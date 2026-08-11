@@ -1,7 +1,9 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
@@ -142,6 +144,11 @@ export class DispatchStageService {
         vendor_id: true,
         required_date_for_dispatch: true,
         no_of_boxes: true,
+        onsite_contact_person_name: true,
+        onsite_contact_person_number: true,
+        material_lift_availability: true,
+        material_lift_size: true,
+        vehicle_approachability_for_dispatch: true,
       },
     });
 
@@ -177,6 +184,14 @@ export class DispatchStageService {
       );
     }
 
+    const hadDispatchDetails = Boolean(
+      lead.dispatch_date ||
+        lead.vehicle_no ||
+        lead.driver_name ||
+        lead.driver_number ||
+        lead.dispatch_remark,
+    );
+
     const updated = await prisma.leadMaster.update({
       where: { id: leadId },
       data: {
@@ -198,6 +213,30 @@ export class DispatchStageService {
         dispatch_remark: true,
       },
     });
+
+    if (lead.account_id) {
+      const formattedDispatchDate = data.dispatch_date
+        ? new Date(data.dispatch_date).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })
+        : "N/A";
+
+      const action = hadDispatchDetails
+        ? `Dispatch details updated. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`
+        : `Dispatch details added. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`;
+
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action,
+        action_type: hadDispatchDetails ? "UPDATE" : "CREATE",
+        history_type: "Lead",
+        created_by: data.updated_by,
+      });
+    }
 
     return updated;
   }
@@ -271,6 +310,29 @@ export class DispatchStageService {
       });
 
       uploadedDocs.push(doc);
+    }
+
+    if (accountId && uploadedDocs.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -363,7 +425,28 @@ export class DispatchStageService {
 
     if (!lead.dispatch_date) missing.push("Dispatch Date");
     if (!lead.vehicle_no) missing.push("Vehicle Number");
-    if (!lead.no_of_boxes || lead.no_of_boxes <= 0) missing.push("Box Count");
+
+    const hasLeadBoxCount = !!lead.no_of_boxes && lead.no_of_boxes > 0;
+    if (!hasLeadBoxCount) {
+      const instanceBoxes = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true, no_of_boxes: true },
+      });
+
+      const hasAllInstanceBoxes =
+        instanceBoxes.length > 0 &&
+        instanceBoxes.every(
+          (instance) => !!instance.no_of_boxes && instance.no_of_boxes > 0
+        );
+
+      if (!hasAllInstanceBoxes) {
+        missing.push("Box Count");
+      }
+    }
+
     if (dispatchDocs.length === 0) missing.push("Dispatch Documents");
 
     const readyForPostDispatch = missing.length === 0;
@@ -418,6 +501,29 @@ export class DispatchStageService {
       });
 
       uploadedDocs.push(doc);
+    }
+
+    if (accountId && uploadedDocs.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Post Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -475,7 +581,7 @@ export class DispatchStageService {
   ) {
     const leadStageRecord = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { status_id: true },
+      select: { status_id: true, franchise_id: true },
     });
     const leadStage = leadStageRecord?.status_id
       ? (
@@ -486,11 +592,39 @@ export class DispatchStageService {
         )?.type ?? null
       : null;
 
+    let miscType = await prisma.miscellaneousTypeMaster.findFirst({
+      where: { name: "Pending Materials", vendor_id: vendorId },
+    });
+    if (!miscType) {
+      miscType = await prisma.miscellaneousTypeMaster.create({
+        data: {
+          name: "Pending Materials",
+          vendor_id: vendorId,
+          created_by: createdBy,
+        },
+      });
+    }
+
+    const misc = await prisma.miscellaneousMaster.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        misc_type_id: miscType.id,
+        problem_description: remark || "Pending Material Added in Dispatch",
+        reorder_material_details: "Pending Material",
+        expected_ready_date: new Date(dueDate),
+        created_by: createdBy,
+        misc_approved: true,
+      },
+    });
+
     const task = await prisma.userLeadTask.create({
       data: {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
+        franchise_id: leadStageRecord?.franchise_id ?? null,
         user_id: assigneeUserId,
         task_type: "Pending Materials",
         lead_stage: leadStage,
@@ -498,6 +632,13 @@ export class DispatchStageService {
         remark: remark || null,
         created_by: createdBy,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
     });
 
     // 🧹 Clear Redis cache for dashboard tasks of this user
@@ -519,7 +660,7 @@ export class DispatchStageService {
   ) {
     const leadStageRecord = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { status_id: true },
+      select: { status_id: true, franchise_id: true },
     });
     const leadStage = leadStageRecord?.status_id
       ? (
@@ -535,6 +676,7 @@ export class DispatchStageService {
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: accountId,
+        franchise_id: leadStageRecord?.franchise_id ?? null,
         user_id: assigneeUserId,
         task_type: "Pending Work",
         lead_stage: leadStage,
@@ -542,6 +684,13 @@ export class DispatchStageService {
         remark: remark || null,
         created_by: createdBy,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
     });
 
     // 🧹 Clear Redis Cache for Sales Executive Dashboard
@@ -624,6 +773,7 @@ export class DispatchStageService {
       select: {
         id: true,
         item_type: true,
+        instance_id: true,
       },
     });
 

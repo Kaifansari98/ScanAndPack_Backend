@@ -1,3 +1,4 @@
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi from "../../../utils/wasabiClient";
 import { uploadToWasabiInitialSiteMeasurementFile } from "../../../utils/wasabiClient";
@@ -18,28 +19,31 @@ import {
   PaymentUploadDetailDtoo,
   UpdatePaymentUploadDto,
 } from "../../../types/leadModule.types";
+import * as path from 'path';
 import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
 import { NotificationType, Prisma } from "../../../prisma/generated";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
-import { sendLeadMovedToDesigningEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
+import { sendLeadMovedToDesigningEmail } from "../../email/brevoEmail.service";
 
 export interface CreateBDISMPaymentUploadDto {
   lead_id: number;
   account_id: number;
   vendor_id: number;
   created_by: number;
-  client_id: number;
   user_id: number;
   amount?: number;
   payment_date?: Date;
   payment_text?: string;
   sitePhotos?: Express.Multer.File[];
-  pdfFile?: Express.Multer.File;
+  pdfFiles?: Express.Multer.File[];
   paymentImageFile?: Express.Multer.File;
 }
 
@@ -56,7 +60,87 @@ const assignTaskISMSchema = Joi.object({
   remark: Joi.string().allow("", null),
   assignee_user_id: Joi.number().integer().positive().required(),
   created_by: Joi.number().integer().positive().required(),
+  baseUrl: Joi.string().uri().allow("", null).optional(),
 });
+
+const RESTRICTED_TASK_TYPE = "Initial Site Measurement" as const;
+const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
+
+export const getInitialSiteMeasurementTaskConflicts = async (
+  leadId: number,
+) => {
+  const lead = await prisma.leadMaster.findUnique({
+    where: { id: leadId },
+    select: { id: true },
+  });
+
+  if (!lead) {
+    throw new Error(`Lead ${leadId} not found`);
+  }
+
+  const restrictedTaskConflicts = await prisma.userLeadTask.findMany({
+    where: {
+      lead_id: leadId,
+      task_type: RESTRICTED_TASK_TYPE,
+      status: { not: "completed" },
+    },
+    select: {
+      id: true,
+      task_type: true,
+      status: true,
+      due_date: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  const followUpConflicts = await prisma.userLeadTask.findMany({
+    where: {
+      lead_id: leadId,
+      task_type: FOLLOW_UP_TASK_TYPE,
+      status: { not: "completed" },
+    },
+    select: {
+      id: true,
+      task_type: true,
+      status: true,
+      due_date: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return {
+    restrictedTaskConflicts: restrictedTaskConflicts.map((task) => ({
+      id: task.id,
+      task_type: task.task_type,
+      status: task.status,
+      due_date: task.due_date,
+      assignee: task.user,
+    })),
+    followUpConflicts: followUpConflicts.map((task) => ({
+      id: task.id,
+      task_type: task.task_type,
+      status: task.status,
+      due_date: task.due_date,
+      assignee: task.user,
+    })),
+  };
+};
 
 export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
   const { error, value } = assignTaskISMSchema.validate(payload);
@@ -66,14 +150,27 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     );
   }
 
-  const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } =
-    value;
+  const {
+    lead_id,
+    task_type,
+    due_date,
+    remark,
+    assignee_user_id,
+    created_by,
+    baseUrl,
+  } = value;
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     // 1) Lead (for vendor/account)
     const lead = await tx.leadMaster.findUnique({
       where: { id: lead_id },
-      select: { id: true, vendor_id: true, account_id: true, status_id: true },
+      select: {
+        id: true,
+        vendor_id: true,
+        account_id: true,
+        status_id: true,
+        franchise_id: true,
+      },
     });
     if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
@@ -99,12 +196,63 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       );
     }
 
+    const isSelfAssignTask = await validateSelfAssignTask({
+      tx,
+      vendorId: lead.vendor_id,
+      taskType: task_type,
+      assigneeUserId: assignee_user_id,
+      createdBy: created_by,
+    });
+
+    if (task_type === FOLLOW_UP_TASK_TYPE && assignee_user_id !== created_by) {
+      const existingFollowUpTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: lead.id,
+          task_type: FOLLOW_UP_TASK_TYPE,
+          user_id: assignee_user_id,
+          status: { not: "completed" },
+        },
+        select: { id: true },
+        orderBy: { created_at: "desc" },
+      });
+
+      if (existingFollowUpTask) {
+        throw new Error(
+          "A Follow Up Task is already assigned to this user, which is not yet completed",
+        );
+      }
+    }
+
+    if (task_type === RESTRICTED_TASK_TYPE) {
+      const existingTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: lead.id,
+          task_type,
+          status: { not: "completed" },
+        },
+        select: {
+          id: true,
+          status: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      if (existingTask) {
+        throw new Error(
+          `${task_type} task already exists for this lead and is not completed`,
+        );
+      }
+    }
+
     // 3) Create task (status=open by default)
     const task = await tx.userLeadTask.create({
       data: {
         lead_id: lead.id,
         account_id: lead.account_id!,
         vendor_id: lead.vendor_id,
+        franchise_id: lead.franchise_id ?? null,
         user_id: assignee_user_id,
         task_type,
         lead_stage: leadStage,
@@ -113,6 +261,13 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         status: "open",
         created_by,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: tx,
+      task,
+      createdBy: created_by,
+      actionType: "CREATE",
     });
 
     // 3B) Create LeadUserMapping for ISM task assignment
@@ -185,7 +340,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       status_id: number | null; // ✅ explicit, matches Prisma
     } = { ...lead, status_id: null };
 
-    if (task_type.toLowerCase() !== "follow up") {
+    if (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) {
       const toStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: lead.vendor_id, tag: "Type 2" },
         select: { id: true },
@@ -228,9 +383,11 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     });
 
     if (task_type === "Initial Site Measurement") {
-      actionMessage = `Lead has been assigned to ${assignee.user_name} for Initial Site Measurement on ${formattedDate}.`;
+      actionMessage = `Initial Site Measurement task is been created for ${assignee.user_name} Due Date : ${formattedDate}.`;
     } else if (task_type === "Follow Up") {
       actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up on ${formattedDate}.`;
+    } else if (isSelfAssignTask) {
+      actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type} on ${formattedDate}.`;
     }
 
     // Append remark if present
@@ -245,16 +402,14 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 
     // 6️⃣ Insert into LeadDetailedLogs
     if (actionMessage) {
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for ISM task assignment", {
@@ -272,8 +427,108 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       new_status_id: updatedLead.status_id,
     });
 
-    return { task, lead: updatedLead };
+    return {
+      task,
+      lead: updatedLead,
+      isStageChanged:
+        task_type.toLowerCase() !== "follow up" && !isSelfAssignTask,
+    };
   });
+
+  // ✅ Send Notifications outside the transaction if the lead stage was actually updated to ISM
+  if (result.isStageChanged && result.lead && result.lead.status_id) {
+    try {
+      const [leadData, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            account_id: true,
+            vendor_id: true,
+            franchise_id: true,
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: created_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      if (leadData) {
+        const leadName =
+          `${leadData.firstname ?? ""} ${leadData.lastname ?? ""}`.trim();
+        const leadCode =
+          leadData.lead_code ?? `LEAD-${String(lead_id).padStart(4, "0")}`;
+        const accountId = leadData.account_id;
+
+        const redirectUrl = accountId
+          ? `/dashboard/leads/details/${lead_id}?accountId=${accountId}`
+          : `/dashboard/leads/details/${lead_id}`;
+        const resolvedBaseUrl = (
+          typeof baseUrl === "string" && baseUrl.trim().length > 0
+            ? baseUrl
+            : process.env.CLIENT_BASE_URL ||
+              process.env.FRONTEND_URL ||
+              "http://localhost:3000"
+        ).replace(/\/$/, "");
+        const projectUrl = `${resolvedBaseUrl}${redirectUrl}`;
+
+        const { recipients, isSuperAdminFallback } =
+          await getFranchiseAdminRecipients({
+            vendorId: leadData.vendor_id,
+            franchiseId: leadData.franchise_id ?? null,
+          });
+
+        const updatedAt = new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+        const updatedBy = actor?.user_name || "System";
+
+        for (const admin of recipients) {
+          // In-App
+          await NotificationService.createAndSend({
+            vendor_id: leadData.vendor_id,
+            user_id: admin.id,
+            sender_id: created_by,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead moved to Initial Site Measurement",
+            message: `${leadCode} - ${leadName} moved to Initial Site Measurement stage.`,
+            entity_type: "lead",
+            entity_id: lead_id,
+            redirect_url: redirectUrl,
+          });
+
+          // Email
+          try {
+            const {
+              sendLeadMovedToISMEmail,
+            } = require("../../email/brevoEmail.service");
+            await sendLeadMovedToISMEmail({
+              allowSuperAdmin: isSuperAdminFallback,
+              vendor_id: leadData.vendor_id,
+              toEmail: admin.user_email!,
+              toName: admin.user_name || "Admin",
+              leadCode,
+              leadName,
+              updatedBy,
+              updatedAt,
+              projectUrl,
+            });
+          } catch (e) {
+            logger.warn("Brevo email failed for ISM stage", e);
+          }
+        }
+      }
+    } catch (err: any) {
+      logger.error("Failed to send ISM stage notifications", err);
+    }
+  }
+
+  return { task: result.task, lead: result.lead };
 };
 
 export class PaymentUploadService {
@@ -347,6 +602,7 @@ export class PaymentUploadService {
             originalName: doc.doc_og_name,
             uploadedAt: doc.created_at,
             s3Key: doc.doc_sys_name,
+            product_structure_instance_id: doc.product_structure_instance_id,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
           })),
         );
@@ -402,6 +658,46 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error("[PaymentUploadService] Error:", error);
       throw new Error(`Failed to fetch ISM details: ${error.message}`);
+    }
+  }
+
+  public async checkIsmUploaded(
+    leadId: number,
+  ): Promise<{ isUploaded: boolean }> {
+    try {
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      const docType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 3" },
+        select: { id: true },
+      });
+
+      if (!docType) {
+        return { isUploaded: false };
+      }
+
+      const docCount = await prisma.leadDocuments.count({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          doc_type_id: docType.id,
+          is_deleted: false,
+        },
+      });
+
+      return { isUploaded: docCount > 0 };
+    } catch (error: any) {
+      console.error("[PaymentUploadService] checkIsmUploaded Error:", error);
+      throw new Error(`Failed to check ISM upload status: ${error.message}`);
     }
   }
 
@@ -461,8 +757,29 @@ export class PaymentUploadService {
     data: CreatePaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
-      if (!data.pdfFile) {
-        throw new Error("Document file is mandatory");
+      const pdfFiles = data.pdfFiles ?? [];
+
+      if (!pdfFiles.length) {
+        const existingMeasurementDocType =
+          await prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: data.vendor_id, tag: "Type 3" },
+            select: { id: true },
+          });
+
+        const existingMeasurementDocsCount = existingMeasurementDocType
+          ? await prisma.leadDocuments.count({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                doc_type_id: existingMeasurementDocType.id,
+                is_deleted: false,
+              },
+            })
+          : 0;
+
+        if (existingMeasurementDocsCount === 0) {
+          throw new Error("At least one document file is mandatory");
+        }
       }
 
       const response: PaymentUploadResponseDto = {
@@ -472,9 +789,13 @@ export class PaymentUploadService {
         message: "Upload completed successfully",
       };
 
-      const uploadedSitePhotos: { originalName: string; s3Key: string }[] = [];
+      const uploadedSitePhotos: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
       if (data.sitePhotos && data.sitePhotos.length > 0) {
-        for (const photo of data.sitePhotos) {
+        for (const [index, photo] of data.sitePhotos.entries()) {
           const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
             photo.path,
             data.vendor_id,
@@ -488,19 +809,33 @@ export class PaymentUploadService {
           uploadedSitePhotos.push({
             originalName: photo.originalname,
             s3Key,
+            productStructureInstanceId:
+              data.sitePhotoInstanceIds?.[index] ?? null,
           });
         }
       }
 
-      const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
-        data.pdfFile.path,
-        data.vendor_id,
-        data.lead_id,
-        data.pdfFile.originalname,
-        data.pdfFile.mimetype,
-        "initial_site_measurement_documents",
-      );
-      await fs.unlink(data.pdfFile.path);
+      const uploadedPdfDocuments: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+      for (const [index, pdfFile] of pdfFiles.entries()) {
+        const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          pdfFile.originalname,
+          pdfFile.mimetype,
+          "initial_site_measurement_documents",
+        );
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: pdfFile.originalname,
+          s3Key: pdfS3Key,
+          productStructureInstanceId: data.pdfFileInstanceIds?.[index] ?? null,
+        });
+      }
 
       let paymentImageS3Key: string | null = null;
       if (data.paymentImageFile) {
@@ -540,6 +875,8 @@ export class PaymentUploadService {
                   account_id: data.account_id,
                   lead_id: data.lead_id,
                   vendor_id: data.vendor_id,
+                  product_structure_instance_id:
+                    uploaded.productStructureInstanceId,
                 },
               });
 
@@ -563,24 +900,28 @@ export class PaymentUploadService {
             );
           }
 
-          const pdfDocument = await tx.leadDocuments.create({
-            data: {
-              doc_og_name: data.pdfFile!.originalname,
-              doc_sys_name: pdfS3Key,
-              created_by: data.created_by,
-              doc_type_id: pdfDocType.id,
-              account_id: data.account_id,
-              lead_id: data.lead_id,
-              vendor_id: data.vendor_id,
-            },
-          });
+          for (const uploadedPdf of uploadedPdfDocuments) {
+            const pdfDocument = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: uploadedPdf.originalName,
+                doc_sys_name: uploadedPdf.s3Key,
+                created_by: data.created_by,
+                doc_type_id: pdfDocType.id,
+                account_id: data.account_id,
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                product_structure_instance_id:
+                  uploadedPdf.productStructureInstanceId,
+              },
+            });
 
-          response.documentsUploaded.push({
-            id: pdfDocument.id,
-            type: "pdf_upload",
-            originalName: data.pdfFile!.originalname,
-            s3Key: pdfS3Key,
-          });
+            response.documentsUploaded.push({
+              id: pdfDocument.id,
+              type: "pdf_upload",
+              originalName: uploadedPdf.originalName,
+              s3Key: uploadedPdf.s3Key,
+            });
+          }
 
           // 3. Handle payment image file (optional)
           let paymentFileId: number | null = null;
@@ -629,12 +970,18 @@ export class PaymentUploadService {
               );
             }
 
+            const leadForPayment = await tx.leadMaster.findUnique({
+              where: { id: data.lead_id },
+              select: { status_id: true },
+            });
+
             const paymentInfo = await tx.paymentInfo.create({
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
                 vendor_id: data.vendor_id,
                 created_by: data.created_by,
+                status_id: leadForPayment?.status_id ?? null,
                 amount: data.amount,
                 payment_date: data.payment_date,
                 payment_text: data.payment_text || null,
@@ -655,7 +1002,6 @@ export class PaymentUploadService {
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
-                client_id: data.client_id,
                 vendor_id: data.vendor_id,
                 amount: data.amount,
                 payment_date: data.payment_date,
@@ -672,82 +1018,93 @@ export class PaymentUploadService {
             };
           }
 
-          // 6. Update LeadMaster status (status "Type 2" → "Type 3")
-          const statusFrom = await tx.statusTypeMaster.findFirst({
-            where: { vendor_id: data.vendor_id, tag: "Type 2" },
-          });
-          const statusTo = await tx.statusTypeMaster.findFirst({
-            where: { vendor_id: data.vendor_id, tag: "Type 3" },
-          });
+          if (!data.skip_status_update) {
+            const vendor = await tx.vendorMaster.findUnique({
+              where: { id: data.vendor_id },
+              select: { is_this_vendor_is_custom_usertype_only: true },
+            });
 
-          if (statusFrom && statusTo) {
-            await tx.leadMaster.updateMany({
+            if (!vendor?.is_this_vendor_is_custom_usertype_only) {
+              // 6. Update LeadMaster status (status "Type 2" → "Type 3")
+              const statusFrom = await tx.statusTypeMaster.findFirst({
+                where: { vendor_id: data.vendor_id, tag: "Type 2" },
+              });
+              const statusTo = await tx.statusTypeMaster.findFirst({
+                where: { vendor_id: data.vendor_id, tag: "Type 3" },
+              });
+
+              if (statusFrom && statusTo) {
+                await tx.leadMaster.updateMany({
+                  where: {
+                    id: data.lead_id,
+                    vendor_id: data.vendor_id,
+                    status_id: statusFrom.id,
+                  },
+                  data: {
+                    status_id: statusTo.id,
+                  },
+                });
+              }
+
+              // 6B. Insert into LeadStatusLogs
+              if (statusFrom && statusTo) {
+                await tx.leadStatusLogs.create({
+                  data: {
+                    lead_id: data.lead_id,
+                    account_id: data.account_id,
+                    vendor_id: data.vendor_id,
+                    status_id: statusTo.id,
+                    created_by: data.created_by,
+                    created_at: new Date(),
+                  },
+                });
+
+                logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
+                  lead_id: data.lead_id,
+                  from: statusFrom.id,
+                  to: statusTo.id,
+                });
+              }
+            }
+
+            // 7. Mark related userLeadTask as completed
+            await tx.userLeadTask.updateMany({
               where: {
-                id: data.lead_id,
                 vendor_id: data.vendor_id,
-                status_id: statusFrom.id,
-              },
-              data: {
-                status_id: statusTo.id,
-              },
-            });
-          }
-
-          // 6B. Insert into LeadStatusLogs
-          if (statusFrom && statusTo) {
-            await tx.leadStatusLogs.create({
-              data: {
                 lead_id: data.lead_id,
-                account_id: data.account_id,
-                vendor_id: data.vendor_id,
-                status_id: statusTo.id,
-                created_by: data.created_by,
-                created_at: new Date(),
+                task_type: "Initial Site Measurement",
+                status: "open", // or "pending" depending on your flow
+              },
+              data: {
+                status: "completed",
+                closed_by: data.user_id,
+                closed_at: new Date(),
+                updated_by: data.user_id,
+                updated_at: new Date(),
               },
             });
 
-            logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
-              lead_id: data.lead_id,
-              from: statusFrom.id,
-              to: statusTo.id,
+            // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
+            // Fetch all users who were assigned the ISM task
+            const ismAssignees = await tx.userLeadTask.findMany({
+              where: {
+                vendor_id: data.vendor_id,
+                lead_id: data.lead_id,
+                task_type: "Initial Site Measurement",
+              },
+              select: { user_id: true },
             });
+
+            // Invalidate cache for each assignee
+            for (const t of ismAssignees) {
+              await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
+            }
+
+            // Also invalidate for the user completing this stage
+            await cache.del(
+              `dashboard:tasks:${data.vendor_id}:${data.user_id}`,
+            );
           }
-
-          // 7. Mark related userLeadTask as completed
-          await tx.userLeadTask.updateMany({
-            where: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              task_type: "Initial Site Measurement",
-              status: "open", // or "pending" depending on your flow
-            },
-            data: {
-              status: "completed",
-              closed_by: data.user_id,
-              closed_at: new Date(),
-              updated_by: data.user_id,
-              updated_at: new Date(),
-            },
-          });
-
-          // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
-          // Fetch all users who were assigned the ISM task
-          const ismAssignees = await tx.userLeadTask.findMany({
-            where: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              task_type: "Initial Site Measurement",
-            },
-            select: { user_id: true },
-          });
-
-          // Invalidate cache for each assignee
-          for (const t of ismAssignees) {
-            await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
-          }
-
-          // Also invalidate for the user completing this stage
-          await cache.del(`dashboard:tasks:${data.vendor_id}:${data.user_id}`);
 
           // 8️⃣ Create LeadDetailedLogs + LeadDocumentLogs (Audit Trail)
           let actionMessage = "";
@@ -772,16 +1129,14 @@ export class PaymentUploadService {
             "Initial Site Measurements have been uploaded successfully.";
 
           // Create parent log entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           // Log each document (if any)
@@ -828,6 +1183,7 @@ export class PaymentUploadService {
               lead_code: true,
               vendor_id: true,
               account_id: true, // ✅ added
+              franchise_id: true,
             },
           }),
 
@@ -849,67 +1205,66 @@ export class PaymentUploadService {
           day: "2-digit",
           month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
         });
 
-        const baseUrl =
-          process.env.CLIENT_BASE_URL ||
-          process.env.FRONTEND_URL ||
-          "http://localhost:3000";
-
+        const baseUrl = data.baseUrl;
         // ✅ Account aware deep-link
         const projectUrl = lead.account_id
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"] },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        const vendor = await prisma.vendorMaster.findUnique({
+          where: { id: data.vendor_id },
+          select: { is_this_vendor_is_custom_usertype_only: true },
         });
 
-        for (const admin of admins) {
-          // ❌ Self block
-          if (admin.id === actorId) continue;
+        const shouldSendNotification =
+          !data.skip_status_update &&
+          !vendor?.is_this_vendor_is_custom_usertype_only;
 
-          // 🔔 In-App
-          await NotificationService.createAndSend({
-            vendor_id: lead.vendor_id,
-            user_id: admin.id,
-            sender_id: actorId,
-            type: NotificationType.LEAD_MILESTONE,
-            title: "Lead Entered Designing Stage",
-            message: `${leadCode} - ${leadName} moved to Designing stage.`,
-            entity_type: "lead",
-            entity_id: data.lead_id,
-            redirect_url: lead.account_id
-              ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
-              : `/dashboard/leads/details/${data.lead_id}`,
-          });
+        if (shouldSendNotification) {
+          const { recipients: admins, isSuperAdminFallback } =
+            await getFranchiseAdminRecipients({
+              vendorId: lead.vendor_id,
+              franchiseId: lead.franchise_id ?? null,
+              excludeUserId: actorId,
+            });
 
-          // 📧 Email
-          if (!admin.user_email) continue;
+          for (const admin of admins) {
+            // 🔔 In-App
+            await NotificationService.createAndSend({
+              vendor_id: lead.vendor_id,
+              user_id: admin.id,
+              sender_id: actorId,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Lead Entered Designing Stage",
+              message: `${leadCode} - ${leadName} moved to Designing stage.`,
+              entity_type: "lead",
+              entity_id: data.lead_id,
+              redirect_url: lead.account_id
+                ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+                : `/dashboard/leads/details/${data.lead_id}`,
+            });
 
-          await sendLeadMovedToDesigningEmail({
-            vendor_id: lead.vendor_id,
-            toEmail: admin.user_email,
-            toName: admin.user_name,
-            leadCode,
-            leadName,
-            updatedBy: actor?.user_name ?? "System",
-            updatedAt,
-            projectUrl,
-          });
+            // 📧 Send Email Notification
+            if (admin.user_email) {
+              await sendLeadMovedToDesigningEmail({
+                allowSuperAdmin: isSuperAdminFallback,
+                vendor_id: lead.vendor_id,
+                toEmail: admin.user_email,
+                toName: admin.user_name || "Admin",
+                leadCode: leadCode,
+                leadName: leadName,
+                updatedBy: actor?.user_name || "System",
+                updatedAt: updatedAt,
+                projectUrl: projectUrl,
+              }).catch((e) =>
+                logger.error("Failed to send designing email", {
+                  error: e.message,
+                }),
+              );
+            }
+          }
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
@@ -928,8 +1283,8 @@ export class PaymentUploadService {
     data: CreateBDISMPaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
-      if (!data.pdfFile) {
-        throw new Error("BD-ISM document is mandatory");
+      if (!data.pdfFiles?.length) {
+        throw new Error("At least one BD-ISM document is mandatory");
       }
 
       const response: PaymentUploadResponseDto = {
@@ -959,15 +1314,23 @@ export class PaymentUploadService {
         }
       }
 
-      const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
-        data.pdfFile.path,
-        data.vendor_id,
-        data.lead_id,
-        data.pdfFile.originalname,
-        data.pdfFile.mimetype,
-        "bd_initial_site_measurement_documents",
-      );
-      await fs.unlink(data.pdfFile.path);
+      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] =
+        [];
+      for (const pdfFile of data.pdfFiles) {
+        const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          pdfFile.originalname,
+          pdfFile.mimetype,
+          "bd_initial_site_measurement_documents",
+        );
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: pdfFile.originalname,
+          s3Key: pdfKey,
+        });
+      }
 
       let paymentKey: string | null = null;
       if (data.paymentImageFile) {
@@ -1029,24 +1392,26 @@ export class PaymentUploadService {
             throw new Error("Document type for BD-ISM document not found");
           }
 
-          const pdfDoc = await tx.leadDocuments.create({
-            data: {
-              doc_og_name: data.pdfFile!.originalname,
-              doc_sys_name: pdfKey,
-              doc_type_id: pdfType.id,
-              created_by: data.created_by,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              vendor_id: data.vendor_id,
-            },
-          });
+          for (const uploadedPdf of uploadedPdfDocuments) {
+            const pdfDoc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: uploadedPdf.originalName,
+                doc_sys_name: uploadedPdf.s3Key,
+                doc_type_id: pdfType.id,
+                created_by: data.created_by,
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                vendor_id: data.vendor_id,
+              },
+            });
 
-          response.documentsUploaded.push({
-            id: pdfDoc.id,
-            type: "bd_ism_pdf",
-            originalName: data.pdfFile!.originalname,
-            s3Key: pdfKey,
-          });
+            response.documentsUploaded.push({
+              id: pdfDoc.id,
+              type: "bd_ism_pdf",
+              originalName: uploadedPdf.originalName,
+              s3Key: uploadedPdf.s3Key,
+            });
+          }
 
           /* ----------------------------------
              3️⃣ Payment Image (Optional)
@@ -1096,12 +1461,18 @@ export class PaymentUploadService {
               throw new Error("Payment type not found");
             }
 
+            const leadForPayment = await tx.leadMaster.findUnique({
+              where: { id: data.lead_id },
+              select: { status_id: true },
+            });
+
             const payment = await tx.paymentInfo.create({
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
                 vendor_id: data.vendor_id,
                 created_by: data.created_by,
+                status_id: leadForPayment?.status_id ?? null,
                 amount: data.amount,
                 payment_date: data.payment_date,
                 payment_text: data.payment_text || null,
@@ -1121,7 +1492,6 @@ export class PaymentUploadService {
               data: {
                 lead_id: data.lead_id,
                 account_id: data.account_id,
-                client_id: data.client_id,
                 vendor_id: data.vendor_id,
                 amount: data.amount,
                 payment_date: data.payment_date,
@@ -1160,16 +1530,14 @@ export class PaymentUploadService {
           /* ----------------------------------
              6️⃣ Logs
           ---------------------------------- */
-          const log = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: "Booking Done – ISM documents uploaded successfully.",
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const log = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: "Booking Done – ISM documents uploaded successfully.",
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           if (response.documentsUploaded.length) {
@@ -2036,16 +2404,14 @@ export class PaymentUploadService {
               : "Payment details updated successfully.";
 
           // Create LeadDetailedLogs entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "UPDATE",
-              created_by: data.updated_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "UPDATE",
+            created_by: data.updated_by,
+            created_at: new Date(),
           });
 
           // If new documents were uploaded → create mapping logs
@@ -2080,6 +2446,345 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error("[PaymentUploadService] Error updating payment:", error);
       throw new Error(`Failed to update payment upload: ${error.message}`);
+    }
+  }
+  public async uploadAdditionalSitePhotos(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    updated_by: number;
+    currentSitePhotos: Express.Multer.File[];
+    sitePhotoInstanceIds?: (number | null)[];
+  }): Promise<{ documentsUploaded: any[]; message: string }> {
+    try {
+      if (!data.currentSitePhotos || data.currentSitePhotos.length === 0) {
+        throw new Error("No site photos provided");
+      }
+
+      const response = {
+        documentsUploaded: [] as any[],
+        message: "Site photos uploaded successfully",
+      };
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { account_id: true, firstname: true, lastname: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: data.vendor_id },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 2" },
+      });
+
+      if (!sitePhotoDocType) {
+        throw new Error("Document type (site photos) not found for this vendor");
+      }
+
+      const allLeadInstances = useCustomVendorFlow
+        ? await prisma.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              account_id: lead.account_id ?? undefined,
+            },
+            select: { id: true, productType: { select: { type: true } } },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          })
+        : [];
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      const revisionMap = new Map<number | null, number>();
+
+      if (useCustomVendorFlow) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+        
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            doc_type_id: sitePhotoDocType.id,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true, product_structure_instance_id: true },
+        });
+
+        for (const doc of existingDocs) {
+          const instId = doc.product_structure_instance_id;
+          const match = doc.doc_og_name?.match(/^ISM(\d+)-CSP-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            const currentMax = revisionMap.get(instId) ?? -1;
+            revisionMap.set(instId, Math.max(currentMax, rev));
+          }
+        }
+      }
+
+      const uploadedSitePhotos: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+
+      for (const [index, photo] of data.currentSitePhotos.entries()) {
+        const instanceId = data.sitePhotoInstanceIds?.[index] ?? null;
+
+        const finalOriginalName = useCustomVendorFlow
+          ? (() => {
+              let structureSegment = "General";
+              if (instanceId !== null) {
+                const inst = allLeadInstances.find(i => i.id === instanceId);
+                if (inst && inst.productType?.type) {
+                  structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+                }
+              }
+
+              let currentRev = revisionMap.get(instanceId) ?? -1;
+              currentRev += 1;
+              revisionMap.set(instanceId, currentRev);
+
+              const extension = path.extname(photo.originalname || "");
+              return `ISM${currentRev}-CSP-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+            })()
+          : photo.originalname;
+
+        const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          photo.path,
+          data.vendor_id,
+          data.lead_id,
+          finalOriginalName,
+          photo.mimetype,
+          "current_site_photos",
+        );
+
+        await fs.unlink(photo.path);
+        uploadedSitePhotos.push({
+          originalName: finalOriginalName,
+          s3Key,
+          productStructureInstanceId: data.sitePhotoInstanceIds?.[index] ?? null,
+        });
+      }
+
+      await prisma.$transaction(async (tx: any) => {
+        for (const uploaded of uploadedSitePhotos) {
+          const document = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: uploaded.originalName,
+              doc_sys_name: uploaded.s3Key,
+              created_by: data.updated_by,
+              doc_type_id: sitePhotoDocType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
+            },
+          });
+
+          response.documentsUploaded.push({
+            id: document.id,
+            type: "current_site_photo",
+            originalName: uploaded.originalName,
+            s3Key: uploaded.s3Key,
+          });
+        }
+      });
+
+      return response;
+    } catch (error: any) {
+      console.error(
+        "[PaymentUploadService] Error uploading additional photos:",
+        error,
+      );
+      throw new Error(
+        `Failed to upload additional site photos: ${error.message}`,
+      );
+    }
+  }
+
+  public async uploadMeasurementDocuments(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    updated_by: number;
+    uploadPdf: Express.Multer.File[];
+    pdfFileInstanceIds?: (number | null)[];
+  }): Promise<{ documentsUploaded: any[]; message: string }> {
+    try {
+      if (!data.uploadPdf || data.uploadPdf.length === 0) {
+        throw new Error("No measurement documents provided");
+      }
+
+      const response = {
+        documentsUploaded: [] as any[],
+        message: "Measurement documents uploaded successfully",
+      };
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { account_id: true, firstname: true, lastname: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: data.vendor_id },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const pdfDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: data.vendor_id, tag: "Type 3" },
+      });
+
+      if (!pdfDocType) {
+        throw new Error("Document type (measurement documents) not found for this vendor");
+      }
+
+      const allLeadInstances = useCustomVendorFlow
+        ? await prisma.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              account_id: lead.account_id ?? undefined,
+            },
+            select: { id: true, productType: { select: { type: true } } },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          })
+        : [];
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      const revisionMap = new Map<number | null, number>();
+
+      if (useCustomVendorFlow) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+        
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            doc_type_id: pdfDocType.id,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true, product_structure_instance_id: true },
+        });
+
+        for (const doc of existingDocs) {
+          const instId = doc.product_structure_instance_id;
+          const match = doc.doc_og_name?.match(/^ISM(\d+)-MD-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            const currentMax = revisionMap.get(instId) ?? -1;
+            revisionMap.set(instId, Math.max(currentMax, rev));
+          }
+        }
+      }
+
+      const uploadedPdfDocuments: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+
+      for (const [index, pdfFile] of data.uploadPdf.entries()) {
+        const instanceId = data.pdfFileInstanceIds?.[index] ?? null;
+
+        const finalOriginalName = useCustomVendorFlow
+          ? (() => {
+              let structureSegment = "General";
+              if (instanceId !== null) {
+                const inst = allLeadInstances.find(i => i.id === instanceId);
+                if (inst && inst.productType?.type) {
+                  structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+                }
+              }
+
+              let currentRev = revisionMap.get(instanceId) ?? -1;
+              currentRev += 1;
+              revisionMap.set(instanceId, currentRev);
+
+              const extension = path.extname(pdfFile.originalname || "");
+              return `ISM${currentRev}-MD-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+            })()
+          : pdfFile.originalname;
+
+        const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          finalOriginalName,
+          pdfFile.mimetype,
+          "initial_site_measurement_documents",
+        );
+
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: finalOriginalName,
+          s3Key,
+          productStructureInstanceId: data.pdfFileInstanceIds?.[index] ?? null,
+        });
+      }
+
+      await prisma.$transaction(async (tx: any) => {
+        for (const uploaded of uploadedPdfDocuments) {
+          const document = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: uploaded.originalName,
+              doc_sys_name: uploaded.s3Key,
+              created_by: data.updated_by,
+              doc_type_id: pdfDocType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
+            },
+          });
+
+          response.documentsUploaded.push({
+            id: document.id,
+            type: "initial_site_measurement_documents",
+            originalName: uploaded.originalName,
+            s3Key: uploaded.s3Key,
+          });
+        }
+      });
+
+      return response;
+    } catch (error: any) {
+      console.error(
+        "[PaymentUploadService] Error uploading measurement documents:",
+        error,
+      );
+      throw new Error(
+        `Failed to upload measurement documents: ${error.message}`,
+      );
     }
   }
 
@@ -2270,15 +2975,6 @@ export class PaymentUploadService {
         );
       }
 
-      if (existingDoc.documentType?.tag !== "Type 3") {
-        throw Object.assign(
-          new Error(
-            "Only initial site measurement documents can be replaced via this endpoint",
-          ),
-          { statusCode: 400 },
-        );
-      }
-
       await tx.leadDocuments.update({
         where: { id: documentId },
         data: {
@@ -2316,16 +3012,28 @@ export class PaymentUploadService {
 
       const signed_url = await generateSignedUrl(pdfS3Key);
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id!,
-          action: "Initial Site Measurement document updated successfully.",
-          action_type: "UPDATE",
-          created_by: userId,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: existingDoc.lead_id!,
+        account_id: existingDoc.account_id!,
+        action: "Initial Site Measurement document updated successfully.",
+        action_type: "UPDATE",
+        created_by: userId,
+        created_at: new Date(),
+      });
+
+      await tx.leadDocumentLogs.createMany({
+        data: [
+          {
+            vendor_id: vendorId,
+            lead_id: existingDoc.lead_id!,
+            account_id: existingDoc.account_id!,
+            doc_id: newDocument.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          },
+        ],
       });
 
       return {

@@ -7,13 +7,18 @@ import {
 } from "../../../types/leadModule.types";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
-import { assignTaskISMService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
+import {
+  assignTaskISMService,
+  getInitialSiteMeasurementTaskConflicts,
+} from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
-import {
-  sendLeadMovedToISMEmail,
-  sendTaskAssignedEmail,
-} from "../../../services/email/brevoEmail.service";
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
+const getNumberParam = (param: string | string[] | undefined): number =>
+  Number(getParam(param));
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -40,12 +45,74 @@ export class PaymentUploadController {
     this.paymentUploadService = new PaymentUploadService();
   }
 
+  private parseInstanceIdArray(
+    raw: unknown,
+    expectedLength: number,
+  ): (number | null)[] | undefined {
+    if (raw == null || raw === "") return undefined;
+
+    let parsed: unknown = raw;
+    if (typeof raw === "string") {
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        throw new Error("Invalid instance mapping payload");
+      }
+    }
+
+    if (!Array.isArray(parsed)) {
+      throw new Error("Instance mapping payload must be an array");
+    }
+
+    if (parsed.length !== expectedLength) {
+      throw new Error("Instance mapping count does not match uploaded files");
+    }
+
+    return parsed.map((value) => {
+      if (value == null || value === "") return null;
+      const numeric = Number(value);
+      if (Number.isNaN(numeric)) {
+        throw new Error("Instance mapping contains a non-numeric value");
+      }
+      return numeric;
+    });
+  }
+
+  private async validateInstanceIdsForLead(
+    leadId: number,
+    vendorId: number,
+    instanceIds: (number | null)[] | undefined,
+  ) {
+    const concreteIds = Array.from(
+      new Set(
+        (instanceIds ?? []).filter((value): value is number => value != null),
+      ),
+    );
+
+    if (!concreteIds.length) return;
+
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        id: { in: concreteIds },
+      },
+      select: { id: true },
+    });
+
+    if (instances.length !== concreteIds.length) {
+      throw new Error(
+        "One or more product structure instances are invalid for this lead",
+      );
+    }
+  }
+
   public getISMDetailsByLeadId = async (
     req: Request,
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
 
       if (!leadId) {
         res.status(400).json({
@@ -56,7 +123,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMDetailsByLeadId(
-        parseInt(leadId),
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -73,12 +140,31 @@ export class PaymentUploadController {
     }
   };
 
+  public checkIsmUploaded = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      if (!leadId || isNaN(leadId)) {
+        res.status(400).json({ success: false, message: "Invalid lead ID" });
+        return;
+      }
+
+      const result = await this.paymentUploadService.checkIsmUploaded(leadId);
+      res.status(200).json({ success: true, data: result });
+    } catch (error: any) {
+      console.error("[PaymentUploadController] checkIsmUploaded Error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
   public getISMPaymentInfoByLeadId = async (
     req: Request,
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
 
       if (!leadId) {
         res.status(400).json({
@@ -89,7 +175,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getISMPaymentInfoByLeadId(
-        parseInt(leadId),
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -106,10 +192,42 @@ export class PaymentUploadController {
     }
   };
 
+  public getTaskConflicts = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = getNumberParam(req.params.leadId);
+
+      if (!leadId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+        return;
+      }
+
+      const conflicts = await getInitialSiteMeasurementTaskConflicts(leadId);
+
+      res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] getISMTaskConflicts:", { err: error });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
+      });
+    }
+  };
+
   public async assignTaskISM(req: Request, res: Response): Promise<Response> {
     logger.info("[CONTROLLER] assignTaskISM called");
     try {
-      const leadId = Number(req.params.leadId);
+      const leadId = getNumberParam(req.params.leadId);
       const {
         task_type,
         due_date,
@@ -154,6 +272,7 @@ export class PaymentUploadController {
         remark,
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
+        baseUrl: resolveClientBaseUrl(req),
       });
 
       // ===============================
@@ -161,7 +280,7 @@ export class PaymentUploadController {
       // ===============================
 
       try {
-        const [assignee, lead, assignedBy] = await Promise.all([
+        const [assignee, lead] = await Promise.all([
           prisma.userMaster.findUnique({
             where: { id: Number(user_id) },
             select: {
@@ -176,28 +295,21 @@ export class PaymentUploadController {
             select: {
               firstname: true,
               lastname: true,
-              lead_code: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
-          actorId
-            ? prisma.userMaster.findUnique({
-                where: { id: Number(actorId) },
-                select: { user_name: true },
-              })
-            : Promise.resolve(null),
         ]);
 
         const leadName =
           `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
 
-        const leadCode =
-          lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
 
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+
+        const franchiseId = lead?.franchise_id ?? null;
 
         // ===============================
         // SALES EXEC TASK NOTIFICATION (UNCHANGED)
@@ -223,99 +335,6 @@ export class PaymentUploadController {
             redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}`,
           });
         }
-
-        // ===============================
-        // SALES EXEC EMAIL (UNCHANGED)
-        // ===============================
-
-        let assigneeEmail = assignee?.user_email?.trim();
-        if (!assigneeEmail && assignee?.id) {
-          const fallbackAssignee = await prisma.userMaster.findUnique({
-            where: { id: assignee.id },
-            select: { user_email: true },
-          });
-          assigneeEmail = fallbackAssignee?.user_email?.trim();
-        }
-
-        if (assigneeEmail && !isSelfAssigned) {
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const taskUrl = `${clientBaseUrl}/dashboard/my-tasks`;
-
-          const assignedByName = assignedBy?.user_name ?? "Admin";
-
-          const dueDate = due_date
-            ? new Date(due_date).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
-            : "—";
-
-          await sendTaskAssignedEmail({
-            vendor_id: result.lead.vendor_id,
-            toEmail: assigneeEmail,
-            toName: assignee?.user_name ?? undefined,
-            leadCode,
-            taskTitle: task_type,
-            leadName: leadName || "—",
-            assignedBy: assignedByName,
-            dueDate,
-            remark,
-            taskUrl,
-          });
-        }
-
-        // ======================================================
-        // ✅ NEW ADDITION — ADMIN EMAIL ON ISM STAGE MOVE ONLY
-        // ======================================================
-
-        const isISMStageMove = task_type === "Initial Site Measurement";
-
-        if (isISMStageMove) {
-          const admins = await prisma.userMaster.findMany({
-            where: {
-              vendor_id: result.lead.vendor_id,
-              status: "active",
-              user_type: {
-                user_type: { in: ["admin"] },
-              },
-            },
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          });
-
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const projectUrl = `${clientBaseUrl}/dashboard/leads/details/${leadId}?accountId=${lead?.account_id}`;
-
-          const updatedAt = new Date().toLocaleString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-
-          for (const admin of admins) {
-            // ❌ Admin self-trigger block
-            if (admin.id === actorId) continue;
-
-            if (!admin.user_email) continue;
-
-            await sendLeadMovedToISMEmail({
-              vendor_id: result.lead.vendor_id,
-              toEmail: admin.user_email,
-              toName: admin.user_name,
-              leadCode,
-              leadName,
-              updatedBy: assignedBy?.user_name ?? "System",
-              updatedAt,
-              projectUrl,
-            });
-          }
-        }
       } catch (notificationError: any) {
         logger.warn("⚠️ Failed to send notification", {
           error: notificationError?.message,
@@ -333,13 +352,24 @@ export class PaymentUploadController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        (errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed") ||
+          errorMessage
+            .toLowerCase()
+            .includes("follow up task is already assigned"));
+
       logger.error("[ERROR] assignTaskISM:", { err: error });
 
-      return res.status(500).json({
+      return res.status(isConflict ? 409 : 500).json({
         success: false,
-        error: "Internal server error",
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
         details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       });
     }
   }
@@ -349,18 +379,10 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
-        req.body;
+      const { lead_id, account_id, vendor_id, created_by, user_id } = req.body;
 
       // Validate required fields
-      if (
-        !lead_id ||
-        !account_id ||
-        !vendor_id ||
-        !created_by ||
-        !client_id ||
-        !user_id
-      ) {
+      if (!lead_id || !account_id || !vendor_id || !created_by || !user_id) {
         res.status(400).json({
           success: false,
           message:
@@ -373,24 +395,10 @@ export class PaymentUploadController {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       const sitePhotos = files?.current_site_photos || [];
-      const pdfFile = files?.upload_pdf?.[0];
+      const pdfFiles = files?.upload_pdf || [];
       const paymentImageFile = files?.payment_image?.[0];
-
-      // Validate document file if provided (PDF or image)
-      const validDocumentTypes = [
-        "application/pdf",
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/gif",
-      ];
-      if (pdfFile && !validDocumentTypes.includes(pdfFile.mimetype)) {
-        res.status(400).json({
-          success: false,
-          message: "Upload file must be a PDF or image",
-        });
-        return;
-      }
+      let sitePhotoInstanceIds: (number | null)[] | undefined;
+      let pdfFileInstanceIds: (number | null)[] | undefined;
 
       // Validate image files for site photos
       const validImageTypes = [
@@ -406,29 +414,7 @@ export class PaymentUploadController {
         "image/avif",
         "image/svg+xml",
       ];
-      const validImageExtensions = [
-        ".jpg",
-        ".jpeg",
-        ".png",
-        ".gif",
-        ".webp",
-        ".bmp",
-        ".tif",
-        ".tiff",
-        ".heic",
-        ".heif",
-        ".avif",
-        ".svg",
-        ".jfif",
-      ];
-      const isValidImage = (file: Express.Multer.File) => {
-        const ext = path.extname(file.originalname || "").toLowerCase();
-        return (
-          file.mimetype.startsWith("image/") ||
-          validImageTypes.includes(file.mimetype) ||
-          validImageExtensions.includes(ext)
-        );
-      };
+
       for (const photo of sitePhotos) {
         if (!validImageTypes.includes(photo.mimetype)) {
           res.status(400).json({
@@ -453,22 +439,58 @@ export class PaymentUploadController {
         return;
       }
 
+      try {
+        sitePhotoInstanceIds = this.parseInstanceIdArray(
+          req.body.current_site_photo_instance_ids,
+          sitePhotos.length,
+        );
+        pdfFileInstanceIds = this.parseInstanceIdArray(
+          req.body.upload_pdf_instance_ids,
+          pdfFiles.length,
+        );
+      } catch (mappingError: any) {
+        res.status(400).json({
+          success: false,
+          message: mappingError?.message || "Invalid instance mapping payload",
+        });
+        return;
+      }
+
+      try {
+        await this.validateInstanceIdsForLead(
+          parseInt(lead_id),
+          parseInt(vendor_id),
+          [...(sitePhotoInstanceIds ?? []), ...(pdfFileInstanceIds ?? [])],
+        );
+      } catch (instanceError: any) {
+        res.status(400).json({
+          success: false,
+          message:
+            instanceError?.message ||
+            "Invalid product structure instance mapping",
+        });
+        return;
+      }
+
       // Create DTO
       const createDto: CreatePaymentUploadDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
-        client_id: parseInt(client_id),
         user_id: parseInt(user_id),
         amount: req.body.amount ? parseFloat(req.body.amount) : undefined,
+        baseUrl: resolveClientBaseUrl(req),
         payment_date: req.body.payment_date
           ? new Date(req.body.payment_date)
           : undefined,
         payment_text: req.body.payment_text || undefined,
         sitePhotos,
-        pdfFile,
+        sitePhotoInstanceIds,
+        pdfFiles,
+        pdfFileInstanceIds,
         paymentImageFile,
+        skip_status_update: String(req.body.skip_status_update) === "true",
       };
 
       // Business logic validations
@@ -538,15 +560,15 @@ export class PaymentUploadController {
         account_id: +account_id,
         vendor_id: +vendor_id,
         created_by: +created_by,
-        client_id: +client_id,
         user_id: +user_id,
         amount: req.body.amount ? +req.body.amount : undefined,
+        baseUrl: resolveClientBaseUrl(req),
         payment_date: req.body.payment_date
           ? new Date(req.body.payment_date)
           : undefined,
         payment_text: req.body.payment_text || undefined,
         sitePhotos: files?.current_site_photos || [],
-        pdfFile: files?.upload_pdf?.[0],
+        pdfFiles: files?.upload_pdf || [],
         paymentImageFile: files?.payment_image?.[0],
       };
 
@@ -572,7 +594,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = Number(req.params.leadId);
+      const leadId = getNumberParam(req.params.leadId);
       const vendorId = Number(req.query.vendor_id);
 
       if (!leadId || !vendorId) {
@@ -607,7 +629,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { s3Key } = req.params;
+      const s3Key = getParam(req.params.s3Key);
       const { vendor_id, expires_in } = req.query;
 
       if (!s3Key || !vendor_id) {
@@ -720,7 +742,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { page = "1", limit = "10", userId } = req.query;
 
       if (!vendorId || !userId) {
@@ -731,7 +753,7 @@ export class PaymentUploadController {
         return;
       }
 
-      const vendor_id = parseInt(vendorId);
+      const vendor_id = Number(vendorId);
       const user_id = Number(userId);
 
       // ✅ Find the correct status type for this vendor
@@ -802,7 +824,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { leadId } = req.params;
+      const leadId = getNumberParam(req.params.leadId);
       const { vendor_id } = req.query;
 
       if (!leadId || !vendor_id) {
@@ -814,7 +836,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getPaymentUploadsByLead(
-        parseInt(leadId),
+        Number(leadId),
         parseInt(vendor_id as string),
       );
 
@@ -840,7 +862,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { accountId } = req.params;
+      const accountId = getNumberParam(req.params.accountId);
       const { vendor_id } = req.query;
 
       if (!accountId || !vendor_id) {
@@ -852,7 +874,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getPaymentUploadsByAccount(
-        parseInt(accountId),
+        Number(accountId),
         parseInt(vendor_id as string),
       );
 
@@ -878,11 +900,11 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { page = "1", limit = "10", startDate, endDate } = req.query;
 
       const result = await this.paymentUploadService.getPaymentUploadsByVendor(
-        parseInt(vendorId),
+        Number(vendorId),
         parseInt(page as string),
         parseInt(limit as string),
         startDate ? new Date(startDate as string) : undefined,
@@ -920,7 +942,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { vendor_id } = req.query;
 
       if (!documentId || !vendor_id) {
@@ -932,7 +954,7 @@ export class PaymentUploadController {
       }
 
       const result = await this.paymentUploadService.getDocumentDownloadUrl(
-        parseInt(documentId),
+        Number(documentId),
         parseInt(vendor_id as string),
       );
 
@@ -966,11 +988,11 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { vendorId } = req.params;
+      const vendorId = getNumberParam(req.params.vendorId);
       const { startDate, endDate } = req.query;
 
       const result = await this.paymentUploadService.getPaymentAnalytics(
-        parseInt(vendorId),
+        Number(vendorId),
         startDate ? new Date(startDate as string) : undefined,
         endDate ? new Date(endDate as string) : undefined,
       );
@@ -996,7 +1018,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { paymentId } = req.params;
+      const paymentId = getNumberParam(req.params.paymentId);
       const {
         lead_id,
         account_id,
@@ -1018,7 +1040,7 @@ export class PaymentUploadController {
       }
 
       // Validate paymentId is a valid number
-      const paymentIdNum = parseInt(paymentId);
+      const paymentIdNum = Number(paymentId);
       if (isNaN(paymentIdNum)) {
         res.status(400).json({
           success: false,
@@ -1075,8 +1097,7 @@ export class PaymentUploadController {
         if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
-            message:
-              "Current site photos must be valid image files",
+            message: "Current site photos must be valid image files",
           });
           return;
         }
@@ -1087,8 +1108,7 @@ export class PaymentUploadController {
         if (!isValidImage(photo)) {
           res.status(400).json({
             success: false,
-            message:
-              "Payment detail photos must be valid image files",
+            message: "Payment detail photos must be valid image files",
           });
           return;
         }
@@ -1211,13 +1231,177 @@ export class PaymentUploadController {
     }
   };
 
+  public uploadAdditionalSitePhotos = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, updated_by } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message:
+            "lead_id, account_id, vendor_id, and updated_by are required",
+        });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const currentSitePhotos = files?.current_site_photos || [];
+
+      if (currentSitePhotos.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one site photo must be provided",
+        });
+        return;
+      }
+
+      const validImageTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/bmp",
+        "image/tiff",
+        "image/heic",
+        "image/heif",
+        "image/avif",
+        "image/svg+xml",
+      ];
+
+      for (const photo of currentSitePhotos) {
+        if (!validImageTypes.includes(photo.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message:
+              "Site photos must be valid image files (JPEG, JPG, PNG, GIF, etc)",
+          });
+          return;
+        }
+      }
+
+      let sitePhotoInstanceIds: (number | null)[] | undefined;
+      try {
+        if (req.body.site_photo_instance_ids) {
+          sitePhotoInstanceIds = JSON.parse(req.body.site_photo_instance_ids);
+        }
+      } catch (e) {
+        console.warn("Could not parse site_photo_instance_ids");
+      }
+
+      const result = await this.paymentUploadService.uploadAdditionalSitePhotos(
+        {
+          lead_id: Number(lead_id),
+          account_id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          updated_by: Number(updated_by),
+          currentSitePhotos,
+          sitePhotoInstanceIds,
+        },
+      );
+
+      res.status(200).json({
+        success: true,
+        ...result,
+      });
+    } catch (error: any) {
+      console.error("[Controller] uploadAdditionalSitePhotos error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload site photos",
+        error: error.message,
+      });
+    }
+  };
+
+  public uploadMeasurementDocuments = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, updated_by } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message:
+            "lead_id, account_id, vendor_id, and updated_by are required",
+        });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const uploadPdf = files?.upload_pdf || [];
+
+      if (uploadPdf.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one measurement document must be provided",
+        });
+        return;
+      }
+
+      const validFileTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+      ];
+
+      for (const file of uploadPdf) {
+        if (!validFileTypes.includes(file.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message: "Measurement documents must be valid PDF or image files",
+          });
+          return;
+        }
+      }
+
+      let pdfFileInstanceIds: (number | null)[] | undefined;
+      try {
+        if (req.body.upload_pdf_instance_ids) {
+          pdfFileInstanceIds = JSON.parse(req.body.upload_pdf_instance_ids);
+        }
+      } catch (e) {
+        console.warn("Could not parse upload_pdf_instance_ids");
+      }
+
+      const result = await this.paymentUploadService.uploadMeasurementDocuments(
+        {
+          lead_id: Number(lead_id),
+          account_id: Number(account_id),
+          vendor_id: Number(vendor_id),
+          updated_by: Number(updated_by),
+          uploadPdf,
+          pdfFileInstanceIds,
+        },
+      );
+
+      res.status(200).json({
+        success: true,
+        ...result,
+      });
+    } catch (error: any) {
+      console.error("[Controller] uploadMeasurementDocuments error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload measurement documents",
+        error: error.message,
+      });
+    }
+  };
+
   // PUT /api/payment-upload/documents/:documentId/delete
   public softDeleteDocument = async (
     req: Request,
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
 
       // Validate required parameters
@@ -1238,7 +1422,7 @@ export class PaymentUploadController {
       }
 
       // Validate documentId is a valid number
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       if (isNaN(documentIdNum) || documentIdNum <= 0) {
         res.status(400).json({
           success: false,
@@ -1320,7 +1504,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
       const pdfFile = files?.upload_pdf?.[0];
@@ -1349,22 +1533,7 @@ export class PaymentUploadController {
         return;
       }
 
-      const validDocumentTypes = [
-        "application/pdf",
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/gif",
-      ];
-      if (!validDocumentTypes.includes(pdfFile.mimetype)) {
-        res.status(400).json({
-          success: false,
-          message: "Upload file must be a PDF or image",
-        });
-        return;
-      }
-
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       const userIdNum = parseInt(user_id);
       const vendorIdNum = parseInt(vendor_id);
 
@@ -1423,7 +1592,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { documentId } = req.params;
+      const documentId = getNumberParam(req.params.documentId);
       const { user_id, vendor_id } = req.body;
 
       // Validate required parameters
@@ -1444,7 +1613,7 @@ export class PaymentUploadController {
       }
 
       // Validate documentId is a valid number
-      const documentIdNum = parseInt(documentId);
+      const documentIdNum = Number(documentId);
       if (isNaN(documentIdNum) || documentIdNum <= 0) {
         res.status(400).json({
           success: false,
@@ -1625,7 +1794,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { paymentId } = req.params;
+      const paymentId = getNumberParam(req.params.paymentId);
       const { vendor_id } = req.query;
 
       if (!paymentId || !vendor_id) {
@@ -1637,7 +1806,7 @@ export class PaymentUploadController {
       }
 
       // Validate paymentId is a valid number
-      const paymentIdNum = parseInt(paymentId);
+      const paymentIdNum = Number(paymentId);
       if (isNaN(paymentIdNum)) {
         res.status(400).json({
           success: false,

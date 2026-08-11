@@ -26,7 +26,9 @@ export * from "./enums"
  * Type-safe database client for TypeScript
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
  * // Fetch zero or more VendorMasters
  * const vendorMasters = await prisma.vendorMaster.findMany()
  * ```
@@ -58,6 +60,11 @@ export type VendorTaxInfo = Prisma.VendorTaxInfoModel
  */
 export type UserTypeMaster = Prisma.UserTypeMasterModel
 /**
+ * Model PrivilegeMaster
+ * 
+ */
+export type PrivilegeMaster = Prisma.PrivilegeMasterModel
+/**
  * Model UserMaster
  * 
  */
@@ -67,6 +74,16 @@ export type UserMaster = Prisma.UserMasterModel
  * 
  */
 export type UserDocument = Prisma.UserDocumentModel
+/**
+ * Model UserSession
+ * 
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
+ * Model UserPrivilegeMapping
+ * 
+ */
+export type UserPrivilegeMapping = Prisma.UserPrivilegeMappingModel
 /**
  * Model ProjectMaster
  * 
@@ -103,10 +120,40 @@ export type VendorTokens = Prisma.VendorTokensModel
  */
 export type ClientMaster = Prisma.ClientMasterModel
 /**
+ * Model ClientBankDetail
+ * 
+ */
+export type ClientBankDetail = Prisma.ClientBankDetailModel
+/**
+ * Model ClientTypeMaster
+ * 
+ */
+export type ClientTypeMaster = Prisma.ClientTypeMasterModel
+/**
  * Model LeadMaster
  * 
  */
 export type LeadMaster = Prisma.LeadMasterModel
+/**
+ * Model LeadSpecificationsMaster
+ * 
+ */
+export type LeadSpecificationsMaster = Prisma.LeadSpecificationsMasterModel
+/**
+ * Model LeadCarcassMaterialMapping
+ * 
+ */
+export type LeadCarcassMaterialMapping = Prisma.LeadCarcassMaterialMappingModel
+/**
+ * Model LeadShutterMaterialMapping
+ * 
+ */
+export type LeadShutterMaterialMapping = Prisma.LeadShutterMaterialMappingModel
+/**
+ * Model LeadSuperAdminApprovalLocIns
+ * 
+ */
+export type LeadSuperAdminApprovalLocIns = Prisma.LeadSuperAdminApprovalLocInsModel
 /**
  * Model LeadUserMapping
  * 
@@ -142,6 +189,121 @@ export type LeadProductMapping = Prisma.LeadProductMappingModel
  * 
  */
 export type ProductTypeMaster = Prisma.ProductTypeMasterModel
+/**
+ * Model ProcessBriefMaster
+ * 
+ */
+export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
+/**
+ * Model LeadProcessBriefMapping
+ * 
+ */
+export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
+/**
+ * Model LeadRequirementMaterialMapping
+ * 
+ */
+export type LeadRequirementMaterialMapping = Prisma.LeadRequirementMaterialMappingModel
+/**
+ * Model CarcassTypeMaster
+ * 
+ */
+export type CarcassTypeMaster = Prisma.CarcassTypeMasterModel
+/**
+ * Model CarcasMaterialMaster
+ * 
+ */
+export type CarcasMaterialMaster = Prisma.CarcasMaterialMasterModel
+/**
+ * Model CarcassMaterialFinishMaster
+ * 
+ */
+export type CarcassMaterialFinishMaster = Prisma.CarcassMaterialFinishMasterModel
+/**
+ * Model ShutterTypeMaster
+ * 
+ */
+export type ShutterTypeMaster = Prisma.ShutterTypeMasterModel
+/**
+ * Model ShutterSubTypeMaster
+ * 
+ */
+export type ShutterSubTypeMaster = Prisma.ShutterSubTypeMasterModel
+/**
+ * Model ShutterMaterialMaster
+ * 
+ */
+export type ShutterMaterialMaster = Prisma.ShutterMaterialMasterModel
+/**
+ * Model ShutterMaterialFinishMaster
+ * 
+ */
+export type ShutterMaterialFinishMaster = Prisma.ShutterMaterialFinishMasterModel
+/**
+ * Model CarcassLegsMaster
+ * 
+ */
+export type CarcassLegsMaster = Prisma.CarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsMaster
+ * 
+ */
+export type SkirtingCarcassLegsMaster = Prisma.SkirtingCarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsColorMaster
+ * 
+ */
+export type SkirtingCarcassLegsColorMaster = Prisma.SkirtingCarcassLegsColorMasterModel
+/**
+ * Model LeadHardwareMapping
+ * 
+ */
+export type LeadHardwareMapping = Prisma.LeadHardwareMappingModel
+/**
+ * Model LightCarcasTypeMaster
+ * 
+ */
+export type LightCarcasTypeMaster = Prisma.LightCarcasTypeMasterModel
+/**
+ * Model LightCarcasUnitMaster
+ * 
+ */
+export type LightCarcasUnitMaster = Prisma.LightCarcasUnitMasterModel
+/**
+ * Model LeadLightCarcasUnitMapping
+ * 
+ */
+export type LeadLightCarcasUnitMapping = Prisma.LeadLightCarcasUnitMappingModel
+/**
+ * Model OtherAppliancesMaster
+ * 
+ */
+export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
+/**
+ * Model LeadOtherAppliancesMapping
+ * 
+ */
+export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
+/**
+ * Model LeadOtherAppliancesRemarkMapping
+ * 
+ */
+export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
+/**
+ * Model HandleTypeMaster
+ * 
+ */
+export type HandleTypeMaster = Prisma.HandleTypeMasterModel
+/**
+ * Model TimelineRule
+ * 
+ */
+export type TimelineRule = Prisma.TimelineRuleModel
+/**
+ * Model specificationDocumentMapping
+ * 
+ */
+export type specificationDocumentMapping = Prisma.specificationDocumentMappingModel
 /**
  * Model LeadDocuments
  * 
@@ -183,6 +345,16 @@ export type LeadChatDocument = Prisma.LeadChatDocumentModel
  */
 export type ProductStructure = Prisma.ProductStructureModel
 /**
+ * Model ProductSubStructure
+ * 
+ */
+export type ProductSubStructure = Prisma.ProductSubStructureModel
+/**
+ * Model ProductItemCode
+ * 
+ */
+export type ProductItemCode = Prisma.ProductItemCodeModel
+/**
  * Model LeadProductStructureMapping
  * 
  */
@@ -192,6 +364,11 @@ export type LeadProductStructureMapping = Prisma.LeadProductStructureMappingMode
  * 
  */
 export type LeadProductStructureInstance = Prisma.LeadProductStructureInstanceModel
+/**
+ * Model SelfAssignTaskTypeMaster
+ * 
+ */
+export type SelfAssignTaskTypeMaster = Prisma.SelfAssignTaskTypeMasterModel
 /**
  * Model PaymentInfo
  * 
@@ -208,6 +385,31 @@ export type Ledger = Prisma.LedgerModel
  */
 export type DocumentTypeMaster = Prisma.DocumentTypeMasterModel
 /**
+ * Model SmallOrderRequestTypeMaster
+ * 
+ */
+export type SmallOrderRequestTypeMaster = Prisma.SmallOrderRequestTypeMasterModel
+/**
+ * Model SmallOrderRequest
+ * 
+ */
+export type SmallOrderRequest = Prisma.SmallOrderRequestModel
+/**
+ * Model SmallOrderRequestDocument
+ * 
+ */
+export type SmallOrderRequestDocument = Prisma.SmallOrderRequestDocumentModel
+/**
+ * Model LeadAmcContract
+ * 
+ */
+export type LeadAmcContract = Prisma.LeadAmcContractModel
+/**
+ * Model LeadServiceSchedule
+ * 
+ */
+export type LeadServiceSchedule = Prisma.LeadServiceScheduleModel
+/**
  * Model StatusTypeMaster
  * 
  */
@@ -223,15 +425,35 @@ export type LeadStatusLogs = Prisma.LeadStatusLogsModel
  */
 export type LeadDesignMeeting = Prisma.LeadDesignMeetingModel
 /**
+ * Model LeadClientVisit
+ * 
+ */
+export type LeadClientVisit = Prisma.LeadClientVisitModel
+/**
+ * Model MeetingTypeMaster
+ * 
+ */
+export type MeetingTypeMaster = Prisma.MeetingTypeMasterModel
+/**
  * Model LeadDesignMeetingDocumentsMapping
  * 
  */
 export type LeadDesignMeetingDocumentsMapping = Prisma.LeadDesignMeetingDocumentsMappingModel
 /**
+ * Model LeadClientVisitDocumentMapping
+ * 
+ */
+export type LeadClientVisitDocumentMapping = Prisma.LeadClientVisitDocumentMappingModel
+/**
  * Model LeadDesignSelection
  * 
  */
 export type LeadDesignSelection = Prisma.LeadDesignSelectionModel
+/**
+ * Model CHSSelectionTypeMapping
+ * 
+ */
+export type CHSSelectionTypeMapping = Prisma.CHSSelectionTypeMappingModel
 /**
  * Model PaymentTypeMaster
  * 
@@ -248,6 +470,36 @@ export type LeadSiteSupervisorMapping = Prisma.LeadSiteSupervisorMappingModel
  */
 export type UserLeadTask = Prisma.UserLeadTaskModel
 /**
+ * Model FastProductionRequestBatch
+ * 
+ */
+export type FastProductionRequestBatch = Prisma.FastProductionRequestBatchModel
+/**
+ * Model FastProductionRequest
+ * 
+ */
+export type FastProductionRequest = Prisma.FastProductionRequestModel
+/**
+ * Model FastProductionFinish
+ * 
+ */
+export type FastProductionFinish = Prisma.FastProductionFinishModel
+/**
+ * Model FastProductionApproval
+ * 
+ */
+export type FastProductionApproval = Prisma.FastProductionApprovalModel
+/**
+ * Model FastProductionRequestDocument
+ * 
+ */
+export type FastProductionRequestDocument = Prisma.FastProductionRequestDocumentModel
+/**
+ * Model FastProductionStatusLog
+ * 
+ */
+export type FastProductionStatusLog = Prisma.FastProductionStatusLogModel
+/**
  * Model LeadDetailedLogs
  * 
  */
@@ -257,6 +509,16 @@ export type LeadDetailedLogs = Prisma.LeadDetailedLogsModel
  * 
  */
 export type LeadDocumentLogs = Prisma.LeadDocumentLogsModel
+/**
+ * Model LeadApprovalRequest
+ * 
+ */
+export type LeadApprovalRequest = Prisma.LeadApprovalRequestModel
+/**
+ * Model LeadApprovalRequestDocumentMapping
+ * 
+ */
+export type LeadApprovalRequestDocumentMapping = Prisma.LeadApprovalRequestDocumentMappingModel
 /**
  * Model CompanyVendorsMaster
  * 
@@ -362,3 +624,443 @@ export type NotificationDeliveryLogs = Prisma.NotificationDeliveryLogsModel
  * 
  */
 export type VloqEmailLogs = Prisma.VloqEmailLogsModel
+/**
+ * Model ModulesMaster
+ * 
+ */
+export type ModulesMaster = Prisma.ModulesMasterModel
+/**
+ * Model VendorModulesMapping
+ * 
+ */
+export type VendorModulesMapping = Prisma.VendorModulesMappingModel
+/**
+ * Model MachineMaster
+ * 
+ */
+export type MachineMaster = Prisma.MachineMasterModel
+/**
+ * Model CutList
+ * 
+ */
+export type CutList = Prisma.CutListModel
+/**
+ * Model CutListMachineMapping
+ * 
+ */
+export type CutListMachineMapping = Prisma.CutListMachineMappingModel
+/**
+ * Model UserMachineMapping
+ * 
+ */
+export type UserMachineMapping = Prisma.UserMachineMappingModel
+/**
+ * Model OrderLoginPoFileMapping
+ * 
+ */
+export type OrderLoginPoFileMapping = Prisma.OrderLoginPoFileMappingModel
+/**
+ * Model MachineTypeMaster
+ * 
+ */
+export type MachineTypeMaster = Prisma.MachineTypeMasterModel
+/**
+ * Model VendorSettingKey
+ * 
+ */
+export type VendorSettingKey = Prisma.VendorSettingKeyModel
+/**
+ * Model VendorSetting
+ * 
+ */
+export type VendorSetting = Prisma.VendorSettingModel
+/**
+ * Model DefectMaster
+ * 
+ */
+export type DefectMaster = Prisma.DefectMasterModel
+/**
+ * Model DefectedItem
+ * 
+ */
+export type DefectedItem = Prisma.DefectedItemModel
+/**
+ * Model FranchiseMaster
+ * 
+ */
+export type FranchiseMaster = Prisma.FranchiseMasterModel
+/**
+ * Model HeadSiteSupervisorFranchiseMapping
+ * 
+ */
+export type HeadSiteSupervisorFranchiseMapping = Prisma.HeadSiteSupervisorFranchiseMappingModel
+/**
+ * Model CountryMaster
+ * 
+ */
+export type CountryMaster = Prisma.CountryMasterModel
+/**
+ * Model RegionMaster
+ * 
+ */
+export type RegionMaster = Prisma.RegionMasterModel
+/**
+ * Model StateMaster
+ * 
+ */
+export type StateMaster = Prisma.StateMasterModel
+/**
+ * Model CityMaster
+ * 
+ */
+export type CityMaster = Prisma.CityMasterModel
+/**
+ * Model AreaMaster
+ * 
+ */
+export type AreaMaster = Prisma.AreaMasterModel
+/**
+ * Model GeographicalMapping
+ * 
+ */
+export type GeographicalMapping = Prisma.GeographicalMappingModel
+/**
+ * Model UserGeographicalMapping
+ * 
+ */
+export type UserGeographicalMapping = Prisma.UserGeographicalMappingModel
+/**
+ * Model UserActivityLog
+ * 
+ */
+export type UserActivityLog = Prisma.UserActivityLogModel
+/**
+ * Model ThemeMaster
+ * 
+ */
+export type ThemeMaster = Prisma.ThemeMasterModel
+/**
+ * Model ThemeMapping
+ * 
+ */
+export type ThemeMapping = Prisma.ThemeMappingModel
+/**
+ * Model ApiRequestLog
+ * 
+ */
+export type ApiRequestLog = Prisma.ApiRequestLogModel
+/**
+ * Model ExternalPlatformMaster
+ * 
+ */
+export type ExternalPlatformMaster = Prisma.ExternalPlatformMasterModel
+/**
+ * Model ExternalPlatformToken
+ * 
+ */
+export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel
+/**
+ * Model LeadExternalPlatformCustomerMapping
+ * 
+ */
+export type LeadExternalPlatformCustomerMapping = Prisma.LeadExternalPlatformCustomerMappingModel
+/**
+ * Model DefectedItemImage
+ * 
+ */
+export type DefectedItemImage = Prisma.DefectedItemImageModel
+/**
+ * Model DefectCompletionPhoto
+ * 
+ */
+export type DefectCompletionPhoto = Prisma.DefectCompletionPhotoModel
+/**
+ * Model ProjectCategoriesTypeMaster
+ * 
+ */
+export type ProjectCategoriesTypeMaster = Prisma.ProjectCategoriesTypeMasterModel
+/**
+ * Model ProjectCategoriesMaster
+ * 
+ */
+export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
+/**
+ * Model ProjectCategoriesMasterVendorMapping
+ * 
+ */
+export type ProjectCategoriesMasterVendorMapping = Prisma.ProjectCategoriesMasterVendorMappingModel
+/**
+ * Model BrandMaster
+ * 
+ */
+export type BrandMaster = Prisma.BrandMasterModel
+/**
+ * Model ProductMaster
+ * 
+ */
+export type ProductMaster = Prisma.ProductMasterModel
+/**
+ * Model CoreProductMaster
+ * 
+ */
+export type CoreProductMaster = Prisma.CoreProductMasterModel
+/**
+ * Model GradeMaster
+ * 
+ */
+export type GradeMaster = Prisma.GradeMasterModel
+/**
+ * Model FinishMaster
+ * 
+ */
+export type FinishMaster = Prisma.FinishMasterModel
+/**
+ * Model TypeMaster
+ * 
+ */
+export type TypeMaster = Prisma.TypeMasterModel
+/**
+ * Model ItemTypeMaster
+ * 
+ */
+export type ItemTypeMaster = Prisma.ItemTypeMasterModel
+/**
+ * Model PurchaseIntentMaster
+ * 
+ */
+export type PurchaseIntentMaster = Prisma.PurchaseIntentMasterModel
+/**
+ * Model PurchaseIntentItem
+ * 
+ */
+export type PurchaseIntentItem = Prisma.PurchaseIntentItemModel
+/**
+ * Model PurchaseIntentItemVendorMapping
+ * 
+ */
+export type PurchaseIntentItemVendorMapping = Prisma.PurchaseIntentItemVendorMappingModel
+/**
+ * Model PurchaseIntentStatusLog
+ * 
+ */
+export type PurchaseIntentStatusLog = Prisma.PurchaseIntentStatusLogModel
+/**
+ * Model PurchaseOrderMaster
+ * 
+ */
+export type PurchaseOrderMaster = Prisma.PurchaseOrderMasterModel
+/**
+ * Model PurchaseOrderItem
+ * 
+ */
+export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
+/**
+ * Model GRNMaster
+ * 
+ */
+export type GRNMaster = Prisma.GRNMasterModel
+/**
+ * Model GRNItem
+ * 
+ */
+export type GRNItem = Prisma.GRNItemModel
+/**
+ * Model DebitCreditNote
+ * 
+ */
+export type DebitCreditNote = Prisma.DebitCreditNoteModel
+/**
+ * Model RedeliveryRequest
+ * 
+ */
+export type RedeliveryRequest = Prisma.RedeliveryRequestModel
+/**
+ * Model HsnProductMapping
+ * 
+ */
+export type HsnProductMapping = Prisma.HsnProductMappingModel
+/**
+ * Model ProductStockHistory
+ * 
+ */
+export type ProductStockHistory = Prisma.ProductStockHistoryModel
+/**
+ * Model PaymentTermMaster
+ * 
+ */
+export type PaymentTermMaster = Prisma.PaymentTermMasterModel
+/**
+ * Model PaymentTermStage
+ * 
+ */
+export type PaymentTermStage = Prisma.PaymentTermStageModel
+/**
+ * Model POPaymentSchedule
+ * 
+ */
+export type POPaymentSchedule = Prisma.POPaymentScheduleModel
+/**
+ * Model POPayment
+ * 
+ */
+export type POPayment = Prisma.POPaymentModel
+/**
+ * Model UnitMaster
+ * 
+ */
+export type UnitMaster = Prisma.UnitMasterModel
+/**
+ * Model ItemGroupMaster
+ * 
+ */
+export type ItemGroupMaster = Prisma.ItemGroupMasterModel
+/**
+ * Model ProductSupplierMapping
+ * 
+ */
+export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel
+/**
+ * Model POPaymentScheduleHistory
+ * 
+ */
+export type POPaymentScheduleHistory = Prisma.POPaymentScheduleHistoryModel
+/**
+ * Model Architechuremaster
+ * 
+ */
+export type Architechuremaster = Prisma.ArchitechuremasterModel
+/**
+ * Model AdditionalCostMaster
+ * 
+ */
+export type AdditionalCostMaster = Prisma.AdditionalCostMasterModel
+/**
+ * Model PurchaseIntentSupplierAdditionalCost
+ * 
+ */
+export type PurchaseIntentSupplierAdditionalCost = Prisma.PurchaseIntentSupplierAdditionalCostModel
+/**
+ * Model PurchaseOrderSupplierAdditionalCost
+ * 
+ */
+export type PurchaseOrderSupplierAdditionalCost = Prisma.PurchaseOrderSupplierAdditionalCostModel
+/**
+ * Model ProjectBoxInfoField
+ * 
+ */
+export type ProjectBoxInfoField = Prisma.ProjectBoxInfoFieldModel
+/**
+ * Model BoxInfoFieldValue
+ * 
+ */
+export type BoxInfoFieldValue = Prisma.BoxInfoFieldValueModel
+/**
+ * Model VendorTypeMaster
+ * 
+ */
+export type VendorTypeMaster = Prisma.VendorTypeMasterModel
+/**
+ * Model CompanyVendorTypeMapping
+ * 
+ */
+export type CompanyVendorTypeMapping = Prisma.CompanyVendorTypeMappingModel
+/**
+ * Model CompanyVendorContactPerson
+ * 
+ */
+export type CompanyVendorContactPerson = Prisma.CompanyVendorContactPersonModel
+/**
+ * Model CompanyVendorBankAccount
+ * 
+ */
+export type CompanyVendorBankAccount = Prisma.CompanyVendorBankAccountModel
+/**
+ * Model CompanyVendorDocumentMaster
+ * 
+ */
+export type CompanyVendorDocumentMaster = Prisma.CompanyVendorDocumentMasterModel
+/**
+ * Model CompanyVendorDocumentMapping
+ * 
+ */
+export type CompanyVendorDocumentMapping = Prisma.CompanyVendorDocumentMappingModel
+/**
+ * Model CompanyVendorAddress
+ * 
+ */
+export type CompanyVendorAddress = Prisma.CompanyVendorAddressModel
+/**
+ * Model BroadcastMaster
+ * 
+ */
+export type BroadcastMaster = Prisma.BroadcastMasterModel
+/**
+ * Model BroadcastCategoryMaster
+ * 
+ */
+export type BroadcastCategoryMaster = Prisma.BroadcastCategoryMasterModel
+/**
+ * Model BroadcastAudienceMapping
+ * 
+ */
+export type BroadcastAudienceMapping = Prisma.BroadcastAudienceMappingModel
+/**
+ * Model BroadcastAttachment
+ * 
+ */
+export type BroadcastAttachment = Prisma.BroadcastAttachmentModel
+/**
+ * Model BroadcastRead
+ * 
+ */
+export type BroadcastRead = Prisma.BroadcastReadModel
+/**
+ * Model NotificationQueue
+ * 
+ */
+export type NotificationQueue = Prisma.NotificationQueueModel
+/**
+ * Model B2BRequirementTypeMaster
+ * 
+ */
+export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
+/**
+ * Model LeadB2BRequirementTypeMapping
+ * 
+ */
+export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
+/**
+ * Model OnlineLead
+ * 
+ */
+export type OnlineLead = Prisma.OnlineLeadModel
+/**
+ * Model OnlineLeadFollowupStatus
+ * 
+ */
+export type OnlineLeadFollowupStatus = Prisma.OnlineLeadFollowupStatusModel
+/**
+ * Model OnlineLeadHistory
+ * 
+ */
+export type OnlineLeadHistory = Prisma.OnlineLeadHistoryModel
+/**
+ * Model OnlineLeadCallLog
+ * 
+ */
+export type OnlineLeadCallLog = Prisma.OnlineLeadCallLogModel
+/**
+ * Model OnlineLeadStoreLog
+ * 
+ */
+export type OnlineLeadStoreLog = Prisma.OnlineLeadStoreLogModel
+/**
+ * Model UserTypePrivilegeMapping
+ * 
+ */
+export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
+/**
+ * Model TelecallerCampaignLead
+ * 
+ */
+export type TelecallerCampaignLead = Prisma.TelecallerCampaignLeadModel

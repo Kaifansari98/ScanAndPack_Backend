@@ -254,7 +254,7 @@ export type SiteReadinessGroupByOutputType = {
   _max: SiteReadinessMaxAggregateOutputType | null
 }
 
-type GetSiteReadinessGroupByPayload<T extends SiteReadinessGroupByArgs> = Prisma.PrismaPromise<
+export type GetSiteReadinessGroupByPayload<T extends SiteReadinessGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SiteReadinessGroupByOutputType, T['by']> &
       {
@@ -2206,6 +2206,11 @@ export type SiteReadinessFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` SiteReadinesses.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of SiteReadinesses.
+   */
   distinct?: Prisma.SiteReadinessScalarFieldEnum | Prisma.SiteReadinessScalarFieldEnum[]
 }
 

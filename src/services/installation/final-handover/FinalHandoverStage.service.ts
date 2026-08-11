@@ -1,11 +1,27 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { sendProjectCompletedEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class FinalHandoverStageService {
+  private formatDateTimeInIndia(date: Date) {
+    return new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).format(date);
+  }
+
   /**
    * ✅ Fetch all leads with status = Type 16 (Final Handover Stage)
    */
@@ -148,6 +164,13 @@ export class FinalHandoverStageService {
     },
   ) {
     const uploadedDocs: any[] = [];
+    const uploadedBySection: Record<string, any[]> = {
+      final_site_photos: [],
+      warranty_card: [],
+      handover_booklet: [],
+      final_handover_form: [],
+      qc_documents: [],
+    };
 
     // Get doc types
     const docTypes = await prisma.documentTypeMaster.findMany({
@@ -185,6 +208,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_site_photos.push(saved);
       }
     }
 
@@ -206,6 +230,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.warranty_card.push(saved);
       }
     }
 
@@ -227,6 +252,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.handover_booklet.push(saved);
       }
     }
 
@@ -248,6 +274,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_handover_form.push(saved);
       }
     }
 
@@ -269,7 +296,42 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.qc_documents.push(saved);
       }
+    }
+
+    const sectionMessages: Array<{ key: keyof typeof uploadedBySection; label: string }> = [
+      { key: "final_site_photos", label: "Final Site Photo" },
+      { key: "warranty_card", label: "Warranty Card Photo" },
+      { key: "handover_booklet", label: "Handover Booklet" },
+      { key: "final_handover_form", label: "Final Handover Form" },
+      { key: "qc_documents", label: "QC Document" },
+    ];
+
+    for (const section of sectionMessages) {
+      const docs = uploadedBySection[section.key];
+      if (!docs.length) continue;
+
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${docs.length} ${section.label}${docs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: docs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -334,8 +396,23 @@ export class FinalHandoverStageService {
         statusCode: 400,
       });
 
+    const lead = await prisma.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+      select: {
+        is_amc_opted: true,
+      },
+    });
+
+    if (!lead) {
+      throw Object.assign(new Error("Lead not found"), { statusCode: 404 });
+    }
+
     // 🔹 Required final handover document types
-    const REQUIRED_TAGS = [
+    const requiredTags = [
       "Type 27",
       "Type 28",
       "Type 29",
@@ -343,17 +420,22 @@ export class FinalHandoverStageService {
       "Type 31",
     ];
 
+    if (lead.is_amc_opted) {
+      requiredTags.push("Type 39");
+    }
+
     // 1️⃣ Fetch document type ids
     const docTypes = await prisma.documentTypeMaster.findMany({
-      where: { vendor_id: vendorId, tag: { in: REQUIRED_TAGS } },
+      where: { vendor_id: vendorId, tag: { in: requiredTags } },
       select: { id: true, tag: true },
     });
 
-    if (docTypes.length !== REQUIRED_TAGS.length) {
+    if (docTypes.length !== requiredTags.length) {
       return {
         docs_complete: false,
         pending_tasks_clear: false,
         can_move_to_final_handover: false,
+        requires_amc_documents: lead.is_amc_opted,
       };
     }
 
@@ -397,6 +479,7 @@ export class FinalHandoverStageService {
       docs_complete,
       pending_tasks_clear,
       can_move_to_final_handover: docs_complete && pending_tasks_clear,
+      requires_amc_documents: lead.is_amc_opted,
     };
   }
 
@@ -443,6 +526,121 @@ export class FinalHandoverStageService {
     };
   }
 
+  async updateAmcOptedStatus(
+    vendorId: number,
+    leadId: number,
+    updatedBy: number,
+    isAmcOpted: boolean,
+  ) {
+    if (!vendorId || !leadId || !updatedBy) {
+      throw Object.assign(
+        new Error("vendorId, leadId, updatedBy, and isAmcOpted are required"),
+        { statusCode: 400 },
+      );
+    }
+
+    const [lead, user] = await Promise.all([
+      prisma.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          is_amc_opted: true,
+          amc_opted_at: true,
+        },
+      }),
+      prisma.userMaster.findFirst({
+        where: {
+          id: updatedBy,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_type: {
+            select: {
+              user_type: true,
+            },
+          },
+        },
+      }),
+    ]);
+
+    if (!lead) {
+      throw Object.assign(new Error("Lead not found"), { statusCode: 404 });
+    }
+
+    if (!user) {
+      throw Object.assign(new Error("User not found"), { statusCode: 404 });
+    }
+
+    const role = user.user_type?.user_type?.toLowerCase() ?? "";
+    const canSetTrue = ["site-supervisor", "admin", "super-admin", "custom"].includes(
+      role,
+    );
+    const canSetFalse = ["admin", "super-admin"].includes(role);
+
+    if (isAmcOpted && !canSetTrue) {
+      throw Object.assign(
+        new Error(
+          "Only site-supervisor, admin, or super-admin can mark AMC as opted",
+        ),
+        { statusCode: 403 },
+      );
+    }
+
+    if (!isAmcOpted && !canSetFalse) {
+      throw Object.assign(
+        new Error("Only admin or super-admin can unmark AMC opted status"),
+        { statusCode: 403 },
+      );
+    }
+
+    if (lead.is_amc_opted === isAmcOpted) {
+      return {
+        id: lead.id,
+        is_amc_opted: lead.is_amc_opted,
+        amc_opted_at: lead.amc_opted_at,
+      };
+    }
+
+    const amcOptedAt = isAmcOpted ? new Date() : null;
+
+    const updatedLead = await prisma.leadMaster.update({
+      where: { id: leadId },
+      data: {
+        is_amc_opted: isAmcOpted,
+        amc_opted_at: amcOptedAt,
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        is_amc_opted: true,
+        amc_opted_at: true,
+      },
+    });
+
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: lead.account_id!,
+      action: isAmcOpted
+        ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
+        : "AMC opted in marked as No and AMC date/time cleared.",
+      action_type: "UPDATE",
+      created_by: updatedBy,
+      created_at: new Date(),
+    });
+
+    return updatedLead;
+  }
+
   /**
    * ✅ Move Lead to Project Completed Stage (Type 17)
    */
@@ -450,6 +648,7 @@ export class FinalHandoverStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string
   ) {
     // ==================================================
     // 1️⃣ CORE TRANSACTION LAYER (ONLY DB OPERATIONS)
@@ -463,9 +662,19 @@ export class FinalHandoverStageService {
           id: true,
           vendor_id: true,
           account_id: true,
+          franchise_id: true,
           lead_code: true,
           firstname: true,
           lastname: true,
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  tag: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -485,29 +694,124 @@ export class FinalHandoverStageService {
         throw new Error("Project Completed status not configured");
       }
 
+      const siteSupervisorMapping = await tx.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          type: "site-supervisor",
+          status: "active",
+        },
+        select: {
+          user_id: true,
+        },
+      });
+
+      if (!siteSupervisorMapping) {
+        throw new Error("Active site supervisor is not assigned to this lead");
+      }
+
+      const isSmallOrderLead = lead.productMappings.some(
+        (mapping) => mapping.productType?.tag === "Type 7",
+      );
+
+      const freeServiceSchedules = await tx.leadServiceSchedule.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          service_type: "free",
+          service_no: { in: [1, 2, 3] },
+        },
+        select: {
+          service_no: true,
+          scheduled_for: true,
+        },
+        orderBy: {
+          service_no: "asc",
+        },
+      });
+
+      if (!isSmallOrderLead && freeServiceSchedules.length < 3) {
+        throw new Error(
+          "Free service schedule is not ready. Complete usable handover first.",
+        );
+      }
+
       // 3. Update Lead Status
       await tx.leadMaster.update({
         where: { id: leadId },
         data: {
           status_id: status.id,
+          final_handover_marked_at: new Date(),
           updated_by: updatedBy,
           updated_at: new Date(),
         },
       });
 
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId,
+        accountId: lead.account_id,
+        statusId: status.id,
+        createdBy: updatedBy,
+      });
+
+      const taskTypeByServiceNo: Record<number, string> = {
+        1: "1st Servicing",
+        2: "2nd Servicing",
+        3: "3rd Servicing",
+      };
+
+      for (const service of freeServiceSchedules) {
+        const taskType = taskTypeByServiceNo[service.service_no];
+        if (!taskType) continue;
+
+        const existingTask = await tx.userLeadTask.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            user_id: siteSupervisorMapping.user_id,
+            task_type: taskType,
+            due_date: service.scheduled_for,
+          },
+          select: { id: true },
+        });
+
+        if (!existingTask) {
+          const task = await tx.userLeadTask.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: lead.account_id!,
+              franchise_id: lead.franchise_id ?? null,
+              user_id: siteSupervisorMapping.user_id,
+              task_type: taskType,
+              lead_stage: "servicing-stage",
+              due_date: service.scheduled_for,
+              remark: null,
+              status: "open",
+              created_by: updatedBy,
+            },
+          });
+          await createTaskHistoryLog({
+            db: tx,
+            task,
+            createdBy: updatedBy,
+            actionType: "CREATE",
+          });
+        }
+      }
+
       // 4. Insert Audit Log
       const actionMessage = `Lead moved to Project Completed Stage.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("✅ Project Completed DB update done", {
@@ -528,33 +832,31 @@ export class FinalHandoverStageService {
     // ==================================================
 
     try {
-      const [leadUsers, admins] = await Promise.all([
-        // SALES EXECUTIVES FROM MAPPING
+      const [leadUsers, leadMeta, firstInstance] = await Promise.all([
+        // MAPPED USERS
         prisma.leadUserMapping.findMany({
-          where: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            status: "active",
-          },
+          where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
           select: { user_id: true },
         }),
-
-        // ADMINS
-        prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"], mode: "insensitive" },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        // FRANCHISE ID for admin filter
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: { franchise_id: true },
+        }),
+        // FIRST INSTANCE for deep link
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
       ]);
+
+      const franchiseId = leadMeta?.franchise_id ?? null;
+
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+        vendorId,
+        franchiseId,
+      });
 
       const salesUserIds = Array.from(new Set(leadUsers.map((m) => m.user_id)));
 
@@ -564,35 +866,24 @@ export class FinalHandoverStageService {
               where: {
                 id: { in: salesUserIds },
                 status: "active",
-                user_type: {
-                  user_type: {
-                    in: ["sales-executive"],
-                    mode: "insensitive",
-                  },
-                },
+                user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
               },
-              select: {
-                id: true,
-                user_name: true,
-                user_email: true,
-              },
+              select: { id: true, user_name: true, user_email: true },
             })
           : [];
 
-      const recipients = [...admins, ...salesExecutives];
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...admins, ...salesExecutives]) recipientMap.set(u.id, u);
+      const recipients = Array.from(recipientMap.values());
 
       if (!recipients.length) return result;
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath = `/dashboard/leads/project-summary/${leadId}`;
-
-      const projectUrl = result.accountId
-        ? `${baseUrl}${redirectPath}?accountId=${result.accountId}`
-        : `${baseUrl}${redirectPath}`;
+      const stagePath = `${STAGE_PATH_BY_TAG["Type 17"]}/${leadId}`;
+      const qp = new URLSearchParams();
+      if (result.accountId) qp.set("accountId", String(result.accountId));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      const redirectPath = qp.toString() ? `${stagePath}?${qp.toString()}` : stagePath;
+      const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ==================================================
       // 3️⃣ SEND NOTIFICATIONS + EMAILS

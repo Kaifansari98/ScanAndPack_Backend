@@ -133,10 +133,12 @@ export const uploadFinalMeasurement = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      const safeName = sanitizeFilename(file.originalname).replace(/\s+/g, "_");
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${uniqueSuffix}-${safeName}`);
     },
   }),
-  limits: { fileSize: 200 * 1024 * 1024, files: 100 },
+  limits: { fileSize: 200 * 1024 * 1024, files: 40 },
   fileFilter: (req, file, cb) => {
     const allowedMimeTypes = [
       "image/jpeg",
@@ -151,6 +153,94 @@ export const uploadFinalMeasurement = multer({
       cb(
         new Error(
           `Only image files and PDFs are allowed! Received: ${file.mimetype}`
+        )
+      );
+    }
+  },
+});
+
+export const uploadApprovalRequest = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/approval_request";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      const safeName = sanitizeFilename(file.originalname).replace(/\s+/g, "_");
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${uniqueSuffix}-${safeName}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
+  fileFilter: (_req, file, cb) => {
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-powerpoint",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "application/zip",
+      "application/x-zip-compressed",
+    ];
+
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Unsupported file type for approval request: ${file.mimetype}`
+        )
+      );
+    }
+  },
+});
+
+export const uploadClientVisit = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/client_visit";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      const safeName = sanitizeFilename(file.originalname).replace(/\s+/g, "_");
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${uniqueSuffix}-${safeName}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 30 },
+  fileFilter: (_req, file, cb) => {
+    const allowedMimeTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-powerpoint",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "application/zip",
+      "application/x-zip-compressed",
+    ];
+
+    if (allowedMimeTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(
+        new Error(
+          `Unsupported file type for client visit upload: ${file.mimetype}`
         )
       );
     }
@@ -401,6 +491,20 @@ export const uploadPostProductionFiles = multer({
   limits: { fileSize: 200 * 1024 * 1024, files: 10 },
 });
 
+export const uploadPreProductionFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/pre_production_files";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+});
+
 export const uploadReadyToDispatchPhotos = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
@@ -468,7 +572,7 @@ export const uploadUnderInstallationFiles = multer({
       cb(null, `${Date.now()}-${file.originalname}`);
     },
   }),
-  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
 });
 
 export const uploadFinalHandoverFiles = multer({
@@ -483,6 +587,20 @@ export const uploadFinalHandoverFiles = multer({
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 40 },
+});
+
+export const uploadServicingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/servicing";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
 });
 
 export const uploadMeetingDocs = multer({
@@ -513,7 +631,8 @@ export const uploadBookingStageFiles = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `${unique}-${file.originalname}`);
     },
   }),
   limits: { fileSize: 200 * 1024 * 1024, files: 11 },
@@ -546,12 +665,22 @@ export const uploadCSPBookingFiles = multer({
   },
 });
 
-const CHAT_MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB per file
+export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
+  storage: multer.memoryStorage(),
+  limits: { files: 20 },
+  fileFilter: (req, file, cb) => {
+    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".mp4"];
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (allowed.includes(ext)) cb(null, true);
+    else cb(new Error(`Unsupported file type: ${ext}`));
+  },
+});
 
-const uploadChatAttachments = multer({
+
+export const uploadMachineFiles = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
-      const dir = "/tmp/chat_uploads";
+      const dir = "/tmp/machine_images";
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
       cb(null, dir);
     },
@@ -560,17 +689,71 @@ const uploadChatAttachments = multer({
     },
   }),
   limits: {
-    fileSize: 200 * 1024 * 1024, // 200 MB
+    fileSize: 20 * 1024 * 1024,
+    files: 1,
+  },
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    allowed.includes(file.mimetype)
+      ? cb(null, true)
+      : cb(new Error("Only image files are allowed"));
   },
 });
 
-export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
-  storage: multer.memoryStorage(),
-  limits: { files: 10 },
-  fileFilter: (req, file, cb) => {
-    const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".mp4"];
-    const ext = path.extname(file.originalname).toLowerCase();
-    if (allowed.includes(ext)) cb(null, true);
-    else cb(new Error(`Unsupported file type: ${ext}`));
+export const uploadProjectExcel = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/project_excels";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+
+  limits: {
+    fileSize: 25 * 1024 * 1024, // Excel can be large
+    files: 1,
+  },
+
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+      "application/vnd.ms-excel", // .xls
+    ];
+
+    allowed.includes(file.mimetype)
+      ? cb(null, true)
+      : cb(new Error("Only Excel files are allowed"));
+  },
+});
+
+export const uploadVendorAssets = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/vendor_assets";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB
+    files: 2,
+  },
+  fileFilter: (_req, file, cb) => {
+    const allowed = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/svg+xml",
+      "image/webp",
+      "image/x-icon",
+    ];
+    if (allowed.includes(file.mimetype)) cb(null, true);
+    else cb(new Error("Only image files are allowed for logo and icon"));
   },
 });

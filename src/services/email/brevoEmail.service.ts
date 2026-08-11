@@ -2,8 +2,67 @@
 
 import { prisma } from "../../prisma/client";
 import logger from "../../../src/utils/logger";
+import { resolveEmailIdentity } from "../../../src/validations/emailIdentity.resolver";
+
+
+export const applyVendorDomain = async <T extends { vendor_id?: number }>(payload: T): Promise<T> => {
+  let domain = process.env.FRONTEND_URL || "http://localhost:3000";
+
+  try {
+    if (payload.vendor_id) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: payload.vendor_id },
+        select: { subdomain_url: true }
+      });
+      if (vendor?.subdomain_url && vendor.subdomain_url.trim().length > 0) {
+        domain = vendor.subdomain_url.trim();
+      }
+    }
+  } catch (e) {
+    // Ignore DB errors and use fallback domain
+  }
+
+  // FORCE domain to have http/https so Sendinblue never throws "host missing"
+  if (!/^https?:\/\//i.test(domain)) {
+    if (domain.includes('localhost')) {
+      domain = 'http://' + domain;
+    } else {
+      domain = 'https://' + domain;
+    }
+  }
+  domain = domain.replace(/\/$/, ""); // remove trailing slash
+
+  const newPayload = { ...payload } as any;
+  const urlKeys = ['projectUrl', 'leadUrl', 'taskUrl', 'conversationUrl', 'detailsUrl', 'loginUrl', 'dashboardUrl', 'vendorUrl'];
+  
+  for (const key of urlKeys) {
+    let originalUrl = newPayload[key];
+    if (originalUrl && typeof originalUrl === 'string') {
+      try {
+        originalUrl = originalUrl.trim();
+        // Check if originalUrl is a full absolute URL
+        if (/^https?:\/\//i.test(originalUrl)) {
+          const urlObj = new URL(originalUrl);
+          newPayload[key] = originalUrl.replace(urlObj.origin, domain);
+        } else {
+          // If it's a relative path or missing protocol (e.g. "localhost:3000/dashboard")
+          if (!originalUrl.startsWith('/')) {
+             const firstSlashIdx = originalUrl.indexOf('/');
+             originalUrl = firstSlashIdx !== -1 ? originalUrl.substring(firstSlashIdx) : '/';
+          }
+          newPayload[key] = `${domain}${originalUrl}`;
+        }
+      } catch (e) {
+        // Ultimate fallback to ensure a valid URL is passed to Sendinblue
+        newPayload[key] = domain;
+      }
+    }
+  }
+  return newPayload;
+};
 
 export type BrevoEmailPayload = {
+  vendor_id?: number;
   toEmail: string;
   toName?: string | null;
   subject: string;
@@ -12,6 +71,7 @@ export type BrevoEmailPayload = {
   replyToEmail?: string;
   replyToName?: string;
   senderName?: string;
+  allowSuperAdmin?: boolean;
 };
 
 export type BrevoEmailResult =
@@ -20,6 +80,7 @@ export type BrevoEmailResult =
   | { success: false; skipped: true; reason: string };
 
 export type LeadCreatedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -34,6 +95,7 @@ export type LeadCreatedEmailPayload = {
 };
 
 export type TaskAssignedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -47,6 +109,7 @@ export type TaskAssignedEmailPayload = {
 };
 
 export type ChatMentionEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -57,7 +120,20 @@ export type ChatMentionEmailPayload = {
   conversationUrl?: string;
 };
 
+export type NewMeetingAddedEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  meetingDate: string;
+  meetingDescription?: string | null;
+  detailsUrl?: string;
+};
+
 export type MajorMilestoneEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -68,7 +144,19 @@ export type MajorMilestoneEmailPayload = {
   detailsUrl?: string;
 };
 
+export type FinalMeasurementUploadedEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  contact: string;
+  leadUrl?: string;
+};
+
 export type LeadOnHoldEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -82,6 +170,7 @@ export type LeadOnHoldEmailPayload = {
 };
 
 export type LeadActiveEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -95,6 +184,7 @@ export type LeadActiveEmailPayload = {
 };
 
 export type LeadLostApprovalEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -107,6 +197,7 @@ export type LeadLostApprovalEmailPayload = {
 };
 
 export type LeadLostApprovedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -119,6 +210,7 @@ export type LeadLostApprovedEmailPayload = {
 };
 
 export type LeadLostRejectedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string | null;
@@ -131,7 +223,9 @@ export type LeadLostRejectedEmailPayload = {
 };
 
 export type PaymentAddedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
+  franchise_id?: number | null;
   toEmail: string;
   toName?: string | null;
   leadCode: string;
@@ -143,6 +237,7 @@ export type PaymentAddedEmailPayload = {
 };
 
 export interface ReadyToDispatchEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -154,6 +249,7 @@ export interface ReadyToDispatchEmailPayload {
 }
 
 export interface MiscERDUpdatedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -162,6 +258,73 @@ export interface MiscERDUpdatedEmailPayload {
   fulfillmentDate: string;
   projectUrl?: string;
 }
+
+export interface LeadMarkedActiveEmailPayload {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+
+  toEmail: string;
+  toName?: string;
+
+  leadCode: string;
+  leadName: string;
+
+  updatedBy: string;
+  updatedAt: string;
+
+  remark: string;
+  leadUrl?: string;
+}
+
+export type BookingDoneApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  dateOfAction: string;
+  dueDate: string;
+  ctaLink?: string;
+};
+
+export type OrderLoginApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  dateOfAction: string;
+  dueDate: string;
+  ctaLink?: string;
+};
+
+export type DispatchPlanningApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  dateOfAction: string;
+  dueDate: string;
+  ctaLink?: string;
+};
+
+export type FastProductionApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  raisedBy: string;
+  ctaLink?: string;
+};
 
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
@@ -184,11 +347,20 @@ const MISC_READY_TEMPLATE_KEY = "MISC_READY";
 const MISC_RESOLVED_TEMPLATE_KEY = "MISC_RESOLVED";
 const FINAL_HANDOVER_TEMPLATE_KEY = "FINAL_HANDOVER";
 const PROJECT_COMPLETED_TEMPLATE_KEY = "PROJECT_COMPLETED";
+const FM_UPLOADED_TEMPLATE_KEY = "FM_UPLOADED";
 const TECH_CHECK_APPROVED_TEMPLATE_KEY = "TECHCHECK_DOCUMENT_APPROVED";
 const TECH_CHECK_REJECTED_TEMPLATE_KEY = "TECHCHECK_DOCUMENT_REJECT";
 const REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY = "REVISED_DOCUMENTS_UPLOADED";
 const ORDER_LOGIN_ENABLED_TEMPLATE_KEY = "ORDER_LOGIN_ENABLED";
 const ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY = "ORDER_LOGIN_ASSIGNED";
+const BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "BOOKING_DONE_APPROVAL_REQUIRED";
+const ORDER_LOGIN_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "ORDER_LOGIN_APPROVAL_REQUIRED";
+const DISPATCH_PLANNING_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "DISPATCH_PLANNING_APPROVAL_REQUIRED";
+const FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "FAST_PRODUCTION_APPROVAL_REQUIRED";
 
 export const LEAD_STAGE_TEMPLATE_KEYS = {
   ISM_STAGE: "LEAD_MOVED_TO_ISM_STAGE",
@@ -213,16 +385,35 @@ const renderTemplate = (template: string, values: Record<string, string>) => {
   });
 };
 
+export type EmailIdentity = {
+  senderName: string;
+  senderEmail: string;
+};
+
 export const sendBrevoEmail = async (
   payload: BrevoEmailPayload,
+  identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
-  const senderEmail = process.env.BREVO_SENDER_EMAIL;
-  const defaultSenderName = process.env.BREVO_SENDER_NAME || "Furnix CRM";
-  const senderName = payload.senderName || defaultSenderName;
-  const replyTo = payload.replyToEmail || process.env.BREVO_REPLY_TO_EMAIL;
-  const replyToName = payload.replyToName || senderName;
-  const brevoEnabled = process.env.BREVO_ENABLED === "true";
+  let brevoEnabled = process.env.BREVO_ENABLED === "true";
+
+  if (payload.vendor_id) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: payload.vendor_id },
+      select: { is_email_noti_enabled: true }
+    });
+    if (vendor) {
+      brevoEnabled = vendor.is_email_noti_enabled;
+    }
+  }
+
+  const forcedSenderEmail = process.env.BREVO_SENDER_EMAIL;
+
+  const senderEmail = forcedSenderEmail || identity?.senderEmail;
+  const senderName = identity?.senderName;
+
+  const replyTo = identity?.senderEmail;
+  const replyToName = identity?.senderName;
 
   if (!brevoEnabled) {
     logger.info("Brevo email skipped: disabled", {
@@ -233,6 +424,25 @@ export const sendBrevoEmail = async (
       success: false,
       skipped: true,
       reason: "Brevo disabled",
+    };
+  }
+
+  // Skip email if recipient is super-admin
+  const recipientUser = await prisma.userMaster.findFirst({
+    where: { user_email: payload.toEmail },
+    select: { user_type: { select: { user_type: true } } },
+  });
+  if (
+    recipientUser?.user_type?.user_type?.toLowerCase() === "super-admin" &&
+    !payload.allowSuperAdmin
+  ) {
+    logger.info("Email skipped: recipient is super-admin", {
+      to: payload.toEmail,
+    });
+    return {
+      success: false,
+      skipped: true,
+      reason: "Skipped: recipient is super-admin",
     };
   }
 
@@ -308,15 +518,102 @@ export const sendBrevoEmail = async (
   }
 };
 
+export const sendNewMeetingAddedEmail = async (
+  payload: NewMeetingAddedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `New Meeting Added - ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `A new meeting has been added on ${payload.leadCode} - ${payload.leadName}.`,
+    `Meeting Date: ${payload.meetingDate}`,
+    payload.meetingDescription?.trim()
+      ? `Meeting Description: ${payload.meetingDescription.trim()}`
+      : "",
+    "",
+    "Click to view the meeting details.",
+    payload.detailsUrl ? `View Meeting Details: ${payload.detailsUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0; padding:0; background:#f5f7fb; font-family:Arial, sans-serif; color:#111827;">
+  <div style="max-width:640px; margin:0 auto; padding:24px 16px;">
+    <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden;">
+      <div style="padding:24px;">
+        <h2 style="margin:0 0 12px; font-size:22px; line-height:1.3;">New Meeting Added</h2>
+        <p style="margin:0 0 16px; color:#4b5563;">
+          A new meeting has been added on <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+        </p>
+        <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:16px; margin-bottom:16px;">
+          <p style="margin:0 0 8px;"><strong>Meeting Date:</strong> ${payload.meetingDate}</p>
+          ${
+            payload.meetingDescription?.trim()
+              ? `<p style="margin:0;"><strong>Meeting Description:</strong> ${payload.meetingDescription.trim()}</p>`
+              : ""
+          }
+        </div>
+        <p style="margin:0 0 16px; color:#4b5563;">
+          Click below to view the meeting details.
+        </p>
+        ${
+          payload.detailsUrl
+            ? `<div style="margin-top:16px;">
+          <a
+            href="${payload.detailsUrl}"
+            style="display:inline-block; background:#111827; color:#ffffff; text-decoration:none; padding:10px 16px; border-radius:8px; font-size:14px;"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Meeting Details
+          </a>
+        </div>`
+            : ""
+        }
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject: defaultSubject,
+      text: defaultText,
+      html: defaultHtml,
+    },
+    identity,
+  );
+};
+//1
 export const sendLeadCreatedEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Lead Created: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A new lead has been created.",
-    "Lead Details:",
+    "",
+    "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Contact Details: ${payload.contact}`,
@@ -331,61 +628,137 @@ export const sendLeadCreatedEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">New Lead Created</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">A new lead has been created.</p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Contact Details</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.contact}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Type</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Structure</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureStructure}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Created Date</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.createdDate}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Created By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.createdBy}</td>
-            </tr>
-          </table>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        New Lead Created
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A new lead has been created.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Contact Details</div>
+          <div class="lead-info-value">${payload.contact}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Furniture Type</div>
+          <div class="lead-info-value">${payload.furnitureType}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Furniture Structure</div>
+          <div class="lead-info-value">${payload.furnitureStructure}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Created Date</div>
+          <div class="lead-info-value">${payload.createdDate}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Created By</div>
+          <div class="lead-info-value">${payload.createdBy}</div>
+        </div>
       </div>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -407,45 +780,44 @@ export const sendLeadCreatedEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_CREATED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_CREATED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template?.subject?.trim().length
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template?.text?.trim().length
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template?.html?.trim().length
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+//2
 export const sendLeadAssignedEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "New lead has been assigned to you.",
+    "A new lead has been assigned to you by the admin.",
+    "",
     "Lead Summary",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
@@ -454,68 +826,140 @@ export const sendLeadAssignedEmail = async (
     `Furniture Structure: ${payload.furnitureStructure}`,
     `Created Date: ${payload.createdDate}`,
     "",
-    "Please connect with the client and start capturing requirements.",
-    payload.leadUrl ? `View Lead: ${payload.leadUrl}` : "",
+    "Please connect with the client and initiate the sales process.",
+    payload.leadUrl ? `View Assigned Lead: ${payload.leadUrl}` : "",
   ]
     .filter(Boolean)
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">New Lead Assigned</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          New lead has been assigned to you.
-        </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Summary</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Contact Details</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.contact}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Type</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Structure</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureStructure}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Created Date</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.createdDate}</td>
-            </tr>
-          </table>
-        </div>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please connect with the client and start capturing requirements.
-        </p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead
-                </a>
-              </p>`
-            : ""
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <style>
+        /* Desktop view - table layout */
+        .lead-info-row {
+          display: table;
+          width: 100%;
+          padding: 4px 0;
         }
+        .lead-info-label {
+          display: table-cell;
+          color: #6b7280;
+          font-size: 14px;
+          width: 40%;
+          vertical-align: top;
+        }
+        .lead-info-value {
+          display: table-cell;
+          color: #111827;
+          font-weight: 600;
+          font-size: 14px;
+          width: 60%;
+        }
+        
+        /* Mobile view - stacked layout */
+        @media only screen and (max-width: 600px) {
+          .lead-info-row {
+            display: block !important;
+            margin-bottom: 4px !important;
+            padding-bottom: 4px !important;
+            border-bottom: 1px solid #e5e7eb !important;
+          }
+          .lead-info-row:last-child {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+          }
+          .lead-info-label {
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 4px !important;
+            font-size: 13px !important;
+          }
+          .lead-info-value {
+            display: block !important;
+            width: 100% !important;
+          }
+          .lead-info-row.no-border {
+            border-bottom: none !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+          }
+        }
+      </style>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: Arial, sans-serif;">
+      <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 10px;">
+        <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+          
+          <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">New Lead Assigned</h2>
+          
+          <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
+          
+          <p style="margin: 0 0 16px; color: #4b5563;">
+            A new lead has been assigned to you by the admin.
+          </p>
+          
+          <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
+            <p style="margin: 0 0 4px; font-weight: 600; color: #111827;">Lead Summary</p>
+            
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Code</div>
+              <div class="lead-info-value">${payload.leadCode}</div>
+            </div>
+            
+            <div class="lead-info-row">
+              <div class="lead-info-label">Lead Name</div>
+              <div class="lead-info-value">${payload.leadName}</div>
+            </div>
+            
+            <div class="lead-info-row">
+              <div class="lead-info-label">Contact Details</div>
+              <div class="lead-info-value">${payload.contact}</div>
+            </div>
+            
+            <div class="lead-info-row">
+              <div class="lead-info-label">Furniture Type</div>
+              <div class="lead-info-value">${payload.furnitureType}</div>
+            </div>
+            
+            <div class="lead-info-row">
+              <div class="lead-info-label">Furniture Structure</div>
+              <div class="lead-info-value">${payload.furnitureStructure}</div>
+            </div>
+            
+            <div class="lead-info-row no-border">
+              <div class="lead-info-label">Created Date</div>
+              <div class="lead-info-value">${payload.createdDate}</div>
+            </div>
+          </div>
+          
+          <p style="margin: 16px 0 0; color: #4b5563;">
+            Please connect with the client and initiate the sales process.
+          </p>
+          
+         ${
+           payload.leadUrl
+             ? `<div style="margin: 16px 0 0; text-align: start;">
+         <a
+           href="${payload.leadUrl}"
+           style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 14px;"
+           target="_blank"
+           rel="noopener noreferrer"
+         >
+           View Assigned Lead
+         </a>
+       </div>`
+             : ""
+         }
+
+        </div>
       </div>
-    </div>
+    </body>
+    </html>
   `;
 
   const templateValues = {
@@ -560,23 +1004,32 @@ export const sendLeadAssignedEmail = async (
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+//
 export const sendLeadAssignedToSiteSupervisorEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A lead has been assigned to you.",
+    "",
     "Lead Summary",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
@@ -592,62 +1045,136 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Assigned</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          A lead has been assigned to you.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Assigned
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A lead has been assigned to you.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Summary
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Summary</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Contact Details</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.contact}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Type</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureType}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Furniture Structure</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.furnitureStructure}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Created Date</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.createdDate}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please review the lead details and plan the next steps.
-        </p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Contact Details</div>
+          <div class="lead-info-value">${payload.contact}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Furniture Type</div>
+          <div class="lead-info-value">${payload.furnitureType}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Furniture Structure</div>
+          <div class="lead-info-value">${payload.furnitureStructure}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Created Date</div>
+          <div class="lead-info-value">${payload.createdDate}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please review the lead details and plan the next steps.
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -669,45 +1196,44 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_ASSIGNED_SITE_SUPERVISOR_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+//3
 export const sendTaskAssignedEmail = async (
   payload: TaskAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Task Assigned: ${payload.taskTitle} for ${payload.leadCode} ${payload.leadName}`;
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Task Assigned: ${payload.taskTitle} for ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "You have been assigned a new task in the CRM.",
+    "",
     "Task Details",
     `Task: ${payload.taskTitle}`,
     `Lead Code: ${payload.leadCode}`,
@@ -723,67 +1249,141 @@ export const sendTaskAssignedEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Task Assigned</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          You have been assigned a new task in the CRM.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Task Assigned
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        You have been assigned a new task in the CRM.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Task Details
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Task Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Task</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.taskTitle}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Assigned By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.assignedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Due Date</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.dueDate}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Remarks</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.remark ?? "—"}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Task</div>
+          <div class="lead-info-value">${payload.taskTitle}</div>
         </div>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please review the task and take the necessary action within the defined timeline.
-        </p>
-        ${
-          payload.taskUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.taskUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Task
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Assigned By</div>
+          <div class="lead-info-value">${payload.assignedBy}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Due Date</div>
+          <div class="lead-info-value">${payload.dueDate}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Remarks</div>
+          <div class="lead-info-value">${payload.remark ?? "—"}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please review the task and take the necessary action within the defined timeline.
+      </p>
+
+      ${
+        payload.taskUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.taskUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                 View Task & Lead
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
     taskTitle: payload.taskTitle,
+    leadCode: payload.leadCode,
     leadName: payload.leadName,
     assignedBy: payload.assignedBy,
     dueDate: payload.dueDate,
@@ -799,40 +1399,37 @@ export const sendTaskAssignedEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: TASK_ASSIGNED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: TASK_ASSIGNED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+// 4
 export const sendChatMentionEmail = async (
   payload: ChatMentionEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `You Were Mentioned on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -926,18 +1523,25 @@ export const sendChatMentionEmail = async (
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+// 5
 export const sendMajorMilestoneEmail = async (
   payload: MajorMilestoneEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatMilestoneDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -947,8 +1551,11 @@ export const sendMajorMilestoneEmail = async (
       year: "numeric",
     });
   };
+
   const completedOn = formatMilestoneDate(payload.completedOn);
+
   const defaultSubject = `Milestone Achieved: ${payload.milestoneName} on ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
@@ -967,60 +1574,129 @@ export const sendMajorMilestoneEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Milestone Achieved</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          A major milestone has been achieved for the following lead:
-        </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Milestone</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.milestoneName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Achieved On</td>
-              <td style="padding: 4px 0; font-weight: 600;">${completedOn}</td>
-            </tr>
-          </table>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Milestone Achieved
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A major milestone has been achieved for the following lead:
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.
-        </p>
-        ${
-          payload.detailsUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.detailsUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead / Project Details
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Milestone</div>
+          <div class="lead-info-value">${payload.milestoneName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Achieved On</div>
+          <div class="lead-info-value">${completedOn}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        This marks an important progression in the project lifecycle. Please review the details and proceed with the next required actions.
+      </p>
+
+      ${
+        payload.detailsUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.detailsUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead / Project Details
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
     leadCode: payload.leadCode,
     leadName: payload.leadName,
     milestoneName: payload.milestoneName,
-    completedOn: payload.completedOn,
+    completedOn,
     detailsUrl: payload.detailsUrl ?? "",
   };
 
@@ -1032,40 +1708,37 @@ export const sendMajorMilestoneEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: MILESTONE_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: MILESTONE_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+// 7
 export const sendLeadOnHoldEmail = async (
   payload: LeadOnHoldEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatOnHoldDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -1075,18 +1748,23 @@ export const sendLeadOnHoldEmail = async (
       year: "numeric",
     });
   };
+
   const updatedAt = formatOnHoldDate(payload.updatedAt);
   const updatedByRole = payload.updatedByRole?.trim() || "Sales Executive";
-  const defaultSubject = `Lead Placed On Hold: ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultSubject = `Lead Mark On Hold: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     `The following lead has been marked On Hold by the ${updatedByRole}.`,
+    "",
     "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Updated By: ${payload.updatedBy}`,
     `Marked on: ${updatedAt}`,
+    "",
     "Remark Provided:",
     `"${payload.remark}"`,
     "",
@@ -1096,53 +1774,130 @@ export const sendLeadOnHoldEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Placed On Hold</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The following lead has been marked On Hold by the ${updatedByRole}.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Mark On Hold
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The following lead has been marked On Hold by the <b>${updatedByRole}</b>.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Updated By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.updatedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Marked on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${updatedAt}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 6px; color: #4b5563;">Remark Provided:</p>
-        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead Details
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked On</div>
+          <div class="lead-info-value">${updatedAt}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Remark Provided:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        ${payload.remark}
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -1163,181 +1918,50 @@ export const sendLeadOnHoldEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_ON_HOLD_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_ON_HOLD_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendLeadActiveEmail = async (
-  payload: LeadActiveEmailPayload,
-): Promise<BrevoEmailResult> => {
-  const formatActiveDate = (value: string) => {
-    const parsed = new Date(value);
-    if (Number.isNaN(parsed.getTime())) return value;
-    return parsed.toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
-  const updatedAt = formatActiveDate(payload.updatedAt);
-  const updatedByRole = payload.updatedByRole?.trim() || "Sales Executive";
-  const defaultSubject = `Lead marked Active: ${payload.leadCode} - ${payload.leadName}`;
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The following lead has been marked Active by the ${updatedByRole}.`,
-    "Lead Details",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Updated By: ${payload.updatedBy}`,
-    `Marked on: ${updatedAt}`,
-    "Remark Provided:",
-    `"${payload.remark}"`,
-    "",
-    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead marked Active</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The following lead has been marked Active by the ${updatedByRole}.
-        </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Updated By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.updatedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Marked on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${updatedAt}</td>
-            </tr>
-          </table>
-        </div>
-        <p style="margin: 16px 0 6px; color: #4b5563;">Remark Provided:</p>
-        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead Details
-                </a>
-              </p>`
-            : ""
-        }
-      </div>
-    </div>
-  `;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt,
-    updatedByRole,
-    remark: payload.remark,
-    leadUrl: payload.leadUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
       vendor_id: payload.vendor_id,
-      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
-      active: true,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
     },
-  });
-
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+    identity,
+  );
 };
-
+// 8
 export const sendLeadLostApprovalEmail = async (
   payload: LeadLostApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Approval Required: Lead Marked as Lost - ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "A lead has been marked as Lost and is awaiting your approval.",
+    "",
     "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Marked Lost By: ${payload.markedBy}`,
     `Marked Lost on: ${payload.markedAt}`,
+    "",
     "Reason Provided:",
     `"${payload.remark}"`,
     "",
@@ -1348,56 +1972,134 @@ export const sendLeadLostApprovalEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Approval Required</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          A lead has been marked as Lost and is awaiting your approval.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Approval Required
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A lead has been marked as Lost and is awaiting your approval.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Marked Lost By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.markedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Marked Lost on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.markedAt}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 6px; color: #4b5563;">Reason Provided:</p>
-        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please review the request and either approve or reject the lost status.
-        </p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Review Lost Lead
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Marked Lost By</div>
+          <div class="lead-info-value">${payload.markedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked Lost On</div>
+          <div class="lead-info-value">${payload.markedAt}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Reason Provided:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        "${payload.remark}"
+      </p>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please review the request and either approve or reject the lost status.
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Lost Lead
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -1417,50 +2119,50 @@ export const sendLeadLostApprovalEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_LOST_APPROVAL_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_LOST_APPROVAL_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
-
+// 9
 export const sendLeadLostApprovedEmail = async (
   payload: LeadLostApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lost Lead Request Approved: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "Your request to mark the following lead as Lost has been approved by the Admin.",
+    "",
     "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Approved By: ${payload.approvedBy}`,
     `Approved on: ${payload.approvedAt}`,
+    "",
     "Reason Provided:",
     `"${payload.remark}"`,
     "",
@@ -1471,56 +2173,134 @@ export const sendLeadLostApprovedEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lost Lead Approved</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          Your request to mark the following lead as Lost has been approved by the Admin.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lost Lead Approved
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Your request to mark the following lead as <b>Lost</b> has been approved by the Admin.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Approved By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.approvedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Approved on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.approvedAt}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 6px; color: #4b5563;">Reason Provided:</p>
-        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          The lead has now been closed as Lost in the system.
-        </p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead Details
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.approvedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Approved On</div>
+          <div class="lead-info-value">${payload.approvedAt}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Reason Provided:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        "${payload.remark}"
+      </p>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        The lead has now been closed as <b>Lost</b> in the system.
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -1540,50 +2320,51 @@ export const sendLeadLostApprovedEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_LOST_APPROVED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_LOST_APPROVED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 
+// 10
 export const sendLeadLostRejectedEmail = async (
   payload: LeadLostRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lost Lead Request Rejected: ${payload.leadCode} - ${payload.leadName}`;
+
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
     "Your request to mark the following lead as Lost has been reviewed and rejected by the Admin.",
+    "",
     "Lead Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
     `Rejected By: ${payload.rejectedBy}`,
     `Rejected on: ${payload.rejectedAt}`,
+    "",
     "Admin Remark:",
     `"${payload.remark}"`,
     "",
@@ -1594,56 +2375,134 @@ export const sendLeadLostRejectedEmail = async (
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 520px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lost Lead Request Rejected</h2>
-        <p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p>
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          Your request to mark the following lead as Lost has been reviewed and rejected by the Admin.
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lost Lead Request Rejected
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Your request to mark the following lead as <b>Lost</b> has been reviewed and <b>rejected</b> by the Admin.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
         </p>
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <p style="margin: 0 0 8px; font-weight: 600; color: #111827;">Lead Details</p>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Rejected By</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.rejectedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 4px 0; color: #6b7280;">Rejected on</td>
-              <td style="padding: 4px 0; font-weight: 600;">${payload.rejectedAt}</td>
-            </tr>
-          </table>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-        <p style="margin: 16px 0 6px; color: #4b5563;">Admin Remark:</p>
-        <p style="margin: 0; color: #111827;">"${payload.remark}"</p>
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Please revisit the lead and take the necessary next steps.
-        </p>
-        ${
-          payload.leadUrl
-            ? `<p style="margin: 16px 0 0;">
-                <a
-                  href="${payload.leadUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Review Lead Details
-                </a>
-              </p>`
-            : ""
-        }
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Rejected By</div>
+          <div class="lead-info-value">${payload.rejectedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Rejected On</div>
+          <div class="lead-info-value">${payload.rejectedAt}</div>
+        </div>
       </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Admin Remark:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        "${payload.remark}"
+      </p>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please revisit the lead and take the necessary next steps.
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
     </div>
-  `;
+  </div>
+</body>
+</html>
+`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
@@ -1663,40 +2522,5670 @@ export const sendLeadLostRejectedEmail = async (
     },
   });
 
-  if (template) {
-    logger.info("Brevo email template source: db", {
-      template_key: LEAD_LOST_REJECTED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  } else {
-    logger.info("Brevo email template source: default", {
-      template_key: LEAD_LOST_REJECTED_TEMPLATE_KEY,
-      vendor_id: payload.vendor_id,
-    });
-  }
-
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
-  const text = template
+
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
-  const html = template
+
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
+
+// 11
+export const sendLeadActiveEmail = async (
+  payload: LeadActiveEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const formatActiveDate = (value: string) => {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const updatedAt = formatActiveDate(payload.updatedAt);
+  const updatedByRole = payload.updatedByRole?.trim() || "Sales Executive";
+
+  const defaultSubject = `Lead marked Active: ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The following lead has been marked Active by the ${updatedByRole}.`,
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Updated By: ${payload.updatedBy}`,
+    `Marked on: ${updatedAt}`,
+    "",
+    "Remark Provided:",
+    `"${payload.remark}"`,
+    "",
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Marked Active
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The following lead has been marked Active by the ${updatedByRole}.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked On</div>
+          <div class="lead-info-value">${updatedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Remark Provided:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        "${payload.remark}"
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt,
+    updatedByRole,
+    remark: payload.remark,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_ACTIVE_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 12 from on hold
+export const sendLeadMarkedActiveEmail = async (
+  payload: LeadMarkedActiveEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const formatDate = (value: string) => {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
+  const updatedAt = formatDate(payload.updatedAt);
+
+  const defaultSubject = `Lead marked Active: ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The following lead has been marked Active.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Updated By: ${payload.updatedBy}`,
+    `Marked on: ${updatedAt}`,
+    "",
+    "Remark Provided:",
+    `"${payload.remark}"`,
+    "",
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Marked Active from On Hold
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The following lead has been marked <b>Active</b>.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked On</div>
+          <div class="lead-info-value">${updatedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 6px;color:#4b5563;">
+        Remark Provided:
+      </p>
+
+      <p style="margin:0;color:#111827;">
+        "${payload.remark}"
+      </p>
+
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt,
+    remark: payload.remark,
+    leadUrl: payload.leadUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: "LEAD_MARKED_ACTIVE_FROM_ON_HOLD",
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+//13
+export const sendReadyToDispatchEmail = async (
+  payload: ReadyToDispatchEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} is Ready to Dispatch`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The production for the following project has been successfully completed and marked as Ready to Dispatch by the factory.",
+    "",
+    "Project Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Marked Ready By: ${payload.markedBy}`,
+    `Marked Ready On: ${payload.markedAt}`,
+    "",
+    payload.projectUrl ? `View Project Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Ready to Dispatch
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The production for the following project has been successfully completed and marked as <b>Ready to Dispatch</b> by the factory.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Project Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Marked Ready By</div>
+          <div class="lead-info-value">${payload.markedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked Ready On</div>
+          <div class="lead-info-value">${payload.markedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Project Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    markedBy: payload.markedBy,
+    markedAt: payload.markedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// Site supervisor email
+//3
+export const sendMiscRequirementEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  assignedBy: string;
+  assignedAt: string;
+  requirementDescription: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Miscellaneous Requirement Raised for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A miscellaneous requirement has been raised during installation for the following lead.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Assigned By: ${payload.assignedBy}`,
+    `Assigned Date: ${payload.assignedAt}`,
+    "",
+    "Requirement Details:",
+    payload.requirementDescription,
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Miscellaneous Requirement Raised
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A miscellaneous requirement has been raised during installation for the following lead.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Assigned By</div>
+          <div class="lead-info-value">${payload.assignedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Assigned Date</div>
+          <div class="lead-info-value">${payload.assignedAt}</div>
+        </div>
+      </div>
+
+      <div style="margin:16px 0 0;">
+        <p style="margin:0 0 6px;color:#4b5563;font-weight:600;">
+          Requirement Details:
+        </p>
+        <p style="margin:0;color:#111827;">
+          ${payload.requirementDescription}
+        </p>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Requirement
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    assignedBy: payload.assignedBy,
+    assignedAt: payload.assignedAt,
+    requirementDescription: payload.requirementDescription,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: MISC_REQUIREMENT_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+//4
+export const sendMiscERDUpdatedEmail = async (
+  payload: MiscERDUpdatedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Miscellaneous ERD Date has been Updated for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The factory has updated the fulfillment date for a miscellaneous requirement related to the following lead:",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Expected Fulfillment Date: ${payload.fulfillmentDate}`,
+    "",
+    "You will be notified once the requirement is marked ready.",
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Miscellaneous ERD Date has been Updated
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The factory has updated the fulfillment date for a miscellaneous requirement related to the following lead:
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Expected Fulfillment Date</div>
+          <div class="lead-info-value">${payload.fulfillmentDate}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;font-size:14px;">
+        You will be notified once the requirement is marked ready.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Requirement
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    fulfillmentDate: payload.fulfillmentDate,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: MISC_ERD_UPDATED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: MISC_ERD_UPDATED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+//5
+export const sendMarkAsReadyEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  readyAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Miscellaneous Requirement Ready for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The factory has fulfilled and marked the miscellaneous requirement as Ready for the following lead:",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Marked Ready On: ${payload.readyAt}`,
+    "",
+    "You may now verify the delivery and mark the requirement as resolved.",
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Miscellaneous Requirement Ready
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The factory has fulfilled and marked the miscellaneous requirement as Ready for the following lead:
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Marked Ready On</div>
+          <div class="lead-info-value">${payload.readyAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        You may now verify the delivery and mark the requirement as resolved.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Requirement
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    readyAt: payload.readyAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: MISC_READY_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 6
+export const sendMiscResolvedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  resolvedBy: string;
+  resolvedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Miscellaneous Requirement Resolved for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The miscellaneous requirement raised for the following lead has been marked as Resolved.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Resolved By: ${payload.resolvedBy}`,
+    `Resolved On: ${payload.resolvedAt}`,
+    "",
+    "Installation activities can proceed as planned.",
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Miscellaneous Requirement Resolved
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The miscellaneous requirement raised for the following lead has been marked as Resolved.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Resolved By</div>
+          <div class="lead-info-value">${payload.resolvedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Resolved On</div>
+          <div class="lead-info-value">${payload.resolvedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Installation activities can proceed as planned.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    resolvedBy: payload.resolvedBy,
+    resolvedAt: payload.resolvedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: MISC_RESOLVED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 6.5
+export const sendMiscRequiredDeliveryDateEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  setBy: string;
+  deliveryDate: string;
+  projectUrl?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Required Delivery Date Set for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A required delivery date has been set for a miscellaneous requirement on the following lead:",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Set By: ${payload.setBy}`,
+    `Required Delivery Date: ${payload.deliveryDate}`,
+    "",
+    "Please ensure the requirement is fulfilled by the specified delivery date.",
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; border-bottom: 1px solid #f3f4f6; }
+    .lead-info-row.no-border { border-bottom: none; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-size: 14px; font-weight: 500; }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Required Delivery Date Set</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${payload.toName ?? "there"},</p>
+      <p style="margin:0 0 16px;color:#4b5563;">A required delivery date has been set for a miscellaneous requirement on the following lead:</p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Set By</div>
+          <div class="lead-info-value">${payload.setBy}</div>
+        </div>
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Required Delivery Date</div>
+          <div class="lead-info-value">${payload.deliveryDate}</div>
+        </div>
+      </div>
+      <p style="margin:16px 0 0;color:#4b5563;">Please ensure the requirement is fulfilled by the specified delivery date.</p>
+      ${payload.projectUrl ? `<p style="margin:12px 0 0;"><a href="${payload.projectUrl}" style="color:#2563eb;">View Requirement</a></p>` : ""}
+    </div>
+  </div>
+</body>
+</html>`;
+
+  return sendBrevoEmail(
+    {
+      subject: defaultSubject,
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      text: defaultText,
+      html: defaultHtml,
+    },
+    identity,
+  );
+};
+
+// 7
+export const sendFinalHandoverEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Final Handover Initiated for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The lead ${payload.leadCode} - ${payload.leadName} has now entered the Final Handover stage.`,
+    "",
+    "Final documentation upload is in progress.",
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Final Handover Initiated
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The following lead has now entered the Final Handover stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Final documentation upload is in progress.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: FINAL_HANDOVER_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 8
+export const sendProjectCompletedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} Project Completed Successfully`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project associated with ${payload.leadCode} - ${payload.leadName} has been successfully completed.`,
+    "",
+    "Final handover documents have been uploaded and the project is now closed.",
+    "",
+    payload.projectUrl ? `View Project Summary: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Project Completed
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The following project has been successfully completed.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Project Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Final handover documents have been uploaded and the project is now closed.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Project Summary
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: PROJECT_COMPLETED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: PROJECT_COMPLETED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// Techcheck email ui
+// 2
+export const sendTechCheckApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  approvedBy: string;
+  approvedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Tech Check Approved for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The documents submitted for the following lead have been approved by the Tech Check team.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Approved By: ${payload.approvedBy}`,
+    `Approval Date: ${payload.approvedAt}`,
+    "",
+    "You can now proceed with the next steps.",
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Tech Check Approved
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The documents submitted for the following lead have been approved by the Tech Check team.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.approvedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Approval Date</div>
+          <div class="lead-info-value">${payload.approvedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        You can now proceed with the next steps.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    approvedBy: payload.approvedBy,
+    approvedAt: payload.approvedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: TECH_CHECK_APPROVED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: TECH_CHECK_APPROVED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 3
+export const sendTechCheckRejectedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  rejectedBy: string;
+  rejectedAt: string;
+  remark?: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Tech Check Rejected for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "The documents submitted for the following lead have been rejected by the Tech Check team.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Rejected By: ${payload.rejectedBy}`,
+    `Rejected Date: ${payload.rejectedAt}`,
+    `Remark: ${payload.remark ?? "—"}`,
+    "",
+    "Please review the remark and resubmit the documents.",
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Tech Check Rejected
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The documents submitted for the following lead have been rejected by the Tech Check team.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Rejected By</div>
+          <div class="lead-info-value">${payload.rejectedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Rejected Date</div>
+          <div class="lead-info-value">${payload.rejectedAt}</div>
+        </div>
+      </div>
+      
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Remarks</div>
+          <div class="lead-info-value">${payload.remark ?? "—"}</div>
+        </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please review the remark and resubmit the documents.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    rejectedBy: payload.rejectedBy,
+    rejectedAt: payload.rejectedAt,
+    remark: payload.remark ?? "—",
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: TECH_CHECK_REJECTED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: TECH_CHECK_REJECTED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 4
+export const sendRevisedDocumentsUploadedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  uploadedBy: string;
+  uploadedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Revised Documents Submitted for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "Revised documents have been uploaded by the Sales Executive for the following lead:",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Uploaded By: ${payload.uploadedBy}`,
+    `Uploaded On: ${payload.uploadedAt}`,
+    "",
+    "Please re-evaluate the documents and update your Tech Check status.",
+    "",
+    payload.projectUrl ? `Review Revised Documents: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Revised Documents Uploaded
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Revised documents have been uploaded by the Sales Executive for the following lead:
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Uploaded By</div>
+          <div class="lead-info-value">${payload.uploadedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Uploaded On</div>
+          <div class="lead-info-value">${payload.uploadedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        Please re-evaluate the documents and update your Tech Check status.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Revised Documents
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    uploadedBy: payload.uploadedBy,
+    uploadedAt: payload.uploadedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// 5
+export const sendOrderLoginEnabledEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  approvedBy: string;
+  approvedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Order Login Enabled for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "All required documents for the following lead have been successfully approved.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Approved By: ${payload.approvedBy}`,
+    `Approval Date: ${payload.approvedAt}`,
+    "",
+    "The Order Login option is now enabled. You may proceed to move the project to the next stage.",
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Order Login Enabled
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        All required documents for the following lead have been successfully approved.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.approvedBy}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Approval Date</div>
+          <div class="lead-info-value">${payload.approvedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        The Order Login option is now enabled. You may proceed to move the project to the next stage.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    approvedBy: payload.approvedBy,
+    approvedAt: payload.approvedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: ORDER_LOGIN_ENABLED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: ORDER_LOGIN_ENABLED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 1. LEAD MOVED TO ISM STAGE
+// ================================================================================
+export const sendLeadMovedToISMEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to ISM Stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The lead ${payload.leadCode} - ${payload.leadName} has progressed to the ISM stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Moved to ISM
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The lead ${payload.leadCode} - ${payload.leadName} has progressed to the ISM stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.ISM_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.ISM_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 2. LEAD MOVED TO DESIGNING STAGE
+// ================================================================================
+export const sendLeadMovedToDesigningEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Designing stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The lead ${payload.leadCode} - ${payload.leadName} has entered the Designing stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Designing Stage Started
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The lead ${payload.leadCode} - ${payload.leadName} has entered the Designing stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.DESIGNING_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.DESIGNING_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 3. LEAD MOVED TO BOOKING STAGE
+// ================================================================================
+export const sendLeadMovedToBookingEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Booking Done for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The booking has been completed for ${payload.leadCode} - ${payload.leadName}.`,
+    "",
+    `Booking Done By: ${payload.updatedBy}`,
+    `Booking Done On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Booking Done
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The booking has been completed for ${payload.leadCode} - ${payload.leadName}.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Booking Done By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Booking Done On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.BOOKING_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.BOOKING_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 4. LEAD MOVED TO CLIENT DOCUMENTATION STAGE
+// ================================================================================
+export const sendLeadMovedToClientDocumentationEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Client Documentation stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The lead ${payload.leadCode} - ${payload.leadName} has moved to the Client Documentation stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Client Documentation Stage
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The lead ${payload.leadCode} - ${payload.leadName} has moved to the Client Documentation stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_DOCUMENTATION_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_DOCUMENTATION_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 5. LEAD MOVED TO CLIENT APPROVAL STAGE
+// ================================================================================
+export const sendLeadMovedToClientApprovalEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} awaiting client approval`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The lead ${payload.leadCode} - ${payload.leadName} has entered the Client Approval stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Client Approval Stage
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The lead ${payload.leadCode} - ${payload.leadName} has entered the Client Approval stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_APPROVAL_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_APPROVAL_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 6. LEAD MOVED TO ORDER LOGIN STAGE
+// ================================================================================
+export const sendLeadMovedToOrderLoginEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Order Login stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project ${payload.leadCode} - ${payload.leadName} has moved to the Order Login stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Order Login: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Order Login Stage
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The project ${payload.leadCode} - ${payload.leadName} has moved to the Order Login stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Order Login
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.ORDER_LOGIN_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.ORDER_LOGIN_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 7. LEAD MOVED TO PRODUCTION STAGE
+// ================================================================================
+export const sendLeadMovedToProductionEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} is now in Production`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project ${payload.leadCode} - ${payload.leadName} has entered the Production stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Production Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Production Started
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The project ${payload.leadCode} - ${payload.leadName} has entered the Production stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Production Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.PRODUCTION_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.PRODUCTION_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 8. LEAD MOVED TO READY TO DISPATCH STAGE
+// ================================================================================
+export const sendLeadMovedToReadyToDispatchEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  markedBy: string;
+  markedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} marked Ready to Dispatch`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project ${payload.leadCode} - ${payload.leadName} has been marked Ready to Dispatch.`,
+    "",
+    `Marked By: ${payload.markedBy}`,
+    `Marked On: ${payload.markedAt}`,
+    "",
+    payload.projectUrl ? `View Dispatch Status: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Ready to Dispatch
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The project ${payload.leadCode} - ${payload.leadName} has been marked Ready to Dispatch.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Marked By</div>
+          <div class="lead-info-value">${payload.markedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Marked On</div>
+          <div class="lead-info-value">${payload.markedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Dispatch Status
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    markedBy: payload.markedBy,
+    markedAt: payload.markedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.READY_TO_DISPATCH_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.READY_TO_DISPATCH_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 9. LEAD MOVED TO DISPATCH PLANNING STAGE
+// ================================================================================
+export const sendLeadMovedToDispatchPlanningEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  movedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch Planning`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `Dispatch planning can now be done for ${payload.leadCode} - ${payload.leadName}.`,
+    "",
+    `Moved By: ${payload.movedBy}`,
+    `Moved On: ${payload.movedAt}`,
+    "",
+    payload.projectUrl ? `View Dispatch Plan: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Dispatch Planning
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Dispatch planning can now be done for ${payload.leadCode} - ${payload.leadName}.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Moved By</div>
+          <div class="lead-info-value">${payload.movedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Moved On</div>
+          <div class="lead-info-value">${payload.movedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Dispatch Plan
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    movedAt: payload.movedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_PLANNING_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_PLANNING_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 10. LEAD MOVED TO DISPATCH STAGE
+// ================================================================================
+export const sendLeadMovedToDispatchEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  movedBy: string;
+  movedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved for Dispatch`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `${payload.leadCode} - ${payload.leadName} has been moved to the Dispatch stage.`,
+    "",
+    `Moved By: ${payload.movedBy}`,
+    `Moved On: ${payload.movedAt}`,
+    "",
+    payload.projectUrl ? `View Dispatch: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Dispatch Stage
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        ${payload.leadCode} - ${payload.leadName} has been moved to the Dispatch stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Moved By</div>
+          <div class="lead-info-value">${payload.movedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Moved On</div>
+          <div class="lead-info-value">${payload.movedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Dispatch
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    movedAt: payload.movedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 11. LEAD MOVED TO UNDER INSTALLATION STAGE
+// ================================================================================
+export const sendLeadMovedToUnderInstallationEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  dispatchedBy: string;
+  dispatchedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Under Installation`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project ${payload.leadCode} - ${payload.leadName} has been dispatched and moved to the Under Installation stage.`,
+    "",
+    `Dispatched By: ${payload.dispatchedBy}`,
+    `Dispatched On: ${payload.dispatchedAt}`,
+    "",
+    payload.projectUrl
+      ? `View Under Installation Details: ${payload.projectUrl}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Under Installation
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The project ${payload.leadCode} - ${payload.leadName} has been dispatched and moved to the Under Installation stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Dispatched By</div>
+          <div class="lead-info-value">${payload.dispatchedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Dispatched On</div>
+          <div class="lead-info-value">${payload.dispatchedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Under Installation Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    dispatchedBy: payload.dispatchedBy,
+    dispatchedAt: payload.dispatchedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.UNDER_INSTALLATION_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.UNDER_INSTALLATION_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ================================================================================
+// 12. LEAD MOVED TO FINAL HANDOVER STAGE repeat final handover sitesuparvisor 7
+// ================================================================================
+export const sendLeadMovedToFinalHandoverEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  updatedBy: string;
+  updatedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered Final Handover`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `The project ${payload.leadCode} - ${payload.leadName} has entered the Final Handover stage.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedAt}`,
+    "",
+    payload.projectUrl ? `View Handover Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Final Handover
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The project ${payload.leadCode} - ${payload.leadName} has entered the Final Handover stage.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated By</div>
+          <div class="lead-info-value">${payload.updatedBy}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Updated On</div>
+          <div class="lead-info-value">${payload.updatedAt}</div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Handover Details
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    updatedBy: payload.updatedBy,
+    updatedAt: payload.updatedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_STAGE_TEMPLATE_KEYS.FINAL_HANDOVER_STAGE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_STAGE_TEMPLATE_KEYS.FINAL_HANDOVER_STAGE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// Backend use email
+//1
+export const sendOrderLoginAssignedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  assignedBy: string;
+  assignedAt: string;
+  projectUrl: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Order Login Assigned for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "You have been assigned a project for Order Login processing.",
+    "",
+    "Project Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Assigned By: ${payload.assignedBy}`,
+    `Assigned Date: ${payload.assignedAt}`,
+    "",
+    "Next Actions Required:",
+    "Upload Production Files (mandatory)",
+    "Fill Order Login details (file breakup, vendor/factory selection)",
+    "Upload PO files (if applicable)",
+    "",
+    "You may move the project to Production after uploading production files. However, Order Login details must be completed for Production to proceed smoothly.",
+    "",
+    payload.projectUrl ? `Go to Order Login: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Project Assigned – Order Login
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        You have been assigned a project for Order Login processing.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Project Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Assigned By</div>
+          <div class="lead-info-value">${payload.assignedBy}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Assigned Date</div>
+          <div class="lead-info-value">${payload.assignedAt}</div>
+        </div>
+      </div>
+
+      <p style="margin:16px 0 6px;color:#111827;font-weight:600;">
+        Next Actions Required
+      </p>
+
+     <ul style="margin:0; padding-left:16px;">
+  <li style="margin:0 0 6px; color:#4b5563;">
+    Upload Production Files (mandatory)
+  </li>
+  <li style="margin:0 0 6px; color:#4b5563;">
+    Fill Order Login details (file breakup, vendor/factory selection)
+  </li>
+  <li style="margin:0; color:#4b5563;">
+    Upload PO files (if applicable)
+  </li>
+</ul>
+
+
+      <p style="margin:16px 0 0;color:#4b5563;">
+        You may move the project to Production after uploading production files.
+        However, Order Login details must be completed for Production to proceed smoothly.
+      </p>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Go to Order Login
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    assignedBy: payload.assignedBy,
+    assignedAt: payload.assignedAt,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendBookingDoneApprovalRequiredEmail = async (
+  payload: BookingDoneApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Booking Done Stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A lead has been moved to the Booking Done stage and requires your approval to proceed further.",
+    "",
+    "Lead Details:",
+    `Lead Name: ${payload.leadName}`,
+    `Lead Code: ${payload.leadCode}`,
+    `Moved By: ${payload.movedBy}`,
+    `Date of Action: ${payload.dateOfAction}`,
+    `A task has been created for you with a due date of ${payload.dueDate}.`,
+    "Please review and take action:",
+    payload.ctaLink ? `Click here to review: ${payload.ctaLink}` : "",
+    "",
+    "Note: Further actions (FM Task Assignment) will only be enabled post approval.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Approval Required: Booking Done</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                A lead has been moved to the Booking Done stage and requires your approval to proceed further.
+              </p>
+              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Name</span>
+                    <span class="lead-info-value">${payload.leadName}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Code</span>
+                    <span class="lead-info-value">${payload.leadCode}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Moved By</span>
+                    <span class="lead-info-value">${payload.movedBy}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Date of Action</span>
+                    <span class="lead-info-value">${payload.dateOfAction}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Due Date</span>
+                    <span class="lead-info-value">${payload.dueDate}</span>
+                  </div>
+                </td></tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+                A task has been created for you with a due date of ${payload.dueDate}.
+              </p>
+              ${
+                payload.ctaLink
+                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                      <tr>
+                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
+                          <a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Click here to review</a>
+                        </td>
+                      </tr>
+                    </table>`
+                  : ""
+              }
+              <p style="margin:0;font-size:14px;color:#4b5563;">
+                Note: Further actions (FM Task Assignment) will only be enabled post approval.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    dateOfAction: payload.dateOfAction,
+    dueDate: payload.dueDate,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: BOOKING_DONE_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendOrderLoginApprovalRequiredEmail = async (
+  payload: OrderLoginApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Order Login Stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A lead has been transitioned from Tech Check to Order Login stage and requires your approval.",
+    "",
+    "Lead Details:",
+    `Lead Name: ${payload.leadName}`,
+    `Lead Code: ${payload.leadCode}`,
+    `Moved By: ${payload.movedBy}`,
+    `Date of Action: ${payload.dateOfAction}`,
+    `A task has been assigned to you with a due date of ${payload.dueDate}.`,
+    "Please review and take action:",
+    payload.ctaLink ? `Click here to review: ${payload.ctaLink}` : "",
+    "",
+    "Note: Production file upload and Order Login actions will be enabled only after approval.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Approval Required: Order Login</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                A lead has been transitioned from Tech Check to Order Login stage and requires your approval.
+              </p>
+              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Lead Name</span><span class="lead-info-value">${payload.leadName}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Lead Code</span><span class="lead-info-value">${payload.leadCode}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Moved By</span><span class="lead-info-value">${payload.movedBy}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Date of Action</span><span class="lead-info-value">${payload.dateOfAction}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Due Date</span><span class="lead-info-value">${payload.dueDate}</span></div></td></tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+                A task has been assigned to you with a due date of ${payload.dueDate}.
+              </p>
+              ${
+                payload.ctaLink
+                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;"><tr><td style="background-color:#111827;border-radius:6px;padding:12px 24px;"><a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Click here to review</a></td></tr></table>`
+                  : ""
+              }
+              <p style="margin:0;font-size:14px;color:#4b5563;">
+                Note: Production file upload and Order Login actions will be enabled only after approval.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    dateOfAction: payload.dateOfAction,
+    dueDate: payload.dueDate,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: ORDER_LOGIN_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: ORDER_LOGIN_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendDispatchPlanningApprovalRequiredEmail = async (
+  payload: DispatchPlanningApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Dispatch Planning Stage`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    "A lead has been moved to the Dispatch Planning stage and is pending your approval.",
+    "",
+    "Lead Details:",
+    `Lead Name: ${payload.leadName}`,
+    `Lead Code: ${payload.leadCode}`,
+    `Moved By: ${payload.movedBy}`,
+    `Date of Action: ${payload.dateOfAction}`,
+    `A task has been created with a due date of ${payload.dueDate}.`,
+    "Please review and take action:",
+    payload.ctaLink ? `Click here to review: ${payload.ctaLink}` : "",
+    "",
+    "Note: Dispatch Planning inputs, including On-Site Delivery Date, will be enabled only after approval.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; margin-bottom: 4px !important; }
+      .lead-info-label, .lead-info-value { display: block !important; width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Approval Required: Dispatch Planning</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                A lead has been moved to the Dispatch Planning stage and is pending your approval.
+              </p>
+              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Lead Name</span><span class="lead-info-value">${payload.leadName}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Lead Code</span><span class="lead-info-value">${payload.leadCode}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Moved By</span><span class="lead-info-value">${payload.movedBy}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Date of Action</span><span class="lead-info-value">${payload.dateOfAction}</span></div></td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;"><div class="lead-info-row"><span class="lead-info-label">Due Date</span><span class="lead-info-value">${payload.dueDate}</span></div></td></tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+                A task has been created with a due date of ${payload.dueDate}.
+              </p>
+              ${
+                payload.ctaLink
+                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;"><tr><td style="background-color:#111827;border-radius:6px;padding:12px 24px;"><a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Click here to review</a></td></tr></table>`
+                  : ""
+              }
+              <p style="margin:0;font-size:14px;color:#4b5563;">
+                Note: Dispatch Planning inputs, including On-Site Delivery Date, will be enabled only after approval.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    movedBy: payload.movedBy,
+    dateOfAction: payload.dateOfAction,
+    dueDate: payload.dueDate,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: DISPATCH_PLANNING_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: DISPATCH_PLANNING_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+// next brevoe email 2 file
 
 export const sendPaymentAddedEmail = async (
   payload: PaymentAddedEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Payment Added for ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -1807,1993 +8296,402 @@ export const sendPaymentAddedEmail = async (
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendReadyToDispatchEmail = async (
-  payload: ReadyToDispatchEmailPayload,
-): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} is Ready to Dispatch`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The production for the following project has been successfully completed and marked as Ready to Dispatch by the factory.",
-    "",
-    "Project Details:",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Marked Ready By: ${payload.markedBy}`,
-    `Marked Ready On: ${payload.markedAt}`,
-    "",
-    payload.projectUrl ? `View Project Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">
-          Ready to Dispatch
-        </h2>
-
-        <p style="margin: 0 0 12px; color: #111827;">
-          Hello ${payload.toName ?? "there"},
-        </p>
-
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The production for the following project has been successfully completed and marked as Ready to Dispatch by the factory.
-        </p>
-
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 6px 0; font-weight: 600;">${payload.leadCode}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 6px 0; font-weight: 600;">${payload.leadName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Marked Ready By</td>
-              <td style="padding: 6px 0; font-weight: 600;">${payload.markedBy}</td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Marked Ready On</td>
-              <td style="padding: 6px 0; font-weight: 600;">${payload.markedAt}</td>
-            </tr>
-          </table>
-        </div>
-
-        ${
-          payload.projectUrl
-            ? `<p style="margin: 18px 0 0;">
-                <a
-                  href="${payload.projectUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Project Details
-                </a>
-              </p>`
-            : ""
-        }
-
-      </div>
-    </div>
-  `;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    markedBy: payload.markedBy,
-    markedAt: payload.markedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
       vendor_id: payload.vendor_id,
-      template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
-      active: true,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
     },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: READY_TO_DISPATCH_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+    identity,
+  );
 };
 
-export const sendMiscRequirementEmail = async (payload: {
+// ---------------------------------------------------------------------------
+// Final Handover Completed — sent to Head Site Supervisor
+// ---------------------------------------------------------------------------
+export const sendFinalHandoverCompletedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
   leadCode: string;
   leadName: string;
-  assignedBy: string;
-  assignedAt: string;
-  requirementDescription: string;
+  updatedBy: string;
+  updatedOn: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Miscellaneous Requirement Raised for ${payload.leadCode} - ${payload.leadName}`;
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+  const subject = `Final Handover completed for ${payload.leadCode} \u2013 ${payload.leadName}`;
+
+  const text = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `Final Handover has been completed for ${payload.leadCode} \u2013 ${payload.leadName}.`,
+    "",
+    `Updated By: ${payload.updatedBy}`,
+    `Updated On: ${payload.updatedOn}`,
+    "",
+    payload.projectUrl ? `View Lead: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; margin-bottom: 4px !important; }
+      .lead-info-label, .lead-info-value { display: block !important; width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Final Handover Completed</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hello ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                Final Handover has been completed for <strong>${payload.leadCode} \u2013 ${payload.leadName}</strong>.
+              </p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Updated By</span>
+                    <span class="lead-info-value">${payload.updatedBy}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Updated On</span>
+                    <span class="lead-info-value">${payload.updatedOn}</span>
+                  </div>
+                </td></tr>
+              </table>
+              ${
+                payload.projectUrl
+                  ? `<table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
+                          <a href="${payload.projectUrl}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">View Lead</a>
+                        </td>
+                      </tr>
+                    </table>`
+                  : ""
+              }
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendFinalMeasurementUploadedEmail = async (
+  payload: FinalMeasurementUploadedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const defaultSubject = `Upload Client Documentation for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
     "",
-    "A miscellaneous requirement has been raised during installation for the following lead.",
+    "Site Supervisor has uploaded the Final Measurement Documents for the below project.",
     "",
-    "Lead Details:",
+    "Project Details",
     `Lead Code: ${payload.leadCode}`,
     `Lead Name: ${payload.leadName}`,
-    `Assigned By: ${payload.assignedBy}`,
-    `Assigned Date: ${payload.assignedAt}`,
+    `Contact Details: ${payload.contact}`,
     "",
-    "Requirement Details:",
-    payload.requirementDescription,
+    "Kindly upload the Client Documentation and add selections.",
     "",
-    `View Requirement: ${payload.projectUrl}`,
-  ].join("\n");
+    payload.leadUrl ? `View Lead Details: ${payload.leadUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   const defaultHtml = `
-  <div style="font-family: Arial, sans-serif; background:#f9fafb; padding:24px;">
-    <div style="max-width:560px; margin:auto; background:#ffffff; border-radius:10px; padding:20px; border:1px solid #e5e7eb;">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; margin-bottom: 4px !important; padding-bottom: 4px !important; border-bottom: 1px solid #e5e7eb !important; }
+      .lead-info-row:last-child { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+      .lead-info-label, .lead-info-value { display: block !important; width: 100% !important; }
+      .lead-info-label { font-size: 13px !important; margin-bottom: 4px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
 
-      <h2 style="color:#111827;">Miscellaneous Requirement Raised</h2>
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Final Measurement Documents Uploaded
+      </h2>
 
-      <p>Hello ${payload.toName ?? "there"},</p>
-
-      <p>
-        A miscellaneous requirement has been raised during installation for the following lead.
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
       </p>
 
-      <table style="width:100%; font-size:14px; margin:12px 0;">
-        <tr><td>Lead Code</td><td><b>${payload.leadCode}</b></td></tr>
-        <tr><td>Lead Name</td><td><b>${payload.leadName}</b></td></tr>
-        <tr><td>Assigned By</td><td><b>${payload.assignedBy}</b></td></tr>
-        <tr><td>Assigned Date</td><td><b>${payload.assignedAt}</b></td></tr>
-      </table>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Site Supervisor has uploaded the Final Measurement Documents for the below project.
+        Kindly upload the Client Documentation and add selections.
+      </p>
 
-      <div style="background:#f8fafc; padding:12px; border-radius:6px; margin-bottom:14px;">
-        <b>Requirement Details</b>
-        <p>${payload.requirementDescription}</p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 8px;font-weight:600;color:#111827;">Project Details</p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Contact Details</div>
+          <div class="lead-info-value">${payload.contact}</div>
+        </div>
       </div>
 
-      <a href="${payload.projectUrl}"
-         target="_blank"
-         style="background:#111827;color:#fff;padding:10px 18px;border-radius:6px;text-decoration:none;">
-         View Requirement
-      </a>
+      ${
+        payload.leadUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.leadUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead Details
+              </a>
+            </div>`
+          : ""
+      }
 
     </div>
   </div>
-  `;
+</body>
+</html>`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
     leadCode: payload.leadCode,
     leadName: payload.leadName,
-    assignedBy: payload.assignedBy,
-    assignedAt: payload.assignedAt,
-    requirementDescription: payload.requirementDescription,
-    projectUrl: payload.projectUrl,
+    contact: payload.contact,
+    leadUrl: payload.leadUrl ?? "",
   };
 
   const template = await prisma.emailNotificationMaster.findFirst({
     where: {
       vendor_id: payload.vendor_id,
-      template_key: MISC_REQUIREMENT_TEMPLATE_KEY,
+      template_key: FM_UPLOADED_TEMPLATE_KEY,
       active: true,
     },
   });
 
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
 
-  const text = template
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
 
-  const html = template
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
 };
 
-export const sendMiscERDUpdatedEmail = async (
-  payload: MiscERDUpdatedEmailPayload,
+export const sendFastProductionApprovalRequiredEmail = async (
+  payload: FastProductionApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Miscellaneous Fulfillment Date Updated for ${payload.leadCode} - ${payload.leadName}`;
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
+    `Hi ${payload.toName ?? "there"},`,
     "",
-    "The factory has updated the fulfillment date for a miscellaneous requirement related to the following lead:",
+    `A Fast Production request has been raised by ${payload.raisedBy} for ${payload.leadCode} - ${payload.leadName}.`,
     "",
-    "Lead Details:",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Expected Fulfillment Date: ${payload.fulfillmentDate}`,
+    "The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.",
     "",
-    "You will be notified once the requirement is marked ready.",
+    "Please review the request and approve or reject it.",
     "",
-    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Miscellaneous Fulfillment Date Updated</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The factory has updated the fulfillment date for a miscellaneous requirement related to the following lead:</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280;">Lead Code</td><td style="padding: 6px 0; font-weight: 600;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280;">Lead Name</td><td style="padding: 6px 0; font-weight: 600;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280;">Expected Fulfillment Date</td><td style="padding: 6px 0; font-weight: 600;">${payload.fulfillmentDate}</td></tr></table></div><p style="margin: 16px 0 0; color: #4b5563; font-size: 14px;">You will be notified once the requirement is marked ready.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Requirement</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    fulfillmentDate: payload.fulfillmentDate,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: MISC_ERD_UPDATED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: MISC_ERD_UPDATED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendMarkAsReadyEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  readyAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Miscellaneous Requirement Ready for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The factory has fulfilled and marked the miscellaneous requirement as Ready for the following lead:",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Marked Ready on: ${payload.readyAt}`,
-    "",
-    "You may now verify the delivery and mark the requirement as resolved.",
-    "",
-    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+    payload.ctaLink ? `Review Fast Production Request: ${payload.ctaLink}` : "",
   ]
     .filter(Boolean)
     .join("\n");
 
   const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approval Request</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">A Fast Production request has been raised by ${payload.raisedBy} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">Please review the request and approve or reject it at the earliest.</p>
 
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">
-          Miscellaneous Requirement Ready
-        </h2>
-
-        <p style="margin: 0 0 12px; color: #111827;">
-          Hello ${payload.toName ?? "there"},
-        </p>
-
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The factory has fulfilled and marked the miscellaneous requirement as Ready for the following lead:
-        </p>
-
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadCode}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadName}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Marked Ready On</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.readyAt}
-              </td>
-            </tr>
-          </table>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
         </div>
-
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          You may now verify the delivery and mark the requirement as resolved.
-        </p>
-
-        ${
-          payload.projectUrl
-            ? `<p style="margin: 18px 0 0;">
-                <a
-                  href="${payload.projectUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Requirement
-                </a>
-              </p>`
-            : ""
-        }
-
-      </div>
-    </div>
-  `;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    readyAt: payload.readyAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: MISC_READY_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendMiscResolvedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  resolvedBy: string;
-  resolvedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Miscellaneous Requirement Resolved for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The miscellaneous requirement raised for the following lead has been marked as Resolved.",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Resolved By: ${payload.resolvedBy}`,
-    `Resolved On: ${payload.resolvedAt}`,
-    "",
-    "Installation activities can proceed as planned.",
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">
-          Miscellaneous Requirement Resolved
-        </h2>
-
-        <p style="margin: 0 0 12px; color: #111827;">
-          Hello ${payload.toName ?? "there"},
-        </p>
-
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The miscellaneous requirement raised for the following lead has been marked as Resolved.
-        </p>
-
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadCode}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadName}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Resolved By</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.resolvedBy}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Resolved On</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.resolvedAt}
-              </td>
-            </tr>
-          </table>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
         </div>
-
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Installation activities can proceed as planned.
-        </p>
-
-        ${
-          payload.projectUrl
-            ? `<p style="margin: 18px 0 0;">
-                <a
-                  href="${payload.projectUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead Details
-                </a>
-              </p>`
-            : ""
-        }
-
-      </div>
-    </div>
-  `;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    resolvedBy: payload.resolvedBy,
-    resolvedAt: payload.resolvedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: MISC_RESOLVED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendFinalHandoverEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Final Handover Initiated for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The lead ${payload.leadCode} - ${payload.leadName} has now entered the Final Handover stage.`,
-    "",
-    "Final documentation upload is in progress.",
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `
-    <div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;">
-      <div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;">
-
-        <h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">
-          Final Handover Initiated
-        </h2>
-
-        <p style="margin: 0 0 12px; color: #111827;">
-          Hello ${payload.toName ?? "there"},
-        </p>
-
-        <p style="margin: 0 0 16px; color: #4b5563;">
-          The following lead has now entered the Final Handover stage.
-        </p>
-
-        <div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;">
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Code</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadCode}
-              </td>
-            </tr>
-            <tr>
-              <td style="padding: 6px 0; color: #6b7280;">Lead Name</td>
-              <td style="padding: 6px 0; font-weight: 600;">
-                ${payload.leadName}
-              </td>
-            </tr>
-          </table>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Raised By</div>
+          <div class="lead-info-value">${payload.raisedBy}</div>
         </div>
-
-        <p style="margin: 16px 0 0; color: #4b5563;">
-          Final documentation upload is in progress.
-        </p>
-
-        ${
-          payload.projectUrl
-            ? `<p style="margin: 18px 0 0;">
-                <a
-                  href="${payload.projectUrl}"
-                  style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Lead Details
-                </a>
-              </p>`
-            : ""
-        }
-
       </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Fast Production Request
+              </a>
+            </div>`
+          : ""
+      }
+      <p style="margin:16px 0 0;font-size:14px;color:#4b5563;">
+        Note: The fast production timeline will only be applied after your approval.
+      </p>
     </div>
-  `;
+  </div>
+</body>
+</html>`;
 
   const templateValues = {
     toName: payload.toName ?? "there",
     leadCode: payload.leadCode,
     leadName: payload.leadName,
-    projectUrl: payload.projectUrl ?? "",
+    raisedBy: payload.raisedBy,
+    ctaLink: payload.ctaLink ?? "",
   };
 
   const template = await prisma.emailNotificationMaster.findFirst({
     where: {
       vendor_id: payload.vendor_id,
-      template_key: FINAL_HANDOVER_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendProjectCompletedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} Project Completed Successfully`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project associated with ${payload.leadCode} - ${payload.leadName} has been successfully completed.`,
-    "",
-    "Final handover documents have been uploaded and the project is now closed.",
-    "",
-    payload.projectUrl ? `View Project Summary: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Project Completed</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The following project has been successfully completed.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Code</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Name</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadName}</td></tr></table></div><p style="margin: 16px 0 0; color: #4b5563;">Final handover documents have been uploaded and the project is now closed.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Project Summary</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: PROJECT_COMPLETED_TEMPLATE_KEY,
+      template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
       active: true,
     },
   });
 
   logger.info("Brevo email template source", {
-    template_key: PROJECT_COMPLETED_TEMPLATE_KEY,
+    template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
     vendor_id: payload.vendor_id,
     source: template ? "db" : "default",
   });
 
-  const subject = template
+  const subject = template?.subject?.trim()
     ? renderTemplate(template.subject, templateValues)
     : defaultSubject;
 
-  const text = template
+  const text = template?.text?.trim()
     ? renderTemplate(template.text, templateValues)
     : defaultText;
 
-  const html = template
+  const html = template?.html?.trim()
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendTechCheckApprovedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  approvedBy: string;
-  approvedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Tech Check Approved for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The documents submitted for the following lead have been approved by the Tech Check team.",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Approved By: ${payload.approvedBy}`,
-    `Approval Date: ${payload.approvedAt}`,
-    "",
-    "You can now proceed with the next steps.",
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Tech Check Approved</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The documents submitted for the following lead have been approved by the Tech Check team.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280;">Lead Code</td><td style="padding: 6px 0; font-weight: 600;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280;">Lead Name</td><td style="padding: 6px 0; font-weight: 600;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280;">Approved By</td><td style="padding: 6px 0; font-weight: 600;">${payload.approvedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280;">Approval Date</td><td style="padding: 6px 0; font-weight: 600;">${payload.approvedAt}</td></tr></table></div><p style="margin: 16px 0 0; color: #4b5563;">You can now proceed with the next steps.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    approvedBy: payload.approvedBy,
-    approvedAt: payload.approvedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
       vendor_id: payload.vendor_id,
-      template_key: TECH_CHECK_APPROVED_TEMPLATE_KEY,
-      active: true,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
     },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: TECH_CHECK_APPROVED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
+    identity,
+  );
 };
 
-export const sendTechCheckRejectedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  rejectedBy: string;
-  rejectedAt: string;
-  remark?: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Tech Check Rejected for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "The documents submitted for the following lead have been rejected by the Tech Check team.",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Rejected By: ${payload.rejectedBy}`,
-    `Rejected Date: ${payload.rejectedAt}`,
-    `Remark: ${payload.remark ?? "—"}`,
-    "",
-    "Please review the remark and resubmit the documents.",
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Tech Check Rejected</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The documents submitted for the following lead have been rejected by the Tech Check team.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Code</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Name</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Rejected By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.rejectedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Rejected Date</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.rejectedAt}</td></tr></table></div>${payload.remark ? `<div style="margin-top: 16px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><p style="margin: 0 0 6px; color: #6b7280; font-size: 13px; font-weight: 500;">Remark:</p><p style="margin: 0; color: #111827; font-size: 14px; line-height: 1.6; word-wrap: break-word; word-break: break-word; white-space: pre-wrap;">${payload.remark}</p></div>` : ""}<p style="margin: 16px 0 0; color: #4b5563;">Please review the remark and resubmit the documents.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    rejectedBy: payload.rejectedBy,
-    rejectedAt: payload.rejectedAt,
-    remark: payload.remark ?? "—",
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: TECH_CHECK_REJECTED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: TECH_CHECK_REJECTED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendRevisedDocumentsUploadedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  uploadedBy: string;
-  uploadedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Revised Documents Submitted for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "Revised documents have been uploaded by the Sales Executive for the following lead:",
-    "",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Uploaded By: ${payload.uploadedBy}`,
-    `Uploaded On: ${payload.uploadedAt}`,
-    "",
-    "Please re-evaluate the documents and update your Tech Check status.",
-    "",
-    payload.projectUrl ? `Review Revised Documents: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Revised Documents Uploaded </h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">Revised documents have been uploaded by the Sales Executive for the following lead:</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Code</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Name</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Uploaded By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.uploadedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Uploaded On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.uploadedAt}</td></tr></table></div><p style="margin: 16px 0 0; color: #4b5563;">Please re-evaluate the documents and update your Tech Check status.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">Review Revised Documents</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    uploadedBy: payload.uploadedBy,
-    uploadedAt: payload.uploadedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: REVISED_DOCUMENTS_UPLOADED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendOrderLoginEnabledEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  approvedBy: string;
-  approvedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Order Login Enabled for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "All required documents for the following lead have been successfully approved.",
-    "",
-    "Lead Details:",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Approved By: ${payload.approvedBy}`,
-    `Approval Date: ${payload.approvedAt}`,
-    "",
-    "The Order Login option is now enabled. You may proceed to move the project to the next stage.",
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Order Login Enabled</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">All required documents for the following lead have been successfully approved.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Code</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Name</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Approved By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.approvedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Approval Date</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.approvedAt}</td></tr></table></div><p style="margin: 16px 0 0; color: #4b5563;">The Order Login option is now enabled. You may proceed to move the project to the next stage.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    approvedBy: payload.approvedBy,
-    approvedAt: payload.approvedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: ORDER_LOGIN_ENABLED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: ORDER_LOGIN_ENABLED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-export const sendOrderLoginAssignedEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  assignedBy: string;
-  assignedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Order Login Assigned for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    "You have been assigned a project for Order Login processing.",
-    "",
-    "Project Details:",
-    `Lead Code: ${payload.leadCode}`,
-    `Lead Name: ${payload.leadName}`,
-    `Assigned By: ${payload.assignedBy}`,
-    `Assigned Date: ${payload.assignedAt}`,
-    "",
-    "Next Actions Required:",
-    "• Upload Production Files (mandatory)",
-    "• Fill Order Login details (file breakup, vendor/factory selection)",
-    "• Upload PO files (if applicable)",
-    "",
-    "You may move the project to Production after uploading production files. However, Order Login details must be completed for Production to proceed smoothly.",
-    "",
-    payload.projectUrl ? `Go to Order Login: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Project Assigned – Order Login</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">You have been assigned a project for Order Login processing.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc; margin-bottom: 16px;"><p style="margin: 0 0 8px; font-weight: 600; font-size: 14px; color: #111827;">Project Details</p><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Code</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadCode}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Lead Name</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.leadName}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Assigned By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.assignedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Assigned Date</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.assignedAt}</td></tr></table></div><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><p style="margin: 0 0 8px; font-weight: 600; font-size: 14px; color: #111827;">Next Actions Required</p><ul style="margin: 0; padding-left: 20px; color: #4b5563; font-size: 14px; line-height: 1.6;"><li style="margin-bottom: 4px;">Upload Production Files (mandatory)</li><li style="margin-bottom: 4px;">Fill Order Login details (file breakup, vendor/factory selection)</li><li style="margin-bottom: 0;">Upload PO files (if applicable)</li></ul></div><p style="margin: 16px 0 0; color: #4b5563; font-size: 14px; line-height: 1.5;">You may move the project to Production after uploading production files. However, Order Login details must be completed for Production to proceed smoothly.</p>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">Go to Order Login</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    assignedBy: payload.assignedBy,
-    assignedAt: payload.assignedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: ORDER_LOGIN_ASSIGNED_TEMPLATE_KEY,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 1. LEAD MOVED TO ISM STAGE
-// ================================================================================
-export const sendLeadMovedToISMEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to ISM Stage`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The lead ${payload.leadCode} - ${payload.leadName} has progressed to the ISM stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Lead Moved to ISM</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The lead ${payload.leadCode} - ${payload.leadName} has progressed to the ISM stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.ISM_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.ISM_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 2. LEAD MOVED TO DESIGNING STAGE
-// ================================================================================
-export const sendLeadMovedToDesigningEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Designing stage`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The lead ${payload.leadCode} - ${payload.leadName} has entered the Designing stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Designing Stage Started</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The lead ${payload.leadCode} - ${payload.leadName} has entered the Designing stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.DESIGNING_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.DESIGNING_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 3. LEAD MOVED TO BOOKING STAGE
-// ================================================================================
-export const sendLeadMovedToBookingEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `Booking Done for ${payload.leadCode} - ${payload.leadName}`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The booking has been completed for ${payload.leadCode} - ${payload.leadName}.`,
-    "",
-    `Booking Done By: ${payload.updatedBy}`,
-    `Booking Done On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Booking Done</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The booking has been completed for ${payload.leadCode} - ${payload.leadName}.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Booking Done By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Booking Done On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.BOOKING_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.BOOKING_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 4. LEAD MOVED TO CLIENT DOCUMENTATION STAGE
-// ================================================================================
-export const sendLeadMovedToClientDocumentationEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Client Documentation stage`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The lead ${payload.leadCode} - ${payload.leadName} has moved to the Client Documentation stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Client Documentation</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The lead ${payload.leadCode} - ${payload.leadName} has moved to the Client Documentation stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_DOCUMENTATION_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_DOCUMENTATION_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 5. LEAD MOVED TO CLIENT APPROVAL STAGE
-// ================================================================================
-export const sendLeadMovedToClientApprovalEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} awaiting client approval`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The lead ${payload.leadCode} - ${payload.leadName} has entered the Client Approval stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Lead Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Client Approval</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The lead ${payload.leadCode} - ${payload.leadName} has entered the Client Approval stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Lead Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_APPROVAL_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.CLIENT_APPROVAL_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 6. LEAD MOVED TO ORDER LOGIN STAGE
-// ================================================================================
-export const sendLeadMovedToOrderLoginEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Order Login stage`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project ${payload.leadCode} - ${payload.leadName} has moved to the Order Login stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Order Login: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Order Login Stage</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The project ${payload.leadCode} - ${payload.leadName} has moved to the Order Login stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Order Login</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.ORDER_LOGIN_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.ORDER_LOGIN_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 7. LEAD MOVED TO PRODUCTION STAGE
-// ================================================================================
-export const sendLeadMovedToProductionEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} is now in Production`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project ${payload.leadCode} - ${payload.leadName} has entered the Production stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Production Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Production Started</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The project ${payload.leadCode} - ${payload.leadName} has entered the Production stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Production Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.PRODUCTION_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.PRODUCTION_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 8. LEAD MOVED TO READY TO DISPATCH STAGE
-// ================================================================================
-export const sendLeadMovedToReadyToDispatchEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  markedBy: string;
-  markedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} marked Ready to Dispatch`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project ${payload.leadCode} - ${payload.leadName} has been marked Ready to Dispatch.`,
-    "",
-    `Marked By: ${payload.markedBy}`,
-    `Marked On: ${payload.markedAt}`,
-    "",
-    payload.projectUrl ? `View Dispatch Status: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Ready to Dispatch</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The project ${payload.leadCode} - ${payload.leadName} has been marked Ready to Dispatch.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Marked By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.markedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Marked On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.markedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Dispatch Status</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    markedBy: payload.markedBy,
-    markedAt: payload.markedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.READY_TO_DISPATCH_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.READY_TO_DISPATCH_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 9. LEAD MOVED TO DISPATCH PLANNING STAGE
-// ================================================================================
-export const sendLeadMovedToDispatchPlanningEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  movedBy: string;
-  movedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch planning`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `Dispatch planning can be done for ${payload.leadCode} - ${payload.leadName}.`,
-    "",
-    `Moved By: ${payload.movedBy}`,
-    `Moved On: ${payload.movedAt}`,
-    "",
-    payload.projectUrl ? `View Dispatch Plan: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Dispatch Planning</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">Dispatch planning can be done for ${payload.leadCode} - ${payload.leadName}.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Moved By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.movedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Moved On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.movedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Dispatch Plan</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    movedBy: payload.movedBy,
-    movedAt: payload.movedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_PLANNING_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_PLANNING_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 10. LEAD MOVED TO DISPATCH STAGE
-// ================================================================================
-export const sendLeadMovedToDispatchEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  movedBy: string;
-  movedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved for Dispatch`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `${payload.leadCode} - ${payload.leadName} moved for Dispatch.`,
-    "",
-    `Moved By: ${payload.movedBy}`,
-    `Moved On: ${payload.movedAt}`,
-    "",
-    payload.projectUrl ? `View Dispatch: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Dispatch</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">${payload.leadCode} - ${payload.leadName} moved for Dispatch.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Moved By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.movedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Moved On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.movedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Dispatch</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    movedBy: payload.movedBy,
-    movedAt: payload.movedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.DISPATCH_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 11. LEAD MOVED TO UNDER INSTALLATION STAGE
-// ================================================================================
-export const sendLeadMovedToUnderInstallationEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  dispatchedBy: string;
-  dispatchedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} has been moved to Under Installation`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project ${payload.leadCode} - ${payload.leadName} has been Dispatched and moved to Under Installation.`,
-    "",
-    `Dispatched By: ${payload.dispatchedBy}`,
-    `Dispatched On: ${payload.dispatchedAt}`,
-    "",
-    payload.projectUrl
-      ? `View Under Installation Details: ${payload.projectUrl}`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Under Installation</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The project ${payload.leadCode} - ${payload.leadName} has been Dispatched and moved to Under Installation.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Dispatched By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.dispatchedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Dispatched On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.dispatchedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Under Installation Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    dispatchedBy: payload.dispatchedBy,
-    dispatchedAt: payload.dispatchedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.UNDER_INSTALLATION_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.UNDER_INSTALLATION_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};
-
-// ================================================================================
-// 12. LEAD MOVED TO FINAL HANDOVER STAGE
-// ================================================================================
-export const sendLeadMovedToFinalHandoverEmail = async (payload: {
-  vendor_id: number;
-  toEmail: string;
-  toName?: string;
-  leadCode: string;
-  leadName: string;
-  updatedBy: string;
-  updatedAt: string;
-  projectUrl: string;
-}): Promise<BrevoEmailResult> => {
-  const defaultSubject = `${payload.leadCode} - ${payload.leadName} has entered the Final Handover stage`;
-
-  const defaultText = [
-    `Hello ${payload.toName ?? "there"},`,
-    "",
-    `The project ${payload.leadCode} - ${payload.leadName} has entered the Final Handover stage.`,
-    "",
-    `Updated By: ${payload.updatedBy}`,
-    `Updated On: ${payload.updatedAt}`,
-    "",
-    payload.projectUrl ? `View Handover Details: ${payload.projectUrl}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  const defaultHtml = `<div style="font-family: Arial, sans-serif; background: #f9fafb; padding: 24px;"><div style="max-width: 540px; margin: 0 auto; background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px;"><h2 style="margin: 0 0 12px; font-size: 18px; color: #111827;">Final Handover</h2><p style="margin: 0 0 12px; color: #111827;">Hello ${payload.toName ?? "there"},</p><p style="margin: 0 0 16px; color: #4b5563;">The project ${payload.leadCode} - ${payload.leadName} has entered the Final Handover stage.</p><div style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #f8fafc;"><table style="width: 100%; border-collapse: collapse; font-size: 14px; color: #111827;"><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated By</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedBy}</td></tr><tr><td style="padding: 6px 0; color: #6b7280; width: 35%; vertical-align: top;">Updated On</td><td style="padding: 6px 0; font-weight: 600; word-break: break-word;">${payload.updatedAt}</td></tr></table></div>${payload.projectUrl ? `<p style="margin: 18px 0 0;"><a href="${payload.projectUrl}" style="display: inline-block; background: #111827; color: #ffffff; text-decoration: none; padding: 10px 18px; border-radius: 6px;" target="_blank" rel="noopener noreferrer">View Handover Details</a></p>` : ""}</div></div>`;
-
-  const templateValues = {
-    toName: payload.toName ?? "there",
-    leadCode: payload.leadCode,
-    leadName: payload.leadName,
-    updatedBy: payload.updatedBy,
-    updatedAt: payload.updatedAt,
-    projectUrl: payload.projectUrl ?? "",
-  };
-
-  const template = await prisma.emailNotificationMaster.findFirst({
-    where: {
-      vendor_id: payload.vendor_id,
-      template_key: LEAD_STAGE_TEMPLATE_KEYS.FINAL_HANDOVER_STAGE,
-      active: true,
-    },
-  });
-
-  logger.info("Brevo email template source", {
-    template_key: LEAD_STAGE_TEMPLATE_KEYS.FINAL_HANDOVER_STAGE,
-    vendor_id: payload.vendor_id,
-    source: template ? "db" : "default",
-  });
-
-  const subject = template
-    ? renderTemplate(template.subject, templateValues)
-    : defaultSubject;
-  const text = template
-    ? renderTemplate(template.text, templateValues)
-    : defaultText;
-  const html = template
-    ? renderTemplate(template.html, templateValues)
-    : defaultHtml;
-
-  return sendBrevoEmail({
-    toEmail: payload.toEmail,
-    toName: payload.toName,
-    subject,
-    text,
-    html,
-  });
-};

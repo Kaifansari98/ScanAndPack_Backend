@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { NotificationService } from "../../services/notification/notification.service";
 import { NotificationType } from "../../prisma/generated";
+import logger from "../../../src/utils/logger";
 
 export class NotificationController {
   static async send(req: Request, res: Response) {
@@ -13,11 +14,15 @@ export class NotificationController {
       const title = String(req.body.title || "").trim();
       const message = String(req.body.message || "").trim();
       const entityType =
-        req.body.entity_type !== undefined ? String(req.body.entity_type) : null;
+        req.body.entity_type !== undefined
+          ? String(req.body.entity_type)
+          : null;
       const entityId =
         req.body.entity_id !== undefined ? Number(req.body.entity_id) : null;
       const redirectUrl =
-        req.body.redirect_url !== undefined ? String(req.body.redirect_url) : null;
+        req.body.redirect_url !== undefined
+          ? String(req.body.redirect_url)
+          : null;
 
       if (!vendorId || !userId || !type || !title || !message) {
         return res.status(400).json({
@@ -33,17 +38,18 @@ export class NotificationController {
         });
       }
 
-      const { notification, delivery } = await NotificationService.createAndSend({
-        vendor_id: vendorId,
-        user_id: userId,
-        sender_id: senderId,
-        type,
-        title,
-        message,
-        entity_type: entityType,
-        entity_id: entityId,
-        redirect_url: redirectUrl,
-      });
+      const { notification, delivery } =
+        await NotificationService.createAndSend({
+          vendor_id: vendorId,
+          user_id: userId,
+          sender_id: senderId,
+          type,
+          title,
+          message,
+          entity_type: entityType,
+          entity_id: entityId,
+          redirect_url: redirectUrl,
+        });
 
       return res.status(201).json({
         success: true,
@@ -61,40 +67,98 @@ export class NotificationController {
   }
 
   static async listForUser(req: Request, res: Response) {
+    const startTime = Date.now();
     try {
       const vendorId = Number(req.params.vendorId);
       const userId = Number(req.params.userId);
-      const isReadParam = req.query.is_read;
-      const isRead =
-        typeof isReadParam === "string"
-          ? isReadParam === "true"
-          : undefined;
-      const take = req.query.take ? Number(req.query.take) : undefined;
-      const skip = req.query.skip ? Number(req.query.skip) : undefined;
 
-      if (!vendorId || !userId) {
+      if (!vendorId || !userId || Number.isNaN(vendorId) || Number.isNaN(userId)) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and userId are required",
+          message: "vendorId and userId are required and must be valid numbers",
         });
       }
 
-      const { notifications, unread_count } = await NotificationService.listForUser(
-        vendorId,
-        userId,
-        { is_read: isRead, take, skip }
+      const isReadParam = req.query.is_read;
+      const isRead =
+        typeof isReadParam === "string" ? isReadParam === "true" : undefined;
+
+      const takeParam = Number(req.query.take);
+      const take = !Number.isNaN(takeParam) ? Math.min(100, Math.max(1, takeParam)) : 20;
+
+      const skipParam = Number(req.query.skip);
+      const skip = !Number.isNaN(skipParam) ? Math.max(0, skipParam) : 0;
+
+      const search = typeof req.query.search === "string" ? req.query.search : undefined;
+      const tab = typeof req.query.tab === "string" ? req.query.tab : undefined;
+
+      const dbStartTime = Date.now();
+      const { notifications, unread_count, total_count } =
+        await NotificationService.listForUser(vendorId, userId, {
+          is_read: isRead,
+          take,
+          skip,
+          search,
+          tab,
+        });
+      const dbDuration = Date.now() - dbStartTime;
+      const apiDuration = Date.now() - startTime;
+
+      logger.info(
+        `[NotificationAPI] listForUser success: vendorId=${vendorId}, userId=${userId}, tab=${tab || "all"}, take=${take}, skip=${skip}. DB query time: ${dbDuration}ms. Total API time: ${apiDuration}ms`
       );
 
       return res.status(200).json({
         success: true,
         count: notifications.length,
         unread_count,
+        total_count,
         data: notifications,
+      });
+    } catch (error: any) {
+      const apiDuration = Date.now() - startTime;
+      logger.error(
+        `[NotificationAPI] listForUser failure: error=${error.message}. Total API time: ${apiDuration}ms`
+      );
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch notifications",
+        error: error.message,
+      });
+    }
+  }
+
+  static async markReadBulk(req: Request, res: Response) {
+    try {
+      const notificationIds = req.body.ids;
+      const userId = Number(req.body.user_id);
+
+      if (!Array.isArray(notificationIds) || !userId) {
+        return res.status(400).json({
+          success: false,
+          message: "ids (array) and user_id are required",
+        });
+      }
+
+      if (notificationIds.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "No notifications to mark as read",
+        });
+      }
+
+      const parsedIds = notificationIds.map(Number).filter((id) => !Number.isNaN(id));
+      const result = await NotificationService.markReadBulk(parsedIds, userId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Notifications marked as read",
+        count: result.count,
       });
     } catch (error: any) {
       return res.status(500).json({
         success: false,
-        message: "Failed to fetch notifications",
+        message: "Failed to mark notifications as read",
         error: error.message,
       });
     }
@@ -171,6 +235,53 @@ export class NotificationController {
         success: false,
         message: "Failed to register push token",
         error: error.message,
+      });
+    }
+  }
+
+  static async deactivatePushToken(req: Request, res: Response) {
+    try {
+      const { user_id, vendor_id, device_id, token } = req.body;
+
+      if (!user_id || !vendor_id) {
+        return res.status(400).json({
+          message: "user_id and vendor_id are required",
+        });
+      }
+
+      if (!device_id && !token) {
+        return res.status(400).json({
+          message: "device_id or token must be provided",
+        });
+      }
+
+      logger.info("Deactivate push token request", {
+        user_id,
+        vendor_id,
+        device_id,
+        token,
+      });
+
+      const result = await NotificationService.deactivatePushToken({
+        user_id,
+        vendor_id,
+        device_id,
+        token,
+      });
+
+      logger.info("Push token deactivated", {
+        user_id,
+        vendor_id,
+      });
+
+      return res.json(result);
+    } catch (error: any) {
+      logger.error("Failed to deactivate push token", {
+        error: error?.message,
+      });
+
+      return res.status(500).json({
+        message: "Failed to deactivate token",
       });
     }
   }

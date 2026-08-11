@@ -4,22 +4,27 @@ import {
   uploadCSPBookingFiles,
 } from "../../middlewares/uploadWasabi";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 const bookingStageController = new BookingStageController();
 const bookingStageRouter = Router();
 
 bookingStageRouter.post(
   "/onboard",
-  uploadBookingStageFiles.fields([
-    { name: "final_documents", maxCount: 10 },
-    { name: "booking_payment_file", maxCount: 1 },
-  ]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([
+      { name: "final_documents" },
+      { name: "booking_payment_file" },
+    ])
+  ),
   bookingStageController.createBookingStage,
 );
 
 bookingStageRouter.post(
   "/add-more-files",
-  uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([{ name: "final_documents" }])
+  ),
   bookingStageController.addBookingStageFiles,
 );
 
@@ -58,6 +63,11 @@ bookingStageRouter.post(
 );
 
 bookingStageRouter.post(
+  "/draft-lead-table-data/vendorId/:vendorId",
+  bookingStageController.getDraftLeadTableData,
+);
+
+bookingStageRouter.post(
   "/vendorId/:vendorId/vendor-leads-by-tag/all-leads",
   bookingStageController.getVendorLeadsByTag2,
 );
@@ -84,9 +94,26 @@ bookingStageRouter.put(
   bookingStageController.updateBookingAmount,
 );
 
+bookingStageRouter.put(
+  "/update-basic-amount/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateBasicAmount,
+);
+
+bookingStageRouter.put(
+  "/update-gst-percentage/vendor/:vendorId/lead/:leadId",
+  bookingStageController.updateGstPercentage,
+);
+
+bookingStageRouter.put(
+  "/update-payment-amount/vendor/:vendorId/lead/:leadId/payment/:paymentId",
+  bookingStageController.updatePaymentAmount,
+);
+
 bookingStageRouter.post(
   "/add-additional-payment",
-  uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([{ name: "payment_file" }])
+  ),
   bookingStageController.addPayment,
 );
 
@@ -95,19 +122,34 @@ bookingStageRouter.get(
   bookingStageController.getPayments,
 );
 
+bookingStageRouter.get(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.getLeadBillingAddresses,
+);
+
+bookingStageRouter.put(
+  "/billing-information/vendor/:vendorId/lead/:leadId",
+  bookingStageController.upsertLeadBillingAddresses,
+);
+
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
-  { name: "current_site_photos", maxCount: 10 },
+  { name: "current_site_photos" },
 ]);
 
 bookingStageRouter.post(
   "/upload-CSP-booking",
-  uploadFinalMeasurement,
+  handleMulterUpload(uploadFinalMeasurement),
   bookingStageController.uploadCSPBooking,
 );
 
 bookingStageRouter.get(
   "/get-CSP-booking/:vendorId/:leadId",
   bookingStageController.getCSPBooking,
+);
+
+bookingStageRouter.post(
+  "/leadId/:leadId/tasks/assign-booking",
+  bookingStageController.assignTaskBooking,
 );
 
 export default bookingStageRouter;

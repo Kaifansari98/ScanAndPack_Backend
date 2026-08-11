@@ -6,38 +6,32 @@ const upload = multer(); // 🧾 Handles multipart/form-data
 const companyVendorsRoutes = Router();
 const controller = new CompanyVendorsController();
 
-// ✅ POST → Create a new company vendor (form-data)
-companyVendorsRoutes.post(
-  "/vendorId/:vendorId/create",
-  upload.none(), // <— parses form-data fields into req.body
-  controller.createCompanyVendor
-);
-
-// ✅ POST → Create multiple company vendors (form-data or JSON array)
-companyVendorsRoutes.post(
-  "/vendorId/:vendorId/create/bulk",
-  upload.none(),
-  controller.createCompanyVendorsBulk
-);
-
 // ✅ Fetch all company vendors by vendor_id
 companyVendorsRoutes.get(
   "/vendorId/:vendorId",
   controller.getCompanyVendorsByVendorId
 );
-
-// ✅ Update company vendor details by vendor_id and company_vendor_id
-companyVendorsRoutes.put(
-  "/vendorId/:vendorId/companyVendorId/:companyVendorId/update",
-  upload.none(), // handles form-data input
-  controller.updateCompanyVendor
+companyVendorsRoutes.get(
+  "/vendorId/:vendorId/master",
+  controller.getCompanyVendorsByVendorIdForMaster
 );
 
-// ✅ Soft delete a company vendor
-companyVendorsRoutes.delete(
-  "/vendorId/:vendorId/companyVendorId/:companyVendorId/delete",
+// ✅ Toggle company vendor status
+companyVendorsRoutes.patch(
+  "/vendorId/:vendorId/companyVendorId/:companyVendorId/status",
   upload.none(),
-  controller.softDeleteCompanyVendor
+  controller.toggleCompanyVendorStatus
 );
+
+// ✅ REST endpoints for detailed company vendor
+import { CompanyVendorsDetailedController } from "../../controllers/generic/CompanyVendorsDetailedController";
+const detailedController = new CompanyVendorsDetailedController();
+
+companyVendorsRoutes.get("/meta", detailedController.getCompanyVendorMetaData.bind(detailedController));
+companyVendorsRoutes.post("/", upload.any(), detailedController.createDetailedCompanyVendor.bind(detailedController));
+companyVendorsRoutes.get("/:id", detailedController.getDetailedCompanyVendorById.bind(detailedController));
+companyVendorsRoutes.put("/:id", upload.any(), detailedController.updateDetailedCompanyVendor.bind(detailedController));
+companyVendorsRoutes.delete("/:id", upload.none(), detailedController.deleteDetailedCompanyVendor.bind(detailedController));
 
 export default companyVendorsRoutes;
+

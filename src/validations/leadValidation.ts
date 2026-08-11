@@ -19,9 +19,13 @@ const structureInstanceSchema = Joi.object({
   description: Joi.string().trim().max(2000).optional().allow("", null),
 });
 
+const prioritySchema = Joi.string()
+  .trim()
+  .valid("High", "Medium", "Low");
+
 export const createLeadSchema = Joi.object({
-  firstname: Joi.string().trim().min(2).max(50).required(),
-  lastname: Joi.string().trim().min(2).max(50).required(),
+  firstname: Joi.string().trim().min(1).max(50).required(),
+  lastname: Joi.string().trim().min(1).max(50).required(),
 
   country_code: Joi.string()
     .pattern(/^\+\d{1,4}$/)
@@ -38,19 +42,30 @@ export const createLeadSchema = Joi.object({
 
   email: Joi.string().email().optional().allow("", null),
 
-  site_address: Joi.string().trim().min(1).max(2000).required(),
+  site_address: Joi.string().trim().max(2000).optional().allow("", null),
   site_map_link: Joi.string().uri().optional().allow("", null, ""),
 
   site_type_id: numberLike.optional().allow(null),
   source_id: numberLike.required().messages({
     "alternatives.match": '"source_id" must be a valid number',
   }),
+  refered_by: Joi.string().trim().max(300).optional().allow("", null),
+
+  client_id: numberLike.optional().allow(null),
+  order_number: Joi.string().trim().max(100).optional().allow("", null),
 
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  archetech_number: Joi.string()
+    .trim()
+    .pattern(/^\+?\d{7,20}$/)
+    .optional()
+    .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
+  franchise_id: numberLike.required(),
   created_by: numberLike.required(),
+  priority: prioritySchema.required(),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),
 
@@ -100,11 +115,21 @@ export const createLeadDraftSchema = Joi.object({
 
   site_type_id: numberLike.optional().allow(null),
   source_id: numberLike.optional().allow(null), // ✅ Drafts don't require this
+  refered_by: Joi.string().trim().max(300).optional().allow("", null),
+  client_id: numberLike.optional().allow(null),
+  order_number: Joi.string().trim().max(100).optional().allow("", null),
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  archetech_number: Joi.string()
+    .trim()
+    .pattern(/^\+?\d{7,20}$/)
+    .optional()
+    .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
+  franchise_id: numberLike.required(),
   created_by: numberLike.required(),
+  priority: prioritySchema.optional().allow(null, ""),
   assign_to: numberLike.optional().allow(null),
   assigned_by: numberLike.optional().allow(null),
 
@@ -127,10 +152,12 @@ export const isLeadComplete = (lead: any): boolean => {
   const requiredFields = {
     firstname: lead.firstname,
     lastname: lead.lastname,
+    country_code: lead.country_code,
     contact_no: lead.contact_no,
     site_type_id: lead.site_type_id,
     site_address: lead.site_address,
     source_id: lead.source_id,
+    priority: lead.priority,
   };
 
   // Check if all required fields are filled
@@ -167,11 +194,14 @@ interface UpdateLeadInput {
   site_address?: string;
   site_type_id?: number;
   source_id?: number;
+  priority?: string;
   archetech_name?: string;
+  archetech_number?: string;
   designer_remark?: string;
   updated_by?: number;
-  product_types?: number[];
-  product_structures?: number[];
+  client_id?: number;
+  order_number?: string;
+  refered_by?: string;
 }
 
 export const validateUpdateLeadInput = (
@@ -231,6 +261,17 @@ export const validateUpdateLeadInput = (
     }
   }
 
+  if (input.priority !== undefined && input.priority !== null) {
+    if (
+      typeof input.priority !== "string" ||
+      !["High", "Medium", "Low"].includes(input.priority.trim())
+    ) {
+      errors.push(
+        "priority must be one of High, Medium, or Low if provided"
+      );
+    }
+  }
+
   // updated_by is required for audit trail
   if (
     input.updated_by === undefined ||
@@ -274,6 +315,20 @@ export const validateUpdateLeadInput = (
   }
 
   if (
+    input.archetech_number !== undefined &&
+    input.archetech_number !== null
+  ) {
+    if (typeof input.archetech_number !== "string") {
+      errors.push("archetech_number must be a string if provided");
+    } else if (
+      input.archetech_number.trim() !== "" &&
+      !/^\+?\d{7,20}$/.test(input.archetech_number.trim())
+    ) {
+      errors.push("archetech_number must be a valid phone number if provided");
+    }
+  }
+
+  if (
     input.designer_remark !== undefined &&
     input.designer_remark !== null &&
     typeof input.designer_remark !== "string"
@@ -281,35 +336,28 @@ export const validateUpdateLeadInput = (
     errors.push("designer_remark must be a string if provided");
   }
 
-  // Validate arrays
-  if (input.product_types !== undefined) {
-    if (!Array.isArray(input.product_types)) {
-      errors.push("product_types must be an array if provided");
-    } else {
-      for (let i = 0; i < input.product_types.length; i++) {
-        if (typeof input.product_types[i] !== "number") {
-          errors.push(`product_types[${i}] must be a number`);
-        }
-      }
-    }
-  }
-
-  if (input.product_structures !== undefined) {
-    if (!Array.isArray(input.product_structures)) {
-      errors.push("product_structures must be an array if provided");
-    } else {
-      for (let i = 0; i < input.product_structures.length; i++) {
-        if (typeof input.product_structures[i] !== "number") {
-          errors.push(`product_structures[${i}] must be a number`);
-        }
-      }
-    }
-  }
-
   // Contact number validation (basic)
   if (input.contact_no && typeof input.contact_no === "string") {
     if (input.contact_no.length < 7 || input.contact_no.length > 15) {
       errors.push("contact_no must be between 7 and 15 characters");
+    }
+  }
+
+  if (input.client_id !== undefined && input.client_id !== null) {
+    if (typeof input.client_id !== "number") {
+      errors.push("client_id must be a number if provided");
+    }
+  }
+
+  if (input.order_number !== undefined && input.order_number !== null) {
+    if (typeof input.order_number !== "string") {
+      errors.push("order_number must be a string if provided");
+    }
+  }
+
+  if (input.refered_by !== undefined && input.refered_by !== null) {
+    if (typeof input.refered_by !== "string") {
+      errors.push("refered_by must be a string if provided");
     }
   }
 

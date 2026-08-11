@@ -5,20 +5,25 @@ import {
     getAllProductStructureTypes,
     updateProductStructureTypeParent,
 } from "../../services/leadModuleServices/productStructureType.service";
-import { ProductStructureType, ProductStructureTypeInput } from "../../types/leadModule.types";
+import { ProductStructureTypeInput } from "../../types/leadModule.types";
 
 export const createProductStructureType = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] createProductStructureType called", { body: req.body });
 
     try {
-        const {vendor_id, type, parent} = req.body as ProductStructureTypeInput;
+        const {vendor_id, type, parent, product_type_id} = req.body as ProductStructureTypeInput;
 
-        if(!vendor_id || !type || !parent){
-            console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, parent });
-            return res.status(400).json({ error: "vendor_id, type and parent are required" });
+        if(!vendor_id || !type || !product_type_id){
+            console.warn("[CONTROLLER] Missing required fields", { vendor_id, type, product_type_id });
+            return res.status(400).json({ error: "vendor_id, type and product_type_id are required" });
         }
 
-        const productStructureType = await addProductStructureType({vendor_id, type, parent});
+        const productStructureType = await addProductStructureType({
+            vendor_id,
+            type,
+            parent,
+            product_type_id,
+        });
 
         console.log("[CONTROLLER] createProductStructureType created successfully", productStructureType);
         return res.status(201).json({ success: true, data: productStructureType });
@@ -34,7 +39,7 @@ export const fetchAllProductStructureTypes = async (req: Request, res: Response)
     console.log("[CONTROLLER] fetchAllProductStructureTypes called", { query: req.query });
 
     try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(req.params.vendor_id);
     if (!vendor_id) {
       console.warn("[CONTROLLER] Missing vendor_id");
       return res.status(400).json({ error: "vendor_id is required" });
@@ -53,7 +58,7 @@ export const removeProductStructureType = async (req: Request, res: Response) =>
     console.log("[CONTROLLER] removeProductStructureType called", { params: req.params });
   
     try {
-      const id = parseInt(req.params.id);
+      const id = Number(req.params.id);
       if (!id) {
         console.warn("[CONTROLLER] Missing ProductStructure type id");
         return res.status(400).json({ error: "id is required" });
@@ -74,7 +79,7 @@ export const editProductStructureParent = async (req: Request, res: Response) =>
     });
 
     try {
-        const id = parseInt(req.params.id);
+        const id = Number(req.params.id);
         const { parent } = req.body as { parent?: string };
 
         if (!id) {

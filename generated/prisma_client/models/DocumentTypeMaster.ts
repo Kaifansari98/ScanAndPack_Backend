@@ -41,6 +41,8 @@ export type DocumentTypeMasterMinAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  doc_title: string | null
+  stage: string | null
 }
 
 export type DocumentTypeMasterMaxAggregateOutputType = {
@@ -48,6 +50,8 @@ export type DocumentTypeMasterMaxAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  doc_title: string | null
+  stage: string | null
 }
 
 export type DocumentTypeMasterCountAggregateOutputType = {
@@ -55,6 +59,8 @@ export type DocumentTypeMasterCountAggregateOutputType = {
   type: number
   vendor_id: number
   tag: number
+  doc_title: number
+  stage: number
   _all: number
 }
 
@@ -74,6 +80,8 @@ export type DocumentTypeMasterMinAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
 }
 
 export type DocumentTypeMasterMaxAggregateInputType = {
@@ -81,6 +89,8 @@ export type DocumentTypeMasterMaxAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
 }
 
 export type DocumentTypeMasterCountAggregateInputType = {
@@ -88,6 +98,8 @@ export type DocumentTypeMasterCountAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
   _all?: true
 }
 
@@ -182,6 +194,8 @@ export type DocumentTypeMasterGroupByOutputType = {
   type: string
   vendor_id: number
   tag: string
+  doc_title: string | null
+  stage: string | null
   _count: DocumentTypeMasterCountAggregateOutputType | null
   _avg: DocumentTypeMasterAvgAggregateOutputType | null
   _sum: DocumentTypeMasterSumAggregateOutputType | null
@@ -189,7 +203,7 @@ export type DocumentTypeMasterGroupByOutputType = {
   _max: DocumentTypeMasterMaxAggregateOutputType | null
 }
 
-type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DocumentTypeMasterGroupByOutputType, T['by']> &
       {
@@ -212,6 +226,8 @@ export type DocumentTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.LeadDocumentsListRelationFilter
 }
@@ -221,6 +237,8 @@ export type DocumentTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
 }
@@ -233,6 +251,8 @@ export type DocumentTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.LeadDocumentsListRelationFilter
 }, "id">
@@ -242,6 +262,8 @@ export type DocumentTypeMasterOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DocumentTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.DocumentTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.DocumentTypeMasterMaxOrderByAggregateInput
@@ -257,11 +279,15 @@ export type DocumentTypeMasterScalarWhereWithAggregatesInput = {
   type?: Prisma.StringWithAggregatesFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringWithAggregatesFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableWithAggregatesFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableWithAggregatesFilter<"DocumentTypeMaster"> | string | null
 }
 
 export type DocumentTypeMasterCreateInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentTypesInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutDocumentTypeInput
 }
@@ -271,12 +297,16 @@ export type DocumentTypeMasterUncheckedCreateInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentTypesNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutDocumentTypeNestedInput
 }
@@ -286,6 +316,8 @@ export type DocumentTypeMasterUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
@@ -294,11 +326,15 @@ export type DocumentTypeMasterCreateManyInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
 }
 
 export type DocumentTypeMasterUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentTypeMasterUncheckedUpdateManyInput = {
@@ -306,6 +342,8 @@ export type DocumentTypeMasterUncheckedUpdateManyInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentTypeMasterListRelationFilter = {
@@ -328,6 +366,8 @@ export type DocumentTypeMasterCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterAvgOrderByAggregateInput = {
@@ -340,6 +380,8 @@ export type DocumentTypeMasterMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterMinOrderByAggregateInput = {
@@ -347,6 +389,8 @@ export type DocumentTypeMasterMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterSumOrderByAggregateInput = {
@@ -413,6 +457,8 @@ export type DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput = {
 export type DocumentTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutDocumentTypeInput
 }
 
@@ -420,6 +466,8 @@ export type DocumentTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
@@ -457,11 +505,15 @@ export type DocumentTypeMasterScalarWhereInput = {
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
 }
 
 export type DocumentTypeMasterCreateWithoutDocumentsInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentTypesInput
 }
 
@@ -470,6 +522,8 @@ export type DocumentTypeMasterUncheckedCreateWithoutDocumentsInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
 }
 
 export type DocumentTypeMasterCreateOrConnectWithoutDocumentsInput = {
@@ -491,6 +545,8 @@ export type DocumentTypeMasterUpdateToOneWithWhereWithoutDocumentsInput = {
 export type DocumentTypeMasterUpdateWithoutDocumentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentTypesNestedInput
 }
 
@@ -499,17 +555,23 @@ export type DocumentTypeMasterUncheckedUpdateWithoutDocumentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentTypeMasterCreateManyVendorInput = {
   id?: number
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
 }
 
 export type DocumentTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUpdateManyWithoutDocumentTypeNestedInput
 }
 
@@ -517,6 +579,8 @@ export type DocumentTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
@@ -524,6 +588,8 @@ export type DocumentTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -562,6 +628,8 @@ export type DocumentTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.DocumentTypeMaster$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -572,6 +640,8 @@ export type DocumentTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentTypeMaster"]>
 
@@ -580,6 +650,8 @@ export type DocumentTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentTypeMaster"]>
 
@@ -588,9 +660,11 @@ export type DocumentTypeMasterSelectScalar = {
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
 }
 
-export type DocumentTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["documentTypeMaster"]>
+export type DocumentTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag" | "doc_title" | "stage", ExtArgs["result"]["documentTypeMaster"]>
 export type DocumentTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.DocumentTypeMaster$documentsArgs<ExtArgs>
@@ -614,6 +688,8 @@ export type $DocumentTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.
     type: string
     vendor_id: number
     tag: string
+    doc_title: string | null
+    stage: string | null
   }, ExtArgs["result"]["documentTypeMaster"]>
   composites: {}
 }
@@ -1043,6 +1119,8 @@ export interface DocumentTypeMasterFieldRefs {
   readonly type: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"DocumentTypeMaster", 'Int'>
   readonly tag: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
+  readonly doc_title: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
+  readonly stage: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
 }
     
 
@@ -1239,6 +1317,11 @@ export type DocumentTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` DocumentTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DocumentTypeMasters.
+   */
   distinct?: Prisma.DocumentTypeMasterScalarFieldEnum | Prisma.DocumentTypeMasterScalarFieldEnum[]
 }
 

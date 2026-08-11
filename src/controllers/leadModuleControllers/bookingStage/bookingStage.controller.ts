@@ -3,6 +3,7 @@ import { BookingStageService } from "../../../services/bookingStage/bookingStage
 import {
   AddPaymentDto,
   CreateBookingStageDto,
+  LeadBillingAddressInput,
   UploadedFileRef,
 } from "../../../types/booking-stage.dto";
 import logger, { log } from "../../../utils/logger";
@@ -13,11 +14,16 @@ import {
   uploadToWasabiCSPBookingPhotoFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
+import path from "node:path";
 import { prisma } from "../../../prisma/client";
 import {
   sendLeadAssignedToSiteSupervisorEmail,
-  sendMajorMilestoneEmail,
+  sendTaskAssignedEmail,
 } from "../../../services/email/brevoEmail.service";
+import { sendSiteSupervisorAssignedEmail } from "../../../services/email/brevoEmail2.service";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -37,6 +43,41 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
+const normalizeStringArray = (value: unknown): string[] | undefined => {
+  if (Array.isArray(value)) {
+    const normalized = value.map((item) => String(item).trim()).filter(Boolean);
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  if (typeof value === "string") {
+    const normalized = value.trim();
+    return normalized ? [normalized] : undefined;
+  }
+
+  return undefined;
+};
+
+const normalizeNumberArray = (value: unknown): number[] | undefined => {
+  if (Array.isArray(value)) {
+    const normalized = value
+      .map((item) => Number(item))
+      .filter((item) => Number.isFinite(item) && item > 0);
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  if (value === undefined || value === null || value === "") {
+    return undefined;
+  }
+
+  const normalized = Number(value);
+  return Number.isFinite(normalized) && normalized > 0
+    ? [normalized]
+    : undefined;
+};
+
 export class BookingStageController {
   private bookingStageService = new BookingStageService();
 
@@ -50,28 +91,49 @@ export class BookingStageController {
         account_id,
         vendor_id,
         created_by,
+        product_type_id,
         client_id,
         bookingAmount,
+        basic_amount,
+        gst_percentage,
+        gst_amount,
+        total_amount,
         bookingAmountPaymentDetailsText,
         finalBookingAmount,
         siteSupervisorId,
         mrpValue,
       } = req.body;
 
+      const vendorIdNum = Number(vendor_id);
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorIdNum },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+      const useCustomUsersOnly =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+
       if (
         !lead_id ||
         !account_id ||
         !vendor_id ||
         !created_by ||
-        !client_id ||
-        !bookingAmount ||
         !finalBookingAmount ||
-        !siteSupervisorId ||
         !mrpValue
       ) {
         res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      if (
+        !useCustomUsersOnly &&
+        (!siteSupervisorId || Number(siteSupervisorId) <= 0)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Site supervisor is required",
+        });
         return;
       }
 
@@ -86,12 +148,70 @@ export class BookingStageController {
         return;
       }
 
+      // Validate final documents file extensions
+      const allowedExtensions = [".pptx", ".ppt", ".pdf", ".jpg", ".jpeg", ".png", ".pyo"];
+      for (const file of finalDocuments) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (!allowedExtensions.includes(ext)) {
+          // Clean up all uploaded files
+          const allFilesToCleanup = [
+            ...finalDocuments,
+            ...(bookingAmountPaymentDetailsFile ? [bookingAmountPaymentDetailsFile] : []),
+          ];
+          for (const f of allFilesToCleanup) {
+            if (f.path && fsSync.existsSync(f.path)) {
+              await fs.unlink(f.path).catch(() => {});
+            }
+          }
+          res.status(400).json({
+            success: false,
+            message: `Unsupported file type for final documents: ${ext}. Supported types: .pptx, .ppt, .pdf, .jpg, .jpeg, .png, .pyo`,
+          });
+          return;
+        }
+      }
+
       if (Number(mrpValue) < Number(finalBookingAmount)) {
         res.status(400).json({
           success: false,
           message: "MRP value cannot be less than Total Booking Value",
         });
         return;
+      }
+
+      if (
+        typeof product_type_id !== "undefined" &&
+        product_type_id !== null &&
+        (!Number.isFinite(Number(product_type_id)) ||
+          Number(product_type_id) <= 0)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "product_type_id must be a valid positive number",
+        });
+        return;
+      }
+
+      const optionalAmountFields = [
+        ["basic_amount", basic_amount],
+        ["gst_percentage", gst_percentage],
+        ["gst_amount", gst_amount],
+        ["total_amount", total_amount],
+      ] as const;
+
+      for (const [fieldName, fieldValue] of optionalAmountFields) {
+        if (
+          typeof fieldValue !== "undefined" &&
+          fieldValue !== null &&
+          fieldValue !== "" &&
+          (!Number.isFinite(Number(fieldValue)) || Number(fieldValue) < 0)
+        ) {
+          res.status(400).json({
+            success: false,
+            message: `${fieldName} must be a valid non-negative number`,
+          });
+          return;
+        }
       }
 
       const uploadedFinalDocuments: UploadedFileRef[] = [];
@@ -132,17 +252,45 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: CreateBookingStageDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
-        client_id: parseInt(client_id),
+        product_type_id:
+          product_type_id && Number(product_type_id) > 0
+            ? parseInt(product_type_id)
+            : undefined,
+        client_id: client_id ? parseInt(client_id) : undefined,
         bookingAmount: parseFloat(bookingAmount),
+        basic_amount:
+          basic_amount !== undefined && basic_amount !== null && basic_amount !== ""
+            ? parseFloat(basic_amount)
+            : undefined,
+        gst_percentage:
+          gst_percentage !== undefined &&
+          gst_percentage !== null &&
+          gst_percentage !== ""
+            ? parseFloat(gst_percentage)
+            : undefined,
+        gst_amount:
+          gst_amount !== undefined && gst_amount !== null && gst_amount !== ""
+            ? parseFloat(gst_amount)
+            : undefined,
+        total_amount:
+          total_amount !== undefined && total_amount !== null && total_amount !== ""
+            ? parseFloat(total_amount)
+            : undefined,
         mrpValue: parseFloat(mrpValue),
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
-        siteSupervisorId: parseInt(siteSupervisorId),
+        siteSupervisorId:
+          siteSupervisorId && Number(siteSupervisorId) > 0
+            ? parseInt(siteSupervisorId)
+            : undefined,
+        baseUrl,
         finalDocuments: uploadedFinalDocuments,
         bookingAmountPaymentDetailsFile: uploadedPaymentFile,
       };
@@ -150,11 +298,14 @@ export class BookingStageController {
       const result = await this.bookingStageService.createBookingStage(dto);
 
       try {
-        if (dto.siteSupervisorId !== dto.created_by) {
+        if (
+          dto.siteSupervisorId &&
+          dto.siteSupervisorId !== dto.created_by
+        ) {
           const [supervisor, createdBy, lead] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.siteSupervisorId },
-              select: { user_name: true, user_email: true },
+              select: { user_name: true, user_email: true, user_type: { select: { user_type: true } } },
             }),
             prisma.userMaster.findUnique({
               where: { id: dto.created_by },
@@ -180,8 +331,11 @@ export class BookingStageController {
             }),
           ]);
 
+          const supervisorRole = supervisor?.user_type?.user_type?.toLowerCase();
           const supervisorEmail = supervisor?.user_email?.trim();
-          if (!supervisorEmail) {
+          if (supervisorRole === "site-supervisor" || supervisorRole === "head-site-supervisor") {
+            // skip — lead-assigned email is not sent to site-supervisor or head-site-supervisor
+          } else if (!supervisorEmail) {
             logger.warn(
               "Booking stage email skipped: missing supervisor email",
               {
@@ -241,78 +395,6 @@ export class BookingStageController {
         });
       }
 
-      try {
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: dto.vendor_id,
-              status: "active",
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
-          prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: dto.vendor_id,
-              lead_id: dto.lead_id,
-              status: "active",
-            },
-            select: { user_id: true },
-          }),
-          prisma.leadMaster.findUnique({
-            where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true },
-          }),
-        ]);
-
-        const leadName =
-          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
-        const leadCode =
-          lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
-
-        if (recipientIds.size > 0) {
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const detailsUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
-          const completedOn = new Date().toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          await Promise.allSettled(
-            users
-              .filter((user) => user.user_email)
-              .map((user) =>
-                sendMajorMilestoneEmail({
-                  vendor_id: dto.vendor_id,
-                  toEmail: user.user_email!,
-                  toName: user.user_name ?? undefined,
-                  leadCode,
-                  leadName: leadName || "Lead",
-                  milestoneName: "Lead to Project",
-                  completedOn,
-                  detailsUrl,
-                }),
-              ),
-          );
-        }
-      } catch (emailError: any) {
-        logger.warn("⚠️ Failed to send lead-to-project milestone email", {
-          error: emailError?.message,
-          lead_id: dto.lead_id,
-        });
-      }
-
       res.status(201).json({
         success: true,
         message: "Booking stage completed",
@@ -353,6 +435,24 @@ export class BookingStageController {
         return;
       }
 
+      // Validate final documents file extensions
+      const allowedExtensions = [".pptx", ".ppt", ".pdf", ".jpg", ".jpeg", ".png", ".pyo"];
+      for (const file of finalDocuments) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (!allowedExtensions.includes(ext)) {
+          for (const f of finalDocuments) {
+            if (f.path && fsSync.existsSync(f.path)) {
+              await fs.unlink(f.path).catch(() => {});
+            }
+          }
+          res.status(400).json({
+            success: false,
+            message: `Unsupported file type for final documents: ${ext}. Supported types: .pptx, .ppt, .pdf, .jpg, .jpeg, .png, .pyo`,
+          });
+          return;
+        }
+      }
+
       const uploadedFinalDocuments: UploadedFileRef[] = [];
 
       for (const file of finalDocuments) {
@@ -377,6 +477,7 @@ export class BookingStageController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         finalDocuments: uploadedFinalDocuments,
       };
 
@@ -400,8 +501,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
 
       if (!leadId) {
         res.status(400).json({ success: false, message: "leadId is required" });
@@ -429,7 +530,7 @@ export class BookingStageController {
 
   public getBookingLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
 
       if (!vendorId || !userId) {
@@ -468,7 +569,7 @@ export class BookingStageController {
    */
   public getVendorLeadsByTag = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.query.userId ? Number(req.query.userId) : null;
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");
@@ -526,8 +627,16 @@ export class BookingStageController {
   // CONTROLLER 1: getVendorLeadsByTag2
   public getVendorLeadsByTag2 = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = req.body.userId ? Number(req.body.userId) : null;
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined &&
+        franchiseIdRaw !== null &&
+        franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
 
       const page = parseInt((req.body.page as string) || "1");
@@ -575,7 +684,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -583,6 +691,7 @@ export class BookingStageController {
         site_map_link: req.body.site_map_link,
         site_type: req.body.site_type,
         assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
         stagetag: req.body.stagetag,
         site_address: req.body.site_address,
         archetech_name: req.body.archetech_name,
@@ -591,7 +700,10 @@ export class BookingStageController {
         alt_contact_no: req.body.alt_contact_no,
         email: req.body.email,
         designer_remark: req.body.designer_remark,
-        date_range: dateRange, // Normalized date range
+        date_range: dateRange,
+        production_status: req.body.production_status,
+        pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       // ============================
@@ -601,6 +713,8 @@ export class BookingStageController {
         logger.warn("[BookingStageController] Missing vendorId or tag", {
           vendorId,
           tag,
+          franchiseId,
+          franchiseIds,
         });
 
         return res.status(400).json({
@@ -609,16 +723,37 @@ export class BookingStageController {
         });
       }
 
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
+        });
+      }
+
       logger.info("[BookingStageController] getVendorLeadsByTag2 called", {
         vendorId,
+        franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
         dateRange,
       });
+      console.log("[getVendorLeadsByTag2] payload", {
+        vendorId,
+        franchiseId,
+        franchiseIds,
+        userId,
+        tag,
+        page,
+        limit,
+        filters,
+      });
 
       const { leads, count } = await BookingStageService.getVendorLeadsByTag2(
         vendorId,
+        franchiseId,
+        franchiseIds,
         tag,
         userId,
         page,
@@ -655,8 +790,14 @@ export class BookingStageController {
   // CONTROLLER 2: getUniversalTableData2
   public getUniversalTableData2 = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.body.userId);
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+      const franchiseIds = normalizeNumberArray(req.body.franchise_ids);
       const tag = req.body.tag as string;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -703,7 +844,6 @@ export class BookingStageController {
 
       const filters = {
         global_search: req.body.global_search,
-        filter_lead_code: req.body.filter_lead_code,
         filter_name: req.body.filter_name,
         contact: req.body.contact,
         furniture_type: req.body.furniture_type,
@@ -711,6 +851,7 @@ export class BookingStageController {
         site_map_link: req.body.site_map_link,
         site_type: req.body.site_type,
         assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
         stagetag: req.body.stagetag,
         site_address: req.body.site_address,
         archetech_name: req.body.archetech_name,
@@ -719,27 +860,62 @@ export class BookingStageController {
         alt_contact_no: req.body.alt_contact_no,
         email: req.body.email,
         designer_remark: req.body.designer_remark,
-        date_range: dateRange, // Normalized date range
+        date_range: dateRange,
+        production_status: req.body.production_status,
+        pending_services: req.body.pending_services,
+        franchises: req.body.franchises,
       };
 
       if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+        logger.warn("Missing vendorId or userId", {
+          vendorId,
+          userId,
+          franchiseId,
+          franchiseIds,
+          tag,
+        });
         return res.status(400).json({
           success: false,
           message: "Vendor ID and User ID are required",
+        });
+      }
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        logger.warn("Invalid franchiseId provided", {
+          vendorId,
+          userId,
+          franchiseId,
+          tag,
+        });
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
         });
       }
 
       logger.info("[BookingStageController] getUniversalTableData2 called", {
         vendorId,
         userId,
+        franchiseId,
+        franchiseIds,
         tag,
         dateRange,
+      });
+      console.log("[getUniversalTableData2] payload", {
+        vendorId,
+        userId,
+        franchiseId,
+        franchiseIds,
+        tag,
+        page,
+        limit,
+        filters,
       });
 
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
+        franchiseIds,
         tag,
         page,
         limit,
@@ -771,9 +947,123 @@ export class BookingStageController {
     }
   };
 
+  public getDraftLeadTableData = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(req.body.userId);
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "50");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+        date_range: dateRange,
+      };
+
+      if (!vendorId || !userId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
+        });
+      }
+
+      const { leads, count } = await BookingStageService.getDraftLeadTableData(
+        vendorId,
+        userId,
+        franchiseId,
+        page,
+        limit,
+        filters
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Draft leads fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getDraftLeadTableData Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId || req.body.userId);
 
       if (!vendorId || !userId) {
@@ -816,23 +1106,31 @@ export class BookingStageController {
 
   public getUniversalTableData = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
+      const franchiseId = Number(req.query.franchise_id);
       const tag = req.query.tag as string;
       const page = parseInt((req.query.page as string) || "1");
       const limit = parseInt((req.query.limit as string) || "10");
 
-      if (!vendorId || !userId) {
-        logger.warn("Missing vendorId or userId", { vendorId, userId, tag });
+      if (!vendorId || !userId || !franchiseId) {
+        logger.warn("Missing vendorId or userId or franchiseId", {
+          vendorId,
+          userId,
+          franchiseId,
+          tag,
+        });
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
+        undefined,
         tag,
         page,
         limit,
@@ -915,6 +1213,7 @@ export class BookingStageController {
         lead_id,
         account_id,
         vendor_id,
+        product_type_id,
         client_id,
         created_by,
         amount,
@@ -926,7 +1225,6 @@ export class BookingStageController {
         !lead_id ||
         !account_id ||
         !vendor_id ||
-        !client_id ||
         !created_by ||
         !amount ||
         !payment_text ||
@@ -960,15 +1258,22 @@ export class BookingStageController {
         };
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const dto: AddPaymentDto = {
         lead_id: parseInt(lead_id),
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
-        client_id: parseInt(client_id),
+        product_type_id:
+          product_type_id && Number(product_type_id) > 0
+            ? parseInt(product_type_id)
+            : undefined,
+        client_id: client_id ? parseInt(client_id) : undefined,
         created_by: parseInt(created_by),
         amount: parseFloat(amount),
         payment_text,
         payment_date,
+        baseUrl,
         payment_file: uploadedPaymentFile,
       };
 
@@ -986,16 +1291,16 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
-      const siteSupervisorId = parseInt(req.body.siteSupervisorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const siteSupervisorId = req.body.siteSupervisorId ? parseInt(req.body.siteSupervisorId) : undefined;
       const createdBy = parseInt(req.body.created_by);
 
-      if (!leadId || !vendorId || !siteSupervisorId || !createdBy) {
+     if (!leadId || !vendorId || !createdBy || !siteSupervisorId) {
         res.status(400).json({
           success: false,
           message:
-            "leadId, vendorId, siteSupervisorId, and created_by are required",
+            "leadId, vendorId, and created_by are required",
         });
         return;
       }
@@ -1009,9 +1314,115 @@ export class BookingStageController {
 
       res.status(200).json({
         success: true,
-        message: "Site supervisor reassigned successfully",
+        message: "Site supervisor assigned successfully",
         data: result,
       });
+
+      // ─── Notify + email sales-executive(s) assigned to this lead ───────────
+      void (async () => {
+        try {
+          const [lead, supervisor, salesExecMappings] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                id: true,
+                lead_code: true,
+                firstname: true,
+                lastname: true,
+                country_code: true,
+                contact_no: true,
+                account_id: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: siteSupervisorId },
+              select: { user_name: true },
+            }),
+            prisma.leadUserMapping.findMany({
+              where: {
+                lead_id: leadId,
+                vendor_id: vendorId,
+                status: "active",
+                user: {
+                  user_type: { user_type: { equals: "sales-executive", mode: "insensitive" } },
+                },
+              },
+              select: {
+                user: { select: { id: true, user_name: true, user_email: true } },
+              },
+            }),
+          ]);
+
+          if (!lead || salesExecMappings.length === 0) return;
+
+          // Deduplicate — a user can have multiple active mapping rows for the same lead
+          const seenIds = new Set<number>();
+          const uniqueSalesExecs = salesExecMappings
+            .map((m) => m.user)
+            .filter((user) => {
+              if (seenIds.has(user.id)) return false;
+              seenIds.add(user.id);
+              return true;
+            });
+
+          const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const leadCode = lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+          const contact = `${lead.country_code ?? ""} ${lead.contact_no ?? ""}`.trim();
+          const supervisorName = supervisor?.user_name ?? "—";
+          const assignedOn = new Date().toLocaleDateString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+          const clientBaseUrl = resolveClientBaseUrl(req);
+          const leadUrl = lead.account_id
+            ? `${clientBaseUrl}/dashboard/leads/booking-stage/details/${leadId}?accountId=${lead.account_id}`
+            : `${clientBaseUrl}/dashboard/leads/booking-stage/details/${leadId}`;
+          const redirectPath = lead.account_id
+            ? `/dashboard/leads/booking-stage/details/${leadId}?accountId=${lead.account_id}`
+            : `/dashboard/leads/booking-stage/details/${leadId}`;
+
+          await Promise.allSettled(
+            uniqueSalesExecs.map(async (user) => {
+              // In-app notification
+              await NotificationService.createAndSend({
+                vendor_id: vendorId,
+                user_id: user.id,
+                sender_id: createdBy,
+                type: NotificationType.LEAD_ASSIGNED,
+                title: "Site Supervisor Assigned",
+                message:
+                  leadName.length > 0
+                    ? `Site Supervisor ${supervisorName} has been assigned to ${leadCode} - ${leadName}.`
+                    : `Site Supervisor ${supervisorName} has been assigned to ${leadCode}.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: redirectPath,
+              });
+
+              // Email
+              if (user.user_email) {
+                await sendSiteSupervisorAssignedEmail({
+                  vendor_id: vendorId,
+                  toEmail: user.user_email,
+                  toName: user.user_name ?? undefined,
+                  leadCode,
+                  leadName: leadName || "—",
+                  contact: contact || "—",
+                  assignedTo: supervisorName,
+                  assignedOn,
+                  leadUrl,
+                });
+              }
+            }),
+          );
+        } catch (notifyErr: any) {
+          logger.warn("⚠️ Failed to send site-supervisor-assigned notification", {
+            lead_id: leadId,
+            error: notifyErr?.message,
+          });
+        }
+      })();
     } catch (error: any) {
       console.error("[BookingStageController] Reassign Error:", error);
       res.status(500).json({
@@ -1026,8 +1437,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const mrpValue = Number(req.body.mrp_value);
       const updatedBy = parseInt(req.body.updated_by);
 
@@ -1065,8 +1476,8 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const totalProjectAmount = Number(req.body.total_project_amount);
       const updatedBy = parseInt(req.body.updated_by);
 
@@ -1113,10 +1524,17 @@ export class BookingStageController {
     res: Response,
   ): Promise<void> => {
     try {
-      const leadId = parseInt(req.params.leadId);
-      const vendorId = parseInt(req.params.vendorId);
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
       const bookingAmount = Number(req.body.booking_amount);
       const updatedBy = parseInt(req.body.updated_by);
+      const rawProductTypeId = req.body.product_type_id;
+      const productTypeId =
+        rawProductTypeId !== undefined &&
+        rawProductTypeId !== null &&
+        String(rawProductTypeId).trim() !== ""
+          ? Number(rawProductTypeId)
+          : undefined;
 
       if (!leadId || !vendorId || Number.isNaN(bookingAmount) || !updatedBy) {
         res.status(400).json({
@@ -1132,6 +1550,10 @@ export class BookingStageController {
         vendor_id: vendorId,
         booking_amount: bookingAmount,
         updated_by: updatedBy,
+        product_type_id:
+          productTypeId != null && !Number.isNaN(productTypeId)
+            ? productTypeId
+            : undefined,
       });
 
       res.status(200).json({
@@ -1151,10 +1573,169 @@ export class BookingStageController {
     }
   };
 
+  public updateBasicAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const basicAmount = Number(req.body.basic_amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(basicAmount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, basic_amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateBasicAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        basic_amount: basicAmount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Basic amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateBasicAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updateGstPercentage = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const gstPercentage = Number(req.body.gst_percentage);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        Number.isNaN(gstPercentage) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, gst_percentage, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updateGstPercentage({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        gst_percentage: gstPercentage,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "GST percentage updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updateGstPercentage Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public updatePaymentAmount = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+      const paymentId = Number(getParam(req.params.paymentId));
+      const amount = Number(req.body.amount);
+      const updatedBy = parseInt(req.body.updated_by);
+      const productTypeId = Number(req.body.product_type_id);
+
+      if (
+        !leadId ||
+        !vendorId ||
+        !paymentId ||
+        Number.isNaN(amount) ||
+        !updatedBy ||
+        !productTypeId ||
+        Number.isNaN(productTypeId)
+      ) {
+        res.status(400).json({
+          success: false,
+          message:
+            "leadId, vendorId, paymentId, amount, updated_by, and product_type_id are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.updatePaymentAmount({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        payment_id: paymentId,
+        amount,
+        updated_by: updatedBy,
+        product_type_id: productTypeId,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Payment amount updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error(
+        "[BookingStageController] updatePaymentAmount Error:",
+        error,
+      );
+      res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   public getPayments = async (req: Request, res: Response) => {
     // 👈 arrow fn preserves `this`
     try {
-      const leadId = parseInt(req.params.leadId);
+      const leadId = Number(getParam(req.params.leadId));
       const vendorId = parseInt(req.query.vendorId as string);
 
       if (!leadId || !vendorId) {
@@ -1172,6 +1753,97 @@ export class BookingStageController {
     } catch (error: any) {
       logger.error("[PaymentController] Error", { error: error.message });
       res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  public getLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const result = await this.bookingStageService.getLeadBillingAddresses(
+        leadId,
+        vendorId,
+      );
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getLeadBillingAddresses Error", {
+        error: error.message,
+      });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public upsertLeadBillingAddresses = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+      const vendorId = Number(getParam(req.params.vendorId));
+
+      if (!leadId || !vendorId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId and vendorId are required",
+        });
+        return;
+      }
+
+      const normalizeAddress = (
+        value: any,
+      ): LeadBillingAddressInput | null => {
+        if (!value || typeof value !== "object") return null;
+
+        return {
+          name: typeof value.name === "string" ? value.name : null,
+          address: typeof value.address === "string" ? value.address : null,
+          map_link: typeof value.map_link === "string" ? value.map_link : null,
+          gst_number:
+            typeof value.gst_number === "string" ? value.gst_number : null,
+          state_name:
+            typeof value.state_name === "string" ? value.state_name : null,
+          place_of_supply:
+            typeof value.place_of_supply === "string"
+              ? value.place_of_supply
+              : null,
+        };
+      };
+
+      const result = await this.bookingStageService.upsertLeadBillingAddresses({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        billingAddress: normalizeAddress(req.body.billingAddress),
+        shippingAddress: normalizeAddress(req.body.shippingAddress),
+      });
+
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error(
+        "[BookingStageController] upsertLeadBillingAddresses Error",
+        {
+          error: error.message,
+        },
+      );
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
     }
   };
 
@@ -1266,6 +1938,131 @@ export class BookingStageController {
         success: false,
         message: error.message,
       });
+    }
+  };
+
+  public assignTaskBooking = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const { task_type, due_date, remark, user_id, created_by } = req.body;
+
+      if (!leadId || !task_type || !due_date || !user_id) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, task_type, due_date, and user_id are required",
+        });
+      }
+
+      const task = await this.bookingStageService.assignTaskBookingService({
+        lead_id: leadId,
+        task_type,
+        due_date,
+        remark,
+        assignee_user_id: Number(user_id),
+        created_by: Number(created_by),
+      });
+
+      // ===============================
+      // NOTIFICATION + EMAIL (fire-and-forget)
+      // ===============================
+      void (async () => {
+        try {
+          const isSelfAssigned =
+            Number(created_by) === Number(user_id);
+
+          if (isSelfAssigned) return;
+
+          const [assignee, lead, assigner] = await Promise.all([
+            prisma.userMaster.findUnique({
+              where: { id: Number(user_id) },
+              select: { user_name: true, user_email: true },
+            }),
+            prisma.leadMaster.findUnique({
+              where: { id: leadId },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                vendor_id: true,
+                account_id: true,
+                status_id: true,
+              },
+            }),
+            prisma.userMaster.findUnique({
+              where: { id: Number(created_by) },
+              select: { user_name: true },
+            }),
+          ]);
+
+          if (!assignee || !lead) return;
+
+          const leadName =
+            `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const leadCode =
+            lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
+
+          const redirectPath = lead.account_id
+            ? `/dashboard/leads/booking-stage/details/${leadId}?accountId=${lead.account_id}`
+            : `/dashboard/leads/booking-stage/details/${leadId}`;
+
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: Number(user_id),
+            sender_id: Number(created_by) || null,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New task assigned",
+            message:
+              leadName.length > 0
+                ? `Task assigned for ${leadName}: ${task_type}.`
+                : `Task assigned: ${task_type}.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 Email
+          if (assignee.user_email) {
+            const clientBaseUrl = resolveClientBaseUrl(req);
+            const projectUrl = `${clientBaseUrl}${redirectPath}`;
+            const assignedAt = new Date().toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
+            const dueDateFormatted = due_date
+              ? new Date(due_date).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "—";
+
+            await sendTaskAssignedEmail({
+              vendor_id: lead.vendor_id,
+              toEmail: assignee.user_email,
+              toName: assignee.user_name ?? undefined,
+              leadCode,
+              taskTitle: task_type,
+              leadName: leadName || "—",
+              assignedBy: assigner?.user_name ?? "Admin",
+              dueDate: dueDateFormatted,
+              remark,
+              taskUrl: projectUrl,
+            });
+          }
+        } catch (notifyErr: any) {
+          logger.warn("⚠️ assignTaskBooking notification failed", {
+            lead_id: leadId,
+            error: notifyErr?.message,
+          });
+        }
+      })();
+
+      return res.status(201).json({ success: true, data: task });
+    } catch (error: any) {
+      console.error("[assignTaskBooking] Error:", error);
+      return res.status(500).json({ success: false, message: error.message });
     }
   };
 }

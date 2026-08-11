@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ReadyToDispatchController } from "../../../controllers/leadModuleControllers/production/ready-to-dispatch/ReadyToDispatch.controller";
 import { uploadReadyToDispatchPhotos } from "../../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const readyToDispatchRoutes = Router();
 const controller = new ReadyToDispatchController();
@@ -11,10 +12,9 @@ readyToDispatchRoutes.get(
   controller.getAllReadyToDispatchLeads
 );
 
-// ✅ POST → Upload Current Site Photos at Ready-To-Dispatch
 readyToDispatchRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-current-site-photos",
-  uploadReadyToDispatchPhotos.array("files", 10), // accept up to 10 images
+  handleMulterUpload(uploadReadyToDispatchPhotos.array("files")), // accept multiple images
   controller.uploadCurrentSitePhotosAtReadyToDispatch
 );
 
@@ -27,6 +27,11 @@ readyToDispatchRoutes.get(
 readyToDispatchRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/current-site-photos/count",
   controller.getCurrentSitePhotosCountAtReadyToDispatch
+);
+
+readyToDispatchRoutes.get(
+  "/leadId/:leadId/task-conflicts",
+  controller.getSiteReadinessTaskConflicts
 );
 
 // ✅ Assign Site Readiness Task

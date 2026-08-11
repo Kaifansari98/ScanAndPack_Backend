@@ -3,9 +3,13 @@ import {
     addSourceType,
     deleteSourceType,
     getAllSourceTypes,
+    updateSourceType,
     updateSourceTypeStatus,
 } from "../../services/leadModuleServices/sourceMaster.service";
-import { SourceTypeInput, SourceType } from "../../types/leadModule.types";
+import {
+    SourceTypeInput,
+    UpdateSourceTypeInput,
+} from "../../types/leadModule.types";
 
 export const createSourceType = async(req: Request, res: Response) => {
 
@@ -40,7 +44,7 @@ export const fetchAllSourceTypes = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] fetchAllSourceTypes called", { query: req.query });
 
     try {
-    const vendor_id = parseInt(req.params.vendor_id);
+    const vendor_id = Number(req.params.vendor_id);
     if (!vendor_id) {
       console.warn("[CONTROLLER] Missing vendor_id");
       return res.status(400).json({ error: "vendor_id is required" });
@@ -59,7 +63,7 @@ export const removeSourceType = async (req: Request, res: Response) => {
     console.log("[CONTROLLER] removeSourceType called", { params: req.params });
   
     try {
-      const id = parseInt(req.params.id);
+      const id = Number(req.params.id);
       if (!id) {
         console.warn("[CONTROLLER] Missing source type id");
         return res.status(400).json({ error: "id is required" });
@@ -80,7 +84,7 @@ export const toggleSourceTypeStatus = async (req: Request, res: Response) => {
     });
 
     try {
-        const id = parseInt(req.params.id);
+        const id = Number(req.params.id);
         const { status } = req.body as { status?: string };
 
         if (!id) {
@@ -105,6 +109,34 @@ export const toggleSourceTypeStatus = async (req: Request, res: Response) => {
         return res.status(200).json({ success: true, data: updated });
     } catch (error: any) {
         console.error("[CONTROLLER] Error updating source type status", {
+            error: error.message,
+        });
+        return res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+export const editSourceType = async (req: Request, res: Response) => {
+    console.log("[CONTROLLER] editSourceType called", {
+        params: req.params,
+        body: req.body,
+    });
+
+    try {
+        const id = Number(req.params.id);
+        const { type } = req.body as UpdateSourceTypeInput;
+
+        if (!id) {
+            return res.status(400).json({ error: "id is required" });
+        }
+
+        if (!type?.trim()) {
+            return res.status(400).json({ error: "type is required" });
+        }
+
+        const updated = await updateSourceType(id, { type: type.trim() });
+        return res.status(200).json({ success: true, data: updated });
+    } catch (error: any) {
+        console.error("[CONTROLLER] Error editing source type", {
             error: error.message,
         });
         return res.status(500).json({ success: false, error: error.message });

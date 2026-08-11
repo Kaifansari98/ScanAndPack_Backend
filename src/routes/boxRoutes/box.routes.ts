@@ -3,14 +3,24 @@ import {
   createBox,
   getAllBoxes,
   getBoxesByVendorAndProject,
-  getBoxDetailsWithItems,
+  // getBoxDetailsWithItems,
   getAllBoxesWithItemCount,
   updateBoxName,
   markBoxAsPacked,
   markBoxAsUnpacked,
-  deleteBoxAndItsScanItems,
-  getGroupedItemInfo
+  // deleteBoxAndItsScanItems,
+  // getGroupedItemInfo,
+  generateBoxPdf,
+  generateProjectBoxPdf,
+  generateAllBoxesPdf,
+  generateProjectFullReport,
+  markItemSiteIn,
+  getBoxSiteInStatus,
+  getBoxDetailsWithItems,
+  getProjectBoxInfoFields,
+  getBoxInfoValues,
 } from '../../controllers/boxControllers/box.controller';
+
 
 const router = Router();
 
@@ -20,7 +30,7 @@ router.get('/vendor/:vendorId/project/:projectId', getBoxesByVendorAndProject); 
 
 // 🔥 NEW API: Get full box + vendor + item details
 router.get(
-  '/details/vendor/:vendorId/project/:projectId/client/:clientId/box/:boxId',
+  '/details/vendor/:vendorId/project/:projectId/box/:boxId',
   getBoxDetailsWithItems
 );
 
@@ -34,8 +44,31 @@ router.put('/update-name', updateBoxName);
 router.put('/status/packed/:boxId', markBoxAsPacked);
 router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
 
-router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
+// router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
 
-router.get('/grouped-info/:boxId', getGroupedItemInfo);
+// router.get('/grouped-info/:boxId', getGroupedItemInfo);
+
+router.get('/boxes/pdf/:boxId/:project_id/:vendor_id', generateBoxPdf);
+router.get('/boxes/pdf/:boxId/:project_id/:vendor_id/web', generateBoxPdf);
+
+router.get('/boxes/projects/:project_id/:vendor_id', generateProjectBoxPdf);
+router.get("/all-boxes-pdf/:project_id/:vendor_id", generateAllBoxesPdf);
+
+router.get("/project-full-report/:project_id/:vendor_id", generateProjectFullReport);
+router.get("/project-full-report/:project_id/:vendor_id/web", generateProjectFullReport);
+
+router.patch("/boxes/:box_id/items/site-in", markItemSiteIn);
+router.get("/boxes/:box_id/site-in-status", getBoxSiteInStatus);
+
+router.get(
+  "/project/:projectId/vendor/:vendorId/box-info-fields",
+  getProjectBoxInfoFields
+);
+
+router.get(
+  "/:boxId/info-values",
+  getBoxInfoValues
+);
+
 
 export default router;

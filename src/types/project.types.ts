@@ -1,9 +1,9 @@
 export interface CreateProjectInput {
-    project_name: string;
-    vendor_id: number;
-    client_id: number;
-    created_by: number;
-    project_status: string;
+  project_name: string;
+  vendor_id: number;
+  client_id: number;
+  created_by: number;
+  project_status: string;
 }
 
 
@@ -58,5 +58,31 @@ export interface FullProjectCreateInput {
   rooms: ProjectRoomInput[];  // ✅ Replaces flat `items`
 }
 
+export interface CadbidPayload {
+  projectName: string;
+  customer_id:Number
+  items: CadbidItems[];
+}
+
+export interface CadbidItems {
+  articleCode: string,
+  groupName: string;
+  el1: string;
+  el2: string;
+  l1: Number;
+  l2: Number;
+  l3: Number;
+  name: string;
+  qty: Number;
+  rotation: Number;
+  sl1: string;
+  sl2: string;
+  barcode1: string;
+  barcode2: string;
+  procurement: string;
+  categoryName: string;
+}
+
+
+
 // -------------- For the POST Api "End" -------------- //
-  

@@ -1,126 +1,196 @@
+
 import { prisma, Prisma } from "../../prisma/client";
 
 export class TaskService {
-  private static taskIncludes() {
-    return {
-      select: {
-        // ----------------
-        // TASK TABLE FIELDS
-        // ----------------
-        id: true,
-        status: true,
-        due_date: true,
-        task_type: true,
-        remark: true,
-        closed_by: true,
-        closed_at: true,
-        created_by: true,
-        created_at: true,
-        updated_by: true,
-        updated_at: true,
+private static activeLeadWhere() {
+  return {
+    lead: {
+      is_deleted: false,
+    },
+  } satisfies Prisma.UserLeadTaskWhereInput;
+}
 
-        // ----------------
-        // RELATIONS
-        // ----------------
+private static taskIncludes() {
+  return {
+    select: {
+      // ----------------
+      // TASK TABLE FIELDS
+      // ----------------
+      id: true,
+      status: true,
+      due_date: true,
+      task_type: true,
+      remark: true,
+      closed_by: true,
+      closed_at: true,
+      created_by: true,
+      created_at: true,
+      updated_by: true,
+      updated_at: true,
+      instance_id: true, // ✅ NEW
 
-        createdBy: {
-          select: {
-            id: true,
-            user_name: true,
+      // ----------------
+      // RELATIONS
+      // ----------------
+
+      createdBy: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+
+      // ✅ NEW: instance relation
+      instance: {
+        select: {
+          id: true,
+          quantity_index: true,
+          product_structure_id: true,
+          product_type_id: true,
+          productStructure: {
+            select: {
+              type: true,
+            },
+          },
+          productType: {
+            select: {
+              type: true,
+            },
           },
         },
+      },
 
-        user: {
-          select: {
-            id: true,
-            user_name: true,
+      lead: {
+        select: {
+          id: true,
+          
+          account_id: true,
+          vendor_id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+          contact_no: true,
+          site_map_link: true,
+          is_blocked: true,
+          lead_blocked_at: true,
+
+          statusType: {
+            select: {
+              type: true,
+            },
           },
-        },
 
-        lead: {
-          select: {
-            id: true,
-            account_id: true,
-            vendor_id: true,
-            lead_code: true,
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            site_map_link: true,
-
-            statusType: {
-              select: {
-                type: true,
-              },
+          siteType: {
+            select: {
+              type: true,
             },
+          },
 
-            siteType: {
-              select: {
-                type: true,
-              },
-            },
-
-            productMappings: {
-              select: {
-                productType: {
-                  select: {
-                    type: true,
-                  },
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  type: true,
                 },
               },
             },
+          },
 
-            leadProductStructureMapping: {
-              select: {
-                productStructure: {
-                  select: {
-                    type: true,
-                  },
+          leadProductStructureMapping: {
+            select: {
+              productStructure: {
+                select: {
+                  type: true,
                 },
               },
             },
           },
         },
       },
-    };
-  }
+    },
+  };
+}
 
-  private static mapTaskWithLead(task: any) {
-    return {
-      userLeadTask: {
-        id: task.id,
-        status: task.status,
-        due_date: task.due_date,
-        task_type: task.task_type,
-        remark: task.remark,
-        closed_by: task.closed_by,
-        closed_at: task.closed_at,
-        created_by: task.created_by,
-        created_by_name: task.createdBy?.user_name || null,
-        assigned_to_name: task.user?.user_name || null,
-        created_at: task.created_at,
-        updated_by: task.updated_by,
-        updated_at: task.updated_at,
-      },
-      leadMaster: {
-        id: task.lead?.id,
-        account_id: task.lead?.account_id,
-        vendor_id: task?.lead?.vendor_id,
-        lead_code: task.lead?.lead_code,
-        site_map_link: task.lead?.site_map_link,
-        name: `${task.lead?.firstname} ${task.lead?.lastname}`,
-        phone_number: task.lead?.contact_no,
-        site_type: task.lead?.siteType?.type,
-        lead_status: task.lead?.statusType?.type,
-        product_type: task.lead?.productMappings.map(
-          (pm: any) => pm.productType.type,
-        ),
-        product_structure: task.lead?.leadProductStructureMapping.map(
-          (ps: any) => ps.productStructure.type,
-        ),
-      },
-    };
-  }
+private static mapTaskWithLead(task: any) {
+  const rawLeadCode = task.lead?.lead_code ?? null;
+  const quantityIndex = task.instance?.quantity_index ?? null;
+
+  const displayLeadCode =
+    rawLeadCode && quantityIndex !== null && quantityIndex !== undefined
+      ? `${rawLeadCode}.${quantityIndex}`
+      : rawLeadCode;
+
+  // ✅ Agar instance hai → sirf uska product_structure dikhao
+  // ✅ Agar instance nahi → saare lead ke product_structures dikhao
+  const productStructure = task.instance
+    ? task.instance.productStructure?.type
+      ? [task.instance.productStructure.type]
+      : []
+    : (task.lead?.leadProductStructureMapping ?? []).map(
+        (ps: any) => ps.productStructure.type,
+      );
+
+  // ✅ Same for product_type
+  const productType = task.instance
+    ? task.instance.productType?.type
+      ? [task.instance.productType.type]
+      : []
+    : (task.lead?.productMappings ?? []).map(
+        (pm: any) => pm.productType.type,
+      );
+
+  return {
+    userLeadTask: {
+      id: task.id,
+      status: task.status,
+      due_date: task.due_date,
+      task_type: task.task_type,
+      remark: task.remark,
+      closed_by: task.closed_by,
+      closed_at: task.closed_at,
+      created_by: task.created_by,
+      created_by_name: task.createdBy?.user_name || null,
+      assigned_to_name: task.user?.user_name || null,
+      created_at: task.created_at,
+      updated_by: task.updated_by,
+      updated_at: task.updated_at,
+      instance_id: task.instance_id ?? null,
+    },
+    leadMaster: {
+      id: task.lead?.id,
+      account_id: task.lead?.account_id,
+      vendor_id: task?.lead?.vendor_id,
+      lead_code: displayLeadCode,
+      site_map_link: task.lead?.site_map_link,
+      name: `${task.lead?.firstname} ${task.lead?.lastname}`,
+      phone_number: task.lead?.contact_no,
+      site_type: task.lead?.siteType?.type,
+      lead_status: task.lead?.statusType?.type,
+      product_type: productType,       // ✅ instance-aware
+      product_structure: productStructure, // ✅ instance-aware
+      instance_id: task.instance_id ?? null, 
+      is_blocked: task.lead?.is_blocked ?? false,
+      lead_blocked_at: task.lead?.lead_blocked_at ?? null,
+    },
+    instanceDetails: task.instance
+      ? {
+          id: task.instance.id,
+          quantity_index: task.instance.quantity_index,
+          product_structure_id: task.instance.product_structure_id,
+          product_structure_type: task.instance.productStructure?.type ?? null,
+          product_type_id: task.instance.product_type_id,
+          product_type: task.instance.productType?.type ?? null,
+        }
+      : null,
+  };
+}
 
   /**
    * Get all tasks for a given vendor and user, including relations
@@ -131,6 +201,7 @@ export class TaskService {
         vendor_id: vendorId,
         user_id: userId,
         status: "open",
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
@@ -170,6 +241,8 @@ export class TaskService {
             lastname: true,
             contact_no: true,
             site_map_link: true,
+            is_blocked: true,
+            lead_blocked_at: true,
             statusType: { select: { type: true } },
             siteType: { select: { type: true } },
             productMappings: {
@@ -191,6 +264,7 @@ export class TaskService {
   static async getTasksByVendorAndUser2(
     vendorId: number,
     userId: number,
+    franchiseId: number | undefined,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -200,7 +274,7 @@ export class TaskService {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -218,6 +292,53 @@ export class TaskService {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
+    };
+  }> {
+    return this.getTasksByVendorAndUserReport(
+      vendorId,
+      userId,
+      franchiseId,
+      page,
+      limit,
+      filters,
+      false,
+    );
+  }
+
+  static async getTasksByVendorAndUserReport(
+    vendorId: number,
+    userId: number,
+    franchiseId: number | undefined,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      lead_code?: string;
+      lead_name?: string;
+      phone?: string;
+      task_type?: string[];
+      due_date?: string;
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
+      site_map_link?: boolean;
+      site_type?: number[];
+      product_type?: number[];
+      product_structure?: number[];
+      assign_by?: number;
+      assign_to?: number[];
+      created_at?: "asc" | "desc";
+      date_range?: { from: string; to: string };
+      assignat_range?: { from: string; to: string };
+    },
+    includeAllStatuses: boolean = true,
+  ): Promise<{
+    tasks: any[];
+    count: number;
+    summary: {
+      today: number;
+      upcoming: number;
+      overdue: number;
+      completed: number;
     };
   }> {
     // USER ROLE RESOLUTION
@@ -226,7 +347,14 @@ export class TaskService {
       include: { user_type: true },
     });
 
-    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const isAdmin = normalizedUserType === "admin";
+    const shouldIncludeFranchise = [
+      "sales-executive",
+      "admin",
+      "super-admin",
+    ].includes(normalizedUserType ?? "");
+    const includeFranchise = shouldIncludeFranchise && !!franchiseId;
 
     const skip = (page - 1) * limit;
 
@@ -475,23 +603,47 @@ export class TaskService {
     };
 
     // ============================
-    // ADMIN FLOW
+    // ADMIN FLOW                  
     // ============================
 
     if (isAdmin) {
+      const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+      const completedStatusFilter = { status: "completed" as const };
+      const dataStatusFilter =
+        filters.due_filter === "completed"
+          ? completedStatusFilter
+          : includeAllStatuses
+            ? {}
+            : activeStatusFilter;
+
       // ✅ UNFILTERED BASE (for inactive tabs)
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
         user_id: userId,
-        status: "open",
+        ...TaskService.activeLeadWhere(),
+        ...(includeAllStatuses ? {} : activeStatusFilter),
       };
+      const completedBaseWhereClause: any = {
+        vendor_id: vendorId,
+        user_id: userId,
+        ...TaskService.activeLeadWhere(),
+        ...completedStatusFilter,
+      };
+      if (includeFranchise) {
+        unfilteredBaseWhereClause.franchise_id = franchiseId;
+        completedBaseWhereClause.franchise_id = franchiseId;
+      }
 
       // ✅ FILTERED BASE (for active tab)
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
         user_id: userId,
-        status: "open",
+        ...TaskService.activeLeadWhere(),
+        ...dataStatusFilter,
       });
+      if (includeFranchise) {
+        filteredBaseWhereClause.franchise_id = franchiseId;
+      }
 
       const dataWhereClause: any = { ...filteredBaseWhereClause };
 
@@ -520,6 +672,7 @@ export class TaskService {
       let todayCount = 0;
       let upcomingCount = 0;
       let overdueCount = 0;
+      let completedCount = 0;
 
       if (filters.due_filter === "today") {
         todayCount = await prisma.userLeadTask.count({
@@ -602,6 +755,15 @@ export class TaskService {
         ]);
       }
 
+      completedCount =
+        filters.due_filter === "completed"
+          ? await prisma.userLeadTask.count({
+              where: dataWhereClause,
+            })
+          : await prisma.userLeadTask.count({
+              where: completedBaseWhereClause,
+            });
+
       const [tasks, total] = await Promise.all([
         prisma.userLeadTask.findMany({
           where: dataWhereClause,
@@ -621,6 +783,7 @@ export class TaskService {
           today: todayCount,
           upcoming: upcomingCount,
           overdue: overdueCount,
+          completed: completedCount,
         },
       };
     }
@@ -632,7 +795,9 @@ export class TaskService {
     const ownedTasks = await prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
-        OR: [{ created_by: userId }, { user_id: userId }],
+        user_id: userId,
+        ...TaskService.activeLeadWhere(),
+        ...(includeFranchise ? { franchise_id: franchiseId } : {}),
       },
       select: { id: true },
     });
@@ -643,23 +808,47 @@ export class TaskService {
       return {
         tasks: [],
         count: 0,
-        summary: { today: 0, upcoming: 0, overdue: 0 },
+        summary: { today: 0, upcoming: 0, overdue: 0, completed: 0 },
       };
     }
 
     // ✅ UNFILTERED BASE (for inactive tabs)
+    const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+    const completedStatusFilter = { status: "completed" as const };
+    const dataStatusFilter =
+      filters.due_filter === "completed"
+        ? completedStatusFilter
+        : includeAllStatuses
+          ? {}
+          : activeStatusFilter;
+
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
-      status: "open",
+      ...TaskService.activeLeadWhere(),
+      ...(includeAllStatuses ? {} : activeStatusFilter),
     };
+    const completedBaseWhereClause: any = {
+      id: { in: taskIds },
+      vendor_id: vendorId,
+      ...TaskService.activeLeadWhere(),
+      ...completedStatusFilter,
+    };
+    if (includeFranchise) {
+      unfilteredBaseWhereClause.franchise_id = franchiseId;
+      completedBaseWhereClause.franchise_id = franchiseId;
+    }
 
     // ✅ FILTERED BASE (for active tab)
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
-      status: "open",
+      ...TaskService.activeLeadWhere(),
+      ...dataStatusFilter,
     });
+    if (includeFranchise) {
+      filteredBaseWhereClause.franchise_id = franchiseId;
+    }
 
     const dataWhereClause: any = { ...filteredBaseWhereClause };
 
@@ -688,6 +877,7 @@ export class TaskService {
     let todayCount = 0;
     let upcomingCount = 0;
     let overdueCount = 0;
+    let completedCount = 0;
 
     if (filters.due_filter === "today") {
       todayCount = await prisma.userLeadTask.count({
@@ -770,6 +960,15 @@ export class TaskService {
       ]);
     }
 
+    completedCount =
+      filters.due_filter === "completed"
+        ? await prisma.userLeadTask.count({
+            where: dataWhereClause,
+          })
+        : await prisma.userLeadTask.count({
+            where: completedBaseWhereClause,
+          });
+
     const [tasks, total] = await Promise.all([
       prisma.userLeadTask.findMany({
         where: dataWhereClause,
@@ -789,6 +988,7 @@ export class TaskService {
         today: todayCount,
         upcoming: upcomingCount,
         overdue: overdueCount,
+        completed: completedCount,
       },
     };
   }
@@ -801,6 +1001,7 @@ export class TaskService {
       where: {
         vendor_id: vendorId,
         status: { in: ["open", "in_progress"] },
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
@@ -855,6 +1056,7 @@ export class TaskService {
 
   static async getTasksFilterByVendor2(
     vendorId: number,
+    franchiseId: number,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -864,7 +1066,7 @@ export class TaskService {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -882,6 +1084,51 @@ export class TaskService {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
+    };
+  }> {
+    return this.getTasksFilterByVendorReport(
+      vendorId,
+      franchiseId,
+      page,
+      limit,
+      filters,
+      false,
+    );
+  }
+
+  static async getTasksFilterByVendorReport(
+    vendorId: number,
+    franchiseId: number,
+    page: number = 1,
+    limit: number = 10,
+    filters: {
+      global_search?: string;
+      lead_code?: string;
+      lead_name?: string;
+      phone?: string;
+      task_type?: string[];
+      due_date?: string;
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
+      site_map_link?: boolean;
+      site_type?: number[];
+      product_type?: number[];
+      product_structure?: number[];
+      assign_by?: number;
+      assign_to?: number[];
+      created_at?: "asc" | "desc";
+      date_range?: { from: string; to: string };
+      assignat_range?: { from: string; to: string };
+    },
+    includeAllStatuses: boolean = true,
+  ): Promise<{
+    tasks: any[];
+    count: number;
+    summary: {
+      today: number;
+      upcoming: number;
+      overdue: number;
+      completed: number;
     };
   }> {
     const skip = (page - 1) * limit;
@@ -1136,9 +1383,26 @@ export class TaskService {
     // ✅ BASE QUERY - WITHOUT ANY FILTERS (for unfiltered counts)
     // ============================
 
+    const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+    const completedStatusFilter = { status: "completed" as const };
+    const dataStatusFilter =
+      filters.due_filter === "completed"
+        ? completedStatusFilter
+        : includeAllStatuses
+          ? {}
+          : activeStatusFilter;
+
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
-      status: { in: ["open", "in_progress"] },
+      franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
+      ...(includeAllStatuses ? {} : activeStatusFilter),
+    };
+    const completedBaseWhereClause: any = {
+      vendor_id: vendorId,
+      franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
+      ...completedStatusFilter,
     };
 
     // ============================
@@ -1147,7 +1411,9 @@ export class TaskService {
 
     const filteredBaseWhereClause: any = addFilterConditions({
       vendor_id: vendorId,
-      status: { in: ["open", "in_progress"] },
+      franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
+      ...dataStatusFilter,
     });
 
     // ============================
@@ -1186,6 +1452,7 @@ export class TaskService {
     let todayCount = 0;
     let upcomingCount = 0;
     let overdueCount = 0;
+    let completedCount = 0;
 
     if (filters.due_filter === "today") {
       // Today is active → filtered count
@@ -1274,6 +1541,15 @@ export class TaskService {
       ]);
     }
 
+    completedCount =
+      filters.due_filter === "completed"
+        ? await prisma.userLeadTask.count({
+            where: dataWhereClause,
+          })
+        : await prisma.userLeadTask.count({
+            where: completedBaseWhereClause,
+          });
+
     // ============================
     // FETCH TASKS (with filters)
     // ============================
@@ -1303,6 +1579,7 @@ export class TaskService {
         today: todayCount,
         upcoming: upcomingCount,
         overdue: overdueCount,
+        completed: completedCount,
       },
     };
   }
@@ -1321,6 +1598,7 @@ export class TaskService {
         lead_id: leadId,
         task_type: taskType,
         status: "open", // ✅ only open tasks
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
@@ -1341,6 +1619,66 @@ export class TaskService {
     });
   }
 
+  static async getSelfAssignTaskTypeByVendor(
+    vendorId: number,
+    taskType: string,
+  ) {
+    return prisma.selfAssignTaskTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        type: taskType,
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        user_type_id: true,
+        type: true,
+      },
+    });
+  }
+
+  static async getValidatedSelfAssignTask(leadId: number, taskId: number) {
+    const task = await prisma.userLeadTask.findFirst({
+      where: {
+        id: taskId,
+        lead_id: leadId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        task_type: true,
+        vendor_id: true,
+        user_id: true,
+        user: {
+          select: {
+            user_type_id: true,
+          },
+        },
+      },
+    });
+
+    if (!task) {
+      throw new Error("Task not found");
+    }
+
+    const selfAssignTaskType = await prisma.selfAssignTaskTypeMaster.findFirst({
+      where: {
+        vendor_id: task.vendor_id,
+        user_type_id: task.user.user_type_id,
+        type: task.task_type,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!selfAssignTaskType) {
+      throw new Error("This is not a self-assign task");
+    }
+
+    return task;
+  }
+
   // Convenience wrappers
   static async getInitialSiteMeasurementTasks(userId: number, leadId: number) {
     return this.getTasksByUserAndLead(
@@ -1358,11 +1696,16 @@ export class TaskService {
     return this.getTasksByUserAndLead(userId, leadId, "Final Measurements");
   }
 
-  static async getActiveTasksByVendorAndLead(vendorId: number, leadId: number) {
+  static async getActiveTasksByVendorAndLead(
+    vendorId: number,
+    leadId: number,
+    franchiseId?: number,
+  ) {
     return prisma.userLeadTask.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
+        ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
         status: { in: ["open", "in_progress"] },
       },
       select: {

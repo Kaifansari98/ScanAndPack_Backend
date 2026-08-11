@@ -28,10 +28,14 @@ export type AggregateClientMaster = {
 
 export type ClientMasterAvgAggregateOutputType = {
   id: number | null
+  client_type_id: number | null
+  vendor_id: number | null
 }
 
 export type ClientMasterSumAggregateOutputType = {
   id: number | null
+  client_type_id: number | null
+  vendor_id: number | null
 }
 
 export type ClientMasterMinAggregateOutputType = {
@@ -46,6 +50,13 @@ export type ClientMasterMinAggregateOutputType = {
   country: string | null
   pincode: string | null
   clientCode: string | null
+  client_type_id: number | null
+  company_name: string | null
+  created_at: Date | null
+  gst_number: string | null
+  is_active: boolean | null
+  updated_at: Date | null
+  vendor_id: number | null
 }
 
 export type ClientMasterMaxAggregateOutputType = {
@@ -60,6 +71,13 @@ export type ClientMasterMaxAggregateOutputType = {
   country: string | null
   pincode: string | null
   clientCode: string | null
+  client_type_id: number | null
+  company_name: string | null
+  created_at: Date | null
+  gst_number: string | null
+  is_active: boolean | null
+  updated_at: Date | null
+  vendor_id: number | null
 }
 
 export type ClientMasterCountAggregateOutputType = {
@@ -74,16 +92,27 @@ export type ClientMasterCountAggregateOutputType = {
   country: number
   pincode: number
   clientCode: number
+  client_type_id: number
+  company_name: number
+  created_at: number
+  gst_number: number
+  is_active: number
+  updated_at: number
+  vendor_id: number
   _all: number
 }
 
 
 export type ClientMasterAvgAggregateInputType = {
   id?: true
+  client_type_id?: true
+  vendor_id?: true
 }
 
 export type ClientMasterSumAggregateInputType = {
   id?: true
+  client_type_id?: true
+  vendor_id?: true
 }
 
 export type ClientMasterMinAggregateInputType = {
@@ -98,6 +127,13 @@ export type ClientMasterMinAggregateInputType = {
   country?: true
   pincode?: true
   clientCode?: true
+  client_type_id?: true
+  company_name?: true
+  created_at?: true
+  gst_number?: true
+  is_active?: true
+  updated_at?: true
+  vendor_id?: true
 }
 
 export type ClientMasterMaxAggregateInputType = {
@@ -112,6 +148,13 @@ export type ClientMasterMaxAggregateInputType = {
   country?: true
   pincode?: true
   clientCode?: true
+  client_type_id?: true
+  company_name?: true
+  created_at?: true
+  gst_number?: true
+  is_active?: true
+  updated_at?: true
+  vendor_id?: true
 }
 
 export type ClientMasterCountAggregateInputType = {
@@ -126,6 +169,13 @@ export type ClientMasterCountAggregateInputType = {
   country?: true
   pincode?: true
   clientCode?: true
+  client_type_id?: true
+  company_name?: true
+  created_at?: true
+  gst_number?: true
+  is_active?: true
+  updated_at?: true
+  vendor_id?: true
   _all?: true
 }
 
@@ -227,6 +277,13 @@ export type ClientMasterGroupByOutputType = {
   country: string
   pincode: string
   clientCode: string
+  client_type_id: number | null
+  company_name: string | null
+  created_at: Date
+  gst_number: string | null
+  is_active: boolean
+  updated_at: Date
+  vendor_id: number
   _count: ClientMasterCountAggregateOutputType | null
   _avg: ClientMasterAvgAggregateOutputType | null
   _sum: ClientMasterSumAggregateOutputType | null
@@ -234,7 +291,7 @@ export type ClientMasterGroupByOutputType = {
   _max: ClientMasterMaxAggregateOutputType | null
 }
 
-type GetClientMasterGroupByPayload<T extends ClientMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetClientMasterGroupByPayload<T extends ClientMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ClientMasterGroupByOutputType, T['by']> &
       {
@@ -264,10 +321,18 @@ export type ClientMasterWhereInput = {
   country?: Prisma.StringFilter<"ClientMaster"> | string
   pincode?: Prisma.StringFilter<"ClientMaster"> | string
   clientCode?: Prisma.StringFilter<"ClientMaster"> | string
-  boxes?: Prisma.BoxMasterListRelationFilter
+  client_type_id?: Prisma.IntNullableFilter<"ClientMaster"> | number | null
+  company_name?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  created_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  gst_number?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  is_active?: Prisma.BoolFilter<"ClientMaster"> | boolean
+  updated_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  vendor_id?: Prisma.IntFilter<"ClientMaster"> | number
+  clientType?: Prisma.XOR<Prisma.ClientTypeMasterNullableScalarRelationFilter, Prisma.ClientTypeMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  bankAccounts?: Prisma.ClientBankDetailListRelationFilter
+  leads?: Prisma.LeadMasterListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
-  details?: Prisma.ProjectDetailsListRelationFilter
-  items?: Prisma.ProjectItemsMasterListRelationFilter
   projects?: Prisma.ProjectMasterListRelationFilter
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
 }
@@ -284,10 +349,18 @@ export type ClientMasterOrderByWithRelationInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
-  boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
+  client_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  company_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  gst_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
+  clientType?: Prisma.ClientTypeMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  bankAccounts?: Prisma.ClientBankDetailOrderByRelationAggregateInput
+  leads?: Prisma.LeadMasterOrderByRelationAggregateInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
-  details?: Prisma.ProjectDetailsOrderByRelationAggregateInput
-  items?: Prisma.ProjectItemsMasterOrderByRelationAggregateInput
   projects?: Prisma.ProjectMasterOrderByRelationAggregateInput
   scanItems?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
 }
@@ -307,10 +380,18 @@ export type ClientMasterWhereUniqueInput = Prisma.AtLeast<{
   country?: Prisma.StringFilter<"ClientMaster"> | string
   pincode?: Prisma.StringFilter<"ClientMaster"> | string
   clientCode?: Prisma.StringFilter<"ClientMaster"> | string
-  boxes?: Prisma.BoxMasterListRelationFilter
+  client_type_id?: Prisma.IntNullableFilter<"ClientMaster"> | number | null
+  company_name?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  created_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  gst_number?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  is_active?: Prisma.BoolFilter<"ClientMaster"> | boolean
+  updated_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  vendor_id?: Prisma.IntFilter<"ClientMaster"> | number
+  clientType?: Prisma.XOR<Prisma.ClientTypeMasterNullableScalarRelationFilter, Prisma.ClientTypeMasterWhereInput> | null
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  bankAccounts?: Prisma.ClientBankDetailListRelationFilter
+  leads?: Prisma.LeadMasterListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
-  details?: Prisma.ProjectDetailsListRelationFilter
-  items?: Prisma.ProjectItemsMasterListRelationFilter
   projects?: Prisma.ProjectMasterListRelationFilter
   scanItems?: Prisma.ScanAndPackItemListRelationFilter
 }, "id">
@@ -327,6 +408,13 @@ export type ClientMasterOrderByWithAggregationInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  company_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  gst_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
   _count?: Prisma.ClientMasterCountOrderByAggregateInput
   _avg?: Prisma.ClientMasterAvgOrderByAggregateInput
   _max?: Prisma.ClientMasterMaxOrderByAggregateInput
@@ -349,6 +437,13 @@ export type ClientMasterScalarWhereWithAggregatesInput = {
   country?: Prisma.StringWithAggregatesFilter<"ClientMaster"> | string
   pincode?: Prisma.StringWithAggregatesFilter<"ClientMaster"> | string
   clientCode?: Prisma.StringWithAggregatesFilter<"ClientMaster"> | string
+  client_type_id?: Prisma.IntNullableWithAggregatesFilter<"ClientMaster"> | number | null
+  company_name?: Prisma.StringNullableWithAggregatesFilter<"ClientMaster"> | string | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"ClientMaster"> | Date | string
+  gst_number?: Prisma.StringNullableWithAggregatesFilter<"ClientMaster"> | string | null
+  is_active?: Prisma.BoolWithAggregatesFilter<"ClientMaster"> | boolean
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"ClientMaster"> | Date | string
+  vendor_id?: Prisma.IntWithAggregatesFilter<"ClientMaster"> | number
 }
 
 export type ClientMasterCreateInput = {
@@ -362,10 +457,16 @@ export type ClientMasterCreateInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
@@ -382,10 +483,16 @@ export type ClientMasterUncheckedCreateInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
@@ -401,10 +508,16 @@ export type ClientMasterUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
@@ -421,10 +534,16 @@ export type ClientMasterUncheckedUpdateInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
@@ -441,6 +560,13 @@ export type ClientMasterCreateManyInput = {
   country: string
   pincode: string
   clientCode: string
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
 }
 
 export type ClientMasterUpdateManyMutationInput = {
@@ -454,6 +580,11 @@ export type ClientMasterUpdateManyMutationInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ClientMasterUncheckedUpdateManyInput = {
@@ -468,6 +599,28 @@ export type ClientMasterUncheckedUpdateManyInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ClientMasterListRelationFilter = {
+  every?: Prisma.ClientMasterWhereInput
+  some?: Prisma.ClientMasterWhereInput
+  none?: Prisma.ClientMasterWhereInput
+}
+
+export type ClientMasterOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type ClientMasterNullableScalarRelationFilter = {
+  is?: Prisma.ClientMasterWhereInput | null
+  isNot?: Prisma.ClientMasterWhereInput | null
 }
 
 export type ClientMasterScalarRelationFilter = {
@@ -487,10 +640,19 @@ export type ClientMasterCountOrderByAggregateInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrder
+  company_name?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  gst_number?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 export type ClientMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 export type ClientMasterMaxOrderByAggregateInput = {
@@ -505,6 +667,13 @@ export type ClientMasterMaxOrderByAggregateInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrder
+  company_name?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  gst_number?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 export type ClientMasterMinOrderByAggregateInput = {
@@ -519,15 +688,61 @@ export type ClientMasterMinOrderByAggregateInput = {
   country?: Prisma.SortOrder
   pincode?: Prisma.SortOrder
   clientCode?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrder
+  company_name?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  gst_number?: Prisma.SortOrder
+  is_active?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
 export type ClientMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  client_type_id?: Prisma.SortOrder
+  vendor_id?: Prisma.SortOrder
 }
 
-export type ClientMasterNullableScalarRelationFilter = {
-  is?: Prisma.ClientMasterWhereInput | null
-  isNot?: Prisma.ClientMasterWhereInput | null
+export type ClientMasterCreateNestedManyWithoutVendorInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput> | Prisma.ClientMasterCreateWithoutVendorInput[] | Prisma.ClientMasterUncheckedCreateWithoutVendorInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutVendorInput | Prisma.ClientMasterCreateOrConnectWithoutVendorInput[]
+  createMany?: Prisma.ClientMasterCreateManyVendorInputEnvelope
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+}
+
+export type ClientMasterUncheckedCreateNestedManyWithoutVendorInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput> | Prisma.ClientMasterCreateWithoutVendorInput[] | Prisma.ClientMasterUncheckedCreateWithoutVendorInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutVendorInput | Prisma.ClientMasterCreateOrConnectWithoutVendorInput[]
+  createMany?: Prisma.ClientMasterCreateManyVendorInputEnvelope
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+}
+
+export type ClientMasterUpdateManyWithoutVendorNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput> | Prisma.ClientMasterCreateWithoutVendorInput[] | Prisma.ClientMasterUncheckedCreateWithoutVendorInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutVendorInput | Prisma.ClientMasterCreateOrConnectWithoutVendorInput[]
+  upsert?: Prisma.ClientMasterUpsertWithWhereUniqueWithoutVendorInput | Prisma.ClientMasterUpsertWithWhereUniqueWithoutVendorInput[]
+  createMany?: Prisma.ClientMasterCreateManyVendorInputEnvelope
+  set?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  disconnect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  delete?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  update?: Prisma.ClientMasterUpdateWithWhereUniqueWithoutVendorInput | Prisma.ClientMasterUpdateWithWhereUniqueWithoutVendorInput[]
+  updateMany?: Prisma.ClientMasterUpdateManyWithWhereWithoutVendorInput | Prisma.ClientMasterUpdateManyWithWhereWithoutVendorInput[]
+  deleteMany?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
+}
+
+export type ClientMasterUncheckedUpdateManyWithoutVendorNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput> | Prisma.ClientMasterCreateWithoutVendorInput[] | Prisma.ClientMasterUncheckedCreateWithoutVendorInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutVendorInput | Prisma.ClientMasterCreateOrConnectWithoutVendorInput[]
+  upsert?: Prisma.ClientMasterUpsertWithWhereUniqueWithoutVendorInput | Prisma.ClientMasterUpsertWithWhereUniqueWithoutVendorInput[]
+  createMany?: Prisma.ClientMasterCreateManyVendorInputEnvelope
+  set?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  disconnect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  delete?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  update?: Prisma.ClientMasterUpdateWithWhereUniqueWithoutVendorInput | Prisma.ClientMasterUpdateWithWhereUniqueWithoutVendorInput[]
+  updateMany?: Prisma.ClientMasterUpdateManyWithWhereWithoutVendorInput | Prisma.ClientMasterUpdateManyWithWhereWithoutVendorInput[]
+  deleteMany?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
 }
 
 export type ClientMasterCreateNestedOneWithoutProjectsInput = {
@@ -536,54 +751,14 @@ export type ClientMasterCreateNestedOneWithoutProjectsInput = {
   connect?: Prisma.ClientMasterWhereUniqueInput
 }
 
-export type ClientMasterUpdateOneRequiredWithoutProjectsNestedInput = {
+export type ClientMasterUpdateOneWithoutProjectsNestedInput = {
   create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutProjectsInput, Prisma.ClientMasterUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutProjectsInput
   upsert?: Prisma.ClientMasterUpsertWithoutProjectsInput
+  disconnect?: Prisma.ClientMasterWhereInput | boolean
+  delete?: Prisma.ClientMasterWhereInput | boolean
   connect?: Prisma.ClientMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutProjectsInput, Prisma.ClientMasterUpdateWithoutProjectsInput>, Prisma.ClientMasterUncheckedUpdateWithoutProjectsInput>
-}
-
-export type ClientMasterCreateNestedOneWithoutDetailsInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutDetailsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutDetailsNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutDetailsInput
-  upsert?: Prisma.ClientMasterUpsertWithoutDetailsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutDetailsInput, Prisma.ClientMasterUpdateWithoutDetailsInput>, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-}
-
-export type ClientMasterCreateNestedOneWithoutItemsInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutItemsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutItemsInput
-  upsert?: Prisma.ClientMasterUpsertWithoutItemsInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutItemsInput, Prisma.ClientMasterUpdateWithoutItemsInput>, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-}
-
-export type ClientMasterCreateNestedOneWithoutBoxesInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBoxesInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-}
-
-export type ClientMasterUpdateOneRequiredWithoutBoxesNestedInput = {
-  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBoxesInput
-  upsert?: Prisma.ClientMasterUpsertWithoutBoxesInput
-  connect?: Prisma.ClientMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.ClientMasterUpdateWithoutBoxesInput>, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
 }
 
 export type ClientMasterCreateNestedOneWithoutScanItemsInput = {
@@ -600,8 +775,76 @@ export type ClientMasterUpdateOneRequiredWithoutScanItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutScanItemsInput, Prisma.ClientMasterUpdateWithoutScanItemsInput>, Prisma.ClientMasterUncheckedUpdateWithoutScanItemsInput>
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
+export type ClientMasterCreateNestedOneWithoutBankAccountsInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedCreateWithoutBankAccountsInput>
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBankAccountsInput
+  connect?: Prisma.ClientMasterWhereUniqueInput
+}
+
+export type ClientMasterUpdateOneRequiredWithoutBankAccountsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedCreateWithoutBankAccountsInput>
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutBankAccountsInput
+  upsert?: Prisma.ClientMasterUpsertWithoutBankAccountsInput
+  connect?: Prisma.ClientMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutBankAccountsInput, Prisma.ClientMasterUpdateWithoutBankAccountsInput>, Prisma.ClientMasterUncheckedUpdateWithoutBankAccountsInput>
+}
+
+export type ClientMasterCreateNestedManyWithoutClientTypeInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput> | Prisma.ClientMasterCreateWithoutClientTypeInput[] | Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput | Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput[]
+  createMany?: Prisma.ClientMasterCreateManyClientTypeInputEnvelope
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+}
+
+export type ClientMasterUncheckedCreateNestedManyWithoutClientTypeInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput> | Prisma.ClientMasterCreateWithoutClientTypeInput[] | Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput | Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput[]
+  createMany?: Prisma.ClientMasterCreateManyClientTypeInputEnvelope
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+}
+
+export type ClientMasterUpdateManyWithoutClientTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput> | Prisma.ClientMasterCreateWithoutClientTypeInput[] | Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput | Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput[]
+  upsert?: Prisma.ClientMasterUpsertWithWhereUniqueWithoutClientTypeInput | Prisma.ClientMasterUpsertWithWhereUniqueWithoutClientTypeInput[]
+  createMany?: Prisma.ClientMasterCreateManyClientTypeInputEnvelope
+  set?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  disconnect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  delete?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  update?: Prisma.ClientMasterUpdateWithWhereUniqueWithoutClientTypeInput | Prisma.ClientMasterUpdateWithWhereUniqueWithoutClientTypeInput[]
+  updateMany?: Prisma.ClientMasterUpdateManyWithWhereWithoutClientTypeInput | Prisma.ClientMasterUpdateManyWithWhereWithoutClientTypeInput[]
+  deleteMany?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
+}
+
+export type ClientMasterUncheckedUpdateManyWithoutClientTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput> | Prisma.ClientMasterCreateWithoutClientTypeInput[] | Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput[]
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput | Prisma.ClientMasterCreateOrConnectWithoutClientTypeInput[]
+  upsert?: Prisma.ClientMasterUpsertWithWhereUniqueWithoutClientTypeInput | Prisma.ClientMasterUpsertWithWhereUniqueWithoutClientTypeInput[]
+  createMany?: Prisma.ClientMasterCreateManyClientTypeInputEnvelope
+  set?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  disconnect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  delete?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  connect?: Prisma.ClientMasterWhereUniqueInput | Prisma.ClientMasterWhereUniqueInput[]
+  update?: Prisma.ClientMasterUpdateWithWhereUniqueWithoutClientTypeInput | Prisma.ClientMasterUpdateWithWhereUniqueWithoutClientTypeInput[]
+  updateMany?: Prisma.ClientMasterUpdateManyWithWhereWithoutClientTypeInput | Prisma.ClientMasterUpdateManyWithWhereWithoutClientTypeInput[]
+  deleteMany?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
+}
+
+export type ClientMasterCreateNestedOneWithoutLeadsInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutLeadsInput, Prisma.ClientMasterUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutLeadsInput
+  connect?: Prisma.ClientMasterWhereUniqueInput
+}
+
+export type ClientMasterUpdateOneWithoutLeadsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientMasterCreateWithoutLeadsInput, Prisma.ClientMasterUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ClientMasterCreateOrConnectWithoutLeadsInput
+  upsert?: Prisma.ClientMasterUpsertWithoutLeadsInput
+  disconnect?: Prisma.ClientMasterWhereInput | boolean
+  delete?: Prisma.ClientMasterWhereInput | boolean
+  connect?: Prisma.ClientMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutLeadsInput, Prisma.ClientMasterUpdateWithoutLeadsInput>, Prisma.ClientMasterUncheckedUpdateWithoutLeadsInput>
 }
 
 export type ClientMasterCreateNestedOneWithoutLedgersInput = {
@@ -620,6 +863,105 @@ export type ClientMasterUpdateOneWithoutLedgersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientMasterUpdateToOneWithWhereWithoutLedgersInput, Prisma.ClientMasterUpdateWithoutLedgersInput>, Prisma.ClientMasterUncheckedUpdateWithoutLedgersInput>
 }
 
+export type ClientMasterCreateWithoutVendorInput = {
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterUncheckedCreateWithoutVendorInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterCreateOrConnectWithoutVendorInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput>
+}
+
+export type ClientMasterCreateManyVendorInputEnvelope = {
+  data: Prisma.ClientMasterCreateManyVendorInput | Prisma.ClientMasterCreateManyVendorInput[]
+  skipDuplicates?: boolean
+}
+
+export type ClientMasterUpsertWithWhereUniqueWithoutVendorInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutVendorInput, Prisma.ClientMasterUncheckedUpdateWithoutVendorInput>
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutVendorInput, Prisma.ClientMasterUncheckedCreateWithoutVendorInput>
+}
+
+export type ClientMasterUpdateWithWhereUniqueWithoutVendorInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutVendorInput, Prisma.ClientMasterUncheckedUpdateWithoutVendorInput>
+}
+
+export type ClientMasterUpdateManyWithWhereWithoutVendorInput = {
+  where: Prisma.ClientMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateManyMutationInput, Prisma.ClientMasterUncheckedUpdateManyWithoutVendorInput>
+}
+
+export type ClientMasterScalarWhereInput = {
+  AND?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
+  OR?: Prisma.ClientMasterScalarWhereInput[]
+  NOT?: Prisma.ClientMasterScalarWhereInput | Prisma.ClientMasterScalarWhereInput[]
+  id?: Prisma.IntFilter<"ClientMaster"> | number
+  name?: Prisma.StringFilter<"ClientMaster"> | string
+  contact?: Prisma.StringFilter<"ClientMaster"> | string
+  alt_contact?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  email?: Prisma.StringFilter<"ClientMaster"> | string
+  address?: Prisma.StringFilter<"ClientMaster"> | string
+  city?: Prisma.StringFilter<"ClientMaster"> | string
+  state?: Prisma.StringFilter<"ClientMaster"> | string
+  country?: Prisma.StringFilter<"ClientMaster"> | string
+  pincode?: Prisma.StringFilter<"ClientMaster"> | string
+  clientCode?: Prisma.StringFilter<"ClientMaster"> | string
+  client_type_id?: Prisma.IntNullableFilter<"ClientMaster"> | number | null
+  company_name?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  created_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  gst_number?: Prisma.StringNullableFilter<"ClientMaster"> | string | null
+  is_active?: Prisma.BoolFilter<"ClientMaster"> | boolean
+  updated_at?: Prisma.DateTimeFilter<"ClientMaster"> | Date | string
+  vendor_id?: Prisma.IntFilter<"ClientMaster"> | number
+}
+
 export type ClientMasterCreateWithoutProjectsInput = {
   name: string
   contact: string
@@ -631,10 +973,16 @@ export type ClientMasterCreateWithoutProjectsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
 
@@ -650,10 +998,16 @@ export type ClientMasterUncheckedCreateWithoutProjectsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
 
@@ -684,10 +1038,16 @@ export type ClientMasterUpdateWithoutProjectsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
 
@@ -703,280 +1063,16 @@ export type ClientMasterUncheckedUpdateWithoutProjectsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutDetailsInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutDetailsInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutDetailsInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-}
-
-export type ClientMasterUpsertWithoutDetailsInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutDetailsInput, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutDetailsInput, Prisma.ClientMasterUncheckedCreateWithoutDetailsInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutDetailsInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutDetailsInput, Prisma.ClientMasterUncheckedUpdateWithoutDetailsInput>
-}
-
-export type ClientMasterUpdateWithoutDetailsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutDetailsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutItemsInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutItemsInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutItemsInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-}
-
-export type ClientMasterUpsertWithoutItemsInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutItemsInput, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutItemsInput, Prisma.ClientMasterUncheckedCreateWithoutItemsInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutItemsInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutItemsInput, Prisma.ClientMasterUncheckedUpdateWithoutItemsInput>
-}
-
-export type ClientMasterUpdateWithoutItemsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutItemsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterCreateWithoutBoxesInput = {
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterUncheckedCreateWithoutBoxesInput = {
-  id?: number
-  name: string
-  contact: string
-  alt_contact?: string | null
-  email: string
-  address: string
-  city: string
-  state: string
-  country: string
-  pincode: string
-  clientCode: string
-  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
-  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
-  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
-}
-
-export type ClientMasterCreateOrConnectWithoutBoxesInput = {
-  where: Prisma.ClientMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-}
-
-export type ClientMasterUpsertWithoutBoxesInput = {
-  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBoxesInput, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
-  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBoxesInput, Prisma.ClientMasterUncheckedCreateWithoutBoxesInput>
-  where?: Prisma.ClientMasterWhereInput
-}
-
-export type ClientMasterUpdateToOneWithWhereWithoutBoxesInput = {
-  where?: Prisma.ClientMasterWhereInput
-  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBoxesInput, Prisma.ClientMasterUncheckedUpdateWithoutBoxesInput>
-}
-
-export type ClientMasterUpdateWithoutBoxesInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
-  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
-}
-
-export type ClientMasterUncheckedUpdateWithoutBoxesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  contact?: Prisma.StringFieldUpdateOperationsInput | string
-  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  address?: Prisma.StringFieldUpdateOperationsInput | string
-  city?: Prisma.StringFieldUpdateOperationsInput | string
-  state?: Prisma.StringFieldUpdateOperationsInput | string
-  country?: Prisma.StringFieldUpdateOperationsInput | string
-  pincode?: Prisma.StringFieldUpdateOperationsInput | string
-  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
-  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
 
@@ -991,10 +1087,16 @@ export type ClientMasterCreateWithoutScanItemsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
 }
 
@@ -1010,10 +1112,16 @@ export type ClientMasterUncheckedCreateWithoutScanItemsInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
 }
 
@@ -1044,10 +1152,16 @@ export type ClientMasterUpdateWithoutScanItemsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
 }
 
@@ -1063,11 +1177,320 @@ export type ClientMasterUncheckedUpdateWithoutScanItemsInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterCreateWithoutBankAccountsInput = {
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterUncheckedCreateWithoutBankAccountsInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterCreateOrConnectWithoutBankAccountsInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedCreateWithoutBankAccountsInput>
+}
+
+export type ClientMasterUpsertWithoutBankAccountsInput = {
+  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedUpdateWithoutBankAccountsInput>
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedCreateWithoutBankAccountsInput>
+  where?: Prisma.ClientMasterWhereInput
+}
+
+export type ClientMasterUpdateToOneWithWhereWithoutBankAccountsInput = {
+  where?: Prisma.ClientMasterWhereInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutBankAccountsInput, Prisma.ClientMasterUncheckedUpdateWithoutBankAccountsInput>
+}
+
+export type ClientMasterUpdateWithoutBankAccountsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateWithoutBankAccountsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterCreateWithoutClientTypeInput = {
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterUncheckedCreateWithoutClientTypeInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterCreateOrConnectWithoutClientTypeInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput>
+}
+
+export type ClientMasterCreateManyClientTypeInputEnvelope = {
+  data: Prisma.ClientMasterCreateManyClientTypeInput | Prisma.ClientMasterCreateManyClientTypeInput[]
+  skipDuplicates?: boolean
+}
+
+export type ClientMasterUpsertWithWhereUniqueWithoutClientTypeInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutClientTypeInput, Prisma.ClientMasterUncheckedUpdateWithoutClientTypeInput>
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutClientTypeInput, Prisma.ClientMasterUncheckedCreateWithoutClientTypeInput>
+}
+
+export type ClientMasterUpdateWithWhereUniqueWithoutClientTypeInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutClientTypeInput, Prisma.ClientMasterUncheckedUpdateWithoutClientTypeInput>
+}
+
+export type ClientMasterUpdateManyWithWhereWithoutClientTypeInput = {
+  where: Prisma.ClientMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateManyMutationInput, Prisma.ClientMasterUncheckedUpdateManyWithoutClientTypeInput>
+}
+
+export type ClientMasterCreateWithoutLeadsInput = {
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterUncheckedCreateWithoutLeadsInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutClientInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
+}
+
+export type ClientMasterCreateOrConnectWithoutLeadsInput = {
+  where: Prisma.ClientMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutLeadsInput, Prisma.ClientMasterUncheckedCreateWithoutLeadsInput>
+}
+
+export type ClientMasterUpsertWithoutLeadsInput = {
+  update: Prisma.XOR<Prisma.ClientMasterUpdateWithoutLeadsInput, Prisma.ClientMasterUncheckedUpdateWithoutLeadsInput>
+  create: Prisma.XOR<Prisma.ClientMasterCreateWithoutLeadsInput, Prisma.ClientMasterUncheckedCreateWithoutLeadsInput>
+  where?: Prisma.ClientMasterWhereInput
+}
+
+export type ClientMasterUpdateToOneWithWhereWithoutLeadsInput = {
+  where?: Prisma.ClientMasterWhereInput
+  data: Prisma.XOR<Prisma.ClientMasterUpdateWithoutLeadsInput, Prisma.ClientMasterUncheckedUpdateWithoutLeadsInput>
+}
+
+export type ClientMasterUpdateWithoutLeadsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateWithoutLeadsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientMasterCreateWithoutLedgersInput = {
@@ -1081,9 +1504,15 @@ export type ClientMasterCreateWithoutLedgersInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterCreateNestedManyWithoutClientInput
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  clientType?: Prisma.ClientTypeMasterCreateNestedOneWithoutClientsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutClientsInput
+  bankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutClientInput
 }
@@ -1100,9 +1529,15 @@ export type ClientMasterUncheckedCreateWithoutLedgersInput = {
   country: string
   pincode: string
   clientCode: string
-  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutClientInput
-  details?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutClientInput
-  items?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutClientInput
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutClientInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutClientInput
   projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutClientInput
   scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutClientInput
 }
@@ -1134,9 +1569,15 @@ export type ClientMasterUpdateWithoutLedgersInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUpdateManyWithoutClientNestedInput
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
 }
@@ -1153,11 +1594,195 @@ export type ClientMasterUncheckedUpdateWithoutLedgersInput = {
   country?: Prisma.StringFieldUpdateOperationsInput | string
   pincode?: Prisma.StringFieldUpdateOperationsInput | string
   clientCode?: Prisma.StringFieldUpdateOperationsInput | string
-  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutClientNestedInput
-  details?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutClientNestedInput
-  items?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutClientNestedInput
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
   scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterCreateManyVendorInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  client_type_id?: number | null
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+}
+
+export type ClientMasterUpdateWithoutVendorInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientType?: Prisma.ClientTypeMasterUpdateOneWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateWithoutVendorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateManyWithoutVendorInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  client_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ClientMasterCreateManyClientTypeInput = {
+  id?: number
+  name: string
+  contact: string
+  alt_contact?: string | null
+  email: string
+  address: string
+  city: string
+  state: string
+  country: string
+  pincode: string
+  clientCode: string
+  company_name?: string | null
+  created_at?: Date | string
+  gst_number?: string | null
+  is_active?: boolean
+  updated_at?: Date | string
+  vendor_id: number
+}
+
+export type ClientMasterUpdateWithoutClientTypeInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutClientsNestedInput
+  bankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateWithoutClientTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  bankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutClientNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutClientNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutClientNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutClientNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientMasterUncheckedUpdateManyWithoutClientTypeInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.StringFieldUpdateOperationsInput | string
+  city?: Prisma.StringFieldUpdateOperationsInput | string
+  state?: Prisma.StringFieldUpdateOperationsInput | string
+  country?: Prisma.StringFieldUpdateOperationsInput | string
+  pincode?: Prisma.StringFieldUpdateOperationsInput | string
+  clientCode?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gst_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -1166,19 +1791,17 @@ export type ClientMasterUncheckedUpdateWithoutLedgersInput = {
  */
 
 export type ClientMasterCountOutputType = {
-  boxes: number
+  bankAccounts: number
+  leads: number
   ledgers: number
-  details: number
-  items: number
   projects: number
   scanItems: number
 }
 
 export type ClientMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  boxes?: boolean | ClientMasterCountOutputTypeCountBoxesArgs
+  bankAccounts?: boolean | ClientMasterCountOutputTypeCountBankAccountsArgs
+  leads?: boolean | ClientMasterCountOutputTypeCountLeadsArgs
   ledgers?: boolean | ClientMasterCountOutputTypeCountLedgersArgs
-  details?: boolean | ClientMasterCountOutputTypeCountDetailsArgs
-  items?: boolean | ClientMasterCountOutputTypeCountItemsArgs
   projects?: boolean | ClientMasterCountOutputTypeCountProjectsArgs
   scanItems?: boolean | ClientMasterCountOutputTypeCountScanItemsArgs
 }
@@ -1196,8 +1819,15 @@ export type ClientMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types
 /**
  * ClientMasterCountOutputType without action
  */
-export type ClientMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.BoxMasterWhereInput
+export type ClientMasterCountOutputTypeCountBankAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClientBankDetailWhereInput
+}
+
+/**
+ * ClientMasterCountOutputType without action
+ */
+export type ClientMasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadMasterWhereInput
 }
 
 /**
@@ -1205,20 +1835,6 @@ export type ClientMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Ty
  */
 export type ClientMasterCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LedgerWhereInput
-}
-
-/**
- * ClientMasterCountOutputType without action
- */
-export type ClientMasterCountOutputTypeCountDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProjectDetailsWhereInput
-}
-
-/**
- * ClientMasterCountOutputType without action
- */
-export type ClientMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProjectItemsMasterWhereInput
 }
 
 /**
@@ -1248,10 +1864,18 @@ export type ClientMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   country?: boolean
   pincode?: boolean
   clientCode?: boolean
-  boxes?: boolean | Prisma.ClientMaster$boxesArgs<ExtArgs>
+  client_type_id?: boolean
+  company_name?: boolean
+  created_at?: boolean
+  gst_number?: boolean
+  is_active?: boolean
+  updated_at?: boolean
+  vendor_id?: boolean
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  bankAccounts?: boolean | Prisma.ClientMaster$bankAccountsArgs<ExtArgs>
+  leads?: boolean | Prisma.ClientMaster$leadsArgs<ExtArgs>
   ledgers?: boolean | Prisma.ClientMaster$ledgersArgs<ExtArgs>
-  details?: boolean | Prisma.ClientMaster$detailsArgs<ExtArgs>
-  items?: boolean | Prisma.ClientMaster$itemsArgs<ExtArgs>
   projects?: boolean | Prisma.ClientMaster$projectsArgs<ExtArgs>
   scanItems?: boolean | Prisma.ClientMaster$scanItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -1269,6 +1893,15 @@ export type ClientMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   country?: boolean
   pincode?: boolean
   clientCode?: boolean
+  client_type_id?: boolean
+  company_name?: boolean
+  created_at?: boolean
+  gst_number?: boolean
+  is_active?: boolean
+  updated_at?: boolean
+  vendor_id?: boolean
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["clientMaster"]>
 
 export type ClientMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1283,6 +1916,15 @@ export type ClientMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   country?: boolean
   pincode?: boolean
   clientCode?: boolean
+  client_type_id?: boolean
+  company_name?: boolean
+  created_at?: boolean
+  gst_number?: boolean
+  is_active?: boolean
+  updated_at?: boolean
+  vendor_id?: boolean
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["clientMaster"]>
 
 export type ClientMasterSelectScalar = {
@@ -1297,28 +1939,43 @@ export type ClientMasterSelectScalar = {
   country?: boolean
   pincode?: boolean
   clientCode?: boolean
+  client_type_id?: boolean
+  company_name?: boolean
+  created_at?: boolean
+  gst_number?: boolean
+  is_active?: boolean
+  updated_at?: boolean
+  vendor_id?: boolean
 }
 
-export type ClientMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "contact" | "alt_contact" | "email" | "address" | "city" | "state" | "country" | "pincode" | "clientCode", ExtArgs["result"]["clientMaster"]>
+export type ClientMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "contact" | "alt_contact" | "email" | "address" | "city" | "state" | "country" | "pincode" | "clientCode" | "client_type_id" | "company_name" | "created_at" | "gst_number" | "is_active" | "updated_at" | "vendor_id", ExtArgs["result"]["clientMaster"]>
 export type ClientMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  boxes?: boolean | Prisma.ClientMaster$boxesArgs<ExtArgs>
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  bankAccounts?: boolean | Prisma.ClientMaster$bankAccountsArgs<ExtArgs>
+  leads?: boolean | Prisma.ClientMaster$leadsArgs<ExtArgs>
   ledgers?: boolean | Prisma.ClientMaster$ledgersArgs<ExtArgs>
-  details?: boolean | Prisma.ClientMaster$detailsArgs<ExtArgs>
-  items?: boolean | Prisma.ClientMaster$itemsArgs<ExtArgs>
   projects?: boolean | Prisma.ClientMaster$projectsArgs<ExtArgs>
   scanItems?: boolean | Prisma.ClientMaster$scanItemsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type ClientMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ClientMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ClientMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+}
+export type ClientMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  clientType?: boolean | Prisma.ClientMaster$clientTypeArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+}
 
 export type $ClientMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ClientMaster"
   objects: {
-    boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
+    clientType: Prisma.$ClientTypeMasterPayload<ExtArgs> | null
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    bankAccounts: Prisma.$ClientBankDetailPayload<ExtArgs>[]
+    leads: Prisma.$LeadMasterPayload<ExtArgs>[]
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
-    details: Prisma.$ProjectDetailsPayload<ExtArgs>[]
-    items: Prisma.$ProjectItemsMasterPayload<ExtArgs>[]
     projects: Prisma.$ProjectMasterPayload<ExtArgs>[]
     scanItems: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
   }
@@ -1334,6 +1991,13 @@ export type $ClientMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     country: string
     pincode: string
     clientCode: string
+    client_type_id: number | null
+    company_name: string | null
+    created_at: Date
+    gst_number: string | null
+    is_active: boolean
+    updated_at: Date
+    vendor_id: number
   }, ExtArgs["result"]["clientMaster"]>
   composites: {}
 }
@@ -1728,10 +2392,11 @@ readonly fields: ClientMasterFieldRefs;
  */
 export interface Prisma__ClientMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  boxes<T extends Prisma.ClientMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  clientType<T extends Prisma.ClientMaster$clientTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$clientTypeArgs<ExtArgs>>): Prisma.Prisma__ClientTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  bankAccounts<T extends Prisma.ClientMaster$bankAccountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$bankAccountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientBankDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leads<T extends Prisma.ClientMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgers<T extends Prisma.ClientMaster$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  details<T extends Prisma.ClientMaster$detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  items<T extends Prisma.ClientMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectItemsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.ClientMaster$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scanItems<T extends Prisma.ClientMaster$scanItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMaster$scanItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1774,6 +2439,13 @@ export interface ClientMasterFieldRefs {
   readonly country: Prisma.FieldRef<"ClientMaster", 'String'>
   readonly pincode: Prisma.FieldRef<"ClientMaster", 'String'>
   readonly clientCode: Prisma.FieldRef<"ClientMaster", 'String'>
+  readonly client_type_id: Prisma.FieldRef<"ClientMaster", 'Int'>
+  readonly company_name: Prisma.FieldRef<"ClientMaster", 'String'>
+  readonly created_at: Prisma.FieldRef<"ClientMaster", 'DateTime'>
+  readonly gst_number: Prisma.FieldRef<"ClientMaster", 'String'>
+  readonly is_active: Prisma.FieldRef<"ClientMaster", 'Boolean'>
+  readonly updated_at: Prisma.FieldRef<"ClientMaster", 'DateTime'>
+  readonly vendor_id: Prisma.FieldRef<"ClientMaster", 'Int'>
 }
     
 
@@ -1970,6 +2642,11 @@ export type ClientMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` ClientMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ClientMasters.
+   */
   distinct?: Prisma.ClientMasterScalarFieldEnum | Prisma.ClientMasterScalarFieldEnum[]
 }
 
@@ -2023,6 +2700,10 @@ export type ClientMasterCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    */
   data: Prisma.ClientMasterCreateManyInput | Prisma.ClientMasterCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientMasterIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2093,6 +2774,10 @@ export type ClientMasterUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many ClientMasters to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientMasterIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -2162,27 +2847,70 @@ export type ClientMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * ClientMaster.boxes
+ * ClientMaster.clientType
  */
-export type ClientMaster$boxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ClientMaster$clientTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the BoxMaster
+   * Select specific fields to fetch from the ClientTypeMaster
    */
-  select?: Prisma.BoxMasterSelect<ExtArgs> | null
+  select?: Prisma.ClientTypeMasterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the BoxMaster
+   * Omit specific fields from the ClientTypeMaster
    */
-  omit?: Prisma.BoxMasterOmit<ExtArgs> | null
+  omit?: Prisma.ClientTypeMasterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.BoxMasterInclude<ExtArgs> | null
-  where?: Prisma.BoxMasterWhereInput
-  orderBy?: Prisma.BoxMasterOrderByWithRelationInput | Prisma.BoxMasterOrderByWithRelationInput[]
-  cursor?: Prisma.BoxMasterWhereUniqueInput
+  include?: Prisma.ClientTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.ClientTypeMasterWhereInput
+}
+
+/**
+ * ClientMaster.bankAccounts
+ */
+export type ClientMaster$bankAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClientBankDetail
+   */
+  select?: Prisma.ClientBankDetailSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClientBankDetail
+   */
+  omit?: Prisma.ClientBankDetailOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientBankDetailInclude<ExtArgs> | null
+  where?: Prisma.ClientBankDetailWhereInput
+  orderBy?: Prisma.ClientBankDetailOrderByWithRelationInput | Prisma.ClientBankDetailOrderByWithRelationInput[]
+  cursor?: Prisma.ClientBankDetailWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
+  distinct?: Prisma.ClientBankDetailScalarFieldEnum | Prisma.ClientBankDetailScalarFieldEnum[]
+}
+
+/**
+ * ClientMaster.leads
+ */
+export type ClientMaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
+  orderBy?: Prisma.LeadMasterOrderByWithRelationInput | Prisma.LeadMasterOrderByWithRelationInput[]
+  cursor?: Prisma.LeadMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
 }
 
 /**
@@ -2207,54 +2935,6 @@ export type ClientMaster$ledgersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
-}
-
-/**
- * ClientMaster.details
- */
-export type ClientMaster$detailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProjectDetails
-   */
-  select?: Prisma.ProjectDetailsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProjectDetails
-   */
-  omit?: Prisma.ProjectDetailsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProjectDetailsInclude<ExtArgs> | null
-  where?: Prisma.ProjectDetailsWhereInput
-  orderBy?: Prisma.ProjectDetailsOrderByWithRelationInput | Prisma.ProjectDetailsOrderByWithRelationInput[]
-  cursor?: Prisma.ProjectDetailsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProjectDetailsScalarFieldEnum | Prisma.ProjectDetailsScalarFieldEnum[]
-}
-
-/**
- * ClientMaster.items
- */
-export type ClientMaster$itemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProjectItemsMaster
-   */
-  select?: Prisma.ProjectItemsMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProjectItemsMaster
-   */
-  omit?: Prisma.ProjectItemsMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProjectItemsMasterInclude<ExtArgs> | null
-  where?: Prisma.ProjectItemsMasterWhereInput
-  orderBy?: Prisma.ProjectItemsMasterOrderByWithRelationInput | Prisma.ProjectItemsMasterOrderByWithRelationInput[]
-  cursor?: Prisma.ProjectItemsMasterWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProjectItemsMasterScalarFieldEnum | Prisma.ProjectItemsMasterScalarFieldEnum[]
 }
 
 /**

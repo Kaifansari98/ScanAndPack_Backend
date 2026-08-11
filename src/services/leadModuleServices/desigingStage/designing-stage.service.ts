@@ -4,9 +4,47 @@ import {
   uploadToWasabiMeetingDocs,
   uploadToWasabiDesignQuotationFile,
 } from "../../../utils/wasabiClient";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { z } from "zod";
 import { Prisma } from "../../../prisma/generated";
 import fs from "node:fs/promises";
+import path from "node:path";
+import { sanitizeFilename } from "../../../utils/fileUtils";
+
+function formatDateSegment(date: Date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function buildQuotationNameFromDesign(
+  designOriginalName: string,
+  quotationOriginalName: string,
+) {
+  let designNameWithoutExtension = path.parse(designOriginalName).name;
+  designNameWithoutExtension = designNameWithoutExtension.replace(/^\[.*?\]\s*/, "");
+  const quotationExtension = path.extname(quotationOriginalName || "");
+  const designMatch = designNameWithoutExtension.match(
+    /^D(\d+)_(?:(2D|3D)_)?(.+)_\d{4}-\d{2}-\d{2}$/i,
+  );
+
+  if (!designMatch) {
+    throw new Error("Selected design file name is invalid for quotation naming");
+  }
+
+  const [, revisionNumber, , baseSegment] = designMatch;
+  const todaySegment = formatDateSegment(new Date());
+
+  return sanitizeFilename(
+    `Q${revisionNumber}_${baseSegment}_${todaySegment}${quotationExtension}`,
+  ).replace(/_+/g, "_");
+}
+export type StageType =
+  | "tech-check-stage"
+  | "order-login-stage"
+  | "production-stage";
 
 const editDesignMeetingSchema = z.object({
   meetingId: z.number().int().positive(),
@@ -21,7 +59,7 @@ export class DesigingStage {
   public static async addToDesigingStage(
     lead_id: number,
     user_id: number,
-    vendor_id: number
+    vendor_id: number,
   ) {
     // 1. Check if user belongs to the same vendor
     const user = await prisma.userMaster.findFirst({
@@ -72,16 +110,14 @@ export class DesigingStage {
     });
 
     // ⭐ 6. LeadDetailedLogs entry (REQUIRED)
-    const detailedLog = await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id,
-        account_id: lead.account_id!,
-        action: `Lead has moved to Designing stage.`,
-        action_type: "UPDATE",
-        created_by: user_id,
-        created_at: new Date(),
-      },
+    const detailedLog = await createLeadLog(prisma, {
+      vendor_id,
+      lead_id,
+      account_id: lead.account_id!,
+      action: `Lead has moved to Designing stage.`,
+      action_type: "UPDATE",
+      created_by: user_id,
+      created_at: new Date(),
     });
 
     return { updatedLead, log };
@@ -91,7 +127,7 @@ export class DesigingStage {
     vendorId: number,
     userId: number,
     page: number = 1,
-    limit: number = 10
+    limit: number = 10,
   ) {
     const skip = (page - 1) * limit;
 
@@ -246,10 +282,10 @@ export class DesigingStage {
           (lead.documents || []).map(async (doc: any) => ({
             ...doc,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
-          }))
+          })),
         );
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
 
     return {
@@ -356,6 +392,30 @@ export class DesigingStage {
 
     if (!lead) return null;
 
+    const isSmallOrderRequestLead =
+      (lead as any).is_small_order_request === true;
+    const linkedSmallOrderRequest =
+      isSmallOrderRequestLead && lead.lead_code
+        ? await prisma.smallOrderRequest.findFirst({
+            where: {
+              vendor_id: vendorId,
+              so_code: lead.lead_code,
+            },
+            select: {
+              id: true,
+              is_request_resolved: true,
+              request_type_id: true,
+              requestType: {
+                select: {
+                  id: true,
+                  type: true,
+                  type_key: true,
+                },
+              },
+            },
+          })
+        : null;
+
     // ✅ Generate signed URLs for documents
     const docsWithUrls = await Promise.all(
       (lead.documents || []).map(async (doc: any) => {
@@ -363,11 +423,15 @@ export class DesigingStage {
           ...doc,
           signedUrl: await generateSignedUrl(doc.doc_sys_name),
         };
-      })
+      }),
     );
 
     return {
       ...lead,
+      smallOrderRequest:
+        linkedSmallOrderRequest && isSmallOrderRequestLead
+          ? linkedSmallOrderRequest
+          : null,
       documents: docsWithUrls,
     };
   }
@@ -377,38 +441,41 @@ export class DesigingStage {
     vendorId: number;
     leadId: number;
     userId: number;
+    designDocumentId?: number;
   }) {
-    const uploadedFiles: { originalName: string; sysName: string }[] = [];
-
-    for (const file of data.files) {
-      const sysName = await uploadToWasabiDesignQuotationFile(
-        file.path,
-        data.vendorId,
-        data.leadId,
-        file.originalname,
-        file.mimetype
-      );
-
-      await fs.unlink(file.path);
-
-      uploadedFiles.push({
-        originalName: file.originalname,
-        sysName,
-      });
-    }
-
     return prisma.$transaction(async (tx) => {
       // 0️⃣ Fetch lead → derive account_id
-      const lead = await tx.leadMaster.findFirst({
-        where: {
-          id: data.leadId,
-          vendor_id: data.vendorId,
-          is_deleted: false,
-        },
-        select: {
-          account_id: true,
-        },
-      });
+      const [lead, quotationDocType, designDocType, vendor] = await Promise.all([
+        tx.leadMaster.findFirst({
+          where: {
+            id: data.leadId,
+            vendor_id: data.vendorId,
+            is_deleted: false,
+          },
+          select: {
+            account_id: true,
+          },
+        }),
+        tx.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: data.vendorId,
+            tag: "Type 5",
+          },
+        }),
+        tx.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: data.vendorId,
+            tag: "Type 6",
+          },
+        }),
+        tx.vendorMaster.findUnique({
+          where: { id: data.vendorId },
+          select: {
+            is_this_vendor_is_custom_usertype_only: true,
+            handlesLargeScaleProjects: true,
+          },
+        }),
+      ]);
 
       if (!lead) {
         throw new Error(`Invalid leadId ${data.leadId} for this vendor`);
@@ -418,35 +485,85 @@ export class DesigingStage {
         throw new Error("No account linked with this lead");
       }
 
-      const accountId = lead.account_id; // ✅ backend-owned
-
-      // 2️⃣ Get quotation doc type
-      const quotationDocType = await tx.documentTypeMaster.findFirst({
-        where: {
-          vendor_id: data.vendorId,
-          tag: "Type 5", // Quotation
-        },
-      });
-
       if (!quotationDocType) {
         throw new Error(
-          "Quotation document type (Type 5) is not configured for this vendor"
+          "Quotation document type (Type 5) is not configured for this vendor",
         );
       }
 
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only === true &&
+        !designDocType
+      ) {
+        throw new Error("Design document type (Type 6) is not configured for this vendor");
+      }
+
+      const useCustomNaming = vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+      const selectedDesignDocument =
+        useCustomNaming && data.designDocumentId && designDocType
+          ? await tx.leadDocuments.findFirst({
+              where: {
+                id: data.designDocumentId,
+                lead_id: data.leadId,
+                vendor_id: data.vendorId,
+                is_deleted: false,
+                doc_type_id: designDocType.id,
+              },
+              select: {
+                id: true,
+                doc_og_name: true,
+                product_type_id: true,
+                product_structure_instance_id: true,
+              },
+            })
+          : null;
+
+      if (useCustomNaming && !selectedDesignDocument) {
+        throw new Error("Selected design file was not found for this lead");
+      }
+
+      const accountId = lead.account_id; // ✅ backend-owned
+      const inheritedProductTypeId =
+        vendor?.handlesLargeScaleProjects === true
+          ? selectedDesignDocument?.product_type_id ?? null
+          : null;
+      const inheritedInstanceId =
+        vendor?.handlesLargeScaleProjects === true
+          ? selectedDesignDocument?.product_structure_instance_id ?? null
+          : null;
       const uploadedDocs: any[] = [];
 
       // 3️⃣ Upload + LeadDocuments
-      for (const file of uploadedFiles) {
+      for (const file of data.files) {
+        const finalOriginalName =
+          useCustomNaming && selectedDesignDocument
+            ? buildQuotationNameFromDesign(
+                selectedDesignDocument.doc_og_name,
+                file.originalname,
+              )
+            : file.originalname;
+        const sysName = await uploadToWasabiDesignQuotationFile(
+          file.path,
+          data.vendorId,
+          data.leadId,
+          finalOriginalName,
+          file.mimetype,
+        );
+
+        await fs.unlink(file.path);
+
         const document = await tx.leadDocuments.create({
           data: {
-            doc_og_name: file.originalName,
-            doc_sys_name: file.sysName,
+            doc_og_name: finalOriginalName,
+            doc_sys_name: sysName,
             vendor_id: data.vendorId,
             lead_id: data.leadId,
             account_id: accountId,
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
+            product_type_id: inheritedProductTypeId,
+            product_structure_instance_id: inheritedInstanceId,
           },
         });
 
@@ -460,16 +577,14 @@ export class DesigingStage {
           ? `${count} Quotations have been uploaded successfully.`
           : "Quotation has been uploaded successfully.";
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendorId,
-          lead_id: data.leadId,
-          account_id: accountId,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.userId,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendorId,
+        lead_id: data.leadId,
+        account_id: accountId,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by: data.userId,
+        created_at: new Date(),
       });
 
       await tx.leadDocumentLogs.createMany({
@@ -490,7 +605,7 @@ export class DesigingStage {
 
   public static async getDesignQuotationDocuments(
     vendorId: number,
-    leadId: number
+    leadId: number,
   ) {
     const logs: any[] = [];
 
@@ -518,7 +633,7 @@ export class DesigingStage {
 
     if (!designQuotationDocType) {
       throw new Error(
-        "Design quotation document type not found for this vendor"
+        "Design quotation document type not found for this vendor",
       );
     }
     logs.push("Design quotation document type found");
@@ -566,11 +681,11 @@ export class DesigingStage {
           ...doc,
           signedUrl,
         };
-      })
+      }),
     );
 
     logs.push(
-      `Found ${documents.length} design quotation documents for lead ${leadId}`
+      `Found ${documents.length} design quotation documents for lead ${leadId}`,
     );
 
     return {
@@ -648,7 +763,7 @@ export class DesigingStage {
           file.buffer,
           input.vendorId,
           existingMeeting.lead_id,
-          file.originalname
+          file.originalname,
         );
         logs.push({ fileUploaded: file.originalname, sysName });
 
@@ -696,6 +811,7 @@ export class DesigingStage {
     lead_id: number;
     account_id: number;
     vendor_id: number;
+    product_structure_instance_id?: number;
     type: string;
     desc: string;
     created_by: number;
@@ -743,12 +859,32 @@ export class DesigingStage {
     }
     logs.push("Account verified successfully");
 
+    // 4️⃣ Validate product structure instance (optional)
+    let resolvedInstanceId: number | null = null;
+    if (data.product_structure_instance_id) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: data.product_structure_instance_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+
+      if (!instance) {
+        throw new Error("Product structure instance not found for this lead");
+      }
+      resolvedInstanceId = instance.id;
+    }
+
     // 4️⃣ Create design selection
     const designSelection = await prisma.leadDesignSelection.create({
       data: {
         lead_id: data.lead_id,
         account_id: data.account_id,
         vendor_id: data.vendor_id,
+        product_structure_instance_id: resolvedInstanceId,
         type: data.type,
         desc: data.desc,
         created_by: data.created_by,
@@ -790,7 +926,8 @@ export class DesigingStage {
     vendorId: number,
     leadId: number,
     page: number,
-    limit: number
+    limit: number,
+    productStructureInstanceId?: number,
   ) {
     const logs: any[] = [];
     const skip = (page - 1) * limit;
@@ -814,6 +951,9 @@ export class DesigingStage {
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
+        ...(productStructureInstanceId
+          ? { product_structure_instance_id: productStructureInstanceId }
+          : {}),
       },
       skip,
       take: limit,
@@ -858,11 +998,14 @@ export class DesigingStage {
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
+        ...(productStructureInstanceId
+          ? { product_structure_instance_id: productStructureInstanceId }
+          : {}),
       },
     });
 
     logs.push(
-      `Fetched ${designSelections.length} design selections for lead ${leadId}`
+      `Fetched ${designSelections.length} design selections for lead ${leadId}`,
     );
 
     const pagination = {
@@ -878,6 +1021,54 @@ export class DesigingStage {
       logs,
       designSelections,
       pagination,
+    };
+  }
+
+  public static async getInstanceStageByContext(params: {
+    vendorId: number;
+    leadId: number;
+    instanceId: number;
+  }) {
+    const { vendorId, leadId, instanceId } = params;
+
+    // 🔐 Fetch instance only if it belongs to vendor + lead
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        vendor_id: true,
+        is_tech_check_completed: true,
+        is_order_login_completed: true,
+      },
+    });
+
+    if (!instance) {
+      throw new Error("Instance not found for given vendor/lead context");
+    }
+
+    // =============================
+    // Workflow Stage Derivation
+    // =============================
+    let stage: StageType;
+
+    if (instance.is_tech_check_completed !== true) {
+      stage = "tech-check-stage";
+    } else if (instance.is_order_login_completed !== true) {
+      stage = "order-login-stage";
+    } else {
+      stage = "production-stage";
+    }
+
+    return {
+      vendor_id: vendorId,
+      lead_id: instance.lead_id,
+      instance_id: instance.id,
+      derived_stage: stage,
     };
   }
 }

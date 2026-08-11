@@ -5,12 +5,15 @@ import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/was
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 import {
   sendLeadAssignedEmail,
   sendMajorMilestoneEmail,
 } from "../../../services/email/brevoEmail.service";
+import { STAGE_PATH_BY_TAG } from "../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import logger from "../../../utils/logger";
+import { sendTechCheckAssignedEmail } from "../../../../src/services/email/brevoEmail2.service";
 
 const resolveClientBaseUrl = (req: Request): string => {
   const origin = req.headers.origin;
@@ -30,12 +33,15 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
+
 const clientApprovalService = new ClientApprovalService();
 
 export class ClientApprovalController {
   public static async addApprovalDocuments(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> {
     try {
       const { lead_id, vendor_id, account_id, created_by } = req.body;
@@ -65,7 +71,7 @@ export class ClientApprovalController {
           Number(vendor_id),
           Number(lead_id),
           doc.originalname,
-          doc.mimetype
+          doc.mimetype,
         );
 
         await fs.unlink(doc.path);
@@ -90,7 +96,10 @@ export class ClientApprovalController {
         data: result,
       });
     } catch (error: any) {
-      console.error("[ClientApprovalController] addApprovalDocuments Error:", error);
+      console.error(
+        "[ClientApprovalController] addApprovalDocuments Error:",
+        error,
+      );
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
@@ -100,7 +109,7 @@ export class ClientApprovalController {
 
   public static async submitApproval(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
@@ -116,7 +125,7 @@ export class ClientApprovalController {
       const approvalScreenshots = (req.files as any)?.approvalScreenshots || [];
       const payment_files = (req.files as any)?.payment_files || [];
 
-      if (!leadId || !vendorId || !account_id || !client_id || !created_by) {
+      if (!leadId || !vendorId || !account_id || !created_by) {
         res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
@@ -142,7 +151,7 @@ export class ClientApprovalController {
           Number(vendorId),
           Number(leadId),
           doc.originalname,
-          doc.mimetype
+          doc.mimetype,
         );
 
         await fs.unlink(doc.path);
@@ -165,7 +174,7 @@ export class ClientApprovalController {
             Number(vendorId),
             Number(leadId),
             doc.originalname,
-            doc.mimetype
+            doc.mimetype,
           );
 
           await fs.unlink(doc.path);
@@ -178,8 +187,8 @@ export class ClientApprovalController {
       }
 
       const dto = {
-        lead_id: parseInt(leadId),
-        vendor_id: parseInt(vendorId),
+        lead_id: Number(leadId),
+        vendor_id: Number(vendorId),
         account_id: parseInt(account_id),
         client_id: parseInt(client_id),
         created_by: parseInt(created_by),
@@ -211,10 +220,10 @@ export class ClientApprovalController {
    */
   public static async fetchBackendUsersByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -224,12 +233,11 @@ export class ClientApprovalController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching Backend Users for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching Backend Users for vendor ID: ${vendorId}`,
       );
 
-      const backendUsers = await clientApprovalService.getBackendUsersByVendor(
-        vendorId
-      );
+      const backendUsers =
+        await clientApprovalService.getBackendUsersByVendor(vendorId);
 
       // Check if any backend users were found
       if (backendUsers.length === 0) {
@@ -239,8 +247,8 @@ export class ClientApprovalController {
             ApiResponse.success(
               [],
               "No Backend Users found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
@@ -253,8 +261,8 @@ export class ClientApprovalController {
             count: backendUsers.length,
           },
           "backend users fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchBackendUsersByVendor error:", error);
@@ -265,16 +273,16 @@ export class ClientApprovalController {
           ApiResponse.error(
             "Failed to fetch Backend Users",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }
 
   public static getAllClientApprovals = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -286,7 +294,7 @@ export class ClientApprovalController {
       const leads =
         await clientApprovalService.getLeadsWithStatusClientApproval(
           vendorId,
-          userId
+          userId,
         );
 
       const count = leads.length;
@@ -300,7 +308,7 @@ export class ClientApprovalController {
     } catch (error: any) {
       console.error(
         "[ClientApprovalController] getAllClientApprovals Error:",
-        error
+        error,
       );
       return res.status(500).json({
         success: false,
@@ -311,7 +319,7 @@ export class ClientApprovalController {
 
   public static async getApprovalDetails(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
@@ -325,8 +333,8 @@ export class ClientApprovalController {
       }
 
       const details = await clientApprovalService.getClientApprovalDetails(
-        parseInt(vendorId),
-        parseInt(leadId)
+        Number(vendorId),
+        Number(leadId),
       );
 
       res.status(200).json({
@@ -337,7 +345,7 @@ export class ClientApprovalController {
     } catch (error: any) {
       console.error(
         "[ClientApprovalController] getApprovalDetails Error:",
-        error
+        error,
       );
       res.status(500).json({
         success: false,
@@ -346,43 +354,40 @@ export class ClientApprovalController {
     }
   }
 
-  public static async requestToTechCheck(req: Request, res: Response): Promise<void> {
+  public static async requestToTechCheck(
+    req: Request,
+    res: Response,
+  ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
-      const {
-        account_id,
-        assign_to_user_id,
-        created_by,
-        client_required_order_login_complition_date,
-      } = req.body;
-  
+      const { account_id, assign_to_user_id, created_by } = req.body;
+
       if (
         !leadId ||
         !vendorId ||
         !account_id ||
         !assign_to_user_id ||
-        !created_by ||
-        !client_required_order_login_complition_date
+        !created_by
       ) {
         res.status(400).json({
           success: false,
           message:
-            "Missing required fields: leadId, vendorId, account_id, assign_to_user_id, created_by, client_required_order_login_complition_date",
+            "Missing required fields: leadId, vendorId, account_id, assign_to_user_id, created_by",
         });
         return;
       }
-  
+
       const dto = {
-        lead_id: parseInt(leadId),
-        vendor_id: parseInt(vendorId),
+        lead_id: Number(leadId),
+        vendor_id: Number(vendorId),
         account_id: parseInt(account_id),
         assign_to_user_id: parseInt(assign_to_user_id),
         created_by: parseInt(created_by),
-        required_date: new Date(client_required_order_login_complition_date),
       };
-  
+
       const result = await clientApprovalService.requestToTechCheck(dto);
 
+      // ─── 1. In-app notification to assignee ───────────────────────────────
       try {
         const assignee = await prisma.userMaster.findUnique({
           where: { id: dto.assign_to_user_id },
@@ -394,26 +399,68 @@ export class ClientApprovalController {
         });
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const lead = await prisma.leadMaster.findUnique({
-            where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true },
-          });
-          const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const [lead, instances] = await Promise.all([
+            prisma.leadMaster.findUnique({
+              where: { id: dto.lead_id },
+              select: {
+                firstname: true,
+                lastname: true,
+                lead_code: true,
+                franchise_id: true,
+              },
+            }),
+            prisma.leadProductStructureInstance.findMany({
+              where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+              select: { id: true, quantity_index: true },
+              orderBy: [
+                { product_structure_id: "asc" },
+                { quantity_index: "asc" },
+              ],
+            }),
+          ]);
 
-          await NotificationService.createAndSend({
-            vendor_id: dto.vendor_id,
-            user_id: dto.assign_to_user_id,
-            sender_id: dto.created_by,
-            type: NotificationType.LEAD_ASSIGNED,
-            title: "Lead assigned",
-            message:
+          const leadName =
+            `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+          const baseLeadCode =
+            lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
+
+          // Build one notification entry per instance (or one without suffix if no instances)
+          const notificationTargets =
+            instances.length > 1
+              ? instances.map((inst) => ({
+                  instanceId: inst.id,
+                  leadCode: `${baseLeadCode}.${inst.quantity_index}`,
+                }))
+              : [
+                  {
+                    instanceId: instances[0]?.id ?? null,
+                    leadCode: baseLeadCode,
+                  },
+                ];
+
+          for (const target of notificationTargets) {
+            const redirectUrl =
+              target.instanceId != null
+                ? `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}&instance_id=${target.instanceId}`
+                : `/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+            const notificationMessage =
               leadName.length > 0
-                ? `Lead ${leadName} has been assigned to you.`
-                : "A lead has been assigned to you.",
-            entity_type: "lead",
-            entity_id: dto.lead_id,
-            redirect_url: `/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`,
-          });
+                ? `You have been assigned ${target.leadCode} - ${leadName} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`
+                : `You have been assigned ${target.leadCode} for Tech Check Review. Please review the documents uploaded by the Sales Executive.`;
+
+            await NotificationService.createAndSend({
+              vendor_id: dto.vendor_id,
+              user_id: dto.assign_to_user_id,
+              sender_id: dto.created_by,
+              type: NotificationType.LEAD_ASSIGNED,
+              title: "Tech Check Review Required",
+              message: notificationMessage,
+              entity_type: "lead",
+              entity_id: dto.lead_id,
+              redirect_url: redirectUrl,
+            });
+          }
         }
       } catch (notificationError: any) {
         console.error("⚠️ Failed to send tech-check assignment notification", {
@@ -423,9 +470,10 @@ export class ClientApprovalController {
         });
       }
 
+      // ─── 2. Email to assignee (Tech Check) ────────────────────────────────
       try {
         if (dto.assign_to_user_id !== dto.created_by) {
-          const [assignee, assignedBy, lead] = await Promise.all([
+          const [assignee, assignedBy, lead, instances] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.assign_to_user_id },
               select: { user_name: true, user_email: true },
@@ -441,16 +489,15 @@ export class ClientApprovalController {
                 lead_code: true,
                 firstname: true,
                 lastname: true,
-                country_code: true,
-                contact_no: true,
-                created_at: true,
-                productMappings: {
-                  select: { productType: { select: { type: true } } },
-                },
-                leadProductStructureMapping: {
-                  select: { productStructure: { select: { type: true } } },
-                },
               },
+            }),
+            prisma.leadProductStructureInstance.findMany({
+              where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+              select: { id: true, quantity_index: true },
+              orderBy: [
+                { product_structure_id: "asc" },
+                { quantity_index: "asc" },
+              ],
             }),
           ]);
 
@@ -461,47 +508,48 @@ export class ClientApprovalController {
               assignee_user_id: dto.assign_to_user_id,
             });
           } else if (lead) {
-            const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-            const leadCode =
-              lead.lead_code ??
-              `LEAD-${String(lead.id).padStart(4, "0")}`;
-            const contactDetails = `${lead.country_code ?? ""} ${
-              lead.contact_no ?? ""
-            }`.trim();
-            const furnitureType =
-              lead.productMappings
-                ?.map((item) => item.productType?.type)
-                .filter(Boolean)
-                .join(", ") || "—";
-            const furnitureStructure =
-              lead.leadProductStructureMapping
-                ?.map((item) => item.productStructure?.type)
-                .filter(Boolean)
-                .join(", ") || "—";
-            const createdDate = lead.created_at
-              ? new Date(lead.created_at).toLocaleDateString("en-IN", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })
-              : "—";
-            const createdByName = assignedBy?.user_name ?? "Admin";
-            const clientBaseUrl = resolveClientBaseUrl(req);
-            const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`;
-
-            await sendLeadAssignedEmail({
-              vendor_id: dto.vendor_id,
-              toEmail: assigneeEmail,
-              toName: assignee?.user_name ?? undefined,
-              leadCode,
-              leadName: leadName || "—",
-              contact: contactDetails || "—",
-              furnitureType,
-              furnitureStructure,
-              createdDate,
-              createdBy: createdByName,
-              leadUrl,
+            const leadName =
+              `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+            const baseLeadCode =
+              lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+            const assignedByName = assignedBy?.user_name ?? "Admin";
+            const assignedDate = new Date().toLocaleDateString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
             });
+            const clientBaseUrl = resolveClientBaseUrl(req);
+
+            const emailTargets =
+              instances.length > 1
+                ? instances.map((inst) => ({
+                    instanceId: inst.id,
+                    leadCode: `${baseLeadCode}.${inst.quantity_index}`,
+                  }))
+                : [
+                    {
+                      instanceId: instances[0]?.id ?? null,
+                      leadCode: baseLeadCode,
+                    },
+                  ];
+
+            for (const target of emailTargets) {
+              const leadUrl =
+                target.instanceId != null
+                  ? `${clientBaseUrl}/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}&instance_id=${target.instanceId}`
+                  : `${clientBaseUrl}/dashboard/production/tech-check/details/${dto.lead_id}?accountId=${dto.account_id}`;
+
+              await sendTechCheckAssignedEmail({
+                vendor_id: dto.vendor_id,
+                toEmail: assigneeEmail,
+                toName: assignee?.user_name ?? undefined,
+                leadCode: target.leadCode,
+                leadName: leadName || "—",
+                assignedBy: assignedByName,
+                assignedDate,
+                leadUrl,
+              });
+            }
           }
         }
       } catch (emailError: any) {
@@ -512,119 +560,132 @@ export class ClientApprovalController {
         });
       }
 
+      // ─── 3. Milestone notification + email (admins only, matching franchise) ────────
       try {
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: dto.vendor_id,
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
-          prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: dto.vendor_id,
-              lead_id: dto.lead_id,
-              status: "active",
-            },
-            select: { user_id: true },
-          }),
+        const [lead, firstInstance] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: dto.lead_id },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
+            select: { id: true },
+            orderBy: [
+              { product_structure_id: "asc" },
+              { quantity_index: "asc" },
+            ],
           }),
         ]);
 
-        const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
+        const leadName =
+          `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+        const franchiseId = lead?.franchise_id ?? null;
+        const stageTag = lead?.statusType?.tag;
+        const instanceId = firstInstance?.id;
 
-        if (recipientIds.size > 0) {
-          const redirectUrl = dto.account_id
-            ? `/dashboard/leads/details/${dto.lead_id}?accountId=${dto.account_id}`
-            : `/dashboard/leads/details/${dto.lead_id}`;
+        // Build redirect URL using STAGE_PATH_BY_TAG
+        const stagePath =
+          stageTag && STAGE_PATH_BY_TAG[stageTag]
+            ? `${STAGE_PATH_BY_TAG[stageTag]}/${dto.lead_id}`
+            : `/dashboard/production/details/${dto.lead_id}`;
 
-          await Promise.all(
-            Array.from(recipientIds).map((recipientId) =>
-              NotificationService.createAndSend({
+        const queryParams = new URLSearchParams();
+        if (dto.account_id)
+          queryParams.set("accountId", String(dto.account_id));
+        if (instanceId) queryParams.set("instance_id", String(instanceId));
+        const qs = queryParams.toString();
+        const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
+
+        // Only admins matching vendor_id + franchise_id
+        const { recipients: users, isSuperAdminFallback } =
+          await getFranchiseAdminRecipients({
+            vendorId: dto.vendor_id,
+            franchiseId,
+            excludeUserId: dto.created_by,
+          });
+
+        await Promise.all(
+          users.map((user) =>
+            NotificationService.createAndSend({
+              vendor_id: dto.vendor_id,
+              user_id: user.id,
+              sender_id: dto.created_by,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Lead moved to Production",
+              message:
+                leadName.length > 0
+                  ? `Lead ${leadName} moved to Production stage.`
+                  : "Lead moved to Production stage.",
+              entity_type: "lead",
+              entity_id: dto.lead_id,
+              redirect_url: redirectUrl,
+            }),
+          ),
+        );
+
+        const clientBaseUrl = resolveClientBaseUrl(req);
+        const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
+        const completedOn = new Date().toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+
+        await Promise.allSettled(
+          users
+            .filter((user) => user.user_email)
+            .map((user) =>
+              sendMajorMilestoneEmail({
                 vendor_id: dto.vendor_id,
-                user_id: recipientId,
-                sender_id: dto.created_by,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Lead moved to Production",
-                message:
-                  leadName.length > 0
-                    ? `Lead ${leadName} moved to Production stage.`
-                    : "Lead moved to Production stage.",
-                entity_type: "lead",
-                entity_id: dto.lead_id,
-                redirect_url: redirectUrl,
-              })
-            )
-          );
-
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
-          const completedOn = new Date().toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          await Promise.allSettled(
-            users
-              .filter((user) => user.user_email)
-              .map((user) =>
-                sendMajorMilestoneEmail({
-                  vendor_id: dto.vendor_id,
-                  toEmail: user.user_email!,
-                  toName: user.user_name ?? undefined,
-                  leadCode,
-                  leadName: leadName || "Lead",
-                  milestoneName: "Project to Production",
-                  completedOn,
-                  detailsUrl,
-                })
-              )
-          );
-        }
+                allowSuperAdmin: isSuperAdminFallback,
+                toEmail: user.user_email!,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName: leadName || "Lead",
+                milestoneName: "Project to Production",
+                completedOn,
+                detailsUrl,
+              }),
+            ),
+        );
       } catch (milestoneError: any) {
         console.error("⚠️ Failed to send project-to-production notification", {
           error: milestoneError?.message,
           lead_id: dto.lead_id,
         });
       }
-  
+
       res.status(200).json({
         success: true,
         message: "Lead moved to Tech Check stage successfully",
         data: result,
       });
     } catch (error: any) {
-      console.error("[ClientApprovalController] Error in requestToTechCheck:", error);
+      console.error(
+        "[ClientApprovalController] Error in requestToTechCheck:",
+        error,
+      );
       res.status(500).json({
         success: false,
         message: error.message || "Internal server error",
       });
     }
-  }  
+  }
 
   public static async fetchTechCheckUsersByVendor(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response> {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
 
       if (isNaN(vendorId) || vendorId <= 0) {
         return res
@@ -633,7 +694,7 @@ export class ClientApprovalController {
       }
 
       console.log(
-        `[CONTROLLER] Fetching Tech-Check Users for vendor ID: ${vendorId}`
+        `[CONTROLLER] Fetching Tech-Check Users for vendor ID: ${vendorId}`,
       );
 
       const techCheckUsers =
@@ -646,13 +707,13 @@ export class ClientApprovalController {
             ApiResponse.success(
               [],
               "No Tech-Check Users found for this vendor",
-              200
-            )
+              200,
+            ),
           );
       }
 
       console.log(
-        `[CONTROLLER] Found ${techCheckUsers.length} Tech-Check Users`
+        `[CONTROLLER] Found ${techCheckUsers.length} Tech-Check Users`,
       );
 
       return res.status(200).json(
@@ -662,8 +723,8 @@ export class ClientApprovalController {
             count: techCheckUsers.length,
           },
           "Tech-Check users fetched successfully",
-          200
-        )
+          200,
+        ),
       );
     } catch (error: any) {
       console.error("[CONTROLLER] fetchTechCheckUsersByVendor error:", error);
@@ -674,8 +735,8 @@ export class ClientApprovalController {
           ApiResponse.error(
             "Failed to fetch Tech-Check Users",
             500,
-            process.env.NODE_ENV === "development" ? error.message : undefined
-          )
+            process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
         );
     }
   }

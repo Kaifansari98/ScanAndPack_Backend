@@ -1,26 +1,39 @@
 import { Request, Response } from "express";
+import { prisma } from "../../prisma/client";
 import { TaskService } from "../../services/task/task.service";
+import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
+import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
+import { actOnFastProductionRequestTask, getFastProductionRequestDetails } from "../../services/leadModuleServices/fastProductionRequest.service";
 import logger from "../../../src/utils/logger";
+import { ApprovalRequestService } from "../../services/approval-request/approvalRequest.service";
 import { date } from "joi";
 
 export class TaskController {
   static async getTasks(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const userId = parseInt(req.params.userId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
+      const franchiseId = Number(req.query.franchise_id);
 
-      if (isNaN(vendorId) || isNaN(userId)) {
+      if (isNaN(vendorId) || isNaN(userId) || isNaN(franchiseId)) {
         return res.status(400).json({
           success: false,
-          message: "Invalid vendorId or userId",
+          message: "Invalid vendorId, userId, or franchise_id",
         });
       }
 
-      const tasks = await TaskService.getTasksByVendorAndUser(vendorId, userId);
+      const { tasks, count } = await TaskService.getTasksByVendorAndUser2(
+        vendorId,
+        userId,
+        franchiseId,
+        1,
+        1000,
+        {},
+      );
 
       return res.status(200).json({
         success: true,
-        count: tasks.length,
+        count,
         data: tasks,
       });
     } catch (error: any) {
@@ -35,8 +48,9 @@ export class TaskController {
 
   static async getTasks2(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const userId = parseInt(req.params.userId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
+      const franchiseId = Number(req.body.franchise_id);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -144,7 +158,7 @@ export class TaskController {
       // ======================
       // VALIDATION GATE
       // ======================
-      if (!vendorId || !userId) {
+      if (!vendorId || !userId || !franchiseId) {
         logger.warn("[TaskController] Missing vendorId or userId", {
           vendorId,
           userId,
@@ -152,7 +166,7 @@ export class TaskController {
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID and User ID are required",
+          message: "Vendor ID, User ID, and Franchise ID are required",
         });
       }
 
@@ -168,6 +182,7 @@ export class TaskController {
         await TaskService.getTasksByVendorAndUser2(
           vendorId,
           userId,
+          franchiseId,
           page,
           limit,
           filters,
@@ -200,10 +215,153 @@ export class TaskController {
     }
   }
 
+  static async getReportTasksByUser(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const userId = Number(req.params.userId);
+      const franchiseId = Number(req.body.franchise_id);
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date in date_range",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      let assignatRange: { from: string; to: string } | undefined;
+
+      if (req.body.assignat_range) {
+        const { from, to } = req.body.assignat_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'from' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'to' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          assignatRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message:
+                "'from' date cannot be after 'to' date in assignat_range",
+            });
+          }
+          assignatRange = { from, to };
+        } else if (!from && to) {
+          assignatRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        lead_code: req.body.lead_code,
+        lead_name: req.body.lead_name,
+        phone: req.body.phone,
+        task_type: req.body.task_type,
+        due_date: req.body.due_date,
+        due_filter: req.body.due_filter,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        product_type: req.body.product_type,
+        product_structure: req.body.product_structure,
+        assign_by: req.body.assign_by,
+        assign_to: req.body.assign_to,
+        created_at: req.body.created_at,
+        date_range: dateRange,
+        assignat_range: assignatRange,
+      };
+
+      if (!vendorId || !userId || !franchiseId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID, User ID, and Franchise ID are required",
+        });
+      }
+
+      const { tasks, count, summary } =
+        await TaskService.getTasksByVendorAndUserReport(
+          vendorId,
+          userId,
+          franchiseId,
+          page,
+          limit,
+          filters,
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Report tasks fetched successfully",
+        count,
+        summary,
+        data: tasks,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getReportTasksByUser Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  }
+
   static async getInitialSiteMeasurementTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -233,8 +391,8 @@ export class TaskController {
 
   static async getFollowUpTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -256,10 +414,154 @@ export class TaskController {
     }
   }
 
+  static async updateSelfAssignTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { status, updated_by, closed_at, closed_by, remark } = req.body;
+
+      if (!leadId || !taskId || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, and updated_by are required",
+        });
+      }
+
+      await TaskService.getValidatedSelfAssignTask(leadId, taskId);
+
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        updated_by: Number(updated_by),
+        status,
+        closed_at,
+        closed_by: closed_by ? Number(closed_by) : undefined,
+        remark,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Self-assign task updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to update self-assign task",
+      });
+    }
+  }
+
+  static async rescheduleSelfAssignTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { due_date, remark, updated_by } = req.body;
+
+      if (!leadId || !taskId || !due_date || !remark || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, due_date, remark, and updated_by are required",
+        });
+      }
+
+      await TaskService.getValidatedSelfAssignTask(leadId, taskId);
+
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        due_date,
+        remark,
+        updated_by: Number(updated_by),
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Self-assign task rescheduled successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to reschedule self-assign task",
+      });
+    }
+  }
+
+  static async actOnFastProductionRequestTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { action, acted_by, remark, production_target_date } = req.body;
+
+      if (!leadId || !taskId || !acted_by || !action) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, action, and acted_by are required",
+        });
+      }
+
+      const result = await actOnFastProductionRequestTask({
+        lead_id: leadId,
+        task_id: taskId,
+        action,
+        acted_by: Number(acted_by),
+        remark,
+        production_target_date: production_target_date
+          ? new Date(production_target_date)
+          : undefined,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Fast production request updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      const statusCode =
+        error?.message?.startsWith("Validation failed") ||
+          error?.message?.includes("required")
+          ? 400
+          : 500;
+
+      return res.status(statusCode).json({
+        success: false,
+        message: error.message || "Failed to update fast production request",
+      });
+    }
+  }
+
+  static async getFastProductionRequestDetails(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+
+      if (!leadId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId and taskId are required",
+        });
+      }
+
+      const result = await getFastProductionRequestDetails(leadId, taskId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Fast production request details fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch fast production request details",
+      });
+    }
+  }
+
   static async getFinalMeasurementTasks(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.userId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const userId = Number(req.params.userId);
+      const leadId = Number(req.params.leadId);
 
       if (isNaN(userId) || isNaN(leadId)) {
         return res
@@ -284,20 +586,27 @@ export class TaskController {
   // Vendor overall tasks
   static async getTasksByVendor(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.query.franchise_id);
 
-      if (isNaN(vendorId)) {
+      if (isNaN(vendorId) || isNaN(franchiseId)) {
         return res.status(400).json({
           success: false,
-          message: "Invalid vendorId",
+          message: "Invalid vendorId or franchise_id",
         });
       }
 
-      const tasks = await TaskService.getTasksByVendor(vendorId);
+      const { tasks, count } = await TaskService.getTasksFilterByVendor2(
+        vendorId,
+        franchiseId,
+        1,
+        1000,
+        {},
+      );
 
       return res.status(200).json({
         success: true,
-        count: tasks.length,
+        count,
         data: tasks,
       });
     } catch (error: any) {
@@ -312,7 +621,8 @@ export class TaskController {
 
   static async getTasksFilterByVendorAll(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.body.franchise_id);
 
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
@@ -416,14 +726,14 @@ export class TaskController {
       // ======================
       // VALIDATION GATE
       // ======================
-      if (!vendorId) {
+      if (!vendorId || !franchiseId) {
         logger.warn("[TaskController] Missing vendorId", {
           vendorId,
         });
 
         return res.status(400).json({
           success: false,
-          message: "Vendor ID is required",
+          message: "Vendor ID and Franchise ID are required",
         });
       }
 
@@ -437,6 +747,7 @@ export class TaskController {
       const { tasks, count, summary } =
         await TaskService.getTasksFilterByVendor2(
           vendorId,
+          franchiseId,
           page,
           limit,
           filters,
@@ -469,21 +780,175 @@ export class TaskController {
     }
   }
 
-  
+  static async getReportTasksFilterByVendorAll(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = Number(req.body.franchise_id);
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format in date_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date in date_range",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      let assignatRange: { from: string; to: string } | undefined;
+
+      if (req.body.assignat_range) {
+        const { from, to } = req.body.assignat_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'from' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message:
+              "Invalid 'to' date format in assignat_range. Use YYYY-MM-DD",
+          });
+        }
+
+        if (from && !to) {
+          assignatRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message:
+                "'from' date cannot be after 'to' date in assignat_range",
+            });
+          }
+          assignatRange = { from, to };
+        } else if (!from && to) {
+          assignatRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        lead_code: req.body.lead_code,
+        lead_name: req.body.lead_name,
+        phone: req.body.phone,
+        task_type: req.body.task_type,
+        due_date: req.body.due_date,
+        due_filter: req.body.due_filter,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        product_type: req.body.product_type,
+        product_structure: req.body.product_structure,
+        assign_by: req.body.assign_by,
+        assign_to: req.body.assign_to,
+        created_at: req.body.created_at,
+        date_range: dateRange,
+        assignat_range: assignatRange,
+      };
+
+      if (!vendorId || !franchiseId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and Franchise ID are required",
+        });
+      }
+
+      const { tasks, count, summary } =
+        await TaskService.getTasksFilterByVendorReport(
+          vendorId,
+          franchiseId,
+          page,
+          limit,
+          filters,
+        );
+
+      return res.status(200).json({
+        success: true,
+        message: "Report vendor tasks fetched successfully",
+        count,
+        summary,
+        data: tasks,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getReportTasksFilterByVendorAll Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  }
+
+
   static async getActiveTasksByVendorAndLead(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId, 10);
-      const leadId = parseInt(req.params.leadId, 10);
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const rawFranchiseId = req.query.franchise_id;
+      const franchiseId =
+        rawFranchiseId === undefined || rawFranchiseId === null || rawFranchiseId === ""
+          ? undefined
+          : Number(rawFranchiseId);
 
-      if (isNaN(vendorId) || isNaN(leadId)) {
+      if (
+        isNaN(vendorId) ||
+        isNaN(leadId) ||
+        (franchiseId !== undefined && isNaN(franchiseId))
+      ) {
         return res
           .status(400)
-          .json({ success: false, message: "Invalid vendorId or leadId" });
+          .json({
+            success: false,
+            message: "Invalid vendorId, leadId, or franchise_id",
+          });
       }
 
       const tasks = await TaskService.getActiveTasksByVendorAndLead(
         vendorId,
         leadId,
+        franchiseId,
       );
       return res
         .status(200)
@@ -496,6 +961,145 @@ export class TaskController {
       return res.status(500).json({
         success: false,
         message: "Failed to fetch active tasks",
+        error: error.message,
+      });
+    }
+  }
+
+  static async actOnSmallOrderRequestTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const actedBy = Number(req.body.acted_by);
+      const action = String(req.body.action ?? "");
+      const remark =
+        typeof req.body.remark === "string" ? req.body.remark : null;
+
+      const result = await actOnSmallOrderRequestTask({
+        lead_id: leadId,
+        task_id: taskId,
+        acted_by: actedBy,
+        action: action === "reject" ? "reject" : "approve",
+        remark,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message:
+          action === "reject"
+            ? "Small order request rejected successfully"
+            : "Small order request approved successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] actOnSmallOrderRequestTask Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      const message =
+        error?.message || "Failed to update small order request task";
+      const statusCode =
+        message.includes("required") ||
+          message.includes("not found") ||
+          message.includes("not allowed") ||
+          message.includes("Only") ||
+          message.includes("already completed") ||
+          message.includes("No approval action")
+          ? 400
+          : 500;
+
+      return res.status(statusCode).json({
+        success: false,
+        message,
+      });
+    }
+  }
+
+  static async getTaskDetails(req: Request, res: Response) {
+    try {
+      const taskId = Number(req.params.taskId);
+
+      if (isNaN(taskId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid taskId",
+        });
+      }
+
+      const task = await prisma.userLeadTask.findUnique({
+        where: { id: taskId },
+        include: {
+          lead: {
+            include: {
+              statusType: true,
+              createdBy: {
+                select: {
+                  user_name: true,
+                }
+              },
+              assignedTo: {
+                select: {
+                  user_name: true,
+                }
+              }
+            }
+          },
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+          createdBy: {
+            select: {
+              user_name: true,
+            },
+          },
+          closedBy: {
+            select: {
+              user_name: true,
+            },
+          },
+          instance: {
+            select: {
+              title: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        return res.status(404).json({
+          success: false,
+          message: "Task not found",
+        });
+      }
+
+      let approvalRequest = null;
+      try {
+        const approvalRequestService = new ApprovalRequestService();
+        approvalRequest = await approvalRequestService.getApprovalRequestDetails(task.lead_id, taskId);
+      } catch (err) {
+        // Not an approval task or not found
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          ...task,
+          approvalRequest,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getTaskDetails Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch task details",
         error: error.message,
       });
     }

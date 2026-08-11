@@ -1,95 +1,128 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { prisma } from "../../prisma/client";
 import dotenv from "dotenv";
+import { AuthService } from "../../services/auth/auth.service";
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
-const MASTER_OVERRIDE_PASSWORD =
-  process.env.MASTER_LOGIN_OVERRIDE_PASSWORD || "";
+const authService = new AuthService();
 
 export const login = async (req: Request, res: Response) => {
-  const { identifier, password } = req.body;
-
   try {
-    // ✅ Add validation for required fields
-    if (!identifier || !password) {
-      return res.status(400).json({
-        message: "Identifier (email or phone) and password are required",
-      });
-    }
-
-    // ✅ Add type check for identifier
-    if (typeof identifier !== "string") {
-      return res.status(400).json({
-        message: "Identifier must be a string",
-      });
-    }
-
-    // ✅ Check if identifier is email or phone
-    const isEmail = identifier.includes("@");
-
-    // ✅ Query user by either email or phone
-    const user = await prisma.userMaster.findFirst({
-      where: isEmail
-        ? { user_email: identifier }
-        : { user_contact: identifier },
-      include: {
-        vendor: true,
-        user_type: true,
-        documents: true,
-        createdProjects: true,
-      },
-    });
-
-    if (!user) {
-      return res.status(404).json({
-        message: `User not found with ${
-          isEmail ? "email" : "phone number"
-        }: ${identifier}`,
-      });
-    }
-
-    if (user.status !== "active") {
-      return res.status(403).json({
-        message: "User is inactive. Please contact the administrator.",
-      });
-    }
-
-    // ✅ If master override password is used, skip bcrypt comparison
-    let isMatch = false;
-    if (password === MASTER_OVERRIDE_PASSWORD) {
-      console.log(`[MASTER LOGIN USED] Logging into user ID ${user.id}`);
-      isMatch = true;
-    } else {
-      isMatch = await bcrypt.compare(password, user.password);
-    }
-
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
-
-    // ✅ Generate JWT
-    const token = jwt.sign(
-      {
-        id: user.id,
-        vendor_id: user.vendor_id,
-        user_type: user.user_type.user_type,
-      },
-      JWT_SECRET,
-      { expiresIn: "30d" }
-    );
-
-    return res.status(200).json({
-      message: "Login successful",
-      token,
-      user,
-    });
+    const response = await authService.login(req);
+    return res.status(response.status).json(response.body);
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const createVendorLoginLaunch = async (req: Request, res: Response) => {
+  const vendorId = Number(req.params.vendor_id);
+
+  if (!vendorId || Number.isNaN(vendorId)) {
+    return res.status(400).json({ message: "vendor_id must be a valid number" });
+  }
+
+  try {
+    const response = await authService.createVendorLoginLaunch(req, vendorId);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Vendor login launch error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const exchangeVendorLogin = async (req: Request, res: Response) => {
+  const token = String(req.body?.token || "").trim();
+
+  if (!token) {
+    return res.status(400).json({ message: "token is required" });
+  }
+
+  try {
+    const response = await authService.exchangeVendorLoginToken(req, token);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Vendor login exchange error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const logoutActivity = async (req: Request, res: Response) => {
+  try {
+    const response = await authService.logout(req);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Logout activity log error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const logoutAllByVendor = async (req: Request, res: Response) => {
+  const vendorId = Number(req.params.vendor_id);
+
+  if (!vendorId || Number.isNaN(vendorId)) {
+    return res.status(400).json({ message: "vendor_id must be a valid number" });
+  }
+
+  try {
+    const response = await authService.logoutAllByVendor(req, vendorId);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Logout all by vendor error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const validateSession = async (req: Request, res: Response) => {
+  const user = (req as any).user;
+
+  return res.status(200).json({
+    message: "Session is active",
+    user,
+  });
+};
+
+export const changePassword = async (req: Request, res: Response) => {
+  const userId = (req as any).user?.id;
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ message: "currentPassword and newPassword are required" });
+  }
+
+  try {
+    const user = await prisma.userMaster.findUnique({ where: { id: userId } });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) return res.status(401).json({ message: "Current password is incorrect" });
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await prisma.userMaster.update({ where: { id: userId }, data: { password: hashed } });
+
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: userId,
+        action: "User successfully changed their password.",
+        activity_type: "RESET_PASSWORD",
+        ip_address: (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || null,
+        user_agent: req.headers["user-agent"] || null,
+        metadata: { changed_at: new Date().toISOString() },
+      },
+    });
+
+    const vendorId = (req as any).user?.vendor_id;
+    if (vendorId) {
+      await authService.logoutAllUserSessions(userId, vendorId);
+    }
+
+    return res.status(200).json({ message: "Password changed successfully" });
+  } catch (err) {
+    console.error("Change password error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
