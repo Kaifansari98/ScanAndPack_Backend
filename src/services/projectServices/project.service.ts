@@ -1612,9 +1612,33 @@ export const handelItems_29_july = async (
         }
       });
 
+      const toNumber = (value: any): number => {
+        if (value === undefined || value === null || value === "") {
+          return 0;
+        }
+
+        const numericValue = Number(
+          String(value)
+            .replace(/,/g, "")
+            .replace(/kg/gi, "")
+            .trim()
+        );
+
+        return Number.isFinite(numericValue) ? numericValue : 0;
+      };
+
+      const roundWeight = (value: number): number => {
+        return Number(value.toFixed(7));
+      };
+
       for (const item of payload.items) {
 
         const quantity = Number(item.qty);
+        const excelRowWeight = roundWeight(
+          toNumber((item as any).weight) * quantity
+        );
+        const perItemWeight =
+          quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
         const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
 
         // 1 cutList row per item regardless of qty
@@ -1641,6 +1665,7 @@ export const handelItems_29_july = async (
             group_name: item.groupName || null,
             category_name: item.categoryName || null,
             procurement: item.procurement || null,
+            weight: excelRowWeight,
           }
         });
 
@@ -1694,6 +1719,7 @@ export const handelItems_29_july = async (
                     status: "Pending",
                     created_by: createdByUserId,
                     expected_in: true,
+                    weight: Number(typeId) === 18 ? perItemWeight : 0,
                   },
                 });
               }
@@ -1726,7 +1752,8 @@ export const handelItems_29_july = async (
                 sequence_no: machine_type_11.sequence_no ?? 0,
                 status: "Pending",
                 created_by: createdByUserId,
-                expected_in: true
+                expected_in: true,
+                weight: 0,
               }
             });
           }
@@ -1752,6 +1779,7 @@ export const handelItems_29_july = async (
                 status: "Pending",
                 created_by: createdByUserId,
                 expected_in: true,
+                weight: 0,
               },
             });
           }
@@ -1779,6 +1807,7 @@ export const handelItems_29_july = async (
                   status: "Pending",
                   created_by: createdByUserId,
                   expected_in: true,
+                  weight: 0,
                 },
               });
             }
@@ -1806,6 +1835,7 @@ export const handelItems_29_july = async (
                   status: "Pending",
                   created_by: createdByUserId,
                   expected_in: true,
+                  weight: Number(typeId) === 18 ? perItemWeight : 0,
                 },
               });
             }
@@ -2074,9 +2104,33 @@ export const handelItems = async (
         }
       });
 
+      const toNumber = (value: any): number => {
+        if (value === undefined || value === null || value === "") {
+          return 0;
+        }
+
+        const numericValue = Number(
+          String(value)
+            .replace(/,/g, "")
+            .replace(/kg/gi, "")
+            .trim()
+        );
+
+        return Number.isFinite(numericValue) ? numericValue : 0;
+      };
+
+      const roundWeight = (value: number): number => {
+        return Number(value.toFixed(7));
+      };
+
       for (const item of payload.items) {
 
         const quantity = Number(item.qty);
+        const excelRowWeight = roundWeight(
+          toNumber((item as any).weight) * quantity
+        );
+        const perItemWeight =
+          quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
         const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
 
         // 1 cutList row per item regardless of qty
@@ -2103,6 +2157,7 @@ export const handelItems = async (
             group_name: item.groupName || null,
             category_name: item.categoryName || null,
             procurement: item.procurement || null,
+            weight: excelRowWeight,
           }
         });
 
@@ -2156,6 +2211,7 @@ export const handelItems = async (
                     status: "Pending",
                     created_by: createdByUserId,
                     expected_in: true,
+                    weight: Number(typeId) === 18 ? perItemWeight : 0,
                   },
                 });
               }
@@ -2188,7 +2244,8 @@ export const handelItems = async (
                 sequence_no: machine_type_11.sequence_no ?? 0,
                 status: "Pending",
                 created_by: createdByUserId,
-                expected_in: true
+                expected_in: true,
+                weight: 0,
               }
             });
           }
@@ -2214,6 +2271,7 @@ export const handelItems = async (
                 status: "Pending",
                 created_by: createdByUserId,
                 expected_in: true,
+                weight: 0,
               },
             });
           }
@@ -2241,6 +2299,7 @@ export const handelItems = async (
                   status: "Pending",
                   created_by: createdByUserId,
                   expected_in: true,
+                  weight: 0,
                 },
               });
             }
@@ -2268,6 +2327,7 @@ export const handelItems = async (
                   status: "Pending",
                   created_by: createdByUserId,
                   expected_in: true,
+                  weight: Number(typeId) === 18 ? perItemWeight : 0,
                 },
               });
             }
