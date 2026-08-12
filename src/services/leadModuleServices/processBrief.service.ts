@@ -106,10 +106,9 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
           lead_id,
           vendor_id,
           b2b_requirement_type_id: reqTypeId,
-          product_type_id: reqTypeId,
           process_brief_id: briefId,
           created_by: validCreatedBy,
-        } as any;
+        };
       })
       .filter((item): item is NonNullable<typeof item> => item !== null);
 
@@ -132,10 +131,9 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
           lead_id,
           vendor_id,
           b2b_requirement_type_id: defaultTypeId,
-          product_type_id: defaultTypeId,
           process_brief_id: briefId,
           created_by: validCreatedBy,
-        } as any;
+        };
       })
       .filter((item): item is NonNullable<typeof item> => item !== null);
 
