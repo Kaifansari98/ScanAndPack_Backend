@@ -98,6 +98,11 @@ export type VendorTokens = Prisma.VendorTokensModel
  */
 export type ClientMaster = Prisma.ClientMasterModel
 /**
+ * Model ClientBankDetail
+ * 
+ */
+export type ClientBankDetail = Prisma.ClientBankDetailModel
+/**
  * Model ClientTypeMaster
  * 
  */
@@ -138,6 +143,11 @@ export type LeadUserMapping = Prisma.LeadUserMappingModel
  */
 export type LeadActivityStatusLog = Prisma.LeadActivityStatusLogModel
 /**
+ * Model LeadScopedActivityStatusLog
+ * 
+ */
+export type LeadScopedActivityStatusLog = Prisma.LeadScopedActivityStatusLogModel
+/**
  * Model SiteTypeMaster
  * 
  */
@@ -162,6 +172,21 @@ export type LeadProductMapping = Prisma.LeadProductMappingModel
  * 
  */
 export type ProductTypeMaster = Prisma.ProductTypeMasterModel
+/**
+ * Model ProcessBriefMaster
+ * 
+ */
+export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
+/**
+ * Model LeadProcessBriefMapping
+ * 
+ */
+export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
+/**
+ * Model LeadRequirementMaterialMapping
+ * 
+ */
+export type LeadRequirementMaterialMapping = Prisma.LeadRequirementMaterialMappingModel
 /**
  * Model CarcassTypeMaster
  * 
@@ -242,11 +267,6 @@ export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
  * 
  */
 export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
-/**
- * Model LeadOtherAppliancesRemarkMapping
- * 
- */
-export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
 /**
  * Model HandleTypeMaster
  * 
@@ -758,6 +778,31 @@ export type BrandMaster = Prisma.BrandMasterModel
  */
 export type ProductMaster = Prisma.ProductMasterModel
 /**
+ * Model CoreProductMaster
+ * 
+ */
+export type CoreProductMaster = Prisma.CoreProductMasterModel
+/**
+ * Model GradeMaster
+ * 
+ */
+export type GradeMaster = Prisma.GradeMasterModel
+/**
+ * Model FinishMaster
+ * 
+ */
+export type FinishMaster = Prisma.FinishMasterModel
+/**
+ * Model TypeMaster
+ * 
+ */
+export type TypeMaster = Prisma.TypeMasterModel
+/**
+ * Model ItemTypeMaster
+ * 
+ */
+export type ItemTypeMaster = Prisma.ItemTypeMasterModel
+/**
  * Model PurchaseIntentMaster
  * 
  */
@@ -953,7 +998,52 @@ export type BroadcastRead = Prisma.BroadcastReadModel
  */
 export type NotificationQueue = Prisma.NotificationQueueModel
 /**
- * Model LeadBillingAddress
+ * Model B2BRequirementTypeMaster
  * 
  */
-export type LeadBillingAddress = Prisma.LeadBillingAddressModel
+export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
+/**
+ * Model LeadB2BRequirementTypeMapping
+ * 
+ */
+export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
+/**
+ * Model LeadOtherAppliancesRemarkMapping
+ * 
+ */
+export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
+/**
+ * Model UserTypePrivilegeMapping
+ * 
+ */
+export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
+/**
+ * Model online_lead_call_log
+ * 
+ */
+export type online_lead_call_log = Prisma.online_lead_call_logModel
+/**
+ * Model online_lead_followup_status
+ * 
+ */
+export type online_lead_followup_status = Prisma.online_lead_followup_statusModel
+/**
+ * Model online_lead_history
+ * 
+ */
+export type online_lead_history = Prisma.online_lead_historyModel
+/**
+ * Model online_lead_store_log
+ * 
+ */
+export type online_lead_store_log = Prisma.online_lead_store_logModel
+/**
+ * Model online_leads
+ * 
+ */
+export type online_leads = Prisma.online_leadsModel
+/**
+ * Model telecaller_campaign_leads
+ * 
+ */
+export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel

@@ -204,6 +204,7 @@ export const createLeadService = async (
     assign_to,
     assigned_by,
     product_types = [],
+    b2b_requirement_type_ids = [],
     product_structures = [],
     product_structure_instances = [],
     initial_site_measurement_date,
@@ -485,6 +486,35 @@ export const createLeadService = async (
           });
           logger.info("✅ Product mapping created", { productTypeId });
         }
+
+        // 3.5 Validate and create mappings for b2b requirement types
+        for (const reqTypeId of b2b_requirement_type_ids) {
+          logger.debug("Processing B2B requirement type", { reqTypeId });
+
+          const reqType = await tx.b2BRequirementTypeMaster.findFirst({
+            where: {
+              id: reqTypeId,
+              vendor_id,
+            },
+          });
+
+          if (!reqType) {
+            throw new Error(
+              `B2B Requirement type with ID ${reqTypeId} not found for vendor ${vendor_id}`,
+            );
+          }
+
+          await tx.leadB2BRequirementTypeMapping.create({
+            data: {
+              vendor_id,
+              lead_id: lead.id,
+              b2b_requirement_type_id: reqTypeId,
+              created_by,
+            },
+          });
+          logger.info("✅ B2B Requirement mapping created", { reqTypeId });
+        }
+
 
         // 4. Validate and create mappings for product structures using IDs
         for (const productStructureId of product_structures) {
@@ -912,6 +942,22 @@ export const getLeadsByVendorAndUser = async (
         productMappings: {
           select: { productType: { select: { id: true, type: true } } },
         },
+        leadB2BReqMappings: {
+          select: {
+            id: true,
+            b2b_requirement_type_id: true,
+            b2bRequirementType: { select: { id: true, type: true } },
+          },
+        },
+        leadProcessBriefs: {
+          select: {
+            id: true,
+            b2b_requirement_type_id: true,
+            process_brief_id: true,
+            processBrief: { select: { id: true, name: true } },
+            b2bRequirementType: { select: { id: true, type: true } },
+          },
+        },
         documents: {
           where: {
             documentType: { tag: "Type 1", vendor_id: vendorId },
@@ -1066,6 +1112,8 @@ export const getLeadById = async (
         source: true,
         statusType: true,
         productMappings: { include: { productType: true } },
+        leadB2BReqMappings: { include: { b2bRequirementType: true } },
+        leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
         leadProductStructureMapping: { include: { productStructure: true } },
         documents: {
           where: { deleted_at: null, documentType: { tag: "Type 1" } },

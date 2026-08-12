@@ -527,6 +527,7 @@ export type LeadProductStructureInstanceWhereInput = {
   subProductStructure?: Prisma.XOR<Prisma.ProductSubStructureNullableScalarRelationFilter, Prisma.ProductSubStructureWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
 }
 
@@ -578,6 +579,7 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   subProductStructure?: Prisma.ProductSubStructureOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogOrderByRelationAggregateInput
   tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
 }
 
@@ -633,6 +635,7 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   subProductStructure?: Prisma.XOR<Prisma.ProductSubStructureNullableScalarRelationFilter, Prisma.ProductSubStructureWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogListRelationFilter
   tasks?: Prisma.UserLeadTaskListRelationFilter
 }, "id" | "uniq_structure_instance">
 
@@ -761,6 +764,7 @@ export type LeadProductStructureInstanceCreateInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -804,6 +808,7 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -846,6 +851,7 @@ export type LeadProductStructureInstanceUpdateInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -889,6 +895,7 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -1304,6 +1311,22 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInpu
   deleteMany?: Prisma.LeadProductStructureInstanceScalarWhereInput | Prisma.LeadProductStructureInstanceScalarWhereInput[]
 }
 
+export type LeadProductStructureInstanceCreateNestedOneWithoutActivityStatusLogsInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+}
+
+export type LeadProductStructureInstanceUpdateOneWithoutActivityStatusLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput
+  upsert?: Prisma.LeadProductStructureInstanceUpsertWithoutActivityStatusLogsInput
+  disconnect?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  delete?: Prisma.LeadProductStructureInstanceWhereInput | boolean
+  connect?: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateToOneWithWhereWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput>, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+}
+
 export type LeadProductStructureInstanceCreateNestedManyWithoutAccountInput = {
   create?: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutAccountInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutAccountInput> | Prisma.LeadProductStructureInstanceCreateWithoutAccountInput[] | Prisma.LeadProductStructureInstanceUncheckedCreateWithoutAccountInput[]
   connectOrCreate?: Prisma.LeadProductStructureInstanceCreateOrConnectWithoutAccountInput | Prisma.LeadProductStructureInstanceCreateOrConnectWithoutAccountInput[]
@@ -1618,6 +1641,7 @@ export type LeadProductStructureInstanceCreateWithoutVendorInput = {
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -1660,6 +1684,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -1769,6 +1794,7 @@ export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -1811,6 +1837,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -1878,6 +1905,7 @@ export type LeadProductStructureInstanceCreateWithoutLeadInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -1920,6 +1948,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -1947,6 +1976,192 @@ export type LeadProductStructureInstanceUpdateWithWhereUniqueWithoutLeadInput = 
 export type LeadProductStructureInstanceUpdateManyWithWhereWithoutLeadInput = {
   where: Prisma.LeadProductStructureInstanceScalarWhereInput
   data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateManyMutationInput, Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput>
+}
+
+export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  quantity?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutProductStructureInstanceInput
+  account: Prisma.AccountMasterCreateNestedOneWithoutProductStructureInstancesInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutProductStructureInstancesInput
+  productItemCode?: Prisma.ProductItemCodeCreateNestedOneWithoutLeadProductStructureInstancesInput
+  productStructure: Prisma.ProductStructureCreateNestedOneWithoutProductStructureInstancesInput
+  productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
+  subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  account_id: number
+  product_type_id: number
+  product_structure_id: number
+  quantity_index: number
+  title: string
+  status?: $Enums.ProductInstanceStatus
+  description?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_tech_check_completed?: boolean | null
+  tech_check_completed_at?: Date | string | null
+  is_order_login_completed?: boolean | null
+  order_login_completed_at?: Date | string | null
+  is_production_completed?: boolean | null
+  production_completed_at?: Date | string | null
+  woodwork_packing_details_remark?: string | null
+  hardware_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  no_of_client_documents_initially_submitted?: number | null
+  is_order_login_filled?: boolean | null
+  is_pre_prod_done?: boolean | null
+  is_under_production?: boolean | null
+  pre_prod_done_at?: Date | string | null
+  under_production_at?: Date | string | null
+  production_erd_date?: Date | string | null
+  is_post_production?: boolean | null
+  pre_prod_remark?: string | null
+  isLargeScaleProjectInstance?: boolean
+  product_item_code_id?: number | null
+  quantity?: number | null
+  sub_product_structure_id?: number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
+}
+
+export type LeadProductStructureInstanceCreateOrConnectWithoutActivityStatusLogsInput = {
+  where: Prisma.LeadProductStructureInstanceWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+}
+
+export type LeadProductStructureInstanceUpsertWithoutActivityStatusLogsInput = {
+  update: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+  create: Prisma.XOR<Prisma.LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogsInput>
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutActivityStatusLogsInput = {
+  where?: Prisma.LeadProductStructureInstanceWhereInput
+  data: Prisma.XOR<Prisma.LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput, Prisma.LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput>
+}
+
+export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutProductStructureInstanceNestedInput
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productItemCode?: Prisma.ProductItemCodeUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  productStructure?: Prisma.ProductStructureUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
+}
+
+export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_tech_check_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_order_login_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_production_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  production_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_order_login_filled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_pre_prod_done?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_under_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_done_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  under_production_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  production_erd_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_post_production?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  pre_prod_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLargeScaleProjectInstance?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  product_item_code_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  quantity?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
+  designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutAccountInput = {
@@ -1987,6 +2202,7 @@ export type LeadProductStructureInstanceCreateWithoutAccountInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2029,6 +2245,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2096,6 +2313,7 @@ export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2138,6 +2356,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2205,6 +2424,7 @@ export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2247,6 +2467,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   sub_product_structure_id?: number | null
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2304,6 +2525,7 @@ export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -2346,6 +2568,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -2387,6 +2610,7 @@ export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2429,6 +2653,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2496,6 +2721,7 @@ export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = 
   productType: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2538,6 +2764,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructur
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2605,6 +2832,7 @@ export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2647,6 +2875,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInp
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2714,6 +2943,7 @@ export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -2756,6 +2986,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   sub_product_structure_id?: number | null
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -2813,6 +3044,7 @@ export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -2855,6 +3087,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -2897,6 +3130,7 @@ export type LeadProductStructureInstanceCreateWithoutTasksInput = {
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
@@ -2939,6 +3173,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutInstanceInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
 }
 
 export type LeadProductStructureInstanceCreateOrConnectWithoutTasksInput = {
@@ -2996,6 +3231,7 @@ export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
@@ -3038,6 +3274,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput = {
@@ -3078,6 +3315,7 @@ export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput
   subProductStructure?: Prisma.ProductSubStructureCreateNestedOneWithoutLeadProductStructureInstancesInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProductStructureInstancesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInstancesInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutInstanceInput
 }
 
@@ -3120,6 +3358,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequ
   sub_product_structure_id?: number | null
   designSelections?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutProductStructureInstanceInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutProductStructureInstanceInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutInstanceInput
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutInstanceInput
 }
 
@@ -3177,6 +3416,7 @@ export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3219,6 +3459,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequ
   sub_product_structure_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3298,6 +3539,7 @@ export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3340,6 +3582,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3457,6 +3700,7 @@ export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3499,6 +3743,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3616,6 +3861,7 @@ export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3658,6 +3904,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3775,6 +4022,7 @@ export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3817,6 +4065,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3934,6 +4183,7 @@ export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -3976,6 +4226,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4093,6 +4344,7 @@ export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4135,6 +4387,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4252,6 +4505,7 @@ export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = 
   productType?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4294,6 +4548,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructur
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4411,6 +4666,7 @@ export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
   subProductStructure?: Prisma.ProductSubStructureUpdateOneWithoutLeadProductStructureInstancesNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProductStructureInstancesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4453,6 +4709,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInp
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutInstanceNestedInput
   designSelections?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutProductStructureInstanceNestedInput
+  activityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutInstanceNestedInput
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput
 }
 
@@ -4503,6 +4760,7 @@ export type LeadProductStructureInstanceCountOutputType = {
   fastProductionRequests: number
   designSelections: number
   documents: number
+  activityStatusLogs: number
   tasks: number
 }
 
@@ -4510,6 +4768,7 @@ export type LeadProductStructureInstanceCountOutputTypeSelect<ExtArgs extends ru
   fastProductionRequests?: boolean | LeadProductStructureInstanceCountOutputTypeCountFastProductionRequestsArgs
   designSelections?: boolean | LeadProductStructureInstanceCountOutputTypeCountDesignSelectionsArgs
   documents?: boolean | LeadProductStructureInstanceCountOutputTypeCountDocumentsArgs
+  activityStatusLogs?: boolean | LeadProductStructureInstanceCountOutputTypeCountActivityStatusLogsArgs
   tasks?: boolean | LeadProductStructureInstanceCountOutputTypeCountTasksArgs
 }
 
@@ -4542,6 +4801,13 @@ export type LeadProductStructureInstanceCountOutputTypeCountDesignSelectionsArgs
  */
 export type LeadProductStructureInstanceCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDocumentsWhereInput
+}
+
+/**
+ * LeadProductStructureInstanceCountOutputType without action
+ */
+export type LeadProductStructureInstanceCountOutputTypeCountActivityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
 }
 
 /**
@@ -4600,6 +4866,7 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
   tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadProductStructureInstance"]>
@@ -4750,6 +5017,7 @@ export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Ex
   subProductStructure?: boolean | Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  activityStatusLogs?: boolean | Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>
   tasks?: boolean | Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.LeadProductStructureInstanceCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -4788,6 +5056,7 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     subProductStructure: Prisma.$ProductSubStructurePayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    activityStatusLogs: Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>[]
     tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -5232,6 +5501,7 @@ export interface Prisma__LeadProductStructureInstanceClient<T, Null = never, Ext
   subProductStructure<T extends Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$subProductStructureArgs<ExtArgs>>): Prisma.Prisma__ProductSubStructureClient<runtime.Types.Result.GetResult<Prisma.$ProductSubStructurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  activityStatusLogs<T extends Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadScopedActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tasks<T extends Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadProductStructureInstance$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5825,6 +6095,30 @@ export type LeadProductStructureInstance$updatedByArgs<ExtArgs extends runtime.T
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadProductStructureInstance.activityStatusLogs
+ */
+export type LeadProductStructureInstance$activityStatusLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadScopedActivityStatusLog
+   */
+  select?: Prisma.LeadScopedActivityStatusLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadScopedActivityStatusLog
+   */
+  omit?: Prisma.LeadScopedActivityStatusLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadScopedActivityStatusLogInclude<ExtArgs> | null
+  where?: Prisma.LeadScopedActivityStatusLogWhereInput
+  orderBy?: Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput | Prisma.LeadScopedActivityStatusLogOrderByWithRelationInput[]
+  cursor?: Prisma.LeadScopedActivityStatusLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadScopedActivityStatusLogScalarFieldEnum | Prisma.LeadScopedActivityStatusLogScalarFieldEnum[]
 }
 
 /**
