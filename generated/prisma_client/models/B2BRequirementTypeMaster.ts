@@ -229,10 +229,10 @@ export type B2BRequirementTypeMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"B2BRequirementTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"B2BRequirementTypeMaster"> | Date | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
+  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
-  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
 }
 
 export type B2BRequirementTypeMasterOrderByWithRelationInput = {
@@ -243,10 +243,10 @@ export type B2BRequirementTypeMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingOrderByRelationAggregateInput
+  requirementDocuments?: Prisma.LeadDocumentsOrderByRelationAggregateInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
-  requirementDocuments?: Prisma.LeadDocumentsOrderByRelationAggregateInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingOrderByRelationAggregateInput
 }
 
 export type B2BRequirementTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -260,10 +260,10 @@ export type B2BRequirementTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"B2BRequirementTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"B2BRequirementTypeMaster"> | Date | string
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
+  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
-  requirementDocuments?: Prisma.LeadDocumentsListRelationFilter
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingListRelationFilter
 }, "id">
 
 export type B2BRequirementTypeMasterOrderByWithAggregationInput = {
@@ -298,10 +298,10 @@ export type B2BRequirementTypeMasterCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutB2bRequirementTypesInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateInput = {
@@ -311,10 +311,10 @@ export type B2BRequirementTypeMasterUncheckedCreateInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUpdateInput = {
@@ -323,10 +323,10 @@ export type B2BRequirementTypeMasterUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutB2bRequirementTypesNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateInput = {
@@ -336,10 +336,10 @@ export type B2BRequirementTypeMasterUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterCreateManyInput = {
@@ -533,10 +533,10 @@ export type B2BRequirementTypeMasterCreateWithoutVendorInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -545,10 +545,10 @@ export type B2BRequirementTypeMasterUncheckedCreateWithoutVendorInput = {
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -595,9 +595,9 @@ export type B2BRequirementTypeMasterCreateWithoutLeadProcessBriefsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutB2bRequirementTypesInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
@@ -607,9 +607,9 @@ export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadProcessBriefsInput
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
@@ -634,9 +634,9 @@ export type B2BRequirementTypeMasterUpdateWithoutLeadProcessBriefsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutB2bRequirementTypesNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
@@ -646,9 +646,9 @@ export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadProcessBriefsInput
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterCreateWithoutLeadRequirementMaterialsInput = {
@@ -657,9 +657,9 @@ export type B2BRequirementTypeMasterCreateWithoutLeadRequirementMaterialsInput =
   created_at?: Date | string
   updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutB2bRequirementTypesInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
@@ -669,9 +669,9 @@ export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadRequirementMateria
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterCreateOrConnectWithoutLeadRequirementMaterialsInput = {
@@ -696,9 +696,9 @@ export type B2BRequirementTypeMasterUpdateWithoutLeadRequirementMaterialsInput =
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutB2bRequirementTypesNestedInput
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
@@ -708,9 +708,9 @@ export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadRequirementMateria
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterCreateWithoutRequirementDocumentsInput = {
@@ -719,9 +719,9 @@ export type B2BRequirementTypeMasterCreateWithoutRequirementDocumentsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutB2bRequirementTypesInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateWithoutRequirementDocumentsInput = {
@@ -731,9 +731,9 @@ export type B2BRequirementTypeMasterUncheckedCreateWithoutRequirementDocumentsIn
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterCreateOrConnectWithoutRequirementDocumentsInput = {
@@ -758,9 +758,9 @@ export type B2BRequirementTypeMasterUpdateWithoutRequirementDocumentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutB2bRequirementTypesNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateWithoutRequirementDocumentsInput = {
@@ -770,9 +770,9 @@ export type B2BRequirementTypeMasterUncheckedUpdateWithoutRequirementDocumentsIn
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterCreateWithoutLeadB2BReqMappingsInput = {
@@ -781,9 +781,9 @@ export type B2BRequirementTypeMasterCreateWithoutLeadB2BReqMappingsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutB2bRequirementTypesInput
+  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
@@ -793,9 +793,9 @@ export type B2BRequirementTypeMasterUncheckedCreateWithoutLeadB2BReqMappingsInpu
   status?: string
   created_at?: Date | string
   updated_at?: Date | string
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutB2bRequirementTypeInput
 }
 
 export type B2BRequirementTypeMasterCreateOrConnectWithoutLeadB2BReqMappingsInput = {
@@ -820,9 +820,9 @@ export type B2BRequirementTypeMasterUpdateWithoutLeadB2BReqMappingsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutB2bRequirementTypesNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
@@ -832,9 +832,9 @@ export type B2BRequirementTypeMasterUncheckedUpdateWithoutLeadB2BReqMappingsInpu
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterCreateManyVendorInput = {
@@ -850,10 +850,10 @@ export type B2BRequirementTypeMasterUpdateWithoutVendorInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -862,10 +862,10 @@ export type B2BRequirementTypeMasterUncheckedUpdateWithoutVendorInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
+  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  requirementDocuments?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
-  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutB2bRequirementTypeNestedInput
 }
 
 export type B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -882,17 +882,17 @@ export type B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type B2BRequirementTypeMasterCountOutputType = {
+  leadB2BReqMappings: number
+  requirementDocuments: number
   leadProcessBriefs: number
   leadRequirementMaterials: number
-  requirementDocuments: number
-  leadB2BReqMappings: number
 }
 
 export type B2BRequirementTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  leadB2BReqMappings?: boolean | B2BRequirementTypeMasterCountOutputTypeCountLeadB2BReqMappingsArgs
+  requirementDocuments?: boolean | B2BRequirementTypeMasterCountOutputTypeCountRequirementDocumentsArgs
   leadProcessBriefs?: boolean | B2BRequirementTypeMasterCountOutputTypeCountLeadProcessBriefsArgs
   leadRequirementMaterials?: boolean | B2BRequirementTypeMasterCountOutputTypeCountLeadRequirementMaterialsArgs
-  requirementDocuments?: boolean | B2BRequirementTypeMasterCountOutputTypeCountRequirementDocumentsArgs
-  leadB2BReqMappings?: boolean | B2BRequirementTypeMasterCountOutputTypeCountLeadB2BReqMappingsArgs
 }
 
 /**
@@ -903,6 +903,20 @@ export type B2BRequirementTypeMasterCountOutputTypeDefaultArgs<ExtArgs extends r
    * Select specific fields to fetch from the B2BRequirementTypeMasterCountOutputType
    */
   select?: Prisma.B2BRequirementTypeMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * B2BRequirementTypeMasterCountOutputType without action
+ */
+export type B2BRequirementTypeMasterCountOutputTypeCountLeadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
+}
+
+/**
+ * B2BRequirementTypeMasterCountOutputType without action
+ */
+export type B2BRequirementTypeMasterCountOutputTypeCountRequirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadDocumentsWhereInput
 }
 
 /**
@@ -919,20 +933,6 @@ export type B2BRequirementTypeMasterCountOutputTypeCountLeadRequirementMaterials
   where?: Prisma.LeadRequirementMaterialMappingWhereInput
 }
 
-/**
- * B2BRequirementTypeMasterCountOutputType without action
- */
-export type B2BRequirementTypeMasterCountOutputTypeCountRequirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadDocumentsWhereInput
-}
-
-/**
- * B2BRequirementTypeMasterCountOutputType without action
- */
-export type B2BRequirementTypeMasterCountOutputTypeCountLeadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
-}
-
 
 export type B2BRequirementTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -942,10 +942,10 @@ export type B2BRequirementTypeMasterSelect<ExtArgs extends runtime.Types.Extensi
   created_at?: boolean
   updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  leadB2BReqMappings?: boolean | Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>
+  requirementDocuments?: boolean | Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>
   leadProcessBriefs?: boolean | Prisma.B2BRequirementTypeMaster$leadProcessBriefsArgs<ExtArgs>
   leadRequirementMaterials?: boolean | Prisma.B2BRequirementTypeMaster$leadRequirementMaterialsArgs<ExtArgs>
-  requirementDocuments?: boolean | Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>
-  leadB2BReqMappings?: boolean | Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.B2BRequirementTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["b2BRequirementTypeMaster"]>
 
@@ -981,10 +981,10 @@ export type B2BRequirementTypeMasterSelectScalar = {
 export type B2BRequirementTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "status" | "created_at" | "updated_at", ExtArgs["result"]["b2BRequirementTypeMaster"]>
 export type B2BRequirementTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  leadB2BReqMappings?: boolean | Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>
+  requirementDocuments?: boolean | Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>
   leadProcessBriefs?: boolean | Prisma.B2BRequirementTypeMaster$leadProcessBriefsArgs<ExtArgs>
   leadRequirementMaterials?: boolean | Prisma.B2BRequirementTypeMaster$leadRequirementMaterialsArgs<ExtArgs>
-  requirementDocuments?: boolean | Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>
-  leadB2BReqMappings?: boolean | Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.B2BRequirementTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type B2BRequirementTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -998,10 +998,10 @@ export type $B2BRequirementTypeMasterPayload<ExtArgs extends runtime.Types.Exten
   name: "B2BRequirementTypeMaster"
   objects: {
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    leadB2BReqMappings: Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>[]
+    requirementDocuments: Prisma.$LeadDocumentsPayload<ExtArgs>[]
     leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
     leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
-    requirementDocuments: Prisma.$LeadDocumentsPayload<ExtArgs>[]
-    leadB2BReqMappings: Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1405,10 +1405,10 @@ readonly fields: B2BRequirementTypeMasterFieldRefs;
 export interface Prisma__B2BRequirementTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  leadB2BReqMappings<T extends Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  requirementDocuments<T extends Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProcessBriefs<T extends Prisma.B2BRequirementTypeMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadRequirementMaterials<T extends Prisma.B2BRequirementTypeMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  requirementDocuments<T extends Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadB2BReqMappings<T extends Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadB2BRequirementTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1845,6 +1845,54 @@ export type B2BRequirementTypeMasterDeleteManyArgs<ExtArgs extends runtime.Types
 }
 
 /**
+ * B2BRequirementTypeMaster.leadB2BReqMappings
+ */
+export type B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadB2BRequirementTypeMapping
+   */
+  select?: Prisma.LeadB2BRequirementTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadB2BRequirementTypeMapping
+   */
+  omit?: Prisma.LeadB2BRequirementTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadB2BRequirementTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
+  orderBy?: Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput | Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadB2BRequirementTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum | Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum[]
+}
+
+/**
+ * B2BRequirementTypeMaster.requirementDocuments
+ */
+export type B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDocuments
+   */
+  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadDocuments
+   */
+  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
+  where?: Prisma.LeadDocumentsWhereInput
+  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
+  cursor?: Prisma.LeadDocumentsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
+}
+
+/**
  * B2BRequirementTypeMaster.leadProcessBriefs
  */
 export type B2BRequirementTypeMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1890,54 +1938,6 @@ export type B2BRequirementTypeMaster$leadRequirementMaterialsArgs<ExtArgs extend
   take?: number
   skip?: number
   distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
-}
-
-/**
- * B2BRequirementTypeMaster.requirementDocuments
- */
-export type B2BRequirementTypeMaster$requirementDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadDocuments
-   */
-  select?: Prisma.LeadDocumentsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadDocuments
-   */
-  omit?: Prisma.LeadDocumentsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadDocumentsInclude<ExtArgs> | null
-  where?: Prisma.LeadDocumentsWhereInput
-  orderBy?: Prisma.LeadDocumentsOrderByWithRelationInput | Prisma.LeadDocumentsOrderByWithRelationInput[]
-  cursor?: Prisma.LeadDocumentsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
-}
-
-/**
- * B2BRequirementTypeMaster.leadB2BReqMappings
- */
-export type B2BRequirementTypeMaster$leadB2BReqMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadB2BRequirementTypeMapping
-   */
-  select?: Prisma.LeadB2BRequirementTypeMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadB2BRequirementTypeMapping
-   */
-  omit?: Prisma.LeadB2BRequirementTypeMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadB2BRequirementTypeMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadB2BRequirementTypeMappingWhereInput
-  orderBy?: Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput | Prisma.LeadB2BRequirementTypeMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadB2BRequirementTypeMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum | Prisma.LeadB2BRequirementTypeMappingScalarFieldEnum[]
 }
 
 /**

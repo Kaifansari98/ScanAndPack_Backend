@@ -41,25 +41,25 @@ export type SelfAssignTaskTypeMasterSumAggregateOutputType = {
 export type SelfAssignTaskTypeMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  user_type_id: number | null
   type: string | null
   created_at: Date | null
+  user_type_id: number | null
 }
 
 export type SelfAssignTaskTypeMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  user_type_id: number | null
   type: string | null
   created_at: Date | null
+  user_type_id: number | null
 }
 
 export type SelfAssignTaskTypeMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
-  user_type_id: number
   type: number
   created_at: number
+  user_type_id: number
   _all: number
 }
 
@@ -79,25 +79,25 @@ export type SelfAssignTaskTypeMasterSumAggregateInputType = {
 export type SelfAssignTaskTypeMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
-  user_type_id?: true
   type?: true
   created_at?: true
+  user_type_id?: true
 }
 
 export type SelfAssignTaskTypeMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
-  user_type_id?: true
   type?: true
   created_at?: true
+  user_type_id?: true
 }
 
 export type SelfAssignTaskTypeMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
-  user_type_id?: true
   type?: true
   created_at?: true
+  user_type_id?: true
   _all?: true
 }
 
@@ -190,9 +190,9 @@ export type SelfAssignTaskTypeMasterGroupByArgs<ExtArgs extends runtime.Types.Ex
 export type SelfAssignTaskTypeMasterGroupByOutputType = {
   id: number
   vendor_id: number
-  user_type_id: number
   type: string
   created_at: Date
+  user_type_id: number
   _count: SelfAssignTaskTypeMasterCountAggregateOutputType | null
   _avg: SelfAssignTaskTypeMasterAvgAggregateOutputType | null
   _sum: SelfAssignTaskTypeMasterSumAggregateOutputType | null
@@ -221,9 +221,9 @@ export type SelfAssignTaskTypeMasterWhereInput = {
   NOT?: Prisma.SelfAssignTaskTypeMasterWhereInput | Prisma.SelfAssignTaskTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
-  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SelfAssignTaskTypeMaster"> | Date | string
+  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
@@ -231,9 +231,9 @@ export type SelfAssignTaskTypeMasterWhereInput = {
 export type SelfAssignTaskTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  user_type_id?: Prisma.SortOrder
   userType?: Prisma.UserTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
@@ -244,9 +244,9 @@ export type SelfAssignTaskTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SelfAssignTaskTypeMasterWhereInput[]
   NOT?: Prisma.SelfAssignTaskTypeMasterWhereInput | Prisma.SelfAssignTaskTypeMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
-  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SelfAssignTaskTypeMaster"> | Date | string
+  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
@@ -254,9 +254,9 @@ export type SelfAssignTaskTypeMasterWhereUniqueInput = Prisma.AtLeast<{
 export type SelfAssignTaskTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  user_type_id?: Prisma.SortOrder
   _count?: Prisma.SelfAssignTaskTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.SelfAssignTaskTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.SelfAssignTaskTypeMasterMaxOrderByAggregateInput
@@ -270,9 +270,9 @@ export type SelfAssignTaskTypeMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SelfAssignTaskTypeMasterScalarWhereWithAggregatesInput | Prisma.SelfAssignTaskTypeMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | number
-  user_type_id?: Prisma.IntWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | Date | string
+  user_type_id?: Prisma.IntWithAggregatesFilter<"SelfAssignTaskTypeMaster"> | number
 }
 
 export type SelfAssignTaskTypeMasterCreateInput = {
@@ -285,9 +285,9 @@ export type SelfAssignTaskTypeMasterCreateInput = {
 export type SelfAssignTaskTypeMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
-  user_type_id: number
   type: string
   created_at?: Date | string
+  user_type_id: number
 }
 
 export type SelfAssignTaskTypeMasterUpdateInput = {
@@ -300,17 +300,17 @@ export type SelfAssignTaskTypeMasterUpdateInput = {
 export type SelfAssignTaskTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SelfAssignTaskTypeMasterCreateManyInput = {
   id?: number
   vendor_id: number
-  user_type_id: number
   type: string
   created_at?: Date | string
+  user_type_id: number
 }
 
 export type SelfAssignTaskTypeMasterUpdateManyMutationInput = {
@@ -321,9 +321,9 @@ export type SelfAssignTaskTypeMasterUpdateManyMutationInput = {
 export type SelfAssignTaskTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SelfAssignTaskTypeMasterListRelationFilter = {
@@ -339,9 +339,9 @@ export type SelfAssignTaskTypeMasterOrderByRelationAggregateInput = {
 export type SelfAssignTaskTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  user_type_id?: Prisma.SortOrder
 }
 
 export type SelfAssignTaskTypeMasterAvgOrderByAggregateInput = {
@@ -353,17 +353,17 @@ export type SelfAssignTaskTypeMasterAvgOrderByAggregateInput = {
 export type SelfAssignTaskTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  user_type_id?: Prisma.SortOrder
 }
 
 export type SelfAssignTaskTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  user_type_id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  user_type_id?: Prisma.SortOrder
 }
 
 export type SelfAssignTaskTypeMasterSumOrderByAggregateInput = {
@@ -464,9 +464,9 @@ export type SelfAssignTaskTypeMasterCreateWithoutVendorInput = {
 
 export type SelfAssignTaskTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
-  user_type_id: number
   type: string
   created_at?: Date | string
+  user_type_id: number
 }
 
 export type SelfAssignTaskTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -501,9 +501,9 @@ export type SelfAssignTaskTypeMasterScalarWhereInput = {
   NOT?: Prisma.SelfAssignTaskTypeMasterScalarWhereInput | Prisma.SelfAssignTaskTypeMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   vendor_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
-  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
   type?: Prisma.StringFilter<"SelfAssignTaskTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"SelfAssignTaskTypeMaster"> | Date | string
+  user_type_id?: Prisma.IntFilter<"SelfAssignTaskTypeMaster"> | number
 }
 
 export type SelfAssignTaskTypeMasterCreateWithoutUserTypeInput = {
@@ -547,9 +547,9 @@ export type SelfAssignTaskTypeMasterUpdateManyWithWhereWithoutUserTypeInput = {
 
 export type SelfAssignTaskTypeMasterCreateManyVendorInput = {
   id?: number
-  user_type_id: number
   type: string
   created_at?: Date | string
+  user_type_id: number
 }
 
 export type SelfAssignTaskTypeMasterUpdateWithoutVendorInput = {
@@ -560,16 +560,16 @@ export type SelfAssignTaskTypeMasterUpdateWithoutVendorInput = {
 
 export type SelfAssignTaskTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type SelfAssignTaskTypeMasterCreateManyUserTypeInput = {
@@ -604,9 +604,9 @@ export type SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeInput = {
 export type SelfAssignTaskTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  user_type_id?: boolean
   type?: boolean
   created_at?: boolean
+  user_type_id?: boolean
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
@@ -614,9 +614,9 @@ export type SelfAssignTaskTypeMasterSelect<ExtArgs extends runtime.Types.Extensi
 export type SelfAssignTaskTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  user_type_id?: boolean
   type?: boolean
   created_at?: boolean
+  user_type_id?: boolean
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
@@ -624,9 +624,9 @@ export type SelfAssignTaskTypeMasterSelectCreateManyAndReturn<ExtArgs extends ru
 export type SelfAssignTaskTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
-  user_type_id?: boolean
   type?: boolean
   created_at?: boolean
+  user_type_id?: boolean
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
@@ -634,12 +634,12 @@ export type SelfAssignTaskTypeMasterSelectUpdateManyAndReturn<ExtArgs extends ru
 export type SelfAssignTaskTypeMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
-  user_type_id?: boolean
   type?: boolean
   created_at?: boolean
+  user_type_id?: boolean
 }
 
-export type SelfAssignTaskTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_type_id" | "type" | "created_at", ExtArgs["result"]["selfAssignTaskTypeMaster"]>
+export type SelfAssignTaskTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "created_at" | "user_type_id", ExtArgs["result"]["selfAssignTaskTypeMaster"]>
 export type SelfAssignTaskTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -662,9 +662,9 @@ export type $SelfAssignTaskTypeMasterPayload<ExtArgs extends runtime.Types.Exten
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
-    user_type_id: number
     type: string
     created_at: Date
+    user_type_id: number
   }, ExtArgs["result"]["selfAssignTaskTypeMaster"]>
   composites: {}
 }
@@ -1092,9 +1092,9 @@ export interface Prisma__SelfAssignTaskTypeMasterClient<T, Null = never, ExtArgs
 export interface SelfAssignTaskTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'Int'>
-  readonly user_type_id: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'Int'>
   readonly type: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'String'>
   readonly created_at: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'DateTime'>
+  readonly user_type_id: Prisma.FieldRef<"SelfAssignTaskTypeMaster", 'Int'>
 }
     
 

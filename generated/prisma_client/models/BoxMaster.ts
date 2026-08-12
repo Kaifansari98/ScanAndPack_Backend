@@ -33,8 +33,8 @@ export type BoxMasterAvgAggregateOutputType = {
   created_by: number | null
   deleted_by: number | null
   project_details_id: number | null
-  lead_id: number | null
   factory_out_by: number | null
+  lead_id: number | null
   site_in_by: number | null
   packed_by: number | null
 }
@@ -46,8 +46,8 @@ export type BoxMasterSumAggregateOutputType = {
   created_by: number | null
   deleted_by: number | null
   project_details_id: number | null
-  lead_id: number | null
   factory_out_by: number | null
+  lead_id: number | null
   site_in_by: number | null
   packed_by: number | null
 }
@@ -64,9 +64,9 @@ export type BoxMasterMinAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   project_details_id: number | null
-  lead_id: number | null
   factory_out_at: Date | null
   factory_out_by: number | null
+  lead_id: number | null
   site_in_at: Date | null
   site_in_by: number | null
   packed_at: Date | null
@@ -85,9 +85,9 @@ export type BoxMasterMaxAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   project_details_id: number | null
-  lead_id: number | null
   factory_out_at: Date | null
   factory_out_by: number | null
+  lead_id: number | null
   site_in_at: Date | null
   site_in_by: number | null
   packed_at: Date | null
@@ -106,9 +106,9 @@ export type BoxMasterCountAggregateOutputType = {
   deleted_by: number
   is_deleted: number
   project_details_id: number
-  lead_id: number
   factory_out_at: number
   factory_out_by: number
+  lead_id: number
   site_in_at: number
   site_in_by: number
   packed_at: number
@@ -124,8 +124,8 @@ export type BoxMasterAvgAggregateInputType = {
   created_by?: true
   deleted_by?: true
   project_details_id?: true
-  lead_id?: true
   factory_out_by?: true
+  lead_id?: true
   site_in_by?: true
   packed_by?: true
 }
@@ -137,8 +137,8 @@ export type BoxMasterSumAggregateInputType = {
   created_by?: true
   deleted_by?: true
   project_details_id?: true
-  lead_id?: true
   factory_out_by?: true
+  lead_id?: true
   site_in_by?: true
   packed_by?: true
 }
@@ -155,9 +155,9 @@ export type BoxMasterMinAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
-  lead_id?: true
   factory_out_at?: true
   factory_out_by?: true
+  lead_id?: true
   site_in_at?: true
   site_in_by?: true
   packed_at?: true
@@ -176,9 +176,9 @@ export type BoxMasterMaxAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
-  lead_id?: true
   factory_out_at?: true
   factory_out_by?: true
+  lead_id?: true
   site_in_at?: true
   site_in_by?: true
   packed_at?: true
@@ -197,9 +197,9 @@ export type BoxMasterCountAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
-  lead_id?: true
   factory_out_at?: true
   factory_out_by?: true
+  lead_id?: true
   site_in_at?: true
   site_in_by?: true
   packed_at?: true
@@ -305,9 +305,9 @@ export type BoxMasterGroupByOutputType = {
   deleted_by: number | null
   is_deleted: boolean
   project_details_id: number
-  lead_id: number | null
   factory_out_at: Date | null
   factory_out_by: number | null
+  lead_id: number | null
   site_in_at: Date | null
   site_in_by: number | null
   packed_at: Date | null
@@ -349,9 +349,9 @@ export type BoxMasterWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
@@ -380,9 +380,9 @@ export type BoxMasterOrderByWithRelationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_out_at?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_out_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   site_in_at?: Prisma.SortOrderInput | Prisma.SortOrder
   site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -414,9 +414,9 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
@@ -445,9 +445,9 @@ export type BoxMasterOrderByWithAggregationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_out_at?: Prisma.SortOrderInput | Prisma.SortOrder
   factory_out_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   site_in_at?: Prisma.SortOrderInput | Prisma.SortOrder
   site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -474,9 +474,9 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   factory_out_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
   factory_out_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   site_in_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
   site_in_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
@@ -491,8 +491,8 @@ export type BoxMasterCreateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -519,9 +519,9 @@ export type BoxMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -540,8 +540,8 @@ export type BoxMasterUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -568,9 +568,9 @@ export type BoxMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -593,9 +593,9 @@ export type BoxMasterCreateManyInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -610,8 +610,8 @@ export type BoxMasterUpdateManyMutationInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -628,9 +628,9 @@ export type BoxMasterUncheckedUpdateManyInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -659,9 +659,9 @@ export type BoxMasterCountOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   factory_out_at?: Prisma.SortOrder
   factory_out_by?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   site_in_at?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
@@ -675,8 +675,8 @@ export type BoxMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   factory_out_by?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
 }
@@ -693,9 +693,9 @@ export type BoxMasterMaxOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   factory_out_at?: Prisma.SortOrder
   factory_out_by?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   site_in_at?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
@@ -714,9 +714,9 @@ export type BoxMasterMinOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   factory_out_at?: Prisma.SortOrder
   factory_out_by?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   site_in_at?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
@@ -730,8 +730,8 @@ export type BoxMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
   factory_out_by?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
 }
@@ -1092,8 +1092,8 @@ export type BoxMasterCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1118,9 +1118,9 @@ export type BoxMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1172,9 +1172,9 @@ export type BoxMasterScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
@@ -1189,8 +1189,8 @@ export type BoxMasterCreateWithoutFactoryOutByUserInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1216,8 +1216,8 @@ export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1246,8 +1246,8 @@ export type BoxMasterCreateWithoutPackedByUserInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1273,9 +1273,9 @@ export type BoxMasterUncheckedCreateWithoutPackedByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1303,8 +1303,8 @@ export type BoxMasterCreateWithoutSiteInByUserInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1330,9 +1330,9 @@ export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   packed_by?: number | null
@@ -1408,8 +1408,8 @@ export type BoxMasterCreateWithoutProjectInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1434,9 +1434,9 @@ export type BoxMasterUncheckedCreateWithoutProjectInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1481,8 +1481,8 @@ export type BoxMasterCreateWithoutDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1507,9 +1507,9 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1554,8 +1554,8 @@ export type BoxMasterCreateWithoutItemsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1581,9 +1581,9 @@ export type BoxMasterUncheckedCreateWithoutItemsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1617,8 +1617,8 @@ export type BoxMasterUpdateWithoutItemsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -1644,9 +1644,9 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1664,8 +1664,8 @@ export type BoxMasterCreateWithoutLeadMasterInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1691,9 +1691,9 @@ export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1732,8 +1732,8 @@ export type BoxMasterCreateWithoutCutListMachineMappingInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
@@ -1759,9 +1759,9 @@ export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1795,8 +1795,8 @@ export type BoxMasterUpdateWithoutCutListMachineMappingInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -1822,9 +1822,9 @@ export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1842,8 +1842,8 @@ export type BoxMasterCreateWithoutBox_info_valuesInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
@@ -1869,9 +1869,9 @@ export type BoxMasterUncheckedCreateWithoutBox_info_valuesInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1905,8 +1905,8 @@ export type BoxMasterUpdateWithoutBox_info_valuesInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
@@ -1932,9 +1932,9 @@ export type BoxMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1955,9 +1955,9 @@ export type BoxMasterCreateManyVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -1972,8 +1972,8 @@ export type BoxMasterUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -1998,9 +1998,9 @@ export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2022,9 +2022,9 @@ export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2043,8 +2043,8 @@ export type BoxMasterCreateManyFactoryOutByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -2063,9 +2063,9 @@ export type BoxMasterCreateManyPackedByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -2083,9 +2083,9 @@ export type BoxMasterCreateManySiteInByUserInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   packed_by?: number | null
@@ -2099,8 +2099,8 @@ export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2126,8 +2126,8 @@ export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2150,8 +2150,8 @@ export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2166,8 +2166,8 @@ export type BoxMasterUpdateWithoutPackedByUserInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2193,9 +2193,9 @@ export type BoxMasterUncheckedUpdateWithoutPackedByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2217,9 +2217,9 @@ export type BoxMasterUncheckedUpdateManyWithoutPackedByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2233,8 +2233,8 @@ export type BoxMasterUpdateWithoutSiteInByUserInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2260,9 +2260,9 @@ export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2284,9 +2284,9 @@ export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2303,9 +2303,9 @@ export type BoxMasterCreateManyProjectInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -2320,8 +2320,8 @@ export type BoxMasterUpdateWithoutProjectInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2346,9 +2346,9 @@ export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2370,9 +2370,9 @@ export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2390,9 +2390,9 @@ export type BoxMasterCreateManyDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  lead_id?: number | null
   factory_out_at?: Date | string | null
   factory_out_by?: number | null
+  lead_id?: number | null
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
@@ -2407,8 +2407,8 @@ export type BoxMasterUpdateWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2433,9 +2433,9 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2457,9 +2457,9 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2474,8 +2474,8 @@ export type BoxMasterUpdateWithoutLeadMasterInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
@@ -2501,9 +2501,9 @@ export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2525,9 +2525,9 @@ export type BoxMasterUncheckedUpdateManyWithoutLeadMasterInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2604,9 +2604,9 @@ export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  lead_id?: boolean
   factory_out_at?: boolean
   factory_out_by?: boolean
+  lead_id?: boolean
   site_in_at?: boolean
   site_in_by?: boolean
   packed_at?: boolean
@@ -2636,9 +2636,9 @@ export type BoxMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  lead_id?: boolean
   factory_out_at?: boolean
   factory_out_by?: boolean
+  lead_id?: boolean
   site_in_at?: boolean
   site_in_by?: boolean
   packed_at?: boolean
@@ -2663,9 +2663,9 @@ export type BoxMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  lead_id?: boolean
   factory_out_at?: boolean
   factory_out_by?: boolean
+  lead_id?: boolean
   site_in_at?: boolean
   site_in_by?: boolean
   packed_at?: boolean
@@ -2690,16 +2690,16 @@ export type BoxMasterSelectScalar = {
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  lead_id?: boolean
   factory_out_at?: boolean
   factory_out_by?: boolean
+  lead_id?: boolean
   site_in_at?: boolean
   site_in_by?: boolean
   packed_at?: boolean
   packed_by?: boolean
 }
 
-export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id" | "lead_id" | "factory_out_at" | "factory_out_by" | "site_in_at" | "site_in_by" | "packed_at" | "packed_by", ExtArgs["result"]["boxMaster"]>
+export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id" | "factory_out_at" | "factory_out_by" | "lead_id" | "site_in_at" | "site_in_by" | "packed_at" | "packed_by", ExtArgs["result"]["boxMaster"]>
 export type BoxMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | Prisma.BoxMaster$box_info_valuesArgs<ExtArgs>
   factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
@@ -2756,9 +2756,9 @@ export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     deleted_by: number | null
     is_deleted: boolean
     project_details_id: number
-    lead_id: number | null
     factory_out_at: Date | null
     factory_out_by: number | null
+    lead_id: number | null
     site_in_at: Date | null
     site_in_by: number | null
     packed_at: Date | null
@@ -3207,9 +3207,9 @@ export interface BoxMasterFieldRefs {
   readonly deleted_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"BoxMaster", 'Boolean'>
   readonly project_details_id: Prisma.FieldRef<"BoxMaster", 'Int'>
-  readonly lead_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly factory_out_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
   readonly factory_out_by: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly lead_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly site_in_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
   readonly site_in_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly packed_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>

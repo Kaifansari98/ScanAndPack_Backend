@@ -28,94 +28,94 @@ export type AggregateFastProductionApproval = {
 
 export type FastProductionApprovalAvgAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   approver_user_id: number | null
+  batch_id: number | null
 }
 
 export type FastProductionApprovalSumAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   approver_user_id: number | null
+  batch_id: number | null
 }
 
 export type FastProductionApprovalMinAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   approver_role: $Enums.FastProductionApproverRole | null
   approver_user_id: number | null
   status: $Enums.FastProductionApprovalStatus | null
   remark: string | null
   acted_at: Date | null
   created_at: Date | null
+  batch_id: number | null
 }
 
 export type FastProductionApprovalMaxAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   approver_role: $Enums.FastProductionApproverRole | null
   approver_user_id: number | null
   status: $Enums.FastProductionApprovalStatus | null
   remark: string | null
   acted_at: Date | null
   created_at: Date | null
+  batch_id: number | null
 }
 
 export type FastProductionApprovalCountAggregateOutputType = {
   id: number
-  batch_id: number
   approver_role: number
   approver_user_id: number
   status: number
   remark: number
   acted_at: number
   created_at: number
+  batch_id: number
   _all: number
 }
 
 
 export type FastProductionApprovalAvgAggregateInputType = {
   id?: true
-  batch_id?: true
   approver_user_id?: true
+  batch_id?: true
 }
 
 export type FastProductionApprovalSumAggregateInputType = {
   id?: true
-  batch_id?: true
   approver_user_id?: true
+  batch_id?: true
 }
 
 export type FastProductionApprovalMinAggregateInputType = {
   id?: true
-  batch_id?: true
   approver_role?: true
   approver_user_id?: true
   status?: true
   remark?: true
   acted_at?: true
   created_at?: true
+  batch_id?: true
 }
 
 export type FastProductionApprovalMaxAggregateInputType = {
   id?: true
-  batch_id?: true
   approver_role?: true
   approver_user_id?: true
   status?: true
   remark?: true
   acted_at?: true
   created_at?: true
+  batch_id?: true
 }
 
 export type FastProductionApprovalCountAggregateInputType = {
   id?: true
-  batch_id?: true
   approver_role?: true
   approver_user_id?: true
   status?: true
   remark?: true
   acted_at?: true
   created_at?: true
+  batch_id?: true
   _all?: true
 }
 
@@ -207,13 +207,13 @@ export type FastProductionApprovalGroupByArgs<ExtArgs extends runtime.Types.Exte
 
 export type FastProductionApprovalGroupByOutputType = {
   id: number
-  batch_id: number
   approver_role: $Enums.FastProductionApproverRole
   approver_user_id: number | null
   status: $Enums.FastProductionApprovalStatus
   remark: string | null
   acted_at: Date | null
   created_at: Date
+  batch_id: number
   _count: FastProductionApprovalCountAggregateOutputType | null
   _avg: FastProductionApprovalAvgAggregateOutputType | null
   _sum: FastProductionApprovalSumAggregateOutputType | null
@@ -241,26 +241,26 @@ export type FastProductionApprovalWhereInput = {
   OR?: Prisma.FastProductionApprovalWhereInput[]
   NOT?: Prisma.FastProductionApprovalWhereInput | Prisma.FastProductionApprovalWhereInput[]
   id?: Prisma.IntFilter<"FastProductionApproval"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFilter<"FastProductionApproval"> | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.IntNullableFilter<"FastProductionApproval"> | number | null
   status?: Prisma.EnumFastProductionApprovalStatusFilter<"FastProductionApproval"> | $Enums.FastProductionApprovalStatus
   remark?: Prisma.StringNullableFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionApproval"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
   approver?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }
 
 export type FastProductionApprovalOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_role?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   acted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
   approver?: Prisma.UserMasterOrderByWithRelationInput
   batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
 }
@@ -271,26 +271,26 @@ export type FastProductionApprovalWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FastProductionApprovalWhereInput | Prisma.FastProductionApprovalWhereInput[]
   OR?: Prisma.FastProductionApprovalWhereInput[]
   NOT?: Prisma.FastProductionApprovalWhereInput | Prisma.FastProductionApprovalWhereInput[]
-  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFilter<"FastProductionApproval"> | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.IntNullableFilter<"FastProductionApproval"> | number | null
   status?: Prisma.EnumFastProductionApprovalStatusFilter<"FastProductionApproval"> | $Enums.FastProductionApprovalStatus
   remark?: Prisma.StringNullableFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionApproval"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
   approver?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }, "id" | "batch_id_approver_role">
 
 export type FastProductionApprovalOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_role?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   acted_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
   _count?: Prisma.FastProductionApprovalCountOrderByAggregateInput
   _avg?: Prisma.FastProductionApprovalAvgOrderByAggregateInput
   _max?: Prisma.FastProductionApprovalMaxOrderByAggregateInput
@@ -303,13 +303,13 @@ export type FastProductionApprovalScalarWhereWithAggregatesInput = {
   OR?: Prisma.FastProductionApprovalScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FastProductionApprovalScalarWhereWithAggregatesInput | Prisma.FastProductionApprovalScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"FastProductionApproval"> | number
-  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionApproval"> | number
   approver_role?: Prisma.EnumFastProductionApproverRoleWithAggregatesFilter<"FastProductionApproval"> | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.IntNullableWithAggregatesFilter<"FastProductionApproval"> | number | null
   status?: Prisma.EnumFastProductionApprovalStatusWithAggregatesFilter<"FastProductionApproval"> | $Enums.FastProductionApprovalStatus
   remark?: Prisma.StringNullableWithAggregatesFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableWithAggregatesFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionApproval"> | Date | string
+  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionApproval"> | number
 }
 
 export type FastProductionApprovalCreateInput = {
@@ -324,13 +324,13 @@ export type FastProductionApprovalCreateInput = {
 
 export type FastProductionApprovalUncheckedCreateInput = {
   id?: number
-  batch_id: number
   approver_role: $Enums.FastProductionApproverRole
   approver_user_id?: number | null
   status?: $Enums.FastProductionApprovalStatus
   remark?: string | null
   acted_at?: Date | string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionApprovalUpdateInput = {
@@ -345,24 +345,24 @@ export type FastProductionApprovalUpdateInput = {
 
 export type FastProductionApprovalUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFieldUpdateOperationsInput | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumFastProductionApprovalStatusFieldUpdateOperationsInput | $Enums.FastProductionApprovalStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionApprovalCreateManyInput = {
   id?: number
-  batch_id: number
   approver_role: $Enums.FastProductionApproverRole
   approver_user_id?: number | null
   status?: $Enums.FastProductionApprovalStatus
   remark?: string | null
   acted_at?: Date | string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionApprovalUpdateManyMutationInput = {
@@ -375,13 +375,13 @@ export type FastProductionApprovalUpdateManyMutationInput = {
 
 export type FastProductionApprovalUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFieldUpdateOperationsInput | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumFastProductionApprovalStatusFieldUpdateOperationsInput | $Enums.FastProductionApprovalStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionApprovalListRelationFilter = {
@@ -401,47 +401,47 @@ export type FastProductionApprovalBatch_idApprover_roleCompoundUniqueInput = {
 
 export type FastProductionApprovalCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_role?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   acted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionApprovalAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionApprovalMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_role?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   acted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionApprovalMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_role?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   acted_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionApprovalSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   approver_user_id?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionApprovalCreateNestedManyWithoutApproverInput = {
@@ -547,12 +547,12 @@ export type FastProductionApprovalCreateWithoutApproverInput = {
 
 export type FastProductionApprovalUncheckedCreateWithoutApproverInput = {
   id?: number
-  batch_id: number
   approver_role: $Enums.FastProductionApproverRole
   status?: $Enums.FastProductionApprovalStatus
   remark?: string | null
   acted_at?: Date | string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionApprovalCreateOrConnectWithoutApproverInput = {
@@ -586,13 +586,13 @@ export type FastProductionApprovalScalarWhereInput = {
   OR?: Prisma.FastProductionApprovalScalarWhereInput[]
   NOT?: Prisma.FastProductionApprovalScalarWhereInput | Prisma.FastProductionApprovalScalarWhereInput[]
   id?: Prisma.IntFilter<"FastProductionApproval"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFilter<"FastProductionApproval"> | $Enums.FastProductionApproverRole
   approver_user_id?: Prisma.IntNullableFilter<"FastProductionApproval"> | number | null
   status?: Prisma.EnumFastProductionApprovalStatusFilter<"FastProductionApproval"> | $Enums.FastProductionApprovalStatus
   remark?: Prisma.StringNullableFilter<"FastProductionApproval"> | string | null
   acted_at?: Prisma.DateTimeNullableFilter<"FastProductionApproval"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionApproval"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionApproval"> | number
 }
 
 export type FastProductionApprovalCreateWithoutBatchInput = {
@@ -642,12 +642,12 @@ export type FastProductionApprovalUpdateManyWithWhereWithoutBatchInput = {
 
 export type FastProductionApprovalCreateManyApproverInput = {
   id?: number
-  batch_id: number
   approver_role: $Enums.FastProductionApproverRole
   status?: $Enums.FastProductionApprovalStatus
   remark?: string | null
   acted_at?: Date | string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionApprovalUpdateWithoutApproverInput = {
@@ -661,22 +661,22 @@ export type FastProductionApprovalUpdateWithoutApproverInput = {
 
 export type FastProductionApprovalUncheckedUpdateWithoutApproverInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFieldUpdateOperationsInput | $Enums.FastProductionApproverRole
   status?: Prisma.EnumFastProductionApprovalStatusFieldUpdateOperationsInput | $Enums.FastProductionApprovalStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionApprovalUncheckedUpdateManyWithoutApproverInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   approver_role?: Prisma.EnumFastProductionApproverRoleFieldUpdateOperationsInput | $Enums.FastProductionApproverRole
   status?: Prisma.EnumFastProductionApprovalStatusFieldUpdateOperationsInput | $Enums.FastProductionApprovalStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionApprovalCreateManyBatchInput = {
@@ -722,55 +722,55 @@ export type FastProductionApprovalUncheckedUpdateManyWithoutBatchInput = {
 
 export type FastProductionApprovalSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   approver_role?: boolean
   approver_user_id?: boolean
   status?: boolean
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
+  batch_id?: boolean
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   approver_role?: boolean
   approver_user_id?: boolean
   status?: boolean
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
+  batch_id?: boolean
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   approver_role?: boolean
   approver_user_id?: boolean
   status?: boolean
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
+  batch_id?: boolean
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionApproval"]>
 
 export type FastProductionApprovalSelectScalar = {
   id?: boolean
-  batch_id?: boolean
   approver_role?: boolean
   approver_user_id?: boolean
   status?: boolean
   remark?: boolean
   acted_at?: boolean
   created_at?: boolean
+  batch_id?: boolean
 }
 
-export type FastProductionApprovalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "approver_role" | "approver_user_id" | "status" | "remark" | "acted_at" | "created_at", ExtArgs["result"]["fastProductionApproval"]>
+export type FastProductionApprovalOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "approver_role" | "approver_user_id" | "status" | "remark" | "acted_at" | "created_at" | "batch_id", ExtArgs["result"]["fastProductionApproval"]>
 export type FastProductionApprovalInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approver?: boolean | Prisma.FastProductionApproval$approverArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
@@ -792,13 +792,13 @@ export type $FastProductionApprovalPayload<ExtArgs extends runtime.Types.Extensi
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    batch_id: number
     approver_role: $Enums.FastProductionApproverRole
     approver_user_id: number | null
     status: $Enums.FastProductionApprovalStatus
     remark: string | null
     acted_at: Date | null
     created_at: Date
+    batch_id: number
   }, ExtArgs["result"]["fastProductionApproval"]>
   composites: {}
 }
@@ -1225,13 +1225,13 @@ export interface Prisma__FastProductionApprovalClient<T, Null = never, ExtArgs e
  */
 export interface FastProductionApprovalFieldRefs {
   readonly id: Prisma.FieldRef<"FastProductionApproval", 'Int'>
-  readonly batch_id: Prisma.FieldRef<"FastProductionApproval", 'Int'>
   readonly approver_role: Prisma.FieldRef<"FastProductionApproval", 'FastProductionApproverRole'>
   readonly approver_user_id: Prisma.FieldRef<"FastProductionApproval", 'Int'>
   readonly status: Prisma.FieldRef<"FastProductionApproval", 'FastProductionApprovalStatus'>
   readonly remark: Prisma.FieldRef<"FastProductionApproval", 'String'>
   readonly acted_at: Prisma.FieldRef<"FastProductionApproval", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"FastProductionApproval", 'DateTime'>
+  readonly batch_id: Prisma.FieldRef<"FastProductionApproval", 'Int'>
 }
     
 

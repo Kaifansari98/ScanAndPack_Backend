@@ -244,9 +244,9 @@ export type UserTypePrivilegeMappingWhereInput = {
   is_allowed?: Prisma.BoolFilter<"UserTypePrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserTypePrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserTypePrivilegeMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
-  privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  PrivilegeMaster?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  UserTypeMaster?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
+  VendorMaster?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type UserTypePrivilegeMappingOrderByWithRelationInput = {
@@ -257,9 +257,9 @@ export type UserTypePrivilegeMappingOrderByWithRelationInput = {
   is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
-  userType?: Prisma.UserTypeMasterOrderByWithRelationInput
-  privilege?: Prisma.PrivilegeMasterOrderByWithRelationInput
+  PrivilegeMaster?: Prisma.PrivilegeMasterOrderByWithRelationInput
+  UserTypeMaster?: Prisma.UserTypeMasterOrderByWithRelationInput
+  VendorMaster?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type UserTypePrivilegeMappingWhereUniqueInput = Prisma.AtLeast<{
@@ -274,9 +274,9 @@ export type UserTypePrivilegeMappingWhereUniqueInput = Prisma.AtLeast<{
   is_allowed?: Prisma.BoolFilter<"UserTypePrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserTypePrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserTypePrivilegeMapping"> | Date | string
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  userType?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
-  privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  PrivilegeMaster?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
+  UserTypeMaster?: Prisma.XOR<Prisma.UserTypeMasterScalarRelationFilter, Prisma.UserTypeMasterWhereInput>
+  VendorMaster?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_user_type_id_privilege_id">
 
 export type UserTypePrivilegeMappingOrderByWithAggregationInput = {
@@ -310,10 +310,10 @@ export type UserTypePrivilegeMappingScalarWhereWithAggregatesInput = {
 export type UserTypePrivilegeMappingCreateInput = {
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
-  userType: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
-  privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
+  updated_at: Date | string
+  PrivilegeMaster: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
+  UserTypeMaster: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
+  VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
 }
 
 export type UserTypePrivilegeMappingUncheckedCreateInput = {
@@ -323,16 +323,16 @@ export type UserTypePrivilegeMappingUncheckedCreateInput = {
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
 export type UserTypePrivilegeMappingUpdateInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
-  userType?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
-  privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
+  PrivilegeMaster?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
+  UserTypeMaster?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
+  VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
 }
 
 export type UserTypePrivilegeMappingUncheckedUpdateInput = {
@@ -352,7 +352,7 @@ export type UserTypePrivilegeMappingCreateManyInput = {
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
 export type UserTypePrivilegeMappingUpdateManyMutationInput = {
@@ -431,173 +431,173 @@ export type UserTypePrivilegeMappingSumOrderByAggregateInput = {
   privilege_id?: Prisma.SortOrder
 }
 
-export type UserTypePrivilegeMappingCreateNestedManyWithoutVendorInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorInputEnvelope
+export type UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorInputEnvelope
+export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithoutVendorNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorInputEnvelope
+export type UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorInputEnvelope
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeInputEnvelope
+export type UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeInputEnvelope
+export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithoutUserTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeInputEnvelope
+export type UserTypePrivilegeMappingUpdateManyWithoutUserTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeInputEnvelope
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingCreateNestedManyWithoutPrivilegeInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInputEnvelope
+export type UserTypePrivilegeMappingCreateNestedManyWithoutPrivilegeMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutPrivilegeInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInputEnvelope
+export type UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutPrivilegeMasterInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInputEnvelope
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithoutPrivilegeNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInputEnvelope
+export type UserTypePrivilegeMappingUpdateManyWithoutPrivilegeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput[]
-  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput[]
-  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeInput[]
-  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInputEnvelope
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput> | Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput[] | Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput[]
+  connectOrCreate?: Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput[]
+  upsert?: Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeMasterInput[]
+  createMany?: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInputEnvelope
   set?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   disconnect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   delete?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
   connect?: Prisma.UserTypePrivilegeMappingWhereUniqueInput | Prisma.UserTypePrivilegeMappingWhereUniqueInput[]
-  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeInput[]
-  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput[]
+  update?: Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeMasterInput[]
+  updateMany?: Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeMasterInput[]
   deleteMany?: Prisma.UserTypePrivilegeMappingScalarWhereInput | Prisma.UserTypePrivilegeMappingScalarWhereInput[]
 }
 
-export type UserTypePrivilegeMappingCreateWithoutVendorInput = {
+export type UserTypePrivilegeMappingCreateWithoutVendorMasterInput = {
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
-  userType: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
-  privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
+  updated_at: Date | string
+  PrivilegeMaster: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
+  UserTypeMaster: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput = {
+export type UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput = {
   id?: number
   user_type_id: number
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingCreateOrConnectWithoutVendorInput = {
+export type UserTypePrivilegeMappingCreateOrConnectWithoutVendorMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput>
 }
 
-export type UserTypePrivilegeMappingCreateManyVendorInputEnvelope = {
-  data: Prisma.UserTypePrivilegeMappingCreateManyVendorInput | Prisma.UserTypePrivilegeMappingCreateManyVendorInput[]
+export type UserTypePrivilegeMappingCreateManyVendorMasterInputEnvelope = {
+  data: Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInput | Prisma.UserTypePrivilegeMappingCreateManyVendorMasterInput[]
   skipDuplicates?: boolean
 }
 
-export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorInput = {
+export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutVendorMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutVendorInput>
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorInput>
+  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutVendorMasterInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutVendorMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorInput = {
+export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutVendorMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutVendorInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutVendorInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutVendorMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutVendorMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorInput = {
+export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutVendorMasterInput = {
   where: Prisma.UserTypePrivilegeMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterInput>
 }
 
 export type UserTypePrivilegeMappingScalarWhereInput = {
@@ -613,110 +613,110 @@ export type UserTypePrivilegeMappingScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"UserTypePrivilegeMapping"> | Date | string
 }
 
-export type UserTypePrivilegeMappingCreateWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput = {
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
-  privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
+  updated_at: Date | string
+  PrivilegeMaster: Prisma.PrivilegeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
+  VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput = {
   id?: number
   vendor_id: number
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingCreateOrConnectWithoutUserTypeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput>
 }
 
-export type UserTypePrivilegeMappingCreateManyUserTypeInputEnvelope = {
-  data: Prisma.UserTypePrivilegeMappingCreateManyUserTypeInput | Prisma.UserTypePrivilegeMappingCreateManyUserTypeInput[]
+export type UserTypePrivilegeMappingCreateManyUserTypeMasterInputEnvelope = {
+  data: Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInput | Prisma.UserTypePrivilegeMappingCreateManyUserTypeMasterInput[]
   skipDuplicates?: boolean
 }
 
-export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutUserTypeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeInput>
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeInput>
+  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeMasterInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutUserTypeMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutUserTypeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutUserTypeInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutUserTypeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutUserTypeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterInput>
 }
 
-export type UserTypePrivilegeMappingCreateWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput = {
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
-  userType: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput
+  updated_at: Date | string
+  UserTypeMaster: Prisma.UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
+  VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput
 }
 
-export type UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput = {
   id?: number
   vendor_id: number
   user_type_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingCreateOrConnectWithoutPrivilegeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput>
 }
 
-export type UserTypePrivilegeMappingCreateManyPrivilegeInputEnvelope = {
-  data: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInput | Prisma.UserTypePrivilegeMappingCreateManyPrivilegeInput[]
+export type UserTypePrivilegeMappingCreateManyPrivilegeMasterInputEnvelope = {
+  data: Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInput | Prisma.UserTypePrivilegeMappingCreateManyPrivilegeMasterInput[]
   skipDuplicates?: boolean
 }
 
-export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUpsertWithWhereUniqueWithoutPrivilegeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeInput>
-  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeInput>
+  update: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeMasterInput>
+  create: Prisma.XOR<Prisma.UserTypePrivilegeMappingCreateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedCreateWithoutPrivilegeMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUpdateWithWhereUniqueWithoutPrivilegeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutPrivilegeInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateWithoutPrivilegeMasterInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeMasterInput>
 }
 
-export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUpdateManyWithWhereWithoutPrivilegeMasterInput = {
   where: Prisma.UserTypePrivilegeMappingScalarWhereInput
-  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeInput>
+  data: Prisma.XOR<Prisma.UserTypePrivilegeMappingUpdateManyMutationInput, Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeMasterInput>
 }
 
-export type UserTypePrivilegeMappingCreateManyVendorInput = {
+export type UserTypePrivilegeMappingCreateManyVendorMasterInput = {
   id?: number
   user_type_id: number
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingUpdateWithoutVendorInput = {
+export type UserTypePrivilegeMappingUpdateWithoutVendorMasterInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userType?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
-  privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
+  PrivilegeMaster?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
+  UserTypeMaster?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateWithoutVendorInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateWithoutVendorMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -725,7 +725,7 @@ export type UserTypePrivilegeMappingUncheckedUpdateWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -734,24 +734,24 @@ export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTypePrivilegeMappingCreateManyUserTypeInput = {
+export type UserTypePrivilegeMappingCreateManyUserTypeMasterInput = {
   id?: number
   vendor_id: number
   privilege_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingUpdateWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUpdateWithoutUserTypeMasterInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
-  privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
+  PrivilegeMaster?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
+  VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -760,7 +760,7 @@ export type UserTypePrivilegeMappingUncheckedUpdateWithoutUserTypeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -769,24 +769,24 @@ export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTypePrivilegeMappingCreateManyPrivilegeInput = {
+export type UserTypePrivilegeMappingCreateManyPrivilegeMasterInput = {
   id?: number
   vendor_id: number
   user_type_id: number
   is_allowed?: boolean
   created_at?: Date | string
-  updated_at?: Date | string
+  updated_at: Date | string
 }
 
-export type UserTypePrivilegeMappingUpdateWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUpdateWithoutPrivilegeMasterInput = {
   is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
-  userType?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput
+  UserTypeMaster?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
+  VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -795,7 +795,7 @@ export type UserTypePrivilegeMappingUncheckedUpdateWithoutPrivilegeInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeInput = {
+export type UserTypePrivilegeMappingUncheckedUpdateManyWithoutPrivilegeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -814,9 +814,9 @@ export type UserTypePrivilegeMappingSelect<ExtArgs extends runtime.Types.Extensi
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypePrivilegeMapping"]>
 
 export type UserTypePrivilegeMappingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -827,9 +827,9 @@ export type UserTypePrivilegeMappingSelectCreateManyAndReturn<ExtArgs extends ru
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypePrivilegeMapping"]>
 
 export type UserTypePrivilegeMappingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -840,9 +840,9 @@ export type UserTypePrivilegeMappingSelectUpdateManyAndReturn<ExtArgs extends ru
   is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypePrivilegeMapping"]>
 
 export type UserTypePrivilegeMappingSelectScalar = {
@@ -857,27 +857,27 @@ export type UserTypePrivilegeMappingSelectScalar = {
 
 export type UserTypePrivilegeMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_type_id" | "privilege_id" | "is_allowed" | "created_at" | "updated_at", ExtArgs["result"]["userTypePrivilegeMapping"]>
 export type UserTypePrivilegeMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserTypePrivilegeMappingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type UserTypePrivilegeMappingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  userType?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
-  privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  PrivilegeMaster?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
+  UserTypeMaster?: boolean | Prisma.UserTypeMasterDefaultArgs<ExtArgs>
+  VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
 export type $UserTypePrivilegeMappingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserTypePrivilegeMapping"
   objects: {
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    userType: Prisma.$UserTypeMasterPayload<ExtArgs>
-    privilege: Prisma.$PrivilegeMasterPayload<ExtArgs>
+    PrivilegeMaster: Prisma.$PrivilegeMasterPayload<ExtArgs>
+    UserTypeMaster: Prisma.$UserTypeMasterPayload<ExtArgs>
+    VendorMaster: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1281,9 +1281,9 @@ readonly fields: UserTypePrivilegeMappingFieldRefs;
  */
 export interface Prisma__UserTypePrivilegeMappingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  userType<T extends Prisma.UserTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$UserTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  privilege<T extends Prisma.PrivilegeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrivilegeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PrivilegeMasterClient<runtime.Types.Result.GetResult<Prisma.$PrivilegeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  PrivilegeMaster<T extends Prisma.PrivilegeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PrivilegeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__PrivilegeMasterClient<runtime.Types.Result.GetResult<Prisma.$PrivilegeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  UserTypeMaster<T extends Prisma.UserTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$UserTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  VendorMaster<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

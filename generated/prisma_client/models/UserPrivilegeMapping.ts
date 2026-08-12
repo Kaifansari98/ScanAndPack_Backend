@@ -45,9 +45,9 @@ export type UserPrivilegeMappingMinAggregateOutputType = {
   vendor_id: number | null
   user_id: number | null
   privilege_id: number | null
-  is_allowed: boolean | null
   created_at: Date | null
   updated_at: Date | null
+  is_allowed: boolean | null
 }
 
 export type UserPrivilegeMappingMaxAggregateOutputType = {
@@ -55,9 +55,9 @@ export type UserPrivilegeMappingMaxAggregateOutputType = {
   vendor_id: number | null
   user_id: number | null
   privilege_id: number | null
-  is_allowed: boolean | null
   created_at: Date | null
   updated_at: Date | null
+  is_allowed: boolean | null
 }
 
 export type UserPrivilegeMappingCountAggregateOutputType = {
@@ -65,9 +65,9 @@ export type UserPrivilegeMappingCountAggregateOutputType = {
   vendor_id: number
   user_id: number
   privilege_id: number
-  is_allowed: number
   created_at: number
   updated_at: number
+  is_allowed: number
   _all: number
 }
 
@@ -91,9 +91,9 @@ export type UserPrivilegeMappingMinAggregateInputType = {
   vendor_id?: true
   user_id?: true
   privilege_id?: true
-  is_allowed?: true
   created_at?: true
   updated_at?: true
+  is_allowed?: true
 }
 
 export type UserPrivilegeMappingMaxAggregateInputType = {
@@ -101,9 +101,9 @@ export type UserPrivilegeMappingMaxAggregateInputType = {
   vendor_id?: true
   user_id?: true
   privilege_id?: true
-  is_allowed?: true
   created_at?: true
   updated_at?: true
+  is_allowed?: true
 }
 
 export type UserPrivilegeMappingCountAggregateInputType = {
@@ -111,9 +111,9 @@ export type UserPrivilegeMappingCountAggregateInputType = {
   vendor_id?: true
   user_id?: true
   privilege_id?: true
-  is_allowed?: true
   created_at?: true
   updated_at?: true
+  is_allowed?: true
   _all?: true
 }
 
@@ -208,9 +208,9 @@ export type UserPrivilegeMappingGroupByOutputType = {
   vendor_id: number
   user_id: number
   privilege_id: number
-  is_allowed: boolean
   created_at: Date
   updated_at: Date
+  is_allowed: boolean
   _count: UserPrivilegeMappingCountAggregateOutputType | null
   _avg: UserPrivilegeMappingAvgAggregateOutputType | null
   _sum: UserPrivilegeMappingSumAggregateOutputType | null
@@ -241,9 +241,9 @@ export type UserPrivilegeMappingWhereInput = {
   vendor_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   user_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   privilege_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
-  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
+  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -254,9 +254,9 @@ export type UserPrivilegeMappingOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   privilege_id?: Prisma.SortOrder
-  is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_allowed?: Prisma.SortOrder
   privilege?: Prisma.PrivilegeMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -271,9 +271,9 @@ export type UserPrivilegeMappingWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   user_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   privilege_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
-  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
+  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   privilege?: Prisma.XOR<Prisma.PrivilegeMasterScalarRelationFilter, Prisma.PrivilegeMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -284,9 +284,9 @@ export type UserPrivilegeMappingOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   privilege_id?: Prisma.SortOrder
-  is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_allowed?: Prisma.SortOrder
   _count?: Prisma.UserPrivilegeMappingCountOrderByAggregateInput
   _avg?: Prisma.UserPrivilegeMappingAvgOrderByAggregateInput
   _max?: Prisma.UserPrivilegeMappingMaxOrderByAggregateInput
@@ -302,15 +302,15 @@ export type UserPrivilegeMappingScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"UserPrivilegeMapping"> | number
   user_id?: Prisma.IntWithAggregatesFilter<"UserPrivilegeMapping"> | number
   privilege_id?: Prisma.IntWithAggregatesFilter<"UserPrivilegeMapping"> | number
-  is_allowed?: Prisma.BoolWithAggregatesFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"UserPrivilegeMapping"> | Date | string
+  is_allowed?: Prisma.BoolWithAggregatesFilter<"UserPrivilegeMapping"> | boolean
 }
 
 export type UserPrivilegeMappingCreateInput = {
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
@@ -321,15 +321,15 @@ export type UserPrivilegeMappingUncheckedCreateInput = {
   vendor_id: number
   user_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingUpdateInput = {
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
@@ -340,9 +340,9 @@ export type UserPrivilegeMappingUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingCreateManyInput = {
@@ -350,15 +350,15 @@ export type UserPrivilegeMappingCreateManyInput = {
   vendor_id: number
   user_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingUpdateManyMutationInput = {
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingUncheckedUpdateManyInput = {
@@ -366,9 +366,9 @@ export type UserPrivilegeMappingUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingListRelationFilter = {
@@ -392,9 +392,9 @@ export type UserPrivilegeMappingCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   privilege_id?: Prisma.SortOrder
-  is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_allowed?: Prisma.SortOrder
 }
 
 export type UserPrivilegeMappingAvgOrderByAggregateInput = {
@@ -409,9 +409,9 @@ export type UserPrivilegeMappingMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   privilege_id?: Prisma.SortOrder
-  is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_allowed?: Prisma.SortOrder
 }
 
 export type UserPrivilegeMappingMinOrderByAggregateInput = {
@@ -419,9 +419,9 @@ export type UserPrivilegeMappingMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
   privilege_id?: Prisma.SortOrder
-  is_allowed?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  is_allowed?: Prisma.SortOrder
 }
 
 export type UserPrivilegeMappingSumOrderByAggregateInput = {
@@ -558,9 +558,9 @@ export type UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type UserPrivilegeMappingCreateWithoutVendorInput = {
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
@@ -569,9 +569,9 @@ export type UserPrivilegeMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   user_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingCreateOrConnectWithoutVendorInput = {
@@ -608,15 +608,15 @@ export type UserPrivilegeMappingScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   user_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
   privilege_id?: Prisma.IntFilter<"UserPrivilegeMapping"> | number
-  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
   created_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserPrivilegeMapping"> | Date | string
+  is_allowed?: Prisma.BoolFilter<"UserPrivilegeMapping"> | boolean
 }
 
 export type UserPrivilegeMappingCreateWithoutPrivilegeInput = {
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
   user: Prisma.UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
@@ -625,9 +625,9 @@ export type UserPrivilegeMappingUncheckedCreateWithoutPrivilegeInput = {
   id?: number
   vendor_id: number
   user_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingCreateOrConnectWithoutPrivilegeInput = {
@@ -657,9 +657,9 @@ export type UserPrivilegeMappingUpdateManyWithWhereWithoutPrivilegeInput = {
 }
 
 export type UserPrivilegeMappingCreateWithoutUserInput = {
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
   privilege: Prisma.PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserPrivilegeMappingsInput
 }
@@ -668,9 +668,9 @@ export type UserPrivilegeMappingUncheckedCreateWithoutUserInput = {
   id?: number
   vendor_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingCreateOrConnectWithoutUserInput = {
@@ -703,15 +703,15 @@ export type UserPrivilegeMappingCreateManyVendorInput = {
   id?: number
   user_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingUpdateWithoutVendorInput = {
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
@@ -720,33 +720,33 @@ export type UserPrivilegeMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingCreateManyPrivilegeInput = {
   id?: number
   vendor_id: number
   user_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingUpdateWithoutPrivilegeInput = {
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
@@ -755,33 +755,33 @@ export type UserPrivilegeMappingUncheckedUpdateWithoutPrivilegeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingUncheckedUpdateManyWithoutPrivilegeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingCreateManyUserInput = {
   id?: number
   vendor_id: number
   privilege_id: number
-  is_allowed?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  is_allowed?: boolean
 }
 
 export type UserPrivilegeMappingUpdateWithoutUserInput = {
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   privilege?: Prisma.PrivilegeMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput
 }
@@ -790,18 +790,18 @@ export type UserPrivilegeMappingUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserPrivilegeMappingUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   privilege_id?: Prisma.IntFieldUpdateOperationsInput | number
-  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -811,9 +811,9 @@ export type UserPrivilegeMappingSelect<ExtArgs extends runtime.Types.Extensions.
   vendor_id?: boolean
   user_id?: boolean
   privilege_id?: boolean
-  is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
+  is_allowed?: boolean
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -824,9 +824,9 @@ export type UserPrivilegeMappingSelectCreateManyAndReturn<ExtArgs extends runtim
   vendor_id?: boolean
   user_id?: boolean
   privilege_id?: boolean
-  is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
+  is_allowed?: boolean
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -837,9 +837,9 @@ export type UserPrivilegeMappingSelectUpdateManyAndReturn<ExtArgs extends runtim
   vendor_id?: boolean
   user_id?: boolean
   privilege_id?: boolean
-  is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
+  is_allowed?: boolean
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -850,12 +850,12 @@ export type UserPrivilegeMappingSelectScalar = {
   vendor_id?: boolean
   user_id?: boolean
   privilege_id?: boolean
-  is_allowed?: boolean
   created_at?: boolean
   updated_at?: boolean
+  is_allowed?: boolean
 }
 
-export type UserPrivilegeMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_id" | "privilege_id" | "is_allowed" | "created_at" | "updated_at", ExtArgs["result"]["userPrivilegeMapping"]>
+export type UserPrivilegeMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "user_id" | "privilege_id" | "created_at" | "updated_at" | "is_allowed", ExtArgs["result"]["userPrivilegeMapping"]>
 export type UserPrivilegeMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   privilege?: boolean | Prisma.PrivilegeMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -884,9 +884,9 @@ export type $UserPrivilegeMappingPayload<ExtArgs extends runtime.Types.Extension
     vendor_id: number
     user_id: number
     privilege_id: number
-    is_allowed: boolean
     created_at: Date
     updated_at: Date
+    is_allowed: boolean
   }, ExtArgs["result"]["userPrivilegeMapping"]>
   composites: {}
 }
@@ -1317,9 +1317,9 @@ export interface UserPrivilegeMappingFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"UserPrivilegeMapping", 'Int'>
   readonly user_id: Prisma.FieldRef<"UserPrivilegeMapping", 'Int'>
   readonly privilege_id: Prisma.FieldRef<"UserPrivilegeMapping", 'Int'>
-  readonly is_allowed: Prisma.FieldRef<"UserPrivilegeMapping", 'Boolean'>
   readonly created_at: Prisma.FieldRef<"UserPrivilegeMapping", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"UserPrivilegeMapping", 'DateTime'>
+  readonly is_allowed: Prisma.FieldRef<"UserPrivilegeMapping", 'Boolean'>
 }
     
 

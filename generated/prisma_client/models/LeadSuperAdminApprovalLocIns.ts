@@ -31,8 +31,8 @@ export type LeadSuperAdminApprovalLocInsAvgAggregateOutputType = {
   vendor_id: number | null
   franchise_id: number | null
   lead_id: number | null
-  created_by: number | null
   approved_by: number | null
+  created_by: number | null
 }
 
 export type LeadSuperAdminApprovalLocInsSumAggregateOutputType = {
@@ -40,8 +40,8 @@ export type LeadSuperAdminApprovalLocInsSumAggregateOutputType = {
   vendor_id: number | null
   franchise_id: number | null
   lead_id: number | null
-  created_by: number | null
   approved_by: number | null
+  created_by: number | null
 }
 
 export type LeadSuperAdminApprovalLocInsMinAggregateOutputType = {
@@ -50,12 +50,12 @@ export type LeadSuperAdminApprovalLocInsMinAggregateOutputType = {
   franchise_id: number | null
   lead_id: number | null
   approval_type: $Enums.SuperAdminApprovalType | null
-  created_by: number | null
-  created_at: Date | null
   is_approved: boolean | null
   approved_at: Date | null
   approved_by: number | null
   approval_remark: string | null
+  created_at: Date | null
+  created_by: number | null
 }
 
 export type LeadSuperAdminApprovalLocInsMaxAggregateOutputType = {
@@ -64,12 +64,12 @@ export type LeadSuperAdminApprovalLocInsMaxAggregateOutputType = {
   franchise_id: number | null
   lead_id: number | null
   approval_type: $Enums.SuperAdminApprovalType | null
-  created_by: number | null
-  created_at: Date | null
   is_approved: boolean | null
   approved_at: Date | null
   approved_by: number | null
   approval_remark: string | null
+  created_at: Date | null
+  created_by: number | null
 }
 
 export type LeadSuperAdminApprovalLocInsCountAggregateOutputType = {
@@ -78,12 +78,12 @@ export type LeadSuperAdminApprovalLocInsCountAggregateOutputType = {
   franchise_id: number
   lead_id: number
   approval_type: number
-  created_by: number
-  created_at: number
   is_approved: number
   approved_at: number
   approved_by: number
   approval_remark: number
+  created_at: number
+  created_by: number
   _all: number
 }
 
@@ -93,8 +93,8 @@ export type LeadSuperAdminApprovalLocInsAvgAggregateInputType = {
   vendor_id?: true
   franchise_id?: true
   lead_id?: true
-  created_by?: true
   approved_by?: true
+  created_by?: true
 }
 
 export type LeadSuperAdminApprovalLocInsSumAggregateInputType = {
@@ -102,8 +102,8 @@ export type LeadSuperAdminApprovalLocInsSumAggregateInputType = {
   vendor_id?: true
   franchise_id?: true
   lead_id?: true
-  created_by?: true
   approved_by?: true
+  created_by?: true
 }
 
 export type LeadSuperAdminApprovalLocInsMinAggregateInputType = {
@@ -112,12 +112,12 @@ export type LeadSuperAdminApprovalLocInsMinAggregateInputType = {
   franchise_id?: true
   lead_id?: true
   approval_type?: true
-  created_by?: true
-  created_at?: true
   is_approved?: true
   approved_at?: true
   approved_by?: true
   approval_remark?: true
+  created_at?: true
+  created_by?: true
 }
 
 export type LeadSuperAdminApprovalLocInsMaxAggregateInputType = {
@@ -126,12 +126,12 @@ export type LeadSuperAdminApprovalLocInsMaxAggregateInputType = {
   franchise_id?: true
   lead_id?: true
   approval_type?: true
-  created_by?: true
-  created_at?: true
   is_approved?: true
   approved_at?: true
   approved_by?: true
   approval_remark?: true
+  created_at?: true
+  created_by?: true
 }
 
 export type LeadSuperAdminApprovalLocInsCountAggregateInputType = {
@@ -140,12 +140,12 @@ export type LeadSuperAdminApprovalLocInsCountAggregateInputType = {
   franchise_id?: true
   lead_id?: true
   approval_type?: true
-  created_by?: true
-  created_at?: true
   is_approved?: true
   approved_at?: true
   approved_by?: true
   approval_remark?: true
+  created_at?: true
+  created_by?: true
   _all?: true
 }
 
@@ -241,12 +241,12 @@ export type LeadSuperAdminApprovalLocInsGroupByOutputType = {
   franchise_id: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at: Date
   is_approved: boolean
   approved_at: Date | null
   approved_by: number | null
   approval_remark: string | null
+  created_at: Date
+  created_by: number
   _count: LeadSuperAdminApprovalLocInsCountAggregateOutputType | null
   _avg: LeadSuperAdminApprovalLocInsAvgAggregateOutputType | null
   _sum: LeadSuperAdminApprovalLocInsSumAggregateOutputType | null
@@ -278,12 +278,12 @@ export type LeadSuperAdminApprovalLocInsWhereInput = {
   franchise_id?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   lead_id?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFilter<"LeadSuperAdminApprovalLocIns"> | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
-  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
   is_approved?: Prisma.BoolFilter<"LeadSuperAdminApprovalLocIns"> | boolean
   approved_at?: Prisma.DateTimeNullableFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
+  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
@@ -297,12 +297,12 @@ export type LeadSuperAdminApprovalLocInsOrderByWithRelationInput = {
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   approval_type?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   is_approved?: Prisma.SortOrder
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   approved_by?: Prisma.SortOrderInput | Prisma.SortOrder
   approval_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
   approvedBy?: Prisma.UserMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   franchise?: Prisma.FranchiseMasterOrderByWithRelationInput
@@ -320,12 +320,12 @@ export type LeadSuperAdminApprovalLocInsWhereUniqueInput = Prisma.AtLeast<{
   franchise_id?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   lead_id?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFilter<"LeadSuperAdminApprovalLocIns"> | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
-  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
   is_approved?: Prisma.BoolFilter<"LeadSuperAdminApprovalLocIns"> | boolean
   approved_at?: Prisma.DateTimeNullableFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
+  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   franchise?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
@@ -339,12 +339,12 @@ export type LeadSuperAdminApprovalLocInsOrderByWithAggregationInput = {
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   approval_type?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   is_approved?: Prisma.SortOrder
   approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   approved_by?: Prisma.SortOrderInput | Prisma.SortOrder
   approval_remark?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
   _count?: Prisma.LeadSuperAdminApprovalLocInsCountOrderByAggregateInput
   _avg?: Prisma.LeadSuperAdminApprovalLocInsAvgOrderByAggregateInput
   _max?: Prisma.LeadSuperAdminApprovalLocInsMaxOrderByAggregateInput
@@ -361,20 +361,20 @@ export type LeadSuperAdminApprovalLocInsScalarWhereWithAggregatesInput = {
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | number
-  created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
   is_approved?: Prisma.BoolWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | boolean
   approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
+  created_by?: Prisma.IntWithAggregatesFilter<"LeadSuperAdminApprovalLocIns"> | number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
@@ -388,20 +388,20 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
@@ -415,12 +415,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateInput = {
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateManyInput = {
@@ -429,20 +429,20 @@ export type LeadSuperAdminApprovalLocInsCreateManyInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateManyMutationInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyInput = {
@@ -451,12 +451,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyInput = {
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsListRelationFilter = {
@@ -481,12 +481,12 @@ export type LeadSuperAdminApprovalLocInsCountOrderByAggregateInput = {
   franchise_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   approval_type?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   is_approved?: Prisma.SortOrder
   approved_at?: Prisma.SortOrder
   approved_by?: Prisma.SortOrder
   approval_remark?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type LeadSuperAdminApprovalLocInsAvgOrderByAggregateInput = {
@@ -494,8 +494,8 @@ export type LeadSuperAdminApprovalLocInsAvgOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
   approved_by?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type LeadSuperAdminApprovalLocInsMaxOrderByAggregateInput = {
@@ -504,12 +504,12 @@ export type LeadSuperAdminApprovalLocInsMaxOrderByAggregateInput = {
   franchise_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   approval_type?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   is_approved?: Prisma.SortOrder
   approved_at?: Prisma.SortOrder
   approved_by?: Prisma.SortOrder
   approval_remark?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type LeadSuperAdminApprovalLocInsMinOrderByAggregateInput = {
@@ -518,12 +518,12 @@ export type LeadSuperAdminApprovalLocInsMinOrderByAggregateInput = {
   franchise_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   approval_type?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
-  created_at?: Prisma.SortOrder
   is_approved?: Prisma.SortOrder
   approved_at?: Prisma.SortOrder
   approved_by?: Prisma.SortOrder
   approval_remark?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type LeadSuperAdminApprovalLocInsSumOrderByAggregateInput = {
@@ -531,8 +531,8 @@ export type LeadSuperAdminApprovalLocInsSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
-  created_by?: Prisma.SortOrder
   approved_by?: Prisma.SortOrder
+  created_by?: Prisma.SortOrder
 }
 
 export type LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput = {
@@ -751,10 +751,10 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNeste
 
 export type LeadSuperAdminApprovalLocInsCreateWithoutVendorInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
@@ -766,12 +766,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutVendorInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateOrConnectWithoutVendorInput = {
@@ -809,20 +809,20 @@ export type LeadSuperAdminApprovalLocInsScalarWhereInput = {
   franchise_id?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   lead_id?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFilter<"LeadSuperAdminApprovalLocIns"> | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
-  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
   is_approved?: Prisma.BoolFilter<"LeadSuperAdminApprovalLocIns"> | boolean
   approved_at?: Prisma.DateTimeNullableFilter<"LeadSuperAdminApprovalLocIns"> | Date | string | null
   approved_by?: Prisma.IntNullableFilter<"LeadSuperAdminApprovalLocIns"> | number | null
   approval_remark?: Prisma.StringNullableFilter<"LeadSuperAdminApprovalLocIns"> | string | null
+  created_at?: Prisma.DateTimeFilter<"LeadSuperAdminApprovalLocIns"> | Date | string
+  created_by?: Prisma.IntFilter<"LeadSuperAdminApprovalLocIns"> | number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateWithoutApprovedByInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
@@ -835,11 +835,11 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutApprovedByInput = 
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateOrConnectWithoutApprovedByInput = {
@@ -854,10 +854,10 @@ export type LeadSuperAdminApprovalLocInsCreateManyApprovedByInputEnvelope = {
 
 export type LeadSuperAdminApprovalLocInsCreateWithoutCreatedByInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
@@ -870,11 +870,11 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutCreatedByInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
 }
 
 export type LeadSuperAdminApprovalLocInsCreateOrConnectWithoutCreatedByInput = {
@@ -921,10 +921,10 @@ export type LeadSuperAdminApprovalLocInsUpdateManyWithWhereWithoutCreatedByInput
 
 export type LeadSuperAdminApprovalLocInsCreateWithoutLeadInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadSuperAdminApprovalLocInsInput
@@ -936,12 +936,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   franchise_id?: number | null
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateOrConnectWithoutLeadInput = {
@@ -972,10 +972,10 @@ export type LeadSuperAdminApprovalLocInsUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadSuperAdminApprovalLocInsCreateWithoutFranchiseInput = {
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsApprovedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSuperAdminApprovalsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput
@@ -987,12 +987,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedCreateWithoutFranchiseInput = {
   vendor_id: number
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateOrConnectWithoutFranchiseInput = {
@@ -1026,20 +1026,20 @@ export type LeadSuperAdminApprovalLocInsCreateManyVendorInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateWithoutVendorInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
@@ -1051,12 +1051,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutVendorInput = {
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorInput = {
@@ -1064,12 +1064,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorInput = 
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateManyApprovedByInput = {
@@ -1078,11 +1078,11 @@ export type LeadSuperAdminApprovalLocInsCreateManyApprovedByInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateManyCreatedByInput = {
@@ -1091,19 +1091,19 @@ export type LeadSuperAdminApprovalLocInsCreateManyCreatedByInput = {
   franchise_id?: number | null
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateWithoutApprovedByInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
@@ -1116,11 +1116,11 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutApprovedByInput = 
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByInput = {
@@ -1129,19 +1129,19 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByInpu
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateWithoutCreatedByInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
@@ -1154,11 +1154,11 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutCreatedByInput = {
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1167,11 +1167,11 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByInput
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type LeadSuperAdminApprovalLocInsCreateManyLeadInput = {
@@ -1179,20 +1179,20 @@ export type LeadSuperAdminApprovalLocInsCreateManyLeadInput = {
   vendor_id: number
   franchise_id?: number | null
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateWithoutLeadInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadSuperAdminApprovalLocInsNestedInput
@@ -1204,12 +1204,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadInput = {
@@ -1217,12 +1217,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsCreateManyFranchiseInput = {
@@ -1230,20 +1230,20 @@ export type LeadSuperAdminApprovalLocInsCreateManyFranchiseInput = {
   vendor_id: number
   lead_id: number
   approval_type: $Enums.SuperAdminApprovalType
-  created_by: number
-  created_at?: Date | string
   is_approved?: boolean
   approved_at?: Date | string | null
   approved_by?: number | null
   approval_remark?: string | null
+  created_at?: Date | string
+  created_by: number
 }
 
 export type LeadSuperAdminApprovalLocInsUpdateWithoutFranchiseInput = {
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   approvedBy?: Prisma.UserMasterUpdateOneWithoutLeadSuperAdminApprovalsApprovedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSuperAdminApprovalsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSuperAdminApprovalLocInsNestedInput
@@ -1255,12 +1255,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateWithoutFranchiseInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseInput = {
@@ -1268,12 +1268,12 @@ export type LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseInput
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   approval_type?: Prisma.EnumSuperAdminApprovalTypeFieldUpdateOperationsInput | $Enums.SuperAdminApprovalType
-  created_by?: Prisma.IntFieldUpdateOperationsInput | number
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   approval_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -1284,12 +1284,12 @@ export type LeadSuperAdminApprovalLocInsSelect<ExtArgs extends runtime.Types.Ext
   franchise_id?: boolean
   lead_id?: boolean
   approval_type?: boolean
-  created_by?: boolean
-  created_at?: boolean
   is_approved?: boolean
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  created_at?: boolean
+  created_by?: boolean
   approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
@@ -1303,12 +1303,12 @@ export type LeadSuperAdminApprovalLocInsSelectCreateManyAndReturn<ExtArgs extend
   franchise_id?: boolean
   lead_id?: boolean
   approval_type?: boolean
-  created_by?: boolean
-  created_at?: boolean
   is_approved?: boolean
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  created_at?: boolean
+  created_by?: boolean
   approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
@@ -1322,12 +1322,12 @@ export type LeadSuperAdminApprovalLocInsSelectUpdateManyAndReturn<ExtArgs extend
   franchise_id?: boolean
   lead_id?: boolean
   approval_type?: boolean
-  created_by?: boolean
-  created_at?: boolean
   is_approved?: boolean
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  created_at?: boolean
+  created_by?: boolean
   approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.LeadSuperAdminApprovalLocIns$franchiseArgs<ExtArgs>
@@ -1341,15 +1341,15 @@ export type LeadSuperAdminApprovalLocInsSelectScalar = {
   franchise_id?: boolean
   lead_id?: boolean
   approval_type?: boolean
-  created_by?: boolean
-  created_at?: boolean
   is_approved?: boolean
   approved_at?: boolean
   approved_by?: boolean
   approval_remark?: boolean
+  created_at?: boolean
+  created_by?: boolean
 }
 
-export type LeadSuperAdminApprovalLocInsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "approval_type" | "created_by" | "created_at" | "is_approved" | "approved_at" | "approved_by" | "approval_remark", ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
+export type LeadSuperAdminApprovalLocInsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "approval_type" | "is_approved" | "approved_at" | "approved_by" | "approval_remark" | "created_at" | "created_by", ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
 export type LeadSuperAdminApprovalLocInsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   approvedBy?: boolean | Prisma.LeadSuperAdminApprovalLocIns$approvedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1387,12 +1387,12 @@ export type $LeadSuperAdminApprovalLocInsPayload<ExtArgs extends runtime.Types.E
     franchise_id: number | null
     lead_id: number
     approval_type: $Enums.SuperAdminApprovalType
-    created_by: number
-    created_at: Date
     is_approved: boolean
     approved_at: Date | null
     approved_by: number | null
     approval_remark: string | null
+    created_at: Date
+    created_by: number
   }, ExtArgs["result"]["leadSuperAdminApprovalLocIns"]>
   composites: {}
 }
@@ -1826,12 +1826,12 @@ export interface LeadSuperAdminApprovalLocInsFieldRefs {
   readonly franchise_id: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Int'>
   readonly approval_type: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'SuperAdminApprovalType'>
-  readonly created_by: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Int'>
-  readonly created_at: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'DateTime'>
   readonly is_approved: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Boolean'>
   readonly approved_at: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'DateTime'>
   readonly approved_by: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Int'>
   readonly approval_remark: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'String'>
+  readonly created_at: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'DateTime'>
+  readonly created_by: Prisma.FieldRef<"LeadSuperAdminApprovalLocIns", 'Int'>
 }
     
 

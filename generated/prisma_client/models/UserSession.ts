@@ -51,7 +51,6 @@ export type UserSessionMinAggregateOutputType = {
   platform: string | null
   ip_address: string | null
   user_agent: string | null
-  login_type: $Enums.UserSessionLoginType | null
   status: $Enums.UserSessionStatus | null
   is_current: boolean | null
   last_seen_at: Date | null
@@ -62,6 +61,7 @@ export type UserSessionMinAggregateOutputType = {
   revoke_reason: string | null
   created_at: Date | null
   updated_at: Date | null
+  login_type: $Enums.UserSessionLoginType | null
 }
 
 export type UserSessionMaxAggregateOutputType = {
@@ -75,7 +75,6 @@ export type UserSessionMaxAggregateOutputType = {
   platform: string | null
   ip_address: string | null
   user_agent: string | null
-  login_type: $Enums.UserSessionLoginType | null
   status: $Enums.UserSessionStatus | null
   is_current: boolean | null
   last_seen_at: Date | null
@@ -86,6 +85,7 @@ export type UserSessionMaxAggregateOutputType = {
   revoke_reason: string | null
   created_at: Date | null
   updated_at: Date | null
+  login_type: $Enums.UserSessionLoginType | null
 }
 
 export type UserSessionCountAggregateOutputType = {
@@ -99,7 +99,6 @@ export type UserSessionCountAggregateOutputType = {
   platform: number
   ip_address: number
   user_agent: number
-  login_type: number
   status: number
   is_current: number
   last_seen_at: number
@@ -110,6 +109,7 @@ export type UserSessionCountAggregateOutputType = {
   revoke_reason: number
   created_at: number
   updated_at: number
+  login_type: number
   _all: number
 }
 
@@ -139,7 +139,6 @@ export type UserSessionMinAggregateInputType = {
   platform?: true
   ip_address?: true
   user_agent?: true
-  login_type?: true
   status?: true
   is_current?: true
   last_seen_at?: true
@@ -150,6 +149,7 @@ export type UserSessionMinAggregateInputType = {
   revoke_reason?: true
   created_at?: true
   updated_at?: true
+  login_type?: true
 }
 
 export type UserSessionMaxAggregateInputType = {
@@ -163,7 +163,6 @@ export type UserSessionMaxAggregateInputType = {
   platform?: true
   ip_address?: true
   user_agent?: true
-  login_type?: true
   status?: true
   is_current?: true
   last_seen_at?: true
@@ -174,6 +173,7 @@ export type UserSessionMaxAggregateInputType = {
   revoke_reason?: true
   created_at?: true
   updated_at?: true
+  login_type?: true
 }
 
 export type UserSessionCountAggregateInputType = {
@@ -187,7 +187,6 @@ export type UserSessionCountAggregateInputType = {
   platform?: true
   ip_address?: true
   user_agent?: true
-  login_type?: true
   status?: true
   is_current?: true
   last_seen_at?: true
@@ -198,6 +197,7 @@ export type UserSessionCountAggregateInputType = {
   revoke_reason?: true
   created_at?: true
   updated_at?: true
+  login_type?: true
   _all?: true
 }
 
@@ -298,7 +298,6 @@ export type UserSessionGroupByOutputType = {
   platform: string | null
   ip_address: string | null
   user_agent: string | null
-  login_type: $Enums.UserSessionLoginType
   status: $Enums.UserSessionStatus
   is_current: boolean | null
   last_seen_at: Date | null
@@ -309,6 +308,7 @@ export type UserSessionGroupByOutputType = {
   revoke_reason: string | null
   created_at: Date
   updated_at: Date
+  login_type: $Enums.UserSessionLoginType
   _count: UserSessionCountAggregateOutputType | null
   _avg: UserSessionAvgAggregateOutputType | null
   _sum: UserSessionSumAggregateOutputType | null
@@ -345,7 +345,6 @@ export type UserSessionWhereInput = {
   platform?: Prisma.StringNullableFilter<"UserSession"> | string | null
   ip_address?: Prisma.StringNullableFilter<"UserSession"> | string | null
   user_agent?: Prisma.StringNullableFilter<"UserSession"> | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFilter<"UserSession"> | $Enums.UserSessionStatus
   is_current?: Prisma.BoolNullableFilter<"UserSession"> | boolean | null
   last_seen_at?: Prisma.DateTimeNullableFilter<"UserSession"> | Date | string | null
@@ -356,6 +355,7 @@ export type UserSessionWhereInput = {
   revoke_reason?: Prisma.StringNullableFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
   revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -372,7 +372,6 @@ export type UserSessionOrderByWithRelationInput = {
   platform?: Prisma.SortOrderInput | Prisma.SortOrder
   ip_address?: Prisma.SortOrderInput | Prisma.SortOrder
   user_agent?: Prisma.SortOrderInput | Prisma.SortOrder
-  login_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   is_current?: Prisma.SortOrderInput | Prisma.SortOrder
   last_seen_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -383,6 +382,7 @@ export type UserSessionOrderByWithRelationInput = {
   revoke_reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  login_type?: Prisma.SortOrder
   revokedBy?: Prisma.UserMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -402,7 +402,6 @@ export type UserSessionWhereUniqueInput = Prisma.AtLeast<{
   platform?: Prisma.StringNullableFilter<"UserSession"> | string | null
   ip_address?: Prisma.StringNullableFilter<"UserSession"> | string | null
   user_agent?: Prisma.StringNullableFilter<"UserSession"> | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFilter<"UserSession"> | $Enums.UserSessionStatus
   is_current?: Prisma.BoolNullableFilter<"UserSession"> | boolean | null
   last_seen_at?: Prisma.DateTimeNullableFilter<"UserSession"> | Date | string | null
@@ -413,6 +412,7 @@ export type UserSessionWhereUniqueInput = Prisma.AtLeast<{
   revoke_reason?: Prisma.StringNullableFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
   revokedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -429,7 +429,6 @@ export type UserSessionOrderByWithAggregationInput = {
   platform?: Prisma.SortOrderInput | Prisma.SortOrder
   ip_address?: Prisma.SortOrderInput | Prisma.SortOrder
   user_agent?: Prisma.SortOrderInput | Prisma.SortOrder
-  login_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   is_current?: Prisma.SortOrderInput | Prisma.SortOrder
   last_seen_at?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -440,6 +439,7 @@ export type UserSessionOrderByWithAggregationInput = {
   revoke_reason?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  login_type?: Prisma.SortOrder
   _count?: Prisma.UserSessionCountOrderByAggregateInput
   _avg?: Prisma.UserSessionAvgOrderByAggregateInput
   _max?: Prisma.UserSessionMaxOrderByAggregateInput
@@ -461,7 +461,6 @@ export type UserSessionScalarWhereWithAggregatesInput = {
   platform?: Prisma.StringNullableWithAggregatesFilter<"UserSession"> | string | null
   ip_address?: Prisma.StringNullableWithAggregatesFilter<"UserSession"> | string | null
   user_agent?: Prisma.StringNullableWithAggregatesFilter<"UserSession"> | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeWithAggregatesFilter<"UserSession"> | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusWithAggregatesFilter<"UserSession"> | $Enums.UserSessionStatus
   is_current?: Prisma.BoolNullableWithAggregatesFilter<"UserSession"> | boolean | null
   last_seen_at?: Prisma.DateTimeNullableWithAggregatesFilter<"UserSession"> | Date | string | null
@@ -472,6 +471,7 @@ export type UserSessionScalarWhereWithAggregatesInput = {
   revoke_reason?: Prisma.StringNullableWithAggregatesFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"UserSession"> | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeWithAggregatesFilter<"UserSession"> | $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateInput = {
@@ -482,7 +482,6 @@ export type UserSessionCreateInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -492,6 +491,7 @@ export type UserSessionCreateInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
   user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
@@ -508,7 +508,6 @@ export type UserSessionUncheckedCreateInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -519,6 +518,7 @@ export type UserSessionUncheckedCreateInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionUpdateInput = {
@@ -529,7 +529,6 @@ export type UserSessionUpdateInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -539,6 +538,7 @@ export type UserSessionUpdateInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
@@ -555,7 +555,6 @@ export type UserSessionUncheckedUpdateInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -566,6 +565,7 @@ export type UserSessionUncheckedUpdateInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateManyInput = {
@@ -579,7 +579,6 @@ export type UserSessionCreateManyInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -590,6 +589,7 @@ export type UserSessionCreateManyInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionUpdateManyMutationInput = {
@@ -600,7 +600,6 @@ export type UserSessionUpdateManyMutationInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -610,6 +609,7 @@ export type UserSessionUpdateManyMutationInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionUncheckedUpdateManyInput = {
@@ -623,7 +623,6 @@ export type UserSessionUncheckedUpdateManyInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -634,6 +633,7 @@ export type UserSessionUncheckedUpdateManyInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionListRelationFilter = {
@@ -657,7 +657,6 @@ export type UserSessionCountOrderByAggregateInput = {
   platform?: Prisma.SortOrder
   ip_address?: Prisma.SortOrder
   user_agent?: Prisma.SortOrder
-  login_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   is_current?: Prisma.SortOrder
   last_seen_at?: Prisma.SortOrder
@@ -668,6 +667,7 @@ export type UserSessionCountOrderByAggregateInput = {
   revoke_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  login_type?: Prisma.SortOrder
 }
 
 export type UserSessionAvgOrderByAggregateInput = {
@@ -688,7 +688,6 @@ export type UserSessionMaxOrderByAggregateInput = {
   platform?: Prisma.SortOrder
   ip_address?: Prisma.SortOrder
   user_agent?: Prisma.SortOrder
-  login_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   is_current?: Prisma.SortOrder
   last_seen_at?: Prisma.SortOrder
@@ -699,6 +698,7 @@ export type UserSessionMaxOrderByAggregateInput = {
   revoke_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  login_type?: Prisma.SortOrder
 }
 
 export type UserSessionMinOrderByAggregateInput = {
@@ -712,7 +712,6 @@ export type UserSessionMinOrderByAggregateInput = {
   platform?: Prisma.SortOrder
   ip_address?: Prisma.SortOrder
   user_agent?: Prisma.SortOrder
-  login_type?: Prisma.SortOrder
   status?: Prisma.SortOrder
   is_current?: Prisma.SortOrder
   last_seen_at?: Prisma.SortOrder
@@ -723,6 +722,7 @@ export type UserSessionMinOrderByAggregateInput = {
   revoke_reason?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  login_type?: Prisma.SortOrder
 }
 
 export type UserSessionSumOrderByAggregateInput = {
@@ -858,16 +858,16 @@ export type UserSessionUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.UserSessionScalarWhereInput | Prisma.UserSessionScalarWhereInput[]
 }
 
-export type EnumUserSessionLoginTypeFieldUpdateOperationsInput = {
-  set?: $Enums.UserSessionLoginType
-}
-
 export type EnumUserSessionStatusFieldUpdateOperationsInput = {
   set?: $Enums.UserSessionStatus
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type EnumUserSessionLoginTypeFieldUpdateOperationsInput = {
+  set?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateWithoutVendorInput = {
@@ -878,7 +878,6 @@ export type UserSessionCreateWithoutVendorInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -888,6 +887,7 @@ export type UserSessionCreateWithoutVendorInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
   user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
 }
@@ -902,7 +902,6 @@ export type UserSessionUncheckedCreateWithoutVendorInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -913,6 +912,7 @@ export type UserSessionUncheckedCreateWithoutVendorInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateOrConnectWithoutVendorInput = {
@@ -955,7 +955,6 @@ export type UserSessionScalarWhereInput = {
   platform?: Prisma.StringNullableFilter<"UserSession"> | string | null
   ip_address?: Prisma.StringNullableFilter<"UserSession"> | string | null
   user_agent?: Prisma.StringNullableFilter<"UserSession"> | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFilter<"UserSession"> | $Enums.UserSessionStatus
   is_current?: Prisma.BoolNullableFilter<"UserSession"> | boolean | null
   last_seen_at?: Prisma.DateTimeNullableFilter<"UserSession"> | Date | string | null
@@ -966,6 +965,7 @@ export type UserSessionScalarWhereInput = {
   revoke_reason?: Prisma.StringNullableFilter<"UserSession"> | string | null
   created_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UserSession"> | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFilter<"UserSession"> | $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateWithoutRevokedByInput = {
@@ -976,7 +976,6 @@ export type UserSessionCreateWithoutRevokedByInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -986,6 +985,7 @@ export type UserSessionCreateWithoutRevokedByInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
   user: Prisma.UserMasterCreateNestedOneWithoutSessionsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
 }
@@ -1001,7 +1001,6 @@ export type UserSessionUncheckedCreateWithoutRevokedByInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1011,6 +1010,7 @@ export type UserSessionUncheckedCreateWithoutRevokedByInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateOrConnectWithoutRevokedByInput = {
@@ -1031,7 +1031,6 @@ export type UserSessionCreateWithoutUserInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1041,6 +1040,7 @@ export type UserSessionCreateWithoutUserInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterCreateNestedOneWithoutRevokedSessionsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserSessionsInput
 }
@@ -1055,7 +1055,6 @@ export type UserSessionUncheckedCreateWithoutUserInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1066,6 +1065,7 @@ export type UserSessionUncheckedCreateWithoutUserInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateOrConnectWithoutUserInput = {
@@ -1120,7 +1120,6 @@ export type UserSessionCreateManyVendorInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1131,6 +1130,7 @@ export type UserSessionCreateManyVendorInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionUpdateWithoutVendorInput = {
@@ -1141,7 +1141,6 @@ export type UserSessionUpdateWithoutVendorInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1151,6 +1150,7 @@ export type UserSessionUpdateWithoutVendorInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
 }
@@ -1165,7 +1165,6 @@ export type UserSessionUncheckedUpdateWithoutVendorInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1176,6 +1175,7 @@ export type UserSessionUncheckedUpdateWithoutVendorInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionUncheckedUpdateManyWithoutVendorInput = {
@@ -1188,7 +1188,6 @@ export type UserSessionUncheckedUpdateManyWithoutVendorInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1199,6 +1198,7 @@ export type UserSessionUncheckedUpdateManyWithoutVendorInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateManyRevokedByInput = {
@@ -1212,7 +1212,6 @@ export type UserSessionCreateManyRevokedByInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1222,6 +1221,7 @@ export type UserSessionCreateManyRevokedByInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionCreateManyUserInput = {
@@ -1234,7 +1234,6 @@ export type UserSessionCreateManyUserInput = {
   platform?: string | null
   ip_address?: string | null
   user_agent?: string | null
-  login_type?: $Enums.UserSessionLoginType
   status?: $Enums.UserSessionStatus
   is_current?: boolean | null
   last_seen_at?: Date | string | null
@@ -1245,6 +1244,7 @@ export type UserSessionCreateManyUserInput = {
   revoke_reason?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  login_type?: $Enums.UserSessionLoginType
 }
 
 export type UserSessionUpdateWithoutRevokedByInput = {
@@ -1255,7 +1255,6 @@ export type UserSessionUpdateWithoutRevokedByInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1265,6 +1264,7 @@ export type UserSessionUpdateWithoutRevokedByInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   user?: Prisma.UserMasterUpdateOneRequiredWithoutSessionsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
 }
@@ -1280,7 +1280,6 @@ export type UserSessionUncheckedUpdateWithoutRevokedByInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1290,6 +1289,7 @@ export type UserSessionUncheckedUpdateWithoutRevokedByInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionUncheckedUpdateManyWithoutRevokedByInput = {
@@ -1303,7 +1303,6 @@ export type UserSessionUncheckedUpdateManyWithoutRevokedByInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1313,6 +1312,7 @@ export type UserSessionUncheckedUpdateManyWithoutRevokedByInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionUpdateWithoutUserInput = {
@@ -1323,7 +1323,6 @@ export type UserSessionUpdateWithoutUserInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1333,6 +1332,7 @@ export type UserSessionUpdateWithoutUserInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   revokedBy?: Prisma.UserMasterUpdateOneWithoutRevokedSessionsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserSessionsNestedInput
 }
@@ -1347,7 +1347,6 @@ export type UserSessionUncheckedUpdateWithoutUserInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1358,6 +1357,7 @@ export type UserSessionUncheckedUpdateWithoutUserInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 export type UserSessionUncheckedUpdateManyWithoutUserInput = {
@@ -1370,7 +1370,6 @@ export type UserSessionUncheckedUpdateManyWithoutUserInput = {
   platform?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ip_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user_agent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
   status?: Prisma.EnumUserSessionStatusFieldUpdateOperationsInput | $Enums.UserSessionStatus
   is_current?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   last_seen_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1381,6 +1380,7 @@ export type UserSessionUncheckedUpdateManyWithoutUserInput = {
   revoke_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  login_type?: Prisma.EnumUserSessionLoginTypeFieldUpdateOperationsInput | $Enums.UserSessionLoginType
 }
 
 
@@ -1396,7 +1396,6 @@ export type UserSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   platform?: boolean
   ip_address?: boolean
   user_agent?: boolean
-  login_type?: boolean
   status?: boolean
   is_current?: boolean
   last_seen_at?: boolean
@@ -1407,6 +1406,7 @@ export type UserSessionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  login_type?: boolean
   revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1423,7 +1423,6 @@ export type UserSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   platform?: boolean
   ip_address?: boolean
   user_agent?: boolean
-  login_type?: boolean
   status?: boolean
   is_current?: boolean
   last_seen_at?: boolean
@@ -1434,6 +1433,7 @@ export type UserSessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  login_type?: boolean
   revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1450,7 +1450,6 @@ export type UserSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   platform?: boolean
   ip_address?: boolean
   user_agent?: boolean
-  login_type?: boolean
   status?: boolean
   is_current?: boolean
   last_seen_at?: boolean
@@ -1461,6 +1460,7 @@ export type UserSessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  login_type?: boolean
   revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1477,7 +1477,6 @@ export type UserSessionSelectScalar = {
   platform?: boolean
   ip_address?: boolean
   user_agent?: boolean
-  login_type?: boolean
   status?: boolean
   is_current?: boolean
   last_seen_at?: boolean
@@ -1488,9 +1487,10 @@ export type UserSessionSelectScalar = {
   revoke_reason?: boolean
   created_at?: boolean
   updated_at?: boolean
+  login_type?: boolean
 }
 
-export type UserSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "vendor_id" | "refresh_token_hash" | "access_jti" | "device_id" | "device_name" | "platform" | "ip_address" | "user_agent" | "login_type" | "status" | "is_current" | "last_seen_at" | "expires_at" | "logged_out_at" | "revoked_at" | "revoked_by" | "revoke_reason" | "created_at" | "updated_at", ExtArgs["result"]["userSession"]>
+export type UserSessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "vendor_id" | "refresh_token_hash" | "access_jti" | "device_id" | "device_name" | "platform" | "ip_address" | "user_agent" | "status" | "is_current" | "last_seen_at" | "expires_at" | "logged_out_at" | "revoked_at" | "revoked_by" | "revoke_reason" | "created_at" | "updated_at" | "login_type", ExtArgs["result"]["userSession"]>
 export type UserSessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   revokedBy?: boolean | Prisma.UserSession$revokedByArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1525,7 +1525,6 @@ export type $UserSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     platform: string | null
     ip_address: string | null
     user_agent: string | null
-    login_type: $Enums.UserSessionLoginType
     status: $Enums.UserSessionStatus
     is_current: boolean | null
     last_seen_at: Date | null
@@ -1536,6 +1535,7 @@ export type $UserSessionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     revoke_reason: string | null
     created_at: Date
     updated_at: Date
+    login_type: $Enums.UserSessionLoginType
   }, ExtArgs["result"]["userSession"]>
   composites: {}
 }
@@ -1972,7 +1972,6 @@ export interface UserSessionFieldRefs {
   readonly platform: Prisma.FieldRef<"UserSession", 'String'>
   readonly ip_address: Prisma.FieldRef<"UserSession", 'String'>
   readonly user_agent: Prisma.FieldRef<"UserSession", 'String'>
-  readonly login_type: Prisma.FieldRef<"UserSession", 'UserSessionLoginType'>
   readonly status: Prisma.FieldRef<"UserSession", 'UserSessionStatus'>
   readonly is_current: Prisma.FieldRef<"UserSession", 'Boolean'>
   readonly last_seen_at: Prisma.FieldRef<"UserSession", 'DateTime'>
@@ -1983,6 +1982,7 @@ export interface UserSessionFieldRefs {
   readonly revoke_reason: Prisma.FieldRef<"UserSession", 'String'>
   readonly created_at: Prisma.FieldRef<"UserSession", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"UserSession", 'DateTime'>
+  readonly login_type: Prisma.FieldRef<"UserSession", 'UserSessionLoginType'>
 }
     
 

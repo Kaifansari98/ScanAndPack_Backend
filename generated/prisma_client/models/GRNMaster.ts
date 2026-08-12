@@ -35,16 +35,16 @@ export type GRNMasterAvgAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   confirmed_by: number | null
-  cess_amount: runtime.Decimal | null
-  cgst_amount: runtime.Decimal | null
-  discount_amount: runtime.Decimal | null
-  freight_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  other_charges_amount: runtime.Decimal | null
-  packing_amount: runtime.Decimal | null
-  roundoff_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
   subtotal_amount: runtime.Decimal | null
+  cgst_amount: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  cess_amount: runtime.Decimal | null
+  discount_amount: runtime.Decimal | null
+  packing_amount: runtime.Decimal | null
+  freight_amount: runtime.Decimal | null
+  other_charges_amount: runtime.Decimal | null
+  roundoff_amount: runtime.Decimal | null
   taxable_amount: runtime.Decimal | null
   total_amount: runtime.Decimal | null
 }
@@ -58,16 +58,16 @@ export type GRNMasterSumAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   confirmed_by: number | null
-  cess_amount: runtime.Decimal | null
-  cgst_amount: runtime.Decimal | null
-  discount_amount: runtime.Decimal | null
-  freight_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  other_charges_amount: runtime.Decimal | null
-  packing_amount: runtime.Decimal | null
-  roundoff_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
   subtotal_amount: runtime.Decimal | null
+  cgst_amount: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  cess_amount: runtime.Decimal | null
+  discount_amount: runtime.Decimal | null
+  packing_amount: runtime.Decimal | null
+  freight_amount: runtime.Decimal | null
+  other_charges_amount: runtime.Decimal | null
+  roundoff_amount: runtime.Decimal | null
   taxable_amount: runtime.Decimal | null
   total_amount: runtime.Decimal | null
 }
@@ -92,22 +92,22 @@ export type GRNMasterMinAggregateOutputType = {
   confirmed_at: Date | null
   created_at: Date | null
   updated_at: Date | null
-  cess_amount: runtime.Decimal | null
-  cgst_amount: runtime.Decimal | null
-  discount_amount: runtime.Decimal | null
-  eway_bill_no: string | null
-  freight_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  lr_date: Date | null
-  lr_no: string | null
-  other_charges_amount: runtime.Decimal | null
-  packing_amount: runtime.Decimal | null
-  roundoff_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
   subtotal_amount: runtime.Decimal | null
+  cgst_amount: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  cess_amount: runtime.Decimal | null
+  discount_amount: runtime.Decimal | null
+  packing_amount: runtime.Decimal | null
+  freight_amount: runtime.Decimal | null
+  other_charges_amount: runtime.Decimal | null
+  roundoff_amount: runtime.Decimal | null
   taxable_amount: runtime.Decimal | null
   total_amount: runtime.Decimal | null
+  eway_bill_no: string | null
   transporter_name: string | null
+  lr_no: string | null
+  lr_date: Date | null
 }
 
 export type GRNMasterMaxAggregateOutputType = {
@@ -130,22 +130,22 @@ export type GRNMasterMaxAggregateOutputType = {
   confirmed_at: Date | null
   created_at: Date | null
   updated_at: Date | null
-  cess_amount: runtime.Decimal | null
-  cgst_amount: runtime.Decimal | null
-  discount_amount: runtime.Decimal | null
-  eway_bill_no: string | null
-  freight_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  lr_date: Date | null
-  lr_no: string | null
-  other_charges_amount: runtime.Decimal | null
-  packing_amount: runtime.Decimal | null
-  roundoff_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
   subtotal_amount: runtime.Decimal | null
+  cgst_amount: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  cess_amount: runtime.Decimal | null
+  discount_amount: runtime.Decimal | null
+  packing_amount: runtime.Decimal | null
+  freight_amount: runtime.Decimal | null
+  other_charges_amount: runtime.Decimal | null
+  roundoff_amount: runtime.Decimal | null
   taxable_amount: runtime.Decimal | null
   total_amount: runtime.Decimal | null
+  eway_bill_no: string | null
   transporter_name: string | null
+  lr_no: string | null
+  lr_date: Date | null
 }
 
 export type GRNMasterCountAggregateOutputType = {
@@ -168,22 +168,22 @@ export type GRNMasterCountAggregateOutputType = {
   confirmed_at: number
   created_at: number
   updated_at: number
-  cess_amount: number
-  cgst_amount: number
-  discount_amount: number
-  eway_bill_no: number
-  freight_amount: number
-  igst_amount: number
-  lr_date: number
-  lr_no: number
-  other_charges_amount: number
-  packing_amount: number
-  roundoff_amount: number
-  sgst_amount: number
   subtotal_amount: number
+  cgst_amount: number
+  sgst_amount: number
+  igst_amount: number
+  cess_amount: number
+  discount_amount: number
+  packing_amount: number
+  freight_amount: number
+  other_charges_amount: number
+  roundoff_amount: number
   taxable_amount: number
   total_amount: number
+  eway_bill_no: number
   transporter_name: number
+  lr_no: number
+  lr_date: number
   _all: number
 }
 
@@ -197,16 +197,16 @@ export type GRNMasterAvgAggregateInputType = {
   created_by?: true
   updated_by?: true
   confirmed_by?: true
-  cess_amount?: true
-  cgst_amount?: true
-  discount_amount?: true
-  freight_amount?: true
-  igst_amount?: true
-  other_charges_amount?: true
-  packing_amount?: true
-  roundoff_amount?: true
-  sgst_amount?: true
   subtotal_amount?: true
+  cgst_amount?: true
+  sgst_amount?: true
+  igst_amount?: true
+  cess_amount?: true
+  discount_amount?: true
+  packing_amount?: true
+  freight_amount?: true
+  other_charges_amount?: true
+  roundoff_amount?: true
   taxable_amount?: true
   total_amount?: true
 }
@@ -220,16 +220,16 @@ export type GRNMasterSumAggregateInputType = {
   created_by?: true
   updated_by?: true
   confirmed_by?: true
-  cess_amount?: true
-  cgst_amount?: true
-  discount_amount?: true
-  freight_amount?: true
-  igst_amount?: true
-  other_charges_amount?: true
-  packing_amount?: true
-  roundoff_amount?: true
-  sgst_amount?: true
   subtotal_amount?: true
+  cgst_amount?: true
+  sgst_amount?: true
+  igst_amount?: true
+  cess_amount?: true
+  discount_amount?: true
+  packing_amount?: true
+  freight_amount?: true
+  other_charges_amount?: true
+  roundoff_amount?: true
   taxable_amount?: true
   total_amount?: true
 }
@@ -254,22 +254,22 @@ export type GRNMasterMinAggregateInputType = {
   confirmed_at?: true
   created_at?: true
   updated_at?: true
-  cess_amount?: true
-  cgst_amount?: true
-  discount_amount?: true
-  eway_bill_no?: true
-  freight_amount?: true
-  igst_amount?: true
-  lr_date?: true
-  lr_no?: true
-  other_charges_amount?: true
-  packing_amount?: true
-  roundoff_amount?: true
-  sgst_amount?: true
   subtotal_amount?: true
+  cgst_amount?: true
+  sgst_amount?: true
+  igst_amount?: true
+  cess_amount?: true
+  discount_amount?: true
+  packing_amount?: true
+  freight_amount?: true
+  other_charges_amount?: true
+  roundoff_amount?: true
   taxable_amount?: true
   total_amount?: true
+  eway_bill_no?: true
   transporter_name?: true
+  lr_no?: true
+  lr_date?: true
 }
 
 export type GRNMasterMaxAggregateInputType = {
@@ -292,22 +292,22 @@ export type GRNMasterMaxAggregateInputType = {
   confirmed_at?: true
   created_at?: true
   updated_at?: true
-  cess_amount?: true
-  cgst_amount?: true
-  discount_amount?: true
-  eway_bill_no?: true
-  freight_amount?: true
-  igst_amount?: true
-  lr_date?: true
-  lr_no?: true
-  other_charges_amount?: true
-  packing_amount?: true
-  roundoff_amount?: true
-  sgst_amount?: true
   subtotal_amount?: true
+  cgst_amount?: true
+  sgst_amount?: true
+  igst_amount?: true
+  cess_amount?: true
+  discount_amount?: true
+  packing_amount?: true
+  freight_amount?: true
+  other_charges_amount?: true
+  roundoff_amount?: true
   taxable_amount?: true
   total_amount?: true
+  eway_bill_no?: true
   transporter_name?: true
+  lr_no?: true
+  lr_date?: true
 }
 
 export type GRNMasterCountAggregateInputType = {
@@ -330,22 +330,22 @@ export type GRNMasterCountAggregateInputType = {
   confirmed_at?: true
   created_at?: true
   updated_at?: true
-  cess_amount?: true
-  cgst_amount?: true
-  discount_amount?: true
-  eway_bill_no?: true
-  freight_amount?: true
-  igst_amount?: true
-  lr_date?: true
-  lr_no?: true
-  other_charges_amount?: true
-  packing_amount?: true
-  roundoff_amount?: true
-  sgst_amount?: true
   subtotal_amount?: true
+  cgst_amount?: true
+  sgst_amount?: true
+  igst_amount?: true
+  cess_amount?: true
+  discount_amount?: true
+  packing_amount?: true
+  freight_amount?: true
+  other_charges_amount?: true
+  roundoff_amount?: true
   taxable_amount?: true
   total_amount?: true
+  eway_bill_no?: true
   transporter_name?: true
+  lr_no?: true
+  lr_date?: true
   _all?: true
 }
 
@@ -455,22 +455,22 @@ export type GRNMasterGroupByOutputType = {
   confirmed_at: Date | null
   created_at: Date
   updated_at: Date
-  cess_amount: runtime.Decimal | null
-  cgst_amount: runtime.Decimal | null
-  discount_amount: runtime.Decimal | null
-  eway_bill_no: string | null
-  freight_amount: runtime.Decimal | null
-  igst_amount: runtime.Decimal | null
-  lr_date: Date | null
-  lr_no: string | null
-  other_charges_amount: runtime.Decimal | null
-  packing_amount: runtime.Decimal | null
-  roundoff_amount: runtime.Decimal | null
-  sgst_amount: runtime.Decimal | null
   subtotal_amount: runtime.Decimal | null
+  cgst_amount: runtime.Decimal | null
+  sgst_amount: runtime.Decimal | null
+  igst_amount: runtime.Decimal | null
+  cess_amount: runtime.Decimal | null
+  discount_amount: runtime.Decimal | null
+  packing_amount: runtime.Decimal | null
+  freight_amount: runtime.Decimal | null
+  other_charges_amount: runtime.Decimal | null
+  roundoff_amount: runtime.Decimal | null
   taxable_amount: runtime.Decimal | null
   total_amount: runtime.Decimal | null
+  eway_bill_no: string | null
   transporter_name: string | null
+  lr_no: string | null
+  lr_date: Date | null
   _count: GRNMasterCountAggregateOutputType | null
   _avg: GRNMasterAvgAggregateOutputType | null
   _sum: GRNMasterSumAggregateOutputType | null
@@ -516,22 +516,22 @@ export type GRNMasterWhereInput = {
   confirmed_at?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
-  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
-  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   transporter_name?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
   items?: Prisma.GRNItemListRelationFilter
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
@@ -563,22 +563,22 @@ export type GRNMasterOrderByWithRelationInput = {
   confirmed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  eway_bill_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  freight_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  lr_date?: Prisma.SortOrderInput | Prisma.SortOrder
-  lr_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  packing_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cess_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  packing_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  freight_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  eway_bill_no?: Prisma.SortOrderInput | Prisma.SortOrder
   transporter_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  lr_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  lr_date?: Prisma.SortOrderInput | Prisma.SortOrder
   debitCreditNotes?: Prisma.DebitCreditNoteOrderByRelationAggregateInput
   items?: Prisma.GRNItemOrderByRelationAggregateInput
   companyVendor?: Prisma.CompanyVendorsMasterOrderByWithRelationInput
@@ -613,22 +613,22 @@ export type GRNMasterWhereUniqueInput = Prisma.AtLeast<{
   confirmed_at?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
-  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
-  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   transporter_name?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
   items?: Prisma.GRNItemListRelationFilter
   companyVendor?: Prisma.XOR<Prisma.CompanyVendorsMasterScalarRelationFilter, Prisma.CompanyVendorsMasterWhereInput>
@@ -660,22 +660,22 @@ export type GRNMasterOrderByWithAggregationInput = {
   confirmed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  eway_bill_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  freight_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  lr_date?: Prisma.SortOrderInput | Prisma.SortOrder
-  lr_no?: Prisma.SortOrderInput | Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  packing_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrderInput | Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  igst_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  cess_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  discount_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  packing_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  freight_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   taxable_amount?: Prisma.SortOrderInput | Prisma.SortOrder
   total_amount?: Prisma.SortOrderInput | Prisma.SortOrder
+  eway_bill_no?: Prisma.SortOrderInput | Prisma.SortOrder
   transporter_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  lr_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  lr_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.GRNMasterCountOrderByAggregateInput
   _avg?: Prisma.GRNMasterAvgOrderByAggregateInput
   _max?: Prisma.GRNMasterMaxOrderByAggregateInput
@@ -706,22 +706,22 @@ export type GRNMasterScalarWhereWithAggregatesInput = {
   confirmed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"GRNMaster"> | Date | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"GRNMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"GRNMaster"> | Date | string
-  cess_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.StringNullableWithAggregatesFilter<"GRNMaster"> | string | null
-  freight_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.DateTimeNullableWithAggregatesFilter<"GRNMaster"> | Date | string | null
-  lr_no?: Prisma.StringNullableWithAggregatesFilter<"GRNMaster"> | string | null
-  other_charges_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableWithAggregatesFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.StringNullableWithAggregatesFilter<"GRNMaster"> | string | null
   transporter_name?: Prisma.StringNullableWithAggregatesFilter<"GRNMaster"> | string | null
+  lr_no?: Prisma.StringNullableWithAggregatesFilter<"GRNMaster"> | string | null
+  lr_date?: Prisma.DateTimeNullableWithAggregatesFilter<"GRNMaster"> | Date | string | null
 }
 
 export type GRNMasterCreateInput = {
@@ -737,22 +737,22 @@ export type GRNMasterCreateInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -784,22 +784,22 @@ export type GRNMasterUncheckedCreateInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -818,22 +818,22 @@ export type GRNMasterUpdateInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -865,22 +865,22 @@ export type GRNMasterUncheckedUpdateInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -906,22 +906,22 @@ export type GRNMasterCreateManyInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterUpdateManyMutationInput = {
@@ -937,22 +937,22 @@ export type GRNMasterUpdateManyMutationInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterUncheckedUpdateManyInput = {
@@ -975,22 +975,22 @@ export type GRNMasterUncheckedUpdateManyInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterListRelationFilter = {
@@ -1023,22 +1023,22 @@ export type GRNMasterCountOrderByAggregateInput = {
   confirmed_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrder
-  discount_amount?: Prisma.SortOrder
-  eway_bill_no?: Prisma.SortOrder
-  freight_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  lr_date?: Prisma.SortOrder
-  lr_no?: Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrder
-  packing_amount?: Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  cess_amount?: Prisma.SortOrder
+  discount_amount?: Prisma.SortOrder
+  packing_amount?: Prisma.SortOrder
+  freight_amount?: Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrder
   taxable_amount?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
+  eway_bill_no?: Prisma.SortOrder
   transporter_name?: Prisma.SortOrder
+  lr_no?: Prisma.SortOrder
+  lr_date?: Prisma.SortOrder
 }
 
 export type GRNMasterAvgOrderByAggregateInput = {
@@ -1050,16 +1050,16 @@ export type GRNMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   confirmed_by?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrder
-  discount_amount?: Prisma.SortOrder
-  freight_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrder
-  packing_amount?: Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  cess_amount?: Prisma.SortOrder
+  discount_amount?: Prisma.SortOrder
+  packing_amount?: Prisma.SortOrder
+  freight_amount?: Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrder
   taxable_amount?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
 }
@@ -1084,22 +1084,22 @@ export type GRNMasterMaxOrderByAggregateInput = {
   confirmed_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrder
-  discount_amount?: Prisma.SortOrder
-  eway_bill_no?: Prisma.SortOrder
-  freight_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  lr_date?: Prisma.SortOrder
-  lr_no?: Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrder
-  packing_amount?: Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  cess_amount?: Prisma.SortOrder
+  discount_amount?: Prisma.SortOrder
+  packing_amount?: Prisma.SortOrder
+  freight_amount?: Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrder
   taxable_amount?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
+  eway_bill_no?: Prisma.SortOrder
   transporter_name?: Prisma.SortOrder
+  lr_no?: Prisma.SortOrder
+  lr_date?: Prisma.SortOrder
 }
 
 export type GRNMasterMinOrderByAggregateInput = {
@@ -1122,22 +1122,22 @@ export type GRNMasterMinOrderByAggregateInput = {
   confirmed_at?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrder
-  discount_amount?: Prisma.SortOrder
-  eway_bill_no?: Prisma.SortOrder
-  freight_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  lr_date?: Prisma.SortOrder
-  lr_no?: Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrder
-  packing_amount?: Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  cess_amount?: Prisma.SortOrder
+  discount_amount?: Prisma.SortOrder
+  packing_amount?: Prisma.SortOrder
+  freight_amount?: Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrder
   taxable_amount?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
+  eway_bill_no?: Prisma.SortOrder
   transporter_name?: Prisma.SortOrder
+  lr_no?: Prisma.SortOrder
+  lr_date?: Prisma.SortOrder
 }
 
 export type GRNMasterSumOrderByAggregateInput = {
@@ -1149,16 +1149,16 @@ export type GRNMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   confirmed_by?: Prisma.SortOrder
-  cess_amount?: Prisma.SortOrder
-  cgst_amount?: Prisma.SortOrder
-  discount_amount?: Prisma.SortOrder
-  freight_amount?: Prisma.SortOrder
-  igst_amount?: Prisma.SortOrder
-  other_charges_amount?: Prisma.SortOrder
-  packing_amount?: Prisma.SortOrder
-  roundoff_amount?: Prisma.SortOrder
-  sgst_amount?: Prisma.SortOrder
   subtotal_amount?: Prisma.SortOrder
+  cgst_amount?: Prisma.SortOrder
+  sgst_amount?: Prisma.SortOrder
+  igst_amount?: Prisma.SortOrder
+  cess_amount?: Prisma.SortOrder
+  discount_amount?: Prisma.SortOrder
+  packing_amount?: Prisma.SortOrder
+  freight_amount?: Prisma.SortOrder
+  other_charges_amount?: Prisma.SortOrder
+  roundoff_amount?: Prisma.SortOrder
   taxable_amount?: Prisma.SortOrder
   total_amount?: Prisma.SortOrder
 }
@@ -1486,22 +1486,22 @@ export type GRNMasterCreateWithoutVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -1531,22 +1531,22 @@ export type GRNMasterUncheckedCreateWithoutVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -1601,22 +1601,22 @@ export type GRNMasterScalarWhereInput = {
   confirmed_at?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
   created_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"GRNMaster"> | Date | string
-  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
-  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
-  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"GRNMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
   transporter_name?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_no?: Prisma.StringNullableFilter<"GRNMaster"> | string | null
+  lr_date?: Prisma.DateTimeNullableFilter<"GRNMaster"> | Date | string | null
 }
 
 export type GRNMasterCreateWithoutConfirmedByInput = {
@@ -1632,22 +1632,22 @@ export type GRNMasterCreateWithoutConfirmedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -1677,22 +1677,22 @@ export type GRNMasterUncheckedCreateWithoutConfirmedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -1721,22 +1721,22 @@ export type GRNMasterCreateWithoutCreatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -1766,22 +1766,22 @@ export type GRNMasterUncheckedCreateWithoutCreatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -1810,22 +1810,22 @@ export type GRNMasterCreateWithoutUpdatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -1855,22 +1855,22 @@ export type GRNMasterUncheckedCreateWithoutUpdatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -1947,22 +1947,22 @@ export type GRNMasterCreateWithoutCompanyVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
@@ -1992,22 +1992,22 @@ export type GRNMasterUncheckedCreateWithoutCompanyVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -2052,22 +2052,22 @@ export type GRNMasterCreateWithoutPurchaseOrderInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -2097,22 +2097,22 @@ export type GRNMasterUncheckedCreateWithoutPurchaseOrderInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
@@ -2157,22 +2157,22 @@ export type GRNMasterCreateWithoutItemsInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
   confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
@@ -2203,22 +2203,22 @@ export type GRNMasterUncheckedCreateWithoutItemsInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
@@ -2252,22 +2252,22 @@ export type GRNMasterUpdateWithoutItemsInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
   confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
@@ -2298,22 +2298,22 @@ export type GRNMasterUncheckedUpdateWithoutItemsInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
@@ -2331,22 +2331,22 @@ export type GRNMasterCreateWithoutDebitCreditNotesInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
   confirmedBy?: Prisma.UserMasterCreateNestedOneWithoutGrnsConfirmedInput
@@ -2377,22 +2377,22 @@ export type GRNMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutGrnInput
 }
@@ -2426,22 +2426,22 @@ export type GRNMasterUpdateWithoutDebitCreditNotesInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
   confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
@@ -2472,22 +2472,22 @@ export type GRNMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
 }
@@ -2505,22 +2505,22 @@ export type GRNMasterCreateWithoutPaymentSchedulesInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemCreateNestedManyWithoutGrnInput
   companyVendor: Prisma.CompanyVendorsMasterCreateNestedOneWithoutGrnsInput
@@ -2551,22 +2551,22 @@ export type GRNMasterUncheckedCreateWithoutPaymentSchedulesInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutGrnInput
   items?: Prisma.GRNItemUncheckedCreateNestedManyWithoutGrnInput
 }
@@ -2600,22 +2600,22 @@ export type GRNMasterUpdateWithoutPaymentSchedulesInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -2646,22 +2646,22 @@ export type GRNMasterUncheckedUpdateWithoutPaymentSchedulesInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
 }
@@ -2685,22 +2685,22 @@ export type GRNMasterCreateManyVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterUpdateWithoutVendorInput = {
@@ -2716,22 +2716,22 @@ export type GRNMasterUpdateWithoutVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -2761,22 +2761,22 @@ export type GRNMasterUncheckedUpdateWithoutVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -2801,22 +2801,22 @@ export type GRNMasterUncheckedUpdateManyWithoutVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterCreateManyConfirmedByInput = {
@@ -2838,22 +2838,22 @@ export type GRNMasterCreateManyConfirmedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterCreateManyCreatedByInput = {
@@ -2875,22 +2875,22 @@ export type GRNMasterCreateManyCreatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterCreateManyUpdatedByInput = {
@@ -2912,22 +2912,22 @@ export type GRNMasterCreateManyUpdatedByInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterUpdateWithoutConfirmedByInput = {
@@ -2943,22 +2943,22 @@ export type GRNMasterUpdateWithoutConfirmedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -2988,22 +2988,22 @@ export type GRNMasterUncheckedUpdateWithoutConfirmedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -3028,22 +3028,22 @@ export type GRNMasterUncheckedUpdateManyWithoutConfirmedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterUpdateWithoutCreatedByInput = {
@@ -3059,22 +3059,22 @@ export type GRNMasterUpdateWithoutCreatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -3104,22 +3104,22 @@ export type GRNMasterUncheckedUpdateWithoutCreatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -3144,22 +3144,22 @@ export type GRNMasterUncheckedUpdateManyWithoutCreatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterUpdateWithoutUpdatedByInput = {
@@ -3175,22 +3175,22 @@ export type GRNMasterUpdateWithoutUpdatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -3220,22 +3220,22 @@ export type GRNMasterUncheckedUpdateWithoutUpdatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -3260,22 +3260,22 @@ export type GRNMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterCreateManyCompanyVendorInput = {
@@ -3297,22 +3297,22 @@ export type GRNMasterCreateManyCompanyVendorInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterUpdateWithoutCompanyVendorInput = {
@@ -3328,22 +3328,22 @@ export type GRNMasterUpdateWithoutCompanyVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   confirmedBy?: Prisma.UserMasterUpdateOneWithoutGrnsConfirmedNestedInput
@@ -3373,22 +3373,22 @@ export type GRNMasterUncheckedUpdateWithoutCompanyVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -3413,22 +3413,22 @@ export type GRNMasterUncheckedUpdateManyWithoutCompanyVendorInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type GRNMasterCreateManyPurchaseOrderInput = {
@@ -3450,22 +3450,22 @@ export type GRNMasterCreateManyPurchaseOrderInput = {
   confirmed_at?: Date | string | null
   created_at?: Date | string
   updated_at?: Date | string
-  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: string | null
-  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Date | string | null
-  lr_no?: string | null
-  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: string | null
   transporter_name?: string | null
+  lr_no?: string | null
+  lr_date?: Date | string | null
 }
 
 export type GRNMasterUpdateWithoutPurchaseOrderInput = {
@@ -3481,22 +3481,22 @@ export type GRNMasterUpdateWithoutPurchaseOrderInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUpdateManyWithoutGrnNestedInput
   companyVendor?: Prisma.CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput
@@ -3526,22 +3526,22 @@ export type GRNMasterUncheckedUpdateWithoutPurchaseOrderInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutGrnNestedInput
   items?: Prisma.GRNItemUncheckedUpdateManyWithoutGrnNestedInput
   paymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutGrnNestedInput
@@ -3566,22 +3566,22 @@ export type GRNMasterUncheckedUpdateManyWithoutPurchaseOrderInput = {
   confirmed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   subtotal_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  sgst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  igst_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  cess_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  discount_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  packing_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  freight_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  other_charges_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  roundoff_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   taxable_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  eway_bill_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transporter_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lr_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -3653,22 +3653,22 @@ export type GRNMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   confirmed_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  cess_amount?: boolean
-  cgst_amount?: boolean
-  discount_amount?: boolean
-  eway_bill_no?: boolean
-  freight_amount?: boolean
-  igst_amount?: boolean
-  lr_date?: boolean
-  lr_no?: boolean
-  other_charges_amount?: boolean
-  packing_amount?: boolean
-  roundoff_amount?: boolean
-  sgst_amount?: boolean
   subtotal_amount?: boolean
+  cgst_amount?: boolean
+  sgst_amount?: boolean
+  igst_amount?: boolean
+  cess_amount?: boolean
+  discount_amount?: boolean
+  packing_amount?: boolean
+  freight_amount?: boolean
+  other_charges_amount?: boolean
+  roundoff_amount?: boolean
   taxable_amount?: boolean
   total_amount?: boolean
+  eway_bill_no?: boolean
   transporter_name?: boolean
+  lr_no?: boolean
+  lr_date?: boolean
   debitCreditNotes?: boolean | Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs>
   items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
@@ -3701,22 +3701,22 @@ export type GRNMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   confirmed_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  cess_amount?: boolean
-  cgst_amount?: boolean
-  discount_amount?: boolean
-  eway_bill_no?: boolean
-  freight_amount?: boolean
-  igst_amount?: boolean
-  lr_date?: boolean
-  lr_no?: boolean
-  other_charges_amount?: boolean
-  packing_amount?: boolean
-  roundoff_amount?: boolean
-  sgst_amount?: boolean
   subtotal_amount?: boolean
+  cgst_amount?: boolean
+  sgst_amount?: boolean
+  igst_amount?: boolean
+  cess_amount?: boolean
+  discount_amount?: boolean
+  packing_amount?: boolean
+  freight_amount?: boolean
+  other_charges_amount?: boolean
+  roundoff_amount?: boolean
   taxable_amount?: boolean
   total_amount?: boolean
+  eway_bill_no?: boolean
   transporter_name?: boolean
+  lr_no?: boolean
+  lr_date?: boolean
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -3745,22 +3745,22 @@ export type GRNMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   confirmed_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  cess_amount?: boolean
-  cgst_amount?: boolean
-  discount_amount?: boolean
-  eway_bill_no?: boolean
-  freight_amount?: boolean
-  igst_amount?: boolean
-  lr_date?: boolean
-  lr_no?: boolean
-  other_charges_amount?: boolean
-  packing_amount?: boolean
-  roundoff_amount?: boolean
-  sgst_amount?: boolean
   subtotal_amount?: boolean
+  cgst_amount?: boolean
+  sgst_amount?: boolean
+  igst_amount?: boolean
+  cess_amount?: boolean
+  discount_amount?: boolean
+  packing_amount?: boolean
+  freight_amount?: boolean
+  other_charges_amount?: boolean
+  roundoff_amount?: boolean
   taxable_amount?: boolean
   total_amount?: boolean
+  eway_bill_no?: boolean
   transporter_name?: boolean
+  lr_no?: boolean
+  lr_date?: boolean
   companyVendor?: boolean | Prisma.CompanyVendorsMasterDefaultArgs<ExtArgs>
   confirmedBy?: boolean | Prisma.GRNMaster$confirmedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -3789,25 +3789,25 @@ export type GRNMasterSelectScalar = {
   confirmed_at?: boolean
   created_at?: boolean
   updated_at?: boolean
-  cess_amount?: boolean
-  cgst_amount?: boolean
-  discount_amount?: boolean
-  eway_bill_no?: boolean
-  freight_amount?: boolean
-  igst_amount?: boolean
-  lr_date?: boolean
-  lr_no?: boolean
-  other_charges_amount?: boolean
-  packing_amount?: boolean
-  roundoff_amount?: boolean
-  sgst_amount?: boolean
   subtotal_amount?: boolean
+  cgst_amount?: boolean
+  sgst_amount?: boolean
+  igst_amount?: boolean
+  cess_amount?: boolean
+  discount_amount?: boolean
+  packing_amount?: boolean
+  freight_amount?: boolean
+  other_charges_amount?: boolean
+  roundoff_amount?: boolean
   taxable_amount?: boolean
   total_amount?: boolean
+  eway_bill_no?: boolean
   transporter_name?: boolean
+  lr_no?: boolean
+  lr_date?: boolean
 }
 
-export type GRNMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "grn_no" | "purchase_order_id" | "company_vendor_id" | "status" | "received_date" | "vehicle_no" | "gate_entry_no" | "invoice_no" | "invoice_date" | "invoice_amount" | "remarks" | "created_by" | "updated_by" | "confirmed_by" | "confirmed_at" | "created_at" | "updated_at" | "cess_amount" | "cgst_amount" | "discount_amount" | "eway_bill_no" | "freight_amount" | "igst_amount" | "lr_date" | "lr_no" | "other_charges_amount" | "packing_amount" | "roundoff_amount" | "sgst_amount" | "subtotal_amount" | "taxable_amount" | "total_amount" | "transporter_name", ExtArgs["result"]["gRNMaster"]>
+export type GRNMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "grn_no" | "purchase_order_id" | "company_vendor_id" | "status" | "received_date" | "vehicle_no" | "gate_entry_no" | "invoice_no" | "invoice_date" | "invoice_amount" | "remarks" | "created_by" | "updated_by" | "confirmed_by" | "confirmed_at" | "created_at" | "updated_at" | "subtotal_amount" | "cgst_amount" | "sgst_amount" | "igst_amount" | "cess_amount" | "discount_amount" | "packing_amount" | "freight_amount" | "other_charges_amount" | "roundoff_amount" | "taxable_amount" | "total_amount" | "eway_bill_no" | "transporter_name" | "lr_no" | "lr_date", ExtArgs["result"]["gRNMaster"]>
 export type GRNMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   debitCreditNotes?: boolean | Prisma.GRNMaster$debitCreditNotesArgs<ExtArgs>
   items?: boolean | Prisma.GRNMaster$itemsArgs<ExtArgs>
@@ -3870,22 +3870,22 @@ export type $GRNMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     confirmed_at: Date | null
     created_at: Date
     updated_at: Date
-    cess_amount: runtime.Decimal | null
-    cgst_amount: runtime.Decimal | null
-    discount_amount: runtime.Decimal | null
-    eway_bill_no: string | null
-    freight_amount: runtime.Decimal | null
-    igst_amount: runtime.Decimal | null
-    lr_date: Date | null
-    lr_no: string | null
-    other_charges_amount: runtime.Decimal | null
-    packing_amount: runtime.Decimal | null
-    roundoff_amount: runtime.Decimal | null
-    sgst_amount: runtime.Decimal | null
     subtotal_amount: runtime.Decimal | null
+    cgst_amount: runtime.Decimal | null
+    sgst_amount: runtime.Decimal | null
+    igst_amount: runtime.Decimal | null
+    cess_amount: runtime.Decimal | null
+    discount_amount: runtime.Decimal | null
+    packing_amount: runtime.Decimal | null
+    freight_amount: runtime.Decimal | null
+    other_charges_amount: runtime.Decimal | null
+    roundoff_amount: runtime.Decimal | null
     taxable_amount: runtime.Decimal | null
     total_amount: runtime.Decimal | null
+    eway_bill_no: string | null
     transporter_name: string | null
+    lr_no: string | null
+    lr_date: Date | null
   }, ExtArgs["result"]["gRNMaster"]>
   composites: {}
 }
@@ -4337,22 +4337,22 @@ export interface GRNMasterFieldRefs {
   readonly confirmed_at: Prisma.FieldRef<"GRNMaster", 'DateTime'>
   readonly created_at: Prisma.FieldRef<"GRNMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"GRNMaster", 'DateTime'>
-  readonly cess_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly cgst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly discount_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly eway_bill_no: Prisma.FieldRef<"GRNMaster", 'String'>
-  readonly freight_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly igst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly lr_date: Prisma.FieldRef<"GRNMaster", 'DateTime'>
-  readonly lr_no: Prisma.FieldRef<"GRNMaster", 'String'>
-  readonly other_charges_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly packing_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly roundoff_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
-  readonly sgst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
   readonly subtotal_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly cgst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly sgst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly igst_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly cess_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly discount_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly packing_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly freight_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly other_charges_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly roundoff_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
   readonly taxable_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
   readonly total_amount: Prisma.FieldRef<"GRNMaster", 'Decimal'>
+  readonly eway_bill_no: Prisma.FieldRef<"GRNMaster", 'String'>
   readonly transporter_name: Prisma.FieldRef<"GRNMaster", 'String'>
+  readonly lr_no: Prisma.FieldRef<"GRNMaster", 'String'>
+  readonly lr_date: Prisma.FieldRef<"GRNMaster", 'DateTime'>
 }
     
 

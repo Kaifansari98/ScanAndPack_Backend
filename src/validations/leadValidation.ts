@@ -71,10 +71,8 @@ export const createLeadSchema = Joi.object({
 
   status_id: numberLike.required(),
 
-  product_types: Joi.array().items(numberLike).min(1).required().messages({
-    "any.required": "At least one product type is required",
-    "array.min": "At least one product type must be selected",
-  }),
+  product_types: Joi.array().items(numberLike).optional(),
+  b2b_requirement_type_ids: Joi.array().items(numberLike).optional(),
 
   product_structures: Joi.array().items(numberLike).min(1).required().messages({
     "any.required": "At least one product structure is required",

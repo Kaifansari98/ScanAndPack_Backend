@@ -279,6 +279,7 @@ export interface CreateLeadDTO {
   assign_to?: number;
   assigned_by?: number;
   product_types: number[];
+  b2b_requirement_type_ids?: number[];
   product_structures: number[];
   product_structure_instances?: {
     product_structure_id: number;
