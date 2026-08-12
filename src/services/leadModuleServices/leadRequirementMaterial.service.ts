@@ -109,7 +109,6 @@ export const addLeadRequirementMaterial = async (
         client_quantity,
         frankvin_quantity,
         created_by: validCreatedBy,
-        createdBy: { connect: { id: validCreatedBy } },
       } as any,
       include: {
         product: {
