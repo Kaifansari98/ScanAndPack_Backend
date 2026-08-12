@@ -33,6 +33,7 @@ export type ProjectMasterAvgAggregateOutputType = {
   created_by: number | null
   lead_id: number | null
   updated_by: number | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterSumAggregateOutputType = {
@@ -42,6 +43,7 @@ export type ProjectMasterSumAggregateOutputType = {
   created_by: number | null
   lead_id: number | null
   updated_by: number | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterMinAggregateOutputType = {
@@ -65,6 +67,7 @@ export type ProjectMasterMinAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   packing_type: $Enums.PackingType | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterMaxAggregateOutputType = {
@@ -88,6 +91,7 @@ export type ProjectMasterMaxAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   packing_type: $Enums.PackingType | null
+  no_of_boxes: number | null
 }
 
 export type ProjectMasterCountAggregateOutputType = {
@@ -111,6 +115,7 @@ export type ProjectMasterCountAggregateOutputType = {
   updated_at: number
   updated_by: number
   packing_type: number
+  no_of_boxes: number
   _all: number
 }
 
@@ -122,6 +127,7 @@ export type ProjectMasterAvgAggregateInputType = {
   created_by?: true
   lead_id?: true
   updated_by?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterSumAggregateInputType = {
@@ -131,6 +137,7 @@ export type ProjectMasterSumAggregateInputType = {
   created_by?: true
   lead_id?: true
   updated_by?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterMinAggregateInputType = {
@@ -154,6 +161,7 @@ export type ProjectMasterMinAggregateInputType = {
   updated_at?: true
   updated_by?: true
   packing_type?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterMaxAggregateInputType = {
@@ -177,6 +185,7 @@ export type ProjectMasterMaxAggregateInputType = {
   updated_at?: true
   updated_by?: true
   packing_type?: true
+  no_of_boxes?: true
 }
 
 export type ProjectMasterCountAggregateInputType = {
@@ -200,6 +209,7 @@ export type ProjectMasterCountAggregateInputType = {
   updated_at?: true
   updated_by?: true
   packing_type?: true
+  no_of_boxes?: true
   _all?: true
 }
 
@@ -310,6 +320,7 @@ export type ProjectMasterGroupByOutputType = {
   updated_at: Date | null
   updated_by: number | null
   packing_type: $Enums.PackingType
+  no_of_boxes: number
   _count: ProjectMasterCountAggregateOutputType | null
   _avg: ProjectMasterAvgAggregateOutputType | null
   _sum: ProjectMasterSumAggregateOutputType | null
@@ -356,6 +367,7 @@ export type ProjectMasterWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
@@ -392,6 +404,7 @@ export type ProjectMasterOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packing_type?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
   box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
   CutList?: Prisma.CutListOrderByRelationAggregateInput
@@ -431,6 +444,7 @@ export type ProjectMasterWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
@@ -467,6 +481,7 @@ export type ProjectMasterOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packing_type?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
   _count?: Prisma.ProjectMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectMasterAvgOrderByAggregateInput
   _max?: Prisma.ProjectMasterMaxOrderByAggregateInput
@@ -498,6 +513,7 @@ export type ProjectMasterScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProjectMaster"> | Date | string | null
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectMaster"> | number | null
   packing_type?: Prisma.EnumPackingTypeWithAggregatesFilter<"ProjectMaster"> | $Enums.PackingType
+  no_of_boxes?: Prisma.IntWithAggregatesFilter<"ProjectMaster"> | number
 }
 
 export type ProjectMasterCreateInput = {
@@ -516,6 +532,7 @@ export type ProjectMasterCreateInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -552,6 +569,7 @@ export type ProjectMasterUncheckedCreateInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -579,6 +597,7 @@ export type ProjectMasterUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -615,6 +634,7 @@ export type ProjectMasterUncheckedUpdateInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -647,6 +667,7 @@ export type ProjectMasterCreateManyInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
 }
 
 export type ProjectMasterUpdateManyMutationInput = {
@@ -665,6 +686,7 @@ export type ProjectMasterUpdateManyMutationInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProjectMasterUncheckedUpdateManyInput = {
@@ -688,6 +710,7 @@ export type ProjectMasterUncheckedUpdateManyInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProjectMasterListRelationFilter = {
@@ -721,6 +744,7 @@ export type ProjectMasterCountOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   packing_type?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterAvgOrderByAggregateInput = {
@@ -730,6 +754,7 @@ export type ProjectMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterMaxOrderByAggregateInput = {
@@ -753,6 +778,7 @@ export type ProjectMasterMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   packing_type?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterMinOrderByAggregateInput = {
@@ -776,6 +802,7 @@ export type ProjectMasterMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   packing_type?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterSumOrderByAggregateInput = {
@@ -785,6 +812,7 @@ export type ProjectMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  no_of_boxes?: Prisma.SortOrder
 }
 
 export type ProjectMasterScalarRelationFilter = {
@@ -1106,6 +1134,7 @@ export type ProjectMasterCreateWithoutVendorInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1140,6 +1169,7 @@ export type ProjectMasterUncheckedCreateWithoutVendorInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1201,6 +1231,7 @@ export type ProjectMasterScalarWhereInput = {
   updated_at?: Prisma.DateTimeNullableFilter<"ProjectMaster"> | Date | string | null
   updated_by?: Prisma.IntNullableFilter<"ProjectMaster"> | number | null
   packing_type?: Prisma.EnumPackingTypeFilter<"ProjectMaster"> | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFilter<"ProjectMaster"> | number
 }
 
 export type ProjectMasterCreateWithoutCreatedByUserInput = {
@@ -1219,6 +1250,7 @@ export type ProjectMasterCreateWithoutCreatedByUserInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1253,6 +1285,7 @@ export type ProjectMasterUncheckedCreateWithoutCreatedByUserInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1306,6 +1339,7 @@ export type ProjectMasterCreateWithoutDetailsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1341,6 +1375,7 @@ export type ProjectMasterUncheckedCreateWithoutDetailsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1383,6 +1418,7 @@ export type ProjectMasterUpdateWithoutDetailsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -1418,6 +1454,7 @@ export type ProjectMasterUncheckedUpdateWithoutDetailsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -1444,6 +1481,7 @@ export type ProjectMasterCreateWithoutItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1479,6 +1517,7 @@ export type ProjectMasterUncheckedCreateWithoutItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1521,6 +1560,7 @@ export type ProjectMasterUpdateWithoutItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -1556,6 +1596,7 @@ export type ProjectMasterUncheckedUpdateWithoutItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -1582,6 +1623,7 @@ export type ProjectMasterCreateWithoutBoxesInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -1617,6 +1659,7 @@ export type ProjectMasterUncheckedCreateWithoutBoxesInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -1659,6 +1702,7 @@ export type ProjectMasterUpdateWithoutBoxesInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -1694,6 +1738,7 @@ export type ProjectMasterUncheckedUpdateWithoutBoxesInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -1720,6 +1765,7 @@ export type ProjectMasterCreateWithoutScanItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1755,6 +1801,7 @@ export type ProjectMasterUncheckedCreateWithoutScanItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1797,6 +1844,7 @@ export type ProjectMasterUpdateWithoutScanItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -1832,6 +1880,7 @@ export type ProjectMasterUncheckedUpdateWithoutScanItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -1858,6 +1907,7 @@ export type ProjectMasterCreateWithoutClientInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1892,6 +1942,7 @@ export type ProjectMasterUncheckedCreateWithoutClientInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -1945,6 +1996,7 @@ export type ProjectMasterCreateWithoutLeadInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -1979,6 +2031,7 @@ export type ProjectMasterUncheckedCreateWithoutLeadInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -2032,6 +2085,7 @@ export type ProjectMasterCreateWithoutCutListInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -2067,6 +2121,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -2109,6 +2164,7 @@ export type ProjectMasterUpdateWithoutCutListInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -2144,6 +2200,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -2170,6 +2227,7 @@ export type ProjectMasterCreateWithoutCutListMachineMappingInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -2205,6 +2263,7 @@ export type ProjectMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -2247,6 +2306,7 @@ export type ProjectMasterUpdateWithoutCutListMachineMappingInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2282,6 +2342,7 @@ export type ProjectMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -2308,6 +2369,7 @@ export type ProjectMasterCreateWithoutDefectedItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -2343,6 +2405,7 @@ export type ProjectMasterUncheckedCreateWithoutDefectedItemsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -2385,6 +2448,7 @@ export type ProjectMasterUpdateWithoutDefectedItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2420,6 +2484,7 @@ export type ProjectMasterUncheckedUpdateWithoutDefectedItemsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -2446,6 +2511,7 @@ export type ProjectMasterCreateWithoutBox_info_fieldsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
@@ -2481,6 +2547,7 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutProjectInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
@@ -2523,6 +2590,7 @@ export type ProjectMasterUpdateWithoutBox_info_fieldsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2558,6 +2626,7 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -2584,6 +2653,7 @@ export type ProjectMasterCreateWithoutBox_info_valuesInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectInput
@@ -2619,6 +2689,7 @@ export type ProjectMasterUncheckedCreateWithoutBox_info_valuesInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutProjectInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutProjectInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectInput
@@ -2661,6 +2732,7 @@ export type ProjectMasterUpdateWithoutBox_info_valuesInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutProjectNestedInput
@@ -2696,6 +2768,7 @@ export type ProjectMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectNestedInput
@@ -2726,6 +2799,7 @@ export type ProjectMasterCreateManyVendorInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
 }
 
 export type ProjectMasterUpdateWithoutVendorInput = {
@@ -2744,6 +2818,7 @@ export type ProjectMasterUpdateWithoutVendorInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2778,6 +2853,7 @@ export type ProjectMasterUncheckedUpdateWithoutVendorInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -2809,6 +2885,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProjectMasterCreateManyCreatedByUserInput = {
@@ -2831,6 +2908,7 @@ export type ProjectMasterCreateManyCreatedByUserInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
 }
 
 export type ProjectMasterUpdateWithoutCreatedByUserInput = {
@@ -2849,6 +2927,7 @@ export type ProjectMasterUpdateWithoutCreatedByUserInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2883,6 +2962,7 @@ export type ProjectMasterUncheckedUpdateWithoutCreatedByUserInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -2914,6 +2994,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProjectMasterCreateManyClientInput = {
@@ -2936,6 +3017,7 @@ export type ProjectMasterCreateManyClientInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
 }
 
 export type ProjectMasterUpdateWithoutClientInput = {
@@ -2954,6 +3036,7 @@ export type ProjectMasterUpdateWithoutClientInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -2988,6 +3071,7 @@ export type ProjectMasterUncheckedUpdateWithoutClientInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -3019,6 +3103,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutClientInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ProjectMasterCreateManyLeadInput = {
@@ -3041,6 +3126,7 @@ export type ProjectMasterCreateManyLeadInput = {
   updated_at?: Date | string | null
   updated_by?: number | null
   packing_type?: $Enums.PackingType
+  no_of_boxes?: number
 }
 
 export type ProjectMasterUpdateWithoutLeadInput = {
@@ -3059,6 +3145,7 @@ export type ProjectMasterUpdateWithoutLeadInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutProjectNestedInput
@@ -3093,6 +3180,7 @@ export type ProjectMasterUncheckedUpdateWithoutLeadInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutProjectNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutProjectNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutProjectNestedInput
@@ -3124,6 +3212,7 @@ export type ProjectMasterUncheckedUpdateManyWithoutLeadInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packing_type?: Prisma.EnumPackingTypeFieldUpdateOperationsInput | $Enums.PackingType
+  no_of_boxes?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -3250,6 +3339,7 @@ export type ProjectMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updated_at?: boolean
   updated_by?: boolean
   packing_type?: boolean
+  no_of_boxes?: boolean
   box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
   CutList?: boolean | Prisma.ProjectMaster$CutListArgs<ExtArgs>
@@ -3287,6 +3377,7 @@ export type ProjectMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   updated_at?: boolean
   updated_by?: boolean
   packing_type?: boolean
+  no_of_boxes?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
@@ -3314,6 +3405,7 @@ export type ProjectMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   updated_at?: boolean
   updated_by?: boolean
   packing_type?: boolean
+  no_of_boxes?: boolean
   client?: boolean | Prisma.ProjectMaster$clientArgs<ExtArgs>
   createdByUser?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.ProjectMaster$leadArgs<ExtArgs>
@@ -3341,9 +3433,10 @@ export type ProjectMasterSelectScalar = {
   updated_at?: boolean
   updated_by?: boolean
   packing_type?: boolean
+  no_of_boxes?: boolean
 }
 
-export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "lead_id" | "track_trace_status" | "track_completed_at" | "track_started_at" | "client_address" | "client_contact_no" | "client_name" | "order_no" | "updated_at" | "updated_by" | "packing_type", ExtArgs["result"]["projectMaster"]>
+export type ProjectMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_name" | "vendor_id" | "client_id" | "created_by" | "project_status" | "created_at" | "unique_project_id" | "is_grouping" | "lead_id" | "track_trace_status" | "track_completed_at" | "track_started_at" | "client_address" | "client_contact_no" | "client_name" | "order_no" | "updated_at" | "updated_by" | "packing_type" | "no_of_boxes", ExtArgs["result"]["projectMaster"]>
 export type ProjectMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | Prisma.ProjectMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.ProjectMaster$boxesArgs<ExtArgs>
@@ -3411,6 +3504,7 @@ export type $ProjectMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     updated_at: Date | null
     updated_by: number | null
     packing_type: $Enums.PackingType
+    no_of_boxes: number
   }, ExtArgs["result"]["projectMaster"]>
   composites: {}
 }
@@ -3867,6 +3961,7 @@ export interface ProjectMasterFieldRefs {
   readonly updated_at: Prisma.FieldRef<"ProjectMaster", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"ProjectMaster", 'Int'>
   readonly packing_type: Prisma.FieldRef<"ProjectMaster", 'PackingType'>
+  readonly no_of_boxes: Prisma.FieldRef<"ProjectMaster", 'Int'>
 }
     
 

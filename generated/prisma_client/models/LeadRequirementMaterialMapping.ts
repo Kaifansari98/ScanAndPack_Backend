@@ -30,6 +30,7 @@ export type LeadRequirementMaterialMappingAvgAggregateOutputType = {
   id: number | null
   lead_id: number | null
   vendor_id: number | null
+  product_type_id: number | null
   product_id: number | null
   quantity: runtime.Decimal | null
   unit_id: number | null
@@ -46,6 +47,7 @@ export type LeadRequirementMaterialMappingSumAggregateOutputType = {
   id: number | null
   lead_id: number | null
   vendor_id: number | null
+  product_type_id: number | null
   product_id: number | null
   quantity: runtime.Decimal | null
   unit_id: number | null
@@ -62,6 +64,7 @@ export type LeadRequirementMaterialMappingMinAggregateOutputType = {
   id: number | null
   lead_id: number | null
   vendor_id: number | null
+  product_type_id: number | null
   product_id: number | null
   quantity: runtime.Decimal | null
   unit_id: number | null
@@ -82,6 +85,7 @@ export type LeadRequirementMaterialMappingMaxAggregateOutputType = {
   id: number | null
   lead_id: number | null
   vendor_id: number | null
+  product_type_id: number | null
   product_id: number | null
   quantity: runtime.Decimal | null
   unit_id: number | null
@@ -102,6 +106,7 @@ export type LeadRequirementMaterialMappingCountAggregateOutputType = {
   id: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: number
   unit_id: number
@@ -124,6 +129,7 @@ export type LeadRequirementMaterialMappingAvgAggregateInputType = {
   id?: true
   lead_id?: true
   vendor_id?: true
+  product_type_id?: true
   product_id?: true
   quantity?: true
   unit_id?: true
@@ -140,6 +146,7 @@ export type LeadRequirementMaterialMappingSumAggregateInputType = {
   id?: true
   lead_id?: true
   vendor_id?: true
+  product_type_id?: true
   product_id?: true
   quantity?: true
   unit_id?: true
@@ -156,6 +163,7 @@ export type LeadRequirementMaterialMappingMinAggregateInputType = {
   id?: true
   lead_id?: true
   vendor_id?: true
+  product_type_id?: true
   product_id?: true
   quantity?: true
   unit_id?: true
@@ -176,6 +184,7 @@ export type LeadRequirementMaterialMappingMaxAggregateInputType = {
   id?: true
   lead_id?: true
   vendor_id?: true
+  product_type_id?: true
   product_id?: true
   quantity?: true
   unit_id?: true
@@ -196,6 +205,7 @@ export type LeadRequirementMaterialMappingCountAggregateInputType = {
   id?: true
   lead_id?: true
   vendor_id?: true
+  product_type_id?: true
   product_id?: true
   quantity?: true
   unit_id?: true
@@ -303,6 +313,7 @@ export type LeadRequirementMaterialMappingGroupByOutputType = {
   id: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal
   unit_id: number | null
@@ -346,6 +357,7 @@ export type LeadRequirementMaterialMappingWhereInput = {
   id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
+  product_type_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   product_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   quantity?: Prisma.DecimalFilter<"LeadRequirementMaterialMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.IntNullableFilter<"LeadRequirementMaterialMapping"> | number | null
@@ -364,6 +376,7 @@ export type LeadRequirementMaterialMappingWhereInput = {
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  ProductTypeMaster?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
   unit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -373,6 +386,7 @@ export type LeadRequirementMaterialMappingOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -391,6 +405,7 @@ export type LeadRequirementMaterialMappingOrderByWithRelationInput = {
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   product?: Prisma.ProductMasterOrderByWithRelationInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterOrderByWithRelationInput
   unit?: Prisma.UnitMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -403,6 +418,7 @@ export type LeadRequirementMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeadRequirementMaterialMappingWhereInput | Prisma.LeadRequirementMaterialMappingWhereInput[]
   lead_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
+  product_type_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   product_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   quantity?: Prisma.DecimalFilter<"LeadRequirementMaterialMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.IntNullableFilter<"LeadRequirementMaterialMapping"> | number | null
@@ -421,6 +437,7 @@ export type LeadRequirementMaterialMappingWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   product?: Prisma.XOR<Prisma.ProductMasterScalarRelationFilter, Prisma.ProductMasterWhereInput>
+  ProductTypeMaster?: Prisma.XOR<Prisma.ProductTypeMasterScalarRelationFilter, Prisma.ProductTypeMasterWhereInput>
   unit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -430,6 +447,7 @@ export type LeadRequirementMaterialMappingOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -458,6 +476,7 @@ export type LeadRequirementMaterialMappingScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number
+  product_type_id?: Prisma.IntWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number
   product_id?: Prisma.IntWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number
   quantity?: Prisma.DecimalWithAggregatesFilter<"LeadRequirementMaterialMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.IntNullableWithAggregatesFilter<"LeadRequirementMaterialMapping"> | number | null
@@ -488,6 +507,7 @@ export type LeadRequirementMaterialMappingCreateInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
@@ -497,6 +517,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -527,6 +548,7 @@ export type LeadRequirementMaterialMappingUpdateInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
@@ -536,6 +558,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -556,6 +579,7 @@ export type LeadRequirementMaterialMappingCreateManyInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -588,6 +612,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -618,6 +643,7 @@ export type LeadRequirementMaterialMappingCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrder
@@ -638,6 +664,7 @@ export type LeadRequirementMaterialMappingAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrder
@@ -654,6 +681,7 @@ export type LeadRequirementMaterialMappingMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrder
@@ -674,6 +702,7 @@ export type LeadRequirementMaterialMappingMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrder
@@ -694,6 +723,7 @@ export type LeadRequirementMaterialMappingSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  product_type_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   quantity?: Prisma.SortOrder
   unit_id?: Prisma.SortOrder
@@ -874,6 +904,48 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedIn
   deleteMany?: Prisma.LeadRequirementMaterialMappingScalarWhereInput | Prisma.LeadRequirementMaterialMappingScalarWhereInput[]
 }
 
+export type LeadRequirementMaterialMappingCreateNestedManyWithoutProductTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput[] | Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInputEnvelope
+  connect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+}
+
+export type LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput[] | Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInputEnvelope
+  connect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+}
+
+export type LeadRequirementMaterialMappingUpdateManyWithoutProductTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput[] | Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput[]
+  upsert?: Prisma.LeadRequirementMaterialMappingUpsertWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpsertWithWhereUniqueWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInputEnvelope
+  set?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  delete?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  connect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  update?: Prisma.LeadRequirementMaterialMappingUpdateWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpdateWithWhereUniqueWithoutProductTypeMasterInput[]
+  updateMany?: Prisma.LeadRequirementMaterialMappingUpdateManyWithWhereWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpdateManyWithWhereWithoutProductTypeMasterInput[]
+  deleteMany?: Prisma.LeadRequirementMaterialMappingScalarWhereInput | Prisma.LeadRequirementMaterialMappingScalarWhereInput[]
+}
+
+export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput[] | Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput[]
+  upsert?: Prisma.LeadRequirementMaterialMappingUpsertWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpsertWithWhereUniqueWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInputEnvelope
+  set?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  disconnect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  delete?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  connect?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput | Prisma.LeadRequirementMaterialMappingWhereUniqueInput[]
+  update?: Prisma.LeadRequirementMaterialMappingUpdateWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpdateWithWhereUniqueWithoutProductTypeMasterInput[]
+  updateMany?: Prisma.LeadRequirementMaterialMappingUpdateManyWithWhereWithoutProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingUpdateManyWithWhereWithoutProductTypeMasterInput[]
+  deleteMany?: Prisma.LeadRequirementMaterialMappingScalarWhereInput | Prisma.LeadRequirementMaterialMappingScalarWhereInput[]
+}
+
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1026,6 +1098,7 @@ export type LeadRequirementMaterialMappingCreateWithoutVendorInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
 }
@@ -1033,6 +1106,7 @@ export type LeadRequirementMaterialMappingCreateWithoutVendorInput = {
 export type LeadRequirementMaterialMappingUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1082,6 +1156,7 @@ export type LeadRequirementMaterialMappingScalarWhereInput = {
   id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   lead_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   vendor_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
+  product_type_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   product_id?: Prisma.IntFilter<"LeadRequirementMaterialMapping"> | number
   quantity?: Prisma.DecimalFilter<"LeadRequirementMaterialMapping"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.IntNullableFilter<"LeadRequirementMaterialMapping"> | number | null
@@ -1111,6 +1186,7 @@ export type LeadRequirementMaterialMappingCreateWithoutCreatedByInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
@@ -1120,6 +1196,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateWithoutCreatedByInput =
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1159,6 +1236,7 @@ export type LeadRequirementMaterialMappingCreateWithoutUpdatedByInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
 }
@@ -1167,6 +1245,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateWithoutUpdatedByInput =
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1237,6 +1316,7 @@ export type LeadRequirementMaterialMappingCreateWithoutLeadInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
@@ -1245,6 +1325,7 @@ export type LeadRequirementMaterialMappingCreateWithoutLeadInput = {
 export type LeadRequirementMaterialMappingUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1287,6 +1368,71 @@ export type LeadRequirementMaterialMappingUpdateManyWithWhereWithoutLeadInput = 
   data: Prisma.XOR<Prisma.LeadRequirementMaterialMappingUpdateManyMutationInput, Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadInput>
 }
 
+export type LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput = {
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_name?: string | null
+  supplied_by?: $Enums.MaterialSupplyType
+  client_percentage?: number
+  frankvin_percentage?: number
+  client_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+}
+
+export type LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput = {
+  id?: number
+  lead_id: number
+  vendor_id: number
+  product_id: number
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_id?: number | null
+  unit_name?: string | null
+  supplied_by?: $Enums.MaterialSupplyType
+  client_percentage?: number
+  frankvin_percentage?: number
+  client_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by?: number | null
+  b2b_requirement_type_id?: number | null
+}
+
+export type LeadRequirementMaterialMappingCreateOrConnectWithoutProductTypeMasterInput = {
+  where: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput>
+}
+
+export type LeadRequirementMaterialMappingCreateManyProductTypeMasterInputEnvelope = {
+  data: Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInput | Prisma.LeadRequirementMaterialMappingCreateManyProductTypeMasterInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadRequirementMaterialMappingUpsertWithWhereUniqueWithoutProductTypeMasterInput = {
+  where: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadRequirementMaterialMappingUpdateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedUpdateWithoutProductTypeMasterInput>
+  create: Prisma.XOR<Prisma.LeadRequirementMaterialMappingCreateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedCreateWithoutProductTypeMasterInput>
+}
+
+export type LeadRequirementMaterialMappingUpdateWithWhereUniqueWithoutProductTypeMasterInput = {
+  where: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadRequirementMaterialMappingUpdateWithoutProductTypeMasterInput, Prisma.LeadRequirementMaterialMappingUncheckedUpdateWithoutProductTypeMasterInput>
+}
+
+export type LeadRequirementMaterialMappingUpdateManyWithWhereWithoutProductTypeMasterInput = {
+  where: Prisma.LeadRequirementMaterialMappingScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadRequirementMaterialMappingUpdateManyMutationInput, Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeMasterInput>
+}
+
 export type LeadRequirementMaterialMappingCreateWithoutProductInput = {
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_name?: string | null
@@ -1300,6 +1446,7 @@ export type LeadRequirementMaterialMappingCreateWithoutProductInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
@@ -1309,6 +1456,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateWithoutProductInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
   unit_name?: string | null
@@ -1364,6 +1512,7 @@ export type LeadRequirementMaterialMappingCreateWithoutUnitInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
 }
@@ -1372,6 +1521,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateWithoutUnitInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_name?: string | null
@@ -1426,6 +1576,7 @@ export type LeadRequirementMaterialMappingCreateWithoutB2bRequirementTypeInput =
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   product: Prisma.ProductMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
+  ProductTypeMaster: Prisma.ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappingInput
   unit?: Prisma.UnitMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadReqMaterialsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadRequirementMaterialsInput
@@ -1435,6 +1586,7 @@ export type LeadRequirementMaterialMappingUncheckedCreateWithoutB2bRequirementTy
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1479,6 +1631,7 @@ export type LeadRequirementMaterialMappingUpdateManyWithWhereWithoutB2bRequireme
 export type LeadRequirementMaterialMappingCreateManyVendorInput = {
   id?: number
   lead_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1509,6 +1662,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutVendorInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
 }
@@ -1516,6 +1670,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutVendorInput = {
 export type LeadRequirementMaterialMappingUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1535,6 +1690,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutVendorInput = {
 export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1555,6 +1711,7 @@ export type LeadRequirementMaterialMappingCreateManyCreatedByInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1574,6 +1731,7 @@ export type LeadRequirementMaterialMappingCreateManyUpdatedByInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1602,6 +1760,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutCreatedByInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
@@ -1611,6 +1770,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutCreatedByInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1630,6 +1790,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1659,6 +1820,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutUpdatedByInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
 }
@@ -1667,6 +1829,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutUpdatedByInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1686,6 +1849,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1704,6 +1868,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByInp
 export type LeadRequirementMaterialMappingCreateManyLeadInput = {
   id?: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1733,6 +1898,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutLeadInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
@@ -1741,6 +1907,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutLeadInput = {
 export type LeadRequirementMaterialMappingUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1759,6 +1926,86 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutLeadInput = {
 
 export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplied_by?: Prisma.EnumMaterialSupplyTypeFieldUpdateOperationsInput | $Enums.MaterialSupplyType
+  client_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  frankvin_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  client_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadRequirementMaterialMappingCreateManyProductTypeMasterInput = {
+  id?: number
+  lead_id: number
+  vendor_id: number
+  product_id: number
+  quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_id?: number | null
+  unit_name?: string | null
+  supplied_by?: $Enums.MaterialSupplyType
+  client_percentage?: number
+  frankvin_percentage?: number
+  client_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by?: number | null
+  b2b_requirement_type_id?: number | null
+}
+
+export type LeadRequirementMaterialMappingUpdateWithoutProductTypeMasterInput = {
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplied_by?: Prisma.EnumMaterialSupplyTypeFieldUpdateOperationsInput | $Enums.MaterialSupplyType
+  client_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  frankvin_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  client_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+}
+
+export type LeadRequirementMaterialMappingUncheckedUpdateWithoutProductTypeMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_id?: Prisma.IntFieldUpdateOperationsInput | number
+  quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplied_by?: Prisma.EnumMaterialSupplyTypeFieldUpdateOperationsInput | $Enums.MaterialSupplyType
+  client_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  frankvin_percentage?: Prisma.FloatFieldUpdateOperationsInput | number
+  client_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  frankvin_quantity?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductTypeMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1780,6 +2027,7 @@ export type LeadRequirementMaterialMappingCreateManyProductInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
   unit_name?: string | null
@@ -1808,6 +2056,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutProductInput = {
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
@@ -1817,6 +2066,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutProductInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1836,6 +2086,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1855,6 +2106,7 @@ export type LeadRequirementMaterialMappingCreateManyUnitInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_name?: string | null
@@ -1884,6 +2136,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutUnitInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
 }
@@ -1892,6 +2145,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1911,6 +2165,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitInput = 
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1930,6 +2185,7 @@ export type LeadRequirementMaterialMappingCreateManyB2bRequirementTypeInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  product_type_id: number
   product_id: number
   quantity: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: number | null
@@ -1958,6 +2214,7 @@ export type LeadRequirementMaterialMappingUpdateWithoutB2bRequirementTypeInput =
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadReqMaterialsCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
   product?: Prisma.ProductMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput
   unit?: Prisma.UnitMasterUpdateOneWithoutLeadRequirementMaterialsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadReqMaterialsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadRequirementMaterialsNestedInput
@@ -1967,6 +2224,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateWithoutB2bRequirementTy
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1986,6 +2244,7 @@ export type LeadRequirementMaterialMappingUncheckedUpdateManyWithoutB2bRequireme
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2007,6 +2266,7 @@ export type LeadRequirementMaterialMappingSelect<ExtArgs extends runtime.Types.E
   id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  product_type_id?: boolean
   product_id?: boolean
   quantity?: boolean
   unit_id?: boolean
@@ -2025,6 +2285,7 @@ export type LeadRequirementMaterialMappingSelect<ExtArgs extends runtime.Types.E
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2034,6 +2295,7 @@ export type LeadRequirementMaterialMappingSelectCreateManyAndReturn<ExtArgs exte
   id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  product_type_id?: boolean
   product_id?: boolean
   quantity?: boolean
   unit_id?: boolean
@@ -2052,6 +2314,7 @@ export type LeadRequirementMaterialMappingSelectCreateManyAndReturn<ExtArgs exte
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2061,6 +2324,7 @@ export type LeadRequirementMaterialMappingSelectUpdateManyAndReturn<ExtArgs exte
   id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  product_type_id?: boolean
   product_id?: boolean
   quantity?: boolean
   unit_id?: boolean
@@ -2079,6 +2343,7 @@ export type LeadRequirementMaterialMappingSelectUpdateManyAndReturn<ExtArgs exte
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2088,6 +2353,7 @@ export type LeadRequirementMaterialMappingSelectScalar = {
   id?: boolean
   lead_id?: boolean
   vendor_id?: boolean
+  product_type_id?: boolean
   product_id?: boolean
   quantity?: boolean
   unit_id?: boolean
@@ -2104,12 +2370,13 @@ export type LeadRequirementMaterialMappingSelectScalar = {
   b2b_requirement_type_id?: boolean
 }
 
-export type LeadRequirementMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "product_id" | "quantity" | "unit_id" | "unit_name" | "supplied_by" | "client_percentage" | "frankvin_percentage" | "client_quantity" | "frankvin_quantity" | "created_at" | "created_by" | "updated_at" | "updated_by" | "b2b_requirement_type_id", ExtArgs["result"]["leadRequirementMaterialMapping"]>
+export type LeadRequirementMaterialMappingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "product_type_id" | "product_id" | "quantity" | "unit_id" | "unit_name" | "supplied_by" | "client_percentage" | "frankvin_percentage" | "client_quantity" | "frankvin_quantity" | "created_at" | "created_by" | "updated_at" | "updated_by" | "b2b_requirement_type_id", ExtArgs["result"]["leadRequirementMaterialMapping"]>
 export type LeadRequirementMaterialMappingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   b2bRequirementType?: boolean | Prisma.LeadRequirementMaterialMapping$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2119,6 +2386,7 @@ export type LeadRequirementMaterialMappingIncludeCreateManyAndReturn<ExtArgs ext
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2128,6 +2396,7 @@ export type LeadRequirementMaterialMappingIncludeUpdateManyAndReturn<ExtArgs ext
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   product?: boolean | Prisma.ProductMasterDefaultArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.ProductTypeMasterDefaultArgs<ExtArgs>
   unit?: boolean | Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2140,6 +2409,7 @@ export type $LeadRequirementMaterialMappingPayload<ExtArgs extends runtime.Types
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     product: Prisma.$ProductMasterPayload<ExtArgs>
+    ProductTypeMaster: Prisma.$ProductTypeMasterPayload<ExtArgs>
     unit: Prisma.$UnitMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -2148,6 +2418,7 @@ export type $LeadRequirementMaterialMappingPayload<ExtArgs extends runtime.Types
     id: number
     lead_id: number
     vendor_id: number
+    product_type_id: number
     product_id: number
     quantity: runtime.Decimal
     unit_id: number | null
@@ -2560,6 +2831,7 @@ export interface Prisma__LeadRequirementMaterialMappingClient<T, Null = never, E
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   product<T extends Prisma.ProductMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ProductTypeMaster<T extends Prisma.ProductTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   unit<T extends Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadRequirementMaterialMapping$unitArgs<ExtArgs>>): Prisma.Prisma__UnitMasterClient<runtime.Types.Result.GetResult<Prisma.$UnitMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadRequirementMaterialMapping$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -2595,6 +2867,7 @@ export interface LeadRequirementMaterialMappingFieldRefs {
   readonly id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>
+  readonly product_type_id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>
   readonly product_id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>
   readonly quantity: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Decimal'>
   readonly unit_id: Prisma.FieldRef<"LeadRequirementMaterialMapping", 'Int'>

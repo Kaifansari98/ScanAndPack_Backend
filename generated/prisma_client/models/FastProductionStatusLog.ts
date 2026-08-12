@@ -28,88 +28,88 @@ export type AggregateFastProductionStatusLog = {
 
 export type FastProductionStatusLogAvgAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   actor_user_id: number | null
+  batch_id: number | null
 }
 
 export type FastProductionStatusLogSumAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   actor_user_id: number | null
+  batch_id: number | null
 }
 
 export type FastProductionStatusLogMinAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   from_status: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus | null
   actor_user_id: number | null
   remark: string | null
   created_at: Date | null
+  batch_id: number | null
 }
 
 export type FastProductionStatusLogMaxAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   from_status: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus | null
   actor_user_id: number | null
   remark: string | null
   created_at: Date | null
+  batch_id: number | null
 }
 
 export type FastProductionStatusLogCountAggregateOutputType = {
   id: number
-  batch_id: number
   from_status: number
   to_status: number
   actor_user_id: number
   remark: number
   created_at: number
+  batch_id: number
   _all: number
 }
 
 
 export type FastProductionStatusLogAvgAggregateInputType = {
   id?: true
-  batch_id?: true
   actor_user_id?: true
+  batch_id?: true
 }
 
 export type FastProductionStatusLogSumAggregateInputType = {
   id?: true
-  batch_id?: true
   actor_user_id?: true
+  batch_id?: true
 }
 
 export type FastProductionStatusLogMinAggregateInputType = {
   id?: true
-  batch_id?: true
   from_status?: true
   to_status?: true
   actor_user_id?: true
   remark?: true
   created_at?: true
+  batch_id?: true
 }
 
 export type FastProductionStatusLogMaxAggregateInputType = {
   id?: true
-  batch_id?: true
   from_status?: true
   to_status?: true
   actor_user_id?: true
   remark?: true
   created_at?: true
+  batch_id?: true
 }
 
 export type FastProductionStatusLogCountAggregateInputType = {
   id?: true
-  batch_id?: true
   from_status?: true
   to_status?: true
   actor_user_id?: true
   remark?: true
   created_at?: true
+  batch_id?: true
   _all?: true
 }
 
@@ -201,12 +201,12 @@ export type FastProductionStatusLogGroupByArgs<ExtArgs extends runtime.Types.Ext
 
 export type FastProductionStatusLogGroupByOutputType = {
   id: number
-  batch_id: number
   from_status: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus
   actor_user_id: number
   remark: string | null
   created_at: Date
+  batch_id: number
   _count: FastProductionStatusLogCountAggregateOutputType | null
   _avg: FastProductionStatusLogAvgAggregateOutputType | null
   _sum: FastProductionStatusLogSumAggregateOutputType | null
@@ -234,24 +234,24 @@ export type FastProductionStatusLogWhereInput = {
   OR?: Prisma.FastProductionStatusLogWhereInput[]
   NOT?: Prisma.FastProductionStatusLogWhereInput | Prisma.FastProductionStatusLogWhereInput[]
   id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   from_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionStatusLog"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   actor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }
 
 export type FastProductionStatusLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   from_status?: Prisma.SortOrderInput | Prisma.SortOrder
   to_status?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
   actor?: Prisma.UserMasterOrderByWithRelationInput
   batch?: Prisma.FastProductionRequestBatchOrderByWithRelationInput
 }
@@ -261,24 +261,24 @@ export type FastProductionStatusLogWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FastProductionStatusLogWhereInput | Prisma.FastProductionStatusLogWhereInput[]
   OR?: Prisma.FastProductionStatusLogWhereInput[]
   NOT?: Prisma.FastProductionStatusLogWhereInput | Prisma.FastProductionStatusLogWhereInput[]
-  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   from_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionStatusLog"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   actor?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   batch?: Prisma.XOR<Prisma.FastProductionRequestBatchScalarRelationFilter, Prisma.FastProductionRequestBatchWhereInput>
 }, "id">
 
 export type FastProductionStatusLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   from_status?: Prisma.SortOrderInput | Prisma.SortOrder
   to_status?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
   _count?: Prisma.FastProductionStatusLogCountOrderByAggregateInput
   _avg?: Prisma.FastProductionStatusLogAvgOrderByAggregateInput
   _max?: Prisma.FastProductionStatusLogMaxOrderByAggregateInput
@@ -291,12 +291,12 @@ export type FastProductionStatusLogScalarWhereWithAggregatesInput = {
   OR?: Prisma.FastProductionStatusLogScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FastProductionStatusLogScalarWhereWithAggregatesInput | Prisma.FastProductionStatusLogScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"FastProductionStatusLog"> | number
-  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionStatusLog"> | number
   from_status?: Prisma.EnumFastProductionRequestStatusNullableWithAggregatesFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusWithAggregatesFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntWithAggregatesFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableWithAggregatesFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionStatusLog"> | Date | string
+  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionStatusLog"> | number
 }
 
 export type FastProductionStatusLogCreateInput = {
@@ -310,12 +310,12 @@ export type FastProductionStatusLogCreateInput = {
 
 export type FastProductionStatusLogUncheckedCreateInput = {
   id?: number
-  batch_id: number
   from_status?: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus
   actor_user_id: number
   remark?: string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionStatusLogUpdateInput = {
@@ -329,22 +329,22 @@ export type FastProductionStatusLogUpdateInput = {
 
 export type FastProductionStatusLogUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   from_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionStatusLogCreateManyInput = {
   id?: number
-  batch_id: number
   from_status?: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus
   actor_user_id: number
   remark?: string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionStatusLogUpdateManyMutationInput = {
@@ -356,12 +356,12 @@ export type FastProductionStatusLogUpdateManyMutationInput = {
 
 export type FastProductionStatusLogUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   from_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionStatusLogListRelationFilter = {
@@ -376,44 +376,44 @@ export type FastProductionStatusLogOrderByRelationAggregateInput = {
 
 export type FastProductionStatusLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   from_status?: Prisma.SortOrder
   to_status?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionStatusLogAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionStatusLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   from_status?: Prisma.SortOrder
   to_status?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionStatusLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   from_status?: Prisma.SortOrder
   to_status?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
   remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionStatusLogSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   actor_user_id?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
 }
 
 export type FastProductionStatusLogCreateNestedManyWithoutActorInput = {
@@ -510,11 +510,11 @@ export type FastProductionStatusLogCreateWithoutActorInput = {
 
 export type FastProductionStatusLogUncheckedCreateWithoutActorInput = {
   id?: number
-  batch_id: number
   from_status?: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus
   remark?: string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionStatusLogCreateOrConnectWithoutActorInput = {
@@ -548,12 +548,12 @@ export type FastProductionStatusLogScalarWhereInput = {
   OR?: Prisma.FastProductionStatusLogScalarWhereInput[]
   NOT?: Prisma.FastProductionStatusLogScalarWhereInput | Prisma.FastProductionStatusLogScalarWhereInput[]
   id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   from_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFilter<"FastProductionStatusLog"> | $Enums.FastProductionRequestStatus
   actor_user_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
   remark?: Prisma.StringNullableFilter<"FastProductionStatusLog"> | string | null
   created_at?: Prisma.DateTimeFilter<"FastProductionStatusLog"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionStatusLog"> | number
 }
 
 export type FastProductionStatusLogCreateWithoutBatchInput = {
@@ -601,11 +601,11 @@ export type FastProductionStatusLogUpdateManyWithWhereWithoutBatchInput = {
 
 export type FastProductionStatusLogCreateManyActorInput = {
   id?: number
-  batch_id: number
   from_status?: $Enums.FastProductionRequestStatus | null
   to_status: $Enums.FastProductionRequestStatus
   remark?: string | null
   created_at?: Date | string
+  batch_id: number
 }
 
 export type FastProductionStatusLogUpdateWithoutActorInput = {
@@ -618,20 +618,20 @@ export type FastProductionStatusLogUpdateWithoutActorInput = {
 
 export type FastProductionStatusLogUncheckedUpdateWithoutActorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   from_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionStatusLogUncheckedUpdateManyWithoutActorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   from_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
   to_status?: Prisma.EnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type FastProductionStatusLogCreateManyBatchInput = {
@@ -673,51 +673,51 @@ export type FastProductionStatusLogUncheckedUpdateManyWithoutBatchInput = {
 
 export type FastProductionStatusLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   from_status?: boolean
   to_status?: boolean
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
+  batch_id?: boolean
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   from_status?: boolean
   to_status?: boolean
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
+  batch_id?: boolean
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   from_status?: boolean
   to_status?: boolean
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
+  batch_id?: boolean
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fastProductionStatusLog"]>
 
 export type FastProductionStatusLogSelectScalar = {
   id?: boolean
-  batch_id?: boolean
   from_status?: boolean
   to_status?: boolean
   actor_user_id?: boolean
   remark?: boolean
   created_at?: boolean
+  batch_id?: boolean
 }
 
-export type FastProductionStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "from_status" | "to_status" | "actor_user_id" | "remark" | "created_at", ExtArgs["result"]["fastProductionStatusLog"]>
+export type FastProductionStatusLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "from_status" | "to_status" | "actor_user_id" | "remark" | "created_at" | "batch_id", ExtArgs["result"]["fastProductionStatusLog"]>
 export type FastProductionStatusLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   actor?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
@@ -739,12 +739,12 @@ export type $FastProductionStatusLogPayload<ExtArgs extends runtime.Types.Extens
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    batch_id: number
     from_status: $Enums.FastProductionRequestStatus | null
     to_status: $Enums.FastProductionRequestStatus
     actor_user_id: number
     remark: string | null
     created_at: Date
+    batch_id: number
   }, ExtArgs["result"]["fastProductionStatusLog"]>
   composites: {}
 }
@@ -1171,12 +1171,12 @@ export interface Prisma__FastProductionStatusLogClient<T, Null = never, ExtArgs 
  */
 export interface FastProductionStatusLogFieldRefs {
   readonly id: Prisma.FieldRef<"FastProductionStatusLog", 'Int'>
-  readonly batch_id: Prisma.FieldRef<"FastProductionStatusLog", 'Int'>
   readonly from_status: Prisma.FieldRef<"FastProductionStatusLog", 'FastProductionRequestStatus'>
   readonly to_status: Prisma.FieldRef<"FastProductionStatusLog", 'FastProductionRequestStatus'>
   readonly actor_user_id: Prisma.FieldRef<"FastProductionStatusLog", 'Int'>
   readonly remark: Prisma.FieldRef<"FastProductionStatusLog", 'String'>
   readonly created_at: Prisma.FieldRef<"FastProductionStatusLog", 'DateTime'>
+  readonly batch_id: Prisma.FieldRef<"FastProductionStatusLog", 'Int'>
 }
     
 

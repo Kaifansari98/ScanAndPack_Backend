@@ -1007,3 +1007,43 @@ export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
  * 
  */
 export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
+/**
+ * Model LeadOtherAppliancesRemarkMapping
+ * 
+ */
+export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
+/**
+ * Model UserTypePrivilegeMapping
+ * 
+ */
+export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
+/**
+ * Model online_lead_call_log
+ * 
+ */
+export type online_lead_call_log = Prisma.online_lead_call_logModel
+/**
+ * Model online_lead_followup_status
+ * 
+ */
+export type online_lead_followup_status = Prisma.online_lead_followup_statusModel
+/**
+ * Model online_lead_history
+ * 
+ */
+export type online_lead_history = Prisma.online_lead_historyModel
+/**
+ * Model online_lead_store_log
+ * 
+ */
+export type online_lead_store_log = Prisma.online_lead_store_logModel
+/**
+ * Model online_leads
+ * 
+ */
+export type online_leads = Prisma.online_leadsModel
+/**
+ * Model telecaller_campaign_leads
+ * 
+ */
+export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel

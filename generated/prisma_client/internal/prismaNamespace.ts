@@ -594,7 +594,15 @@ export const ModelName = {
   BroadcastRead: 'BroadcastRead',
   NotificationQueue: 'NotificationQueue',
   B2BRequirementTypeMaster: 'B2BRequirementTypeMaster',
-  LeadB2BRequirementTypeMapping: 'LeadB2BRequirementTypeMapping'
+  LeadB2BRequirementTypeMapping: 'LeadB2BRequirementTypeMapping',
+  LeadOtherAppliancesRemarkMapping: 'LeadOtherAppliancesRemarkMapping',
+  UserTypePrivilegeMapping: 'UserTypePrivilegeMapping',
+  online_lead_call_log: 'online_lead_call_log',
+  online_lead_followup_status: 'online_lead_followup_status',
+  online_lead_history: 'online_lead_history',
+  online_lead_store_log: 'online_lead_store_log',
+  online_leads: 'online_leads',
+  telecaller_campaign_leads: 'telecaller_campaign_leads'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -610,7 +618,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping" | "leadOtherAppliancesRemarkMapping" | "userTypePrivilegeMapping" | "online_lead_call_log" | "online_lead_followup_status" | "online_lead_history" | "online_lead_store_log" | "online_leads" | "telecaller_campaign_leads"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -15266,6 +15274,598 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LeadOtherAppliancesRemarkMapping: {
+      payload: Prisma.$LeadOtherAppliancesRemarkMappingPayload<ExtArgs>
+      fields: Prisma.LeadOtherAppliancesRemarkMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        findMany: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
+        }
+        create: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        createMany: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        update: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadOtherAppliancesRemarkMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadOtherAppliancesRemarkMapping>
+        }
+        groupBy: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadOtherAppliancesRemarkMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadOtherAppliancesRemarkMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserTypePrivilegeMapping: {
+      payload: Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>
+      fields: Prisma.UserTypePrivilegeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserTypePrivilegeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserTypePrivilegeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.UserTypePrivilegeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserTypePrivilegeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.UserTypePrivilegeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.UserTypePrivilegeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.UserTypePrivilegeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserTypePrivilegeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.UserTypePrivilegeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        update: {
+          args: Prisma.UserTypePrivilegeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserTypePrivilegeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserTypePrivilegeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserTypePrivilegeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserTypePrivilegeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserTypePrivilegeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.UserTypePrivilegeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserTypePrivilegeMapping>
+        }
+        groupBy: {
+          args: Prisma.UserTypePrivilegeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTypePrivilegeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserTypePrivilegeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserTypePrivilegeMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    online_lead_call_log: {
+      payload: Prisma.$online_lead_call_logPayload<ExtArgs>
+      fields: Prisma.online_lead_call_logFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.online_lead_call_logFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.online_lead_call_logFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        findFirst: {
+          args: Prisma.online_lead_call_logFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.online_lead_call_logFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        findMany: {
+          args: Prisma.online_lead_call_logFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>[]
+        }
+        create: {
+          args: Prisma.online_lead_call_logCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        createMany: {
+          args: Prisma.online_lead_call_logCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.online_lead_call_logCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>[]
+        }
+        delete: {
+          args: Prisma.online_lead_call_logDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        update: {
+          args: Prisma.online_lead_call_logUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        deleteMany: {
+          args: Prisma.online_lead_call_logDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.online_lead_call_logUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.online_lead_call_logUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>[]
+        }
+        upsert: {
+          args: Prisma.online_lead_call_logUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_call_logPayload>
+        }
+        aggregate: {
+          args: Prisma.Online_lead_call_logAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnline_lead_call_log>
+        }
+        groupBy: {
+          args: Prisma.online_lead_call_logGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_call_logGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.online_lead_call_logCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_call_logCountAggregateOutputType> | number
+        }
+      }
+    }
+    online_lead_followup_status: {
+      payload: Prisma.$online_lead_followup_statusPayload<ExtArgs>
+      fields: Prisma.online_lead_followup_statusFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.online_lead_followup_statusFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.online_lead_followup_statusFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        findFirst: {
+          args: Prisma.online_lead_followup_statusFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.online_lead_followup_statusFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        findMany: {
+          args: Prisma.online_lead_followup_statusFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>[]
+        }
+        create: {
+          args: Prisma.online_lead_followup_statusCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        createMany: {
+          args: Prisma.online_lead_followup_statusCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.online_lead_followup_statusCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>[]
+        }
+        delete: {
+          args: Prisma.online_lead_followup_statusDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        update: {
+          args: Prisma.online_lead_followup_statusUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        deleteMany: {
+          args: Prisma.online_lead_followup_statusDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.online_lead_followup_statusUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.online_lead_followup_statusUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>[]
+        }
+        upsert: {
+          args: Prisma.online_lead_followup_statusUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_followup_statusPayload>
+        }
+        aggregate: {
+          args: Prisma.Online_lead_followup_statusAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnline_lead_followup_status>
+        }
+        groupBy: {
+          args: Prisma.online_lead_followup_statusGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_followup_statusGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.online_lead_followup_statusCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_followup_statusCountAggregateOutputType> | number
+        }
+      }
+    }
+    online_lead_history: {
+      payload: Prisma.$online_lead_historyPayload<ExtArgs>
+      fields: Prisma.online_lead_historyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.online_lead_historyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.online_lead_historyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        findFirst: {
+          args: Prisma.online_lead_historyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.online_lead_historyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        findMany: {
+          args: Prisma.online_lead_historyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>[]
+        }
+        create: {
+          args: Prisma.online_lead_historyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        createMany: {
+          args: Prisma.online_lead_historyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.online_lead_historyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>[]
+        }
+        delete: {
+          args: Prisma.online_lead_historyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        update: {
+          args: Prisma.online_lead_historyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        deleteMany: {
+          args: Prisma.online_lead_historyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.online_lead_historyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.online_lead_historyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>[]
+        }
+        upsert: {
+          args: Prisma.online_lead_historyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_historyPayload>
+        }
+        aggregate: {
+          args: Prisma.Online_lead_historyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnline_lead_history>
+        }
+        groupBy: {
+          args: Prisma.online_lead_historyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_historyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.online_lead_historyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_historyCountAggregateOutputType> | number
+        }
+      }
+    }
+    online_lead_store_log: {
+      payload: Prisma.$online_lead_store_logPayload<ExtArgs>
+      fields: Prisma.online_lead_store_logFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.online_lead_store_logFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.online_lead_store_logFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        findFirst: {
+          args: Prisma.online_lead_store_logFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.online_lead_store_logFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        findMany: {
+          args: Prisma.online_lead_store_logFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>[]
+        }
+        create: {
+          args: Prisma.online_lead_store_logCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        createMany: {
+          args: Prisma.online_lead_store_logCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.online_lead_store_logCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>[]
+        }
+        delete: {
+          args: Prisma.online_lead_store_logDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        update: {
+          args: Prisma.online_lead_store_logUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        deleteMany: {
+          args: Prisma.online_lead_store_logDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.online_lead_store_logUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.online_lead_store_logUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>[]
+        }
+        upsert: {
+          args: Prisma.online_lead_store_logUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_lead_store_logPayload>
+        }
+        aggregate: {
+          args: Prisma.Online_lead_store_logAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnline_lead_store_log>
+        }
+        groupBy: {
+          args: Prisma.online_lead_store_logGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_store_logGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.online_lead_store_logCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_lead_store_logCountAggregateOutputType> | number
+        }
+      }
+    }
+    online_leads: {
+      payload: Prisma.$online_leadsPayload<ExtArgs>
+      fields: Prisma.online_leadsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.online_leadsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.online_leadsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        findFirst: {
+          args: Prisma.online_leadsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.online_leadsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        findMany: {
+          args: Prisma.online_leadsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>[]
+        }
+        create: {
+          args: Prisma.online_leadsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        createMany: {
+          args: Prisma.online_leadsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.online_leadsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>[]
+        }
+        delete: {
+          args: Prisma.online_leadsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        update: {
+          args: Prisma.online_leadsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        deleteMany: {
+          args: Prisma.online_leadsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.online_leadsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.online_leadsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>[]
+        }
+        upsert: {
+          args: Prisma.online_leadsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$online_leadsPayload>
+        }
+        aggregate: {
+          args: Prisma.Online_leadsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOnline_leads>
+        }
+        groupBy: {
+          args: Prisma.online_leadsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_leadsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.online_leadsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Online_leadsCountAggregateOutputType> | number
+        }
+      }
+    }
+    telecaller_campaign_leads: {
+      payload: Prisma.$telecaller_campaign_leadsPayload<ExtArgs>
+      fields: Prisma.telecaller_campaign_leadsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.telecaller_campaign_leadsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.telecaller_campaign_leadsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        findFirst: {
+          args: Prisma.telecaller_campaign_leadsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.telecaller_campaign_leadsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        findMany: {
+          args: Prisma.telecaller_campaign_leadsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>[]
+        }
+        create: {
+          args: Prisma.telecaller_campaign_leadsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        createMany: {
+          args: Prisma.telecaller_campaign_leadsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.telecaller_campaign_leadsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>[]
+        }
+        delete: {
+          args: Prisma.telecaller_campaign_leadsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        update: {
+          args: Prisma.telecaller_campaign_leadsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        deleteMany: {
+          args: Prisma.telecaller_campaign_leadsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.telecaller_campaign_leadsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.telecaller_campaign_leadsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>[]
+        }
+        upsert: {
+          args: Prisma.telecaller_campaign_leadsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$telecaller_campaign_leadsPayload>
+        }
+        aggregate: {
+          args: Prisma.Telecaller_campaign_leadsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTelecaller_campaign_leads>
+        }
+        groupBy: {
+          args: Prisma.telecaller_campaign_leadsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Telecaller_campaign_leadsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.telecaller_campaign_leadsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Telecaller_campaign_leadsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -15345,7 +15945,9 @@ export const VendorMasterScalarFieldEnum = {
   tag_line: 'tag_line',
   toll_free_no: 'toll_free_no',
   website_link: 'website_link',
-  is_broadcast_enabled: 'is_broadcast_enabled'
+  is_broadcast_enabled: 'is_broadcast_enabled',
+  is_scanpack_enabled: 'is_scanpack_enabled',
+  is_online_lead_feature_enabled: 'is_online_lead_feature_enabled'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -15464,9 +16066,9 @@ export const UserPrivilegeMappingScalarFieldEnum = {
   vendor_id: 'vendor_id',
   user_id: 'user_id',
   privilege_id: 'privilege_id',
-  is_allowed: 'is_allowed',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  is_allowed: 'is_allowed'
 } as const
 
 export type UserPrivilegeMappingScalarFieldEnum = (typeof UserPrivilegeMappingScalarFieldEnum)[keyof typeof UserPrivilegeMappingScalarFieldEnum]
@@ -15492,7 +16094,8 @@ export const ProjectMasterScalarFieldEnum = {
   order_no: 'order_no',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  packing_type: 'packing_type'
+  packing_type: 'packing_type',
+  no_of_boxes: 'no_of_boxes'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
@@ -15713,9 +16316,9 @@ export const LeadMasterScalarFieldEnum = {
   usable_handover_completed: 'usable_handover_completed',
   franchise_id: 'franchise_id',
   order_login_prod_files_remark: 'order_login_prod_files_remark',
+  usable_handover_completed_at: 'usable_handover_completed_at',
   actual_installation_completion_at: 'actual_installation_completion_at',
   final_handover_marked_at: 'final_handover_marked_at',
-  usable_handover_completed_at: 'usable_handover_completed_at',
   tech_check_completed_at: 'tech_check_completed_at',
   tech_check_reached_at: 'tech_check_reached_at',
   priority: 'priority',
@@ -15739,6 +16342,8 @@ export const LeadMasterScalarFieldEnum = {
   client_id: 'client_id',
   order_number: 'order_number',
   refered_by: 'refered_by',
+  is_so_value_received: 'is_so_value_received',
+  so_value_received_at: 'so_value_received_at',
   project_status: 'project_status'
 } as const
 
@@ -15749,11 +16354,13 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
-  name: 'name',
   created_at: 'created_at',
   created_by: 'created_by',
+  name: 'name',
   lights_remark: 'lights_remark',
-  item_code_id: 'item_code_id'
+  item_code_id: 'item_code_id',
+  is_completed: 'is_completed',
+  completed_marked_at: 'completed_marked_at'
 } as const
 
 export type LeadSpecificationsMasterScalarFieldEnum = (typeof LeadSpecificationsMasterScalarFieldEnum)[keyof typeof LeadSpecificationsMasterScalarFieldEnum]
@@ -15767,7 +16374,16 @@ export const LeadCarcassMaterialMappingScalarFieldEnum = {
   carcas_material_id: 'carcas_material_id',
   carcass_material_finish_id: 'carcass_material_finish_id',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  specs_id: 'specs_id',
+  amended_at: 'amended_at',
+  approved_at: 'approved_at',
+  deleted_item_at: 'deleted_item_at',
+  is_amended: 'is_amended',
+  is_approved: 'is_approved',
+  is_deleted_item: 'is_deleted_item',
+  amended_remark: 'amended_remark',
+  deleted_remark: 'deleted_remark'
 } as const
 
 export type LeadCarcassMaterialMappingScalarFieldEnum = (typeof LeadCarcassMaterialMappingScalarFieldEnum)[keyof typeof LeadCarcassMaterialMappingScalarFieldEnum]
@@ -15781,7 +16397,16 @@ export const LeadShutterMaterialMappingScalarFieldEnum = {
   shutter_material_id: 'shutter_material_id',
   shutter_material_finish_id: 'shutter_material_finish_id',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  specs_id: 'specs_id',
+  amended_at: 'amended_at',
+  approved_at: 'approved_at',
+  deleted_item_at: 'deleted_item_at',
+  is_amended: 'is_amended',
+  is_approved: 'is_approved',
+  is_deleted_item: 'is_deleted_item',
+  amended_remark: 'amended_remark',
+  deleted_remark: 'deleted_remark'
 } as const
 
 export type LeadShutterMaterialMappingScalarFieldEnum = (typeof LeadShutterMaterialMappingScalarFieldEnum)[keyof typeof LeadShutterMaterialMappingScalarFieldEnum]
@@ -15793,12 +16418,12 @@ export const LeadSuperAdminApprovalLocInsScalarFieldEnum = {
   franchise_id: 'franchise_id',
   lead_id: 'lead_id',
   approval_type: 'approval_type',
-  created_by: 'created_by',
-  created_at: 'created_at',
   is_approved: 'is_approved',
   approved_at: 'approved_at',
   approved_by: 'approved_by',
-  approval_remark: 'approval_remark'
+  approval_remark: 'approval_remark',
+  created_at: 'created_at',
+  created_by: 'created_by'
 } as const
 
 export type LeadSuperAdminApprovalLocInsScalarFieldEnum = (typeof LeadSuperAdminApprovalLocInsScalarFieldEnum)[keyof typeof LeadSuperAdminApprovalLocInsScalarFieldEnum]
@@ -15941,6 +16566,7 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
   process_brief_id: 'process_brief_id',
   created_at: 'created_at',
   created_by: 'created_by',
@@ -15956,6 +16582,7 @@ export const LeadRequirementMaterialMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
   product_id: 'product_id',
   quantity: 'quantity',
   unit_id: 'unit_id',
@@ -15978,7 +16605,8 @@ export type LeadRequirementMaterialMappingScalarFieldEnum = (typeof LeadRequirem
 export const CarcassTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  vendor_id: 'vendor_id'
+  vendor_id: 'vendor_id',
+  can_do_fast_production: 'can_do_fast_production'
 } as const
 
 export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
@@ -16076,7 +16704,16 @@ export const LeadHardwareMappingScalarFieldEnum = {
   skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
   note: 'note',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  specs_id: 'specs_id',
+  amended_at: 'amended_at',
+  approved_at: 'approved_at',
+  deleted_item_at: 'deleted_item_at',
+  is_amended: 'is_amended',
+  is_approved: 'is_approved',
+  is_deleted_item: 'is_deleted_item',
+  amended_remark: 'amended_remark',
+  deleted_remark: 'deleted_remark'
 } as const
 
 export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScalarFieldEnum)[keyof typeof LeadHardwareMappingScalarFieldEnum]
@@ -16112,7 +16749,16 @@ export const LeadLightCarcasUnitMappingScalarFieldEnum = {
   specs_id: 'specs_id',
   light_carcas_unit_master_id: 'light_carcas_unit_master_id',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  custom_remark: 'custom_remark',
+  amended_at: 'amended_at',
+  approved_at: 'approved_at',
+  deleted_item_at: 'deleted_item_at',
+  is_amended: 'is_amended',
+  is_approved: 'is_approved',
+  is_deleted_item: 'is_deleted_item',
+  amended_remark: 'amended_remark',
+  deleted_remark: 'deleted_remark'
 } as const
 
 export type LeadLightCarcasUnitMappingScalarFieldEnum = (typeof LeadLightCarcasUnitMappingScalarFieldEnum)[keyof typeof LeadLightCarcasUnitMappingScalarFieldEnum]
@@ -16137,7 +16783,17 @@ export const LeadOtherAppliancesMappingScalarFieldEnum = {
   specs_id: 'specs_id',
   other_appliances_master_id: 'other_appliances_master_id',
   created_at: 'created_at',
-  created_by: 'created_by'
+  created_by: 'created_by',
+  custom_remark: 'custom_remark',
+  other_appliance_type: 'other_appliance_type',
+  amended_at: 'amended_at',
+  approved_at: 'approved_at',
+  deleted_item_at: 'deleted_item_at',
+  is_amended: 'is_amended',
+  is_approved: 'is_approved',
+  is_deleted_item: 'is_deleted_item',
+  amended_remark: 'amended_remark',
+  deleted_remark: 'deleted_remark'
 } as const
 
 export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
@@ -16157,9 +16813,9 @@ export const TimelineRuleScalarFieldEnum = {
   vendor_id: 'vendor_id',
   carcass_id: 'carcass_id',
   shutter_id: 'shutter_id',
+  created_at: 'created_at',
   kitchen_manufacturing_days: 'kitchen_manufacturing_days',
   other_manufacturing_days: 'other_manufacturing_days',
-  created_at: 'created_at',
   kitchen_manufacturing_days_for_fast_production: 'kitchen_manufacturing_days_for_fast_production',
   other_manufacturing_days_for_fast_production: 'other_manufacturing_days_for_fast_production'
 } as const
@@ -16342,6 +16998,8 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   created_at: 'created_at',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
+  is_tech_check_completed: 'is_tech_check_completed',
+  tech_check_completed_at: 'tech_check_completed_at',
   is_order_login_completed: 'is_order_login_completed',
   order_login_completed_at: 'order_login_completed_at',
   is_production_completed: 'is_production_completed',
@@ -16349,8 +17007,6 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   woodwork_packing_details_remark: 'woodwork_packing_details_remark',
   hardware_packing_details_remark: 'hardware_packing_details_remark',
   no_of_boxes: 'no_of_boxes',
-  is_tech_check_completed: 'is_tech_check_completed',
-  tech_check_completed_at: 'tech_check_completed_at',
   no_of_client_documents_initially_submitted: 'no_of_client_documents_initially_submitted',
   is_order_login_filled: 'is_order_login_filled',
   is_pre_prod_done: 'is_pre_prod_done',
@@ -16372,9 +17028,9 @@ export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStr
 export const SelfAssignTaskTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
-  user_type_id: 'user_type_id',
   type: 'type',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  user_type_id: 'user_type_id'
 } as const
 
 export type SelfAssignTaskTypeMasterScalarFieldEnum = (typeof SelfAssignTaskTypeMasterScalarFieldEnum)[keyof typeof SelfAssignTaskTypeMasterScalarFieldEnum]
@@ -16392,7 +17048,13 @@ export const PaymentInfoScalarFieldEnum = {
   created_by: 'created_by',
   vendor_id: 'vendor_id',
   payment_type_id: 'payment_type_id',
-  status_id: 'status_id'
+  status_id: 'status_id',
+  product_type_id: 'product_type_id',
+  basic_amount: 'basic_amount',
+  gst_amount: 'gst_amount',
+  gst_percentage: 'gst_percentage',
+  total_amount: 'total_amount',
+  is_booking_received_amt: 'is_booking_received_amt'
 } as const
 
 export type PaymentInfoScalarFieldEnum = (typeof PaymentInfoScalarFieldEnum)[keyof typeof PaymentInfoScalarFieldEnum]
@@ -16408,7 +17070,8 @@ export const LedgerScalarFieldEnum = {
   payment_date: 'payment_date',
   type: 'type',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -16741,11 +17404,9 @@ export type FastProductionRequestBatchScalarFieldEnum = (typeof FastProductionRe
 
 export const FastProductionRequestScalarFieldEnum = {
   id: 'id',
-  batch_id: 'batch_id',
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   account_id: 'account_id',
-  instance_id: 'instance_id',
   franchise_id: 'franchise_id',
   task_id: 'task_id',
   requester_user_id: 'requester_user_id',
@@ -16767,6 +17428,8 @@ export const FastProductionRequestScalarFieldEnum = {
   created_at: 'created_at',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
+  batch_id: 'batch_id',
+  instance_id: 'instance_id',
   tentative_order_login_date: 'tentative_order_login_date'
 } as const
 
@@ -16787,13 +17450,13 @@ export type FastProductionFinishScalarFieldEnum = (typeof FastProductionFinishSc
 
 export const FastProductionApprovalScalarFieldEnum = {
   id: 'id',
-  batch_id: 'batch_id',
   approver_role: 'approver_role',
   approver_user_id: 'approver_user_id',
   status: 'status',
   remark: 'remark',
   acted_at: 'acted_at',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  batch_id: 'batch_id'
 } as const
 
 export type FastProductionApprovalScalarFieldEnum = (typeof FastProductionApprovalScalarFieldEnum)[keyof typeof FastProductionApprovalScalarFieldEnum]
@@ -16812,12 +17475,12 @@ export type FastProductionRequestDocumentScalarFieldEnum = (typeof FastProductio
 
 export const FastProductionStatusLogScalarFieldEnum = {
   id: 'id',
-  batch_id: 'batch_id',
   from_status: 'from_status',
   to_status: 'to_status',
   actor_user_id: 'actor_user_id',
   remark: 'remark',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  batch_id: 'batch_id'
 } as const
 
 export type FastProductionStatusLogScalarFieldEnum = (typeof FastProductionStatusLogScalarFieldEnum)[keyof typeof FastProductionStatusLogScalarFieldEnum]
@@ -16834,7 +17497,8 @@ export const LeadDetailedLogsScalarFieldEnum = {
   created_by: 'created_by',
   history_type: 'history_type',
   stage_id: 'stage_id',
-  task_id: 'task_id'
+  task_id: 'task_id',
+  product_type_id: 'product_type_id'
 } as const
 
 export type LeadDetailedLogsScalarFieldEnum = (typeof LeadDetailedLogsScalarFieldEnum)[keyof typeof LeadDetailedLogsScalarFieldEnum]
@@ -17303,7 +17967,8 @@ export const CutListMachineMappingScalarFieldEnum = {
   created_at: 'created_at',
   box_id: 'box_id',
   site_in_at: 'site_in_at',
-  site_in_by: 'site_in_by'
+  site_in_by: 'site_in_by',
+  weight: 'weight'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -17522,11 +18187,11 @@ export const UserActivityLogScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   action: 'action',
-  activity_type: 'activity_type',
   metadata: 'metadata',
   ip_address: 'ip_address',
   user_agent: 'user_agent',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  activity_type: 'activity_type'
 } as const
 
 export type UserActivityLogScalarFieldEnum = (typeof UserActivityLogScalarFieldEnum)[keyof typeof UserActivityLogScalarFieldEnum]
@@ -17655,8 +18320,8 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   external_category_id: 'external_category_id',
-  parent_id: 'parent_id',
   created_by: 'created_by',
+  parent_id: 'parent_id',
   updated_by: 'updated_by'
 } as const
 
@@ -17685,9 +18350,9 @@ export const BrandMasterScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   brand_short_name: 'brand_short_name',
-  logo: 'logo',
-  is_active: 'is_active',
   created_by: 'created_by',
+  is_active: 'is_active',
+  logo: 'logo',
   updated_by: 'updated_by'
 } as const
 
@@ -17752,19 +18417,19 @@ export const ProductMasterScalarFieldEnum = {
   reorder_level_unit_id: 'reorder_level_unit_id',
   shelf_life_days: 'shelf_life_days',
   stock_unit_id: 'stock_unit_id',
-  sub_category_id: 'sub_category_id',
-  item_code: 'item_code',
   barcode: 'barcode',
-  purchase_unit_id: 'purchase_unit_id',
-  item_type_master_id: 'item_type_master_id',
-  grade_id: 'grade_id',
-  type_id: 'type_id',
-  finish_id: 'finish_id',
-  length: 'length',
-  height: 'height',
-  thickness: 'thickness',
   core_product_id: 'core_product_id',
-  size: 'size'
+  finish_id: 'finish_id',
+  grade_id: 'grade_id',
+  height: 'height',
+  item_code: 'item_code',
+  item_type_master_id: 'item_type_master_id',
+  length: 'length',
+  purchase_unit_id: 'purchase_unit_id',
+  size: 'size',
+  sub_category_id: 'sub_category_id',
+  thickness: 'thickness',
+  type_id: 'type_id'
 } as const
 
 export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
@@ -18219,8 +18884,8 @@ export const UnitMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  short_name: 'short_name',
-  decimal_allowed: 'decimal_allowed'
+  decimal_allowed: 'decimal_allowed',
+  short_name: 'short_name'
 } as const
 
 export type UnitMasterScalarFieldEnum = (typeof UnitMasterScalarFieldEnum)[keyof typeof UnitMasterScalarFieldEnum]
@@ -18587,11 +19252,11 @@ export const BroadcastAttachmentScalarFieldEnum = {
   original_file_name: 'original_file_name',
   file_url: 'file_url',
   file_type: 'file_type',
+  file_size: 'file_size',
   created_by: 'created_by',
   updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  file_size: 'file_size'
+  updated_at: 'updated_at'
 } as const
 
 export type BroadcastAttachmentScalarFieldEnum = (typeof BroadcastAttachmentScalarFieldEnum)[keyof typeof BroadcastAttachmentScalarFieldEnum]
@@ -18656,6 +19321,129 @@ export const LeadB2BRequirementTypeMappingScalarFieldEnum = {
 } as const
 
 export type LeadB2BRequirementTypeMappingScalarFieldEnum = (typeof LeadB2BRequirementTypeMappingScalarFieldEnum)[keyof typeof LeadB2BRequirementTypeMappingScalarFieldEnum]
+
+
+export const LeadOtherAppliancesRemarkMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  other_appliance_type: 'other_appliance_type',
+  remark: 'remark',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadOtherAppliancesRemarkMappingScalarFieldEnum = (typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesRemarkMappingScalarFieldEnum]
+
+
+export const UserTypePrivilegeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_type_id: 'user_type_id',
+  privilege_id: 'privilege_id',
+  is_allowed: 'is_allowed',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserTypePrivilegeMappingScalarFieldEnum = (typeof UserTypePrivilegeMappingScalarFieldEnum)[keyof typeof UserTypePrivilegeMappingScalarFieldEnum]
+
+
+export const Online_lead_call_logScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  telecaller_id: 'telecaller_id',
+  call_type: 'call_type',
+  online_lead_status_id: 'online_lead_status_id',
+  started_at: 'started_at',
+  ended_at: 'ended_at',
+  duration_seconds: 'duration_seconds',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type Online_lead_call_logScalarFieldEnum = (typeof Online_lead_call_logScalarFieldEnum)[keyof typeof Online_lead_call_logScalarFieldEnum]
+
+
+export const Online_lead_followup_statusScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  status_name: 'status_name',
+  followup_required: 'followup_required',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type Online_lead_followup_statusScalarFieldEnum = (typeof Online_lead_followup_statusScalarFieldEnum)[keyof typeof Online_lead_followup_statusScalarFieldEnum]
+
+
+export const Online_lead_historyScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  remark: 'remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  store_preference_option: 'store_preference_option',
+  online_lead_status_id: 'online_lead_status_id'
+} as const
+
+export type Online_lead_historyScalarFieldEnum = (typeof Online_lead_historyScalarFieldEnum)[keyof typeof Online_lead_historyScalarFieldEnum]
+
+
+export const Online_lead_store_logScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  online_lead_id: 'online_lead_id',
+  from_store_id: 'from_store_id',
+  to_store_id: 'to_store_id',
+  action_type: 'action_type',
+  selected_by: 'selected_by',
+  assigned_to: 'assigned_to',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type Online_lead_store_logScalarFieldEnum = (typeof Online_lead_store_logScalarFieldEnum)[keyof typeof Online_lead_store_logScalarFieldEnum]
+
+
+export const Online_leadsScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  leads_name: 'leads_name',
+  email: 'email',
+  contact: 'contact',
+  source: 'source',
+  lead_entry_type: 'lead_entry_type',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  assign_to: 'assign_to',
+  status: 'status',
+  remark: 'remark',
+  follow_up_date: 'follow_up_date',
+  store_id: 'store_id',
+  final_assigned_leads: 'final_assigned_leads'
+} as const
+
+export type Online_leadsScalarFieldEnum = (typeof Online_leadsScalarFieldEnum)[keyof typeof Online_leadsScalarFieldEnum]
+
+
+export const Telecaller_campaign_leadsScalarFieldEnum = {
+  id: 'id',
+  campaign_name: 'campaign_name',
+  online_lead_id: 'online_lead_id'
+} as const
+
+export type Telecaller_campaign_leadsScalarFieldEnum = (typeof Telecaller_campaign_leadsScalarFieldEnum)[keyof typeof Telecaller_campaign_leadsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -19378,20 +20166,6 @@ export type ListEnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<
 
 
 /**
- * Reference to a field of type 'UserActivityType'
- */
-export type EnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType'>
-    
-
-
-/**
- * Reference to a field of type 'UserActivityType[]'
- */
-export type ListEnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType[]'>
-    
-
-
-/**
  * Reference to a field of type 'Json'
  */
 export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -19402,6 +20176,20 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'UserActivityType'
+ */
+export type EnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType'>
+    
+
+
+/**
+ * Reference to a field of type 'UserActivityType[]'
+ */
+export type ListEnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType[]'>
     
 
 
@@ -19810,6 +20598,48 @@ export type EnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 export type ListEnumNotificationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'LeadCallType'
+ */
+export type EnumLeadCallTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadCallType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadCallType[]'
+ */
+export type ListEnumLeadCallTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadCallType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStoreActionType'
+ */
+export type EnumLeadStoreActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStoreActionType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadStoreActionType[]'
+ */
+export type ListEnumLeadStoreActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStoreActionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadEntryType'
+ */
+export type EnumLeadEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadEntryType'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadEntryType[]'
+ */
+export type ListEnumLeadEntryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadEntryType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -20159,6 +20989,14 @@ export type GlobalOmitConfig = {
   notificationQueue?: Prisma.NotificationQueueOmit
   b2BRequirementTypeMaster?: Prisma.B2BRequirementTypeMasterOmit
   leadB2BRequirementTypeMapping?: Prisma.LeadB2BRequirementTypeMappingOmit
+  leadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingOmit
+  userTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingOmit
+  online_lead_call_log?: Prisma.online_lead_call_logOmit
+  online_lead_followup_status?: Prisma.online_lead_followup_statusOmit
+  online_lead_history?: Prisma.online_lead_historyOmit
+  online_lead_store_log?: Prisma.online_lead_store_logOmit
+  online_leads?: Prisma.online_leadsOmit
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsOmit
 }
 
 /* Types for Logging */

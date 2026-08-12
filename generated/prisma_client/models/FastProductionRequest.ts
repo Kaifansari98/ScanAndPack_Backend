@@ -28,41 +28,39 @@ export type AggregateFastProductionRequest = {
 
 export type FastProductionRequestAvgAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   vendor_id: number | null
   lead_id: number | null
   account_id: number | null
-  instance_id: number | null
   franchise_id: number | null
   task_id: number | null
   requester_user_id: number | null
   revoked_by: number | null
   created_by: number | null
   updated_by: number | null
+  batch_id: number | null
+  instance_id: number | null
 }
 
 export type FastProductionRequestSumAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   vendor_id: number | null
   lead_id: number | null
   account_id: number | null
-  instance_id: number | null
   franchise_id: number | null
   task_id: number | null
   requester_user_id: number | null
   revoked_by: number | null
   created_by: number | null
   updated_by: number | null
+  batch_id: number | null
+  instance_id: number | null
 }
 
 export type FastProductionRequestMinAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   vendor_id: number | null
   lead_id: number | null
   account_id: number | null
-  instance_id: number | null
   franchise_id: number | null
   task_id: number | null
   requester_user_id: number | null
@@ -84,16 +82,16 @@ export type FastProductionRequestMinAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  batch_id: number | null
+  instance_id: number | null
   tentative_order_login_date: Date | null
 }
 
 export type FastProductionRequestMaxAggregateOutputType = {
   id: number | null
-  batch_id: number | null
   vendor_id: number | null
   lead_id: number | null
   account_id: number | null
-  instance_id: number | null
   franchise_id: number | null
   task_id: number | null
   requester_user_id: number | null
@@ -115,16 +113,16 @@ export type FastProductionRequestMaxAggregateOutputType = {
   created_at: Date | null
   updated_by: number | null
   updated_at: Date | null
+  batch_id: number | null
+  instance_id: number | null
   tentative_order_login_date: Date | null
 }
 
 export type FastProductionRequestCountAggregateOutputType = {
   id: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id: number
   task_id: number
   requester_user_id: number
@@ -146,6 +144,8 @@ export type FastProductionRequestCountAggregateOutputType = {
   created_at: number
   updated_by: number
   updated_at: number
+  batch_id: number
+  instance_id: number
   tentative_order_login_date: number
   _all: number
 }
@@ -153,41 +153,39 @@ export type FastProductionRequestCountAggregateOutputType = {
 
 export type FastProductionRequestAvgAggregateInputType = {
   id?: true
-  batch_id?: true
   vendor_id?: true
   lead_id?: true
   account_id?: true
-  instance_id?: true
   franchise_id?: true
   task_id?: true
   requester_user_id?: true
   revoked_by?: true
   created_by?: true
   updated_by?: true
+  batch_id?: true
+  instance_id?: true
 }
 
 export type FastProductionRequestSumAggregateInputType = {
   id?: true
-  batch_id?: true
   vendor_id?: true
   lead_id?: true
   account_id?: true
-  instance_id?: true
   franchise_id?: true
   task_id?: true
   requester_user_id?: true
   revoked_by?: true
   created_by?: true
   updated_by?: true
+  batch_id?: true
+  instance_id?: true
 }
 
 export type FastProductionRequestMinAggregateInputType = {
   id?: true
-  batch_id?: true
   vendor_id?: true
   lead_id?: true
   account_id?: true
-  instance_id?: true
   franchise_id?: true
   task_id?: true
   requester_user_id?: true
@@ -209,16 +207,16 @@ export type FastProductionRequestMinAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  batch_id?: true
+  instance_id?: true
   tentative_order_login_date?: true
 }
 
 export type FastProductionRequestMaxAggregateInputType = {
   id?: true
-  batch_id?: true
   vendor_id?: true
   lead_id?: true
   account_id?: true
-  instance_id?: true
   franchise_id?: true
   task_id?: true
   requester_user_id?: true
@@ -240,16 +238,16 @@ export type FastProductionRequestMaxAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  batch_id?: true
+  instance_id?: true
   tentative_order_login_date?: true
 }
 
 export type FastProductionRequestCountAggregateInputType = {
   id?: true
-  batch_id?: true
   vendor_id?: true
   lead_id?: true
   account_id?: true
-  instance_id?: true
   franchise_id?: true
   task_id?: true
   requester_user_id?: true
@@ -271,6 +269,8 @@ export type FastProductionRequestCountAggregateInputType = {
   created_at?: true
   updated_by?: true
   updated_at?: true
+  batch_id?: true
+  instance_id?: true
   tentative_order_login_date?: true
   _all?: true
 }
@@ -363,11 +363,9 @@ export type FastProductionRequestGroupByArgs<ExtArgs extends runtime.Types.Exten
 
 export type FastProductionRequestGroupByOutputType = {
   id: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id: number | null
   task_id: number | null
   requester_user_id: number
@@ -389,6 +387,8 @@ export type FastProductionRequestGroupByOutputType = {
   created_at: Date
   updated_by: number | null
   updated_at: Date
+  batch_id: number
+  instance_id: number
   tentative_order_login_date: Date | null
   _count: FastProductionRequestCountAggregateOutputType | null
   _avg: FastProductionRequestAvgAggregateOutputType | null
@@ -417,11 +417,9 @@ export type FastProductionRequestWhereInput = {
   OR?: Prisma.FastProductionRequestWhereInput[]
   NOT?: Prisma.FastProductionRequestWhereInput | Prisma.FastProductionRequestWhereInput[]
   id?: Prisma.IntFilter<"FastProductionRequest"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   vendor_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   lead_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   account_id?: Prisma.IntFilter<"FastProductionRequest"> | number
-  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   franchise_id?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   task_id?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   requester_user_id?: Prisma.IntFilter<"FastProductionRequest"> | number
@@ -443,6 +441,8 @@ export type FastProductionRequestWhereInput = {
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
+  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
   finishes?: Prisma.FastProductionFinishListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
@@ -461,11 +461,9 @@ export type FastProductionRequestWhereInput = {
 
 export type FastProductionRequestOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   task_id?: Prisma.SortOrderInput | Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
@@ -487,6 +485,8 @@ export type FastProductionRequestOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
   finishes?: Prisma.FastProductionFinishOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
@@ -510,11 +510,9 @@ export type FastProductionRequestWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.FastProductionRequestWhereInput | Prisma.FastProductionRequestWhereInput[]
   OR?: Prisma.FastProductionRequestWhereInput[]
   NOT?: Prisma.FastProductionRequestWhereInput | Prisma.FastProductionRequestWhereInput[]
-  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   vendor_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   lead_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   account_id?: Prisma.IntFilter<"FastProductionRequest"> | number
-  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   franchise_id?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   requester_user_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   month_bucket?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
@@ -535,6 +533,8 @@ export type FastProductionRequestWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
+  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
   finishes?: Prisma.FastProductionFinishListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
@@ -553,11 +553,9 @@ export type FastProductionRequestWhereUniqueInput = Prisma.AtLeast<{
 
 export type FastProductionRequestOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrderInput | Prisma.SortOrder
   task_id?: Prisma.SortOrderInput | Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
@@ -579,6 +577,8 @@ export type FastProductionRequestOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FastProductionRequestCountOrderByAggregateInput
   _avg?: Prisma.FastProductionRequestAvgOrderByAggregateInput
@@ -592,11 +592,9 @@ export type FastProductionRequestScalarWhereWithAggregatesInput = {
   OR?: Prisma.FastProductionRequestScalarWhereWithAggregatesInput[]
   NOT?: Prisma.FastProductionRequestScalarWhereWithAggregatesInput | Prisma.FastProductionRequestScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
-  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
-  instance_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
   franchise_id?: Prisma.IntNullableWithAggregatesFilter<"FastProductionRequest"> | number | null
   task_id?: Prisma.IntNullableWithAggregatesFilter<"FastProductionRequest"> | number | null
   requester_user_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
@@ -618,6 +616,8 @@ export type FastProductionRequestScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"FastProductionRequest"> | Date | string
+  batch_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
+  instance_id?: Prisma.IntWithAggregatesFilter<"FastProductionRequest"> | number
   tentative_order_login_date?: Prisma.DateTimeNullableWithAggregatesFilter<"FastProductionRequest"> | Date | string | null
 }
 
@@ -655,11 +655,9 @@ export type FastProductionRequestCreateInput = {
 
 export type FastProductionRequestUncheckedCreateInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -681,6 +679,8 @@ export type FastProductionRequestUncheckedCreateInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -720,11 +720,9 @@ export type FastProductionRequestUpdateInput = {
 
 export type FastProductionRequestUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -746,6 +744,8 @@ export type FastProductionRequestUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -753,11 +753,9 @@ export type FastProductionRequestUncheckedUpdateInput = {
 
 export type FastProductionRequestCreateManyInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -779,6 +777,8 @@ export type FastProductionRequestCreateManyInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -803,11 +803,9 @@ export type FastProductionRequestUpdateManyMutationInput = {
 
 export type FastProductionRequestUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -829,6 +827,8 @@ export type FastProductionRequestUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -854,11 +854,9 @@ export type FastProductionRequestBatch_idInstance_idCompoundUniqueInput = {
 
 export type FastProductionRequestCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
@@ -880,31 +878,31 @@ export type FastProductionRequestCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
   revoked_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type FastProductionRequestMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
@@ -926,16 +924,16 @@ export type FastProductionRequestMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
@@ -957,22 +955,24 @@ export type FastProductionRequestMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
   tentative_order_login_date?: Prisma.SortOrder
 }
 
 export type FastProductionRequestSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  batch_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
-  instance_id?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   task_id?: Prisma.SortOrder
   requester_user_id?: Prisma.SortOrder
   revoked_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  batch_id?: Prisma.SortOrder
+  instance_id?: Prisma.SortOrder
 }
 
 export type FastProductionRequestScalarRelationFilter = {
@@ -1493,10 +1493,8 @@ export type FastProductionRequestCreateWithoutVendorInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutVendorInput = {
   id?: number
-  batch_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -1518,6 +1516,8 @@ export type FastProductionRequestUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -1554,11 +1554,9 @@ export type FastProductionRequestScalarWhereInput = {
   OR?: Prisma.FastProductionRequestScalarWhereInput[]
   NOT?: Prisma.FastProductionRequestScalarWhereInput | Prisma.FastProductionRequestScalarWhereInput[]
   id?: Prisma.IntFilter<"FastProductionRequest"> | number
-  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   vendor_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   lead_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   account_id?: Prisma.IntFilter<"FastProductionRequest"> | number
-  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   franchise_id?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   task_id?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   requester_user_id?: Prisma.IntFilter<"FastProductionRequest"> | number
@@ -1580,6 +1578,8 @@ export type FastProductionRequestScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"FastProductionRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"FastProductionRequest"> | Date | string
+  batch_id?: Prisma.IntFilter<"FastProductionRequest"> | number
+  instance_id?: Prisma.IntFilter<"FastProductionRequest"> | number
   tentative_order_login_date?: Prisma.DateTimeNullableFilter<"FastProductionRequest"> | Date | string | null
 }
 
@@ -1616,11 +1616,9 @@ export type FastProductionRequestCreateWithoutCreatedByInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutCreatedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -1641,6 +1639,8 @@ export type FastProductionRequestUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -1689,11 +1689,9 @@ export type FastProductionRequestCreateWithoutRequesterInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutRequesterInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   month_bucket: Date | string
@@ -1714,6 +1712,8 @@ export type FastProductionRequestUncheckedCreateWithoutRequesterInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -1762,11 +1762,9 @@ export type FastProductionRequestCreateWithoutRevokedByInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutRevokedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -1787,6 +1785,8 @@ export type FastProductionRequestUncheckedCreateWithoutRevokedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -1835,11 +1835,9 @@ export type FastProductionRequestCreateWithoutUpdatedByInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -1860,6 +1858,8 @@ export type FastProductionRequestUncheckedCreateWithoutUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -1972,10 +1972,8 @@ export type FastProductionRequestCreateWithoutLeadInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutLeadInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -1997,6 +1995,8 @@ export type FastProductionRequestUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2061,10 +2061,8 @@ export type FastProductionRequestCreateWithoutAccountInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutAccountInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2086,6 +2084,8 @@ export type FastProductionRequestUncheckedCreateWithoutAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2150,7 +2150,6 @@ export type FastProductionRequestCreateWithoutInstanceInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutInstanceInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
@@ -2175,6 +2174,7 @@ export type FastProductionRequestUncheckedCreateWithoutInstanceInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2239,11 +2239,9 @@ export type FastProductionRequestCreateWithoutTaskInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutTaskInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   requester_user_id: number
   month_bucket: Date | string
@@ -2264,6 +2262,8 @@ export type FastProductionRequestUncheckedCreateWithoutTaskInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2318,11 +2318,9 @@ export type FastProductionRequestUpdateWithoutTaskInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutTaskInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2343,6 +2341,8 @@ export type FastProductionRequestUncheckedUpdateWithoutTaskInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -2384,7 +2384,6 @@ export type FastProductionRequestUncheckedCreateWithoutBatchInput = {
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2406,6 +2405,7 @@ export type FastProductionRequestUncheckedCreateWithoutBatchInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2470,11 +2470,9 @@ export type FastProductionRequestCreateWithoutFinishesInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutFinishesInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2496,6 +2494,8 @@ export type FastProductionRequestUncheckedCreateWithoutFinishesInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2549,11 +2549,9 @@ export type FastProductionRequestUpdateWithoutFinishesInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutFinishesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2575,6 +2573,8 @@ export type FastProductionRequestUncheckedUpdateWithoutFinishesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -2612,11 +2612,9 @@ export type FastProductionRequestCreateWithoutDocumentsInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutDocumentsInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2638,6 +2636,8 @@ export type FastProductionRequestUncheckedCreateWithoutDocumentsInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
 }
@@ -2691,11 +2691,9 @@ export type FastProductionRequestUpdateWithoutDocumentsInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutDocumentsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2717,6 +2715,8 @@ export type FastProductionRequestUncheckedUpdateWithoutDocumentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
 }
@@ -2754,11 +2754,9 @@ export type FastProductionRequestCreateWithoutFranchiseInput = {
 
 export type FastProductionRequestUncheckedCreateWithoutFranchiseInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   task_id?: number | null
   requester_user_id: number
   month_bucket: Date | string
@@ -2779,6 +2777,8 @@ export type FastProductionRequestUncheckedCreateWithoutFranchiseInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedCreateNestedManyWithoutRequestInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutRequestInput
@@ -2812,10 +2812,8 @@ export type FastProductionRequestUpdateManyWithWhereWithoutFranchiseInput = {
 
 export type FastProductionRequestCreateManyVendorInput = {
   id?: number
-  batch_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2837,6 +2835,8 @@ export type FastProductionRequestCreateManyVendorInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -2873,10 +2873,8 @@ export type FastProductionRequestUpdateWithoutVendorInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2898,6 +2896,8 @@ export type FastProductionRequestUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -2905,10 +2905,8 @@ export type FastProductionRequestUncheckedUpdateWithoutVendorInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2930,16 +2928,16 @@ export type FastProductionRequestUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyCreatedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -2960,16 +2958,16 @@ export type FastProductionRequestCreateManyCreatedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestCreateManyRequesterInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   month_bucket: Date | string
@@ -2990,16 +2988,16 @@ export type FastProductionRequestCreateManyRequesterInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestCreateManyRevokedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -3020,16 +3018,16 @@ export type FastProductionRequestCreateManyRevokedByInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
 export type FastProductionRequestCreateManyUpdatedByInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -3050,6 +3048,8 @@ export type FastProductionRequestCreateManyUpdatedByInput = {
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3086,11 +3086,9 @@ export type FastProductionRequestUpdateWithoutCreatedByInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3111,6 +3109,8 @@ export type FastProductionRequestUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3118,11 +3118,9 @@ export type FastProductionRequestUncheckedUpdateWithoutCreatedByInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3143,6 +3141,8 @@ export type FastProductionRequestUncheckedUpdateManyWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -3179,11 +3179,9 @@ export type FastProductionRequestUpdateWithoutRequesterInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutRequesterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3204,6 +3202,8 @@ export type FastProductionRequestUncheckedUpdateWithoutRequesterInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3211,11 +3211,9 @@ export type FastProductionRequestUncheckedUpdateWithoutRequesterInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutRequesterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3236,6 +3234,8 @@ export type FastProductionRequestUncheckedUpdateManyWithoutRequesterInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -3272,11 +3272,9 @@ export type FastProductionRequestUpdateWithoutRevokedByInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutRevokedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3297,6 +3295,8 @@ export type FastProductionRequestUncheckedUpdateWithoutRevokedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3304,11 +3304,9 @@ export type FastProductionRequestUncheckedUpdateWithoutRevokedByInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutRevokedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3329,6 +3327,8 @@ export type FastProductionRequestUncheckedUpdateManyWithoutRevokedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -3365,11 +3365,9 @@ export type FastProductionRequestUpdateWithoutUpdatedByInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3390,6 +3388,8 @@ export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3397,11 +3397,9 @@ export type FastProductionRequestUncheckedUpdateWithoutUpdatedByInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3422,15 +3420,15 @@ export type FastProductionRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyLeadInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -3452,6 +3450,8 @@ export type FastProductionRequestCreateManyLeadInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3488,10 +3488,8 @@ export type FastProductionRequestUpdateWithoutLeadInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3513,6 +3511,8 @@ export type FastProductionRequestUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3520,10 +3520,8 @@ export type FastProductionRequestUncheckedUpdateWithoutLeadInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3545,15 +3543,15 @@ export type FastProductionRequestUncheckedUpdateManyWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyAccountInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -3575,6 +3573,8 @@ export type FastProductionRequestCreateManyAccountInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3611,10 +3611,8 @@ export type FastProductionRequestUpdateWithoutAccountInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3636,6 +3634,8 @@ export type FastProductionRequestUncheckedUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3643,10 +3643,8 @@ export type FastProductionRequestUncheckedUpdateWithoutAccountInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutAccountInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3668,12 +3666,13 @@ export type FastProductionRequestUncheckedUpdateManyWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyInstanceInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
@@ -3698,6 +3697,7 @@ export type FastProductionRequestCreateManyInstanceInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3734,7 +3734,6 @@ export type FastProductionRequestUpdateWithoutInstanceInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutInstanceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3759,6 +3758,7 @@ export type FastProductionRequestUncheckedUpdateWithoutInstanceInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3766,7 +3766,6 @@ export type FastProductionRequestUncheckedUpdateWithoutInstanceInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutInstanceInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3791,6 +3790,7 @@ export type FastProductionRequestUncheckedUpdateManyWithoutInstanceInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -3799,7 +3799,6 @@ export type FastProductionRequestCreateManyBatchInput = {
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   franchise_id?: number | null
   task_id?: number | null
   requester_user_id: number
@@ -3821,6 +3820,7 @@ export type FastProductionRequestCreateManyBatchInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3860,7 +3860,6 @@ export type FastProductionRequestUncheckedUpdateWithoutBatchInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3882,6 +3881,7 @@ export type FastProductionRequestUncheckedUpdateWithoutBatchInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -3892,7 +3892,6 @@ export type FastProductionRequestUncheckedUpdateManyWithoutBatchInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3914,16 +3913,15 @@ export type FastProductionRequestUncheckedUpdateManyWithoutBatchInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FastProductionRequestCreateManyFranchiseInput = {
   id?: number
-  batch_id: number
   vendor_id: number
   lead_id: number
   account_id: number
-  instance_id: number
   task_id?: number | null
   requester_user_id: number
   month_bucket: Date | string
@@ -3944,6 +3942,8 @@ export type FastProductionRequestCreateManyFranchiseInput = {
   created_at?: Date | string
   updated_by?: number | null
   updated_at?: Date | string
+  batch_id: number
+  instance_id: number
   tentative_order_login_date?: Date | string | null
 }
 
@@ -3980,11 +3980,9 @@ export type FastProductionRequestUpdateWithoutFranchiseInput = {
 
 export type FastProductionRequestUncheckedUpdateWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4005,6 +4003,8 @@ export type FastProductionRequestUncheckedUpdateWithoutFranchiseInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finishes?: Prisma.FastProductionFinishUncheckedUpdateManyWithoutRequestNestedInput
   documents?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutRequestNestedInput
@@ -4012,11 +4012,9 @@ export type FastProductionRequestUncheckedUpdateWithoutFranchiseInput = {
 
 export type FastProductionRequestUncheckedUpdateManyWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   task_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   requester_user_id?: Prisma.IntFieldUpdateOperationsInput | number
   month_bucket?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4037,6 +4035,8 @@ export type FastProductionRequestUncheckedUpdateManyWithoutFranchiseInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  batch_id?: Prisma.IntFieldUpdateOperationsInput | number
+  instance_id?: Prisma.IntFieldUpdateOperationsInput | number
   tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -4082,11 +4082,9 @@ export type FastProductionRequestCountOutputTypeCountDocumentsArgs<ExtArgs exten
 
 export type FastProductionRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
   account_id?: boolean
-  instance_id?: boolean
   franchise_id?: boolean
   task_id?: boolean
   requester_user_id?: boolean
@@ -4108,6 +4106,8 @@ export type FastProductionRequestSelect<ExtArgs extends runtime.Types.Extensions
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  batch_id?: boolean
+  instance_id?: boolean
   tentative_order_login_date?: boolean
   finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -4127,11 +4127,9 @@ export type FastProductionRequestSelect<ExtArgs extends runtime.Types.Extensions
 
 export type FastProductionRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
   account_id?: boolean
-  instance_id?: boolean
   franchise_id?: boolean
   task_id?: boolean
   requester_user_id?: boolean
@@ -4153,6 +4151,8 @@ export type FastProductionRequestSelectCreateManyAndReturn<ExtArgs extends runti
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  batch_id?: boolean
+  instance_id?: boolean
   tentative_order_login_date?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
@@ -4169,11 +4169,9 @@ export type FastProductionRequestSelectCreateManyAndReturn<ExtArgs extends runti
 
 export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  batch_id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
   account_id?: boolean
-  instance_id?: boolean
   franchise_id?: boolean
   task_id?: boolean
   requester_user_id?: boolean
@@ -4195,6 +4193,8 @@ export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runti
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  batch_id?: boolean
+  instance_id?: boolean
   tentative_order_login_date?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   batch?: boolean | Prisma.FastProductionRequestBatchDefaultArgs<ExtArgs>
@@ -4211,11 +4211,9 @@ export type FastProductionRequestSelectUpdateManyAndReturn<ExtArgs extends runti
 
 export type FastProductionRequestSelectScalar = {
   id?: boolean
-  batch_id?: boolean
   vendor_id?: boolean
   lead_id?: boolean
   account_id?: boolean
-  instance_id?: boolean
   franchise_id?: boolean
   task_id?: boolean
   requester_user_id?: boolean
@@ -4237,10 +4235,12 @@ export type FastProductionRequestSelectScalar = {
   created_at?: boolean
   updated_by?: boolean
   updated_at?: boolean
+  batch_id?: boolean
+  instance_id?: boolean
   tentative_order_login_date?: boolean
 }
 
-export type FastProductionRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "batch_id" | "vendor_id" | "lead_id" | "account_id" | "instance_id" | "franchise_id" | "task_id" | "requester_user_id" | "month_bucket" | "status" | "hardware_selection" | "accessory_selection" | "special_requirements" | "client_required_delivery_date" | "remarks" | "terms_accepted_at" | "terms_version" | "approved_at" | "rejected_at" | "revoked_at" | "revoked_by" | "revocation_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "tentative_order_login_date", ExtArgs["result"]["fastProductionRequest"]>
+export type FastProductionRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "franchise_id" | "task_id" | "requester_user_id" | "month_bucket" | "status" | "hardware_selection" | "accessory_selection" | "special_requirements" | "client_required_delivery_date" | "remarks" | "terms_accepted_at" | "terms_version" | "approved_at" | "rejected_at" | "revoked_at" | "revoked_by" | "revocation_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "batch_id" | "instance_id" | "tentative_order_login_date", ExtArgs["result"]["fastProductionRequest"]>
 export type FastProductionRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   finishes?: boolean | Prisma.FastProductionRequest$finishesArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -4303,11 +4303,9 @@ export type $FastProductionRequestPayload<ExtArgs extends runtime.Types.Extensio
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    batch_id: number
     vendor_id: number
     lead_id: number
     account_id: number
-    instance_id: number
     franchise_id: number | null
     task_id: number | null
     requester_user_id: number
@@ -4329,6 +4327,8 @@ export type $FastProductionRequestPayload<ExtArgs extends runtime.Types.Extensio
     created_at: Date
     updated_by: number | null
     updated_at: Date
+    batch_id: number
+    instance_id: number
     tentative_order_login_date: Date | null
   }, ExtArgs["result"]["fastProductionRequest"]>
   composites: {}
@@ -4767,11 +4767,9 @@ export interface Prisma__FastProductionRequestClient<T, Null = never, ExtArgs ex
  */
 export interface FastProductionRequestFieldRefs {
   readonly id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
-  readonly batch_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly lead_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly account_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
-  readonly instance_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly franchise_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly task_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly requester_user_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
@@ -4793,6 +4791,8 @@ export interface FastProductionRequestFieldRefs {
   readonly created_at: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly updated_at: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
+  readonly batch_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
+  readonly instance_id: Prisma.FieldRef<"FastProductionRequest", 'Int'>
   readonly tentative_order_login_date: Prisma.FieldRef<"FastProductionRequest", 'DateTime'>
 }
     

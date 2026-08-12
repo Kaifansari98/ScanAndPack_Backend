@@ -30,8 +30,8 @@ export type ProjectCategoriesMasterAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   external_category_id: number | null
-  parent_id: number | null
   created_by: number | null
+  parent_id: number | null
   updated_by: number | null
 }
 
@@ -39,8 +39,8 @@ export type ProjectCategoriesMasterSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   external_category_id: number | null
-  parent_id: number | null
   created_by: number | null
+  parent_id: number | null
   updated_by: number | null
 }
 
@@ -52,8 +52,8 @@ export type ProjectCategoriesMasterMinAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   external_category_id: number | null
-  parent_id: number | null
   created_by: number | null
+  parent_id: number | null
   updated_by: number | null
 }
 
@@ -65,8 +65,8 @@ export type ProjectCategoriesMasterMaxAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   external_category_id: number | null
-  parent_id: number | null
   created_by: number | null
+  parent_id: number | null
   updated_by: number | null
 }
 
@@ -78,8 +78,8 @@ export type ProjectCategoriesMasterCountAggregateOutputType = {
   created_at: number
   updated_at: number
   external_category_id: number
-  parent_id: number
   created_by: number
+  parent_id: number
   updated_by: number
   _all: number
 }
@@ -89,8 +89,8 @@ export type ProjectCategoriesMasterAvgAggregateInputType = {
   id?: true
   vendor_id?: true
   external_category_id?: true
-  parent_id?: true
   created_by?: true
+  parent_id?: true
   updated_by?: true
 }
 
@@ -98,8 +98,8 @@ export type ProjectCategoriesMasterSumAggregateInputType = {
   id?: true
   vendor_id?: true
   external_category_id?: true
-  parent_id?: true
   created_by?: true
+  parent_id?: true
   updated_by?: true
 }
 
@@ -111,8 +111,8 @@ export type ProjectCategoriesMasterMinAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
-  parent_id?: true
   created_by?: true
+  parent_id?: true
   updated_by?: true
 }
 
@@ -124,8 +124,8 @@ export type ProjectCategoriesMasterMaxAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
-  parent_id?: true
   created_by?: true
+  parent_id?: true
   updated_by?: true
 }
 
@@ -137,8 +137,8 @@ export type ProjectCategoriesMasterCountAggregateInputType = {
   created_at?: true
   updated_at?: true
   external_category_id?: true
-  parent_id?: true
   created_by?: true
+  parent_id?: true
   updated_by?: true
   _all?: true
 }
@@ -237,8 +237,8 @@ export type ProjectCategoriesMasterGroupByOutputType = {
   created_at: Date
   updated_at: Date
   external_category_id: number | null
-  parent_id: number | null
   created_by: number | null
+  parent_id: number | null
   updated_by: number | null
   _count: ProjectCategoriesMasterCountAggregateOutputType | null
   _avg: ProjectCategoriesMasterAvgAggregateOutputType | null
@@ -273,8 +273,8 @@ export type ProjectCategoriesMasterWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
-  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   products?: Prisma.ProductMasterListRelationFilter
   subCategoryProducts?: Prisma.ProductMasterListRelationFilter
@@ -293,8 +293,8 @@ export type ProjectCategoriesMasterOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   products?: Prisma.ProductMasterOrderByRelationAggregateInput
   subCategoryProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
@@ -316,8 +316,8 @@ export type ProjectCategoriesMasterWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
-  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   products?: Prisma.ProductMasterListRelationFilter
   subCategoryProducts?: Prisma.ProductMasterListRelationFilter
@@ -336,8 +336,8 @@ export type ProjectCategoriesMasterOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  parent_id?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCategoriesMasterCountOrderByAggregateInput
   _avg?: Prisma.ProjectCategoriesMasterAvgOrderByAggregateInput
@@ -357,8 +357,8 @@ export type ProjectCategoriesMasterScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
-  parent_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
   created_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProjectCategoriesMaster"> | number | null
 }
 
@@ -387,8 +387,8 @@ export type ProjectCategoriesMasterUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -422,8 +422,8 @@ export type ProjectCategoriesMasterUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -440,8 +440,8 @@ export type ProjectCategoriesMasterCreateManyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
 }
 
@@ -463,8 +463,8 @@ export type ProjectCategoriesMasterUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -491,8 +491,8 @@ export type ProjectCategoriesMasterCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
-  parent_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
 
@@ -500,8 +500,8 @@ export type ProjectCategoriesMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
-  parent_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
 
@@ -513,8 +513,8 @@ export type ProjectCategoriesMasterMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
-  parent_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
 
@@ -526,8 +526,8 @@ export type ProjectCategoriesMasterMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
-  parent_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
 
@@ -535,8 +535,8 @@ export type ProjectCategoriesMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   external_category_id?: Prisma.SortOrder
-  parent_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+  parent_id?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
 }
 
@@ -732,8 +732,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -779,8 +779,8 @@ export type ProjectCategoriesMasterScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectCategoriesMaster"> | Date | string
   external_category_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
-  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   created_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
+  parent_id?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"ProjectCategoriesMaster"> | number | null
 }
 
@@ -808,8 +808,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutChildrenInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -900,8 +900,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutChildrenInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -949,8 +949,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutProjectCategoriesMaster
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -998,8 +998,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutProjectCategoriesMaster
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -1031,8 +1031,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutProductsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
   children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
@@ -1069,8 +1069,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutSubCategoryProductsInpu
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   children?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutParentInput
@@ -1118,8 +1118,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutProductsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
   children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
@@ -1162,8 +1162,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutSubCategoryProductsInpu
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   children?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutParentNestedInput
@@ -1195,8 +1195,8 @@ export type ProjectCategoriesMasterUncheckedCreateWithoutPurchaseIntentsInput = 
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
   products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutCategoryInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -1244,8 +1244,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutPurchaseIntentsInput = 
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -1260,8 +1260,8 @@ export type ProjectCategoriesMasterCreateManyVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   external_category_id?: number | null
-  parent_id?: number | null
   created_by?: number | null
+  parent_id?: number | null
   updated_by?: number | null
 }
 
@@ -1288,8 +1288,8 @@ export type ProjectCategoriesMasterUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   products?: Prisma.ProductMasterUncheckedUpdateManyWithoutCategoryNestedInput
   subCategoryProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -1305,8 +1305,8 @@ export type ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   external_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  parent_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -1442,8 +1442,8 @@ export type ProjectCategoriesMasterSelect<ExtArgs extends runtime.Types.Extensio
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
-  parent_id?: boolean
   created_by?: boolean
+  parent_id?: boolean
   updated_by?: boolean
   products?: boolean | Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs>
   subCategoryProducts?: boolean | Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs>
@@ -1463,8 +1463,8 @@ export type ProjectCategoriesMasterSelectCreateManyAndReturn<ExtArgs extends run
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
-  parent_id?: boolean
   created_by?: boolean
+  parent_id?: boolean
   updated_by?: boolean
   parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1478,8 +1478,8 @@ export type ProjectCategoriesMasterSelectUpdateManyAndReturn<ExtArgs extends run
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
-  parent_id?: boolean
   created_by?: boolean
+  parent_id?: boolean
   updated_by?: boolean
   parent?: boolean | Prisma.ProjectCategoriesMaster$parentArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1493,12 +1493,12 @@ export type ProjectCategoriesMasterSelectScalar = {
   created_at?: boolean
   updated_at?: boolean
   external_category_id?: boolean
-  parent_id?: boolean
   created_by?: boolean
+  parent_id?: boolean
   updated_by?: boolean
 }
 
-export type ProjectCategoriesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "category_name" | "status" | "vendor_id" | "created_at" | "updated_at" | "external_category_id" | "parent_id" | "created_by" | "updated_by", ExtArgs["result"]["projectCategoriesMaster"]>
+export type ProjectCategoriesMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "category_name" | "status" | "vendor_id" | "created_at" | "updated_at" | "external_category_id" | "created_by" | "parent_id" | "updated_by", ExtArgs["result"]["projectCategoriesMaster"]>
 export type ProjectCategoriesMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   products?: boolean | Prisma.ProjectCategoriesMaster$productsArgs<ExtArgs>
   subCategoryProducts?: boolean | Prisma.ProjectCategoriesMaster$subCategoryProductsArgs<ExtArgs>
@@ -1537,8 +1537,8 @@ export type $ProjectCategoriesMasterPayload<ExtArgs extends runtime.Types.Extens
     created_at: Date
     updated_at: Date
     external_category_id: number | null
-    parent_id: number | null
     created_by: number | null
+    parent_id: number | null
     updated_by: number | null
   }, ExtArgs["result"]["projectCategoriesMaster"]>
   composites: {}
@@ -1977,8 +1977,8 @@ export interface ProjectCategoriesMasterFieldRefs {
   readonly created_at: Prisma.FieldRef<"ProjectCategoriesMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"ProjectCategoriesMaster", 'DateTime'>
   readonly external_category_id: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
-  readonly parent_id: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
   readonly created_by: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
+  readonly parent_id: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
   readonly updated_by: Prisma.FieldRef<"ProjectCategoriesMaster", 'Int'>
 }
     

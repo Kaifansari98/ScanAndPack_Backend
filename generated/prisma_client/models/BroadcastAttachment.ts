@@ -29,17 +29,17 @@ export type AggregateBroadcastAttachment = {
 export type BroadcastAttachmentAvgAggregateOutputType = {
   id: number | null
   broadcast_id: number | null
+  file_size: number | null
   created_by: number | null
   updated_by: number | null
-  file_size: number | null
 }
 
 export type BroadcastAttachmentSumAggregateOutputType = {
   id: number | null
   broadcast_id: number | null
+  file_size: bigint | null
   created_by: number | null
   updated_by: number | null
-  file_size: bigint | null
 }
 
 export type BroadcastAttachmentMinAggregateOutputType = {
@@ -51,11 +51,11 @@ export type BroadcastAttachmentMinAggregateOutputType = {
   original_file_name: string | null
   file_url: string | null
   file_type: string | null
+  file_size: bigint | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  file_size: bigint | null
 }
 
 export type BroadcastAttachmentMaxAggregateOutputType = {
@@ -67,11 +67,11 @@ export type BroadcastAttachmentMaxAggregateOutputType = {
   original_file_name: string | null
   file_url: string | null
   file_type: string | null
+  file_size: bigint | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  file_size: bigint | null
 }
 
 export type BroadcastAttachmentCountAggregateOutputType = {
@@ -83,11 +83,11 @@ export type BroadcastAttachmentCountAggregateOutputType = {
   original_file_name: number
   file_url: number
   file_type: number
+  file_size: number
   created_by: number
   updated_by: number
   created_at: number
   updated_at: number
-  file_size: number
   _all: number
 }
 
@@ -95,17 +95,17 @@ export type BroadcastAttachmentCountAggregateOutputType = {
 export type BroadcastAttachmentAvgAggregateInputType = {
   id?: true
   broadcast_id?: true
+  file_size?: true
   created_by?: true
   updated_by?: true
-  file_size?: true
 }
 
 export type BroadcastAttachmentSumAggregateInputType = {
   id?: true
   broadcast_id?: true
+  file_size?: true
   created_by?: true
   updated_by?: true
-  file_size?: true
 }
 
 export type BroadcastAttachmentMinAggregateInputType = {
@@ -117,11 +117,11 @@ export type BroadcastAttachmentMinAggregateInputType = {
   original_file_name?: true
   file_url?: true
   file_type?: true
+  file_size?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  file_size?: true
 }
 
 export type BroadcastAttachmentMaxAggregateInputType = {
@@ -133,11 +133,11 @@ export type BroadcastAttachmentMaxAggregateInputType = {
   original_file_name?: true
   file_url?: true
   file_type?: true
+  file_size?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  file_size?: true
 }
 
 export type BroadcastAttachmentCountAggregateInputType = {
@@ -149,11 +149,11 @@ export type BroadcastAttachmentCountAggregateInputType = {
   original_file_name?: true
   file_url?: true
   file_type?: true
+  file_size?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  file_size?: true
   _all?: true
 }
 
@@ -252,11 +252,11 @@ export type BroadcastAttachmentGroupByOutputType = {
   original_file_name: string | null
   file_url: string
   file_type: string | null
+  file_size: bigint | null
   created_by: number
   updated_by: number | null
   created_at: Date
   updated_at: Date
-  file_size: bigint | null
   _count: BroadcastAttachmentCountAggregateOutputType | null
   _avg: BroadcastAttachmentAvgAggregateOutputType | null
   _sum: BroadcastAttachmentSumAggregateOutputType | null
@@ -291,11 +291,11 @@ export type BroadcastAttachmentWhereInput = {
   original_file_name?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
   file_url?: Prisma.StringFilter<"BroadcastAttachment"> | string
   file_type?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
+  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
   created_by?: Prisma.IntFilter<"BroadcastAttachment"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastAttachment"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
-  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
   broadcast?: Prisma.XOR<Prisma.BroadcastMasterScalarRelationFilter, Prisma.BroadcastMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -310,11 +310,11 @@ export type BroadcastAttachmentOrderByWithRelationInput = {
   original_file_name?: Prisma.SortOrderInput | Prisma.SortOrder
   file_url?: Prisma.SortOrder
   file_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  file_size?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  file_size?: Prisma.SortOrderInput | Prisma.SortOrder
   broadcast?: Prisma.BroadcastMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -332,11 +332,11 @@ export type BroadcastAttachmentWhereUniqueInput = Prisma.AtLeast<{
   original_file_name?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
   file_url?: Prisma.StringFilter<"BroadcastAttachment"> | string
   file_type?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
+  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
   created_by?: Prisma.IntFilter<"BroadcastAttachment"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastAttachment"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
-  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
   broadcast?: Prisma.XOR<Prisma.BroadcastMasterScalarRelationFilter, Prisma.BroadcastMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -351,11 +351,11 @@ export type BroadcastAttachmentOrderByWithAggregationInput = {
   original_file_name?: Prisma.SortOrderInput | Prisma.SortOrder
   file_url?: Prisma.SortOrder
   file_type?: Prisma.SortOrderInput | Prisma.SortOrder
+  file_size?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  file_size?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BroadcastAttachmentCountOrderByAggregateInput
   _avg?: Prisma.BroadcastAttachmentAvgOrderByAggregateInput
   _max?: Prisma.BroadcastAttachmentMaxOrderByAggregateInput
@@ -375,11 +375,11 @@ export type BroadcastAttachmentScalarWhereWithAggregatesInput = {
   original_file_name?: Prisma.StringNullableWithAggregatesFilter<"BroadcastAttachment"> | string | null
   file_url?: Prisma.StringWithAggregatesFilter<"BroadcastAttachment"> | string
   file_type?: Prisma.StringNullableWithAggregatesFilter<"BroadcastAttachment"> | string | null
+  file_size?: Prisma.BigIntNullableWithAggregatesFilter<"BroadcastAttachment"> | bigint | number | null
   created_by?: Prisma.IntWithAggregatesFilter<"BroadcastAttachment"> | number
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"BroadcastAttachment"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"BroadcastAttachment"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"BroadcastAttachment"> | Date | string
-  file_size?: Prisma.BigIntNullableWithAggregatesFilter<"BroadcastAttachment"> | bigint | number | null
 }
 
 export type BroadcastAttachmentCreateInput = {
@@ -389,9 +389,9 @@ export type BroadcastAttachmentCreateInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
   broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutAttachmentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsUpdatedInput
@@ -406,11 +406,11 @@ export type BroadcastAttachmentUncheckedCreateInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentUpdateInput = {
@@ -420,9 +420,9 @@ export type BroadcastAttachmentUpdateInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutAttachmentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastAttachmentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastAttachmentsUpdatedNestedInput
@@ -437,11 +437,11 @@ export type BroadcastAttachmentUncheckedUpdateInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentCreateManyInput = {
@@ -453,11 +453,11 @@ export type BroadcastAttachmentCreateManyInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentUpdateManyMutationInput = {
@@ -467,9 +467,9 @@ export type BroadcastAttachmentUpdateManyMutationInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentUncheckedUpdateManyInput = {
@@ -481,11 +481,11 @@ export type BroadcastAttachmentUncheckedUpdateManyInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentListRelationFilter = {
@@ -507,19 +507,19 @@ export type BroadcastAttachmentCountOrderByAggregateInput = {
   original_file_name?: Prisma.SortOrder
   file_url?: Prisma.SortOrder
   file_type?: Prisma.SortOrder
+  file_size?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  file_size?: Prisma.SortOrder
 }
 
 export type BroadcastAttachmentAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   broadcast_id?: Prisma.SortOrder
+  file_size?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  file_size?: Prisma.SortOrder
 }
 
 export type BroadcastAttachmentMaxOrderByAggregateInput = {
@@ -531,11 +531,11 @@ export type BroadcastAttachmentMaxOrderByAggregateInput = {
   original_file_name?: Prisma.SortOrder
   file_url?: Prisma.SortOrder
   file_type?: Prisma.SortOrder
+  file_size?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  file_size?: Prisma.SortOrder
 }
 
 export type BroadcastAttachmentMinOrderByAggregateInput = {
@@ -547,19 +547,19 @@ export type BroadcastAttachmentMinOrderByAggregateInput = {
   original_file_name?: Prisma.SortOrder
   file_url?: Prisma.SortOrder
   file_type?: Prisma.SortOrder
+  file_size?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  file_size?: Prisma.SortOrder
 }
 
 export type BroadcastAttachmentSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   broadcast_id?: Prisma.SortOrder
+  file_size?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
-  file_size?: Prisma.SortOrder
 }
 
 export type BroadcastAttachmentCreateNestedManyWithoutCreatedByInput = {
@@ -707,9 +707,9 @@ export type BroadcastAttachmentCreateWithoutCreatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
   broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutAttachmentsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsUpdatedInput
 }
@@ -723,10 +723,10 @@ export type BroadcastAttachmentUncheckedCreateWithoutCreatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentCreateOrConnectWithoutCreatedByInput = {
@@ -746,9 +746,9 @@ export type BroadcastAttachmentCreateWithoutUpdatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
   broadcast: Prisma.BroadcastMasterCreateNestedOneWithoutAttachmentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsCreatedInput
 }
@@ -762,10 +762,10 @@ export type BroadcastAttachmentUncheckedCreateWithoutUpdatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentCreateOrConnectWithoutUpdatedByInput = {
@@ -806,11 +806,11 @@ export type BroadcastAttachmentScalarWhereInput = {
   original_file_name?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
   file_url?: Prisma.StringFilter<"BroadcastAttachment"> | string
   file_type?: Prisma.StringNullableFilter<"BroadcastAttachment"> | string | null
+  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
   created_by?: Prisma.IntFilter<"BroadcastAttachment"> | number
   updated_by?: Prisma.IntNullableFilter<"BroadcastAttachment"> | number | null
   created_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"BroadcastAttachment"> | Date | string
-  file_size?: Prisma.BigIntNullableFilter<"BroadcastAttachment"> | bigint | number | null
 }
 
 export type BroadcastAttachmentUpsertWithWhereUniqueWithoutUpdatedByInput = {
@@ -836,9 +836,9 @@ export type BroadcastAttachmentCreateWithoutBroadcastInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
   createdBy: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutBroadcastAttachmentsUpdatedInput
 }
@@ -851,11 +851,11 @@ export type BroadcastAttachmentUncheckedCreateWithoutBroadcastInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentCreateOrConnectWithoutBroadcastInput = {
@@ -893,10 +893,10 @@ export type BroadcastAttachmentCreateManyCreatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentCreateManyUpdatedByInput = {
@@ -908,10 +908,10 @@ export type BroadcastAttachmentCreateManyUpdatedByInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentUpdateWithoutCreatedByInput = {
@@ -921,9 +921,9 @@ export type BroadcastAttachmentUpdateWithoutCreatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutAttachmentsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastAttachmentsUpdatedNestedInput
 }
@@ -937,10 +937,10 @@ export type BroadcastAttachmentUncheckedUpdateWithoutCreatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByInput = {
@@ -952,10 +952,10 @@ export type BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentUpdateWithoutUpdatedByInput = {
@@ -965,9 +965,9 @@ export type BroadcastAttachmentUpdateWithoutUpdatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   broadcast?: Prisma.BroadcastMasterUpdateOneRequiredWithoutAttachmentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastAttachmentsCreatedNestedInput
 }
@@ -981,10 +981,10 @@ export type BroadcastAttachmentUncheckedUpdateWithoutUpdatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -996,10 +996,10 @@ export type BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentCreateManyBroadcastInput = {
@@ -1010,11 +1010,11 @@ export type BroadcastAttachmentCreateManyBroadcastInput = {
   original_file_name?: string | null
   file_url: string
   file_type?: string | null
+  file_size?: bigint | number | null
   created_by: number
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  file_size?: bigint | number | null
 }
 
 export type BroadcastAttachmentUpdateWithoutBroadcastInput = {
@@ -1024,9 +1024,9 @@ export type BroadcastAttachmentUpdateWithoutBroadcastInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutBroadcastAttachmentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutBroadcastAttachmentsUpdatedNestedInput
 }
@@ -1039,11 +1039,11 @@ export type BroadcastAttachmentUncheckedUpdateWithoutBroadcastInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 export type BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastInput = {
@@ -1054,11 +1054,11 @@ export type BroadcastAttachmentUncheckedUpdateManyWithoutBroadcastInput = {
   original_file_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   file_url?: Prisma.StringFieldUpdateOperationsInput | string
   file_type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  file_size?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
 }
 
 
@@ -1072,11 +1072,11 @@ export type BroadcastAttachmentSelect<ExtArgs extends runtime.Types.Extensions.I
   original_file_name?: boolean
   file_url?: boolean
   file_type?: boolean
+  file_size?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  file_size?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastAttachment$updatedByArgs<ExtArgs>
@@ -1091,11 +1091,11 @@ export type BroadcastAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime
   original_file_name?: boolean
   file_url?: boolean
   file_type?: boolean
+  file_size?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  file_size?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastAttachment$updatedByArgs<ExtArgs>
@@ -1110,11 +1110,11 @@ export type BroadcastAttachmentSelectUpdateManyAndReturn<ExtArgs extends runtime
   original_file_name?: boolean
   file_url?: boolean
   file_type?: boolean
+  file_size?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  file_size?: boolean
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.BroadcastAttachment$updatedByArgs<ExtArgs>
@@ -1129,14 +1129,14 @@ export type BroadcastAttachmentSelectScalar = {
   original_file_name?: boolean
   file_url?: boolean
   file_type?: boolean
+  file_size?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  file_size?: boolean
 }
 
-export type BroadcastAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "broadcast_id" | "attachment_type" | "title" | "file_name" | "original_file_name" | "file_url" | "file_type" | "created_by" | "updated_by" | "created_at" | "updated_at" | "file_size", ExtArgs["result"]["broadcastAttachment"]>
+export type BroadcastAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "broadcast_id" | "attachment_type" | "title" | "file_name" | "original_file_name" | "file_url" | "file_type" | "file_size" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["broadcastAttachment"]>
 export type BroadcastAttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   broadcast?: boolean | Prisma.BroadcastMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1169,11 +1169,11 @@ export type $BroadcastAttachmentPayload<ExtArgs extends runtime.Types.Extensions
     original_file_name: string | null
     file_url: string
     file_type: string | null
+    file_size: bigint | null
     created_by: number
     updated_by: number | null
     created_at: Date
     updated_at: Date
-    file_size: bigint | null
   }, ExtArgs["result"]["broadcastAttachment"]>
   composites: {}
 }
@@ -1608,11 +1608,11 @@ export interface BroadcastAttachmentFieldRefs {
   readonly original_file_name: Prisma.FieldRef<"BroadcastAttachment", 'String'>
   readonly file_url: Prisma.FieldRef<"BroadcastAttachment", 'String'>
   readonly file_type: Prisma.FieldRef<"BroadcastAttachment", 'String'>
+  readonly file_size: Prisma.FieldRef<"BroadcastAttachment", 'BigInt'>
   readonly created_by: Prisma.FieldRef<"BroadcastAttachment", 'Int'>
   readonly updated_by: Prisma.FieldRef<"BroadcastAttachment", 'Int'>
   readonly created_at: Prisma.FieldRef<"BroadcastAttachment", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"BroadcastAttachment", 'DateTime'>
-  readonly file_size: Prisma.FieldRef<"BroadcastAttachment", 'BigInt'>
 }
     
 

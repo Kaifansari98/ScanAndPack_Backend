@@ -64,16 +64,16 @@ export type ProductMasterAvgAggregateOutputType = {
   reorder_level_unit_id: number | null
   shelf_life_days: number | null
   stock_unit_id: number | null
-  sub_category_id: number | null
-  purchase_unit_id: number | null
-  item_type_master_id: number | null
-  grade_id: number | null
-  type_id: number | null
-  finish_id: number | null
-  length: runtime.Decimal | null
-  height: runtime.Decimal | null
-  thickness: runtime.Decimal | null
   core_product_id: number | null
+  finish_id: number | null
+  grade_id: number | null
+  height: runtime.Decimal | null
+  item_type_master_id: number | null
+  length: runtime.Decimal | null
+  purchase_unit_id: number | null
+  sub_category_id: number | null
+  thickness: runtime.Decimal | null
+  type_id: number | null
 }
 
 export type ProductMasterSumAggregateOutputType = {
@@ -114,16 +114,16 @@ export type ProductMasterSumAggregateOutputType = {
   reorder_level_unit_id: number | null
   shelf_life_days: number | null
   stock_unit_id: number | null
-  sub_category_id: number | null
-  purchase_unit_id: number | null
-  item_type_master_id: number | null
-  grade_id: number | null
-  type_id: number | null
-  finish_id: number | null
-  length: runtime.Decimal | null
-  height: runtime.Decimal | null
-  thickness: runtime.Decimal | null
   core_product_id: number | null
+  finish_id: number | null
+  grade_id: number | null
+  height: runtime.Decimal | null
+  item_type_master_id: number | null
+  length: runtime.Decimal | null
+  purchase_unit_id: number | null
+  sub_category_id: number | null
+  thickness: runtime.Decimal | null
+  type_id: number | null
 }
 
 export type ProductMasterMinAggregateOutputType = {
@@ -184,19 +184,19 @@ export type ProductMasterMinAggregateOutputType = {
   reorder_level_unit_id: number | null
   shelf_life_days: number | null
   stock_unit_id: number | null
-  sub_category_id: number | null
-  item_code: string | null
   barcode: string | null
-  purchase_unit_id: number | null
-  item_type_master_id: number | null
-  grade_id: number | null
-  type_id: number | null
-  finish_id: number | null
-  length: runtime.Decimal | null
-  height: runtime.Decimal | null
-  thickness: runtime.Decimal | null
   core_product_id: number | null
+  finish_id: number | null
+  grade_id: number | null
+  height: runtime.Decimal | null
+  item_code: string | null
+  item_type_master_id: number | null
+  length: runtime.Decimal | null
+  purchase_unit_id: number | null
   size: string | null
+  sub_category_id: number | null
+  thickness: runtime.Decimal | null
+  type_id: number | null
 }
 
 export type ProductMasterMaxAggregateOutputType = {
@@ -257,19 +257,19 @@ export type ProductMasterMaxAggregateOutputType = {
   reorder_level_unit_id: number | null
   shelf_life_days: number | null
   stock_unit_id: number | null
-  sub_category_id: number | null
-  item_code: string | null
   barcode: string | null
-  purchase_unit_id: number | null
-  item_type_master_id: number | null
-  grade_id: number | null
-  type_id: number | null
-  finish_id: number | null
-  length: runtime.Decimal | null
-  height: runtime.Decimal | null
-  thickness: runtime.Decimal | null
   core_product_id: number | null
+  finish_id: number | null
+  grade_id: number | null
+  height: runtime.Decimal | null
+  item_code: string | null
+  item_type_master_id: number | null
+  length: runtime.Decimal | null
+  purchase_unit_id: number | null
   size: string | null
+  sub_category_id: number | null
+  thickness: runtime.Decimal | null
+  type_id: number | null
 }
 
 export type ProductMasterCountAggregateOutputType = {
@@ -330,19 +330,19 @@ export type ProductMasterCountAggregateOutputType = {
   reorder_level_unit_id: number
   shelf_life_days: number
   stock_unit_id: number
-  sub_category_id: number
-  item_code: number
   barcode: number
-  purchase_unit_id: number
-  item_type_master_id: number
-  grade_id: number
-  type_id: number
-  finish_id: number
-  length: number
-  height: number
-  thickness: number
   core_product_id: number
+  finish_id: number
+  grade_id: number
+  height: number
+  item_code: number
+  item_type_master_id: number
+  length: number
+  purchase_unit_id: number
   size: number
+  sub_category_id: number
+  thickness: number
+  type_id: number
   _all: number
 }
 
@@ -385,16 +385,16 @@ export type ProductMasterAvgAggregateInputType = {
   reorder_level_unit_id?: true
   shelf_life_days?: true
   stock_unit_id?: true
-  sub_category_id?: true
-  purchase_unit_id?: true
-  item_type_master_id?: true
-  grade_id?: true
-  type_id?: true
-  finish_id?: true
-  length?: true
-  height?: true
-  thickness?: true
   core_product_id?: true
+  finish_id?: true
+  grade_id?: true
+  height?: true
+  item_type_master_id?: true
+  length?: true
+  purchase_unit_id?: true
+  sub_category_id?: true
+  thickness?: true
+  type_id?: true
 }
 
 export type ProductMasterSumAggregateInputType = {
@@ -435,16 +435,16 @@ export type ProductMasterSumAggregateInputType = {
   reorder_level_unit_id?: true
   shelf_life_days?: true
   stock_unit_id?: true
-  sub_category_id?: true
-  purchase_unit_id?: true
-  item_type_master_id?: true
-  grade_id?: true
-  type_id?: true
-  finish_id?: true
-  length?: true
-  height?: true
-  thickness?: true
   core_product_id?: true
+  finish_id?: true
+  grade_id?: true
+  height?: true
+  item_type_master_id?: true
+  length?: true
+  purchase_unit_id?: true
+  sub_category_id?: true
+  thickness?: true
+  type_id?: true
 }
 
 export type ProductMasterMinAggregateInputType = {
@@ -505,19 +505,19 @@ export type ProductMasterMinAggregateInputType = {
   reorder_level_unit_id?: true
   shelf_life_days?: true
   stock_unit_id?: true
-  sub_category_id?: true
-  item_code?: true
   barcode?: true
-  purchase_unit_id?: true
-  item_type_master_id?: true
-  grade_id?: true
-  type_id?: true
-  finish_id?: true
-  length?: true
-  height?: true
-  thickness?: true
   core_product_id?: true
+  finish_id?: true
+  grade_id?: true
+  height?: true
+  item_code?: true
+  item_type_master_id?: true
+  length?: true
+  purchase_unit_id?: true
   size?: true
+  sub_category_id?: true
+  thickness?: true
+  type_id?: true
 }
 
 export type ProductMasterMaxAggregateInputType = {
@@ -578,19 +578,19 @@ export type ProductMasterMaxAggregateInputType = {
   reorder_level_unit_id?: true
   shelf_life_days?: true
   stock_unit_id?: true
-  sub_category_id?: true
-  item_code?: true
   barcode?: true
-  purchase_unit_id?: true
-  item_type_master_id?: true
-  grade_id?: true
-  type_id?: true
-  finish_id?: true
-  length?: true
-  height?: true
-  thickness?: true
   core_product_id?: true
+  finish_id?: true
+  grade_id?: true
+  height?: true
+  item_code?: true
+  item_type_master_id?: true
+  length?: true
+  purchase_unit_id?: true
   size?: true
+  sub_category_id?: true
+  thickness?: true
+  type_id?: true
 }
 
 export type ProductMasterCountAggregateInputType = {
@@ -651,19 +651,19 @@ export type ProductMasterCountAggregateInputType = {
   reorder_level_unit_id?: true
   shelf_life_days?: true
   stock_unit_id?: true
-  sub_category_id?: true
-  item_code?: true
   barcode?: true
-  purchase_unit_id?: true
-  item_type_master_id?: true
-  grade_id?: true
-  type_id?: true
-  finish_id?: true
-  length?: true
-  height?: true
-  thickness?: true
   core_product_id?: true
+  finish_id?: true
+  grade_id?: true
+  height?: true
+  item_code?: true
+  item_type_master_id?: true
+  length?: true
+  purchase_unit_id?: true
   size?: true
+  sub_category_id?: true
+  thickness?: true
+  type_id?: true
   _all?: true
 }
 
@@ -811,19 +811,19 @@ export type ProductMasterGroupByOutputType = {
   reorder_level_unit_id: number | null
   shelf_life_days: number | null
   stock_unit_id: number | null
-  sub_category_id: number | null
-  item_code: string | null
   barcode: string | null
-  purchase_unit_id: number | null
-  item_type_master_id: number | null
-  grade_id: number | null
-  type_id: number | null
-  finish_id: number | null
-  length: runtime.Decimal | null
-  height: runtime.Decimal | null
-  thickness: runtime.Decimal | null
   core_product_id: number | null
+  finish_id: number | null
+  grade_id: number | null
+  height: runtime.Decimal | null
+  item_code: string | null
+  item_type_master_id: number | null
+  length: runtime.Decimal | null
+  purchase_unit_id: number | null
   size: string | null
+  sub_category_id: number | null
+  thickness: runtime.Decimal | null
+  type_id: number | null
   _count: ProductMasterCountAggregateOutputType | null
   _avg: ProductMasterAvgAggregateOutputType | null
   _sum: ProductMasterSumAggregateOutputType | null
@@ -907,19 +907,19 @@ export type ProductMasterWhereInput = {
   reorder_level_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   barcode?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   size?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   grnItems?: Prisma.GRNItemListRelationFilter
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   brand?: Prisma.XOR<Prisma.BrandMasterNullableScalarRelationFilter, Prisma.BrandMasterWhereInput> | null
@@ -1005,19 +1005,19 @@ export type ProductMasterOrderByWithRelationInput = {
   reorder_level_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrderInput | Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  item_code?: Prisma.SortOrderInput | Prisma.SortOrder
   barcode?: Prisma.SortOrderInput | Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  grade_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  type_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  finish_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  length?: Prisma.SortOrderInput | Prisma.SortOrder
-  height?: Prisma.SortOrderInput | Prisma.SortOrder
-  thickness?: Prisma.SortOrderInput | Prisma.SortOrder
   core_product_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  finish_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  grade_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  height?: Prisma.SortOrderInput | Prisma.SortOrder
+  item_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  length?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  thickness?: Prisma.SortOrderInput | Prisma.SortOrder
+  type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   grnItems?: Prisma.GRNItemOrderByRelationAggregateInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
   brand?: Prisma.BrandMasterOrderByWithRelationInput
@@ -1106,19 +1106,19 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   reorder_level_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   barcode?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   size?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   grnItems?: Prisma.GRNItemListRelationFilter
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   brand?: Prisma.XOR<Prisma.BrandMasterNullableScalarRelationFilter, Prisma.BrandMasterWhereInput> | null
@@ -1204,19 +1204,19 @@ export type ProductMasterOrderByWithAggregationInput = {
   reorder_level_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrderInput | Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  item_code?: Prisma.SortOrderInput | Prisma.SortOrder
   barcode?: Prisma.SortOrderInput | Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  grade_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  type_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  finish_id?: Prisma.SortOrderInput | Prisma.SortOrder
-  length?: Prisma.SortOrderInput | Prisma.SortOrder
-  height?: Prisma.SortOrderInput | Prisma.SortOrder
-  thickness?: Prisma.SortOrderInput | Prisma.SortOrder
   core_product_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  finish_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  grade_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  height?: Prisma.SortOrderInput | Prisma.SortOrder
+  item_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  length?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   size?: Prisma.SortOrderInput | Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  thickness?: Prisma.SortOrderInput | Prisma.SortOrder
+  type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProductMasterCountOrderByAggregateInput
   _avg?: Prisma.ProductMasterAvgOrderByAggregateInput
   _max?: Prisma.ProductMasterMaxOrderByAggregateInput
@@ -1285,19 +1285,19 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   reorder_level_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   stock_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  sub_category_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  item_code?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   barcode?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
-  purchase_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  item_type_master_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  grade_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  type_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  finish_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
-  length?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  finish_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  grade_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  height?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
+  item_type_master_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  length?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   size?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
+  sub_category_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  thickness?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
 }
 
 export type ProductMasterCreateInput = {
@@ -1345,12 +1345,12 @@ export type ProductMasterCreateInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -1436,19 +1436,19 @@ export type ProductMasterUncheckedCreateInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -1502,12 +1502,12 @@ export type ProductMasterUpdateInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -1593,19 +1593,19 @@ export type ProductMasterUncheckedUpdateInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -1672,19 +1672,19 @@ export type ProductMasterCreateManyInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateManyMutationInput = {
@@ -1732,12 +1732,12 @@ export type ProductMasterUpdateManyMutationInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductMasterUncheckedUpdateManyInput = {
@@ -1798,19 +1798,19 @@ export type ProductMasterUncheckedUpdateManyInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterListRelationFilter = {
@@ -1886,19 +1886,19 @@ export type ProductMasterCountOrderByAggregateInput = {
   reorder_level_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrder
-  item_code?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrder
-  grade_id?: Prisma.SortOrder
-  type_id?: Prisma.SortOrder
-  finish_id?: Prisma.SortOrder
-  length?: Prisma.SortOrder
-  height?: Prisma.SortOrder
-  thickness?: Prisma.SortOrder
   core_product_id?: Prisma.SortOrder
+  finish_id?: Prisma.SortOrder
+  grade_id?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  item_code?: Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrder
+  length?: Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrder
   size?: Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrder
+  thickness?: Prisma.SortOrder
+  type_id?: Prisma.SortOrder
 }
 
 export type ProductMasterAvgOrderByAggregateInput = {
@@ -1939,16 +1939,16 @@ export type ProductMasterAvgOrderByAggregateInput = {
   reorder_level_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrder
-  grade_id?: Prisma.SortOrder
-  type_id?: Prisma.SortOrder
-  finish_id?: Prisma.SortOrder
-  length?: Prisma.SortOrder
-  height?: Prisma.SortOrder
-  thickness?: Prisma.SortOrder
   core_product_id?: Prisma.SortOrder
+  finish_id?: Prisma.SortOrder
+  grade_id?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrder
+  length?: Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrder
+  thickness?: Prisma.SortOrder
+  type_id?: Prisma.SortOrder
 }
 
 export type ProductMasterMaxOrderByAggregateInput = {
@@ -2009,19 +2009,19 @@ export type ProductMasterMaxOrderByAggregateInput = {
   reorder_level_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrder
-  item_code?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrder
-  grade_id?: Prisma.SortOrder
-  type_id?: Prisma.SortOrder
-  finish_id?: Prisma.SortOrder
-  length?: Prisma.SortOrder
-  height?: Prisma.SortOrder
-  thickness?: Prisma.SortOrder
   core_product_id?: Prisma.SortOrder
+  finish_id?: Prisma.SortOrder
+  grade_id?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  item_code?: Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrder
+  length?: Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrder
   size?: Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrder
+  thickness?: Prisma.SortOrder
+  type_id?: Prisma.SortOrder
 }
 
 export type ProductMasterMinOrderByAggregateInput = {
@@ -2082,19 +2082,19 @@ export type ProductMasterMinOrderByAggregateInput = {
   reorder_level_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrder
-  item_code?: Prisma.SortOrder
   barcode?: Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrder
-  grade_id?: Prisma.SortOrder
-  type_id?: Prisma.SortOrder
-  finish_id?: Prisma.SortOrder
-  length?: Prisma.SortOrder
-  height?: Prisma.SortOrder
-  thickness?: Prisma.SortOrder
   core_product_id?: Prisma.SortOrder
+  finish_id?: Prisma.SortOrder
+  grade_id?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  item_code?: Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrder
+  length?: Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrder
   size?: Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrder
+  thickness?: Prisma.SortOrder
+  type_id?: Prisma.SortOrder
 }
 
 export type ProductMasterSumOrderByAggregateInput = {
@@ -2135,16 +2135,16 @@ export type ProductMasterSumOrderByAggregateInput = {
   reorder_level_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   stock_unit_id?: Prisma.SortOrder
-  sub_category_id?: Prisma.SortOrder
-  purchase_unit_id?: Prisma.SortOrder
-  item_type_master_id?: Prisma.SortOrder
-  grade_id?: Prisma.SortOrder
-  type_id?: Prisma.SortOrder
-  finish_id?: Prisma.SortOrder
-  length?: Prisma.SortOrder
-  height?: Prisma.SortOrder
-  thickness?: Prisma.SortOrder
   core_product_id?: Prisma.SortOrder
+  finish_id?: Prisma.SortOrder
+  grade_id?: Prisma.SortOrder
+  height?: Prisma.SortOrder
+  item_type_master_id?: Prisma.SortOrder
+  length?: Prisma.SortOrder
+  purchase_unit_id?: Prisma.SortOrder
+  sub_category_id?: Prisma.SortOrder
+  thickness?: Prisma.SortOrder
+  type_id?: Prisma.SortOrder
 }
 
 export type ProductMasterCreateNestedManyWithoutVendorInput = {
@@ -3086,12 +3086,12 @@ export type ProductMasterCreateWithoutVendorInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -3175,19 +3175,19 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -3283,19 +3283,19 @@ export type ProductMasterScalarWhereInput = {
   reorder_level_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   barcode?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
-  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  finish_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  grade_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  height?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  item_type_master_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  length?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   size?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  sub_category_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  thickness?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
 }
 
 export type ProductMasterCreateWithoutLeadRequirementMaterialsInput = {
@@ -3343,12 +3343,12 @@ export type ProductMasterCreateWithoutLeadRequirementMaterialsInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
@@ -3433,19 +3433,19 @@ export type ProductMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
@@ -3514,12 +3514,12 @@ export type ProductMasterUpdateWithoutLeadRequirementMaterialsInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
@@ -3604,19 +3604,19 @@ export type ProductMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
@@ -3669,12 +3669,12 @@ export type ProductMasterCreateWithoutCategoryInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -3758,19 +3758,19 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -3834,12 +3834,12 @@ export type ProductMasterCreateWithoutSubCategoryInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -3924,18 +3924,18 @@ export type ProductMasterUncheckedCreateWithoutSubCategoryInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4031,12 +4031,12 @@ export type ProductMasterCreateWithoutBrandInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
@@ -4120,19 +4120,19 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4212,12 +4212,12 @@ export type ProductMasterCreateWithoutCoreProductInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -4302,18 +4302,18 @@ export type ProductMasterUncheckedCreateWithoutCoreProductInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
   finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grade_id?: number | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4393,12 +4393,12 @@ export type ProductMasterCreateWithoutGradeInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -4483,18 +4483,18 @@ export type ProductMasterUncheckedCreateWithoutGradeInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4574,12 +4574,12 @@ export type ProductMasterCreateWithoutFinishMasterInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -4664,18 +4664,18 @@ export type ProductMasterUncheckedCreateWithoutFinishMasterInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4755,12 +4755,12 @@ export type ProductMasterCreateWithoutTypeInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -4845,18 +4845,18 @@ export type ProductMasterUncheckedCreateWithoutTypeInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -4936,12 +4936,12 @@ export type ProductMasterCreateWithoutItemTypeMasterInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -5026,18 +5026,18 @@ export type ProductMasterUncheckedCreateWithoutItemTypeMasterInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -5117,12 +5117,12 @@ export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -5207,19 +5207,19 @@ export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -5288,12 +5288,12 @@ export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -5378,19 +5378,19 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -5443,12 +5443,12 @@ export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -5533,19 +5533,19 @@ export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -5614,12 +5614,12 @@ export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -5704,19 +5704,19 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -5769,12 +5769,12 @@ export type ProductMasterCreateWithoutGrnItemsInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
@@ -5859,19 +5859,19 @@ export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
@@ -5940,12 +5940,12 @@ export type ProductMasterUpdateWithoutGrnItemsInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
@@ -6030,19 +6030,19 @@ export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
@@ -6095,12 +6095,12 @@ export type ProductMasterCreateWithoutHsnInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -6184,19 +6184,19 @@ export type ProductMasterUncheckedCreateWithoutHsnInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -6276,12 +6276,12 @@ export type ProductMasterCreateWithoutStockHistoriesInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -6366,19 +6366,19 @@ export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
@@ -6447,12 +6447,12 @@ export type ProductMasterUpdateWithoutStockHistoriesInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -6537,19 +6537,19 @@ export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
@@ -6602,12 +6602,12 @@ export type ProductMasterCreateWithoutConsumptionUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -6691,19 +6691,19 @@ export type ProductMasterUncheckedCreateWithoutConsumptionUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -6767,12 +6767,12 @@ export type ProductMasterCreateWithoutMaxStockUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -6856,19 +6856,19 @@ export type ProductMasterUncheckedCreateWithoutMaxStockUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -6932,12 +6932,12 @@ export type ProductMasterCreateWithoutMinStockUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7021,19 +7021,19 @@ export type ProductMasterUncheckedCreateWithoutMinStockUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -7097,12 +7097,12 @@ export type ProductMasterCreateWithoutPrimaryUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7186,19 +7186,19 @@ export type ProductMasterUncheckedCreateWithoutPrimaryUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -7262,12 +7262,12 @@ export type ProductMasterCreateWithoutPurchaseUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7352,18 +7352,18 @@ export type ProductMasterUncheckedCreateWithoutPurchaseUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -7427,12 +7427,12 @@ export type ProductMasterCreateWithoutReorderBatchUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7516,19 +7516,19 @@ export type ProductMasterUncheckedCreateWithoutReorderBatchUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -7592,12 +7592,12 @@ export type ProductMasterCreateWithoutReorderLevelUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7681,19 +7681,19 @@ export type ProductMasterUncheckedCreateWithoutReorderLevelUnitInput = {
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -7757,12 +7757,12 @@ export type ProductMasterCreateWithoutStockUnitInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -7846,19 +7846,19 @@ export type ProductMasterUncheckedCreateWithoutStockUnitInput = {
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -8050,12 +8050,12 @@ export type ProductMasterCreateWithoutItemGroupInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -8139,19 +8139,19 @@ export type ProductMasterUncheckedCreateWithoutItemGroupInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -8231,12 +8231,12 @@ export type ProductMasterCreateWithoutSupplierMappingsInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
-  item_code?: string | null
   barcode?: string | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutProductInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
@@ -8321,19 +8321,19 @@ export type ProductMasterUncheckedCreateWithoutSupplierMappingsInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
@@ -8402,12 +8402,12 @@ export type ProductMasterUpdateWithoutSupplierMappingsInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -8492,19 +8492,19 @@ export type ProductMasterUncheckedUpdateWithoutSupplierMappingsInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -8569,19 +8569,19 @@ export type ProductMasterCreateManyVendorInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutVendorInput = {
@@ -8629,12 +8629,12 @@ export type ProductMasterUpdateWithoutVendorInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -8718,19 +8718,19 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -8796,19 +8796,19 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyCategoryInput = {
@@ -8868,19 +8868,19 @@ export type ProductMasterCreateManyCategoryInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManySubCategoryInput = {
@@ -8941,18 +8941,18 @@ export type ProductMasterCreateManySubCategoryInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutCategoryInput = {
@@ -9000,12 +9000,12 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -9089,19 +9089,19 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -9167,19 +9167,19 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutSubCategoryInput = {
@@ -9227,12 +9227,12 @@ export type ProductMasterUpdateWithoutSubCategoryInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -9317,18 +9317,18 @@ export type ProductMasterUncheckedUpdateWithoutSubCategoryInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -9395,18 +9395,18 @@ export type ProductMasterUncheckedUpdateManyWithoutSubCategoryInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyBrandInput = {
@@ -9466,19 +9466,19 @@ export type ProductMasterCreateManyBrandInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutBrandInput = {
@@ -9526,12 +9526,12 @@ export type ProductMasterUpdateWithoutBrandInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
@@ -9615,19 +9615,19 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -9693,19 +9693,19 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyCoreProductInput = {
@@ -9766,18 +9766,18 @@ export type ProductMasterCreateManyCoreProductInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
   finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grade_id?: number | null
   height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutCoreProductInput = {
@@ -9825,12 +9825,12 @@ export type ProductMasterUpdateWithoutCoreProductInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -9915,18 +9915,18 @@ export type ProductMasterUncheckedUpdateWithoutCoreProductInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -9993,18 +9993,18 @@ export type ProductMasterUncheckedUpdateManyWithoutCoreProductInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyGradeInput = {
@@ -10065,18 +10065,18 @@ export type ProductMasterCreateManyGradeInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutGradeInput = {
@@ -10124,12 +10124,12 @@ export type ProductMasterUpdateWithoutGradeInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -10214,18 +10214,18 @@ export type ProductMasterUncheckedUpdateWithoutGradeInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -10292,18 +10292,18 @@ export type ProductMasterUncheckedUpdateManyWithoutGradeInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyFinishMasterInput = {
@@ -10364,18 +10364,18 @@ export type ProductMasterCreateManyFinishMasterInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutFinishMasterInput = {
@@ -10423,12 +10423,12 @@ export type ProductMasterUpdateWithoutFinishMasterInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -10513,18 +10513,18 @@ export type ProductMasterUncheckedUpdateWithoutFinishMasterInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -10591,18 +10591,18 @@ export type ProductMasterUncheckedUpdateManyWithoutFinishMasterInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyTypeInput = {
@@ -10663,18 +10663,18 @@ export type ProductMasterCreateManyTypeInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductMasterUpdateWithoutTypeInput = {
@@ -10722,12 +10722,12 @@ export type ProductMasterUpdateWithoutTypeInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -10812,18 +10812,18 @@ export type ProductMasterUncheckedUpdateWithoutTypeInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -10890,18 +10890,18 @@ export type ProductMasterUncheckedUpdateManyWithoutTypeInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
 }
 
 export type ProductMasterCreateManyItemTypeMasterInput = {
@@ -10962,18 +10962,18 @@ export type ProductMasterCreateManyItemTypeMasterInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutItemTypeMasterInput = {
@@ -11021,12 +11021,12 @@ export type ProductMasterUpdateWithoutItemTypeMasterInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -11111,18 +11111,18 @@ export type ProductMasterUncheckedUpdateWithoutItemTypeMasterInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -11189,18 +11189,18 @@ export type ProductMasterUncheckedUpdateManyWithoutItemTypeMasterInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyHsnInput = {
@@ -11260,19 +11260,19 @@ export type ProductMasterCreateManyHsnInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutHsnInput = {
@@ -11320,12 +11320,12 @@ export type ProductMasterUpdateWithoutHsnInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -11409,19 +11409,19 @@ export type ProductMasterUncheckedUpdateWithoutHsnInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -11487,19 +11487,19 @@ export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyConsumptionUnitInput = {
@@ -11559,19 +11559,19 @@ export type ProductMasterCreateManyConsumptionUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyMaxStockUnitInput = {
@@ -11631,19 +11631,19 @@ export type ProductMasterCreateManyMaxStockUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyMinStockUnitInput = {
@@ -11703,19 +11703,19 @@ export type ProductMasterCreateManyMinStockUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyPrimaryUnitInput = {
@@ -11775,19 +11775,19 @@ export type ProductMasterCreateManyPrimaryUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyPurchaseUnitInput = {
@@ -11848,18 +11848,18 @@ export type ProductMasterCreateManyPurchaseUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyReorderBatchUnitInput = {
@@ -11919,19 +11919,19 @@ export type ProductMasterCreateManyReorderBatchUnitInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyReorderLevelUnitInput = {
@@ -11991,19 +11991,19 @@ export type ProductMasterCreateManyReorderLevelUnitInput = {
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterCreateManyStockUnitInput = {
@@ -12063,19 +12063,19 @@ export type ProductMasterCreateManyStockUnitInput = {
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutConsumptionUnitInput = {
@@ -12123,12 +12123,12 @@ export type ProductMasterUpdateWithoutConsumptionUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -12212,19 +12212,19 @@ export type ProductMasterUncheckedUpdateWithoutConsumptionUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -12290,19 +12290,19 @@ export type ProductMasterUncheckedUpdateManyWithoutConsumptionUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutMaxStockUnitInput = {
@@ -12350,12 +12350,12 @@ export type ProductMasterUpdateWithoutMaxStockUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -12439,19 +12439,19 @@ export type ProductMasterUncheckedUpdateWithoutMaxStockUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -12517,19 +12517,19 @@ export type ProductMasterUncheckedUpdateManyWithoutMaxStockUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutMinStockUnitInput = {
@@ -12577,12 +12577,12 @@ export type ProductMasterUpdateWithoutMinStockUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -12666,19 +12666,19 @@ export type ProductMasterUncheckedUpdateWithoutMinStockUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -12744,19 +12744,19 @@ export type ProductMasterUncheckedUpdateManyWithoutMinStockUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutPrimaryUnitInput = {
@@ -12804,12 +12804,12 @@ export type ProductMasterUpdateWithoutPrimaryUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -12893,19 +12893,19 @@ export type ProductMasterUncheckedUpdateWithoutPrimaryUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -12971,19 +12971,19 @@ export type ProductMasterUncheckedUpdateManyWithoutPrimaryUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutPurchaseUnitInput = {
@@ -13031,12 +13031,12 @@ export type ProductMasterUpdateWithoutPurchaseUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -13121,18 +13121,18 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -13199,18 +13199,18 @@ export type ProductMasterUncheckedUpdateManyWithoutPurchaseUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
@@ -13258,12 +13258,12 @@ export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -13347,19 +13347,19 @@ export type ProductMasterUncheckedUpdateWithoutReorderBatchUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -13425,19 +13425,19 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
@@ -13485,12 +13485,12 @@ export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -13574,19 +13574,19 @@ export type ProductMasterUncheckedUpdateWithoutReorderLevelUnitInput = {
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -13652,19 +13652,19 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitInput = {
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterUpdateWithoutStockUnitInput = {
@@ -13712,12 +13712,12 @@ export type ProductMasterUpdateWithoutStockUnitInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -13801,19 +13801,19 @@ export type ProductMasterUncheckedUpdateWithoutStockUnitInput = {
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -13879,19 +13879,19 @@ export type ProductMasterUncheckedUpdateManyWithoutStockUnitInput = {
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProductMasterCreateManyItemGroupInput = {
@@ -13951,19 +13951,19 @@ export type ProductMasterCreateManyItemGroupInput = {
   reorder_level_unit_id?: number | null
   shelf_life_days?: number | null
   stock_unit_id?: number | null
-  sub_category_id?: number | null
-  item_code?: string | null
   barcode?: string | null
-  purchase_unit_id?: number | null
-  item_type_master_id?: number | null
-  grade_id?: number | null
-  type_id?: number | null
-  finish_id?: number | null
-  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: number | null
+  finish_id?: number | null
+  grade_id?: number | null
+  height?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: string | null
+  item_type_master_id?: number | null
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: number | null
   size?: string | null
+  sub_category_id?: number | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: number | null
 }
 
 export type ProductMasterUpdateWithoutItemGroupInput = {
@@ -14011,12 +14011,12 @@ export type ProductMasterUpdateWithoutItemGroupInput = {
   reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutProductNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
@@ -14100,19 +14100,19 @@ export type ProductMasterUncheckedUpdateWithoutItemGroupInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
@@ -14178,19 +14178,19 @@ export type ProductMasterUncheckedUpdateManyWithoutItemGroupInput = {
   reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   barcode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   core_product_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  finish_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  grade_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  height?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  item_type_master_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  purchase_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sub_category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -14327,19 +14327,19 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   reorder_level_unit_id?: boolean
   shelf_life_days?: boolean
   stock_unit_id?: boolean
-  sub_category_id?: boolean
-  item_code?: boolean
   barcode?: boolean
-  purchase_unit_id?: boolean
-  item_type_master_id?: boolean
-  grade_id?: boolean
-  type_id?: boolean
-  finish_id?: boolean
-  length?: boolean
-  height?: boolean
-  thickness?: boolean
   core_product_id?: boolean
+  finish_id?: boolean
+  grade_id?: boolean
+  height?: boolean
+  item_code?: boolean
+  item_type_master_id?: boolean
+  length?: boolean
+  purchase_unit_id?: boolean
   size?: boolean
+  sub_category_id?: boolean
+  thickness?: boolean
+  type_id?: boolean
   grnItems?: boolean | Prisma.ProductMaster$grnItemsArgs<ExtArgs>
   leadRequirementMaterials?: boolean | Prisma.ProductMaster$leadRequirementMaterialsArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
@@ -14426,19 +14426,19 @@ export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   reorder_level_unit_id?: boolean
   shelf_life_days?: boolean
   stock_unit_id?: boolean
-  sub_category_id?: boolean
-  item_code?: boolean
   barcode?: boolean
-  purchase_unit_id?: boolean
-  item_type_master_id?: boolean
-  grade_id?: boolean
-  type_id?: boolean
-  finish_id?: boolean
-  length?: boolean
-  height?: boolean
-  thickness?: boolean
   core_product_id?: boolean
+  finish_id?: boolean
+  grade_id?: boolean
+  height?: boolean
+  item_code?: boolean
+  item_type_master_id?: boolean
+  length?: boolean
+  purchase_unit_id?: boolean
   size?: boolean
+  sub_category_id?: boolean
+  thickness?: boolean
+  type_id?: boolean
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   consumptionUnit?: boolean | Prisma.ProductMaster$consumptionUnitArgs<ExtArgs>
@@ -14518,19 +14518,19 @@ export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   reorder_level_unit_id?: boolean
   shelf_life_days?: boolean
   stock_unit_id?: boolean
-  sub_category_id?: boolean
-  item_code?: boolean
   barcode?: boolean
-  purchase_unit_id?: boolean
-  item_type_master_id?: boolean
-  grade_id?: boolean
-  type_id?: boolean
-  finish_id?: boolean
-  length?: boolean
-  height?: boolean
-  thickness?: boolean
   core_product_id?: boolean
+  finish_id?: boolean
+  grade_id?: boolean
+  height?: boolean
+  item_code?: boolean
+  item_type_master_id?: boolean
+  length?: boolean
+  purchase_unit_id?: boolean
   size?: boolean
+  sub_category_id?: boolean
+  thickness?: boolean
+  type_id?: boolean
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
   consumptionUnit?: boolean | Prisma.ProductMaster$consumptionUnitArgs<ExtArgs>
@@ -14610,22 +14610,22 @@ export type ProductMasterSelectScalar = {
   reorder_level_unit_id?: boolean
   shelf_life_days?: boolean
   stock_unit_id?: boolean
-  sub_category_id?: boolean
-  item_code?: boolean
   barcode?: boolean
-  purchase_unit_id?: boolean
-  item_type_master_id?: boolean
-  grade_id?: boolean
-  type_id?: boolean
-  finish_id?: boolean
-  length?: boolean
-  height?: boolean
-  thickness?: boolean
   core_product_id?: boolean
+  finish_id?: boolean
+  grade_id?: boolean
+  height?: boolean
+  item_code?: boolean
+  item_type_master_id?: boolean
+  length?: boolean
+  purchase_unit_id?: boolean
   size?: boolean
+  sub_category_id?: boolean
+  thickness?: boolean
+  type_id?: boolean
 }
 
-export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "hsn_id" | "stock_updated_at" | "consumption_unit_id" | "costing_method" | "item_group_id" | "item_type" | "max_stock_qty" | "max_stock_unit_id" | "min_stock_qty" | "min_stock_unit_id" | "primary_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "shelf_life_days" | "stock_unit_id" | "sub_category_id" | "item_code" | "barcode" | "purchase_unit_id" | "item_type_master_id" | "grade_id" | "type_id" | "finish_id" | "length" | "height" | "thickness" | "core_product_id" | "size", ExtArgs["result"]["productMaster"]>
+export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "hsn_id" | "stock_updated_at" | "consumption_unit_id" | "costing_method" | "item_group_id" | "item_type" | "max_stock_qty" | "max_stock_unit_id" | "min_stock_qty" | "min_stock_unit_id" | "primary_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "shelf_life_days" | "stock_unit_id" | "barcode" | "core_product_id" | "finish_id" | "grade_id" | "height" | "item_code" | "item_type_master_id" | "length" | "purchase_unit_id" | "size" | "sub_category_id" | "thickness" | "type_id", ExtArgs["result"]["productMaster"]>
 export type ProductMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   grnItems?: boolean | Prisma.ProductMaster$grnItemsArgs<ExtArgs>
   leadRequirementMaterials?: boolean | Prisma.ProductMaster$leadRequirementMaterialsArgs<ExtArgs>
@@ -14784,19 +14784,19 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     reorder_level_unit_id: number | null
     shelf_life_days: number | null
     stock_unit_id: number | null
-    sub_category_id: number | null
-    item_code: string | null
     barcode: string | null
-    purchase_unit_id: number | null
-    item_type_master_id: number | null
-    grade_id: number | null
-    type_id: number | null
-    finish_id: number | null
-    length: runtime.Decimal | null
-    height: runtime.Decimal | null
-    thickness: runtime.Decimal | null
     core_product_id: number | null
+    finish_id: number | null
+    grade_id: number | null
+    height: runtime.Decimal | null
+    item_code: string | null
+    item_type_master_id: number | null
+    length: runtime.Decimal | null
+    purchase_unit_id: number | null
     size: string | null
+    sub_category_id: number | null
+    thickness: runtime.Decimal | null
+    type_id: number | null
   }, ExtArgs["result"]["productMaster"]>
   composites: {}
 }
@@ -15302,19 +15302,19 @@ export interface ProductMasterFieldRefs {
   readonly reorder_level_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly shelf_life_days: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly stock_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly sub_category_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly item_code: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly barcode: Prisma.FieldRef<"ProductMaster", 'String'>
-  readonly purchase_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly item_type_master_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly grade_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly type_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly finish_id: Prisma.FieldRef<"ProductMaster", 'Int'>
-  readonly length: Prisma.FieldRef<"ProductMaster", 'Decimal'>
-  readonly height: Prisma.FieldRef<"ProductMaster", 'Decimal'>
-  readonly thickness: Prisma.FieldRef<"ProductMaster", 'Decimal'>
   readonly core_product_id: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly finish_id: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly grade_id: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly height: Prisma.FieldRef<"ProductMaster", 'Decimal'>
+  readonly item_code: Prisma.FieldRef<"ProductMaster", 'String'>
+  readonly item_type_master_id: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly length: Prisma.FieldRef<"ProductMaster", 'Decimal'>
+  readonly purchase_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly size: Prisma.FieldRef<"ProductMaster", 'String'>
+  readonly sub_category_id: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly thickness: Prisma.FieldRef<"ProductMaster", 'Decimal'>
+  readonly type_id: Prisma.FieldRef<"ProductMaster", 'Int'>
 }
     
 
