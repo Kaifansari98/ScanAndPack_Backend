@@ -1255,19 +1255,41 @@ export const createProjectService_29_july = async (
           });
         };
 
+        const toNumber = (value: any): number => {
+          if (value === undefined || value === null || value === "") {
+            return 0;
+          }
+
+          const numericValue = Number(
+            String(value)
+              .replace(/,/g, "")
+              .replace(/kg/gi, "")
+              .trim()
+          );
+
+          return Number.isFinite(numericValue) ? numericValue : 0;
+        };
+
+        const roundWeight = (value: number): number => {
+          return Number(value.toFixed(7));
+        };
+
         const cutListMachineMappingRows: any[] = [];
 
         const pushMachineMappingRows = ({
           cutListId,
           machine,
           quantity,
+          perItemWeight,
         }: {
           cutListId: number;
           machine: {
             id: number;
+            machine_type_id: number | null;
             sequence_no: number | null;
           };
           quantity: number;
+          perItemWeight: number;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -1280,6 +1302,10 @@ export const createProjectService_29_july = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              weight:
+                Number(machine.machine_type_id) === 18
+                  ? perItemWeight
+                  : 0,
             });
           }
         };
@@ -1291,6 +1317,11 @@ export const createProjectService_29_july = async (
         */
         for (const item of validPayload.items) {
           const quantity = Number(item.qty);
+          const excelRowWeight = roundWeight(
+            toNumber((item as any).weight) * quantity
+          );
+          const perItemWeight =
+            quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
 
           const hasEdgeBanding =
             !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
@@ -1318,6 +1349,7 @@ export const createProjectService_29_july = async (
               group_name: item.groupName || null,
               category_name: item.categoryName || null,
               procurement: item.procurement || null,
+              weight: excelRowWeight,
             },
           });
 
@@ -1370,6 +1402,7 @@ export const createProjectService_29_july = async (
                 cutListId: row.id,
                 machine: scanMachine,
                 quantity,
+                perItemWeight,
               });
             }
 
@@ -1378,6 +1411,7 @@ export const createProjectService_29_july = async (
                 cutListId: row.id,
                 machine: packMachine,
                 quantity,
+                perItemWeight,
               });
             }
 
@@ -1400,6 +1434,7 @@ export const createProjectService_29_july = async (
               cutListId: row.id,
               machine: edgeBandingMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1410,6 +1445,7 @@ export const createProjectService_29_july = async (
               cutListId: row.id,
               machine: cuttingMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1421,6 +1457,7 @@ export const createProjectService_29_july = async (
                 cutListId: row.id,
                 machine: cncMachine,
                 quantity,
+                perItemWeight,
               });
             }
           }
@@ -1433,6 +1470,7 @@ export const createProjectService_29_july = async (
               cutListId: row.id,
               machine: scanMachine,
               quantity,
+              perItemWeight,
             });
           }
 
@@ -1441,6 +1479,7 @@ export const createProjectService_29_july = async (
               cutListId: row.id,
               machine: packMachine,
               quantity,
+              perItemWeight,
             });
           }
         }
@@ -2036,7 +2075,7 @@ export const createProjectService = async (
         };
 
         const roundWeight = (value: number): number => {
-          return Number(value.toFixed(4));
+          return Number(value.toFixed(7));
         };
 
         const cutListMachineMappingRows: any[] = [];
@@ -2092,13 +2131,15 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           | Excel weight
           |--------------------------------------------------------------------------
-          | Excel row weight is total row weight.
+          | Excel weight is per-piece weight.
           | Example: qty = 4 and weight = 6
-          | CutList.weight = 6
-          | CutListMachineMapping.weight = 1.5 only for machine type 18
+          | CutList.weight = 24
+          | CutListMachineMapping.weight = 6 only for machine type 18
           |--------------------------------------------------------------------------
           */
-          const excelRowWeight = toNumber((item as any).weight);
+          const excelRowWeight = roundWeight(
+            toNumber((item as any).weight) * quantity
+          );
           const perItemWeight =
             quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
 
