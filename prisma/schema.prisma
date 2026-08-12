@@ -1187,7 +1187,7 @@ model LeadProcessBriefMapping {
   id                      Int                       @id @default(autoincrement())
   lead_id                 Int                       @map("lead_id")
   vendor_id               Int                       @map("vendor_id")
-  product_type_id         Int
+  product_type_id         Int?
   process_brief_id        Int                       @map("process_brief_id")
   created_at              DateTime                  @default(now()) @map("created_at")
   created_by              Int                       @map("created_by")
@@ -1198,7 +1198,7 @@ model LeadProcessBriefMapping {
   createdBy               UserMaster                @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   processBrief            ProcessBriefMaster        @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
-  ProductTypeMaster       ProductTypeMaster         @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  ProductTypeMaster       ProductTypeMaster?         @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   updatedBy               UserMaster?               @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
