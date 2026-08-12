@@ -44,42 +44,42 @@ export type UnitMasterMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   unit_name: string | null
+  unit_class: string | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  unit_class: string | null
-  short_name: string | null
   decimal_allowed: boolean | null
+  short_name: string | null
 }
 
 export type UnitMasterMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   unit_name: string | null
+  unit_class: string | null
   is_active: boolean | null
   created_by: number | null
   updated_by: number | null
   created_at: Date | null
   updated_at: Date | null
-  unit_class: string | null
-  short_name: string | null
   decimal_allowed: boolean | null
+  short_name: string | null
 }
 
 export type UnitMasterCountAggregateOutputType = {
   id: number
   vendor_id: number
   unit_name: number
+  unit_class: number
   is_active: number
   created_by: number
   updated_by: number
   created_at: number
   updated_at: number
-  unit_class: number
-  short_name: number
   decimal_allowed: number
+  short_name: number
   _all: number
 }
 
@@ -102,42 +102,42 @@ export type UnitMasterMinAggregateInputType = {
   id?: true
   vendor_id?: true
   unit_name?: true
+  unit_class?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  unit_class?: true
-  short_name?: true
   decimal_allowed?: true
+  short_name?: true
 }
 
 export type UnitMasterMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   unit_name?: true
+  unit_class?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  unit_class?: true
-  short_name?: true
   decimal_allowed?: true
+  short_name?: true
 }
 
 export type UnitMasterCountAggregateInputType = {
   id?: true
   vendor_id?: true
   unit_name?: true
+  unit_class?: true
   is_active?: true
   created_by?: true
   updated_by?: true
   created_at?: true
   updated_at?: true
-  unit_class?: true
-  short_name?: true
   decimal_allowed?: true
+  short_name?: true
   _all?: true
 }
 
@@ -231,14 +231,14 @@ export type UnitMasterGroupByOutputType = {
   id: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active: boolean
   created_by: number | null
   updated_by: number | null
   created_at: Date
   updated_at: Date
-  unit_class: string
-  short_name: string | null
   decimal_allowed: boolean
+  short_name: string | null
   _count: UnitMasterCountAggregateOutputType | null
   _avg: UnitMasterAvgAggregateOutputType | null
   _sum: UnitMasterSumAggregateOutputType | null
@@ -268,14 +268,15 @@ export type UnitMasterWhereInput = {
   id?: Prisma.IntFilter<"UnitMaster"> | number
   vendor_id?: Prisma.IntFilter<"UnitMaster"> | number
   unit_name?: Prisma.StringFilter<"UnitMaster"> | string
+  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
   is_active?: Prisma.BoolFilter<"UnitMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
-  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
-  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
   decimal_allowed?: Prisma.BoolFilter<"UnitMaster"> | boolean
+  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   consumptionUnitProducts?: Prisma.ProductMasterListRelationFilter
   maxStockUnitProducts?: Prisma.ProductMasterListRelationFilter
   minStockUnitProducts?: Prisma.ProductMasterListRelationFilter
@@ -284,7 +285,6 @@ export type UnitMasterWhereInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterListRelationFilter
   reorderLevelUnitProducts?: Prisma.ProductMasterListRelationFilter
   stockUnitProducts?: Prisma.ProductMasterListRelationFilter
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -292,14 +292,15 @@ export type UnitMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   unit_name?: Prisma.SortOrder
+  unit_class?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_class?: Prisma.SortOrder
-  short_name?: Prisma.SortOrderInput | Prisma.SortOrder
   decimal_allowed?: Prisma.SortOrder
+  short_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
   consumptionUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   maxStockUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   minStockUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
@@ -308,7 +309,6 @@ export type UnitMasterOrderByWithRelationInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   reorderLevelUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
   stockUnitProducts?: Prisma.ProductMasterOrderByRelationAggregateInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -320,14 +320,15 @@ export type UnitMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UnitMasterWhereInput | Prisma.UnitMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"UnitMaster"> | number
   unit_name?: Prisma.StringFilter<"UnitMaster"> | string
+  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
   is_active?: Prisma.BoolFilter<"UnitMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
-  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
-  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
   decimal_allowed?: Prisma.BoolFilter<"UnitMaster"> | boolean
+  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   consumptionUnitProducts?: Prisma.ProductMasterListRelationFilter
   maxStockUnitProducts?: Prisma.ProductMasterListRelationFilter
   minStockUnitProducts?: Prisma.ProductMasterListRelationFilter
@@ -336,7 +337,6 @@ export type UnitMasterWhereUniqueInput = Prisma.AtLeast<{
   reorderBatchUnitProducts?: Prisma.ProductMasterListRelationFilter
   reorderLevelUnitProducts?: Prisma.ProductMasterListRelationFilter
   stockUnitProducts?: Prisma.ProductMasterListRelationFilter
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "vendor_id_unit_name">
 
@@ -344,14 +344,14 @@ export type UnitMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   unit_name?: Prisma.SortOrder
+  unit_class?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_class?: Prisma.SortOrder
-  short_name?: Prisma.SortOrderInput | Prisma.SortOrder
   decimal_allowed?: Prisma.SortOrder
+  short_name?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UnitMasterCountOrderByAggregateInput
   _avg?: Prisma.UnitMasterAvgOrderByAggregateInput
   _max?: Prisma.UnitMasterMaxOrderByAggregateInput
@@ -366,26 +366,27 @@ export type UnitMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"UnitMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"UnitMaster"> | number
   unit_name?: Prisma.StringWithAggregatesFilter<"UnitMaster"> | string
+  unit_class?: Prisma.StringWithAggregatesFilter<"UnitMaster"> | string
   is_active?: Prisma.BoolWithAggregatesFilter<"UnitMaster"> | boolean
   created_by?: Prisma.IntNullableWithAggregatesFilter<"UnitMaster"> | number | null
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"UnitMaster"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"UnitMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"UnitMaster"> | Date | string
-  unit_class?: Prisma.StringWithAggregatesFilter<"UnitMaster"> | string
-  short_name?: Prisma.StringNullableWithAggregatesFilter<"UnitMaster"> | string | null
   decimal_allowed?: Prisma.BoolWithAggregatesFilter<"UnitMaster"> | boolean
+  short_name?: Prisma.StringNullableWithAggregatesFilter<"UnitMaster"> | string | null
 }
 
 export type UnitMasterCreateInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -394,7 +395,6 @@ export type UnitMasterCreateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -402,14 +402,15 @@ export type UnitMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -418,19 +419,19 @@ export type UnitMasterUncheckedCreateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterUpdateInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -439,7 +440,6 @@ export type UnitMasterUpdateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -447,14 +447,15 @@ export type UnitMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -463,47 +464,46 @@ export type UnitMasterUncheckedUpdateInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterCreateManyInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
 }
 
 export type UnitMasterUpdateManyMutationInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UnitMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UnitMasterListRelationFilter = {
@@ -530,14 +530,14 @@ export type UnitMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   unit_name?: Prisma.SortOrder
+  unit_class?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_class?: Prisma.SortOrder
-  short_name?: Prisma.SortOrder
   decimal_allowed?: Prisma.SortOrder
+  short_name?: Prisma.SortOrder
 }
 
 export type UnitMasterAvgOrderByAggregateInput = {
@@ -551,28 +551,28 @@ export type UnitMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   unit_name?: Prisma.SortOrder
+  unit_class?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_class?: Prisma.SortOrder
-  short_name?: Prisma.SortOrder
   decimal_allowed?: Prisma.SortOrder
+  short_name?: Prisma.SortOrder
 }
 
 export type UnitMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   unit_name?: Prisma.SortOrder
+  unit_class?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  unit_class?: Prisma.SortOrder
-  short_name?: Prisma.SortOrder
   decimal_allowed?: Prisma.SortOrder
+  short_name?: Prisma.SortOrder
 }
 
 export type UnitMasterSumOrderByAggregateInput = {
@@ -770,14 +770,15 @@ export type UnitMasterUpdateOneWithoutStockUnitProductsNestedInput = {
 
 export type UnitMasterCreateWithoutVendorInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -786,20 +787,20 @@ export type UnitMasterCreateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -808,7 +809,6 @@ export type UnitMasterUncheckedCreateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutVendorInput = {
@@ -844,26 +844,26 @@ export type UnitMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"UnitMaster"> | number
   vendor_id?: Prisma.IntFilter<"UnitMaster"> | number
   unit_name?: Prisma.StringFilter<"UnitMaster"> | string
+  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
   is_active?: Prisma.BoolFilter<"UnitMaster"> | boolean
   created_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   updated_by?: Prisma.IntNullableFilter<"UnitMaster"> | number | null
   created_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"UnitMaster"> | Date | string
-  unit_class?: Prisma.StringFilter<"UnitMaster"> | string
-  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
   decimal_allowed?: Prisma.BoolFilter<"UnitMaster"> | boolean
+  short_name?: Prisma.StringNullableFilter<"UnitMaster"> | string | null
 }
 
 export type UnitMasterCreateWithoutLeadRequirementMaterialsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -879,14 +879,14 @@ export type UnitMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -915,14 +915,14 @@ export type UnitMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialsInput =
 
 export type UnitMasterUpdateWithoutLeadRequirementMaterialsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -938,14 +938,14 @@ export type UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -958,14 +958,15 @@ export type UnitMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
 
 export type UnitMasterCreateWithoutConsumptionUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPrimaryUnitInput
@@ -973,7 +974,6 @@ export type UnitMasterCreateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -981,14 +981,15 @@ export type UnitMasterUncheckedCreateWithoutConsumptionUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPrimaryUnitInput
@@ -996,7 +997,6 @@ export type UnitMasterUncheckedCreateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutConsumptionUnitProductsInput = {
@@ -1006,14 +1006,15 @@ export type UnitMasterCreateOrConnectWithoutConsumptionUnitProductsInput = {
 
 export type UnitMasterCreateWithoutMaxStockUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPrimaryUnitInput
@@ -1021,7 +1022,6 @@ export type UnitMasterCreateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1029,14 +1029,15 @@ export type UnitMasterUncheckedCreateWithoutMaxStockUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPrimaryUnitInput
@@ -1044,7 +1045,6 @@ export type UnitMasterUncheckedCreateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutMaxStockUnitProductsInput = {
@@ -1054,14 +1054,15 @@ export type UnitMasterCreateOrConnectWithoutMaxStockUnitProductsInput = {
 
 export type UnitMasterCreateWithoutMinStockUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPrimaryUnitInput
@@ -1069,7 +1070,6 @@ export type UnitMasterCreateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1077,14 +1077,15 @@ export type UnitMasterUncheckedCreateWithoutMinStockUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPrimaryUnitInput
@@ -1092,7 +1093,6 @@ export type UnitMasterUncheckedCreateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutMinStockUnitProductsInput = {
@@ -1102,14 +1102,15 @@ export type UnitMasterCreateOrConnectWithoutMinStockUnitProductsInput = {
 
 export type UnitMasterCreateWithoutPrimaryUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -1117,7 +1118,6 @@ export type UnitMasterCreateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1125,14 +1125,15 @@ export type UnitMasterUncheckedCreateWithoutPrimaryUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -1140,7 +1141,6 @@ export type UnitMasterUncheckedCreateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutPrimaryUnitProductsInput = {
@@ -1150,14 +1150,15 @@ export type UnitMasterCreateOrConnectWithoutPrimaryUnitProductsInput = {
 
 export type UnitMasterCreateWithoutPurchaseUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -1165,7 +1166,6 @@ export type UnitMasterCreateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1173,14 +1173,15 @@ export type UnitMasterUncheckedCreateWithoutPurchaseUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -1188,7 +1189,6 @@ export type UnitMasterUncheckedCreateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutPurchaseUnitProductsInput = {
@@ -1198,14 +1198,15 @@ export type UnitMasterCreateOrConnectWithoutPurchaseUnitProductsInput = {
 
 export type UnitMasterCreateWithoutReorderBatchUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -1213,7 +1214,6 @@ export type UnitMasterCreateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1221,14 +1221,15 @@ export type UnitMasterUncheckedCreateWithoutReorderBatchUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -1236,7 +1237,6 @@ export type UnitMasterUncheckedCreateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutReorderBatchUnitProductsInput = {
@@ -1246,14 +1246,15 @@ export type UnitMasterCreateOrConnectWithoutReorderBatchUnitProductsInput = {
 
 export type UnitMasterCreateWithoutReorderLevelUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -1261,7 +1262,6 @@ export type UnitMasterCreateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   stockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1269,14 +1269,15 @@ export type UnitMasterUncheckedCreateWithoutReorderLevelUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -1284,7 +1285,6 @@ export type UnitMasterUncheckedCreateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutStockUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutReorderLevelUnitProductsInput = {
@@ -1294,14 +1294,15 @@ export type UnitMasterCreateOrConnectWithoutReorderLevelUnitProductsInput = {
 
 export type UnitMasterCreateWithoutStockUnitProductsInput = {
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutMinStockUnitInput
@@ -1309,7 +1310,6 @@ export type UnitMasterCreateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterCreateNestedManyWithoutReorderLevelUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUnitInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUnitsInput
 }
 
@@ -1317,14 +1317,15 @@ export type UnitMasterUncheckedCreateWithoutStockUnitProductsInput = {
   id?: number
   vendor_id: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutConsumptionUnitInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMaxStockUnitInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutMinStockUnitInput
@@ -1332,7 +1333,6 @@ export type UnitMasterUncheckedCreateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutPurchaseUnitInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderBatchUnitInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutReorderLevelUnitInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUnitInput
 }
 
 export type UnitMasterCreateOrConnectWithoutStockUnitProductsInput = {
@@ -1353,14 +1353,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutConsumptionUnitProductsInput = 
 
 export type UnitMasterUpdateWithoutConsumptionUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPrimaryUnitNestedInput
@@ -1368,7 +1369,6 @@ export type UnitMasterUpdateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1376,14 +1376,15 @@ export type UnitMasterUncheckedUpdateWithoutConsumptionUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPrimaryUnitNestedInput
@@ -1391,7 +1392,6 @@ export type UnitMasterUncheckedUpdateWithoutConsumptionUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutMaxStockUnitProductsInput = {
@@ -1407,14 +1407,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutMaxStockUnitProductsInput = {
 
 export type UnitMasterUpdateWithoutMaxStockUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPrimaryUnitNestedInput
@@ -1422,7 +1423,6 @@ export type UnitMasterUpdateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1430,14 +1430,15 @@ export type UnitMasterUncheckedUpdateWithoutMaxStockUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPrimaryUnitNestedInput
@@ -1445,7 +1446,6 @@ export type UnitMasterUncheckedUpdateWithoutMaxStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutMinStockUnitProductsInput = {
@@ -1461,14 +1461,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutMinStockUnitProductsInput = {
 
 export type UnitMasterUpdateWithoutMinStockUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPrimaryUnitNestedInput
@@ -1476,7 +1477,6 @@ export type UnitMasterUpdateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1484,14 +1484,15 @@ export type UnitMasterUncheckedUpdateWithoutMinStockUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   primaryUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPrimaryUnitNestedInput
@@ -1499,7 +1500,6 @@ export type UnitMasterUncheckedUpdateWithoutMinStockUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutPrimaryUnitProductsInput = {
@@ -1515,14 +1515,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutPrimaryUnitProductsInput = {
 
 export type UnitMasterUpdateWithoutPrimaryUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1530,7 +1531,6 @@ export type UnitMasterUpdateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1538,14 +1538,15 @@ export type UnitMasterUncheckedUpdateWithoutPrimaryUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1553,7 +1554,6 @@ export type UnitMasterUncheckedUpdateWithoutPrimaryUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutPurchaseUnitProductsInput = {
@@ -1569,14 +1569,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutPurchaseUnitProductsInput = {
 
 export type UnitMasterUpdateWithoutPurchaseUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1584,7 +1585,6 @@ export type UnitMasterUpdateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1592,14 +1592,15 @@ export type UnitMasterUncheckedUpdateWithoutPurchaseUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1607,7 +1608,6 @@ export type UnitMasterUncheckedUpdateWithoutPurchaseUnitProductsInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutReorderBatchUnitProductsInput = {
@@ -1623,14 +1623,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutReorderBatchUnitProductsInput =
 
 export type UnitMasterUpdateWithoutReorderBatchUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1638,7 +1639,6 @@ export type UnitMasterUpdateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1646,14 +1646,15 @@ export type UnitMasterUncheckedUpdateWithoutReorderBatchUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1661,7 +1662,6 @@ export type UnitMasterUncheckedUpdateWithoutReorderBatchUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutReorderLevelUnitProductsInput = {
@@ -1677,14 +1677,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutReorderLevelUnitProductsInput =
 
 export type UnitMasterUpdateWithoutReorderLevelUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1692,7 +1693,6 @@ export type UnitMasterUpdateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1700,14 +1700,15 @@ export type UnitMasterUncheckedUpdateWithoutReorderLevelUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1715,7 +1716,6 @@ export type UnitMasterUncheckedUpdateWithoutReorderLevelUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUpsertWithoutStockUnitProductsInput = {
@@ -1731,14 +1731,15 @@ export type UnitMasterUpdateToOneWithWhereWithoutStockUnitProductsInput = {
 
 export type UnitMasterUpdateWithoutStockUnitProductsInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1746,7 +1747,6 @@ export type UnitMasterUpdateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUnitsNestedInput
 }
 
@@ -1754,14 +1754,15 @@ export type UnitMasterUncheckedUpdateWithoutStockUnitProductsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1769,32 +1770,32 @@ export type UnitMasterUncheckedUpdateWithoutStockUnitProductsInput = {
   purchaseUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutPurchaseUnitNestedInput
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterCreateManyVendorInput = {
   id?: number
   unit_name: string
+  unit_class: string
   is_active?: boolean
   created_by?: number | null
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
-  unit_class: string
-  short_name?: string | null
   decimal_allowed?: boolean
+  short_name?: string | null
 }
 
 export type UnitMasterUpdateWithoutVendorInput = {
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutMinStockUnitNestedInput
@@ -1803,20 +1804,20 @@ export type UnitMasterUpdateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
   consumptionUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutConsumptionUnitNestedInput
   maxStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMaxStockUnitNestedInput
   minStockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutMinStockUnitNestedInput
@@ -1825,20 +1826,19 @@ export type UnitMasterUncheckedUpdateWithoutVendorInput = {
   reorderBatchUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitNestedInput
   reorderLevelUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitNestedInput
   stockUnitProducts?: Prisma.ProductMasterUncheckedUpdateManyWithoutStockUnitNestedInput
-  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUnitNestedInput
 }
 
 export type UnitMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   unit_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  unit_class?: Prisma.StringFieldUpdateOperationsInput | string
-  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   decimal_allowed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  short_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1847,6 +1847,7 @@ export type UnitMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type UnitMasterCountOutputType = {
+  leadRequirementMaterials: number
   consumptionUnitProducts: number
   maxStockUnitProducts: number
   minStockUnitProducts: number
@@ -1855,10 +1856,10 @@ export type UnitMasterCountOutputType = {
   reorderBatchUnitProducts: number
   reorderLevelUnitProducts: number
   stockUnitProducts: number
-  leadRequirementMaterials: number
 }
 
 export type UnitMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  leadRequirementMaterials?: boolean | UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs
   consumptionUnitProducts?: boolean | UnitMasterCountOutputTypeCountConsumptionUnitProductsArgs
   maxStockUnitProducts?: boolean | UnitMasterCountOutputTypeCountMaxStockUnitProductsArgs
   minStockUnitProducts?: boolean | UnitMasterCountOutputTypeCountMinStockUnitProductsArgs
@@ -1867,7 +1868,6 @@ export type UnitMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   reorderBatchUnitProducts?: boolean | UnitMasterCountOutputTypeCountReorderBatchUnitProductsArgs
   reorderLevelUnitProducts?: boolean | UnitMasterCountOutputTypeCountReorderLevelUnitProductsArgs
   stockUnitProducts?: boolean | UnitMasterCountOutputTypeCountStockUnitProductsArgs
-  leadRequirementMaterials?: boolean | UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs
 }
 
 /**
@@ -1878,6 +1878,13 @@ export type UnitMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the UnitMasterCountOutputType
    */
   select?: Prisma.UnitMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UnitMasterCountOutputType without action
+ */
+export type UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
 }
 
 /**
@@ -1936,26 +1943,20 @@ export type UnitMasterCountOutputTypeCountStockUnitProductsArgs<ExtArgs extends 
   where?: Prisma.ProductMasterWhereInput
 }
 
-/**
- * UnitMasterCountOutputType without action
- */
-export type UnitMasterCountOutputTypeCountLeadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.LeadRequirementMaterialMappingWhereInput
-}
-
 
 export type UnitMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   vendor_id?: boolean
   unit_name?: boolean
+  unit_class?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_class?: boolean
-  short_name?: boolean
   decimal_allowed?: boolean
+  short_name?: boolean
+  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   consumptionUnitProducts?: boolean | Prisma.UnitMaster$consumptionUnitProductsArgs<ExtArgs>
   maxStockUnitProducts?: boolean | Prisma.UnitMaster$maxStockUnitProductsArgs<ExtArgs>
   minStockUnitProducts?: boolean | Prisma.UnitMaster$minStockUnitProductsArgs<ExtArgs>
@@ -1964,7 +1965,6 @@ export type UnitMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   reorderBatchUnitProducts?: boolean | Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>
   reorderLevelUnitProducts?: boolean | Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>
   stockUnitProducts?: boolean | Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>
-  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unitMaster"]>
@@ -1973,14 +1973,14 @@ export type UnitMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   unit_name?: boolean
+  unit_class?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_class?: boolean
-  short_name?: boolean
   decimal_allowed?: boolean
+  short_name?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unitMaster"]>
 
@@ -1988,14 +1988,14 @@ export type UnitMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   unit_name?: boolean
+  unit_class?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_class?: boolean
-  short_name?: boolean
   decimal_allowed?: boolean
+  short_name?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["unitMaster"]>
 
@@ -2003,18 +2003,19 @@ export type UnitMasterSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   unit_name?: boolean
+  unit_class?: boolean
   is_active?: boolean
   created_by?: boolean
   updated_by?: boolean
   created_at?: boolean
   updated_at?: boolean
-  unit_class?: boolean
-  short_name?: boolean
   decimal_allowed?: boolean
+  short_name?: boolean
 }
 
-export type UnitMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "unit_name" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at" | "unit_class" | "short_name" | "decimal_allowed", ExtArgs["result"]["unitMaster"]>
+export type UnitMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "unit_name" | "unit_class" | "is_active" | "created_by" | "updated_by" | "created_at" | "updated_at" | "decimal_allowed" | "short_name", ExtArgs["result"]["unitMaster"]>
 export type UnitMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   consumptionUnitProducts?: boolean | Prisma.UnitMaster$consumptionUnitProductsArgs<ExtArgs>
   maxStockUnitProducts?: boolean | Prisma.UnitMaster$maxStockUnitProductsArgs<ExtArgs>
   minStockUnitProducts?: boolean | Prisma.UnitMaster$minStockUnitProductsArgs<ExtArgs>
@@ -2023,7 +2024,6 @@ export type UnitMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   reorderBatchUnitProducts?: boolean | Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>
   reorderLevelUnitProducts?: boolean | Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>
   stockUnitProducts?: boolean | Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>
-  leadRequirementMaterials?: boolean | Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.UnitMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -2037,6 +2037,7 @@ export type UnitMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $UnitMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UnitMaster"
   objects: {
+    leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
     consumptionUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     maxStockUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     minStockUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
@@ -2045,21 +2046,20 @@ export type $UnitMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     reorderBatchUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     reorderLevelUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
     stockUnitProducts: Prisma.$ProductMasterPayload<ExtArgs>[]
-    leadRequirementMaterials: Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
     unit_name: string
+    unit_class: string
     is_active: boolean
     created_by: number | null
     updated_by: number | null
     created_at: Date
     updated_at: Date
-    unit_class: string
-    short_name: string | null
     decimal_allowed: boolean
+    short_name: string | null
   }, ExtArgs["result"]["unitMaster"]>
   composites: {}
 }
@@ -2454,6 +2454,7 @@ readonly fields: UnitMasterFieldRefs;
  */
 export interface Prisma__UnitMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  leadRequirementMaterials<T extends Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   consumptionUnitProducts<T extends Prisma.UnitMaster$consumptionUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$consumptionUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   maxStockUnitProducts<T extends Prisma.UnitMaster$maxStockUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$maxStockUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   minStockUnitProducts<T extends Prisma.UnitMaster$minStockUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$minStockUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2462,7 +2463,6 @@ export interface Prisma__UnitMasterClient<T, Null = never, ExtArgs extends runti
   reorderBatchUnitProducts<T extends Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$reorderBatchUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reorderLevelUnitProducts<T extends Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$reorderLevelUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockUnitProducts<T extends Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$stockUnitProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  leadRequirementMaterials<T extends Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UnitMaster$leadRequirementMaterialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadRequirementMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2496,14 +2496,14 @@ export interface UnitMasterFieldRefs {
   readonly id: Prisma.FieldRef<"UnitMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"UnitMaster", 'Int'>
   readonly unit_name: Prisma.FieldRef<"UnitMaster", 'String'>
+  readonly unit_class: Prisma.FieldRef<"UnitMaster", 'String'>
   readonly is_active: Prisma.FieldRef<"UnitMaster", 'Boolean'>
   readonly created_by: Prisma.FieldRef<"UnitMaster", 'Int'>
   readonly updated_by: Prisma.FieldRef<"UnitMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"UnitMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"UnitMaster", 'DateTime'>
-  readonly unit_class: Prisma.FieldRef<"UnitMaster", 'String'>
-  readonly short_name: Prisma.FieldRef<"UnitMaster", 'String'>
   readonly decimal_allowed: Prisma.FieldRef<"UnitMaster", 'Boolean'>
+  readonly short_name: Prisma.FieldRef<"UnitMaster", 'String'>
 }
     
 
@@ -2905,6 +2905,30 @@ export type UnitMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
+ * UnitMaster.leadRequirementMaterials
+ */
+export type UnitMaster$leadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadRequirementMaterialMapping
+   */
+  select?: Prisma.LeadRequirementMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadRequirementMaterialMapping
+   */
+  omit?: Prisma.LeadRequirementMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadRequirementMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadRequirementMaterialMappingWhereInput
+  orderBy?: Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput | Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
+}
+
+/**
  * UnitMaster.consumptionUnitProducts
  */
 export type UnitMaster$consumptionUnitProductsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3094,30 +3118,6 @@ export type UnitMaster$stockUnitProductsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ProductMasterScalarFieldEnum | Prisma.ProductMasterScalarFieldEnum[]
-}
-
-/**
- * UnitMaster.leadRequirementMaterials
- */
-export type UnitMaster$leadRequirementMaterialsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the LeadRequirementMaterialMapping
-   */
-  select?: Prisma.LeadRequirementMaterialMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the LeadRequirementMaterialMapping
-   */
-  omit?: Prisma.LeadRequirementMaterialMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.LeadRequirementMaterialMappingInclude<ExtArgs> | null
-  where?: Prisma.LeadRequirementMaterialMappingWhereInput
-  orderBy?: Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput | Prisma.LeadRequirementMaterialMappingOrderByWithRelationInput[]
-  cursor?: Prisma.LeadRequirementMaterialMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.LeadRequirementMaterialMappingScalarFieldEnum | Prisma.LeadRequirementMaterialMappingScalarFieldEnum[]
 }
 
 /**

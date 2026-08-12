@@ -296,7 +296,7 @@ export type LedgerWhereInput = {
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
+  ProductTypeMaster?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -316,7 +316,7 @@ export type LedgerOrderByWithRelationInput = {
   client?: Prisma.ClientMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
-  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -339,7 +339,7 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   client?: Prisma.XOR<Prisma.ClientMasterNullableScalarRelationFilter, Prisma.ClientMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
+  ProductTypeMaster?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -388,7 +388,7 @@ export type LedgerCreateInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -415,7 +415,7 @@ export type LedgerUpdateInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -752,45 +752,45 @@ export type LedgerUncheckedUpdateManyWithoutAccountNestedInput = {
   deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
-export type LedgerCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
+export type LedgerCreateNestedManyWithoutProductTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LedgerCreateWithoutProductTypeMasterInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput | Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LedgerCreateManyProductTypeMasterInputEnvelope
   connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
 }
 
-export type LedgerUncheckedCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
+export type LedgerUncheckedCreateNestedManyWithoutProductTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LedgerCreateWithoutProductTypeMasterInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput | Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LedgerCreateManyProductTypeMasterInputEnvelope
   connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
 }
 
-export type LedgerUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
+export type LedgerUpdateManyWithoutProductTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LedgerCreateWithoutProductTypeMasterInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput | Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LedgerCreateManyProductTypeMasterInputEnvelope
   set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeMasterInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeMasterInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeMasterInput[]
   deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
-export type LedgerUncheckedUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput> | Prisma.LedgerCreateWithoutProductTypeInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeInput | Prisma.LedgerCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.LedgerCreateManyProductTypeInputEnvelope
+export type LedgerUncheckedUpdateManyWithoutProductTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput> | Prisma.LedgerCreateWithoutProductTypeMasterInput[] | Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput[]
+  connectOrCreate?: Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput | Prisma.LedgerCreateOrConnectWithoutProductTypeMasterInput[]
+  upsert?: Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LedgerUpsertWithWhereUniqueWithoutProductTypeMasterInput[]
+  createMany?: Prisma.LedgerCreateManyProductTypeMasterInputEnvelope
   set?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   disconnect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   delete?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
   connect?: Prisma.LedgerWhereUniqueInput | Prisma.LedgerWhereUniqueInput[]
-  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeInput[]
+  update?: Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeMasterInput | Prisma.LedgerUpdateWithWhereUniqueWithoutProductTypeMasterInput[]
+  updateMany?: Prisma.LedgerUpdateManyWithWhereWithoutProductTypeMasterInput | Prisma.LedgerUpdateManyWithWhereWithoutProductTypeMasterInput[]
   deleteMany?: Prisma.LedgerScalarWhereInput | Prisma.LedgerScalarWhereInput[]
 }
 
@@ -807,7 +807,7 @@ export type LedgerCreateWithoutVendorInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
 }
 
 export type LedgerUncheckedCreateWithoutVendorInput = {
@@ -874,7 +874,7 @@ export type LedgerCreateWithoutCreatedByInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -925,7 +925,7 @@ export type LedgerCreateWithoutClientInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -976,7 +976,7 @@ export type LedgerCreateWithoutLeadInput = {
   account: Prisma.AccountMasterCreateNestedOneWithoutLedgersInput
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -1027,7 +1027,7 @@ export type LedgerCreateWithoutAccountInput = {
   client?: Prisma.ClientMasterCreateNestedOneWithoutLedgersInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLedgersCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLedgersInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgersInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterCreateNestedOneWithoutLedgerInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
@@ -1070,7 +1070,7 @@ export type LedgerUpdateManyWithWhereWithoutAccountInput = {
   data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutAccountInput>
 }
 
-export type LedgerCreateWithoutProductTypeInput = {
+export type LedgerCreateWithoutProductTypeMasterInput = {
   amount: number
   payment_date: Date | string
   type: $Enums.LedgerType
@@ -1082,7 +1082,7 @@ export type LedgerCreateWithoutProductTypeInput = {
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLedgersInput
 }
 
-export type LedgerUncheckedCreateWithoutProductTypeInput = {
+export type LedgerUncheckedCreateWithoutProductTypeMasterInput = {
   id?: number
   lead_id: number
   account_id: number
@@ -1095,30 +1095,30 @@ export type LedgerUncheckedCreateWithoutProductTypeInput = {
   created_at?: Date | string
 }
 
-export type LedgerCreateOrConnectWithoutProductTypeInput = {
+export type LedgerCreateOrConnectWithoutProductTypeMasterInput = {
   where: Prisma.LedgerWhereUniqueInput
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput>
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput>
 }
 
-export type LedgerCreateManyProductTypeInputEnvelope = {
-  data: Prisma.LedgerCreateManyProductTypeInput | Prisma.LedgerCreateManyProductTypeInput[]
+export type LedgerCreateManyProductTypeMasterInputEnvelope = {
+  data: Prisma.LedgerCreateManyProductTypeMasterInput | Prisma.LedgerCreateManyProductTypeMasterInput[]
   skipDuplicates?: boolean
 }
 
-export type LedgerUpsertWithWhereUniqueWithoutProductTypeInput = {
+export type LedgerUpsertWithWhereUniqueWithoutProductTypeMasterInput = {
   where: Prisma.LedgerWhereUniqueInput
-  update: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeInput>
-  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeInput, Prisma.LedgerUncheckedCreateWithoutProductTypeInput>
+  update: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeMasterInput>
+  create: Prisma.XOR<Prisma.LedgerCreateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedCreateWithoutProductTypeMasterInput>
 }
 
-export type LedgerUpdateWithWhereUniqueWithoutProductTypeInput = {
+export type LedgerUpdateWithWhereUniqueWithoutProductTypeMasterInput = {
   where: Prisma.LedgerWhereUniqueInput
-  data: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeInput>
+  data: Prisma.XOR<Prisma.LedgerUpdateWithoutProductTypeMasterInput, Prisma.LedgerUncheckedUpdateWithoutProductTypeMasterInput>
 }
 
-export type LedgerUpdateManyWithWhereWithoutProductTypeInput = {
+export type LedgerUpdateManyWithWhereWithoutProductTypeMasterInput = {
   where: Prisma.LedgerScalarWhereInput
-  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutProductTypeInput>
+  data: Prisma.XOR<Prisma.LedgerUpdateManyMutationInput, Prisma.LedgerUncheckedUpdateManyWithoutProductTypeMasterInput>
 }
 
 export type LedgerCreateManyVendorInput = {
@@ -1143,7 +1143,7 @@ export type LedgerUpdateWithoutVendorInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
 }
 
 export type LedgerUncheckedUpdateWithoutVendorInput = {
@@ -1193,7 +1193,7 @@ export type LedgerUpdateWithoutCreatedByInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1244,7 +1244,7 @@ export type LedgerUpdateWithoutClientInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1295,7 +1295,7 @@ export type LedgerUpdateWithoutLeadInput = {
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutLedgersNestedInput
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1346,7 +1346,7 @@ export type LedgerUpdateWithoutAccountInput = {
   client?: Prisma.ClientMasterUpdateOneWithoutLedgersNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLedgersCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLedgersNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutLedgersNestedInput
+  ProductTypeMaster?: Prisma.ProductTypeMasterUpdateOneWithoutLedgerNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
@@ -1376,7 +1376,7 @@ export type LedgerUncheckedUpdateManyWithoutAccountInput = {
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
-export type LedgerCreateManyProductTypeInput = {
+export type LedgerCreateManyProductTypeMasterInput = {
   id?: number
   lead_id: number
   account_id: number
@@ -1389,7 +1389,7 @@ export type LedgerCreateManyProductTypeInput = {
   created_at?: Date | string
 }
 
-export type LedgerUpdateWithoutProductTypeInput = {
+export type LedgerUpdateWithoutProductTypeMasterInput = {
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   payment_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
@@ -1401,7 +1401,7 @@ export type LedgerUpdateWithoutProductTypeInput = {
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLedgersNestedInput
 }
 
-export type LedgerUncheckedUpdateWithoutProductTypeInput = {
+export type LedgerUncheckedUpdateWithoutProductTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1414,7 +1414,7 @@ export type LedgerUncheckedUpdateWithoutProductTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type LedgerUncheckedUpdateManyWithoutProductTypeInput = {
+export type LedgerUncheckedUpdateManyWithoutProductTypeMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1445,7 +1445,7 @@ export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1465,7 +1465,7 @@ export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1485,7 +1485,7 @@ export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ledger"]>
 
@@ -1509,7 +1509,7 @@ export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1517,7 +1517,7 @@ export type LedgerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1525,7 +1525,7 @@ export type LedgerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   client?: boolean | Prisma.Ledger$clientArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  productType?: boolean | Prisma.Ledger$productTypeArgs<ExtArgs>
+  ProductTypeMaster?: boolean | Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -1536,7 +1536,7 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     client: Prisma.$ClientMasterPayload<ExtArgs> | null
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
-    productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
+    ProductTypeMaster: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1949,7 +1949,7 @@ export interface Prisma__LedgerClient<T, Null = never, ExtArgs extends runtime.T
   client<T extends Prisma.Ledger$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$clientArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  productType<T extends Prisma.Ledger$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ProductTypeMaster<T extends Prisma.Ledger$ProductTypeMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ledger$ProductTypeMasterArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2411,9 +2411,9 @@ export type Ledger$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * Ledger.productType
+ * Ledger.ProductTypeMaster
  */
-export type Ledger$productTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Ledger$ProductTypeMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the ProductTypeMaster
    */

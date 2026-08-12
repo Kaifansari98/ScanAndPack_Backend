@@ -463,6 +463,16 @@ export const ProductInstanceStatus = {
 export type ProductInstanceStatus = (typeof ProductInstanceStatus)[keyof typeof ProductInstanceStatus]
 
 
+export const ActivityStatusScopeType = {
+  lead: 'lead',
+  item_group: 'item_group',
+  item_code: 'item_code',
+  instance: 'instance'
+} as const
+
+export type ActivityStatusScopeType = (typeof ActivityStatusScopeType)[keyof typeof ActivityStatusScopeType]
+
+
 export const ActiveStatus = {
   Yes: 'Yes',
   No: 'No'
@@ -657,20 +667,20 @@ export const OtherApplianceType = {
 export type OtherApplianceType = (typeof OtherApplianceType)[keyof typeof OtherApplianceType]
 
 
-export const LeadEntryType = {
-  ONLINE: 'ONLINE',
-  WALK_IN: 'WALK_IN'
-} as const
-
-export type LeadEntryType = (typeof LeadEntryType)[keyof typeof LeadEntryType]
-
-
 export const LeadCallType = {
   OUTGOING: 'OUTGOING',
   INCOMING: 'INCOMING'
 } as const
 
 export type LeadCallType = (typeof LeadCallType)[keyof typeof LeadCallType]
+
+
+export const LeadEntryType = {
+  ONLINE: 'ONLINE',
+  WALK_IN: 'WALK_IN'
+} as const
+
+export type LeadEntryType = (typeof LeadEntryType)[keyof typeof LeadEntryType]
 
 
 export const LeadStoreActionType = {

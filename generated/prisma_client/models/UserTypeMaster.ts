@@ -193,16 +193,16 @@ export type UserTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"UserTypeMaster"> | number
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingListRelationFilter
 }
 
 export type UserTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_type?: Prisma.SortOrder
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterOrderByRelationAggregateInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingOrderByRelationAggregateInput
   users?: Prisma.UserMasterOrderByRelationAggregateInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingOrderByRelationAggregateInput
 }
 
 export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -212,8 +212,8 @@ export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserTypeMasterWhereInput | Prisma.UserTypeMasterWhereInput[]
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingListRelationFilter
   users?: Prisma.UserMasterListRelationFilter
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingListRelationFilter
 }, "id">
 
 export type UserTypeMasterOrderByWithAggregationInput = {
@@ -237,31 +237,31 @@ export type UserTypeMasterScalarWhereWithAggregatesInput = {
 export type UserTypeMasterCreateInput = {
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterUncheckedCreateInput = {
   id?: number
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterUpdateInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeMasterNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterNestedInput
 }
 
 export type UserTypeMasterCreateManyInput = {
@@ -334,31 +334,31 @@ export type UserTypeMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNeste
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserTypeMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput>, Prisma.UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
 }
 
-export type UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingsInput = {
-  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingsInput>
-  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingsInput
+export type UserTypeMasterCreateNestedOneWithoutUserTypePrivilegeMappingInput = {
+  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput>
+  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingInput
   connect?: Prisma.UserTypeMasterWhereUniqueInput
 }
 
-export type UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingsInput>
-  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingsInput
-  upsert?: Prisma.UserTypeMasterUpsertWithoutUserTypePrivilegeMappingsInput
+export type UserTypeMasterUpdateOneRequiredWithoutUserTypePrivilegeMappingNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput>
+  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingInput
+  upsert?: Prisma.UserTypeMasterUpsertWithoutUserTypePrivilegeMappingInput
   connect?: Prisma.UserTypeMasterWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserTypeMasterUpdateToOneWithWhereWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingsInput>, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserTypeMasterUpdateToOneWithWhereWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingInput>, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput>
 }
 
 export type UserTypeMasterCreateWithoutUsersInput = {
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterUncheckedCreateWithoutUsersInput = {
   id?: number
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterCreateOrConnectWithoutUsersInput = {
@@ -380,27 +380,27 @@ export type UserTypeMasterUpdateToOneWithWhereWithoutUsersInput = {
 export type UserTypeMasterUpdateWithoutUsersInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeMasterNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterNestedInput
 }
 
 export type UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   user_type: string
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   id?: number
   user_type: string
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutUserTypeMasterInput
 }
 
 export type UserTypeMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
@@ -421,53 +421,53 @@ export type UserTypeMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersIn
 
 export type UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutUserTypeMasterNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
-  userTypePrivilegeMappings?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeNestedInput
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutUserTypeMasterNestedInput
 }
 
-export type UserTypeMasterCreateWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterCreateWithoutUserTypePrivilegeMappingInput = {
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
 }
 
-export type UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   id?: number
   user_type: string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
 }
 
-export type UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterCreateOrConnectWithoutUserTypePrivilegeMappingInput = {
   where: Prisma.UserTypeMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingsInput>
+  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput>
 }
 
-export type UserTypeMasterUpsertWithoutUserTypePrivilegeMappingsInput = {
-  update: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingsInput>
-  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingsInput>
+export type UserTypeMasterUpsertWithoutUserTypePrivilegeMappingInput = {
+  update: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput>
+  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput>
   where?: Prisma.UserTypeMasterWhereInput
 }
 
-export type UserTypeMasterUpdateToOneWithWhereWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterUpdateToOneWithWhereWithoutUserTypePrivilegeMappingInput = {
   where?: Prisma.UserTypeMasterWhereInput
-  data: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingsInput, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingsInput>
+  data: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutUserTypePrivilegeMappingInput, Prisma.UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput>
 }
 
-export type UserTypeMasterUpdateWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
   users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
 }
 
-export type UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingsInput = {
+export type UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
@@ -481,14 +481,14 @@ export type UserTypeMasterUncheckedUpdateWithoutUserTypePrivilegeMappingsInput =
 
 export type UserTypeMasterCountOutputType = {
   selfAssignTaskTypeMasters: number
-  userTypePrivilegeMappings: number
   users: number
+  UserTypePrivilegeMapping: number
 }
 
 export type UserTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   selfAssignTaskTypeMasters?: boolean | UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs
-  userTypePrivilegeMappings?: boolean | UserTypeMasterCountOutputTypeCountUserTypePrivilegeMappingsArgs
   users?: boolean | UserTypeMasterCountOutputTypeCountUsersArgs
+  UserTypePrivilegeMapping?: boolean | UserTypeMasterCountOutputTypeCountUserTypePrivilegeMappingArgs
 }
 
 /**
@@ -511,15 +511,15 @@ export type UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs<ExtA
 /**
  * UserTypeMasterCountOutputType without action
  */
-export type UserTypeMasterCountOutputTypeCountUserTypePrivilegeMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserTypePrivilegeMappingWhereInput
+export type UserTypeMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**
  * UserTypeMasterCountOutputType without action
  */
-export type UserTypeMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserMasterWhereInput
+export type UserTypeMasterCountOutputTypeCountUserTypePrivilegeMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserTypePrivilegeMappingWhereInput
 }
 
 
@@ -527,8 +527,8 @@ export type UserTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Intern
   id?: boolean
   user_type?: boolean
   selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
-  userTypePrivilegeMappings?: boolean | Prisma.UserTypeMaster$userTypePrivilegeMappingsArgs<ExtArgs>
   users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
+  UserTypePrivilegeMapping?: boolean | Prisma.UserTypeMaster$UserTypePrivilegeMappingArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypeMaster"]>
 
@@ -550,8 +550,8 @@ export type UserTypeMasterSelectScalar = {
 export type UserTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_type", ExtArgs["result"]["userTypeMaster"]>
 export type UserTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
-  userTypePrivilegeMappings?: boolean | Prisma.UserTypeMaster$userTypePrivilegeMappingsArgs<ExtArgs>
   users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
+  UserTypePrivilegeMapping?: boolean | Prisma.UserTypeMaster$UserTypePrivilegeMappingArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -561,8 +561,8 @@ export type $UserTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "UserTypeMaster"
   objects: {
     selfAssignTaskTypeMasters: Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>[]
-    userTypePrivilegeMappings: Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>[]
     users: Prisma.$UserMasterPayload<ExtArgs>[]
+    UserTypePrivilegeMapping: Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -962,8 +962,8 @@ readonly fields: UserTypeMasterFieldRefs;
 export interface Prisma__UserTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   selfAssignTaskTypeMasters<T extends Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  userTypePrivilegeMappings<T extends Prisma.UserTypeMaster$userTypePrivilegeMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$userTypePrivilegeMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.UserTypeMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  UserTypePrivilegeMapping<T extends Prisma.UserTypeMaster$UserTypePrivilegeMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$UserTypePrivilegeMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTypePrivilegeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1412,30 +1412,6 @@ export type UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs extends runtime
 }
 
 /**
- * UserTypeMaster.userTypePrivilegeMappings
- */
-export type UserTypeMaster$userTypePrivilegeMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UserTypePrivilegeMapping
-   */
-  select?: Prisma.UserTypePrivilegeMappingSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the UserTypePrivilegeMapping
-   */
-  omit?: Prisma.UserTypePrivilegeMappingOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserTypePrivilegeMappingInclude<ExtArgs> | null
-  where?: Prisma.UserTypePrivilegeMappingWhereInput
-  orderBy?: Prisma.UserTypePrivilegeMappingOrderByWithRelationInput | Prisma.UserTypePrivilegeMappingOrderByWithRelationInput[]
-  cursor?: Prisma.UserTypePrivilegeMappingWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.UserTypePrivilegeMappingScalarFieldEnum | Prisma.UserTypePrivilegeMappingScalarFieldEnum[]
-}
-
-/**
  * UserTypeMaster.users
  */
 export type UserTypeMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1457,6 +1433,30 @@ export type UserTypeMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.UserMasterScalarFieldEnum | Prisma.UserMasterScalarFieldEnum[]
+}
+
+/**
+ * UserTypeMaster.UserTypePrivilegeMapping
+ */
+export type UserTypeMaster$UserTypePrivilegeMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserTypePrivilegeMapping
+   */
+  select?: Prisma.UserTypePrivilegeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserTypePrivilegeMapping
+   */
+  omit?: Prisma.UserTypePrivilegeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserTypePrivilegeMappingInclude<ExtArgs> | null
+  where?: Prisma.UserTypePrivilegeMappingWhereInput
+  orderBy?: Prisma.UserTypePrivilegeMappingOrderByWithRelationInput | Prisma.UserTypePrivilegeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.UserTypePrivilegeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserTypePrivilegeMappingScalarFieldEnum | Prisma.UserTypePrivilegeMappingScalarFieldEnum[]
 }
 
 /**

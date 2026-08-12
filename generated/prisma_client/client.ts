@@ -165,6 +165,11 @@ export type LeadUserMapping = Prisma.LeadUserMappingModel
  */
 export type LeadActivityStatusLog = Prisma.LeadActivityStatusLogModel
 /**
+ * Model LeadScopedActivityStatusLog
+ * 
+ */
+export type LeadScopedActivityStatusLog = Prisma.LeadScopedActivityStatusLogModel
+/**
  * Model SiteTypeMaster
  * 
  */
@@ -284,11 +289,6 @@ export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
  * 
  */
 export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
-/**
- * Model LeadOtherAppliancesRemarkMapping
- * 
- */
-export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
 /**
  * Model HandleTypeMaster
  * 
@@ -1030,37 +1030,42 @@ export type B2BRequirementTypeMaster = Prisma.B2BRequirementTypeMasterModel
  */
 export type LeadB2BRequirementTypeMapping = Prisma.LeadB2BRequirementTypeMappingModel
 /**
- * Model OnlineLead
+ * Model LeadOtherAppliancesRemarkMapping
  * 
  */
-export type OnlineLead = Prisma.OnlineLeadModel
-/**
- * Model OnlineLeadFollowupStatus
- * 
- */
-export type OnlineLeadFollowupStatus = Prisma.OnlineLeadFollowupStatusModel
-/**
- * Model OnlineLeadHistory
- * 
- */
-export type OnlineLeadHistory = Prisma.OnlineLeadHistoryModel
-/**
- * Model OnlineLeadCallLog
- * 
- */
-export type OnlineLeadCallLog = Prisma.OnlineLeadCallLogModel
-/**
- * Model OnlineLeadStoreLog
- * 
- */
-export type OnlineLeadStoreLog = Prisma.OnlineLeadStoreLogModel
+export type LeadOtherAppliancesRemarkMapping = Prisma.LeadOtherAppliancesRemarkMappingModel
 /**
  * Model UserTypePrivilegeMapping
  * 
  */
 export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
 /**
- * Model TelecallerCampaignLead
+ * Model online_lead_call_log
  * 
  */
-export type TelecallerCampaignLead = Prisma.TelecallerCampaignLeadModel
+export type online_lead_call_log = Prisma.online_lead_call_logModel
+/**
+ * Model online_lead_followup_status
+ * 
+ */
+export type online_lead_followup_status = Prisma.online_lead_followup_statusModel
+/**
+ * Model online_lead_history
+ * 
+ */
+export type online_lead_history = Prisma.online_lead_historyModel
+/**
+ * Model online_lead_store_log
+ * 
+ */
+export type online_lead_store_log = Prisma.online_lead_store_logModel
+/**
+ * Model online_leads
+ * 
+ */
+export type online_leads = Prisma.online_leadsModel
+/**
+ * Model telecaller_campaign_leads
+ * 
+ */
+export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel

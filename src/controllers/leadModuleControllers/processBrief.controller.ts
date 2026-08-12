@@ -57,17 +57,24 @@ export const saveLeadProcessBriefsHandler = async (req: Request, res: Response) 
       return res.status(400).json({ error: "lead_id and vendor_id are required" });
     }
 
+    const userId = Number((req as any).user?.id || created_by || 1);
+
     const savedMappings = await saveLeadProcessBriefs({
       lead_id: Number(lead_id),
       vendor_id: Number(vendor_id),
       mappings: Array.isArray(mappings)
-        ? mappings.map((m: any) => ({
-            product_type_id: Number(m.product_type_id),
-            process_brief_id: Number(m.process_brief_id),
-          }))
+        ? mappings.map((m: any) => {
+            const rawTypeId = m.b2b_requirement_type_id ?? m.product_type_id;
+            const parsedTypeId = rawTypeId !== undefined && rawTypeId !== null && !isNaN(Number(rawTypeId)) ? Number(rawTypeId) : undefined;
+            return {
+              b2b_requirement_type_id: parsedTypeId,
+              product_type_id: parsedTypeId,
+              process_brief_id: Number(m.process_brief_id),
+            };
+          })
         : undefined,
-      process_brief_ids: Array.isArray(process_brief_ids) ? process_brief_ids.map(Number) : undefined,
-      created_by: Number(created_by || 1),
+      process_brief_ids: Array.isArray(process_brief_ids) ? process_brief_ids.map(Number).filter((id) => !isNaN(id)) : undefined,
+      created_by: isNaN(userId) ? 1 : userId,
     });
 
     return res.status(200).json({ success: true, data: savedMappings });

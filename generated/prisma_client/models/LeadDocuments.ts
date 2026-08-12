@@ -347,13 +347,13 @@ export type LeadDocumentsWhereInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
+  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
-  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
@@ -388,13 +388,13 @@ export type LeadDocumentsOrderByWithRelationInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
   documentType?: Prisma.DocumentTypeMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleOrderByRelationAggregateInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
@@ -432,13 +432,13 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
+  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   documentType?: Prisma.XOR<Prisma.DocumentTypeMasterScalarRelationFilter, Prisma.DocumentTypeMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
-  b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   miscellaneousDocument?: Prisma.MiscellaneousDocumentListRelationFilter
@@ -509,13 +509,13 @@ export type LeadDocumentsCreateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -572,13 +572,13 @@ export type LeadDocumentsUpdateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -1379,13 +1379,13 @@ export type LeadDocumentsCreateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -1488,12 +1488,12 @@ export type LeadDocumentsCreateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1559,12 +1559,12 @@ export type LeadDocumentsCreateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1662,12 +1662,12 @@ export type LeadDocumentsCreateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1748,13 +1748,13 @@ export type LeadDocumentsCreateWithoutAccountInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1836,12 +1836,12 @@ export type LeadDocumentsCreateWithoutProductTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -1923,13 +1923,13 @@ export type LeadDocumentsCreateWithoutSpecificationDocumentMappingsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2000,13 +2000,13 @@ export type LeadDocumentsUpdateWithoutSpecificationDocumentMappingsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2061,12 +2061,12 @@ export type LeadDocumentsCreateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2148,13 +2148,13 @@ export type LeadDocumentsCreateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2225,13 +2225,13 @@ export type LeadDocumentsUpdateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2286,12 +2286,12 @@ export type LeadDocumentsCreateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2373,13 +2373,13 @@ export type LeadDocumentsCreateWithoutSmallOrderRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2450,13 +2450,13 @@ export type LeadDocumentsUpdateWithoutSmallOrderRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2510,13 +2510,13 @@ export type LeadDocumentsCreateWithoutAmcContractsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2587,13 +2587,13 @@ export type LeadDocumentsUpdateWithoutAmcContractsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2649,13 +2649,13 @@ export type LeadDocumentsCreateWithoutCompletedServiceSchedulesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -2726,13 +2726,13 @@ export type LeadDocumentsUpdateWithoutCompletedServiceSchedulesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -2786,13 +2786,13 @@ export type LeadDocumentsCreateWithoutClientVisitDocumentMappingsInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -2863,13 +2863,13 @@ export type LeadDocumentsUpdateWithoutClientVisitDocumentMappingsInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -2924,13 +2924,13 @@ export type LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3001,13 +3001,13 @@ export type LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3062,13 +3062,13 @@ export type LeadDocumentsCreateWithoutLeadDocumentLogsInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3139,13 +3139,13 @@ export type LeadDocumentsUpdateWithoutLeadDocumentLogsInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3200,13 +3200,13 @@ export type LeadDocumentsCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3277,13 +3277,13 @@ export type LeadDocumentsUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3339,13 +3339,13 @@ export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3420,13 +3420,13 @@ export type LeadDocumentsCreateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3497,13 +3497,13 @@ export type LeadDocumentsUpdateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3559,13 +3559,13 @@ export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
@@ -3636,13 +3636,13 @@ export type LeadDocumentsUpdateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -3697,13 +3697,13 @@ export type LeadDocumentsCreateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
   documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
   lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
   productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutDocumentsInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterCreateNestedOneWithoutRequirementDocumentsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
@@ -3774,13 +3774,13 @@ export type LeadDocumentsUpdateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -3940,13 +3940,13 @@ export type LeadDocumentsUpdateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
@@ -4055,12 +4055,12 @@ export type LeadDocumentsUpdateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4134,12 +4134,12 @@ export type LeadDocumentsUpdateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4231,12 +4231,12 @@ export type LeadDocumentsUpdateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4327,13 +4327,13 @@ export type LeadDocumentsUpdateWithoutAccountInput = {
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4425,12 +4425,12 @@ export type LeadDocumentsUpdateWithoutProductTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4522,12 +4522,12 @@ export type LeadDocumentsUpdateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4619,12 +4619,12 @@ export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -4698,13 +4698,13 @@ export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
   documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
   lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
   productType?: Prisma.ProductTypeMasterUpdateOneWithoutDocumentsNestedInput
-  b2bRequirementType?: Prisma.B2BRequirementTypeMasterUpdateOneWithoutRequirementDocumentsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
@@ -5024,13 +5024,13 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   clientVisitDocumentMappings?: boolean | Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
@@ -5060,13 +5060,13 @@ export type LeadDocumentsSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   product_type_id?: boolean
   b2b_requirement_type_id?: boolean
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -5088,13 +5088,13 @@ export type LeadDocumentsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   product_type_id?: boolean
   b2b_requirement_type_id?: boolean
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDocuments"]>
 
@@ -5126,13 +5126,13 @@ export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.Intern
   clientVisitDocumentMappings?: boolean | Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   miscellaneousDocument?: boolean | Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>
@@ -5145,24 +5145,24 @@ export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.Intern
 }
 export type LeadDocumentsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type LeadDocumentsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
+  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.LeadDocuments$deletedByArgs<ExtArgs>
   documentType?: boolean | Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadDocuments$leadArgs<ExtArgs>
   productStructureInstance?: boolean | Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>
   productType?: boolean | Prisma.LeadDocuments$productTypeArgs<ExtArgs>
-  b2bRequirementType?: boolean | Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -5176,13 +5176,13 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     clientVisitDocumentMappings: Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
+    b2bRequirementType: Prisma.$B2BRequirementTypeMasterPayload<ExtArgs> | null
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     documentType: Prisma.$DocumentTypeMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs> | null
     productStructureInstance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
-    b2bRequirementType: Prisma.$B2BRequirementTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     completedServiceSchedules: Prisma.$LeadServiceSchedulePayload<ExtArgs>[]
     miscellaneousDocument: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
@@ -5610,13 +5610,13 @@ export interface Prisma__LeadDocumentsClient<T, Null = never, ExtArgs extends ru
   clientVisitDocumentMappings<T extends Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadDocuments$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  b2bRequirementType<T extends Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>>): Prisma.Prisma__B2BRequirementTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.LeadDocuments$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   documentType<T extends Prisma.DocumentTypeMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentTypeMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__DocumentTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$DocumentTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadDocuments$leadArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productStructureInstance<T extends Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$productStructureInstanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productType<T extends Prisma.LeadDocuments$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  b2bRequirementType<T extends Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$b2bRequirementTypeArgs<ExtArgs>>): Prisma.Prisma__B2BRequirementTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   completedServiceSchedules<T extends Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadServiceSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscellaneousDocument<T extends Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$miscellaneousDocumentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -6234,6 +6234,25 @@ export type LeadDocuments$accountArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * LeadDocuments.b2bRequirementType
+ */
+export type LeadDocuments$b2bRequirementTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the B2BRequirementTypeMaster
+   */
+  select?: Prisma.B2BRequirementTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the B2BRequirementTypeMaster
+   */
+  omit?: Prisma.B2BRequirementTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.B2BRequirementTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.B2BRequirementTypeMasterWhereInput
+}
+
+/**
  * LeadDocuments.deletedBy
  */
 export type LeadDocuments$deletedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -6307,25 +6326,6 @@ export type LeadDocuments$productTypeArgs<ExtArgs extends runtime.Types.Extensio
    */
   include?: Prisma.ProductTypeMasterInclude<ExtArgs> | null
   where?: Prisma.ProductTypeMasterWhereInput
-}
-
-/**
- * LeadDocuments.b2bRequirementType
- */
-export type LeadDocuments$b2bRequirementTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the B2BRequirementTypeMaster
-   */
-  select?: Prisma.B2BRequirementTypeMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the B2BRequirementTypeMaster
-   */
-  omit?: Prisma.B2BRequirementTypeMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.B2BRequirementTypeMasterInclude<ExtArgs> | null
-  where?: Prisma.B2BRequirementTypeMasterWhereInput
 }
 
 /**
