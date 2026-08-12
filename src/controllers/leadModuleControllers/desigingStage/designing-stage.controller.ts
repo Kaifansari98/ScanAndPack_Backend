@@ -3648,7 +3648,7 @@ export class DesigingStageController {
             },
           },
           lights_remark: true,
-          carcassMaterialMappings: {
+          LeadCarcassMaterialMapping: {
             orderBy: { id: "asc" },
             select: {
               is_approved: true,
@@ -3659,7 +3659,7 @@ export class DesigingStageController {
               carcassMaterialFinish: { select: { name: true } },
             },
           },
-          shutterMaterialMappings: {
+          LeadShutterMaterialMapping: {
             orderBy: { id: "asc" },
             select: {
               is_approved: true,
@@ -3670,7 +3670,7 @@ export class DesigingStageController {
               shutterMaterialFinish: { select: { name: true } },
             },
           },
-          hardwareMappings: {
+          LeadHardwareMapping: {
             orderBy: { id: "asc" },
             select: {
               is_approved: true,
@@ -3714,7 +3714,7 @@ export class DesigingStageController {
               },
             },
           },
-          otherAppliancesRemarkMappings: {
+          LeadOtherAppliancesRemarkMapping: {
             orderBy: { other_appliance_type: "asc" },
             select: {
               other_appliance_type: true,
@@ -3731,7 +3731,16 @@ export class DesigingStageController {
         });
       }
 
-      const { lead, productItemCode, created_at, ...tabData } = specification;
+      const {
+        lead,
+        productItemCode,
+        created_at,
+        LeadCarcassMaterialMapping,
+        LeadShutterMaterialMapping,
+        LeadHardwareMapping,
+        LeadOtherAppliancesRemarkMapping,
+        ...rest
+      } = specification;
       const leadName = [lead.firstname, lead.lastname]
         .filter(Boolean)
         .join(" ")
@@ -3749,7 +3758,11 @@ export class DesigingStageController {
             sheet_title: `${sheetType} Detailed Specs Sheet`,
             created_at,
           },
-          ...tabData,
+          carcassMaterialMappings: LeadCarcassMaterialMapping,
+          shutterMaterialMappings: LeadShutterMaterialMapping,
+          hardwareMappings: LeadHardwareMapping,
+          otherAppliancesRemarkMappings: LeadOtherAppliancesRemarkMapping,
+          ...rest,
         },
       });
     } catch (error: any) {
@@ -3810,21 +3823,21 @@ export class DesigingStageController {
             { id: "desc" },
           ],
           include: {
-            carcassMaterialMappings: {
+            LeadCarcassMaterialMapping: {
               select: {
                 carcass_type_id: true,
                 carcas_material_id: true,
                 carcass_material_finish_id: true,
               },
             },
-            shutterMaterialMappings: {
+            LeadShutterMaterialMapping: {
               select: {
                 shutter_type_id: true,
                 shutter_material_id: true,
                 shutter_material_finish_id: true,
               },
             },
-            hardwareMappings: {
+            LeadHardwareMapping: {
               select: {
                 carcass_legs_id: true,
                 skirting_carcass_legs_id: true,
@@ -3905,9 +3918,9 @@ export class DesigingStageController {
         });
 
         if (previousLatestSpecification) {
-          if (previousLatestSpecification.carcassMaterialMappings.length > 0) {
+          if (previousLatestSpecification.LeadCarcassMaterialMapping.length > 0) {
             await tx.leadCarcassMaterialMapping.createMany({
-              data: previousLatestSpecification.carcassMaterialMappings.map(
+              data: previousLatestSpecification.LeadCarcassMaterialMapping.map(
                 (mapping) => ({
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
@@ -3921,9 +3934,9 @@ export class DesigingStageController {
             });
           }
 
-          if (previousLatestSpecification.shutterMaterialMappings.length > 0) {
+          if (previousLatestSpecification.LeadShutterMaterialMapping.length > 0) {
             await tx.leadShutterMaterialMapping.createMany({
-              data: previousLatestSpecification.shutterMaterialMappings.map(
+              data: previousLatestSpecification.LeadShutterMaterialMapping.map(
                 (mapping) => ({
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
@@ -3938,9 +3951,9 @@ export class DesigingStageController {
             });
           }
 
-          if (previousLatestSpecification.hardwareMappings.length > 0) {
+          if (previousLatestSpecification.LeadHardwareMapping.length > 0) {
             await tx.leadHardwareMapping.createMany({
-              data: previousLatestSpecification.hardwareMappings.map(
+              data: previousLatestSpecification.LeadHardwareMapping.map(
                 (mapping) => ({
                   vendor_id: Number(vendorId),
                   lead_id: Number(leadId),
