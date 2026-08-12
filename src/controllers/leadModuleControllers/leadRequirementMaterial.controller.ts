@@ -15,6 +15,7 @@ export const createLeadRequirementMaterialHandler = async (
       lead_id,
       vendor_id,
       product_type_id,
+      b2b_requirement_type_id,
       product_id,
       product_ids,
       quantity,
@@ -26,19 +27,22 @@ export const createLeadRequirementMaterialHandler = async (
       created_by,
     } = req.body;
 
+    const rawTypeId = b2b_requirement_type_id ?? product_type_id;
     const hasProductId = product_id != null || (Array.isArray(product_ids) && product_ids.length > 0);
+    const userId = Number((req as any).user?.id || created_by || 1);
 
-    if (!lead_id || !vendor_id || !product_type_id || !hasProductId || quantity == null || !created_by) {
+    if (!lead_id || !vendor_id || !rawTypeId || !hasProductId || quantity == null) {
       return res.status(400).json({
         success: false,
-        message: "lead_id, vendor_id, product_type_id, product_id(s), quantity, and created_by are required",
+        message: "lead_id, vendor_id, requirement type ID (b2b_requirement_type_id/product_type_id), product_id(s), and quantity are required",
       });
     }
 
     const materials = await addLeadRequirementMaterial({
       lead_id: Number(lead_id),
       vendor_id: Number(vendor_id),
-      product_type_id: Number(product_type_id),
+      product_type_id: rawTypeId ? Number(rawTypeId) : undefined,
+      b2b_requirement_type_id: rawTypeId ? Number(rawTypeId) : undefined,
       product_id: product_id ? Number(product_id) : undefined,
       product_ids: Array.isArray(product_ids) ? product_ids.map(Number) : undefined,
       quantity: Number(quantity),
@@ -47,7 +51,7 @@ export const createLeadRequirementMaterialHandler = async (
       supplied_by,
       client_percentage: client_percentage != null ? Number(client_percentage) : undefined,
       frankvin_percentage: frankvin_percentage != null ? Number(frankvin_percentage) : undefined,
-      created_by: Number(created_by),
+      created_by: isNaN(userId) ? 1 : userId,
     });
 
     return res.status(201).json({

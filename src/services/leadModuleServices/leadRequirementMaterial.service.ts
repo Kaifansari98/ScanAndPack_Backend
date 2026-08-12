@@ -34,6 +34,31 @@ export const addLeadRequirementMaterial = async (
 
   const reqTypeId = b2b_requirement_type_id || product_type_id;
 
+  let validCreatedBy = Number(created_by);
+  if (isNaN(validCreatedBy) || validCreatedBy <= 0) {
+    validCreatedBy = 1;
+  }
+
+  const userExists = await prisma.userMaster.findUnique({
+    where: { id: validCreatedBy },
+    select: { id: true },
+  });
+
+  if (!userExists) {
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { created_by: true },
+    });
+    if (lead?.created_by) {
+      validCreatedBy = lead.created_by;
+    } else {
+      const anyUser = await prisma.userMaster.findFirst({ select: { id: true } });
+      if (anyUser) {
+        validCreatedBy = anyUser.id;
+      }
+    }
+  }
+
   const targetProductIds: number[] = Array.isArray(product_ids) && product_ids.length > 0
     ? product_ids
     : product_id
@@ -73,6 +98,7 @@ export const addLeadRequirementMaterial = async (
         lead_id,
         vendor_id,
         b2b_requirement_type_id: reqTypeId || null,
+        product_type_id: reqTypeId || null,
         product_id: pId,
         quantity,
         unit_id: unit_id || null,
@@ -82,8 +108,9 @@ export const addLeadRequirementMaterial = async (
         frankvin_percentage,
         client_quantity,
         frankvin_quantity,
-        created_by,
-      },
+        created_by: validCreatedBy,
+        createdBy: { connect: { id: validCreatedBy } },
+      } as any,
       include: {
         product: {
           select: {
