@@ -195,6 +195,12 @@ DesigningStageRouter.get(
 
 // GET /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/specifications
 DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/specifications/:specsId/pdf-data",
+  verifyToken,
+  (req, res) => DesigingStageController.getLeadSpecificationPdfData(req, res),
+);
+
+DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/specifications",
   verifyToken,
   (req, res) => DesigingStageController.getLeadSpecifications(req, res),
