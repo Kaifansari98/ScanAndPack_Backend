@@ -1406,18 +1406,14 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
 
 import { z } from "zod";
 
-
-
-
-export const handelItems_29_july = async (
+export const handelItems_13_aug_2026 = async (
   vendorToken: string,
   payload: CadbidPayload
 ) => {
+  let resolvedVendorId: number | null = null;
+  let resolvedProjectId: number | null = null;
+
   try {
-
-    let resolvedVendorId: number | null = null;
-    let resolvedProjectId: number | null = null;
-
     try {
       await prisma.apiRequestLog.create({
         data: {
@@ -1426,463 +1422,10 @@ export const handelItems_29_july = async (
           vendor_id: resolvedVendorId,
           payload: payload as any,
           success: false,
-          response: '',
+          response: "",
           error: null,
           project_id: resolvedProjectId,
-        }
-      });
-    } catch (logError) {
-      console.error("Failed to write api log:", logError);
-    }
-
-    console.log("payload", payload);
-
-    const requiredString = (field: string) =>
-      z.string().min(1, `${field} blank`);
-
-    const requiredNumber = (field: string) =>
-      z.coerce.number({ error: `${field} missing` });
-
-    const itemSchema = z.object({
-      articleCode: requiredString("articleCode"),
-      groupName: requiredString("groupName"),
-      l1: requiredNumber("l1"),
-      l2: requiredNumber("l2"),
-      l3: requiredNumber("l3"),
-      name: requiredString("name"),
-      qty: z.coerce.number().int().positive("qty must be greater than 0"),
-      barcode1: z.string().optional(),
-      barcode2: z.string().optional(),
-      el1: z.string().optional(),
-      el2: z.string().optional(),
-      sl1: z.string().optional(),
-      sl2: z.string().optional(),
-    });
-
-    const payloadSchema = z.object({
-      projectName: requiredString("projectName"),
-      customer_id: z.coerce.number({ error: "customer_id missing" }),
-      items: z.array(itemSchema).min(1, "items missing")
-    });
-
-    const validation = payloadSchema.safeParse(payload);
-
-    if (!validation.success) {
-      const errors = validation.error.issues.map(issue => ({
-        field_name: issue.path.join("."),
-        message:
-          issue.code === "invalid_type"
-            ? "missing"
-            : issue.message.includes("blank")
-              ? "blank"
-              : issue.message
-      }));
-      return { success: false, message: errors };
-    }
-
-    // ── Step 1: Check duplicate barcode1 within payload ────────────────────
-    const uniqueCodesToInsert: string[] = [];
-    for (const item of payload.items) {
-      if (item.barcode1) uniqueCodesToInsert.push(item.barcode1);
-    }
-
-    const duplicatesInPayload = uniqueCodesToInsert.filter(
-      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
-    );
-    if (duplicatesInPayload.length > 0) {
-      return {
-        success: false,
-        message: "Duplicate barcodes found in payload",
-        duplicates: [...new Set(duplicatesInPayload)]
-      };
-    }
-
-    // ── Step 2: Check barcode1 duplicates in database ──────────────────────
-    if (uniqueCodesToInsert.length > 0) {
-      const existingCodes = await prisma.cutList.findMany({
-        where: { unique_code: { in: uniqueCodesToInsert } },
-        select: { unique_code: true }
-      });
-      if (existingCodes.length > 0) {
-        return {
-          success: false,
-          message: "Duplicate barcodes found in database",
-          duplicates: existingCodes.map(c => c.unique_code)
-        };
-      }
-    }
-
-    // ── Step 3: Resolve vendor ─────────────────────────────────────────────
-    const vendorTokenEntry = await prisma.vendorTokens.findUnique({
-      where: { token: vendorToken },
-      include: { vendor: true }
-    });
-
-    if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
-      return { success: false, message: "Invalid or expired vendor token" };
-    }
-
-    const vendor = vendorTokenEntry.vendor;
-
-    // ── Step 4: Resolve admin user ─────────────────────────────────────────
-    const adminUser = await prisma.userMaster.findFirst({
-      where: { vendor_id: vendor.id, user_type_id: 2 },
-      orderBy: { created_at: "asc" }
-    });
-
-    if (!adminUser) {
-      return { success: false, message: "No admin user found for this vendor" };
-    }
-
-    const createdByUserId = adminUser.id;
-
-    // ── Step 5: Resolve lead_id from customer_id ───────────────────────────
-    const customerMapping = await prisma.leadExternalPlatformCustomerMapping.findFirst({
-      where: {
-        external_platform_customer_id: String(payload.customer_id),
-        vendor_id: vendor.id,
-      },
-      select: { lead_id: true }
-    });
-
-    if (!customerMapping) {
-      return {
-        success: false,
-        message: "lead not mapped in cadbid and furnix"
-      };
-    }
-
-    const lead_id = customerMapping.lead_id;
-
-    // ── Step 6: Pre-fetch all category type mappings for this vendor ───────
-    // Build a Map: category_name (lowercase) → project_categories_type_master_id[]
-    // This avoids N+1 queries inside the transaction loop
-    const categoryMappings = await prisma.projectCategoriesMaster.findMany({
-      where: { vendor_id: vendor.id, status: "Yes" },
-      select: {
-        category_name: true,
-        projectCategoriesMasterVendorMapping: {
-          select: { project_categories_type_master_id: true },
         },
-      },
-    });
-
-    const categoryTypeMap = new Map<string, number[]>();
-    for (const cat of categoryMappings) {
-      const typeIds = cat.projectCategoriesMasterVendorMapping.map(
-        (m) => m.project_categories_type_master_id
-      );
-      categoryTypeMap.set(cat.category_name.trim().toLowerCase(), typeIds);
-    }
-
-    const { randomUUID } = require("crypto");
-    const unique_project_id = randomUUID();
-
-    // ── 🔥 MAIN TRANSACTION ────────────────────────────────────────────────
-    const result = await prisma.$transaction(async (tx) => {
-
-      // Create project
-      const project = await tx.projectMaster.create({
-        data: {
-          project_name: payload.projectName,
-          unique_project_id,
-          vendor_id: vendor.id,
-          created_by: createdByUserId,
-          project_status: "Initiated",
-          is_grouping: false,
-          lead_id: lead_id,
-        }
-      });
-
-      // ── Create ProjectDetails entry ───────────────────────────────────────
-      const totalItems = payload.items.reduce((sum, item) => sum + Number(item.qty), 0);
-
-      await tx.projectDetails.create({
-        data: {
-          project_id: project.id,
-          vendor_id: vendor.id,
-          lead_id: lead_id,
-          room_name: payload.projectName,
-          total_items: totalItems,
-          total_packed: 0,
-          total_unpacked: totalItems,
-          is_grouping: false,
-          start_date: new Date(),
-          estimated_completion_date: null,
-        }
-      });
-
-      const toNumber = (value: any): number => {
-        if (value === undefined || value === null || value === "") {
-          return 0;
-        }
-
-        const numericValue = Number(
-          String(value)
-            .replace(/,/g, "")
-            .replace(/kg/gi, "")
-            .trim()
-        );
-
-        return Number.isFinite(numericValue) ? numericValue : 0;
-      };
-
-      const roundWeight = (value: number): number => {
-        return Number(value.toFixed(7));
-      };
-
-      for (const item of payload.items) {
-
-        const quantity = Number(item.qty);
-        const excelRowWeight = roundWeight(
-          toNumber((item as any).weight) * quantity
-        );
-        const perItemWeight =
-          quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
-        const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
-
-        // 1 cutList row per item regardless of qty
-        const row = await tx.cutList.create({
-          data: {
-            project_id: project.id,
-            vendor_id: vendor.id,
-            description: item.name,
-            length: Number(item.l1),
-            width: Number(item.l2),
-            thickness: Number(item.l3),
-            qty: quantity,
-            material_details: item.articleCode,
-            item_name: item.name,
-            status: "Active",
-            created_by: createdByUserId,
-            lead_id: lead_id,
-            elf: item.el1 || '',
-            elb: item.el2 || '',
-            esl: item.sl1 || '',
-            esr: item.sl2 || '',
-            unique_code: "",
-            unique_code_2: item.barcode2 || null,
-            group_name: item.groupName || null,
-            category_name: item.categoryName || null,
-            procurement: item.procurement || null,
-            weight: excelRowWeight,
-          }
-        });
-
-        // Set unique_code: use barcode1 if provided, else generate from row id
-        const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
-        await tx.cutList.update({
-          where: { id: row.id },
-          data: { unique_code: uniqueCode }
-        });
-
-        // ── Resolve category type ids for this item ────────────────────────
-        // Look up by categoryName (case-insensitive)
-        const itemCategoryName = (item.categoryName ?? "").trim().toLowerCase();
-        const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
-
-        // ── Determine machine mapping behaviour based on category type ─────
-        //
-        // type 1 or 2 → normal flow: machine type 3, 7 (if l3>9), 11 (if edge banding)
-        // type 3      → only machine type 17 and 18
-        // type 4      → skip CutListMachineMapping entirely
-        // no mapping  → normal flow (fallback)
-
-        const hasType4 = categoryTypeIds.includes(4);
-        const hasType3 = categoryTypeIds.includes(3);
-        const hasType1or2 = categoryTypeIds.some((t) => t === 1 || t === 2);
-        const isNormalFlow = hasType1or2 || categoryTypeIds.length === 0;
-
-        // type 4 — skip entirely
-        if (hasType4) {
-          continue;
-        }
-
-        // type 3 — only machines 17 and 18
-        if (hasType3 && !isNormalFlow) {
-          const scanPackMachineTypeIds = [17, 18];
-          for (const typeId of scanPackMachineTypeIds) {
-            const machine = await tx.machineMaster.findFirst({
-              where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
-              select: { id: true, sequence_no: true }
-            });
-            if (machine) {
-              for (let i = 0; i < quantity; i++) {
-                await tx.cutListMachineMapping.create({
-                  data: {
-                    cut_list_id: row.id,
-                    machine_id: machine.id,
-                    project_id: project.id,
-                    vendor_id: vendor.id,
-                    lead_id: lead_id,
-                    sequence_no: machine.sequence_no ?? 0,
-                    status: "Pending",
-                    created_by: createdByUserId,
-                    expected_in: true,
-                    weight: Number(typeId) === 18 ? perItemWeight : 0,
-                  },
-                });
-              }
-            }
-          }
-          continue;
-        }
-
-        // ── Normal flow (type 1, 2, or no mapping) ─────────────────────────
-
-        // Edgebanding machine (type 11) — only if item has edge banding
-        if (hasEdgeBanding) {
-          const machine_type_11 = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: 11 },
-            select: { id: true, sequence_no: true }
-          });
-
-          if (!machine_type_11) {
-            throw new Error("Edgebanding machine is not configured");
-          }
-
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: machine_type_11.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id: lead_id,
-                sequence_no: machine_type_11.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-                weight: 0,
-              }
-            });
-          }
-        }
-
-        // Cutting machine (type 3) — all items
-        const machine_type_3 = await tx.machineMaster.findFirst({
-          where: { vendor_id: Number(vendor.id), machine_type_id: 3, status: "ACTIVE" },
-          select: { id: true, sequence_no: true },
-          orderBy: { id: "asc" },
-        });
-
-        if (machine_type_3) {
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: machine_type_3.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id: lead_id,
-                sequence_no: machine_type_3.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-                weight: 0,
-              },
-            });
-          }
-        }
-
-        // CNC machine (type 7) — only if l3 > 9
-        const l3Value = Number(item.l3);
-        if (l3Value > 9) {
-          const machine_type_7 = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: 7, status: "ACTIVE" },
-            select: { id: true, sequence_no: true },
-            orderBy: { id: "asc" },
-          });
-
-          if (machine_type_7) {
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine_type_7.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id: lead_id,
-                  sequence_no: machine_type_7.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                  weight: 0,
-                },
-              });
-            }
-          }
-        }
-
-        // Default machines: type 17 and 18
-        const defaultMachineTypeIds = [17, 18];
-        for (const typeId of defaultMachineTypeIds) {
-          const machine = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
-            select: { id: true, sequence_no: true }
-          });
-
-          if (machine) {
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id: lead_id,
-                  sequence_no: machine.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                  weight: Number(typeId) === 18 ? perItemWeight : 0,
-                },
-              });
-            }
-          }
-        }
-      }
-
-      return project;
-    });
-
-    return {
-      success: true,
-      message: "Items processed successfully",
-      project_id: result.id,
-      unique_project_id: unique_project_id
-    };
-
-  } catch (error: any) {
-    console.error("Transaction failed:", error);
-    return {
-      success: false,
-      message: error.message || "Something went wrong. Transaction rolled back."
-    };
-  }
-};
-
-export const handelItems = async (
-  vendorToken: string,
-  payload: CadbidPayload
-) => {
-  try {
-    
-    let resolvedVendorId: number | null = null;
-    let resolvedProjectId: number | null = null;
-
-    try {
-      await prisma.apiRequestLog.create({
-        data: {
-          endpoint: "handelItems",
-          vendor_token: vendorToken,
-          vendor_id: resolvedVendorId,
-          payload: payload as any,
-          success: false,
-          response: '',
-          error: null,
-          project_id: resolvedProjectId,
-        }
       });
     } catch (logError) {
       console.error("Failed to write api log:", logError);
@@ -1899,71 +1442,122 @@ export const handelItems = async (
     const itemSchema = z.object({
       articleCode: requiredString("articleCode"),
       groupName: requiredString("groupName"),
+      categoryName: z.string().optional().nullable(),
+      procurement: z.string().optional().nullable(),
+
       l1: requiredNumber("l1"),
       l2: requiredNumber("l2"),
       l3: requiredNumber("l3"),
+
       name: requiredString("name"),
-      qty: z.coerce.number().int().positive("qty must be greater than 0"),
-      barcode1: z.string().optional(),
-      barcode2: z.string().optional(),
-      el1: z.string().optional(),
-      el2: z.string().optional(),
-      sl1: z.string().optional(),
-      sl2: z.string().optional(),
+
+      qty: z.coerce
+        .number()
+        .int()
+        .positive("qty must be greater than 0"),
+
+      barcode1: z.string().optional().nullable(),
+      barcode2: z.string().optional().nullable(),
+
+      el1: z.string().optional().nullable(),
+      el2: z.string().optional().nullable(),
+      sl1: z.string().optional().nullable(),
+      sl2: z.string().optional().nullable(),
     });
 
     const payloadSchema = z.object({
       projectName: requiredString("projectName"),
-      customer_id: z.coerce.number({ error: "customer_id missing" }),
-      items: z.array(itemSchema).min(1, "items missing")
+      customer_id: z.coerce.number().optional().nullable(),
+      items: z.array(itemSchema).min(1, "items missing"),
     });
 
     const validation = payloadSchema.safeParse(payload);
 
     if (!validation.success) {
-      const errors = validation.error.issues.map(issue => ({
+      const errors = validation.error.issues.map((issue) => ({
         field_name: issue.path.join("."),
         message:
           issue.code === "invalid_type"
             ? "missing"
             : issue.message.includes("blank")
               ? "blank"
-              : issue.message
+              : issue.message,
       }));
-      return { success: false, message: errors };
+
+      return {
+        success: false,
+        message: errors,
+      };
     }
+
+    const validPayload = validation.data;
 
     const normalizeBarcode = (value?: string | null) =>
       String(value ?? "").trim();
 
-    // ── Step 1: Resolve vendor first because barcode validation depends on vendor settings ──
+    /*
+    |--------------------------------------------------------------------------
+    | Step 1: Resolve vendor
+    |--------------------------------------------------------------------------
+    */
+
     const vendorTokenEntry = await prisma.vendorTokens.findUnique({
-      where: { token: vendorToken },
-      include: { vendor: true }
+      where: {
+        token: vendorToken,
+      },
+      include: {
+        vendor: true,
+      },
     });
 
     if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
-      return { success: false, message: "Invalid or expired vendor token" };
+      return {
+        success: false,
+        message: "Invalid or expired vendor token",
+      };
     }
 
     const vendor = vendorTokenEntry.vendor;
-    console.log(vendor);
+
     resolvedVendorId = vendor.id;
 
     /*
     |--------------------------------------------------------------------------
-    | Barcode validation rule
+    | Step 2: Workstation configuration
     |--------------------------------------------------------------------------
-    | 1. Duplicate barcode1 is NEVER allowed inside the same Excel/API payload.
-    | 2. If is_tracktrace_enabled = true:
-    |    barcode1 must also be unique in database for this vendor.
-    | 3. If is_tracktrace_enabled = false and is_scanpack_enabled = true:
-    |    barcode1 can already exist in database, but duplicate in current Excel
-    |    is still blocked by rule #1.
+    | is_tracktrace_enabled = true
+    | -> machines 3, 7, 11
+    |
+    | is_scanpack_enabled = true
+    | -> machines 17, 18
+    |
+    | both true
+    | -> machines 3, 7, 11, 17, 18
     |--------------------------------------------------------------------------
     */
 
-    const uniqueCodesToInsert = payload.items
+    const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
+    const isScanPackEnabled = vendor.is_scanpack_enabled === true;
+
+    if (!isTrackTraceEnabled && !isScanPackEnabled) {
+      return {
+        success: false,
+        message: "workstation not configured",
+      };
+    }
+
+    const enabledMachineTypeIds = [
+      ...(isTrackTraceEnabled ? [3, 7, 11] : []),
+      ...(isScanPackEnabled ? [17, 18] : []),
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Step 3: Barcode validation
+    |--------------------------------------------------------------------------
+    */
+
+    const uniqueCodesToInsert = validPayload.items
       .map((item) => normalizeBarcode(item.barcode1))
       .filter((code): code is string => Boolean(code));
 
@@ -1981,9 +1575,16 @@ export const handelItems = async (
       return {
         success: false,
         message: "Duplicate barcodes found in this Excel",
-        duplicates: duplicatesInPayload
+        duplicates: duplicatesInPayload,
       };
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | If Track & Trace is enabled, barcode must be unique in database.
+    | If only ScanPack is enabled, same barcode can exist in old projects.
+    |--------------------------------------------------------------------------
+    */
 
     const shouldCheckDatabaseBarcodeDuplicate =
       vendor.is_tracktrace_enabled === true;
@@ -1992,11 +1593,13 @@ export const handelItems = async (
       const existingCodes = await prisma.cutList.findMany({
         where: {
           vendor_id: vendor.id,
-          unique_code: { in: uniqueCodesToInsert }
+          unique_code: {
+            in: uniqueCodesToInsert,
+          },
         },
         select: {
-          unique_code: true
-        }
+          unique_code: true,
+        },
       });
 
       const databaseDuplicates = [
@@ -2004,352 +1607,1222 @@ export const handelItems = async (
           existingCodes
             .map((code) => code.unique_code)
             .filter((code): code is string => Boolean(code))
-        )
+        ),
       ];
 
       if (databaseDuplicates.length > 0) {
         return {
           success: false,
           message: "Duplicate barcodes found in database",
-          duplicates: databaseDuplicates
+          duplicates: databaseDuplicates,
         };
       }
     }
 
-    // ── Step 2: Resolve admin user ─────────────────────────────────────────
+    /*
+    |--------------------------------------------------------------------------
+    | Step 4: Resolve admin user
+    |--------------------------------------------------------------------------
+    */
+
     const adminUser = await prisma.userMaster.findFirst({
-      where: { vendor_id: vendor.id, user_type_id: 2 },
-      orderBy: { created_at: "asc" }
+      where: {
+        vendor_id: vendor.id,
+        user_type_id: 2,
+      },
+      orderBy: {
+        created_at: "asc",
+      },
     });
 
     if (!adminUser) {
-      return { success: false, message: "No admin user found for this vendor" };
+      return {
+        success: false,
+        message: "No admin user found for this vendor",
+      };
     }
 
     const createdByUserId = adminUser.id;
 
-    // ── Step 5: Resolve lead_id from customer_id ───────────────────────────
-    const customerMapping = await prisma.leadExternalPlatformCustomerMapping.findFirst({
-      where: {
-        external_platform_customer_id: String(payload.customer_id),
-        vendor_id: vendor.id,
-      },
-      select: { lead_id: true }
-    });
+    /*
+    |--------------------------------------------------------------------------
+    | Step 5: Resolve lead_id from customer_id
+    |--------------------------------------------------------------------------
+    */
 
-    if (!customerMapping) {
-      return {
-        success: false,
-        message: "lead not mapped in cadbid and furnix"
-      };
+    let lead_id: number | null = null;
+
+    const shouldPushLeadToCadbid = vendor.push_lead_to_cadbid === true;
+
+    if (shouldPushLeadToCadbid) {
+      if (!validPayload.customer_id || Number(validPayload.customer_id) <= 0) {
+        return {
+          success: false,
+          message: "customer_id is required",
+        };
+      }
+
+      const customerMapping =
+        await prisma.leadExternalPlatformCustomerMapping.findFirst({
+          where: {
+            external_platform_customer_id: String(validPayload.customer_id),
+            vendor_id: vendor.id,
+          },
+          select: {
+            lead_id: true,
+          },
+        });
+
+      if (!customerMapping) {
+        return {
+          success: false,
+          message: "lead not mapped in cadbid and furnix",
+        };
+      }
+
+      lead_id = customerMapping.lead_id;
     }
 
-    const lead_id = customerMapping.lead_id;
+    /*
+    |--------------------------------------------------------------------------
+    | Step 6: Pre-fetch category type mappings
+    |--------------------------------------------------------------------------
+    */
 
-    // ── Step 6: Pre-fetch all category type mappings for this vendor ───────
-    // Build a Map: category_name (lowercase) → project_categories_type_master_id[]
-    // This avoids N+1 queries inside the transaction loop
     const categoryMappings = await prisma.projectCategoriesMaster.findMany({
-      where: { vendor_id: vendor.id, status: "Yes" },
+      where: {
+        vendor_id: vendor.id,
+        status: "Yes",
+      },
       select: {
         category_name: true,
         projectCategoriesMasterVendorMapping: {
-          select: { project_categories_type_master_id: true },
+          select: {
+            project_categories_type_master_id: true,
+          },
         },
       },
     });
 
     const categoryTypeMap = new Map<string, number[]>();
-    for (const cat of categoryMappings) {
-      const typeIds = cat.projectCategoriesMasterVendorMapping.map(
-        (m) => m.project_categories_type_master_id
+
+    for (const category of categoryMappings) {
+      const typeIds = category.projectCategoriesMasterVendorMapping.map(
+        (mapping) => mapping.project_categories_type_master_id
       );
-      categoryTypeMap.set(cat.category_name.trim().toLowerCase(), typeIds);
+
+      categoryTypeMap.set(category.category_name.trim().toLowerCase(), typeIds);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Step 7: Pre-fetch machines once
+    |--------------------------------------------------------------------------
+    | Important:
+    | Do not query machineMaster inside transaction item loop.
+    |--------------------------------------------------------------------------
+    */
+
+    const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendor.id,
+        machine_type_id: {
+          in: enabledMachineTypeIds,
+        },
+      },
+      select: {
+        id: true,
+        machine_type_id: true,
+        sequence_no: true,
+        status: true,
+      },
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+    const getMachine = (
+      machineTypeId: number,
+      activeOnly: boolean = false
+    ) => {
+      return machines.find((machine) => {
+        if (machine.machine_type_id !== machineTypeId) return false;
+        if (activeOnly && machine.status !== "ACTIVE") return false;
+
+        return true;
+      });
+    };
 
     const { randomUUID } = require("crypto");
     const unique_project_id = randomUUID();
 
-    // ── 🔥 MAIN TRANSACTION ────────────────────────────────────────────────
-    const result = await prisma.$transaction(async (tx) => {
+    /*
+    |--------------------------------------------------------------------------
+    | Step 8: Transaction
+    |--------------------------------------------------------------------------
+    */
 
-      // Create project
-      const project = await tx.projectMaster.create({
-        data: {
-          project_name: payload.projectName,
-          unique_project_id,
-          vendor_id: vendor.id,
-          created_by: createdByUserId,
-          project_status: "Initiated",
-          is_grouping: false,
-          lead_id: lead_id,
-        }
-      });
+    const result = await prisma.$transaction(
+      async (tx) => {
+        const project = await tx.projectMaster.create({
+          data: {
+            project_name: validPayload.projectName,
+            unique_project_id,
+            vendor_id: vendor.id,
+            created_by: createdByUserId,
+            project_status: "Initiated",
+            is_grouping: false,
+            lead_id,
+          },
+        });
 
-      // ── Create ProjectDetails entry ───────────────────────────────────────
-      const totalItems = payload.items.reduce((sum, item) => sum + Number(item.qty), 0);
+        resolvedProjectId = project.id;
 
-      await tx.projectDetails.create({
-        data: {
-          project_id: project.id,
-          vendor_id: vendor.id,
-          lead_id: lead_id,
-          room_name: payload.projectName,
-          total_items: totalItems,
-          total_packed: 0,
-          total_unpacked: totalItems,
-          is_grouping: false,
-          start_date: new Date(),
-          estimated_completion_date: null,
-        }
-      });
+        const totalItems = validPayload.items.reduce((sum, item) => {
+          return sum + Number(item.qty);
+        }, 0);
 
-      const toNumber = (value: any): number => {
-        if (value === undefined || value === null || value === "") {
-          return 0;
-        }
-
-        const numericValue = Number(
-          String(value)
-            .replace(/,/g, "")
-            .replace(/kg/gi, "")
-            .trim()
-        );
-
-        return Number.isFinite(numericValue) ? numericValue : 0;
-      };
-
-      const roundWeight = (value: number): number => {
-        return Number(value.toFixed(7));
-      };
-
-      for (const item of payload.items) {
-
-        const quantity = Number(item.qty);
-        const excelRowWeight = roundWeight(
-          toNumber((item as any).weight) * quantity
-        );
-        const perItemWeight =
-          quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
-        const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
-
-        // 1 cutList row per item regardless of qty
-        const row = await tx.cutList.create({
+        await tx.projectDetails.create({
           data: {
             project_id: project.id,
             vendor_id: vendor.id,
-            description: item.name,
-            length: Number(item.l1),
-            width: Number(item.l2),
-            thickness: Number(item.l3),
-            qty: quantity,
-            material_details: item.articleCode,
-            item_name: item.name,
-            status: "Active",
-            created_by: createdByUserId,
-            lead_id: lead_id,
-            elf: item.el1 || '',
-            elb: item.el2 || '',
-            esl: item.sl1 || '',
-            esr: item.sl2 || '',
-            unique_code: "",
-            unique_code_2: normalizeBarcode(item.barcode2) || null,
-            group_name: item.groupName || null,
-            category_name: item.categoryName || null,
-            procurement: item.procurement || null,
-            weight: excelRowWeight,
-          }
+            lead_id,
+            room_name: validPayload.projectName,
+            total_items: totalItems,
+            total_packed: 0,
+            total_unpacked: totalItems,
+            is_grouping: false,
+            start_date: new Date(),
+            estimated_completion_date: null,
+          },
         });
 
-        // Set unique_code: use barcode1 if provided, else generate from row id
-        const uniqueCode = normalizeBarcode(item.barcode1) || `${row.id}-${project.id}`;
-        await tx.cutList.update({
-          where: { id: row.id },
-          data: { unique_code: uniqueCode }
-        });
+        const cutListMachineMappingRows: any[] = [];
 
-        // ── Resolve category type ids for this item ────────────────────────
-        // Look up by categoryName (case-insensitive)
-        const itemCategoryName = (item.categoryName ?? "").trim().toLowerCase();
-        const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
-
-        // ── Determine machine mapping behaviour based on category type ─────
-        //
-        // type 1 or 2 → normal flow: machine type 3, 7 (if l3>9), 11 (if edge banding)
-        // type 3      → only machine type 17 and 18
-        // type 4      → skip CutListMachineMapping entirely
-        // no mapping  → normal flow (fallback)
-
-        const hasType4 = categoryTypeIds.includes(4);
-        const hasType3 = categoryTypeIds.includes(3);
-        const hasType1or2 = categoryTypeIds.some((t) => t === 1 || t === 2);
-        const isNormalFlow = hasType1or2 || categoryTypeIds.length === 0;
-
-        // type 4 — skip entirely
-        if (hasType4) {
-          continue;
-        }
-
-        // type 3 — only machines 17 and 18
-        if (hasType3 && !isNormalFlow) {
-          const scanPackMachineTypeIds = [17, 18];
-          for (const typeId of scanPackMachineTypeIds) {
-            const machine = await tx.machineMaster.findFirst({
-              where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
-              select: { id: true, sequence_no: true }
+        const pushMachineMappingRows = ({
+          cutListId,
+          machine,
+          quantity,
+        }: {
+          cutListId: number;
+          machine: {
+            id: number;
+            sequence_no: number | null;
+          };
+          quantity: number;
+        }) => {
+          for (let i = 0; i < quantity; i++) {
+            cutListMachineMappingRows.push({
+              cut_list_id: cutListId,
+              machine_id: machine.id,
+              project_id: project.id,
+              vendor_id: vendor.id,
+              lead_id,
+              sequence_no: machine.sequence_no ?? 0,
+              status: "Pending",
+              created_by: createdByUserId,
+              expected_in: true,
             });
-            if (machine) {
-              for (let i = 0; i < quantity; i++) {
-                await tx.cutListMachineMapping.create({
-                  data: {
-                    cut_list_id: row.id,
-                    machine_id: machine.id,
-                    project_id: project.id,
-                    vendor_id: vendor.id,
-                    lead_id: lead_id,
-                    sequence_no: machine.sequence_no ?? 0,
-                    status: "Pending",
-                    created_by: createdByUserId,
-                    expected_in: true,
-                    weight: Number(typeId) === 18 ? perItemWeight : 0,
-                  },
+          }
+        };
+
+        for (const item of validPayload.items) {
+          const quantity = Number(item.qty);
+          const hasEdgeBanding =
+            !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
+
+          const row = await tx.cutList.create({
+            data: {
+              project_id: project.id,
+              vendor_id: vendor.id,
+              description: item.name,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              qty: quantity,
+              material_details: item.articleCode,
+              item_name: item.name,
+              status: "Active",
+              created_by: createdByUserId,
+              lead_id,
+              elf: item.el1 || "",
+              elb: item.el2 || "",
+              esl: item.sl1 || "",
+              esr: item.sl2 || "",
+              unique_code: "",
+              unique_code_2: normalizeBarcode(item.barcode2) || null,
+              group_name: item.groupName || null,
+              category_name: item.categoryName || null,
+              procurement: item.procurement || null,
+            },
+          });
+
+          const uniqueCode =
+            normalizeBarcode(item.barcode1) || `${row.id}-${project.id}`;
+
+          await tx.cutList.update({
+            where: {
+              id: row.id,
+            },
+            data: {
+              unique_code: uniqueCode,
+            },
+          });
+
+          const itemCategoryName = (item.categoryName ?? "")
+            .trim()
+            .toLowerCase();
+
+          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+          const hasType4 = categoryTypeIds.includes(4);
+          const hasType3 = categoryTypeIds.includes(3);
+          const hasType1or2 = categoryTypeIds.some(
+            (typeId) => typeId === 1 || typeId === 2
+          );
+
+          const isNormalFlow = hasType1or2 || categoryTypeIds.length === 0;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 4: No machine mapping
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasType4) {
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 3: Only ScanPack flow
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasType3 && !isNormalFlow) {
+            if (isScanPackEnabled) {
+              const scanMachine = getMachine(17);
+              const packMachine = getMachine(18);
+
+              if (scanMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: scanMachine,
+                  quantity,
+                });
+              }
+
+              if (packMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: packMachine,
+                  quantity,
+                });
+              }
+            }
+
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Track & Trace flow: 3, 7, 11
+          |--------------------------------------------------------------------------
+          */
+
+          if (isTrackTraceEnabled) {
+            if (hasEdgeBanding) {
+              const edgeBandingMachine = getMachine(11);
+
+              if (edgeBandingMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: edgeBandingMachine,
+                  quantity,
+                });
+                //throw new Error("Edgebanding machine is not configured");
+              }
+
+
+            }
+
+            const cuttingMachine = getMachine(3, true);
+
+            if (cuttingMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: cuttingMachine,
+                quantity,
+              });
+            }
+
+            if (Number(item.l3) > 9) {
+              const cncMachine = getMachine(7, true);
+
+              if (cncMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: cncMachine,
+                  quantity,
                 });
               }
             }
           }
-          continue;
-        }
 
-        // ── Normal flow (type 1, 2, or no mapping) ─────────────────────────
+          /*
+          |--------------------------------------------------------------------------
+          | ScanPack flow: 17, 18
+          |--------------------------------------------------------------------------
+          */
 
-        // Edgebanding machine (type 11) — only if item has edge banding
-        if (hasEdgeBanding) {
-          const machine_type_11 = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: 11 },
-            select: { id: true, sequence_no: true }
-          });
+          if (isScanPackEnabled) {
+            const scanMachine = getMachine(17);
+            const packMachine = getMachine(18);
 
-          if (!machine_type_11) {
-            throw new Error("Edgebanding machine is not configured");
-          }
+            if (scanMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: scanMachine,
+                quantity,
+              });
+            }
 
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: machine_type_11.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id: lead_id,
-                sequence_no: machine_type_11.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-                weight: 0,
-              }
-            });
-          }
-        }
-
-        // Cutting machine (type 3) — all items
-        const machine_type_3 = await tx.machineMaster.findFirst({
-          where: { vendor_id: Number(vendor.id), machine_type_id: 3, status: "ACTIVE" },
-          select: { id: true, sequence_no: true },
-          orderBy: { id: "asc" },
-        });
-
-        if (machine_type_3) {
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: machine_type_3.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id: lead_id,
-                sequence_no: machine_type_3.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-                weight: 0,
-              },
-            });
-          }
-        }
-
-        // CNC machine (type 7) — only if l3 > 9
-        const l3Value = Number(item.l3);
-        if (l3Value > 9) {
-          const machine_type_7 = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: 7, status: "ACTIVE" },
-            select: { id: true, sequence_no: true },
-            orderBy: { id: "asc" },
-          });
-
-          if (machine_type_7) {
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine_type_7.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id: lead_id,
-                  sequence_no: machine_type_7.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                  weight: 0,
-                },
+            if (packMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: packMachine,
+                quantity,
               });
             }
           }
         }
 
-        // Default machines: type 17 and 18
-        const defaultMachineTypeIds = [17, 18];
-        for (const typeId of defaultMachineTypeIds) {
-          const machine = await tx.machineMaster.findFirst({
-            where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
-            select: { id: true, sequence_no: true }
-          });
+        /*
+        |--------------------------------------------------------------------------
+        | Bulk insert machine mappings
+        |--------------------------------------------------------------------------
+        */
 
-          if (machine) {
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id: lead_id,
-                  sequence_no: machine.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                  weight: Number(typeId) === 18 ? perItemWeight : 0,
-                },
-              });
-            }
-          }
+        const chunkSize = 1000;
+
+        for (
+          let index = 0;
+          index < cutListMachineMappingRows.length;
+          index += chunkSize
+        ) {
+          const chunk = cutListMachineMappingRows.slice(
+            index,
+            index + chunkSize
+          );
+
+          await tx.cutListMachineMapping.createMany({
+            data: chunk,
+          });
         }
+
+        return project;
+      },
+      {
+        maxWait: 10000,
+        timeout: 30000,
       }
-
-      return project;
-    });
+    );
 
     return {
       success: true,
       message: "Items processed successfully",
       project_id: result.id,
-      unique_project_id: unique_project_id
+      unique_project_id,
     };
-
   } catch (error: any) {
     console.error("Transaction failed:", error);
+
     return {
       success: false,
-      message: error.message || "Something went wrong. Transaction rolled back."
+      message:
+        error.message || "Something went wrong. Transaction rolled back.",
+    };
+  }
+};
+
+
+export const handelItems = async (
+  vendorToken: string,
+  payload: CadbidPayload
+) => {
+  let resolvedVendorId: number | null = null;
+  let resolvedProjectId: number | null = null;
+
+  const endpoint = "handelItems";
+
+  try {
+    try {
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint,
+          vendor_token: vendorToken,
+          vendor_id: resolvedVendorId,
+          payload: payload as any,
+          success: false,
+          response: "",
+          error: null,
+          project_id: resolvedProjectId,
+        },
+      });
+    } catch (logError) {
+      console.error("Failed to write initial api log:", logError);
+    }
+
+    console.log("payload", payload);
+
+    const cleanText = (value: unknown): string => {
+      if (value === null || value === undefined) return "";
+      return String(value).trim();
+    };
+
+    const requiredString = (field: string) =>
+      z.string().min(1, `${field} blank`);
+
+    const requiredNumber = (field: string) =>
+      z.coerce.number({ error: `${field} missing` });
+
+    const optionalWeight = z.preprocess((value) => {
+      if (value === null || value === undefined || value === "") {
+        return 0;
+      }
+
+      if (typeof value === "string") {
+        return value
+          .replace(/,/g, "")
+          .replace(/kg/gi, "")
+          .trim();
+      }
+
+      return value;
+    }, z.coerce.number().min(0, "weight cannot be negative").default(0));
+
+    const itemSchema = z.object({
+      articleCode: requiredString("articleCode"),
+      groupName: requiredString("groupName"),
+      categoryName: z.string().optional().nullable(),
+      procurement: z.string().optional().nullable(),
+
+      l1: requiredNumber("l1"),
+      l2: requiredNumber("l2"),
+      l3: requiredNumber("l3"),
+
+      name: requiredString("name"),
+
+      qty: z.coerce
+        .number()
+        .int()
+        .positive("qty must be greater than 0"),
+
+      /*
+      |--------------------------------------------------------------------------
+      | Same as createProjectService
+      |--------------------------------------------------------------------------
+      | API weight is treated as per-piece weight.
+      | Example: qty = 4 and weight = 6
+      | CutList.weight = 24
+      | CutListMachineMapping.weight = 6 only for machine type 18
+      |--------------------------------------------------------------------------
+      */
+      weight: optionalWeight,
+
+      barcode1: z.string().optional().nullable(),
+      barcode2: z.string().optional().nullable(),
+
+      el1: z.string().optional().nullable(),
+      el2: z.string().optional().nullable(),
+      sl1: z.string().optional().nullable(),
+      sl2: z.string().optional().nullable(),
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | customer_id is optional at schema level
+    |--------------------------------------------------------------------------
+    | It is required only when VendorMaster.push_lead_to_cadbid = true.
+    |--------------------------------------------------------------------------
+    */
+    const payloadSchema = z.object({
+      projectName: requiredString("projectName"),
+      customer_id: z.coerce.number().optional().nullable(),
+      items: z.array(itemSchema).min(1, "items missing"),
+    });
+
+    const validation = payloadSchema.safeParse(payload);
+
+    if (!validation.success) {
+      const errors = validation.error.issues.map((issue) => ({
+        field_name: issue.path.join("."),
+        message:
+          issue.code === "invalid_type"
+            ? "missing"
+            : issue.message.includes("blank")
+              ? "blank"
+              : issue.message,
+      }));
+
+      return {
+        success: false,
+        message: errors,
+      };
+    }
+
+    const validPayload = validation.data;
+
+    const normalizeBarcode = (value?: string | null) =>
+      String(value ?? "").trim();
+
+    const toNumber = (value: any): number => {
+      if (value === undefined || value === null || value === "") {
+        return 0;
+      }
+
+      const numericValue = Number(
+        String(value)
+          .replace(/,/g, "")
+          .replace(/kg/gi, "")
+          .trim()
+      );
+
+      return Number.isFinite(numericValue) ? numericValue : 0;
+    };
+
+    const roundWeight = (value: number): number => {
+      return Number(value.toFixed(7));
+    };
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 1 — Resolve vendor from token
+    |--------------------------------------------------------------------------
+    */
+
+    const vendorTokenEntry = await prisma.vendorTokens.findUnique({
+      where: {
+        token: vendorToken,
+      },
+      include: {
+        vendor: true,
+      },
+    });
+
+    if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
+      return {
+        success: false,
+        message: "Invalid or expired vendor token",
+      };
+    }
+
+    const vendor = vendorTokenEntry.vendor;
+    resolvedVendorId = vendor.id;
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 2 — Workstation configuration
+    |--------------------------------------------------------------------------
+    | is_tracktrace_enabled = true
+    | -> machine types 3, 7, 11
+    |
+    | is_scanpack_enabled = true
+    | -> machine types 17, 18
+    |
+    | both true
+    | -> machine types 3, 7, 11, 17, 18
+    |--------------------------------------------------------------------------
+    */
+
+    const isTrackTraceEnabled = vendor.is_tracktrace_enabled === true;
+    const isScanPackEnabled = vendor.is_scanpack_enabled === true;
+
+    if (!isTrackTraceEnabled && !isScanPackEnabled) {
+      return {
+        success: false,
+        message: "workstation not configured",
+      };
+    }
+
+    const enabledMachineTypeIds = [
+      ...(isTrackTraceEnabled ? [3, 7, 11] : []),
+      ...(isScanPackEnabled ? [17, 18] : []),
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 3 — Duplicate barcode validation
+    |--------------------------------------------------------------------------
+    | Same rule as createProjectService:
+    | 1. Duplicate barcode inside current payload is never allowed.
+    | 2. Track & Trace enabled -> barcode must be unique in DB.
+    | 3. Only Scan & Pack enabled -> DB duplicate is allowed.
+    |--------------------------------------------------------------------------
+    */
+
+    const uniqueCodesToInsert = validPayload.items
+      .map((item) => normalizeBarcode(item.barcode1))
+      .filter((code): code is string => Boolean(code));
+
+    const duplicatesInPayload = uniqueCodesToInsert.filter(
+      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
+    );
+
+    if (duplicatesInPayload.length > 0) {
+      return {
+        success: false,
+        message: `Duplicate barcodes found in Excel: ${[
+          ...new Set(duplicatesInPayload),
+        ].join(", ")}`,
+        duplicates: [...new Set(duplicatesInPayload)],
+      };
+    }
+
+    const shouldAllowDatabaseDuplicateBarcode =
+      vendor.is_tracktrace_enabled === false &&
+      vendor.is_scanpack_enabled === true;
+
+    const shouldCheckDatabaseBarcodeDuplicate =
+      vendor.is_tracktrace_enabled === true ||
+      !shouldAllowDatabaseDuplicateBarcode;
+
+    if (shouldCheckDatabaseBarcodeDuplicate && uniqueCodesToInsert.length > 0) {
+      const existingCodes = await prisma.cutList.findMany({
+        where: {
+          vendor_id: vendor.id,
+          unique_code: {
+            in: uniqueCodesToInsert,
+          },
+        },
+        select: {
+          unique_code: true,
+        },
+      });
+
+      if (existingCodes.length > 0) {
+        const databaseDuplicates = [
+          ...new Set(
+            existingCodes
+              .map((code) => code.unique_code)
+              .filter((code): code is string => Boolean(code))
+          ),
+        ];
+
+        return {
+          success: false,
+          message: `Duplicate barcodes found in database: ${databaseDuplicates.join(", ")}`,
+          duplicates: databaseDuplicates,
+        };
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4 — Resolve admin user
+    |--------------------------------------------------------------------------
+    */
+
+    const adminUser = await prisma.userMaster.findFirst({
+      where: {
+        vendor_id: vendor.id,
+        user_type_id: 2,
+      },
+      orderBy: {
+        created_at: "asc",
+      },
+    });
+
+    if (!adminUser) {
+      return {
+        success: false,
+        message: "No admin user found for this vendor",
+      };
+    }
+
+    const createdByUserId = adminUser.id;
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 5 — Resolve lead only when push_lead_to_cadbid is enabled
+    |--------------------------------------------------------------------------
+    */
+
+    let lead_id: number | null = null;
+
+    const shouldPushLeadToCadbid = vendor.push_lead_to_cadbid === true;
+
+    if (shouldPushLeadToCadbid) {
+      if (!validPayload.customer_id || Number(validPayload.customer_id) <= 0) {
+        return {
+          success: false,
+          message: "customer_id is required",
+        };
+      }
+
+      const customerMapping =
+        await prisma.leadExternalPlatformCustomerMapping.findFirst({
+          where: {
+            external_platform_customer_id: String(validPayload.customer_id),
+            vendor_id: vendor.id,
+          },
+          select: {
+            lead_id: true,
+          },
+        });
+
+      if (!customerMapping) {
+        return {
+          success: false,
+          message: "lead not mapped in cadbid and furnix",
+        };
+      }
+
+      lead_id = customerMapping.lead_id;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 6 — Pre-fetch category type mappings
+    |--------------------------------------------------------------------------
+    */
+
+    const categoryMappings = await prisma.projectCategoriesMaster.findMany({
+      where: {
+        vendor_id: vendor.id,
+        status: "Yes",
+      },
+      select: {
+        category_name: true,
+        projectCategoriesMasterVendorMapping: {
+          select: {
+            project_categories_type_master_id: true,
+          },
+        },
+      },
+    });
+
+    const categoryTypeMap = new Map<string, number[]>();
+
+    for (const category of categoryMappings) {
+      const typeIds = category.projectCategoriesMasterVendorMapping.map(
+        (mapping) => mapping.project_categories_type_master_id
+      );
+
+      categoryTypeMap.set(category.category_name.trim().toLowerCase(), typeIds);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 7 — Pre-fetch machines once
+    |--------------------------------------------------------------------------
+    | Do not query machineMaster inside item loop.
+    |--------------------------------------------------------------------------
+    */
+
+    const machines = await prisma.machineMaster.findMany({
+      where: {
+        vendor_id: vendor.id,
+        machine_type_id: {
+          in: enabledMachineTypeIds,
+        },
+      },
+      select: {
+        id: true,
+        machine_type_id: true,
+        sequence_no: true,
+        status: true,
+      },
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+    const getMachine = (
+      machineTypeId: number,
+      activeOnly: boolean = false
+    ) => {
+      return machines.find((machine) => {
+        if (machine.machine_type_id !== machineTypeId) return false;
+        if (activeOnly && machine.status !== "ACTIVE") return false;
+
+        return true;
+      });
+    };
+
+    const { randomUUID } = require("crypto");
+    const unique_project_id = randomUUID();
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8 — Transaction
+    |--------------------------------------------------------------------------
+    */
+
+    const result = await prisma.$transaction(
+      async (tx) => {
+        const project = await tx.projectMaster.create({
+          data: {
+            project_name: validPayload.projectName,
+            unique_project_id,
+            vendor_id: vendor.id,
+            created_by: createdByUserId,
+            project_status: "Initiated",
+            is_grouping: false,
+            lead_id,
+          },
+        });
+
+        resolvedProjectId = project.id;
+
+        const totalItems = validPayload.items.reduce((sum, item) => {
+          return sum + Number(item.qty);
+        }, 0);
+
+        await tx.projectDetails.create({
+          data: {
+            project_id: project.id,
+            vendor_id: vendor.id,
+            lead_id,
+            room_name: validPayload.projectName,
+            total_items: totalItems,
+            total_packed: 0,
+            total_unpacked: totalItems,
+            is_grouping: false,
+            start_date: new Date(),
+            estimated_completion_date: null,
+          },
+        });
+
+        const cutListMachineMappingRows: any[] = [];
+
+        const pushMachineMappingRows = ({
+          cutListId,
+          machine,
+          quantity,
+          perItemWeight,
+        }: {
+          cutListId: number;
+          machine: {
+            id: number;
+            machine_type_id: number | null;
+            sequence_no: number | null;
+          };
+          quantity: number;
+          perItemWeight: number;
+        }) => {
+          for (let i = 0; i < quantity; i++) {
+            cutListMachineMappingRows.push({
+              cut_list_id: cutListId,
+              machine_id: machine.id,
+              project_id: project.id,
+              vendor_id: vendor.id,
+              lead_id,
+              sequence_no: machine.sequence_no ?? 0,
+              status: "Pending",
+              created_by: createdByUserId,
+              expected_in: true,
+
+              /*
+              |--------------------------------------------------------------------------
+              | Same as createProjectService
+              |--------------------------------------------------------------------------
+              | Weight is stored only against packaging machine type 18.
+              |--------------------------------------------------------------------------
+              */
+              weight:
+                Number(machine.machine_type_id) === 18
+                  ? perItemWeight
+                  : 0,
+            });
+          }
+        };
+
+        for (const item of validPayload.items) {
+          const quantity = Number(item.qty);
+
+          /*
+          |--------------------------------------------------------------------------
+          | Same weight logic as createProjectService
+          |--------------------------------------------------------------------------
+          | API item.weight is per-piece weight.
+          | CutList.weight stores total weight = per-piece weight * qty.
+          | Packaging mapping weight stores per-piece weight.
+          |--------------------------------------------------------------------------
+          */
+          const excelRowWeight = roundWeight(
+            toNumber((item as any).weight) * quantity
+          );
+
+          const perItemWeight =
+            quantity > 0 ? roundWeight(excelRowWeight / quantity) : 0;
+
+          const hasEdgeBanding =
+            !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
+
+          const row = await tx.cutList.create({
+            data: {
+              project_id: project.id,
+              vendor_id: vendor.id,
+              description: item.name,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              qty: quantity,
+              material_details: item.articleCode,
+              item_name: item.name,
+              status: "Active",
+              created_by: createdByUserId,
+              lead_id,
+              elf: item.el1 || "",
+              elb: item.el2 || "",
+              esl: item.sl1 || "",
+              esr: item.sl2 || "",
+              unique_code: "",
+              unique_code_2: item.barcode2 || null,
+              group_name: item.groupName || null,
+              category_name: item.categoryName || null,
+              procurement: item.procurement || null,
+              weight: excelRowWeight,
+            },
+          });
+
+          const uniqueCode =
+            cleanText(item.barcode1) || `${row.id}-${project.id}`;
+
+          await tx.cutList.update({
+            where: {
+              id: row.id,
+            },
+            data: {
+              unique_code: uniqueCode,
+            },
+          });
+
+          const itemCategoryName = (item.categoryName ?? "")
+            .trim()
+            .toLowerCase();
+
+          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+          const hasType4 = categoryTypeIds.includes(4);
+          const hasType3 = categoryTypeIds.includes(3);
+          const hasType1Or2 = categoryTypeIds.some(
+            (typeId) => typeId === 1 || typeId === 2
+          );
+
+          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 4 — Skip machine mapping
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasType4) {
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 3 — Only ScanPack machine types 17 and 18
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasType3 && !isNormalFlow) {
+            if (isScanPackEnabled) {
+              const scanMachine = getMachine(17);
+              const packMachine = getMachine(18);
+
+              if (scanMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: scanMachine,
+                  quantity,
+                  perItemWeight,
+                });
+              }
+
+              if (packMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: packMachine,
+                  quantity,
+                  perItemWeight,
+                });
+              }
+            }
+
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Track & Trace flow — machine types 3, 7, 11
+          |--------------------------------------------------------------------------
+          */
+
+          if (isTrackTraceEnabled) {
+            if (hasEdgeBanding) {
+              const edgeBandingMachine = getMachine(11);
+
+              if (edgeBandingMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: edgeBandingMachine,
+                  quantity,
+                  perItemWeight,
+                });
+              }
+
+
+            }
+
+            const cuttingMachine = getMachine(3, true);
+
+            if (cuttingMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: cuttingMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+
+            if (Number(item.l3) > 9) {
+              const cncMachine = getMachine(7, true);
+
+              if (cncMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: cncMachine,
+                  quantity,
+                  perItemWeight,
+                });
+              }
+            }
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | ScanPack flow — machine types 17 and 18
+          |--------------------------------------------------------------------------
+          */
+
+          if (isScanPackEnabled) {
+            const scanMachine = getMachine(17);
+            const packMachine = getMachine(18);
+
+            if (scanMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: scanMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+
+            if (packMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: packMachine,
+                quantity,
+                perItemWeight,
+              });
+            }
+          }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Bulk insert machine mappings
+        |--------------------------------------------------------------------------
+        */
+
+        const chunkSize = 1000;
+
+        for (
+          let index = 0;
+          index < cutListMachineMappingRows.length;
+          index += chunkSize
+        ) {
+          const chunk = cutListMachineMappingRows.slice(
+            index,
+            index + chunkSize
+          );
+
+          await tx.cutListMachineMapping.createMany({
+            data: chunk,
+          });
+        }
+
+        return project;
+      },
+      {
+        maxWait: 10000,
+        timeout: 30000,
+      }
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 9 — Success API log
+    |--------------------------------------------------------------------------
+    */
+
+    try {
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint,
+          vendor_token: vendorToken,
+          vendor_id: vendor.id,
+          payload: {
+            ...validPayload,
+            lead_id,
+          } as any,
+          success: true,
+          response: {
+            project_id: result.id,
+            unique_project_id,
+          } as any,
+          error: null,
+          project_id: result.id,
+        },
+      });
+    } catch (logError) {
+      console.error("Failed to write success api log:", logError);
+    }
+
+    return {
+      success: true,
+      message: "Items processed successfully",
+      project_id: result.id,
+      unique_project_id,
+    };
+  } catch (error: any) {
+    console.error("Transaction failed:", error);
+
+    try {
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint,
+          vendor_token: vendorToken,
+          vendor_id: resolvedVendorId,
+          payload: payload as any,
+          success: false,
+          response: "",
+          error: error.message,
+          project_id: resolvedProjectId,
+        },
+      });
+    } catch (logError) {
+      console.error("Failed to write failure api log:", logError);
+    }
+
+    return {
+      success: false,
+      message:
+        error.message || "Something went wrong. Transaction rolled back.",
     };
   }
 };

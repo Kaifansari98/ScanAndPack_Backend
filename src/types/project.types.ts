@@ -60,7 +60,7 @@ export interface FullProjectCreateInput {
 
 export interface CadbidPayload {
   projectName: string;
-  customer_id:Number
+  customer_id?: number | string | null;
   items: CadbidItems[];
 }
 
