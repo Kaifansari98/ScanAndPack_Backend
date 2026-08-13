@@ -499,10 +499,12 @@ export type ProductTypeMasterCreateNestedOneWithoutLeadProcessBriefMappingInput 
   connect?: Prisma.ProductTypeMasterWhereUniqueInput
 }
 
-export type ProductTypeMasterUpdateOneRequiredWithoutLeadProcessBriefMappingNestedInput = {
+export type ProductTypeMasterUpdateOneWithoutLeadProcessBriefMappingNestedInput = {
   create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadProcessBriefMappingInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadProcessBriefMappingInput>
   connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadProcessBriefMappingInput
   upsert?: Prisma.ProductTypeMasterUpsertWithoutLeadProcessBriefMappingInput
+  disconnect?: Prisma.ProductTypeMasterWhereInput | boolean
+  delete?: Prisma.ProductTypeMasterWhereInput | boolean
   connect?: Prisma.ProductTypeMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutLeadProcessBriefMappingInput, Prisma.ProductTypeMasterUpdateWithoutLeadProcessBriefMappingInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadProcessBriefMappingInput>
 }
