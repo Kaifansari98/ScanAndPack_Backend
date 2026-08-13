@@ -102,6 +102,7 @@ export const createVendor = async (req: Request, res: Response) => {
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
     };
@@ -200,10 +201,13 @@ export const updateVendorController = async (req: Request, res: Response) => {
         ? (req.body.head_office_id ? Number(req.body.head_office_id) : null)
         : undefined,
 
-        is_scanpack_enabled: req.body.is_scanpack_enabled !== undefined
+      is_scanpack_enabled: req.body.is_scanpack_enabled !== undefined
         ? (req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true)
         : undefined,
-        
+      push_lead_to_cadbid: req.body.push_lead_to_cadbid !== undefined
+        ? req.body.push_lead_to_cadbid === "true" ||
+        req.body.push_lead_to_cadbid === true : undefined,
+
     };
 
     const vendor = await vendorService.updateVendor(vendorId, vendorData);
@@ -389,7 +393,8 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
       is_scanpack_enabled: req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true,
-      
+      push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
+
     };
 
     const vendor = await vendorService.onboardVendor(vendorData);

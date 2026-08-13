@@ -50,6 +50,7 @@ model VendorMaster {
   is_broadcast_enabled                   Boolean                                @default(false)
   is_scanpack_enabled                    Boolean                                @default(false)
   is_online_lead_feature_enabled         Boolean                                @default(false)
+  push_lead_to_cadbid                    Boolean                                @default(false)
   accounts                               AccountMaster[]
   additionalCostMasters                  AdditionalCostMaster[]                 @relation("AdditionalCostVendor")
   architechuremasters                    Architechuremaster[]
