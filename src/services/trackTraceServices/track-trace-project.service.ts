@@ -1394,8 +1394,8 @@ export const createProjectService_29_july = async (
           |--------------------------------------------------------------------------
           */
           if (hasType3 && !isNormalFlow) {
-            const scanMachine = getMachine(17);
-            const packMachine = getMachine(18);
+            const scanMachine = getMachine(17,true);
+            const packMachine = getMachine(18,true);
 
             if (scanMachine) {
               pushMachineMappingRows({
@@ -1424,7 +1424,7 @@ export const createProjectService_29_july = async (
           |--------------------------------------------------------------------------
           */
           if (hasEdgeBanding) {
-            const edgeBandingMachine = getMachine(11);
+            const edgeBandingMachine = getMachine(11,true);
 
             if (!edgeBandingMachine) {
               throw new Error("Edgebanding machine is not configured");
@@ -1462,8 +1462,8 @@ export const createProjectService_29_july = async (
             }
           }
 
-          const scanMachine = getMachine(17);
-          const packMachine = getMachine(18);
+          const scanMachine = getMachine(17,true);
+          const packMachine = getMachine(18,true);
 
           if (scanMachine) {
             pushMachineMappingRows({
@@ -2032,6 +2032,7 @@ export const createProjectService = async (
         const machines = await tx.machineMaster.findMany({
           where: {
             vendor_id: vendor.id,
+            status: "ACTIVE",
             machine_type_id: {
               in: [3, 7, 11, 17, 18],
             },
@@ -2214,8 +2215,8 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           */
           if (hasType3 && !isNormalFlow) {
-            const scanMachine = getMachine(17);
-            const packMachine = getMachine(18);
+            const scanMachine = getMachine(17,true);
+            const packMachine = getMachine(18,true);
 
             if (scanMachine) {
               pushMachineMappingRows({
@@ -2244,7 +2245,7 @@ export const createProjectService = async (
           |--------------------------------------------------------------------------
           */
           if (hasEdgeBanding) {
-            const edgeBandingMachine = getMachine(11);
+            const edgeBandingMachine = getMachine(11,true);
 
             if (!edgeBandingMachine) {
               throw new Error("Edgebanding machine is not configured");
@@ -2282,8 +2283,8 @@ export const createProjectService = async (
             }
           }
 
-          const scanMachine = getMachine(17);
-          const packMachine = getMachine(18);
+          const scanMachine = getMachine(17,true);
+          const packMachine = getMachine(18,true);
 
           if (scanMachine) {
             pushMachineMappingRows({
