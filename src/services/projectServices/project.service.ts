@@ -1934,15 +1934,16 @@ export const handelItems_13_aug_2026 = async (
             if (hasEdgeBanding) {
               const edgeBandingMachine = getMachine(11);
 
-              if (!edgeBandingMachine) {
-                throw new Error("Edgebanding machine is not configured");
+              if (edgeBandingMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: edgeBandingMachine,
+                  quantity,
+                });
+                //throw new Error("Edgebanding machine is not configured");
               }
 
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: edgeBandingMachine,
-                quantity,
-              });
+
             }
 
             const cuttingMachine = getMachine(3, true);
@@ -2665,16 +2666,16 @@ export const handelItems = async (
             if (hasEdgeBanding) {
               const edgeBandingMachine = getMachine(11);
 
-              if (!edgeBandingMachine) {
-                throw new Error("Edgebanding machine is not configured");
+              if (edgeBandingMachine) {
+                pushMachineMappingRows({
+                  cutListId: row.id,
+                  machine: edgeBandingMachine,
+                  quantity,
+                  perItemWeight,
+                });
               }
 
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: edgeBandingMachine,
-                quantity,
-                perItemWeight,
-              });
+
             }
 
             const cuttingMachine = getMachine(3, true);
