@@ -15934,7 +15934,8 @@ export const VendorMasterScalarFieldEnum = {
   website_link: 'website_link',
   is_broadcast_enabled: 'is_broadcast_enabled',
   is_scanpack_enabled: 'is_scanpack_enabled',
-  is_online_lead_feature_enabled: 'is_online_lead_feature_enabled'
+  is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
+  push_lead_to_cadbid: 'push_lead_to_cadbid'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -18309,7 +18310,10 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   external_category_id: 'external_category_id',
   created_by: 'created_by',
   parent_id: 'parent_id',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  use_in_assembled_packing: 'use_in_assembled_packing',
+  include_in_packing: 'include_in_packing',
+  scan_pack_validate: 'scan_pack_validate'
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]

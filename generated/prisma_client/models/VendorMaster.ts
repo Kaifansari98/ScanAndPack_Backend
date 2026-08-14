@@ -83,6 +83,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_broadcast_enabled: boolean | null
   is_scanpack_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
+  push_lead_to_cadbid: boolean | null
 }
 
 export type VendorMasterMaxAggregateOutputType = {
@@ -128,6 +129,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_broadcast_enabled: boolean | null
   is_scanpack_enabled: boolean | null
   is_online_lead_feature_enabled: boolean | null
+  push_lead_to_cadbid: boolean | null
 }
 
 export type VendorMasterCountAggregateOutputType = {
@@ -173,6 +175,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_broadcast_enabled: number
   is_scanpack_enabled: number
   is_online_lead_feature_enabled: number
+  push_lead_to_cadbid: number
   _all: number
 }
 
@@ -234,6 +237,7 @@ export type VendorMasterMinAggregateInputType = {
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
   is_online_lead_feature_enabled?: true
+  push_lead_to_cadbid?: true
 }
 
 export type VendorMasterMaxAggregateInputType = {
@@ -279,6 +283,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
   is_online_lead_feature_enabled?: true
+  push_lead_to_cadbid?: true
 }
 
 export type VendorMasterCountAggregateInputType = {
@@ -324,6 +329,7 @@ export type VendorMasterCountAggregateInputType = {
   is_broadcast_enabled?: true
   is_scanpack_enabled?: true
   is_online_lead_feature_enabled?: true
+  push_lead_to_cadbid?: true
   _all?: true
 }
 
@@ -456,6 +462,7 @@ export type VendorMasterGroupByOutputType = {
   is_broadcast_enabled: boolean
   is_scanpack_enabled: boolean
   is_online_lead_feature_enabled: boolean
+  push_lead_to_cadbid: boolean
   _count: VendorMasterCountAggregateOutputType | null
   _avg: VendorMasterAvgAggregateOutputType | null
   _sum: VendorMasterSumAggregateOutputType | null
@@ -524,6 +531,7 @@ export type VendorMasterWhereInput = {
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   accounts?: Prisma.AccountMasterListRelationFilter
   additionalCostMasters?: Prisma.AdditionalCostMasterListRelationFilter
   architechuremasters?: Prisma.ArchitechuremasterListRelationFilter
@@ -719,6 +727,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  push_lead_to_cadbid?: Prisma.SortOrder
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
   additionalCostMasters?: Prisma.AdditionalCostMasterOrderByRelationAggregateInput
   architechuremasters?: Prisma.ArchitechuremasterOrderByRelationAggregateInput
@@ -917,6 +926,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
   accounts?: Prisma.AccountMasterListRelationFilter
   additionalCostMasters?: Prisma.AdditionalCostMasterListRelationFilter
   architechuremasters?: Prisma.ArchitechuremasterListRelationFilter
@@ -1112,6 +1122,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  push_lead_to_cadbid?: Prisma.SortOrder
   _count?: Prisma.VendorMasterCountOrderByAggregateInput
   _avg?: Prisma.VendorMasterAvgOrderByAggregateInput
   _max?: Prisma.VendorMasterMaxOrderByAggregateInput
@@ -1165,6 +1176,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_broadcast_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  push_lead_to_cadbid?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
 }
 
 export type VendorMasterCreateInput = {
@@ -1208,6 +1220,7 @@ export type VendorMasterCreateInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -1403,6 +1416,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1595,6 +1609,7 @@ export type VendorMasterUpdateInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -1790,6 +1805,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -1984,6 +2000,7 @@ export type VendorMasterCreateManyInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
 }
 
 export type VendorMasterUpdateManyMutationInput = {
@@ -2027,6 +2044,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VendorMasterUncheckedUpdateManyInput = {
@@ -2072,6 +2090,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type VendorMasterCountOrderByAggregateInput = {
@@ -2117,6 +2136,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  push_lead_to_cadbid?: Prisma.SortOrder
 }
 
 export type VendorMasterAvgOrderByAggregateInput = {
@@ -2169,6 +2189,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  push_lead_to_cadbid?: Prisma.SortOrder
 }
 
 export type VendorMasterMinOrderByAggregateInput = {
@@ -2214,6 +2235,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_broadcast_enabled?: Prisma.SortOrder
   is_scanpack_enabled?: Prisma.SortOrder
   is_online_lead_feature_enabled?: Prisma.SortOrder
+  push_lead_to_cadbid?: Prisma.SortOrder
 }
 
 export type VendorMasterSumOrderByAggregateInput = {
@@ -4452,6 +4474,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -4646,6 +4669,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4853,6 +4877,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -5047,6 +5072,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5238,6 +5264,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -5432,6 +5459,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5639,6 +5667,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -5833,6 +5862,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6024,6 +6054,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -6218,6 +6249,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6425,6 +6457,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -6619,6 +6652,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6810,6 +6844,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -7004,6 +7039,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7211,6 +7247,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -7405,6 +7442,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7596,6 +7634,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -7790,6 +7829,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7997,6 +8037,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -8191,6 +8232,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8382,6 +8424,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -8576,6 +8619,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8783,6 +8827,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -8977,6 +9022,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9168,6 +9214,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -9362,6 +9409,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9569,6 +9617,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -9763,6 +9812,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9954,6 +10004,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -10148,6 +10199,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10355,6 +10407,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -10549,6 +10602,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10740,6 +10794,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -10934,6 +10989,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11141,6 +11197,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -11335,6 +11392,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11526,6 +11584,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -11720,6 +11779,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11927,6 +11987,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -12121,6 +12182,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12312,6 +12374,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -12506,6 +12569,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12713,6 +12777,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -12907,6 +12972,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13098,6 +13164,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -13292,6 +13359,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13499,6 +13567,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -13693,6 +13762,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13884,6 +13954,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -14078,6 +14149,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14285,6 +14357,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -14479,6 +14552,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14670,6 +14744,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -14864,6 +14939,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15071,6 +15147,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -15265,6 +15342,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15456,6 +15534,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -15650,6 +15729,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15857,6 +15937,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -16051,6 +16132,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16242,6 +16324,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -16436,6 +16519,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16643,6 +16727,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -16837,6 +16922,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17028,6 +17114,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -17222,6 +17309,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17429,6 +17517,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -17623,6 +17712,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17814,6 +17904,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -18008,6 +18099,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18215,6 +18307,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -18409,6 +18502,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18600,6 +18694,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -18794,6 +18889,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19001,6 +19097,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -19195,6 +19292,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19386,6 +19484,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -19580,6 +19679,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19787,6 +19887,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -19981,6 +20082,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20172,6 +20274,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -20366,6 +20469,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20573,6 +20677,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -20767,6 +20872,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20958,6 +21064,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -21152,6 +21259,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21359,6 +21467,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -21553,6 +21662,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21744,6 +21854,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -21938,6 +22049,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22145,6 +22257,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -22339,6 +22452,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22530,6 +22644,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -22724,6 +22839,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22931,6 +23047,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -23125,6 +23242,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23316,6 +23434,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -23510,6 +23629,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23717,6 +23837,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -23911,6 +24032,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24102,6 +24224,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
@@ -24296,6 +24419,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24503,6 +24627,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
@@ -24697,6 +24822,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24888,6 +25014,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -25082,6 +25209,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25289,6 +25417,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -25483,6 +25612,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25674,6 +25804,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -25868,6 +25999,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26075,6 +26207,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -26269,6 +26402,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26460,6 +26594,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -26654,6 +26789,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26861,6 +26997,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -27055,6 +27192,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27246,6 +27384,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -27440,6 +27579,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27647,6 +27787,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -27841,6 +27982,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28032,6 +28174,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -28226,6 +28369,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28433,6 +28577,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -28627,6 +28772,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28818,6 +28964,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -29012,6 +29159,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29219,6 +29367,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -29413,6 +29562,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29604,6 +29754,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -29798,6 +29949,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30005,6 +30157,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -30199,6 +30352,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30390,6 +30544,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -30584,6 +30739,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30791,6 +30947,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -30985,6 +31142,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31176,6 +31334,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -31370,6 +31529,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31577,6 +31737,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -31771,6 +31932,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31962,6 +32124,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -32156,6 +32319,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32363,6 +32527,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -32557,6 +32722,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32748,6 +32914,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -32942,6 +33109,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33149,6 +33317,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -33343,6 +33512,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33534,6 +33704,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -33728,6 +33899,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33935,6 +34107,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -34129,6 +34302,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34320,6 +34494,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -34514,6 +34689,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34721,6 +34897,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -34915,6 +35092,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35106,6 +35284,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -35300,6 +35479,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35507,6 +35687,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -35701,6 +35882,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35892,6 +36074,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -36086,6 +36269,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36293,6 +36477,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -36487,6 +36672,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36678,6 +36864,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -36872,6 +37059,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37079,6 +37267,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -37273,6 +37462,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37464,6 +37654,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -37658,6 +37849,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37865,6 +38057,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -38059,6 +38252,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38250,6 +38444,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -38444,6 +38639,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38651,6 +38847,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -38845,6 +39042,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39036,6 +39234,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -39230,6 +39429,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39437,6 +39637,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -39631,6 +39832,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39822,6 +40024,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -40016,6 +40219,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40223,6 +40427,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -40417,6 +40622,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40608,6 +40814,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -40802,6 +41009,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41009,6 +41217,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -41203,6 +41412,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41394,6 +41604,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -41588,6 +41799,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41795,6 +42007,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -41989,6 +42202,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42180,6 +42394,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -42374,6 +42589,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42581,6 +42797,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -42775,6 +42992,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42966,6 +43184,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -43160,6 +43379,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43367,6 +43587,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -43561,6 +43782,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43752,6 +43974,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -43946,6 +44169,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44153,6 +44377,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -44347,6 +44572,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44538,6 +44764,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -44732,6 +44959,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44939,6 +45167,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -45133,6 +45362,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45324,6 +45554,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -45518,6 +45749,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45725,6 +45957,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -45919,6 +46152,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46110,6 +46344,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -46304,6 +46539,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46511,6 +46747,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -46705,6 +46942,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46896,6 +47134,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -47090,6 +47329,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47297,6 +47537,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -47491,6 +47732,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47682,6 +47924,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -47876,6 +48119,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48083,6 +48327,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -48277,6 +48522,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48468,6 +48714,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -48662,6 +48909,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48869,6 +49117,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -49063,6 +49312,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49254,6 +49504,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -49448,6 +49699,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49655,6 +49907,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -49849,6 +50102,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50040,6 +50294,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -50234,6 +50489,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50441,6 +50697,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -50635,6 +50892,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50826,6 +51084,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -51020,6 +51279,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -51227,6 +51487,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -51421,6 +51682,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51612,6 +51874,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -51806,6 +52069,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52013,6 +52277,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -52207,6 +52472,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52398,6 +52664,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -52592,6 +52859,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52799,6 +53067,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -52993,6 +53262,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53184,6 +53454,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -53378,6 +53649,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53585,6 +53857,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -53779,6 +54052,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53970,6 +54244,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -54164,6 +54439,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54371,6 +54647,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -54565,6 +54842,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54756,6 +55034,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -54950,6 +55229,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55157,6 +55437,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -55351,6 +55632,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55542,6 +55824,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -55736,6 +56019,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55943,6 +56227,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -56137,6 +56422,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56328,6 +56614,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -56522,6 +56809,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56729,6 +57017,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -56923,6 +57212,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57114,6 +57404,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -57308,6 +57599,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57515,6 +57807,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -57709,6 +58002,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57900,6 +58194,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -58094,6 +58389,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58301,6 +58597,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -58495,6 +58792,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58686,6 +58984,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -58880,6 +59179,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59087,6 +59387,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -59281,6 +59582,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59472,6 +59774,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -59666,6 +59969,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59873,6 +60177,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -60067,6 +60372,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60258,6 +60564,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -60452,6 +60759,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60659,6 +60967,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -60853,6 +61162,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61044,6 +61354,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -61238,6 +61549,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61445,6 +61757,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -61639,6 +61952,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61830,6 +62144,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -62024,6 +62339,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62231,6 +62547,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -62425,6 +62742,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62616,6 +62934,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -62810,6 +63129,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63017,6 +63337,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -63211,6 +63532,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63402,6 +63724,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -63596,6 +63919,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63803,6 +64127,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -63997,6 +64322,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64188,6 +64514,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -64382,6 +64709,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64589,6 +64917,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -64783,6 +65112,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64974,6 +65304,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -65168,6 +65499,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65375,6 +65707,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -65569,6 +65902,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65760,6 +66094,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -65954,6 +66289,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66161,6 +66497,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -66355,6 +66692,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66546,6 +66884,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -66740,6 +67079,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66947,6 +67287,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -67141,6 +67482,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67332,6 +67674,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -67526,6 +67869,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67733,6 +68077,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -67927,6 +68272,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68118,6 +68464,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -68312,6 +68659,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68519,6 +68867,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -68713,6 +69062,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68904,6 +69254,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -69098,6 +69449,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69305,6 +69657,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -69499,6 +69852,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69690,6 +70044,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -69884,6 +70239,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70091,6 +70447,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -70285,6 +70642,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70476,6 +70834,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -70670,6 +71029,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70877,6 +71237,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -71071,6 +71432,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71262,6 +71624,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -71456,6 +71819,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71663,6 +72027,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -71857,6 +72222,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72048,6 +72414,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -72242,6 +72609,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72449,6 +72817,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -72643,6 +73012,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72834,6 +73204,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -73028,6 +73399,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73235,6 +73607,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -73429,6 +73802,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73620,6 +73994,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -73814,6 +74189,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74021,6 +74397,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -74215,6 +74592,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74406,6 +74784,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -74600,6 +74979,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74807,6 +75187,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -75001,6 +75382,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75192,6 +75574,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -75386,6 +75769,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75593,6 +75977,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -75787,6 +76172,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75978,6 +76364,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -76172,6 +76559,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76379,6 +76767,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -76573,6 +76962,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76764,6 +77154,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -76958,6 +77349,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77165,6 +77557,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -77359,6 +77752,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77550,6 +77944,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -77744,6 +78139,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77951,6 +78347,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -78145,6 +78542,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78336,6 +78734,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -78530,6 +78929,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78737,6 +79137,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -78931,6 +79332,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79122,6 +79524,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -79316,6 +79719,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79523,6 +79927,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -79717,6 +80122,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79908,6 +80314,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -80102,6 +80509,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80309,6 +80717,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -80503,6 +80912,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80694,6 +81104,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -80888,6 +81299,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81095,6 +81507,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -81289,6 +81702,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81480,6 +81894,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -81674,6 +82089,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81881,6 +82297,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -82075,6 +82492,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82266,6 +82684,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -82460,6 +82879,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82667,6 +83087,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -82861,6 +83282,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83052,6 +83474,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -83246,6 +83669,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83453,6 +83877,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -83647,6 +84072,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83838,6 +84264,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -84032,6 +84459,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84239,6 +84667,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -84433,6 +84862,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84624,6 +85054,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -84818,6 +85249,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -85025,6 +85457,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -85219,6 +85652,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85410,6 +85844,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -85604,6 +86039,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -85811,6 +86247,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -86005,6 +86442,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86196,6 +86634,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -86390,6 +86829,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86597,6 +87037,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -86791,6 +87232,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86982,6 +87424,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -87175,6 +87618,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87398,6 +87842,7 @@ export type VendorMasterScalarWhereInput = {
   is_broadcast_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_scanpack_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  push_lead_to_cadbid?: Prisma.BoolFilter<"VendorMaster"> | boolean
 }
 
 export type VendorMasterCreateWithoutThemesInput = {
@@ -87441,6 +87886,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -87635,6 +88081,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87842,6 +88289,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -88036,6 +88484,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88227,6 +88676,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -88421,6 +88871,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -88628,6 +89079,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -88822,6 +89274,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -89013,6 +89466,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -89207,6 +89661,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -89414,6 +89869,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -89608,6 +90064,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -89799,6 +90256,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -89993,6 +90451,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90200,6 +90659,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -90394,6 +90854,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -90585,6 +91046,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -90779,6 +91241,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90986,6 +91449,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -91180,6 +91644,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -91371,6 +91836,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -91565,6 +92031,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91772,6 +92239,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -91966,6 +92434,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -92157,6 +92626,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -92351,6 +92821,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -92558,6 +93029,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -92752,6 +93224,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -92943,6 +93416,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -93137,6 +93611,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -93344,6 +93819,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -93538,6 +94014,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -93729,6 +94206,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -93923,6 +94401,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -94130,6 +94609,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -94324,6 +94804,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94515,6 +94996,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -94709,6 +95191,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -94916,6 +95399,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -95110,6 +95594,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -95301,6 +95786,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -95495,6 +95981,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -95702,6 +96189,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -95896,6 +96384,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96087,6 +96576,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -96281,6 +96771,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96488,6 +96979,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -96682,6 +97174,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96873,6 +97366,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -97067,6 +97561,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -97274,6 +97769,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -97468,6 +97964,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -97659,6 +98156,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -97853,6 +98351,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98060,6 +98559,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -98254,6 +98754,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -98445,6 +98946,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -98639,6 +99141,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98846,6 +99349,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -99040,6 +99544,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -99231,6 +99736,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -99425,6 +99931,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99632,6 +100139,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -99826,6 +100334,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -100017,6 +100526,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -100211,6 +100721,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -100418,6 +100929,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -100612,6 +101124,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -100803,6 +101316,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -100997,6 +101511,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -101204,6 +101719,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -101398,6 +101914,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101589,6 +102106,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -101783,6 +102301,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -101990,6 +102509,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -102184,6 +102704,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -102375,6 +102896,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -102569,6 +103091,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -102776,6 +103299,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -102970,6 +103494,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -103161,6 +103686,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -103355,6 +103881,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -103562,6 +104089,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -103756,6 +104284,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -103947,6 +104476,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -104141,6 +104671,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -104348,6 +104879,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -104542,6 +105074,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -104733,6 +105266,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -104927,6 +105461,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -105134,6 +105669,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -105328,6 +105864,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -105519,6 +106056,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -105713,6 +106251,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -105920,6 +106459,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -106114,6 +106654,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -106305,6 +106846,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -106499,6 +107041,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -106706,6 +107249,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -106900,6 +107444,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -107091,6 +107636,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -107285,6 +107831,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -107492,6 +108039,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -107686,6 +108234,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -107877,6 +108426,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -108071,6 +108621,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -108278,6 +108829,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -108472,6 +109024,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -108663,6 +109216,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
@@ -108857,6 +109411,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -109064,6 +109619,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
@@ -109258,6 +109814,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -109449,6 +110006,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
@@ -109643,6 +110201,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -109850,6 +110409,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
@@ -110044,6 +110604,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -110235,6 +110796,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -110429,6 +110991,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -110636,6 +111199,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -110830,6 +111394,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -111021,6 +111586,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -111215,6 +111781,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -111422,6 +111989,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -111616,6 +112184,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -111807,6 +112376,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -112001,6 +112571,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -112208,6 +112779,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -112402,6 +112974,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -112593,6 +113166,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -112787,6 +113361,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -112994,6 +113569,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -113188,6 +113764,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -113379,6 +113956,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -113573,6 +114151,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -113780,6 +114359,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -113974,6 +114554,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -114165,6 +114746,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -114359,6 +114941,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -114566,6 +115149,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -114760,6 +115344,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -114951,6 +115536,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -115145,6 +115731,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -115352,6 +115939,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -115546,6 +116134,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -115737,6 +116326,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -115931,6 +116521,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -116138,6 +116729,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -116332,6 +116924,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -116523,6 +117116,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -116717,6 +117311,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -116924,6 +117519,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -117118,6 +117714,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -117309,6 +117906,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -117503,6 +118101,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -117710,6 +118309,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -117904,6 +118504,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -118095,6 +118696,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -118289,6 +118891,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -118496,6 +119099,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -118690,6 +119294,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -118881,6 +119486,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -119075,6 +119681,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -119282,6 +119889,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -119476,6 +120084,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -119667,6 +120276,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -119861,6 +120471,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -120068,6 +120679,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -120262,6 +120874,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -120453,6 +121066,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -120647,6 +121261,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -120854,6 +121469,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -121048,6 +121664,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -121239,6 +121856,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
@@ -121433,6 +122051,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
@@ -121640,6 +122259,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -121834,6 +122454,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -122026,6 +122647,7 @@ export type VendorMasterCreateManyStateInput = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
 }
 
 export type VendorMasterUpdateWithoutStateInput = {
@@ -122069,6 +122691,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
@@ -122262,6 +122885,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
   additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -122455,6 +123079,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -123863,6 +124488,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   additionalCostMasters?: boolean | Prisma.VendorMaster$additionalCostMastersArgs<ExtArgs>
   architechuremasters?: boolean | Prisma.VendorMaster$architechuremastersArgs<ExtArgs>
@@ -124059,6 +124685,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -124105,6 +124732,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
   state?: boolean | Prisma.VendorMaster$stateArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -124151,9 +124779,10 @@ export type VendorMasterSelectScalar = {
   is_broadcast_enabled?: boolean
   is_scanpack_enabled?: boolean
   is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   additionalCostMasters?: boolean | Prisma.VendorMaster$additionalCostMastersArgs<ExtArgs>
@@ -124511,6 +125140,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_broadcast_enabled: boolean
     is_scanpack_enabled: boolean
     is_online_lead_feature_enabled: boolean
+    push_lead_to_cadbid: boolean
   }, ExtArgs["result"]["vendorMaster"]>
   composites: {}
 }
@@ -125126,6 +125756,7 @@ export interface VendorMasterFieldRefs {
   readonly is_broadcast_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_scanpack_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_online_lead_feature_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly push_lead_to_cadbid: Prisma.FieldRef<"VendorMaster", 'Boolean'>
 }
     
 
