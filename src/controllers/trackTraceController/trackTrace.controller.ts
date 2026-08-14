@@ -860,14 +860,17 @@ export const getProjectCategoryTypes = async (_req: Request, res: Response) => {
 
 // Controller
 export const createProjectCategory = async (_req: Request, res: Response) => {
-  const { vendor_id, category_name, type_ids, created_by, parent_id } = _req.body;
+  const { vendor_id, category_name, type_ids, created_by, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing } = _req.body;
 
   const serviceResponse = await trackTraceService.createProjectCategory(
     Number(vendor_id),
     String(category_name),
     Array.isArray(type_ids) ? type_ids.map(Number) : [],
     Number(created_by),
-    parent_id ? Number(parent_id) : null
+    parent_id ? Number(parent_id) : null,
+    include_in_packing !== undefined ? Boolean(include_in_packing) : false,
+    scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : false,
+    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : false
   );
 
   if (serviceResponse.status == 0) {
@@ -881,7 +884,7 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
 };
 
 export const updateProjectCategory = async (_req: Request, res: Response) => {
-  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id } =
+  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing } =
     _req.body;
 
   const serviceResponse = await trackTraceService.updateProjectCategory(
@@ -891,7 +894,10 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
     status as "Yes" | "No",
     Array.isArray(type_ids) ? type_ids.map(Number) : [],
     Number(updated_by),
-    parent_id ? Number(parent_id) : null
+    parent_id ? Number(parent_id) : null,
+    include_in_packing !== undefined ? Boolean(include_in_packing) : undefined,
+    scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : undefined,
+    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : undefined
   );
 
   if (serviceResponse.status == 0) {
@@ -956,7 +962,8 @@ export const toggleProjectCategoryStatus = async (
   _req: Request,
   res: Response,
 ) => {
-  const { id, status } = _req.body;
+  const id = _req.params.id || _req.body.id;
+  const { status } = _req.body;
 
   const serviceResponse = await trackTraceService.toggleProjectCategoryStatus(
     Number(id),
