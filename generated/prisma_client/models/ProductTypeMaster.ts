@@ -515,10 +515,12 @@ export type ProductTypeMasterCreateNestedOneWithoutLeadRequirementMaterialMappin
   connect?: Prisma.ProductTypeMasterWhereUniqueInput
 }
 
-export type ProductTypeMasterUpdateOneRequiredWithoutLeadRequirementMaterialMappingNestedInput = {
+export type ProductTypeMasterUpdateOneWithoutLeadRequirementMaterialMappingNestedInput = {
   create?: Prisma.XOR<Prisma.ProductTypeMasterCreateWithoutLeadRequirementMaterialMappingInput, Prisma.ProductTypeMasterUncheckedCreateWithoutLeadRequirementMaterialMappingInput>
   connectOrCreate?: Prisma.ProductTypeMasterCreateOrConnectWithoutLeadRequirementMaterialMappingInput
   upsert?: Prisma.ProductTypeMasterUpsertWithoutLeadRequirementMaterialMappingInput
+  disconnect?: Prisma.ProductTypeMasterWhereInput | boolean
+  delete?: Prisma.ProductTypeMasterWhereInput | boolean
   connect?: Prisma.ProductTypeMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductTypeMasterUpdateToOneWithWhereWithoutLeadRequirementMaterialMappingInput, Prisma.ProductTypeMasterUpdateWithoutLeadRequirementMaterialMappingInput>, Prisma.ProductTypeMasterUncheckedUpdateWithoutLeadRequirementMaterialMappingInput>
 }

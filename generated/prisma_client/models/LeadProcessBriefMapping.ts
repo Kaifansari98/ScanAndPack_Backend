@@ -247,7 +247,7 @@ export type LeadProcessBriefMappingGroupByOutputType = {
   created_by: number
   updated_at: Date
   updated_by: number | null
-  b2b_requirement_type_id: number | null
+  b2b_requirement_type_id: number
   _count: LeadProcessBriefMappingCountAggregateOutputType | null
   _avg: LeadProcessBriefMappingAvgAggregateOutputType | null
   _sum: LeadProcessBriefMappingSumAggregateOutputType | null
@@ -283,7 +283,7 @@ export type LeadProcessBriefMappingWhereInput = {
   created_by?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"LeadProcessBriefMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
-  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
+  b2b_requirement_type_id?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
   b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -303,7 +303,7 @@ export type LeadProcessBriefMappingOrderByWithRelationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  b2b_requirement_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
   b2bRequirementType?: Prisma.B2BRequirementTypeMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
@@ -326,7 +326,7 @@ export type LeadProcessBriefMappingWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"LeadProcessBriefMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
-  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
+  b2b_requirement_type_id?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
   b2bRequirementType?: Prisma.XOR<Prisma.B2BRequirementTypeMasterNullableScalarRelationFilter, Prisma.B2BRequirementTypeMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
@@ -346,7 +346,7 @@ export type LeadProcessBriefMappingOrderByWithAggregationInput = {
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  b2b_requirement_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  b2b_requirement_type_id?: Prisma.SortOrder
   _count?: Prisma.LeadProcessBriefMappingCountOrderByAggregateInput
   _avg?: Prisma.LeadProcessBriefMappingAvgOrderByAggregateInput
   _max?: Prisma.LeadProcessBriefMappingMaxOrderByAggregateInput
@@ -367,7 +367,7 @@ export type LeadProcessBriefMappingScalarWhereWithAggregatesInput = {
   created_by?: Prisma.IntWithAggregatesFilter<"LeadProcessBriefMapping"> | number
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"LeadProcessBriefMapping"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"LeadProcessBriefMapping"> | number | null
-  b2b_requirement_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadProcessBriefMapping"> | number | null
+  b2b_requirement_type_id?: Prisma.IntWithAggregatesFilter<"LeadProcessBriefMapping"> | number
 }
 
 export type LeadProcessBriefMappingCreateInput = {
@@ -392,7 +392,7 @@ export type LeadProcessBriefMappingUncheckedCreateInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateInput = {
@@ -417,7 +417,7 @@ export type LeadProcessBriefMappingUncheckedUpdateInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyInput = {
@@ -430,7 +430,7 @@ export type LeadProcessBriefMappingCreateManyInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateManyMutationInput = {
@@ -448,7 +448,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingListRelationFilter = {
@@ -836,7 +836,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutVendorInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutVendorInput = {
@@ -878,7 +878,7 @@ export type LeadProcessBriefMappingScalarWhereInput = {
   created_by?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
   updated_at?: Prisma.DateTimeFilter<"LeadProcessBriefMapping"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
-  b2b_requirement_type_id?: Prisma.IntNullableFilter<"LeadProcessBriefMapping"> | number | null
+  b2b_requirement_type_id?: Prisma.IntFilter<"LeadProcessBriefMapping"> | number
 }
 
 export type LeadProcessBriefMappingCreateWithoutCreatedByInput = {
@@ -901,7 +901,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutCreatedByInput = {
@@ -934,7 +934,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   created_by: number
   updated_at?: Date | string
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutUpdatedByInput = {
@@ -999,7 +999,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutLeadInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutLeadInput = {
@@ -1048,7 +1048,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutProductTypeMasterInput 
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutProductTypeMasterInput = {
@@ -1097,7 +1097,7 @@ export type LeadProcessBriefMappingUncheckedCreateWithoutProcessBriefInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateOrConnectWithoutProcessBriefInput = {
@@ -1184,7 +1184,7 @@ export type LeadProcessBriefMappingCreateManyVendorInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutVendorInput = {
@@ -1207,7 +1207,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorInput = {
@@ -1219,7 +1219,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyCreatedByInput = {
@@ -1231,7 +1231,7 @@ export type LeadProcessBriefMappingCreateManyCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingCreateManyUpdatedByInput = {
@@ -1243,7 +1243,7 @@ export type LeadProcessBriefMappingCreateManyUpdatedByInput = {
   created_at?: Date | string
   created_by: number
   updated_at?: Date | string
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutCreatedByInput = {
@@ -1266,7 +1266,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1278,7 +1278,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutUpdatedByInput = {
@@ -1301,7 +1301,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1313,7 +1313,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyLeadInput = {
@@ -1325,7 +1325,7 @@ export type LeadProcessBriefMappingCreateManyLeadInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutLeadInput = {
@@ -1348,7 +1348,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutLeadInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadInput = {
@@ -1360,7 +1360,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyProductTypeMasterInput = {
@@ -1372,7 +1372,7 @@ export type LeadProcessBriefMappingCreateManyProductTypeMasterInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutProductTypeMasterInput = {
@@ -1395,7 +1395,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutProductTypeMasterInput 
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeMasterInput = {
@@ -1407,7 +1407,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutProductTypeMasterIn
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyProcessBriefInput = {
@@ -1419,7 +1419,7 @@ export type LeadProcessBriefMappingCreateManyProcessBriefInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
-  b2b_requirement_type_id?: number | null
+  b2b_requirement_type_id: number
 }
 
 export type LeadProcessBriefMappingUpdateWithoutProcessBriefInput = {
@@ -1442,7 +1442,7 @@ export type LeadProcessBriefMappingUncheckedUpdateWithoutProcessBriefInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefInput = {
@@ -1454,7 +1454,7 @@ export type LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefInput =
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  b2b_requirement_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  b2b_requirement_type_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type LeadProcessBriefMappingCreateManyB2bRequirementTypeInput = {
@@ -1629,7 +1629,7 @@ export type $LeadProcessBriefMappingPayload<ExtArgs extends runtime.Types.Extens
     created_by: number
     updated_at: Date
     updated_by: number | null
-    b2b_requirement_type_id: number | null
+    b2b_requirement_type_id: number
   }, ExtArgs["result"]["leadProcessBriefMapping"]>
   composites: {}
 }

@@ -2693,7 +2693,10 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
   external_category_id: 'external_category_id',
   created_by: 'created_by',
   parent_id: 'parent_id',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  use_in_assembled_packing: 'use_in_assembled_packing',
+  include_in_packing: 'include_in_packing',
+  scan_pack_validate: 'scan_pack_validate'
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
