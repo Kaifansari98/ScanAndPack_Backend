@@ -44,7 +44,7 @@ export const getOrSeedRequirementDocumentTypes = async (vendor_id: number) => {
   const allDocTypes = await prisma.documentTypeMaster.findMany({
     where: {
       vendor_id,
-      tag: { in: ["LAYOUT", "SIZES", "CUTLIST", "DRAWING"] },
+      stage: "Requirement Details",
     },
     orderBy: { id: "asc" },
   });

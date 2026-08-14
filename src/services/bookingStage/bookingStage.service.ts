@@ -303,6 +303,119 @@ export class BookingStageService {
   public async createBookingStage(data: CreateBookingStageDto) {
     const response = await prisma.$transaction(
       async (tx: any) => {
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          include: {
+            franchise: true,
+            leadB2BReqMappings: {
+              select: {
+                b2b_requirement_type_id: true,
+              },
+            },
+            leadProcessBriefs: {
+              select: {
+                b2b_requirement_type_id: true,
+              },
+            },
+          },
+        });
+
+        if (!lead) {
+          throw new Error(`Lead ${data.lead_id} not found`);
+        }
+
+        const isB2B = lead.franchise?.moduled_for_b2b === true;
+        if (isB2B) {
+          const b2bReqTypeIds = new Set<number>();
+          if (lead.leadB2BReqMappings) {
+            for (const mapping of lead.leadB2BReqMappings) {
+              if (mapping.b2b_requirement_type_id) {
+                b2bReqTypeIds.add(mapping.b2b_requirement_type_id);
+              }
+            }
+          }
+          if (lead.leadProcessBriefs) {
+            for (const mapping of lead.leadProcessBriefs) {
+              if (mapping.b2b_requirement_type_id) {
+                b2bReqTypeIds.add(mapping.b2b_requirement_type_id);
+              }
+            }
+          }
+
+          const uniqueB2bReqTypeIds = Array.from(b2bReqTypeIds);
+
+          if (uniqueB2bReqTypeIds.length === 0) {
+            throw new Error(
+              "No requirement types or process briefs are mapped to this B2B lead. Please map at least one requirement type or process brief."
+            );
+          }
+
+          // Fetch all non-deleted requirement documents and materials for this lead
+          const [documents, materials] = await Promise.all([
+            tx.leadDocuments.findMany({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                is_deleted: false,
+              },
+              select: {
+                b2b_requirement_type_id: true,
+                documentType: {
+                  select: {
+                    tag: true,
+                  },
+                },
+              },
+            }),
+            tx.leadRequirementMaterialMapping.findMany({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+              },
+              select: {
+                b2b_requirement_type_id: true,
+                product_type_id: true,
+              },
+            }),
+          ]);
+
+          // Fetch requirement type details to get their names for user-friendly error messages
+          const reqTypes = await tx.b2BRequirementTypeMaster.findMany({
+            where: {
+              id: { in: uniqueB2bReqTypeIds },
+            },
+            select: {
+              id: true,
+              type: true,
+            },
+          });
+
+          for (const reqTypeId of uniqueB2bReqTypeIds) {
+            const reqTypeObj = reqTypes.find((t: any) => t.id === reqTypeId);
+            const reqTypeName = reqTypeObj?.type || `Requirement Type #${reqTypeId}`;
+
+            const reqDocs = documents.filter(
+              (doc: any) => doc.b2b_requirement_type_id === reqTypeId
+            );
+            if (reqDocs.length === 0) {
+              throw new Error(
+                `At least one requirement document must be uploaded for requirement type: "${reqTypeName}" before moving to booking.`
+              );
+            }
+
+            const hasMaterial = materials.some(
+              (mat: any) =>
+                mat.b2b_requirement_type_id === reqTypeId ||
+                mat.product_type_id === reqTypeId
+            );
+            if (!hasMaterial) {
+              throw new Error(
+                `At least one material configuration must be added for requirement type: "${reqTypeName}" before moving to booking.`
+              );
+            }
+          }
+        }
+
         const response: any = {
           documentsUploaded: [],
           paymentInfo: null,
