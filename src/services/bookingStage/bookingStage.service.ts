@@ -1900,13 +1900,13 @@ export class BookingStageService {
           let toDate: Date | null = null;
 
           if (dateRange.from) {
-            fromDate = new Date(dateRange.from);
-            fromDate.setHours(0, 0, 0, 0);
+            // Parse in Indian Standard Time (UTC+05:30) to handle timezone offset properly
+            fromDate = new Date(`${dateRange.from}T00:00:00+05:30`);
           }
 
           if (dateRange.to) {
-            toDate = new Date(dateRange.to);
-            toDate.setHours(23, 59, 59, 999);
+            // Parse in Indian Standard Time (UTC+05:30) to handle timezone offset properly
+            toDate = new Date(`${dateRange.to}T23:59:59.999+05:30`);
           }
 
           if (fromDate && toDate) {
@@ -1915,8 +1915,7 @@ export class BookingStageService {
               lte: toDate,
             };
           } else if (fromDate) {
-            const endOfDay = new Date(fromDate);
-            endOfDay.setHours(23, 59, 59, 999);
+            const endOfDay = new Date(fromDate.getTime() + 24 * 60 * 60 * 1000 - 1);
             openScheduleFilter.scheduled_for = {
               gte: fromDate,
               lte: endOfDay,
@@ -4424,8 +4423,10 @@ export class BookingStageService {
       // ========== DATE RANGE FILTER ==========
 
       const dateRange = filters.date_range;
+      const shouldFilterPendingServicesBySchedule =
+        filters.pending_services && (dateRange?.from || dateRange?.to);
 
-      if (dateRange && (dateRange.from || dateRange.to)) {
+      if (dateRange && (dateRange.from || dateRange.to) && !shouldFilterPendingServicesBySchedule) {
         let fromDate: Date | null = null;
         let toDate: Date | null = null;
 
@@ -4473,6 +4474,50 @@ export class BookingStageService {
             },
           });
         }
+      }
+
+      if (filters.pending_services) {
+        const openScheduleFilter: Prisma.LeadServiceScheduleWhereInput = {
+          status: "open",
+        };
+
+        if (dateRange && (dateRange.from || dateRange.to)) {
+          let fromDate: Date | null = null;
+          let toDate: Date | null = null;
+
+          if (dateRange.from) {
+            // Parse in Indian Standard Time (UTC+05:30) to handle timezone offset properly
+            fromDate = new Date(`${dateRange.from}T00:00:00+05:30`);
+          }
+
+          if (dateRange.to) {
+            // Parse in Indian Standard Time (UTC+05:30) to handle timezone offset properly
+            toDate = new Date(`${dateRange.to}T23:59:59.999+05:30`);
+          }
+
+          if (fromDate && toDate) {
+            openScheduleFilter.scheduled_for = {
+              gte: fromDate,
+              lte: toDate,
+            };
+          } else if (fromDate) {
+            const endOfDay = new Date(fromDate.getTime() + 24 * 60 * 60 * 1000 - 1);
+            openScheduleFilter.scheduled_for = {
+              gte: fromDate,
+              lte: endOfDay,
+            };
+          } else if (toDate) {
+            openScheduleFilter.scheduled_for = {
+              lte: toDate,
+            };
+          }
+        }
+
+        addAnd({
+          serviceSchedules: {
+            some: openScheduleFilter,
+          },
+        });
       }
 
       if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
