@@ -1,7 +1,12 @@
 import { Router } from "express";
 import { onlineLeadController } from "../../controllers/leadModuleControllers/onlineLead.controller";
+import { facebookWebhookController } from "../../controllers/leadModuleControllers/facebookWebhook.controller";
 
 const router = Router();
+
+// Facebook / Instagram Webhook endpoints
+router.get("/webhook/facebook", facebookWebhookController.verifyWebhook);
+router.post("/webhook/facebook", facebookWebhookController.handleWebhook);
 
 // Lead pool, My leads, Overall leads, and detailed views
 router.get("/", onlineLeadController.fetchLeads);
