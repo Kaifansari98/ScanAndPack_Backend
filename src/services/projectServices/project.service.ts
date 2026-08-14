@@ -2631,8 +2631,8 @@ export const handelItems = async (
 
           if (hasType3 && !isNormalFlow) {
             if (isScanPackEnabled) {
-              const scanMachine = getMachine(17);
-              const packMachine = getMachine(18);
+              const scanMachine = getMachine(17,true);
+              const packMachine = getMachine(18,true);
 
               if (scanMachine) {
                 pushMachineMappingRows({
@@ -2664,7 +2664,7 @@ export const handelItems = async (
 
           if (isTrackTraceEnabled) {
             if (hasEdgeBanding) {
-              const edgeBandingMachine = getMachine(11);
+              const edgeBandingMachine = getMachine(11,true);
 
               if (edgeBandingMachine) {
                 pushMachineMappingRows({
@@ -2710,8 +2710,8 @@ export const handelItems = async (
           */
 
           if (isScanPackEnabled) {
-            const scanMachine = getMachine(17);
-            const packMachine = getMachine(18);
+            const scanMachine = getMachine(17,true);
+            const packMachine = getMachine(18,true);
 
             if (scanMachine) {
               pushMachineMappingRows({

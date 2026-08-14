@@ -3344,6 +3344,13 @@ model ProjectCategoriesMaster {
   created_by                           Int?
   parent_id                            Int?
   updated_by                           Int?
+  use_in_assembled_packing            Boolean         @default(false)
+  include_in_packing                  Boolean         @default(false) // check if any item under this category is applicable for packing 
+  scan_pack_validate                  Boolean         @default(false) // check if any item under this category is applicable for scan and pack 
+  //if scan_pack_validate is true and include_in_packing is true then scan the item and pack 
+  // if scan_pack_validate is false and include_in_packing is true that mean this item is should be addedin box without scanning
+  // if scan_pack_validate is false and include_in_packing is false that mean this item is not applicable for packing
+  // if scan_pack_validate is true and include_in_packing is false then this is not a correct case
   products                             ProductMaster[]                        @relation("ProductCategory")
   subCategoryProducts                  ProductMaster[]                        @relation("ProductSubCategory")
   parent                               ProjectCategoriesMaster?               @relation("ProjectCategoryHierarchy", fields: [parent_id], references: [id])
