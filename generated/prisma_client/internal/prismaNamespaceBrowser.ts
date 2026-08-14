@@ -2378,6 +2378,8 @@ export type OrderLoginPoFileMappingScalarFieldEnum = (typeof OrderLoginPoFileMap
 export const MachineTypeMasterScalarFieldEnum = {
   id: 'id',
   machine_type: 'machine_type',
+  is_scanandpack: 'is_scanandpack',
+  is_trackandtrace: 'is_trackandtrace',
   active: 'active',
   created_at: 'created_at',
   updated_at: 'updated_at'

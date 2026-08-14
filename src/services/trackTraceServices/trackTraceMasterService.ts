@@ -274,14 +274,44 @@ static async getMachinesByVendor(vendor_id: number) {
   }
 }
 
-export const getMachineType = async () => {
+export const getMachineType = async (vendor_id?: number) => {
   try {
+    let whereCondition: any = {
+      active: "YES",
+    };
+
+    if (vendor_id) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendor_id },
+        select: {
+          is_scanpack_enabled: true,
+          is_tracktrace_enabled: true,
+        },
+      });
+
+      if (vendor) {
+        const { is_scanpack_enabled, is_tracktrace_enabled } = vendor;
+
+        if (is_scanpack_enabled && is_tracktrace_enabled) {
+          // If both are enabled, show all active machine types
+        } else if (is_scanpack_enabled) {
+          // If only scanpack enabled, show machine types where is_scanandpack is true
+          whereCondition.is_scanandpack = true;
+        } else if (is_tracktrace_enabled) {
+          // If only tracktrace enabled, show machine types where is_trackandtrace is true
+          whereCondition.is_trackandtrace = true;
+        }
+      }
+    }
+
     return await prisma.machineTypeMaster.findMany({
+      where: whereCondition,
       orderBy: {
         machine_type: "asc",
       },
     });
   } catch (error) {
+    logger.error("Error fetching machine types", error);
     return null;
   }
 };
