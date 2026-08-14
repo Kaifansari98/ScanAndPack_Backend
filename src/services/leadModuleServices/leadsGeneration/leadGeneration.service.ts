@@ -211,427 +211,449 @@ export const createLeadService = async (
     order_number,
   } = payload;
 
-  const transactionResult = await prisma.$transaction(
-    async (tx) => {
-      try {
-        // 🔍 optional input snapshot
-        logger.debug("[SERVICE] createLead input", {
-          vendor_id,
-          franchise_id,
-          created_by,
-          priority,
-          product_types,
-          product_structures,
-          fileCount: files.length,
-        });
+  let transactionResult: any;
+  let retries = 0;
+  const maxRetries = 5;
 
-        // Validate franchise belongs to vendor
-        const franchise = await tx.franchiseMaster.findFirst({
-          where: {
-            id: franchise_id,
-            vendor_id,
-          },
-          select: { id: true },
-        });
-
-        if (!franchise) {
-          throw new Error("Invalid franchise_id for the given vendor_id.");
-        }
-
-        if (client_id) {
-          const client = await tx.clientMaster.findFirst({
-            where: { id: client_id, vendor_id },
-            select: { id: true },
-          });
-
-          if (!client) {
-            throw new Error("Invalid client_id for the given vendor_id.");
-          }
-        }
-
-        if (!payload.is_draft) {
-          const similarLead = await findSimilarLeadByContactAndProducts(
-            tx,
-            vendor_id,
-            {
-              contact_no,
-              product_types,
-            },
-          );
-
-          if (similarLead) {
-            throw Object.assign(
-              new Error(
-                "Similar lead already exists in the CRM, Hence it cannot be created.",
-              ),
-              {
-                statusCode: 409,
-                lead: toLeadLookupPayload(similarLead),
-              },
-            );
-          }
-        }
-
-        // 1. AccountMaster (reuse if same phone/email exists for this vendor)
-        const matchConditions: Array<Record<string, string>> = [];
-        const normalizedEmail = email?.trim();
-
-        if (contact_no) {
-          matchConditions.push({ contact_no });
-          matchConditions.push({ alt_contact_no: contact_no });
-        }
-        if (alt_contact_no) {
-          matchConditions.push({ contact_no: alt_contact_no });
-          matchConditions.push({ alt_contact_no });
-        }
-        if (normalizedEmail) {
-          matchConditions.push({ email: normalizedEmail });
-        }
-
-        const existingAccount =
-          matchConditions.length > 0
-            ? await tx.accountMaster.findFirst({
-              where: {
-                vendor_id,
-                is_deleted: false,
-                OR: matchConditions,
-              },
-            })
-            : null;
-
-        const account =
-          existingAccount ??
-          (await tx.accountMaster.create({
-            data: {
-              name: `${firstname} ${lastname}`,
-              country_code,
-              contact_no,
-              alt_contact_no,
-              email: normalizedEmail,
+  while (true) {
+    try {
+      transactionResult = await prisma.$transaction(
+        async (tx) => {
+          try {
+            // 🔍 optional input snapshot
+            logger.debug("[SERVICE] createLead input", {
               vendor_id,
               franchise_id,
               created_by,
-            },
-          }));
+              priority,
+              product_types,
+              product_structures,
+              fileCount: files.length,
+            });
 
-        // 2) ⬅️ NEW: generate lead_code for this franchise
-        const lead_code = await generateLeadCode(tx, {
-          franchiseId: franchise_id,
-          vendorId: vendor_id,
-        });
-
-        // 3) Create Lead with the generated code
-        const leadCreateData: any = {
-          lead_code,
-          firstname,
-          lastname,
-          country_code,
-          contact_no,
-          alt_contact_no,
-          email: email ?? "",
-          site_address,
-          site_map_link,
-          site_type_id,
-          status_id,
-          source_id,
-          refered_by: refered_by?.trim() || null,
-          archetech_name,
-          architect_id: architect_id ? Number(architect_id) : null,
-          archetech_number,
-          designer_remark,
-          vendor_id,
-          franchise_id,
-          created_by,
-          priority: priority?.trim() || null,
-          account_id: account.id, // Add account_id reference
-          assign_to,
-          assigned_by,
-          initial_site_measurement_date,
-          is_draft: !!payload.is_draft,
-          client_id: client_id ?? null,
-          order_number: order_number || null,
-        };
-
-        const lead = await tx.leadMaster.create({
-          data: leadCreateData,
-        });
-
-        /* ✅ NEW: LeadUserMapping writes
-      - The creator is always mapped with type="ISM", status="active"
-      - Admin and super-admin also seed the initial assignee mapping
-      */
-        const creator = await tx.userMaster.findUnique({
-          where: { id: created_by },
-          include: { user_type: true }, // joins UserTypeMaster
-        });
-
-        const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
-        const shouldMapInitialAssignee =
-          (creatorRole === "admin" || creatorRole === "super-admin") &&
-          Boolean(assign_to);
-
-        // Base fields common to all LeadUserMapping rows
-        const mappingBase = {
-          vendor_id,
-          account_id: account.id,
-          lead_id: lead.id,
-          type: "ISM" as const,
-          status: "active" as const,
-          created_by, // actor creating the mapping
-        };
-
-        // Always insert mapping for the creator
-        await tx.leadUserMapping.create({
-          data: { ...mappingBase, user_id: created_by },
-        });
-
-        // If creator is admin/super-admin -> also map the assignee (when provided)
-        if (shouldMapInitialAssignee && assign_to) {
-          await tx.leadUserMapping.create({
-            data: { ...mappingBase, user_id: assign_to },
-          });
-        }
-
-        // ✅ Create lead chat room and seed members (all admins + creator + assigned user)
-        const chatRoom = await tx.leadChatRoom.create({
-          data: {
-            lead_id: lead.id,
-            vendor_id,
-          },
-        });
-
-        const [superAdminUsers, adminUsers] = await Promise.all([
-          tx.userMaster.findMany({
-            where: {
-              vendor_id,
-              status: "active",
-              user_type: { user_type: "super-admin" },
-            },
-            select: { id: true },
-          }),
-          franchise_id
-            ? tx.userMaster.findMany({
+            // Validate franchise belongs to vendor
+            const franchise = await tx.franchiseMaster.findFirst({
               where: {
+                id: franchise_id,
                 vendor_id,
-                franchise_id,
-                status: "active",
-                user_type: { user_type: "admin" },
               },
               select: { id: true },
-            })
-            : Promise.resolve([]),
-        ]);
+            });
 
-        const memberIds = new Set<number>([
-          ...superAdminUsers.map((user) => user.id),
-          ...adminUsers.map((user) => user.id),
-        ]);
-        memberIds.add(created_by);
+            if (!franchise) {
+              throw new Error("Invalid franchise_id for the given vendor_id.");
+            }
 
-        if (shouldMapInitialAssignee && assign_to) {
-          memberIds.add(assign_to);
-        }
+            if (client_id) {
+              const client = await tx.clientMaster.findFirst({
+                where: { id: client_id, vendor_id },
+                select: { id: true },
+              });
 
-        if (memberIds.size > 0) {
-          await tx.leadChatMember.createMany({
-            data: Array.from(memberIds).map((user_id) => ({
-              chat_room_id: chatRoom.id,
-              user_id,
-              added_by: created_by,
-            })),
-            skipDuplicates: true,
-          });
-        }
+              if (!client) {
+                throw new Error("Invalid client_id for the given vendor_id.");
+              }
+            }
 
-        // 🧹 Invalidate Performance Snapshot Cache for creator
-        await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
-
-        if (payload.is_draft) {
-          logger.info(
-            "📝 Draft lead detected — skipping mappings, logs & uploads",
-          );
-          return { lead, account, draft: true };
-        }
-
-        // If creator is sales-executive -> nothing more to do (only his own mapping above)
-        // Any other/unknown role falls back to just the creator row
-
-        // 3. Validate and create mappings for product types using IDs
-        for (const productTypeId of product_types) {
-          logger.debug("Processing product type", { productTypeId });
-
-          // Validate that the product type exists and belongs to the vendor
-          const productType = await tx.productTypeMaster.findFirst({
-            where: {
-              id: productTypeId,
-              vendor_id,
-            },
-          });
-
-          if (!productType) {
-            throw new Error(
-              `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`,
-            );
-          }
-
-          await tx.leadProductMapping.create({
-            data: {
-              vendor_id,
-              lead_id: lead.id,
-              account_id: account.id,
-              product_type_id: productTypeId,
-              created_by,
-            },
-          });
-          logger.info("✅ Product mapping created", { productTypeId });
-        }
-
-        // 4. Validate and create mappings for product structures using IDs
-        for (const productStructureId of product_structures) {
-          logger.debug("Processing product structure", { productStructureId });
-
-          // Validate that the product structure exists and belongs to the vendor
-          const structure = await tx.productStructure.findFirst({
-            where: {
-              id: productStructureId,
-              vendor_id,
-            },
-          });
-
-          if (!structure) {
-            throw new Error(
-              `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`,
-            );
-          }
-
-          await tx.leadProductStructureMapping.create({
-            data: {
-              vendor_id,
-              lead_id: lead.id,
-              account_id: account.id,
-              product_structure_id: productStructureId,
-              created_by,
-            },
-          });
-          logger.info("✅ Product structure mapping created", {
-            productStructureId,
-          });
-        }
-
-        // 5. Create product structure instances
-        const instanceProductTypeId = product_types[0];
-        const instanceSource: {
-          product_structure_id: number;
-          title?: string;
-          description?: string;
-        }[] =
-          product_structure_instances.length > 0
-            ? product_structure_instances
-            : product_structures.map((product_structure_id) => ({
-              product_structure_id,
-            }));
-
-        if (!instanceProductTypeId) {
-          logger.warn(
-            "⚠️ Skipping structure instances: product_types is empty",
-            { lead_id: lead.id },
-          );
-        } else {
-          const structureIds = Array.from(
-            new Set(
-              instanceSource.map((instance) => instance.product_structure_id),
-            ),
-          );
-          const structures = await tx.productStructure.findMany({
-            where: {
-              id: { in: structureIds },
-              vendor_id,
-            },
-          });
-          const structureMap = new Map(
-            structures.map((structure) => [structure.id, structure]),
-          );
-
-          if (structureMap.size !== structureIds.length) {
-            const missingIds = structureIds.filter(
-              (id) => !structureMap.has(id),
-            );
-            throw new Error(
-              `Product structure with ID(s) ${missingIds.join(
-                ", ",
-              )} not found for vendor ${vendor_id}`,
-            );
-          }
-
-          let nextIndex = 0;
-          for (const instance of instanceSource) {
-            const structure = structureMap.get(instance.product_structure_id);
-            if (!structure) continue;
-
-            nextIndex += 1;
-
-            await tx.leadProductStructureInstance.create({
-              data: {
+            if (!payload.is_draft) {
+              const similarLead = await findSimilarLeadByContactAndProducts(
+                tx,
                 vendor_id,
+                {
+                  contact_no,
+                  product_types,
+                },
+              );
+
+              if (similarLead) {
+                throw Object.assign(
+                  new Error(
+                    "Similar lead already exists in the CRM, Hence it cannot be created.",
+                  ),
+                  {
+                    statusCode: 409,
+                    lead: toLeadLookupPayload(similarLead),
+                  },
+                );
+              }
+            }
+
+            // 1. AccountMaster (reuse if same phone/email exists for this vendor)
+            const matchConditions: Array<Record<string, string>> = [];
+            const normalizedEmail = email?.trim();
+
+            if (contact_no) {
+              matchConditions.push({ contact_no });
+              matchConditions.push({ alt_contact_no: contact_no });
+            }
+            if (alt_contact_no) {
+              matchConditions.push({ contact_no: alt_contact_no });
+              matchConditions.push({ alt_contact_no });
+            }
+            if (normalizedEmail) {
+              matchConditions.push({ email: normalizedEmail });
+            }
+
+            const existingAccount =
+              matchConditions.length > 0
+                ? await tx.accountMaster.findFirst({
+                  where: {
+                    vendor_id,
+                    is_deleted: false,
+                    OR: matchConditions,
+                  },
+                })
+                : null;
+
+            const account =
+              existingAccount ??
+              (await tx.accountMaster.create({
+                data: {
+                  name: `${firstname} ${lastname}`,
+                  country_code,
+                  contact_no,
+                  alt_contact_no,
+                  email: normalizedEmail,
+                  vendor_id,
+                  franchise_id,
+                  created_by,
+                },
+              }));
+
+            // 2) ⬅️ NEW: generate lead_code for this franchise
+            const lead_code = await generateLeadCode(tx, {
+              franchiseId: franchise_id,
+              vendorId: vendor_id,
+            });
+
+            // 3) Create Lead with the generated code
+            const leadCreateData: any = {
+              lead_code,
+              firstname,
+              lastname,
+              country_code,
+              contact_no,
+              alt_contact_no,
+              email: email ?? "",
+              site_address,
+              site_map_link,
+              site_type_id,
+              status_id,
+              source_id,
+              refered_by: refered_by?.trim() || null,
+              archetech_name,
+              architect_id: architect_id ? Number(architect_id) : null,
+              archetech_number,
+              designer_remark,
+              vendor_id,
+              franchise_id,
+              created_by,
+              priority: priority?.trim() || null,
+              account_id: account.id, // Add account_id reference
+              assign_to,
+              assigned_by,
+              initial_site_measurement_date,
+              is_draft: !!payload.is_draft,
+              client_id: client_id ?? null,
+              order_number: order_number || null,
+            };
+
+            const lead = await tx.leadMaster.create({
+              data: leadCreateData,
+            });
+
+            /* ✅ NEW: LeadUserMapping writes
+          - The creator is always mapped with type="ISM", status="active"
+          - Admin and super-admin also seed the initial assignee mapping
+          */
+            const creator = await tx.userMaster.findUnique({
+              where: { id: created_by },
+              include: { user_type: true }, // joins UserTypeMaster
+            });
+
+            const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
+            const shouldMapInitialAssignee =
+              (creatorRole === "admin" || creatorRole === "super-admin") &&
+              Boolean(assign_to);
+
+            // Base fields common to all LeadUserMapping rows
+            const mappingBase = {
+              vendor_id,
+              account_id: account.id,
+              lead_id: lead.id,
+              type: "ISM" as const,
+              status: "active" as const,
+              created_by, // actor creating the mapping
+            };
+
+            // Always insert mapping for the creator
+            await tx.leadUserMapping.create({
+              data: { ...mappingBase, user_id: created_by },
+            });
+
+            // If creator is admin/super-admin -> also map the assignee (when provided)
+            if (shouldMapInitialAssignee && assign_to) {
+              await tx.leadUserMapping.create({
+                data: { ...mappingBase, user_id: assign_to },
+              });
+            }
+
+            // ✅ Create lead chat room and seed members (all admins + creator + assigned user)
+            const chatRoom = await tx.leadChatRoom.create({
+              data: {
                 lead_id: lead.id,
-                account_id: account.id,
-                product_type_id: instanceProductTypeId,
-                product_structure_id: instance.product_structure_id,
-                quantity_index: nextIndex,
-                title: instance.title?.trim() || structure.type,
-                description: instance.description?.trim() || null,
-                created_by,
+                vendor_id,
               },
             });
+
+            const [superAdminUsers, adminUsers] = await Promise.all([
+              tx.userMaster.findMany({
+                where: {
+                  vendor_id,
+                  status: "active",
+                  user_type: { user_type: "super-admin" },
+                },
+                select: { id: true },
+              }),
+              franchise_id
+                ? tx.userMaster.findMany({
+                  where: {
+                    vendor_id,
+                    franchise_id,
+                    status: "active",
+                    user_type: { user_type: "admin" },
+                  },
+                  select: { id: true },
+                })
+                : Promise.resolve([]),
+            ]);
+
+            const memberIds = new Set<number>([
+              ...superAdminUsers.map((user) => user.id),
+              ...adminUsers.map((user) => user.id),
+            ]);
+            memberIds.add(created_by);
+
+            if (shouldMapInitialAssignee && assign_to) {
+              memberIds.add(assign_to);
+            }
+
+            if (memberIds.size > 0) {
+              await tx.leadChatMember.createMany({
+                data: Array.from(memberIds).map((user_id) => ({
+                  chat_room_id: chatRoom.id,
+                  user_id,
+                  added_by: created_by,
+                })),
+                skipDuplicates: true,
+              });
+            }
+
+            // 🧹 Invalidate Performance Snapshot Cache for creator
+            await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
+
+            if (payload.is_draft) {
+              logger.info(
+                "📝 Draft lead detected — skipping mappings, logs & uploads",
+              );
+              return { lead, account, draft: true };
+            }
+
+            // If creator is sales-executive -> nothing more to do (only his own mapping above)
+            // Any other/unknown role falls back to just the creator row
+
+            // 3. Validate and create mappings for product types using IDs
+            for (const productTypeId of product_types) {
+              logger.debug("Processing product type", { productTypeId });
+
+              // Validate that the product type exists and belongs to the vendor
+              const productType = await tx.productTypeMaster.findFirst({
+                where: {
+                  id: productTypeId,
+                  vendor_id,
+                },
+              });
+
+              if (!productType) {
+                throw new Error(
+                  `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`,
+                );
+              }
+
+              await tx.leadProductMapping.create({
+                data: {
+                  vendor_id,
+                  lead_id: lead.id,
+                  account_id: account.id,
+                  product_type_id: productTypeId,
+                  created_by,
+                },
+              });
+              logger.info("✅ Product mapping created", { productTypeId });
+            }
+
+            // 4. Validate and create mappings for product structures using IDs
+            for (const productStructureId of product_structures) {
+              logger.debug("Processing product structure", { productStructureId });
+
+              // Validate that the product structure exists and belongs to the vendor
+              const structure = await tx.productStructure.findFirst({
+                where: {
+                  id: productStructureId,
+                  vendor_id,
+                },
+              });
+
+              if (!structure) {
+                throw new Error(
+                  `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`,
+                );
+              }
+
+              await tx.leadProductStructureMapping.create({
+                data: {
+                  vendor_id,
+                  lead_id: lead.id,
+                  account_id: account.id,
+                  product_structure_id: productStructureId,
+                  created_by,
+                },
+              });
+              logger.info("✅ Product structure mapping created", {
+                productStructureId,
+              });
+            }
+
+            // 5. Create product structure instances
+            const instanceProductTypeId = product_types[0];
+            const instanceSource: {
+              product_structure_id: number;
+              title?: string;
+              description?: string;
+            }[] =
+              product_structure_instances.length > 0
+                ? product_structure_instances
+                : product_structures.map((product_structure_id) => ({
+                  product_structure_id,
+                }));
+
+            if (!instanceProductTypeId) {
+              logger.warn(
+                "⚠️ Skipping structure instances: product_types is empty",
+                { lead_id: lead.id },
+              );
+            } else {
+              const structureIds = Array.from(
+                new Set(
+                  instanceSource.map((instance) => instance.product_structure_id),
+                ),
+              );
+              const structures = await tx.productStructure.findMany({
+                where: {
+                  id: { in: structureIds },
+                  vendor_id,
+                },
+              });
+              const structureMap = new Map(
+                structures.map((structure) => [structure.id, structure]),
+              );
+
+              if (structureMap.size !== structureIds.length) {
+                const missingIds = structureIds.filter(
+                  (id) => !structureMap.has(id),
+                );
+                throw new Error(
+                  `Product structure with ID(s) ${missingIds.join(
+                    ", ",
+                  )} not found for vendor ${vendor_id}`,
+                );
+              }
+
+              let nextIndex = 0;
+              for (const instance of instanceSource) {
+                const structure = structureMap.get(instance.product_structure_id);
+                if (!structure) continue;
+
+                nextIndex += 1;
+
+                await tx.leadProductStructureInstance.create({
+                  data: {
+                    vendor_id,
+                    lead_id: lead.id,
+                    account_id: account.id,
+                    product_type_id: instanceProductTypeId,
+                    product_structure_id: instance.product_structure_id,
+                    quantity_index: nextIndex,
+                    title: instance.title?.trim() || structure.type,
+                    description: instance.description?.trim() || null,
+                    created_by,
+                  },
+                });
+              }
+            }
+
+            // 6. LeadStatusLogs entry
+            await tx.leadStatusLogs.create({
+              data: {
+                lead_id: lead.id,
+                account_id: account.id,
+                vendor_id,
+                status_id, // from openStatus.id earlier
+                created_by,
+                created_at: new Date(),
+              },
+            });
+            logger.info("✅ LeadStatusLogs entry created for initial stage", {
+              lead_id: lead.id,
+              status_id,
+            });
+
+            // 7. LeadDetailedLogs entry
+            await createLeadLog(tx, {
+              vendor_id,
+              lead_id: lead.id,
+              account_id: account.id,
+              action: "Lead has been created successfully",
+              action_type: "CREATE",
+              created_by,
+              created_at: new Date(),
+            });
+            logger.info("✅ LeadDetailedLogs entry created for lead creation", {
+              lead_id: lead.id,
+            });
+
+            // 8. Return final result
+            return {
+              lead,
+              account,
+              draft: !!payload.is_draft,
+            };
+          } catch (err) {
+            logDbError(err, "createLeadService.transaction", {
+              vendor_id,
+              created_by,
+            });
+            throw err; // IMPORTANT
           }
-        }
+        },
+        { timeout: 15000 },
+      );
+      break; // Success! Exit loop.
+    } catch (err: any) {
+      const isUniqueConstraintOnLeadCode = 
+        err.code === "P2002" && 
+        (err.meta?.target?.includes("lead_code") || 
+         (err.message && err.message.includes("lead_code")));
 
-        // 6. LeadStatusLogs entry
-        await tx.leadStatusLogs.create({
-          data: {
-            lead_id: lead.id,
-            account_id: account.id,
-            vendor_id,
-            status_id, // from openStatus.id earlier
-            created_by,
-            created_at: new Date(),
-          },
-        });
-        logger.info("✅ LeadStatusLogs entry created for initial stage", {
-          lead_id: lead.id,
-          status_id,
-        });
-
-        // 7. LeadDetailedLogs entry
-        await createLeadLog(tx, {
-          vendor_id,
-          lead_id: lead.id,
-          account_id: account.id,
-          action: "Lead has been created successfully",
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        });
-        logger.info("✅ LeadDetailedLogs entry created for lead creation", {
-          lead_id: lead.id,
-        });
-
-        // 8. Return final result
-        return {
-          lead,
-          account,
-          draft: !!payload.is_draft,
-        };
-      } catch (err) {
-        logDbError(err, "createLeadService.transaction", {
-          vendor_id,
-          created_by,
-        });
-        throw err; // IMPORTANT
+      if (isUniqueConstraintOnLeadCode && retries < maxRetries) {
+        retries++;
+        logger.warn(`[LEAD CODE CONFLICT] Unique constraint failed on lead_code. Retrying lead creation: ${retries}/${maxRetries}`);
+        await new Promise((resolve) => setTimeout(resolve, Math.random() * 150 + 50));
+        continue;
       }
-    },
-    { timeout: 15000 },
-  );
+      throw err;
+    }
+  }
 
   if (transactionResult.draft) {
     return {

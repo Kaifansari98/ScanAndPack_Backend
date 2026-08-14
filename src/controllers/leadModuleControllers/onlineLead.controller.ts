@@ -11,7 +11,26 @@ export class OnlineLeadController {
   // 1. Create Lead from API / Integration (ONLINE)
   createOnlineLead = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const { vendor_id, leads_name, email, contact, source, remark } = req.body;
+      const {
+        vendor_id,
+        leads_name,
+        email,
+        contact,
+        source,
+        remark,
+        firstname,
+        lastname,
+        alt_contact_no,
+        site_address,
+        site_type_id,
+        source_id,
+        refered_by,
+        archetech_name,
+        archetech_number,
+        priority,
+        product_types,
+        product_structures,
+      } = req.body;
 
       if (!vendor_id || !leads_name || !contact || !source) {
         return res.status(400).json({
@@ -47,6 +66,18 @@ export class OnlineLeadController {
           lead_entry_type: LeadEntryType.ONLINE,
           remark: remark || "Lead received from online source",
           status: defaultStatus?.id || null,
+          firstname: firstname || null,
+          lastname: lastname || null,
+          alt_contact_no: alt_contact_no || null,
+          site_address: site_address || null,
+          site_type_id: site_type_id ? Number(site_type_id) : null,
+          source_id: source_id ? Number(source_id) : null,
+          refered_by: refered_by || null,
+          archetech_name: archetech_name || null,
+          archetech_number: archetech_number || null,
+          priority: priority || null,
+          product_types: Array.isArray(product_types) ? product_types : [],
+          product_structures: Array.isArray(product_structures) ? product_structures : [],
         },
       });
 
@@ -79,7 +110,28 @@ export class OnlineLeadController {
   // 2. Create Store Walk-in Lead
   createWalkInLead = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const { vendor_id, leads_name, email, contact, store_id, remark, created_by, selected_caller_id } = req.body;
+      const {
+        vendor_id,
+        leads_name,
+        email,
+        contact,
+        store_id,
+        remark,
+        created_by,
+        selected_caller_id,
+        firstname,
+        lastname,
+        alt_contact_no,
+        site_address,
+        site_type_id,
+        source_id,
+        refered_by,
+        archetech_name,
+        archetech_number,
+        priority,
+        product_types,
+        product_structures,
+      } = req.body;
 
       if (!vendor_id || !leads_name || !contact || !store_id || !created_by) {
         return res.status(400).json({
@@ -164,6 +216,18 @@ export class OnlineLeadController {
           status: walkInStatus.id,
           remark: remark || "Store Walk-in customer registered",
           created_by: Number(created_by),
+          firstname: firstname || null,
+          lastname: lastname || null,
+          alt_contact_no: alt_contact_no || null,
+          site_address: site_address || null,
+          site_type_id: site_type_id ? Number(site_type_id) : null,
+          source_id: source_id ? Number(source_id) : null,
+          refered_by: refered_by || null,
+          archetech_name: archetech_name || null,
+          archetech_number: archetech_number || null,
+          priority: priority || null,
+          product_types: Array.isArray(product_types) ? product_types : [],
+          product_structures: Array.isArray(product_structures) ? product_structures : [],
         },
       });
 
@@ -288,6 +352,18 @@ export class OnlineLeadController {
             },
           },
           followupStatus: true,
+          sourceRelation: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+          siteTypeRelation: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
         },
         orderBy: {
           created_at: "desc",
@@ -349,6 +425,18 @@ export class OnlineLeadController {
             },
           },
           followupStatus: true,
+          sourceRelation: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+          siteTypeRelation: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
           call_log: {
             include: {
               telecaller: {
@@ -800,6 +888,9 @@ export class OnlineLeadController {
         where: {
           vendor_id: vendorId,
           status: "active",
+          user_email: {
+            not: "fsaghori777@gmail.com",
+          },
           user_type: {
             user_type: {
               in: [
@@ -935,6 +1026,72 @@ export class OnlineLeadController {
       return res.status(500).json({
         success: false,
         error: error.message || "Failed to deactivate status",
+      });
+    }
+  };
+  // 10. Update Lead (Edit)
+  updateLead = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const id = Number(req.params.id);
+
+      if (isNaN(id)) {
+        return res.status(400).json({ success: false, error: "Invalid lead ID" });
+      }
+
+      const {
+        leads_name,
+        email,
+        contact,
+        alt_contact_no,
+        site_address,
+        remark,
+        priority,
+        source_id,
+        site_type_id,
+        refered_by,
+        archetech_name,
+        archetech_number,
+        product_types,
+        product_structures,
+        updated_by,
+      } = req.body;
+
+      const updated = await prisma.onlineLead.update({
+        where: { id },
+        data: {
+          ...(leads_name !== undefined && { leads_name }),
+          ...(email !== undefined && { email: email || null }),
+          ...(contact !== undefined && { contact: String(contact).replace(/\D/g, "") }),
+          ...(alt_contact_no !== undefined && { alt_contact_no: alt_contact_no || null }),
+          ...(site_address !== undefined && { site_address: site_address || null }),
+          ...(remark !== undefined && { remark: remark || null }),
+          ...(priority !== undefined && { priority: priority || null }),
+          ...(source_id !== undefined && { source_id: source_id ? Number(source_id) : null }),
+          ...(site_type_id !== undefined && { site_type_id: site_type_id ? Number(site_type_id) : null }),
+          ...(refered_by !== undefined && { refered_by: refered_by || null }),
+          ...(archetech_name !== undefined && { archetech_name: archetech_name || null }),
+          ...(archetech_number !== undefined && { archetech_number: archetech_number || null }),
+          ...(Array.isArray(product_types) && { product_types }),
+          ...(Array.isArray(product_structures) && { product_structures }),
+          ...(updated_by !== undefined && { updated_by: updated_by ? Number(updated_by) : null }),
+          updated_at: new Date(),
+        },
+        include: {
+          franchise: { select: { id: true, franchise_name: true } },
+          followupStatus: true,
+          sourceRelation: { select: { id: true, type: true } },
+          siteTypeRelation: { select: { id: true, type: true } },
+          assignedTo: { select: { id: true, user_name: true } },
+          finalAssignedLeads: { select: { id: true, user_name: true } },
+        },
+      });
+
+      return res.status(200).json({ success: true, data: updated });
+    } catch (error: any) {
+      console.error("[ONLINE LEAD CONTROLLER] updateLead error:", error);
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to update lead",
       });
     }
   };

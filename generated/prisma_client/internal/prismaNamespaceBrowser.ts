@@ -3479,7 +3479,19 @@ export const OnlineLeadScalarFieldEnum = {
   remark: 'remark',
   follow_up_date: 'follow_up_date',
   store_id: 'store_id',
-  final_assigned_leads: 'final_assigned_leads'
+  final_assigned_leads: 'final_assigned_leads',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  alt_contact_no: 'alt_contact_no',
+  site_address: 'site_address',
+  site_type_id: 'site_type_id',
+  source_id: 'source_id',
+  refered_by: 'refered_by',
+  archetech_name: 'archetech_name',
+  archetech_number: 'archetech_number',
+  priority: 'priority',
+  product_types: 'product_types',
+  product_structures: 'product_structures'
 } as const
 
 export type OnlineLeadScalarFieldEnum = (typeof OnlineLeadScalarFieldEnum)[keyof typeof OnlineLeadScalarFieldEnum]

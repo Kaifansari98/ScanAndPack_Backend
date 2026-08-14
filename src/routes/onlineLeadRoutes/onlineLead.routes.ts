@@ -14,6 +14,7 @@ router.delete("/statuses/:id", onlineLeadController.deleteStatus);
 router.get("/store/:storeId/callers", onlineLeadController.fetchStoreCallers);
 router.get("/telecallers", onlineLeadController.fetchTelecallers);
 router.get("/:id", onlineLeadController.fetchLeadById);
+router.patch("/:id", onlineLeadController.updateLead);
 router.put("/:id/assign", onlineLeadController.assignLead);
 router.post("/:id/call", onlineLeadController.logCallAndOutcome);
 router.post("/:id/assign-store", onlineLeadController.assignStore);

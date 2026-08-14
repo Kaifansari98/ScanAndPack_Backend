@@ -32,6 +32,8 @@ export async function generateLeadCode(
     throw new Error(`Vendor not found for vendor ${input.vendorId}`);
   }
 
+  let generatedCode = "";
+
   if (vendor.is_year_wise_lead_code_enabled) {
     const prefix = vendor.vendor_code.trim().toUpperCase();
     const financialYearSegment = getFinancialYearSegment(new Date());
@@ -59,7 +61,25 @@ export async function generateLeadCode(
       }
     }
 
-    const generatedCode = `${prefix}-${financialYearSegment}-${nextNumber}`;
+    generatedCode = `${prefix}-${financialYearSegment}-${nextNumber}`;
+
+    // Loop check to prevent any duplicate code conflicts
+    let exists = true;
+    while (exists) {
+      const existing = await tx.leadMaster.findFirst({
+        where: {
+          vendor_id: input.vendorId,
+          lead_code: generatedCode,
+        },
+        select: { id: true },
+      });
+      if (!existing) {
+        exists = false;
+      } else {
+        nextNumber++;
+        generatedCode = `${prefix}-${financialYearSegment}-${nextNumber}`;
+      }
+    }
 
     logger.debug("[LEAD CODE GENERATED - YEAR WISE]", {
       vendorId: input.vendorId,
@@ -91,17 +111,15 @@ export async function generateLeadCode(
     .replace(/[^A-Za-z]/g, "")
     .toUpperCase();
 
-  // 2️⃣ Get latest lead for this franchise
+  // 2️⃣ Get latest lead for this prefix across the entire vendor
   const lastLead = await tx.leadMaster.findFirst({
     where: {
-      franchise_id: input.franchiseId,
+      vendor_id: input.vendorId,
       lead_code: {
         startsWith: `${prefix}-`,
       },
     },
-    orderBy: {
-      created_at: "desc",
-    },
+    orderBy: [{ created_at: "desc" }, { id: "desc" }],
     select: {
       lead_code: true,
     },
@@ -117,7 +135,25 @@ export async function generateLeadCode(
     }
   }
 
-  const generatedCode = `${prefix}-${nextNumber}`;
+  generatedCode = `${prefix}-${nextNumber}`;
+
+  // Loop check to prevent any duplicate code conflicts
+  let exists = true;
+  while (exists) {
+    const existing = await tx.leadMaster.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: generatedCode,
+      },
+      select: { id: true },
+    });
+    if (!existing) {
+      exists = false;
+    } else {
+      nextNumber++;
+      generatedCode = `${prefix}-${nextNumber}`;
+    }
+  }
 
   // 🔍 VERY IMPORTANT DEBUG
   logger.debug("[LEAD CODE GENERATED]", {

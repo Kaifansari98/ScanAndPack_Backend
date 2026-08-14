@@ -966,6 +966,7 @@ model SiteTypeMaster {
   vendor_id Int
   status    String       @default("active")
   leads     LeadMaster[]
+  onlineLeads OnlineLead[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -975,6 +976,7 @@ model SourceMaster {
   vendor_id Int
   status    String       @default("active")
   leads     LeadMaster[]
+  onlineLeads OnlineLead[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -4939,6 +4941,18 @@ model OnlineLead {
   follow_up_date       DateTime?
   store_id             Int?
   final_assigned_leads Int?
+  firstname            String?
+  lastname             String?
+  alt_contact_no       String?
+  site_address         String?
+  site_type_id         Int?
+  source_id            Int?
+  refered_by           String?
+  archetech_name       String?
+  archetech_number     String?
+  priority             String?
+  product_types        String[]      @default([])
+  product_structures   String[]      @default([])
 
   vendor              VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdBy           UserMaster?               @relation("OnlineLeadCreatedBy", fields: [created_by], references: [id], onDelete: SetNull)
@@ -4947,6 +4961,8 @@ model OnlineLead {
   finalAssignedLeads  UserMaster?               @relation("OnlineLeadFinalAssigned", fields: [final_assigned_leads], references: [id], onDelete: SetNull)
   franchise           FranchiseMaster?          @relation(fields: [store_id], references: [id], onDelete: SetNull)
   followupStatus      OnlineLeadFollowupStatus? @relation(fields: [status], references: [id], onDelete: SetNull)
+  sourceRelation      SourceMaster?             @relation(fields: [source_id], references: [id], onDelete: SetNull)
+  siteTypeRelation    SiteTypeMaster?           @relation(fields: [site_type_id], references: [id], onDelete: SetNull)
 
   call_log            OnlineLeadCallLog[]
   online_lead_history OnlineLeadHistory[]
