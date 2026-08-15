@@ -3583,7 +3583,7 @@ export const getUserModules = async (vendor_id: number, user_id: number) => {
         modules.quality_check = true;
       } else if (typeId === 18 && vendor.is_scanpack_enabled === true) {
         modules.scan_and_pack = true;
-      } else if(vendor.is_tracktrace_enabled === true) {
+      } else if (vendor.is_tracktrace_enabled === true) {
         modules.track_and_trace = true;
       }
     }
@@ -5229,7 +5229,7 @@ export const checkExternalTokenService = async (vendor_id: number) => {
 
 
 
-export const getProjectDetailService = async (
+export const getProjectDetailService_old = async (
   vendor_id: number,
   unique_project_id: string
 ) => {
@@ -5394,22 +5394,22 @@ export const getProjectDetailService = async (
     const boxItemStats =
       boxIds.length > 0
         ? await prisma.cutListMachineMapping.groupBy({
-            by: ["box_id"],
-            where: {
-              box_id: {
-                in: boxIds,
-              },
-              project_id,
-              vendor_id,
-              expected_in: true,
+          by: ["box_id"],
+          where: {
+            box_id: {
+              in: boxIds,
             },
-            _count: {
-              id: true,
-            },
-            _sum: {
-              weight: true,
-            },
-          })
+            project_id,
+            vendor_id,
+            expected_in: true,
+          },
+          _count: {
+            id: true,
+          },
+          _sum: {
+            weight: true,
+          },
+        })
         : [];
 
     const boxItemCountMap = new Map<number, number>();
@@ -5460,17 +5460,17 @@ export const getProjectDetailService = async (
     const operators =
       operatorIds.length > 0
         ? await prisma.userMaster.findMany({
-            where: {
-              id: {
-                in: operatorIds,
-              },
+          where: {
+            id: {
+              in: operatorIds,
             },
+          },
 
-            select: {
-              id: true,
-              user_name: true,
-            },
-          })
+          select: {
+            id: true,
+            user_name: true,
+          },
+        })
         : [];
 
     const operatorMap =
@@ -5573,8 +5573,8 @@ export const getProjectDetailService = async (
             pct:
               total > 0
                 ? Math.round(
-                    (scanned / total) * 100
-                  )
+                  (scanned / total) * 100
+                )
                 : 0,
           };
         })
@@ -5659,17 +5659,17 @@ export const getProjectDetailService = async (
     const allOperators =
       allInOperatorIds.length > 0
         ? await prisma.userMaster.findMany({
-            where: {
-              id: {
-                in: allInOperatorIds,
-              },
+          where: {
+            id: {
+              in: allInOperatorIds,
             },
+          },
 
-            select: {
-              id: true,
-              user_name: true,
-            },
-          })
+          select: {
+            id: true,
+            user_name: true,
+          },
+        })
         : [];
 
     const allOperatorMap =
@@ -5833,8 +5833,8 @@ export const getProjectDetailService = async (
             scanned_by:
               row.in_operator
                 ? allOperatorMap.get(
-                    row.in_operator
-                  ) ?? null
+                  row.in_operator
+                ) ?? null
                 : null,
           });
         }
@@ -6005,6 +6005,2549 @@ export const getProjectDetailService = async (
           factory_out_by:
             box.factory_out_by
               ? operatorMap.get(
+                box.factory_out_by
+              ) ?? null
+              : null,
+
+          site_in_at:
+            box.site_in_at,
+
+          site_in_by:
+            box.site_in_by
+              ? operatorMap.get(
+                box.site_in_by
+              ) ?? null
+              : null,
+
+          box_info_values:
+            boxInfoValues,
+        };
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Final response
+    |--------------------------------------------------------------------------
+    */
+
+    return validationResponse(
+      1,
+      "Project detail fetched",
+      {
+        project: {
+          id:
+            project.id,
+
+          project_name:
+            project.project_name,
+
+          project_status:
+            project.project_status,
+
+          track_trace_status:
+            project.track_trace_status,
+
+          lead_id:
+            project.lead_id,
+
+          lead:
+            lead
+              ? {
+                lead_name:
+                  lead.firstname,
+
+                lead_phone:
+                  lead.contact_no,
+
+                lead_email:
+                  lead.email,
+
+                lead_address:
+                  lead.site_address,
+              }
+              : null,
+
+          details:
+            project.details[0] ?? null,
+        },
+
+        stats: {
+          total_panels:
+            totalPanels,
+
+          total_items:
+            uniqueItems,
+
+          total_boxes:
+            boxes.length,
+
+          packed_boxes:
+            boxes.filter(
+              (box) =>
+                box.box_status === "packed"
+            ).length,
+
+          unpacked_boxes:
+            boxes.filter(
+              (box) =>
+                box.box_status === "unpacked"
+            ).length,
+
+          total_weight:
+            Number(totalBoxWeight.toFixed(4)),
+        },
+
+        machines:
+          sortedMachineStats,
+
+        boxes:
+          formattedBoxes,
+
+        cutlist:
+          unitRows,
+      }
+    );
+  } catch (error) {
+    console.error(
+      "getProjectDetailService error:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch project detail"
+    );
+  }
+};
+
+export const getProjectDetailService = async (
+  vendor_id: number,
+  unique_project_id: string
+) => {
+  try {
+    /*
+    |--------------------------------------------------------------------------
+    | Resolve unique_project_id → project_id
+    |--------------------------------------------------------------------------
+    */
+
+    const projectLookup = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id,
+        vendor_id,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!projectLookup) {
+      return validationResponse(0, "Project not found");
+    }
+
+    const project_id = projectLookup.id;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Project + lead info
+    |--------------------------------------------------------------------------
+    */
+
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        id: project_id,
+        vendor_id,
+      },
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        lead_id: true,
+
+        details: {
+          select: {
+            id: true,
+            total_items: true,
+            total_packed: true,
+            total_unpacked: true,
+            estimated_completion_date: true,
+            start_date: true,
+            room_name: true,
+          },
+          take: 1,
+        },
+      },
+    });
+
+    if (!project) {
+      return validationResponse(0, "Project not found");
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Lead info
+    |--------------------------------------------------------------------------
+    */
+
+    let lead: {
+      firstname: string;
+      contact_no: string;
+      email: string | null;
+      site_address: string | null;
+    } | null = null;
+
+    if (project.lead_id) {
+      lead = await prisma.leadMaster.findUnique({
+        where: {
+          id: project.lead_id,
+        },
+        select: {
+          firstname: true,
+          contact_no: true,
+          email: true,
+          site_address: true,
+        },
+      });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Packaging machine + manual CutList items
+    |--------------------------------------------------------------------------
+    |
+    | Manual packing:
+    | include_in_packing = true
+    | scan_pack_validate = false
+    |
+    | These CutList rows may have NO CutListMachineMapping until user manually
+    | adds quantity into a box. Therefore CutList.qty is the source of truth
+    | for total quantity.
+    |--------------------------------------------------------------------------
+    */
+
+    const [packagingMachine, manualCutListItems] = await Promise.all([
+      prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
+        select: {
+          id: true,
+          machine_name: true,
+          sequence_no: true,
+          machineType: {
+            select: {
+              machine_type: true,
+            },
+          },
+        },
+        orderBy: {
+          id: "asc",
+        },
+      }),
+
+      prisma.cutList.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          include_in_packing: true,
+          scan_pack_validate: false,
+          status: "Active",
+        },
+        select: {
+          id: true,
+          project_id: true,
+          item_name: true,
+          unique_code: true,
+          description: true,
+          qty: true,
+          category_name: true,
+          group_name: true,
+          length: true,
+          width: true,
+          thickness: true,
+          weight: true,
+        },
+        orderBy: {
+          id: "asc",
+        },
+      }),
+    ]);
+
+    const manualCutListIds = new Set<number>(
+      manualCutListItems.map((item) => item.id)
+    );
+
+    const manualCutListQtyMap = new Map<number, number>(
+      manualCutListItems.map((item) => [
+        item.id,
+        Math.max(0, Number(item.qty || 0)),
+      ])
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Boxes with dynamic BoxInfoFieldValue
+    |--------------------------------------------------------------------------
+    */
+
+    const boxes = await prisma.boxMaster.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        factory_out_by: true,
+        site_in_at: true,
+        site_in_by: true,
+
+        box_info_values: {
+          select: {
+            id: true,
+            field_id: true,
+            field_value: true,
+
+            field: {
+              select: {
+                id: true,
+                field_label: true,
+                field_key: true,
+                field_type: true,
+                is_required: true,
+                sort_order: true,
+                active: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Box item count + weight
+    |--------------------------------------------------------------------------
+    |
+    | Old:
+    |   COUNT(mapping rows)
+    |
+    | New:
+    |   SUM(mapping.qty)
+    |
+    | Normal scanned row => qty = 1
+    | Manual row         => qty can be > 1
+    |
+    | Mapping weight is per-item weight, therefore total box weight is:
+    |   mapping.weight * mapping.qty
+    |--------------------------------------------------------------------------
+    */
+
+    const boxIds = boxes.map((box) => box.id);
+
+    const boxPackingRows =
+      packagingMachine && boxIds.length > 0
+        ? await prisma.cutListMachineMapping.findMany({
+            where: {
+              box_id: {
+                in: boxIds,
+              },
+              project_id,
+              vendor_id,
+              machine_id: packagingMachine.id,
+              expected_in: true,
+              actual_in_at: {
+                not: null,
+              },
+            },
+            select: {
+              box_id: true,
+              qty: true,
+              weight: true,
+
+              /*
+              |--------------------------------------------------------------------------
+              | Site receipt fields
+              |--------------------------------------------------------------------------
+              |
+              | Normal scan-packed row:
+              |   site_in_at != null => full mapping.qty is received.
+              |
+              | Manual packed row:
+              |   received_qty stores actual physical quantity received.
+              |--------------------------------------------------------------------------
+              */
+              site_in_at: true,
+              received_qty: true,
+              row_created_source: true,
+            },
+          })
+        : [];
+
+    const boxItemCountMap =
+      new Map<number, number>();
+
+    const boxWeightMap =
+      new Map<number, number>();
+
+    /*
+    |--------------------------------------------------------------------------
+    | Site receipt maps
+    |--------------------------------------------------------------------------
+    */
+
+    const boxReceivedQtyMap =
+      new Map<number, number>();
+
+    const boxScannedPackedQtyMap =
+      new Map<number, number>();
+
+    const boxScannedReceivedQtyMap =
+      new Map<number, number>();
+
+    const boxManualPackedQtyMap =
+      new Map<number, number>();
+
+    const boxManualReceivedQtyMap =
+      new Map<number, number>();
+
+    for (const row of boxPackingRows) {
+      if (!row.box_id) {
+        continue;
+      }
+
+      const boxId =
+        Number(row.box_id);
+
+      const rowQty =
+        Math.max(
+          0,
+          Number(row.qty ?? 1)
+        );
+
+      const perItemWeight =
+        Number(row.weight || 0);
+
+      const isManual =
+        String(
+          row.row_created_source ?? ""
+        )
+          .trim()
+          .toLowerCase() ===
+        "manual";
+
+      /*
+      |--------------------------------------------------------------------------
+      | Normal/scanned item receipt
+      |--------------------------------------------------------------------------
+      |
+      | Existing scanner flow marks site_in_at on the mapping row.
+      | One normal row is normally qty=1, but using rowQty keeps it qty-safe.
+      |--------------------------------------------------------------------------
+      */
+
+      const scannedReceivedQty =
+        !isManual &&
+        row.site_in_at
+          ? rowQty
+          : 0;
+
+      /*
+      |--------------------------------------------------------------------------
+      | Manual item receipt
+      |--------------------------------------------------------------------------
+      |
+      | received_qty is nullable:
+      |
+      | null => not verified yet
+      | 0    => explicitly verified as zero received
+      | N    => actual received qty
+      |
+      | Clamp it to row.qty so bad historical data cannot over-count.
+      |--------------------------------------------------------------------------
+      */
+
+      const manualReceivedQty =
+        isManual
+          ? Math.min(
+              rowQty,
+              Math.max(
+                0,
+                Number(
+                  row.received_qty ?? 0
+                )
+              )
+            )
+          : 0;
+
+      const rowReceivedQty =
+        scannedReceivedQty +
+        manualReceivedQty;
+
+      boxItemCountMap.set(
+        boxId,
+        (boxItemCountMap.get(boxId) ?? 0) +
+          rowQty
+      );
+
+      boxWeightMap.set(
+        boxId,
+        (boxWeightMap.get(boxId) ?? 0) +
+          perItemWeight *
+            rowQty
+      );
+
+      boxReceivedQtyMap.set(
+        boxId,
+        (boxReceivedQtyMap.get(boxId) ?? 0) +
+          rowReceivedQty
+      );
+
+      if (isManual) {
+        boxManualPackedQtyMap.set(
+          boxId,
+          (boxManualPackedQtyMap.get(boxId) ?? 0) +
+            rowQty
+        );
+
+        boxManualReceivedQtyMap.set(
+          boxId,
+          (boxManualReceivedQtyMap.get(boxId) ?? 0) +
+            manualReceivedQty
+        );
+      } else {
+        boxScannedPackedQtyMap.set(
+          boxId,
+          (boxScannedPackedQtyMap.get(boxId) ?? 0) +
+            rowQty
+        );
+
+        boxScannedReceivedQtyMap.set(
+          boxId,
+          (boxScannedReceivedQtyMap.get(boxId) ?? 0) +
+            scannedReceivedQty
+        );
+      }
+    }
+
+    const boxNameMap = new Map(
+      boxes.map((box) => [
+        box.id,
+        box.box_name,
+      ])
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Operator name lookup for Factory Out / Site In
+    |--------------------------------------------------------------------------
+    */
+
+    const operatorIds = [
+      ...new Set([
+        ...boxes
+          .map((box) => box.factory_out_by)
+          .filter(Boolean),
+
+        ...boxes
+          .map((box) => box.site_in_by)
+          .filter(Boolean),
+      ]),
+    ] as number[];
+
+    const operators =
+      operatorIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in: operatorIds,
+              },
+            },
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const operatorMap = new Map(
+      operators.map((user) => [
+        user.id,
+        user.user_name,
+      ])
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Machines
+    |--------------------------------------------------------------------------
+    */
+
+    const distinctMachines =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          expected_in: true,
+        },
+        distinct: ["machine_id"],
+        select: {
+          machine_id: true,
+          sequence_no: true,
+
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+              sequence_no: true,
+
+              machineType: {
+                select: {
+                  machine_type: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Normalize machine list
+    |--------------------------------------------------------------------------
+    |
+    | If project contains only manual packing items there may not be any
+    | machine-18 mapping yet. Still include Packaging machine so progress can
+    | show total / packed / pending correctly.
+    |--------------------------------------------------------------------------
+    */
+
+    const normalizedMachines = distinctMachines.map((row) => ({
+      machine_id: row.machine_id,
+      machine_name: row.machine.machine_name,
+      machine_type:
+        row.machine.machineType?.machine_type ?? null,
+      sequence_no:
+        row.sequence_no ??
+        row.machine.sequence_no ??
+        0,
+    }));
+
+    if (
+      packagingMachine &&
+      manualCutListItems.length > 0 &&
+      !normalizedMachines.some(
+        (machine) =>
+          Number(machine.machine_id) === Number(packagingMachine.id)
+      )
+    ) {
+      normalizedMachines.push({
+        machine_id: packagingMachine.id,
+        machine_name: packagingMachine.machine_name,
+        machine_type:
+          packagingMachine.machineType?.machine_type ?? null,
+        sequence_no:
+          packagingMachine.sequence_no ?? 0,
+      });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Machine stats using SUM(qty)
+    |--------------------------------------------------------------------------
+    */
+
+    const machineStats = await Promise.all(
+      normalizedMachines.map(async (machineRow) => {
+        const mappingRows =
+          await prisma.cutListMachineMapping.findMany({
+            where: {
+              project_id,
+              vendor_id,
+              machine_id: machineRow.machine_id,
+              expected_in: true,
+            },
+            select: {
+              cut_list_id: true,
+              qty: true,
+              box_id: true,
+              actual_in_at: true,
+              row_created_source: true,
+            },
+          });
+
+        const isPackagingMachine =
+          packagingMachine &&
+          Number(machineRow.machine_id) ===
+            Number(packagingMachine.id);
+
+        let total = 0;
+        let scanned = 0;
+
+        if (isPackagingMachine) {
+          /*
+          |--------------------------------------------------------------------------
+          | Normal scan-pack rows
+          |--------------------------------------------------------------------------
+          */
+
+          const normalRows =
+            mappingRows.filter(
+              (row) =>
+                !manualCutListIds.has(
+                  row.cut_list_id
+                )
+            );
+
+          total += normalRows.reduce(
+            (sum, row) =>
+              sum +
+              Math.max(
+                0,
+                Number(row.qty ?? 1)
+              ),
+            0
+          );
+
+          scanned += normalRows.reduce(
+            (sum, row) => {
+              if (!row.actual_in_at) {
+                return sum;
+              }
+
+              return (
+                sum +
+                Math.max(
+                  0,
+                  Number(row.qty ?? 1)
+                )
+              );
+            },
+            0
+          );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Manual packing totals
+          |--------------------------------------------------------------------------
+          |
+          | total   => CutList.qty
+          | scanned => SUM(manual mapping qty), capped by CutList.qty
+          |--------------------------------------------------------------------------
+          */
+
+          for (const manualItem of manualCutListItems) {
+            const itemTotal =
+              Math.max(
+                0,
+                Number(manualItem.qty || 0)
+              );
+
+            total += itemTotal;
+
+            const itemPacked =
+              mappingRows
+                .filter(
+                  (row) =>
+                    row.cut_list_id === manualItem.id &&
+                    row.row_created_source
+                      ?.trim()
+                      .toLowerCase() === "manual" &&
+                    row.box_id !== null &&
+                    row.actual_in_at !== null
+                )
+                .reduce(
+                  (sum, row) =>
+                    sum +
+                    Math.max(
+                      0,
+                      Number(row.qty ?? 0)
+                    ),
+                  0
+                );
+
+            scanned += Math.min(
+              itemPacked,
+              itemTotal
+            );
+          }
+        } else {
+          /*
+          |--------------------------------------------------------------------------
+          | Other machines
+          |--------------------------------------------------------------------------
+          |
+          | Existing rows are normally qty=1, but SUM(qty) makes this compatible
+          | with quantity-based mappings too.
+          |--------------------------------------------------------------------------
+          */
+
+          total =
+            mappingRows.reduce(
+              (sum, row) =>
+                sum +
+                Math.max(
+                  0,
+                  Number(row.qty ?? 1)
+                ),
+              0
+            );
+
+          scanned =
+            mappingRows.reduce(
+              (sum, row) => {
+                if (!row.actual_in_at) {
+                  return sum;
+                }
+
+                return (
+                  sum +
+                  Math.max(
+                    0,
+                    Number(row.qty ?? 1)
+                  )
+                );
+              },
+              0
+            );
+        }
+
+        scanned = Math.min(
+          scanned,
+          total
+        );
+
+        const pending =
+          Math.max(
+            total - scanned,
+            0
+          );
+
+        return {
+          machine_id:
+            machineRow.machine_id,
+
+          machine_name:
+            machineRow.machine_name,
+
+          machine_type:
+            machineRow.machine_type,
+
+          sequence_no:
+            machineRow.sequence_no,
+
+          total,
+
+          scanned,
+
+          pending,
+
+          pct:
+            total > 0
+              ? Math.round(
+                  (scanned / total) * 100
+                )
+              : 0,
+        };
+      })
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Fetch all mappings for cut list display
+    |--------------------------------------------------------------------------
+    */
+
+    const allMappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          expected_in: true,
+        },
+        select: {
+          id: true,
+          cut_list_id: true,
+          machine_id: true,
+          sequence_no: true,
+          actual_in_at: true,
+          box_id: true,
+          in_operator: true,
+          weight: true,
+          qty: true,
+          row_created_source: true,
+
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+            },
+          },
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              unique_code: true,
+              description: true,
+              qty: true,
+              category_name: true,
+              group_name: true,
+              length: true,
+              width: true,
+              thickness: true,
+              weight: true,
+            },
+          },
+        },
+        orderBy: [
+          {
+            cut_list_id: "asc",
+          },
+          {
+            machine_id: "asc",
+          },
+          {
+            id: "asc",
+          },
+        ],
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Operator lookup for cut list scan operators
+    |--------------------------------------------------------------------------
+    */
+
+    const allInOperatorIds = [
+      ...new Set(
+        allMappings
+          .map((mapping) => mapping.in_operator)
+          .filter(Boolean)
+      ),
+    ] as number[];
+
+    const allOperators =
+      allInOperatorIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in: allInOperatorIds,
+              },
+            },
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const allOperatorMap = new Map(
+      allOperators.map((user) => [
+        user.id,
+        user.user_name,
+      ])
+    );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Unit row response type
+    |--------------------------------------------------------------------------
+    */
+
+    type MachineColumn = {
+      mapping_id: number;
+      machine_id: number;
+      machine_name: string;
+      sequence_no: number;
+      box_id: number | null;
+      weight: number;
+      qty: number;
+      row_created_source: string | null;
+      scanned: boolean;
+      scanned_at: Date | null;
+      scanned_by: string | null;
+    };
+
+    const unitRows: {
+      row_number: number;
+      cut_list_id: number;
+      item_name: string;
+      unique_code: string | null;
+      description: string;
+      qty: number;
+      total_qty: number;
+      unit_index: number;
+      category: string | null;
+      group: string | null;
+      length: any;
+      width: any;
+      thickness: any;
+      weight: number;
+      package_box_id: number | null;
+      package_box_name: string | null;
+      machines: MachineColumn[];
+    }[] = [];
+
+    let rowNumber = 1;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helper — expand a mapping row by mapping.qty
+    |--------------------------------------------------------------------------
+    |
+    | Normal:
+    |   qty = 1 => one virtual unit
+    |
+    | Quantity-based row:
+    |   qty = 3 => three virtual units
+    |--------------------------------------------------------------------------
+    */
+
+    const expandRowsByQty = <T extends { qty: number }>(
+      rows: T[]
+    ): T[] => {
+      const expanded: T[] = [];
+
+      for (const row of rows) {
+        const rowQty =
+          Math.max(
+            1,
+            Number(row.qty ?? 1)
+          );
+
+        for (
+          let i = 0;
+          i < rowQty;
+          i++
+        ) {
+          expanded.push(row);
+        }
+      }
+
+      return expanded;
+    };
+
+    /*
+    |--------------------------------------------------------------------------
+    | 6. NORMAL / SCANNED CutList rows
+    |--------------------------------------------------------------------------
+    |
+    | Manual CutList IDs are excluded here and handled separately below.
+    |--------------------------------------------------------------------------
+    */
+
+    const normalMappings =
+      allMappings.filter(
+        (mapping) =>
+          !manualCutListIds.has(
+            mapping.cut_list_id
+          )
+      );
+
+    const normalCutlistByItem =
+      new Map<
+        number,
+        typeof normalMappings
+      >();
+
+    for (const mapping of normalMappings) {
+      if (
+        !normalCutlistByItem.has(
+          mapping.cut_list_id
+        )
+      ) {
+        normalCutlistByItem.set(
+          mapping.cut_list_id,
+          []
+        );
+      }
+
+      normalCutlistByItem
+        .get(mapping.cut_list_id)!
+        .push(mapping);
+    }
+
+    for (const [
+      cut_list_id,
+      rows,
+    ] of normalCutlistByItem) {
+      const cutList =
+        rows[0].cut_list;
+
+      const byMachine =
+        new Map<
+          number,
+          typeof rows
+        >();
+
+      for (const row of rows) {
+        if (
+          !byMachine.has(
+            row.machine_id
+          )
+        ) {
+          byMachine.set(
+            row.machine_id,
+            []
+          );
+        }
+
+        byMachine
+          .get(row.machine_id)!
+          .push(row);
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | Expand each machine by qty before pairing units
+      |--------------------------------------------------------------------------
+      */
+
+      const expandedByMachine =
+        new Map<
+          number,
+          typeof rows
+        >();
+
+      for (const [
+        machineId,
+        machineRows,
+      ] of byMachine) {
+        expandedByMachine.set(
+          machineId,
+          expandRowsByQty(machineRows)
+        );
+      }
+
+      const unitCount =
+        Math.max(
+          0,
+          ...[
+            ...expandedByMachine.values(),
+          ].map(
+            (machineRows) =>
+              machineRows.length
+          )
+        );
+
+      for (
+        let unitIndex = 0;
+        unitIndex < unitCount;
+        unitIndex++
+      ) {
+        const machineColumns:
+          MachineColumn[] = [];
+
+        for (const [
+          ,
+          machineRows,
+        ] of expandedByMachine) {
+          const row =
+            machineRows[unitIndex];
+
+          if (!row) {
+            continue;
+          }
+
+          machineColumns.push({
+            mapping_id:
+              row.id,
+
+            machine_id:
+              row.machine_id,
+
+            machine_name:
+              row.machine.machine_name,
+
+            sequence_no:
+              row.sequence_no,
+
+            box_id:
+              row.box_id,
+
+            weight:
+              Number(row.weight || 0),
+
+            qty:
+              1,
+
+            row_created_source:
+              row.row_created_source,
+
+            scanned:
+              row.actual_in_at !== null,
+
+            scanned_at:
+              row.actual_in_at,
+
+            scanned_by:
+              row.in_operator
+                ? allOperatorMap.get(
+                    row.in_operator
+                  ) ?? null
+                : null,
+          });
+        }
+
+        const packageBoxId =
+          machineColumns.find(
+            (machineColumn) =>
+              machineColumn.box_id
+          )?.box_id ?? null;
+
+        const packageBoxName =
+          packageBoxId
+            ? boxNameMap.get(
+                packageBoxId
+              ) ?? null
+            : null;
+
+        const mappedWeight =
+          machineColumns.find(
+            (machineColumn) =>
+              Number(
+                machineColumn.weight || 0
+              ) > 0
+          )?.weight ?? 0;
+
+        const fallbackWeight =
+          Number(cutList.weight || 0) > 0 &&
+          Number(cutList.qty || 0) > 0
+            ? Number(
+                cutList.weight || 0
+              ) /
+              Number(
+                cutList.qty || 1
+              )
+            : 0;
+
+        const unitWeight =
+          Number(
+            Number(
+              mappedWeight ||
+              fallbackWeight ||
+              0
+            ).toFixed(4)
+          );
+
+        unitRows.push({
+          row_number:
+            rowNumber++,
+
+          cut_list_id,
+
+          item_name:
+            cutList.item_name,
+
+          unique_code:
+            cutList.unique_code,
+
+          description:
+            cutList.description,
+
+          qty:
+            1,
+
+          total_qty:
+            Number(cutList.qty || 0),
+
+          unit_index:
+            unitIndex + 1,
+
+          category:
+            cutList.category_name,
+
+          group:
+            cutList.group_name,
+
+          length:
+            cutList.length,
+
+          width:
+            cutList.width,
+
+          thickness:
+            cutList.thickness,
+
+          weight:
+            unitWeight,
+
+          package_box_id:
+            packageBoxId,
+
+          package_box_name:
+            packageBoxName,
+
+          machines:
+            machineColumns,
+        });
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 7. MANUAL packing CutList rows
+    |--------------------------------------------------------------------------
+    |
+    | Total virtual units come from CutList.qty.
+    |
+    | Example:
+    |   CutList.qty = 10
+    |   Box 1 mapping qty = 3
+    |   Box 2 mapping qty = 2
+    |
+    | Result:
+    |   10 unit rows
+    |   first 3 assigned to Box 1
+    |   next 2 assigned to Box 2
+    |   remaining 5 pending
+    |--------------------------------------------------------------------------
+    */
+
+    const allMappingsByCutList =
+      new Map<
+        number,
+        typeof allMappings
+      >();
+
+    for (const mapping of allMappings) {
+      if (
+        !allMappingsByCutList.has(
+          mapping.cut_list_id
+        )
+      ) {
+        allMappingsByCutList.set(
+          mapping.cut_list_id,
+          []
+        );
+      }
+
+      allMappingsByCutList
+        .get(mapping.cut_list_id)!
+        .push(mapping);
+    }
+
+    for (const cutList of manualCutListItems) {
+      const totalQty =
+        Math.max(
+          0,
+          Number(cutList.qty || 0)
+        );
+
+      if (totalQty <= 0) {
+        continue;
+      }
+
+      const itemMappings =
+        allMappingsByCutList.get(
+          cutList.id
+        ) ?? [];
+
+      /*
+      |--------------------------------------------------------------------------
+      | Existing non-packaging machine rows, if any
+      |--------------------------------------------------------------------------
+      */
+
+      const nonPackagingRows =
+        itemMappings.filter(
+          (row) =>
+            !packagingMachine ||
+            Number(row.machine_id) !==
+              Number(packagingMachine.id)
+        );
+
+      const nonPackagingByMachine =
+        new Map<
+          number,
+          typeof nonPackagingRows
+        >();
+
+      for (const row of nonPackagingRows) {
+        if (
+          !nonPackagingByMachine.has(
+            row.machine_id
+          )
+        ) {
+          nonPackagingByMachine.set(
+            row.machine_id,
+            []
+          );
+        }
+
+        nonPackagingByMachine
+          .get(row.machine_id)!
+          .push(row);
+      }
+
+      const expandedNonPackagingByMachine =
+        new Map<
+          number,
+          typeof nonPackagingRows
+        >();
+
+      for (const [
+        machineId,
+        machineRows,
+      ] of nonPackagingByMachine) {
+        expandedNonPackagingByMachine.set(
+          machineId,
+          expandRowsByQty(machineRows)
+        );
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | Expand MANUAL machine-18 rows by qty
+      |--------------------------------------------------------------------------
+      */
+
+      const manualPackagingRows =
+        itemMappings
+          .filter(
+            (row) =>
+              packagingMachine &&
+              Number(row.machine_id) ===
+                Number(packagingMachine.id) &&
+              row.row_created_source
+                ?.trim()
+                .toLowerCase() === "manual"
+          )
+          .sort(
+            (a, b) =>
+              a.id - b.id
+          );
+
+      const expandedManualPackagingRows =
+        expandRowsByQty(
+          manualPackagingRows
+        ).slice(
+          0,
+          totalQty
+        );
+
+      const fallbackWeight =
+        Number(cutList.weight || 0) > 0 &&
+        totalQty > 0
+          ? Number(cutList.weight || 0) /
+            totalQty
+          : 0;
+
+      for (
+        let unitIndex = 0;
+        unitIndex < totalQty;
+        unitIndex++
+      ) {
+        const machineColumns:
+          MachineColumn[] = [];
+
+        /*
+        |--------------------------------------------------------------------------
+        | Existing prior/non-packaging machines
+        |--------------------------------------------------------------------------
+        */
+
+        for (const [
+          ,
+          machineRows,
+        ] of expandedNonPackagingByMachine) {
+          const row =
+            machineRows[unitIndex];
+
+          if (!row) {
+            continue;
+          }
+
+          machineColumns.push({
+            mapping_id:
+              row.id,
+
+            machine_id:
+              row.machine_id,
+
+            machine_name:
+              row.machine.machine_name,
+
+            sequence_no:
+              row.sequence_no,
+
+            box_id:
+              row.box_id,
+
+            weight:
+              Number(row.weight || 0),
+
+            qty:
+              1,
+
+            row_created_source:
+              row.row_created_source,
+
+            scanned:
+              row.actual_in_at !== null,
+
+            scanned_at:
+              row.actual_in_at,
+
+            scanned_by:
+              row.in_operator
+                ? allOperatorMap.get(
+                    row.in_operator
+                  ) ?? null
+                : null,
+          });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Manual packaging machine virtual unit
+        |--------------------------------------------------------------------------
+        */
+
+        const manualPackagingRow =
+          expandedManualPackagingRows[
+            unitIndex
+          ];
+
+        if (packagingMachine) {
+          if (manualPackagingRow) {
+            machineColumns.push({
+              mapping_id:
+                manualPackagingRow.id,
+
+              machine_id:
+                packagingMachine.id,
+
+              machine_name:
+                packagingMachine.machine_name,
+
+              sequence_no:
+                packagingMachine.sequence_no ??
+                0,
+
+              box_id:
+                manualPackagingRow.box_id,
+
+              weight:
+                Number(
+                  manualPackagingRow.weight ||
+                  fallbackWeight ||
+                  0
+                ),
+
+              qty:
+                1,
+
+              row_created_source:
+                manualPackagingRow.row_created_source,
+
+              scanned:
+                manualPackagingRow.actual_in_at !==
+                null,
+
+              scanned_at:
+                manualPackagingRow.actual_in_at,
+
+              scanned_by:
+                manualPackagingRow.in_operator
+                  ? allOperatorMap.get(
+                      manualPackagingRow.in_operator
+                    ) ?? null
+                  : null,
+            });
+          } else {
+            /*
+            |--------------------------------------------------------------------------
+            | Synthetic pending row for UI only
+            |--------------------------------------------------------------------------
+            |
+            | mapping_id = 0 means no DB mapping exists yet.
+            |--------------------------------------------------------------------------
+            */
+
+            machineColumns.push({
+              mapping_id:
+                0,
+
+              machine_id:
+                packagingMachine.id,
+
+              machine_name:
+                packagingMachine.machine_name,
+
+              sequence_no:
+                packagingMachine.sequence_no ??
+                0,
+
+              box_id:
+                null,
+
+              weight:
+                Number(
+                  fallbackWeight.toFixed(4)
+                ),
+
+              qty:
+                1,
+
+              row_created_source:
+                "Manual",
+
+              scanned:
+                false,
+
+              scanned_at:
+                null,
+
+              scanned_by:
+                null,
+            });
+          }
+        }
+
+        const packageBoxId =
+          manualPackagingRow?.box_id ??
+          null;
+
+        const packageBoxName =
+          packageBoxId
+            ? boxNameMap.get(
+                packageBoxId
+              ) ?? null
+            : null;
+
+        const mappedWeight =
+          manualPackagingRow
+            ? Number(
+                manualPackagingRow.weight ||
+                0
+              )
+            : 0;
+
+        const unitWeight =
+          Number(
+            Number(
+              mappedWeight ||
+              fallbackWeight ||
+              0
+            ).toFixed(4)
+          );
+
+        unitRows.push({
+          row_number:
+            rowNumber++,
+
+          cut_list_id:
+            cutList.id,
+
+          item_name:
+            cutList.item_name,
+
+          unique_code:
+            cutList.unique_code,
+
+          description:
+            cutList.description,
+
+          qty:
+            1,
+
+          total_qty:
+            totalQty,
+
+          unit_index:
+            unitIndex + 1,
+
+          category:
+            cutList.category_name,
+
+          group:
+            cutList.group_name,
+
+          length:
+            cutList.length,
+
+          width:
+            cutList.width,
+
+          thickness:
+            cutList.thickness,
+
+          weight:
+            unitWeight,
+
+          package_box_id:
+            packageBoxId,
+
+          package_box_name:
+            packageBoxName,
+
+          machines:
+            machineColumns,
+        });
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8. Stats
+    |--------------------------------------------------------------------------
+    |
+    | IMPORTANT:
+    |
+    | unitRows represents PHYSICAL quantity.
+    |
+    | Normal scanned item:
+    |   one mapping qty = 1 -> one virtual unit row
+    |
+    | Manual item:
+    |   CutList.qty = 10 -> ten virtual unit rows
+    |   regardless of whether machine-18 mappings exist for all 10 units yet.
+    |
+    | Therefore unitRows is the safest common source for total / packed /
+    | pending quantity statistics in this service.
+    |--------------------------------------------------------------------------
+    */
+
+    const totalPanels =
+      unitRows.length;
+
+    const uniqueCutListIds =
+      new Set<number>([
+        ...normalCutlistByItem.keys(),
+        ...manualCutListItems.map(
+          (item) => item.id
+        ),
+      ]);
+
+    const uniqueItems =
+      uniqueCutListIds.size;
+
+    const sortedMachineStats =
+      machineStats.sort(
+        (a, b) =>
+          Number(a.sequence_no || 0) -
+          Number(b.sequence_no || 0)
+      );
+
+    const totalBoxWeight =
+      Array.from(
+        boxWeightMap.values()
+      ).reduce(
+        (total, weight) =>
+          total +
+          Number(weight || 0),
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.1 Packing quantity summary
+    |--------------------------------------------------------------------------
+    */
+
+    const totalQty =
+      unitRows.reduce(
+        (total, row) =>
+          total +
+          Math.max(
+            0,
+            Number(row.qty || 1)
+          ),
+        0
+      );
+
+    const totalPackedQty =
+      unitRows.reduce(
+        (total, row) => {
+          if (
+            row.package_box_id ===
+            null
+          ) {
+            return total;
+          }
+
+          return (
+            total +
+            Math.max(
+              0,
+              Number(row.qty || 1)
+            )
+          );
+        },
+        0
+      );
+
+    const totalPendingQty =
+      Math.max(
+        totalQty -
+          totalPackedQty,
+        0
+      );
+
+    const packingProgressPct =
+      totalQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (totalPackedQty /
+                totalQty) *
+                100
+            )
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.2 Manual vs scanned packing
+    |--------------------------------------------------------------------------
+    |
+    | A CutList item is treated as manual packing when it belongs to the
+    | include_in_packing=true + scan_pack_validate=false flow.
+    |--------------------------------------------------------------------------
+    */
+
+    const manualPackedQty =
+      unitRows.reduce(
+        (total, row) => {
+          if (
+            row.package_box_id ===
+              null ||
+            !manualCutListIds.has(
+              row.cut_list_id
+            )
+          ) {
+            return total;
+          }
+
+          return (
+            total +
+            Math.max(
+              0,
+              Number(row.qty || 1)
+            )
+          );
+        },
+        0
+      );
+
+    const scannedPackedQty =
+      Math.max(
+        totalPackedQty -
+          manualPackedQty,
+        0
+      );
+
+    const manualPackingPct =
+      totalPackedQty > 0
+        ? Math.round(
+            (manualPackedQty /
+              totalPackedQty) *
+              100
+          )
+        : 0;
+
+    const scannedPackingPct =
+      totalPackedQty > 0
+        ? Math.round(
+            (scannedPackedQty /
+              totalPackedQty) *
+              100
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.3 Site item receipt / verification statistics
+    |--------------------------------------------------------------------------
+    |
+    | Two different site receipt mechanisms exist:
+    |
+    | 1. Normal scanned packing
+    |    Mapping.site_in_at != null means the mapping qty was received.
+    |
+    | 2. Manual packing
+    |    Mapping.received_qty is the actual physical quantity received.
+    |
+    | This section combines both flows without treating one manual mapping
+    | row as one physical item.
+    |--------------------------------------------------------------------------
+    */
+
+    const scannedReceivedQty =
+      Array.from(
+        boxScannedReceivedQtyMap.values()
+      ).reduce(
+        (total, qty) =>
+          total +
+          Math.max(
+            0,
+            Number(qty || 0)
+          ),
+        0
+      );
+
+    const manualReceivedQty =
+      Array.from(
+        boxManualReceivedQtyMap.values()
+      ).reduce(
+        (total, qty) =>
+          total +
+          Math.max(
+            0,
+            Number(qty || 0)
+          ),
+        0
+      );
+
+    const totalReceivedQty =
+      Math.min(
+        totalPackedQty,
+        scannedReceivedQty +
+          manualReceivedQty
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | End-to-end receipt pending
+    |--------------------------------------------------------------------------
+    |
+    | Includes:
+    | - packed items whose box has not reached site yet
+    | - items at site but not yet verified/received
+    |--------------------------------------------------------------------------
+    */
+
+    const totalPendingReceiptQty =
+      Math.max(
+        totalPackedQty -
+          totalReceivedQty,
+        0
+      );
+
+    const itemReceiptProgressPct =
+      totalPackedQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (totalReceivedQty /
+                totalPackedQty) *
+                100
+            )
+          )
+        : 0;
+
+    const scannedPendingReceiptQty =
+      Math.max(
+        scannedPackedQty -
+          scannedReceivedQty,
+        0
+      );
+
+    const manualPendingReceiptQty =
+      Math.max(
+        manualPackedQty -
+          manualReceivedQty,
+        0
+      );
+
+    const scannedReceiptProgressPct =
+      scannedPackedQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (scannedReceivedQty /
+                scannedPackedQty) *
+                100
+            )
+          )
+        : 0;
+
+    const manualReceiptProgressPct =
+      manualPackedQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (manualReceivedQty /
+                manualPackedQty) *
+                100
+            )
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Quantity currently eligible for site verification
+    |--------------------------------------------------------------------------
+    |
+    | Only boxes with BoxMaster.site_in_at are considered "at site".
+    |--------------------------------------------------------------------------
+    */
+
+    const siteInBoxIds =
+      new Set<number>(
+        boxes
+          .filter(
+            (box) =>
+              box.site_in_at !==
+              null
+          )
+          .map(
+            (box) =>
+              box.id
+          )
+      );
+
+    const siteInQty =
+      Array.from(
+        siteInBoxIds
+      ).reduce(
+        (total, boxId) =>
+          total +
+          Math.max(
+            0,
+            Number(
+              boxItemCountMap.get(
+                boxId
+              ) ?? 0
+            )
+          ),
+        0
+      );
+
+    const siteInReceivedQty =
+      Array.from(
+        siteInBoxIds
+      ).reduce(
+        (total, boxId) =>
+          total +
+          Math.max(
+            0,
+            Number(
+              boxReceivedQtyMap.get(
+                boxId
+              ) ?? 0
+            )
+          ),
+        0
+      );
+
+    const siteInPendingVerificationQty =
+      Math.max(
+        siteInQty -
+          siteInReceivedQty,
+        0
+      );
+
+    const siteItemVerificationPct =
+      siteInQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (siteInReceivedQty /
+                siteInQty) *
+                100
+            )
+          )
+        : 0;
+
+    const notAtSiteQty =
+      Math.max(
+        totalPackedQty -
+          siteInQty,
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Box-level physical receipt status
+    |--------------------------------------------------------------------------
+    */
+
+    let fullyReceivedBoxes = 0;
+    let partiallyReceivedBoxes = 0;
+    let notReceivedBoxes = 0;
+
+    for (const box of boxes) {
+      const boxQty =
+        Math.max(
+          0,
+          Number(
+            boxItemCountMap.get(
+              box.id
+            ) ?? 0
+          )
+        );
+
+      if (boxQty <= 0) {
+        continue;
+      }
+
+      const receivedQty =
+        Math.min(
+          boxQty,
+          Math.max(
+            0,
+            Number(
+              boxReceivedQtyMap.get(
+                box.id
+              ) ?? 0
+            )
+          )
+        );
+
+      if (
+        receivedQty >=
+        boxQty
+      ) {
+        fullyReceivedBoxes++;
+      } else if (
+        receivedQty > 0
+      ) {
+        partiallyReceivedBoxes++;
+      } else {
+        notReceivedBoxes++;
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.4 Product packing status
+    |--------------------------------------------------------------------------
+    |
+    | Fully Packed      -> packed qty >= total qty
+    | Partially Packed  -> packed qty > 0 and < total qty
+    | Not Started       -> packed qty = 0
+    |--------------------------------------------------------------------------
+    */
+
+    const productPackingMap =
+      new Map<
+        number,
+        {
+          total_qty: number;
+          packed_qty: number;
+        }
+      >();
+
+    for (const row of unitRows) {
+      if (
+        !productPackingMap.has(
+          row.cut_list_id
+        )
+      ) {
+        productPackingMap.set(
+          row.cut_list_id,
+          {
+            total_qty: 0,
+            packed_qty: 0,
+          }
+        );
+      }
+
+      const productStats =
+        productPackingMap.get(
+          row.cut_list_id
+        )!;
+
+      const rowQty =
+        Math.max(
+          0,
+          Number(row.qty || 1)
+        );
+
+      productStats.total_qty +=
+        rowQty;
+
+      if (
+        row.package_box_id !==
+        null
+      ) {
+        productStats.packed_qty +=
+          rowQty;
+      }
+    }
+
+    let fullyPackedProducts = 0;
+    let partiallyPackedProducts = 0;
+    let notStartedProducts = 0;
+
+    for (
+      const productStats
+      of productPackingMap.values()
+    ) {
+      if (
+        productStats.total_qty > 0 &&
+        productStats.packed_qty >=
+          productStats.total_qty
+      ) {
+        fullyPackedProducts++;
+      } else if (
+        productStats.packed_qty > 0
+      ) {
+        partiallyPackedProducts++;
+      } else {
+        notStartedProducts++;
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.5 Box statistics
+    |--------------------------------------------------------------------------
+    */
+
+    const boxesWithItems =
+      boxes.filter(
+        (box) =>
+          Number(
+            boxItemCountMap.get(
+              box.id
+            ) || 0
+          ) > 0
+      ).length;
+
+    const emptyBoxes =
+      Math.max(
+        boxes.length -
+          boxesWithItems,
+        0
+      );
+
+    const packedBoxes =
+      boxes.filter(
+        (box) =>
+          String(
+            box.box_status || ""
+          )
+            .trim()
+            .toLowerCase() ===
+          "packed"
+      ).length;
+
+    const unpackedBoxes =
+      boxes.filter(
+        (box) =>
+          String(
+            box.box_status || ""
+          )
+            .trim()
+            .toLowerCase() ===
+          "unpacked"
+      ).length;
+
+    const averageBoxWeight =
+      boxesWithItems > 0
+        ? Number(
+            (
+              totalBoxWeight /
+              boxesWithItems
+            ).toFixed(4)
+          )
+        : 0;
+
+    const averageQtyPerBox =
+      boxesWithItems > 0
+        ? Number(
+            (
+              totalPackedQty /
+              boxesWithItems
+            ).toFixed(2)
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.6 Dispatch / site statistics
+    |--------------------------------------------------------------------------
+    */
+
+    const factoryOutBoxes =
+      boxes.filter(
+        (box) =>
+          box.factory_out_at !==
+          null
+      ).length;
+
+    const siteReceivedBoxes =
+      boxes.filter(
+        (box) =>
+          box.site_in_at !==
+          null
+      ).length;
+
+    const dispatchProgressPct =
+      boxes.length > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (factoryOutBoxes /
+                boxes.length) *
+                100
+            )
+          )
+        : 0;
+
+    const siteReceiptProgressPct =
+      boxes.length > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (siteReceivedBoxes /
+                boxes.length) *
+                100
+            )
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8.7 Packaging + overall machine progress
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingMachineStats =
+      packagingMachine
+        ? sortedMachineStats.find(
+            (machine) =>
+              Number(
+                machine.machine_id
+              ) ===
+              Number(
+                packagingMachine.id
+              )
+          )
+        : undefined;
+
+    const pendingAtPackaging =
+      Math.max(
+        0,
+        Number(
+          packagingMachineStats?.pending ||
+            0
+        )
+      );
+
+    const totalMachineQty =
+      sortedMachineStats.reduce(
+        (total, machine) =>
+          total +
+          Math.max(
+            0,
+            Number(machine.total || 0)
+          ),
+        0
+      );
+
+    const totalMachineScannedQty =
+      sortedMachineStats.reduce(
+        (total, machine) =>
+          total +
+          Math.max(
+            0,
+            Number(machine.scanned || 0)
+          ),
+        0
+      );
+
+    const machineCompletionPct =
+      totalMachineQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (totalMachineScannedQty /
+                totalMachineQty) *
+                100
+            )
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 9. Format boxes with box_info_values
+    |--------------------------------------------------------------------------
+    */
+
+    const formattedBoxes =
+      boxes.map((box) => {
+        const boxInfoValues =
+          box.box_info_values
+            .filter(
+              (item) =>
+                item.field &&
+                item.field.active
+            )
+            .sort(
+              (a, b) =>
+                Number(
+                  a.field.sort_order ||
+                    0
+                ) -
+                Number(
+                  b.field.sort_order ||
+                    0
+                )
+            )
+            .map((item) => ({
+              id:
+                item.id,
+
+              field_id:
+                item.field_id,
+
+              field_label:
+                item.field.field_label,
+
+              field_key:
+                item.field.field_key,
+
+              field_type:
+                item.field.field_type,
+
+              is_required:
+                item.field.is_required,
+
+              sort_order:
+                item.field.sort_order,
+
+              field_value:
+                item.field_value ||
+                "",
+            }));
+
+        return {
+          id:
+            box.id,
+
+          box_name:
+            box.box_name,
+
+          box_status:
+            box.box_status,
+
+          /*
+          |--------------------------------------------------------------------------
+          | Actual physical quantity in box
+          |--------------------------------------------------------------------------
+          */
+          items_count:
+            boxItemCountMap.get(
+              box.id
+            ) || 0,
+
+          total_weight:
+            Number(
+              (
+                boxWeightMap.get(
+                  box.id
+                ) || 0
+              ).toFixed(4)
+            ),
+
+          /*
+          |--------------------------------------------------------------------------
+          | Site item receipt quantities
+          |--------------------------------------------------------------------------
+          */
+
+          received_qty:
+            Math.min(
+              Number(
+                boxItemCountMap.get(
+                  box.id
+                ) || 0
+              ),
+              Number(
+                boxReceivedQtyMap.get(
+                  box.id
+                ) || 0
+              )
+            ),
+
+          pending_received_qty:
+            Math.max(
+              Number(
+                boxItemCountMap.get(
+                  box.id
+                ) || 0
+              ) -
+                Number(
+                  boxReceivedQtyMap.get(
+                    box.id
+                  ) || 0
+                ),
+              0
+            ),
+
+          receipt_progress_pct:
+            Number(
+              boxItemCountMap.get(
+                box.id
+              ) || 0
+            ) > 0
+              ? Math.min(
+                  100,
+                  Math.round(
+                    (
+                      Number(
+                        boxReceivedQtyMap.get(
+                          box.id
+                        ) || 0
+                      ) /
+                      Number(
+                        boxItemCountMap.get(
+                          box.id
+                        ) || 1
+                      )
+                    ) *
+                      100
+                  )
+                )
+              : 0,
+
+          scanned_packed_qty:
+            Number(
+              boxScannedPackedQtyMap.get(
+                box.id
+              ) || 0
+            ),
+
+          scanned_received_qty:
+            Number(
+              boxScannedReceivedQtyMap.get(
+                box.id
+              ) || 0
+            ),
+
+          manual_packed_qty:
+            Number(
+              boxManualPackedQtyMap.get(
+                box.id
+              ) || 0
+            ),
+
+          manual_received_qty:
+            Number(
+              boxManualReceivedQtyMap.get(
+                box.id
+              ) || 0
+            ),
+
+          factory_out_at:
+            box.factory_out_at,
+
+          factory_out_by:
+            box.factory_out_by
+              ? operatorMap.get(
                   box.factory_out_by
                 ) ?? null
               : null,
@@ -6068,33 +8611,211 @@ export const getProjectDetailService = async (
               : null,
 
           details:
-            project.details[0] ?? null,
+            project.details[0] ??
+            null,
         },
 
         stats: {
+          /*
+          |--------------------------------------------------------------------
+          | Product / quantity overview
+          |--------------------------------------------------------------------
+          */
+
+          product_types:
+            uniqueItems,
+
+          // Backward compatibility
+          total_items:
+            uniqueItems,
+
           total_panels:
             totalPanels,
 
-          total_items:
-            uniqueItems,
+          total_qty:
+            totalQty,
+
+          total_packed_qty:
+            totalPackedQty,
+
+          total_pending_qty:
+            totalPendingQty,
+
+          packing_progress_pct:
+            packingProgressPct,
+
+          /*
+          |--------------------------------------------------------------------
+          | Packing method
+          |--------------------------------------------------------------------
+          */
+
+          scanned_packed_qty:
+            scannedPackedQty,
+
+          manual_packed_qty:
+            manualPackedQty,
+
+          scanned_packing_pct:
+            scannedPackingPct,
+
+          manual_packing_pct:
+            manualPackingPct,
+
+          pending_at_packaging:
+            pendingAtPackaging,
+
+          /*
+          |--------------------------------------------------------------------
+          | Item receipt / site verification
+          |--------------------------------------------------------------------
+          */
+
+          total_received_qty:
+            totalReceivedQty,
+
+          total_pending_receipt_qty:
+            totalPendingReceiptQty,
+
+          item_receipt_progress_pct:
+            itemReceiptProgressPct,
+
+          scanned_received_qty:
+            scannedReceivedQty,
+
+          scanned_pending_receipt_qty:
+            scannedPendingReceiptQty,
+
+          scanned_receipt_progress_pct:
+            scannedReceiptProgressPct,
+
+          manual_received_qty:
+            manualReceivedQty,
+
+          manual_pending_receipt_qty:
+            manualPendingReceiptQty,
+
+          manual_receipt_progress_pct:
+            manualReceiptProgressPct,
+
+          site_in_qty:
+            siteInQty,
+
+          site_in_received_qty:
+            siteInReceivedQty,
+
+          site_in_pending_verification_qty:
+            siteInPendingVerificationQty,
+
+          site_item_verification_pct:
+            siteItemVerificationPct,
+
+          not_at_site_qty:
+            notAtSiteQty,
+
+          fully_received_boxes:
+            fullyReceivedBoxes,
+
+          partially_received_boxes:
+            partiallyReceivedBoxes,
+
+          not_received_boxes:
+            notReceivedBoxes,
+
+          /*
+          |--------------------------------------------------------------------
+          | Product packing status
+          |--------------------------------------------------------------------
+          */
+
+          fully_packed_products:
+            fullyPackedProducts,
+
+          partially_packed_products:
+            partiallyPackedProducts,
+
+          not_started_products:
+            notStartedProducts,
+
+          /*
+          |--------------------------------------------------------------------
+          | Box statistics
+          |--------------------------------------------------------------------
+          */
 
           total_boxes:
             boxes.length,
 
+          boxes_with_items:
+            boxesWithItems,
+
+          empty_boxes:
+            emptyBoxes,
+
           packed_boxes:
-            boxes.filter(
-              (box) =>
-                box.box_status === "packed"
-            ).length,
+            packedBoxes,
 
           unpacked_boxes:
-            boxes.filter(
-              (box) =>
-                box.box_status === "unpacked"
-            ).length,
+            unpackedBoxes,
+
+          /*
+          |--------------------------------------------------------------------
+          | Weight statistics
+          |--------------------------------------------------------------------
+          */
 
           total_weight:
-            Number(totalBoxWeight.toFixed(4)),
+            Number(
+              totalBoxWeight.toFixed(
+                4
+              )
+            ),
+
+          total_packed_weight:
+            Number(
+              totalBoxWeight.toFixed(
+                4
+              )
+            ),
+
+          average_box_weight:
+            averageBoxWeight,
+
+          average_qty_per_box:
+            averageQtyPerBox,
+
+          /*
+          |--------------------------------------------------------------------
+          | Dispatch / site progress
+          |--------------------------------------------------------------------
+          */
+
+          factory_out_boxes:
+            factoryOutBoxes,
+
+          site_received_boxes:
+            siteReceivedBoxes,
+
+          dispatch_progress_pct:
+            dispatchProgressPct,
+
+          site_receipt_progress_pct:
+            siteReceiptProgressPct,
+
+          /*
+          |--------------------------------------------------------------------
+          | Machine progress
+          |--------------------------------------------------------------------
+          */
+
+          machine_completion_pct:
+            machineCompletionPct,
+
+          machine_total_qty:
+            totalMachineQty,
+
+          machine_scanned_qty:
+            totalMachineScannedQty,
         },
 
         machines:
@@ -6120,9 +8841,11 @@ export const getProjectDetailService = async (
   }
 };
 
+
+
 // ─── GET box items ────────────────────────────────────────────────────────────
 
-export const getBoxItemsService = async (
+export const getBoxItemsService_old = async (
   vendor_id: number,
   unique_project_id: string,
   box_id: number
@@ -6195,15 +8918,15 @@ export const getBoxItemsService = async (
         site_in_by: m.site_in_by ? (opMap.get(m.site_in_by) ?? null) : null,
         inOperator: m.in_operator
           ? {
-              id: m.in_operator,
-              name: opMap.get(m.in_operator) ?? "",
-            }
+            id: m.in_operator,
+            name: opMap.get(m.in_operator) ?? "",
+          }
           : null,
         siteInByUser: m.site_in_by
           ? {
-              id: m.site_in_by,
-              name: opMap.get(m.site_in_by) ?? "",
-            }
+            id: m.site_in_by,
+            name: opMap.get(m.site_in_by) ?? "",
+          }
           : null,
         cut_list: m.cut_list,
       })),
@@ -6214,6 +8937,2923 @@ export const getBoxItemsService = async (
     return validationResponse(0, "Failed to fetch box items");
   }
 };
+
+/*
+|--------------------------------------------------------------------------
+| Existing Box Items Service
+|--------------------------------------------------------------------------
+|
+| Keep this endpoint for the Box Items dialog.
+|
+| The nested `cut_list` object below is item metadata for each box mapping.
+| It is NOT the full project Cut List dataset, so it stays here.
+|--------------------------------------------------------------------------
+*/
+
+export const getBoxItemsService = async (
+  vendor_id: number,
+  unique_project_id: string,
+  box_id: number
+) => {
+  try {
+    const projectLookup =
+      await prisma.projectMaster.findFirst({
+        where: {
+          unique_project_id,
+          vendor_id,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+    if (!projectLookup) {
+      return validationResponse(
+        0,
+        "Project not found"
+      );
+    }
+
+    const project_id =
+      projectLookup.id;
+
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          factory_out_at: true,
+          site_in_at: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    const mappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          box_id,
+          project_id,
+          vendor_id,
+          expected_in: true,
+        },
+
+        select: {
+          id: true,
+          machine_id: true,
+          actual_in_at: true,
+          site_in_at: true,
+          in_operator: true,
+          site_in_by: true,
+
+          qty: true,
+          weight: true,
+          row_created_source: true,
+
+          machine: {
+            select: {
+              machine_name: true,
+            },
+          },
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              unique_code: true,
+              qty: true,
+              category_name: true,
+              group_name: true,
+              length: true,
+              width: true,
+              thickness: true,
+              weight: true,
+            },
+          },
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    const opIds = [
+      ...new Set([
+        ...mappings
+          .map(
+            (mapping) =>
+              mapping.in_operator
+          )
+          .filter(Boolean),
+
+        ...mappings
+          .map(
+            (mapping) =>
+              mapping.site_in_by
+          )
+          .filter(Boolean),
+      ]),
+    ] as number[];
+
+    const ops =
+      opIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in: opIds,
+              },
+            },
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const opMap =
+      new Map(
+        ops.map(
+          (user) => [
+            user.id,
+            user.user_name,
+          ]
+        )
+      );
+
+    return validationResponse(
+      1,
+      "Box items fetched",
+      {
+        box,
+
+        items:
+          mappings.map(
+            (mapping) => ({
+              id:
+                mapping.id,
+
+              machine: {
+                machine_name:
+                  mapping.machine
+                    .machine_name,
+              },
+
+              actual_in_at:
+                mapping.actual_in_at,
+
+              site_in_at:
+                mapping.site_in_at,
+
+              qty:
+                Number(
+                  mapping.qty ??
+                  1
+                ),
+
+              weight:
+                Number(
+                  mapping.weight ||
+                  0
+                ),
+
+              row_created_source:
+                mapping.row_created_source,
+
+              scanned_by:
+                mapping.in_operator
+                  ? opMap.get(
+                      mapping.in_operator
+                    ) ?? null
+                  : null,
+
+              site_in_by:
+                mapping.site_in_by
+                  ? opMap.get(
+                      mapping.site_in_by
+                    ) ?? null
+                  : null,
+
+              inOperator:
+                mapping.in_operator
+                  ? {
+                      id:
+                        mapping.in_operator,
+
+                      name:
+                        opMap.get(
+                          mapping.in_operator
+                        ) ?? "",
+                    }
+                  : null,
+
+              siteInByUser:
+                mapping.site_in_by
+                  ? {
+                      id:
+                        mapping.site_in_by,
+
+                      name:
+                        opMap.get(
+                          mapping.site_in_by
+                        ) ?? "",
+                    }
+                  : null,
+
+              cut_list:
+                mapping.cut_list,
+            })
+          ),
+      }
+    );
+  } catch (error) {
+    console.error(
+      "getBoxItemsService error:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch box items"
+    );
+  }
+};
+
+
+/*
+|--------------------------------------------------------------------------
+| Project Cut List - Server-side pagination + filters
+|--------------------------------------------------------------------------
+|
+| Paste this into your existing trackTrace.service.ts.
+|
+| Assumes these already exist in that service file:
+|
+|   import { prisma } from "../../prisma/client";
+|   import { validationResponse } from "../../utils/validationResponse";
+|
+| The service returns PHYSICAL / VIRTUAL UNIT rows, exactly like your
+| existing project-detail Cut List table:
+|
+|   - Normal scanned mapping qty=1 -> one row
+|   - Manual CutList.qty=10        -> ten virtual unit rows
+|   - Manual machine-18 qty=3      -> first three virtual rows are packed
+|   - Remaining manual quantity    -> synthetic Pending packaging rows
+|
+|--------------------------------------------------------------------------
+*/
+
+export type ProjectCutListMachineStatus =
+  | "all"
+  | "done"
+  | "pending";
+
+export type ProjectCutListPackingStatus =
+  | "all"
+  | "packed"
+  | "pending";
+
+export type ProjectCutListPackingMethod =
+  | "all"
+  | "manual"
+  | "scanned";
+
+export type ProjectCutListSortBy =
+  | "row_number"
+  | "item_name"
+  | "unique_code"
+  | "group"
+  | "category"
+  | "weight"
+  | "box";
+
+export type ProjectCutListSortOrder =
+  | "asc"
+  | "desc";
+
+export interface ProjectCutListFilters {
+  page?: number;
+  limit?: number;
+
+  search?: string;
+
+  group?: string;
+  category?: string;
+
+  machine_id?: number | null;
+  machine_status?: ProjectCutListMachineStatus;
+
+  packing_status?: ProjectCutListPackingStatus;
+  packing_method?: ProjectCutListPackingMethod;
+
+  box_id?: number | null;
+
+  min_weight?: number | null;
+  max_weight?: number | null;
+
+  sort_by?: ProjectCutListSortBy;
+  sort_order?: ProjectCutListSortOrder;
+}
+
+type CutListMachineColumn = {
+  mapping_id: number;
+  machine_id: number;
+  machine_name: string;
+  sequence_no: number;
+  box_id: number | null;
+  weight: number;
+  qty: number;
+  row_created_source: string | null;
+  scanned: boolean;
+  scanned_at: Date | null;
+  scanned_by: string | null;
+};
+
+type ProjectCutListUnitRow = {
+  id: number;
+  row_number: number;
+
+  cut_list_id: number;
+
+  item_name: string;
+  unique_code: string | null;
+  unique_code_2: string | null;
+  description: string;
+
+  qty: number;
+  total_qty: number;
+  unit_index: number;
+
+  category: string | null;
+  group: string | null;
+
+  material_details: string | null;
+  procurement: string | null;
+
+  length: any;
+  width: any;
+  thickness: any;
+
+  weight: number;
+
+  packing_method: "Manual" | "Scanned";
+
+  package_box_id: number | null;
+  package_box_name: string | null;
+
+  machines: CutListMachineColumn[];
+};
+
+const normalizeText = (
+  value: unknown
+): string => {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase();
+};
+
+const normalizePageNumber = (
+  value: unknown,
+  fallback: number
+): number => {
+  const parsed = Number(value);
+
+  if (
+    !Number.isFinite(parsed) ||
+    parsed <= 0
+  ) {
+    return fallback;
+  }
+
+  return Math.floor(parsed);
+};
+
+const normalizeNullableNumber = (
+  value: unknown
+): number | null => {
+  if (
+    value === undefined ||
+    value === null ||
+    value === ""
+  ) {
+    return null;
+  }
+
+  const parsed = Number(value);
+
+  return Number.isFinite(parsed)
+    ? parsed
+    : null;
+};
+
+/*
+|--------------------------------------------------------------------------
+| IMPORTANT
+|--------------------------------------------------------------------------
+|
+| Because your schema allows one manual CutListMachineMapping row to hold
+| qty > 1, "physical rows" do not exist directly in the database.
+|
+| Example:
+|
+|   CutList.qty = 10
+|   Manual mapping row qty = 3
+|
+| The UI needs 10 unit rows:
+|
+|   1-3  = packed
+|   4-10 = pending
+|
+| Therefore pagination is performed on the SERVER after virtual unit
+| expansion. The frontend receives only the requested page.
+|
+|--------------------------------------------------------------------------
+*/
+
+export const getProjectCutListPaginatedService = async (
+  vendor_id: number,
+  unique_project_id: string,
+  filters: ProjectCutListFilters = {}
+) => {
+  try {
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 1 - Validate
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      !vendor_id ||
+      !unique_project_id
+    ) {
+      return validationResponse(
+        0,
+        "vendor_id and project_id are required"
+      );
+    }
+
+    const page =
+      normalizePageNumber(
+        filters.page,
+        1
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Limit protection
+    |--------------------------------------------------------------------------
+    |
+    | Keeps someone from requesting 50,000 rows in one request.
+    |--------------------------------------------------------------------------
+    */
+
+    const requestedLimit =
+      normalizePageNumber(
+        filters.limit,
+        25
+      );
+
+    const limit =
+      Math.min(
+        Math.max(
+          requestedLimit,
+          10
+        ),
+        100
+      );
+
+    const search =
+      String(
+        filters.search ?? ""
+      ).trim();
+
+    const selectedGroup =
+      String(
+        filters.group ?? "all"
+      ).trim();
+
+    const selectedCategory =
+      String(
+        filters.category ?? "all"
+      ).trim();
+
+    const machineId =
+      normalizeNullableNumber(
+        filters.machine_id
+      );
+
+    const machineStatus:
+      ProjectCutListMachineStatus =
+        filters.machine_status ??
+        "all";
+
+    const packingStatus:
+      ProjectCutListPackingStatus =
+        filters.packing_status ??
+        "all";
+
+    const packingMethod:
+      ProjectCutListPackingMethod =
+        filters.packing_method ??
+        "all";
+
+    const boxId =
+      normalizeNullableNumber(
+        filters.box_id
+      );
+
+    const minWeight =
+      normalizeNullableNumber(
+        filters.min_weight
+      );
+
+    const maxWeight =
+      normalizeNullableNumber(
+        filters.max_weight
+      );
+
+    const sortBy:
+      ProjectCutListSortBy =
+        filters.sort_by ??
+        "row_number";
+
+    const sortOrder:
+      ProjectCutListSortOrder =
+        filters.sort_order ===
+        "desc"
+          ? "desc"
+          : "asc";
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 2 - Resolve unique project id
+    |--------------------------------------------------------------------------
+    */
+
+    const project =
+      await prisma.projectMaster.findFirst({
+        where: {
+          unique_project_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+          project_name: true,
+          unique_project_id: true,
+        },
+      });
+
+    if (!project) {
+      return validationResponse(
+        0,
+        "Project not found"
+      );
+    }
+
+    const project_id =
+      project.id;
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 3 - Packaging machine + boxes
+    |--------------------------------------------------------------------------
+    */
+
+    const [
+      packagingMachine,
+      boxes,
+    ] =
+      await Promise.all([
+        prisma.machineMaster.findFirst({
+          where: {
+            vendor_id,
+            machine_type_id: 18,
+          },
+
+          select: {
+            id: true,
+            machine_name: true,
+            sequence_no: true,
+          },
+
+          orderBy: {
+            id: "asc",
+          },
+        }),
+
+        prisma.boxMaster.findMany({
+          where: {
+            vendor_id,
+            project_id,
+            is_deleted: false,
+          },
+
+          select: {
+            id: true,
+            box_name: true,
+
+            // Used by Cut List receipt status.
+            site_in_at: true,
+          },
+
+          orderBy: {
+            id: "asc",
+          },
+        }),
+      ]);
+
+    const boxNameMap =
+      new Map<number, string>(
+        boxes.map(
+          (box) => [
+            box.id,
+            box.box_name,
+          ]
+        )
+      );
+
+    const boxSiteInMap =
+      new Map<number, Date | null>(
+        boxes.map(
+          (box) => [
+            box.id,
+            box.site_in_at,
+          ]
+        )
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4 - Fetch CutList master rows
+    |--------------------------------------------------------------------------
+    |
+    | We intentionally keep SEARCH at the unit-row layer because search also
+    | supports Packing Box name. Group/category/method are safe to pre-filter
+    | at the CutList level.
+    |--------------------------------------------------------------------------
+    */
+
+    const allProjectCutLists =
+      await prisma.cutList.findMany({
+        where: {
+          project_id,
+          vendor_id,
+
+          status: {
+            in: [
+              "Active",
+              "active",
+            ],
+          },
+        },
+
+        select: {
+          id: true,
+          project_id: true,
+          vendor_id: true,
+
+          item_name: true,
+          unique_code: true,
+          unique_code_2: true,
+          description: true,
+
+          material_details: true,
+          procurement: true,
+
+          qty: true,
+
+          category_name: true,
+          group_name: true,
+
+          length: true,
+          width: true,
+          thickness: true,
+
+          weight: true,
+
+          include_in_packing: true,
+          scan_pack_validate: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Filter options must not disappear when another filter is selected.
+    |--------------------------------------------------------------------------
+    */
+
+    const groupOptions =
+      Array.from(
+        new Set(
+          allProjectCutLists
+            .map(
+              (item) =>
+                item.group_name
+                  ?.trim()
+            )
+            .filter(
+              (
+                value
+              ): value is string =>
+                Boolean(value)
+            )
+        )
+      ).sort(
+        (a, b) =>
+          a.localeCompare(b)
+      );
+
+    const categoryOptions =
+      Array.from(
+        new Set(
+          allProjectCutLists
+            .map(
+              (item) =>
+                item.category_name
+                  ?.trim()
+            )
+            .filter(
+              (
+                value
+              ): value is string =>
+                Boolean(value)
+            )
+        )
+      ).sort(
+        (a, b) =>
+          a.localeCompare(b)
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pre-filter CutList rows
+    |--------------------------------------------------------------------------
+    */
+
+    const candidateCutLists =
+      allProjectCutLists.filter(
+        (item) => {
+          const isManual =
+            item.include_in_packing ===
+              true &&
+            item.scan_pack_validate ===
+              false;
+
+          if (
+            selectedGroup &&
+            normalizeText(
+              selectedGroup
+            ) !== "all" &&
+            normalizeText(
+              item.group_name
+            ) !==
+              normalizeText(
+                selectedGroup
+              )
+          ) {
+            return false;
+          }
+
+          if (
+            selectedCategory &&
+            normalizeText(
+              selectedCategory
+            ) !== "all" &&
+            normalizeText(
+              item.category_name
+            ) !==
+              normalizeText(
+                selectedCategory
+              )
+          ) {
+            return false;
+          }
+
+          if (
+            packingMethod ===
+              "manual" &&
+            !isManual
+          ) {
+            return false;
+          }
+
+          if (
+            packingMethod ===
+              "scanned" &&
+            isManual
+          ) {
+            return false;
+          }
+
+          return true;
+        }
+      );
+
+    const candidateCutListIds =
+      candidateCutLists.map(
+        (item) => item.id
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Nothing matches master-level filters
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      candidateCutListIds.length ===
+      0
+    ) {
+      return validationResponse(
+        1,
+        "Project cut list fetched",
+        {
+          project,
+
+          items: [],
+
+          pagination: {
+            page: 1,
+            limit,
+            total: 0,
+            total_pages: 0,
+            from: 0,
+            to: 0,
+            has_previous: false,
+            has_next: false,
+          },
+
+          summary: {
+            total_project_qty:
+              allProjectCutLists.reduce(
+                (
+                  sum,
+                  item
+                ) =>
+                  sum +
+                  Math.max(
+                    0,
+                    Number(
+                      item.qty || 0
+                    )
+                  ),
+                0
+              ),
+
+            filtered_qty: 0,
+            packed_qty: 0,
+            pending_qty: 0,
+            filtered_weight: 0,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Site receipt / verification
+            |--------------------------------------------------------------------------
+            */
+            received_qty: 0,
+            pending_receipt_qty: 0,
+            receipt_progress_pct: 0,
+
+            scanned_received_qty: 0,
+            manual_received_qty: 0,
+
+            site_in_qty: 0,
+            site_in_received_qty: 0,
+            pending_verification_qty: 0,
+            site_verification_pct: 0,
+          },
+
+          filter_options: {
+            groups:
+              groupOptions,
+
+            categories:
+              categoryOptions,
+
+            machines: [],
+
+            boxes:
+              boxes.map(
+                (box) => ({
+                  id:
+                    box.id,
+
+                  name:
+                    box.box_name,
+                })
+              ),
+          },
+        }
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 5 - Fetch mappings only for candidate CutLists
+    |--------------------------------------------------------------------------
+    */
+
+    const allMappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          expected_in: true,
+
+          cut_list_id: {
+            in:
+              candidateCutListIds,
+          },
+        },
+
+        select: {
+          id: true,
+
+          cut_list_id: true,
+          machine_id: true,
+          sequence_no: true,
+
+          actual_in_at: true,
+          box_id: true,
+          in_operator: true,
+
+          /*
+          |--------------------------------------------------------------------------
+          | Site receipt / verification
+          |--------------------------------------------------------------------------
+          |
+          | Normal scanned item:
+          |   site_in_at/site_in_by are used.
+          |
+          | Manual item:
+          |   received_qty is the physical quantity verified at site.
+          |--------------------------------------------------------------------------
+          */
+          site_in_at: true,
+          site_in_by: true,
+          received_qty: true,
+
+          weight: true,
+          qty: true,
+
+          row_created_source: true,
+
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+              sequence_no: true,
+              machine_type_id: true,
+            },
+          },
+        },
+
+        orderBy: [
+          {
+            cut_list_id:
+              "asc",
+          },
+          {
+            sequence_no:
+              "asc",
+          },
+          {
+            id:
+              "asc",
+          },
+        ],
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 6 - Operator names
+    |--------------------------------------------------------------------------
+    */
+
+    const operatorIds =
+      [
+        ...new Set([
+          ...allMappings
+            .map(
+              (mapping) =>
+                mapping.in_operator
+            )
+            .filter(Boolean),
+
+          ...allMappings
+            .map(
+              (mapping) =>
+                mapping.site_in_by
+            )
+            .filter(Boolean),
+        ]),
+      ] as number[];
+
+    const operators =
+      operatorIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in:
+                  operatorIds,
+              },
+            },
+
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const operatorMap =
+      new Map<number, string>(
+        operators.map(
+          (user) => [
+            user.id,
+            user.user_name,
+          ]
+        )
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 7 - Machine filter options
+    |--------------------------------------------------------------------------
+    */
+
+    const machineOptionMap =
+      new Map<
+        number,
+        {
+          id: number;
+          name: string;
+          sequence_no: number;
+        }
+      >();
+
+    for (
+      const mapping
+      of allMappings
+    ) {
+      if (
+        !machineOptionMap.has(
+          mapping.machine_id
+        )
+      ) {
+        machineOptionMap.set(
+          mapping.machine_id,
+          {
+            id:
+              mapping.machine_id,
+
+            name:
+              mapping.machine
+                .machine_name,
+
+            sequence_no:
+              mapping.sequence_no ??
+              mapping.machine
+                .sequence_no ??
+              0,
+          }
+        );
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Manual-only project can have no machine-18 mapping yet.
+    |--------------------------------------------------------------------------
+    */
+
+    const containsManualItem =
+      candidateCutLists.some(
+        (item) =>
+          item.include_in_packing ===
+            true &&
+          item.scan_pack_validate ===
+            false
+      );
+
+    if (
+      packagingMachine &&
+      containsManualItem &&
+      !machineOptionMap.has(
+        packagingMachine.id
+      )
+    ) {
+      machineOptionMap.set(
+        packagingMachine.id,
+        {
+          id:
+            packagingMachine.id,
+
+          name:
+            packagingMachine.machine_name,
+
+          sequence_no:
+            packagingMachine.sequence_no ??
+            0,
+        }
+      );
+    }
+
+    const machineOptions =
+      Array.from(
+        machineOptionMap.values()
+      ).sort(
+        (a, b) =>
+          a.sequence_no -
+            b.sequence_no ||
+          a.id - b.id
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8 - Group mappings by CutList
+    |--------------------------------------------------------------------------
+    */
+
+    const mappingsByCutList =
+      new Map<
+        number,
+        typeof allMappings
+      >();
+
+    for (
+      const mapping
+      of allMappings
+    ) {
+      if (
+        !mappingsByCutList.has(
+          mapping.cut_list_id
+        )
+      ) {
+        mappingsByCutList.set(
+          mapping.cut_list_id,
+          []
+        );
+      }
+
+      mappingsByCutList
+        .get(
+          mapping.cut_list_id
+        )!
+        .push(mapping);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Helper: expand a mapping row by mapping.qty
+    |--------------------------------------------------------------------------
+    */
+
+    const expandRowsByQty =
+      <
+        T extends {
+          qty: number;
+        }
+      >(
+        rows: T[]
+      ): T[] => {
+        const expanded: T[] =
+          [];
+
+        for (
+          const row
+          of rows
+        ) {
+          const rowQty =
+            Math.max(
+              1,
+              Number(
+                row.qty ?? 1
+              )
+            );
+
+          for (
+            let index = 0;
+            index < rowQty;
+            index++
+          ) {
+            expanded.push(
+              row
+            );
+          }
+        }
+
+        return expanded;
+      };
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 9 - Build physical / virtual unit rows
+    |--------------------------------------------------------------------------
+    */
+
+    const unitRows:
+      ProjectCutListUnitRow[] =
+      [];
+
+    let rowNumber = 1;
+
+    for (
+      const cutList
+      of candidateCutLists
+    ) {
+      const itemMappings =
+        mappingsByCutList.get(
+          cutList.id
+        ) ?? [];
+
+      const isManual =
+        cutList.include_in_packing ===
+          true &&
+        cutList.scan_pack_validate ===
+          false;
+
+      const totalQty =
+        Math.max(
+          0,
+          Number(
+            cutList.qty || 0
+          )
+        );
+
+      /*
+      |--------------------------------------------------------------------------
+      | Group mappings by machine
+      |--------------------------------------------------------------------------
+      */
+
+      const byMachine =
+        new Map<
+          number,
+          typeof itemMappings
+        >();
+
+      for (
+        const mapping
+        of itemMappings
+      ) {
+        if (
+          !byMachine.has(
+            mapping.machine_id
+          )
+        ) {
+          byMachine.set(
+            mapping.machine_id,
+            []
+          );
+        }
+
+        byMachine
+          .get(
+            mapping.machine_id
+          )!
+          .push(mapping);
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | MANUAL ITEM
+      |--------------------------------------------------------------------------
+      */
+
+      if (isManual) {
+        if (
+          totalQty <= 0
+        ) {
+          continue;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | All non-packaging machines are expanded normally.
+        |--------------------------------------------------------------------------
+        */
+
+        const expandedNonPackagingByMachine =
+          new Map<
+            number,
+            typeof itemMappings
+          >();
+
+        for (
+          const [
+            currentMachineId,
+            machineRows,
+          ]
+          of byMachine
+        ) {
+          if (
+            packagingMachine &&
+            Number(
+              currentMachineId
+            ) ===
+              Number(
+                packagingMachine.id
+              )
+          ) {
+            continue;
+          }
+
+          expandedNonPackagingByMachine.set(
+            currentMachineId,
+            expandRowsByQty(
+              machineRows
+            )
+          );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Only row_created_source=Manual is used as the manual machine-18 row.
+        |--------------------------------------------------------------------------
+        */
+
+        const manualPackagingRows =
+          packagingMachine
+            ? (
+                byMachine.get(
+                  packagingMachine.id
+                ) ?? []
+              )
+                .filter(
+                  (row) =>
+                    normalizeText(
+                      row.row_created_source
+                    ) ===
+                    "manual"
+                )
+                .sort(
+                  (a, b) =>
+                    a.id - b.id
+                )
+            : [];
+
+        const expandedManualPackagingRows =
+          expandRowsByQty(
+            manualPackagingRows
+          ).slice(
+            0,
+            totalQty
+          );
+
+        const fallbackWeight =
+          Number(
+            cutList.weight || 0
+          ) > 0 &&
+          totalQty > 0
+            ? Number(
+                cutList.weight || 0
+              ) /
+              totalQty
+            : 0;
+
+        for (
+          let unitIndex = 0;
+          unitIndex <
+          totalQty;
+          unitIndex++
+        ) {
+          const machineColumns:
+            CutListMachineColumn[] =
+            [];
+
+          /*
+          |--------------------------------------------------------------------------
+          | Prior / non-packaging machines
+          |--------------------------------------------------------------------------
+          */
+
+          for (
+            const [
+              ,
+              machineRows,
+            ]
+            of expandedNonPackagingByMachine
+          ) {
+            const row =
+              machineRows[
+                unitIndex
+              ];
+
+            if (!row) {
+              continue;
+            }
+
+            machineColumns.push({
+              mapping_id:
+                row.id,
+
+              machine_id:
+                row.machine_id,
+
+              machine_name:
+                row.machine
+                  .machine_name,
+
+              sequence_no:
+                row.sequence_no ??
+                row.machine
+                  .sequence_no ??
+                0,
+
+              box_id:
+                row.box_id,
+
+              weight:
+                Number(
+                  row.weight || 0
+                ),
+
+              qty:
+                1,
+
+              row_created_source:
+                row.row_created_source,
+
+              scanned:
+                row.actual_in_at !==
+                null,
+
+              scanned_at:
+                row.actual_in_at,
+
+              scanned_by:
+                row.in_operator
+                  ? operatorMap.get(
+                      row.in_operator
+                    ) ?? null
+                  : null,
+            });
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Packaging machine
+          |--------------------------------------------------------------------------
+          */
+
+          const manualPackagingRow =
+            expandedManualPackagingRows[
+              unitIndex
+            ];
+
+          if (
+            packagingMachine
+          ) {
+            if (
+              manualPackagingRow
+            ) {
+              machineColumns.push({
+                mapping_id:
+                  manualPackagingRow.id,
+
+                machine_id:
+                  packagingMachine.id,
+
+                machine_name:
+                  packagingMachine
+                    .machine_name,
+
+                sequence_no:
+                  packagingMachine
+                    .sequence_no ??
+                  0,
+
+                box_id:
+                  manualPackagingRow
+                    .box_id,
+
+                weight:
+                  Number(
+                    manualPackagingRow
+                      .weight ||
+                      fallbackWeight ||
+                      0
+                  ),
+
+                qty:
+                  1,
+
+                row_created_source:
+                  manualPackagingRow
+                    .row_created_source,
+
+                scanned:
+                  manualPackagingRow
+                    .actual_in_at !==
+                  null,
+
+                scanned_at:
+                  manualPackagingRow
+                    .actual_in_at,
+
+                scanned_by:
+                  manualPackagingRow
+                    .in_operator
+                    ? operatorMap.get(
+                        manualPackagingRow
+                          .in_operator
+                      ) ?? null
+                    : null,
+              });
+            } else {
+              /*
+              |--------------------------------------------------------------------------
+              | Synthetic pending packaging row.
+              |--------------------------------------------------------------------------
+              */
+
+              machineColumns.push({
+                mapping_id:
+                  0,
+
+                machine_id:
+                  packagingMachine.id,
+
+                machine_name:
+                  packagingMachine
+                    .machine_name,
+
+                sequence_no:
+                  packagingMachine
+                    .sequence_no ??
+                  0,
+
+                box_id:
+                  null,
+
+                weight:
+                  Number(
+                    fallbackWeight.toFixed(
+                      4
+                    )
+                  ),
+
+                qty:
+                  1,
+
+                row_created_source:
+                  "Manual",
+
+                scanned:
+                  false,
+
+                scanned_at:
+                  null,
+
+                scanned_by:
+                  null,
+              });
+            }
+          }
+
+          const packageBoxId =
+            manualPackagingRow
+              ?.box_id ??
+            null;
+
+          const packageBoxName =
+            packageBoxId
+              ? boxNameMap.get(
+                  packageBoxId
+                ) ?? null
+              : null;
+
+          const mappedWeight =
+            manualPackagingRow
+              ? Number(
+                  manualPackagingRow
+                    .weight || 0
+                )
+              : 0;
+
+          const unitWeight =
+            Number(
+              Number(
+                mappedWeight ||
+                  fallbackWeight ||
+                  0
+              ).toFixed(4)
+            );
+
+          unitRows.push({
+            id:
+              cutList.id,
+
+            row_number:
+              rowNumber++,
+
+            cut_list_id:
+              cutList.id,
+
+            item_name:
+              cutList.item_name,
+
+            unique_code:
+              cutList.unique_code,
+
+            unique_code_2:
+              cutList.unique_code_2,
+
+            description:
+              cutList.description,
+
+            qty:
+              1,
+
+            total_qty:
+              totalQty,
+
+            unit_index:
+              unitIndex + 1,
+
+            category:
+              cutList.category_name,
+
+            group:
+              cutList.group_name,
+
+            material_details:
+              cutList.material_details,
+
+            procurement:
+              cutList.procurement,
+
+            length:
+              cutList.length,
+
+            width:
+              cutList.width,
+
+            thickness:
+              cutList.thickness,
+
+            weight:
+              unitWeight,
+
+            packing_method:
+              "Manual",
+
+            package_box_id:
+              packageBoxId,
+
+            package_box_name:
+              packageBoxName,
+
+            machines:
+              machineColumns,
+          });
+        }
+
+        continue;
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | NORMAL / SCANNED ITEM
+      |--------------------------------------------------------------------------
+      */
+
+      const expandedByMachine =
+        new Map<
+          number,
+          typeof itemMappings
+        >();
+
+      for (
+        const [
+          currentMachineId,
+          machineRows,
+        ]
+        of byMachine
+      ) {
+        expandedByMachine.set(
+          currentMachineId,
+          expandRowsByQty(
+            machineRows
+          )
+        );
+      }
+
+      const unitCount =
+        Math.max(
+          0,
+          ...[
+            ...expandedByMachine.values(),
+          ].map(
+            (machineRows) =>
+              machineRows.length
+          )
+        );
+
+      if (
+        unitCount <= 0
+      ) {
+        continue;
+      }
+
+      const fallbackWeight =
+        Number(
+          cutList.weight || 0
+        ) > 0 &&
+        Number(
+          cutList.qty || 0
+        ) > 0
+          ? Number(
+              cutList.weight || 0
+            ) /
+            Number(
+              cutList.qty || 1
+            )
+          : 0;
+
+      for (
+        let unitIndex = 0;
+        unitIndex <
+        unitCount;
+        unitIndex++
+      ) {
+        const machineColumns:
+          CutListMachineColumn[] =
+          [];
+
+        for (
+          const [
+            ,
+            machineRows,
+          ]
+          of expandedByMachine
+        ) {
+          const row =
+            machineRows[
+              unitIndex
+            ];
+
+          if (!row) {
+            continue;
+          }
+
+          machineColumns.push({
+            mapping_id:
+              row.id,
+
+            machine_id:
+              row.machine_id,
+
+            machine_name:
+              row.machine
+                .machine_name,
+
+            sequence_no:
+              row.sequence_no ??
+              row.machine
+                .sequence_no ??
+              0,
+
+            box_id:
+              row.box_id,
+
+            weight:
+              Number(
+                row.weight || 0
+              ),
+
+            qty:
+              1,
+
+            row_created_source:
+              row.row_created_source,
+
+            scanned:
+              row.actual_in_at !==
+              null,
+
+            scanned_at:
+              row.actual_in_at,
+
+            scanned_by:
+              row.in_operator
+                ? operatorMap.get(
+                    row.in_operator
+                  ) ?? null
+                : null,
+          });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Prefer packaging machine box_id.
+        |--------------------------------------------------------------------------
+        */
+
+        const packagingColumn =
+          packagingMachine
+            ? machineColumns.find(
+                (column) =>
+                  Number(
+                    column.machine_id
+                  ) ===
+                  Number(
+                    packagingMachine.id
+                  )
+              )
+            : undefined;
+
+        const packageBoxId =
+          packagingColumn
+            ?.box_id ??
+          machineColumns.find(
+            (column) =>
+              column.box_id !==
+              null
+          )?.box_id ??
+          null;
+
+        const packageBoxName =
+          packageBoxId
+            ? boxNameMap.get(
+                packageBoxId
+              ) ?? null
+            : null;
+
+        const mappedWeight =
+          packagingColumn &&
+          Number(
+            packagingColumn.weight ||
+              0
+          ) > 0
+            ? Number(
+                packagingColumn.weight
+              )
+            : machineColumns.find(
+                (column) =>
+                  Number(
+                    column.weight || 0
+                  ) > 0
+              )?.weight ??
+              0;
+
+        const unitWeight =
+          Number(
+            Number(
+              mappedWeight ||
+                fallbackWeight ||
+                0
+            ).toFixed(4)
+          );
+
+        unitRows.push({
+          id:
+            cutList.id,
+
+          row_number:
+            rowNumber++,
+
+          cut_list_id:
+            cutList.id,
+
+          item_name:
+            cutList.item_name,
+
+          unique_code:
+            cutList.unique_code,
+
+          unique_code_2:
+            cutList.unique_code_2,
+
+          description:
+            cutList.description,
+
+          qty:
+            1,
+
+          total_qty:
+            Number(
+              cutList.qty || 0
+            ),
+
+          unit_index:
+            unitIndex + 1,
+
+          category:
+            cutList.category_name,
+
+          group:
+            cutList.group_name,
+
+          material_details:
+            cutList.material_details,
+
+          procurement:
+            cutList.procurement,
+
+          length:
+            cutList.length,
+
+          width:
+            cutList.width,
+
+          thickness:
+            cutList.thickness,
+
+          weight:
+            unitWeight,
+
+          packing_method:
+            "Scanned",
+
+          package_box_id:
+            packageBoxId,
+
+          package_box_name:
+            packageBoxName,
+
+          machines:
+            machineColumns,
+        });
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 10 - Add received_qty / site verification information
+    |--------------------------------------------------------------------------
+    |
+    | Cut List rows are PHYSICAL / VIRTUAL units.
+    |
+    | Normal example:
+    |   mapping.qty = 1
+    |   site_in_at != null
+    |   => received_qty = 1
+    |
+    | Manual example:
+    |   mapping.qty = 5
+    |   mapping.received_qty = 3
+    |
+    | The same mapping is expanded to five virtual Cut List rows:
+    |
+    |   Unit 1 => received_qty = 1
+    |   Unit 2 => received_qty = 1
+    |   Unit 3 => received_qty = 1
+    |   Unit 4 => received_qty = 0
+    |   Unit 5 => received_qty = 0
+    |
+    | This is intentionally done BEFORE server filtering/sorting/pagination,
+    | so the requested page contains the correct physical receipt state.
+    |--------------------------------------------------------------------------
+    */
+
+    const mappingReceiptInfoMap =
+      new Map(
+        allMappings.map(
+          (mapping) => [
+            mapping.id,
+            {
+              qty:
+                Math.max(
+                  0,
+                  Number(
+                    mapping.qty ?? 1
+                  )
+                ),
+
+              received_qty:
+                mapping.received_qty,
+
+              site_in_at:
+                mapping.site_in_at,
+
+              site_in_by:
+                mapping.site_in_by,
+
+              row_created_source:
+                mapping.row_created_source,
+            },
+          ]
+        )
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Number of expanded units already assigned for each DB mapping.
+    |--------------------------------------------------------------------------
+    */
+
+    const mappingUnitPositionMap =
+      new Map<number, number>();
+
+    const unitRowsWithReceipt =
+      unitRows.map(
+        (row) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Receipt is based only on packaging machine (type 18).
+          |--------------------------------------------------------------------------
+          */
+
+          const packagingColumn =
+            packagingMachine
+              ? row.machines.find(
+                  (machine) =>
+                    Number(
+                      machine.machine_id
+                    ) ===
+                    Number(
+                      packagingMachine.id
+                    )
+                )
+              : undefined;
+
+          const mappingId =
+            Number(
+              packagingColumn?.mapping_id ??
+                0
+            );
+
+          const mappingInfo =
+            mappingId > 0
+              ? mappingReceiptInfoMap.get(
+                  mappingId
+                )
+              : undefined;
+
+          const isManual =
+            row.packing_method ===
+            "Manual";
+
+          const packed =
+            row.package_box_id !==
+            null;
+
+          const boxSiteInAt =
+            row.package_box_id
+              ? boxSiteInMap.get(
+                  row.package_box_id
+                ) ?? null
+              : null;
+
+          /*
+          |--------------------------------------------------------------------------
+          | How many physical units of this mapping are received?
+          |--------------------------------------------------------------------------
+          */
+
+          let mappingReceivedQty = 0;
+
+          if (mappingInfo) {
+            if (isManual) {
+              mappingReceivedQty =
+                Math.min(
+                  mappingInfo.qty,
+                  Math.max(
+                    0,
+                    Number(
+                      mappingInfo.received_qty ??
+                        0
+                    )
+                  )
+                );
+            } else {
+              mappingReceivedQty =
+                mappingInfo.site_in_at
+                  ? mappingInfo.qty
+                  : 0;
+            }
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Position of this virtual unit inside the DB mapping.
+          |--------------------------------------------------------------------------
+          */
+
+          const mappingUnitPosition =
+            mappingInfo
+              ? (
+                  mappingUnitPositionMap.get(
+                    mappingId
+                  ) ?? 0
+                )
+              : 0;
+
+          if (mappingInfo) {
+            mappingUnitPositionMap.set(
+              mappingId,
+              mappingUnitPosition + 1
+            );
+          }
+
+          const isReceived =
+            Boolean(
+              mappingInfo
+            ) &&
+            mappingUnitPosition <
+              mappingReceivedQty;
+
+          const unitReceivedQty =
+            isReceived
+              ? 1
+              : 0;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Human-friendly receipt state
+          |--------------------------------------------------------------------------
+          */
+
+          const receiptStatus:
+            | "Not Packed"
+            | "Not At Site"
+            | "Pending Verification"
+            | "Received" =
+              !packed
+                ? "Not Packed"
+                : isReceived
+                  ? "Received"
+                  : !boxSiteInAt
+                    ? "Not At Site"
+                    : "Pending Verification";
+
+          return {
+            ...row,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Physical unit receipt information
+            |--------------------------------------------------------------------------
+            */
+
+            received_qty:
+              unitReceivedQty,
+
+            is_received:
+              isReceived,
+
+            receipt_status:
+              receiptStatus,
+
+            receipt_method:
+              isManual
+                ? "Manual Verification"
+                : "QR Scan",
+
+            received_at:
+              isReceived
+                ? mappingInfo
+                    ?.site_in_at ??
+                  null
+                : null,
+
+            received_by_id:
+              isReceived
+                ? mappingInfo
+                    ?.site_in_by ??
+                  null
+                : null,
+
+            received_by:
+              isReceived &&
+              mappingInfo
+                ?.site_in_by
+                ? operatorMap.get(
+                    mappingInfo.site_in_by
+                  ) ?? null
+                : null,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Box-level site arrival state for this unit
+            |--------------------------------------------------------------------------
+            */
+
+            box_site_in_at:
+              boxSiteInAt,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Original mapping values are also returned for reference.
+            |
+            | Useful for manual rows:
+            | mapping_packed_qty   = 5
+            | mapping_received_qty = 3
+            |--------------------------------------------------------------------------
+            */
+
+            mapping_packed_qty:
+              mappingInfo
+                ?.qty ??
+              0,
+
+            mapping_received_qty:
+              mappingInfo
+                ? (
+                    isManual
+                      ? Math.min(
+                          mappingInfo.qty,
+                          Math.max(
+                            0,
+                            Number(
+                              mappingInfo.received_qty ??
+                                0
+                            )
+                          )
+                        )
+                      : (
+                          mappingInfo.site_in_at
+                            ? mappingInfo.qty
+                            : 0
+                        )
+                  )
+                : 0,
+          };
+        }
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 11 - Server-side row filters
+    |--------------------------------------------------------------------------
+    */
+
+    const searchText =
+      normalizeText(
+        search
+      );
+
+    const filteredRows =
+      unitRowsWithReceipt.filter(
+        (row) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Search
+          |--------------------------------------------------------------------------
+          */
+
+          if (searchText) {
+            const searchable =
+              [
+                row.item_name,
+                row.unique_code,
+                row.unique_code_2,
+                row.description,
+                row.category,
+                row.group,
+                row.material_details,
+                row.procurement,
+                row.package_box_name,
+                row.weight,
+                row.length,
+                row.width,
+                row.thickness,
+                row.packing_method,
+
+                // Receipt information
+                row.receipt_status,
+                row.receipt_method,
+                row.received_by,
+                row.received_qty,
+              ]
+                .map(
+                  (value) =>
+                    normalizeText(
+                      value
+                    )
+                )
+                .join(" ");
+
+            if (
+              !searchable.includes(
+                searchText
+              )
+            ) {
+              return false;
+            }
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Machine + machine status
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            machineId !== null
+          ) {
+            const machineMapping =
+              row.machines.find(
+                (mapping) =>
+                  Number(
+                    mapping.machine_id
+                  ) ===
+                  Number(machineId)
+              );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Machine not applicable to this row.
+            |--------------------------------------------------------------------------
+            */
+
+            if (
+              !machineMapping
+            ) {
+              return false;
+            }
+
+            if (
+              machineStatus ===
+                "done" &&
+              machineMapping.scanned !==
+                true
+            ) {
+              return false;
+            }
+
+            if (
+              machineStatus ===
+                "pending" &&
+              machineMapping.scanned ===
+                true
+            ) {
+              return false;
+            }
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Packing status
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            packingStatus ===
+              "packed" &&
+            row.package_box_id ===
+              null
+          ) {
+            return false;
+          }
+
+          if (
+            packingStatus ===
+              "pending" &&
+            row.package_box_id !==
+              null
+          ) {
+            return false;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Box
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            boxId !== null &&
+            Number(
+              row.package_box_id
+            ) !==
+              Number(boxId)
+          ) {
+            return false;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Weight range
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            minWeight !== null &&
+            Number(
+              row.weight || 0
+            ) <
+              minWeight
+          ) {
+            return false;
+          }
+
+          if (
+            maxWeight !== null &&
+            Number(
+              row.weight || 0
+            ) >
+              maxWeight
+          ) {
+            return false;
+          }
+
+          return true;
+        }
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 12 - Server-side sorting
+    |--------------------------------------------------------------------------
+    */
+
+    const compareText =
+      (
+        first: unknown,
+        second: unknown
+      ) => {
+        return String(
+          first ?? ""
+        ).localeCompare(
+          String(
+            second ?? ""
+          ),
+          undefined,
+          {
+            numeric: true,
+            sensitivity:
+              "base",
+          }
+        );
+      };
+
+    const sortedRows =
+      [...filteredRows].sort(
+        (a, b) => {
+          let result = 0;
+
+          switch (
+            sortBy
+          ) {
+            case "item_name":
+              result =
+                compareText(
+                  a.item_name,
+                  b.item_name
+                );
+              break;
+
+            case "unique_code":
+              result =
+                compareText(
+                  a.unique_code,
+                  b.unique_code
+                );
+              break;
+
+            case "group":
+              result =
+                compareText(
+                  a.group,
+                  b.group
+                );
+              break;
+
+            case "category":
+              result =
+                compareText(
+                  a.category,
+                  b.category
+                );
+              break;
+
+            case "weight":
+              result =
+                Number(
+                  a.weight || 0
+                ) -
+                Number(
+                  b.weight || 0
+                );
+              break;
+
+            case "box":
+              result =
+                compareText(
+                  a.package_box_name,
+                  b.package_box_name
+                );
+              break;
+
+            case "row_number":
+            default:
+              result =
+                a.row_number -
+                b.row_number;
+              break;
+          }
+
+          if (
+            result === 0
+          ) {
+            result =
+              a.row_number -
+              b.row_number;
+          }
+
+          return sortOrder ===
+            "desc"
+            ? result * -1
+            : result;
+        }
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 13 - Pagination
+    |--------------------------------------------------------------------------
+    */
+
+    const total =
+      sortedRows.length;
+
+    const totalPages =
+      total > 0
+        ? Math.ceil(
+            total / limit
+          )
+        : 0;
+
+    const safePage =
+      totalPages > 0
+        ? Math.min(
+            page,
+            totalPages
+          )
+        : 1;
+
+    const skip =
+      (safePage - 1) *
+      limit;
+
+    const paginatedRows =
+      sortedRows.slice(
+        skip,
+        skip + limit
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Re-number only for visual index across filtered result.
+    |--------------------------------------------------------------------------
+    */
+
+    const items =
+      paginatedRows.map(
+        (
+          row,
+          index
+        ) => ({
+          ...row,
+
+          row_number:
+            skip +
+            index +
+            1,
+        })
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 14 - Summary
+    |--------------------------------------------------------------------------
+    */
+
+    const filteredPackedQty =
+      sortedRows.filter(
+        (row) =>
+          row.package_box_id !==
+          null
+      ).length;
+
+    const filteredQty =
+      sortedRows.length;
+
+    const filteredPendingQty =
+      Math.max(
+        filteredQty -
+          filteredPackedQty,
+        0
+      );
+
+    const filteredWeight =
+      sortedRows.reduce(
+        (
+          totalWeight,
+          row
+        ) =>
+          totalWeight +
+          Number(
+            row.weight || 0
+          ),
+        0
+      );
+
+    const totalProjectQty =
+      allProjectCutLists.reduce(
+        (
+          totalQuantity,
+          item
+        ) =>
+          totalQuantity +
+          Math.max(
+            0,
+            Number(
+              item.qty || 0
+            )
+          ),
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Receipt / verification summary for CURRENT FILTERED RESULT
+    |--------------------------------------------------------------------------
+    */
+
+    const filteredReceivedQty =
+      sortedRows.reduce(
+        (sum, row) =>
+          sum +
+          Math.max(
+            0,
+            Number(
+              row.received_qty ??
+                0
+            )
+          ),
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Receipt pending is calculated only against packed quantity.
+    |
+    | Unpacked items are not yet eligible for site receipt.
+    |--------------------------------------------------------------------------
+    */
+
+    const filteredPendingReceiptQty =
+      Math.max(
+        filteredPackedQty -
+          filteredReceivedQty,
+        0
+      );
+
+    const filteredReceiptProgressPct =
+      filteredPackedQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (
+                filteredReceivedQty /
+                filteredPackedQty
+              ) *
+                100
+            )
+          )
+        : 0;
+
+    const filteredScannedReceivedQty =
+      sortedRows.reduce(
+        (sum, row) =>
+          row.packing_method ===
+            "Scanned"
+            ? sum +
+              Math.max(
+                0,
+                Number(
+                  row.received_qty ??
+                    0
+                )
+              )
+            : sum,
+        0
+      );
+
+    const filteredManualReceivedQty =
+      sortedRows.reduce(
+        (sum, row) =>
+          row.packing_method ===
+            "Manual"
+            ? sum +
+              Math.max(
+                0,
+                Number(
+                  row.received_qty ??
+                    0
+                )
+              )
+            : sum,
+        0
+      );
+
+    const filteredSiteInQty =
+      sortedRows.filter(
+        (row) =>
+          row.package_box_id !==
+            null &&
+          row.box_site_in_at !==
+            null
+      ).length;
+
+    const filteredSiteInReceivedQty =
+      sortedRows.reduce(
+        (sum, row) =>
+          row.package_box_id !==
+            null &&
+          row.box_site_in_at !==
+            null
+            ? sum +
+              Math.max(
+                0,
+                Number(
+                  row.received_qty ??
+                    0
+                )
+              )
+            : sum,
+        0
+      );
+
+    const filteredPendingVerificationQty =
+      Math.max(
+        filteredSiteInQty -
+          filteredSiteInReceivedQty,
+        0
+      );
+
+    const filteredSiteVerificationPct =
+      filteredSiteInQty > 0
+        ? Math.min(
+            100,
+            Math.round(
+              (
+                filteredSiteInReceivedQty /
+                filteredSiteInQty
+              ) *
+                100
+            )
+          )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 15 - Response
+    |--------------------------------------------------------------------------
+    */
+
+    return validationResponse(
+      1,
+      "Project cut list fetched",
+      {
+        project,
+
+        items,
+
+        pagination: {
+          page:
+            safePage,
+
+          limit,
+
+          total,
+
+          total_pages:
+            totalPages,
+
+          from:
+            total > 0
+              ? skip + 1
+              : 0,
+
+          to:
+            total > 0
+              ? Math.min(
+                  skip + limit,
+                  total
+                )
+              : 0,
+
+          has_previous:
+            safePage > 1,
+
+          has_next:
+            totalPages > 0 &&
+            safePage <
+              totalPages,
+        },
+
+        summary: {
+          total_project_qty:
+            totalProjectQty,
+
+          filtered_qty:
+            filteredQty,
+
+          packed_qty:
+            filteredPackedQty,
+
+          pending_qty:
+            filteredPendingQty,
+
+          filtered_weight:
+            Number(
+              filteredWeight.toFixed(
+                4
+              )
+            ),
+
+          /*
+          |--------------------------------------------------------------------------
+          | Site receipt / verification summary
+          |--------------------------------------------------------------------------
+          */
+
+          received_qty:
+            filteredReceivedQty,
+
+          pending_receipt_qty:
+            filteredPendingReceiptQty,
+
+          receipt_progress_pct:
+            filteredReceiptProgressPct,
+
+          scanned_received_qty:
+            filteredScannedReceivedQty,
+
+          manual_received_qty:
+            filteredManualReceivedQty,
+
+          site_in_qty:
+            filteredSiteInQty,
+
+          site_in_received_qty:
+            filteredSiteInReceivedQty,
+
+          pending_verification_qty:
+            filteredPendingVerificationQty,
+
+          site_verification_pct:
+            filteredSiteVerificationPct,
+        },
+
+        filter_options: {
+          groups:
+            groupOptions,
+
+          categories:
+            categoryOptions,
+
+          machines:
+            machineOptions,
+
+          boxes:
+            boxes.map(
+              (box) => ({
+                id:
+                  box.id,
+
+                name:
+                  box.box_name,
+              })
+            ),
+        },
+      }
+    );
+  } catch (error) {
+    console.error(
+      "getProjectCutListPaginatedService error:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch project cut list"
+    );
+  }
+};
+
+
 
 
 
@@ -6633,5 +12273,971 @@ export const createUnitMaster = async (
     if (error?.code === "P2002") return validationResponse(0, "Unit already exists");
     console.error("Error in createUnitMaster", error);
     return validationResponse(0, "Failed to create unit");
+  }
+};
+
+
+
+type ApiResponseManualItems = ReturnType<typeof validationResponse>;
+
+export const getManualPackingItemsService = async (
+  projectId: number,
+  vendorId: number
+): Promise<ApiResponseManualItems> => {
+  if (!projectId || projectId <= 0) {
+    return validationResponse(0, "project_id is required");
+  }
+
+  if (!vendorId || vendorId <= 0) {
+    return validationResponse(0, "vendor_id is required");
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 1: Check project
+  |--------------------------------------------------------------------------
+  */
+
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      id: projectId,
+      vendor_id: vendorId,
+    },
+    select: {
+      id: true,
+      project_name: true,
+      unique_project_id: true,
+    },
+  });
+
+  if (!project) {
+    return validationResponse(0, "Project not found");
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 2: Get CutList items applicable for manual packing
+  |--------------------------------------------------------------------------
+  */
+
+  const cutListItems = await prisma.cutList.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      include_in_packing: true,
+      scan_pack_validate: false,
+      status: "Active",
+    },
+    select: {
+      id: true,
+      project_id: true,
+      vendor_id: true,
+      lead_id: true,
+
+      item_name: true,
+      description: true,
+      material_details: true,
+
+      qty: true,
+
+      unique_code: true,
+      unique_code_2: true,
+
+      length: true,
+      width: true,
+      thickness: true,
+
+      category_id: true,
+      category_name: true,
+      group_name: true,
+      procurement: true,
+
+      weight: true,
+
+      use_in_assembled_packing: true,
+      include_in_packing: true,
+      scan_pack_validate: true,
+
+      elf: true,
+      elb: true,
+      esl: true,
+      esr: true,
+    },
+
+    orderBy: {
+      id: "asc",
+    },
+  });
+
+  /*
+  |--------------------------------------------------------------------------
+  | No items
+  |--------------------------------------------------------------------------
+  */
+
+  if (cutListItems.length === 0) {
+    return validationResponse(
+      1,
+      "",
+      {
+        project,
+        summary: {
+          total_items: 0,
+          total_qty: 0,
+          packed_qty: 0,
+          pending_qty: 0,
+        },
+        items: [],
+      }
+    );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 3: Get packaging machines
+  |--------------------------------------------------------------------------
+  */
+
+  const packagingMachines = await prisma.machineMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      machine_type_id: 18,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  const packagingMachineIds = packagingMachines.map(
+    (machine) => machine.id
+  );
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 4: Get packed quantities
+  |--------------------------------------------------------------------------
+  */
+
+  const cutListIds = cutListItems.map((item) => item.id);
+
+  const packedQtyRows =
+    packagingMachineIds.length > 0
+      ? await prisma.cutListMachineMapping.groupBy({
+        by: ["cut_list_id"],
+
+        where: {
+          project_id: projectId,
+          vendor_id: vendorId,
+
+          cut_list_id: {
+            in: cutListIds,
+          },
+
+          machine_id: {
+            in: packagingMachineIds,
+          },
+        },
+
+        _sum: {
+          qty: true,
+        },
+      })
+      : [];
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 5: Packed Qty Map
+  |--------------------------------------------------------------------------
+  */
+
+  const packedQtyMap = new Map<number, number>();
+
+  for (const row of packedQtyRows) {
+    packedQtyMap.set(
+      row.cut_list_id,
+      Number(row._sum.qty ?? 0)
+    );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 6: Prepare items
+  |--------------------------------------------------------------------------
+  */
+
+  const items = cutListItems.map((item) => {
+    const totalQty = Number(item.qty ?? 0);
+
+    const packedQty = Math.min(
+      Number(packedQtyMap.get(item.id) ?? 0),
+      totalQty
+    );
+
+    const pendingQty = Math.max(
+      totalQty - packedQty,
+      0
+    );
+
+    return {
+      ...item,
+
+      total_qty: totalQty,
+      packed_qty: packedQty,
+      pending_qty: pendingQty,
+
+      packing_status:
+        pendingQty === 0
+          ? "Packed"
+          : packedQty > 0
+            ? "Partially Packed"
+            : "Pending",
+    };
+  });
+
+  /*
+  |--------------------------------------------------------------------------
+  | Step 7: Summary
+  |--------------------------------------------------------------------------
+  */
+
+  const summary = items.reduce(
+    (result, item) => {
+      result.total_qty += item.total_qty;
+      result.packed_qty += item.packed_qty;
+      result.pending_qty += item.pending_qty;
+
+      return result;
+    },
+    {
+      total_items: items.length,
+      total_qty: 0,
+      packed_qty: 0,
+      pending_qty: 0,
+    }
+  );
+
+  return validationResponse(
+    1,
+    "",
+    {
+      project,
+      summary,
+      items,
+    }
+  );
+};
+
+
+
+
+interface AddManualPackingItemPayload {
+  project_id: number;
+  vendor_id: number;
+  box_id: number;
+  cut_list_id: number;
+  qty: number;
+  user_id: number;
+}
+
+export const addManualPackingItemService = async (
+  payload: AddManualPackingItemPayload
+): Promise<ApiResponse> => {
+  try {
+    const project_id = Number(payload.project_id);
+    const vendor_id = Number(payload.vendor_id);
+    const box_id = Number(payload.box_id);
+    const cut_list_id = Number(payload.cut_list_id);
+    const qty = Number(payload.qty);
+    const user_id = Number(payload.user_id);
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 1 — Basic validation
+    |--------------------------------------------------------------------------
+    */
+
+    if (!project_id || project_id <= 0) {
+      return validationResponse(
+        0,
+        "project_id is required"
+      );
+    }
+
+    if (!vendor_id || vendor_id <= 0) {
+      return validationResponse(
+        0,
+        "vendor_id is required"
+      );
+    }
+
+    if (!box_id || box_id <= 0) {
+      return validationResponse(
+        0,
+        "box_id is required"
+      );
+    }
+
+    if (!cut_list_id || cut_list_id <= 0) {
+      return validationResponse(
+        0,
+        "cut_list_id is required"
+      );
+    }
+
+    if (
+      !qty ||
+      qty <= 0 ||
+      !Number.isInteger(qty)
+    ) {
+      return validationResponse(
+        0,
+        "qty must be a positive integer"
+      );
+    }
+
+    if (!user_id || user_id <= 0) {
+      return validationResponse(
+        0,
+        "user_id is required"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 2 — Check project
+    |--------------------------------------------------------------------------
+    */
+
+    const project =
+      await prisma.projectMaster.findFirst({
+        where: {
+          id: project_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+          project_name: true,
+          packing_type: true,
+        },
+      });
+
+    if (!project) {
+      return validationResponse(
+        0,
+        "Project not found"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 3 — Check box
+    |--------------------------------------------------------------------------
+    */
+
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+        },
+
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    if (
+      String(box.box_status).toLowerCase() ===
+      "packed"
+    ) {
+      return validationResponse(
+        0,
+        "Packed box cannot be updated"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4 — Check user
+    |--------------------------------------------------------------------------
+    */
+
+    const user =
+      await prisma.userMaster.findFirst({
+        where: {
+          id: user_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+        },
+      });
+
+    if (!user) {
+      return validationResponse(
+        0,
+        "User not found"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 5 — Check CutList item
+    |--------------------------------------------------------------------------
+    |
+    | Manual packing is ONLY applicable when:
+    |
+    | include_in_packing = true
+    | scan_pack_validate = false
+    |--------------------------------------------------------------------------
+    */
+
+    const cutList =
+      await prisma.cutList.findFirst({
+        where: {
+          id: cut_list_id,
+          project_id,
+          vendor_id,
+
+          include_in_packing: true,
+          scan_pack_validate: false,
+
+          status: "Active",
+        },
+
+        select: {
+          id: true,
+          qty: true,
+          lead_id: true,
+
+          item_name: true,
+          material_details: true,
+
+          group_name: true,
+
+          weight: true,
+
+          include_in_packing: true,
+          scan_pack_validate: true,
+        },
+      });
+
+    if (!cutList) {
+      return validationResponse(
+        0,
+        "Item is not available for manual packing"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 6 — Find ACTIVE packaging machine
+    |--------------------------------------------------------------------------
+    |
+    | Machine Type 18 = Packaging
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingMachine =
+      await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+          status: "ACTIVE",
+        },
+
+        select: {
+          id: true,
+          sequence_no: true,
+          machine_name: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!packagingMachine) {
+      return validationResponse(
+        0,
+        "Active packaging machine not configured"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 7 — GROUPWISE packing validation
+    |--------------------------------------------------------------------------
+    |
+    | Keep same behavior as scan packing.
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      project.packing_type ===
+      PackingType.GROUPWISE
+    ) {
+      const incomingGroupName =
+        cutList.group_name?.trim();
+
+      const incomingGroup =
+        incomingGroupName?.toLowerCase();
+
+      if (!incomingGroup) {
+        return validationResponse(
+          0,
+          `Group is not configured for item "${cutList.item_name}"`
+        );
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | First existing packed item decides box group
+      |--------------------------------------------------------------------------
+      */
+
+      const existingBoxItem =
+        await prisma.cutListMachineMapping.findFirst({
+          where: {
+            box_id,
+            vendor_id,
+            project_id,
+
+            actual_in_at: {
+              not: null,
+            },
+          },
+
+          orderBy: [
+            {
+              actual_in_at: "asc",
+            },
+            {
+              id: "asc",
+            },
+          ],
+
+          select: {
+            id: true,
+
+            cut_list: {
+              select: {
+                id: true,
+                item_name: true,
+                group_name: true,
+              },
+            },
+          },
+        });
+
+      if (existingBoxItem?.cut_list) {
+        const existingGroupName =
+          existingBoxItem.cut_list.group_name?.trim();
+
+        const existingGroup =
+          existingGroupName?.toLowerCase();
+
+        if (!existingGroup) {
+          return validationResponse(
+            0,
+            `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`
+          );
+        }
+
+        if (
+          existingGroup !== incomingGroup
+        ) {
+          return validationResponse(
+            0,
+            `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`
+          );
+        }
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8 — Calculate per-item weight
+    |--------------------------------------------------------------------------
+    |
+    | CutList.weight = total row weight.
+    | CutListMachineMapping.weight = per-piece weight.
+    |--------------------------------------------------------------------------
+    */
+
+    const totalCutListQty =
+      Number(cutList.qty || 0);
+
+    const totalCutListWeight =
+      Number(cutList.weight || 0);
+
+    const perItemWeight =
+      totalCutListQty > 0
+        ? Number(
+          (
+            totalCutListWeight /
+            totalCutListQty
+          ).toFixed(7)
+        )
+        : 0;
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 9 — Add quantity to box
+    |--------------------------------------------------------------------------
+    */
+
+    const result =
+      await prisma.$transaction(
+        async (tx) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Re-fetch CutList inside transaction
+          |--------------------------------------------------------------------------
+          */
+
+          const currentCutList =
+            await tx.cutList.findFirst({
+              where: {
+                id: cut_list_id,
+                project_id,
+                vendor_id,
+
+                include_in_packing: true,
+                scan_pack_validate: false,
+
+                status: "Active",
+              },
+
+              select: {
+                id: true,
+                qty: true,
+              },
+            });
+
+          if (!currentCutList) {
+            return validationResponse(
+              0,
+              "Item is not available for manual packing"
+            );
+          }
+
+          const totalQty =
+            Number(currentCutList.qty || 0);
+
+          /*
+          |--------------------------------------------------------------------------
+          | Calculate total quantity already packed across ALL boxes
+          |--------------------------------------------------------------------------
+          */
+
+          const packedQtyResult =
+            await tx.cutListMachineMapping.aggregate({
+              where: {
+                cut_list_id,
+                project_id,
+                vendor_id,
+
+                machine_id:
+                  packagingMachine.id,
+
+                /*
+                |--------------------------------------------------------------------------
+                | Only quantity assigned to a box is considered packed
+                |--------------------------------------------------------------------------
+                */
+                box_id: {
+                  not: null,
+                },
+              },
+
+              _sum: {
+                qty: true,
+              },
+            });
+
+          const packedQty =
+            Number(
+              packedQtyResult._sum.qty ??
+              0
+            );
+
+          const pendingQty =
+            Math.max(
+              totalQty - packedQty,
+              0
+            );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Nothing pending
+          |--------------------------------------------------------------------------
+          */
+
+          if (pendingQty <= 0) {
+            return validationResponse(
+              0,
+              "Item is already fully packed"
+            );
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | User cannot add more than pending quantity
+          |--------------------------------------------------------------------------
+          */
+
+          if (qty > pendingQty) {
+            return validationResponse(
+              0,
+              `Only ${pendingQty} qty is pending`
+            );
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Check same item + same box
+          |--------------------------------------------------------------------------
+          |
+          | If found:
+          | increment qty.
+          |
+          | If not found:
+          | create a new row.
+          |--------------------------------------------------------------------------
+          */
+
+          const existingMapping =
+            await tx.cutListMachineMapping.findFirst({
+              where: {
+                cut_list_id,
+                project_id,
+                vendor_id,
+
+                machine_id:
+                  packagingMachine.id,
+
+                box_id,
+              },
+
+              select: {
+                id: true,
+                qty: true,
+              },
+            });
+
+          let mapping;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Same box → UPDATE qty
+          |--------------------------------------------------------------------------
+          */
+
+          if (existingMapping) {
+            mapping =
+              await tx.cutListMachineMapping.update({
+                where: {
+                  id:
+                    existingMapping.id,
+                },
+
+                data: {
+                  qty: {
+                    increment: qty,
+                  },
+
+                  /*
+                  |--------------------------------------------------------------------------
+                  | Manual selection means item is packed
+                  |--------------------------------------------------------------------------
+                  */
+                  actual_in_at:
+                    new Date(),
+
+                  in_operator:
+                    user_id,
+
+                  box_id,
+
+                  expected_in:
+                    true,
+                },
+
+                select: {
+                  id: true,
+                  cut_list_id: true,
+                  machine_id: true,
+                  project_id: true,
+                  vendor_id: true,
+                  box_id: true,
+                  qty: true,
+                  actual_in_at: true,
+                  in_operator: true,
+                },
+              });
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | New box → CREATE row
+          |--------------------------------------------------------------------------
+          */
+
+          else {
+            mapping =
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id,
+
+                  machine_id:
+                    packagingMachine.id,
+
+                  vendor_id,
+
+                  lead_id:
+                    cutList.lead_id,
+
+                  project_id,
+
+                  sequence_no:
+                    packagingMachine.sequence_no ??
+                    0,
+
+                  is_optional:
+                    false,
+
+                  expected_in:
+                    true,
+
+                  expected_out:
+                    false,
+
+                  status:
+                    "Pending",
+
+                  actual_in_at:
+                    new Date(),
+
+                  in_operator:
+                    user_id,
+
+                  created_by:
+                    user_id,
+
+                  box_id,
+
+                  qty,
+
+                  /*
+                  |--------------------------------------------------------------------------
+                  | Current convention:
+                  | mapping weight stores per-piece weight
+                  |--------------------------------------------------------------------------
+                  */
+                  weight:
+                    perItemWeight,
+                  row_created_source: "Manual"
+                },
+
+                select: {
+                  id: true,
+                  cut_list_id: true,
+                  machine_id: true,
+                  project_id: true,
+                  vendor_id: true,
+                  box_id: true,
+                  qty: true,
+                  actual_in_at: true,
+                  in_operator: true,
+                },
+              });
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Calculate new totals
+          |--------------------------------------------------------------------------
+          */
+
+          const newPackedQty =
+            packedQty + qty;
+
+          const newPendingQty =
+            Math.max(
+              totalQty -
+              newPackedQty,
+              0
+            );
+
+          return validationResponse(
+            1,
+            "Product added to box successfully",
+            {
+              mapping,
+
+              item: {
+                cut_list_id:
+                  cut_list_id,
+
+                item_name:
+                  cutList.item_name,
+
+                box_id,
+
+                box_name:
+                  box.box_name,
+
+                added_qty:
+                  qty,
+
+                total_qty:
+                  totalQty,
+
+                packed_qty:
+                  newPackedQty,
+
+                pending_qty:
+                  newPendingQty,
+
+                packing_status:
+                  newPendingQty === 0
+                    ? "Packed"
+                    : "Partially Packed",
+              },
+            }
+          );
+        },
+        {
+          maxWait: 10000,
+          timeout: 30000,
+        }
+      );
+
+    return result;
+  } catch (error: any) {
+    console.error(
+      "addManualPackingItemService error:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      error?.message ||
+      "Failed to add product to box"
+    );
   }
 };

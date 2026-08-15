@@ -1177,6 +1177,271 @@ export const getBoxItems = async (req: Request, res: Response) => {
   }
 };
 
+
+
+// GET /track-trace/project-detail/:vendor_id/:project_id/cut-list
+export const getProjectCutList = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendor_id =
+      Number(
+        req.params.vendor_id
+      );
+
+    const project_id =
+      String(
+        req.params.project_id ??
+        ""
+      ).trim();
+
+    if (
+      !vendor_id ||
+      Number.isNaN(
+        vendor_id
+      ) ||
+      !project_id
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            "Invalid vendor_id or project_id",
+            400
+          )
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Query params
+    |--------------------------------------------------------------------------
+    */
+
+    const page =
+      req.query.page !==
+      undefined
+        ? Number(
+            req.query.page
+          )
+        : 1;
+
+    const limit =
+      req.query.limit !==
+      undefined
+        ? Number(
+            req.query.limit
+          )
+        : 25;
+
+    const machine_id =
+      req.query.machine_id !==
+        undefined &&
+      req.query.machine_id !==
+        ""
+        ? Number(
+            req.query.machine_id
+          )
+        : null;
+
+    const box_id =
+      req.query.box_id !==
+        undefined &&
+      req.query.box_id !==
+        ""
+        ? Number(
+            req.query.box_id
+          )
+        : null;
+
+    const min_weight =
+      req.query.min_weight !==
+        undefined &&
+      req.query.min_weight !==
+        ""
+        ? Number(
+            req.query.min_weight
+          )
+        : null;
+
+    const max_weight =
+      req.query.max_weight !==
+        undefined &&
+      req.query.max_weight !==
+        ""
+        ? Number(
+            req.query.max_weight
+          )
+        : null;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reject malformed number filters
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      Number.isNaN(page) ||
+      Number.isNaN(limit) ||
+      (
+        machine_id !== null &&
+        Number.isNaN(
+          machine_id
+        )
+      ) ||
+      (
+        box_id !== null &&
+        Number.isNaN(
+          box_id
+        )
+      ) ||
+      (
+        min_weight !== null &&
+        Number.isNaN(
+          min_weight
+        )
+      ) ||
+      (
+        max_weight !== null &&
+        Number.isNaN(
+          max_weight
+        )
+      )
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            "Invalid numeric filter",
+            400
+          )
+        );
+    }
+
+    const result =
+      await trackTraceService.getProjectCutListPaginatedService(
+        vendor_id,
+        project_id,
+        {
+          page,
+          limit,
+
+          search:
+            String(
+              req.query.search ??
+              ""
+            ),
+
+          group:
+            String(
+              req.query.group ??
+              "all"
+            ),
+
+          category:
+            String(
+              req.query.category ??
+              "all"
+            ),
+
+          machine_id,
+
+          machine_status:
+            String(
+              req.query.machine_status ??
+              "all"
+            ) as
+              | "all"
+              | "done"
+              | "pending",
+
+          packing_status:
+            String(
+              req.query.packing_status ??
+              "all"
+            ) as
+              | "all"
+              | "packed"
+              | "pending",
+
+          packing_method:
+            String(
+              req.query.packing_method ??
+              "all"
+            ) as
+              | "all"
+              | "manual"
+              | "scanned",
+
+          box_id,
+
+          min_weight,
+          max_weight,
+
+          sort_by:
+            String(
+              req.query.sort_by ??
+              "row_number"
+            ) as
+              | "row_number"
+              | "item_name"
+              | "unique_code"
+              | "group"
+              | "category"
+              | "weight"
+              | "box",
+
+          sort_order:
+            String(
+              req.query.sort_order ??
+              "asc"
+            ) as
+              | "asc"
+              | "desc",
+        }
+      );
+
+    if (
+      result.status ===
+      0
+    ) {
+      return res
+        .status(404)
+        .json(
+          ApiResponse.error(
+            result.message,
+            404
+          )
+        );
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result.data,
+          result.message,
+          200
+        )
+      );
+  } catch (error) {
+    console.error(
+      "getProjectCutList controller error:",
+      error
+    );
+
+    return res
+      .status(500)
+      .json(
+        ApiResponse.error(
+          "Internal server error",
+          500
+        )
+      );
+  }
+};
+
 export const getDefectDashboard = async (req: Request, res: Response) => {
   try {
     const vendor_id = Number(req.params.vendor_id);
@@ -1454,3 +1719,123 @@ export const createUnitMaster = async (req: Request, res: Response) => {
   return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
 };
 
+
+export const getManualPackingItemsController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const projectId = Number(req.query.project_id);
+    const vendorId = Number(req.query.vendor_id);
+
+    if (!projectId || projectId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "project_id is required",
+      });
+    }
+
+    if (!vendorId || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id is required",
+      });
+    }
+
+    const result = await trackTraceService.getManualPackingItemsService(
+      projectId,
+      vendorId
+    );
+
+    return res
+      .status(200)
+      .json(ApiResponse.success(result.data, result.message, 200));    
+  } catch (error: any) {
+    console.error("getManualPackingItemsController error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message:
+        error?.message ||
+        "Failed to fetch manual packing items",
+    });
+  }
+};
+
+
+
+export const addManualPackingItem = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const {
+      project_id,
+      vendor_id,
+      box_id,
+      cut_list_id,
+      qty,
+      user_id,
+    } = req.body;
+
+    const serviceResponse =
+      await trackTraceService.addManualPackingItemService({
+        project_id:
+          Number(project_id),
+
+        vendor_id:
+          Number(vendor_id),
+
+        box_id:
+          Number(box_id),
+
+        cut_list_id:
+          Number(cut_list_id),
+
+        qty:
+          Number(qty),
+
+        user_id:
+          Number(user_id),
+      });
+
+    if (
+      serviceResponse.status ===
+      0
+    ) {
+      return res
+        .status(200)
+        .json(
+          ApiResponse.error(
+            serviceResponse.message,
+            400
+          )
+        );
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          serviceResponse.data,
+          serviceResponse.message,
+          200
+        )
+      );
+  } catch (error: any) {
+    console.error(
+      "addManualPackingItem controller error:",
+      error
+    );
+
+    return res
+      .status(500)
+      .json(
+        ApiResponse.error(
+          error?.message ||
+            "Internal server error",
+          500
+        )
+      );
+  }
+};

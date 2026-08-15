@@ -38,6 +38,7 @@ export type CutListAvgAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   weight: number | null
+  category_id: number | null
 }
 
 export type CutListSumAggregateOutputType = {
@@ -52,6 +53,7 @@ export type CutListSumAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   weight: number | null
+  category_id: number | null
 }
 
 export type CutListMinAggregateOutputType = {
@@ -81,6 +83,10 @@ export type CutListMinAggregateOutputType = {
   group_name: string | null
   procurement: string | null
   weight: number | null
+  category_id: number | null
+  use_in_assembled_packing: boolean | null
+  include_in_packing: boolean | null
+  scan_pack_validate: boolean | null
 }
 
 export type CutListMaxAggregateOutputType = {
@@ -110,6 +116,10 @@ export type CutListMaxAggregateOutputType = {
   group_name: string | null
   procurement: string | null
   weight: number | null
+  category_id: number | null
+  use_in_assembled_packing: boolean | null
+  include_in_packing: boolean | null
+  scan_pack_validate: boolean | null
 }
 
 export type CutListCountAggregateOutputType = {
@@ -139,6 +149,10 @@ export type CutListCountAggregateOutputType = {
   group_name: number
   procurement: number
   weight: number
+  category_id: number
+  use_in_assembled_packing: number
+  include_in_packing: number
+  scan_pack_validate: number
   _all: number
 }
 
@@ -155,6 +169,7 @@ export type CutListAvgAggregateInputType = {
   created_by?: true
   updated_by?: true
   weight?: true
+  category_id?: true
 }
 
 export type CutListSumAggregateInputType = {
@@ -169,6 +184,7 @@ export type CutListSumAggregateInputType = {
   created_by?: true
   updated_by?: true
   weight?: true
+  category_id?: true
 }
 
 export type CutListMinAggregateInputType = {
@@ -198,6 +214,10 @@ export type CutListMinAggregateInputType = {
   group_name?: true
   procurement?: true
   weight?: true
+  category_id?: true
+  use_in_assembled_packing?: true
+  include_in_packing?: true
+  scan_pack_validate?: true
 }
 
 export type CutListMaxAggregateInputType = {
@@ -227,6 +247,10 @@ export type CutListMaxAggregateInputType = {
   group_name?: true
   procurement?: true
   weight?: true
+  category_id?: true
+  use_in_assembled_packing?: true
+  include_in_packing?: true
+  scan_pack_validate?: true
 }
 
 export type CutListCountAggregateInputType = {
@@ -256,6 +280,10 @@ export type CutListCountAggregateInputType = {
   group_name?: true
   procurement?: true
   weight?: true
+  category_id?: true
+  use_in_assembled_packing?: true
+  include_in_packing?: true
+  scan_pack_validate?: true
   _all?: true
 }
 
@@ -372,6 +400,10 @@ export type CutListGroupByOutputType = {
   group_name: string | null
   procurement: string | null
   weight: number
+  category_id: number | null
+  use_in_assembled_packing: boolean | null
+  include_in_packing: boolean | null
+  scan_pack_validate: boolean | null
   _count: CutListCountAggregateOutputType | null
   _avg: CutListAvgAggregateOutputType | null
   _sum: CutListSumAggregateOutputType | null
@@ -424,12 +456,17 @@ export type CutListWhereInput = {
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
   weight?: Prisma.FloatFilter<"CutList"> | number
+  category_id?: Prisma.IntNullableFilter<"CutList"> | number | null
+  use_in_assembled_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  include_in_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  scan_pack_validate?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
+  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
 }
 
 export type CutListOrderByWithRelationInput = {
@@ -459,12 +496,17 @@ export type CutListOrderByWithRelationInput = {
   group_name?: Prisma.SortOrderInput | Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  use_in_assembled_packing?: Prisma.SortOrderInput | Prisma.SortOrder
+  include_in_packing?: Prisma.SortOrderInput | Prisma.SortOrder
+  scan_pack_validate?: Prisma.SortOrderInput | Prisma.SortOrder
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
   completionPhotos?: Prisma.DefectCompletionPhotoOrderByRelationAggregateInput
   defectedItems?: Prisma.DefectedItemOrderByRelationAggregateInput
+  category?: Prisma.ProjectCategoriesMasterOrderByWithRelationInput
 }
 
 export type CutListWhereUniqueInput = Prisma.AtLeast<{
@@ -497,12 +539,17 @@ export type CutListWhereUniqueInput = Prisma.AtLeast<{
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
   weight?: Prisma.FloatFilter<"CutList"> | number
+  category_id?: Prisma.IntNullableFilter<"CutList"> | number | null
+  use_in_assembled_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  include_in_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  scan_pack_validate?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
   lead?: Prisma.XOR<Prisma.LeadMasterNullableScalarRelationFilter, Prisma.LeadMasterWhereInput> | null
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   defectedItems?: Prisma.DefectedItemListRelationFilter
+  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
 }, "id">
 
 export type CutListOrderByWithAggregationInput = {
@@ -532,6 +579,10 @@ export type CutListOrderByWithAggregationInput = {
   group_name?: Prisma.SortOrderInput | Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  use_in_assembled_packing?: Prisma.SortOrderInput | Prisma.SortOrder
+  include_in_packing?: Prisma.SortOrderInput | Prisma.SortOrder
+  scan_pack_validate?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CutListCountOrderByAggregateInput
   _avg?: Prisma.CutListAvgOrderByAggregateInput
   _max?: Prisma.CutListMaxOrderByAggregateInput
@@ -569,6 +620,10 @@ export type CutListScalarWhereWithAggregatesInput = {
   group_name?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableWithAggregatesFilter<"CutList"> | string | null
   weight?: Prisma.FloatWithAggregatesFilter<"CutList"> | number
+  category_id?: Prisma.IntNullableWithAggregatesFilter<"CutList"> | number | null
+  use_in_assembled_packing?: Prisma.BoolNullableWithAggregatesFilter<"CutList"> | boolean | null
+  include_in_packing?: Prisma.BoolNullableWithAggregatesFilter<"CutList"> | boolean | null
+  scan_pack_validate?: Prisma.BoolNullableWithAggregatesFilter<"CutList"> | boolean | null
 }
 
 export type CutListCreateInput = {
@@ -594,12 +649,16 @@ export type CutListCreateInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateInput = {
@@ -629,6 +688,10 @@ export type CutListUncheckedCreateInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
@@ -657,12 +720,16 @@ export type CutListUpdateInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateInput = {
@@ -692,6 +759,10 @@ export type CutListUncheckedUpdateInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
@@ -724,6 +795,10 @@ export type CutListCreateManyInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
 }
 
 export type CutListUpdateManyMutationInput = {
@@ -749,6 +824,9 @@ export type CutListUpdateManyMutationInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type CutListUncheckedUpdateManyInput = {
@@ -778,6 +856,10 @@ export type CutListUncheckedUpdateManyInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type CutListListRelationFilter = {
@@ -817,6 +899,10 @@ export type CutListCountOrderByAggregateInput = {
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  use_in_assembled_packing?: Prisma.SortOrder
+  include_in_packing?: Prisma.SortOrder
+  scan_pack_validate?: Prisma.SortOrder
 }
 
 export type CutListAvgOrderByAggregateInput = {
@@ -831,6 +917,7 @@ export type CutListAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type CutListMaxOrderByAggregateInput = {
@@ -860,6 +947,10 @@ export type CutListMaxOrderByAggregateInput = {
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  use_in_assembled_packing?: Prisma.SortOrder
+  include_in_packing?: Prisma.SortOrder
+  scan_pack_validate?: Prisma.SortOrder
 }
 
 export type CutListMinOrderByAggregateInput = {
@@ -889,6 +980,10 @@ export type CutListMinOrderByAggregateInput = {
   group_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
+  use_in_assembled_packing?: Prisma.SortOrder
+  include_in_packing?: Prisma.SortOrder
+  scan_pack_validate?: Prisma.SortOrder
 }
 
 export type CutListSumOrderByAggregateInput = {
@@ -903,6 +998,7 @@ export type CutListSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   weight?: Prisma.SortOrder
+  category_id?: Prisma.SortOrder
 }
 
 export type CutListScalarRelationFilter = {
@@ -1085,6 +1181,48 @@ export type CutListUpdateOneRequiredWithoutCompletionPhotosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CutListUpdateToOneWithWhereWithoutCompletionPhotosInput, Prisma.CutListUpdateWithoutCompletionPhotosInput>, Prisma.CutListUncheckedUpdateWithoutCompletionPhotosInput>
 }
 
+export type CutListCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput> | Prisma.CutListCreateWithoutCategoryInput[] | Prisma.CutListUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.CutListCreateOrConnectWithoutCategoryInput | Prisma.CutListCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.CutListCreateManyCategoryInputEnvelope
+  connect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+}
+
+export type CutListUncheckedCreateNestedManyWithoutCategoryInput = {
+  create?: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput> | Prisma.CutListCreateWithoutCategoryInput[] | Prisma.CutListUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.CutListCreateOrConnectWithoutCategoryInput | Prisma.CutListCreateOrConnectWithoutCategoryInput[]
+  createMany?: Prisma.CutListCreateManyCategoryInputEnvelope
+  connect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+}
+
+export type CutListUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput> | Prisma.CutListCreateWithoutCategoryInput[] | Prisma.CutListUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.CutListCreateOrConnectWithoutCategoryInput | Prisma.CutListCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.CutListUpsertWithWhereUniqueWithoutCategoryInput | Prisma.CutListUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.CutListCreateManyCategoryInputEnvelope
+  set?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  disconnect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  delete?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  connect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  update?: Prisma.CutListUpdateWithWhereUniqueWithoutCategoryInput | Prisma.CutListUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.CutListUpdateManyWithWhereWithoutCategoryInput | Prisma.CutListUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.CutListScalarWhereInput | Prisma.CutListScalarWhereInput[]
+}
+
+export type CutListUncheckedUpdateManyWithoutCategoryNestedInput = {
+  create?: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput> | Prisma.CutListCreateWithoutCategoryInput[] | Prisma.CutListUncheckedCreateWithoutCategoryInput[]
+  connectOrCreate?: Prisma.CutListCreateOrConnectWithoutCategoryInput | Prisma.CutListCreateOrConnectWithoutCategoryInput[]
+  upsert?: Prisma.CutListUpsertWithWhereUniqueWithoutCategoryInput | Prisma.CutListUpsertWithWhereUniqueWithoutCategoryInput[]
+  createMany?: Prisma.CutListCreateManyCategoryInputEnvelope
+  set?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  disconnect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  delete?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  connect?: Prisma.CutListWhereUniqueInput | Prisma.CutListWhereUniqueInput[]
+  update?: Prisma.CutListUpdateWithWhereUniqueWithoutCategoryInput | Prisma.CutListUpdateWithWhereUniqueWithoutCategoryInput[]
+  updateMany?: Prisma.CutListUpdateManyWithWhereWithoutCategoryInput | Prisma.CutListUpdateManyWithWhereWithoutCategoryInput[]
+  deleteMany?: Prisma.CutListScalarWhereInput | Prisma.CutListScalarWhereInput[]
+}
+
 export type CutListCreateWithoutVendorInput = {
   description: string
   length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1108,11 +1246,15 @@ export type CutListCreateWithoutVendorInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutVendorInput = {
@@ -1141,6 +1283,10 @@ export type CutListUncheckedCreateWithoutVendorInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
@@ -1202,6 +1348,10 @@ export type CutListScalarWhereInput = {
   group_name?: Prisma.StringNullableFilter<"CutList"> | string | null
   procurement?: Prisma.StringNullableFilter<"CutList"> | string | null
   weight?: Prisma.FloatFilter<"CutList"> | number
+  category_id?: Prisma.IntNullableFilter<"CutList"> | number | null
+  use_in_assembled_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  include_in_packing?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
+  scan_pack_validate?: Prisma.BoolNullableFilter<"CutList"> | boolean | null
 }
 
 export type CutListCreateWithoutProjectInput = {
@@ -1227,11 +1377,15 @@ export type CutListCreateWithoutProjectInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutProjectInput = {
@@ -1260,6 +1414,10 @@ export type CutListUncheckedCreateWithoutProjectInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
@@ -1314,11 +1472,15 @@ export type CutListCreateWithoutLeadInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutLeadInput = {
@@ -1347,6 +1509,10 @@ export type CutListUncheckedCreateWithoutLeadInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
@@ -1401,11 +1567,15 @@ export type CutListCreateWithoutCutListMachineMappingInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -1435,6 +1605,10 @@ export type CutListUncheckedCreateWithoutCutListMachineMappingInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
 }
@@ -1478,11 +1652,15 @@ export type CutListUpdateWithoutCutListMachineMappingInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -1512,6 +1690,10 @@ export type CutListUncheckedUpdateWithoutCutListMachineMappingInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
 }
@@ -1539,11 +1721,15 @@ export type CutListCreateWithoutDefectedItemsInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutDefectedItemsInput = {
@@ -1573,6 +1759,10 @@ export type CutListUncheckedCreateWithoutDefectedItemsInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
 }
@@ -1616,11 +1806,15 @@ export type CutListUpdateWithoutDefectedItemsInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutDefectedItemsInput = {
@@ -1650,6 +1844,10 @@ export type CutListUncheckedUpdateWithoutDefectedItemsInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
 }
@@ -1677,11 +1875,15 @@ export type CutListCreateWithoutCompletionPhotosInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutCutListsInput
 }
 
 export type CutListUncheckedCreateWithoutCompletionPhotosInput = {
@@ -1711,6 +1913,10 @@ export type CutListUncheckedCreateWithoutCompletionPhotosInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
 }
@@ -1754,11 +1960,15 @@ export type CutListUpdateWithoutCompletionPhotosInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -1788,8 +1998,107 @@ export type CutListUncheckedUpdateWithoutCompletionPhotosInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
+}
+
+export type CutListCreateWithoutCategoryInput = {
+  description: string
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty: number
+  material_details: string
+  item_name: string
+  unique_code?: string | null
+  unique_code_2?: string | null
+  status?: string
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
+  category_name?: string | null
+  group_name?: string | null
+  procurement?: string | null
+  weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutCutListInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutCutListInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCutListInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutCut_listInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCutListInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutCutListInput
+}
+
+export type CutListUncheckedCreateWithoutCategoryInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  lead_id?: number | null
+  description: string
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty: number
+  material_details: string
+  item_name: string
+  unique_code?: string | null
+  unique_code_2?: string | null
+  status?: string
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
+  category_name?: string | null
+  group_name?: string | null
+  procurement?: string | null
+  weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutCut_listInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCutListInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCutListInput
+}
+
+export type CutListCreateOrConnectWithoutCategoryInput = {
+  where: Prisma.CutListWhereUniqueInput
+  create: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput>
+}
+
+export type CutListCreateManyCategoryInputEnvelope = {
+  data: Prisma.CutListCreateManyCategoryInput | Prisma.CutListCreateManyCategoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type CutListUpsertWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.CutListWhereUniqueInput
+  update: Prisma.XOR<Prisma.CutListUpdateWithoutCategoryInput, Prisma.CutListUncheckedUpdateWithoutCategoryInput>
+  create: Prisma.XOR<Prisma.CutListCreateWithoutCategoryInput, Prisma.CutListUncheckedCreateWithoutCategoryInput>
+}
+
+export type CutListUpdateWithWhereUniqueWithoutCategoryInput = {
+  where: Prisma.CutListWhereUniqueInput
+  data: Prisma.XOR<Prisma.CutListUpdateWithoutCategoryInput, Prisma.CutListUncheckedUpdateWithoutCategoryInput>
+}
+
+export type CutListUpdateManyWithWhereWithoutCategoryInput = {
+  where: Prisma.CutListScalarWhereInput
+  data: Prisma.XOR<Prisma.CutListUpdateManyMutationInput, Prisma.CutListUncheckedUpdateManyWithoutCategoryInput>
 }
 
 export type CutListCreateManyVendorInput = {
@@ -1818,6 +2127,10 @@ export type CutListCreateManyVendorInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
 }
 
 export type CutListUpdateWithoutVendorInput = {
@@ -1843,11 +2156,15 @@ export type CutListUpdateWithoutVendorInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutVendorInput = {
@@ -1876,6 +2193,10 @@ export type CutListUncheckedUpdateWithoutVendorInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
@@ -1907,6 +2228,10 @@ export type CutListUncheckedUpdateManyWithoutVendorInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type CutListCreateManyProjectInput = {
@@ -1935,6 +2260,10 @@ export type CutListCreateManyProjectInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
 }
 
 export type CutListUpdateWithoutProjectInput = {
@@ -1960,11 +2289,15 @@ export type CutListUpdateWithoutProjectInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutProjectInput = {
@@ -1993,6 +2326,10 @@ export type CutListUncheckedUpdateWithoutProjectInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
@@ -2024,6 +2361,10 @@ export type CutListUncheckedUpdateManyWithoutProjectInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 export type CutListCreateManyLeadInput = {
@@ -2052,6 +2393,10 @@ export type CutListCreateManyLeadInput = {
   group_name?: string | null
   procurement?: string | null
   weight?: number
+  category_id?: number | null
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
 }
 
 export type CutListUpdateWithoutLeadInput = {
@@ -2077,11 +2422,15 @@ export type CutListUpdateWithoutLeadInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutCutListsNestedInput
 }
 
 export type CutListUncheckedUpdateWithoutLeadInput = {
@@ -2110,6 +2459,10 @@ export type CutListUncheckedUpdateWithoutLeadInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
@@ -2141,6 +2494,143 @@ export type CutListUncheckedUpdateManyWithoutLeadInput = {
   group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+}
+
+export type CutListCreateManyCategoryInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  lead_id?: number | null
+  description: string
+  length?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty: number
+  material_details: string
+  item_name: string
+  unique_code?: string | null
+  unique_code_2?: string | null
+  status?: string
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  elf?: string | null
+  elb?: string | null
+  esl?: string | null
+  esr?: string | null
+  category_name?: string | null
+  group_name?: string | null
+  procurement?: string | null
+  weight?: number
+  use_in_assembled_packing?: boolean | null
+  include_in_packing?: boolean | null
+  scan_pack_validate?: boolean | null
+}
+
+export type CutListUpdateWithoutCategoryInput = {
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  material_details?: Prisma.StringFieldUpdateOperationsInput | string
+  item_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  lead?: Prisma.LeadMasterUpdateOneWithoutCutListNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutCutListNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCutListNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutCut_listNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCutListNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutCutListNestedInput
+}
+
+export type CutListUncheckedUpdateWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  material_details?: Prisma.StringFieldUpdateOperationsInput | string
+  item_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutCut_listNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCutListNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutCutListNestedInput
+}
+
+export type CutListUncheckedUpdateManyWithoutCategoryInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  length?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  width?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  thickness?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  material_details?: Prisma.StringFieldUpdateOperationsInput | string
+  item_name?: Prisma.StringFieldUpdateOperationsInput | string
+  unique_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unique_code_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  elf?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  elb?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  esr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.FloatFieldUpdateOperationsInput | number
+  use_in_assembled_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  include_in_packing?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  scan_pack_validate?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
 }
 
 
@@ -2219,12 +2709,17 @@ export type CutListSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   group_name?: boolean
   procurement?: boolean
   weight?: boolean
+  category_id?: boolean
+  use_in_assembled_packing?: boolean
+  include_in_packing?: boolean
+  scan_pack_validate?: boolean
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.CutList$cutListMachineMappingArgs<ExtArgs>
   completionPhotos?: boolean | Prisma.CutList$completionPhotosArgs<ExtArgs>
   defectedItems?: boolean | Prisma.CutList$defectedItemsArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
   _count?: boolean | Prisma.CutListCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
 
@@ -2255,9 +2750,14 @@ export type CutListSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   group_name?: boolean
   procurement?: boolean
   weight?: boolean
+  category_id?: boolean
+  use_in_assembled_packing?: boolean
+  include_in_packing?: boolean
+  scan_pack_validate?: boolean
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
 
 export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2287,9 +2787,14 @@ export type CutListSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   group_name?: boolean
   procurement?: boolean
   weight?: boolean
+  category_id?: boolean
+  use_in_assembled_packing?: boolean
+  include_in_packing?: boolean
+  scan_pack_validate?: boolean
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["cutList"]>
 
 export type CutListSelectScalar = {
@@ -2319,9 +2824,13 @@ export type CutListSelectScalar = {
   group_name?: boolean
   procurement?: boolean
   weight?: boolean
+  category_id?: boolean
+  use_in_assembled_packing?: boolean
+  include_in_packing?: boolean
+  scan_pack_validate?: boolean
 }
 
-export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "unique_code_2" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr" | "category_name" | "group_name" | "procurement" | "weight", ExtArgs["result"]["cutList"]>
+export type CutListOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "description" | "length" | "width" | "thickness" | "qty" | "material_details" | "item_name" | "unique_code" | "unique_code_2" | "status" | "created_by" | "created_at" | "updated_by" | "updated_at" | "elf" | "elb" | "esl" | "esr" | "category_name" | "group_name" | "procurement" | "weight" | "category_id" | "use_in_assembled_packing" | "include_in_packing" | "scan_pack_validate", ExtArgs["result"]["cutList"]>
 export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
@@ -2329,17 +2838,20 @@ export type CutListInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   cutListMachineMapping?: boolean | Prisma.CutList$cutListMachineMappingArgs<ExtArgs>
   completionPhotos?: boolean | Prisma.CutList$completionPhotosArgs<ExtArgs>
   defectedItems?: boolean | Prisma.CutList$defectedItemsArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
   _count?: boolean | Prisma.CutListCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CutListIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
 }
 export type CutListIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.CutList$leadArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.CutList$categoryArgs<ExtArgs>
 }
 
 export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2351,6 +2863,7 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     completionPhotos: Prisma.$DefectCompletionPhotoPayload<ExtArgs>[]
     defectedItems: Prisma.$DefectedItemPayload<ExtArgs>[]
+    category: Prisma.$ProjectCategoriesMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2379,6 +2892,10 @@ export type $CutListPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     group_name: string | null
     procurement: string | null
     weight: number
+    category_id: number | null
+    use_in_assembled_packing: boolean | null
+    include_in_packing: boolean | null
+    scan_pack_validate: boolean | null
   }, ExtArgs["result"]["cutList"]>
   composites: {}
 }
@@ -2779,6 +3296,7 @@ export interface Prisma__CutListClient<T, Null = never, ExtArgs extends runtime.
   cutListMachineMapping<T extends Prisma.CutList$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   completionPhotos<T extends Prisma.CutList$completionPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$completionPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectCompletionPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   defectedItems<T extends Prisma.CutList$defectedItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$defectedItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectedItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  category<T extends Prisma.CutList$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CutList$categoryArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2834,6 +3352,10 @@ export interface CutListFieldRefs {
   readonly group_name: Prisma.FieldRef<"CutList", 'String'>
   readonly procurement: Prisma.FieldRef<"CutList", 'String'>
   readonly weight: Prisma.FieldRef<"CutList", 'Float'>
+  readonly category_id: Prisma.FieldRef<"CutList", 'Int'>
+  readonly use_in_assembled_packing: Prisma.FieldRef<"CutList", 'Boolean'>
+  readonly include_in_packing: Prisma.FieldRef<"CutList", 'Boolean'>
+  readonly scan_pack_validate: Prisma.FieldRef<"CutList", 'Boolean'>
 }
     
 
@@ -3323,6 +3845,25 @@ export type CutList$defectedItemsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.DefectedItemScalarFieldEnum | Prisma.DefectedItemScalarFieldEnum[]
+}
+
+/**
+ * CutList.category
+ */
+export type CutList$categoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectCategoriesMaster
+   */
+  select?: Prisma.ProjectCategoriesMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectCategoriesMaster
+   */
+  omit?: Prisma.ProjectCategoriesMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectCategoriesMasterInclude<ExtArgs> | null
+  where?: Prisma.ProjectCategoriesMasterWhereInput
 }
 
 /**

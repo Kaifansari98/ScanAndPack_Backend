@@ -2905,14 +2905,20 @@ model CutList {
   group_name            String?
   procurement           String?
   weight                Float                   @default(0)
+  category_id           Int?
+  use_in_assembled_packing            Boolean?
+  include_in_packing                  Boolean?
+  scan_pack_validate                  Boolean?
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   project               ProjectMaster           @relation(fields: [project_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
   completionPhotos      DefectCompletionPhoto[]
   defectedItems         DefectedItem[]
+  category ProjectCategoriesMaster? @relation("CutListCategory", fields: [category_id], references: [id], onDelete: SetNull)
 
   @@index([unique_code])
+  @@index([category_id])
 }
 
 model CutListMachineMapping {
@@ -2937,6 +2943,9 @@ model CutListMachineMapping {
   site_in_at       DateTime?
   site_in_by       Int?
   weight           Float                   @default(0)
+  qty              Int @default(1)
+  received_qty     Int?
+  row_created_source String?
   boxMaster        BoxMaster?              @relation(fields: [box_id], references: [id])
   cut_list         CutList                 @relation(fields: [cut_list_id], references: [id])
   operator         UserMaster?             @relation(fields: [in_operator], references: [id])
@@ -3358,6 +3367,7 @@ model ProjectCategoriesMaster {
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
+  cutLists CutList[] @relation("CutListCategory")
 
   @@index([parent_id])
 }

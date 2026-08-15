@@ -7725,7 +7725,7 @@ type CustomPdfOptions = {
 };
 
 
-export const markItemSiteInService = async (
+export const markItemSiteInService_old = async (
   unique_code: string,
   box_id: number,
   project_id: number,
@@ -7859,7 +7859,7 @@ export const markItemSiteInService = async (
 };
 
 // ── Get all items in a box with their site_in status ─────────────────────────
-export const getBoxSiteInStatusService = async (
+export const getBoxSiteInStatusService_old = async (
   box_id: number,
   project_id: number,
   vendor_id: number
@@ -8372,4 +8372,1642 @@ export const getBoxInfoValuesService = async (
     field_value:
       field.values?.[0]?.field_value || "",
   }));
+};
+
+
+const isManualCreatedMapping = (
+  value: string | null | undefined
+) => {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase() === "manual";
+};
+
+const clampReceivedQty = (
+  receivedQty: number | null | undefined,
+  packedQty: number
+) => {
+  const normalizedPackedQty =
+    Math.max(
+      0,
+      Number(packedQty || 0)
+    );
+
+  const normalizedReceivedQty =
+    Math.max(
+      0,
+      Number(receivedQty ?? 0)
+    );
+
+  return Math.min(
+    normalizedReceivedQty,
+    normalizedPackedQty
+  );
+};
+
+
+export const markItemSiteInService = async (
+  unique_code: string,
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number
+) => {
+  try {
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Verify box
+    |--------------------------------------------------------------------------
+    */
+
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+          box_status: "packed",
+        },
+
+        select: {
+          id: true,
+          site_in_at: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    if (!box.site_in_at) {
+      return validationResponse(
+        0,
+        "Box has not been marked as site in yet"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Validate user
+    |--------------------------------------------------------------------------
+    */
+
+    const user =
+      await prisma.userMaster.findFirst({
+        where: {
+          id: user_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+        },
+      });
+
+    if (!user) {
+      return validationResponse(
+        0,
+        "Invalid user"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Find CutList item
+    |--------------------------------------------------------------------------
+    */
+
+    const cutList =
+      await prisma.cutList.findFirst({
+        where: {
+          unique_code,
+          project_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+          item_name: true,
+          unique_code: true,
+
+          include_in_packing: true,
+          scan_pack_validate: true,
+        },
+      });
+
+    if (!cutList) {
+      return validationResponse(
+        0,
+        "Item not found for this QR code"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Manual item must use manual verification screen
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      cutList.include_in_packing === true &&
+      cutList.scan_pack_validate === false
+    ) {
+      return validationResponse(
+        0,
+        "This item was packed manually. Use Verify Manual Items."
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Packaging machine
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingMachine =
+      await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
+
+        select: {
+          id: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!packagingMachine) {
+      return validationResponse(
+        0,
+        "Packaging machine not configured"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Find one normal/scanned unit in THIS BOX
+    |--------------------------------------------------------------------------
+    |
+    | Normal scan packing:
+    |   one mapping row = one physical unit
+    |
+    | Manual rows are explicitly excluded.
+    |--------------------------------------------------------------------------
+    */
+
+    const mapping =
+      await prisma.cutListMachineMapping.findFirst({
+        where: {
+          cut_list_id:
+            cutList.id,
+
+          box_id,
+
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+
+          site_in_at:
+            null,
+
+          OR: [
+            {
+              row_created_source:
+                null,
+            },
+            {
+              row_created_source: {
+                not:
+                  "Manual",
+              },
+            },
+          ],
+        },
+
+        select: {
+          id: true,
+          box_id: true,
+          actual_in_at: true,
+          site_in_at: true,
+          row_created_source: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!mapping) {
+      /*
+      |--------------------------------------------------------------------------
+      | Distinguish wrong box / not packed / already received
+      |--------------------------------------------------------------------------
+      */
+
+      const anyInBox =
+        await prisma.cutListMachineMapping.findFirst({
+          where: {
+            cut_list_id:
+              cutList.id,
+
+            box_id,
+
+            project_id,
+            vendor_id,
+
+            machine_id:
+              packagingMachine.id,
+
+            expected_in:
+              true,
+
+            OR: [
+              {
+                row_created_source:
+                  null,
+              },
+              {
+                row_created_source: {
+                  not:
+                    "Manual",
+                },
+              },
+            ],
+          },
+
+          select: {
+            id: true,
+            site_in_at: true,
+            actual_in_at: true,
+          },
+
+          orderBy: {
+            id: "asc",
+          },
+        });
+
+      if (!anyInBox) {
+        return validationResponse(
+          0,
+          "Item is not packed in this box"
+        );
+      }
+
+      if (!anyInBox.actual_in_at) {
+        return validationResponse(
+          0,
+          "Item has not been scanned into the box yet"
+        );
+      }
+
+      return validationResponse(
+        0,
+        "All units of this item are already marked as received at site"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 6. Mark one scanned unit received
+    |--------------------------------------------------------------------------
+    */
+
+    const updated =
+      await prisma.cutListMachineMapping.update({
+        where: {
+          id: mapping.id,
+        },
+
+        data: {
+          site_in_at:
+            new Date(),
+
+          site_in_by:
+            user_id,
+        },
+
+        select: {
+          id: true,
+          site_in_at: true,
+          site_in_by: true,
+
+          cut_list: {
+            select: {
+              item_name: true,
+              unique_code: true,
+            },
+          },
+        },
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Remaining normal scanned units
+    |--------------------------------------------------------------------------
+    */
+
+    const remaining =
+      await prisma.cutListMachineMapping.count({
+        where: {
+          cut_list_id:
+            cutList.id,
+
+          box_id,
+
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+
+          site_in_at:
+            null,
+
+          OR: [
+            {
+              row_created_source:
+                null,
+            },
+            {
+              row_created_source: {
+                not:
+                  "Manual",
+              },
+            },
+          ],
+        },
+      });
+
+    const message =
+      remaining > 0
+        ? `Item received. ${remaining} more unit${
+            remaining > 1
+              ? "s"
+              : ""
+          } of this item pending`
+        : "Item marked as received at site";
+
+    return validationResponse(
+      1,
+      message,
+      {
+        ...updated,
+
+        remaining_units:
+          remaining,
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Error in markItemSiteInService:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to mark item as received at site"
+    );
+  }
+};
+
+
+export const getManualBoxSiteInItemsService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  try {
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Box validation
+    |--------------------------------------------------------------------------
+    */
+
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+          box_status: "packed",
+        },
+
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          site_in_at: true,
+          site_in_by: true,
+          factory_out_at: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    if (!box.site_in_at) {
+      return validationResponse(
+        0,
+        "Box has not been marked as site in yet"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Packaging machine
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingMachine =
+      await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
+
+        select: {
+          id: true,
+          machine_name: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!packagingMachine) {
+      return validationResponse(
+        0,
+        "Packaging machine not configured"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Fetch manual mappings in this box
+    |--------------------------------------------------------------------------
+    |
+    | Manual mapping can represent multiple physical units:
+    |
+    |   mapping.qty = 5
+    |
+    | received_qty is saved against this same row.
+    |--------------------------------------------------------------------------
+    */
+
+    const mappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          box_id,
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+
+          row_created_source:
+            "Manual",
+        },
+
+        select: {
+          id: true,
+          cut_list_id: true,
+
+          qty: true,
+          received_qty: true,
+
+          weight: true,
+
+          actual_in_at: true,
+
+          site_in_at: true,
+          site_in_by: true,
+
+          row_created_source: true,
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              description: true,
+
+              unique_code: true,
+              unique_code_2: true,
+
+              category_name: true,
+              group_name: true,
+
+              length: true,
+              width: true,
+              thickness: true,
+
+              qty: true,
+              weight: true,
+
+              include_in_packing: true,
+              scan_pack_validate: true,
+            },
+          },
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. User names
+    |--------------------------------------------------------------------------
+    */
+
+    const siteInUserIds = [
+      ...new Set(
+        mappings
+          .map(
+            (mapping) =>
+              mapping.site_in_by
+          )
+          .filter(Boolean)
+      ),
+    ] as number[];
+
+    const users =
+      siteInUserIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in:
+                  siteInUserIds,
+              },
+            },
+
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const userMap =
+      new Map<number, string>(
+        users.map(
+          (user) => [
+            user.id,
+            user.user_name,
+          ]
+        )
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Format rows
+    |--------------------------------------------------------------------------
+    */
+
+    const items =
+      mappings.map(
+        (mapping) => {
+          const packedQty =
+            Math.max(
+              0,
+              Number(
+                mapping.qty ??
+                0
+              )
+            );
+
+          const receivedQty =
+            clampReceivedQty(
+              mapping.received_qty,
+              packedQty
+            );
+
+          const pendingQty =
+            Math.max(
+              packedQty -
+                receivedQty,
+              0
+            );
+
+          const isVerified =
+            mapping.received_qty !==
+            null;
+
+          const isFullyReceived =
+            packedQty > 0 &&
+            receivedQty >=
+              packedQty;
+
+          const perItemWeight =
+            Number(
+              mapping.weight ||
+              0
+            );
+
+          return {
+            mapping_id:
+              mapping.id,
+
+            cut_list_id:
+              mapping.cut_list_id,
+
+            item_name:
+              mapping.cut_list
+                .item_name,
+
+            description:
+              mapping.cut_list
+                .description,
+
+            unique_code:
+              mapping.cut_list
+                .unique_code,
+
+            unique_code_2:
+              mapping.cut_list
+                .unique_code_2,
+
+            category_name:
+              mapping.cut_list
+                .category_name,
+
+            group_name:
+              mapping.cut_list
+                .group_name,
+
+            length:
+              mapping.cut_list
+                .length,
+
+            width:
+              mapping.cut_list
+                .width,
+
+            thickness:
+              mapping.cut_list
+                .thickness,
+
+            packed_qty:
+              packedQty,
+
+            received_qty:
+              mapping.received_qty ===
+              null
+                ? null
+                : receivedQty,
+
+            /*
+            |--------------------------------------------------------------------------
+            | Initial textbox value:
+            |
+            | Never verified -> packed quantity
+            | Already saved  -> saved received quantity
+            |--------------------------------------------------------------------------
+            */
+
+            suggested_received_qty:
+              mapping.received_qty ===
+              null
+                ? packedQty
+                : receivedQty,
+
+            pending_qty:
+              pendingQty,
+
+            is_verified:
+              isVerified,
+
+            is_fully_received:
+              isFullyReceived,
+
+            per_item_weight:
+              perItemWeight,
+
+            packed_weight:
+              Number(
+                (
+                  perItemWeight *
+                  packedQty
+                ).toFixed(4)
+              ),
+
+            received_weight:
+              Number(
+                (
+                  perItemWeight *
+                  receivedQty
+                ).toFixed(4)
+              ),
+
+            site_in_at:
+              mapping.site_in_at,
+
+            site_in_by:
+              mapping.site_in_by,
+
+            site_in_by_name:
+              mapping.site_in_by
+                ? userMap.get(
+                    mapping.site_in_by
+                  ) ?? null
+                : null,
+
+            row_created_source:
+              mapping.row_created_source,
+          };
+        }
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 6. Summary
+    |--------------------------------------------------------------------------
+    */
+
+    const totalQty =
+      items.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          item.packed_qty,
+        0
+      );
+
+    const receivedQty =
+      items.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          Number(
+            item.received_qty ??
+            0
+          ),
+        0
+      );
+
+    const pendingQty =
+      Math.max(
+        totalQty -
+          receivedQty,
+        0
+      );
+
+    const verifiedRows =
+      items.filter(
+        (item) =>
+          item.is_verified
+      ).length;
+
+    const fullyReceivedRows =
+      items.filter(
+        (item) =>
+          item.is_fully_received
+      ).length;
+
+    return validationResponse(
+      1,
+      "Manual box items fetched",
+      {
+        box,
+
+        summary: {
+          total_products:
+            items.length,
+
+          total_qty:
+            totalQty,
+
+          received_qty:
+            receivedQty,
+
+          pending_qty:
+            pendingQty,
+
+          verified_products:
+            verifiedRows,
+
+          fully_received_products:
+            fullyReceivedRows,
+
+          progress_pct:
+            totalQty > 0
+              ? Math.round(
+                  (
+                    receivedQty /
+                    totalQty
+                  ) *
+                    100
+                )
+              : 0,
+        },
+
+        items,
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Error in getManualBoxSiteInItemsService:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch manual items"
+    );
+  }
+};
+
+
+export const verifyManualBoxSiteInItemService = async (
+  mapping_id: number,
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number,
+  received_qty: number
+) => {
+  try {
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Quantity validation
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      !Number.isInteger(
+        received_qty
+      ) ||
+      received_qty < 0
+    ) {
+      return validationResponse(
+        0,
+        "received_qty must be a whole number greater than or equal to 0"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Box validation
+    |--------------------------------------------------------------------------
+    */
+
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+          box_status: "packed",
+        },
+
+        select: {
+          id: true,
+          box_name: true,
+          site_in_at: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    if (!box.site_in_at) {
+      return validationResponse(
+        0,
+        "Box has not been marked as site in yet"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. User validation
+    |--------------------------------------------------------------------------
+    */
+
+    const user =
+      await prisma.userMaster.findFirst({
+        where: {
+          id: user_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+          user_name: true,
+        },
+      });
+
+    if (!user) {
+      return validationResponse(
+        0,
+        "Invalid user"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Packaging machine
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingMachine =
+      await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
+
+        select: {
+          id: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!packagingMachine) {
+      return validationResponse(
+        0,
+        "Packaging machine not configured"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Verify mapping belongs to this exact box/project/vendor
+    |--------------------------------------------------------------------------
+    */
+
+    const mapping =
+      await prisma.cutListMachineMapping.findFirst({
+        where: {
+          id:
+            mapping_id,
+
+          box_id,
+
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+
+          row_created_source:
+            "Manual",
+        },
+
+        select: {
+          id: true,
+          cut_list_id: true,
+
+          qty: true,
+          received_qty: true,
+
+          site_in_at: true,
+          site_in_by: true,
+
+          cut_list: {
+            select: {
+              item_name: true,
+              unique_code: true,
+            },
+          },
+        },
+      });
+
+    if (!mapping) {
+      return validationResponse(
+        0,
+        "Manual item not found in this box"
+      );
+    }
+
+    const packedQty =
+      Math.max(
+        0,
+        Number(
+          mapping.qty ??
+          0
+        )
+      );
+
+    if (
+      received_qty >
+      packedQty
+    ) {
+      return validationResponse(
+        0,
+        `Received quantity cannot be greater than packed quantity (${packedQty})`
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 6. Update
+    |--------------------------------------------------------------------------
+    |
+    | site_in_at / site_in_by become the manual verification audit fields.
+    |
+    | If received_qty = 0:
+    |   received_qty is still saved as 0,
+    |   site_in_at is cleared because nothing was received.
+    |--------------------------------------------------------------------------
+    */
+
+    const now =
+      new Date();
+
+    const updated =
+      await prisma.cutListMachineMapping.update({
+        where: {
+          id:
+            mapping.id,
+        },
+
+        data: {
+          received_qty,
+
+          site_in_at:
+            received_qty > 0
+              ? now
+              : null,
+
+          site_in_by:
+            received_qty > 0
+              ? user_id
+              : null,
+        },
+
+        select: {
+          id: true,
+          cut_list_id: true,
+
+          qty: true,
+          received_qty: true,
+
+          site_in_at: true,
+          site_in_by: true,
+
+          cut_list: {
+            select: {
+              item_name: true,
+              unique_code: true,
+            },
+          },
+        },
+      });
+
+    const pendingQty =
+      Math.max(
+        packedQty -
+          received_qty,
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 7. Calculate current manual box progress
+    |--------------------------------------------------------------------------
+    */
+
+    const allManualMappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          box_id,
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+
+          row_created_source:
+            "Manual",
+        },
+
+        select: {
+          qty: true,
+          received_qty: true,
+        },
+      });
+
+    const boxManualTotalQty =
+      allManualMappings.reduce(
+        (
+          sum,
+          item
+        ) =>
+          sum +
+          Math.max(
+            0,
+            Number(
+              item.qty ??
+              0
+            )
+          ),
+        0
+      );
+
+    const boxManualReceivedQty =
+      allManualMappings.reduce(
+        (
+          sum,
+          item
+        ) => {
+          const itemQty =
+            Math.max(
+              0,
+              Number(
+                item.qty ??
+                0
+              )
+            );
+
+          return (
+            sum +
+            clampReceivedQty(
+              item.received_qty,
+              itemQty
+            )
+          );
+        },
+        0
+      );
+
+    const boxManualPendingQty =
+      Math.max(
+        boxManualTotalQty -
+          boxManualReceivedQty,
+        0
+      );
+
+    const message =
+      pendingQty === 0
+        ? "Manual item verified successfully"
+        : `Manual item verified. ${pendingQty} unit${
+            pendingQty > 1
+              ? "s"
+              : ""
+          } pending for this item`;
+
+    return validationResponse(
+      1,
+      message,
+      {
+        mapping_id:
+          updated.id,
+
+        cut_list_id:
+          updated.cut_list_id,
+
+        item_name:
+          updated.cut_list
+            .item_name,
+
+        unique_code:
+          updated.cut_list
+            .unique_code,
+
+        packed_qty:
+          packedQty,
+
+        received_qty:
+          Number(
+            updated.received_qty ??
+            0
+          ),
+
+        pending_qty:
+          pendingQty,
+
+        is_fully_received:
+          pendingQty === 0,
+
+        site_in_at:
+          updated.site_in_at,
+
+        site_in_by:
+          updated.site_in_by,
+
+        site_in_by_name:
+          received_qty > 0
+            ? user.user_name
+            : null,
+
+        box_summary: {
+          total_qty:
+            boxManualTotalQty,
+
+          received_qty:
+            boxManualReceivedQty,
+
+          pending_qty:
+            boxManualPendingQty,
+
+          progress_pct:
+            boxManualTotalQty > 0
+              ? Math.round(
+                  (
+                    boxManualReceivedQty /
+                    boxManualTotalQty
+                  ) *
+                    100
+                )
+              : 0,
+        },
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Error in verifyManualBoxSiteInItemService:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to verify manual item"
+    );
+  }
+};
+
+export const getBoxSiteInStatusService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  try {
+    const box =
+      await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
+          project_id,
+          vendor_id,
+          is_deleted: false,
+        },
+
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          site_in_at: true,
+          factory_out_at: true,
+        },
+      });
+
+    if (!box) {
+      return validationResponse(
+        0,
+        "Box not found"
+      );
+    }
+
+    const packagingMachine =
+      await prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
+
+        select: {
+          id: true,
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    if (!packagingMachine) {
+      return validationResponse(
+        0,
+        "Packaging machine not configured"
+      );
+    }
+
+    const items =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          box_id,
+          project_id,
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          actual_in_at: {
+            not: null,
+          },
+        },
+
+        select: {
+          id: true,
+
+          qty: true,
+          received_qty: true,
+
+          row_created_source: true,
+
+          site_in_at: true,
+          site_in_by: true,
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              category_name: true,
+              group_name: true,
+              unique_code: true,
+              qty: true,
+            },
+          },
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    let totalItems = 0;
+    let receivedItems = 0;
+
+    let scannedTotalItems = 0;
+    let scannedReceivedItems = 0;
+
+    let manualTotalItems = 0;
+    let manualReceivedItems = 0;
+
+    const formattedItems =
+      items.map(
+        (item) => {
+          const mappingQty =
+            Math.max(
+              0,
+              Number(
+                item.qty ??
+                1
+              )
+            );
+
+          const isManual =
+            isManualCreatedMapping(
+              item.row_created_source
+            );
+
+          let receivedQty = 0;
+
+          if (isManual) {
+            receivedQty =
+              clampReceivedQty(
+                item.received_qty,
+                mappingQty
+              );
+
+            manualTotalItems +=
+              mappingQty;
+
+            manualReceivedItems +=
+              receivedQty;
+          } else {
+            receivedQty =
+              item.site_in_at
+                ? mappingQty
+                : 0;
+
+            scannedTotalItems +=
+              mappingQty;
+
+            scannedReceivedItems +=
+              receivedQty;
+          }
+
+          totalItems +=
+            mappingQty;
+
+          receivedItems +=
+            receivedQty;
+
+          return {
+            mapping_id:
+              item.id,
+
+            cut_list_id:
+              item.cut_list.id,
+
+            item_name:
+              item.cut_list
+                .item_name,
+
+            category_name:
+              item.cut_list
+                .category_name,
+
+            group_name:
+              item.cut_list
+                .group_name,
+
+            unique_code:
+              item.cut_list
+                .unique_code,
+
+            qty:
+              mappingQty,
+
+            received_qty:
+              isManual
+                ? item.received_qty
+                : receivedQty,
+
+            pending_qty:
+              Math.max(
+                mappingQty -
+                  receivedQty,
+                0
+              ),
+
+            row_created_source:
+              item.row_created_source,
+
+            is_manual:
+              isManual,
+
+            site_in_at:
+              item.site_in_at,
+
+            site_in_by:
+              item.site_in_by,
+
+            is_received:
+              receivedQty >=
+              mappingQty,
+          };
+        }
+      );
+
+    const pendingItems =
+      Math.max(
+        totalItems -
+          receivedItems,
+        0
+      );
+
+    const scannedPendingItems =
+      Math.max(
+        scannedTotalItems -
+          scannedReceivedItems,
+        0
+      );
+
+    const manualPendingItems =
+      Math.max(
+        manualTotalItems -
+          manualReceivedItems,
+        0
+      );
+
+    return validationResponse(
+      1,
+      "Box site in status fetched",
+      {
+        box,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Overall physical quantities
+        |--------------------------------------------------------------------------
+        */
+
+        total_items:
+          totalItems,
+
+        received_items:
+          receivedItems,
+
+        pending_items:
+          pendingItems,
+
+        progress_pct:
+          totalItems > 0
+            ? Math.round(
+                (
+                  receivedItems /
+                  totalItems
+                ) *
+                  100
+              )
+            : 0,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Scanner flow
+        |--------------------------------------------------------------------------
+        */
+
+        scanned_total_items:
+          scannedTotalItems,
+
+        scanned_received_items:
+          scannedReceivedItems,
+
+        scanned_pending_items:
+          scannedPendingItems,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Manual flow
+        |--------------------------------------------------------------------------
+        */
+
+        manual_total_items:
+          manualTotalItems,
+
+        manual_received_items:
+          manualReceivedItems,
+
+        manual_pending_items:
+          manualPendingItems,
+
+        has_manual_items:
+          manualTotalItems > 0,
+
+        manual_complete:
+          manualTotalItems > 0 &&
+          manualPendingItems === 0,
+
+        items:
+          formattedItems,
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Error in getBoxSiteInStatusService:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch box site in status"
+    );
+  }
 };
