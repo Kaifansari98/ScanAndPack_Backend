@@ -266,6 +266,7 @@ export const getScanItemsByFields = async ({
       actual_out_at: true,
       in_operator: true,
       created_at: true,
+      qty:true,
       cut_list: {
         select: {
           id: true,
@@ -314,7 +315,7 @@ export const getScanItemsByFields = async ({
           L1: row.cut_list.length?.toString() ?? "0",
           L2: row.cut_list.width?.toString() ?? "0",
           L3: row.cut_list.thickness?.toString() ?? "0",
-          qty: row.cut_list.qty,
+          qty: row.qty,
           material_details: row.cut_list.material_details,
           category: row.cut_list.category_name ?? "",
           group: row.cut_list.group_name ?? "",
@@ -347,9 +348,9 @@ export const deleteScanAndPackItemById = async (
   */
 
   if (!id || !vendor_id || !project_id || !box_id) {
-    throw new Error("id, vendor_id, project_id and box_id are required");
-  }else{
-    console.log(vendor_id,project_id,box_id);
+    throw new Error(
+      "id, vendor_id, project_id and box_id are required"
+    );
   }
 
   /*
@@ -365,6 +366,7 @@ export const deleteScanAndPackItemById = async (
       project_id: Number(project_id),
       is_deleted: false,
     },
+
     select: {
       id: true,
       box_name: true,
@@ -376,8 +378,14 @@ export const deleteScanAndPackItemById = async (
     throw new Error("Box not found");
   }
 
-  if (String(box.box_status).toLowerCase() === "packed") {
-    throw new Error("Packed box cannot be updated");
+  if (
+    String(box.box_status)
+      .trim()
+      .toLowerCase() === "packed"
+  ) {
+    throw new Error(
+      "Packed box cannot be updated"
+    );
   }
 
   /*
@@ -386,60 +394,165 @@ export const deleteScanAndPackItemById = async (
   |--------------------------------------------------------------------------
   */
 
-  const existingMapping = await prisma.cutListMachineMapping.findFirst({
-    where: {
-      id: Number(id),
-      vendor_id: Number(vendor_id),
-      project_id: Number(project_id),
-      box_id: Number(box_id),
-    },
-    select: {
-      id: true,
-      box_id: true,
-      cut_list_id: true,
-      machine_id: true,
-      project_id: true,
-      vendor_id: true,
-    },
-  });
+  const existingMapping =
+    await prisma.cutListMachineMapping.findFirst({
+      where: {
+        id: Number(id),
+        vendor_id: Number(vendor_id),
+        project_id: Number(project_id),
+        box_id: Number(box_id),
+      },
+
+      select: {
+        id: true,
+        box_id: true,
+        cut_list_id: true,
+        machine_id: true,
+        project_id: true,
+        vendor_id: true,
+
+        qty: true,
+        row_created_source: true,
+      },
+    });
 
   if (!existingMapping) {
-    throw new Error("Item not found in this box");
+    throw new Error(
+      "Item not found in this box"
+    );
   }
 
   /*
   |--------------------------------------------------------------------------
-  | STEP 4 — Remove item from box
+  | STEP 4 — Check row source
   |--------------------------------------------------------------------------
-  | Do not delete ScanAndPackItem.
-  | Only set CutListMachineMapping.box_id = null.
+  |
+  | Manual:
+  | Delete complete CutListMachineMapping row.
+  |
+  | Existing / Scan:
+  | Keep existing logic and only remove box_id.
   |--------------------------------------------------------------------------
   */
 
-  const updatedMapping = await prisma.cutListMachineMapping.update({
-    where: {
-      id: existingMapping.id,
-    },
-    data: {
-      box_id: null,
-    },
-    select: {
-      id: true,
-      box_id: true,
-      cut_list_id: true,
-      machine_id: true,
-      project_id: true,
-      vendor_id: true,
-    },
-  });
-  console.log("Item removed from box successfully");
+  const isManualRow =
+    existingMapping.row_created_source
+      ?.trim()
+      .toLowerCase() === "manual";
+
+  /*
+  |--------------------------------------------------------------------------
+  | MANUAL ROW — Delete complete mapping
+  |--------------------------------------------------------------------------
+  */
+
+  if (isManualRow) {
+    await prisma.cutListMachineMapping.delete({
+      where: {
+        id: existingMapping.id,
+      },
+    });
+
+    console.log(
+      "Manual item removed from box successfully"
+    );
+
+    return {
+      message:
+        "Manual item removed from box successfully",
+
+      action: "deleted",
+
+      removed_mapping_id:
+        existingMapping.id,
+
+      removed_qty:
+        existingMapping.qty,
+
+      previous_box_id:
+        Number(box_id),
+
+      current_box_id:
+        null,
+
+      project_id:
+        existingMapping.project_id,
+
+      vendor_id:
+        existingMapping.vendor_id,
+
+      cut_list_id:
+        existingMapping.cut_list_id,
+
+      row_created_source:
+        existingMapping.row_created_source,
+    };
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | NORMAL / SCANNED ROW — Existing logic
+  |--------------------------------------------------------------------------
+  |
+  | Do not delete mapping.
+  | Only set box_id = null.
+  |--------------------------------------------------------------------------
+  */
+
+  const updatedMapping =
+    await prisma.cutListMachineMapping.update({
+      where: {
+        id: existingMapping.id,
+      },
+
+      data: {
+        box_id: null,
+      },
+
+      select: {
+        id: true,
+        box_id: true,
+        cut_list_id: true,
+        machine_id: true,
+        project_id: true,
+        vendor_id: true,
+        qty: true,
+        row_created_source: true,
+      },
+    });
+
+  console.log(
+    "Item removed from box successfully"
+  );
 
   return {
-    message: "Item removed from box successfully",
-    removed_mapping_id: updatedMapping.id,
-    previous_box_id: Number(box_id),
-    current_box_id: updatedMapping.box_id,
-    project_id: updatedMapping.project_id,
-    vendor_id: updatedMapping.vendor_id,
+    message:
+      "Item removed from box successfully",
+
+    action: "box_unassigned",
+
+    removed_mapping_id:
+      updatedMapping.id,
+
+    removed_qty:
+      updatedMapping.qty,
+
+    previous_box_id:
+      Number(box_id),
+
+    current_box_id:
+      updatedMapping.box_id,
+
+    project_id:
+      updatedMapping.project_id,
+
+    vendor_id:
+      updatedMapping.vendor_id,
+
+    cut_list_id:
+      updatedMapping.cut_list_id,
+
+    row_created_source:
+      updatedMapping.row_created_source,
   };
 };

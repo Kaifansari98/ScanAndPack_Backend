@@ -17942,7 +17942,11 @@ export const CutListScalarFieldEnum = {
   category_name: 'category_name',
   group_name: 'group_name',
   procurement: 'procurement',
-  weight: 'weight'
+  weight: 'weight',
+  category_id: 'category_id',
+  use_in_assembled_packing: 'use_in_assembled_packing',
+  include_in_packing: 'include_in_packing',
+  scan_pack_validate: 'scan_pack_validate'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -17969,7 +17973,10 @@ export const CutListMachineMappingScalarFieldEnum = {
   box_id: 'box_id',
   site_in_at: 'site_in_at',
   site_in_by: 'site_in_by',
-  weight: 'weight'
+  weight: 'weight',
+  qty: 'qty',
+  received_qty: 'received_qty',
+  row_created_source: 'row_created_source'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -18008,6 +18015,8 @@ export type OrderLoginPoFileMappingScalarFieldEnum = (typeof OrderLoginPoFileMap
 export const MachineTypeMasterScalarFieldEnum = {
   id: 'id',
   machine_type: 'machine_type',
+  is_scanandpack: 'is_scanandpack',
+  is_trackandtrace: 'is_trackandtrace',
   active: 'active',
   created_at: 'created_at',
   updated_at: 'updated_at'

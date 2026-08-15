@@ -78,6 +78,9 @@ import {
   getResolvedDefects,
   uploadBrandLogo,
   createUnitMaster,
+  getManualPackingItemsController,
+  addManualPackingItem,
+  getProjectCutList
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import {
@@ -215,6 +218,7 @@ router.get("/category/project-categories/check-token", checkToken);
 router.post("/category/project-categories/sync", syncCategories);
 
 router.get("/project-detail/:vendor_id/:project_id", getProjectDetail);
+router.get("/project-detail/:vendor_id/:project_id/cut-list",getProjectCutList);
 router.get("/project-detail/:vendor_id/:project_id/box/:box_id", getBoxItems);
 
 router.get("/defect-dashboard/:vendor_id", getDefectDashboard);
@@ -241,6 +245,16 @@ router.get(
 router.post(
   "/boxes/:box_id/info-values",
   saveBoxInfoValuesController
+);
+
+router.get(
+  "/boxes/packing/manual-items",
+  getManualPackingItemsController
+);
+
+router.post(
+  "/boxes/packing/manual-items",
+  addManualPackingItem
 );
 
 // router.post(

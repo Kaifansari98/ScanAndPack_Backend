@@ -204,16 +204,24 @@ export class TrackTraceMasterController {
 
 export const getMachineType = async (req: Request, res: Response) => {
   try {
-    const vendor_id = Number(req.params.vendor_id);
+    const rawVendorId =
+      req.query.vendorId ||
+      req.query.vendor_id ||
+      req.params.vendor_id ||
+      (req as any).user?.vendor_id;
 
-    const machines_type = await trackTraceService.getMachineType();
+    const vendor_id = rawVendorId ? Number(rawVendorId) : undefined;
+
+    const machines_type = await trackTraceService.getMachineType(
+      vendor_id && !isNaN(vendor_id) ? vendor_id : undefined
+    );
 
     return res.status(200).json({
       success: true,
       data: machines_type,
     });
   } catch (error: any) {
-    logger.error("Controller Error - Get Machines", error);
+    logger.error("Controller Error - Get Machine Types", error);
 
     return res.status(500).json({
       success: false,

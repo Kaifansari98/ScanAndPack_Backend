@@ -203,65 +203,10 @@ const getPackagingTotal = async (
 
 // ── getProjectById ────────────────────────────────────────────────────────────
 
+
+
+
 export const getProjectById_old = async (id: number) => {
-  const [project, packagingMachine] = await Promise.all([
-    prisma.projectMaster.findUnique({
-      where: { id },
-      include: {
-        vendor: true,
-        createdByUser: true,
-        details: true,
-      },
-    }),
-    prisma.machineMaster.findFirst({
-      where: { machine_type_id: 18 },
-      select: { id: true, machine_name: true, sequence_no: true },
-      orderBy: { id: "asc" },
-    }),
-  ]);
-
-  if (!project) return null;
-
-  const packagingMachineId = packagingMachine?.id ?? null;
-
-  // ── total_items: dashboard-style (Part A waterfall + Part B packaging-only)
-  // ── total_packed: distinct cut_list_ids with box_id set (assigned to a box)
-  const [total_items, totalPackedGroups] = await Promise.all([
-    packagingMachine
-      ? getPackagingTotal(id, project.vendor_id, packagingMachine)
-      : Promise.resolve(0),
-
-    packagingMachineId
-      ? prisma.cutListMachineMapping.groupBy({
-        by: ["cut_list_id"],
-        where: {
-          project_id: id,
-          machine_id: packagingMachineId,
-          expected_in: true,
-          box_id: { not: null },
-        },
-      })
-      : Promise.resolve([]),
-  ]);
-
-  const total_packed = totalPackedGroups.length;
-  const total_unpacked = total_items - total_packed;
-
-  return {
-    ...project,
-    machine_id: packagingMachineId,
-    machine_name: packagingMachine?.machine_name ?? null,
-    totals: {
-      total_items,
-      total_packed,
-      total_unpacked,
-      total_weight: 0,
-    },
-  };
-};
-
-
-export const getProjectById = async (id: number) => {
   const project = await prisma.projectMaster.findUnique({
     where: { id },
     include: {
@@ -305,7 +250,94 @@ export const getProjectById = async (id: number) => {
   };
 };
 
-const getPackagingStats = async (
+
+export const getProjectById = async (id: number) => {
+  const project = await prisma.projectMaster.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      vendor: true,
+      createdByUser: true,
+      details: true,
+    },
+  });
+
+  if (!project) {
+    return null;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Find packaging machine - Type 18
+  |--------------------------------------------------------------------------
+  */
+
+  const packagingMachine =
+    await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id: project.vendor_id,
+        machine_type_id: 18,
+      },
+
+      select: {
+        id: true,
+        machine_name: true,
+        sequence_no: true,
+      },
+
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+  /*
+  |--------------------------------------------------------------------------
+  | Calculate packaging totals
+  |--------------------------------------------------------------------------
+  |
+  | Handles both:
+  |
+  | 1. Normal / scan packing
+  |    One mapping row normally represents one qty.
+  |
+  | 2. Manual packing
+  |    CutList:
+  |      include_in_packing = true
+  |      scan_pack_validate = false
+  |
+  |    One mapping row can contain qty > 1.
+  |--------------------------------------------------------------------------
+  */
+
+  const packagingStats =
+    await getPackagingStats(
+      id,
+      project.vendor_id,
+      packagingMachine
+        ? {
+            id: packagingMachine.id,
+            sequence_no:
+              packagingMachine.sequence_no,
+          }
+        : null
+    );
+
+  return {
+    ...project,
+
+    machine_id:
+      packagingMachine?.id ?? null,
+
+    machine_name:
+      packagingMachine?.machine_name ?? null,
+
+    totals:
+      packagingStats,
+  };
+};
+
+const getPackagingStats_old = async (
   project_id: number,
   vendor_id: number,
   machine: {
@@ -460,6 +492,641 @@ const getPackagingStats = async (
   };
 };
 
+const getPackagingStats = async (
+  project_id: number,
+  vendor_id: number,
+  machine: {
+    id: number;
+    sequence_no: number | null;
+  } | null
+): Promise<{
+  total_items: number;
+  total_packed: number;
+  total_unpacked: number;
+  total_weight: number;
+}> => {
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 1 — Fetch manual packing CutList items
+  |--------------------------------------------------------------------------
+  |
+  | These items DO NOT get a machine 18 mapping when project is created.
+  |
+  | Therefore total qty MUST come from CutList.qty.
+  |--------------------------------------------------------------------------
+  */
+
+  const manualCutListItems =
+    await prisma.cutList.findMany({
+      where: {
+        project_id,
+        vendor_id,
+
+        include_in_packing: true,
+        scan_pack_validate: false,
+
+        status: "Active",
+      },
+
+      select: {
+        id: true,
+        qty: true,
+        weight: true,
+      },
+    });
+
+  /*
+  |--------------------------------------------------------------------------
+  | Manual CutList IDs
+  |--------------------------------------------------------------------------
+  |
+  | We exclude these from normal machine-row based calculation,
+  | otherwise they would be counted twice after a manual mapping is created.
+  |--------------------------------------------------------------------------
+  */
+
+  const manualCutListIds =
+    new Set<number>(
+      manualCutListItems.map(
+        (item) => item.id
+      )
+    );
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 2 — Fetch packaging + previous machine rows
+  |--------------------------------------------------------------------------
+  */
+
+  let packagingRows: {
+    id: number;
+    project_id: number;
+    cut_list_id: number;
+    box_id: number | null;
+    actual_in_at: Date | null;
+    qty: number;
+    row_created_source: string | null;
+  }[] = [];
+
+  let priorRows: {
+    id: number;
+    project_id: number;
+    cut_list_id: number;
+    sequence_no: number;
+    actual_in_at: Date | null;
+  }[] = [];
+
+  if (machine) {
+    const machineSeq =
+      machine.sequence_no ?? 0;
+
+    [packagingRows, priorRows] =
+      await Promise.all([
+        /*
+        |--------------------------------------------------------------------------
+        | Machine type 18 mappings
+        |--------------------------------------------------------------------------
+        */
+
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            project_id,
+            vendor_id,
+
+            machine_id:
+              machine.id,
+
+            expected_in:
+              true,
+          },
+
+          select: {
+            id: true,
+            project_id: true,
+            cut_list_id: true,
+            box_id: true,
+            actual_in_at: true,
+
+            /*
+            |--------------------------------------------------------------------------
+            | IMPORTANT
+            |--------------------------------------------------------------------------
+            */
+            qty: true,
+            row_created_source: true,
+          },
+        }),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Machines before packaging
+        |--------------------------------------------------------------------------
+        */
+
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            project_id,
+            vendor_id,
+
+            expected_in:
+              true,
+
+            sequence_no: {
+              lt: machineSeq,
+            },
+          },
+
+          select: {
+            id: true,
+            project_id: true,
+            cut_list_id: true,
+            sequence_no: true,
+            actual_in_at: true,
+          },
+        }),
+      ]);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 3 — NORMAL / SCAN PACKING
+  |--------------------------------------------------------------------------
+  |
+  | Existing logic remains.
+  |
+  | Manual CutList items are excluded because their quantity comes
+  | directly from CutList.qty.
+  |--------------------------------------------------------------------------
+  */
+
+  const normalPackagingRows =
+    packagingRows.filter(
+      (row) =>
+        !manualCutListIds.has(
+          row.cut_list_id
+        )
+    );
+
+  const normalPriorRows =
+    priorRows.filter(
+      (row) =>
+        !manualCutListIds.has(
+          row.cut_list_id
+        )
+    );
+
+  /*
+  |--------------------------------------------------------------------------
+  | Group prior rows by CutList + sequence
+  |--------------------------------------------------------------------------
+  */
+
+  type PriorKey = string;
+
+  const priorBySeq =
+    new Map<
+      PriorKey,
+      typeof normalPriorRows
+    >();
+
+  for (
+    const row
+    of normalPriorRows
+  ) {
+    const sequence =
+      row.sequence_no ?? 0;
+
+    const key =
+      `${row.cut_list_id}-${sequence}`;
+
+    if (!priorBySeq.has(key)) {
+      priorBySeq.set(
+        key,
+        []
+      );
+    }
+
+    priorBySeq
+      .get(key)!
+      .push(row);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Highest previous machine sequence for each CutList
+  |--------------------------------------------------------------------------
+  */
+
+  const lastSeqMap =
+    new Map<number, number>();
+
+  for (
+    const row
+    of normalPriorRows
+  ) {
+    const sequence =
+      row.sequence_no ?? 0;
+
+    const existingSequence =
+      lastSeqMap.get(
+        row.cut_list_id
+      ) ?? -1;
+
+    if (
+      sequence >
+      existingSequence
+    ) {
+      lastSeqMap.set(
+        row.cut_list_id,
+        sequence
+      );
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Eligible qty at packaging machine
+  |--------------------------------------------------------------------------
+  |
+  | Previous machine mappings are still unit-wise.
+  |
+  | Example:
+  |
+  | qty = 10
+  | previous machine scanned = 7
+  |
+  | packaging total eligible = 7
+  |--------------------------------------------------------------------------
+  */
+
+  const eligibleUnitCount =
+    new Map<number, number>();
+
+  for (
+    const [
+      cutListId,
+      maxSequence,
+    ]
+    of lastSeqMap
+  ) {
+    const key =
+      `${cutListId}-${maxSequence}`;
+
+    const rows =
+      priorBySeq.get(key) ?? [];
+
+    const scannedQty =
+      rows.filter(
+        (row) =>
+          row.actual_in_at !==
+          null
+      ).length;
+
+    eligibleUnitCount.set(
+      cutListId,
+      scannedQty
+    );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Group normal packaging rows by CutList
+  |--------------------------------------------------------------------------
+  */
+
+  const packagingRowsByCutList =
+    new Map<
+      number,
+      typeof normalPackagingRows
+    >();
+
+  for (
+    const row
+    of normalPackagingRows
+  ) {
+    if (
+      !packagingRowsByCutList.has(
+        row.cut_list_id
+      )
+    ) {
+      packagingRowsByCutList.set(
+        row.cut_list_id,
+        []
+      );
+    }
+
+    packagingRowsByCutList
+      .get(row.cut_list_id)!
+      .push(row);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Normal packing totals
+  |--------------------------------------------------------------------------
+  */
+
+  let normalTotalItems = 0;
+  let normalPackedQty = 0;
+
+  for (
+    const [
+      cutListId,
+      rows,
+    ]
+    of packagingRowsByCutList
+  ) {
+    const hasPriorMachine =
+      lastSeqMap.has(
+        cutListId
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Total qty represented by packaging rows
+    |--------------------------------------------------------------------------
+    |
+    | Normally qty = 1.
+    |
+    | We use qty instead of rows.length so this remains compatible
+    | with quantity-based rows.
+    |--------------------------------------------------------------------------
+    */
+
+    const packagingTotalQty =
+      rows.reduce(
+        (
+          total,
+          row
+        ) =>
+          total +
+          Number(
+            row.qty ?? 1
+          ),
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Packed qty = mapping has box_id
+    |--------------------------------------------------------------------------
+    */
+
+    const packedQty =
+      rows.reduce(
+        (
+          total,
+          row
+        ) => {
+          if (
+            row.box_id ===
+            null
+          ) {
+            return total;
+          }
+
+          return (
+            total +
+            Number(
+              row.qty ?? 1
+            )
+          );
+        },
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | If prior workstation exists
+    |--------------------------------------------------------------------------
+    */
+
+    if (hasPriorMachine) {
+      const eligibleQty =
+        eligibleUnitCount.get(
+          cutListId
+        ) ?? 0;
+
+      normalTotalItems +=
+        eligibleQty;
+
+      /*
+      |--------------------------------------------------------------------------
+      | Cannot report more packed than eligible
+      |--------------------------------------------------------------------------
+      */
+
+      normalPackedQty +=
+        Math.min(
+          packedQty,
+          eligibleQty
+        );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Packaging-only item
+    |--------------------------------------------------------------------------
+    */
+
+    else {
+      normalTotalItems +=
+        packagingTotalQty;
+
+      normalPackedQty +=
+        Math.min(
+          packedQty,
+          packagingTotalQty
+        );
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 4 — MANUAL PACKING TOTALS
+  |--------------------------------------------------------------------------
+  |
+  | include_in_packing = true
+  | scan_pack_validate = false
+  |
+  | Total qty comes directly from CutList.
+  |--------------------------------------------------------------------------
+  */
+
+  let manualTotalItems = 0;
+  let manualPackedQty = 0;
+
+  /*
+  |--------------------------------------------------------------------------
+  | Group manual machine mappings
+  |--------------------------------------------------------------------------
+  */
+
+  const manualMappingsByCutList =
+    new Map<
+      number,
+      typeof packagingRows
+    >();
+
+  for (
+    const row
+    of packagingRows
+  ) {
+    /*
+    |--------------------------------------------------------------------------
+    | Only manual CutList items
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      !manualCutListIds.has(
+        row.cut_list_id
+      )
+    ) {
+      continue;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Only rows created by manual selection
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      row.row_created_source
+        ?.trim()
+        .toLowerCase() !==
+      "manual"
+    ) {
+      continue;
+    }
+
+    if (
+      !manualMappingsByCutList.has(
+        row.cut_list_id
+      )
+    ) {
+      manualMappingsByCutList.set(
+        row.cut_list_id,
+        []
+      );
+    }
+
+    manualMappingsByCutList
+      .get(row.cut_list_id)!
+      .push(row);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Calculate manual totals item by item
+  |--------------------------------------------------------------------------
+  */
+
+  for (
+    const cutList
+    of manualCutListItems
+  ) {
+    const totalQty =
+      Number(
+        cutList.qty ?? 0
+      );
+
+    manualTotalItems +=
+      totalQty;
+
+    const mappings =
+      manualMappingsByCutList.get(
+        cutList.id
+      ) ?? [];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sum qty across every box
+    |--------------------------------------------------------------------------
+    |
+    | Example:
+    |
+    | Box 1 = qty 3
+    | Box 2 = qty 2
+    |
+    | packed qty = 5
+    |--------------------------------------------------------------------------
+    */
+
+    const packedQty =
+      mappings.reduce(
+        (
+          total,
+          mapping
+        ) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Mapping without box is not packed
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            mapping.box_id ===
+            null
+          ) {
+            return total;
+          }
+
+          return (
+            total +
+            Number(
+              mapping.qty ?? 0
+            )
+          );
+        },
+        0
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Safety cap
+    |--------------------------------------------------------------------------
+    */
+
+    manualPackedQty +=
+      Math.min(
+        packedQty,
+        totalQty
+      );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 5 — Combine both packing systems
+  |--------------------------------------------------------------------------
+  */
+
+  const total_items =
+    normalTotalItems +
+    manualTotalItems;
+
+  const total_packed =
+    normalPackedQty +
+    manualPackedQty;
+
+  const total_unpacked =
+    Math.max(
+      total_items -
+        total_packed,
+      0
+    );
+
+  return {
+    total_items,
+    total_packed,
+    total_unpacked,
+
+    // Keep existing behaviour
+    total_weight: 0,
+  };
+};
+
 export const getProjectDetailsById = (id: number) => {
   return prisma.projectDetails.findUnique({
     where: { id },
@@ -483,7 +1150,7 @@ export const getProjectItemById = (id: number) => {
 };
 
 
-export const getProjectsByVendorIdService = async (vendorId: number) => {
+export const getProjectsByVendorIdService_old = async (vendorId: number) => {
 
   // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
@@ -752,6 +1419,1019 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       any_factory_out: anyFactoryOutSet,
     };
   });
+
+  return result;
+};
+
+export const getProjectsByVendorIdService = async (
+  vendorId: number
+) => {
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 1 — Fetch packaging machine
+  |--------------------------------------------------------------------------
+  */
+
+  const packagingMachine =
+    await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        machine_type_id: 18,
+      },
+
+      select: {
+        id: true,
+        sequence_no: true,
+      },
+
+      orderBy: {
+        id: "asc",
+      },
+    });
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 2 — Fetch projects
+  |--------------------------------------------------------------------------
+  */
+
+  const projects =
+    await prisma.projectMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+      },
+
+      select: {
+        id: true,
+        project_name: true,
+        vendor_id: true,
+        lead_id: true,
+        created_by: true,
+        project_status: true,
+        created_at: true,
+
+        createdByUser: {
+          select: {
+            id: true,
+            vendor_id: true,
+            user_name: true,
+            user_type_id: true,
+          },
+        },
+
+        details: {
+          select: {
+            id: true,
+            project_id: true,
+            vendor_id: true,
+            lead_id: true,
+            total_items: true,
+            total_packed: true,
+            total_unpacked: true,
+            start_date: true,
+            estimated_completion_date: true,
+            actual_completion_date: true,
+            room_name: true,
+          },
+        },
+      },
+
+      orderBy: {
+        id: "desc",
+      },
+    });
+
+  if (projects.length === 0) {
+    return [];
+  }
+
+  const allProjectIds =
+    projects.map(
+      (project) =>
+        project.id
+    );
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 3 — Fetch manual packing CutList items
+  |--------------------------------------------------------------------------
+  |
+  | These items do NOT have machine 18 rows initially.
+  |
+  | include_in_packing = true
+  | scan_pack_validate = false
+  |--------------------------------------------------------------------------
+  */
+
+  const [manualCutListItems, allBoxes] =
+    await Promise.all([
+      prisma.cutList.findMany({
+        where: {
+          vendor_id: vendorId,
+
+          project_id: {
+            in: allProjectIds,
+          },
+
+          include_in_packing: true,
+          scan_pack_validate: false,
+
+          status: "Active",
+        },
+
+        select: {
+          id: true,
+          project_id: true,
+          qty: true,
+          weight: true,
+        },
+      }),
+
+      /*
+      |--------------------------------------------------------------------------
+      | Boxes
+      |--------------------------------------------------------------------------
+      */
+
+      prisma.boxMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+
+          project_id: {
+            in: allProjectIds,
+          },
+
+          is_deleted: false,
+        },
+
+        select: {
+          project_id: true,
+          factory_out_at: true,
+          site_in_at: true,
+        },
+      }),
+    ]);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Manual CutList IDs
+  |--------------------------------------------------------------------------
+  */
+
+  const manualCutListIds =
+    new Set<number>(
+      manualCutListItems.map(
+        (item) =>
+          item.id
+      )
+    );
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 4 — Fetch machine mapping rows
+  |--------------------------------------------------------------------------
+  */
+
+  let priorRows: {
+    id: number;
+    project_id: number;
+    cut_list_id: number;
+    sequence_no: number;
+    actual_in_at: Date | null;
+  }[] = [];
+
+  let packagingRows: {
+    id: number;
+    project_id: number;
+    cut_list_id: number;
+    box_id: number | null;
+    actual_in_at: Date | null;
+    qty: number;
+    row_created_source: string | null;
+  }[] = [];
+
+  /*
+  |--------------------------------------------------------------------------
+  | Only query machine mappings if packaging machine exists
+  |--------------------------------------------------------------------------
+  */
+
+  if (packagingMachine) {
+    const pkgMachineId =
+      packagingMachine.id;
+
+    const pkgMachineSeq =
+      packagingMachine.sequence_no ??
+      0;
+
+    [
+      priorRows,
+      packagingRows,
+    ] =
+      await Promise.all([
+        /*
+        |--------------------------------------------------------------------------
+        | Previous workstation mappings
+        |--------------------------------------------------------------------------
+        */
+
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            vendor_id:
+              vendorId,
+
+            project_id: {
+              in:
+                allProjectIds,
+            },
+
+            sequence_no: {
+              lt:
+                pkgMachineSeq,
+            },
+
+            expected_in:
+              true,
+          },
+
+          select: {
+            id: true,
+            project_id: true,
+            cut_list_id: true,
+            sequence_no: true,
+            actual_in_at: true,
+          },
+        }),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Packaging machine mappings
+        |--------------------------------------------------------------------------
+        */
+
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            vendor_id:
+              vendorId,
+
+            project_id: {
+              in:
+                allProjectIds,
+            },
+
+            machine_id:
+              pkgMachineId,
+
+            expected_in:
+              true,
+          },
+
+          select: {
+            id: true,
+            project_id: true,
+            cut_list_id: true,
+            box_id: true,
+            actual_in_at: true,
+
+            /*
+            |--------------------------------------------------------------------------
+            | NEW quantity logic
+            |--------------------------------------------------------------------------
+            */
+
+            qty: true,
+            row_created_source: true,
+          },
+        }),
+      ]);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 5 — Separate normal packing from manual packing
+  |--------------------------------------------------------------------------
+  |
+  | Manual items must NOT enter the old row-count logic.
+  |--------------------------------------------------------------------------
+  */
+
+  const normalPriorRows =
+    priorRows.filter(
+      (row) =>
+        !manualCutListIds.has(
+          row.cut_list_id
+        )
+    );
+
+  const normalPackagingRows =
+    packagingRows.filter(
+      (row) =>
+        !manualCutListIds.has(
+          row.cut_list_id
+        )
+    );
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 6 — Build prior machine lookup for NORMAL items
+  |--------------------------------------------------------------------------
+  */
+
+  type PriorKey =
+    string;
+
+  const priorBySeq =
+    new Map<
+      PriorKey,
+      typeof normalPriorRows
+    >();
+
+  for (
+    const row
+    of normalPriorRows
+  ) {
+    const key: PriorKey =
+      `${row.project_id}-${row.cut_list_id}-${row.sequence_no}`;
+
+    if (
+      !priorBySeq.has(
+        key
+      )
+    ) {
+      priorBySeq.set(
+        key,
+        []
+      );
+    }
+
+    priorBySeq
+      .get(key)!
+      .push(row);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Find highest previous machine sequence
+  |--------------------------------------------------------------------------
+  */
+
+  const lastSeqMap =
+    new Map<
+      string,
+      number
+    >();
+
+  for (
+    const row
+    of normalPriorRows
+  ) {
+    const key =
+      `${row.project_id}-${row.cut_list_id}`;
+
+    const current =
+      lastSeqMap.get(
+        key
+      ) ?? -1;
+
+    if (
+      row.sequence_no >
+      current
+    ) {
+      lastSeqMap.set(
+        key,
+        row.sequence_no
+      );
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Count eligible units
+  |--------------------------------------------------------------------------
+  |
+  | Eligible = scanned at latest previous workstation.
+  |--------------------------------------------------------------------------
+  */
+
+  const eligibleUnitCount =
+    new Map<
+      string,
+      number
+    >();
+
+  for (
+    const [
+      projectCutListKey,
+      maxSequence,
+    ]
+    of lastSeqMap
+  ) {
+    const seqKey =
+      `${projectCutListKey}-${maxSequence}`;
+
+    const rows =
+      priorBySeq.get(
+        seqKey
+      ) ?? [];
+
+    const scanned =
+      rows.filter(
+        (row) =>
+          row.actual_in_at !==
+          null
+      ).length;
+
+    eligibleUnitCount.set(
+      projectCutListKey,
+      scanned
+    );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 7 — Group normal packaging rows by project and CutList
+  |--------------------------------------------------------------------------
+  */
+
+  const normalPackagingByProject =
+    new Map<
+      number,
+      Map<
+        number,
+        typeof normalPackagingRows
+      >
+    >();
+
+  for (
+    const row
+    of normalPackagingRows
+  ) {
+    if (
+      !normalPackagingByProject.has(
+        row.project_id
+      )
+    ) {
+      normalPackagingByProject.set(
+        row.project_id,
+        new Map()
+      );
+    }
+
+    const projectMap =
+      normalPackagingByProject.get(
+        row.project_id
+      )!;
+
+    if (
+      !projectMap.has(
+        row.cut_list_id
+      )
+    ) {
+      projectMap.set(
+        row.cut_list_id,
+        []
+      );
+    }
+
+    projectMap
+      .get(row.cut_list_id)!
+      .push(row);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 8 — Group manual CutList items by project
+  |--------------------------------------------------------------------------
+  */
+
+  const manualItemsByProject =
+    new Map<
+      number,
+      typeof manualCutListItems
+    >();
+
+  for (
+    const item
+    of manualCutListItems
+  ) {
+    if (
+      !manualItemsByProject.has(
+        item.project_id
+      )
+    ) {
+      manualItemsByProject.set(
+        item.project_id,
+        []
+      );
+    }
+
+    manualItemsByProject
+      .get(item.project_id)!
+      .push(item);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 9 — Calculate packed qty for manual items
+  |--------------------------------------------------------------------------
+  |
+  | Example:
+  |
+  | CutList qty = 10
+  |
+  | Box 1 mapping qty = 3
+  | Box 2 mapping qty = 2
+  |
+  | packed = 5
+  |--------------------------------------------------------------------------
+  */
+
+  const manualPackedQtyMap =
+    new Map<
+      number,
+      number
+    >();
+
+  for (
+    const row
+    of packagingRows
+  ) {
+    /*
+    |--------------------------------------------------------------------------
+    | Must be a manual CutList
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      !manualCutListIds.has(
+        row.cut_list_id
+      )
+    ) {
+      continue;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Only manually created rows
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      row.row_created_source
+        ?.trim()
+        .toLowerCase() !==
+      "manual"
+    ) {
+      continue;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | No box means not packed
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      row.box_id ===
+      null
+    ) {
+      continue;
+    }
+
+    const currentPackedQty =
+      manualPackedQtyMap.get(
+        row.cut_list_id
+      ) ?? 0;
+
+    manualPackedQtyMap.set(
+      row.cut_list_id,
+
+      currentPackedQty +
+        Number(
+          row.qty ?? 0
+        )
+    );
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 10 — Boxes by project
+  |--------------------------------------------------------------------------
+  */
+
+  const boxesByProject =
+    new Map<
+      number,
+      typeof allBoxes
+    >();
+
+  for (
+    const box
+    of allBoxes
+  ) {
+    if (
+      !boxesByProject.has(
+        box.project_id
+      )
+    ) {
+      boxesByProject.set(
+        box.project_id,
+        []
+      );
+    }
+
+    boxesByProject
+      .get(box.project_id)!
+      .push(box);
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 11 — Compute totals per project
+  |--------------------------------------------------------------------------
+  */
+
+  const result =
+    projects.map(
+      (project) => {
+        const pid =
+          project.id;
+
+        /*
+        |--------------------------------------------------------------------------
+        | NORMAL PACKING TOTALS
+        |--------------------------------------------------------------------------
+        */
+
+        let normalTotalItems =
+          0;
+
+        let normalTotalPacked =
+          0;
+
+        const projectPackagingRows =
+          normalPackagingByProject.get(
+            pid
+          ) ??
+          new Map();
+
+        for (
+          const [
+            cutListId,
+            rows,
+          ]
+          of projectPackagingRows
+        ) {
+          const clKey =
+            `${pid}-${cutListId}`;
+
+          const hasPriorMachine =
+            lastSeqMap.has(
+              clKey
+            );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Total quantity represented by machine 18 mappings
+          |--------------------------------------------------------------------------
+          */
+
+          const packagingTotalQty =
+            rows.reduce(
+              (
+                total,
+                row
+              ) =>
+                total +
+                Number(
+                  row.qty ??
+                    1
+                ),
+              0
+            );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Quantity actually inside boxes
+          |--------------------------------------------------------------------------
+          */
+
+          const packedQty =
+            rows.reduce(
+              (
+                total,
+                row
+              ) => {
+                if (
+                  row.box_id ===
+                  null
+                ) {
+                  return total;
+                }
+
+                return (
+                  total +
+                  Number(
+                    row.qty ??
+                      1
+                  )
+                );
+              },
+              0
+            );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Previous machine exists
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            hasPriorMachine
+          ) {
+            const eligible =
+              eligibleUnitCount.get(
+                clKey
+              ) ?? 0;
+
+            normalTotalItems +=
+              eligible;
+
+            normalTotalPacked +=
+              Math.min(
+                packedQty,
+                eligible
+              );
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Packaging only item
+          |--------------------------------------------------------------------------
+          */
+
+          else {
+            normalTotalItems +=
+              packagingTotalQty;
+
+            normalTotalPacked +=
+              Math.min(
+                packedQty,
+                packagingTotalQty
+              );
+          }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | MANUAL PACKING TOTALS
+        |--------------------------------------------------------------------------
+        */
+
+        let manualTotalItems =
+          0;
+
+        let manualTotalPacked =
+          0;
+
+        const manualItems =
+          manualItemsByProject.get(
+            pid
+          ) ?? [];
+
+        for (
+          const item
+          of manualItems
+        ) {
+          const totalQty =
+            Number(
+              item.qty ??
+                0
+            );
+
+          /*
+          |--------------------------------------------------------------------------
+          | Total always comes from CutList.qty
+          |--------------------------------------------------------------------------
+          */
+
+          manualTotalItems +=
+            totalQty;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Packed comes from SUM(CutListMachineMapping.qty)
+          |--------------------------------------------------------------------------
+          */
+
+          const packedQty =
+            manualPackedQtyMap.get(
+              item.id
+            ) ?? 0;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Never allow packed > total
+          |--------------------------------------------------------------------------
+          */
+
+          manualTotalPacked +=
+            Math.min(
+              packedQty,
+              totalQty
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | COMBINE NORMAL + MANUAL
+        |--------------------------------------------------------------------------
+        */
+
+        const totalItems =
+          normalTotalItems +
+          manualTotalItems;
+
+        const totalPacked =
+          normalTotalPacked +
+          manualTotalPacked;
+
+        const totalUnpacked =
+          Math.max(
+            0,
+            totalItems -
+              totalPacked
+          );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Dispatch status
+        |--------------------------------------------------------------------------
+        */
+
+        const projectBoxes =
+          boxesByProject.get(
+            pid
+          ) ?? [];
+
+        const anyFactoryOutNull =
+          projectBoxes.length ===
+            0 ||
+          projectBoxes.some(
+            (box) =>
+              box.factory_out_at ===
+              null
+          );
+
+        const allFactoryOutSet =
+          projectBoxes.length >
+            0 &&
+          projectBoxes.every(
+            (box) =>
+              box.factory_out_at !==
+              null
+          );
+
+        const anyFactoryOutSet =
+          projectBoxes.some(
+            (box) =>
+              box.factory_out_at !==
+              null
+          );
+
+        const anySiteInNull =
+          projectBoxes.some(
+            (box) =>
+              box.site_in_at ===
+              null
+          );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Latest Factory Out
+        |--------------------------------------------------------------------------
+        */
+
+        const latestFactoryOutAt =
+          anyFactoryOutNull
+            ? null
+            : projectBoxes.reduce<
+                Date | null
+              >(
+                (
+                  latest,
+                  box
+                ) => {
+                  if (
+                    !box.factory_out_at
+                  ) {
+                    return latest;
+                  }
+
+                  return (
+                    !latest ||
+                    box.factory_out_at >
+                      latest
+                      ? box.factory_out_at
+                      : latest
+                  );
+                },
+                null
+              );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Latest Site In
+        |--------------------------------------------------------------------------
+        */
+
+        const latestSiteInAt =
+          !allFactoryOutSet ||
+          anySiteInNull
+            ? null
+            : projectBoxes.reduce<
+                Date | null
+              >(
+                (
+                  latest,
+                  box
+                ) => {
+                  if (
+                    !box.site_in_at
+                  ) {
+                    return latest;
+                  }
+
+                  return (
+                    !latest ||
+                    box.site_in_at >
+                      latest
+                      ? box.site_in_at
+                      : latest
+                  );
+                },
+                null
+              );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Final response
+        |--------------------------------------------------------------------------
+        */
+
+        return {
+          id:
+            project.id,
+
+          project_name:
+            project.project_name,
+
+          vendor_id:
+            project.vendor_id,
+
+          lead_id:
+            project.lead_id,
+
+          created_by:
+            project.created_by,
+
+          project_status:
+            project.project_status,
+
+          created_at:
+            project.created_at,
+
+          createdByUser:
+            project.createdByUser,
+
+          details:
+            project.details,
+
+          aggregatedTotals: {
+            total_items:
+              totalItems,
+
+            total_packed:
+              totalPacked,
+
+            total_unpacked:
+              totalUnpacked,
+          },
+
+          factory_out_at:
+            latestFactoryOutAt,
+
+          site_in_at:
+            latestSiteInAt,
+
+          all_factory_out:
+            allFactoryOutSet,
+
+          any_factory_out:
+            anyFactoryOutSet,
+        };
+      }
+    );
 
   return result;
 };
@@ -2387,13 +4067,17 @@ export const handelItems = async (
     |--------------------------------------------------------------------------
     */
 
-    const categoryMappings = await prisma.projectCategoriesMaster.findMany({
+    const categoryMappingsRaw = await prisma.projectCategoriesMaster.findMany({
       where: {
         vendor_id: vendor.id,
         status: "Yes",
       },
       select: {
+        id: true,
         category_name: true,
+        use_in_assembled_packing: true,
+        include_in_packing: true,
+        scan_pack_validate: true,
         projectCategoriesMasterVendorMapping: {
           select: {
             project_categories_type_master_id: true,
@@ -2402,15 +4086,38 @@ export const handelItems = async (
       },
     });
 
+    const categoryMappings = categoryMappingsRaw.map((category) => ({
+      ...category,
+      category_name: category.category_name.trim(),
+    }));
+
+    type CategoryConfig = {
+      id: number;
+      use_in_assembled_packing: boolean;
+      include_in_packing: boolean;
+      scan_pack_validate: boolean;
+    };
+
     const categoryTypeMap = new Map<string, number[]>();
+    const categoryMasterMap = new Map<string, CategoryConfig>();
 
     for (const category of categoryMappings) {
+      const categoryKey = category.category_name.trim().toLowerCase();
+
       const typeIds = category.projectCategoriesMasterVendorMapping.map(
         (mapping) => mapping.project_categories_type_master_id
       );
 
-      categoryTypeMap.set(category.category_name.trim().toLowerCase(), typeIds);
+      categoryTypeMap.set(categoryKey, typeIds);
+      categoryMasterMap.set(categoryKey, {
+        id: category.id,
+        use_in_assembled_packing: category.use_in_assembled_packing === true,
+        include_in_packing: category.include_in_packing === true,
+        scan_pack_validate: category.scan_pack_validate === true,
+      });
     }
+
+    // console.log("categoryMasterMap", categoryMasterMap); return;
 
     /*
     |--------------------------------------------------------------------------
@@ -2423,6 +4130,7 @@ export const handelItems = async (
     const machines = await prisma.machineMaster.findMany({
       where: {
         vendor_id: vendor.id,
+        status: "ACTIVE",
         machine_type_id: {
           in: enabledMachineTypeIds,
         },
@@ -2560,6 +4268,29 @@ export const handelItems = async (
           const hasEdgeBanding =
             !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
 
+          const itemCategoryName = (item.categoryName ?? "")
+            .trim()
+            .toLowerCase();
+
+          const categoryConfig = categoryMasterMap.get(itemCategoryName) ?? null;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Packaging machine type 18 category rule
+          |--------------------------------------------------------------------------
+          | If category does not exist, keep old/default behaviour.
+          | If category exists:
+          | - include_in_packing = false => do not create packaging machine 18 row.
+          | - include_in_packing = true and scan_pack_validate = true => create packaging 18 row.
+          | - include_in_packing = true and scan_pack_validate = false => only CutList stores item;
+          |   no packaging machine 18 row will be created.
+          |--------------------------------------------------------------------------
+          */
+          const shouldInsertPackagingMachineMapping =
+            !categoryConfig ||
+            (categoryConfig.include_in_packing === true &&
+              categoryConfig.scan_pack_validate === true);
+
           const row = await tx.cutList.create({
             data: {
               project_id: project.id,
@@ -2582,6 +4313,13 @@ export const handelItems = async (
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
               category_name: item.categoryName || null,
+              category_id: categoryConfig?.id ?? null,
+              use_in_assembled_packing:
+                categoryConfig?.use_in_assembled_packing ?? null,
+              include_in_packing:
+                categoryConfig?.include_in_packing ?? null,
+              scan_pack_validate:
+                categoryConfig?.scan_pack_validate ?? null,
               procurement: item.procurement || null,
               weight: excelRowWeight,
             },
@@ -2599,10 +4337,6 @@ export const handelItems = async (
             },
           });
 
-          const itemCategoryName = (item.categoryName ?? "")
-            .trim()
-            .toLowerCase();
-
           const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
 
           const hasType4 = categoryTypeIds.includes(4);
@@ -2615,112 +4349,118 @@ export const handelItems = async (
 
           /*
           |--------------------------------------------------------------------------
-          | Type 4 — Skip machine mapping
+          | Existing categoryTypeIds logic for non-packaging machines only
+          |--------------------------------------------------------------------------
+          | IMPORTANT: machine type 18 is NOT controlled by categoryTypeIds.
           |--------------------------------------------------------------------------
           */
 
-          if (hasType4) {
-            continue;
+          if (!hasType4) {
+            /*
+            |------------------------------------------------------------------------
+            | Type 3 — Scan validation machine 17 only
+            |------------------------------------------------------------------------
+            */
+            if (hasType3 && !isNormalFlow) {
+              if (isScanPackEnabled) {
+                const scanMachine = getMachine(17, true);
+
+                if (scanMachine) {
+                  pushMachineMappingRows({
+                    cutListId: row.id,
+                    machine: scanMachine,
+                    quantity,
+                    perItemWeight,
+                  });
+                }
+              }
+            } else {
+              /*
+              |----------------------------------------------------------------------
+              | Track & Trace flow — machine types 3, 7, 11
+              |----------------------------------------------------------------------
+              */
+              if (isTrackTraceEnabled) {
+                if (hasEdgeBanding) {
+                  const edgeBandingMachine = getMachine(11, true);
+
+                  if (edgeBandingMachine) {
+                    pushMachineMappingRows({
+                      cutListId: row.id,
+                      machine: edgeBandingMachine,
+                      quantity,
+                      perItemWeight,
+                    });
+                  }
+                }
+
+                const cuttingMachine = getMachine(3, true);
+
+                if (cuttingMachine) {
+                  pushMachineMappingRows({
+                    cutListId: row.id,
+                    machine: cuttingMachine,
+                    quantity,
+                    perItemWeight,
+                  });
+                }
+
+                if (Number(item.l3) > 9) {
+                  const cncMachine = getMachine(7, true);
+
+                  if (cncMachine) {
+                    pushMachineMappingRows({
+                      cutListId: row.id,
+                      machine: cncMachine,
+                      quantity,
+                      perItemWeight,
+                    });
+                  }
+                }
+              }
+
+              /*
+              |----------------------------------------------------------------------
+              | Existing ScanPack validation flow — machine type 17
+              |----------------------------------------------------------------------
+              */
+              if (isScanPackEnabled) {
+                const scanMachine = getMachine(17, true);
+
+                if (scanMachine) {
+                  pushMachineMappingRows({
+                    cutListId: row.id,
+                    machine: scanMachine,
+                    quantity,
+                    perItemWeight,
+                  });
+                }
+              }
+            }
           }
 
           /*
           |--------------------------------------------------------------------------
-          | Type 3 — Only ScanPack machine types 17 and 18
+          | Packaging machine type 18 — ProjectCategoriesMaster ONLY
+          |--------------------------------------------------------------------------
+          | categoryTypeIds / hasType4 / hasType3 do NOT affect packaging.
+          |
+          | Category not found:
+          |   -> keep old/default behaviour and create packaging mapping.
+          |
+          | Category found:
+          |   include_in_packing = false
+          |     -> no machine 18 mapping
+          |
+          |   include_in_packing = true && scan_pack_validate = true
+          |     -> create machine 18 mapping
+          |
+          |   include_in_packing = true && scan_pack_validate = false
+          |     -> no machine 18 mapping; item remains only in CutList for packing.
           |--------------------------------------------------------------------------
           */
-
-          if (hasType3 && !isNormalFlow) {
-            if (isScanPackEnabled) {
-              const scanMachine = getMachine(17,true);
-              const packMachine = getMachine(18,true);
-
-              if (scanMachine) {
-                pushMachineMappingRows({
-                  cutListId: row.id,
-                  machine: scanMachine,
-                  quantity,
-                  perItemWeight,
-                });
-              }
-
-              if (packMachine) {
-                pushMachineMappingRows({
-                  cutListId: row.id,
-                  machine: packMachine,
-                  quantity,
-                  perItemWeight,
-                });
-              }
-            }
-
-            continue;
-          }
-
-          /*
-          |--------------------------------------------------------------------------
-          | Track & Trace flow — machine types 3, 7, 11
-          |--------------------------------------------------------------------------
-          */
-
-          if (isTrackTraceEnabled) {
-            if (hasEdgeBanding) {
-              const edgeBandingMachine = getMachine(11,true);
-
-              if (edgeBandingMachine) {
-                pushMachineMappingRows({
-                  cutListId: row.id,
-                  machine: edgeBandingMachine,
-                  quantity,
-                  perItemWeight,
-                });
-              }
-
-
-            }
-
-            const cuttingMachine = getMachine(3, true);
-
-            if (cuttingMachine) {
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: cuttingMachine,
-                quantity,
-                perItemWeight,
-              });
-            }
-
-            if (Number(item.l3) > 9) {
-              const cncMachine = getMachine(7, true);
-
-              if (cncMachine) {
-                pushMachineMappingRows({
-                  cutListId: row.id,
-                  machine: cncMachine,
-                  quantity,
-                  perItemWeight,
-                });
-              }
-            }
-          }
-
-          /*
-          |--------------------------------------------------------------------------
-          | ScanPack flow — machine types 17 and 18
-          |--------------------------------------------------------------------------
-          */
-
-          if (isScanPackEnabled) {
-            const scanMachine = getMachine(17,true);
-            const packMachine = getMachine(18,true);
-
-            if (scanMachine) {
-              pushMachineMappingRows({
-                cutListId: row.id,
-                machine: scanMachine,
-                quantity,
-                perItemWeight,
-              });
-            }
+          if (isScanPackEnabled && shouldInsertPackagingMachineMapping) {
+            const packMachine = getMachine(18, true);
 
             if (packMachine) {
               pushMachineMappingRows({
@@ -2826,3 +4566,5 @@ export const handelItems = async (
     };
   }
 };
+
+

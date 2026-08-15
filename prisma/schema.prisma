@@ -1234,7 +1234,7 @@ model LeadRequirementMaterialMapping {
   createdBy               UserMaster                @relation("LeadReqMatCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   product                 ProductMaster             @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  ProductTypeMaster       ProductTypeMaster?         @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  ProductTypeMaster       ProductTypeMaster?        @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   unit                    UnitMaster?               @relation(fields: [unit_id], references: [id])
   updatedBy               UserMaster?               @relation("LeadReqMatUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -2905,14 +2905,20 @@ model CutList {
   group_name            String?
   procurement           String?
   weight                Float                   @default(0)
+  category_id           Int?
+  use_in_assembled_packing            Boolean?
+  include_in_packing                  Boolean?
+  scan_pack_validate                  Boolean?
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   project               ProjectMaster           @relation(fields: [project_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   cutListMachineMapping CutListMachineMapping[]
   completionPhotos      DefectCompletionPhoto[]
   defectedItems         DefectedItem[]
+  category ProjectCategoriesMaster? @relation("CutListCategory", fields: [category_id], references: [id], onDelete: SetNull)
 
   @@index([unique_code])
+  @@index([category_id])
 }
 
 model CutListMachineMapping {
@@ -2937,6 +2943,9 @@ model CutListMachineMapping {
   site_in_at       DateTime?
   site_in_by       Int?
   weight           Float                   @default(0)
+  qty              Int @default(1)
+  received_qty     Int?
+  row_created_source String?
   boxMaster        BoxMaster?              @relation(fields: [box_id], references: [id])
   cut_list         CutList                 @relation(fields: [cut_list_id], references: [id])
   operator         UserMaster?             @relation(fields: [in_operator], references: [id])
@@ -2997,12 +3006,14 @@ model OrderLoginPoFileMapping {
 }
 
 model MachineTypeMaster {
-  id            Int                     @id @default(autoincrement())
-  machine_type  String
-  active        MachineTypeMasterStatus @default(YES)
-  created_at    DateTime                @default(now())
-  updated_at    DateTime                @updatedAt
-  machineMaster MachineMaster[]
+  id               Int                     @id @default(autoincrement())
+  machine_type     String
+  is_scanandpack   Boolean                 @default(false)
+  is_trackandtrace Boolean                 @default(false)
+  active           MachineTypeMasterStatus @default(YES)
+  created_at       DateTime                @default(now())
+  updated_at       DateTime                @updatedAt
+  machineMaster    MachineMaster[]
 }
 
 model VendorSettingKey {
@@ -3344,9 +3355,9 @@ model ProjectCategoriesMaster {
   created_by                           Int?
   parent_id                            Int?
   updated_by                           Int?
-  use_in_assembled_packing            Boolean         @default(false)
-  include_in_packing                  Boolean         @default(false) // check if any item under this category is applicable for packing 
-  scan_pack_validate                  Boolean         @default(false) // check if any item under this category is applicable for scan and pack 
+  use_in_assembled_packing             Boolean                                @default(false)
+  include_in_packing                   Boolean                                @default(false) // check if any item under this category is applicable for packing 
+  scan_pack_validate                   Boolean                                @default(false) // check if any item under this category is applicable for scan and pack 
   //if scan_pack_validate is true and include_in_packing is true then scan the item and pack 
   // if scan_pack_validate is false and include_in_packing is true that mean this item is should be addedin box without scanning
   // if scan_pack_validate is false and include_in_packing is false that mean this item is not applicable for packing
@@ -3358,6 +3369,7 @@ model ProjectCategoriesMaster {
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
+  cutLists CutList[] @relation("CutListCategory")
 
   @@index([parent_id])
 }
