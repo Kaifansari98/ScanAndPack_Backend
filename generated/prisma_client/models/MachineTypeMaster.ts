@@ -37,6 +37,8 @@ export type MachineTypeMasterSumAggregateOutputType = {
 export type MachineTypeMasterMinAggregateOutputType = {
   id: number | null
   machine_type: string | null
+  is_scanandpack: boolean | null
+  is_trackandtrace: boolean | null
   active: $Enums.MachineTypeMasterStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -45,6 +47,8 @@ export type MachineTypeMasterMinAggregateOutputType = {
 export type MachineTypeMasterMaxAggregateOutputType = {
   id: number | null
   machine_type: string | null
+  is_scanandpack: boolean | null
+  is_trackandtrace: boolean | null
   active: $Enums.MachineTypeMasterStatus | null
   created_at: Date | null
   updated_at: Date | null
@@ -53,6 +57,8 @@ export type MachineTypeMasterMaxAggregateOutputType = {
 export type MachineTypeMasterCountAggregateOutputType = {
   id: number
   machine_type: number
+  is_scanandpack: number
+  is_trackandtrace: number
   active: number
   created_at: number
   updated_at: number
@@ -71,6 +77,8 @@ export type MachineTypeMasterSumAggregateInputType = {
 export type MachineTypeMasterMinAggregateInputType = {
   id?: true
   machine_type?: true
+  is_scanandpack?: true
+  is_trackandtrace?: true
   active?: true
   created_at?: true
   updated_at?: true
@@ -79,6 +87,8 @@ export type MachineTypeMasterMinAggregateInputType = {
 export type MachineTypeMasterMaxAggregateInputType = {
   id?: true
   machine_type?: true
+  is_scanandpack?: true
+  is_trackandtrace?: true
   active?: true
   created_at?: true
   updated_at?: true
@@ -87,6 +97,8 @@ export type MachineTypeMasterMaxAggregateInputType = {
 export type MachineTypeMasterCountAggregateInputType = {
   id?: true
   machine_type?: true
+  is_scanandpack?: true
+  is_trackandtrace?: true
   active?: true
   created_at?: true
   updated_at?: true
@@ -182,6 +194,8 @@ export type MachineTypeMasterGroupByArgs<ExtArgs extends runtime.Types.Extension
 export type MachineTypeMasterGroupByOutputType = {
   id: number
   machine_type: string
+  is_scanandpack: boolean
+  is_trackandtrace: boolean
   active: $Enums.MachineTypeMasterStatus
   created_at: Date
   updated_at: Date
@@ -213,6 +227,8 @@ export type MachineTypeMasterWhereInput = {
   NOT?: Prisma.MachineTypeMasterWhereInput | Prisma.MachineTypeMasterWhereInput[]
   id?: Prisma.IntFilter<"MachineTypeMaster"> | number
   machine_type?: Prisma.StringFilter<"MachineTypeMaster"> | string
+  is_scanandpack?: Prisma.BoolFilter<"MachineTypeMaster"> | boolean
+  is_trackandtrace?: Prisma.BoolFilter<"MachineTypeMaster"> | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFilter<"MachineTypeMaster"> | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFilter<"MachineTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"MachineTypeMaster"> | Date | string
@@ -222,6 +238,8 @@ export type MachineTypeMasterWhereInput = {
 export type MachineTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   machine_type?: Prisma.SortOrder
+  is_scanandpack?: Prisma.SortOrder
+  is_trackandtrace?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -234,6 +252,8 @@ export type MachineTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MachineTypeMasterWhereInput[]
   NOT?: Prisma.MachineTypeMasterWhereInput | Prisma.MachineTypeMasterWhereInput[]
   machine_type?: Prisma.StringFilter<"MachineTypeMaster"> | string
+  is_scanandpack?: Prisma.BoolFilter<"MachineTypeMaster"> | boolean
+  is_trackandtrace?: Prisma.BoolFilter<"MachineTypeMaster"> | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFilter<"MachineTypeMaster"> | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFilter<"MachineTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"MachineTypeMaster"> | Date | string
@@ -243,6 +263,8 @@ export type MachineTypeMasterWhereUniqueInput = Prisma.AtLeast<{
 export type MachineTypeMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   machine_type?: Prisma.SortOrder
+  is_scanandpack?: Prisma.SortOrder
+  is_trackandtrace?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -259,6 +281,8 @@ export type MachineTypeMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.MachineTypeMasterScalarWhereWithAggregatesInput | Prisma.MachineTypeMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"MachineTypeMaster"> | number
   machine_type?: Prisma.StringWithAggregatesFilter<"MachineTypeMaster"> | string
+  is_scanandpack?: Prisma.BoolWithAggregatesFilter<"MachineTypeMaster"> | boolean
+  is_trackandtrace?: Prisma.BoolWithAggregatesFilter<"MachineTypeMaster"> | boolean
   active?: Prisma.EnumMachineTypeMasterStatusWithAggregatesFilter<"MachineTypeMaster"> | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeWithAggregatesFilter<"MachineTypeMaster"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"MachineTypeMaster"> | Date | string
@@ -266,6 +290,8 @@ export type MachineTypeMasterScalarWhereWithAggregatesInput = {
 
 export type MachineTypeMasterCreateInput = {
   machine_type: string
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: $Enums.MachineTypeMasterStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -275,6 +301,8 @@ export type MachineTypeMasterCreateInput = {
 export type MachineTypeMasterUncheckedCreateInput = {
   id?: number
   machine_type: string
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: $Enums.MachineTypeMasterStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -283,6 +311,8 @@ export type MachineTypeMasterUncheckedCreateInput = {
 
 export type MachineTypeMasterUpdateInput = {
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -292,6 +322,8 @@ export type MachineTypeMasterUpdateInput = {
 export type MachineTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -301,6 +333,8 @@ export type MachineTypeMasterUncheckedUpdateInput = {
 export type MachineTypeMasterCreateManyInput = {
   id?: number
   machine_type: string
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: $Enums.MachineTypeMasterStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -308,6 +342,8 @@ export type MachineTypeMasterCreateManyInput = {
 
 export type MachineTypeMasterUpdateManyMutationInput = {
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -316,6 +352,8 @@ export type MachineTypeMasterUpdateManyMutationInput = {
 export type MachineTypeMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -329,6 +367,8 @@ export type MachineTypeMasterNullableScalarRelationFilter = {
 export type MachineTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   machine_type?: Prisma.SortOrder
+  is_scanandpack?: Prisma.SortOrder
+  is_trackandtrace?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -341,6 +381,8 @@ export type MachineTypeMasterAvgOrderByAggregateInput = {
 export type MachineTypeMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   machine_type?: Prisma.SortOrder
+  is_scanandpack?: Prisma.SortOrder
+  is_trackandtrace?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -349,6 +391,8 @@ export type MachineTypeMasterMaxOrderByAggregateInput = {
 export type MachineTypeMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   machine_type?: Prisma.SortOrder
+  is_scanandpack?: Prisma.SortOrder
+  is_trackandtrace?: Prisma.SortOrder
   active?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -380,6 +424,8 @@ export type EnumMachineTypeMasterStatusFieldUpdateOperationsInput = {
 
 export type MachineTypeMasterCreateWithoutMachineMasterInput = {
   machine_type: string
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: $Enums.MachineTypeMasterStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -388,6 +434,8 @@ export type MachineTypeMasterCreateWithoutMachineMasterInput = {
 export type MachineTypeMasterUncheckedCreateWithoutMachineMasterInput = {
   id?: number
   machine_type: string
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: $Enums.MachineTypeMasterStatus
   created_at?: Date | string
   updated_at?: Date | string
@@ -411,6 +459,8 @@ export type MachineTypeMasterUpdateToOneWithWhereWithoutMachineMasterInput = {
 
 export type MachineTypeMasterUpdateWithoutMachineMasterInput = {
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -419,6 +469,8 @@ export type MachineTypeMasterUpdateWithoutMachineMasterInput = {
 export type MachineTypeMasterUncheckedUpdateWithoutMachineMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   machine_type?: Prisma.StringFieldUpdateOperationsInput | string
+  is_scanandpack?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_trackandtrace?: Prisma.BoolFieldUpdateOperationsInput | boolean
   active?: Prisma.EnumMachineTypeMasterStatusFieldUpdateOperationsInput | $Enums.MachineTypeMasterStatus
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -458,6 +510,8 @@ export type MachineTypeMasterCountOutputTypeCountMachineMasterArgs<ExtArgs exten
 export type MachineTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   machine_type?: boolean
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -468,6 +522,8 @@ export type MachineTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
 export type MachineTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   machine_type?: boolean
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -476,6 +532,8 @@ export type MachineTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.T
 export type MachineTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   machine_type?: boolean
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -484,12 +542,14 @@ export type MachineTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.T
 export type MachineTypeMasterSelectScalar = {
   id?: boolean
   machine_type?: boolean
+  is_scanandpack?: boolean
+  is_trackandtrace?: boolean
   active?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type MachineTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "machine_type" | "active" | "created_at" | "updated_at", ExtArgs["result"]["machineTypeMaster"]>
+export type MachineTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "machine_type" | "is_scanandpack" | "is_trackandtrace" | "active" | "created_at" | "updated_at", ExtArgs["result"]["machineTypeMaster"]>
 export type MachineTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   machineMaster?: boolean | Prisma.MachineTypeMaster$machineMasterArgs<ExtArgs>
   _count?: boolean | Prisma.MachineTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
@@ -505,6 +565,8 @@ export type $MachineTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     machine_type: string
+    is_scanandpack: boolean
+    is_trackandtrace: boolean
     active: $Enums.MachineTypeMasterStatus
     created_at: Date
     updated_at: Date
@@ -934,6 +996,8 @@ export interface Prisma__MachineTypeMasterClient<T, Null = never, ExtArgs extend
 export interface MachineTypeMasterFieldRefs {
   readonly id: Prisma.FieldRef<"MachineTypeMaster", 'Int'>
   readonly machine_type: Prisma.FieldRef<"MachineTypeMaster", 'String'>
+  readonly is_scanandpack: Prisma.FieldRef<"MachineTypeMaster", 'Boolean'>
+  readonly is_trackandtrace: Prisma.FieldRef<"MachineTypeMaster", 'Boolean'>
   readonly active: Prisma.FieldRef<"MachineTypeMaster", 'MachineTypeMasterStatus'>
   readonly created_at: Prisma.FieldRef<"MachineTypeMaster", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"MachineTypeMaster", 'DateTime'>

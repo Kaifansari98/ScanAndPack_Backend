@@ -4484,6 +4484,9 @@ export const getProjectCategories = async (vendor_id: number) => {
         },
         status: true,
         created_at: true,
+        include_in_packing: true,
+        scan_pack_validate: true,
+        use_in_assembled_packing: true,
         projectCategoriesMasterVendorMapping: {
           select: {
             id: true,
@@ -4524,9 +4527,15 @@ export const createProjectCategory = async (
   category_name: string,
   type_ids: number[],
   created_by: number,
-  parent_id?: number | null
+  parent_id?: number | null,
+  include_in_packing: boolean = false,
+  scan_pack_validate: boolean = false,
+  use_in_assembled_packing: boolean = false
 ) => {
   try {
+    const finalScanPackValidate = Boolean(scan_pack_validate);
+    const finalIncludeInPacking = finalScanPackValidate ? true : Boolean(include_in_packing);
+
     const result = await prisma.$transaction(async (tx) => {
       const category = await tx.projectCategoriesMaster.create({
         data: {
@@ -4536,6 +4545,9 @@ export const createProjectCategory = async (
           parent_id: parent_id ? Number(parent_id) : null,
           created_by,
           updated_by: created_by,
+          include_in_packing: finalIncludeInPacking,
+          scan_pack_validate: finalScanPackValidate,
+          use_in_assembled_packing: Boolean(use_in_assembled_packing),
         },
       });
 
@@ -4569,18 +4581,37 @@ export const updateProjectCategory = async (
   status: "Yes" | "No",
   type_ids: number[],
   updated_by: number,
-  parent_id?: number | null
+  parent_id?: number | null,
+  include_in_packing?: boolean,
+  scan_pack_validate?: boolean,
+  use_in_assembled_packing?: boolean
 ) => {
   try {
     await prisma.$transaction(async (tx) => {
+      const updateData: any = {
+        category_name,
+        status,
+        parent_id: parent_id ? Number(parent_id) : null,
+        updated_by,
+      };
+
+      if (include_in_packing !== undefined) {
+        updateData.include_in_packing = Boolean(include_in_packing);
+      }
+      if (scan_pack_validate !== undefined) {
+        updateData.scan_pack_validate = Boolean(scan_pack_validate);
+      }
+      // Rule: If scan_pack_validate is true, include_in_packing MUST be true
+      if (updateData.scan_pack_validate === true) {
+        updateData.include_in_packing = true;
+      }
+      if (use_in_assembled_packing !== undefined) {
+        updateData.use_in_assembled_packing = Boolean(use_in_assembled_packing);
+      }
+
       await tx.projectCategoriesMaster.update({
         where: { id },
-        data: {
-          category_name,
-          status,
-          parent_id: parent_id ? Number(parent_id) : null,
-          updated_by,
-        },
+        data: updateData,
       });
 
       // Delete existing mappings and re-insert (clean replace)
