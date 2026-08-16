@@ -1095,6 +1095,7 @@ export const generateBoxPdfService = async (
                 unique_code: true,
                 material_details: true,
                 weight: true,
+                qty: true,
                 length: true,
                 width: true,
                 thickness: true,
@@ -1161,6 +1162,8 @@ export const generateBoxPdfService = async (
         }
       >();
 
+      console.log("mappingRows",mappingRows);
+
     for (const mapping of mappingRows) {
       const cutList =
         mapping.cut_list;
@@ -1169,10 +1172,21 @@ export const generateBoxPdfService = async (
         continue;
       }
 
-      const itemWeight =
+      const cutListWeight =
         Number(
           cutList.weight || 0
         );
+
+      const cutListQuantity =
+        Number(
+          cutList.qty || 0
+        );
+
+      const unitWeight =
+        cutListQuantity > 0
+          ? cutListWeight /
+            cutListQuantity
+          : 0;
 
       const existingItem =
         itemMap.get(
@@ -1181,7 +1195,9 @@ export const generateBoxPdfService = async (
 
       if (existingItem) {
         existingItem.quantity += 1;
-        existingItem.total_weight += itemWeight;
+        existingItem.total_weight =
+          unitWeight *
+          existingItem.quantity;
       } else {
         itemMap.set(
           cutList.id,
@@ -1195,9 +1211,9 @@ export const generateBoxPdfService = async (
             length: cutList.length,
             width: cutList.width,
             thickness: cutList.thickness,
-            unit_weight: itemWeight,
+            unit_weight: unitWeight,
             quantity: 1,
-            total_weight: itemWeight,
+            total_weight: unitWeight,
           }
         );
       }
@@ -2721,6 +2737,7 @@ color: #111827;
     );
   }
 };
+
 
 
 
@@ -5833,7 +5850,7 @@ export const generateProjectFullReportService = async (
                     length: cutList.length,
                     width: cutList.width,
                     thickness: cutList.thickness,
-                    unit_weight: itemWeight,
+                    unit_weight: cutList.weight,
                     quantity: 1,
                     total_weight: itemWeight,
                   }
