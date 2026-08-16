@@ -1926,6 +1926,11 @@ padding-top:25px;
    margin-bottom: 0.5mm;
 }
 
+.filed-value-item-no{
+font-size: 18px !important;
+line-height: 12px;
+}
+
 .section-separator {
   height: 1px;
   background: #4b5563;
@@ -1952,7 +1957,7 @@ padding-top:25px;
 
 .project-value{
 color: #111827;
-  font-size: 8pt;
+  font-size: 12pt;
   line-height: 6px;
   font-weight: 600;
   overflow-wrap: anywhere;
@@ -2523,7 +2528,7 @@ color: #111827;
           ITEM NO.
         </div>
 
-        <div class="field-value">
+        <div class="field-value filed-value-item-no">
           ${escapeHtml(
       itemNo
     )}
