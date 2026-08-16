@@ -5789,6 +5789,7 @@ export const generateProjectFullReportService = async (
                       unique_code: true,
                       material_details: true,
                       weight: true,
+                      qty: true,
                       length: true,
                       width: true,
                       thickness: true,
@@ -5828,11 +5829,23 @@ export const generateProjectFullReportService = async (
                 continue;
               }
 
-              const itemWeight =
+              const cutListWeight =
                 Number(
                   cutList.weight ||
                   0
                 );
+
+              const cutListQuantity =
+                Number(
+                  cutList.qty ||
+                  0
+                );
+
+              const unitWeight =
+                cutListQuantity > 0
+                  ? cutListWeight /
+                    cutListQuantity
+                  : 0;
 
               const existingItem =
                 itemMap.get(
@@ -5841,7 +5854,9 @@ export const generateProjectFullReportService = async (
 
               if (existingItem) {
                 existingItem.quantity += 1;
-                existingItem.total_weight += itemWeight;
+                existingItem.total_weight =
+                  unitWeight *
+                  existingItem.quantity;
               } else {
                 itemMap.set(
                   cutList.id,
@@ -5855,9 +5870,9 @@ export const generateProjectFullReportService = async (
                     length: cutList.length,
                     width: cutList.width,
                     thickness: cutList.thickness,
-                    unit_weight: cutList.weight,
+                    unit_weight: unitWeight,
                     quantity: 1,
-                    total_weight: itemWeight,
+                    total_weight: unitWeight,
                   }
                 );
               }
@@ -6756,7 +6771,7 @@ export const generateProjectFullReportService = async (
                         ITEM NO.
                       </div>
 
-                      <div class="field-value">
+                      <div class="field-value filed-value-item-no">
                         ${escapeHtml(
               box.item_no
             )}
@@ -6769,17 +6784,19 @@ export const generateProjectFullReportService = async (
                   <!-- ============================== -->
                   <!-- PRODUCT TITLE                  -->
                   <!-- ============================== -->
-                  <div class="product-title">
+                  <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
                     PRODUCT :
+                    <span class="project-value">
                     ${escapeHtml(
               box.product_name
             )}
+                    </span>
                   </div>
 
                   <!-- ============================== -->
                   <!-- COMPONENTS TABLE               -->
                   <!-- ============================== -->
-                  <table class="component-table">
+                  <table class="component-table" style="border: 1px solid #000 !important;">
                     <colgroup>
                       <col class="col-code" />
                       <col class="col-component" />
@@ -6792,7 +6809,7 @@ export const generateProjectFullReportService = async (
                       <tr class="table-head-main">
                         <th class="blank-head"></th>
 
-                        <th class="component-head">
+                        <th class="component-head fs-10">
                           COMPONENTS
                         </th>
 
@@ -6800,30 +6817,31 @@ export const generateProjectFullReportService = async (
 
                         <th
                           colspan="2"
-                          class="weight-head"
+                          class="weight-head fs-10"
+                          style="font-size:10px;"
                         >
                           WEIGHT (KG)
                         </th>
                       </tr>
 
                       <tr class="table-head-sub">
-                        <th class="code-head">
+                        <th class="code-head fs-10">
                           CODE
                         </th>
 
-                        <th class="name-head">
+                        <th class="name-head fs-10">
                           NAME
                         </th>
 
-                        <th class="qty-head">
+                        <th class="qty-head fs-10">
                           QTY
                         </th>
 
-                        <th class="unit-head">
+                        <th class="unit-head fs-10">
                           UNIT
                         </th>
 
-                        <th class="total-head">
+                        <th class="total-head fs-10">
                           TOTAL
                         </th>
                       </tr>
@@ -6961,6 +6979,10 @@ body {
 
 .page:last-child {
   page-break-after: auto;
+}
+
+.summary-page {
+  height: 100%;
 }
 
 /*
@@ -7226,14 +7248,9 @@ padding-top:25px;
    margin-bottom: 0.5mm;
 }
 
-.item-no-value {
-  font-size: 7px !important;
-  line-height: 7.2px;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  max-height: 15px;
-  overflow: hidden;
+.filed-value-item-no {
+  font-size: 18px !important;
+  line-height: 12px;
 }
 
 .section-separator {
@@ -7262,7 +7279,7 @@ padding-top:25px;
 
 .project-value{
 color: #111827;
-  font-size: 8pt;
+  font-size: 12pt;
   line-height: 6px;
   font-weight: 600;
   overflow-wrap: anywhere;
@@ -7300,8 +7317,8 @@ color: #111827;
 }
 
 .component-table th {
-  background: #111827;
-  color: #ffffff;
+  background: #ffffff;
+  color: #111827;
   border: 1px solid #111827;
   font-size: 4.7px;
   line-height: 5.3px;
@@ -7331,9 +7348,9 @@ color: #111827;
 
 .component-table td {
   color: #111827;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-left: 1px solid #111827;
+  border-right: 1px solid #111827;
+  border-bottom: 1px solid #111827;
   font-size: 5.3px;
   line-height: 6.1px;
   font-weight: 600;
@@ -7343,11 +7360,11 @@ color: #111827;
 }
 
 .component-table tbody tr:nth-child(odd) {
-  background: #f4f4f5;
+  background: #fff;
 }
 
 .component-table tbody tr:nth-child(even) {
-  background: #e5e7eb;
+  background: #fff;
 }
 
 .code-cell {
@@ -7386,14 +7403,14 @@ color: #111827;
   font-weight: 800;
   color: #111827;
   font-size: 8px !important;
-  border-left: 1px solid #fff !important;
-  border-right: 1px solid #fff !important;
-  border-bottom: 1px solid #fff;
+  border-left: 1px solid #111827 !important;
+  border-right: 1px solid #111827 !important;
+  border-bottom: 1px solid #111827;
 }
 
 .component-table tfoot td {
-  background: #b8d7e3;
-  border: 1px solid #fff;
+  background: #fff;
+  border: 1px solid #111827;
   font-size: 8px !important;
   line-height: 5.8px;
   font-weight: 800;
@@ -7692,6 +7709,7 @@ ${stickerPages}
     );
   }
 };
+
 
 
 
