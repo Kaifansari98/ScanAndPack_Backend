@@ -549,3 +549,218 @@ export const getBoxInfoValues = async (
     });
   }
 };
+
+
+// GET /boxes/:box_id/items/manual-site-in?project_id=&vendor_id=
+export const getManualBoxSiteInItems = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const box_id =
+      Number(
+        req.params.box_id
+      );
+
+    const project_id =
+      Number(
+        req.query.project_id
+      );
+
+    const vendor_id =
+      Number(
+        req.query.vendor_id
+      );
+
+    if (
+      [
+        box_id,
+        project_id,
+        vendor_id,
+      ].some(
+        (value) =>
+          Number.isNaN(value)
+      )
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            "Invalid parameters",
+            400
+          )
+        );
+    }
+
+    const result =
+      await boxService.getManualBoxSiteInItemsService(
+        box_id,
+        project_id,
+        vendor_id
+      );
+
+    if (
+      result.status ===
+      0
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            result.message,
+            400
+          )
+        );
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result.data,
+          result.message,
+          200
+        )
+      );
+  } catch (error) {
+    console.error(
+      "getManualBoxSiteInItems error:",
+      error
+    );
+
+    return res
+      .status(500)
+      .json(
+        ApiResponse.error(
+          "Internal server error",
+          500
+        )
+      );
+  }
+};
+
+
+// PATCH /boxes/:box_id/items/manual-site-in/:mapping_id
+export const verifyManualBoxSiteInItem = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const box_id =
+      Number(
+        req.params.box_id
+      );
+
+    const mapping_id =
+      Number(
+        req.params.mapping_id
+      );
+
+    const project_id =
+      Number(
+        req.body.project_id
+      );
+
+    const vendor_id =
+      Number(
+        req.body.vendor_id
+      );
+
+    const user_id =
+      Number(
+        req.body.user_id
+      );
+
+    const received_qty =
+      Number(
+        req.body.received_qty
+      );
+
+    if (
+      [
+        box_id,
+        mapping_id,
+        project_id,
+        vendor_id,
+        user_id,
+        received_qty,
+      ].some(
+        (value) =>
+          Number.isNaN(value)
+      )
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            "Invalid parameters",
+            400
+          )
+        );
+    }
+
+    if (
+      !Number.isInteger(
+        received_qty
+      ) ||
+      received_qty < 0
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            "received_qty must be a whole number greater than or equal to 0",
+            400
+          )
+        );
+    }
+
+    const result =
+      await boxService.verifyManualBoxSiteInItemService(
+        mapping_id,
+        box_id,
+        project_id,
+        vendor_id,
+        user_id,
+        received_qty
+      );
+
+    if (
+      result.status ===
+      0
+    ) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.error(
+            result.message,
+            400
+          )
+        );
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result.data,
+          result.message,
+          200
+        )
+      );
+  } catch (error) {
+    console.error(
+      "verifyManualBoxSiteInItem error:",
+      error
+    );
+
+    return res
+      .status(500)
+      .json(
+        ApiResponse.error(
+          "Internal server error",
+          500
+        )
+      );
+  }
+};
