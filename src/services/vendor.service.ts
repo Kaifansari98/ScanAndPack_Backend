@@ -130,7 +130,7 @@ export const createVendor = async (data: any) => {
     is_year_wise_lead_code_enabled,
   } = data;
 
-  return await prisma.vendorMaster.create({
+  const vendor = await prisma.vendorMaster.create({
     data: {
       vendor_name,
       vendor_code,
@@ -149,6 +149,24 @@ export const createVendor = async (data: any) => {
       is_year_wise_lead_code_enabled,
     },
   });
+
+  const existingToken = await prisma.vendorTokens.findFirst({
+    where: { vendor_id: vendor.id },
+  });
+
+  if (!existingToken) {
+    const expiryDate = new Date();
+    expiryDate.setFullYear(expiryDate.getFullYear() + 5);
+
+    await prisma.vendorTokens.create({
+      data: {
+        vendor_id: vendor.id,
+        expiry_date: expiryDate,
+      },
+    });
+  }
+
+  return vendor;
 };
 
 export const getAllVendors = async () => {
@@ -1933,6 +1951,23 @@ export const onboardVendor = async (data: any) => {
     },
   });
 
+  // Ensure unique VendorToken generation (5-year default expiry date, no duplication per vendor_id)
+  const existingToken = await prisma.vendorTokens.findFirst({
+    where: { vendor_id: vendorId },
+  });
+
+  if (!existingToken) {
+    const expiryDate = new Date();
+    expiryDate.setFullYear(expiryDate.getFullYear() + 5);
+
+    await prisma.vendorTokens.create({
+      data: {
+        vendor_id: vendorId,
+        expiry_date: expiryDate,
+      },
+    });
+  }
+
   return vendor;
 };
 
@@ -2005,6 +2040,23 @@ export const updateVendor = async (vendorId: number, data: any) => {
       is_scanpack_enabled
     },
   });
+
+  // Ensure unique VendorToken generation on edit if missing (5-year default expiry date)
+  const existingToken = await prisma.vendorTokens.findFirst({
+    where: { vendor_id: vendorId },
+  });
+
+  if (!existingToken) {
+    const expiryDate = new Date();
+    expiryDate.setFullYear(expiryDate.getFullYear() + 5);
+
+    await prisma.vendorTokens.create({
+      data: {
+        vendor_id: vendorId,
+        expiry_date: expiryDate,
+      },
+    });
+  }
 
   return vendor;
 };
