@@ -1301,7 +1301,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 11. Build first group map for every box
+    | 11. Build first non-empty group-name map for every box
     |--------------------------------------------------------------------------
     */
 
@@ -1316,6 +1316,16 @@ export const generateBoxPdfService = async (
         continue;
       }
 
+      const groupName =
+        mapping
+          .cut_list
+          ?.group_name
+          ?.trim();
+
+      if (!groupName) {
+        continue;
+      }
+
       if (
         boxGroupMap.has(
           mapping.box_id
@@ -1326,12 +1336,7 @@ export const generateBoxPdfService = async (
 
       boxGroupMap.set(
         mapping.box_id,
-
-        mapping
-          .cut_list
-          ?.group_name
-          ?.trim() ||
-        null
+        groupName
       );
     }
 
@@ -2742,6 +2747,7 @@ color: #111827;
     );
   }
 };
+
 
 
 
