@@ -2130,13 +2130,15 @@ export interface LeadServicingReportRow {
   final_handover_date: Date | null;
   service_1_due_date: Date | null;
   service_1_completed_date: Date | null;
+  service_1_status: string | null;
   service_2_due_date: Date | null;
   service_2_completed_date: Date | null;
+  service_2_status: string | null;
   service_3_due_date: Date | null;
   service_3_completed_date: Date | null;
+  service_3_status: string | null;
   amc_opted_date: Date | null;
   amc_dates_same_as_service_dates: string;
-  status: string | null;
 }
 
 export const getLeadServicingReportData = async (
@@ -2221,19 +2223,6 @@ export const getLeadServicingReportData = async (
       (s) => s.service_no === 3 && s.service_type === "free"
     );
 
-    const freeServiceStatuses = [freeService1, freeService2, freeService3]
-      .map((service) => service?.status ?? null)
-      .filter((status): status is string => Boolean(status));
-
-    const status =
-      freeServiceStatuses.includes("rejected")
-        ? "rejected"
-        : freeServiceStatuses.includes("open")
-        ? "open"
-        : freeServiceStatuses.includes("completed")
-        ? "completed"
-        : null;
-
     const amcService1 = lead.serviceSchedules.find(
       (s) => s.service_no === 1 && s.service_type === "amc"
     );
@@ -2277,13 +2266,15 @@ export const getLeadServicingReportData = async (
       final_handover_date: lead.final_handover_marked_at,
       service_1_due_date: freeService1?.scheduled_for ?? null,
       service_1_completed_date: freeService1?.completed_at ?? null,
+      service_1_status: freeService1?.status ?? null,
       service_2_due_date: freeService2?.scheduled_for ?? null,
       service_2_completed_date: freeService2?.completed_at ?? null,
+      service_2_status: freeService2?.status ?? null,
       service_3_due_date: freeService3?.scheduled_for ?? null,
       service_3_completed_date: freeService3?.completed_at ?? null,
+      service_3_status: freeService3?.status ?? null,
       amc_opted_date: lead.amc_opted_at ?? null,
       amc_dates_same_as_service_dates,
-      status,
     });
 
     if (!lead.productStructureInstances.length) {
