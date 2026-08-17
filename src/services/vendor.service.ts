@@ -2136,6 +2136,7 @@ export interface LeadServicingReportRow {
   service_3_completed_date: Date | null;
   amc_opted_date: Date | null;
   amc_dates_same_as_service_dates: string;
+  status: string | null;
 }
 
 export const getLeadServicingReportData = async (
@@ -2198,6 +2199,7 @@ export const getLeadServicingReportData = async (
           service_type: true,
           scheduled_for: true,
           completed_at: true,
+          status: true,
         },
       },
     },
@@ -2218,6 +2220,19 @@ export const getLeadServicingReportData = async (
     const freeService3 = lead.serviceSchedules.find(
       (s) => s.service_no === 3 && s.service_type === "free"
     );
+
+    const freeServiceStatuses = [freeService1, freeService2, freeService3]
+      .map((service) => service?.status ?? null)
+      .filter((status): status is string => Boolean(status));
+
+    const status =
+      freeServiceStatuses.includes("rejected")
+        ? "rejected"
+        : freeServiceStatuses.includes("open")
+        ? "open"
+        : freeServiceStatuses.includes("completed")
+        ? "completed"
+        : null;
 
     const amcService1 = lead.serviceSchedules.find(
       (s) => s.service_no === 1 && s.service_type === "amc"
@@ -2268,6 +2283,7 @@ export const getLeadServicingReportData = async (
       service_3_completed_date: freeService3?.completed_at ?? null,
       amc_opted_date: lead.amc_opted_at ?? null,
       amc_dates_same_as_service_dates,
+      status,
     });
 
     if (!lead.productStructureInstances.length) {
