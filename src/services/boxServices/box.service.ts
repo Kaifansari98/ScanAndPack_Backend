@@ -1299,50 +1299,27 @@ export const generateBoxPdfService = async (
         .toLowerCase() ||
       null;
 
-    /*
-    |--------------------------------------------------------------------------
-    | 11. Build first non-empty group-name map for every box
-    |--------------------------------------------------------------------------
-    */
-
-    const boxGroupMap =
-      new Map<
-        number,
-        string | null
-      >();
-
-    for (const mapping of allBoxGroupMappings) {
-      if (!mapping.box_id) {
-        continue;
-      }
-
-      const groupName =
-        mapping
-          .cut_list
-          ?.group_name
-          ?.trim();
-
-      if (!groupName) {
-        continue;
-      }
-
-      if (
-        boxGroupMap.has(
-          mapping.box_id
+    const normalizedPackingType =
+      String(
+        project.packing_type ||
+        ""
+      )
+        .trim()
+        .replace(
+          /[\s_-]/g,
+          ""
         )
-      ) {
-        continue;
-      }
+        .toUpperCase();
 
-      boxGroupMap.set(
-        mapping.box_id,
-        groupName
-      );
-    }
+    const isGroupWisePacking =
+      project.packing_type ===
+      PackingType.GROUPWISE ||
+      normalizedPackingType ===
+      "GROUPWISE";
 
     /*
     |--------------------------------------------------------------------------
-    | 12. Calculate PRODUCT BOX COUNT
+    | 11. Calculate PRODUCT BOX COUNT
     |--------------------------------------------------------------------------
     */
 
@@ -1355,8 +1332,7 @@ export const generateBoxPdfService = async (
       );
 
     if (
-      project.packing_type ===
-      PackingType.GROUPWISE
+      isGroupWisePacking
     ) {
       const currentGroupKey =
         normalizeGroupName(
@@ -1364,23 +1340,39 @@ export const generateBoxPdfService = async (
         );
 
       if (currentGroupKey) {
+        const currentGroupBoxIds =
+          new Set<number>();
+
+        for (const mapping of allBoxGroupMappings) {
+          if (!mapping.box_id) {
+            continue;
+          }
+
+          const mappingGroupKey =
+            normalizeGroupName(
+              mapping
+                .cut_list
+                ?.group_name
+            );
+
+          if (
+            mappingGroupKey ===
+            currentGroupKey
+          ) {
+            currentGroupBoxIds.add(
+              mapping.box_id
+            );
+          }
+        }
+
         const currentGroupBoxes =
           projectBoxes.filter(
             (
               projectBox
-            ) => {
-              const boxGroupKey =
-                normalizeGroupName(
-                  boxGroupMap.get(
-                    projectBox.id
-                  )
-                );
-
-              return (
-                boxGroupKey ===
-                currentGroupKey
-              );
-            }
+            ) =>
+              currentGroupBoxIds.has(
+                projectBox.id
+              )
           );
 
         const currentGroupBoxIndex =
@@ -1431,7 +1423,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 13. Package / product derived values
+    | 12. Package / product derived values
     |--------------------------------------------------------------------------
     */
 
@@ -1474,7 +1466,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 14. QR code
+    | 13. QR code
     |--------------------------------------------------------------------------
     */
 
@@ -1498,7 +1490,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 15. Vendor logo
+    | 14. Vendor logo
     |--------------------------------------------------------------------------
     */
 
@@ -1528,7 +1520,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 16. Component rows
+    | 15. Component rows
     |--------------------------------------------------------------------------
     */
 
@@ -1587,7 +1579,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 17. HTML
+    | 16. HTML
     |--------------------------------------------------------------------------
     */
 
@@ -2661,7 +2653,7 @@ color: #111827;
 
     /*
     |--------------------------------------------------------------------------
-    | 18. Prepare printable HTML
+    | 17. Prepare printable HTML
     |--------------------------------------------------------------------------
     | Backend cannot open the printer directly. This returns print_html.
     | Open this HTML in a new browser window/tab; the script will trigger
@@ -2747,6 +2739,7 @@ color: #111827;
     );
   }
 };
+
 
 
 
