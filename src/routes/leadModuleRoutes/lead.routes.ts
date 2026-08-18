@@ -90,6 +90,8 @@ import {
   fetchAllCarcassMaterialFinishesForVendor,
   uploadCarcassMaterialFinishes,
   fetchFastProductionTimelineRules,
+  addTimelineRule,
+  editTimelineRule,
   fetchAllHandleTypes,
   addHandleType,
   fetchAllShutterTypes,
@@ -325,6 +327,8 @@ leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",
   fetchFastProductionTimelineRules,
 );
+leadsRouter.post("/create-timeline-rule", addTimelineRule);
+leadsRouter.patch("/update-timeline-rule/:id", editTimelineRule);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
 leadsRouter.patch("/update-product-type-status/:id", toggleProductTypeStatus);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
