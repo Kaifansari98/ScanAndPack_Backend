@@ -1219,7 +1219,7 @@ export const getFastProductionTimelineRules = async (vendor_id: number) => {
 export const createTimelineRule = async (payload: {
   vendor_id: number;
   carcass_id: number;
-  shutter_id: number;
+  shutter_id: number | null;
   kitchen_manufacturing_days: number;
   other_manufacturing_days: number;
   kitchen_manufacturing_days_for_fast_production?: number | null;
@@ -1235,21 +1235,21 @@ export const createTimelineRule = async (payload: {
     throw new Error("Invalid carcass_id");
   }
 
-  const shutter = await prisma.shutterTypeMaster.findFirst({
-    where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
-    select: { id: true },
-  });
-  if (!shutter) {
-    throw new Error("Invalid shutter_id");
+  if (payload.shutter_id !== null) {
+    const shutter = await prisma.shutterTypeMaster.findFirst({
+      where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
+      select: { id: true },
+    });
+    if (!shutter) {
+      throw new Error("Invalid shutter_id");
+    }
   }
 
-  const existing = await prisma.timelineRule.findUnique({
+  const existing = await prisma.timelineRule.findFirst({
     where: {
-      vendor_id_carcass_id_shutter_id: {
-        vendor_id: payload.vendor_id,
-        carcass_id: payload.carcass_id,
-        shutter_id: payload.shutter_id,
-      },
+      vendor_id: payload.vendor_id,
+      carcass_id: payload.carcass_id,
+      shutter_id: payload.shutter_id,
     },
     select: { id: true },
   });
@@ -1278,7 +1278,7 @@ export const updateTimelineRule = async (
   payload: {
     vendor_id: number;
     carcass_id: number;
-    shutter_id: number;
+    shutter_id: number | null;
     kitchen_manufacturing_days: number;
     other_manufacturing_days: number;
     kitchen_manufacturing_days_for_fast_production?: number | null;
@@ -1303,12 +1303,14 @@ export const updateTimelineRule = async (
     throw new Error("Invalid carcass_id");
   }
 
-  const shutter = await prisma.shutterTypeMaster.findFirst({
-    where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
-    select: { id: true },
-  });
-  if (!shutter) {
-    throw new Error("Invalid shutter_id");
+  if (payload.shutter_id !== null) {
+    const shutter = await prisma.shutterTypeMaster.findFirst({
+      where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
+      select: { id: true },
+    });
+    if (!shutter) {
+      throw new Error("Invalid shutter_id");
+    }
   }
 
   const duplicate = await prisma.timelineRule.findFirst({

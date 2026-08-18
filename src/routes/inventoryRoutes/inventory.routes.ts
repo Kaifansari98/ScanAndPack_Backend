@@ -50,6 +50,8 @@ import {
   productMasters,
   productRemove,
   productUpdate,
+  downloadProductsTemplate,
+  uploadProductsBulk,
 } from "../../controllers/inventoryController/product.controller";
 
 const router = Router();
@@ -81,6 +83,9 @@ router.get("/stock/:vendor_id/download",                   downloadStockSheet);
 router.post("/stock/:vendor_id/upload", upload.single("file"), uploadStockSheet);
 router.get("/stock/:vendor_id/history/:product_id",        getProductStockHistory);
 router.get("/stock/:vendor_id/batches",                    getStockUploadBatches);
+
+router.get("/products/:vendor_id/bulk-upload/template", downloadProductsTemplate);
+router.post("/products/:vendor_id/bulk-upload", upload.single("file"), uploadProductsBulk);
 
 router.get("/products/:vendor_id/masters", productMasters);
 router.get("/products/:vendor_id", productList);
