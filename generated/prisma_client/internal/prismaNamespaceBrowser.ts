@@ -105,6 +105,7 @@ export const ModelName = {
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
   LeadDocuments: 'LeadDocuments',
+  LeadB2BDocument: 'LeadB2BDocument',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
   LeadChatMessage: 'LeadChatMessage',
@@ -1226,6 +1227,23 @@ export const LeadDocumentsScalarFieldEnum = {
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
+
+
+export const LeadB2BDocumentScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted',
+  doc_type_id: 'doc_type_id'
+} as const
+
+export type LeadB2BDocumentScalarFieldEnum = (typeof LeadB2BDocumentScalarFieldEnum)[keyof typeof LeadB2BDocumentScalarFieldEnum]
 
 
 export const LeadChatRoomScalarFieldEnum = {

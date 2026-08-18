@@ -101,6 +101,7 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
             : null;
 
         if (!briefId) return null;
+        if (reqTypeId === null) return null;
 
         return {
           lead_id,
@@ -121,26 +122,28 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
     const firstB2bType = await prisma.b2BRequirementTypeMaster.findFirst({
       where: { vendor_id, status: { equals: "active", mode: "insensitive" } },
     });
-    const defaultTypeId = firstB2bType?.id || null;
+    const defaultTypeId = firstB2bType?.id ?? null;
 
-    const data = process_brief_ids
-      .map((bId) => {
-        const briefId = !isNaN(Number(bId)) ? Number(bId) : null;
-        if (!briefId) return null;
-        return {
-          lead_id,
-          vendor_id,
-          b2b_requirement_type_id: defaultTypeId,
-          process_brief_id: briefId,
-          created_by: validCreatedBy,
-        };
-      })
-      .filter((item): item is NonNullable<typeof item> => item !== null);
+    if (defaultTypeId !== null) {
+      const data = process_brief_ids
+        .map((bId) => {
+          const briefId = !isNaN(Number(bId)) ? Number(bId) : null;
+          if (!briefId) return null;
+          return {
+            lead_id,
+            vendor_id,
+            b2b_requirement_type_id: defaultTypeId,
+            process_brief_id: briefId,
+            created_by: validCreatedBy,
+          };
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null);
 
-    if (data.length > 0) {
-      await prisma.leadProcessBriefMapping.createMany({
-        data,
-      });
+      if (data.length > 0) {
+        await prisma.leadProcessBriefMapping.createMany({
+          data,
+        });
+      }
     }
   }
 
