@@ -60,7 +60,7 @@ export const createProjectController = async (
       box_info_fields,
       created_by,
     } = req.body;
-
+    
     if (!projectName || !vendorId) {
       return res.status(400).json({
         success: false,
