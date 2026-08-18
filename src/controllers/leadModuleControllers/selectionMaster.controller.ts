@@ -10,8 +10,10 @@ import {
   bulkUploadCarcassMaterialFinishes,
   getFastProductionTimelineRules,
   getAllHandleTypes,
+  createHandleType,
   getAllShutterTypes,
   createShutterType,
+  createShutterSubType,
   getAllShutterMaterials,
   createShutterMaterial,
   getShutterMaterialFinishes,
@@ -103,6 +105,24 @@ export const addShutterType = async (req: Request, res: Response) => {
 
     const type = await createShutterType(Number(vendor_id), name);
     return res.status(201).json({ success: true, data: type });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addShutterSubType = async (req: Request, res: Response) => {
+  try {
+    const { shutter_type_id, name } = req.body;
+
+    if (!shutter_type_id || !name) {
+      return res.status(400).json({
+        success: false,
+        error: "shutter_type_id and name are required",
+      });
+    }
+
+    const subtype = await createShutterSubType(Number(shutter_type_id), name);
+    return res.status(201).json({ success: true, data: subtype });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
@@ -682,6 +702,23 @@ export const fetchAllHandleTypes = async (req: Request, res: Response) => {
 
     const types = await getAllHandleTypes(vendor_id);
     return res.status(200).json({ success: true, data: types });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addHandleType = async (req: Request, res: Response) => {
+  try {
+    const { vendor_id, name } = req.body;
+
+    if (!vendor_id || !name) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id and name are required" });
+    }
+
+    const type = await createHandleType(Number(vendor_id), name);
+    return res.status(201).json({ success: true, data: type });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }

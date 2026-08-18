@@ -90,6 +90,27 @@ export const createShutterType = async (
   return type as ShutterType;
 };
 
+export const createShutterSubType = async (
+  shutter_type_id: number,
+  name: string,
+) => {
+  const shutterType = await prisma.shutterTypeMaster.findUnique({
+    where: { id: shutter_type_id },
+    select: { id: true },
+  });
+
+  if (!shutterType) {
+    throw new Error("Invalid shutter_type_id");
+  }
+
+  return prisma.shutterSubTypeMaster.create({
+    data: {
+      shutter_type_id,
+      name,
+    },
+  });
+};
+
 export const getAllCarcasMaterials = async (
   vendor_id: number,
 ): Promise<CarcasMaterial[]> => {
@@ -1138,6 +1159,19 @@ export const getAllHandleTypes = async (
   });
 
   return types as HandleType[];
+};
+
+export const createHandleType = async (
+  vendor_id: number,
+  name: string,
+): Promise<HandleType> => {
+  await ensureVendorExists(vendor_id);
+
+  const type = await prisma.handleTypeMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return type as HandleType;
 };
 
 export const getFastProductionTimelineRules = async (vendor_id: number) => {

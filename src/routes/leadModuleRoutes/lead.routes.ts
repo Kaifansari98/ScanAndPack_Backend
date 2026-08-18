@@ -91,8 +91,10 @@ import {
   uploadCarcassMaterialFinishes,
   fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
+  addHandleType,
   fetchAllShutterTypes,
   addShutterType,
+  addShutterSubType,
   fetchAllShutterMaterials,
   addShutterMaterial,
   fetchShutterMaterialFinishes,
@@ -236,6 +238,7 @@ leadsRouter.post(
 );
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
 leadsRouter.post("/create-shutter-type", addShutterType);
+leadsRouter.post("/create-shutter-sub-type", addShutterSubType);
 leadsRouter.get(
   "/get-all-shutter-materials/:vendor_id",
   fetchAllShutterMaterials,
@@ -317,6 +320,7 @@ leadsRouter.get(
   downloadOtherAppliancesReport,
 );
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
+leadsRouter.post("/create-handle-type", addHandleType);
 leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",
   fetchFastProductionTimelineRules,
