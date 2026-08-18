@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../prisma/client";
 import { LeadEntryType, LeadCallType, LeadStoreActionType } from "../../../generated/prisma_client/client";
+import { generateLeadCode } from "../../utils/generateLeadCode";
 
 // Helpers to get path params
 const getParam = (param: any): string => {
@@ -30,6 +31,7 @@ export class OnlineLeadController {
         priority,
         product_types,
         product_structures,
+        store_id,
       } = req.body;
 
       if (!vendor_id || !leads_name || !contact || !source) {
@@ -56,10 +58,24 @@ export class OnlineLeadController {
         },
       });
 
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: { is_year_wise_lead_code_enabled: true },
+      });
+
+      let generatedCode: string | null = null;
+      if (vendor?.is_year_wise_lead_code_enabled || store_id) {
+        generatedCode = await generateLeadCode(prisma, {
+          franchiseId: store_id ? Number(store_id) : 1,
+          vendorId: Number(vendor_id),
+        });
+      }
+
       const lead = await prisma.onlineLead.create({
         data: {
           vendor_id: Number(vendor_id),
           leads_name,
+          lead_code: generatedCode,
           email: email || null,
           contact,
           source,
@@ -203,10 +219,16 @@ export class OnlineLeadController {
         }
       }
 
+      const generatedCode = await generateLeadCode(prisma, {
+        franchiseId: Number(store_id),
+        vendorId: Number(vendor_id),
+      });
+
       const lead = await prisma.onlineLead.create({
         data: {
           vendor_id: Number(vendor_id),
           leads_name,
+          lead_code: generatedCode,
           email: email || null,
           contact,
           source: "WALK_IN",
@@ -747,12 +769,21 @@ export class OnlineLeadController {
         ? LeadStoreActionType.TRANSFERRED
         : LeadStoreActionType.ASSIGNED;
 
+      let generatedCode = lead.lead_code;
+      if (!generatedCode) {
+        generatedCode = await generateLeadCode(prisma, {
+          franchiseId: Number(to_store_id),
+          vendorId: lead.vendor_id,
+        });
+      }
+
       // Update lead store parameters
       const updatedLead = await prisma.onlineLead.update({
         where: { id },
         data: {
           store_id: Number(to_store_id),
           final_assigned_leads: finalAssignedUserId,
+          lead_code: generatedCode,
         },
       });
 

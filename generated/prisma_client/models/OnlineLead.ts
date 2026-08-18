@@ -56,6 +56,7 @@ export type OnlineLeadMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   leads_name: string | null
+  lead_code: string | null
   email: string | null
   contact: string | null
   source: string | null
@@ -86,6 +87,7 @@ export type OnlineLeadMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   leads_name: string | null
+  lead_code: string | null
   email: string | null
   contact: string | null
   source: string | null
@@ -116,6 +118,7 @@ export type OnlineLeadCountAggregateOutputType = {
   id: number
   vendor_id: number
   leads_name: number
+  lead_code: number
   email: number
   contact: number
   source: number
@@ -176,6 +179,7 @@ export type OnlineLeadMinAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -206,6 +210,7 @@ export type OnlineLeadMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -236,6 +241,7 @@ export type OnlineLeadCountAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -355,6 +361,7 @@ export type OnlineLeadGroupByOutputType = {
   id: number
   vendor_id: number
   leads_name: string
+  lead_code: string | null
   email: string | null
   contact: string
   source: string
@@ -410,6 +417,7 @@ export type OnlineLeadWhereInput = {
   id?: Prisma.IntFilter<"OnlineLead"> | number
   vendor_id?: Prisma.IntFilter<"OnlineLead"> | number
   leads_name?: Prisma.StringFilter<"OnlineLead"> | string
+  lead_code?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   email?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   contact?: Prisma.StringFilter<"OnlineLead"> | string
   source?: Prisma.StringFilter<"OnlineLead"> | string
@@ -455,6 +463,7 @@ export type OnlineLeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -503,6 +512,7 @@ export type OnlineLeadWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.OnlineLeadWhereInput | Prisma.OnlineLeadWhereInput[]
   vendor_id?: Prisma.IntFilter<"OnlineLead"> | number
   leads_name?: Prisma.StringFilter<"OnlineLead"> | string
+  lead_code?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   email?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   contact?: Prisma.StringFilter<"OnlineLead"> | string
   source?: Prisma.StringFilter<"OnlineLead"> | string
@@ -548,6 +558,7 @@ export type OnlineLeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -588,6 +599,7 @@ export type OnlineLeadScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"OnlineLead"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"OnlineLead"> | number
   leads_name?: Prisma.StringWithAggregatesFilter<"OnlineLead"> | string
+  lead_code?: Prisma.StringNullableWithAggregatesFilter<"OnlineLead"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"OnlineLead"> | string | null
   contact?: Prisma.StringWithAggregatesFilter<"OnlineLead"> | string
   source?: Prisma.StringWithAggregatesFilter<"OnlineLead"> | string
@@ -618,6 +630,7 @@ export type OnlineLeadScalarWhereWithAggregatesInput = {
 
 export type OnlineLeadCreateInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -655,6 +668,7 @@ export type OnlineLeadUncheckedCreateInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -689,6 +703,7 @@ export type OnlineLeadUncheckedCreateInput = {
 
 export type OnlineLeadUpdateInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -726,6 +741,7 @@ export type OnlineLeadUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -762,6 +778,7 @@ export type OnlineLeadCreateManyInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -792,6 +809,7 @@ export type OnlineLeadCreateManyInput = {
 
 export type OnlineLeadUpdateManyMutationInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -816,6 +834,7 @@ export type OnlineLeadUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -866,6 +885,7 @@ export type OnlineLeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -911,6 +931,7 @@ export type OnlineLeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -941,6 +962,7 @@ export type OnlineLeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -1443,6 +1465,7 @@ export type OnlineLeadUpdateOneRequiredWithoutCampaignLeadsNestedInput = {
 
 export type OnlineLeadCreateWithoutVendorInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1478,6 +1501,7 @@ export type OnlineLeadCreateWithoutVendorInput = {
 export type OnlineLeadUncheckedCreateWithoutVendorInput = {
   id?: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1543,6 +1567,7 @@ export type OnlineLeadScalarWhereInput = {
   id?: Prisma.IntFilter<"OnlineLead"> | number
   vendor_id?: Prisma.IntFilter<"OnlineLead"> | number
   leads_name?: Prisma.StringFilter<"OnlineLead"> | string
+  lead_code?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   email?: Prisma.StringNullableFilter<"OnlineLead"> | string | null
   contact?: Prisma.StringFilter<"OnlineLead"> | string
   source?: Prisma.StringFilter<"OnlineLead"> | string
@@ -1573,6 +1598,7 @@ export type OnlineLeadScalarWhereInput = {
 
 export type OnlineLeadCreateWithoutCreatedByInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1609,6 +1635,7 @@ export type OnlineLeadUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1652,6 +1679,7 @@ export type OnlineLeadCreateManyCreatedByInputEnvelope = {
 
 export type OnlineLeadCreateWithoutUpdatedByInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1688,6 +1716,7 @@ export type OnlineLeadUncheckedCreateWithoutUpdatedByInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1731,6 +1760,7 @@ export type OnlineLeadCreateManyUpdatedByInputEnvelope = {
 
 export type OnlineLeadCreateWithoutAssignedToInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1767,6 +1797,7 @@ export type OnlineLeadUncheckedCreateWithoutAssignedToInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1810,6 +1841,7 @@ export type OnlineLeadCreateManyAssignedToInputEnvelope = {
 
 export type OnlineLeadCreateWithoutFinalAssignedLeadsInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1846,6 +1878,7 @@ export type OnlineLeadUncheckedCreateWithoutFinalAssignedLeadsInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1953,6 +1986,7 @@ export type OnlineLeadUpdateManyWithWhereWithoutFinalAssignedLeadsInput = {
 
 export type OnlineLeadCreateWithoutSiteTypeRelationInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1989,6 +2023,7 @@ export type OnlineLeadUncheckedCreateWithoutSiteTypeRelationInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2048,6 +2083,7 @@ export type OnlineLeadUpdateManyWithWhereWithoutSiteTypeRelationInput = {
 
 export type OnlineLeadCreateWithoutSourceRelationInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2084,6 +2120,7 @@ export type OnlineLeadUncheckedCreateWithoutSourceRelationInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2143,6 +2180,7 @@ export type OnlineLeadUpdateManyWithWhereWithoutSourceRelationInput = {
 
 export type OnlineLeadCreateWithoutFranchiseInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2179,6 +2217,7 @@ export type OnlineLeadUncheckedCreateWithoutFranchiseInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2238,6 +2277,7 @@ export type OnlineLeadUpdateManyWithWhereWithoutFranchiseInput = {
 
 export type OnlineLeadCreateWithoutFollowupStatusInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2274,6 +2314,7 @@ export type OnlineLeadUncheckedCreateWithoutFollowupStatusInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2333,6 +2374,7 @@ export type OnlineLeadUpdateManyWithWhereWithoutFollowupStatusInput = {
 
 export type OnlineLeadCreateWithoutOnline_lead_historyInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2369,6 +2411,7 @@ export type OnlineLeadUncheckedCreateWithoutOnline_lead_historyInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2418,6 +2461,7 @@ export type OnlineLeadUpdateToOneWithWhereWithoutOnline_lead_historyInput = {
 
 export type OnlineLeadUpdateWithoutOnline_lead_historyInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2454,6 +2498,7 @@ export type OnlineLeadUncheckedUpdateWithoutOnline_lead_historyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2487,6 +2532,7 @@ export type OnlineLeadUncheckedUpdateWithoutOnline_lead_historyInput = {
 
 export type OnlineLeadCreateWithoutCall_logInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2523,6 +2569,7 @@ export type OnlineLeadUncheckedCreateWithoutCall_logInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2572,6 +2619,7 @@ export type OnlineLeadUpdateToOneWithWhereWithoutCall_logInput = {
 
 export type OnlineLeadUpdateWithoutCall_logInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2608,6 +2656,7 @@ export type OnlineLeadUncheckedUpdateWithoutCall_logInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2641,6 +2690,7 @@ export type OnlineLeadUncheckedUpdateWithoutCall_logInput = {
 
 export type OnlineLeadCreateWithoutStore_logsInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2677,6 +2727,7 @@ export type OnlineLeadUncheckedCreateWithoutStore_logsInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2726,6 +2777,7 @@ export type OnlineLeadUpdateToOneWithWhereWithoutStore_logsInput = {
 
 export type OnlineLeadUpdateWithoutStore_logsInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2762,6 +2814,7 @@ export type OnlineLeadUncheckedUpdateWithoutStore_logsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2795,6 +2848,7 @@ export type OnlineLeadUncheckedUpdateWithoutStore_logsInput = {
 
 export type OnlineLeadCreateWithoutCampaignLeadsInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2831,6 +2885,7 @@ export type OnlineLeadUncheckedCreateWithoutCampaignLeadsInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2880,6 +2935,7 @@ export type OnlineLeadUpdateToOneWithWhereWithoutCampaignLeadsInput = {
 
 export type OnlineLeadUpdateWithoutCampaignLeadsInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2916,6 +2972,7 @@ export type OnlineLeadUncheckedUpdateWithoutCampaignLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2950,6 +3007,7 @@ export type OnlineLeadUncheckedUpdateWithoutCampaignLeadsInput = {
 export type OnlineLeadCreateManyVendorInput = {
   id?: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2980,6 +3038,7 @@ export type OnlineLeadCreateManyVendorInput = {
 
 export type OnlineLeadUpdateWithoutVendorInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3015,6 +3074,7 @@ export type OnlineLeadUpdateWithoutVendorInput = {
 export type OnlineLeadUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3050,6 +3110,7 @@ export type OnlineLeadUncheckedUpdateWithoutVendorInput = {
 export type OnlineLeadUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3082,6 +3143,7 @@ export type OnlineLeadCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3113,6 +3175,7 @@ export type OnlineLeadCreateManyUpdatedByInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3144,6 +3207,7 @@ export type OnlineLeadCreateManyAssignedToInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3175,6 +3239,7 @@ export type OnlineLeadCreateManyFinalAssignedLeadsInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3204,6 +3269,7 @@ export type OnlineLeadCreateManyFinalAssignedLeadsInput = {
 
 export type OnlineLeadUpdateWithoutCreatedByInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3240,6 +3306,7 @@ export type OnlineLeadUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3275,6 +3342,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3304,6 +3372,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type OnlineLeadUpdateWithoutUpdatedByInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3340,6 +3409,7 @@ export type OnlineLeadUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3375,6 +3445,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3404,6 +3475,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutUpdatedByInput = {
 
 export type OnlineLeadUpdateWithoutAssignedToInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3440,6 +3512,7 @@ export type OnlineLeadUncheckedUpdateWithoutAssignedToInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3475,6 +3548,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutAssignedToInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3504,6 +3578,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutAssignedToInput = {
 
 export type OnlineLeadUpdateWithoutFinalAssignedLeadsInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3540,6 +3615,7 @@ export type OnlineLeadUncheckedUpdateWithoutFinalAssignedLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3575,6 +3651,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutFinalAssignedLeadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3606,6 +3683,7 @@ export type OnlineLeadCreateManySiteTypeRelationInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3635,6 +3713,7 @@ export type OnlineLeadCreateManySiteTypeRelationInput = {
 
 export type OnlineLeadUpdateWithoutSiteTypeRelationInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3671,6 +3750,7 @@ export type OnlineLeadUncheckedUpdateWithoutSiteTypeRelationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3706,6 +3786,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutSiteTypeRelationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3737,6 +3818,7 @@ export type OnlineLeadCreateManySourceRelationInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3766,6 +3848,7 @@ export type OnlineLeadCreateManySourceRelationInput = {
 
 export type OnlineLeadUpdateWithoutSourceRelationInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3802,6 +3885,7 @@ export type OnlineLeadUncheckedUpdateWithoutSourceRelationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3837,6 +3921,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutSourceRelationInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3868,6 +3953,7 @@ export type OnlineLeadCreateManyFranchiseInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -3897,6 +3983,7 @@ export type OnlineLeadCreateManyFranchiseInput = {
 
 export type OnlineLeadUpdateWithoutFranchiseInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3933,6 +4020,7 @@ export type OnlineLeadUncheckedUpdateWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3968,6 +4056,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutFranchiseInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3999,6 +4088,7 @@ export type OnlineLeadCreateManyFollowupStatusInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -4028,6 +4118,7 @@ export type OnlineLeadCreateManyFollowupStatusInput = {
 
 export type OnlineLeadUpdateWithoutFollowupStatusInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4064,6 +4155,7 @@ export type OnlineLeadUncheckedUpdateWithoutFollowupStatusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4099,6 +4191,7 @@ export type OnlineLeadUncheckedUpdateManyWithoutFollowupStatusInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4188,6 +4281,7 @@ export type OnlineLeadSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -4234,6 +4328,7 @@ export type OnlineLeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -4275,6 +4370,7 @@ export type OnlineLeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -4316,6 +4412,7 @@ export type OnlineLeadSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -4344,7 +4441,7 @@ export type OnlineLeadSelectScalar = {
   product_structures?: boolean
 }
 
-export type OnlineLeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads" | "firstname" | "lastname" | "alt_contact_no" | "site_address" | "site_type_id" | "source_id" | "refered_by" | "archetech_name" | "archetech_number" | "priority" | "product_types" | "product_structures", ExtArgs["result"]["onlineLead"]>
+export type OnlineLeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "lead_code" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads" | "firstname" | "lastname" | "alt_contact_no" | "site_address" | "site_type_id" | "source_id" | "refered_by" | "archetech_name" | "archetech_number" | "priority" | "product_types" | "product_structures", ExtArgs["result"]["onlineLead"]>
 export type OnlineLeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.OnlineLead$createdByArgs<ExtArgs>
@@ -4405,6 +4502,7 @@ export type $OnlineLeadPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: number
     vendor_id: number
     leads_name: string
+    lead_code: string | null
     email: string | null
     contact: string
     source: string
@@ -4870,6 +4968,7 @@ export interface OnlineLeadFieldRefs {
   readonly id: Prisma.FieldRef<"OnlineLead", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"OnlineLead", 'Int'>
   readonly leads_name: Prisma.FieldRef<"OnlineLead", 'String'>
+  readonly lead_code: Prisma.FieldRef<"OnlineLead", 'String'>
   readonly email: Prisma.FieldRef<"OnlineLead", 'String'>
   readonly contact: Prisma.FieldRef<"OnlineLead", 'String'>
   readonly source: Prisma.FieldRef<"OnlineLead", 'String'>

@@ -66,14 +66,23 @@ export async function generateLeadCode(
     // Loop check to prevent any duplicate code conflicts
     let exists = true;
     while (exists) {
-      const existing = await tx.leadMaster.findFirst({
+      const existingInLead = await tx.leadMaster.findFirst({
         where: {
           vendor_id: input.vendorId,
           lead_code: generatedCode,
         },
         select: { id: true },
       });
-      if (!existing) {
+
+      const existingInOnlineLead = await tx.onlineLead.findFirst({
+        where: {
+          vendor_id: input.vendorId,
+          lead_code: generatedCode,
+        },
+        select: { id: true },
+      });
+
+      if (!existingInLead && !existingInOnlineLead) {
         exists = false;
       } else {
         nextNumber++;
@@ -140,14 +149,23 @@ export async function generateLeadCode(
   // Loop check to prevent any duplicate code conflicts
   let exists = true;
   while (exists) {
-    const existing = await tx.leadMaster.findFirst({
+    const existingInLead = await tx.leadMaster.findFirst({
       where: {
         vendor_id: input.vendorId,
         lead_code: generatedCode,
       },
       select: { id: true },
     });
-    if (!existing) {
+
+    const existingInOnlineLead = await tx.onlineLead.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: generatedCode,
+      },
+      select: { id: true },
+    });
+
+    if (!existingInLead && !existingInOnlineLead) {
       exists = false;
     } else {
       nextNumber++;

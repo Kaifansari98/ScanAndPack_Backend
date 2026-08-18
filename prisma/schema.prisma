@@ -4927,6 +4927,7 @@ model OnlineLead {
   id                   Int           @id @default(autoincrement())
   vendor_id            Int
   leads_name           String
+  lead_code            String?
   email                String?
   contact              String
   source               String
@@ -5083,4 +5084,22 @@ model TelecallerCampaignLead {
   onlineLead     OnlineLead @relation(fields: [online_lead_id], references: [id], onDelete: Cascade)
 
   @@map("telecaller_campaign_leads")
+}
+
+model MetaLead {
+  id            Int      @id @default(autoincrement())
+  meta_lead_id  String   @unique
+  name          String
+  phone         String
+  email         String?
+  form_name     String?
+  form_id       String?
+  created_date  DateTime @default(now())
+  lead_source   String   @default("Facebook Lead Ads")
+  status        String   @default("New")
+  custom_fields Json?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@map("meta_leads")
 }

@@ -87,10 +87,14 @@ app.use(
   })
 );
 
-// ===============================
-// ✅ BODY PARSER (LARGE PAYLOAD)
-// ===============================
-app.use(express.json({ limit: "200mb" }));
+app.use(
+  express.json({
+    limit: "200mb",
+    verify: (req: any, _res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true, limit: "200mb" }));
 
 // ===============================

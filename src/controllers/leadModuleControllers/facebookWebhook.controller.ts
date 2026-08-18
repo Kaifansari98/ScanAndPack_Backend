@@ -3,6 +3,7 @@ import { prisma } from "../../prisma/client";
 import { LeadEntryType } from "../../../generated/prisma_client/client";
 import logger from "../../utils/logger";
 import axios from "axios";
+import { generateLeadCode } from "../../utils/generateLeadCode";
 
 export class FacebookWebhookController {
   /**
@@ -223,11 +224,24 @@ export class FacebookWebhookController {
       }
     }
 
+    const vendorRecord = await prisma.vendorMaster.findUnique({
+      where: { id: vendor_id },
+      select: { is_year_wise_lead_code_enabled: true },
+    });
+    let generatedCode: string | null = null;
+    if (vendorRecord?.is_year_wise_lead_code_enabled) {
+      generatedCode = await generateLeadCode(prisma, {
+        franchiseId: 1, // dummy value, year-wise doesn't use franchiseId
+        vendorId: vendor_id,
+      });
+    }
+
     // 7. Insert lead into PostgreSQL online_leads table
     const lead = await prisma.onlineLead.create({
       data: {
         vendor_id: vendor_id,
         leads_name: fullName,
+        lead_code: generatedCode,
         firstname: firstName || null,
         lastname: lastName || null,
         email: email,

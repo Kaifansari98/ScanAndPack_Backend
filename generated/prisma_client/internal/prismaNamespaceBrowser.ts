@@ -248,7 +248,8 @@ export const ModelName = {
   OnlineLeadCallLog: 'OnlineLeadCallLog',
   OnlineLeadStoreLog: 'OnlineLeadStoreLog',
   UserTypePrivilegeMapping: 'UserTypePrivilegeMapping',
-  TelecallerCampaignLead: 'TelecallerCampaignLead'
+  TelecallerCampaignLead: 'TelecallerCampaignLead',
+  MetaLead: 'MetaLead'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3466,6 +3467,7 @@ export const OnlineLeadScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   leads_name: 'leads_name',
+  lead_code: 'lead_code',
   email: 'email',
   contact: 'contact',
   source: 'source',
@@ -3581,6 +3583,25 @@ export const TelecallerCampaignLeadScalarFieldEnum = {
 } as const
 
 export type TelecallerCampaignLeadScalarFieldEnum = (typeof TelecallerCampaignLeadScalarFieldEnum)[keyof typeof TelecallerCampaignLeadScalarFieldEnum]
+
+
+export const MetaLeadScalarFieldEnum = {
+  id: 'id',
+  meta_lead_id: 'meta_lead_id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  form_name: 'form_name',
+  form_id: 'form_id',
+  created_date: 'created_date',
+  lead_source: 'lead_source',
+  status: 'status',
+  custom_fields: 'custom_fields',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MetaLeadScalarFieldEnum = (typeof MetaLeadScalarFieldEnum)[keyof typeof MetaLeadScalarFieldEnum]
 
 
 export const SortOrder = {

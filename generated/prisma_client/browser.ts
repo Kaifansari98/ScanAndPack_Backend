@@ -1007,3 +1007,8 @@ export type UserTypePrivilegeMapping = Prisma.UserTypePrivilegeMappingModel
  * 
  */
 export type TelecallerCampaignLead = Prisma.TelecallerCampaignLeadModel
+/**
+ * Model MetaLead
+ * 
+ */
+export type MetaLead = Prisma.MetaLeadModel
