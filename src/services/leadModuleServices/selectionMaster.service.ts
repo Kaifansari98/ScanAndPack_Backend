@@ -90,6 +90,27 @@ export const createShutterType = async (
   return type as ShutterType;
 };
 
+export const createShutterSubType = async (
+  shutter_type_id: number,
+  name: string,
+) => {
+  const shutterType = await prisma.shutterTypeMaster.findUnique({
+    where: { id: shutter_type_id },
+    select: { id: true },
+  });
+
+  if (!shutterType) {
+    throw new Error("Invalid shutter_type_id");
+  }
+
+  return prisma.shutterSubTypeMaster.create({
+    data: {
+      shutter_type_id,
+      name,
+    },
+  });
+};
+
 export const getAllCarcasMaterials = async (
   vendor_id: number,
 ): Promise<CarcasMaterial[]> => {
@@ -1140,22 +1161,31 @@ export const getAllHandleTypes = async (
   return types as HandleType[];
 };
 
+export const createHandleType = async (
+  vendor_id: number,
+  name: string,
+): Promise<HandleType> => {
+  await ensureVendorExists(vendor_id);
+
+  const type = await prisma.handleTypeMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return type as HandleType;
+};
+
 export const getFastProductionTimelineRules = async (vendor_id: number) => {
   await ensureVendorExists(vendor_id);
 
   return prisma.timelineRule.findMany({
-    where: {
-      vendor_id,
-      OR: [
-        { kitchen_manufacturing_days_for_fast_production: { not: null } },
-        { other_manufacturing_days_for_fast_production: { not: null } },
-      ],
-    },
+    where: { vendor_id },
     select: {
       id: true,
       vendor_id: true,
       carcass_id: true,
       shutter_id: true,
+      kitchen_manufacturing_days: true,
+      other_manufacturing_days: true,
       kitchen_manufacturing_days_for_fast_production: true,
       other_manufacturing_days_for_fast_production: true,
       carcass: {
@@ -1183,6 +1213,132 @@ export const getFastProductionTimelineRules = async (vendor_id: number) => {
       { carcass: { name: "asc" } },
       { shutter: { name: "asc" } },
     ],
+  });
+};
+
+export const createTimelineRule = async (payload: {
+  vendor_id: number;
+  carcass_id: number;
+  shutter_id: number | null;
+  kitchen_manufacturing_days: number;
+  other_manufacturing_days: number;
+  kitchen_manufacturing_days_for_fast_production?: number | null;
+  other_manufacturing_days_for_fast_production?: number | null;
+}) => {
+  await ensureVendorExists(payload.vendor_id);
+
+  const carcass = await prisma.carcassTypeMaster.findFirst({
+    where: { id: payload.carcass_id, vendor_id: payload.vendor_id },
+    select: { id: true },
+  });
+  if (!carcass) {
+    throw new Error("Invalid carcass_id");
+  }
+
+  if (payload.shutter_id !== null) {
+    const shutter = await prisma.shutterTypeMaster.findFirst({
+      where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
+      select: { id: true },
+    });
+    if (!shutter) {
+      throw new Error("Invalid shutter_id");
+    }
+  }
+
+  const existing = await prisma.timelineRule.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      carcass_id: payload.carcass_id,
+      shutter_id: payload.shutter_id,
+    },
+    select: { id: true },
+  });
+
+  if (existing) {
+    throw new Error("Timeline rule already exists for this carcass and shutter combination.");
+  }
+
+  return prisma.timelineRule.create({
+    data: {
+      vendor_id: payload.vendor_id,
+      carcass_id: payload.carcass_id,
+      shutter_id: payload.shutter_id,
+      kitchen_manufacturing_days: payload.kitchen_manufacturing_days,
+      other_manufacturing_days: payload.other_manufacturing_days,
+      kitchen_manufacturing_days_for_fast_production:
+        payload.kitchen_manufacturing_days_for_fast_production ?? null,
+      other_manufacturing_days_for_fast_production:
+        payload.other_manufacturing_days_for_fast_production ?? null,
+    },
+  });
+};
+
+export const updateTimelineRule = async (
+  id: number,
+  payload: {
+    vendor_id: number;
+    carcass_id: number;
+    shutter_id: number | null;
+    kitchen_manufacturing_days: number;
+    other_manufacturing_days: number;
+    kitchen_manufacturing_days_for_fast_production?: number | null;
+    other_manufacturing_days_for_fast_production?: number | null;
+  },
+) => {
+  await ensureVendorExists(payload.vendor_id);
+
+  const existingRule = await prisma.timelineRule.findUnique({
+    where: { id },
+    select: { id: true, vendor_id: true },
+  });
+  if (!existingRule || existingRule.vendor_id !== payload.vendor_id) {
+    throw new Error("Invalid timeline rule id");
+  }
+
+  const carcass = await prisma.carcassTypeMaster.findFirst({
+    where: { id: payload.carcass_id, vendor_id: payload.vendor_id },
+    select: { id: true },
+  });
+  if (!carcass) {
+    throw new Error("Invalid carcass_id");
+  }
+
+  if (payload.shutter_id !== null) {
+    const shutter = await prisma.shutterTypeMaster.findFirst({
+      where: { id: payload.shutter_id, vendor_id: payload.vendor_id },
+      select: { id: true },
+    });
+    if (!shutter) {
+      throw new Error("Invalid shutter_id");
+    }
+  }
+
+  const duplicate = await prisma.timelineRule.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      carcass_id: payload.carcass_id,
+      shutter_id: payload.shutter_id,
+      NOT: { id },
+    },
+    select: { id: true },
+  });
+
+  if (duplicate) {
+    throw new Error("Timeline rule already exists for this carcass and shutter combination.");
+  }
+
+  return prisma.timelineRule.update({
+    where: { id },
+    data: {
+      carcass_id: payload.carcass_id,
+      shutter_id: payload.shutter_id,
+      kitchen_manufacturing_days: payload.kitchen_manufacturing_days,
+      other_manufacturing_days: payload.other_manufacturing_days,
+      kitchen_manufacturing_days_for_fast_production:
+        payload.kitchen_manufacturing_days_for_fast_production ?? null,
+      other_manufacturing_days_for_fast_production:
+        payload.other_manufacturing_days_for_fast_production ?? null,
+    },
   });
 };
 
