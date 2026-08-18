@@ -756,21 +756,23 @@ export const addTimelineRule = async (req: Request, res: Response) => {
     if (
       !vendor_id ||
       !carcass_id ||
-      !shutter_id ||
       kitchen_manufacturing_days === undefined ||
       other_manufacturing_days === undefined
     ) {
       return res.status(400).json({
         success: false,
         error:
-          "vendor_id, carcass_id, shutter_id, kitchen_manufacturing_days and other_manufacturing_days are required",
+          "vendor_id, carcass_id, kitchen_manufacturing_days and other_manufacturing_days are required",
       });
     }
 
     const rule = await createTimelineRule({
       vendor_id: Number(vendor_id),
       carcass_id: Number(carcass_id),
-      shutter_id: Number(shutter_id),
+      shutter_id:
+        shutter_id === undefined || shutter_id === null || shutter_id === ""
+          ? null
+          : Number(shutter_id),
       kitchen_manufacturing_days: Number(kitchen_manufacturing_days),
       other_manufacturing_days: Number(other_manufacturing_days),
       kitchen_manufacturing_days_for_fast_production:
@@ -810,21 +812,23 @@ export const editTimelineRule = async (req: Request, res: Response) => {
       !id ||
       !vendor_id ||
       !carcass_id ||
-      !shutter_id ||
       kitchen_manufacturing_days === undefined ||
       other_manufacturing_days === undefined
     ) {
       return res.status(400).json({
         success: false,
         error:
-          "id, vendor_id, carcass_id, shutter_id, kitchen_manufacturing_days and other_manufacturing_days are required",
+          "id, vendor_id, carcass_id, kitchen_manufacturing_days and other_manufacturing_days are required",
       });
     }
 
     const rule = await updateTimelineRule(id, {
       vendor_id: Number(vendor_id),
       carcass_id: Number(carcass_id),
-      shutter_id: Number(shutter_id),
+      shutter_id:
+        shutter_id === undefined || shutter_id === null || shutter_id === ""
+          ? null
+          : Number(shutter_id),
       kitchen_manufacturing_days: Number(kitchen_manufacturing_days),
       other_manufacturing_days: Number(other_manufacturing_days),
       kitchen_manufacturing_days_for_fast_production:
