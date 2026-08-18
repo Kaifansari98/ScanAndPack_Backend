@@ -2856,7 +2856,7 @@ model VendorModulesMapping {
 model MachineMaster {
   id                    Int                     @id @default(autoincrement())
   machine_name          String
-  machine_code          String                  @unique
+  machine_code          String                  
   machine_type          String?
   machine_type_id       Int?
   status                MachineStatus           @default(ACTIVE)
@@ -2876,6 +2876,8 @@ model MachineMaster {
   machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+  @@index([vendor_id, status])
+  @@unique([vendor_id, machine_code, status],name: "machine_code_vendor_status_unique")
 }
 
 model CutList {
@@ -2919,6 +2921,7 @@ model CutList {
 
   @@index([unique_code])
   @@index([category_id])
+  @@index([vendor_id, unique_code, project_id],map: "idx_cutlist_vendor_code_project")
 }
 
 model CutListMachineMapping {
@@ -2957,14 +2960,18 @@ model CutListMachineMapping {
   completionPhotos DefectCompletionPhoto[]
   defectedItems    DefectedItem[]
 
-  @@index([cut_list_id])
-  @@index([machine_id])
-  @@index([project_id])
-  @@index([vendor_id])
-  @@index([vendor_id, project_id, machine_id, expected_in])
-  @@index([vendor_id, project_id, expected_in])
-  @@index([vendor_id, project_id, cut_list_id, sequence_no, expected_in])
-  @@index([project_id, machine_id, expected_in, box_id])
+@@index([cut_list_id])
+@@index([machine_id])
+@@index([project_id])
+@@index([vendor_id])
+
+@@index([vendor_id, project_id, machine_id, expected_in, actual_in_at, cut_list_id],map: "idx_clmm_pending_scan")
+@@index([vendor_id, project_id, expected_in])
+@@index([vendor_id, project_id, cut_list_id, expected_in, sequence_no, machine_id],map: "idx_clmm_scan_flow")
+@@index([vendor_id, project_id, cut_list_id, actual_in_at, sequence_no],map: "idx_clmm_previous_pass")
+@@index([box_id, vendor_id, project_id, actual_in_at, id],map: "idx_clmm_box_items")
+@@index([project_id, machine_id, expected_in, box_id])
+  
 }
 
 model UserMachineMapping {

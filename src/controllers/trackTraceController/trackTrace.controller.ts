@@ -46,7 +46,7 @@ export const scan_item_old = async (req: Request, res: Response) => {
 };
 
 export const scan_item = async (_req: Request, res: Response) => {
-  console.log(_req.body);
+  //console.log(_req.body);
 
   const files = (_req.files ?? []) as Express.Multer.File[];
   try {
