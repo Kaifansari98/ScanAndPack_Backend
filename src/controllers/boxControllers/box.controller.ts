@@ -171,6 +171,73 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
   }
 };
 
+
+const ALLOWED_PACKING_STATUSES = new Set<boxService.PackingStatusFilter>([
+  "all",
+  "packed",
+  "unpacked",
+]);
+
+export const getBoxesByVendorAndProjectV1 = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    const projectId = Number(req.params.projectId);
+    const page = Number(req.query.page ?? 1);
+    const limit = Number(req.query.limit ?? 10);
+    const search =
+      typeof req.query.search === "string" ? req.query.search.trim() : "";
+    const requestedPackingStatus = String(
+      req.query.packingStatus ?? "all",
+    ).toLowerCase() as boxService.PackingStatusFilter;
+
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({ error: "Invalid vendorId" });
+    }
+
+    if (!Number.isInteger(projectId) || projectId <= 0) {
+      return res.status(400).json({ error: "Invalid projectId" });
+    }
+
+    if (!Number.isInteger(page) || page < 1) {
+      return res.status(400).json({ error: "page must be at least 1" });
+    }
+
+    if (!Number.isInteger(limit) || limit < 1 || limit > 100) {
+      return res
+        .status(400)
+        .json({ error: "limit must be between 1 and 100" });
+    }
+
+    if (!ALLOWED_PACKING_STATUSES.has(requestedPackingStatus)) {
+      return res.status(400).json({
+        error: "packingStatus must be all, packed, or unpacked",
+      });
+    }
+
+    const result = await boxService.getBoxesByVendorAndProjectV1(
+      vendorId,
+      projectId,
+      {
+        page,
+        limit,
+        search,
+        packingStatus: requestedPackingStatus,
+      },
+    );
+
+    return res.status(200).json(result);
+  } catch (err: any) {
+    console.error("getBoxesByVendorAndProject failed:", err);
+    return res.status(500).json({
+      error: err?.message || "Failed to fetch boxes",
+    });
+  }
+};
+
+
 export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);

@@ -1,5 +1,5 @@
 import { prisma } from '../../prisma/client';
-import { BoxStatus, PackingType } from '../../prisma/generated';
+import { BoxStatus, PackingType,Prisma } from '../../prisma/generated';
 import { CreateBoxInput } from '../../types/boxTypes';
 
 import QRCode from "qrcode";
@@ -198,7 +198,7 @@ export const getAllBoxes = async () => {
   });
 };
 
-export const getBoxesByVendorAndProject = async (
+export const getBoxesByVendorAndProject_old = async (
   vendorId: number,
   projectId: number
 ) => {
@@ -297,6 +297,461 @@ export const getBoxesByVendorAndProject = async (
 
   return enriched;
 };
+
+export const getBoxesByVendorAndProject = async (
+  vendorId: number,
+  projectId: number,
+) => {
+  const boxes = await prisma.boxMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      project_id: projectId,
+      is_deleted: false,
+    },
+
+    include: {
+      details: true,
+
+      box_info_values: {
+        include: {
+          field: {
+            select: {
+              id: true,
+              field_label: true,
+              field_key: true,
+              field_type: true,
+              is_required: true,
+              sort_order: true,
+              active: true,
+            },
+          },
+        },
+      },
+    },
+
+    orderBy: {
+      created_date: "asc",
+    },
+  });
+
+  const boxIds = boxes.map((box) => box.id);
+
+  /*
+   * Fetch all packed mapping rows for all boxes.
+   * CutListMachineMapping.qty represents the item quantity.
+   */
+  const mappingRows =
+    boxIds.length > 0
+      ? await prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id: {
+              in: boxIds,
+            },
+            project_id: projectId,
+            vendor_id: vendorId,
+            actual_in_at: {
+              not: null,
+            },
+          },
+
+          select: {
+            box_id: true,
+            cut_list_id: true,
+            qty: true,
+
+            cut_list: {
+              select: {
+                weight: true,
+                qty: true,
+              },
+            },
+          },
+        })
+      : [];
+
+  /*
+   * box_id -> cut_list_id -> clubbed quantity and unit weight
+   */
+  const boxItemMap = new Map<
+    number,
+    Map<
+      number,
+      {
+        quantity: number;
+        unitWeight: number;
+      }
+    >
+  >();
+
+  for (const mapping of mappingRows) {
+    if (mapping.box_id === null || !mapping.cut_list) {
+      continue;
+    }
+
+    const mappingQuantityValue = Number(mapping.qty || 0);
+
+    const mappingQuantity =
+      Number.isFinite(mappingQuantityValue) && mappingQuantityValue > 0
+        ? mappingQuantityValue
+        : 0;
+
+    const cutListWeightValue = Number(mapping.cut_list.weight || 0);
+
+    const cutListWeight = Number.isFinite(cutListWeightValue)
+      ? cutListWeightValue
+      : 0;
+
+    const cutListQuantityValue = Number(mapping.cut_list.qty || 0);
+
+    const cutListQuantity =
+      Number.isFinite(cutListQuantityValue) && cutListQuantityValue > 0
+        ? cutListQuantityValue
+        : 0;
+
+    /*
+     * Weight per item:
+     * CutList.weight / CutList.qty
+     */
+    const unitWeight =
+      cutListQuantity > 0 ? cutListWeight / cutListQuantity : 0;
+
+    let cutListMap = boxItemMap.get(mapping.box_id);
+
+    if (!cutListMap) {
+      cutListMap = new Map();
+      boxItemMap.set(mapping.box_id, cutListMap);
+    }
+
+    const existingItem = cutListMap.get(mapping.cut_list_id);
+
+    if (existingItem) {
+      existingItem.quantity += mappingQuantity;
+    } else {
+      cutListMap.set(mapping.cut_list_id, {
+        quantity: mappingQuantity,
+        unitWeight,
+      });
+    }
+  }
+
+  return boxes.map((box) => {
+    const cutListMap = boxItemMap.get(box.id);
+
+    let itemsCount = 0;
+    let totalWeight = 0;
+
+    if (cutListMap) {
+      for (const item of cutListMap.values()) {
+        itemsCount += item.quantity;
+        totalWeight += item.unitWeight * item.quantity;
+      }
+    }
+
+    const boxInfoValues = box.box_info_values
+      .filter((item) => item.field?.active)
+      .sort(
+        (a, b) =>
+          Number(a.field.sort_order || 0) -
+          Number(b.field.sort_order || 0),
+      )
+      .map((item) => ({
+        id: item.id,
+        field_id: item.field_id,
+        field_label: item.field.field_label,
+        field_key: item.field.field_key,
+        field_type: item.field.field_type,
+        is_required: item.field.is_required,
+        sort_order: item.field.sort_order,
+        field_value: item.field_value || "",
+      }));
+
+    return {
+      ...box,
+
+      // Sum of CutListMachineMapping.qty, clubbed by cut_list_id
+      items_count: itemsCount,
+
+      // Total calculated weight of items packed in the box
+      weight: Number(totalWeight.toFixed(2)),
+
+      box_info_values: boxInfoValues,
+    };
+  });
+};
+
+export type PackingStatusFilter = "all" | "packed" | "unpacked";
+
+export interface GetBoxesByVendorAndProjectOptions {
+  page?: number;
+  limit?: number;
+  search?: string;
+  packingStatus?: PackingStatusFilter;
+}
+
+const getPackingStatusWhere = (packingStatus: PackingStatusFilter) => {
+  return packingStatus === "all" ? undefined : { equals: packingStatus };
+};
+
+export const getBoxesByVendorAndProjectV1 = async (
+  vendorId: number,
+  projectId: number,
+  options: GetBoxesByVendorAndProjectOptions = {},
+) => {
+  const page = Math.max(1, options.page ?? 1);
+  const limit = Math.min(100, Math.max(1, options.limit ?? 10));
+  const search = options.search?.trim() ?? "";
+  const packingStatus = options.packingStatus ?? "all";
+  const skip = (page - 1) * limit;
+
+  const projectWhere: Prisma.BoxMasterWhereInput = {
+    vendor_id: vendorId,
+    project_id: projectId,
+    is_deleted: false,
+  };
+
+  const baseWhere: Prisma.BoxMasterWhereInput = {
+    ...projectWhere,
+    ...(search
+      ? {
+          OR: [
+            {
+              box_name: {
+                contains: search,
+              },
+            },
+            {
+              box_info_values: {
+                some: {
+                  OR: [
+                    {
+                      field_value: {
+                        contains: search,
+                      },
+                    },
+                    {
+                      field: {
+                        is: {
+                          active: true,
+                          OR: [
+                            {
+                              field_label: {
+                                contains: search,
+                              },
+                            },
+                            {
+                              field_key: {
+                                contains: search,
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+        }
+      : {}),
+  };
+
+  const selectedStatusWhere = getPackingStatusWhere(packingStatus);
+  const packedStatusWhere = getPackingStatusWhere("packed");
+  const unpackedStatusWhere = getPackingStatusWhere("unpacked");
+
+  // `as Prisma.BoxMasterWhereInput` keeps the rest of the query strongly typed
+  // while allowing projects where box_status is declared as a normal String.
+  const filteredWhere = {
+    ...baseWhere,
+    ...(selectedStatusWhere ? { box_status: selectedStatusWhere } : {}),
+  } as Prisma.BoxMasterWhereInput;
+
+  const packedWhere = {
+    ...baseWhere,
+    box_status: packedStatusWhere,
+  } as Prisma.BoxMasterWhereInput;
+
+  const unpackedWhere = {
+    ...baseWhere,
+    box_status: unpackedStatusWhere,
+  } as Prisma.BoxMasterWhereInput;
+
+  const [
+    boxes,
+    total,
+    allCount,
+    packedCount,
+    unpackedCount,
+    projectTotal,
+  ] =
+    await Promise.all([
+      prisma.boxMaster.findMany({
+        where: filteredWhere,
+        include: {
+          details: true,
+          box_info_values: {
+            include: {
+              field: {
+                select: {
+                  id: true,
+                  field_label: true,
+                  field_key: true,
+                  field_type: true,
+                  is_required: true,
+                  sort_order: true,
+                  active: true,
+                },
+              },
+            },
+          },
+        },
+        orderBy: [{ created_date: "asc" }, { id: "asc" }],
+        skip,
+        take: limit,
+      }),
+      prisma.boxMaster.count({ where: filteredWhere }),
+      prisma.boxMaster.count({ where: baseWhere }),
+      prisma.boxMaster.count({ where: packedWhere }),
+      prisma.boxMaster.count({ where: unpackedWhere }),
+      prisma.boxMaster.count({ where: projectWhere }),
+    ]);
+
+  const boxIds = boxes.map((box) => box.id);
+
+  const mappingRows =
+    boxIds.length > 0
+      ? await prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id: { in: boxIds },
+            project_id: projectId,
+            vendor_id: vendorId,
+            actual_in_at: { not: null },
+          },
+          select: {
+            box_id: true,
+            cut_list_id: true,
+            qty: true,
+            cut_list: {
+              select: {
+                weight: true,
+                qty: true,
+              },
+            },
+          },
+        })
+      : [];
+
+  const boxItemMap = new Map<
+    number,
+    Map<number, { quantity: number; unitWeight: number }>
+  >();
+
+  for (const mapping of mappingRows) {
+    if (mapping.box_id === null || !mapping.cut_list) continue;
+
+    const rawMappingQuantity = Number(mapping.qty ?? 0);
+    const mappingQuantity =
+      Number.isFinite(rawMappingQuantity) && rawMappingQuantity > 0
+        ? rawMappingQuantity
+        : 0;
+
+    const rawCutListWeight = Number(mapping.cut_list.weight ?? 0);
+    const cutListWeight = Number.isFinite(rawCutListWeight)
+      ? rawCutListWeight
+      : 0;
+
+    const rawCutListQuantity = Number(mapping.cut_list.qty ?? 0);
+    const cutListQuantity =
+      Number.isFinite(rawCutListQuantity) && rawCutListQuantity > 0
+        ? rawCutListQuantity
+        : 0;
+
+    const unitWeight =
+      cutListQuantity > 0 ? cutListWeight / cutListQuantity : 0;
+
+    let cutListMap = boxItemMap.get(mapping.box_id);
+
+    if (!cutListMap) {
+      cutListMap = new Map();
+      boxItemMap.set(mapping.box_id, cutListMap);
+    }
+
+    const existingItem = cutListMap.get(mapping.cut_list_id);
+
+    if (existingItem) {
+      existingItem.quantity += mappingQuantity;
+    } else {
+      cutListMap.set(mapping.cut_list_id, {
+        quantity: mappingQuantity,
+        unitWeight,
+      });
+    }
+  }
+
+  const data = boxes.map((box) => {
+    const cutListMap = boxItemMap.get(box.id);
+    let itemsCount = 0;
+    let totalWeight = 0;
+
+    if (cutListMap) {
+      for (const item of cutListMap.values()) {
+        itemsCount += item.quantity;
+        totalWeight += item.unitWeight * item.quantity;
+      }
+    }
+
+    const boxInfoValues = box.box_info_values
+      .filter((item) => item.field?.active)
+      .sort(
+        (a, b) =>
+          Number(a.field.sort_order ?? 0) - Number(b.field.sort_order ?? 0),
+      )
+      .map((item) => ({
+        id: item.id,
+        field_id: item.field_id,
+        field_label: item.field.field_label,
+        field_key: item.field.field_key,
+        field_type: item.field.field_type,
+        is_required: item.field.is_required,
+        sort_order: item.field.sort_order,
+        field_value: item.field_value ?? "",
+      }));
+
+    return {
+      ...box,
+      items_count: itemsCount,
+      weight: Number(totalWeight.toFixed(2)),
+      box_info_values: boxInfoValues,
+    };
+  });
+
+  const totalPages = total === 0 ? 0 : Math.ceil(total / limit);
+
+  return {
+    data,
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+    counts: {
+      all: allCount,
+      packed: packedCount,
+      unpacked: unpackedCount,
+      projectTotal,
+    },
+    filters: {
+      search,
+      packingStatus,
+    },
+  };
+};
+
+
 
 export const getBoxDetailsWithItems = async (
   vendorId: number,
@@ -539,7 +994,6 @@ const fontToBase64 = (fontPath: string): string => {
 
   return fs.readFileSync(fontPath).toString("base64");
 };
-
 
 
 
@@ -1085,6 +1539,7 @@ export const generateBoxPdfService = async (
 
           select: {
             id: true,
+            qty: true,
 
             cut_list: {
               select: {
@@ -1188,13 +1643,27 @@ export const generateBoxPdfService = async (
             cutListQuantity
           : 0;
 
+      const mappingQuantityValue =
+        Number(
+          mapping.qty || 0
+        );
+
+      const mappingQuantity =
+        Number.isFinite(
+          mappingQuantityValue
+        ) &&
+        mappingQuantityValue > 0
+          ? mappingQuantityValue
+          : 0;
+
       const existingItem =
         itemMap.get(
           cutList.id
         );
 
       if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity +=
+          mappingQuantity;
         existingItem.total_weight =
           unitWeight *
           existingItem.quantity;
@@ -1212,8 +1681,10 @@ export const generateBoxPdfService = async (
             width: cutList.width,
             thickness: cutList.thickness,
             unit_weight: unitWeight,
-            quantity: 1,
-            total_weight: unitWeight,
+            quantity: mappingQuantity,
+            total_weight:
+              unitWeight *
+              mappingQuantity,
           }
         );
       }
@@ -2520,32 +2991,44 @@ color: #111827;
         </div>
       </div>
 
-      <div class="info-cell">
-        <div class="field-label">
-          ITEM NO.
-        </div>
+      ${
+        isGroupWisePacking
+          ? `
+              <div class="info-cell">
+                <div class="field-label">
+                  ITEM NO.
+                </div>
 
-        <div class="field-value filed-value-item-no">
-          ${escapeHtml(
-      itemNo
-    )}
-        </div>
-      </div>
+                <div class="field-value filed-value-item-no">
+                  ${escapeHtml(
+            itemNo
+          )}
+                </div>
+              </div>
+            `
+          : ""
+      }
     </div>
 
     <div class="section-separator"></div>
 
-    <!-- ============================== -->
-    <!-- PRODUCT TITLE                  -->
-    <!-- ============================== -->
-    <div class="field-label" style='padding-top:3px;padding-bottom:3px;'>
-      PRODUCT :
-      <span class="project-value">
-      ${escapeHtml(
-      productName
-    )}
-    </span>
-    </div>
+    ${
+      isGroupWisePacking
+        ? `
+            <!-- ============================== -->
+            <!-- PRODUCT TITLE                  -->
+            <!-- ============================== -->
+            <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
+              PRODUCT :
+              <span class="project-value">
+                ${escapeHtml(
+          productName
+        )}
+              </span>
+            </div>
+          `
+        : ""
+    }
 
     <!-- ============================== -->
     <!-- COMPONENTS TABLE               -->
@@ -2739,6 +3222,9 @@ color: #111827;
     );
   }
 };
+
+
+
 
 
 

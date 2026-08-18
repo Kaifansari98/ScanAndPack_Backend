@@ -374,11 +374,12 @@ export type MachineMasterOrderByWithRelationInput = {
 
 export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  machine_code?: string
+  machine_code_vendor_status_unique?: Prisma.MachineMasterMachine_code_vendor_status_uniqueCompoundUniqueInput
   AND?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
   OR?: Prisma.MachineMasterWhereInput[]
   NOT?: Prisma.MachineMasterWhereInput | Prisma.MachineMasterWhereInput[]
   machine_name?: Prisma.StringFilter<"MachineMaster"> | string
+  machine_code?: Prisma.StringFilter<"MachineMaster"> | string
   machine_type?: Prisma.StringNullableFilter<"MachineMaster"> | string | null
   machine_type_id?: Prisma.IntNullableFilter<"MachineMaster"> | number | null
   status?: Prisma.EnumMachineStatusFilter<"MachineMaster"> | $Enums.MachineStatus
@@ -398,7 +399,7 @@ export type MachineMasterWhereUniqueInput = Prisma.AtLeast<{
   machineType?: Prisma.XOR<Prisma.MachineTypeMasterNullableScalarRelationFilter, Prisma.MachineTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   userMachineMappings?: Prisma.UserMachineMappingListRelationFilter
-}, "id" | "machine_code">
+}, "id" | "machine_code_vendor_status_unique">
 
 export type MachineMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -603,6 +604,12 @@ export type MachineMasterListRelationFilter = {
 
 export type MachineMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type MachineMasterMachine_code_vendor_status_uniqueCompoundUniqueInput = {
+  vendor_id: number
+  machine_code: string
+  status: $Enums.MachineStatus
 }
 
 export type MachineMasterCountOrderByAggregateInput = {
