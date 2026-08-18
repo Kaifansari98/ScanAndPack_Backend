@@ -71,6 +71,7 @@ export async function createLeadLog(
       where: { id: lead_id },
       select: {
         status_id: true,
+        account_id: true,
         statusType: { select: { tag: true } },
       },
     });
@@ -118,11 +119,20 @@ export async function createLeadLog(
     }
   }
 
+  let resolvedAccountId = Number(account_id);
+  if (!resolvedAccountId || resolvedAccountId <= 0) {
+    const leadAcc = await db.leadMaster.findFirst({
+      where: { id: lead_id },
+      select: { account_id: true },
+    });
+    resolvedAccountId = Number((leadAcc as any)?.account_id ?? 0);
+  }
+
   return db.leadDetailedLogs.create({
     data: {
       vendor_id,
       lead_id,
-      account_id,
+      account_id: resolvedAccountId,
       ...(task_id != null && { task_id }),
       ...(product_type_id != null && { product_type_id }),
       action,

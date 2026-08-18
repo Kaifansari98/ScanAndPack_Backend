@@ -690,4 +690,43 @@ export class ClientDocumentationController {
       });
     }
   };
+
+  public static checkMoveToClientApprovalEligibility = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+
+      if (!vendorId || !leadId) {
+        res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+        return;
+      }
+
+      const eligibility =
+        await clientDocumentationService.checkMoveToClientApprovalEligibility({
+          vendor_id: vendorId,
+          lead_id: leadId,
+        });
+
+      res.status(200).json({
+        success: true,
+        message: "Move to Client Approval eligibility checked successfully",
+        data: eligibility,
+      });
+    } catch (error: any) {
+      console.error(
+        "[ClientDocumentationController] checkMoveToClientApprovalEligibility:",
+        error
+      );
+      res.status(500).json({
+        success: false,
+        message: error?.message || "Internal server error",
+      });
+    }
+  };
 }
