@@ -41,6 +41,22 @@ export class ClientDocumentationService {
         message: "Client documentation uploaded successfully",
       };
 
+      const lead = await tx.leadMaster.findFirst({
+        where: { id: data.lead_id, vendor_id: data.vendor_id },
+        select: { account_id: true },
+      });
+
+      const effectiveAccountId =
+        Number(data.account_id) > 0
+          ? Number(data.account_id)
+          : Number(lead?.account_id);
+
+      if (!effectiveAccountId || effectiveAccountId <= 0) {
+        throw new Error(
+          `Account ID is missing or invalid for lead ${data.lead_id}`,
+        );
+      }
+
       // Insert lead documents
       for (const doc of data.documents) {
         const docType = await tx.documentTypeMaster.findFirst({
@@ -59,7 +75,7 @@ export class ClientDocumentationService {
             doc_sys_name: doc.sysName,
             created_by: data.created_by,
             doc_type_id: docType.id,
-            account_id: data.account_id,
+            account_id: effectiveAccountId,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
             product_structure_instance_id:
@@ -165,7 +181,7 @@ export class ClientDocumentationService {
       const detailedLog = await createLeadLog(tx, {
         vendor_id: data.vendor_id,
         lead_id: data.lead_id,
-        account_id: data.account_id,
+        account_id: effectiveAccountId,
         action: actionMessage,
         action_type: "CREATE",
         created_by: data.created_by,
@@ -176,7 +192,7 @@ export class ClientDocumentationService {
         const docLogsData = response.documents.map((doc: any) => ({
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
-          account_id: data.account_id,
+          account_id: effectiveAccountId,
           doc_id: doc.id,
           lead_logs_id: detailedLog.id,
           created_by: data.created_by,
@@ -197,12 +213,354 @@ export class ClientDocumentationService {
     });
   }
 
+  public async checkMoveToClientApprovalEligibility(params: {
+    lead_id: number;
+    vendor_id: number;
+  }) {
+    const { lead_id, vendor_id } = params;
+
+    const lead = await prisma.leadMaster.findFirst({
+      where: { id: lead_id, vendor_id, is_deleted: false },
+      select: {
+        id: true,
+        is_blocked: true,
+        lead_blocked_at: true,
+        is_fast_production: true,
+        createdBy: {
+          select: {
+            vendor: {
+              select: { handlesLargeScaleProjects: true },
+            },
+          },
+        },
+        assignedTo: {
+          select: {
+            vendor: {
+              select: { handlesLargeScaleProjects: true },
+            },
+          },
+        },
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendor_id },
+      select: { handlesLargeScaleProjects: true },
+    });
+
+    const handlesLargeScaleProjects =
+      vendor?.handlesLargeScaleProjects === true ||
+      lead.createdBy?.vendor?.handlesLargeScaleProjects === true ||
+      lead.assignedTo?.vendor?.handlesLargeScaleProjects === true;
+
+    const isFastProduction = lead.is_fast_production === true;
+    const missing_requirements: string[] = [];
+
+    if (lead.is_blocked) {
+      missing_requirements.push(
+        lead.lead_blocked_at
+          ? `This lead has been blocked at ${lead.lead_blocked_at}`
+          : "Lead is blocked",
+      );
+    }
+
+    const [pptType, pythaType, instances, selections, fastProductionRequests, specifications] =
+      await Promise.all([
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 11" },
+          select: { id: true },
+        }),
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 12" },
+          select: { id: true },
+        }),
+        prisma.leadProductStructureInstance.findMany({
+          where: { lead_id, vendor_id },
+          select: {
+            id: true,
+            title: true,
+            productType: { select: { id: true, type: true } },
+            productStructure: { select: { id: true, type: true } },
+            productItemCode: {
+              select: {
+                id: true,
+                item_code: true,
+                productStructure: {
+                  select: { productType: { select: { id: true, type: true } } },
+                },
+              },
+            },
+          },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.leadDesignSelection.findMany({
+          where: {
+            lead_id,
+            vendor_id,
+            type: { in: ["Carcas", "Shutter", "Handles"] },
+          },
+          select: {
+            type: true,
+            desc: true,
+            product_structure_instance_id: true,
+          },
+        }),
+        prisma.fastProductionRequest.findMany({
+          where: { lead_id, vendor_id },
+          select: {
+            instance_id: true,
+            finishes: {
+              where: { component: "CARCASS" },
+              select: { finish_description: true },
+            },
+          },
+        }),
+        prisma.leadSpecificationsMaster.findMany({
+          where: { lead_id, vendor_id },
+          select: {
+            id: true,
+            created_at: true,
+            is_completed: true,
+            item_code_id: true,
+          },
+          orderBy: { created_at: "asc" },
+        }),
+      ]);
+
+    // 1. Large Scale Specifications Check (when handlesLargeScaleProjects is true)
+    if (handlesLargeScaleProjects) {
+      const itemCodeGroupMap = new Map<number, string>(
+        instances
+          .filter((inst) => inst.productItemCode)
+          .map((inst) => [
+            inst.productItemCode!.id,
+            inst.productType?.type ||
+              inst.productItemCode?.productStructure?.productType?.type ||
+              "Other Specifications",
+          ]),
+      );
+
+      const groupedDisplayMap = new Map<string, string>();
+      instances.forEach((inst: any) => {
+        const title =
+          inst.productType?.type ||
+          inst.productItemCode?.productStructure?.productType?.type ||
+          inst.productItemCode?.item_code ||
+          inst.title ||
+          "Item Group";
+        const key = title.trim().toLowerCase();
+        if (!groupedDisplayMap.has(key)) {
+          groupedDisplayMap.set(key, title);
+        }
+      });
+
+      const latestSpecByGroup = new Map<string, any>();
+      for (const spec of specifications) {
+        const title =
+          (spec.item_code_id ? itemCodeGroupMap.get(spec.item_code_id) : null) ||
+          "Other Specifications";
+        const key = title.trim().toLowerCase();
+        const existing = latestSpecByGroup.get(key);
+        if (!existing) {
+          latestSpecByGroup.set(key, spec);
+          continue;
+        }
+        const existingTime = new Date(existing.created_at).getTime();
+        const currentTime = new Date(spec.created_at).getTime();
+        if (
+          currentTime > existingTime ||
+          (currentTime === existingTime && spec.id > existing.id)
+        ) {
+          latestSpecByGroup.set(key, spec);
+        }
+      }
+
+      const missingGroups: string[] = [];
+      groupedDisplayMap.forEach((displayTitle, key) => {
+        const latestSpec = latestSpecByGroup.get(key);
+        if (!latestSpec?.is_completed) {
+          missingGroups.push(displayTitle);
+        }
+      });
+
+      if (missingGroups.length > 0) {
+        const prefix =
+          missingGroups.length === 1
+            ? "Complete specification review for"
+            : "Complete specification review for all item groups:";
+        const suffix =
+          missingGroups.length === 1
+            ? `${missingGroups[0]}. Approve, amend, or delete every row and mark the specification as completed.`
+            : `${missingGroups.join(", ")}. Approve, amend, or delete every row and mark each latest specification as completed.`;
+        missing_requirements.push(`${prefix} ${suffix}`);
+      }
+    }
+
+    // 2. Design Selections Check (ONLY when handlesLargeScaleProjects is false)
+    if (!handlesLargeScaleProjects) {
+      const hasFilledValue = (value?: string | null) => {
+        const normalized = (value || "").trim();
+        return normalized.length > 0 && normalized.toUpperCase() !== "NULL";
+      };
+
+      const hasFastProductionCarcassByInstance = new Map(
+        fastProductionRequests.map((request) => [
+          request.instance_id,
+          request.finishes.some((finish) =>
+            hasFilledValue(finish.finish_description),
+          ),
+        ]),
+      );
+
+      let selectionsReady = true;
+      if (instances.length > 1) {
+        const leadLevelSelections = selections.filter(
+          (row) => row.product_structure_instance_id === null,
+        );
+
+        for (const instance of instances) {
+          let rows = selections.filter(
+            (row) => row.product_structure_instance_id === instance.id,
+          );
+          if (rows.length === 0) {
+            rows = leadLevelSelections;
+          }
+
+          const hasValueByType = {
+            Carcas: rows.some(
+              (row) => row.type === "Carcas" && hasFilledValue(row.desc),
+            ),
+            Shutter: rows.some(
+              (row) => row.type === "Shutter" && hasFilledValue(row.desc),
+            ),
+          };
+
+          if (isFastProduction) {
+            if (!hasFastProductionCarcassByInstance.get(instance.id)) {
+              selectionsReady = false;
+              break;
+            }
+          } else {
+            if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
+              selectionsReady = false;
+              break;
+            }
+          }
+        }
+      } else {
+        const hasValueByType = {
+          Carcas: selections.some(
+            (row) => row.type === "Carcas" && hasFilledValue(row.desc),
+          ),
+          Shutter: selections.some(
+            (row) => row.type === "Shutter" && hasFilledValue(row.desc),
+          ),
+        };
+        if (isFastProduction) {
+          const instanceId = instances[0]?.id;
+          if (!instanceId || !hasFastProductionCarcassByInstance.get(instanceId)) {
+            selectionsReady = false;
+          }
+        } else {
+          if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
+            selectionsReady = false;
+          }
+        }
+      }
+
+      if (!selectionsReady) {
+        if (isFastProduction) {
+          missing_requirements.push("Save Carcas for all instances");
+        } else {
+          missing_requirements.push("Save Carcas & Shutter for all instances");
+        }
+      }
+    }
+
+    // 3. Documents Check (PPT & Pytha)
+    if (pptType && pythaType) {
+      const docs = await prisma.leadDocuments.findMany({
+        where: {
+          lead_id,
+          vendor_id,
+          is_deleted: false,
+          doc_type_id: { in: [pptType.id, pythaType.id] },
+        },
+        select: {
+          doc_type_id: true,
+          product_structure_instance_id: true,
+        },
+      });
+
+      let docsReady = true;
+      if (handlesLargeScaleProjects) {
+        const hasPpt = docs.some((d) => d.doc_type_id === pptType.id);
+        const hasPytha = docs.some((d) => d.doc_type_id === pythaType.id);
+        if (!hasPpt || !hasPytha) {
+          docsReady = false;
+        }
+      } else if (instances.length > 1) {
+        for (const instance of instances) {
+          const pptCount = docs.filter(
+            (d) =>
+              (d.product_structure_instance_id === instance.id ||
+                d.product_structure_instance_id === null) &&
+              d.doc_type_id === pptType.id,
+          ).length;
+          const pythaCount = docs.filter(
+            (d) =>
+              (d.product_structure_instance_id === instance.id ||
+                d.product_structure_instance_id === null) &&
+              d.doc_type_id === pythaType.id,
+          ).length;
+          if (pptCount === 0 || pythaCount === 0) {
+            docsReady = false;
+            break;
+          }
+        }
+      } else {
+        const pptCount = docs.filter((d) => d.doc_type_id === pptType.id).length;
+        const pythaCount = docs.filter((d) => d.doc_type_id === pythaType.id).length;
+        if (pptCount === 0 || pythaCount === 0) {
+          docsReady = false;
+        }
+      }
+
+      if (!docsReady) {
+        missing_requirements.push("Upload Project Files & Pytha Files for all instances");
+      }
+    }
+
+    return {
+      can_move: missing_requirements.length === 0,
+      missing_requirements,
+      handlesLargeScaleProjects,
+      isFastProduction,
+    };
+  }
+
   public async moveToClientApproval(data: {
     lead_id: number;
     vendor_id: number;
     updated_by: number;
     baseUrl: string;
   }) {
+    const eligibility = await this.checkMoveToClientApprovalEligibility({
+      lead_id: data.lead_id,
+      vendor_id: data.vendor_id,
+    });
+
+    if (!eligibility.can_move) {
+      throw new Error(
+        eligibility.missing_requirements[0] ||
+          "Lead cannot be moved to Client Approval due to incomplete requirements",
+      );
+    }
+
     const result = await prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findFirst({
         where: {
@@ -303,64 +661,66 @@ export class ClientDocumentationService {
         ]),
       );
 
-      if (instances.length > 1) {
-        const leadLevelSelections = selections.filter(
-          (row) => row.product_structure_instance_id === null,
-        );
-
-        for (const instance of instances) {
-          let rows = selections.filter(
-            (row) => row.product_structure_instance_id === instance.id,
+      if (!eligibility.handlesLargeScaleProjects) {
+        if (instances.length > 1) {
+          const leadLevelSelections = selections.filter(
+            (row) => row.product_structure_instance_id === null,
           );
 
-          // Fall back to lead-level selections if no instance-specific rows exist
-          if (rows.length === 0) {
-            rows = leadLevelSelections;
-          }
+          for (const instance of instances) {
+            let rows = selections.filter(
+              (row) => row.product_structure_instance_id === instance.id,
+            );
 
+            // Fall back to lead-level selections if no instance-specific rows exist
+            if (rows.length === 0) {
+              rows = leadLevelSelections;
+            }
+
+            const hasValueByType = {
+              Carcas: rows.some(
+                (row) => row.type === "Carcas" && hasFilledValue(row.desc),
+              ),
+              Shutter: rows.some(
+                (row) => row.type === "Shutter" && hasFilledValue(row.desc),
+              ),
+            };
+
+            if (isFastProduction) {
+              if (!hasFastProductionCarcassByInstance.get(instance.id)) {
+                throw new Error(
+                  `Carcas must be filled for ${instance.title}`,
+                );
+              }
+            } else {
+              if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
+                throw new Error(
+                  `Carcas and Shutter must be filled for ${instance.title}`,
+                );
+              }
+            }
+          }
+        } else {
           const hasValueByType = {
-            Carcas: rows.some(
+            Carcas: selections.some(
               (row) => row.type === "Carcas" && hasFilledValue(row.desc),
             ),
-            Shutter: rows.some(
+            Shutter: selections.some(
               (row) => row.type === "Shutter" && hasFilledValue(row.desc),
             ),
           };
-
           if (isFastProduction) {
-            if (!hasFastProductionCarcassByInstance.get(instance.id)) {
-              throw new Error(
-                `Carcas must be filled for ${instance.title}`,
-              );
+            const instanceId = instances[0]?.id;
+            if (
+              !instanceId ||
+              !hasFastProductionCarcassByInstance.get(instanceId)
+            ) {
+              throw new Error("Carcas must be filled");
             }
           } else {
             if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
-              throw new Error(
-                `Carcas and Shutter must be filled for ${instance.title}`,
-              );
+              throw new Error("Carcas and Shutter must be filled");
             }
-          }
-        }
-      } else {
-        const hasValueByType = {
-          Carcas: selections.some(
-            (row) => row.type === "Carcas" && hasFilledValue(row.desc),
-          ),
-          Shutter: selections.some(
-            (row) => row.type === "Shutter" && hasFilledValue(row.desc),
-          ),
-        };
-        if (isFastProduction) {
-          const instanceId = instances[0]?.id;
-          if (
-            !instanceId ||
-            !hasFastProductionCarcassByInstance.get(instanceId)
-          ) {
-            throw new Error("Carcas must be filled");
-          }
-        } else {
-          if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
-            throw new Error("Carcas and Shutter must be filled");
           }
         }
       }
@@ -378,16 +738,26 @@ export class ClientDocumentationService {
         },
       });
 
-      if (instances.length > 1) {
+      if (eligibility.handlesLargeScaleProjects) {
+        const hasPpt = docs.some((d) => d.doc_type_id === pptType.id);
+        const hasPytha = docs.some((d) => d.doc_type_id === pythaType.id);
+        if (!hasPpt || !hasPytha) {
+          throw new Error(
+            "Both Project Files and Pytha Design Files are required before moving stage",
+          );
+        }
+      } else if (instances.length > 1) {
         for (const instance of instances) {
           const pptCount = docs.filter(
             (d) =>
-              d.product_structure_instance_id === instance.id &&
+              (d.product_structure_instance_id === instance.id ||
+                d.product_structure_instance_id === null) &&
               d.doc_type_id === pptType.id,
           ).length;
           const pythaCount = docs.filter(
             (d) =>
-              d.product_structure_instance_id === instance.id &&
+              (d.product_structure_instance_id === instance.id ||
+                d.product_structure_instance_id === null) &&
               d.doc_type_id === pythaType.id,
           ).length;
           if (pptCount === 0 || pythaCount === 0) {
@@ -1118,6 +1488,22 @@ export class ClientDocumentationService {
         message: "Additional client documentation uploaded successfully",
       };
 
+      const lead = await tx.leadMaster.findFirst({
+        where: { id: data.lead_id, vendor_id: data.vendor_id },
+        select: { account_id: true },
+      });
+
+      const effectiveAccountId =
+        Number(data.account_id) > 0
+          ? Number(data.account_id)
+          : Number(lead?.account_id);
+
+      if (!effectiveAccountId || effectiveAccountId <= 0) {
+        throw new Error(
+          `Account ID is missing or invalid for lead ${data.lead_id}`,
+        );
+      }
+
       for (const doc of data.documents) {
         const docType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id: data.vendor_id, tag: doc.docTypeTag },
@@ -1134,7 +1520,7 @@ export class ClientDocumentationService {
             doc_sys_name: doc.sysName,
             created_by: data.created_by,
             doc_type_id: docType.id,
-            account_id: data.account_id,
+            account_id: effectiveAccountId,
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
             tech_check_status: "REVISED",
@@ -1153,7 +1539,7 @@ export class ClientDocumentationService {
       const detailedLog = await createLeadLog(tx, {
         vendor_id: data.vendor_id,
         lead_id: data.lead_id,
-        account_id: data.account_id,
+        account_id: effectiveAccountId,
         action: `${docCount} additional Client Documentation uploaded.`,
         action_type: "UPLOAD",
         created_by: data.created_by,
@@ -1163,7 +1549,7 @@ export class ClientDocumentationService {
         data: response.documents.map((doc: any) => ({
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
-          account_id: data.account_id,
+          account_id: effectiveAccountId,
           doc_id: doc.id,
           lead_logs_id: detailedLog.id,
           created_by: data.created_by,

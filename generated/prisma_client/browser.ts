@@ -288,6 +288,11 @@ export type specificationDocumentMapping = Prisma.specificationDocumentMappingMo
  */
 export type LeadDocuments = Prisma.LeadDocumentsModel
 /**
+ * Model LeadB2BDocument
+ * 
+ */
+export type LeadB2BDocument = Prisma.LeadB2BDocumentModel
+/**
  * Model LeadChatRoom
  * 
  */

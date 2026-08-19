@@ -25,39 +25,71 @@ export const createLeadRequirementMaterialHandler = async (
       client_percentage,
       frankvin_percentage,
       created_by,
+      materials,
     } = req.body;
 
     const rawTypeId = b2b_requirement_type_id ?? product_type_id;
-    const hasProductId = product_id != null || (Array.isArray(product_ids) && product_ids.length > 0);
     const userId = Number((req as any).user?.id || created_by || 1);
 
-    if (!lead_id || !vendor_id || !rawTypeId || !hasProductId || quantity == null) {
+    if (!lead_id || !vendor_id || !rawTypeId) {
       return res.status(400).json({
         success: false,
-        message: "lead_id, vendor_id, requirement type ID (b2b_requirement_type_id/product_type_id), product_id(s), and quantity are required",
+        message: "lead_id, vendor_id, and requirement type ID (b2b_requirement_type_id/product_type_id) are required",
       });
     }
 
-    const materials = await addLeadRequirementMaterial({
+    if (Array.isArray(materials) && materials.length > 0) {
+      for (const mat of materials) {
+        if (!mat.product_id || mat.quantity == null) {
+          return res.status(400).json({
+            success: false,
+            message: "Each material in list requires a product_id and a quantity",
+          });
+        }
+      }
+    } else {
+      const hasProductId = product_id != null || (Array.isArray(product_ids) && product_ids.length > 0);
+      if (!hasProductId || quantity == null) {
+        return res.status(400).json({
+          success: false,
+          message: "product_id(s) and quantity are required when materials array is not provided",
+        });
+      }
+    }
+
+    const createdByVal = isNaN(userId) ? 1 : userId;
+
+    const result = await addLeadRequirementMaterial({
       lead_id: Number(lead_id),
       vendor_id: Number(vendor_id),
       product_type_id: rawTypeId ? Number(rawTypeId) : undefined,
       b2b_requirement_type_id: rawTypeId ? Number(rawTypeId) : undefined,
       product_id: product_id ? Number(product_id) : undefined,
       product_ids: Array.isArray(product_ids) ? product_ids.map(Number) : undefined,
-      quantity: Number(quantity),
+      quantity: quantity != null ? Number(quantity) : undefined,
       unit_id: unit_id ? Number(unit_id) : null,
       unit_name: unit_name || null,
       supplied_by,
       client_percentage: client_percentage != null ? Number(client_percentage) : undefined,
       frankvin_percentage: frankvin_percentage != null ? Number(frankvin_percentage) : undefined,
-      created_by: isNaN(userId) ? 1 : userId,
+      created_by: createdByVal,
+      materials: Array.isArray(materials)
+        ? materials.map((mat: any) => ({
+            product_id: Number(mat.product_id),
+            quantity: Number(mat.quantity),
+            unit_id: mat.unit_id ? Number(mat.unit_id) : null,
+            unit_name: mat.unit_name || null,
+            supplied_by: mat.supplied_by,
+            client_percentage: mat.client_percentage != null ? Number(mat.client_percentage) : undefined,
+            frankvin_percentage: mat.frankvin_percentage != null ? Number(mat.frankvin_percentage) : undefined,
+          }))
+        : undefined,
     });
 
     return res.status(201).json({
       success: true,
       message: "Lead requirement material(s) created successfully",
-      data: materials,
+      data: result,
     });
   } catch (error: any) {
     console.error("[ERROR] createLeadRequirementMaterialHandler:", error.message);

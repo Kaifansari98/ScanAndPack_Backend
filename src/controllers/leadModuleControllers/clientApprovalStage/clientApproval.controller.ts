@@ -44,7 +44,13 @@ export class ClientApprovalController {
     res: Response,
   ): Promise<void> {
     try {
-      const { lead_id, vendor_id, account_id, created_by } = req.body;
+      const {
+        lead_id,
+        vendor_id,
+        account_id,
+        created_by,
+        product_type_id,
+      } = req.body;
 
       if (!lead_id || !vendor_id || !account_id || !created_by) {
         res
@@ -87,6 +93,7 @@ export class ClientApprovalController {
         vendor_id: Number(vendor_id),
         account_id: Number(account_id),
         created_by: Number(created_by),
+        product_type_id: product_type_id ? Number(product_type_id) : undefined,
         documents: uploadedDocs,
       });
 
@@ -120,6 +127,7 @@ export class ClientApprovalController {
         advance_payment_date,
         amount_paid,
         payment_text,
+        product_type_id,
       } = req.body;
 
       const approvalScreenshots = (req.files as any)?.approvalScreenshots || [];
@@ -197,6 +205,7 @@ export class ClientApprovalController {
         amount_paid: parseFloat(amount_paid),
         payment_text,
         payment_files: uploadedPaymentFiles,
+        product_type_id: product_type_id ? Number(product_type_id) : undefined,
       };
 
       const result = await clientApprovalService.submitClientApproval(dto);
@@ -323,6 +332,7 @@ export class ClientApprovalController {
   ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
+      const { product_type_id } = req.query;
 
       if (!leadId || !vendorId) {
         res.status(400).json({
@@ -335,6 +345,7 @@ export class ClientApprovalController {
       const details = await clientApprovalService.getClientApprovalDetails(
         Number(vendorId),
         Number(leadId),
+        product_type_id ? Number(product_type_id) : undefined,
       );
 
       res.status(200).json({

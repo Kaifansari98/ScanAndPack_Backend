@@ -1,19 +1,34 @@
 import { prisma } from "../../prisma/client";
 
-export interface AddLeadRequirementMaterialInput {
-  lead_id: number;
-  vendor_id: number;
-  product_type_id?: number;
-  b2b_requirement_type_id?: number;
-  product_id?: number;
-  product_ids?: number[];
+export interface AddLeadRequirementMaterialItem {
+  product_id: number;
   quantity: number;
   unit_id?: number | null;
   unit_name?: string | null;
   supplied_by?: "Frankvin" | "Client" | "Shared";
   client_percentage?: number;
   frankvin_percentage?: number;
+}
+
+export interface AddLeadRequirementMaterialInput {
+  lead_id: number;
+  vendor_id: number;
+  product_type_id?: number;
+  b2b_requirement_type_id?: number;
   created_by: number;
+
+  // Single-item fallback parameters (for backward compatibility)
+  product_id?: number;
+  product_ids?: number[];
+  quantity?: number;
+  unit_id?: number | null;
+  unit_name?: string | null;
+  supplied_by?: "Frankvin" | "Client" | "Shared";
+  client_percentage?: number;
+  frankvin_percentage?: number;
+
+  // New materials array parameter
+  materials?: AddLeadRequirementMaterialItem[];
 }
 
 export const addLeadRequirementMaterial = async (
@@ -24,11 +39,6 @@ export const addLeadRequirementMaterial = async (
     vendor_id,
     product_type_id,
     b2b_requirement_type_id,
-    product_id,
-    product_ids,
-    quantity,
-    unit_id,
-    unit_name,
     created_by,
   } = payload;
 
@@ -59,16 +69,91 @@ export const addLeadRequirementMaterial = async (
     }
   }
 
-  const targetProductIds: number[] = Array.isArray(product_ids) && product_ids.length > 0
-    ? product_ids
-    : product_id
-    ? [product_id]
+  // Handle new materials array bulk creation mode
+  if (Array.isArray(payload.materials) && payload.materials.length > 0) {
+    return prisma.$transaction(async (tx) => {
+      const createdMaterials = [];
+
+      for (const item of payload.materials!) {
+        const supplied_by = item.supplied_by || "Frankvin";
+        let client_percentage = 0;
+        let frankvin_percentage = 100;
+
+        if (supplied_by === "Client") {
+          client_percentage = 100;
+          frankvin_percentage = 0;
+        } else if (supplied_by === "Shared") {
+          client_percentage = Number(item.client_percentage) || 0;
+          if (client_percentage < 0) client_percentage = 0;
+          if (client_percentage > 100) client_percentage = 100;
+          frankvin_percentage = 100 - client_percentage;
+        }
+
+        const client_quantity = (item.quantity * client_percentage) / 100;
+        const frankvin_quantity = (item.quantity * frankvin_percentage) / 100;
+
+        const newMaterial = await tx.leadRequirementMaterialMapping.create({
+          data: {
+            lead_id,
+            vendor_id,
+            b2b_requirement_type_id: reqTypeId || null,
+            product_type_id: reqTypeId || null,
+            product_id: item.product_id,
+            quantity: item.quantity,
+            unit_id: item.unit_id || null,
+            unit_name: item.unit_name ? item.unit_name.trim() : null,
+            supplied_by: supplied_by as any,
+            client_percentage,
+            frankvin_percentage,
+            client_quantity,
+            frankvin_quantity,
+            created_by: validCreatedBy,
+          } as any,
+          include: {
+            product: {
+              select: {
+                id: true,
+                product_name: true,
+                item_code: true,
+                unit_of_measure: true,
+              },
+            },
+            b2bRequirementType: {
+              select: {
+                id: true,
+                type: true,
+              },
+            },
+            unit: {
+              select: {
+                id: true,
+                unit_name: true,
+                short_name: true,
+              },
+            },
+          },
+        });
+        createdMaterials.push(newMaterial);
+      }
+
+      return createdMaterials;
+    });
+  }
+
+  // Fallback to single item creation mode (for backward compatibility)
+  const targetProductIds: number[] = Array.isArray(payload.product_ids) && payload.product_ids.length > 0
+    ? payload.product_ids
+    : payload.product_id
+    ? [payload.product_id]
     : [];
 
   if (targetProductIds.length === 0) {
     throw new Error("At least one product_id or product_ids must be provided");
   }
 
+  const quantity = payload.quantity || 0;
+  const unit_id = payload.unit_id;
+  const unit_name = payload.unit_name;
   const supplied_by = payload.supplied_by || "Frankvin";
   let client_percentage = 0;
   let frankvin_percentage = 100;
@@ -81,10 +166,6 @@ export const addLeadRequirementMaterial = async (
     if (client_percentage < 0) client_percentage = 0;
     if (client_percentage > 100) client_percentage = 100;
     frankvin_percentage = 100 - client_percentage;
-  } else {
-    // Frankvin
-    client_percentage = 0;
-    frankvin_percentage = 100;
   }
 
   const client_quantity = (quantity * client_percentage) / 100;
