@@ -274,6 +274,12 @@ export class BookingStageService {
           vendor_id: vendorId,
           deleted_at: null,
         },
+      }) || await prisma.leadB2BDocument.findFirst({
+        where: {
+          doc_sys_name: s3Key,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
       });
 
       if (!document) {
@@ -352,21 +358,37 @@ export class BookingStageService {
 
           // Fetch all non-deleted requirement documents and materials for this lead
           const [documents, materials] = await Promise.all([
-            tx.leadDocuments.findMany({
-              where: {
-                lead_id: data.lead_id,
-                vendor_id: data.vendor_id,
-                is_deleted: false,
-              },
-              select: {
-                b2b_requirement_type_id: true,
-                documentType: {
-                  select: {
-                    tag: true,
+            isB2B
+              ? tx.leadB2BDocument.findMany({
+                where: {
+                  lead_id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                  is_deleted: false,
+                },
+                select: {
+                  b2b_requirement_type_id: true,
+                  documentType: {
+                    select: {
+                      tag: true,
+                    },
                   },
                 },
-              },
-            }),
+              })
+              : tx.leadDocuments.findMany({
+                where: {
+                  lead_id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                  is_deleted: false,
+                },
+                select: {
+                  b2b_requirement_type_id: true,
+                  documentType: {
+                    select: {
+                      tag: true,
+                    },
+                  },
+                },
+              }),
             tx.leadRequirementMaterialMapping.findMany({
               where: {
                 lead_id: data.lead_id,

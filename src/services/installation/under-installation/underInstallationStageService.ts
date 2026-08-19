@@ -3514,7 +3514,7 @@ export class UnderInstallationStageService {
       },
     });
 
-    const uploadedTags = docs.map((d) => d.documentType.tag);
+    const uploadedTags = docs.map((d) => d.documentType?.tag).filter(Boolean);
     const missing = requiredTags.filter((tag) => !uploadedTags.includes(tag));
 
     return {

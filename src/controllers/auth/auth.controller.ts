@@ -12,9 +12,9 @@ export const login = async (req: Request, res: Response) => {
   try {
     const response = await authService.login(req);
     return res.status(response.status).json(response.body);
-  } catch (err) {
+  } catch (err: any) {
     console.error("Login error:", err);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 

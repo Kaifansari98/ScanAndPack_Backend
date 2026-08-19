@@ -109,6 +109,7 @@ model VendorMaster {
   leadDetailedLogs                       LeadDetailedLogs[]
   leadDocumentLogs                       LeadDocumentLogs[]
   documents                              LeadDocuments[]
+  b2bDocuments                           LeadB2BDocument[]
   leadExternalPlatformCustomerMappings   LeadExternalPlatformCustomerMapping[]
   leadHardwareMappings                   LeadHardwareMapping[]
   leadLightCarcasUnitMappings            LeadLightCarcasUnitMapping[]
@@ -340,6 +341,7 @@ model UserMaster {
   leadDetailedLogs                                                               LeadDetailedLogs[]
   leadDocumentLogs                                                               LeadDocumentLogs[]
   documentsCreated                                                               LeadDocuments[]                        @relation("DocumentCreatedBy")
+  b2bDocumentsCreated                                                            LeadB2BDocument[]                      @relation("LeadB2BDocumentCreatedBy")
   documentsDeleted                                                               LeadDocuments[]                        @relation("DocumentDeletedBy")
   leadHardwareMappingsCreated                                                    LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
   leadLightCarcasUnitMappingsCreated                                             LeadLightCarcasUnitMapping[]           @relation("LeadLightCarcasUnitMappingCreatedBy")
@@ -823,6 +825,7 @@ model LeadMaster {
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
+  b2bDocuments                                LeadB2BDocument[]
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
   hardwareMappings                            LeadHardwareMapping[]
   lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
@@ -1570,6 +1573,32 @@ model LeadDocuments {
   @@index([product_type_id])
 }
 
+model LeadB2BDocument {
+  id                      Int                      @id @default(autoincrement())
+  lead_id                 Int                      @map("lead_id")
+  vendor_id               Int                      @map("vendor_id")
+  b2b_requirement_type_id Int                      @map("b2b_requirement_type_id")
+  doc_og_name             String                   @map("doc_og_name")
+  doc_sys_name            String                   @map("doc_sys_name")
+  created_by              Int                      @map("created_by")
+  created_at              DateTime                 @default(now()) @map("created_at")
+  updated_at              DateTime                 @updatedAt @map("updated_at")
+  is_deleted              Boolean                  @default(false) @map("is_deleted")
+  doc_type_id             Int?                     @map("doc_type_id")
+
+  lead                    LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor                  VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  b2bRequirementType      B2BRequirementTypeMaster @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
+  createdBy               UserMaster               @relation("LeadB2BDocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  documentType            DocumentTypeMaster?      @relation(fields: [doc_type_id], references: [id], onDelete: Cascade)
+
+  @@index([lead_id])
+  @@index([vendor_id])
+  @@index([b2b_requirement_type_id])
+  @@index([doc_type_id])
+  @@map("LeadB2BDocument")
+}
+
 model LeadChatRoom {
   id         Int               @id @default(autoincrement())
   lead_id    Int
@@ -1848,14 +1877,15 @@ model Ledger {
 }
 
 model DocumentTypeMaster {
-  id        Int             @id @default(autoincrement())
-  type      String
-  vendor_id Int
-  tag       String
-  doc_title String?
-  stage     String?
-  vendor    VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  documents LeadDocuments[]
+  id           Int               @id @default(autoincrement())
+  type         String
+  vendor_id    Int
+  tag          String
+  doc_title    String?
+  stage        String?
+  vendor       VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  documents    LeadDocuments[]
+  b2bDocuments LeadB2BDocument[]
 }
 
 model SmallOrderRequestTypeMaster {
@@ -2856,7 +2886,7 @@ model VendorModulesMapping {
 model MachineMaster {
   id                    Int                     @id @default(autoincrement())
   machine_name          String
-  machine_code          String                  @unique
+  machine_code          String                  
   machine_type          String?
   machine_type_id       Int?
   status                MachineStatus           @default(ACTIVE)
@@ -2876,6 +2906,8 @@ model MachineMaster {
   machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+  @@index([vendor_id, status])
+  @@unique([vendor_id, machine_code, status],name: "machine_code_vendor_status_unique")
 }
 
 model CutList {
@@ -2919,6 +2951,7 @@ model CutList {
 
   @@index([unique_code])
   @@index([category_id])
+  @@index([vendor_id, unique_code, project_id],map: "idx_cutlist_vendor_code_project")
 }
 
 model CutListMachineMapping {
@@ -2957,14 +2990,18 @@ model CutListMachineMapping {
   completionPhotos DefectCompletionPhoto[]
   defectedItems    DefectedItem[]
 
-  @@index([cut_list_id])
-  @@index([machine_id])
-  @@index([project_id])
-  @@index([vendor_id])
-  @@index([vendor_id, project_id, machine_id, expected_in])
-  @@index([vendor_id, project_id, expected_in])
-  @@index([vendor_id, project_id, cut_list_id, sequence_no, expected_in])
-  @@index([project_id, machine_id, expected_in, box_id])
+@@index([cut_list_id])
+@@index([machine_id])
+@@index([project_id])
+@@index([vendor_id])
+
+@@index([vendor_id, project_id, machine_id, expected_in, actual_in_at, cut_list_id],map: "idx_clmm_pending_scan")
+@@index([vendor_id, project_id, expected_in])
+@@index([vendor_id, project_id, cut_list_id, expected_in, sequence_no, machine_id],map: "idx_clmm_scan_flow")
+@@index([vendor_id, project_id, cut_list_id, actual_in_at, sequence_no],map: "idx_clmm_previous_pass")
+@@index([box_id, vendor_id, project_id, actual_in_at, id],map: "idx_clmm_box_items")
+@@index([project_id, machine_id, expected_in, box_id])
+  
 }
 
 model UserMachineMapping {
@@ -4586,6 +4623,7 @@ model B2BRequirementTypeMaster {
   vendor                   VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   leadB2BReqMappings       LeadB2BRequirementTypeMapping[]
   requirementDocuments     LeadDocuments[]                  @relation("LeadDocumentsToB2BRequirementType")
+  b2bDocuments             LeadB2BDocument[]
   leadProcessBriefs        LeadProcessBriefMapping[]
   leadRequirementMaterials LeadRequirementMaterialMapping[]
 

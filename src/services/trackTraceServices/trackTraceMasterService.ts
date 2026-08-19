@@ -57,7 +57,7 @@ export const validateCreateMachine = (data: any) => {
 
 export class TrackTraceMasterService {
 
-   static async assignUsersToMachineService({
+  static async assignUsersToMachineService({
     machine_id,
     vendor_id,
     user_ids,
@@ -145,130 +145,240 @@ export class TrackTraceMasterService {
     };
   }
 
+
+
   static async createMachine(data: MachineData) {
     try {
-      logger.info("Creating machine", { vendor_id: data.vendor_id });
+      logger.info("Creating machine", {
+        vendor_id: data.vendor_id,
+      });
 
       validateCreateMachine(data);
 
+      const machineCode =
+        data.machine_code.trim();
+
+      const machineStatus =
+        MachineStatus.ACTIVE;
+
       /* ---------------- UNIQUE VALIDATION ---------------- */
 
-      const existingMachine = await prisma.machineMaster.findFirst({
-        where: {
-          machine_code: data.machine_code,
-        },
-        select: { id: true },
-      });
+      const existingMachine =
+        await prisma.machineMaster.findFirst({
+          where: {
+            vendor_id: data.vendor_id,
+            machine_code: machineCode,
+            status: machineStatus,
+          },
+
+          select: {
+            id: true,
+          },
+        });
 
       if (existingMachine) {
-        throw new Error(`Machine code '${data.machine_code}' already exists`);
+        throw new Error(
+          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`
+        );
       }
 
       /* ---------------- CREATE MACHINE ---------------- */
 
-      const machine = await prisma.machineMaster.create({
-        data: {
-          ...data,
-          factory_id: data.factory_id ?? null,
-        },
-      });
+      const machine =
+        await prisma.machineMaster.create({
+          data: {
+            ...data,
 
-      logger.info("Machine created successfully", {
-        id: machine.id,
-      });
+            machine_code:
+              machineCode,
+
+            status:
+              machineStatus,
+
+            factory_id:
+              data.factory_id ??
+              null,
+          },
+        });
+
+      logger.info(
+        "Machine created successfully",
+        {
+          id: machine.id,
+          vendor_id: machine.vendor_id,
+          machine_code: machine.machine_code,
+          status: machine.status,
+        }
+      );
 
       return machine;
     } catch (error) {
-      logger.error("Error creating machine", error);
+      throw new Error(
+        `A machine with the same code, vendor and status already exists`
+      );
+    }
+  }
+
+
+  static async getMachinesByVendor(vendor_id: number) {
+    try {
+      logger.info("Fetching machines for vendor", { vendor_id });
+
+      const rawMachines = await prisma.machineMaster.findMany({
+        where: {
+          vendor_id,
+          machineType: { isNot: null },
+        },
+        orderBy: { sequence_no: "asc" },
+        include: {
+          machineType: {
+            select: { machine_type: true },
+          },
+        },
+      });
+
+      const machines = await Promise.all(
+        rawMachines.map(async ({ machineType, ...machine }) => ({
+          ...machine,
+          image_path: machine.image_path ? await generateSignedUrl(machine.image_path) : null,
+          machine_type: machineType?.machine_type ?? null,
+        }))
+      );
+
+      return machines;
+    } catch (error) {
+      logger.error("Error fetching machines", error);
       throw error;
     }
   }
-static async getMachinesByVendor(vendor_id: number) {
-  try {
-    logger.info("Fetching machines for vendor", { vendor_id });
-
-    const rawMachines = await prisma.machineMaster.findMany({
-      where: {
-        vendor_id,
-        machineType: { isNot: null },
-      },
-      orderBy: { sequence_no: "asc" },
-      include: {
-        machineType: {
-          select: { machine_type: true },
-        },
-      },
-    });
-
-    const machines = await Promise.all(
-      rawMachines.map(async ({ machineType, ...machine }) => ({
-        ...machine,
-        image_path: machine.image_path ? await generateSignedUrl(machine.image_path) : null,
-        machine_type: machineType?.machine_type ?? null,
-      }))
-    );
-
-    return machines;
-  } catch (error) {
-    logger.error("Error fetching machines", error);
-    throw error;
-  }
-}
 
   static async updateMachine(
     id: number,
     vendor_id: number,
-    data: UpdateMachineData,
+    data: UpdateMachineData
   ) {
     try {
-      logger.info("Updating machine", { id, vendor_id });
-
-      /* -------- Check Machine Exists -------- */
-
-      const existing = await prisma.machineMaster.findFirst({
-        where: { id, vendor_id },
-        select: { id: true },
+      logger.info("Updating machine", {
+        id,
+        vendor_id,
       });
 
-      if (!existing) {
-        throw new Error("Machine not found for this vendor");
-      }
+      /* -------- CHECK MACHINE EXISTS -------- */
 
-      /* -------- UNIQUE MACHINE CODE VALIDATION -------- */
-      // Only run if machine_code is being updated
-
-      if (data.machine_code) {
-        const duplicate = await prisma.machineMaster.findFirst({
+      const existing =
+        await prisma.machineMaster.findFirst({
           where: {
-            machine_code: data.machine_code,
-            NOT: { id: id }, // 👈 Ignore current machine
+            id,
+            vendor_id,
           },
-          select: { id: true },
+
+          select: {
+            id: true,
+            machine_code: true,
+            status: true,
+          },
         });
 
-        if (duplicate) {
-          throw new Error(`Machine code '${data.machine_code}' already exists`);
-        }
+      if (!existing) {
+        throw new Error(
+          "Machine not found for this vendor"
+        );
+      }
+
+      /*
+       * Use the updated value when supplied;
+       * otherwise retain the existing value.
+       */
+      const machineCode =
+        data.machine_code !== undefined
+          ? data.machine_code.trim()
+          : existing.machine_code;
+
+      const machineStatus =
+        data.status !== undefined
+          ? data.status
+          : existing.status;
+
+      /* -------- UNIQUE COMBINATION VALIDATION -------- */
+
+      const duplicate =
+        await prisma.machineMaster.findFirst({
+          where: {
+            vendor_id,
+            machine_code:
+              machineCode,
+            status:
+              machineStatus,
+
+            NOT: {
+              id,
+            },
+          },
+
+          select: {
+            id: true,
+          },
+        });
+
+      if (duplicate) {
+        throw new Error(
+          `Machine code '${machineCode}' already exists for this vendor with status '${machineStatus}'`
+        );
       }
 
       /* -------- UPDATE MACHINE -------- */
 
-      const updated = await prisma.machineMaster.update({
-        where: { id },
-        data,
-      });
+      const updated =
+        await prisma.machineMaster.update({
+          where: {
+            id,
+          },
 
-      logger.info("Machine updated successfully", { id });
+          data: {
+            ...data,
+
+            // Prevent changing the machine's vendor
+            vendor_id,
+
+            machine_code:
+              machineCode,
+
+            status:
+              machineStatus,
+
+            ...(data.factory_id !== undefined
+              ? {
+                factory_id:
+                  data.factory_id ??
+                  null,
+              }
+              : {}),
+          },
+        });
+
+      logger.info(
+        "Machine updated successfully",
+        {
+          id: updated.id,
+          vendor_id:
+            updated.vendor_id,
+          machine_code:
+            updated.machine_code,
+          status:
+            updated.status,
+        }
+      );
 
       return updated;
-    } catch (error: any) {
-      /* -------- HANDLE DB UNIQUE ERROR (Race Condition Safe) -------- */
+    } catch (error) {
+      /* -------- HANDLE DATABASE RACE CONDITION -------- */
 
-      if (error.code === "P2002") {
-        throw new Error("Machine code already exists");
-      }
+      throw new Error(
+        "A machine with the same code, vendor and status already exists"
+      );
 
-      logger.error("Error updating machine", error);
+
+
       throw error;
     }
   }

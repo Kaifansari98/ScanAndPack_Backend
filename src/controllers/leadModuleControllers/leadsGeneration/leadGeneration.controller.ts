@@ -2772,7 +2772,7 @@ export class LeadController {
         });
       }
 
-      // 🧾 Check if document exists and belongs to the vendor
+      // 🧾 Check if document exists and belongs to the vendor in leadDocuments
       const existingDoc = await prisma.leadDocuments.findFirst({
         where: {
           id: Number(documentId),
@@ -2780,7 +2780,9 @@ export class LeadController {
           is_deleted: false,
         },
         include: {
-          lead: true,
+          lead: {
+            include: { franchise: true },
+          },
           account: true,
           documentType: {
             select: {
@@ -2790,69 +2792,114 @@ export class LeadController {
         },
       });
 
-      if (!existingDoc) {
-        return res.status(404).json({
-          success: false,
-          message: "Document not found or already deleted",
-        });
-      }
-
-      // 🧹 Soft delete it
-      const updatedDoc = await prisma.leadDocuments.update({
-        where: { id: Number(documentId) },
-        data: {
-          is_deleted: true,
-          deleted_by: Number(deleted_by),
-          deleted_at: new Date(),
-        },
-      });
-
-      if (existingDoc.account_id) {
-        const action =
-          existingDoc.documentType?.tag === "Type 25"
-            ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
-            : existingDoc.documentType?.tag === "Type 26"
-              ? `Handover Document "${existingDoc.doc_og_name}" was deleted.`
-              : existingDoc.documentType?.tag === "Type 27"
-                ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
-                : existingDoc.documentType?.tag === "Type 28"
-                  ? `Warranty Card Photo "${existingDoc.doc_og_name}" was deleted.`
-                  : existingDoc.documentType?.tag === "Type 29"
-                    ? `Handover Booklet "${existingDoc.doc_og_name}" was deleted.`
-                    : existingDoc.documentType?.tag === "Type 30"
-                      ? `Final Handover Form "${existingDoc.doc_og_name}" was deleted.`
-                      : existingDoc.documentType?.tag === "Type 31"
-                        ? `QC Document "${existingDoc.doc_og_name}" was deleted.`
-                        : existingDoc.documentType?.tag === "Type 39"
-                          ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
-                          : `Document "${existingDoc.doc_og_name}" was deleted.`;
-
-        const detailedLog = await createLeadLog(prisma, {
-          vendor_id: Number(vendorId),
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id,
-          action,
-          action_type: "DELETE",
-          history_type: "Lead",
-          created_by: Number(deleted_by),
-        });
-
-        await prisma.leadDocumentLogs.create({
+      if (existingDoc && !existingDoc.lead?.franchise?.moduled_for_b2b) {
+        // 🧹 Soft delete it
+        const updatedDoc = await prisma.leadDocuments.update({
+          where: { id: Number(documentId) },
           data: {
+            is_deleted: true,
+            deleted_by: Number(deleted_by),
+            deleted_at: new Date(),
+          },
+        });
+
+        if (existingDoc.account_id) {
+          const action =
+            existingDoc.documentType?.tag === "Type 25"
+              ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+              : existingDoc.documentType?.tag === "Type 26"
+                ? `Handover Document "${existingDoc.doc_og_name}" was deleted.`
+                : existingDoc.documentType?.tag === "Type 27"
+                  ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+                  : existingDoc.documentType?.tag === "Type 28"
+                    ? `Warranty Card Photo "${existingDoc.doc_og_name}" was deleted.`
+                    : existingDoc.documentType?.tag === "Type 29"
+                      ? `Handover Booklet "${existingDoc.doc_og_name}" was deleted.`
+                      : existingDoc.documentType?.tag === "Type 30"
+                        ? `Final Handover Form "${existingDoc.doc_og_name}" was deleted.`
+                        : existingDoc.documentType?.tag === "Type 31"
+                          ? `QC Document "${existingDoc.doc_og_name}" was deleted.`
+                          : existingDoc.documentType?.tag === "Type 39"
+                            ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
+                            : `Document "${existingDoc.doc_og_name}" was deleted.`;
+
+          const detailedLog = await createLeadLog(prisma, {
             vendor_id: Number(vendorId),
             lead_id: existingDoc.lead_id!,
             account_id: existingDoc.account_id,
-            doc_id: Number(documentId),
-            lead_logs_id: detailedLog.id,
+            action,
+            action_type: "DELETE",
+            history_type: "Lead",
             created_by: Number(deleted_by),
-          },
+          });
+
+          await prisma.leadDocumentLogs.create({
+            data: {
+              vendor_id: Number(vendorId),
+              lead_id: existingDoc.lead_id!,
+              account_id: existingDoc.account_id,
+              doc_id: Number(documentId),
+              lead_logs_id: detailedLog.id,
+              created_by: Number(deleted_by),
+            },
+          });
+        }
+
+        return res.status(200).json({
+          success: true,
+          message: "Document deleted successfully (soft delete)",
+          data: updatedDoc,
         });
       }
 
-      return res.status(200).json({
-        success: true,
-        message: "Document deleted successfully (soft delete)",
-        data: updatedDoc,
+      // Check if document exists and belongs to the vendor in leadB2BDocument
+      const existingB2bDoc = await prisma.leadB2BDocument.findFirst({
+        where: {
+          id: Number(documentId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+        include: {
+          lead: {
+            include: { franchise: true },
+          },
+        },
+      });
+
+      if (existingB2bDoc && existingB2bDoc.lead?.franchise?.moduled_for_b2b) {
+        // 🧹 Soft delete it
+        const updatedB2bDoc = await prisma.leadB2BDocument.update({
+          where: { id: Number(documentId) },
+          data: {
+            is_deleted: true,
+            updated_at: new Date(),
+          },
+        });
+
+        if (existingB2bDoc.lead && existingB2bDoc.lead.account_id) {
+          const action = `B2B Document "${existingB2bDoc.doc_og_name}" was deleted.`;
+
+          await createLeadLog(prisma, {
+            vendor_id: Number(vendorId),
+            lead_id: existingB2bDoc.lead_id,
+            account_id: existingB2bDoc.lead.account_id,
+            action,
+            action_type: "DELETE",
+            history_type: "Lead",
+            created_by: Number(deleted_by),
+          });
+        }
+
+        return res.status(200).json({
+          success: true,
+          message: "Document deleted successfully (soft delete)",
+          data: updatedB2bDoc,
+        });
+      }
+
+      return res.status(404).json({
+        success: false,
+        message: "Document not found or already deleted",
       });
     } catch (error: any) {
       console.error("Error deleting document:", error);

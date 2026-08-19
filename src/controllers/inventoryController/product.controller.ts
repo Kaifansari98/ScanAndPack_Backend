@@ -8,6 +8,10 @@ import {
   listProducts,
   updateProduct,
 } from "../../services/inventoryService/product.service";
+import {
+  generateProductTemplateService,
+  processProductBulkUploadService,
+} from "../../services/inventoryService/product-bulk-upload.service";
 
 const getVendorId = (req: Request) => Number(req.params.vendor_id);
 
@@ -95,3 +99,57 @@ export const productRemove = async (req: Request, res: Response) => {
       : ApiResponse.error(result.message, 400)
   );
 };
+
+export const downloadProductsTemplate = async (req: Request, res: Response) => {
+  try {
+    const buffer = await generateProductTemplateService();
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="product_bulk_template.xlsx"'
+    );
+    return res.status(200).send(buffer);
+  } catch (error: any) {
+    console.error("downloadProductsTemplate error:", error);
+    return res.status(500).json(ApiResponse.error("Failed to generate template", 500));
+  }
+};
+
+export const uploadProductsBulk = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req);
+    const user_id = Number(req.body.user_id || req.query.user_id || 0);
+
+    if (!req.file) {
+      return res.status(400).json(ApiResponse.error("No file uploaded", 400));
+    }
+
+    const { response, errorFileBuffer } = await processProductBulkUploadService(
+      vendor_id,
+      user_id,
+      req.file.buffer
+    );
+
+    let errorFileBase64: string | undefined = undefined;
+    if (errorFileBuffer) {
+      errorFileBase64 = errorFileBuffer.toString("base64");
+    }
+
+    const finalData = {
+      ...(response.data || {}),
+      errorFileBase64,
+    };
+
+    return res.status(response.status ? 200 : 400).json(
+      response.status
+        ? ApiResponse.success(finalData, response.message, 200)
+        : ApiResponse.error(response.message, 400)
+    );
+  } catch (error: any) {
+    console.error("uploadProductsBulk error:", error);
+    return res.status(500).json(ApiResponse.error("Failed to process bulk upload", 500));
+  }
+};
