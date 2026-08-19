@@ -19,6 +19,9 @@ import {
   getBoxDetailsWithItems,
   getProjectBoxInfoFields,
   getBoxInfoValues,
+  getManualBoxSiteInItems,
+  verifyManualBoxSiteInItem
+
 } from '../../controllers/boxControllers/box.controller';
 
 
@@ -68,6 +71,17 @@ router.get(
 router.get(
   "/:boxId/info-values",
   getBoxInfoValues
+);
+
+router.get(
+  "/boxes/:box_id/items/manual-site-in",
+  getManualBoxSiteInItems
+);
+
+// NEW - verify/update one manually packed mapping row
+router.patch(
+  "/boxes/:box_id/items/manual-site-in/:mapping_id",
+  verifyManualBoxSiteInItem
 );
 
 

@@ -128,6 +128,7 @@ export const createVendor = async (data: any) => {
     is_inventory_enabled,
     is_tracktrace_enabled,
     is_year_wise_lead_code_enabled,
+    push_lead_to_cadbid,
   } = data;
 
   return await prisma.vendorMaster.create({
@@ -147,6 +148,7 @@ export const createVendor = async (data: any) => {
       is_inventory_enabled,
       is_tracktrace_enabled,
       is_year_wise_lead_code_enabled,
+      push_lead_to_cadbid,
     },
   });
 };
@@ -209,6 +211,7 @@ export const getAllVendorsPaginated = async ({
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
         is_scanpack_enabled:true,
+        push_lead_to_cadbid: true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
         logo: true,
@@ -1879,7 +1882,8 @@ export const onboardVendor = async (data: any) => {
     is_inventory_enabled,
     is_tracktrace_enabled,
     is_year_wise_lead_code_enabled,
-    is_scanpack_enabled
+    is_scanpack_enabled,
+    push_lead_to_cadbid,
   } = data;
 
   const vendor = await prisma.vendorMaster.create({
@@ -1909,7 +1913,8 @@ export const onboardVendor = async (data: any) => {
       is_inventory_enabled,
       is_tracktrace_enabled,
       is_year_wise_lead_code_enabled,
-      is_scanpack_enabled
+      is_scanpack_enabled,
+      push_lead_to_cadbid,
     },
   });
 
@@ -1972,7 +1977,8 @@ export const updateVendor = async (vendorId: number, data: any) => {
     is_tracktrace_enabled,
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
-    is_scanpack_enabled
+    is_scanpack_enabled,
+    push_lead_to_cadbid
   } = data;
 
   const vendor = await prisma.vendorMaster.update({
@@ -2002,7 +2008,8 @@ export const updateVendor = async (vendorId: number, data: any) => {
       is_tracktrace_enabled,
       handlesLargeScaleProjects,
       is_year_wise_lead_code_enabled,
-      is_scanpack_enabled
+      is_scanpack_enabled,
+      push_lead_to_cadbid,
     },
   });
 
@@ -2123,10 +2130,13 @@ export interface LeadServicingReportRow {
   final_handover_date: Date | null;
   service_1_due_date: Date | null;
   service_1_completed_date: Date | null;
+  service_1_status: string | null;
   service_2_due_date: Date | null;
   service_2_completed_date: Date | null;
+  service_2_status: string | null;
   service_3_due_date: Date | null;
   service_3_completed_date: Date | null;
+  service_3_status: string | null;
   amc_opted_date: Date | null;
   amc_dates_same_as_service_dates: string;
 }
@@ -2191,6 +2201,7 @@ export const getLeadServicingReportData = async (
           service_type: true,
           scheduled_for: true,
           completed_at: true,
+          status: true,
         },
       },
     },
@@ -2255,10 +2266,13 @@ export const getLeadServicingReportData = async (
       final_handover_date: lead.final_handover_marked_at,
       service_1_due_date: freeService1?.scheduled_for ?? null,
       service_1_completed_date: freeService1?.completed_at ?? null,
+      service_1_status: freeService1?.status ?? null,
       service_2_due_date: freeService2?.scheduled_for ?? null,
       service_2_completed_date: freeService2?.completed_at ?? null,
+      service_2_status: freeService2?.status ?? null,
       service_3_due_date: freeService3?.scheduled_for ?? null,
       service_3_completed_date: freeService3?.completed_at ?? null,
+      service_3_status: freeService3?.status ?? null,
       amc_opted_date: lead.amc_opted_at ?? null,
       amc_dates_same_as_service_dates,
     });

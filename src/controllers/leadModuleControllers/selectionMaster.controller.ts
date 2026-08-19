@@ -9,9 +9,13 @@ import {
   getAllCarcassMaterialFinishesForVendor,
   bulkUploadCarcassMaterialFinishes,
   getFastProductionTimelineRules,
+  createTimelineRule,
+  updateTimelineRule,
   getAllHandleTypes,
+  createHandleType,
   getAllShutterTypes,
   createShutterType,
+  createShutterSubType,
   getAllShutterMaterials,
   createShutterMaterial,
   getShutterMaterialFinishes,
@@ -103,6 +107,24 @@ export const addShutterType = async (req: Request, res: Response) => {
 
     const type = await createShutterType(Number(vendor_id), name);
     return res.status(201).json({ success: true, data: type });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addShutterSubType = async (req: Request, res: Response) => {
+  try {
+    const { shutter_type_id, name } = req.body;
+
+    if (!shutter_type_id || !name) {
+      return res.status(400).json({
+        success: false,
+        error: "shutter_type_id and name are required",
+      });
+    }
+
+    const subtype = await createShutterSubType(Number(shutter_type_id), name);
+    return res.status(201).json({ success: true, data: subtype });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
@@ -687,6 +709,23 @@ export const fetchAllHandleTypes = async (req: Request, res: Response) => {
   }
 };
 
+export const addHandleType = async (req: Request, res: Response) => {
+  try {
+    const { vendor_id, name } = req.body;
+
+    if (!vendor_id || !name) {
+      return res
+        .status(400)
+        .json({ success: false, error: "vendor_id and name are required" });
+    }
+
+    const type = await createHandleType(Number(vendor_id), name);
+    return res.status(201).json({ success: true, data: type });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 export const fetchFastProductionTimelineRules = async (
   req: Request,
   res: Response,
@@ -697,6 +736,116 @@ export const fetchFastProductionTimelineRules = async (
 
     const rules = await getFastProductionTimelineRules(vendor_id);
     return res.status(200).json({ success: true, data: rules });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const addTimelineRule = async (req: Request, res: Response) => {
+  try {
+    const {
+      vendor_id,
+      carcass_id,
+      shutter_id,
+      kitchen_manufacturing_days,
+      other_manufacturing_days,
+      kitchen_manufacturing_days_for_fast_production,
+      other_manufacturing_days_for_fast_production,
+    } = req.body;
+
+    if (
+      !vendor_id ||
+      !carcass_id ||
+      kitchen_manufacturing_days === undefined ||
+      other_manufacturing_days === undefined
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "vendor_id, carcass_id, kitchen_manufacturing_days and other_manufacturing_days are required",
+      });
+    }
+
+    const rule = await createTimelineRule({
+      vendor_id: Number(vendor_id),
+      carcass_id: Number(carcass_id),
+      shutter_id:
+        shutter_id === undefined || shutter_id === null || shutter_id === ""
+          ? null
+          : Number(shutter_id),
+      kitchen_manufacturing_days: Number(kitchen_manufacturing_days),
+      other_manufacturing_days: Number(other_manufacturing_days),
+      kitchen_manufacturing_days_for_fast_production:
+        kitchen_manufacturing_days_for_fast_production === undefined ||
+        kitchen_manufacturing_days_for_fast_production === null ||
+        kitchen_manufacturing_days_for_fast_production === ""
+          ? null
+          : Number(kitchen_manufacturing_days_for_fast_production),
+      other_manufacturing_days_for_fast_production:
+        other_manufacturing_days_for_fast_production === undefined ||
+        other_manufacturing_days_for_fast_production === null ||
+        other_manufacturing_days_for_fast_production === ""
+          ? null
+          : Number(other_manufacturing_days_for_fast_production),
+    });
+
+    return res.status(201).json({ success: true, data: rule });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const editTimelineRule = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const {
+      vendor_id,
+      carcass_id,
+      shutter_id,
+      kitchen_manufacturing_days,
+      other_manufacturing_days,
+      kitchen_manufacturing_days_for_fast_production,
+      other_manufacturing_days_for_fast_production,
+    } = req.body;
+
+    if (
+      !id ||
+      !vendor_id ||
+      !carcass_id ||
+      kitchen_manufacturing_days === undefined ||
+      other_manufacturing_days === undefined
+    ) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "id, vendor_id, carcass_id, kitchen_manufacturing_days and other_manufacturing_days are required",
+      });
+    }
+
+    const rule = await updateTimelineRule(id, {
+      vendor_id: Number(vendor_id),
+      carcass_id: Number(carcass_id),
+      shutter_id:
+        shutter_id === undefined || shutter_id === null || shutter_id === ""
+          ? null
+          : Number(shutter_id),
+      kitchen_manufacturing_days: Number(kitchen_manufacturing_days),
+      other_manufacturing_days: Number(other_manufacturing_days),
+      kitchen_manufacturing_days_for_fast_production:
+        kitchen_manufacturing_days_for_fast_production === undefined ||
+        kitchen_manufacturing_days_for_fast_production === null ||
+        kitchen_manufacturing_days_for_fast_production === ""
+          ? null
+          : Number(kitchen_manufacturing_days_for_fast_production),
+      other_manufacturing_days_for_fast_production:
+        other_manufacturing_days_for_fast_production === undefined ||
+        other_manufacturing_days_for_fast_production === null ||
+        other_manufacturing_days_for_fast_production === ""
+          ? null
+          : Number(other_manufacturing_days_for_fast_production),
+    });
+
+    return res.status(200).json({ success: true, data: rule });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }

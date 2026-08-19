@@ -3685,6 +3685,171 @@ export class DesigingStageController {
     }
   }
 
+  public static async getLeadSpecificationPdfData(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const specsId = Number(req.params.specsId);
+
+      if (!vendorId || !leadId || !specsId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId, leadId and specsId are required",
+        });
+      }
+
+      const specification = await prisma.leadSpecificationsMaster.findFirst({
+        where: {
+          id: specsId,
+          vendor_id: vendorId,
+          lead_id: leadId,
+        },
+        select: {
+          created_at: true,
+          lead: {
+            select: {
+              firstname: true,
+              lastname: true,
+            },
+          },
+          productItemCode: {
+            select: {
+              productStructure: {
+                select: {
+                  type: true,
+                  productType: { select: { type: true } },
+                },
+              },
+            },
+          },
+          lights_remark: true,
+          LeadCarcassMaterialMapping: {
+            orderBy: { id: "asc" },
+            select: {
+              is_approved: true,
+              is_amended: true,
+              is_deleted_item: true,
+              carcassType: { select: { name: true } },
+              carcasMaterial: { select: { name: true } },
+              carcassMaterialFinish: { select: { name: true } },
+            },
+          },
+          LeadShutterMaterialMapping: {
+            orderBy: { id: "asc" },
+            select: {
+              is_approved: true,
+              is_amended: true,
+              is_deleted_item: true,
+              shutterType: { select: { name: true } },
+              shutterMaterial: { select: { name: true } },
+              shutterMaterialFinish: { select: { name: true } },
+            },
+          },
+          LeadHardwareMapping: {
+            orderBy: { id: "asc" },
+            select: {
+              is_approved: true,
+              is_amended: true,
+              is_deleted_item: true,
+              carcassLegs: { select: { name: true } },
+              skirtingCarcassLegs: { select: { name: true, inScope: true } },
+              skirtingCarcassLegsColor: { select: { color: true } },
+              note: true,
+            },
+          },
+          lightCarcasUnitMappings: {
+            orderBy: { id: "asc" },
+            select: {
+              is_approved: true,
+              is_amended: true,
+              is_deleted_item: true,
+              custom_remark: true,
+              lightCarcasUnit: {
+                select: {
+                  type: true,
+                  lightCarcasType: { select: { type: true } },
+                },
+              },
+            },
+          },
+          otherAppliancesMappings: {
+            orderBy: { id: "asc" },
+            select: {
+              is_approved: true,
+              is_amended: true,
+              is_deleted_item: true,
+              other_appliance_type: true,
+              custom_remark: true,
+              otherAppliances: {
+                select: {
+                  type: true,
+                  article_number: true,
+                  description: true,
+                },
+              },
+            },
+          },
+          LeadOtherAppliancesRemarkMapping: {
+            orderBy: { other_appliance_type: "asc" },
+            select: {
+              other_appliance_type: true,
+              remark: true,
+            },
+          },
+        },
+      });
+
+      if (!specification) {
+        return res.status(404).json({
+          success: false,
+          message: "Specification not found",
+        });
+      }
+
+      const {
+        lead,
+        productItemCode,
+        created_at,
+        LeadCarcassMaterialMapping,
+        LeadShutterMaterialMapping,
+        LeadHardwareMapping,
+        LeadOtherAppliancesRemarkMapping,
+        ...rest
+      } = specification;
+      const leadName = [lead.firstname, lead.lastname]
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+      const sheetType =
+        productItemCode?.productStructure.productType?.type?.trim() ||
+        productItemCode?.productStructure.type?.trim() ||
+        "Specification";
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          header: {
+            lead_name: leadName || "—",
+            sheet_title: `${sheetType} Detailed Specs Sheet`,
+            created_at,
+          },
+          carcassMaterialMappings: LeadCarcassMaterialMapping,
+          shutterMaterialMappings: LeadShutterMaterialMapping,
+          hardwareMappings: LeadHardwareMapping,
+          otherAppliancesRemarkMappings: LeadOtherAppliancesRemarkMapping,
+          ...rest,
+        },
+      });
+    } catch (error: any) {
+      console.error("Error fetching specification PDF data:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
   public static async createLeadSpecification(req: Request, res: Response) {
     try {
       const { vendorId, leadId } = req.params;

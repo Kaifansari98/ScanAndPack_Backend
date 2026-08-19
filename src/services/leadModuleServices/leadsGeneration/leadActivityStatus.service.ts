@@ -83,7 +83,7 @@ const normalizePositiveIds = (values?: number[]) =>
     ),
   );
 
-const clonePartialLeadForOnHold = async (
+const clonePartialLeadForScopedStatus = async (
   tx: TxClient,
   params: {
     leadId: number;
@@ -92,7 +92,8 @@ const clonePartialLeadForOnHold = async (
     userId: number;
     createdBy: number;
     remark: string;
-    dueDate: string;
+    targetStatus: ActivityStatus;
+    dueDate?: string;
     selection: PartialOnHoldSelection;
   },
 ) => {
@@ -103,6 +104,7 @@ const clonePartialLeadForOnHold = async (
     userId,
     createdBy,
     remark,
+    targetStatus,
     dueDate,
     selection,
   } = params;
@@ -124,6 +126,10 @@ const clonePartialLeadForOnHold = async (
 
   const sourceInstances = await tx.leadProductStructureInstance.findMany({
     where: { lead_id: leadId, vendor_id: vendorId },
+    include: {
+      productType: { select: { type: true } },
+      productItemCode: { select: { item_code: true } },
+    },
   });
 
   const selectedInstances = sourceInstances.filter(
@@ -139,13 +145,13 @@ const clonePartialLeadForOnHold = async (
 
   if (selectedInstances.length === sourceInstances.length) {
     throw new Error(
-      "Partial On Hold flow cannot be used when all items are selected.",
+      "Partial status flow cannot be used when all items are selected.",
     );
   }
 
   if (!sourceLead.franchise_id) {
     throw new Error(
-      "Cannot create a cloned lead for On Hold because franchise_id is missing.",
+      "Cannot create a cloned lead because franchise_id is missing.",
     );
   }
 
@@ -185,7 +191,7 @@ const clonePartialLeadForOnHold = async (
     data: {
       ...clonedLeadScalars,
       lead_code: newLeadCode,
-      activity_status: ActivityStatus.onHold,
+      activity_status: targetStatus,
       activity_status_remark: remark,
       created_by: createdBy,
       updated_by: createdBy,
@@ -312,12 +318,19 @@ const clonePartialLeadForOnHold = async (
     });
   }
 
+  const targetInstanceStatus: ProductInstanceStatus =
+    targetStatus === ActivityStatus.onHold
+      ? ProductInstanceStatus.onHold
+      : targetStatus === ActivityStatus.lostApproval
+        ? ProductInstanceStatus.lostApproval
+        : ProductInstanceStatus.lost;
+
   await tx.leadProductStructureInstance.updateMany({
     where: { id: { in: selectedInstanceIds } },
     data: {
       lead_id: clonedLead.id,
       account_id: clonedLead.account_id ?? accountId,
-      status: ProductInstanceStatus.onHold,
+      status: targetInstanceStatus,
       updated_by: createdBy,
     },
   });
@@ -415,9 +428,9 @@ const clonePartialLeadForOnHold = async (
       lead_id: leadId,
       instance_id: instance.id,
       scope_type: "instance",
-      activity_status: ActivityStatus.onHold,
+      activity_status: targetStatus,
       activity_status_remark: remark,
-      due_date: new Date(dueDate),
+      due_date: dueDate ? new Date(dueDate) : null,
       created_by: createdBy,
       created_at: new Date(),
     })),
@@ -429,43 +442,69 @@ const clonePartialLeadForOnHold = async (
       account_id: clonedLead.account_id ?? accountId,
       lead_id: clonedLead.id,
       user_id: userId,
-      activity_status: ActivityStatus.onHold,
+      activity_status: targetStatus,
       activity_status_remark: remark,
       created_by: createdBy,
     },
   });
 
-  const leadStage = clonedLead.status_id
-    ? ((
-        await tx.statusTypeMaster.findUnique({
-          where: { id: clonedLead.status_id },
-          select: { type: true },
-        })
-      )?.type ?? null)
-    : null;
+  if (targetStatus === ActivityStatus.onHold && dueDate) {
+    const leadStage = clonedLead.status_id
+      ? ((
+          await tx.statusTypeMaster.findUnique({
+            where: { id: clonedLead.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+      : null;
 
-  const task = await tx.userLeadTask.create({
-    data: {
-      lead_id: clonedLead.id,
-      account_id: clonedLead.account_id ?? accountId,
-      vendor_id: vendorId,
-      franchise_id: clonedLead.franchise_id ?? null,
-      user_id: userId,
-      task_type: "Follow Up",
-      lead_stage: leadStage,
-      due_date: new Date(dueDate),
-      remark,
-      status: "open",
-      created_by: createdBy,
-    },
-  });
+    const task = await tx.userLeadTask.create({
+      data: {
+        lead_id: clonedLead.id,
+        account_id: clonedLead.account_id ?? accountId,
+        vendor_id: vendorId,
+        franchise_id: clonedLead.franchise_id ?? null,
+        user_id: userId,
+        task_type: "Follow Up",
+        lead_stage: leadStage,
+        due_date: new Date(dueDate),
+        remark,
+        status: "open",
+        created_by: createdBy,
+      },
+    });
 
-  await createTaskHistoryLog({
-    db: tx,
-    task,
-    createdBy,
-    actionType: "CREATE",
-  });
+    await createTaskHistoryLog({
+      db: tx,
+      task,
+      createdBy,
+      actionType: "CREATE",
+    });
+  }
+
+  if (targetStatus === ActivityStatus.lost) {
+    const openTasks = await tx.userLeadTask.findMany({
+      where: {
+        lead_id: clonedLead.id,
+        vendor_id: vendorId,
+        status: "open",
+      },
+      select: { id: true },
+    });
+
+    if (openTasks.length > 0) {
+      await tx.userLeadTask.updateMany({
+        where: { id: { in: openTasks.map((t) => t.id) } },
+        data: {
+          status: "cancelled",
+          closed_by: userId,
+          closed_at: new Date(),
+          remark: "Lead has been marked as Lost.",
+          updated_by: createdBy,
+        },
+      });
+    }
+  }
 
   const remainingInstances = await tx.leadProductStructureInstance.findMany({
     where: { lead_id: leadId, vendor_id: vendorId },
@@ -520,11 +559,39 @@ const clonePartialLeadForOnHold = async (
     ]);
   }
 
+  const itemLabelSet = new Set<string>();
+  for (const instance of selectedInstances as any[]) {
+    const itemCode = instance.productItemCode?.item_code;
+    const groupTitle = instance.productType?.type || instance.title;
+    if (itemCode) {
+      if (groupTitle) {
+        itemLabelSet.add(`${groupTitle} (${itemCode})`);
+      } else {
+        itemLabelSet.add(itemCode);
+      }
+    } else if (groupTitle) {
+      itemLabelSet.add(groupTitle);
+    }
+  }
+
+  const selectedItemsList = Array.from(itemLabelSet);
+  const selectedItemsText =
+    selectedItemsList.length > 0
+      ? selectedItemsList.join(", ")
+      : "Selected items";
+
+  const statusLabel =
+    targetStatus === ActivityStatus.onHold
+      ? "On Hold"
+      : targetStatus === ActivityStatus.lostApproval
+        ? "Lost Approval"
+        : "Lost";
+
   await createLeadLog(tx, {
     vendor_id: vendorId,
     lead_id: leadId,
     account_id: accountId,
-    action: `Selected items moved to cloned lead ${newLeadCode} for On Hold. — Remark: ${remark.trim()}`,
+    action: `Items [${selectedItemsText}] moved to cloned lead ${newLeadCode} for ${statusLabel}. — Remark: ${remark.trim()}`,
     action_type: "UPDATE",
     created_by: createdBy,
     created_at: new Date(),
@@ -534,7 +601,7 @@ const clonePartialLeadForOnHold = async (
     vendor_id: vendorId,
     lead_id: clonedLead.id,
     account_id: clonedLead.account_id ?? accountId,
-    action: `Lead cloned from ${sourceLead.lead_code} and put On Hold. — Remark: ${remark.trim()}`,
+    action: `Lead cloned from ${sourceLead.lead_code} for items [${selectedItemsText}] and set to ${statusLabel}. — Remark: ${remark.trim()}`,
     action_type: "CREATE",
     created_by: createdBy,
     created_at: new Date(),
@@ -572,34 +639,13 @@ export class LeadActivityStatusService {
       });
 
       const actorRole = (actor?.user_type?.user_type || "").toLowerCase();
-      const isActorAdmin = actorRole === "admin" || actorRole === "super-admin";
+      const isActorAdmin =
+        actorRole === "admin" ||
+        actorRole === "super-admin" ||
+        actorRole === "superadmin";
 
       if (!isActorAdmin) {
-        const targetLead = await prisma.leadMaster.findUnique({
-          where: { id: leadId, vendor_id: vendorId },
-          select: { franchise_id: true },
-        });
-
-        if (targetLead?.franchise_id) {
-          const storeAdminExists = await prisma.userMaster.findFirst({
-            where: {
-              vendor_id: vendorId,
-              franchise_id: targetLead.franchise_id,
-              status: "active",
-              user_type: {
-                user_type: {
-                  equals: "admin",
-                  mode: "insensitive",
-                },
-              },
-            },
-            select: { id: true },
-          });
-
-          if (storeAdminExists) {
-            effectiveStatus = ActivityStatus.lostApproval;
-          }
-        }
+        effectiveStatus = ActivityStatus.lostApproval;
       }
     }
 
@@ -607,20 +653,26 @@ export class LeadActivityStatusService {
       const affectedTaskUserIds = new Set<number>();
 
       if (
-        effectiveStatus === ActivityStatus.onHold &&
-        dueDate &&
+        (effectiveStatus === ActivityStatus.onHold ||
+          effectiveStatus === ActivityStatus.lost ||
+          effectiveStatus === ActivityStatus.lostApproval) &&
         selection &&
         selection.applyToWholeLead !== true &&
         (normalizePositiveIds(selection.selectedGroupIds).length > 0 ||
           normalizePositiveIds(selection.selectedItemIds).length > 0)
       ) {
-        const clonedLead = await clonePartialLeadForOnHold(tx, {
+        if (effectiveStatus === ActivityStatus.onHold && !dueDate) {
+          throw new Error("Due date is required when marking lead as On Hold.");
+        }
+
+        const clonedLead = await clonePartialLeadForScopedStatus(tx, {
           leadId,
           vendorId,
           accountId,
           userId,
           createdBy,
           remark,
+          targetStatus: effectiveStatus,
           dueDate,
           selection,
         });
