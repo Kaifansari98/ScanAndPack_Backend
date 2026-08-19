@@ -17,6 +17,7 @@ export class ClientApprovalService {
     vendor_id: number;
     account_id: number;
     created_by: number;
+    product_type_id?: number;
     documents: { originalName: string; sysName: string }[];
   }) {
     if (!data.documents || data.documents.length === 0) {
@@ -39,6 +40,7 @@ export class ClientApprovalService {
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
         },
       });
       createdDocs.push(docEntry);
@@ -66,6 +68,7 @@ export class ClientApprovalService {
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
         },
       });
       response.screenshots.push(docEntry);
@@ -106,6 +109,7 @@ export class ClientApprovalService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id,
             },
           });
           uploadedPaymentDocs.push(docEntry);
@@ -131,6 +135,7 @@ export class ClientApprovalService {
           payment_text: data.payment_text,
           payment_file_id: paymentFileId,
           payment_date: new Date(data.advance_payment_date),
+          product_type_id: data.product_type_id,
         },
       });
 
@@ -458,7 +463,11 @@ export class ClientApprovalService {
     });
   }
 
-  public async getClientApprovalDetails(vendorId: number, leadId: number) {
+  public async getClientApprovalDetails(
+    vendorId: number,
+    leadId: number,
+    productTypeId?: number,
+  ) {
     // Step 1️⃣. Fetch DocType for approval screenshots
     const approvalDocType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 13" }, // Client Approval Documents
@@ -471,6 +480,7 @@ export class ClientApprovalService {
         vendor_id: vendorId,
         lead_id: leadId,
         paymentType: { tag: "Type 3" },
+        product_type_id: productTypeId || undefined,
       },
       orderBy: { created_at: "desc" },
     });
@@ -484,6 +494,7 @@ export class ClientApprovalService {
           lead_id: leadId,
           doc_type_id: approvalDocType.id,
           is_deleted: false,
+          product_type_id: productTypeId || undefined,
           NOT: paymentInfo?.payment_file_id
             ? { id: paymentInfo.payment_file_id }
             : undefined, // exclude payment proof file
