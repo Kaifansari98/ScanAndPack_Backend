@@ -20,7 +20,8 @@ import {
   getProjectBoxInfoFields,
   getBoxInfoValues,
   getManualBoxSiteInItems,
-  verifyManualBoxSiteInItem
+  verifyManualBoxSiteInItem,
+  getBoxesByVendorAndProjectV1
 
 } from '../../controllers/boxControllers/box.controller';
 
@@ -30,6 +31,7 @@ const router = Router();
 router.post('/', createBox);
 router.get('/', getAllBoxes); // Get all boxes
 router.get('/vendor/:vendorId/project/:projectId', getBoxesByVendorAndProject); // Filtered
+router.get('/vendor/v1/:vendorId/project/:projectId', getBoxesByVendorAndProjectV1); // Filtered
 
 // 🔥 NEW API: Get full box + vendor + item details
 router.get(
