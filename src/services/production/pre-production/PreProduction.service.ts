@@ -308,27 +308,56 @@ export class PreProductionService {
       actor?.user_type?.user_type?.trim().toLowerCase() ?? "";
     const isSuperAdmin = normalizedRole === "super-admin";
     const currentLeadErd = lead.expected_order_login_ready_date;
+    const currentInstance = instanceId
+      ? await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+          },
+          select: {
+            id: true,
+            production_erd_date: true,
+          },
+        })
+      : null;
     const nextDate = new Date(date);
     const currentLeadErdTime = currentLeadErd ? currentLeadErd.getTime() : null;
+    const currentInstanceErdTime = currentInstance?.production_erd_date
+      ? currentInstance.production_erd_date.getTime()
+      : null;
     const nextDateTime = nextDate.getTime();
+    const isExistingDisplayedErdChanged = instanceId
+      ? currentInstanceErdTime !== null && currentInstanceErdTime !== nextDateTime
+      : currentLeadErdTime !== null && currentLeadErdTime !== nextDateTime;
     const isMasterErdChange =
       !instanceId &&
       currentLeadErdTime !== null &&
       currentLeadErdTime !== nextDateTime;
+    const isInstanceErdChange =
+      !!instanceId &&
+      currentInstanceErdTime !== null &&
+      currentInstanceErdTime !== nextDateTime;
 
-    if (isMasterErdChange && !isSuperAdmin && !String(changeRemark ?? "").trim()) {
-      throw new Error("Reason is required when changing the master ERD");
+    if (
+      isExistingDisplayedErdChanged &&
+      !isSuperAdmin &&
+      !String(changeRemark ?? "").trim()
+    ) {
+      throw new Error("Reason is required when changing this ERD");
     }
 
-    if (isMasterErdChange && !isSuperAdmin) {
+    if ((isMasterErdChange || isInstanceErdChange) && !isSuperAdmin) {
       const previousChange = await prisma.leadDetailedLogs.findFirst({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
           history_type: "Lead",
           action: {
-            contains: "Expected Order Login ready date changed to",
-            mode: "insensitive",
+            contains: instanceId
+              ? "Instance ERD changed to"
+              : "Expected Order Login ready date changed to",
+            mode: "insensitive" as const,
           },
         },
         select: { id: true },
@@ -336,7 +365,9 @@ export class PreProductionService {
 
       if (previousChange) {
         throw new Error(
-          "Master ERD can only be changed once after setting it. Please contact Super Admin for further changes.",
+          instanceId
+            ? "This ERD can only be changed once after setting it. Please contact Super Admin for further changes."
+            : "Master ERD can only be changed once after setting it. Please contact Super Admin for further changes.",
         );
       }
     }
@@ -383,7 +414,11 @@ export class PreProductionService {
         lead_id: leadId,
         account_id: lead.account_id,
         action: instanceId
-          ? `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
+          ? currentInstanceErdTime === null
+            ? `Instance ERD set to ${formattedDate} and lead ERD recalculated`
+            : String(changeRemark ?? "").trim()
+              ? `Instance ERD changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
+              : `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
           : currentLeadErdTime === null
             ? `Expected Order Login ready date set to ${formattedDate}`
             : String(changeRemark ?? "").trim()
