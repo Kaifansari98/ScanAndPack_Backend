@@ -82,6 +82,8 @@ export async function createLeadLog(
     // Multi-instance override: only for Type 8 / Type 9 / Type 10
     if (
       instance_id != null &&
+      typeof instance_id === "number" &&
+      !Number.isNaN(instance_id) &&
       currentTag != null &&
       MULTI_INSTANCE_STAGE_TAGS.has(currentTag)
     ) {

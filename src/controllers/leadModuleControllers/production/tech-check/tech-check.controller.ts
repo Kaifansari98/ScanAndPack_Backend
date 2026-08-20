@@ -191,7 +191,14 @@ export class TechCheckController {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
       const userId = Number(getParam(req.params.userId));
-      const instanceId = Number(getParam(req.params.instanceId));
+      const rawInstanceId = getParam(req.params.instanceId);
+      const instanceId =
+        rawInstanceId &&
+        rawInstanceId !== "null" &&
+        rawInstanceId !== "undefined" &&
+        !Number.isNaN(Number(rawInstanceId))
+          ? Number(rawInstanceId)
+          : undefined;
       const { approvedDocs } = req.body;
 
       if (!vendorId || !leadId || !userId) {
@@ -241,7 +248,14 @@ export class TechCheckController {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
       const userId = Number(getParam(req.params.userId));
-      const instanceId = Number(getParam(req.params.instanceId));
+      const rawInstanceId = getParam(req.params.instanceId);
+      const instanceId =
+        rawInstanceId &&
+        rawInstanceId !== "null" &&
+        rawInstanceId !== "undefined" &&
+        !Number.isNaN(Number(rawInstanceId))
+          ? Number(rawInstanceId)
+          : undefined;
       const { rejectedDocs, remark } = req.body;
 
       if (!vendorId || !leadId || !userId) {

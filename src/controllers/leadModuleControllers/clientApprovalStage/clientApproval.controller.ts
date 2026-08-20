@@ -410,7 +410,7 @@ export class ClientApprovalController {
         });
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const [lead, instances] = await Promise.all([
+          const [lead, vendor, instances] = await Promise.all([
             prisma.leadMaster.findUnique({
               where: { id: dto.lead_id },
               select: {
@@ -419,6 +419,10 @@ export class ClientApprovalController {
                 lead_code: true,
                 franchise_id: true,
               },
+            }),
+            prisma.vendorMaster.findUnique({
+              where: { id: dto.vendor_id },
+              select: { handlesLargeScaleProjects: true },
             }),
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
@@ -430,14 +434,17 @@ export class ClientApprovalController {
             }),
           ]);
 
+          const handlesLargeScaleProjects =
+            vendor?.handlesLargeScaleProjects === true;
+
           const leadName =
             `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
           const baseLeadCode =
             lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
 
-          // Build one notification entry per instance (or one without suffix if no instances)
+          // Build notification targets (single lead target for large scale projects)
           const notificationTargets =
-            instances.length > 1
+            !handlesLargeScaleProjects && instances.length > 1
               ? instances.map((inst) => ({
                   instanceId: inst.id,
                   leadCode: `${baseLeadCode}.${inst.quantity_index}`,
@@ -484,7 +491,7 @@ export class ClientApprovalController {
       // ─── 2. Email to assignee (Tech Check) ────────────────────────────────
       try {
         if (dto.assign_to_user_id !== dto.created_by) {
-          const [assignee, assignedBy, lead, instances] = await Promise.all([
+          const [assignee, assignedBy, lead, vendor, instances] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.assign_to_user_id },
               select: { user_name: true, user_email: true },
@@ -502,6 +509,10 @@ export class ClientApprovalController {
                 lastname: true,
               },
             }),
+            prisma.vendorMaster.findUnique({
+              where: { id: dto.vendor_id },
+              select: { handlesLargeScaleProjects: true },
+            }),
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
               select: { id: true, quantity_index: true },
@@ -511,6 +522,9 @@ export class ClientApprovalController {
               ],
             }),
           ]);
+
+          const handlesLargeScaleProjects =
+            vendor?.handlesLargeScaleProjects === true;
 
           const assigneeEmail = assignee?.user_email?.trim();
           if (!assigneeEmail) {
@@ -532,7 +546,7 @@ export class ClientApprovalController {
             const clientBaseUrl = resolveClientBaseUrl(req);
 
             const emailTargets =
-              instances.length > 1
+              !handlesLargeScaleProjects && instances.length > 1
                 ? instances.map((inst) => ({
                     instanceId: inst.id,
                     leadCode: `${baseLeadCode}.${inst.quantity_index}`,

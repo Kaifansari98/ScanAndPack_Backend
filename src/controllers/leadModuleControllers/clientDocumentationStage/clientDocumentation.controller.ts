@@ -610,8 +610,8 @@ export class ClientDocumentationController {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
       const userId = Number(req.query.userId);
-      const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined
-
+      const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined;
+      const productTypeId = req.query.productTypeId ? parseInt(req.query.productTypeId as string) : undefined;
 
       if (!vendorId || !leadId || !userId) {
         res.status(400).json({
@@ -629,6 +629,7 @@ export class ClientDocumentationController {
         userId,
         baseUrl,
         instanceId,
+        productTypeId,
       );
 
       console.info("[ClientDocumentation:get] Response summary", {
