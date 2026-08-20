@@ -1716,17 +1716,25 @@ export class UnderInstallationStageService {
     misc_id,
     misc_approved,
     exp_of_rejection,
+    approval_remark,
     updated_by,
   }: {
     vendor_id: number;
     misc_id: number;
     misc_approved: boolean;
     exp_of_rejection?: string | null;
+    approval_remark?: string | null;
     updated_by: number;
   }) {
     const existing = await prisma.miscellaneousMaster.findFirst({
       where: { id: misc_id, vendor_id },
-      select: { id: true },
+      select: {
+        id: true,
+        lead_id: true,
+        account_id: true,
+        reorder_material_details: true,
+        problem_description: true,
+      },
     });
 
     if (!existing) {
@@ -1737,6 +1745,12 @@ export class UnderInstallationStageService {
     if (misc_approved === false && !exp_of_rejection?.trim()) {
       throw new Error(
         "Rejection reason is required when rejecting miscellaneous",
+      );
+    }
+
+    if (misc_approved === true && !approval_remark?.trim()) {
+      throw new Error(
+        "Approval remark is required when approving miscellaneous",
       );
     }
 
@@ -1756,17 +1770,25 @@ export class UnderInstallationStageService {
       },
     });
 
+    await createLeadLog(prisma, {
+      vendor_id,
+      lead_id: existing.lead_id,
+      account_id: existing.account_id,
+      action: misc_approved
+        ? `Miscellaneous request approved. Remark: ${approval_remark?.trim()}`
+        : `Miscellaneous request rejected. Reason: ${exp_of_rejection?.trim()}`,
+      action_type: "UPDATE",
+      history_type: "Lead",
+      created_by: updated_by,
+      created_at: new Date(),
+    });
+
     // ✅ If rejected → cancel related misc task
     if (shouldResolve) {
       const miscTaskKey = `[misc:${misc_id}]`;
 
-      const miscRecord = await prisma.miscellaneousMaster.findFirst({
-        where: { id: misc_id, vendor_id },
-        select: { reorder_material_details: true, problem_description: true },
-      });
-
-      const remarkKey = miscRecord
-        ? `${miscRecord.reorder_material_details} - ${miscRecord.problem_description}`
+      const remarkKey = existing
+        ? `${existing.reorder_material_details} - ${existing.problem_description}`
         : undefined;
 
       await prisma.userLeadTask.updateMany({
