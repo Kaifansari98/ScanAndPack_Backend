@@ -655,18 +655,38 @@ export class ClientApprovalService {
       createdBy: data.created_by,
     });
 
-    // Step 3. Create LeadUserMapping (assign to backend user)
-    const leadUserMapping = await prisma.leadUserMapping.create({
-      data: {
-        account_id: data.account_id,
+    // Step 3. Create or update LeadUserMapping (assign to backend user as single lead mapping)
+    const existingMapping = await prisma.leadUserMapping.findFirst({
+      where: {
         lead_id: data.lead_id,
         vendor_id: data.vendor_id,
-        user_id: data.assign_to_user_id,
         type: "tech-check",
         status: "active",
-        created_by: data.created_by,
       },
     });
+
+    let leadUserMapping;
+    if (existingMapping) {
+      leadUserMapping = await prisma.leadUserMapping.update({
+        where: { id: existingMapping.id },
+        data: {
+          user_id: data.assign_to_user_id,
+          updated_at: new Date(),
+        },
+      });
+    } else {
+      leadUserMapping = await prisma.leadUserMapping.create({
+        data: {
+          account_id: data.account_id,
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          user_id: data.assign_to_user_id,
+          type: "tech-check",
+          status: "active",
+          created_by: data.created_by,
+        },
+      });
+    }
 
     // ✅ Ensure assigned tech-check user is in lead chat members
     let chatRoom = await prisma.leadChatRoom.findFirst({

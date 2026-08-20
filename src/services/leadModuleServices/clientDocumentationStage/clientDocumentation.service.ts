@@ -888,43 +888,146 @@ export class ClientDocumentationService {
       throw new Error("vendorId and leadId are required");
     }
 
-    // 1️⃣ Fetch lead with documents
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: leadId,
-        vendor_id: vendorId,
-        is_deleted: false,
-      },
-      include: {
-        documents: {
-          where: { is_deleted: false },
-          include: {
-            documentType: true, // Type 11 (PPT) / Type 12 (PYTHA)
+    // 1️⃣ Fetch vendor and lead with documents
+    const [vendor, lead, productStructureInstances] = await Promise.all([
+      prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { handlesLargeScaleProjects: true },
+      }),
+      prisma.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+        },
+        include: {
+          documents: {
+            where: { is_deleted: false },
+            include: {
+              documentType: true, // Type 11 (PPT) / Type 12 (PYTHA)
+            },
           },
         },
-      },
-    });
+      }),
+      prisma.leadProductStructureInstance.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          title: true,
+          product_type_id: true,
+          productType: { select: { id: true, type: true } },
+          productStructure: { select: { id: true, type: true, product_type_id: true } },
+        },
+      }),
+    ]);
 
     if (!lead) {
       throw new Error("Lead not found");
     }
 
+    const handlesLargeScaleProjects = vendor?.handlesLargeScaleProjects === true;
     const docs = lead.documents ?? [];
     const requiredCount = lead.no_of_client_documents_initially_submitted ?? 0;
 
     // =====================================================
-    // ✅ STATUS-BASED CLASSIFICATION (IMPORTANT FIX)
+    // ✅ STATUS-BASED CLASSIFICATION
     // =====================================================
-
     const approvedDocs = docs.filter((d) => d.tech_check_status === "APPROVED");
-
-    // 🔥 FIX: ONLY PENDING / REVISED ARE BLOCKERS
-    // ❌ NULL / UNDEFINED / REJECTED are NOT pending
     const pendingDocs = docs.filter(
       (d) =>
-        d.tech_check_status === "PENDING" || d.tech_check_status === "REVISED",
+        !d.tech_check_status ||
+        d.tech_check_status === "PENDING" ||
+        d.tech_check_status === "REVISED",
     );
 
+    // =====================================================
+    // 🏢 LARGE SCALE PROJECTS FLOW (ALL ITEM GROUPS MUST BE APPROVED)
+    // =====================================================
+    if (handlesLargeScaleProjects) {
+      const instanceToProductTypeMap = new Map<number, number>();
+      const productTypeMap = new Map<number, string>();
+
+      productStructureInstances.forEach((inst: any) => {
+        const pTypeId =
+          inst.product_type_id ||
+          inst.productType?.id ||
+          inst.productStructure?.product_type_id;
+
+        if (pTypeId) {
+          const typeName =
+            inst.productType?.type ||
+            inst.productStructure?.type ||
+            inst.title ||
+            `Item Group #${pTypeId}`;
+
+          if (!productTypeMap.has(Number(pTypeId))) {
+            productTypeMap.set(Number(pTypeId), typeName);
+          }
+
+          if (inst.id) {
+            instanceToProductTypeMap.set(Number(inst.id), Number(pTypeId));
+          }
+        }
+      });
+
+      // ❌ Check 1: If there are unapproved / pending documents across any item group
+      if (pendingDocs.length > 0) {
+        return {
+          allowed: false,
+          reason:
+            "You have pending/unapproved client documents. Please review and approve all documents across all item groups before moving to Order Login.",
+        };
+      }
+
+      // ❌ Check 2: Verify each unique Product Type (Item Group) has approved PPT & Pytha
+      for (const [pTypeId, typeName] of productTypeMap.entries()) {
+        const groupDocs = docs.filter((d: any) => {
+          if (d.product_type_id && Number(d.product_type_id) === pTypeId) {
+            return true;
+          }
+          if (
+            d.product_structure_instance_id &&
+            instanceToProductTypeMap.get(Number(d.product_structure_instance_id)) === pTypeId
+          ) {
+            return true;
+          }
+          return false;
+        });
+
+        const groupApprovedPPT = groupDocs.filter(
+          (d: any) =>
+            d.tech_check_status === "APPROVED" && d.documentType?.tag === "Type 11",
+        ).length;
+
+        const groupApprovedPytha = groupDocs.filter(
+          (d: any) =>
+            d.tech_check_status === "APPROVED" && d.documentType?.tag === "Type 12",
+        ).length;
+
+        if (groupApprovedPPT === 0) {
+          return {
+            allowed: false,
+            reason: `Item group "${typeName}" requires at least one approved PPT file before moving to Order Login.`,
+          };
+        }
+
+        if (groupApprovedPytha === 0) {
+          return {
+            allowed: false,
+            reason: `Item group "${typeName}" requires at least one approved Pytha file before moving to Order Login.`,
+          };
+        }
+      }
+
+      return {
+        allowed: true,
+        reason: null,
+      };
+    }
+
+    // =====================================================
+    // ⚙️ NORMAL SINGLE/MULTI-INSTANCE FLOW
+    // =====================================================
     const approvedPPT = approvedDocs.filter(
       (d) => d.documentType?.tag === "Type 11", // PPT
     ).length;
@@ -933,9 +1036,6 @@ export class ClientDocumentationService {
       (d) => d.documentType?.tag === "Type 12", // PYTHA
     ).length;
 
-    // =====================================================
-    // ❌ RULE 1 — Initial submission must be fully approved
-    // =====================================================
     if (requiredCount && approvedDocs.length < requiredCount) {
       return {
         allowed: false,
@@ -943,9 +1043,6 @@ export class ClientDocumentationService {
       };
     }
 
-    // =====================================================
-    // ❌ RULE 2 — At least one PPT must be approved
-    // =====================================================
     if (approvedPPT === 0) {
       return {
         allowed: false,
@@ -954,9 +1051,6 @@ export class ClientDocumentationService {
       };
     }
 
-    // =====================================================
-    // ❌ RULE 3 — At least one PYTHA must be approved
-    // =====================================================
     if (approvedPytha === 0) {
       return {
         allowed: false,
@@ -965,9 +1059,6 @@ export class ClientDocumentationService {
       };
     }
 
-    // =====================================================
-    // ❌ RULE 4 — Any pending / revised doc blocks movement
-    // =====================================================
     if (pendingDocs.length > 0) {
       return {
         allowed: false,
@@ -976,9 +1067,6 @@ export class ClientDocumentationService {
       };
     }
 
-    // =====================================================
-    // ✅ ALL CONDITIONS SATISFIED
-    // =====================================================
     return {
       allowed: true,
       reason: null,
@@ -1139,6 +1227,7 @@ export class ClientDocumentationService {
     userId: number,
     baseUrl: string,
     instanceId?: number,
+    productTypeId?: number,
   ) {
     if (!vendorId || !leadId) {
       throw new Error("vendorId and leadId are required");
@@ -1149,6 +1238,7 @@ export class ClientDocumentationService {
       vendorId,
       userId,
       instanceId: instanceId ?? null,
+      productTypeId: productTypeId ?? null,
     });
 
     const [pptDocType, pythaDocType, productStructureInstances, lead] =
@@ -1166,7 +1256,9 @@ export class ClientDocumentationService {
             title: true,
             quantity_index: true,
             no_of_client_documents_initially_submitted: true,
-            productStructure: { select: { id: true, type: true } },
+            product_type_id: true,
+            productType: { select: { id: true, type: true } },
+            productStructure: { select: { id: true, type: true, product_type_id: true } },
           },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
@@ -1202,14 +1294,40 @@ export class ClientDocumentationService {
       pythaDocTypeId: pythaDocType?.id ?? null,
       instanceCount: productStructureInstances.length,
       instanceIds: productStructureInstances.map((i) => i.id),
+      productTypeId: productTypeId ?? null,
     });
 
+    const instanceToProductTypeMap = new Map<number, number>();
+    productStructureInstances.forEach((inst: any) => {
+      const pTypeId =
+        inst.product_type_id ||
+        inst.productType?.id ||
+        inst.productStructure?.product_type_id;
+      if (inst.id && pTypeId) {
+        instanceToProductTypeMap.set(inst.id, Number(pTypeId));
+      }
+    });
+
+    const isDocMatchProductType = (doc: any) => {
+      if (!productTypeId) return true;
+      if (doc.product_type_id && Number(doc.product_type_id) === Number(productTypeId)) {
+        return true;
+      }
+      if (doc.product_structure_instance_id) {
+        const instPTypeId = instanceToProductTypeMap.get(doc.product_structure_instance_id);
+        if (instPTypeId && Number(instPTypeId) === Number(productTypeId)) {
+          return true;
+        }
+      }
+      return false;
+    };
+
     const pptDocs = lead.documents.filter(
-      (d) => d.doc_type_id === pptDocType?.id,
+      (d) => d.doc_type_id === pptDocType?.id && isDocMatchProductType(d),
     );
 
     const pythaDocs = lead.documents.filter(
-      (d) => d.doc_type_id === pythaDocType?.id,
+      (d) => d.doc_type_id === pythaDocType?.id && isDocMatchProductType(d),
     );
 
     const [pptDocsWithUrls, pythaDocsWithUrls] = await Promise.all([
