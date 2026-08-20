@@ -224,48 +224,44 @@ export class FacebookWebhookController {
       }
     }
 
-    const vendorRecord = await prisma.vendorMaster.findUnique({
-      where: { id: vendor_id },
-      select: { is_year_wise_lead_code_enabled: true },
-    });
-    let generatedCode: string | null = null;
-    if (vendorRecord?.is_year_wise_lead_code_enabled) {
-      generatedCode = await generateLeadCode(prisma, {
-        franchiseId: 1, // dummy value, year-wise doesn't use franchiseId
+    const { lead } = await prisma.$transaction(async (tx) => {
+      const generatedCode = await generateLeadCode(tx, {
         vendorId: vendor_id,
       });
-    }
 
-    // 7. Insert lead into PostgreSQL online_leads table
-    const lead = await prisma.onlineLead.create({
-      data: {
-        vendor_id: vendor_id,
-        leads_name: fullName,
-        lead_code: generatedCode,
-        firstname: firstName || null,
-        lastname: lastName || null,
-        email: email,
-        contact: contactNumber || "0000000000",
-        source: platform,
-        source_id: matchedSource?.id || null,
-        lead_entry_type: LeadEntryType.ONLINE,
-        remark: remarkContent,
-        status: defaultStatus?.id || null,
-      },
-    });
-
-    // 8. Log lead history status
-    if (defaultStatus) {
-      await prisma.onlineLeadHistory.create({
+      // 7. Insert lead into PostgreSQL online_leads table
+      const lead = await tx.onlineLead.create({
         data: {
           vendor_id: vendor_id,
-          online_lead_id: lead.id,
-          remark: "Lead automatically created from Meta Ads integration",
-          created_by: 1, // system / admin placeholder
-          online_lead_status_id: defaultStatus.id,
+          leads_name: fullName,
+          lead_code: generatedCode,
+          firstname: firstName || null,
+          lastname: lastName || null,
+          email: email,
+          contact: contactNumber || "0000000000",
+          source: platform,
+          source_id: matchedSource?.id || null,
+          lead_entry_type: LeadEntryType.ONLINE,
+          remark: remarkContent,
+          status: defaultStatus?.id || null,
         },
       });
-    }
+
+      // 8. Log lead history status
+      if (defaultStatus) {
+        await tx.onlineLeadHistory.create({
+          data: {
+            vendor_id: vendor_id,
+            online_lead_id: lead.id,
+            remark: "Lead automatically created from Meta Ads integration",
+            created_by: 1, // system / admin placeholder
+            online_lead_status_id: defaultStatus.id,
+          },
+        });
+      }
+
+      return { lead };
+    });
 
     logger.info(
       `[FACEBOOK WEBHOOK] Successfully ingested lead ${leadgenId} for Vendor ${vendor_id} as OnlineLead ID ${lead.id}`

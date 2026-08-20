@@ -507,6 +507,7 @@ export type OnlineLeadOrderByWithRelationInput = {
 
 export type OnlineLeadWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  uniq_vendor_online_lead_contact?: Prisma.OnlineLeadUniq_vendor_online_lead_contactCompoundUniqueInput
   AND?: Prisma.OnlineLeadWhereInput | Prisma.OnlineLeadWhereInput[]
   OR?: Prisma.OnlineLeadWhereInput[]
   NOT?: Prisma.OnlineLeadWhereInput | Prisma.OnlineLeadWhereInput[]
@@ -552,7 +553,7 @@ export type OnlineLeadWhereUniqueInput = Prisma.AtLeast<{
   online_lead_history?: Prisma.OnlineLeadHistoryListRelationFilter
   store_logs?: Prisma.OnlineLeadStoreLogListRelationFilter
   campaignLeads?: Prisma.TelecallerCampaignLeadListRelationFilter
-}, "id">
+}, "id" | "uniq_vendor_online_lead_contact">
 
 export type OnlineLeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -879,6 +880,11 @@ export type StringNullableListFilter<$PrismaModel = never> = {
   hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
   hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
   isEmpty?: boolean
+}
+
+export type OnlineLeadUniq_vendor_online_lead_contactCompoundUniqueInput = {
+  vendor_id: number
+  contact: string
 }
 
 export type OnlineLeadCountOrderByAggregateInput = {
