@@ -1760,6 +1760,8 @@ export class BookingStageController {
     try {
       const leadId = Number(getParam(req.params.leadId));
       const vendorId = Number(getParam(req.params.vendorId));
+      const rawProductTypeId = req.query.product_type_id || req.query.productTypeId;
+      const productTypeId = rawProductTypeId ? Number(rawProductTypeId) : null;
 
       if (!leadId || !vendorId) {
         res.status(400).json({
@@ -1772,6 +1774,7 @@ export class BookingStageController {
       const result = await this.bookingStageService.getLeadBillingAddresses(
         leadId,
         vendorId,
+        productTypeId,
       );
 
       res.status(200).json({
@@ -1793,6 +1796,8 @@ export class BookingStageController {
     try {
       const leadId = Number(getParam(req.params.leadId));
       const vendorId = Number(getParam(req.params.vendorId));
+      const rawProductTypeId = req.body.product_type_id ?? req.body.productTypeId;
+      const productTypeId = rawProductTypeId ? Number(rawProductTypeId) : null;
 
       if (!leadId || !vendorId) {
         res.status(400).json({
@@ -1825,6 +1830,7 @@ export class BookingStageController {
       const result = await this.bookingStageService.upsertLeadBillingAddresses({
         lead_id: leadId,
         vendor_id: vendorId,
+        product_type_id: productTypeId,
         billingAddress: normalizeAddress(req.body.billingAddress),
         shippingAddress: normalizeAddress(req.body.shippingAddress),
       });

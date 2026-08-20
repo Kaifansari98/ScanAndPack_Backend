@@ -257,7 +257,8 @@ export const ModelName = {
   online_lead_history: 'online_lead_history',
   online_lead_store_log: 'online_lead_store_log',
   online_leads: 'online_leads',
-  telecaller_campaign_leads: 'telecaller_campaign_leads'
+  telecaller_campaign_leads: 'telecaller_campaign_leads',
+  LeadBillingAddress: 'LeadBillingAddress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3845,6 +3846,25 @@ export const Telecaller_campaign_leadsScalarFieldEnum = {
 } as const
 
 export type Telecaller_campaign_leadsScalarFieldEnum = (typeof Telecaller_campaign_leadsScalarFieldEnum)[keyof typeof Telecaller_campaign_leadsScalarFieldEnum]
+
+
+export const LeadBillingAddressScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  address_type: 'address_type',
+  name: 'name',
+  address: 'address',
+  map_link: 'map_link',
+  gst_number: 'gst_number',
+  state_name: 'state_name',
+  place_of_supply: 'place_of_supply',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
 
 
 export const SortOrder = {
