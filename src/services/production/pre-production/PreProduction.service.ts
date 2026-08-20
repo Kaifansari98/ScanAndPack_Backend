@@ -277,14 +277,68 @@ export class PreProductionService {
     date: string,
     updatedBy: number,
     instanceId?: number,
+    changeRemark?: string,
   ) {
     // Verify lead belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      select: {
+        id: true,
+        account_id: true,
+        expected_order_login_ready_date: true,
+      },
     });
 
     if (!lead) {
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+    }
+
+    const actor = await prisma.userMaster.findFirst({
+      where: { id: updatedBy, vendor_id: vendorId, status: "active" },
+      select: {
+        user_type: {
+          select: {
+            user_type: true,
+          },
+        },
+      },
+    });
+
+    const normalizedRole =
+      actor?.user_type?.user_type?.trim().toLowerCase() ?? "";
+    const isSuperAdmin = normalizedRole === "super-admin";
+    const currentLeadErd = lead.expected_order_login_ready_date;
+    const nextDate = new Date(date);
+    const currentLeadErdTime = currentLeadErd ? currentLeadErd.getTime() : null;
+    const nextDateTime = nextDate.getTime();
+    const isMasterErdChange =
+      !instanceId &&
+      currentLeadErdTime !== null &&
+      currentLeadErdTime !== nextDateTime;
+
+    if (isMasterErdChange && !isSuperAdmin && !String(changeRemark ?? "").trim()) {
+      throw new Error("Reason is required when changing the master ERD");
+    }
+
+    if (isMasterErdChange && !isSuperAdmin) {
+      const previousChange = await prisma.leadDetailedLogs.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          history_type: "Lead",
+          action: {
+            contains: "Expected Order Login ready date changed to",
+            mode: "insensitive",
+          },
+        },
+        select: { id: true },
+      });
+
+      if (previousChange) {
+        throw new Error(
+          "Master ERD can only be changed once after setting it. Please contact Super Admin for further changes.",
+        );
+      }
     }
 
     if (instanceId) {
@@ -330,7 +384,11 @@ export class PreProductionService {
         account_id: lead.account_id,
         action: instanceId
           ? `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
-          : `Expected Order Login ready date updated to ${formattedDate}`,
+          : currentLeadErdTime === null
+            ? `Expected Order Login ready date set to ${formattedDate}`
+            : String(changeRemark ?? "").trim()
+              ? `Expected Order Login ready date changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
+              : `Expected Order Login ready date updated to ${formattedDate}`,
         action_type: "UPDATE",
         history_type: "Lead",
         created_by: updatedBy,
