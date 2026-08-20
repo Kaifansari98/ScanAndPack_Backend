@@ -94,7 +94,9 @@ export class BookingStageService {
       userMappings: {
         where: {
           status: LeadUserStatus.active,
-          type: "designer",
+          type: {
+            in: ["designer", "site-supervisor"],
+          },
         },
         select: {
           id: true,
