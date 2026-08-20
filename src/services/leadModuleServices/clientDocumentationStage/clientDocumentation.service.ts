@@ -382,7 +382,7 @@ export class ClientDocumentationService {
       const missingGroups: string[] = [];
       groupedDisplayMap.forEach((displayTitle, key) => {
         const latestSpec = latestSpecByGroup.get(key);
-        if (!latestSpec?.is_completed) {
+        if (latestSpec && !latestSpec.is_completed) {
           missingGroups.push(displayTitle);
         }
       });
@@ -497,14 +497,55 @@ export class ClientDocumentationService {
       });
 
       let docsReady = true;
-      if (handlesLargeScaleProjects) {
-        const hasPpt = docs.some((d) => d.doc_type_id === pptType.id);
-        const hasPytha = docs.some((d) => d.doc_type_id === pythaType.id);
-        if (!hasPpt || !hasPytha) {
-          docsReady = false;
+      const missingDocGroups: string[] = [];
+
+      if (handlesLargeScaleProjects && instances.length > 0) {
+        const groupedMap = new Map<string, any[]>();
+        instances.forEach((inst: any) => {
+          const groupTitle =
+            inst.productType?.type ||
+            inst.productItemCode?.productStructure?.productType?.type ||
+            inst.productItemCode?.item_code ||
+            inst.title ||
+            "Item Group";
+          if (!groupedMap.has(groupTitle)) {
+            groupedMap.set(groupTitle, []);
+          }
+          groupedMap.get(groupTitle)!.push(inst);
+        });
+
+        groupedMap.forEach((groupInsts, groupTitle) => {
+          let pptCount = 0;
+          let pythaCount = 0;
+          groupInsts.forEach((inst) => {
+            pptCount += docs.filter(
+              (d) =>
+                (d.product_structure_instance_id === inst.id ||
+                  d.product_structure_instance_id === null) &&
+                d.doc_type_id === pptType.id,
+            ).length;
+            pythaCount += docs.filter(
+              (d) =>
+                (d.product_structure_instance_id === inst.id ||
+                  d.product_structure_instance_id === null) &&
+                d.doc_type_id === pythaType.id,
+            ).length;
+          });
+
+          if (pptCount === 0 || pythaCount === 0) {
+            docsReady = false;
+            missingDocGroups.push(groupTitle);
+          }
+        });
+
+        if (!docsReady) {
+          missing_requirements.push(
+            `Please upload required files for item group(s): ${missingDocGroups.join(", ")}`,
+          );
         }
-      } else if (instances.length > 1) {
+      } else if (instances.length > 0) {
         for (const instance of instances) {
+          const instanceTitle = (instance as any).title || (instance as any).productType?.type || "Item Group";
           const pptCount = docs.filter(
             (d) =>
               (d.product_structure_instance_id === instance.id ||
@@ -519,19 +560,22 @@ export class ClientDocumentationService {
           ).length;
           if (pptCount === 0 || pythaCount === 0) {
             docsReady = false;
-            break;
+            missingDocGroups.push(instanceTitle);
           }
+        }
+
+        if (!docsReady) {
+          missing_requirements.push(
+            `Upload Project Files & Pytha Files for: ${missingDocGroups.join(", ")}`,
+          );
         }
       } else {
         const pptCount = docs.filter((d) => d.doc_type_id === pptType.id).length;
         const pythaCount = docs.filter((d) => d.doc_type_id === pythaType.id).length;
         if (pptCount === 0 || pythaCount === 0) {
           docsReady = false;
+          missing_requirements.push("Upload Project Files & Pytha Files for all instances");
         }
-      }
-
-      if (!docsReady) {
-        missing_requirements.push("Upload Project Files & Pytha Files for all instances");
       }
     }
 
