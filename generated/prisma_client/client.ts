@@ -1074,3 +1074,8 @@ export type online_leads = Prisma.online_leadsModel
  * 
  */
 export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel
+/**
+ * Model LeadBillingAddress
+ * 
+ */
+export type LeadBillingAddress = Prisma.LeadBillingAddressModel

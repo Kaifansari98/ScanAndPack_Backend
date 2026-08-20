@@ -2840,14 +2840,36 @@ export class BookingStageService {
     return hasAnyValue ? normalized : null;
   }
 
-  public async getLeadBillingAddresses(leadId: number, vendorId: number) {
+  public async getLeadBillingAddresses(
+    leadId: number,
+    vendorId: number,
+    productTypeId?: number | null,
+  ) {
     const billingAddressDelegate = (prisma as any).leadBillingAddress;
-    const addresses = await billingAddressDelegate.findMany({
-      where: {
-        lead_id: leadId,
-        vendor_id: vendorId,
-      },
+    const whereCondition: any = {
+      lead_id: leadId,
+      vendor_id: vendorId,
+    };
+
+    if (productTypeId) {
+      whereCondition.product_type_id = productTypeId;
+    } else {
+      whereCondition.product_type_id = null;
+    }
+
+    let addresses = await billingAddressDelegate.findMany({
+      where: whereCondition,
     });
+
+    if (productTypeId && addresses.length === 0) {
+      addresses = await billingAddressDelegate.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_type_id: null,
+        },
+      });
+    }
 
     const billingAddress =
       addresses.find((address: any) => address.address_type === "BILL_TO") ??
@@ -2856,9 +2878,28 @@ export class BookingStageService {
       addresses.find((address: any) => address.address_type === "SHIP_TO") ??
       null;
 
+    const allAddresses = await billingAddressDelegate.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        product_type_id: true,
+      },
+    });
+
+    const configuredProductTypeIds = Array.from(
+      new Set(
+        allAddresses
+          .map((addr: any) => addr.product_type_id)
+          .filter((id: any) => id !== null && id !== undefined),
+      ),
+    );
+
     return {
       billingAddress,
       shippingAddress,
+      configuredProductTypeIds,
     };
   }
 
@@ -2867,6 +2908,7 @@ export class BookingStageService {
   ) {
     const billingAddress = this.normalizeBillingAddress(data.billingAddress);
     const shippingAddress = this.normalizeBillingAddress(data.shippingAddress);
+    const productTypeId = data.product_type_id ?? null;
 
     return prisma.$transaction(async (tx) => {
       const billingAddressDelegate = (tx as any).leadBillingAddress;
@@ -2891,27 +2933,35 @@ export class BookingStageService {
             where: {
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: productTypeId,
               address_type: addressType,
             },
           });
           return null;
         }
 
-        return billingAddressDelegate.upsert({
+        const existingRecord = await billingAddressDelegate.findFirst({
           where: {
-            lead_id_vendor_id_address_type: {
-              lead_id: data.lead_id,
-              vendor_id: data.vendor_id,
-              address_type: addressType,
-            },
-          },
-          create: {
             lead_id: data.lead_id,
             vendor_id: data.vendor_id,
+            product_type_id: productTypeId,
             address_type: addressType,
-            ...address,
           },
-          update: {
+        });
+
+        if (existingRecord) {
+          return billingAddressDelegate.update({
+            where: { id: existingRecord.id },
+            data: { ...address },
+          });
+        }
+
+        return billingAddressDelegate.create({
+          data: {
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+            product_type_id: productTypeId,
+            address_type: addressType,
             ...address,
           },
         });

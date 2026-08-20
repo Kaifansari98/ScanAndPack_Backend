@@ -54,6 +54,7 @@ export interface LeadBillingAddressInput {
 export interface UpsertLeadBillingAddressesDto {
   lead_id: number;
   vendor_id: number;
+  product_type_id?: number | null;
   billingAddress?: LeadBillingAddressInput | null;
   shippingAddress?: LeadBillingAddressInput | null;
 }
