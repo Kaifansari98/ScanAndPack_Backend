@@ -2714,6 +2714,7 @@ export type ProjectCategoriesTypeMasterScalarFieldEnum = (typeof ProjectCategori
 export const ProjectCategoriesMasterScalarFieldEnum = {
   id: 'id',
   category_name: 'category_name',
+  prefix: 'prefix',
   status: 'status',
   vendor_id: 'vendor_id',
   created_at: 'created_at',
@@ -2784,6 +2785,8 @@ export const ProductMasterScalarFieldEnum = {
   brand_id: 'brand_id',
   category_id: 'category_id',
   article_code: 'article_code',
+  p_code: 'p_code',
+  color_name: 'color_name',
   core_material: 'core_material',
   edge_banding_color: 'edge_banding_color',
   finish: 'finish',

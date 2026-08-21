@@ -12,6 +12,7 @@ import {
   generateProductTemplateService,
   processProductBulkUploadService,
 } from "../../services/inventoryService/product-bulk-upload.service";
+import { getNextItemCodeService } from "../../services/inventoryService/product-code.service";
 
 const getVendorId = (req: Request) => Number(req.params.vendor_id);
 
@@ -33,7 +34,17 @@ export const productList = async (req: Request, res: Response) => {
   const page = Number(req.query.page || 1);
   const pageSize = Number(req.query.page_size || 20);
 
-  const result = await listProducts(vendor_id, search, page, pageSize);
+  const category_id = req.query.category_id ? Number(req.query.category_id) : undefined;
+  const brand_id = req.query.brand_id ? Number(req.query.brand_id) : undefined;
+  const active = req.query.active ? String(req.query.active) : undefined;
+  const procurement = req.query.procurement ? String(req.query.procurement) : undefined;
+
+  const result = await listProducts(vendor_id, search, page, pageSize, {
+    category_id,
+    brand_id,
+    active,
+    procurement,
+  });
 
   return res.status(result.status ? 200 : 400).json(
     result.status
@@ -151,5 +162,23 @@ export const uploadProductsBulk = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error("uploadProductsBulk error:", error);
     return res.status(500).json(ApiResponse.error("Failed to process bulk upload", 500));
+  }
+};
+
+export const getNextItemCode = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req);
+    const category_id = Number(req.query.category_id);
+
+    if (!category_id) {
+      return res.status(400).json(ApiResponse.error("category_id is required", 400));
+    }
+
+    const nextCode = await getNextItemCodeService(vendor_id, category_id);
+
+    return res.status(200).json(ApiResponse.success(nextCode, "Next item code generated successfully", 200));
+  } catch (error: any) {
+    console.error("getNextItemCode error:", error);
+    return res.status(500).json(ApiResponse.error(error.message || "Failed to generate next item code", 500));
   }
 };

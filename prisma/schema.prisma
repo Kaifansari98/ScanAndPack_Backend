@@ -3387,6 +3387,7 @@ model ProjectCategoriesTypeMaster {
 model ProjectCategoriesMaster {
   id                                   Int                                    @id @default(autoincrement())
   category_name                        String
+  prefix                               String?
   status                               ProjectCategoriesStatus                @default(Yes)
   vendor_id                            Int
   created_at                           DateTime                               @default(now())
@@ -3471,6 +3472,8 @@ model ProductMaster {
   brand_id                 Int?
   category_id              Int
   article_code             String?
+  p_code                   String?
+  color_name               String?
   core_material            String?
   edge_banding_color       String?
   finish                   String?

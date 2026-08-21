@@ -149,6 +149,8 @@ export type ProductMasterMinAggregateOutputType = {
   brand_id: number | null
   category_id: number | null
   article_code: string | null
+  p_code: string | null
+  color_name: string | null
   core_material: string | null
   edge_banding_color: string | null
   finish: string | null
@@ -222,6 +224,8 @@ export type ProductMasterMaxAggregateOutputType = {
   brand_id: number | null
   category_id: number | null
   article_code: string | null
+  p_code: string | null
+  color_name: string | null
   core_material: string | null
   edge_banding_color: string | null
   finish: string | null
@@ -295,6 +299,8 @@ export type ProductMasterCountAggregateOutputType = {
   brand_id: number
   category_id: number
   article_code: number
+  p_code: number
+  color_name: number
   core_material: number
   edge_banding_color: number
   finish: number
@@ -470,6 +476,8 @@ export type ProductMasterMinAggregateInputType = {
   brand_id?: true
   category_id?: true
   article_code?: true
+  p_code?: true
+  color_name?: true
   core_material?: true
   edge_banding_color?: true
   finish?: true
@@ -543,6 +551,8 @@ export type ProductMasterMaxAggregateInputType = {
   brand_id?: true
   category_id?: true
   article_code?: true
+  p_code?: true
+  color_name?: true
   core_material?: true
   edge_banding_color?: true
   finish?: true
@@ -616,6 +626,8 @@ export type ProductMasterCountAggregateInputType = {
   brand_id?: true
   category_id?: true
   article_code?: true
+  p_code?: true
+  color_name?: true
   core_material?: true
   edge_banding_color?: true
   finish?: true
@@ -776,6 +788,8 @@ export type ProductMasterGroupByOutputType = {
   brand_id: number | null
   category_id: number
   article_code: string | null
+  p_code: string | null
+  color_name: string | null
   core_material: string | null
   edge_banding_color: string | null
   finish: string | null
@@ -872,6 +886,8 @@ export type ProductMasterWhereInput = {
   brand_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   category_id?: Prisma.IntFilter<"ProductMaster"> | number
   article_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  p_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  color_name?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   core_material?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -970,6 +986,8 @@ export type ProductMasterOrderByWithRelationInput = {
   brand_id?: Prisma.SortOrderInput | Prisma.SortOrder
   category_id?: Prisma.SortOrder
   article_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  p_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  color_name?: Prisma.SortOrderInput | Prisma.SortOrder
   core_material?: Prisma.SortOrderInput | Prisma.SortOrder
   edge_banding_color?: Prisma.SortOrderInput | Prisma.SortOrder
   finish?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1071,6 +1089,8 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   brand_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   category_id?: Prisma.IntFilter<"ProductMaster"> | number
   article_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  p_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  color_name?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   core_material?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -1169,6 +1189,8 @@ export type ProductMasterOrderByWithAggregationInput = {
   brand_id?: Prisma.SortOrderInput | Prisma.SortOrder
   category_id?: Prisma.SortOrder
   article_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  p_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  color_name?: Prisma.SortOrderInput | Prisma.SortOrder
   core_material?: Prisma.SortOrderInput | Prisma.SortOrder
   edge_banding_color?: Prisma.SortOrderInput | Prisma.SortOrder
   finish?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1250,6 +1272,8 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   brand_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   category_id?: Prisma.IntWithAggregatesFilter<"ProductMaster"> | number
   article_code?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
+  p_code?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
+  color_name?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   core_material?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   edge_banding_color?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
@@ -1319,6 +1343,8 @@ export type ProductMasterCreateInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -1401,6 +1427,8 @@ export type ProductMasterUncheckedCreateInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -1476,6 +1504,8 @@ export type ProductMasterUpdateInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1558,6 +1588,8 @@ export type ProductMasterUncheckedUpdateInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1637,6 +1669,8 @@ export type ProductMasterCreateManyInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -1706,6 +1740,8 @@ export type ProductMasterUpdateManyMutationInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1763,6 +1799,8 @@ export type ProductMasterUncheckedUpdateManyInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1851,6 +1889,8 @@ export type ProductMasterCountOrderByAggregateInput = {
   brand_id?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
   article_code?: Prisma.SortOrder
+  p_code?: Prisma.SortOrder
+  color_name?: Prisma.SortOrder
   core_material?: Prisma.SortOrder
   edge_banding_color?: Prisma.SortOrder
   finish?: Prisma.SortOrder
@@ -1974,6 +2014,8 @@ export type ProductMasterMaxOrderByAggregateInput = {
   brand_id?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
   article_code?: Prisma.SortOrder
+  p_code?: Prisma.SortOrder
+  color_name?: Prisma.SortOrder
   core_material?: Prisma.SortOrder
   edge_banding_color?: Prisma.SortOrder
   finish?: Prisma.SortOrder
@@ -2047,6 +2089,8 @@ export type ProductMasterMinOrderByAggregateInput = {
   brand_id?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
   article_code?: Prisma.SortOrder
+  p_code?: Prisma.SortOrder
+  color_name?: Prisma.SortOrder
   core_material?: Prisma.SortOrder
   edge_banding_color?: Prisma.SortOrder
   finish?: Prisma.SortOrder
@@ -3060,6 +3104,8 @@ export type ProductMasterCreateWithoutVendorInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3140,6 +3186,8 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3248,6 +3296,8 @@ export type ProductMasterScalarWhereInput = {
   brand_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   category_id?: Prisma.IntFilter<"ProductMaster"> | number
   article_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  p_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  color_name?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   core_material?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -3317,6 +3367,8 @@ export type ProductMasterCreateWithoutLeadRequirementMaterialsInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3398,6 +3450,8 @@ export type ProductMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3488,6 +3542,8 @@ export type ProductMasterUpdateWithoutLeadRequirementMaterialsInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3569,6 +3625,8 @@ export type ProductMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3643,6 +3701,8 @@ export type ProductMasterCreateWithoutCategoryInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3723,6 +3783,8 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   alt_uom_text?: string | null
   brand_id?: number | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3808,6 +3870,8 @@ export type ProductMasterCreateWithoutSubCategoryInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -3889,6 +3953,8 @@ export type ProductMasterUncheckedCreateWithoutSubCategoryInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4005,6 +4071,8 @@ export type ProductMasterCreateWithoutBrandInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4085,6 +4153,8 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   alt_uom_text?: string | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4186,6 +4256,8 @@ export type ProductMasterCreateWithoutCoreProductInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4267,6 +4339,8 @@ export type ProductMasterUncheckedCreateWithoutCoreProductInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4367,6 +4441,8 @@ export type ProductMasterCreateWithoutGradeInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4448,6 +4524,8 @@ export type ProductMasterUncheckedCreateWithoutGradeInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4548,6 +4626,8 @@ export type ProductMasterCreateWithoutFinishMasterInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4629,6 +4709,8 @@ export type ProductMasterUncheckedCreateWithoutFinishMasterInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4729,6 +4811,8 @@ export type ProductMasterCreateWithoutTypeInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4810,6 +4894,8 @@ export type ProductMasterUncheckedCreateWithoutTypeInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4910,6 +4996,8 @@ export type ProductMasterCreateWithoutItemTypeMasterInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -4991,6 +5079,8 @@ export type ProductMasterUncheckedCreateWithoutItemTypeMasterInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5091,6 +5181,8 @@ export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5172,6 +5264,8 @@ export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5262,6 +5356,8 @@ export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5343,6 +5439,8 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5417,6 +5515,8 @@ export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5498,6 +5598,8 @@ export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5588,6 +5690,8 @@ export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5669,6 +5773,8 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5743,6 +5849,8 @@ export type ProductMasterCreateWithoutGrnItemsInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5824,6 +5932,8 @@ export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -5914,6 +6024,8 @@ export type ProductMasterUpdateWithoutGrnItemsInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5995,6 +6107,8 @@ export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6069,6 +6183,8 @@ export type ProductMasterCreateWithoutHsnInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6150,6 +6266,8 @@ export type ProductMasterUncheckedCreateWithoutHsnInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6250,6 +6368,8 @@ export type ProductMasterCreateWithoutStockHistoriesInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6331,6 +6451,8 @@ export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6421,6 +6543,8 @@ export type ProductMasterUpdateWithoutStockHistoriesInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6502,6 +6626,8 @@ export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6576,6 +6702,8 @@ export type ProductMasterCreateWithoutConsumptionUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6657,6 +6785,8 @@ export type ProductMasterUncheckedCreateWithoutConsumptionUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6741,6 +6871,8 @@ export type ProductMasterCreateWithoutMaxStockUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6822,6 +6954,8 @@ export type ProductMasterUncheckedCreateWithoutMaxStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6906,6 +7040,8 @@ export type ProductMasterCreateWithoutMinStockUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -6987,6 +7123,8 @@ export type ProductMasterUncheckedCreateWithoutMinStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7071,6 +7209,8 @@ export type ProductMasterCreateWithoutPrimaryUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7152,6 +7292,8 @@ export type ProductMasterUncheckedCreateWithoutPrimaryUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7236,6 +7378,8 @@ export type ProductMasterCreateWithoutPurchaseUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7317,6 +7461,8 @@ export type ProductMasterUncheckedCreateWithoutPurchaseUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7401,6 +7547,8 @@ export type ProductMasterCreateWithoutReorderBatchUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7482,6 +7630,8 @@ export type ProductMasterUncheckedCreateWithoutReorderBatchUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7566,6 +7716,8 @@ export type ProductMasterCreateWithoutReorderLevelUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7647,6 +7799,8 @@ export type ProductMasterUncheckedCreateWithoutReorderLevelUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7731,6 +7885,8 @@ export type ProductMasterCreateWithoutStockUnitInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -7812,6 +7968,8 @@ export type ProductMasterUncheckedCreateWithoutStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8024,6 +8182,8 @@ export type ProductMasterCreateWithoutItemGroupInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8105,6 +8265,8 @@ export type ProductMasterUncheckedCreateWithoutItemGroupInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8205,6 +8367,8 @@ export type ProductMasterCreateWithoutSupplierMappingsInput = {
   pre_mill_width?: number
   alt_uom_text?: string | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8286,6 +8450,8 @@ export type ProductMasterUncheckedCreateWithoutSupplierMappingsInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8376,6 +8542,8 @@ export type ProductMasterUpdateWithoutSupplierMappingsInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8457,6 +8625,8 @@ export type ProductMasterUncheckedUpdateWithoutSupplierMappingsInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8534,6 +8704,8 @@ export type ProductMasterCreateManyVendorInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8603,6 +8775,8 @@ export type ProductMasterUpdateWithoutVendorInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8683,6 +8857,8 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8761,6 +8937,8 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8833,6 +9011,8 @@ export type ProductMasterCreateManyCategoryInput = {
   alt_uom_text?: string | null
   brand_id?: number | null
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8906,6 +9086,8 @@ export type ProductMasterCreateManySubCategoryInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -8974,6 +9156,8 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9054,6 +9238,8 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9132,6 +9318,8 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9201,6 +9389,8 @@ export type ProductMasterUpdateWithoutSubCategoryInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9282,6 +9472,8 @@ export type ProductMasterUncheckedUpdateWithoutSubCategoryInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9360,6 +9552,8 @@ export type ProductMasterUncheckedUpdateManyWithoutSubCategoryInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9431,6 +9625,8 @@ export type ProductMasterCreateManyBrandInput = {
   alt_uom_text?: string | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -9500,6 +9696,8 @@ export type ProductMasterUpdateWithoutBrandInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9580,6 +9778,8 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9658,6 +9858,8 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9731,6 +9933,8 @@ export type ProductMasterCreateManyCoreProductInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -9799,6 +10003,8 @@ export type ProductMasterUpdateWithoutCoreProductInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9880,6 +10086,8 @@ export type ProductMasterUncheckedUpdateWithoutCoreProductInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9958,6 +10166,8 @@ export type ProductMasterUncheckedUpdateManyWithoutCoreProductInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10030,6 +10240,8 @@ export type ProductMasterCreateManyGradeInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -10098,6 +10310,8 @@ export type ProductMasterUpdateWithoutGradeInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10179,6 +10393,8 @@ export type ProductMasterUncheckedUpdateWithoutGradeInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10257,6 +10473,8 @@ export type ProductMasterUncheckedUpdateManyWithoutGradeInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10329,6 +10547,8 @@ export type ProductMasterCreateManyFinishMasterInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -10397,6 +10617,8 @@ export type ProductMasterUpdateWithoutFinishMasterInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10478,6 +10700,8 @@ export type ProductMasterUncheckedUpdateWithoutFinishMasterInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10556,6 +10780,8 @@ export type ProductMasterUncheckedUpdateManyWithoutFinishMasterInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10628,6 +10854,8 @@ export type ProductMasterCreateManyTypeInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -10696,6 +10924,8 @@ export type ProductMasterUpdateWithoutTypeInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10777,6 +11007,8 @@ export type ProductMasterUncheckedUpdateWithoutTypeInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10855,6 +11087,8 @@ export type ProductMasterUncheckedUpdateManyWithoutTypeInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10927,6 +11161,8 @@ export type ProductMasterCreateManyItemTypeMasterInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -10995,6 +11231,8 @@ export type ProductMasterUpdateWithoutItemTypeMasterInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11076,6 +11314,8 @@ export type ProductMasterUncheckedUpdateWithoutItemTypeMasterInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11154,6 +11394,8 @@ export type ProductMasterUncheckedUpdateManyWithoutItemTypeMasterInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11226,6 +11468,8 @@ export type ProductMasterCreateManyHsnInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11294,6 +11538,8 @@ export type ProductMasterUpdateWithoutHsnInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11375,6 +11621,8 @@ export type ProductMasterUncheckedUpdateWithoutHsnInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11453,6 +11701,8 @@ export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11525,6 +11775,8 @@ export type ProductMasterCreateManyConsumptionUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11597,6 +11849,8 @@ export type ProductMasterCreateManyMaxStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11669,6 +11923,8 @@ export type ProductMasterCreateManyMinStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11741,6 +11997,8 @@ export type ProductMasterCreateManyPrimaryUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11813,6 +12071,8 @@ export type ProductMasterCreateManyPurchaseUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11885,6 +12145,8 @@ export type ProductMasterCreateManyReorderBatchUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -11957,6 +12219,8 @@ export type ProductMasterCreateManyReorderLevelUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -12029,6 +12293,8 @@ export type ProductMasterCreateManyStockUnitInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -12097,6 +12363,8 @@ export type ProductMasterUpdateWithoutConsumptionUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12178,6 +12446,8 @@ export type ProductMasterUncheckedUpdateWithoutConsumptionUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12256,6 +12526,8 @@ export type ProductMasterUncheckedUpdateManyWithoutConsumptionUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12324,6 +12596,8 @@ export type ProductMasterUpdateWithoutMaxStockUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12405,6 +12679,8 @@ export type ProductMasterUncheckedUpdateWithoutMaxStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12483,6 +12759,8 @@ export type ProductMasterUncheckedUpdateManyWithoutMaxStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12551,6 +12829,8 @@ export type ProductMasterUpdateWithoutMinStockUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12632,6 +12912,8 @@ export type ProductMasterUncheckedUpdateWithoutMinStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12710,6 +12992,8 @@ export type ProductMasterUncheckedUpdateManyWithoutMinStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12778,6 +13062,8 @@ export type ProductMasterUpdateWithoutPrimaryUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12859,6 +13145,8 @@ export type ProductMasterUncheckedUpdateWithoutPrimaryUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12937,6 +13225,8 @@ export type ProductMasterUncheckedUpdateManyWithoutPrimaryUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13005,6 +13295,8 @@ export type ProductMasterUpdateWithoutPurchaseUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13086,6 +13378,8 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13164,6 +13458,8 @@ export type ProductMasterUncheckedUpdateManyWithoutPurchaseUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13232,6 +13528,8 @@ export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13313,6 +13611,8 @@ export type ProductMasterUncheckedUpdateWithoutReorderBatchUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13391,6 +13691,8 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13459,6 +13761,8 @@ export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13540,6 +13844,8 @@ export type ProductMasterUncheckedUpdateWithoutReorderLevelUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13618,6 +13924,8 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13686,6 +13994,8 @@ export type ProductMasterUpdateWithoutStockUnitInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13767,6 +14077,8 @@ export type ProductMasterUncheckedUpdateWithoutStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13845,6 +14157,8 @@ export type ProductMasterUncheckedUpdateManyWithoutStockUnitInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13917,6 +14231,8 @@ export type ProductMasterCreateManyItemGroupInput = {
   brand_id?: number | null
   category_id: number
   article_code?: string | null
+  p_code?: string | null
+  color_name?: string | null
   core_material?: string | null
   edge_banding_color?: string | null
   finish?: string | null
@@ -13985,6 +14301,8 @@ export type ProductMasterUpdateWithoutItemGroupInput = {
   pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
   alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14066,6 +14384,8 @@ export type ProductMasterUncheckedUpdateWithoutItemGroupInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14144,6 +14464,8 @@ export type ProductMasterUncheckedUpdateManyWithoutItemGroupInput = {
   brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   category_id?: Prisma.IntFieldUpdateOperationsInput | number
   article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  p_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14292,6 +14614,8 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   brand_id?: boolean
   category_id?: boolean
   article_code?: boolean
+  p_code?: boolean
+  color_name?: boolean
   core_material?: boolean
   edge_banding_color?: boolean
   finish?: boolean
@@ -14391,6 +14715,8 @@ export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   brand_id?: boolean
   category_id?: boolean
   article_code?: boolean
+  p_code?: boolean
+  color_name?: boolean
   core_material?: boolean
   edge_banding_color?: boolean
   finish?: boolean
@@ -14483,6 +14809,8 @@ export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   brand_id?: boolean
   category_id?: boolean
   article_code?: boolean
+  p_code?: boolean
+  color_name?: boolean
   core_material?: boolean
   edge_banding_color?: boolean
   finish?: boolean
@@ -14575,6 +14903,8 @@ export type ProductMasterSelectScalar = {
   brand_id?: boolean
   category_id?: boolean
   article_code?: boolean
+  p_code?: boolean
+  color_name?: boolean
   core_material?: boolean
   edge_banding_color?: boolean
   finish?: boolean
@@ -14625,7 +14955,7 @@ export type ProductMasterSelectScalar = {
   type_id?: boolean
 }
 
-export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "hsn_id" | "stock_updated_at" | "consumption_unit_id" | "costing_method" | "item_group_id" | "item_type" | "max_stock_qty" | "max_stock_unit_id" | "min_stock_qty" | "min_stock_unit_id" | "primary_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "shelf_life_days" | "stock_unit_id" | "barcode" | "core_product_id" | "finish_id" | "grade_id" | "height" | "item_code" | "item_type_master_id" | "length" | "purchase_unit_id" | "size" | "sub_category_id" | "thickness" | "type_id", ExtArgs["result"]["productMaster"]>
+export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "p_code" | "color_name" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "hsn_id" | "stock_updated_at" | "consumption_unit_id" | "costing_method" | "item_group_id" | "item_type" | "max_stock_qty" | "max_stock_unit_id" | "min_stock_qty" | "min_stock_unit_id" | "primary_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "shelf_life_days" | "stock_unit_id" | "barcode" | "core_product_id" | "finish_id" | "grade_id" | "height" | "item_code" | "item_type_master_id" | "length" | "purchase_unit_id" | "size" | "sub_category_id" | "thickness" | "type_id", ExtArgs["result"]["productMaster"]>
 export type ProductMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   grnItems?: boolean | Prisma.ProductMaster$grnItemsArgs<ExtArgs>
   leadRequirementMaterials?: boolean | Prisma.ProductMaster$leadRequirementMaterialsArgs<ExtArgs>
@@ -14749,6 +15079,8 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     brand_id: number | null
     category_id: number
     article_code: string | null
+    p_code: string | null
+    color_name: string | null
     core_material: string | null
     edge_banding_color: string | null
     finish: string | null
@@ -15267,6 +15599,8 @@ export interface ProductMasterFieldRefs {
   readonly brand_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly category_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly article_code: Prisma.FieldRef<"ProductMaster", 'String'>
+  readonly p_code: Prisma.FieldRef<"ProductMaster", 'String'>
+  readonly color_name: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly core_material: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly edge_banding_color: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly finish: Prisma.FieldRef<"ProductMaster", 'String'>

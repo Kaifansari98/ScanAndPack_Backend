@@ -5048,6 +5048,7 @@ export const getProjectCategories = async (vendor_id: number) => {
           select: { id: true, category_name: true },
         },
         status: true,
+        prefix: true,
         created_at: true,
         include_in_packing: true,
         scan_pack_validate: true,
@@ -5095,7 +5096,8 @@ export const createProjectCategory = async (
   parent_id?: number | null,
   include_in_packing: boolean = false,
   scan_pack_validate: boolean = false,
-  use_in_assembled_packing: boolean = false
+  use_in_assembled_packing: boolean = false,
+  prefix?: string | null
 ) => {
   try {
     const finalScanPackValidate = Boolean(scan_pack_validate);
@@ -5105,6 +5107,7 @@ export const createProjectCategory = async (
       const category = await tx.projectCategoriesMaster.create({
         data: {
           category_name,
+          prefix: prefix ? prefix.trim().toUpperCase() : null,
           vendor_id,
           status: "Yes",
           parent_id: parent_id ? Number(parent_id) : null,
@@ -5149,7 +5152,8 @@ export const updateProjectCategory = async (
   parent_id?: number | null,
   include_in_packing?: boolean,
   scan_pack_validate?: boolean,
-  use_in_assembled_packing?: boolean
+  use_in_assembled_packing?: boolean,
+  prefix?: string | null
 ) => {
   try {
     await prisma.$transaction(async (tx) => {
@@ -5160,6 +5164,9 @@ export const updateProjectCategory = async (
         updated_by,
       };
 
+      if (prefix !== undefined) {
+        updateData.prefix = prefix ? prefix.trim().toUpperCase() : null;
+      }
       if (include_in_packing !== undefined) {
         updateData.include_in_packing = Boolean(include_in_packing);
       }
