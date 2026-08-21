@@ -1069,6 +1069,7 @@ model SiteTypeMaster {
   vendor_id Int
   status    String       @default("active")
   leads     LeadMaster[]
+  onlineLeads online_leads[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -1078,6 +1079,7 @@ model SourceMaster {
   vendor_id Int
   status    String       @default("active")
   leads     LeadMaster[]
+  onlineLeads online_leads[]
   vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -4776,6 +4778,7 @@ model online_leads {
   id                                                       Int                          @id @default(autoincrement())
   vendor_id                                                Int
   leads_name                                               String
+  lead_code                                                String?
   email                                                    String?
   contact                                                  String
   source                                                   String
@@ -4790,6 +4793,18 @@ model online_leads {
   follow_up_date                                           DateTime?
   store_id                                                 Int?
   final_assigned_leads                                     Int?
+  firstname                                                String?
+  lastname                                                 String?
+  alt_contact_no                                           String?
+  site_address                                             String?
+  site_type_id                                             Int?
+  source_id                                                Int?
+  refered_by                                               String?
+  archetech_name                                           String?
+  archetech_number                                         String?
+  priority                                                 String?
+  product_types                                            String[]                     @default([])
+  product_structures                                       String[]                     @default([])
   online_lead_call_log                                     online_lead_call_log[]
   online_lead_history                                      online_lead_history[]
   online_lead_store_log                                    online_lead_store_log[]
@@ -4798,9 +4813,13 @@ model online_leads {
   UserMaster_online_leads_final_assigned_leadsToUserMaster UserMaster?                  @relation("online_leads_final_assigned_leadsToUserMaster", fields: [final_assigned_leads], references: [id])
   online_lead_followup_status                              online_lead_followup_status? @relation(fields: [status], references: [id])
   FranchiseMaster                                          FranchiseMaster?             @relation(fields: [store_id], references: [id])
+  SourceMaster                                             SourceMaster?                @relation(fields: [source_id], references: [id])
+  SiteTypeMaster                                           SiteTypeMaster?              @relation(fields: [site_type_id], references: [id])
   UserMaster_online_leads_updated_byToUserMaster           UserMaster?                  @relation("online_leads_updated_byToUserMaster", fields: [updated_by], references: [id])
   VendorMaster                                             VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   telecaller_campaign_leads                                telecaller_campaign_leads[]
+
+  @@unique([vendor_id, contact], name: "uniq_vendor_online_lead_contact")
 }
 
 model telecaller_campaign_leads {
@@ -5290,4 +5309,22 @@ model LeadBillingAddress {
   @@index([lead_id, vendor_id, address_type])
   @@index([product_type_id])
   @@map("lead_billing_addresses")
+}
+
+model MetaLead {
+  id            Int      @id @default(autoincrement())
+  meta_lead_id  String   @unique
+  name          String
+  phone         String
+  email         String?
+  form_name     String?
+  form_id       String?
+  created_date  DateTime @default(now())
+  lead_source   String   @default("Facebook Lead Ads")
+  status        String   @default("New")
+  custom_fields Json?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  @@map("meta_leads")
 }

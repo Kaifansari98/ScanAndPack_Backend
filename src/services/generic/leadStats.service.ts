@@ -53,15 +53,10 @@ export class LeadStatsService {
         "custom",
         "admin",
       ].includes(userType);
-      const shouldUseMapping = [
-        "sales-executive",
-        "custom",
-        "site-supervisor",
-        "backend",
-        "tech-check",
-        "factory",
-        "head-site-supervisor",
-        "pre-prod",
+      const shouldUseMapping = ![
+        "admin",
+        "super-admin",
+        "auditor",
       ].includes(userType);
       console.log("[LeadStatsService] role flags", {
         userType,
