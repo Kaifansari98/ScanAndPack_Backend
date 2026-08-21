@@ -277,14 +277,99 @@ export class PreProductionService {
     date: string,
     updatedBy: number,
     instanceId?: number,
+    changeRemark?: string,
   ) {
     // Verify lead belongs to vendor
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      select: {
+        id: true,
+        account_id: true,
+        expected_order_login_ready_date: true,
+      },
     });
 
     if (!lead) {
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
+    }
+
+    const actor = await prisma.userMaster.findFirst({
+      where: { id: updatedBy, vendor_id: vendorId, status: "active" },
+      select: {
+        user_type: {
+          select: {
+            user_type: true,
+          },
+        },
+      },
+    });
+
+    const normalizedRole =
+      actor?.user_type?.user_type?.trim().toLowerCase() ?? "";
+    const isSuperAdmin = normalizedRole === "super-admin";
+    const currentLeadErd = lead.expected_order_login_ready_date;
+    const currentInstance = instanceId
+      ? await prisma.leadProductStructureInstance.findFirst({
+          where: {
+            id: instanceId,
+            lead_id: leadId,
+            vendor_id: vendorId,
+          },
+          select: {
+            id: true,
+            production_erd_date: true,
+          },
+        })
+      : null;
+    const nextDate = new Date(date);
+    const currentLeadErdTime = currentLeadErd ? currentLeadErd.getTime() : null;
+    const currentInstanceErdTime = currentInstance?.production_erd_date
+      ? currentInstance.production_erd_date.getTime()
+      : null;
+    const nextDateTime = nextDate.getTime();
+    const isExistingDisplayedErdChanged = instanceId
+      ? currentInstanceErdTime !== null && currentInstanceErdTime !== nextDateTime
+      : currentLeadErdTime !== null && currentLeadErdTime !== nextDateTime;
+    const isMasterErdChange =
+      !instanceId &&
+      currentLeadErdTime !== null &&
+      currentLeadErdTime !== nextDateTime;
+    const isInstanceErdChange =
+      !!instanceId &&
+      currentInstanceErdTime !== null &&
+      currentInstanceErdTime !== nextDateTime;
+
+    if (
+      isExistingDisplayedErdChanged &&
+      !isSuperAdmin &&
+      !String(changeRemark ?? "").trim()
+    ) {
+      throw new Error("Reason is required when changing this ERD");
+    }
+
+    if ((isMasterErdChange || isInstanceErdChange) && !isSuperAdmin) {
+      const previousChange = await prisma.leadDetailedLogs.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          history_type: "Lead",
+          action: {
+            contains: instanceId
+              ? "Instance ERD changed to"
+              : "Expected Order Login ready date changed to",
+            mode: "insensitive" as const,
+          },
+        },
+        select: { id: true },
+      });
+
+      if (previousChange) {
+        throw new Error(
+          instanceId
+            ? "This ERD can only be changed once after setting it. Please contact Super Admin for further changes."
+            : "Master ERD can only be changed once after setting it. Please contact Super Admin for further changes.",
+        );
+      }
     }
 
     if (instanceId) {
@@ -329,8 +414,16 @@ export class PreProductionService {
         lead_id: leadId,
         account_id: lead.account_id,
         action: instanceId
-          ? `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
-          : `Expected Order Login ready date updated to ${formattedDate}`,
+          ? currentInstanceErdTime === null
+            ? `Instance ERD set to ${formattedDate} and lead ERD recalculated`
+            : String(changeRemark ?? "").trim()
+              ? `Instance ERD changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
+              : `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
+          : currentLeadErdTime === null
+            ? `Expected Order Login ready date set to ${formattedDate}`
+            : String(changeRemark ?? "").trim()
+              ? `Expected Order Login ready date changed to ${formattedDate}. Reason: ${String(changeRemark).trim()}`
+              : `Expected Order Login ready date updated to ${formattedDate}`,
         action_type: "UPDATE",
         history_type: "Lead",
         created_by: updatedBy,

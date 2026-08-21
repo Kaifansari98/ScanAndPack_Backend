@@ -132,7 +132,12 @@ export class PreProductionController {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
-      const { expected_order_login_ready_date, updated_by, instance_id } = req.body;
+      const {
+        expected_order_login_ready_date,
+        updated_by,
+        instance_id,
+        change_remark,
+      } = req.body;
 
       if (
         !vendorId ||
@@ -153,6 +158,7 @@ export class PreProductionController {
         expected_order_login_ready_date,
         updated_by,
         typeof instance_id !== "undefined" ? Number(instance_id) : undefined,
+        change_remark,
       );
 
       return res.status(200).json({
