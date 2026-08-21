@@ -201,6 +201,7 @@ export const ModelName = {
   DefectCompletionPhoto: 'DefectCompletionPhoto',
   ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
   ProjectCategoriesMaster: 'ProjectCategoriesMaster',
+  CategoryNamingStructure: 'CategoryNamingStructure',
   ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
   BrandMaster: 'BrandMaster',
   ProductMaster: 'ProductMaster',
@@ -2729,6 +2730,19 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
+
+
+export const CategoryNamingStructureScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  category_id: 'category_id',
+  delimiter: 'delimiter',
+  fields_json: 'fields_json',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CategoryNamingStructureScalarFieldEnum = (typeof CategoryNamingStructureScalarFieldEnum)[keyof typeof CategoryNamingStructureScalarFieldEnum]
 
 
 export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {

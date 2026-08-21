@@ -768,6 +768,11 @@ export type ProjectCategoriesTypeMaster = Prisma.ProjectCategoriesTypeMasterMode
  */
 export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
 /**
+ * Model CategoryNamingStructure
+ * 
+ */
+export type CategoryNamingStructure = Prisma.CategoryNamingStructureModel
+/**
  * Model ProjectCategoriesMasterVendorMapping
  * 
  */

@@ -63,6 +63,7 @@ model VendorMaster {
   carcasMaterials                        CarcasMaterialMaster[]
   carcassLegs                            CarcassLegsMaster[]
   carcassTypes                           CarcassTypeMaster[]
+  categoryNamingStructures               CategoryNamingStructure[]
   clientBankAccounts                     ClientBankDetail[]
   clients                                ClientMaster[]
   clientTypes                            ClientTypeMaster[]
@@ -3412,7 +3413,25 @@ model ProjectCategoriesMaster {
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
   cutLists                             CutList[]                              @relation("CutListCategory")
 
+  namingStructure                      CategoryNamingStructure?               @relation("CategoryNamingStructure")
+
   @@index([parent_id])
+}
+
+model CategoryNamingStructure {
+  id           Int                     @id @default(autoincrement())
+  vendor_id    Int
+  category_id  Int                     @unique
+  delimiter    String                  @default("_")
+  fields_json  Json
+  created_at   DateTime                @default(now())
+  updated_at   DateTime                @updatedAt
+  vendor       VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  category     ProjectCategoriesMaster @relation("CategoryNamingStructure", fields: [category_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, category_id])
+  @@index([vendor_id])
+  @@index([category_id])
 }
 
 model ProjectCategoriesMasterVendorMapping {
