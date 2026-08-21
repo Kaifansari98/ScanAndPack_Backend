@@ -28,7 +28,8 @@ async function main() {
     { type: "head-site-supervisor" },
     { type: "tech-check" },
     { type: "factory" },
-    { type: "auditor" }
+    { type: "auditor" },
+    { type: "backend" }
   ];
 
   const roleMap: Record<string, number> = {};
@@ -107,6 +108,18 @@ async function main() {
       user_contact: "9999900009",
       user_email: "auditor@vloq.com",
       roleKey: "auditor"
+    },
+    {
+      user_name: "Backend User",
+      user_contact: "9999900010",
+      user_email: "backend@vloq.com",
+      roleKey: "backend"
+    },
+    {
+      user_name: "Factory User",
+      user_contact: "9999900011",
+      user_email: "factory@vloq.com",
+      roleKey: "factory"
     }
   ];
 

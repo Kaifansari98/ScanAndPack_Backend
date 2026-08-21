@@ -1183,6 +1183,15 @@ export const getLeadById = async (
         where: { id: lead.id },
         data: { is_draft: false },
       });
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id || 1,
+        action: "Lead marked as Open Lead (Draft completed).",
+        action_type: "STATUS_CHANGE",
+        created_by: userId,
+        history_type: "Lead",
+      });
       lead.is_draft = false;
     }
 
@@ -2318,6 +2327,15 @@ export const updateLeadService = async (
         await tx.leadMaster.update({
           where: { id: leadId },
           data: { is_draft: false },
+        });
+        await createLeadLog(tx, {
+          vendor_id: hydratedLead.vendor_id,
+          lead_id: leadId,
+          account_id: hydratedLead.account_id || 1,
+          action: "Lead marked as Open Lead (Draft completed).",
+          action_type: "STATUS_CHANGE",
+          created_by: updated_by || 1,
+          history_type: "Lead",
         });
 
         const assigneeEmail = hydratedLead.assignedTo?.user_email?.trim();
@@ -4046,4 +4064,182 @@ export const updateLeadStageService = async (
     logger.error("Error in updateLeadStageService", { error: error.message });
     throw new Error(error.message || "Failed to update lead stage");
   }
+};
+
+export const getLeadOnlineHistory = async (params: {
+  lead_id: number;
+  vendor_id: number;
+}) => {
+  const { lead_id, vendor_id } = params;
+
+  // 1. Fetch LeadMaster details to get contact number and created_at
+  const leadMaster = await prisma.leadMaster.findUnique({
+    where: { id: lead_id, vendor_id },
+    include: {
+      createdBy: { select: { user_name: true, user_email: true } },
+    },
+  });
+
+  if (!leadMaster) {
+    return [];
+  }
+
+  const cleanContact = leadMaster.contact_no.replace(/\D/g, "");
+
+  // 2. Fetch all Online Leads for this vendor to match by contact
+  const onlineLeads = await prisma.onlineLead.findMany({
+    where: { vendor_id },
+    include: {
+      createdBy: { select: { id: true, user_name: true, user_email: true } },
+      assignedTo: { select: { id: true, user_name: true, user_email: true } },
+      finalAssignedLeads: { select: { id: true, user_name: true, user_email: true } },
+      franchise: { select: { id: true, franchise_name: true } },
+    },
+  });
+
+  const onlineLead = onlineLeads.find((l) => l.contact.replace(/\D/g, "") === cleanContact);
+
+  const events: Array<{
+    id: string;
+    event_type: "creation" | "status_change" | "assignment" | "store_assignment" | "stage_move";
+    action: string;
+    remark: string | null;
+    created_at: Date;
+    user: {
+      name: string;
+      email: string;
+    } | null;
+  }> = [];
+
+  // 3. Add OnlineLead Creation Event
+  if (onlineLead) {
+    events.push({
+      id: `creation-${onlineLead.id}`,
+      event_type: "creation",
+      action: `Lead created from online source (${onlineLead.source}). Entry Type: ${onlineLead.lead_entry_type}.`,
+      remark: onlineLead.remark || null,
+      created_at: onlineLead.created_at,
+      user: onlineLead.createdBy
+        ? { name: onlineLead.createdBy.user_name, email: onlineLead.createdBy.user_email }
+        : { name: "System / Integration", email: "system@vloq.com" },
+    });
+
+    // 4. Add OnlineLeadHistory Events (Calls, Status Updates, Assignments)
+    const histories = await prisma.onlineLeadHistory.findMany({
+      where: { online_lead_id: onlineLead.id },
+      include: {
+        createdBy: { select: { user_name: true, user_email: true } },
+        status: { select: { status_name: true } },
+        franchise: { select: { franchise_name: true } },
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    // Reconstruct old -> new status changes
+    let prevStatusName = "Pending";
+    for (const h of histories) {
+      const currentStatusName = h.status?.status_name || "New Lead";
+      let actionText = h.remark || `Update to status: ${currentStatusName}`;
+
+      if (currentStatusName !== prevStatusName) {
+        actionText = `Status changed from "${prevStatusName}" to "${currentStatusName}". ${actionText}`;
+        prevStatusName = currentStatusName;
+      }
+
+      events.push({
+        id: `history-${h.id}`,
+        event_type: h.remark?.includes("assignments updated") ? "assignment" : "status_change",
+        action: actionText,
+        remark: h.follow_up_date
+          ? `Scheduled follow-up date: ${new Date(h.follow_up_date).toLocaleString("en-IN")}`
+          : null,
+        created_at: h.created_at,
+        user: { name: h.createdBy.user_name, email: h.createdBy.user_email },
+      });
+    }
+
+    // 5. Add OnlineLeadStoreLog Events
+    const storeLogs = await prisma.onlineLeadStoreLog.findMany({
+      where: { online_lead_id: onlineLead.id },
+      include: {
+        selectedBy: { select: { user_name: true, user_email: true } },
+        assignedTo: { select: { user_name: true, user_email: true } },
+        fromFranchise: { select: { franchise_name: true } },
+        toFranchise: { select: { franchise_name: true } },
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    for (const sl of storeLogs) {
+      let actionText = `Store Assigned: ${sl.toFranchise.franchise_name}`;
+      if (sl.fromFranchise) {
+        actionText = `Store Transferred from "${sl.fromFranchise.franchise_name}" to "${sl.toFranchise.franchise_name}"`;
+      }
+      if (sl.assignedTo) {
+        actionText += ` and allocated to user: ${sl.assignedTo.user_name}`;
+      }
+
+      events.push({
+        id: `store-log-${sl.id}`,
+        event_type: "store_assignment",
+        action: actionText,
+        remark: sl.remark || null,
+        created_at: sl.created_at,
+        user: { name: sl.selectedBy.user_name, email: sl.selectedBy.user_email },
+      });
+    }
+  }
+
+  // 6. Add LeadMaster Creation (when it became a Draft Lead)
+  if (leadMaster) {
+    events.push({
+      id: `pipeline-creation-${leadMaster.id}`,
+      event_type: "stage_move",
+      action: `Lead successfully moved to CRM pipeline (Draft Lead stage).`,
+      remark: `Lead Code: ${leadMaster.lead_code}`,
+      created_at: leadMaster.created_at,
+      user: leadMaster.createdBy
+        ? { name: leadMaster.createdBy.user_name, email: leadMaster.createdBy.user_email }
+        : { name: "System", email: "system@vloq.com" },
+    });
+
+    // 7. Add LeadDetailedLogs Events (Pipeline stage changes and actions)
+    const pipelineLogs = await prisma.leadDetailedLogs.findMany({
+      where: { lead_id: lead_id },
+      include: {
+        user: { select: { user_name: true, user_email: true } },
+        stage: { select: { type: true } },
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    let prevStageType = "Draft Lead";
+    for (const pl of pipelineLogs) {
+      const currentStageType = pl.stage?.type || "open";
+
+      // If the stage changed or if it is a major action, include it
+      let isStageMove = false;
+      let actionText = pl.action;
+
+      if (currentStageType !== prevStageType) {
+        isStageMove = true;
+        actionText = `Lead moved to stage: ${currentStageType}. ${actionText}`;
+        prevStageType = currentStageType;
+      }
+
+      events.push({
+        id: `pipeline-log-${pl.id}`,
+        event_type: isStageMove ? "stage_move" : "status_change",
+        action: actionText,
+        remark: null,
+        created_at: pl.created_at,
+        user: { name: pl.user.user_name, email: pl.user.user_email },
+      });
+    }
+  }
+
+  // Sort events newest -> oldest
+  events.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+
+  return events;
 };

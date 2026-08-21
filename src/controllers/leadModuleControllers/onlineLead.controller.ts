@@ -749,6 +749,27 @@ export class OnlineLeadController {
         });
       }
 
+      const statusNameLower = status.status_name.toLowerCase();
+      const shouldCreateDraft =
+        statusNameLower === "store assigned" ||
+        statusNameLower === "store visit done";
+
+      let targetStoreId: number | null = lead.store_id;
+      if (store_preference_option === "No Preference") {
+        targetStoreId = null;
+      } else if (store_preference_option === "Another Store" && store_id !== undefined) {
+        targetStoreId = store_id ? Number(store_id) : null;
+      } else if (store_id !== undefined) {
+        targetStoreId = store_id ? Number(store_id) : null;
+      }
+
+      if (shouldCreateDraft && !targetStoreId) {
+        return res.status(400).json({
+          success: false,
+          error: `Please assign a store to this lead before setting status to '${status.status_name}'`,
+        });
+      }
+
       const { updatedLead, callLog } = await prisma.$transaction(async (tx) => {
         // 1. Create Call Log
         const callLog = await tx.onlineLeadCallLog.create({

@@ -25,6 +25,7 @@ import {
   unassignDesignerFromLead,
   blockLeadService,
   unblockLeadService,
+  getLeadOnlineHistory,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -3147,6 +3148,29 @@ export class LeadController {
         .json(ApiResponse.success(result, "Lead stage updated successfully"));
     } catch (error: any) {
       logger.error("[CONTROLLER] updateLeadStage error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  getOnlineHistory = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const lead_id = Number(req.params.lead_id);
+      const vendor_id = Number(req.params.vendor_id);
+
+      if (isNaN(lead_id) || isNaN(vendor_id)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor_id or lead_id"));
+      }
+
+      const history = await getLeadOnlineHistory({ lead_id, vendor_id });
+      return res
+        .status(200)
+        .json(ApiResponse.success(history, "Lead online history fetched successfully"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] getOnlineHistory error", error);
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error"));
