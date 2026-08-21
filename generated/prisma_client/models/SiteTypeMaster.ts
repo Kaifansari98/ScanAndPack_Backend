@@ -213,7 +213,7 @@ export type SiteTypeMasterWhereInput = {
   vendor_id?: Prisma.IntFilter<"SiteTypeMaster"> | number
   status?: Prisma.StringFilter<"SiteTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
-  onlineLeads?: Prisma.OnlineLeadListRelationFilter
+  onlineLeads?: Prisma.Online_leadsListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -223,7 +223,7 @@ export type SiteTypeMasterOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   status?: Prisma.SortOrder
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
-  onlineLeads?: Prisma.OnlineLeadOrderByRelationAggregateInput
+  onlineLeads?: Prisma.online_leadsOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -236,7 +236,7 @@ export type SiteTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"SiteTypeMaster"> | number
   status?: Prisma.StringFilter<"SiteTypeMaster"> | string
   leads?: Prisma.LeadMasterListRelationFilter
-  onlineLeads?: Prisma.OnlineLeadListRelationFilter
+  onlineLeads?: Prisma.Online_leadsListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -266,7 +266,7 @@ export type SiteTypeMasterCreateInput = {
   type: string
   status?: string
   leads?: Prisma.LeadMasterCreateNestedManyWithoutSiteTypeInput
-  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsCreateNestedManyWithoutSiteTypeMasterInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteTypesInput
 }
 
@@ -276,14 +276,14 @@ export type SiteTypeMasterUncheckedCreateInput = {
   vendor_id: number
   status?: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutSiteTypeInput
-  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutSiteTypeMasterInput
 }
 
 export type SiteTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUpdateManyWithoutSiteTypeNestedInput
-  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUpdateManyWithoutSiteTypeMasterNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteTypesNestedInput
 }
 
@@ -293,7 +293,7 @@ export type SiteTypeMasterUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutSiteTypeNestedInput
-  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUncheckedUpdateManyWithoutSiteTypeMasterNestedInput
 }
 
 export type SiteTypeMasterCreateManyInput = {
@@ -439,7 +439,7 @@ export type SiteTypeMasterCreateWithoutVendorInput = {
   type: string
   status?: string
   leads?: Prisma.LeadMasterCreateNestedManyWithoutSiteTypeInput
-  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsCreateNestedManyWithoutSiteTypeMasterInput
 }
 
 export type SiteTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -447,7 +447,7 @@ export type SiteTypeMasterUncheckedCreateWithoutVendorInput = {
   type: string
   status?: string
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutSiteTypeInput
-  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutSiteTypeMasterInput
 }
 
 export type SiteTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -489,7 +489,7 @@ export type SiteTypeMasterScalarWhereInput = {
 export type SiteTypeMasterCreateWithoutLeadsInput = {
   type: string
   status?: string
-  onlineLeads?: Prisma.OnlineLeadCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsCreateNestedManyWithoutSiteTypeMasterInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSiteTypesInput
 }
 
@@ -498,7 +498,7 @@ export type SiteTypeMasterUncheckedCreateWithoutLeadsInput = {
   type: string
   vendor_id: number
   status?: string
-  onlineLeads?: Prisma.OnlineLeadUncheckedCreateNestedManyWithoutSiteTypeRelationInput
+  onlineLeads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutSiteTypeMasterInput
 }
 
 export type SiteTypeMasterCreateOrConnectWithoutLeadsInput = {
@@ -520,7 +520,7 @@ export type SiteTypeMasterUpdateToOneWithWhereWithoutLeadsInput = {
 export type SiteTypeMasterUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUpdateManyWithoutSiteTypeMasterNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSiteTypesNestedInput
 }
 
@@ -529,7 +529,7 @@ export type SiteTypeMasterUncheckedUpdateWithoutLeadsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUncheckedUpdateManyWithoutSiteTypeMasterNestedInput
 }
 
 export type SiteTypeMasterCreateWithoutOnlineLeadsInput = {
@@ -588,7 +588,7 @@ export type SiteTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUpdateManyWithoutSiteTypeNestedInput
-  onlineLeads?: Prisma.OnlineLeadUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUpdateManyWithoutSiteTypeMasterNestedInput
 }
 
 export type SiteTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -596,7 +596,7 @@ export type SiteTypeMasterUncheckedUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutSiteTypeNestedInput
-  onlineLeads?: Prisma.OnlineLeadUncheckedUpdateManyWithoutSiteTypeRelationNestedInput
+  onlineLeads?: Prisma.online_leadsUncheckedUpdateManyWithoutSiteTypeMasterNestedInput
 }
 
 export type SiteTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -641,7 +641,7 @@ export type SiteTypeMasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.
  * SiteTypeMasterCountOutputType without action
  */
 export type SiteTypeMasterCountOutputTypeCountOnlineLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.OnlineLeadWhereInput
+  where?: Prisma.online_leadsWhereInput
 }
 
 
@@ -697,7 +697,7 @@ export type $SiteTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "SiteTypeMaster"
   objects: {
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
-    onlineLeads: Prisma.$OnlineLeadPayload<ExtArgs>[]
+    onlineLeads: Prisma.$online_leadsPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1100,7 +1100,7 @@ readonly fields: SiteTypeMasterFieldRefs;
 export interface Prisma__SiteTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   leads<T extends Prisma.SiteTypeMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteTypeMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  onlineLeads<T extends Prisma.SiteTypeMaster$onlineLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteTypeMaster$onlineLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OnlineLeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  onlineLeads<T extends Prisma.SiteTypeMaster$onlineLeadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SiteTypeMaster$onlineLeadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$online_leadsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1564,23 +1564,23 @@ export type SiteTypeMaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.In
  */
 export type SiteTypeMaster$onlineLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the OnlineLead
+   * Select specific fields to fetch from the online_leads
    */
-  select?: Prisma.OnlineLeadSelect<ExtArgs> | null
+  select?: Prisma.online_leadsSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the OnlineLead
+   * Omit specific fields from the online_leads
    */
-  omit?: Prisma.OnlineLeadOmit<ExtArgs> | null
+  omit?: Prisma.online_leadsOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.OnlineLeadInclude<ExtArgs> | null
-  where?: Prisma.OnlineLeadWhereInput
-  orderBy?: Prisma.OnlineLeadOrderByWithRelationInput | Prisma.OnlineLeadOrderByWithRelationInput[]
-  cursor?: Prisma.OnlineLeadWhereUniqueInput
+  include?: Prisma.online_leadsInclude<ExtArgs> | null
+  where?: Prisma.online_leadsWhereInput
+  orderBy?: Prisma.online_leadsOrderByWithRelationInput | Prisma.online_leadsOrderByWithRelationInput[]
+  cursor?: Prisma.online_leadsWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.OnlineLeadScalarFieldEnum | Prisma.OnlineLeadScalarFieldEnum[]
+  distinct?: Prisma.Online_leadsScalarFieldEnum | Prisma.Online_leadsScalarFieldEnum[]
 }
 
 /**
