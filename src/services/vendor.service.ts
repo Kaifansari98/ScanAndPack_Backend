@@ -2262,7 +2262,7 @@ export const getLeadServicingReportData = async (
     },
   });
 
-  return leads.flatMap((lead) => {
+  const rows = leads.flatMap((lead) => {
     const hasMultipleInstances = lead.productStructureInstances.length > 1;
 
     const freeService1 = lead.serviceSchedules.find(
@@ -2341,5 +2341,35 @@ export const getLeadServicingReportData = async (
         instance.title
       )
     );
+  });
+
+  return rows.sort((a, b) => {
+    const dueA = a.service_1_due_date ? new Date(a.service_1_due_date).getTime() : null;
+    const dueB = b.service_1_due_date ? new Date(b.service_1_due_date).getTime() : null;
+    const isValidDueA = dueA !== null && !isNaN(dueA);
+    const isValidDueB = dueB !== null && !isNaN(dueB);
+
+    if (isValidDueA && isValidDueB) {
+      if (dueA !== dueB) return dueA! - dueB!;
+    } else if (isValidDueA) {
+      return -1;
+    } else if (isValidDueB) {
+      return 1;
+    }
+
+    const timeA = a.service_1_completed_date ? new Date(a.service_1_completed_date).getTime() : null;
+    const timeB = b.service_1_completed_date ? new Date(b.service_1_completed_date).getTime() : null;
+    const isValidA = timeA !== null && !isNaN(timeA);
+    const isValidB = timeB !== null && !isNaN(timeB);
+
+    if (isValidA && isValidB) {
+      if (timeA !== timeB) return timeA! - timeB!;
+    } else if (isValidA) {
+      return -1;
+    } else if (isValidB) {
+      return 1;
+    }
+
+    return a.lead_id - b.lead_id;
   });
 };
