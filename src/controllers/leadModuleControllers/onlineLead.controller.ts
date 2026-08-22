@@ -10,6 +10,38 @@ const getParam = (param: any): string => {
   return typeof param === "string" ? param : "";
 };
 
+const mapOnlineLeadToFrontend = (lead: any) => {
+  if (!lead) return null;
+  return {
+    ...lead,
+    assignedTo: lead.UserMaster_online_leads_assign_toToUserMaster || null,
+    finalAssignedLeads: lead.UserMaster_online_leads_final_assigned_leadsToUserMaster || null,
+    createdBy: lead.UserMaster_online_leads_created_byToUserMaster || null,
+    franchise: lead.FranchiseMaster || null,
+    followupStatus: lead.online_lead_followup_status || null,
+    sourceRelation: lead.SourceMaster || null,
+    siteTypeRelation: lead.SiteTypeMaster || null,
+    call_log: lead.online_lead_call_log ? lead.online_lead_call_log.map((c: any) => ({
+      ...c,
+      telecaller: c.UserMaster || null,
+      status: c.online_lead_followup_status || null,
+    })) : undefined,
+    online_lead_history: lead.online_lead_history ? lead.online_lead_history.map((h: any) => ({
+      ...h,
+      createdBy: h.UserMaster || null,
+      status: h.online_lead_followup_status || null,
+      franchise: h.FranchiseMaster || null,
+    })) : undefined,
+    store_logs: lead.online_lead_store_log ? lead.online_lead_store_log.map((sl: any) => ({
+      ...sl,
+      fromFranchise: sl.FranchiseMaster_online_lead_store_log_from_store_idToFranchiseMaster || null,
+      toFranchise: sl.FranchiseMaster_online_lead_store_log_to_store_idToFranchiseMaster || null,
+      selectedBy: sl.UserMaster_online_lead_store_log_selected_byToUserMaster || null,
+      assignedTo: sl.UserMaster_online_lead_store_log_assigned_toToUserMaster || null,
+    })) : undefined,
+  };
+};
+
 export class OnlineLeadController {
   // 1. Create Lead from API / Integration (ONLINE)
   createOnlineLead = async (req: Request, res: Response): Promise<Response> => {
@@ -53,7 +85,7 @@ export class OnlineLeadController {
 
       // Find initial status (e.g., Interested or Call Disconnected or look for a default like "New Lead")
       // We will look for an active status for this vendor, if none found, we use a placeholder or create one.
-      let defaultStatus = await prisma.onlineLeadFollowupStatus.findFirst({
+      let defaultStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
           is_active: true,
@@ -71,7 +103,7 @@ export class OnlineLeadController {
           vendorId: Number(vendor_id),
         });
 
-        return await tx.onlineLead.create({
+        return await tx.online_leads.create({
           data: {
             vendor_id: Number(vendor_id),
             leads_name,
@@ -83,6 +115,7 @@ export class OnlineLeadController {
             remark: remark ? remark.trim() : "-",
             status: defaultStatus?.id || null,
             store_id: store_id ? Number(store_id) : null,
+            updated_at: new Date(),
             firstname: firstname || null,
             lastname: lastname || null,
             alt_contact_no: alt_contact_no || null,
@@ -101,7 +134,7 @@ export class OnlineLeadController {
 
       // Create history entry
       if (defaultStatus) {
-        await prisma.onlineLeadHistory.create({
+        await prisma.online_lead_history.create({
           data: {
             vendor_id: Number(vendor_id),
             online_lead_id: lead.id,
@@ -167,7 +200,7 @@ export class OnlineLeadController {
       }
 
       // Find default Initial status (Pending)
-      const walkInStatus = await prisma.onlineLeadFollowupStatus.findFirst({
+      const walkInStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
           status_name: { equals: "Pending", mode: "insensitive" },
@@ -227,7 +260,7 @@ export class OnlineLeadController {
           vendorId: Number(vendor_id),
         });
 
-        return await tx.onlineLead.create({
+        return await tx.online_leads.create({
           data: {
             vendor_id: Number(vendor_id),
             leads_name,
@@ -241,6 +274,7 @@ export class OnlineLeadController {
             status: walkInStatus.id,
             remark: remark ? remark.trim() : "-",
             created_by: Number(created_by),
+            updated_at: new Date(),
             firstname: firstname || null,
             lastname: lastname || null,
             alt_contact_no: alt_contact_no || null,
@@ -258,7 +292,7 @@ export class OnlineLeadController {
       });
 
       // Create history
-      await prisma.onlineLeadHistory.create({
+      await prisma.online_lead_history.create({
         data: {
           vendor_id: Number(vendor_id),
           online_lead_id: lead.id,
@@ -270,7 +304,7 @@ export class OnlineLeadController {
       });
 
       // Log initial store preference
-      await prisma.onlineLeadStoreLog.create({
+      await prisma.online_lead_store_log.create({
         data: {
           vendor_id: Number(vendor_id),
           online_lead_id: lead.id,
@@ -316,7 +350,7 @@ export class OnlineLeadController {
       const where: any = {
         vendor_id: vendorId,
         NOT: {
-          followupStatus: {
+          online_lead_followup_status: {
             status_name: {
               in: ["Store Assigned", "Store Visit Done"],
               mode: "insensitive",
@@ -366,43 +400,43 @@ export class OnlineLeadController {
         }
       }
 
-      const leads = await prisma.onlineLead.findMany({
+      const leads = await prisma.online_leads.findMany({
         where,
         include: {
-          assignedTo: {
+          UserMaster_online_leads_assign_toToUserMaster: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
             },
           },
-          finalAssignedLeads: {
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
             },
           },
-          createdBy: {
+          UserMaster_online_leads_created_byToUserMaster: {
             select: {
               id: true,
               user_name: true,
             },
           },
-          franchise: {
+          FranchiseMaster: {
             select: {
               id: true,
               franchise_name: true,
             },
           },
-          followupStatus: true,
-          sourceRelation: {
+          online_lead_followup_status: true,
+          SourceMaster: {
             select: {
               id: true,
               type: true,
             },
           },
-          siteTypeRelation: {
+          SiteTypeMaster: {
             select: {
               id: true,
               type: true,
@@ -416,7 +450,7 @@ export class OnlineLeadController {
 
       return res.status(200).json({
         success: true,
-        data: leads,
+        data: leads.map(mapOnlineLeadToFrontend),
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] fetchLeads error:", error);
@@ -439,57 +473,57 @@ export class OnlineLeadController {
         });
       }
 
-      const lead = await prisma.onlineLead.findUnique({
+      const lead = await prisma.online_leads.findUnique({
         where: { id },
         include: {
-          assignedTo: {
+          UserMaster_online_leads_assign_toToUserMaster: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
             },
           },
-          finalAssignedLeads: {
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
             },
           },
-          createdBy: {
+          UserMaster_online_leads_created_byToUserMaster: {
             select: {
               id: true,
               user_name: true,
             },
           },
-          franchise: {
+          FranchiseMaster: {
             select: {
               id: true,
               franchise_name: true,
             },
           },
-          followupStatus: true,
-          sourceRelation: {
+          online_lead_followup_status: true,
+          SourceMaster: {
             select: {
               id: true,
               type: true,
             },
           },
-          siteTypeRelation: {
+          SiteTypeMaster: {
             select: {
               id: true,
               type: true,
             },
           },
-          call_log: {
+          online_lead_call_log: {
             include: {
-              telecaller: {
+              UserMaster: {
                 select: {
                   id: true,
                   user_name: true,
                 },
               },
-              status: true,
+              online_lead_followup_status: true,
             },
             orderBy: {
               created_at: "desc",
@@ -497,14 +531,14 @@ export class OnlineLeadController {
           },
           online_lead_history: {
             include: {
-              createdBy: {
+              UserMaster: {
                 select: {
                   id: true,
                   user_name: true,
                 },
               },
-              status: true,
-              franchise: {
+              online_lead_followup_status: true,
+              FranchiseMaster: {
                 select: {
                   id: true,
                   franchise_name: true,
@@ -515,17 +549,17 @@ export class OnlineLeadController {
               created_at: "desc",
             },
           },
-          store_logs: {
+          online_lead_store_log: {
             include: {
-              fromFranchise: true,
-              toFranchise: true,
-              selectedBy: {
+              FranchiseMaster_online_lead_store_log_from_store_idToFranchiseMaster: true,
+              FranchiseMaster_online_lead_store_log_to_store_idToFranchiseMaster: true,
+              UserMaster_online_lead_store_log_selected_byToUserMaster: {
                 select: {
                   id: true,
                   user_name: true,
                 },
               },
-              assignedTo: {
+              UserMaster_online_lead_store_log_assigned_toToUserMaster: {
                 select: {
                   id: true,
                   user_name: true,
@@ -548,7 +582,7 @@ export class OnlineLeadController {
 
       return res.status(200).json({
         success: true,
-        data: lead,
+        data: mapOnlineLeadToFrontend(lead),
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] fetchLeadById error:", error);
@@ -601,7 +635,7 @@ export class OnlineLeadController {
       }
 
       // Update lead
-      const lead = await prisma.onlineLead.update({
+      const lead = await prisma.online_leads.update({
         where: { id },
         data: {
           assign_to: assign_to ? Number(assign_to) : null,
@@ -681,7 +715,7 @@ export class OnlineLeadController {
       const finalRemark = remark || `Lead assignments updated (${descParts.join(", ")})`;
 
       // Create history
-      await prisma.onlineLeadHistory.create({
+      await prisma.online_lead_history.create({
         data: {
           vendor_id: lead.vendor_id,
           online_lead_id: lead.id,
@@ -728,12 +762,12 @@ export class OnlineLeadController {
         });
       }
 
-      const lead = await prisma.onlineLead.findUnique({ where: { id } });
+      const lead = await prisma.online_leads.findUnique({ where: { id } });
       if (!lead) {
         return res.status(404).json({ success: false, error: "Lead not found" });
       }
 
-      const status = await prisma.onlineLeadFollowupStatus.findUnique({
+      const status = await prisma.online_lead_followup_status.findUnique({
         where: { id: Number(online_lead_status_id) },
       });
 
@@ -772,7 +806,7 @@ export class OnlineLeadController {
 
       const { updatedLead, callLog } = await prisma.$transaction(async (tx) => {
         // 1. Create Call Log
-        const callLog = await tx.onlineLeadCallLog.create({
+        const callLog = await tx.online_lead_call_log.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
@@ -787,7 +821,7 @@ export class OnlineLeadController {
         });
 
         // 2. Create Lead History
-        await tx.onlineLeadHistory.create({
+        await tx.online_lead_history.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
@@ -818,7 +852,7 @@ export class OnlineLeadController {
           lead.lead_code
         );
 
-        const updatedLead = await tx.onlineLead.update({
+        const updatedLead = await tx.online_leads.update({
           where: { id },
           data: {
             status: status.id,
@@ -936,9 +970,9 @@ export class OnlineLeadController {
 
             // Map product types from online lead to main pipeline
             if (Array.isArray(lead.product_types) && lead.product_types.length > 0) {
-              const uniqueTypes = Array.from(
+              const uniqueTypes: string[] = Array.from(
                 new Set(
-                  lead.product_types
+                  (lead.product_types as any[])
                     .map((s: any) => String(s || "").trim())
                     .filter(Boolean)
                 )
@@ -967,9 +1001,9 @@ export class OnlineLeadController {
 
             // Map product structures from online lead to main pipeline
             if (Array.isArray(lead.product_structures) && lead.product_structures.length > 0) {
-              const uniqueStructs = Array.from(
+              const uniqueStructs: string[] = Array.from(
                 new Set(
-                  lead.product_structures
+                  (lead.product_structures as any[])
                     .map((s: any) => String(s || "").trim())
                     .filter(Boolean)
                 )
@@ -1101,7 +1135,7 @@ export class OnlineLeadController {
         });
       }
 
-      const lead = await prisma.onlineLead.findUnique({ where: { id } });
+      const lead = await prisma.online_leads.findUnique({ where: { id } });
       if (!lead) {
         return res.status(404).json({ success: false, error: "Lead not found" });
       }
@@ -1174,7 +1208,7 @@ export class OnlineLeadController {
         );
 
         // Update lead store parameters
-        const updatedLead = await tx.onlineLead.update({
+        const updatedLead = await tx.online_leads.update({
           where: { id },
           data: {
             store_id: Number(to_store_id),
@@ -1204,7 +1238,7 @@ export class OnlineLeadController {
         }
 
         // Log store change
-        const storeLog = await tx.onlineLeadStoreLog.create({
+        const storeLog = await tx.online_lead_store_log.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
@@ -1218,7 +1252,7 @@ export class OnlineLeadController {
         });
 
         // Also create history log (store transfer doesn't overwrite general call history logs)
-        await tx.onlineLeadHistory.create({
+        await tx.online_lead_history.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
@@ -1260,7 +1294,7 @@ export class OnlineLeadController {
         });
       }
 
-      const statuses = await prisma.onlineLeadFollowupStatus.findMany({
+      const statuses = await prisma.online_lead_followup_status.findMany({
         where: {
           vendor_id: vendorId,
           is_active: true,
@@ -1395,13 +1429,14 @@ export class OnlineLeadController {
         });
       }
 
-      const status = await prisma.onlineLeadFollowupStatus.create({
+      const status = await prisma.online_lead_followup_status.create({
         data: {
           vendor_id: Number(vendor_id),
           status_name,
           followup_required: Boolean(followup_required),
           is_active: true,
           created_by: created_by ? Number(created_by) : null,
+          updated_at: new Date(),
         },
       });
 
@@ -1430,7 +1465,7 @@ export class OnlineLeadController {
         });
       }
 
-      const status = await prisma.onlineLeadFollowupStatus.update({
+      const status = await prisma.online_lead_followup_status.update({
         where: { id },
         data: {
           status_name,
@@ -1465,7 +1500,7 @@ export class OnlineLeadController {
       }
 
       // Soft delete: toggle is_active to false
-      const status = await prisma.onlineLeadFollowupStatus.update({
+      const status = await prisma.online_lead_followup_status.update({
         where: { id },
         data: {
           is_active: false,
@@ -1511,7 +1546,7 @@ export class OnlineLeadController {
         updated_by,
       } = req.body;
 
-      const updated = await prisma.onlineLead.update({
+      const updated = await prisma.online_leads.update({
         where: { id },
         data: {
           ...(leads_name !== undefined && { leads_name }),
@@ -1532,16 +1567,16 @@ export class OnlineLeadController {
           updated_at: new Date(),
         },
         include: {
-          franchise: { select: { id: true, franchise_name: true } },
-          followupStatus: true,
-          sourceRelation: { select: { id: true, type: true } },
-          siteTypeRelation: { select: { id: true, type: true } },
-          assignedTo: { select: { id: true, user_name: true } },
-          finalAssignedLeads: { select: { id: true, user_name: true } },
+          FranchiseMaster: { select: { id: true, franchise_name: true } },
+          online_lead_followup_status: true,
+          SourceMaster: { select: { id: true, type: true } },
+          SiteTypeMaster: { select: { id: true, type: true } },
+          UserMaster_online_leads_assign_toToUserMaster: { select: { id: true, user_name: true } },
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: { select: { id: true, user_name: true } },
         },
       });
 
-      return res.status(200).json({ success: true, data: updated });
+      return res.status(200).json({ success: true, data: mapOnlineLeadToFrontend(updated) });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] updateLead error:", error);
       return res.status(500).json({
@@ -1629,7 +1664,7 @@ export class OnlineLeadController {
       }
 
       // Find default Initial status (Pending)
-      const walkInStatus = await prisma.onlineLeadFollowupStatus.findFirst({
+      const walkInStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
           status_name: { equals: "Pending", mode: "insensitive" },
@@ -1700,7 +1735,7 @@ export class OnlineLeadController {
       };
 
       // Fetch all existing contacts for this vendor
-      const existingLeads = await prisma.onlineLead.findMany({
+      const existingLeads = await prisma.online_leads.findMany({
         where: { vendor_id: Number(vendor_id) },
         select: { contact: true },
       });
@@ -1753,9 +1788,41 @@ export class OnlineLeadController {
         let source = "WALK_IN";
         let lead_entry_type: LeadEntryType = LeadEntryType.WALK_IN;
 
-        // Map location from ad_set_name to franchise
+        // Map location from store/franchise column or ad_set_name to franchise
         let storeId: number | null = null;
         let leadFranchiseId: number | undefined = undefined;
+
+        const storeKey = Object.keys(rowData).find(k => ["store", "storename", "assignedstore", "storecode", "franchise", "location"].includes(k));
+        const rawStoreVal = storeKey ? rowData[storeKey].toLowerCase().trim() : "";
+
+        if (rawStoreVal) {
+          const exactFranchise = franchises.find(
+            f => (f.franchise_code || "").toLowerCase() === rawStoreVal || f.franchise_name.toLowerCase() === rawStoreVal
+          );
+          if (exactFranchise) {
+            storeId = exactFranchise.id;
+            leadFranchiseId = exactFranchise.id;
+          } else {
+            const matched = keywordMappings.find(km => 
+              km.keywords.some(kw => rawStoreVal.includes(kw) || kw.includes(rawStoreVal))
+            );
+            if (matched) {
+              storeId = matched.id;
+              leadFranchiseId = matched.id;
+            }
+          }
+        }
+
+        if (!storeId && rawAdSetName) {
+          const adsetClean = rawAdSetName.toLowerCase();
+          const matched = keywordMappings.find(km =>
+            km.keywords.some(kw => adsetClean.includes(kw))
+          );
+          if (matched) {
+            storeId = matched.id;
+            leadFranchiseId = matched.id;
+          }
+        }
 
         if (cleanPlatform) {
           const platClean = cleanPlatform.toLowerCase();
@@ -1869,7 +1936,7 @@ export class OnlineLeadController {
             });
 
             // Create OnlineLead
-            return await tx.onlineLead.create({
+            return await tx.online_leads.create({
               data: {
                 vendor_id: Number(vendor_id),
                 leads_name,
@@ -1883,6 +1950,7 @@ export class OnlineLeadController {
                 status: walkInStatus.id,
                 remark: remark,
                 created_by: Number(created_by),
+                updated_at: new Date(),
                 firstname: firstname || null,
                 lastname: lastname || null,
                 alt_contact_no: cleanAltContact,
@@ -1894,7 +1962,7 @@ export class OnlineLeadController {
             });
           });
 
-          await prisma.onlineLeadHistory.create({
+          await prisma.online_lead_history.create({
             data: {
               vendor_id: Number(vendor_id),
               online_lead_id: lead.id,
@@ -1954,7 +2022,7 @@ export class OnlineLeadController {
         return res.status(400).json({ success: false, error: "Invalid lead ID" });
       }
 
-      const lead = await prisma.onlineLead.findUnique({
+      const lead = await prisma.online_leads.findUnique({
         where: { id },
       });
 
@@ -1962,7 +2030,7 @@ export class OnlineLeadController {
         return res.status(404).json({ success: false, error: "Lead not found" });
       }
 
-      await prisma.onlineLead.delete({
+      await prisma.online_leads.delete({
         where: { id },
       });
 
@@ -1985,7 +2053,7 @@ export class OnlineLeadController {
       }
 
       // 1. Find all history records related to bulk upload for this vendor
-      const bulkHistory = await prisma.onlineLeadHistory.findMany({
+      const bulkHistory = await prisma.online_lead_history.findMany({
         where: {
           vendor_id: Number(vendor_id),
           OR: [
@@ -2007,18 +2075,18 @@ export class OnlineLeadController {
       if (leadIds.length > 0) {
         await prisma.$transaction(async (tx) => {
           // Delete child records first to satisfy foreign key constraints
-          await tx.onlineLeadHistory.deleteMany({
+          await tx.online_lead_history.deleteMany({
             where: { online_lead_id: { in: leadIds } }
           });
-          await tx.onlineLeadCallLog.deleteMany({
+          await tx.online_lead_call_log.deleteMany({
             where: { online_lead_id: { in: leadIds } }
           });
-          await tx.onlineLeadStoreLog.deleteMany({
+          await tx.online_lead_store_log.deleteMany({
             where: { online_lead_id: { in: leadIds } }
           });
           
           // Delete parent online leads
-          const deleteResult = await tx.onlineLead.deleteMany({
+          const deleteResult = await tx.online_leads.deleteMany({
             where: { id: { in: leadIds } }
           });
 
