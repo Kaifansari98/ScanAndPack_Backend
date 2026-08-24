@@ -44,7 +44,13 @@ export class ClientApprovalController {
     res: Response,
   ): Promise<void> {
     try {
-      const { lead_id, vendor_id, account_id, created_by } = req.body;
+      const {
+        lead_id,
+        vendor_id,
+        account_id,
+        created_by,
+        product_type_id,
+      } = req.body;
 
       if (!lead_id || !vendor_id || !account_id || !created_by) {
         res
@@ -87,6 +93,7 @@ export class ClientApprovalController {
         vendor_id: Number(vendor_id),
         account_id: Number(account_id),
         created_by: Number(created_by),
+        product_type_id: product_type_id ? Number(product_type_id) : undefined,
         documents: uploadedDocs,
       });
 
@@ -120,6 +127,7 @@ export class ClientApprovalController {
         advance_payment_date,
         amount_paid,
         payment_text,
+        product_type_id,
       } = req.body;
 
       const approvalScreenshots = (req.files as any)?.approvalScreenshots || [];
@@ -197,6 +205,7 @@ export class ClientApprovalController {
         amount_paid: parseFloat(amount_paid),
         payment_text,
         payment_files: uploadedPaymentFiles,
+        product_type_id: product_type_id ? Number(product_type_id) : undefined,
       };
 
       const result = await clientApprovalService.submitClientApproval(dto);
@@ -323,6 +332,7 @@ export class ClientApprovalController {
   ): Promise<void> {
     try {
       const { leadId, vendorId } = req.params;
+      const { product_type_id } = req.query;
 
       if (!leadId || !vendorId) {
         res.status(400).json({
@@ -335,6 +345,7 @@ export class ClientApprovalController {
       const details = await clientApprovalService.getClientApprovalDetails(
         Number(vendorId),
         Number(leadId),
+        product_type_id ? Number(product_type_id) : undefined,
       );
 
       res.status(200).json({
@@ -399,7 +410,7 @@ export class ClientApprovalController {
         });
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         if (assigneeRole !== "admin" && assigneeRole !== "super-admin") {
-          const [lead, instances] = await Promise.all([
+          const [lead, vendor, instances] = await Promise.all([
             prisma.leadMaster.findUnique({
               where: { id: dto.lead_id },
               select: {
@@ -408,6 +419,10 @@ export class ClientApprovalController {
                 lead_code: true,
                 franchise_id: true,
               },
+            }),
+            prisma.vendorMaster.findUnique({
+              where: { id: dto.vendor_id },
+              select: { handlesLargeScaleProjects: true },
             }),
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
@@ -419,14 +434,17 @@ export class ClientApprovalController {
             }),
           ]);
 
+          const handlesLargeScaleProjects =
+            vendor?.handlesLargeScaleProjects === true;
+
           const leadName =
             `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
           const baseLeadCode =
             lead?.lead_code ?? `LEAD-${String(dto.lead_id).padStart(4, "0")}`;
 
-          // Build one notification entry per instance (or one without suffix if no instances)
+          // Build notification targets (single lead target for large scale projects)
           const notificationTargets =
-            instances.length > 1
+            !handlesLargeScaleProjects && instances.length > 1
               ? instances.map((inst) => ({
                   instanceId: inst.id,
                   leadCode: `${baseLeadCode}.${inst.quantity_index}`,
@@ -473,7 +491,7 @@ export class ClientApprovalController {
       // ─── 2. Email to assignee (Tech Check) ────────────────────────────────
       try {
         if (dto.assign_to_user_id !== dto.created_by) {
-          const [assignee, assignedBy, lead, instances] = await Promise.all([
+          const [assignee, assignedBy, lead, vendor, instances] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.assign_to_user_id },
               select: { user_name: true, user_email: true },
@@ -491,6 +509,10 @@ export class ClientApprovalController {
                 lastname: true,
               },
             }),
+            prisma.vendorMaster.findUnique({
+              where: { id: dto.vendor_id },
+              select: { handlesLargeScaleProjects: true },
+            }),
             prisma.leadProductStructureInstance.findMany({
               where: { lead_id: dto.lead_id, vendor_id: dto.vendor_id },
               select: { id: true, quantity_index: true },
@@ -500,6 +522,9 @@ export class ClientApprovalController {
               ],
             }),
           ]);
+
+          const handlesLargeScaleProjects =
+            vendor?.handlesLargeScaleProjects === true;
 
           const assigneeEmail = assignee?.user_email?.trim();
           if (!assigneeEmail) {
@@ -521,7 +546,7 @@ export class ClientApprovalController {
             const clientBaseUrl = resolveClientBaseUrl(req);
 
             const emailTargets =
-              instances.length > 1
+              !handlesLargeScaleProjects && instances.length > 1
                 ? instances.map((inst) => ({
                     instanceId: inst.id,
                     leadCode: `${baseLeadCode}.${inst.quantity_index}`,

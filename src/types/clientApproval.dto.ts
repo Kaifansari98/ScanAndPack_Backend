@@ -17,6 +17,9 @@ export interface ClientApprovalDto {
     // Step 4 - Transaction ID / Remarks
     payment_text?: string; // remarks or transaction ID
     payment_files?: UploadedFileRef[];
+
+    // Large Scale Projects fields
+    product_type_id?: number;
   }
 
 export interface UploadedFileRef {

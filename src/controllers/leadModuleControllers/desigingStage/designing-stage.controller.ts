@@ -328,54 +328,68 @@ export class DesigingStageController {
         },
       });
 
-      if (!designQuotationDocType) {
-        return res.status(404).json({
-          success: false,
-          message: "Design quotation document type not found for this vendor",
-          logs: ["Document type 'design-quotation' not found for vendor"],
+      // 3️⃣ Fetch all design-quotation documents for the lead (both LeadDocuments and LeadB2BDocument)
+      let documents: any[] = [];
+      if (designQuotationDocType) {
+        documents = await prisma.leadDocuments.findMany({
+          where: {
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+            doc_type_id: designQuotationDocType.id,
+            is_deleted: false,
+          },
+          orderBy: { created_at: "desc" },
+          include: {
+            documentType: {
+              select: {
+                id: true,
+                type: true,
+                tag: true,
+              },
+            },
+            specificationDocumentMappings: {
+              select: {
+                specification: {
+                  select: { id: true, name: true },
+                },
+              },
+            },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_contact: true,
+              },
+            },
+            deletedBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
         });
       }
-      logs.push("Design quotation document type found");
 
-      // 3️⃣ Fetch all design-quotation documents for the lead
-      const documents = await prisma.leadDocuments.findMany({
+      const b2bQuotationDocs = await prisma.leadB2BDocument.findMany({
         where: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
-          doc_type_id: designQuotationDocType.id,
+          ...(designQuotationDocType ? { doc_type_id: designQuotationDocType.id } : {}),
           is_deleted: false,
         },
         orderBy: { created_at: "desc" },
         include: {
-          documentType: {
-            select: {
-              id: true,
-              type: true,
-              tag: true,
-            },
-          },
-          specificationDocumentMappings: {
-            select: {
-              specification: {
-                select: { id: true, name: true },
-              },
-            },
-          },
           createdBy: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
-              user_contact: true,
             },
           },
-          deletedBy: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
+          documentType: true,
         },
       });
 
@@ -394,9 +408,19 @@ export class DesigingStageController {
         }),
       );
 
-      logs.push(
-        `Found ${documents.length} design quotation documents for lead ${leadId}`,
+      const b2bDocsWithSignedUrls = await Promise.all(
+        b2bQuotationDocs.map(async (doc: any) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return {
+            ...doc,
+            documentType: { id: 0, type: "Quotation", tag: "Q" },
+            specification: null,
+            signedUrl,
+          };
+        }),
       );
+
+      const allDocs = [...documentsWithSignedUrls, ...b2bDocsWithSignedUrls];
 
       return res.status(200).json({
         success: true,
@@ -405,9 +429,9 @@ export class DesigingStageController {
         data: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
-          document_type: designQuotationDocType.type,
-          total_documents: documents.length,
-          documents: documentsWithSignedUrls,
+          document_type: designQuotationDocType?.type || "Quotation",
+          total_documents: allDocs.length,
+          documents: allDocs,
         },
       });
     } catch (error: any) {
@@ -464,54 +488,68 @@ export class DesigingStageController {
         },
       });
 
-      if (!designType) {
-        return res.status(404).json({
-          success: false,
-          message: "Design document type not found for this vendor",
-          logs: ["Document type 'stage-1-design' not found for vendor"],
+      // 3️⃣ Fetch all design-quotation documents for the lead (both LeadDocuments and LeadB2BDocument)
+      let documents: any[] = [];
+      if (designType) {
+        documents = await prisma.leadDocuments.findMany({
+          where: {
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+            doc_type_id: designType.id,
+            is_deleted: false,
+          },
+          orderBy: { created_at: "desc" },
+          include: {
+            documentType: {
+              select: {
+                id: true,
+                type: true,
+                tag: true,
+              },
+            },
+            specificationDocumentMappings: {
+              select: {
+                specification: {
+                  select: { id: true, name: true },
+                },
+              },
+            },
+            createdBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_contact: true,
+              },
+            },
+            deletedBy: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
         });
       }
-      logs.push("stage-1-design document type found");
 
-      // 3️⃣ Fetch all design-quotation documents for the lead
-      const documents = await prisma.leadDocuments.findMany({
+      const b2bDesignDocs = await prisma.leadB2BDocument.findMany({
         where: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
-          doc_type_id: designType.id,
+          ...(designType ? { doc_type_id: designType.id } : {}),
           is_deleted: false,
         },
         orderBy: { created_at: "desc" },
         include: {
-          documentType: {
-            select: {
-              id: true,
-              type: true,
-              tag: true,
-            },
-          },
-          specificationDocumentMappings: {
-            select: {
-              specification: {
-                select: { id: true, name: true },
-              },
-            },
-          },
           createdBy: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
-              user_contact: true,
             },
           },
-          deletedBy: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
+          documentType: true,
         },
       });
 
@@ -530,21 +568,35 @@ export class DesigingStageController {
         }),
       );
 
+      const b2bDocsWithSignedUrls = await Promise.all(
+        b2bDesignDocs.map(async (doc: any) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return {
+            ...doc,
+            documentType: { id: 0, type: "Design", tag: "D" },
+            specification: null,
+            signedUrl,
+          };
+        }),
+      );
+
+      const allDocs = [...documentsWithSignedUrls, ...b2bDocsWithSignedUrls];
+
       logs.push(
         `Found ${documents.length} design quotation documents for lead ${leadId}`,
       );
 
       return res.status(200).json({
         success: true,
-        message: "Design quotation documents fetched successfully",
+        message: "Design stage documents fetched successfully",
         logs,
         data: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
-          document_type: designType.type,
-          total_documents: documents.length,
-          documents: documentsWithSignedUrls,
-          leadStage: lead?.statusType?.type || "Unknown Stage",
+          document_type: designType?.type || "Design",
+          stage: leadStage,
+          total_documents: allDocs.length,
+          documents: allDocs,
         },
       });
     } catch (error: any) {
@@ -3362,6 +3414,9 @@ export class DesigingStageController {
       // 1️⃣ Validate lead
       const lead = await prisma.leadMaster.findFirst({
         where: { id: lId, vendor_id: vId, is_deleted: false },
+        include: {
+          franchise: true,
+        },
       });
 
       if (!lead) {
@@ -3370,6 +3425,8 @@ export class DesigingStageController {
           message: "Lead not found or does not belong to vendor",
         });
       }
+
+      const isB2b = lead?.franchise?.moduled_for_b2b ?? false;
 
       // 2️⃣ Get doc types for quotation + designs
       const [quotationType, designsType] = await Promise.all([
@@ -3385,25 +3442,43 @@ export class DesigingStageController {
       const [quotationCount, designCount, selectionCount, meetingCount] =
         await Promise.all([
           quotationType
-            ? prisma.leadDocuments.count({
-              where: {
-                lead_id: lId,
-                vendor_id: vId,
-                doc_type_id: quotationType.id,
-                is_deleted: false,
-              },
-            })
+            ? (isB2b
+              ? prisma.leadB2BDocument.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: quotationType.id,
+                  is_deleted: false,
+                },
+              })
+              : prisma.leadDocuments.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: quotationType.id,
+                  is_deleted: false,
+                },
+              }))
             : 0,
 
           designsType
-            ? prisma.leadDocuments.count({
-              where: {
-                lead_id: lId,
-                vendor_id: vId,
-                doc_type_id: designsType.id,
-                is_deleted: false,
-              },
-            })
+            ? (isB2b
+              ? prisma.leadB2BDocument.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: designsType.id,
+                  is_deleted: false,
+                },
+              })
+              : prisma.leadDocuments.count({
+                where: {
+                  lead_id: lId,
+                  vendor_id: vId,
+                  doc_type_id: designsType.id,
+                  is_deleted: false,
+                },
+              }))
             : 0,
 
           prisma.leadDesignSelection.count({

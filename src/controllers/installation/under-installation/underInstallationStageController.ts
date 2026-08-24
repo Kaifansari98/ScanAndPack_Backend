@@ -1007,7 +1007,7 @@ export class UnderInstallationStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
-      const { misc_approved, exp_of_rejection, updated_by } = req.body;
+      const { misc_approved, exp_of_rejection, approval_remark, updated_by } = req.body;
 
       if (!vendorId || !miscId) {
         return res.status(400).json({
@@ -1030,12 +1030,20 @@ export class UnderInstallationStageController {
         });
       }
 
+      if (misc_approved === true && !String(approval_remark ?? "").trim()) {
+        return res.status(400).json({
+          success: false,
+          error: "approval_remark is required when approving",
+        });
+      }
+
       const data =
         await UnderInstallationStageService.updateMiscApprovalService({
           vendor_id: vendorId,
           misc_id: miscId,
           misc_approved,
           exp_of_rejection,
+          approval_remark,
           updated_by,
         });
 

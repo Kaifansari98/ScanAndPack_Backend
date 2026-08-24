@@ -860,7 +860,7 @@ export const getProjectCategoryTypes = async (_req: Request, res: Response) => {
 
 // Controller
 export const createProjectCategory = async (_req: Request, res: Response) => {
-  const { vendor_id, category_name, type_ids, created_by, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing } = _req.body;
+  const { vendor_id, category_name, type_ids, created_by, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing, prefix, naming_structure } = _req.body;
 
   const serviceResponse = await trackTraceService.createProjectCategory(
     Number(vendor_id),
@@ -870,7 +870,9 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
     parent_id ? Number(parent_id) : null,
     include_in_packing !== undefined ? Boolean(include_in_packing) : false,
     scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : false,
-    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : false
+    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : false,
+    prefix ? String(prefix) : null,
+    naming_structure || null
   );
 
   if (serviceResponse.status == 0) {
@@ -884,7 +886,7 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
 };
 
 export const updateProjectCategory = async (_req: Request, res: Response) => {
-  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing } =
+  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing, prefix, naming_structure } =
     _req.body;
 
   const serviceResponse = await trackTraceService.updateProjectCategory(
@@ -897,7 +899,9 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
     parent_id ? Number(parent_id) : null,
     include_in_packing !== undefined ? Boolean(include_in_packing) : undefined,
     scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : undefined,
-    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : undefined
+    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : undefined,
+    prefix !== undefined ? (prefix ? String(prefix) : null) : undefined,
+    naming_structure || null
   );
 
   if (serviceResponse.status == 0) {

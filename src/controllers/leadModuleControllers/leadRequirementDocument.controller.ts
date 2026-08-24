@@ -23,7 +23,7 @@ export const getRequirementDocumentTypesHandler = async (req: Request, res: Resp
 
 export const uploadRequirementDocumentHandler = async (req: Request, res: Response) => {
   try {
-    const { lead_id, vendor_id, product_type_id, doc_type_id, created_by } = req.body;
+    const { lead_id, vendor_id, product_type_id, b2b_requirement_type_id, doc_type_id, stage, created_by } = req.body;
     const file = req.file;
 
     if (!file) {
@@ -33,8 +33,10 @@ export const uploadRequirementDocumentHandler = async (req: Request, res: Respon
     const document = await uploadRequirementDocument({
       lead_id: Number(lead_id),
       vendor_id: Number(vendor_id),
-      product_type_id: Number(product_type_id),
-      doc_type_id: Number(doc_type_id),
+      product_type_id: product_type_id ? Number(product_type_id) : undefined,
+      b2b_requirement_type_id: b2b_requirement_type_id ? Number(b2b_requirement_type_id) : undefined,
+      doc_type_id: doc_type_id ? Number(doc_type_id) : undefined,
+      stage: stage ? String(stage) : "Designing",
       created_by: Number(created_by || 1),
       file,
     });
@@ -51,12 +53,20 @@ export const getRequirementDocumentsHandler = async (req: Request, res: Response
     const lead_id = Number(req.query.lead_id);
     const vendor_id = Number(req.query.vendor_id);
     const product_type_id = req.query.product_type_id ? Number(req.query.product_type_id) : undefined;
+    const b2b_requirement_type_id = req.query.b2b_requirement_type_id ? Number(req.query.b2b_requirement_type_id) : undefined;
+    const stage = req.query.stage ? String(req.query.stage) : undefined;
 
     if (!lead_id || !vendor_id) {
       return res.status(400).json({ success: false, message: "lead_id and vendor_id are required" });
     }
 
-    const documents = await getRequirementDocuments(lead_id, vendor_id, product_type_id);
+    const documents = await getRequirementDocuments(
+      lead_id,
+      vendor_id,
+      product_type_id,
+      b2b_requirement_type_id,
+      stage
+    );
     return res.status(200).json({ success: true, data: documents });
   } catch (error: any) {
     console.error("[CONTROLLER ERROR] getRequirementDocumentsHandler:", error);

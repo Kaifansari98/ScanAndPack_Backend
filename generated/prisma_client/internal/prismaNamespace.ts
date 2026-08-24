@@ -451,6 +451,7 @@ export const ModelName = {
   TimelineRule: 'TimelineRule',
   specificationDocumentMapping: 'specificationDocumentMapping',
   LeadDocuments: 'LeadDocuments',
+  LeadB2BDocument: 'LeadB2BDocument',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
   LeadChatMessage: 'LeadChatMessage',
@@ -546,6 +547,7 @@ export const ModelName = {
   DefectCompletionPhoto: 'DefectCompletionPhoto',
   ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
   ProjectCategoriesMaster: 'ProjectCategoriesMaster',
+  CategoryNamingStructure: 'CategoryNamingStructure',
   ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
   BrandMaster: 'BrandMaster',
   ProductMaster: 'ProductMaster',
@@ -602,7 +604,9 @@ export const ModelName = {
   online_lead_history: 'online_lead_history',
   online_lead_store_log: 'online_lead_store_log',
   online_leads: 'online_leads',
-  telecaller_campaign_leads: 'telecaller_campaign_leads'
+  telecaller_campaign_leads: 'telecaller_campaign_leads',
+  LeadBillingAddress: 'LeadBillingAddress',
+  MetaLead: 'MetaLead'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -618,7 +622,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping" | "leadOtherAppliancesRemarkMapping" | "userTypePrivilegeMapping" | "online_lead_call_log" | "online_lead_followup_status" | "online_lead_history" | "online_lead_store_log" | "online_leads" | "telecaller_campaign_leads"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "clientBankDetail" | "clientTypeMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "leadScopedActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "processBriefMaster" | "leadProcessBriefMapping" | "leadRequirementMaterialMapping" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "specificationDocumentMapping" | "leadDocuments" | "leadB2BDocument" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "categoryNamingStructure" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "coreProductMaster" | "gradeMaster" | "finishMaster" | "typeMaster" | "itemTypeMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "projectBoxInfoField" | "boxInfoFieldValue" | "vendorTypeMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress" | "broadcastMaster" | "broadcastCategoryMaster" | "broadcastAudienceMapping" | "broadcastAttachment" | "broadcastRead" | "notificationQueue" | "b2BRequirementTypeMaster" | "leadB2BRequirementTypeMapping" | "leadOtherAppliancesRemarkMapping" | "userTypePrivilegeMapping" | "online_lead_call_log" | "online_lead_followup_status" | "online_lead_history" | "online_lead_store_log" | "online_leads" | "telecaller_campaign_leads" | "leadBillingAddress" | "metaLead"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4615,6 +4619,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadDocumentsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadDocumentsCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadB2BDocument: {
+      payload: Prisma.$LeadB2BDocumentPayload<ExtArgs>
+      fields: Prisma.LeadB2BDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadB2BDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadB2BDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadB2BDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadB2BDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.LeadB2BDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.LeadB2BDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.LeadB2BDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadB2BDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadB2BDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        update: {
+          args: Prisma.LeadB2BDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadB2BDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadB2BDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadB2BDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadB2BDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadB2BDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadB2BDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadB2BDocument>
+        }
+        groupBy: {
+          args: Prisma.LeadB2BDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadB2BDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadB2BDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadB2BDocumentCountAggregateOutputType> | number
         }
       }
     }
@@ -11648,6 +11726,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CategoryNamingStructure: {
+      payload: Prisma.$CategoryNamingStructurePayload<ExtArgs>
+      fields: Prisma.CategoryNamingStructureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CategoryNamingStructureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CategoryNamingStructureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        findFirst: {
+          args: Prisma.CategoryNamingStructureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CategoryNamingStructureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        findMany: {
+          args: Prisma.CategoryNamingStructureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>[]
+        }
+        create: {
+          args: Prisma.CategoryNamingStructureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        createMany: {
+          args: Prisma.CategoryNamingStructureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CategoryNamingStructureCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>[]
+        }
+        delete: {
+          args: Prisma.CategoryNamingStructureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        update: {
+          args: Prisma.CategoryNamingStructureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        deleteMany: {
+          args: Prisma.CategoryNamingStructureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CategoryNamingStructureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CategoryNamingStructureUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>[]
+        }
+        upsert: {
+          args: Prisma.CategoryNamingStructureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CategoryNamingStructurePayload>
+        }
+        aggregate: {
+          args: Prisma.CategoryNamingStructureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCategoryNamingStructure>
+        }
+        groupBy: {
+          args: Prisma.CategoryNamingStructureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategoryNamingStructureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CategoryNamingStructureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CategoryNamingStructureCountAggregateOutputType> | number
+        }
+      }
+    }
     ProjectCategoriesMasterVendorMapping: {
       payload: Prisma.$ProjectCategoriesMasterVendorMappingPayload<ExtArgs>
       fields: Prisma.ProjectCategoriesMasterVendorMappingFieldRefs
@@ -15866,6 +16018,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LeadBillingAddress: {
+      payload: Prisma.$LeadBillingAddressPayload<ExtArgs>
+      fields: Prisma.LeadBillingAddressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadBillingAddressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadBillingAddressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadBillingAddressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadBillingAddressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        findMany: {
+          args: Prisma.LeadBillingAddressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
+        }
+        create: {
+          args: Prisma.LeadBillingAddressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        createMany: {
+          args: Prisma.LeadBillingAddressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadBillingAddressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadBillingAddressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        update: {
+          args: Prisma.LeadBillingAddressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadBillingAddressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadBillingAddressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadBillingAddressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadBillingAddressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadBillingAddressPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadBillingAddressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadBillingAddress>
+        }
+        groupBy: {
+          args: Prisma.LeadBillingAddressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadBillingAddressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadBillingAddressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadBillingAddressCountAggregateOutputType> | number
+        }
+      }
+    }
+    MetaLead: {
+      payload: Prisma.$MetaLeadPayload<ExtArgs>
+      fields: Prisma.MetaLeadFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MetaLeadFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MetaLeadFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        findFirst: {
+          args: Prisma.MetaLeadFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MetaLeadFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        findMany: {
+          args: Prisma.MetaLeadFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>[]
+        }
+        create: {
+          args: Prisma.MetaLeadCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        createMany: {
+          args: Prisma.MetaLeadCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MetaLeadCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>[]
+        }
+        delete: {
+          args: Prisma.MetaLeadDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        update: {
+          args: Prisma.MetaLeadUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        deleteMany: {
+          args: Prisma.MetaLeadDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MetaLeadUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MetaLeadUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>[]
+        }
+        upsert: {
+          args: Prisma.MetaLeadUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MetaLeadPayload>
+        }
+        aggregate: {
+          args: Prisma.MetaLeadAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMetaLead>
+        }
+        groupBy: {
+          args: Prisma.MetaLeadGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MetaLeadGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MetaLeadCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MetaLeadCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -16857,6 +17157,23 @@ export const LeadDocumentsScalarFieldEnum = {
 } as const
 
 export type LeadDocumentsScalarFieldEnum = (typeof LeadDocumentsScalarFieldEnum)[keyof typeof LeadDocumentsScalarFieldEnum]
+
+
+export const LeadB2BDocumentScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted',
+  doc_type_id: 'doc_type_id'
+} as const
+
+export type LeadB2BDocumentScalarFieldEnum = (typeof LeadB2BDocumentScalarFieldEnum)[keyof typeof LeadB2BDocumentScalarFieldEnum]
 
 
 export const LeadChatRoomScalarFieldEnum = {
@@ -18325,6 +18642,7 @@ export type ProjectCategoriesTypeMasterScalarFieldEnum = (typeof ProjectCategori
 export const ProjectCategoriesMasterScalarFieldEnum = {
   id: 'id',
   category_name: 'category_name',
+  prefix: 'prefix',
   status: 'status',
   vendor_id: 'vendor_id',
   created_at: 'created_at',
@@ -18339,6 +18657,19 @@ export const ProjectCategoriesMasterScalarFieldEnum = {
 } as const
 
 export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
+
+
+export const CategoryNamingStructureScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  category_id: 'category_id',
+  delimiter: 'delimiter',
+  fields_json: 'fields_json',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CategoryNamingStructureScalarFieldEnum = (typeof CategoryNamingStructureScalarFieldEnum)[keyof typeof CategoryNamingStructureScalarFieldEnum]
 
 
 export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {
@@ -18395,6 +18726,8 @@ export const ProductMasterScalarFieldEnum = {
   brand_id: 'brand_id',
   category_id: 'category_id',
   article_code: 'article_code',
+  p_code: 'p_code',
+  color_name: 'color_name',
   core_material: 'core_material',
   edge_banding_color: 'edge_banding_color',
   finish: 'finish',
@@ -19431,6 +19764,7 @@ export const Online_leadsScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   leads_name: 'leads_name',
+  lead_code: 'lead_code',
   email: 'email',
   contact: 'contact',
   source: 'source',
@@ -19444,7 +19778,19 @@ export const Online_leadsScalarFieldEnum = {
   remark: 'remark',
   follow_up_date: 'follow_up_date',
   store_id: 'store_id',
-  final_assigned_leads: 'final_assigned_leads'
+  final_assigned_leads: 'final_assigned_leads',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  alt_contact_no: 'alt_contact_no',
+  site_address: 'site_address',
+  site_type_id: 'site_type_id',
+  source_id: 'source_id',
+  refered_by: 'refered_by',
+  archetech_name: 'archetech_name',
+  archetech_number: 'archetech_number',
+  priority: 'priority',
+  product_types: 'product_types',
+  product_structures: 'product_structures'
 } as const
 
 export type Online_leadsScalarFieldEnum = (typeof Online_leadsScalarFieldEnum)[keyof typeof Online_leadsScalarFieldEnum]
@@ -19457,6 +19803,44 @@ export const Telecaller_campaign_leadsScalarFieldEnum = {
 } as const
 
 export type Telecaller_campaign_leadsScalarFieldEnum = (typeof Telecaller_campaign_leadsScalarFieldEnum)[keyof typeof Telecaller_campaign_leadsScalarFieldEnum]
+
+
+export const LeadBillingAddressScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
+  address_type: 'address_type',
+  name: 'name',
+  address: 'address',
+  map_link: 'map_link',
+  gst_number: 'gst_number',
+  state_name: 'state_name',
+  place_of_supply: 'place_of_supply',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
+
+
+export const MetaLeadScalarFieldEnum = {
+  id: 'id',
+  meta_lead_id: 'meta_lead_id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  form_name: 'form_name',
+  form_id: 'form_id',
+  created_date: 'created_date',
+  lead_source: 'lead_source',
+  status: 'status',
+  custom_fields: 'custom_fields',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MetaLeadScalarFieldEnum = (typeof MetaLeadScalarFieldEnum)[keyof typeof MetaLeadScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -20858,6 +21242,7 @@ export type GlobalOmitConfig = {
   timelineRule?: Prisma.TimelineRuleOmit
   specificationDocumentMapping?: Prisma.specificationDocumentMappingOmit
   leadDocuments?: Prisma.LeadDocumentsOmit
+  leadB2BDocument?: Prisma.LeadB2BDocumentOmit
   leadChatRoom?: Prisma.LeadChatRoomOmit
   leadChatMember?: Prisma.LeadChatMemberOmit
   leadChatMessage?: Prisma.LeadChatMessageOmit
@@ -20953,6 +21338,7 @@ export type GlobalOmitConfig = {
   defectCompletionPhoto?: Prisma.DefectCompletionPhotoOmit
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterOmit
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterOmit
+  categoryNamingStructure?: Prisma.CategoryNamingStructureOmit
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingOmit
   brandMaster?: Prisma.BrandMasterOmit
   productMaster?: Prisma.ProductMasterOmit
@@ -21010,6 +21396,8 @@ export type GlobalOmitConfig = {
   online_lead_store_log?: Prisma.online_lead_store_logOmit
   online_leads?: Prisma.online_leadsOmit
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsOmit
+  leadBillingAddress?: Prisma.LeadBillingAddressOmit
+  metaLead?: Prisma.MetaLeadOmit
 }
 
 /* Types for Logging */

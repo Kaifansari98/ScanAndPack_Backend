@@ -105,7 +105,8 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
             ? Number(m.process_brief_id)
             : null;
 
-        if (!briefId || reqTypeId === null) return null;
+        if (!briefId) return null;
+        if (reqTypeId === null) return null;
 
         return {
           lead_id,
@@ -125,28 +126,32 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
         data,
       });
     }
-  } else if (process_brief_ids && process_brief_ids.length > 0 && defaultTypeId !== null) {
-    const data = process_brief_ids
-      .map((bId) => {
-        const briefId = !isNaN(Number(bId)) ? Number(bId) : null;
-        if (!briefId) return null;
-        return {
-          lead_id,
-          vendor_id,
-          b2b_requirement_type_id: defaultTypeId,
-          process_brief_id: briefId,
-          created_by: validCreatedBy,
-        };
-      })
-      .filter(
-        (item): item is { lead_id: number; vendor_id: number; b2b_requirement_type_id: number; process_brief_id: number; created_by: number } =>
-          item !== null
-      );
+  } else if (process_brief_ids && process_brief_ids.length > 0) {
+    const firstB2bType = await prisma.b2BRequirementTypeMaster.findFirst({
+      where: { vendor_id, status: { equals: "active", mode: "insensitive" } },
+    });
+    const defaultTypeId = firstB2bType?.id ?? null;
 
-    if (data.length > 0) {
-      await prisma.leadProcessBriefMapping.createMany({
-        data,
-      });
+    if (defaultTypeId !== null) {
+      const data = process_brief_ids
+        .map((bId) => {
+          const briefId = !isNaN(Number(bId)) ? Number(bId) : null;
+          if (!briefId) return null;
+          return {
+            lead_id,
+            vendor_id,
+            b2b_requirement_type_id: defaultTypeId,
+            process_brief_id: briefId,
+            created_by: validCreatedBy,
+          };
+        })
+        .filter((item): item is NonNullable<typeof item> => item !== null);
+
+      if (data.length > 0) {
+        await prisma.leadProcessBriefMapping.createMany({
+          data,
+        });
+      }
     }
   }
 

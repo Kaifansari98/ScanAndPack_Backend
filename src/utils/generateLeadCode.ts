@@ -3,19 +3,10 @@ import logger from "./logger";
 
 type Tx = PrismaClient | Prisma.TransactionClient;
 
-const getFinancialYearSegment = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const financialYearStart = month >= 3 ? year : year - 1;
-  const financialYearEnd = financialYearStart + 1;
-
-  return `${String(financialYearStart).slice(-2)}/${String(financialYearEnd).slice(-2)}`;
-};
-
 export async function generateLeadCode(
   tx: Tx,
   input: {
-    franchiseId: number;
+    franchiseId?: number;
     vendorId: number;
   },
 ): Promise<string> {
@@ -23,7 +14,6 @@ export async function generateLeadCode(
     where: { id: input.vendorId },
     select: {
       vendor_code: true,
-      is_year_wise_lead_code_enabled: true,
     },
   });
 
@@ -32,98 +22,123 @@ export async function generateLeadCode(
     throw new Error(`Vendor not found for vendor ${input.vendorId}`);
   }
 
-  if (vendor.is_year_wise_lead_code_enabled) {
-    const prefix = vendor.vendor_code.trim().toUpperCase();
-    const financialYearSegment = getFinancialYearSegment(new Date());
-    const codePrefix = `${prefix}-${financialYearSegment}-`;
-
-    const lastLead = await tx.leadMaster.findFirst({
-      where: {
-        vendor_id: input.vendorId,
-        lead_code: {
-          startsWith: codePrefix,
-        },
-      },
-      orderBy: [{ created_at: "desc" }, { id: "desc" }],
-      select: {
-        lead_code: true,
-      },
-    });
-
-    let nextNumber = 1;
-
-    if (lastLead?.lead_code) {
-      const match = lastLead.lead_code.match(/-(\d+)$/);
-      if (match) {
-        nextNumber = parseInt(match[1], 10) + 1;
-      }
-    }
-
-    const generatedCode = `${prefix}-${financialYearSegment}-${nextNumber}`;
-
-    logger.debug("[LEAD CODE GENERATED - YEAR WISE]", {
-      vendorId: input.vendorId,
-      prefix,
-      financialYearSegment,
-      lastLead: lastLead?.lead_code,
-      generatedCode,
-    });
-
-    return generatedCode;
-  }
-
-  // 1️⃣ Get franchise_code
-  const franchise = await tx.franchiseMaster.findUnique({
-    where: { id: input.franchiseId },
-    select: { franchise_code: true },
-  });
-
-  if (!franchise || !franchise.franchise_code) {
-    logger.error("[LEAD CODE] Franchise code missing", {
-      franchiseId: input.franchiseId,
-    });
-    throw new Error(
-      `Franchise code not found for franchise ${input.franchiseId}`,
+  // Concurrency-safety: Lock the franchise or vendor row for update
+  if (input.franchiseId) {
+    await tx.$queryRawUnsafe(
+      `SELECT id FROM "FranchiseMaster" WHERE id = $1 FOR UPDATE`,
+      input.franchiseId,
+    );
+  } else {
+    await tx.$queryRawUnsafe(
+      `SELECT id FROM "VendorMaster" WHERE id = $1 FOR UPDATE`,
+      input.vendorId,
     );
   }
 
-  const prefix = franchise.franchise_code
-    .replace(/[^A-Za-z]/g, "")
-    .toUpperCase();
+  let prefix = "SH";
 
-  // 2️⃣ Get latest lead for this franchise
+  if (input.franchiseId) {
+    const franchise = await tx.franchiseMaster.findUnique({
+      where: { id: input.franchiseId },
+      select: { city_id: true },
+    });
+
+    if (franchise && franchise.city_id) {
+      const city = await tx.cityMaster.findUnique({
+        where: { id: franchise.city_id },
+        select: { name: true },
+      });
+
+      if (city && city.name) {
+        const citySegment = city.name.replace(/[^A-Za-z]/g, "").toUpperCase();
+        if (citySegment) {
+          prefix = `SH${citySegment}`;
+        }
+      }
+    }
+  }
+
+  // Get latest lead for this prefix across the entire vendor
   const lastLead = await tx.leadMaster.findFirst({
     where: {
-      franchise_id: input.franchiseId,
+      vendor_id: input.vendorId,
       lead_code: {
         startsWith: `${prefix}-`,
       },
     },
-    orderBy: {
-      created_at: "desc",
-    },
+    orderBy: [{ created_at: "desc" }, { id: "desc" }],
     select: {
       lead_code: true,
     },
   });
 
-  // 3️⃣ Extract last number
-  let nextNumber = 1;
+  // Also look up in onlineLead for conflicts
+  const lastOnlineLead = await tx.onlineLead.findFirst({
+    where: {
+      vendor_id: input.vendorId,
+      lead_code: {
+        startsWith: `${prefix}-`,
+      },
+    },
+    orderBy: [{ created_at: "desc" }, { id: "desc" }],
+    select: {
+      lead_code: true,
+    },
+  });
 
-  if (lastLead?.lead_code) {
-    const match = lastLead.lead_code.match(/-(\d+)$/);
+  let lastCode = "";
+  if (lastLead?.lead_code && lastOnlineLead?.lead_code) {
+    const m1 = lastLead.lead_code.match(/-(\d+)$/);
+    const m2 = lastOnlineLead.lead_code.match(/-(\d+)$/);
+    const n1 = m1 ? parseInt(m1[1], 10) : 0;
+    const n2 = m2 ? parseInt(m2[1], 10) : 0;
+    lastCode = n1 >= n2 ? lastLead.lead_code : lastOnlineLead.lead_code;
+  } else {
+    lastCode = lastLead?.lead_code || lastOnlineLead?.lead_code || "";
+  }
+
+  let nextNumber = 1;
+  if (lastCode) {
+    const match = lastCode.match(/-(\d+)$/);
     if (match) {
       nextNumber = parseInt(match[1], 10) + 1;
     }
   }
 
-  const generatedCode = `${prefix}-${nextNumber}`;
+  let numSegment = nextNumber < 10 ? `0${nextNumber}` : `${nextNumber}`;
+  let generatedCode = `${prefix}-${numSegment}`;
 
-  // 🔍 VERY IMPORTANT DEBUG
+  // Loop check to prevent duplicate conflicts
+  let exists = true;
+  while (exists) {
+    const existingInLead = await tx.leadMaster.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: generatedCode,
+      },
+      select: { id: true },
+    });
+
+    const existingInOnlineLead = await tx.onlineLead.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: generatedCode,
+      },
+      select: { id: true },
+    });
+
+    if (!existingInLead && !existingInOnlineLead) {
+      exists = false;
+    } else {
+      nextNumber++;
+      numSegment = nextNumber < 10 ? `0${nextNumber}` : `${nextNumber}`;
+      generatedCode = `${prefix}-${numSegment}`;
+    }
+  }
+
   logger.debug("[LEAD CODE GENERATED]", {
     franchiseId: input.franchiseId,
     prefix,
-    lastLead: lastLead?.lead_code,
     generatedCode,
   });
 

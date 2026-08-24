@@ -310,6 +310,11 @@ export type specificationDocumentMapping = Prisma.specificationDocumentMappingMo
  */
 export type LeadDocuments = Prisma.LeadDocumentsModel
 /**
+ * Model LeadB2BDocument
+ * 
+ */
+export type LeadB2BDocument = Prisma.LeadB2BDocumentModel
+/**
  * Model LeadChatRoom
  * 
  */
@@ -785,6 +790,11 @@ export type ProjectCategoriesTypeMaster = Prisma.ProjectCategoriesTypeMasterMode
  */
 export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
 /**
+ * Model CategoryNamingStructure
+ * 
+ */
+export type CategoryNamingStructure = Prisma.CategoryNamingStructureModel
+/**
  * Model ProjectCategoriesMasterVendorMapping
  * 
  */
@@ -1069,3 +1079,13 @@ export type online_leads = Prisma.online_leadsModel
  * 
  */
 export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel
+/**
+ * Model LeadBillingAddress
+ * 
+ */
+export type LeadBillingAddress = Prisma.LeadBillingAddressModel
+/**
+ * Model MetaLead
+ * 
+ */
+export type MetaLead = Prisma.MetaLeadModel

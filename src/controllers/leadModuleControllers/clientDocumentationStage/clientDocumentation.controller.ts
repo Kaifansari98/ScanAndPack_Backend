@@ -610,8 +610,8 @@ export class ClientDocumentationController {
       const vendorId = Number(getParam(req.params.vendorId));
       const leadId = Number(getParam(req.params.leadId));
       const userId = Number(req.query.userId);
-      const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined
-
+      const instanceId = req.query.instanceId ? parseInt(req.query.instanceId as string) : undefined;
+      const productTypeId = req.query.productTypeId ? parseInt(req.query.productTypeId as string) : undefined;
 
       if (!vendorId || !leadId || !userId) {
         res.status(400).json({
@@ -629,6 +629,7 @@ export class ClientDocumentationController {
         userId,
         baseUrl,
         instanceId,
+        productTypeId,
       );
 
       console.info("[ClientDocumentation:get] Response summary", {
@@ -687,6 +688,45 @@ export class ClientDocumentationController {
       res.status(400).json({
         success: false,
         message: error?.message || "Failed to move lead to Client Approval",
+      });
+    }
+  };
+
+  public static checkMoveToClientApprovalEligibility = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+
+      if (!vendorId || !leadId) {
+        res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+        return;
+      }
+
+      const eligibility =
+        await clientDocumentationService.checkMoveToClientApprovalEligibility({
+          vendor_id: vendorId,
+          lead_id: leadId,
+        });
+
+      res.status(200).json({
+        success: true,
+        message: "Move to Client Approval eligibility checked successfully",
+        data: eligibility,
+      });
+    } catch (error: any) {
+      console.error(
+        "[ClientDocumentationController] checkMoveToClientApprovalEligibility:",
+        error
+      );
+      res.status(500).json({
+        success: false,
+        message: error?.message || "Internal server error",
       });
     }
   };

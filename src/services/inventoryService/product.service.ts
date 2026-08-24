@@ -56,6 +56,8 @@ type ProductPayload = {
     supplier_item_code?: string | null;
     amount?: number | null;
   }[];
+  p_code?: string | null;
+  color_name?: string | null;
 };
 
 const toDecimal = (v: any) =>
@@ -83,6 +85,8 @@ const buildProductData = (payload: ProductPayload) => {
     article_code: itemCode,
     item_code: itemCode,
     barcode: payload.barcode?.trim() || null,
+    p_code: payload.p_code?.trim() || null,
+    color_name: payload.color_name?.trim() || null,
 
     brand_id: toIntOrNull(payload.brand_id),
     item_group_id: toIntOrNull(payload.item_group_id),
@@ -315,6 +319,14 @@ export const getProductMasters = async (vendor_id: number) => {
           id: true,
           category_name: true,
           parent_id: true,
+          prefix: true,
+          namingStructure: {
+            select: {
+              id: true,
+              delimiter: true,
+              fields_json: true,
+            },
+          },
         },
         orderBy: { category_name: "asc" },
       }),
@@ -444,14 +456,23 @@ export const listProducts = async (
   vendor_id: number,
   search = "",
   page = 1,
-  pageSize = 20
+  pageSize = 20,
+  filters?: {
+    category_id?: number;
+    brand_id?: number;
+    active?: string;
+    procurement?: string;
+  }
 ) => {
   try {
     const skip = (page - 1) * pageSize;
 
     const where: Prisma.ProductMasterWhereInput = {
       vendor_id,
-      active: "Yes",
+      ...(filters?.active ? { active: filters.active as any } : (filters?.active === "" ? {} : { active: "Yes" })),
+      ...(filters?.category_id ? { category_id: filters.category_id } : {}),
+      ...(filters?.brand_id ? { brand_id: filters.brand_id } : {}),
+      ...(filters?.procurement ? { procurement: filters.procurement } : {}),
       ...(search
         ? {
           OR: [

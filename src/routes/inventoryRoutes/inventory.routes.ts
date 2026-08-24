@@ -52,6 +52,7 @@ import {
   productUpdate,
   downloadProductsTemplate,
   uploadProductsBulk,
+  getNextItemCode,
 } from "../../controllers/inventoryController/product.controller";
 
 const router = Router();
@@ -88,6 +89,7 @@ router.get("/products/:vendor_id/bulk-upload/template", downloadProductsTemplate
 router.post("/products/:vendor_id/bulk-upload", upload.single("file"), uploadProductsBulk);
 
 router.get("/products/:vendor_id/masters", productMasters);
+router.get("/products/:vendor_id/next-item-code", getNextItemCode);
 router.get("/products/:vendor_id", productList);
 router.get("/products/:vendor_id/:id", productDetail);
 router.post("/products/:vendor_id", productCreate);
