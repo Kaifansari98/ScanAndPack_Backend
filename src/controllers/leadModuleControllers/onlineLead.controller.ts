@@ -42,6 +42,42 @@ const mapOnlineLeadToFrontend = (lead: any) => {
   };
 };
 
+export const ensureDefaultStatuses = async (vendorId: number) => {
+  const defaultStatuses = [
+    { name: "Pending", required: true },
+    { name: "Follow Up Done", required: true },
+    { name: "Store Assigned", required: true },
+    { name: "Store Visit Done", required: false },
+    { name: "Lost", required: false },
+  ];
+
+  for (const status of defaultStatuses) {
+    const existing = await prisma.online_lead_followup_status.findFirst({
+      where: {
+        vendor_id: vendorId,
+        status_name: { equals: status.name, mode: "insensitive" },
+      },
+    });
+
+    if (!existing) {
+      await prisma.online_lead_followup_status.create({
+        data: {
+          vendor_id: vendorId,
+          status_name: status.name,
+          followup_required: status.required,
+          is_active: true,
+          updated_at: new Date(),
+        },
+      });
+    } else if (!existing.is_active) {
+      await prisma.online_lead_followup_status.update({
+        where: { id: existing.id },
+        data: { is_active: true },
+      });
+    }
+  }
+};
+
 export class OnlineLeadController {
   // 1. Create Lead from API / Integration (ONLINE)
   createOnlineLead = async (req: Request, res: Response): Promise<Response> => {
@@ -85,6 +121,7 @@ export class OnlineLeadController {
 
       // Find initial status (e.g., Interested or Call Disconnected or look for a default like "New Lead")
       // We will look for an active status for this vendor, if none found, we use a placeholder or create one.
+      await ensureDefaultStatuses(Number(vendor_id));
       let defaultStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
@@ -200,6 +237,7 @@ export class OnlineLeadController {
       }
 
       // Find default Initial status (Pending)
+      await ensureDefaultStatuses(Number(vendor_id));
       const walkInStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
@@ -1294,6 +1332,8 @@ export class OnlineLeadController {
         });
       }
 
+      await ensureDefaultStatuses(vendorId);
+
       const statuses = await prisma.online_lead_followup_status.findMany({
         where: {
           vendor_id: vendorId,
@@ -1664,6 +1704,7 @@ export class OnlineLeadController {
       }
 
       // Find default Initial status (Pending)
+      await ensureDefaultStatuses(Number(vendor_id));
       const walkInStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: Number(vendor_id),
