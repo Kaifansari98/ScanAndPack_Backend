@@ -790,6 +790,11 @@ export type ProjectCategoriesTypeMaster = Prisma.ProjectCategoriesTypeMasterMode
  */
 export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
 /**
+ * Model CategoryNamingStructure
+ * 
+ */
+export type CategoryNamingStructure = Prisma.CategoryNamingStructureModel
+/**
  * Model ProjectCategoriesMasterVendorMapping
  * 
  */
@@ -1079,3 +1084,8 @@ export type telecaller_campaign_leads = Prisma.telecaller_campaign_leadsModel
  * 
  */
 export type LeadBillingAddress = Prisma.LeadBillingAddressModel
+/**
+ * Model MetaLead
+ * 
+ */
+export type MetaLead = Prisma.MetaLeadModel

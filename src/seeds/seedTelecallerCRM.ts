@@ -29,16 +29,11 @@ async function main() {
   const vendors = await prisma.vendorMaster.findMany();
   
   const statuses = [
-    { name: "Call Disconnected", required: true },
-    { name: "Callback Required", required: true },
-    { name: "No Answer", required: true },
-    { name: "Interested", required: true },
-    { name: "Not Interested", required: false },
-    { name: "Store Visit", required: true },
+    { name: "Pending", required: true },
+    { name: "Follow Up Done", required: true },
     { name: "Store Assigned", required: true },
-    { name: "Converted", required: false },
-    { name: "Closed", required: false },
-    { name: "Walk-In Customer", required: true }
+    { name: "Store Visit Done", required: false },
+    { name: "Lost", required: false }
   ];
   
   for (const vendor of vendors) {

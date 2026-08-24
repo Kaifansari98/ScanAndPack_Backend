@@ -542,6 +542,11 @@ leadsRouter.get(
   leadController.getLeadLogsWithDocuments
 );
 
+leadsRouter.get(
+  "/vendorId/:vendor_id/leadId/:lead_id/online-history",
+  leadController.getOnlineHistory
+);
+
 leadsRouter.delete(
   "/delete-doc/vendorId/:vendorId/documentId/:documentId",
   leadController.deleteDocument

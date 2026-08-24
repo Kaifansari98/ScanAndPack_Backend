@@ -5049,6 +5049,13 @@ export const getProjectCategories = async (vendor_id: number) => {
         },
         status: true,
         prefix: true,
+        namingStructure: {
+          select: {
+            id: true,
+            delimiter: true,
+            fields_json: true,
+          },
+        },
         created_at: true,
         include_in_packing: true,
         scan_pack_validate: true,
@@ -5097,7 +5104,8 @@ export const createProjectCategory = async (
   include_in_packing: boolean = false,
   scan_pack_validate: boolean = false,
   use_in_assembled_packing: boolean = false,
-  prefix?: string | null
+  prefix?: string | null,
+  naming_structure?: { delimiter?: string; fields: string[] } | null
 ) => {
   try {
     const finalScanPackValidate = Boolean(scan_pack_validate);
@@ -5131,6 +5139,22 @@ export const createProjectCategory = async (
         });
       }
 
+      if (naming_structure && Array.isArray(naming_structure.fields)) {
+        await tx.categoryNamingStructure.upsert({
+          where: { category_id: category.id },
+          create: {
+            vendor_id,
+            category_id: category.id,
+            delimiter: naming_structure.delimiter || "_",
+            fields_json: naming_structure.fields,
+          },
+          update: {
+            delimiter: naming_structure.delimiter || "_",
+            fields_json: naming_structure.fields,
+          },
+        });
+      }
+
       return category;
     });
 
@@ -5153,7 +5177,8 @@ export const updateProjectCategory = async (
   include_in_packing?: boolean,
   scan_pack_validate?: boolean,
   use_in_assembled_packing?: boolean,
-  prefix?: string | null
+  prefix?: string | null,
+  naming_structure?: { delimiter?: string; fields: string[] } | null
 ) => {
   try {
     await prisma.$transaction(async (tx) => {
@@ -5200,6 +5225,22 @@ export const updateProjectCategory = async (
             created_by: updated_by,
             updated_by,
           })),
+        });
+      }
+
+      if (naming_structure && Array.isArray(naming_structure.fields)) {
+        await tx.categoryNamingStructure.upsert({
+          where: { category_id: id },
+          create: {
+            vendor_id,
+            category_id: id,
+            delimiter: naming_structure.delimiter || "_",
+            fields_json: naming_structure.fields,
+          },
+          update: {
+            delimiter: naming_structure.delimiter || "_",
+            fields_json: naming_structure.fields,
+          },
         });
       }
     });

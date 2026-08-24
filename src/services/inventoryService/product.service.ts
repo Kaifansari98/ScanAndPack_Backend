@@ -319,6 +319,14 @@ export const getProductMasters = async (vendor_id: number) => {
           id: true,
           category_name: true,
           parent_id: true,
+          prefix: true,
+          namingStructure: {
+            select: {
+              id: true,
+              delimiter: true,
+              fields_json: true,
+            },
+          },
         },
         orderBy: { category_name: "asc" },
       }),

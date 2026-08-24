@@ -35,6 +35,8 @@ export type Online_leadsAvgAggregateOutputType = {
   status: number | null
   store_id: number | null
   final_assigned_leads: number | null
+  site_type_id: number | null
+  source_id: number | null
 }
 
 export type Online_leadsSumAggregateOutputType = {
@@ -46,12 +48,15 @@ export type Online_leadsSumAggregateOutputType = {
   status: number | null
   store_id: number | null
   final_assigned_leads: number | null
+  site_type_id: number | null
+  source_id: number | null
 }
 
 export type Online_leadsMinAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   leads_name: string | null
+  lead_code: string | null
   email: string | null
   contact: string | null
   source: string | null
@@ -66,12 +71,23 @@ export type Online_leadsMinAggregateOutputType = {
   follow_up_date: Date | null
   store_id: number | null
   final_assigned_leads: number | null
+  firstname: string | null
+  lastname: string | null
+  alt_contact_no: string | null
+  site_address: string | null
+  site_type_id: number | null
+  source_id: number | null
+  refered_by: string | null
+  archetech_name: string | null
+  archetech_number: string | null
+  priority: string | null
 }
 
 export type Online_leadsMaxAggregateOutputType = {
   id: number | null
   vendor_id: number | null
   leads_name: string | null
+  lead_code: string | null
   email: string | null
   contact: string | null
   source: string | null
@@ -86,12 +102,23 @@ export type Online_leadsMaxAggregateOutputType = {
   follow_up_date: Date | null
   store_id: number | null
   final_assigned_leads: number | null
+  firstname: string | null
+  lastname: string | null
+  alt_contact_no: string | null
+  site_address: string | null
+  site_type_id: number | null
+  source_id: number | null
+  refered_by: string | null
+  archetech_name: string | null
+  archetech_number: string | null
+  priority: string | null
 }
 
 export type Online_leadsCountAggregateOutputType = {
   id: number
   vendor_id: number
   leads_name: number
+  lead_code: number
   email: number
   contact: number
   source: number
@@ -106,6 +133,18 @@ export type Online_leadsCountAggregateOutputType = {
   follow_up_date: number
   store_id: number
   final_assigned_leads: number
+  firstname: number
+  lastname: number
+  alt_contact_no: number
+  site_address: number
+  site_type_id: number
+  source_id: number
+  refered_by: number
+  archetech_name: number
+  archetech_number: number
+  priority: number
+  product_types: number
+  product_structures: number
   _all: number
 }
 
@@ -119,6 +158,8 @@ export type Online_leadsAvgAggregateInputType = {
   status?: true
   store_id?: true
   final_assigned_leads?: true
+  site_type_id?: true
+  source_id?: true
 }
 
 export type Online_leadsSumAggregateInputType = {
@@ -130,12 +171,15 @@ export type Online_leadsSumAggregateInputType = {
   status?: true
   store_id?: true
   final_assigned_leads?: true
+  site_type_id?: true
+  source_id?: true
 }
 
 export type Online_leadsMinAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -150,12 +194,23 @@ export type Online_leadsMinAggregateInputType = {
   follow_up_date?: true
   store_id?: true
   final_assigned_leads?: true
+  firstname?: true
+  lastname?: true
+  alt_contact_no?: true
+  site_address?: true
+  site_type_id?: true
+  source_id?: true
+  refered_by?: true
+  archetech_name?: true
+  archetech_number?: true
+  priority?: true
 }
 
 export type Online_leadsMaxAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -170,12 +225,23 @@ export type Online_leadsMaxAggregateInputType = {
   follow_up_date?: true
   store_id?: true
   final_assigned_leads?: true
+  firstname?: true
+  lastname?: true
+  alt_contact_no?: true
+  site_address?: true
+  site_type_id?: true
+  source_id?: true
+  refered_by?: true
+  archetech_name?: true
+  archetech_number?: true
+  priority?: true
 }
 
 export type Online_leadsCountAggregateInputType = {
   id?: true
   vendor_id?: true
   leads_name?: true
+  lead_code?: true
   email?: true
   contact?: true
   source?: true
@@ -190,6 +256,18 @@ export type Online_leadsCountAggregateInputType = {
   follow_up_date?: true
   store_id?: true
   final_assigned_leads?: true
+  firstname?: true
+  lastname?: true
+  alt_contact_no?: true
+  site_address?: true
+  site_type_id?: true
+  source_id?: true
+  refered_by?: true
+  archetech_name?: true
+  archetech_number?: true
+  priority?: true
+  product_types?: true
+  product_structures?: true
   _all?: true
 }
 
@@ -283,6 +361,7 @@ export type Online_leadsGroupByOutputType = {
   id: number
   vendor_id: number
   leads_name: string
+  lead_code: string | null
   email: string | null
   contact: string
   source: string
@@ -297,6 +376,18 @@ export type Online_leadsGroupByOutputType = {
   follow_up_date: Date | null
   store_id: number | null
   final_assigned_leads: number | null
+  firstname: string | null
+  lastname: string | null
+  alt_contact_no: string | null
+  site_address: string | null
+  site_type_id: number | null
+  source_id: number | null
+  refered_by: string | null
+  archetech_name: string | null
+  archetech_number: string | null
+  priority: string | null
+  product_types: string[]
+  product_structures: string[]
   _count: Online_leadsCountAggregateOutputType | null
   _avg: Online_leadsAvgAggregateOutputType | null
   _sum: Online_leadsSumAggregateOutputType | null
@@ -326,6 +417,7 @@ export type online_leadsWhereInput = {
   id?: Prisma.IntFilter<"online_leads"> | number
   vendor_id?: Prisma.IntFilter<"online_leads"> | number
   leads_name?: Prisma.StringFilter<"online_leads"> | string
+  lead_code?: Prisma.StringNullableFilter<"online_leads"> | string | null
   email?: Prisma.StringNullableFilter<"online_leads"> | string | null
   contact?: Prisma.StringFilter<"online_leads"> | string
   source?: Prisma.StringFilter<"online_leads"> | string
@@ -340,6 +432,18 @@ export type online_leadsWhereInput = {
   follow_up_date?: Prisma.DateTimeNullableFilter<"online_leads"> | Date | string | null
   store_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   final_assigned_leads?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  firstname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_name?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_number?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  priority?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  product_types?: Prisma.StringNullableListFilter<"online_leads">
+  product_structures?: Prisma.StringNullableListFilter<"online_leads">
   online_lead_call_log?: Prisma.Online_lead_call_logListRelationFilter
   online_lead_history?: Prisma.Online_lead_historyListRelationFilter
   online_lead_store_log?: Prisma.Online_lead_store_logListRelationFilter
@@ -348,6 +452,8 @@ export type online_leadsWhereInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   online_lead_followup_status?: Prisma.XOR<Prisma.Online_lead_followup_statusNullableScalarRelationFilter, Prisma.online_lead_followup_statusWhereInput> | null
   FranchiseMaster?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
+  SourceMaster?: Prisma.XOR<Prisma.SourceMasterNullableScalarRelationFilter, Prisma.SourceMasterWhereInput> | null
+  SiteTypeMaster?: Prisma.XOR<Prisma.SiteTypeMasterNullableScalarRelationFilter, Prisma.SiteTypeMasterWhereInput> | null
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   VendorMaster?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   telecaller_campaign_leads?: Prisma.Telecaller_campaign_leadsListRelationFilter
@@ -357,6 +463,7 @@ export type online_leadsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -371,6 +478,18 @@ export type online_leadsOrderByWithRelationInput = {
   follow_up_date?: Prisma.SortOrderInput | Prisma.SortOrder
   store_id?: Prisma.SortOrderInput | Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstname?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastname?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_address?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  source_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  archetech_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  archetech_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  priority?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_types?: Prisma.SortOrder
+  product_structures?: Prisma.SortOrder
   online_lead_call_log?: Prisma.online_lead_call_logOrderByRelationAggregateInput
   online_lead_history?: Prisma.online_lead_historyOrderByRelationAggregateInput
   online_lead_store_log?: Prisma.online_lead_store_logOrderByRelationAggregateInput
@@ -379,6 +498,8 @@ export type online_leadsOrderByWithRelationInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterOrderByWithRelationInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusOrderByWithRelationInput
   FranchiseMaster?: Prisma.FranchiseMasterOrderByWithRelationInput
+  SourceMaster?: Prisma.SourceMasterOrderByWithRelationInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterOrderByWithRelationInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterOrderByWithRelationInput
   VendorMaster?: Prisma.VendorMasterOrderByWithRelationInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsOrderByRelationAggregateInput
@@ -386,11 +507,13 @@ export type online_leadsOrderByWithRelationInput = {
 
 export type online_leadsWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  uniq_vendor_online_lead_contact?: Prisma.online_leadsUniq_vendor_online_lead_contactCompoundUniqueInput
   AND?: Prisma.online_leadsWhereInput | Prisma.online_leadsWhereInput[]
   OR?: Prisma.online_leadsWhereInput[]
   NOT?: Prisma.online_leadsWhereInput | Prisma.online_leadsWhereInput[]
   vendor_id?: Prisma.IntFilter<"online_leads"> | number
   leads_name?: Prisma.StringFilter<"online_leads"> | string
+  lead_code?: Prisma.StringNullableFilter<"online_leads"> | string | null
   email?: Prisma.StringNullableFilter<"online_leads"> | string | null
   contact?: Prisma.StringFilter<"online_leads"> | string
   source?: Prisma.StringFilter<"online_leads"> | string
@@ -405,6 +528,18 @@ export type online_leadsWhereUniqueInput = Prisma.AtLeast<{
   follow_up_date?: Prisma.DateTimeNullableFilter<"online_leads"> | Date | string | null
   store_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   final_assigned_leads?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  firstname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_name?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_number?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  priority?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  product_types?: Prisma.StringNullableListFilter<"online_leads">
+  product_structures?: Prisma.StringNullableListFilter<"online_leads">
   online_lead_call_log?: Prisma.Online_lead_call_logListRelationFilter
   online_lead_history?: Prisma.Online_lead_historyListRelationFilter
   online_lead_store_log?: Prisma.Online_lead_store_logListRelationFilter
@@ -413,15 +548,18 @@ export type online_leadsWhereUniqueInput = Prisma.AtLeast<{
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   online_lead_followup_status?: Prisma.XOR<Prisma.Online_lead_followup_statusNullableScalarRelationFilter, Prisma.online_lead_followup_statusWhereInput> | null
   FranchiseMaster?: Prisma.XOR<Prisma.FranchiseMasterNullableScalarRelationFilter, Prisma.FranchiseMasterWhereInput> | null
+  SourceMaster?: Prisma.XOR<Prisma.SourceMasterNullableScalarRelationFilter, Prisma.SourceMasterWhereInput> | null
+  SiteTypeMaster?: Prisma.XOR<Prisma.SiteTypeMasterNullableScalarRelationFilter, Prisma.SiteTypeMasterWhereInput> | null
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   VendorMaster?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   telecaller_campaign_leads?: Prisma.Telecaller_campaign_leadsListRelationFilter
-}, "id">
+}, "id" | "uniq_vendor_online_lead_contact">
 
 export type online_leadsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -436,6 +574,18 @@ export type online_leadsOrderByWithAggregationInput = {
   follow_up_date?: Prisma.SortOrderInput | Prisma.SortOrder
   store_id?: Prisma.SortOrderInput | Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrderInput | Prisma.SortOrder
+  firstname?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastname?: Prisma.SortOrderInput | Prisma.SortOrder
+  alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_address?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  source_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  archetech_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  archetech_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  priority?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_types?: Prisma.SortOrder
+  product_structures?: Prisma.SortOrder
   _count?: Prisma.online_leadsCountOrderByAggregateInput
   _avg?: Prisma.online_leadsAvgOrderByAggregateInput
   _max?: Prisma.online_leadsMaxOrderByAggregateInput
@@ -450,6 +600,7 @@ export type online_leadsScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"online_leads"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"online_leads"> | number
   leads_name?: Prisma.StringWithAggregatesFilter<"online_leads"> | string
+  lead_code?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
   contact?: Prisma.StringWithAggregatesFilter<"online_leads"> | string
   source?: Prisma.StringWithAggregatesFilter<"online_leads"> | string
@@ -464,10 +615,23 @@ export type online_leadsScalarWhereWithAggregatesInput = {
   follow_up_date?: Prisma.DateTimeNullableWithAggregatesFilter<"online_leads"> | Date | string | null
   store_id?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
   final_assigned_leads?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
+  firstname?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  lastname?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  alt_contact_no?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  site_address?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  site_type_id?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
+  source_id?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
+  refered_by?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  archetech_name?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  archetech_number?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  priority?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  product_types?: Prisma.StringNullableListFilter<"online_leads">
+  product_structures?: Prisma.StringNullableListFilter<"online_leads">
 }
 
 export type online_leadsCreateInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -476,6 +640,16 @@ export type online_leadsCreateInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -484,6 +658,8 @@ export type online_leadsCreateInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -493,6 +669,7 @@ export type online_leadsUncheckedCreateInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -507,6 +684,18 @@ export type online_leadsUncheckedCreateInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -515,6 +704,7 @@ export type online_leadsUncheckedCreateInput = {
 
 export type online_leadsUpdateInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -523,6 +713,16 @@ export type online_leadsUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -531,6 +731,8 @@ export type online_leadsUpdateInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -540,6 +742,7 @@ export type online_leadsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -554,6 +757,18 @@ export type online_leadsUncheckedUpdateInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -564,6 +779,7 @@ export type online_leadsCreateManyInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -578,10 +794,23 @@ export type online_leadsCreateManyInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateManyMutationInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -590,12 +819,23 @@ export type online_leadsUpdateManyMutationInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -610,6 +850,18 @@ export type online_leadsUncheckedUpdateManyInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type Online_leadsListRelationFilter = {
@@ -627,10 +879,24 @@ export type Online_leadsScalarRelationFilter = {
   isNot?: Prisma.online_leadsWhereInput
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
+export type online_leadsUniq_vendor_online_lead_contactCompoundUniqueInput = {
+  vendor_id: number
+  contact: string
+}
+
 export type online_leadsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -645,6 +911,18 @@ export type online_leadsCountOrderByAggregateInput = {
   follow_up_date?: Prisma.SortOrder
   store_id?: Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrder
+  firstname?: Prisma.SortOrder
+  lastname?: Prisma.SortOrder
+  alt_contact_no?: Prisma.SortOrder
+  site_address?: Prisma.SortOrder
+  site_type_id?: Prisma.SortOrder
+  source_id?: Prisma.SortOrder
+  refered_by?: Prisma.SortOrder
+  archetech_name?: Prisma.SortOrder
+  archetech_number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
+  product_types?: Prisma.SortOrder
+  product_structures?: Prisma.SortOrder
 }
 
 export type online_leadsAvgOrderByAggregateInput = {
@@ -656,12 +934,15 @@ export type online_leadsAvgOrderByAggregateInput = {
   status?: Prisma.SortOrder
   store_id?: Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrder
+  site_type_id?: Prisma.SortOrder
+  source_id?: Prisma.SortOrder
 }
 
 export type online_leadsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -676,12 +957,23 @@ export type online_leadsMaxOrderByAggregateInput = {
   follow_up_date?: Prisma.SortOrder
   store_id?: Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrder
+  firstname?: Prisma.SortOrder
+  lastname?: Prisma.SortOrder
+  alt_contact_no?: Prisma.SortOrder
+  site_address?: Prisma.SortOrder
+  site_type_id?: Prisma.SortOrder
+  source_id?: Prisma.SortOrder
+  refered_by?: Prisma.SortOrder
+  archetech_name?: Prisma.SortOrder
+  archetech_number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
 }
 
 export type online_leadsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   leads_name?: Prisma.SortOrder
+  lead_code?: Prisma.SortOrder
   email?: Prisma.SortOrder
   contact?: Prisma.SortOrder
   source?: Prisma.SortOrder
@@ -696,6 +988,16 @@ export type online_leadsMinOrderByAggregateInput = {
   follow_up_date?: Prisma.SortOrder
   store_id?: Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrder
+  firstname?: Prisma.SortOrder
+  lastname?: Prisma.SortOrder
+  alt_contact_no?: Prisma.SortOrder
+  site_address?: Prisma.SortOrder
+  site_type_id?: Prisma.SortOrder
+  source_id?: Prisma.SortOrder
+  refered_by?: Prisma.SortOrder
+  archetech_name?: Prisma.SortOrder
+  archetech_number?: Prisma.SortOrder
+  priority?: Prisma.SortOrder
 }
 
 export type online_leadsSumOrderByAggregateInput = {
@@ -707,6 +1009,8 @@ export type online_leadsSumOrderByAggregateInput = {
   status?: Prisma.SortOrder
   store_id?: Prisma.SortOrder
   final_assigned_leads?: Prisma.SortOrder
+  site_type_id?: Prisma.SortOrder
+  source_id?: Prisma.SortOrder
 }
 
 export type online_leadsCreateNestedManyWithoutVendorMasterInput = {
@@ -919,6 +1223,90 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_update
   deleteMany?: Prisma.online_leadsScalarWhereInput | Prisma.online_leadsScalarWhereInput[]
 }
 
+export type online_leadsCreateNestedManyWithoutSiteTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput> | Prisma.online_leadsCreateWithoutSiteTypeMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput | Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySiteTypeMasterInputEnvelope
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+}
+
+export type online_leadsUncheckedCreateNestedManyWithoutSiteTypeMasterInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput> | Prisma.online_leadsCreateWithoutSiteTypeMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput | Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySiteTypeMasterInputEnvelope
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+}
+
+export type online_leadsUpdateManyWithoutSiteTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput> | Prisma.online_leadsCreateWithoutSiteTypeMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput | Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput[]
+  upsert?: Prisma.online_leadsUpsertWithWhereUniqueWithoutSiteTypeMasterInput | Prisma.online_leadsUpsertWithWhereUniqueWithoutSiteTypeMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySiteTypeMasterInputEnvelope
+  set?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  disconnect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  delete?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  update?: Prisma.online_leadsUpdateWithWhereUniqueWithoutSiteTypeMasterInput | Prisma.online_leadsUpdateWithWhereUniqueWithoutSiteTypeMasterInput[]
+  updateMany?: Prisma.online_leadsUpdateManyWithWhereWithoutSiteTypeMasterInput | Prisma.online_leadsUpdateManyWithWhereWithoutSiteTypeMasterInput[]
+  deleteMany?: Prisma.online_leadsScalarWhereInput | Prisma.online_leadsScalarWhereInput[]
+}
+
+export type online_leadsUncheckedUpdateManyWithoutSiteTypeMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput> | Prisma.online_leadsCreateWithoutSiteTypeMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput | Prisma.online_leadsCreateOrConnectWithoutSiteTypeMasterInput[]
+  upsert?: Prisma.online_leadsUpsertWithWhereUniqueWithoutSiteTypeMasterInput | Prisma.online_leadsUpsertWithWhereUniqueWithoutSiteTypeMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySiteTypeMasterInputEnvelope
+  set?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  disconnect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  delete?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  update?: Prisma.online_leadsUpdateWithWhereUniqueWithoutSiteTypeMasterInput | Prisma.online_leadsUpdateWithWhereUniqueWithoutSiteTypeMasterInput[]
+  updateMany?: Prisma.online_leadsUpdateManyWithWhereWithoutSiteTypeMasterInput | Prisma.online_leadsUpdateManyWithWhereWithoutSiteTypeMasterInput[]
+  deleteMany?: Prisma.online_leadsScalarWhereInput | Prisma.online_leadsScalarWhereInput[]
+}
+
+export type online_leadsCreateNestedManyWithoutSourceMasterInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput> | Prisma.online_leadsCreateWithoutSourceMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput | Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySourceMasterInputEnvelope
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+}
+
+export type online_leadsUncheckedCreateNestedManyWithoutSourceMasterInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput> | Prisma.online_leadsCreateWithoutSourceMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput | Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySourceMasterInputEnvelope
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+}
+
+export type online_leadsUpdateManyWithoutSourceMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput> | Prisma.online_leadsCreateWithoutSourceMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput | Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput[]
+  upsert?: Prisma.online_leadsUpsertWithWhereUniqueWithoutSourceMasterInput | Prisma.online_leadsUpsertWithWhereUniqueWithoutSourceMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySourceMasterInputEnvelope
+  set?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  disconnect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  delete?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  update?: Prisma.online_leadsUpdateWithWhereUniqueWithoutSourceMasterInput | Prisma.online_leadsUpdateWithWhereUniqueWithoutSourceMasterInput[]
+  updateMany?: Prisma.online_leadsUpdateManyWithWhereWithoutSourceMasterInput | Prisma.online_leadsUpdateManyWithWhereWithoutSourceMasterInput[]
+  deleteMany?: Prisma.online_leadsScalarWhereInput | Prisma.online_leadsScalarWhereInput[]
+}
+
+export type online_leadsUncheckedUpdateManyWithoutSourceMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput> | Prisma.online_leadsCreateWithoutSourceMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput[]
+  connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput | Prisma.online_leadsCreateOrConnectWithoutSourceMasterInput[]
+  upsert?: Prisma.online_leadsUpsertWithWhereUniqueWithoutSourceMasterInput | Prisma.online_leadsUpsertWithWhereUniqueWithoutSourceMasterInput[]
+  createMany?: Prisma.online_leadsCreateManySourceMasterInputEnvelope
+  set?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  disconnect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  delete?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  connect?: Prisma.online_leadsWhereUniqueInput | Prisma.online_leadsWhereUniqueInput[]
+  update?: Prisma.online_leadsUpdateWithWhereUniqueWithoutSourceMasterInput | Prisma.online_leadsUpdateWithWhereUniqueWithoutSourceMasterInput[]
+  updateMany?: Prisma.online_leadsUpdateManyWithWhereWithoutSourceMasterInput | Prisma.online_leadsUpdateManyWithWhereWithoutSourceMasterInput[]
+  deleteMany?: Prisma.online_leadsScalarWhereInput | Prisma.online_leadsScalarWhereInput[]
+}
+
 export type online_leadsCreateNestedManyWithoutFranchiseMasterInput = {
   create?: Prisma.XOR<Prisma.online_leadsCreateWithoutFranchiseMasterInput, Prisma.online_leadsUncheckedCreateWithoutFranchiseMasterInput> | Prisma.online_leadsCreateWithoutFranchiseMasterInput[] | Prisma.online_leadsUncheckedCreateWithoutFranchiseMasterInput[]
   connectOrCreate?: Prisma.online_leadsCreateOrConnectWithoutFranchiseMasterInput | Prisma.online_leadsCreateOrConnectWithoutFranchiseMasterInput[]
@@ -1045,8 +1433,26 @@ export type online_leadsUpdateOneRequiredWithoutOnline_lead_store_logNestedInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.online_leadsUpdateToOneWithWhereWithoutOnline_lead_store_logInput, Prisma.online_leadsUpdateWithoutOnline_lead_store_logInput>, Prisma.online_leadsUncheckedUpdateWithoutOnline_lead_store_logInput>
 }
 
+export type online_leadsCreateproduct_typesInput = {
+  set: string[]
+}
+
+export type online_leadsCreateproduct_structuresInput = {
+  set: string[]
+}
+
 export type EnumLeadEntryTypeFieldUpdateOperationsInput = {
   set?: $Enums.LeadEntryType
+}
+
+export type online_leadsUpdateproduct_typesInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type online_leadsUpdateproduct_structuresInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type online_leadsCreateNestedOneWithoutTelecaller_campaign_leadsInput = {
@@ -1065,6 +1471,7 @@ export type online_leadsUpdateOneRequiredWithoutTelecaller_campaign_leadsNestedI
 
 export type online_leadsCreateWithoutVendorMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1073,6 +1480,16 @@ export type online_leadsCreateWithoutVendorMasterInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1081,6 +1498,8 @@ export type online_leadsCreateWithoutVendorMasterInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
 }
@@ -1088,6 +1507,7 @@ export type online_leadsCreateWithoutVendorMasterInput = {
 export type online_leadsUncheckedCreateWithoutVendorMasterInput = {
   id?: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1102,6 +1522,18 @@ export type online_leadsUncheckedCreateWithoutVendorMasterInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1141,6 +1573,7 @@ export type online_leadsScalarWhereInput = {
   id?: Prisma.IntFilter<"online_leads"> | number
   vendor_id?: Prisma.IntFilter<"online_leads"> | number
   leads_name?: Prisma.StringFilter<"online_leads"> | string
+  lead_code?: Prisma.StringNullableFilter<"online_leads"> | string | null
   email?: Prisma.StringNullableFilter<"online_leads"> | string | null
   contact?: Prisma.StringFilter<"online_leads"> | string
   source?: Prisma.StringFilter<"online_leads"> | string
@@ -1155,10 +1588,23 @@ export type online_leadsScalarWhereInput = {
   follow_up_date?: Prisma.DateTimeNullableFilter<"online_leads"> | Date | string | null
   store_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   final_assigned_leads?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  firstname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
+  refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_name?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  archetech_number?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  priority?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  product_types?: Prisma.StringNullableListFilter<"online_leads">
+  product_structures?: Prisma.StringNullableListFilter<"online_leads">
 }
 
 export type online_leadsCreateWithoutUserMaster_online_leads_assign_toToUserMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1167,6 +1613,16 @@ export type online_leadsCreateWithoutUserMaster_online_leads_assign_toToUserMast
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1174,6 +1630,8 @@ export type online_leadsCreateWithoutUserMaster_online_leads_assign_toToUserMast
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1183,6 +1641,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_assign_toT
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1196,6 +1655,18 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_assign_toT
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1214,6 +1685,7 @@ export type online_leadsCreateManyUserMaster_online_leads_assign_toToUserMasterI
 
 export type online_leadsCreateWithoutUserMaster_online_leads_created_byToUserMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1222,6 +1694,16 @@ export type online_leadsCreateWithoutUserMaster_online_leads_created_byToUserMas
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1229,6 +1711,8 @@ export type online_leadsCreateWithoutUserMaster_online_leads_created_byToUserMas
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1238,6 +1722,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_created_by
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1251,6 +1736,18 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_created_by
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1269,6 +1766,7 @@ export type online_leadsCreateManyUserMaster_online_leads_created_byToUserMaster
 
 export type online_leadsCreateWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1277,6 +1775,16 @@ export type online_leadsCreateWithoutUserMaster_online_leads_final_assigned_lead
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1284,6 +1792,8 @@ export type online_leadsCreateWithoutUserMaster_online_leads_final_assigned_lead
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_created_byToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1293,6 +1803,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_final_assi
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1306,6 +1817,18 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_final_assi
   remark?: string | null
   follow_up_date?: Date | string | null
   store_id?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1324,6 +1847,7 @@ export type online_leadsCreateManyUserMaster_online_leads_final_assigned_leadsTo
 
 export type online_leadsCreateWithoutUserMaster_online_leads_updated_byToUserMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1332,6 +1856,16 @@ export type online_leadsCreateWithoutUserMaster_online_leads_updated_byToUserMas
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1340,6 +1874,8 @@ export type online_leadsCreateWithoutUserMaster_online_leads_updated_byToUserMas
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
 }
@@ -1348,6 +1884,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_updated_by
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1361,6 +1898,18 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_updated_by
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1441,8 +1990,9 @@ export type online_leadsUpdateManyWithWhereWithoutUserMaster_online_leads_update
   data: Prisma.XOR<Prisma.online_leadsUpdateManyMutationInput, Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterInput>
 }
 
-export type online_leadsCreateWithoutFranchiseMasterInput = {
+export type online_leadsCreateWithoutSiteTypeMasterInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1451,6 +2001,16 @@ export type online_leadsCreateWithoutFranchiseMasterInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1458,6 +2018,202 @@ export type online_leadsCreateWithoutFranchiseMasterInput = {
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_created_byToUserMasterInput
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
+  FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
+  VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
+}
+
+export type online_leadsUncheckedCreateWithoutSiteTypeMasterInput = {
+  id?: number
+  vendor_id: number
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  created_by?: number | null
+  updated_at: Date | string
+  updated_by?: number | null
+  assign_to?: number | null
+  status?: number | null
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  store_id?: number | null
+  final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedCreateNestedManyWithoutOnline_leadsInput
+}
+
+export type online_leadsCreateOrConnectWithoutSiteTypeMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  create: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput>
+}
+
+export type online_leadsCreateManySiteTypeMasterInputEnvelope = {
+  data: Prisma.online_leadsCreateManySiteTypeMasterInput | Prisma.online_leadsCreateManySiteTypeMasterInput[]
+  skipDuplicates?: boolean
+}
+
+export type online_leadsUpsertWithWhereUniqueWithoutSiteTypeMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  update: Prisma.XOR<Prisma.online_leadsUpdateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedUpdateWithoutSiteTypeMasterInput>
+  create: Prisma.XOR<Prisma.online_leadsCreateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedCreateWithoutSiteTypeMasterInput>
+}
+
+export type online_leadsUpdateWithWhereUniqueWithoutSiteTypeMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  data: Prisma.XOR<Prisma.online_leadsUpdateWithoutSiteTypeMasterInput, Prisma.online_leadsUncheckedUpdateWithoutSiteTypeMasterInput>
+}
+
+export type online_leadsUpdateManyWithWhereWithoutSiteTypeMasterInput = {
+  where: Prisma.online_leadsScalarWhereInput
+  data: Prisma.XOR<Prisma.online_leadsUpdateManyMutationInput, Prisma.online_leadsUncheckedUpdateManyWithoutSiteTypeMasterInput>
+}
+
+export type online_leadsCreateWithoutSourceMasterInput = {
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  updated_at: Date | string
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
+  UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_assign_toToUserMasterInput
+  UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_created_byToUserMasterInput
+  UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
+  FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
+  UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
+  VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
+}
+
+export type online_leadsUncheckedCreateWithoutSourceMasterInput = {
+  id?: number
+  vendor_id: number
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  created_by?: number | null
+  updated_at: Date | string
+  updated_by?: number | null
+  assign_to?: number | null
+  status?: number | null
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  store_id?: number | null
+  final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedCreateNestedManyWithoutOnline_leadsInput
+}
+
+export type online_leadsCreateOrConnectWithoutSourceMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  create: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput>
+}
+
+export type online_leadsCreateManySourceMasterInputEnvelope = {
+  data: Prisma.online_leadsCreateManySourceMasterInput | Prisma.online_leadsCreateManySourceMasterInput[]
+  skipDuplicates?: boolean
+}
+
+export type online_leadsUpsertWithWhereUniqueWithoutSourceMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  update: Prisma.XOR<Prisma.online_leadsUpdateWithoutSourceMasterInput, Prisma.online_leadsUncheckedUpdateWithoutSourceMasterInput>
+  create: Prisma.XOR<Prisma.online_leadsCreateWithoutSourceMasterInput, Prisma.online_leadsUncheckedCreateWithoutSourceMasterInput>
+}
+
+export type online_leadsUpdateWithWhereUniqueWithoutSourceMasterInput = {
+  where: Prisma.online_leadsWhereUniqueInput
+  data: Prisma.XOR<Prisma.online_leadsUpdateWithoutSourceMasterInput, Prisma.online_leadsUncheckedUpdateWithoutSourceMasterInput>
+}
+
+export type online_leadsUpdateManyWithWhereWithoutSourceMasterInput = {
+  where: Prisma.online_leadsScalarWhereInput
+  data: Prisma.XOR<Prisma.online_leadsUpdateManyMutationInput, Prisma.online_leadsUncheckedUpdateManyWithoutSourceMasterInput>
+}
+
+export type online_leadsCreateWithoutFranchiseMasterInput = {
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  updated_at: Date | string
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
+  UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_assign_toToUserMasterInput
+  UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_created_byToUserMasterInput
+  UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1467,6 +2223,7 @@ export type online_leadsUncheckedCreateWithoutFranchiseMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1480,6 +2237,18 @@ export type online_leadsUncheckedCreateWithoutFranchiseMasterInput = {
   remark?: string | null
   follow_up_date?: Date | string | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1514,6 +2283,7 @@ export type online_leadsUpdateManyWithWhereWithoutFranchiseMasterInput = {
 
 export type online_leadsCreateWithoutOnline_lead_call_logInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1522,6 +2292,16 @@ export type online_leadsCreateWithoutOnline_lead_call_logInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_assign_toToUserMasterInput
@@ -1529,6 +2309,8 @@ export type online_leadsCreateWithoutOnline_lead_call_logInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1538,6 +2320,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_call_logInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1552,6 +2335,18 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_call_logInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1575,6 +2370,7 @@ export type online_leadsUpdateToOneWithWhereWithoutOnline_lead_call_logInput = {
 
 export type online_leadsUpdateWithoutOnline_lead_call_logInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1583,6 +2379,16 @@ export type online_leadsUpdateWithoutOnline_lead_call_logInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_assign_toToUserMasterNestedInput
@@ -1590,6 +2396,8 @@ export type online_leadsUpdateWithoutOnline_lead_call_logInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -1599,6 +2407,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_call_logInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1613,6 +2422,18 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_call_logInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -1620,6 +2441,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_call_logInput = {
 
 export type online_leadsCreateWithoutOnline_lead_followup_statusInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1628,6 +2450,16 @@ export type online_leadsCreateWithoutOnline_lead_followup_statusInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1635,6 +2467,8 @@ export type online_leadsCreateWithoutOnline_lead_followup_statusInput = {
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_created_byToUserMasterInput
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1644,6 +2478,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_followup_statusInput =
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1657,6 +2492,18 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_followup_statusInput =
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1691,6 +2538,7 @@ export type online_leadsUpdateManyWithWhereWithoutOnline_lead_followup_statusInp
 
 export type online_leadsCreateWithoutOnline_lead_historyInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1699,6 +2547,16 @@ export type online_leadsCreateWithoutOnline_lead_historyInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_assign_toToUserMasterInput
@@ -1706,6 +2564,8 @@ export type online_leadsCreateWithoutOnline_lead_historyInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1715,6 +2575,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_historyInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1729,6 +2590,18 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_historyInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1752,6 +2625,7 @@ export type online_leadsUpdateToOneWithWhereWithoutOnline_lead_historyInput = {
 
 export type online_leadsUpdateWithoutOnline_lead_historyInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1760,6 +2634,16 @@ export type online_leadsUpdateWithoutOnline_lead_historyInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_assign_toToUserMasterNestedInput
@@ -1767,6 +2651,8 @@ export type online_leadsUpdateWithoutOnline_lead_historyInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -1776,6 +2662,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_historyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1790,6 +2677,18 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_historyInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -1797,6 +2696,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_historyInput = {
 
 export type online_leadsCreateWithoutOnline_lead_store_logInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1805,6 +2705,16 @@ export type online_leadsCreateWithoutOnline_lead_store_logInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_assign_toToUserMasterInput
@@ -1812,6 +2722,8 @@ export type online_leadsCreateWithoutOnline_lead_store_logInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsCreateNestedManyWithoutOnline_leadsInput
@@ -1821,6 +2733,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_store_logInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1835,6 +2748,18 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_store_logInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1858,6 +2783,7 @@ export type online_leadsUpdateToOneWithWhereWithoutOnline_lead_store_logInput = 
 
 export type online_leadsUpdateWithoutOnline_lead_store_logInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1866,6 +2792,16 @@ export type online_leadsUpdateWithoutOnline_lead_store_logInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_assign_toToUserMasterNestedInput
@@ -1873,6 +2809,8 @@ export type online_leadsUpdateWithoutOnline_lead_store_logInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -1882,6 +2820,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_store_logInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1896,6 +2835,18 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_store_logInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -1903,6 +2854,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_store_logInput = {
 
 export type online_leadsCreateWithoutTelecaller_campaign_leadsInput = {
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1911,6 +2863,16 @@ export type online_leadsCreateWithoutTelecaller_campaign_leadsInput = {
   updated_at: Date | string
   remark?: string | null
   follow_up_date?: Date | string | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutOnline_leadsInput
@@ -1919,6 +2881,8 @@ export type online_leadsCreateWithoutTelecaller_campaign_leadsInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedOneWithoutOnline_leadsInput
   FranchiseMaster?: Prisma.FranchiseMasterCreateNestedOneWithoutOnline_leadsInput
+  SourceMaster?: Prisma.SourceMasterCreateNestedOneWithoutOnlineLeadsInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterCreateNestedOneWithoutOnlineLeadsInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterCreateNestedOneWithoutOnline_leads_online_leads_updated_byToUserMasterInput
   VendorMaster: Prisma.VendorMasterCreateNestedOneWithoutOnline_leadsInput
 }
@@ -1927,6 +2891,7 @@ export type online_leadsUncheckedCreateWithoutTelecaller_campaign_leadsInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -1941,6 +2906,18 @@ export type online_leadsUncheckedCreateWithoutTelecaller_campaign_leadsInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutOnline_leadsInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutOnline_leadsInput
@@ -1964,6 +2941,7 @@ export type online_leadsUpdateToOneWithWhereWithoutTelecaller_campaign_leadsInpu
 
 export type online_leadsUpdateWithoutTelecaller_campaign_leadsInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1972,6 +2950,16 @@ export type online_leadsUpdateWithoutTelecaller_campaign_leadsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -1980,6 +2968,8 @@ export type online_leadsUpdateWithoutTelecaller_campaign_leadsInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
 }
@@ -1988,6 +2978,7 @@ export type online_leadsUncheckedUpdateWithoutTelecaller_campaign_leadsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2002,6 +2993,18 @@ export type online_leadsUncheckedUpdateWithoutTelecaller_campaign_leadsInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2010,6 +3013,7 @@ export type online_leadsUncheckedUpdateWithoutTelecaller_campaign_leadsInput = {
 export type online_leadsCreateManyVendorMasterInput = {
   id?: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2024,10 +3028,23 @@ export type online_leadsCreateManyVendorMasterInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutVendorMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2036,6 +3053,16 @@ export type online_leadsUpdateWithoutVendorMasterInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2044,6 +3071,8 @@ export type online_leadsUpdateWithoutVendorMasterInput = {
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
 }
@@ -2051,6 +3080,7 @@ export type online_leadsUpdateWithoutVendorMasterInput = {
 export type online_leadsUncheckedUpdateWithoutVendorMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2065,6 +3095,18 @@ export type online_leadsUncheckedUpdateWithoutVendorMasterInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2074,6 +3116,7 @@ export type online_leadsUncheckedUpdateWithoutVendorMasterInput = {
 export type online_leadsUncheckedUpdateManyWithoutVendorMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2088,12 +3131,25 @@ export type online_leadsUncheckedUpdateManyWithoutVendorMasterInput = {
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyUserMaster_online_leads_assign_toToUserMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2107,12 +3163,25 @@ export type online_leadsCreateManyUserMaster_online_leads_assign_toToUserMasterI
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyUserMaster_online_leads_created_byToUserMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2126,12 +3195,25 @@ export type online_leadsCreateManyUserMaster_online_leads_created_byToUserMaster
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyUserMaster_online_leads_final_assigned_leadsToUserMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2145,12 +3227,25 @@ export type online_leadsCreateManyUserMaster_online_leads_final_assigned_leadsTo
   remark?: string | null
   follow_up_date?: Date | string | null
   store_id?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyUserMaster_online_leads_updated_byToUserMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2164,10 +3259,23 @@ export type online_leadsCreateManyUserMaster_online_leads_updated_byToUserMaster
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutUserMaster_online_leads_assign_toToUserMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2176,6 +3284,16 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_assign_toToUserMast
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2183,6 +3301,8 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_assign_toToUserMast
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -2192,6 +3312,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_assign_toT
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2205,6 +3326,18 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_assign_toT
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2215,6 +3348,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2228,10 +3362,23 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutUserMaster_online_leads_created_byToUserMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2240,6 +3387,16 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_created_byToUserMas
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2247,6 +3404,8 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_created_byToUserMas
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -2256,6 +3415,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_created_by
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2269,6 +3429,18 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_created_by
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2279,6 +3451,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_create
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2292,10 +3465,23 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_create
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2304,6 +3490,16 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_final_assigned_lead
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2311,6 +3507,8 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_final_assigned_lead
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_created_byToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -2320,6 +3518,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_final_assi
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2333,6 +3532,18 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_final_assi
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2343,6 +3554,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2356,10 +3568,23 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutUserMaster_online_leads_updated_byToUserMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2368,6 +3593,16 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_updated_byToUserMas
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2376,6 +3611,8 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_updated_byToUserMas
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
 }
@@ -2384,6 +3621,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_updated_by
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2397,6 +3635,18 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_updated_by
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2407,6 +3657,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_update
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2420,12 +3671,295 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_update
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+}
+
+export type online_leadsCreateManySiteTypeMasterInput = {
+  id?: number
+  vendor_id: number
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  created_by?: number | null
+  updated_at: Date | string
+  updated_by?: number | null
+  assign_to?: number | null
+  status?: number | null
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  store_id?: number | null
+  final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+}
+
+export type online_leadsUpdateWithoutSiteTypeMasterInput = {
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
+  UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_assign_toToUserMasterNestedInput
+  UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_created_byToUserMasterNestedInput
+  UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
+  FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
+  VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
+}
+
+export type online_leadsUncheckedUpdateWithoutSiteTypeMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedUpdateManyWithoutOnline_leadsNestedInput
+}
+
+export type online_leadsUncheckedUpdateManyWithoutSiteTypeMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+}
+
+export type online_leadsCreateManySourceMasterInput = {
+  id?: number
+  vendor_id: number
+  leads_name: string
+  lead_code?: string | null
+  email?: string | null
+  contact: string
+  source: string
+  lead_entry_type?: $Enums.LeadEntryType
+  created_at?: Date | string
+  created_by?: number | null
+  updated_at: Date | string
+  updated_by?: number | null
+  assign_to?: number | null
+  status?: number | null
+  remark?: string | null
+  follow_up_date?: Date | string | null
+  store_id?: number | null
+  final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
+}
+
+export type online_leadsUpdateWithoutSourceMasterInput = {
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
+  UserMaster_online_leads_assign_toToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_assign_toToUserMasterNestedInput
+  UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_created_byToUserMasterNestedInput
+  UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
+  FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
+  UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
+  VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
+}
+
+export type online_leadsUncheckedUpdateWithoutSourceMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
+  telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUncheckedUpdateManyWithoutOnline_leadsNestedInput
+}
+
+export type online_leadsUncheckedUpdateManyWithoutSourceMasterInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact?: Prisma.StringFieldUpdateOperationsInput | string
+  source?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_entry_type?: Prisma.EnumLeadEntryTypeFieldUpdateOperationsInput | $Enums.LeadEntryType
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyFranchiseMasterInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2439,10 +3973,23 @@ export type online_leadsCreateManyFranchiseMasterInput = {
   remark?: string | null
   follow_up_date?: Date | string | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutFranchiseMasterInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2451,6 +3998,16 @@ export type online_leadsUpdateWithoutFranchiseMasterInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2458,6 +4015,8 @@ export type online_leadsUpdateWithoutFranchiseMasterInput = {
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_created_byToUserMasterNestedInput
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -2467,6 +4026,7 @@ export type online_leadsUncheckedUpdateWithoutFranchiseMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2480,6 +4040,18 @@ export type online_leadsUncheckedUpdateWithoutFranchiseMasterInput = {
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2490,6 +4062,7 @@ export type online_leadsUncheckedUpdateManyWithoutFranchiseMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2503,12 +4076,25 @@ export type online_leadsUncheckedUpdateManyWithoutFranchiseMasterInput = {
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 export type online_leadsCreateManyOnline_lead_followup_statusInput = {
   id?: number
   vendor_id: number
   leads_name: string
+  lead_code?: string | null
   email?: string | null
   contact: string
   source: string
@@ -2522,10 +4108,23 @@ export type online_leadsCreateManyOnline_lead_followup_statusInput = {
   follow_up_date?: Date | string | null
   store_id?: number | null
   final_assigned_leads?: number | null
+  firstname?: string | null
+  lastname?: string | null
+  alt_contact_no?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  refered_by?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  priority?: string | null
+  product_types?: Prisma.online_leadsCreateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsCreateproduct_structuresInput | string[]
 }
 
 export type online_leadsUpdateWithoutOnline_lead_followup_statusInput = {
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2534,6 +4133,16 @@ export type online_leadsUpdateWithoutOnline_lead_followup_statusInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutOnline_leadsNestedInput
@@ -2541,6 +4150,8 @@ export type online_leadsUpdateWithoutOnline_lead_followup_statusInput = {
   UserMaster_online_leads_created_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_created_byToUserMasterNestedInput
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_final_assigned_leadsToUserMasterNestedInput
   FranchiseMaster?: Prisma.FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput
+  SourceMaster?: Prisma.SourceMasterUpdateOneWithoutOnlineLeadsNestedInput
+  SiteTypeMaster?: Prisma.SiteTypeMasterUpdateOneWithoutOnlineLeadsNestedInput
   UserMaster_online_leads_updated_byToUserMaster?: Prisma.UserMasterUpdateOneWithoutOnline_leads_online_leads_updated_byToUserMasterNestedInput
   VendorMaster?: Prisma.VendorMasterUpdateOneRequiredWithoutOnline_leadsNestedInput
   telecaller_campaign_leads?: Prisma.telecaller_campaign_leadsUpdateManyWithoutOnline_leadsNestedInput
@@ -2550,6 +4161,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2563,6 +4175,18 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
   online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutOnline_leadsNestedInput
   online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutOnline_leadsNestedInput
@@ -2573,6 +4197,7 @@ export type online_leadsUncheckedUpdateManyWithoutOnline_lead_followup_statusInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   leads_name?: Prisma.StringFieldUpdateOperationsInput | string
+  lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contact?: Prisma.StringFieldUpdateOperationsInput | string
   source?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2586,6 +4211,18 @@ export type online_leadsUncheckedUpdateManyWithoutOnline_lead_followup_statusInp
   follow_up_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   store_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   final_assigned_leads?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  firstname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_types?: Prisma.online_leadsUpdateproduct_typesInput | string[]
+  product_structures?: Prisma.online_leadsUpdateproduct_structuresInput | string[]
 }
 
 
@@ -2650,6 +4287,7 @@ export type online_leadsSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -2664,6 +4302,18 @@ export type online_leadsSelect<ExtArgs extends runtime.Types.Extensions.Internal
   follow_up_date?: boolean
   store_id?: boolean
   final_assigned_leads?: boolean
+  firstname?: boolean
+  lastname?: boolean
+  alt_contact_no?: boolean
+  site_address?: boolean
+  site_type_id?: boolean
+  source_id?: boolean
+  refered_by?: boolean
+  archetech_name?: boolean
+  archetech_number?: boolean
+  priority?: boolean
+  product_types?: boolean
+  product_structures?: boolean
   online_lead_call_log?: boolean | Prisma.online_leads$online_lead_call_logArgs<ExtArgs>
   online_lead_history?: boolean | Prisma.online_leads$online_lead_historyArgs<ExtArgs>
   online_lead_store_log?: boolean | Prisma.online_leads$online_lead_store_logArgs<ExtArgs>
@@ -2672,6 +4322,8 @@ export type online_leadsSelect<ExtArgs extends runtime.Types.Extensions.Internal
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   telecaller_campaign_leads?: boolean | Prisma.online_leads$telecaller_campaign_leadsArgs<ExtArgs>
@@ -2682,6 +4334,7 @@ export type online_leadsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -2696,11 +4349,25 @@ export type online_leadsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   follow_up_date?: boolean
   store_id?: boolean
   final_assigned_leads?: boolean
+  firstname?: boolean
+  lastname?: boolean
+  alt_contact_no?: boolean
+  site_address?: boolean
+  site_type_id?: boolean
+  source_id?: boolean
+  refered_by?: boolean
+  archetech_name?: boolean
+  archetech_number?: boolean
+  priority?: boolean
+  product_types?: boolean
+  product_structures?: boolean
   UserMaster_online_leads_assign_toToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_assign_toToUserMasterArgs<ExtArgs>
   UserMaster_online_leads_created_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_created_byToUserMasterArgs<ExtArgs>
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["online_leads"]>
@@ -2709,6 +4376,7 @@ export type online_leadsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -2723,11 +4391,25 @@ export type online_leadsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   follow_up_date?: boolean
   store_id?: boolean
   final_assigned_leads?: boolean
+  firstname?: boolean
+  lastname?: boolean
+  alt_contact_no?: boolean
+  site_address?: boolean
+  site_type_id?: boolean
+  source_id?: boolean
+  refered_by?: boolean
+  archetech_name?: boolean
+  archetech_number?: boolean
+  priority?: boolean
+  product_types?: boolean
+  product_structures?: boolean
   UserMaster_online_leads_assign_toToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_assign_toToUserMasterArgs<ExtArgs>
   UserMaster_online_leads_created_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_created_byToUserMasterArgs<ExtArgs>
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["online_leads"]>
@@ -2736,6 +4418,7 @@ export type online_leadsSelectScalar = {
   id?: boolean
   vendor_id?: boolean
   leads_name?: boolean
+  lead_code?: boolean
   email?: boolean
   contact?: boolean
   source?: boolean
@@ -2750,9 +4433,21 @@ export type online_leadsSelectScalar = {
   follow_up_date?: boolean
   store_id?: boolean
   final_assigned_leads?: boolean
+  firstname?: boolean
+  lastname?: boolean
+  alt_contact_no?: boolean
+  site_address?: boolean
+  site_type_id?: boolean
+  source_id?: boolean
+  refered_by?: boolean
+  archetech_name?: boolean
+  archetech_number?: boolean
+  priority?: boolean
+  product_types?: boolean
+  product_structures?: boolean
 }
 
-export type online_leadsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads", ExtArgs["result"]["online_leads"]>
+export type online_leadsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "lead_code" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads" | "firstname" | "lastname" | "alt_contact_no" | "site_address" | "site_type_id" | "source_id" | "refered_by" | "archetech_name" | "archetech_number" | "priority" | "product_types" | "product_structures", ExtArgs["result"]["online_leads"]>
 export type online_leadsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   online_lead_call_log?: boolean | Prisma.online_leads$online_lead_call_logArgs<ExtArgs>
   online_lead_history?: boolean | Prisma.online_leads$online_lead_historyArgs<ExtArgs>
@@ -2762,6 +4457,8 @@ export type online_leadsInclude<ExtArgs extends runtime.Types.Extensions.Interna
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   telecaller_campaign_leads?: boolean | Prisma.online_leads$telecaller_campaign_leadsArgs<ExtArgs>
@@ -2773,6 +4470,8 @@ export type online_leadsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -2782,6 +4481,8 @@ export type online_leadsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
   UserMaster_online_leads_final_assigned_leadsToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>
   online_lead_followup_status?: boolean | Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>
   FranchiseMaster?: boolean | Prisma.online_leads$FranchiseMasterArgs<ExtArgs>
+  SourceMaster?: boolean | Prisma.online_leads$SourceMasterArgs<ExtArgs>
+  SiteTypeMaster?: boolean | Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>
   UserMaster_online_leads_updated_byToUserMaster?: boolean | Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>
   VendorMaster?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -2797,6 +4498,8 @@ export type $online_leadsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     UserMaster_online_leads_final_assigned_leadsToUserMaster: Prisma.$UserMasterPayload<ExtArgs> | null
     online_lead_followup_status: Prisma.$online_lead_followup_statusPayload<ExtArgs> | null
     FranchiseMaster: Prisma.$FranchiseMasterPayload<ExtArgs> | null
+    SourceMaster: Prisma.$SourceMasterPayload<ExtArgs> | null
+    SiteTypeMaster: Prisma.$SiteTypeMasterPayload<ExtArgs> | null
     UserMaster_online_leads_updated_byToUserMaster: Prisma.$UserMasterPayload<ExtArgs> | null
     VendorMaster: Prisma.$VendorMasterPayload<ExtArgs>
     telecaller_campaign_leads: Prisma.$telecaller_campaign_leadsPayload<ExtArgs>[]
@@ -2805,6 +4508,7 @@ export type $online_leadsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: number
     vendor_id: number
     leads_name: string
+    lead_code: string | null
     email: string | null
     contact: string
     source: string
@@ -2819,6 +4523,18 @@ export type $online_leadsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     follow_up_date: Date | null
     store_id: number | null
     final_assigned_leads: number | null
+    firstname: string | null
+    lastname: string | null
+    alt_contact_no: string | null
+    site_address: string | null
+    site_type_id: number | null
+    source_id: number | null
+    refered_by: string | null
+    archetech_name: string | null
+    archetech_number: string | null
+    priority: string | null
+    product_types: string[]
+    product_structures: string[]
   }, ExtArgs["result"]["online_leads"]>
   composites: {}
 }
@@ -3221,6 +4937,8 @@ export interface Prisma__online_leadsClient<T, Null = never, ExtArgs extends run
   UserMaster_online_leads_final_assigned_leadsToUserMaster<T extends Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$UserMaster_online_leads_final_assigned_leadsToUserMasterArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   online_lead_followup_status<T extends Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$online_lead_followup_statusArgs<ExtArgs>>): Prisma.Prisma__online_lead_followup_statusClient<runtime.Types.Result.GetResult<Prisma.$online_lead_followup_statusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   FranchiseMaster<T extends Prisma.online_leads$FranchiseMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$FranchiseMasterArgs<ExtArgs>>): Prisma.Prisma__FranchiseMasterClient<runtime.Types.Result.GetResult<Prisma.$FranchiseMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  SourceMaster<T extends Prisma.online_leads$SourceMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$SourceMasterArgs<ExtArgs>>): Prisma.Prisma__SourceMasterClient<runtime.Types.Result.GetResult<Prisma.$SourceMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  SiteTypeMaster<T extends Prisma.online_leads$SiteTypeMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$SiteTypeMasterArgs<ExtArgs>>): Prisma.Prisma__SiteTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$SiteTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   UserMaster_online_leads_updated_byToUserMaster<T extends Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$UserMaster_online_leads_updated_byToUserMasterArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   VendorMaster<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   telecaller_campaign_leads<T extends Prisma.online_leads$telecaller_campaign_leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.online_leads$telecaller_campaign_leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$telecaller_campaign_leadsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3256,6 +4974,7 @@ export interface online_leadsFieldRefs {
   readonly id: Prisma.FieldRef<"online_leads", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"online_leads", 'Int'>
   readonly leads_name: Prisma.FieldRef<"online_leads", 'String'>
+  readonly lead_code: Prisma.FieldRef<"online_leads", 'String'>
   readonly email: Prisma.FieldRef<"online_leads", 'String'>
   readonly contact: Prisma.FieldRef<"online_leads", 'String'>
   readonly source: Prisma.FieldRef<"online_leads", 'String'>
@@ -3270,6 +4989,18 @@ export interface online_leadsFieldRefs {
   readonly follow_up_date: Prisma.FieldRef<"online_leads", 'DateTime'>
   readonly store_id: Prisma.FieldRef<"online_leads", 'Int'>
   readonly final_assigned_leads: Prisma.FieldRef<"online_leads", 'Int'>
+  readonly firstname: Prisma.FieldRef<"online_leads", 'String'>
+  readonly lastname: Prisma.FieldRef<"online_leads", 'String'>
+  readonly alt_contact_no: Prisma.FieldRef<"online_leads", 'String'>
+  readonly site_address: Prisma.FieldRef<"online_leads", 'String'>
+  readonly site_type_id: Prisma.FieldRef<"online_leads", 'Int'>
+  readonly source_id: Prisma.FieldRef<"online_leads", 'Int'>
+  readonly refered_by: Prisma.FieldRef<"online_leads", 'String'>
+  readonly archetech_name: Prisma.FieldRef<"online_leads", 'String'>
+  readonly archetech_number: Prisma.FieldRef<"online_leads", 'String'>
+  readonly priority: Prisma.FieldRef<"online_leads", 'String'>
+  readonly product_types: Prisma.FieldRef<"online_leads", 'String[]'>
+  readonly product_structures: Prisma.FieldRef<"online_leads", 'String[]'>
 }
     
 
@@ -3835,6 +5566,44 @@ export type online_leads$FranchiseMasterArgs<ExtArgs extends runtime.Types.Exten
    */
   include?: Prisma.FranchiseMasterInclude<ExtArgs> | null
   where?: Prisma.FranchiseMasterWhereInput
+}
+
+/**
+ * online_leads.SourceMaster
+ */
+export type online_leads$SourceMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SourceMaster
+   */
+  select?: Prisma.SourceMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SourceMaster
+   */
+  omit?: Prisma.SourceMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SourceMasterInclude<ExtArgs> | null
+  where?: Prisma.SourceMasterWhereInput
+}
+
+/**
+ * online_leads.SiteTypeMaster
+ */
+export type online_leads$SiteTypeMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SiteTypeMaster
+   */
+  select?: Prisma.SiteTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SiteTypeMaster
+   */
+  omit?: Prisma.SiteTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SiteTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.SiteTypeMasterWhereInput
 }
 
 /**
