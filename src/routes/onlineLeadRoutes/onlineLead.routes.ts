@@ -27,6 +27,7 @@ router.patch("/:id", onlineLeadController.updateLead);
 router.put("/:id/assign", onlineLeadController.assignLead);
 router.post("/:id/call", onlineLeadController.logCallAndOutcome);
 router.post("/:id/assign-store", onlineLeadController.assignStore);
+router.post("/:id/move-to-draft", onlineLeadController.moveToDraft);
 router.delete("/:id", onlineLeadController.deleteLead);
 
 export default router;

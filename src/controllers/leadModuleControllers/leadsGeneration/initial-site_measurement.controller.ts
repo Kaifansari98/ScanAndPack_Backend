@@ -535,7 +535,7 @@ export class PaymentUploadController {
     res: Response,
   ): Promise<void> => {
     try {
-      const { lead_id, account_id, vendor_id, created_by, client_id, user_id } =
+      const { lead_id, account_id, vendor_id, created_by, user_id } =
         req.body;
 
       if (
@@ -543,7 +543,6 @@ export class PaymentUploadController {
         !account_id ||
         !vendor_id ||
         !created_by ||
-        !client_id ||
         !user_id
       ) {
         res.status(400).json({

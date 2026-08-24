@@ -197,7 +197,7 @@ export class FacebookWebhookController {
     });
 
     // 6. Get default followup status for this vendor
-    const defaultStatus = await prisma.onlineLeadFollowupStatus.findFirst({
+    const defaultStatus = await prisma.online_lead_followup_status.findFirst({
       where: {
         vendor_id: vendor_id,
         is_active: true,
@@ -230,7 +230,7 @@ export class FacebookWebhookController {
       });
 
       // 7. Insert lead into PostgreSQL online_leads table
-      const lead = await tx.onlineLead.create({
+      const lead = await tx.online_leads.create({
         data: {
           vendor_id: vendor_id,
           leads_name: fullName,
@@ -244,12 +244,13 @@ export class FacebookWebhookController {
           lead_entry_type: LeadEntryType.ONLINE,
           remark: remarkContent,
           status: defaultStatus?.id || null,
+          updated_at: new Date(),
         },
       });
 
       // 8. Log lead history status
       if (defaultStatus) {
-        await tx.onlineLeadHistory.create({
+        await tx.online_lead_history.create({
           data: {
             vendor_id: vendor_id,
             online_lead_id: lead.id,
