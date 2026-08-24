@@ -1,6 +1,7 @@
 import { validationResponse } from '../../../src/utils/validationResponse';
 import axios from "axios";
-import { prisma } from '../../prisma/client';
+import { prisma,Prisma } from '../../prisma/client';
+
 import { PackingType } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
 import ExcelJS from "exceljs";
@@ -13836,4 +13837,430 @@ export const addManualPackingItemService = async (
       "Failed to add product to box"
     );
   }
+};
+
+
+
+export type ProjectItemScanFilter = "all" | "scanned" | "pending";
+
+export interface ProjectItemTrackingQuery {
+  page: number;
+  limit: number;
+  search: string;
+  scanStatus: ProjectItemScanFilter;
+  machineId?: number;
+}
+
+type MappingRow = {
+  sequence_no: number;
+  qty: number;
+  is_optional: boolean;
+  actual_in_at: Date | null;
+  machine: {
+    id: number;
+    machine_name: string;
+    machine_code: string;
+    scan_type: string;
+  };
+};
+
+const getMappingScope = (
+  vendorId: number,
+  projectId: number,
+): Prisma.CutListMachineMappingWhereInput => ({
+  vendor_id: vendorId,
+  project_id: projectId,
+  expected_in: true,
+});
+
+const getSearchWhere = (
+  search: string,
+  mappingScope: Prisma.CutListMachineMappingWhereInput,
+): Prisma.CutListWhereInput | undefined => {
+  const value = search.trim();
+
+  if (!value) {
+    return undefined;
+  }
+
+  return {
+    OR: [
+      { item_name: { contains: value, mode: "insensitive" } },
+      { description: { contains: value, mode: "insensitive" } },
+      { unique_code: { contains: value, mode: "insensitive" } },
+      { unique_code_2: { contains: value, mode: "insensitive" } },
+      { material_details: { contains: value, mode: "insensitive" } },
+      { category_name: { contains: value, mode: "insensitive" } },
+      { group_name: { contains: value, mode: "insensitive" } },
+      {
+        cutListMachineMapping: {
+          some: {
+            ...mappingScope,
+            machine: {
+              is: {
+                OR: [
+                  {
+                    machine_name: {
+                      contains: value,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    machine_code: {
+                      contains: value,
+                      mode: "insensitive",
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      },
+    ],
+  };
+};
+
+const addScanStatus = (
+  where: Prisma.CutListWhereInput,
+  scanStatus: ProjectItemScanFilter,
+  mappingScope: Prisma.CutListMachineMappingWhereInput,
+): Prisma.CutListWhereInput => {
+  if (scanStatus === "all") {
+    return where;
+  }
+
+  if (scanStatus === "scanned") {
+    return {
+      AND: [
+        where,
+        {
+          // An unassigned item must not be considered scanned.
+          cutListMachineMapping: {
+            some: mappingScope,
+          },
+        },
+        {
+          // Every expected machine mapping must have a scan timestamp.
+          cutListMachineMapping: {
+            none: {
+              ...mappingScope,
+              actual_in_at: null,
+            },
+          },
+        },
+      ],
+    };
+  }
+
+  return {
+    AND: [
+      where,
+      {
+        OR: [
+          // Unassigned items remain visible under Pending.
+          {
+            cutListMachineMapping: {
+              none: mappingScope,
+            },
+          },
+          {
+            cutListMachineMapping: {
+              some: {
+                ...mappingScope,
+                actual_in_at: null,
+              },
+            },
+          },
+        ],
+      },
+    ],
+  };
+};
+
+const toNullableNumber = (value: unknown): number | null => {
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+
+const normaliseQuantity = (value: unknown): number => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+};
+
+const buildMachineSummaries = (rows: MappingRow[]) => {
+  type MachineSummary = {
+    machine_id: number;
+    machine_name: string;
+    machine_code: string;
+    scan_type: string;
+    sequence_no: number;
+    is_optional: boolean;
+    total_quantity: number;
+    scanned_quantity: number;
+    status: "scanned" | "pending";
+    scanned_at: Date | null;
+    last_scanned_at: Date | null;
+  };
+
+  const grouped = new Map<
+    string,
+    Omit<MachineSummary, "status" | "scanned_at">
+  >();
+
+  for (const row of rows) {
+    // A machine can occur more than once at different points in the flow.
+    const key = `${row.sequence_no}:${row.machine.id}`;
+    const quantity = normaliseQuantity(row.qty);
+    const existing = grouped.get(key);
+
+    if (!existing) {
+      grouped.set(key, {
+        machine_id: row.machine.id,
+        machine_name: row.machine.machine_name,
+        machine_code: row.machine.machine_code,
+        scan_type: String(row.machine.scan_type),
+        sequence_no: row.sequence_no,
+        is_optional: row.is_optional,
+        total_quantity: quantity,
+        scanned_quantity: row.actual_in_at ? quantity : 0,
+        last_scanned_at: row.actual_in_at,
+      });
+      continue;
+    }
+
+    existing.total_quantity += quantity;
+    existing.scanned_quantity += row.actual_in_at ? quantity : 0;
+    existing.is_optional = existing.is_optional && row.is_optional;
+
+    if (
+      row.actual_in_at &&
+      (!existing.last_scanned_at ||
+        row.actual_in_at.getTime() > existing.last_scanned_at.getTime())
+    ) {
+      existing.last_scanned_at = row.actual_in_at;
+    }
+  }
+
+  return Array.from(grouped.values())
+    .map<MachineSummary>((machine) => {
+      const scanned =
+        machine.total_quantity > 0 &&
+        machine.scanned_quantity >= machine.total_quantity;
+
+      return {
+        ...machine,
+        status: scanned ? "scanned" : "pending",
+        scanned_at: scanned ? machine.last_scanned_at : null,
+      };
+    })
+    .sort(
+      (a, b) =>
+        a.sequence_no - b.sequence_no ||
+        a.machine_name.localeCompare(b.machine_name),
+    );
+};
+
+export const getProjectItemTrackingService = async (
+  vendorId: number,
+  projectId: number,
+  query: ProjectItemTrackingQuery,
+) => {
+  const page = Math.max(1, query.page);
+  const limit = Math.min(50, Math.max(1, query.limit));
+  const skip = (page - 1) * limit;
+  const mappingScope = getMappingScope(vendorId, projectId);
+
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      id: projectId,
+      vendor_id: vendorId,
+    },
+    select: {
+      id: true,
+      project_name: true,
+      track_trace_status: true,
+    },
+  });
+
+  if (!project) {
+    return null;
+  }
+
+  const baseAnd: Prisma.CutListWhereInput[] = [];
+  const searchWhere = getSearchWhere(query.search, mappingScope);
+
+  if (searchWhere) {
+    baseAnd.push(searchWhere);
+  }
+
+  if (query.machineId) {
+    baseAnd.push({
+      cutListMachineMapping: {
+        some: {
+          ...mappingScope,
+          machine_id: query.machineId,
+        },
+      },
+    });
+  }
+
+  const baseWhere: Prisma.CutListWhereInput = {
+    vendor_id: vendorId,
+    project_id: projectId,
+    ...(baseAnd.length > 0 ? { AND: baseAnd } : {}),
+  };
+
+  const pageWhere = addScanStatus(
+    baseWhere,
+    query.scanStatus,
+    mappingScope,
+  );
+  const scannedWhere = addScanStatus(baseWhere, "scanned", mappingScope);
+  const pendingWhere = addScanStatus(baseWhere, "pending", mappingScope);
+
+  const [items, allCount, scannedCount, pendingCount, machines] =
+    await Promise.all([
+      prisma.cutList.findMany({
+        where: pageWhere,
+        skip,
+        take: limit,
+        orderBy: [{ item_name: "asc" }, { id: "asc" }],
+        select: {
+          id: true,
+          item_name: true,
+          description: true,
+          unique_code: true,
+          unique_code_2: true,
+          qty: true,
+          length: true,
+          width: true,
+          thickness: true,
+          material_details: true,
+          category_name: true,
+          group_name: true,
+          procurement: true,
+          weight: true,
+          status: true,
+          cutListMachineMapping: {
+            where: mappingScope,
+            orderBy: [
+              { sequence_no: "asc" },
+              { machine_id: "asc" },
+              { id: "asc" },
+            ],
+            select: {
+              sequence_no: true,
+              qty: true,
+              is_optional: true,
+              actual_in_at: true,
+              machine: {
+                select: {
+                  id: true,
+                  machine_name: true,
+                  machine_code: true,
+                  scan_type: true,
+                },
+              },
+            },
+          },
+        },
+      }),
+      prisma.cutList.count({ where: baseWhere }),
+      prisma.cutList.count({ where: scannedWhere }),
+      prisma.cutList.count({ where: pendingWhere }),
+      prisma.machineMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          cutListMachineMapping: {
+            some: mappingScope,
+          },
+        },
+        select: {
+          id: true,
+          machine_name: true,
+          machine_code: true,
+          scan_type: true,
+          sequence_no: true,
+        },
+        orderBy: [{ sequence_no: "asc" }, { machine_name: "asc" }],
+      }),
+    ]);
+
+  const data = items.map((item) => {
+    const machineSummaries = buildMachineSummaries(
+      item.cutListMachineMapping as MappingRow[],
+    );
+    const isScanned =
+      machineSummaries.length > 0 &&
+      machineSummaries.every((machine) => machine.status === "scanned");
+
+    return {
+      id: item.id,
+      item_name: item.item_name,
+      description: item.description,
+      unique_code: item.unique_code,
+      unique_code_2: item.unique_code_2,
+      qty: item.qty,
+      length: toNullableNumber(item.length),
+      width: toNullableNumber(item.width),
+      thickness: toNullableNumber(item.thickness),
+      material_details: item.material_details,
+      category_name: item.category_name,
+      group_name: item.group_name,
+      procurement: item.procurement,
+      weight: toNullableNumber(item.weight) ?? 0,
+      item_status: item.status,
+      scan_status: isScanned ? ("scanned" as const) : ("pending" as const),
+      assigned_machines_count: machineSummaries.length,
+      scanned_machines_count: machineSummaries.filter(
+        (machine) => machine.status === "scanned",
+      ).length,
+      machines: machineSummaries,
+    };
+  });
+
+  const total =
+    query.scanStatus === "scanned"
+      ? scannedCount
+      : query.scanStatus === "pending"
+        ? pendingCount
+        : allCount;
+  const totalPages = total === 0 ? 0 : Math.ceil(total / limit);
+
+  return {
+    project,
+    data,
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPreviousPage: page > 1,
+    },
+    counts: {
+      all: allCount,
+      scanned: scannedCount,
+      pending: pendingCount,
+    },
+    filters: {
+      search: query.search,
+      scanStatus: query.scanStatus,
+      machineId: query.machineId ?? null,
+    },
+    filterOptions: {
+      machines: machines.map((machine) => ({
+        id: machine.id,
+        machine_name: machine.machine_name,
+        machine_code: machine.machine_code,
+        scan_type: String(machine.scan_type),
+        sequence_no: machine.sequence_no,
+      })),
+    },
+  };
 };

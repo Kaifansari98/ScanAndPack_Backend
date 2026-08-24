@@ -80,7 +80,8 @@ import {
   createUnitMaster,
   getManualPackingItemsController,
   addManualPackingItem,
-  getProjectCutList
+  getProjectCutList,
+  getProjectItemTracking
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import {
@@ -256,6 +257,12 @@ router.post(
   "/boxes/packing/manual-items",
   addManualPackingItem
 );
+
+router.get(
+  "/vendor/:vendorId/project/:projectId/items",
+  getProjectItemTracking,
+);
+
 
 // router.post(
 //   "/upload-machine-excel/:vendor_id/:project_token",
