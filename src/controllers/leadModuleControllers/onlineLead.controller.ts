@@ -1063,14 +1063,14 @@ export class OnlineLeadController {
 
             const adminUsers = targetStoreId
               ? await tx.userMaster.findMany({
-                  where: {
-                    vendor_id: lead.vendor_id,
-                    franchise_id: targetStoreId,
-                    status: "active",
-                    user_type: { user_type: "admin" },
-                  },
-                  select: { id: true },
-                })
+                where: {
+                  vendor_id: lead.vendor_id,
+                  franchise_id: targetStoreId,
+                  status: "active",
+                  user_type: { user_type: "admin" },
+                },
+                select: { id: true },
+              })
               : [];
 
             const memberIds = new Set<number>([
@@ -1803,7 +1803,7 @@ export class OnlineLeadController {
             storeId = exactFranchise.id;
             leadFranchiseId = exactFranchise.id;
           } else {
-            const matched = keywordMappings.find(km => 
+            const matched = keywordMappings.find(km =>
               km.keywords.some(kw => rawStoreVal.includes(kw) || kw.includes(rawStoreVal))
             );
             if (matched) {
@@ -2084,7 +2084,7 @@ export class OnlineLeadController {
           await tx.online_lead_store_log.deleteMany({
             where: { online_lead_id: { in: leadIds } }
           });
-          
+
           // Delete parent online leads
           const deleteResult = await tx.online_leads.deleteMany({
             where: { id: { in: leadIds } }
@@ -2381,8 +2381,8 @@ export class OnlineLeadController {
     }
 
     const needsNewCode = !currentLeadCode ||
-                         (storePrefix === "SH" && !currentLeadCode.startsWith("SH-")) ||
-                         (storePrefix !== "SH" && !currentLeadCode.startsWith(`${storePrefix}-`));
+      (storePrefix === "SH" && !currentLeadCode.startsWith("SH-")) ||
+      (storePrefix !== "SH" && !currentLeadCode.startsWith(`${storePrefix}-`));
 
     if (needsNewCode) {
       return await generateLeadCode(tx, {
