@@ -458,28 +458,19 @@ export const getProductMasterService = async (
           current_stock: true,    // auto-updated on GRN confirmation
           stock_updated_at: true,    // ← added
           barcode: true,
-          product_as_per_vendor_invoice: true,
           p_code: true,
           color_name: true,
-          thickness_mm: true,
-          cost_price: true,
-          b2c_selling_price: true,
-          b2b_selling_price: true,
-          mrp: true,
-          subCategory: { select: { id: true, name: true } },
-          coreProduct: { select: { id: true, name: true } },
-          grade: { select: { id: true, name: true } },
-          productType: { select: { id: true, type: true, tag: true } },
-          finishMaster: { select: { id: true, name: true } },
-          sizeMaster: { select: { id: true, name: true } },
+          // (barcode, p_code, color_name, stock_updated_at already above)
+          subCategory: { select: { id: true, category_name: true } },
+          coreProduct: { select: { id: true, core_product_name: true } },
+          grade: { select: { id: true, grade_name: true } },
+          finishMaster: { select: { id: true, finish_name: true } },
           primaryUnit: { select: { id: true, unit_name: true } },
           // ── Category + Brand ──────────────────────────────────────────────
           category: { select: { id: true, category_name: true } },
           brand: { select: { id: true, brand_name: true } },
           finish_id: true,
           core_product_id: true,
-          finishMaster: { select: { id: true, finish_name: true } },
-          coreProduct: { select: { id: true, core_product_name: true } },
           // ── HSN mapping (for tax rates) ────────────────────────────────────
           // hsn_id is the FK; include the joined row so the frontend can
           // display/use cgst_rate, sgst_rate, igst_rate without a second call
@@ -979,19 +970,20 @@ export const createSubCategoryService = async (
     if (!category) return validationResponse(0, "Category not found");
 
     const name = payload.name.trim();
-    const existing = await prisma.subCategory.findFirst({
+    const existing = await prisma.projectCategoriesMaster.findFirst({
       where: {
-        categoryId: Number(payload.categoryId),
-        name: { equals: name, mode: "insensitive" },
+        parent_id: Number(payload.categoryId),
+        vendor_id,
+        category_name: { equals: name, mode: "insensitive" },
       },
     });
     if (existing) return validationResponse(0, "Subcategory already exists under this category");
 
-    const subCategory = await prisma.subCategory.create({
+    const subCategory = await prisma.projectCategoriesMaster.create({
       data: {
         vendor_id,
-        categoryId: Number(payload.categoryId),
-        name,
+        parent_id: Number(payload.categoryId),
+        category_name: name,
       },
     });
     return validationResponse(1, "Subcategory created successfully", subCategory);
@@ -1010,16 +1002,16 @@ export const createCoreProductService = async (
     if (!payload.name?.trim()) return validationResponse(0, "Name is required");
 
     const name = payload.name.trim();
-    const existing = await prisma.coreProduct.findFirst({
+    const existing = await prisma.coreProductMaster.findFirst({
       where: {
-        OR: [{ vendor_id: null }, { vendor_id }],
-        name: { equals: name, mode: "insensitive" },
+        vendor_id,
+        core_product_name: { equals: name, mode: "insensitive" },
       },
     });
     if (existing) return validationResponse(0, "Core product already exists");
 
-    const coreProduct = await prisma.coreProduct.create({
-      data: { vendor_id, name },
+    const coreProduct = await prisma.coreProductMaster.create({
+      data: { vendor_id, core_product_name: name },
     });
     return validationResponse(1, "Core product created successfully", coreProduct);
   } catch (error) {
@@ -1037,16 +1029,16 @@ export const createGradeService = async (
     if (!payload.name?.trim()) return validationResponse(0, "Name is required");
 
     const name = payload.name.trim();
-    const existing = await prisma.grade.findFirst({
+    const existing = await prisma.gradeMaster.findFirst({
       where: {
-        OR: [{ vendor_id: null }, { vendor_id }],
-        name: { equals: name, mode: "insensitive" },
+        vendor_id,
+        grade_name: { equals: name, mode: "insensitive" },
       },
     });
     if (existing) return validationResponse(0, "Grade already exists");
 
-    const grade = await prisma.grade.create({
-      data: { vendor_id, name },
+    const grade = await prisma.gradeMaster.create({
+      data: { vendor_id, grade_name: name },
     });
     return validationResponse(1, "Grade created successfully", grade);
   } catch (error) {
@@ -1064,16 +1056,16 @@ export const createFinishService = async (
     if (!payload.name?.trim()) return validationResponse(0, "Name is required");
 
     const name = payload.name.trim();
-    const existing = await prisma.finish.findFirst({
+    const existing = await prisma.finishMaster.findFirst({
       where: {
-        OR: [{ vendor_id: null }, { vendor_id }],
-        name: { equals: name, mode: "insensitive" },
+        vendor_id,
+        finish_name: { equals: name, mode: "insensitive" },
       },
     });
     if (existing) return validationResponse(0, "Finish already exists");
 
-    const finish = await prisma.finish.create({
-      data: { vendor_id, name },
+    const finish = await prisma.finishMaster.create({
+      data: { vendor_id, finish_name: name },
     });
     return validationResponse(1, "Finish created successfully", finish);
   } catch (error) {
@@ -1083,41 +1075,22 @@ export const createFinishService = async (
 };
 
 export const createSizeService = async (
-  vendor_id: number,
-  payload: { name: string }
+  _vendor_id: number,
+  _payload: { name: string }
 ) => {
-  try {
-    if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    if (!payload.name?.trim()) return validationResponse(0, "Name is required");
-
-    const name = payload.name.trim();
-    const existing = await prisma.size.findFirst({
-      where: {
-        OR: [{ vendor_id: null }, { vendor_id }],
-        name: { equals: name, mode: "insensitive" },
-      },
-    });
-    if (existing) return validationResponse(0, "Size already exists");
-
-    const size = await prisma.size.create({
-      data: { vendor_id, name },
-    });
-    return validationResponse(1, "Size created successfully", size);
-  } catch (error) {
-    console.error("createSizeService error:", error);
-    return validationResponse(0, "Failed to create size");
-  }
+  // Size is a plain string field on ProductMaster (no separate Size model exists in the schema).
+  return validationResponse(0, "Size management is not supported via a separate model");
 };
 
 export const deleteSubCategoryService = async (vendor_id: number, id: number) => {
   try {
     if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    const subCategory = await prisma.subCategory.findFirst({
+    const subCategory = await prisma.projectCategoriesMaster.findFirst({
       where: { id, vendor_id },
     });
     if (!subCategory) return validationResponse(0, "Subcategory not found");
 
-    await prisma.subCategory.delete({ where: { id } });
+    await prisma.projectCategoriesMaster.delete({ where: { id } });
     return validationResponse(1, "Subcategory deleted successfully");
   } catch (error) {
     console.error("deleteSubCategoryService error:", error);
@@ -1128,12 +1101,12 @@ export const deleteSubCategoryService = async (vendor_id: number, id: number) =>
 export const deleteCoreProductService = async (vendor_id: number, id: number) => {
   try {
     if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    const coreProduct = await prisma.coreProduct.findFirst({
+    const coreProduct = await prisma.coreProductMaster.findFirst({
       where: { id, vendor_id },
     });
-    if (!coreProduct) return validationResponse(0, "Core product not found or is global template");
+    if (!coreProduct) return validationResponse(0, "Core product not found");
 
-    await prisma.coreProduct.delete({ where: { id } });
+    await prisma.coreProductMaster.delete({ where: { id } });
     return validationResponse(1, "Core product deleted successfully");
   } catch (error) {
     console.error("deleteCoreProductService error:", error);
@@ -1144,12 +1117,12 @@ export const deleteCoreProductService = async (vendor_id: number, id: number) =>
 export const deleteGradeService = async (vendor_id: number, id: number) => {
   try {
     if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    const grade = await prisma.grade.findFirst({
+    const grade = await prisma.gradeMaster.findFirst({
       where: { id, vendor_id },
     });
-    if (!grade) return validationResponse(0, "Grade not found or is global template");
+    if (!grade) return validationResponse(0, "Grade not found");
 
-    await prisma.grade.delete({ where: { id } });
+    await prisma.gradeMaster.delete({ where: { id } });
     return validationResponse(1, "Grade deleted successfully");
   } catch (error) {
     console.error("deleteGradeService error:", error);
@@ -1160,12 +1133,12 @@ export const deleteGradeService = async (vendor_id: number, id: number) => {
 export const deleteFinishService = async (vendor_id: number, id: number) => {
   try {
     if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    const finish = await prisma.finish.findFirst({
+    const finish = await prisma.finishMaster.findFirst({
       where: { id, vendor_id },
     });
-    if (!finish) return validationResponse(0, "Finish not found or is global template");
+    if (!finish) return validationResponse(0, "Finish not found");
 
-    await prisma.finish.delete({ where: { id } });
+    await prisma.finishMaster.delete({ where: { id } });
     return validationResponse(1, "Finish deleted successfully");
   } catch (error) {
     console.error("deleteFinishService error:", error);
@@ -1173,20 +1146,12 @@ export const deleteFinishService = async (vendor_id: number, id: number) => {
   }
 };
 
-export const deleteSizeService = async (vendor_id: number, id: number) => {
-  try {
-    if (!vendor_id) return validationResponse(0, "Vendor ID is required");
-    const size = await prisma.size.findFirst({
-      where: { id, vendor_id },
-    });
-    if (!size) return validationResponse(0, "Size not found or is global template");
-
-    await prisma.size.delete({ where: { id } });
-    return validationResponse(1, "Size deleted successfully");
-  } catch (error) {
-    console.error("deleteSizeService error:", error);
-    return validationResponse(0, "Failed to delete size");
-  }
+export const deleteSizeService = async (
+  _vendor_id: number,
+  _id: number
+) => {
+  // Size is a plain string field on ProductMaster (no separate Size model exists in the schema).
+  return validationResponse(0, "Size management is not supported via a separate model");
 };
 
 export const createBrandService = async (vendor_id: number, payload: any) => {
