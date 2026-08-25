@@ -800,6 +800,22 @@ export class OnlineLeadController {
         });
       }
 
+      // Ensure the logged-in user matches the telecaller_id in the payload to prevent spoofing
+      const authUser = (req as any).user;
+      if (!authUser || Number(authUser.id) !== Number(telecaller_id)) {
+        return res.status(403).json({
+          success: false,
+          error: "Unauthorized: telecaller_id does not match the authenticated user",
+        });
+      }
+
+      // Fetch caller details to verify if they have the "telecaller" role
+      const callerUser = await prisma.userMaster.findUnique({
+        where: { id: Number(telecaller_id) },
+        include: { user_type: true },
+      });
+      const isCallerTelecaller = callerUser?.user_type?.user_type?.toLowerCase() === "telecaller";
+
       const lead = await prisma.online_leads.findUnique({ where: { id } });
       if (!lead) {
         return res.status(404).json({ success: false, error: "Lead not found" });
@@ -889,6 +905,20 @@ export class OnlineLeadController {
           lead.vendor_id,
           lead.lead_code
         );
+
+        // Atomic conditional update: Auto-assign lead to the caller only if it is currently unassigned
+        // and the user logging the call has the "telecaller" role.
+        if (isCallerTelecaller) {
+          await tx.online_leads.updateMany({
+            where: {
+              id,
+              assign_to: null,
+            },
+            data: {
+              assign_to: Number(authUser.id),
+            },
+          });
+        }
 
         const updatedLead = await tx.online_leads.update({
           where: { id },
@@ -1830,40 +1860,9 @@ export class OnlineLeadController {
         let lead_entry_type: LeadEntryType = LeadEntryType.WALK_IN;
 
         // Map location from store/franchise column or ad_set_name to franchise
-        let storeId: number | null = null;
-        let leadFranchiseId: number | undefined = undefined;
-
-        const storeKey = Object.keys(rowData).find(k => ["store", "storename", "assignedstore", "storecode", "franchise", "location"].includes(k));
-        const rawStoreVal = storeKey ? rowData[storeKey].toLowerCase().trim() : "";
-
-        if (rawStoreVal) {
-          const exactFranchise = franchises.find(
-            f => (f.franchise_code || "").toLowerCase() === rawStoreVal || f.franchise_name.toLowerCase() === rawStoreVal
-          );
-          if (exactFranchise) {
-            storeId = exactFranchise.id;
-            leadFranchiseId = exactFranchise.id;
-          } else {
-            const matched = keywordMappings.find(km =>
-              km.keywords.some(kw => rawStoreVal.includes(kw) || kw.includes(rawStoreVal))
-            );
-            if (matched) {
-              storeId = matched.id;
-              leadFranchiseId = matched.id;
-            }
-          }
-        }
-
-        if (!storeId && rawAdSetName) {
-          const adsetClean = rawAdSetName.toLowerCase();
-          const matched = keywordMappings.find(km =>
-            km.keywords.some(kw => adsetClean.includes(kw))
-          );
-          if (matched) {
-            storeId = matched.id;
-            leadFranchiseId = matched.id;
-          }
-        }
+        // (Disabled: new leads should always remain unassigned by default)
+        const storeId: number | null = null;
+        const leadFranchiseId: number | undefined = undefined;
 
         if (cleanPlatform) {
           const platClean = cleanPlatform.toLowerCase();
@@ -2167,6 +2166,18 @@ export class OnlineLeadController {
 
       if (!lead) {
         return res.status(404).json({ success: false, error: "Lead not found" });
+      }
+
+      // Check if lead has any follow-up call logs
+      const callLogCount = await prisma.online_lead_call_log.count({
+        where: { online_lead_id: id },
+      });
+
+      if (callLogCount === 0) {
+        return res.status(400).json({
+          success: false,
+          error: "Cannot move lead to Draft. Please add at least one call log first.",
+        });
       }
 
       const storeAssignedStatus = await prisma.online_lead_followup_status.findFirst({
