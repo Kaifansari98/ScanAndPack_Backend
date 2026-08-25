@@ -442,6 +442,8 @@ model UserMaster {
   smallOrderRequestsUpdated                                                      SmallOrderRequest[]                    @relation("SmallOrderRequestUpdatedBy")
   smallOrderRequestDocumentsCreated                                              SmallOrderRequestDocument[]            @relation("SmallOrderRequestDocumentCreatedBy")
   specificationDocumentMappingsCreated                                           specificationDocumentMapping[]         @relation("SpecificationDocumentMappingCreatedBy")
+  projectMasters                                                                 ProjectMaster[]
+  deletedProjects                                                                ProjectMaster[]                        @relation("ProjectDeletedByUser")
 }
 
 model UserDocument {
@@ -504,27 +506,31 @@ model UserPrivilegeMapping {
 }
 
 model ProjectMaster {
-  id                    Int                     @id @default(autoincrement())
-  project_name          String
-  vendor_id             Int
-  client_id             Int?
-  created_by            Int
-  project_status        String                  @default("Initiated")
-  created_at            DateTime                @default(now())
-  unique_project_id     String
-  is_grouping           Boolean                 @default(false)
-  lead_id               Int?
-  track_trace_status    String                  @default("Not Started")
-  track_completed_at    DateTime?
-  track_started_at      DateTime?
-  client_address        String?
-  client_contact_no     String?
-  client_name           String?
-  order_no              String?
-  updated_at            DateTime?               @updatedAt
-  updated_by            Int?
-  packing_type          PackingType             @default(DEFAULT)
-  no_of_boxes           Int                     @default(0)
+  id                 Int         @id @default(autoincrement())
+  project_name       String
+  vendor_id          Int
+  client_id          Int?
+  created_by         Int
+  project_status     String      @default("Initiated")
+  created_at         DateTime    @default(now())
+  unique_project_id  String
+  is_grouping        Boolean     @default(false)
+  lead_id            Int?
+  track_trace_status String      @default("Not Started")
+  track_completed_at DateTime?
+  track_started_at   DateTime?
+  client_address     String?
+  client_contact_no  String?
+  client_name        String?
+  order_no           String?
+  updated_at         DateTime?   @updatedAt
+  updated_by         Int?
+  packing_type       PackingType @default(DEFAULT)
+  no_of_boxes        Int         @default(0)
+  isDeleted          Boolean     @default(false)
+  deleted_by         Int?
+  deleted_at         DateTime?
+
   box_info_values       BoxInfoFieldValue[]
   boxes                 BoxMaster[]
   CutList               CutList[]
@@ -538,6 +544,11 @@ model ProjectMaster {
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  deletedByUser         UserMaster?             @relation("ProjectDeletedByUser", fields: [deleted_by], references: [id])
+  userMaster            UserMaster?             @relation(fields: [userMasterId], references: [id])
+  userMasterId          Int?
+
+  @@index([vendor_id, isDeleted])
 }
 
 model ProjectDetails {
@@ -1065,23 +1076,23 @@ model LeadScopedActivityStatusLog {
 }
 
 model SiteTypeMaster {
-  id        Int          @id @default(autoincrement())
-  type      String
-  vendor_id Int
-  status    String       @default("active")
-  leads     LeadMaster[]
+  id          Int            @id @default(autoincrement())
+  type        String
+  vendor_id   Int
+  status      String         @default("active")
+  leads       LeadMaster[]
   onlineLeads online_leads[]
-  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model SourceMaster {
-  id        Int          @id @default(autoincrement())
-  type      String
-  vendor_id Int
-  status    String       @default("active")
-  leads     LeadMaster[]
+  id          Int            @id @default(autoincrement())
+  type        String
+  vendor_id   Int
+  status      String         @default("active")
+  leads       LeadMaster[]
   onlineLeads online_leads[]
-  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor      VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model AccountMaster {
@@ -1144,6 +1155,7 @@ model LeadProductMapping {
   lead_id            Int
   account_id         Int
   product_type_id    Int
+  is_archived        Boolean           @default(false)
   created_by         Int
   created_at         DateTime          @default(now())
   approximate_budget Decimal?          @db.Decimal(12, 2)
@@ -1540,6 +1552,7 @@ model LeadDocuments {
   vendor_id                           Int
   doc_type_id                         Int
   is_deleted                          Boolean                              @default(false)
+  is_archived                         Boolean                              @default(false)
   tech_check_status                   TechCheckStatus?
   product_structure_instance_id       Int?
   product_type_id                     Int?
@@ -1758,6 +1771,7 @@ model LeadProductStructureInstance {
   lead_id                                    Int
   account_id                                 Int
   product_type_id                            Int
+  is_archived                                Boolean                       @default(false)
   product_structure_id                       Int
   quantity_index                             Int
   title                                      String
@@ -1835,6 +1849,7 @@ model PaymentInfo {
   payment_type_id         Int
   status_id               Int?
   product_type_id         Int?
+  is_archived             Boolean            @default(false)
   basic_amount            Float?
   gst_amount              Float?
   gst_percentage          Float?
@@ -1864,6 +1879,7 @@ model Ledger {
   created_by        Int
   created_at        DateTime           @default(now())
   product_type_id   Int?
+  is_archived       Boolean            @default(false)
   account           AccountMaster      @relation(fields: [account_id], references: [id], onDelete: Cascade)
   client            ClientMaster?      @relation(fields: [client_id], references: [id], onDelete: Cascade)
   createdBy         UserMaster         @relation(fields: [created_by], references: [id], onDelete: Cascade)
@@ -2426,6 +2442,7 @@ model LeadDetailedLogs {
   stage_id          Int?
   task_id           Int?
   product_type_id   Int?
+  is_archived       Boolean            @default(false)
   account           AccountMaster      @relation(fields: [account_id], references: [id])
   user              UserMaster         @relation(fields: [created_by], references: [id])
   lead              LeadMaster         @relation(fields: [lead_id], references: [id])
@@ -2884,7 +2901,7 @@ model VendorModulesMapping {
 model MachineMaster {
   id                    Int                     @id @default(autoincrement())
   machine_name          String
-  machine_code          String                  
+  machine_code          String
   machine_type          String?
   machine_type_id       Int?
   status                MachineStatus           @default(ACTIVE)
@@ -2904,8 +2921,9 @@ model MachineMaster {
   machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+
+  @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
   @@index([vendor_id, status])
-  @@unique([vendor_id, machine_code, status],name: "machine_code_vendor_status_unique")
 }
 
 model CutList {
@@ -2949,7 +2967,7 @@ model CutList {
 
   @@index([unique_code])
   @@index([category_id])
-  @@index([vendor_id, unique_code, project_id],map: "idx_cutlist_vendor_code_project")
+  @@index([vendor_id, unique_code, project_id], map: "idx_cutlist_vendor_code_project")
 }
 
 model CutListMachineMapping {
@@ -2988,18 +3006,16 @@ model CutListMachineMapping {
   completionPhotos   DefectCompletionPhoto[]
   defectedItems      DefectedItem[]
 
-@@index([cut_list_id])
-@@index([machine_id])
-@@index([project_id])
-@@index([vendor_id])
-
-@@index([vendor_id, project_id, machine_id, expected_in, actual_in_at, cut_list_id],map: "idx_clmm_pending_scan")
-@@index([vendor_id, project_id, expected_in])
-@@index([vendor_id, project_id, cut_list_id, expected_in, sequence_no, machine_id],map: "idx_clmm_scan_flow")
-@@index([vendor_id, project_id, cut_list_id, actual_in_at, sequence_no],map: "idx_clmm_previous_pass")
-@@index([box_id, vendor_id, project_id, actual_in_at, id],map: "idx_clmm_box_items")
-@@index([project_id, machine_id, expected_in, box_id])
-  
+  @@index([cut_list_id])
+  @@index([machine_id])
+  @@index([project_id])
+  @@index([vendor_id])
+  @@index([vendor_id, project_id, machine_id, expected_in, actual_in_at, cut_list_id], map: "idx_clmm_pending_scan")
+  @@index([vendor_id, project_id, expected_in])
+  @@index([vendor_id, project_id, cut_list_id, expected_in, sequence_no, machine_id], map: "idx_clmm_scan_flow")
+  @@index([vendor_id, project_id, cut_list_id, actual_in_at, sequence_no], map: "idx_clmm_previous_pass")
+  @@index([box_id, vendor_id, project_id, actual_in_at, id], map: "idx_clmm_box_items")
+  @@index([project_id, machine_id, expected_in, box_id])
 }
 
 model UserMachineMapping {
@@ -3407,21 +3423,21 @@ model ProjectCategoriesMaster {
   purchaseIntents                      PurchaseIntentMaster[]                 @relation("PICategory")
   cutLists                             CutList[]                              @relation("CutListCategory")
 
-  namingStructure                      CategoryNamingStructure?               @relation("CategoryNamingStructure")
+  namingStructure CategoryNamingStructure? @relation("CategoryNamingStructure")
 
   @@index([parent_id])
 }
 
 model CategoryNamingStructure {
-  id           Int                     @id @default(autoincrement())
-  vendor_id    Int
-  category_id  Int                     @unique
-  delimiter    String                  @default("_")
-  fields_json  Json
-  created_at   DateTime                @default(now())
-  updated_at   DateTime                @updatedAt
-  vendor       VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  category     ProjectCategoriesMaster @relation("CategoryNamingStructure", fields: [category_id], references: [id], onDelete: Cascade)
+  id          Int                     @id @default(autoincrement())
+  vendor_id   Int
+  category_id Int                     @unique
+  delimiter   String                  @default("_")
+  fields_json Json
+  created_at  DateTime                @default(now())
+  updated_at  DateTime                @updatedAt
+  vendor      VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  category    ProjectCategoriesMaster @relation("CategoryNamingStructure", fields: [category_id], references: [id], onDelete: Cascade)
 
   @@unique([vendor_id, category_id])
   @@index([vendor_id])
@@ -5303,6 +5319,7 @@ model LeadBillingAddress {
   lead_id         Int
   vendor_id       Int
   product_type_id Int?
+  is_archived     Boolean  @default(false)
   address_type    String
   name            String?
   address         String?
