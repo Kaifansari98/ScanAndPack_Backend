@@ -365,7 +365,10 @@ const clonePartialLeadForScopedStatus = async (
     where: {
       lead_id: leadId,
       vendor_id: vendorId,
-      product_structure_instance_id: { in: selectedInstanceIds },
+      OR: [
+        { product_structure_instance_id: { in: selectedInstanceIds } },
+        { product_type_id: { in: touchedProductTypeIds } },
+      ],
     },
     data: {
       lead_id: clonedLead.id,
