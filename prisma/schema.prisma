@@ -1163,10 +1163,8 @@ model ProductTypeMaster {
   status                         String                           @default("active")
   LeadDetailedLogs               LeadDetailedLogs[]
   documents                      LeadDocuments[]                  @relation("LeadDocumentsToProductType")
-  LeadProcessBriefMapping        LeadProcessBriefMapping[]
   leads                          LeadProductMapping[]
   productStructureInstances      LeadProductStructureInstance[]
-  LeadRequirementMaterialMapping LeadRequirementMaterialMapping[]
   Ledger                         Ledger[]
   PaymentInfo                    PaymentInfo[]
   productStructures              ProductStructure[]
@@ -1197,7 +1195,6 @@ model LeadProcessBriefMapping {
   id                      Int                       @id @default(autoincrement())
   lead_id                 Int                       @map("lead_id")
   vendor_id               Int                       @map("vendor_id")
-  product_type_id         Int?
   process_brief_id        Int                       @map("process_brief_id")
   created_at              DateTime                  @default(now()) @map("created_at")
   created_by              Int                       @map("created_by")
@@ -1208,7 +1205,6 @@ model LeadProcessBriefMapping {
   createdBy               UserMaster                @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   processBrief            ProcessBriefMaster        @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
-  ProductTypeMaster       ProductTypeMaster?        @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   updatedBy               UserMaster?               @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
@@ -1216,7 +1212,6 @@ model LeadProcessBriefMapping {
   @@index([vendor_id])
   @@index([b2b_requirement_type_id])
   @@index([process_brief_id])
-  @@index([product_type_id])
   @@map("LeadProcessBriefMapping")
 }
 
@@ -1224,7 +1219,6 @@ model LeadRequirementMaterialMapping {
   id                      Int                       @id @default(autoincrement())
   lead_id                 Int                       @map("lead_id")
   vendor_id               Int                       @map("vendor_id")
-  product_type_id         Int?
   product_id              Int                       @map("product_id")
   quantity                Decimal                   @map("quantity") @db.Decimal(12, 2)
   unit_id                 Int?                      @map("unit_id")
@@ -1243,7 +1237,6 @@ model LeadRequirementMaterialMapping {
   createdBy               UserMaster                @relation("LeadReqMatCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   product                 ProductMaster             @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  ProductTypeMaster       ProductTypeMaster?        @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   unit                    UnitMaster?               @relation(fields: [unit_id], references: [id])
   updatedBy               UserMaster?               @relation("LeadReqMatUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1252,7 +1245,6 @@ model LeadRequirementMaterialMapping {
   @@index([vendor_id])
   @@index([b2b_requirement_type_id])
   @@index([product_id])
-  @@index([product_type_id])
   @@map("LeadRequirementMaterialMapping")
 }
 

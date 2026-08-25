@@ -3,7 +3,10 @@
  * @param number Phone number string
  * @returns { isValid: boolean; reason?: string }
  */
-export function validateIndianMobileRisk(number: string): { isValid: boolean; reason?: string } {
+export function validateIndianMobileRisk(number: string, isB2B = false): { isValid: boolean; reason?: string } {
+  if (isB2B) {
+    return { isValid: true };
+  }
   let cleanNumber = number.replace(/\D/g, "");
   
   // Strip common Indian country code (+91) / prefix (0) if they are prepended

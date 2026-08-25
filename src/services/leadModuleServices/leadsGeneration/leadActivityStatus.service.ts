@@ -267,7 +267,6 @@ const clonePartialLeadForScopedStatus = async (
     where: {
       lead_id: leadId,
       vendor_id: vendorId,
-      product_type_id: { in: touchedProductTypeIds },
     },
   });
   if (processBriefMappings.length > 0) {
@@ -275,7 +274,6 @@ const clonePartialLeadForScopedStatus = async (
       data: processBriefMappings.map((mapping) => ({
         lead_id: clonedLead.id,
         vendor_id: mapping.vendor_id,
-        product_type_id: mapping.product_type_id,
         process_brief_id: mapping.process_brief_id,
         b2b_requirement_type_id: mapping.b2b_requirement_type_id,
         created_by: createdBy,
@@ -291,7 +289,6 @@ const clonePartialLeadForScopedStatus = async (
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_type_id: { in: touchedProductTypeIds },
       },
     });
   if (requirementMaterialMappings.length > 0) {
@@ -299,7 +296,6 @@ const clonePartialLeadForScopedStatus = async (
       data: requirementMaterialMappings.map((mapping) => ({
         lead_id: clonedLead.id,
         vendor_id: mapping.vendor_id,
-        product_type_id: mapping.product_type_id,
         b2b_requirement_type_id: mapping.b2b_requirement_type_id,
         product_id: mapping.product_id,
         quantity: mapping.quantity,
@@ -539,20 +535,6 @@ const clonePartialLeadForScopedStatus = async (
   if (orphanTypeIds.length > 0) {
     await Promise.all([
       tx.leadProductMapping.deleteMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: orphanTypeIds },
-        },
-      }),
-      tx.leadProcessBriefMapping.deleteMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: orphanTypeIds },
-        },
-      }),
-      tx.leadRequirementMaterialMapping.deleteMany({
         where: {
           lead_id: leadId,
           vendor_id: vendorId,

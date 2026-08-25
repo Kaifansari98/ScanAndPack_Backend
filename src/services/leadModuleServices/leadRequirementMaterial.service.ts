@@ -13,7 +13,6 @@ export interface AddLeadRequirementMaterialItem {
 export interface AddLeadRequirementMaterialInput {
   lead_id: number;
   vendor_id: number;
-  product_type_id?: number;
   b2b_requirement_type_id?: number;
   created_by: number;
 
@@ -37,12 +36,11 @@ export const addLeadRequirementMaterial = async (
   const {
     lead_id,
     vendor_id,
-    product_type_id,
     b2b_requirement_type_id,
     created_by,
   } = payload;
 
-  const reqTypeId = b2b_requirement_type_id || product_type_id;
+  const reqTypeId = b2b_requirement_type_id;
 
   let validCreatedBy = Number(created_by);
   if (isNaN(validCreatedBy) || validCreatedBy <= 0) {
@@ -97,7 +95,6 @@ export const addLeadRequirementMaterial = async (
             lead_id,
             vendor_id,
             b2b_requirement_type_id: reqTypeId || null,
-            product_type_id: reqTypeId || null,
             product_id: item.product_id,
             quantity: item.quantity,
             unit_id: item.unit_id || null,
@@ -179,7 +176,6 @@ export const addLeadRequirementMaterial = async (
         lead_id,
         vendor_id,
         b2b_requirement_type_id: reqTypeId || null,
-        product_type_id: reqTypeId || null,
         product_id: pId,
         quantity,
         unit_id: unit_id || null,
