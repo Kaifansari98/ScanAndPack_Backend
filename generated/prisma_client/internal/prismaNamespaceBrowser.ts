@@ -259,7 +259,8 @@ export const ModelName = {
   online_lead_store_log: 'online_lead_store_log',
   online_leads: 'online_leads',
   telecaller_campaign_leads: 'telecaller_campaign_leads',
-  LeadBillingAddress: 'LeadBillingAddress'
+  LeadBillingAddress: 'LeadBillingAddress',
+  MetaLead: 'MetaLead'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3837,6 +3838,7 @@ export const Online_leadsScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   leads_name: 'leads_name',
+  lead_code: 'lead_code',
   email: 'email',
   contact: 'contact',
   source: 'source',
@@ -3850,7 +3852,19 @@ export const Online_leadsScalarFieldEnum = {
   remark: 'remark',
   follow_up_date: 'follow_up_date',
   store_id: 'store_id',
-  final_assigned_leads: 'final_assigned_leads'
+  final_assigned_leads: 'final_assigned_leads',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  alt_contact_no: 'alt_contact_no',
+  site_address: 'site_address',
+  site_type_id: 'site_type_id',
+  source_id: 'source_id',
+  refered_by: 'refered_by',
+  archetech_name: 'archetech_name',
+  archetech_number: 'archetech_number',
+  priority: 'priority',
+  product_types: 'product_types',
+  product_structures: 'product_structures'
 } as const
 
 export type Online_leadsScalarFieldEnum = (typeof Online_leadsScalarFieldEnum)[keyof typeof Online_leadsScalarFieldEnum]
@@ -3882,6 +3896,25 @@ export const LeadBillingAddressScalarFieldEnum = {
 } as const
 
 export type LeadBillingAddressScalarFieldEnum = (typeof LeadBillingAddressScalarFieldEnum)[keyof typeof LeadBillingAddressScalarFieldEnum]
+
+
+export const MetaLeadScalarFieldEnum = {
+  id: 'id',
+  meta_lead_id: 'meta_lead_id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  form_name: 'form_name',
+  form_id: 'form_id',
+  created_date: 'created_date',
+  lead_source: 'lead_source',
+  status: 'status',
+  custom_fields: 'custom_fields',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MetaLeadScalarFieldEnum = (typeof MetaLeadScalarFieldEnum)[keyof typeof MetaLeadScalarFieldEnum]
 
 
 export const SortOrder = {

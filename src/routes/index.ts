@@ -57,6 +57,8 @@ import configureRoutes from "./trackTraceRoutes/configure.routes";
 import tracktraceProjectRoutes from "./trackTraceRoutes/track-trace-project.routes";
 import themeRoutes from "./theme/theme.routes";
 import cadbidIntegrationWithFurnixcrmRoutes from "./cadbid-integration-with-furnixcrm/CadbidIntegrationWithFurnixcrm.routes";
+import metaLeadsRoutes from "./webhookRoutes/metaLeads.routes";
+import metaLeadsDashboardRoutes from "./metaLeadsDashboard.routes";
 
 import inventoryRoutes from "./inventoryRoutes/inventory.routes";
 import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
@@ -85,6 +87,8 @@ router.use("/clients", clientRoutes);
 router.use("/client-types", clientTypeRoutes);
 router.use("/leads", leadModuleRoutes);
 router.use("/online-leads", onlineLeadRoutes);
+router.use("/", metaLeadsRoutes);
+router.use("/meta-leads", metaLeadsDashboardRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
 router.use("/leads/designing-stage", DesigningStageRouter);
 router.use("/leads/stats", Statsrouter);

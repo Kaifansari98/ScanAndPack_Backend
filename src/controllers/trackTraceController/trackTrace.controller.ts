@@ -1850,3 +1850,89 @@ export const addManualPackingItem = async (
       );
   }
 };
+
+const SCAN_STATUSES: ProjectItemScanFilter[] = [
+  "all",
+  "scanned",
+  "pending",
+];
+
+const toPositiveInteger = (
+  value: unknown,
+  fallback?: number,
+): number | undefined => {
+  if (value === undefined || value === null || value === "") {
+    return fallback;
+  }
+
+  const parsed = Number(value);
+
+  if (!Number.isInteger(parsed) || parsed <= 0) {
+    return undefined;
+  }
+
+  return parsed;
+};
+
+export const getProjectItemTracking = async (req: Request, res: Response) => {
+  try {
+    const vendorId = toPositiveInteger(req.params.vendorId);
+    const projectId = toPositiveInteger(req.params.projectId);
+    const page = toPositiveInteger(req.query.page, 1);
+    const limit = toPositiveInteger(req.query.limit, 10);
+    const search = String(req.query.search ?? "").trim().slice(0, 100);
+    const rawStatus = String(req.query.scanStatus ?? "all").toLowerCase();
+    const machineId = toPositiveInteger(req.query.machineId);
+
+    if (!vendorId || !projectId) {
+      return res.status(400).json({
+        error: "vendorId and projectId must be positive integers",
+      });
+    }
+
+    if (!page || !limit || limit > 50) {
+      return res.status(400).json({
+        error: "page must be positive and limit must be between 1 and 50",
+      });
+    }
+
+    if (!SCAN_STATUSES.includes(rawStatus as trackTraceService.ProjectItemScanFilter)) {
+      return res.status(400).json({
+        error: "scanStatus must be all, scanned, or pending",
+      });
+    }
+
+    if (
+      req.query.machineId !== undefined &&
+      req.query.machineId !== "" &&
+      !machineId
+    ) {
+      return res
+        .status(400)
+        .json({ error: "machineId must be a positive integer" });
+    }
+
+    const result = await trackTraceService.getProjectItemTrackingService(vendorId, projectId, {
+      page,
+      limit,
+      search,
+      scanStatus: rawStatus as trackTraceService.ProjectItemScanFilter,
+      machineId,
+    });
+
+    if (!result) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    return res.status(200).json(result);
+  } catch (error: unknown) {
+    console.error("getProjectItemTracking failed", error);
+
+    return res.status(500).json({
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unable to load project item tracking",
+    });
+  }
+};

@@ -4073,3 +4073,151 @@ export const updateLeadStageService = async (
     throw new Error(error.message || "Failed to update lead stage");
   }
 };
+
+export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: number }) => {
+  const { lead_id, vendor_id } = input;
+  
+  // 1. Find LeadMaster
+  const leadMaster = await prisma.leadMaster.findUnique({
+    where: { id: lead_id },
+    select: { contact_no: true },
+  });
+  
+  if (!leadMaster) {
+    return [];
+  }
+  
+  const normalizedContact = leadMaster.contact_no.replace(/\D/g, "");
+  
+  // 2. Query online_leads
+  const onlineLead = await prisma.online_leads.findFirst({
+    where: {
+      vendor_id,
+      contact: {
+        contains: normalizedContact,
+      },
+    },
+    include: {
+      online_lead_history: {
+        include: {
+          UserMaster: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+          online_lead_followup_status: true,
+        },
+      },
+      online_lead_store_log: {
+        include: {
+          FranchiseMaster_online_lead_store_log_to_store_idToFranchiseMaster: {
+            select: {
+              franchise_name: true,
+            },
+          },
+          UserMaster_online_lead_store_log_selected_byToUserMaster: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  const timelineEvents: any[] = [];
+
+  if (onlineLead) {
+    // 3. Online Lead creation event
+    timelineEvents.push({
+      id: `olc-${onlineLead.id}`,
+      event_type: "creation",
+      action: `Lead received from source: ${onlineLead.source || "Meta Ads"}`,
+      remark: onlineLead.remark,
+      created_at: onlineLead.created_at,
+      user: {
+        name: "System / Automated",
+        email: "",
+      },
+    });
+
+    // 4. Online Lead history events
+    if (onlineLead.online_lead_history) {
+      for (const h of onlineLead.online_lead_history) {
+        const isStoreRemark = h.remark?.toLowerCase().includes("store") || h.remark?.toLowerCase().includes("franchise");
+        timelineEvents.push({
+          id: `olh-${h.id}`,
+          event_type: isStoreRemark ? "store_assignment" : "status_change",
+          action: h.remark || `Status updated to ${h.online_lead_followup_status?.status_name || "Unknown"}`,
+          remark: null,
+          created_at: h.created_at,
+          user: h.UserMaster ? {
+            name: h.UserMaster.user_name,
+            email: h.UserMaster.user_email,
+          } : null,
+        });
+      }
+    }
+
+    // 5. Online Lead store logs
+    if (onlineLead.online_lead_store_log) {
+      for (const sl of onlineLead.online_lead_store_log) {
+        timelineEvents.push({
+          id: `olsl-${sl.id}`,
+          event_type: "store_assignment",
+          action: `Store preference/assignment set to: ${sl.FranchiseMaster_online_lead_store_log_to_store_idToFranchiseMaster?.franchise_name || sl.to_store_id}`,
+          remark: sl.remark,
+          created_at: sl.created_at,
+          user: sl.UserMaster_online_lead_store_log_selected_byToUserMaster ? {
+            name: sl.UserMaster_online_lead_store_log_selected_byToUserMaster.user_name,
+            email: sl.UserMaster_online_lead_store_log_selected_byToUserMaster.user_email,
+          } : null,
+        });
+      }
+    }
+  }
+
+  // 6. LeadDetailedLogs (main pipeline history)
+  const detailedLogs = await prisma.leadDetailedLogs.findMany({
+    where: {
+      lead_id,
+      vendor_id,
+    },
+    include: {
+      user: {
+        select: {
+          user_name: true,
+          user_email: true,
+        },
+      },
+      stage: {
+        select: {
+          type: true,
+        },
+      },
+    },
+  });
+
+  for (const dl of detailedLogs) {
+    const isStageMove = dl.action_type === "STATUS_CHANGE";
+    const isAssign = dl.action?.toLowerCase().includes("assigned") || dl.action?.toLowerCase().includes("allocated");
+    timelineEvents.push({
+      id: `ldl-${dl.id}`,
+      event_type: isStageMove ? "stage_move" : isAssign ? "assignment" : "status_change",
+      action: dl.action || `Lead activity: ${dl.history_type}`,
+      remark: null,
+      created_at: dl.created_at,
+      user: dl.user ? {
+        name: dl.user.user_name,
+        email: dl.user.user_email,
+      } : null,
+    });
+  }
+
+  // 7. Sort newest -> oldest
+  timelineEvents.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  return timelineEvents;
+};

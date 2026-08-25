@@ -1469,7 +1469,8 @@ export class BookingStageService {
       include: { user_type: true },
     });
 
-    const isAdmin = creator?.user_type?.user_type?.toLowerCase() === "admin";
+    const userRole = creator?.user_type?.user_type?.toLowerCase();
+    const isAdmin = userRole === "admin" || userRole === "super-admin" || userRole === "auditor";
 
     // ============= Admin Flow =============
     if (isAdmin) {

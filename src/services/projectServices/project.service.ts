@@ -2099,8 +2099,8 @@ export const getProjectsByVendorIdService = async (
           const packagingTotalQty =
             rows.reduce(
               (
-                total,
-                row
+                total: number,
+                row: any
               ) =>
                 total +
                 Number(
@@ -2119,8 +2119,8 @@ export const getProjectsByVendorIdService = async (
           const packedQty =
             rows.reduce(
               (
-                total,
-                row
+                total: number,
+                row: any
               ) => {
                 if (
                   row.box_id ===

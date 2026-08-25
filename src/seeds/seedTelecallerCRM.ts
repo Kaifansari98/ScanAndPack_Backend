@@ -29,22 +29,17 @@ async function main() {
   const vendors = await prisma.vendorMaster.findMany();
   
   const statuses = [
-    { name: "Call Disconnected", required: true },
-    { name: "Callback Required", required: true },
-    { name: "No Answer", required: true },
-    { name: "Interested", required: true },
-    { name: "Not Interested", required: false },
-    { name: "Store Visit", required: true },
+    { name: "Pending", required: true },
+    { name: "Follow Up Done", required: true },
     { name: "Store Assigned", required: true },
-    { name: "Converted", required: false },
-    { name: "Closed", required: false },
-    { name: "Walk-In Customer", required: true }
+    { name: "Store Visit Done", required: false },
+    { name: "Lost", required: false }
   ];
   
   for (const vendor of vendors) {
     console.log(`Seeding statuses for Vendor: ${vendor.vendor_name} (id: ${vendor.id})`);
     for (const status of statuses) {
-      const existingStatus = await prisma.onlineLeadFollowupStatus.findFirst({
+      const existingStatus = await prisma.online_lead_followup_status.findFirst({
         where: {
           vendor_id: vendor.id,
           status_name: { equals: status.name, mode: "insensitive" }
@@ -52,12 +47,13 @@ async function main() {
       });
       
       if (!existingStatus) {
-        await prisma.onlineLeadFollowupStatus.create({
+        await prisma.online_lead_followup_status.create({
           data: {
             vendor_id: vendor.id,
             status_name: status.name,
             followup_required: status.required,
-            is_active: true
+            is_active: true,
+            updated_at: new Date()
           }
         });
         console.log(`  Created status: ${status.name}`);
