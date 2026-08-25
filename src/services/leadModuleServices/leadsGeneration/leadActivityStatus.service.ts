@@ -267,7 +267,6 @@ const clonePartialLeadForScopedStatus = async (
     where: {
       lead_id: leadId,
       vendor_id: vendorId,
-      product_type_id: { in: touchedProductTypeIds },
     },
   });
   if (processBriefMappings.length > 0) {
@@ -275,7 +274,6 @@ const clonePartialLeadForScopedStatus = async (
       data: processBriefMappings.map((mapping) => ({
         lead_id: clonedLead.id,
         vendor_id: mapping.vendor_id,
-        product_type_id: mapping.product_type_id,
         process_brief_id: mapping.process_brief_id,
         b2b_requirement_type_id: mapping.b2b_requirement_type_id,
         created_by: createdBy,
@@ -291,7 +289,6 @@ const clonePartialLeadForScopedStatus = async (
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_type_id: { in: touchedProductTypeIds },
       },
     });
   if (requirementMaterialMappings.length > 0) {
@@ -299,7 +296,6 @@ const clonePartialLeadForScopedStatus = async (
       data: requirementMaterialMappings.map((mapping) => ({
         lead_id: clonedLead.id,
         vendor_id: mapping.vendor_id,
-        product_type_id: mapping.product_type_id,
         b2b_requirement_type_id: mapping.b2b_requirement_type_id,
         product_id: mapping.product_id,
         quantity: mapping.quantity,
@@ -365,7 +361,10 @@ const clonePartialLeadForScopedStatus = async (
     where: {
       lead_id: leadId,
       vendor_id: vendorId,
-      product_structure_instance_id: { in: selectedInstanceIds },
+      OR: [
+        { product_structure_instance_id: { in: selectedInstanceIds } },
+        { product_type_id: { in: touchedProductTypeIds } },
+      ],
     },
     data: {
       lead_id: clonedLead.id,
@@ -510,89 +509,18 @@ const clonePartialLeadForScopedStatus = async (
     where: { lead_id: leadId, vendor_id: vendorId },
     select: { product_type_id: true, product_structure_id: true },
   });
+  const remainingTypeIds = Array.from(
+    new Set(remainingInstances.map((instance) => instance.product_type_id)),
+  );
   const remainingStructureIds = Array.from(
     new Set(remainingInstances.map((instance) => instance.product_structure_id)),
+  );
+  const orphanTypeIds = touchedProductTypeIds.filter(
+    (productTypeId) => !remainingTypeIds.includes(productTypeId),
   );
   const orphanStructureIds = touchedStructureIds.filter(
     (structureId) => !remainingStructureIds.includes(structureId),
   );
-
-  if (touchedProductTypeIds.length > 0) {
-    await Promise.all([
-      tx.leadProductMapping.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-      tx.leadProcessBriefMapping.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true, updated_by: createdBy },
-      }),
-      tx.leadRequirementMaterialMapping.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true, updated_by: createdBy },
-      }),
-      tx.leadDocuments.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-      tx.leadProductStructureInstance.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true, updated_by: createdBy },
-      }),
-      tx.paymentInfo.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-      tx.ledger.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-      tx.leadDetailedLogs.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-      tx.leadBillingAddress.updateMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          product_type_id: { in: touchedProductTypeIds },
-        },
-        data: { is_archived: true },
-      }),
-    ]);
-  }
 
   if (orphanStructureIds.length > 0) {
     await tx.leadProductStructureMapping.deleteMany({
@@ -602,6 +530,18 @@ const clonePartialLeadForScopedStatus = async (
         product_structure_id: { in: orphanStructureIds },
       },
     });
+  }
+
+  if (orphanTypeIds.length > 0) {
+    await Promise.all([
+      tx.leadProductMapping.deleteMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          product_type_id: { in: orphanTypeIds },
+        },
+      }),
+    ]);
   }
 
   const itemLabelSet = new Set<string>();
