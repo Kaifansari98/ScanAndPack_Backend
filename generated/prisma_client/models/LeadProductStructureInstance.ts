@@ -66,6 +66,7 @@ export type LeadProductStructureInstanceMinAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   product_structure_id: number | null
   quantity_index: number | null
   title: string | null
@@ -105,6 +106,7 @@ export type LeadProductStructureInstanceMaxAggregateOutputType = {
   lead_id: number | null
   account_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   product_structure_id: number | null
   quantity_index: number | null
   title: string | null
@@ -144,6 +146,7 @@ export type LeadProductStructureInstanceCountAggregateOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived: number
   product_structure_id: number
   quantity_index: number
   title: number
@@ -219,6 +222,7 @@ export type LeadProductStructureInstanceMinAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -258,6 +262,7 @@ export type LeadProductStructureInstanceMaxAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -297,6 +302,7 @@ export type LeadProductStructureInstanceCountAggregateInputType = {
   lead_id?: true
   account_id?: true
   product_type_id?: true
+  is_archived?: true
   product_structure_id?: true
   quantity_index?: true
   title?: true
@@ -423,6 +429,7 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -485,6 +492,7 @@ export type LeadProductStructureInstanceWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -537,6 +545,7 @@ export type LeadProductStructureInstanceOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -593,6 +602,7 @@ export type LeadProductStructureInstanceWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -645,6 +655,7 @@ export type LeadProductStructureInstanceOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -692,6 +703,7 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolWithAggregatesFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntWithAggregatesFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringWithAggregatesFilter<"LeadProductStructureInstance"> | string
@@ -726,6 +738,7 @@ export type LeadProductStructureInstanceScalarWhereWithAggregatesInput = {
 }
 
 export type LeadProductStructureInstanceCreateInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -774,6 +787,7 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -813,6 +827,7 @@ export type LeadProductStructureInstanceUncheckedCreateInput = {
 }
 
 export type LeadProductStructureInstanceUpdateInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -861,6 +876,7 @@ export type LeadProductStructureInstanceUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -905,6 +921,7 @@ export type LeadProductStructureInstanceCreateManyInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -939,6 +956,7 @@ export type LeadProductStructureInstanceCreateManyInput = {
 }
 
 export type LeadProductStructureInstanceUpdateManyMutationInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -974,6 +992,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1035,6 +1054,7 @@ export type LeadProductStructureInstanceCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -1091,6 +1111,7 @@ export type LeadProductStructureInstanceMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -1130,6 +1151,7 @@ export type LeadProductStructureInstanceMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   account_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   product_structure_id?: Prisma.SortOrder
   quantity_index?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -1604,6 +1626,7 @@ export type LeadProductStructureInstanceUpdateOneRequiredWithoutFastProductionRe
 }
 
 export type LeadProductStructureInstanceCreateWithoutVendorInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1650,6 +1673,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutVendorInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1723,6 +1747,7 @@ export type LeadProductStructureInstanceScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   account_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   product_type_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
+  is_archived?: Prisma.BoolFilter<"LeadProductStructureInstance"> | boolean
   product_structure_id?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   quantity_index?: Prisma.IntFilter<"LeadProductStructureInstance"> | number
   title?: Prisma.StringFilter<"LeadProductStructureInstance"> | string
@@ -1757,6 +1782,7 @@ export type LeadProductStructureInstanceScalarWhereInput = {
 }
 
 export type LeadProductStructureInstanceCreateWithoutUpdatedByInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1804,6 +1830,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutUpdatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1868,6 +1895,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutUpdatedByInput
 }
 
 export type LeadProductStructureInstanceCreateWithoutLeadInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -1914,6 +1942,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -1979,6 +2008,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type LeadProductStructureInstanceCreateWithoutActivityStatusLogsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2026,6 +2056,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutActivityStatusLogs
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2080,6 +2111,7 @@ export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutActivityStatu
 }
 
 export type LeadProductStructureInstanceUpdateWithoutActivityStatusLogsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -2127,6 +2159,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogs
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2165,6 +2198,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutActivityStatusLogs
 }
 
 export type LeadProductStructureInstanceCreateWithoutAccountInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2211,6 +2245,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutAccountInput = {
   vendor_id: number
   lead_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2276,6 +2311,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutAccountInput =
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductTypeInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2322,6 +2358,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductTypeInput =
   vendor_id: number
   lead_id: number
   account_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2387,6 +2424,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductTypeInp
 }
 
 export type LeadProductStructureInstanceCreateWithoutDocumentsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2434,6 +2472,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDocumentsInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2488,6 +2527,7 @@ export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutDocumentsInpu
 }
 
 export type LeadProductStructureInstanceUpdateWithoutDocumentsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -2535,6 +2575,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -2573,6 +2614,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDocumentsInput = {
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductStructureInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2620,6 +2662,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductStructureIn
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2684,6 +2727,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductStructu
 }
 
 export type LeadProductStructureInstanceCreateWithoutSubProductStructureInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2731,6 +2775,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutSubProductStructur
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2795,6 +2840,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutSubProductStru
 }
 
 export type LeadProductStructureInstanceCreateWithoutProductItemCodeInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2842,6 +2888,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutProductItemCodeInp
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -2906,6 +2953,7 @@ export type LeadProductStructureInstanceUpdateManyWithWhereWithoutProductItemCod
 }
 
 export type LeadProductStructureInstanceCreateWithoutDesignSelectionsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -2953,6 +3001,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutDesignSelectionsIn
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3007,6 +3056,7 @@ export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutDesignSelecti
 }
 
 export type LeadProductStructureInstanceUpdateWithoutDesignSelectionsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3054,6 +3104,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3092,6 +3143,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutDesignSelectionsIn
 }
 
 export type LeadProductStructureInstanceCreateWithoutTasksInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -3139,6 +3191,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutTasksInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3193,6 +3246,7 @@ export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutTasksInput = 
 }
 
 export type LeadProductStructureInstanceUpdateWithoutTasksInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3240,6 +3294,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3278,6 +3333,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutTasksInput = {
 }
 
 export type LeadProductStructureInstanceCreateWithoutFastProductionRequestsInput = {
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -3325,6 +3381,7 @@ export type LeadProductStructureInstanceUncheckedCreateWithoutFastProductionRequ
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3379,6 +3436,7 @@ export type LeadProductStructureInstanceUpdateToOneWithWhereWithoutFastProductio
 }
 
 export type LeadProductStructureInstanceUpdateWithoutFastProductionRequestsInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3426,6 +3484,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutFastProductionRequ
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3468,6 +3527,7 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3502,6 +3562,7 @@ export type LeadProductStructureInstanceCreateManyVendorInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutVendorInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3548,6 +3609,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3591,6 +3653,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorInput = 
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3630,6 +3693,7 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3663,6 +3727,7 @@ export type LeadProductStructureInstanceCreateManyUpdatedByInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutUpdatedByInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3710,6 +3775,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutUpdatedByInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3753,6 +3819,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByInput
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3790,6 +3857,7 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
   vendor_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3824,6 +3892,7 @@ export type LeadProductStructureInstanceCreateManyLeadInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutLeadInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -3870,6 +3939,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3913,6 +3983,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3951,6 +4022,7 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
   vendor_id: number
   lead_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -3985,6 +4057,7 @@ export type LeadProductStructureInstanceCreateManyAccountInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutAccountInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4031,6 +4104,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4074,6 +4148,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutAccountInput =
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4112,6 +4187,7 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
   vendor_id: number
   lead_id: number
   account_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -4146,6 +4222,7 @@ export type LeadProductStructureInstanceCreateManyProductTypeInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutProductTypeInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4192,6 +4269,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductTypeInput =
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4235,6 +4313,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductTypeInp
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4274,6 +4353,7 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   quantity_index: number
   title: string
   status?: $Enums.ProductInstanceStatus
@@ -4307,6 +4387,7 @@ export type LeadProductStructureInstanceCreateManyProductStructureInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutProductStructureInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4354,6 +4435,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductStructureIn
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4397,6 +4479,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructu
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4435,6 +4518,7 @@ export type LeadProductStructureInstanceCreateManySubProductStructureInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -4468,6 +4552,7 @@ export type LeadProductStructureInstanceCreateManySubProductStructureInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutSubProductStructureInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4515,6 +4600,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutSubProductStructur
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4558,6 +4644,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutSubProductStru
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4596,6 +4683,7 @@ export type LeadProductStructureInstanceCreateManyProductItemCodeInput = {
   lead_id: number
   account_id: number
   product_type_id: number
+  is_archived?: boolean
   product_structure_id: number
   quantity_index: number
   title: string
@@ -4629,6 +4717,7 @@ export type LeadProductStructureInstanceCreateManyProductItemCodeInput = {
 }
 
 export type LeadProductStructureInstanceUpdateWithoutProductItemCodeInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumProductInstanceStatusFieldUpdateOperationsInput | $Enums.ProductInstanceStatus
@@ -4676,6 +4765,7 @@ export type LeadProductStructureInstanceUncheckedUpdateWithoutProductItemCodeInp
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4719,6 +4809,7 @@ export type LeadProductStructureInstanceUncheckedUpdateManyWithoutProductItemCod
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   product_structure_id?: Prisma.IntFieldUpdateOperationsInput | number
   quantity_index?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
@@ -4824,6 +4915,7 @@ export type LeadProductStructureInstanceSelect<ExtArgs extends runtime.Types.Ext
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -4877,6 +4969,7 @@ export type LeadProductStructureInstanceSelectCreateManyAndReturn<ExtArgs extend
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -4924,6 +5017,7 @@ export type LeadProductStructureInstanceSelectUpdateManyAndReturn<ExtArgs extend
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -4971,6 +5065,7 @@ export type LeadProductStructureInstanceSelectScalar = {
   lead_id?: boolean
   account_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   product_structure_id?: boolean
   quantity_index?: boolean
   title?: boolean
@@ -5004,7 +5099,7 @@ export type LeadProductStructureInstanceSelectScalar = {
   sub_product_structure_id?: boolean
 }
 
-export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
+export type LeadProductStructureInstanceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "product_type_id" | "is_archived" | "product_structure_id" | "quantity_index" | "title" | "status" | "description" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_tech_check_completed" | "tech_check_completed_at" | "is_order_login_completed" | "order_login_completed_at" | "is_production_completed" | "production_completed_at" | "woodwork_packing_details_remark" | "hardware_packing_details_remark" | "no_of_boxes" | "no_of_client_documents_initially_submitted" | "is_order_login_filled" | "is_pre_prod_done" | "is_under_production" | "pre_prod_done_at" | "under_production_at" | "production_erd_date" | "is_post_production" | "pre_prod_remark" | "isLargeScaleProjectInstance" | "product_item_code_id" | "quantity" | "sub_product_structure_id", ExtArgs["result"]["leadProductStructureInstance"]>
 export type LeadProductStructureInstanceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fastProductionRequests?: boolean | Prisma.LeadProductStructureInstance$fastProductionRequestsArgs<ExtArgs>
   designSelections?: boolean | Prisma.LeadProductStructureInstance$designSelectionsArgs<ExtArgs>
@@ -5065,6 +5160,7 @@ export type $LeadProductStructureInstancePayload<ExtArgs extends runtime.Types.E
     lead_id: number
     account_id: number
     product_type_id: number
+    is_archived: boolean
     product_structure_id: number
     quantity_index: number
     title: string
@@ -5537,6 +5633,7 @@ export interface LeadProductStructureInstanceFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly account_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly product_type_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
+  readonly is_archived: Prisma.FieldRef<"LeadProductStructureInstance", 'Boolean'>
   readonly product_structure_id: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly quantity_index: Prisma.FieldRef<"LeadProductStructureInstance", 'Int'>
   readonly title: Prisma.FieldRef<"LeadProductStructureInstance", 'String'>

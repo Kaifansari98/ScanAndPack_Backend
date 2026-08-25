@@ -45,6 +45,7 @@ export type LeadBillingAddressMinAggregateOutputType = {
   lead_id: number | null
   vendor_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   address_type: string | null
   name: string | null
   address: string | null
@@ -61,6 +62,7 @@ export type LeadBillingAddressMaxAggregateOutputType = {
   lead_id: number | null
   vendor_id: number | null
   product_type_id: number | null
+  is_archived: boolean | null
   address_type: string | null
   name: string | null
   address: string | null
@@ -77,6 +79,7 @@ export type LeadBillingAddressCountAggregateOutputType = {
   lead_id: number
   vendor_id: number
   product_type_id: number
+  is_archived: number
   address_type: number
   name: number
   address: number
@@ -109,6 +112,7 @@ export type LeadBillingAddressMinAggregateInputType = {
   lead_id?: true
   vendor_id?: true
   product_type_id?: true
+  is_archived?: true
   address_type?: true
   name?: true
   address?: true
@@ -125,6 +129,7 @@ export type LeadBillingAddressMaxAggregateInputType = {
   lead_id?: true
   vendor_id?: true
   product_type_id?: true
+  is_archived?: true
   address_type?: true
   name?: true
   address?: true
@@ -141,6 +146,7 @@ export type LeadBillingAddressCountAggregateInputType = {
   lead_id?: true
   vendor_id?: true
   product_type_id?: true
+  is_archived?: true
   address_type?: true
   name?: true
   address?: true
@@ -244,6 +250,7 @@ export type LeadBillingAddressGroupByOutputType = {
   lead_id: number
   vendor_id: number
   product_type_id: number | null
+  is_archived: boolean
   address_type: string
   name: string | null
   address: string | null
@@ -283,6 +290,7 @@ export type LeadBillingAddressWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   vendor_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   product_type_id?: Prisma.IntNullableFilter<"LeadBillingAddress"> | number | null
+  is_archived?: Prisma.BoolFilter<"LeadBillingAddress"> | boolean
   address_type?: Prisma.StringFilter<"LeadBillingAddress"> | string
   name?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
   address?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
@@ -302,6 +310,7 @@ export type LeadBillingAddressOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   address_type?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -324,6 +333,7 @@ export type LeadBillingAddressWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   vendor_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   product_type_id?: Prisma.IntNullableFilter<"LeadBillingAddress"> | number | null
+  is_archived?: Prisma.BoolFilter<"LeadBillingAddress"> | boolean
   address_type?: Prisma.StringFilter<"LeadBillingAddress"> | string
   name?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
   address?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
@@ -343,6 +353,7 @@ export type LeadBillingAddressOrderByWithAggregationInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   address_type?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -367,6 +378,7 @@ export type LeadBillingAddressScalarWhereWithAggregatesInput = {
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadBillingAddress"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadBillingAddress"> | number
   product_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadBillingAddress"> | number | null
+  is_archived?: Prisma.BoolWithAggregatesFilter<"LeadBillingAddress"> | boolean
   address_type?: Prisma.StringWithAggregatesFilter<"LeadBillingAddress"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"LeadBillingAddress"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"LeadBillingAddress"> | string | null
@@ -379,6 +391,7 @@ export type LeadBillingAddressScalarWhereWithAggregatesInput = {
 }
 
 export type LeadBillingAddressCreateInput = {
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -398,6 +411,7 @@ export type LeadBillingAddressUncheckedCreateInput = {
   lead_id: number
   vendor_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -410,6 +424,7 @@ export type LeadBillingAddressUncheckedCreateInput = {
 }
 
 export type LeadBillingAddressUpdateInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -429,6 +444,7 @@ export type LeadBillingAddressUncheckedUpdateInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -445,6 +461,7 @@ export type LeadBillingAddressCreateManyInput = {
   lead_id: number
   vendor_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -457,6 +474,7 @@ export type LeadBillingAddressCreateManyInput = {
 }
 
 export type LeadBillingAddressUpdateManyMutationInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -473,6 +491,7 @@ export type LeadBillingAddressUncheckedUpdateManyInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -499,6 +518,7 @@ export type LeadBillingAddressCountOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   address_type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -522,6 +542,7 @@ export type LeadBillingAddressMaxOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   address_type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -538,6 +559,7 @@ export type LeadBillingAddressMinOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   product_type_id?: Prisma.SortOrder
+  is_archived?: Prisma.SortOrder
   address_type?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
@@ -683,6 +705,7 @@ export type LeadBillingAddressUncheckedUpdateManyWithoutProductTypeNestedInput =
 }
 
 export type LeadBillingAddressCreateWithoutVendorInput = {
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -700,6 +723,7 @@ export type LeadBillingAddressUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -745,6 +769,7 @@ export type LeadBillingAddressScalarWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   vendor_id?: Prisma.IntFilter<"LeadBillingAddress"> | number
   product_type_id?: Prisma.IntNullableFilter<"LeadBillingAddress"> | number | null
+  is_archived?: Prisma.BoolFilter<"LeadBillingAddress"> | boolean
   address_type?: Prisma.StringFilter<"LeadBillingAddress"> | string
   name?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
   address?: Prisma.StringNullableFilter<"LeadBillingAddress"> | string | null
@@ -757,6 +782,7 @@ export type LeadBillingAddressScalarWhereInput = {
 }
 
 export type LeadBillingAddressCreateWithoutLeadInput = {
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -774,6 +800,7 @@ export type LeadBillingAddressUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -812,6 +839,7 @@ export type LeadBillingAddressUpdateManyWithWhereWithoutLeadInput = {
 }
 
 export type LeadBillingAddressCreateWithoutProductTypeInput = {
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -829,6 +857,7 @@ export type LeadBillingAddressUncheckedCreateWithoutProductTypeInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -870,6 +899,7 @@ export type LeadBillingAddressCreateManyVendorInput = {
   id?: number
   lead_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -882,6 +912,7 @@ export type LeadBillingAddressCreateManyVendorInput = {
 }
 
 export type LeadBillingAddressUpdateWithoutVendorInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -899,6 +930,7 @@ export type LeadBillingAddressUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -914,6 +946,7 @@ export type LeadBillingAddressUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -929,6 +962,7 @@ export type LeadBillingAddressCreateManyLeadInput = {
   id?: number
   vendor_id: number
   product_type_id?: number | null
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -941,6 +975,7 @@ export type LeadBillingAddressCreateManyLeadInput = {
 }
 
 export type LeadBillingAddressUpdateWithoutLeadInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -958,6 +993,7 @@ export type LeadBillingAddressUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -973,6 +1009,7 @@ export type LeadBillingAddressUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -988,6 +1025,7 @@ export type LeadBillingAddressCreateManyProductTypeInput = {
   id?: number
   lead_id: number
   vendor_id: number
+  is_archived?: boolean
   address_type: string
   name?: string | null
   address?: string | null
@@ -1000,6 +1038,7 @@ export type LeadBillingAddressCreateManyProductTypeInput = {
 }
 
 export type LeadBillingAddressUpdateWithoutProductTypeInput = {
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1017,6 +1056,7 @@ export type LeadBillingAddressUncheckedUpdateWithoutProductTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1032,6 +1072,7 @@ export type LeadBillingAddressUncheckedUpdateManyWithoutProductTypeInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_archived?: Prisma.BoolFieldUpdateOperationsInput | boolean
   address_type?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1050,6 +1091,7 @@ export type LeadBillingAddressSelect<ExtArgs extends runtime.Types.Extensions.In
   lead_id?: boolean
   vendor_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   address_type?: boolean
   name?: boolean
   address?: boolean
@@ -1069,6 +1111,7 @@ export type LeadBillingAddressSelectCreateManyAndReturn<ExtArgs extends runtime.
   lead_id?: boolean
   vendor_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   address_type?: boolean
   name?: boolean
   address?: boolean
@@ -1088,6 +1131,7 @@ export type LeadBillingAddressSelectUpdateManyAndReturn<ExtArgs extends runtime.
   lead_id?: boolean
   vendor_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   address_type?: boolean
   name?: boolean
   address?: boolean
@@ -1107,6 +1151,7 @@ export type LeadBillingAddressSelectScalar = {
   lead_id?: boolean
   vendor_id?: boolean
   product_type_id?: boolean
+  is_archived?: boolean
   address_type?: boolean
   name?: boolean
   address?: boolean
@@ -1118,7 +1163,7 @@ export type LeadBillingAddressSelectScalar = {
   updated_at?: boolean
 }
 
-export type LeadBillingAddressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "product_type_id" | "address_type" | "name" | "address" | "map_link" | "gst_number" | "state_name" | "place_of_supply" | "created_at" | "updated_at", ExtArgs["result"]["leadBillingAddress"]>
+export type LeadBillingAddressOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "product_type_id" | "is_archived" | "address_type" | "name" | "address" | "map_link" | "gst_number" | "state_name" | "place_of_supply" | "created_at" | "updated_at", ExtArgs["result"]["leadBillingAddress"]>
 export type LeadBillingAddressInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1147,6 +1192,7 @@ export type $LeadBillingAddressPayload<ExtArgs extends runtime.Types.Extensions.
     lead_id: number
     vendor_id: number
     product_type_id: number | null
+    is_archived: boolean
     address_type: string
     name: string | null
     address: string | null
@@ -1586,6 +1632,7 @@ export interface LeadBillingAddressFieldRefs {
   readonly lead_id: Prisma.FieldRef<"LeadBillingAddress", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"LeadBillingAddress", 'Int'>
   readonly product_type_id: Prisma.FieldRef<"LeadBillingAddress", 'Int'>
+  readonly is_archived: Prisma.FieldRef<"LeadBillingAddress", 'Boolean'>
   readonly address_type: Prisma.FieldRef<"LeadBillingAddress", 'String'>
   readonly name: Prisma.FieldRef<"LeadBillingAddress", 'String'>
   readonly address: Prisma.FieldRef<"LeadBillingAddress", 'String'>
