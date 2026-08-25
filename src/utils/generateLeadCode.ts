@@ -35,7 +35,8 @@ export async function generateLeadCode(
     );
   }
 
-  let prefix = "SH";
+  const basePrefix = input.vendorId === 1 ? "SH" : (vendor.vendor_code || "SH");
+  let prefix = basePrefix;
 
   if (input.franchiseId) {
     const franchise = await tx.franchiseMaster.findUnique({
@@ -52,7 +53,7 @@ export async function generateLeadCode(
       if (city && city.name) {
         const citySegment = city.name.replace(/[^A-Za-z]/g, "").toUpperCase();
         if (citySegment) {
-          prefix = `SH${citySegment}`;
+          prefix = `${basePrefix}${citySegment}`;
         }
       }
     }
