@@ -1941,7 +1941,7 @@ export class LeadActivityStatusService {
         vendor_id: vendorId,
         ...(franchiseId ? { franchise_id: franchiseId } : {}),
         ...(assignTo ? { assign_to: assignTo } : {}),
-        is_draft: false,
+        is_draft: { not: true },
         is_deleted: false,
       },
       _count: {
@@ -1984,7 +1984,7 @@ export class LeadActivityStatusService {
         ...(franchiseId ? { franchise_id: franchiseId } : {}),
         ...(assignTo ? { assign_to: assignTo } : {}),
         is_deleted: false,
-        is_draft: false,
+        is_draft: { not: true },
         activity_status: "onGoing",
         statusType: {
           type: "open",

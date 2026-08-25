@@ -41,21 +41,12 @@ export async function generateLeadCode(
   if (input.franchiseId) {
     const franchise = await tx.franchiseMaster.findUnique({
       where: { id: input.franchiseId },
-      select: { city_id: true },
+      select: { franchise_code: true },
     });
 
-    if (franchise && franchise.city_id) {
-      const city = await tx.cityMaster.findUnique({
-        where: { id: franchise.city_id },
-        select: { name: true },
-      });
-
-      if (city && city.name) {
-        const citySegment = city.name.replace(/[^A-Za-z]/g, "").toUpperCase();
-        if (citySegment) {
-          prefix = `${basePrefix}${citySegment}`;
-        }
-      }
+    if (franchise?.franchise_code) {
+      // Use franchise_code directly (e.g. SHMUM, SHPN) — never hardcoded
+      prefix = franchise.franchise_code.trim().toUpperCase();
     }
   }
 
