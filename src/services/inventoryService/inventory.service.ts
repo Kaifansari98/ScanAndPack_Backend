@@ -33,10 +33,6 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
       );
     }
 
-
-
-
-
     // ─────────────────────────────────────────────
     // 2) Fetch all pages
     // ─────────────────────────────────────────────

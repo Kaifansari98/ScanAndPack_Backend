@@ -1851,7 +1851,7 @@ export const addManualPackingItem = async (
   }
 };
 
-const SCAN_STATUSES: ProjectItemScanFilter[] = [
+const SCAN_STATUSES: trackTraceService.ProjectItemScanFilter[] = [
   "all",
   "scanned",
   "pending",

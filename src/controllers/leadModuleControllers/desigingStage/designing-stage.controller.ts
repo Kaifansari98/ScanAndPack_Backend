@@ -1199,7 +1199,10 @@ export class DesigingStageController {
           const accountId = lead.account_id; // ✅ derived safely
           const vendor = await tx.vendorMaster.findUnique({
             where: { id: Number(vendorId) },
-            select: { is_this_vendor_is_custom_usertype_only: true },
+            select: {
+              is_this_vendor_is_custom_usertype_only: true,
+              handlesLargeScaleProjects: true,
+            },
           });
           const useCustomVendorFlow =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
@@ -1216,15 +1219,19 @@ export class DesigingStageController {
             : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
               ? [rawInstanceIds]
               : [];
-          const parsedInstanceIds = useCustomVendorFlow
-            ? [...new Set(
-              requestedInstanceIds
-                .map((value) => Number(value))
-                .filter((value) => Number.isFinite(value) && value > 0),
-            )]
+          const isLargeScaleOrCustom =
+            useCustomVendorFlow || vendor?.handlesLargeScaleProjects === true;
+          const parsedInstanceIds = isLargeScaleOrCustom
+            ? [
+                ...new Set(
+                  requestedInstanceIds
+                    .map((value: any) => Number(value))
+                    .filter((value: any) => Number.isFinite(value) && value > 0),
+                ),
+              ]
             : [];
 
-          const allLeadInstances = useCustomVendorFlow
+          const allLeadInstances = isLargeScaleOrCustom
             ? await tx.leadProductStructureInstance.findMany({
               where: {
                 lead_id: Number(leadId),
@@ -1234,15 +1241,25 @@ export class DesigingStageController {
               select: {
                 id: true,
                 title: true,
+                product_type_id: true,
                 productType: {
-                  select: { type: true },
+                  select: { id: true, type: true },
+                },
+                productItemCode: {
+                  select: {
+                    productStructure: {
+                      select: {
+                        product_type_id: true,
+                      },
+                    },
+                  },
                 },
               },
               orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
             })
             : [];
 
-          const selectedInstances = useCustomVendorFlow
+          const selectedInstances = isLargeScaleOrCustom
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
                 parsedInstanceIds.includes(instance.id),
@@ -1317,7 +1334,7 @@ export class DesigingStageController {
           let clientNameSegment = "";
           let structureSegment = "";
           let dateSegment = "";
-          let instanceIdToPersist: number | null = null;
+          let productTypeIdToPersist: number | null = null;
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
@@ -1393,23 +1410,16 @@ export class DesigingStageController {
                   : maxRevision;
               }, -1) + 1;
 
-            if (selectedInstances.length === 1) {
-              instanceIdToPersist = selectedInstances[0].id;
-            } else if (selectedInstances.length > 1) {
-              const uniqueSelectedProductTypes = [
-                ...new Set(
-                  selectedInstances
-                    .map((instance) => instance.productType?.type?.trim())
-                    .filter(Boolean),
-                ),
-              ];
+          }
 
-              instanceIdToPersist =
-                uniqueSelectedProductTypes.length === 1
-                  ? selectedInstances[0].id
-                  : null;
-            } else {
-              instanceIdToPersist = null;
+          if (selectedInstances.length > 0) {
+            const matchedInstance = selectedInstances[0];
+            productTypeIdToPersist = matchedInstance?.product_type_id ?? null;
+            if (!productTypeIdToPersist && matchedInstance?.productItemCode?.productStructure) {
+              productTypeIdToPersist = matchedInstance.productItemCode.productStructure.product_type_id ?? null;
+            }
+            if (!productTypeIdToPersist && matchedInstance?.productType) {
+              productTypeIdToPersist = matchedInstance.productType.id;
             }
           }
 
@@ -1445,7 +1455,7 @@ export class DesigingStageController {
                 account_id: Number(accountId), // ✅ backend-owned
                 doc_type_id: designDocType.id,
                 created_by: Number(userId),
-                product_structure_instance_id: instanceIdToPersist,
+                product_type_id: productTypeIdToPersist,
               },
             });
 

@@ -16396,7 +16396,11 @@ export const ProjectMasterScalarFieldEnum = {
   updated_at: 'updated_at',
   updated_by: 'updated_by',
   packing_type: 'packing_type',
-  no_of_boxes: 'no_of_boxes'
+  no_of_boxes: 'no_of_boxes',
+  isDeleted: 'isDeleted',
+  deleted_by: 'deleted_by',
+  deleted_at: 'deleted_at',
+  userMasterId: 'userMasterId'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]

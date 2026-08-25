@@ -71,43 +71,417 @@ export const createProjectDetails = async (data: Omit<ProjectDetails, 'id'>) => 
 
 
 
-export const getAllProjectsTrackTrace = (vendor_id: number) => {
+export interface GetTrackTraceProjectsOptions {
+  page?: number;
+  limit?: number;
+  search?: string;
 
-  return prisma.projectMaster.findMany({
-    where: {
-      vendor_id: vendor_id,
+  track_trace_status?: string;
+  project_status?: string;
+
+  deleted?: "active" | "deleted" | "all";
+
+  date_from?: string;
+  date_to?: string;
+
+  sort_by?: string;
+  sort_order?: "asc" | "desc";
+}
+
+const PROJECT_LIST_SELECT = {
+  id: true,
+  unique_project_id: true,
+  project_name: true,
+  project_status: true,
+  track_trace_status: true,
+  created_at: true,
+
+  lead_id: true,
+
+  order_no: true,
+  client_name: true,
+  client_address: true,
+  client_contact_no: true,
+
+  isDeleted: true,
+  deleted_by: true,
+  deleted_at: true,
+
+  lead: {
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      contact_no: true,
+      site_address: true,
     },
+  },
+} satisfies Prisma.ProjectMasterSelect;
+
+export const getAllProjectsTrackTrace = async (
+  vendor_id: number,
+  options: GetTrackTraceProjectsOptions = {}
+) => {
+  const page = Math.max(options.page || 1, 1);
+
+  const limit = Math.min(
+    Math.max(options.limit || 10, 1),
+    100
+  );
+
+  const skip = (page - 1) * limit;
+
+  const search = options.search?.trim();
+
+  const where: Prisma.ProjectMasterWhereInput = {
+    vendor_id,
+  };
+
+  /*
+  |--------------------------------------------------------------------------
+  | Deleted filter
+  |--------------------------------------------------------------------------
+  |
+  | active  => isDeleted = false
+  | deleted => isDeleted = true
+  | all     => do not add isDeleted condition
+  |
+  */
+
+  switch (options.deleted) {
+    case "deleted":
+      where.isDeleted = true;
+      break;
+
+    case "all":
+      break;
+
+    case "active":
+    default:
+      where.isDeleted = false;
+      break;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Track & Trace Status
+  |--------------------------------------------------------------------------
+  */
+
+  if (
+    options.track_trace_status &&
+    options.track_trace_status !== "all"
+  ) {
+    where.track_trace_status =
+      options.track_trace_status;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Project Status
+  |--------------------------------------------------------------------------
+  */
+
+  if (
+    options.project_status &&
+    options.project_status !== "all"
+  ) {
+    where.project_status =
+      options.project_status;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Search
+  |--------------------------------------------------------------------------
+  |
+  | Search:
+  | - Project name
+  | - Unique project ID
+  | - Order number
+  | - Client name
+  | - Client contact
+  | - Lead code
+  | - Lead first name
+  | - Lead last name
+  | - Lead contact
+  |
+  */
+
+  if (search) {
+    where.OR = [
+      {
+        project_name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        unique_project_id: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        order_no: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        client_name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        client_contact_no: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+
+      {
+        lead: {
+          is: {
+            OR: [
+              {
+                lead_code: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              },
+
+              {
+                firstname: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              },
+
+              {
+                lastname: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              },
+
+              {
+                contact_no: {
+                  contains: search,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          },
+        },
+      },
+    ];
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Created Date Filter
+  |--------------------------------------------------------------------------
+  */
+
+  if (options.date_from || options.date_to) {
+    const createdAtFilter: Prisma.DateTimeFilter = {};
+
+    if (options.date_from) {
+      const startDate = new Date(
+        `${options.date_from}T00:00:00.000Z`
+      );
+
+      if (!Number.isNaN(startDate.getTime())) {
+        createdAtFilter.gte = startDate;
+      }
+    }
+
+    if (options.date_to) {
+      const endDate = new Date(
+        `${options.date_to}T00:00:00.000Z`
+      );
+
+      if (!Number.isNaN(endDate.getTime())) {
+        /*
+         * Exclusive next-day boundary:
+         *
+         * date_to = 2026-08-24
+         * means < 2026-08-25 00:00:00
+         */
+
+        endDate.setUTCDate(
+          endDate.getUTCDate() + 1
+        );
+
+        createdAtFilter.lt = endDate;
+      }
+    }
+
+    if (
+      createdAtFilter.gte ||
+      createdAtFilter.lt
+    ) {
+      where.created_at = createdAtFilter;
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Sorting
+  |--------------------------------------------------------------------------
+  */
+
+  const allowedSortFields = [
+    "id",
+    "created_at",
+    "project_name",
+    "order_no",
+    "project_status",
+    "track_trace_status",
+  ] as const;
+
+  type SortField =
+    (typeof allowedSortFields)[number];
+
+  const requestedSort =
+    options.sort_by as SortField;
+
+  const sortBy: SortField =
+    allowedSortFields.includes(requestedSort)
+      ? requestedSort
+      : "created_at";
+
+  const sortOrder: Prisma.SortOrder =
+    options.sort_order === "asc"
+      ? "asc"
+      : "desc";
+
+  const primaryOrder = {
+    [sortBy]: sortOrder,
+  } as Prisma.ProjectMasterOrderByWithRelationInput;
+
+  const orderBy:
+    Prisma.ProjectMasterOrderByWithRelationInput[] =
+    sortBy === "id"
+      ? [primaryOrder]
+      : [
+          primaryOrder,
+          {
+            id: "desc",
+          },
+        ];
+
+  /*
+  |--------------------------------------------------------------------------
+  | Query
+  |--------------------------------------------------------------------------
+  */
+
+  const [total, projects] =
+    await prisma.$transaction([
+      prisma.projectMaster.count({
+        where,
+      }),
+
+      prisma.projectMaster.findMany({
+        where,
+
+        select: PROJECT_LIST_SELECT,
+
+        skip,
+        take: limit,
+
+        orderBy,
+      }),
+    ]);
+
+  const totalPages =
+    total === 0
+      ? 0
+      : Math.ceil(total / limit);
+
+  return {
+    projects,
+
+    pagination: {
+      page,
+      limit,
+      total,
+      totalPages,
+
+      hasNextPage:
+        page < totalPages,
+
+      hasPreviousPage:
+        page > 1,
+    },
+  };
+};
+
+/*
+|--------------------------------------------------------------------------
+| Soft Delete Project
+|--------------------------------------------------------------------------
+*/
+
+export const deleteTrackTraceProject = async (
+  vendor_id: number,
+  project_id: number,
+  user_id: number
+) => {
+  /*
+   * updateMany is intentional here because it allows us to
+   * include vendor_id and isDeleted in the WHERE condition.
+   */
+
+  const result =
+    await prisma.projectMaster.updateMany({
+      where: {
+        id: project_id,
+        vendor_id,
+        isDeleted: false,
+      },
+
+      data: {
+        isDeleted: true,
+
+        deleted_by: user_id,
+        deleted_at: new Date(),
+
+        updated_by: user_id,
+      },
+    });
+
+  if (result.count === 0) {
+    return null;
+  }
+
+  return prisma.projectMaster.findFirst({
+    where: {
+      id: project_id,
+      vendor_id,
+    },
+
     select: {
       id: true,
       unique_project_id: true,
       project_name: true,
-      project_status: true,
-      track_trace_status: true,
-      created_at: true,
-
-      lead_id: true,
-
-      order_no: true,
-      client_name: true,
-      client_address: true,
-      client_contact_no: true,
-
-      lead: {
-        select: {
-          id: true,
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          contact_no: true,
-          site_address: true,
-        },
-      },
+      isDeleted: true,
+      deleted_by: true,
+      deleted_at: true,
     },
-
-
-    orderBy: { id: "desc" }
   });
 };
+
+
+
 
 export const getAllProjectDetails = () => {
   return prisma.projectDetails.findMany({

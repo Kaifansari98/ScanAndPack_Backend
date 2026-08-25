@@ -198,6 +198,7 @@ export const uploadRequirementDocument = async ({
         account_id: lead?.account_id ?? undefined,
         doc_type_id: resolvedDocTypeId || 1,
         created_by,
+        product_type_id: product_type_id || undefined,
       },
       include: {
         documentType: true,
