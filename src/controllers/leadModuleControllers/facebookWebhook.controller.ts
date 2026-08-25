@@ -4,6 +4,7 @@ import { LeadEntryType } from "../../../generated/prisma_client/client";
 import logger from "../../utils/logger";
 import axios from "axios";
 import { generateLeadCode } from "../../utils/generateLeadCode";
+import { ensureDefaultStatuses } from "./onlineLead.controller";
 
 export class FacebookWebhookController {
   /**
@@ -197,6 +198,7 @@ export class FacebookWebhookController {
     });
 
     // 6. Get default followup status for this vendor
+    await ensureDefaultStatuses(vendor_id);
     const defaultStatus = await prisma.online_lead_followup_status.findFirst({
       where: {
         vendor_id: vendor_id,

@@ -326,9 +326,26 @@ export class LeadStatsService {
       },
     });
 
+    // Resolve online lead pool count
+    const totalLeadPool = await prisma.online_leads.count({
+      where: {
+        vendor_id: vendorId,
+        assign_to: null,
+        NOT: {
+          online_lead_followup_status: {
+            status_name: {
+              in: ["Store Assigned", "Store Visit Done"],
+              mode: "insensitive",
+            },
+          },
+        },
+      },
+    });
+
     console.log("[LeadStatsService] counts snapshot", {
       totalLeads,
       totalOverallLeads,
+      totalLeadPool,
       totalOpenLeads,
       totalDraftLeads,
       totalInitialSiteMeasurementLeads,
@@ -381,6 +398,7 @@ export class LeadStatsService {
       // =====================
       total_leads: totalLeads,
       total_overall_leads: totalOverallLeads,
+      total_lead_pool: totalLeadPool,
       total_my_tasks: totalMyTasks,
 
       total_open_leads: totalOpenLeads,

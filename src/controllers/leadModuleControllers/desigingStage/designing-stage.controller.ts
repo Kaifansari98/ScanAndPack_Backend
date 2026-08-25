@@ -1218,6 +1218,10 @@ export class DesigingStageController {
               is_this_vendor_is_custom_usertype_only: true,
               handlesLargeScaleProjects: true,
             },
+            select: {
+              is_this_vendor_is_custom_usertype_only: true,
+              handlesLargeScaleProjects: true,
+            },
           });
           const isCustomVendor =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
@@ -1237,15 +1241,19 @@ export class DesigingStageController {
             : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
               ? [rawInstanceIds]
               : [];
-          const parsedInstanceIds = useCustomVendorFlow
-            ? [...new Set(
-              requestedInstanceIds
-                .map((value) => Number(value))
-                .filter((value) => Number.isFinite(value) && value > 0),
-            )]
+          const isLargeScaleOrCustom =
+            useCustomVendorFlow || vendor?.handlesLargeScaleProjects === true;
+          const parsedInstanceIds = isLargeScaleOrCustom
+            ? [
+                ...new Set(
+                  requestedInstanceIds
+                    .map((value: any) => Number(value))
+                    .filter((value: any) => Number.isFinite(value) && value > 0),
+                ),
+              ]
             : [];
 
-          const allLeadInstances = useCustomVendorFlow
+          const allLeadInstances = isLargeScaleOrCustom
             ? await tx.leadProductStructureInstance.findMany({
               where: {
                 lead_id: Number(leadId),
@@ -1255,6 +1263,7 @@ export class DesigingStageController {
               select: {
                 id: true,
                 title: true,
+                product_type_id: true,
                 product_type_id: true,
                 productType: {
                   select: { id: true, type: true },
@@ -1275,7 +1284,7 @@ export class DesigingStageController {
             })
             : [];
 
-          const selectedInstances = useCustomVendorFlow
+          const selectedInstances = isLargeScaleOrCustom
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
                 parsedInstanceIds.includes(instance.id),

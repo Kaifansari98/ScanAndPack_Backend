@@ -499,9 +499,10 @@ export class DesigingStage {
       }
 
       const useCustomNaming = vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const lookupDesign = useCustomNaming || vendor?.handlesLargeScaleProjects === true;
 
       const selectedDesignDocument =
-        useCustomNaming && data.designDocumentId && designDocType
+        lookupDesign && data.designDocumentId && designDocType
           ? await tx.leadDocuments.findFirst({
               where: {
                 id: data.designDocumentId,
@@ -523,14 +524,10 @@ export class DesigingStage {
         throw new Error("Selected design file was not found for this lead");
       }
 
-      const accountId = lead.account_id; // ✅ backend-owned
+      const accountId = lead.account_id; // ✅ derived safely
       const inheritedProductTypeId =
-        vendor?.handlesLargeScaleProjects === true
+        (vendor?.handlesLargeScaleProjects === true || vendor?.is_this_vendor_is_custom_usertype_only === true)
           ? selectedDesignDocument?.product_type_id ?? null
-          : null;
-      const inheritedInstanceId =
-        vendor?.handlesLargeScaleProjects === true
-          ? selectedDesignDocument?.product_structure_instance_id ?? null
           : null;
       const uploadedDocs: any[] = [];
 
@@ -563,7 +560,6 @@ export class DesigingStage {
             doc_type_id: quotationDocType.id,
             created_by: data.userId,
             product_type_id: inheritedProductTypeId,
-            product_structure_instance_id: inheritedInstanceId,
           },
         });
 

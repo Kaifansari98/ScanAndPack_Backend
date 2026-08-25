@@ -1,6 +1,15 @@
 import Joi from "joi";
 import { prisma } from "../prisma/client";
 import { UserRoleInfo } from "../types/leadModule.types";
+import { validateIndianMobileRisk } from "../utils/phoneRiskValidator";
+
+const joiPhoneRiskValidator = (value: string, helpers: any) => {
+  const result = validateIndianMobileRisk(value);
+  if (!result.isValid) {
+    return helpers.message(result.reason || "Invalid or fake phone number");
+  }
+  return value;
+};
 
 // 🧩 Reusable helper for numeric fields (accepts number or numeric string)
 const numberLike = Joi.alternatives()
@@ -33,10 +42,12 @@ export const createLeadSchema = Joi.object({
 
   contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
+    .custom(joiPhoneRiskValidator)
     .required(),
 
   alt_contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
+    .custom(joiPhoneRiskValidator)
     .optional()
     .allow("", null),
 
@@ -58,6 +69,7 @@ export const createLeadSchema = Joi.object({
   archetech_number: Joi.string()
     .trim()
     .pattern(/^\+?\d{7,20}$/)
+    .custom(joiPhoneRiskValidator)
     .optional()
     .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
@@ -99,10 +111,12 @@ export const createLeadDraftSchema = Joi.object({
 
   contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
+    .custom(joiPhoneRiskValidator)
     .required(),
 
   alt_contact_no: Joi.string()
     .pattern(/^\d{10,15}$/)
+    .custom(joiPhoneRiskValidator)
     .optional()
     .allow("", null),
 
@@ -120,6 +134,7 @@ export const createLeadDraftSchema = Joi.object({
   archetech_number: Joi.string()
     .trim()
     .pattern(/^\+?\d{7,20}$/)
+    .custom(joiPhoneRiskValidator)
     .optional()
     .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
@@ -282,10 +297,16 @@ export const validateUpdateLeadInput = (
   // Optional fields validation (if provided)
   if (
     input.alt_contact_no !== undefined &&
-    input.alt_contact_no !== null &&
-    typeof input.alt_contact_no !== "string"
+    input.alt_contact_no !== null
   ) {
-    errors.push("alt_contact_no must be a string if provided");
+    if (typeof input.alt_contact_no !== "string") {
+      errors.push("alt_contact_no must be a string if provided");
+    } else if (input.alt_contact_no.trim() !== "") {
+      const riskResult = validateIndianMobileRisk(input.alt_contact_no);
+      if (!riskResult.isValid) {
+        errors.push(`alt_contact_no: ${riskResult.reason}`);
+      }
+    }
   }
 
   if (input.email !== undefined && input.email !== null) {
@@ -318,11 +339,15 @@ export const validateUpdateLeadInput = (
   ) {
     if (typeof input.archetech_number !== "string") {
       errors.push("archetech_number must be a string if provided");
-    } else if (
-      input.archetech_number.trim() !== "" &&
-      !/^\+?\d{7,20}$/.test(input.archetech_number.trim())
-    ) {
-      errors.push("archetech_number must be a valid phone number if provided");
+    } else if (input.archetech_number.trim() !== "") {
+      if (!/^\+?\d{7,20}$/.test(input.archetech_number.trim())) {
+        errors.push("archetech_number must be a valid phone number if provided");
+      } else {
+        const riskResult = validateIndianMobileRisk(input.archetech_number);
+        if (!riskResult.isValid) {
+          errors.push(`archetech_number: ${riskResult.reason}`);
+        }
+      }
     }
   }
 
@@ -338,6 +363,11 @@ export const validateUpdateLeadInput = (
   if (input.contact_no && typeof input.contact_no === "string") {
     if (input.contact_no.length < 7 || input.contact_no.length > 15) {
       errors.push("contact_no must be between 7 and 15 characters");
+    } else {
+      const riskResult = validateIndianMobileRisk(input.contact_no);
+      if (!riskResult.isValid) {
+        errors.push(`contact_no: ${riskResult.reason}`);
+      }
     }
   }
 

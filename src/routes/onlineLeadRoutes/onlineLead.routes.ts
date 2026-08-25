@@ -2,6 +2,7 @@ import { Router } from "express";
 import { onlineLeadController } from "../../controllers/leadModuleControllers/onlineLead.controller";
 import { facebookWebhookController } from "../../controllers/leadModuleControllers/facebookWebhook.controller";
 import multer from "multer";
+import { verifyToken } from "../../middlewares/auth.middleware";
 
 const router = Router();
 const upload = multer();
@@ -25,7 +26,7 @@ router.post("/delete-bulk", onlineLeadController.deleteBulkLeads);
 router.get("/:id", onlineLeadController.fetchLeadById);
 router.patch("/:id", onlineLeadController.updateLead);
 router.put("/:id/assign", onlineLeadController.assignLead);
-router.post("/:id/call", onlineLeadController.logCallAndOutcome);
+router.post("/:id/call", verifyToken, onlineLeadController.logCallAndOutcome);
 router.post("/:id/assign-store", onlineLeadController.assignStore);
 router.post("/:id/move-to-draft", onlineLeadController.moveToDraft);
 router.delete("/:id", onlineLeadController.deleteLead);
