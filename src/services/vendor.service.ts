@@ -76,6 +76,7 @@ interface LeadTrackingReportRow {
   client_approval_date: Date | null;
   tc_req_date: Date | null;
   tc_approval_date: Date | null;
+  ol_req_date: Date | null;
   ol_date: Date | null;
   production_start_date: Date | null;
   production_completion_date: Date | null;
@@ -1103,7 +1104,11 @@ export const getLeadTrackingReportData = async (
       tasks: {
         where: {
           task_type: {
-            in: ["Final Measurements", "Site Readiness"],
+            in: [
+              "Final Measurements",
+              "Site Readiness",
+              "Order Login Approval",
+            ],
           },
         },
         select: {
@@ -1211,6 +1216,7 @@ export const getLeadTrackingReportData = async (
         client_approval_date: firstStatusDate("Type 7"),
         tc_req_date: firstStatusDate("Type 7"),
         tc_approval_date: firstStatusDate("Type 9"),
+        ol_req_date: firstTaskCreatedAt("Order Login Approval"),
         ol_date: instance.order_login_completed_at,
         production_start_date: instance.order_login_completed_at,
         production_completion_date: instance.production_completed_at,

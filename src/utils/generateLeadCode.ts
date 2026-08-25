@@ -73,7 +73,7 @@ export async function generateLeadCode(
   });
 
   // Also look up in onlineLead for conflicts
-  const lastOnlineLead = await tx.onlineLead.findFirst({
+  const lastOnlineLead = await tx.online_leads.findFirst({
     where: {
       vendor_id: input.vendorId,
       lead_code: {
@@ -119,7 +119,7 @@ export async function generateLeadCode(
       select: { id: true },
     });
 
-    const existingInOnlineLead = await tx.onlineLead.findFirst({
+    const existingInOnlineLead = await tx.online_leads.findFirst({
       where: {
         vendor_id: input.vendorId,
         lead_code: generatedCode,
