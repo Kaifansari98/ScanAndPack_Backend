@@ -398,7 +398,6 @@ export class BookingStageService {
               },
               select: {
                 b2b_requirement_type_id: true,
-                product_type_id: true,
               },
             }),
           ]);
@@ -429,8 +428,7 @@ export class BookingStageService {
 
             const hasMaterial = materials.some(
               (mat: any) =>
-                mat.b2b_requirement_type_id === reqTypeId ||
-                mat.product_type_id === reqTypeId
+                mat.b2b_requirement_type_id === reqTypeId
             );
             if (!hasMaterial) {
               throw new Error(
