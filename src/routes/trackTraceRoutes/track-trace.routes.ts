@@ -3,7 +3,7 @@ import multer from "multer";
 import os from "os";
 
 // Trigger dev server restart after service update
-import { getAllProjectsTrackTrace } from "../../controllers/trackTraceController/project.controller";
+import { getAllProjectsTrackTrace,deleteTrackTraceProject } from "../../controllers/trackTraceController/project.controller";
 
 import {
   getProjectBoxInfoFieldsController,
@@ -101,6 +101,11 @@ const uploadMemory = multer({ storage: multer.memoryStorage(), limits: { fileSiz
 
 router.get("/project/:vendor_id", getAllProjectsTrackTrace);
 router.get("/get-filter-track-trace/:vendor_id", get_filter_track_trace);
+
+router.patch(
+  "/project/:vendor_id/:project_id/delete",
+  deleteTrackTraceProject
+);
 
 router.post("/scan/item", uploadDisk.array("photos[]", 10), scan_item);
 // router.post('/scan/item', scan_item);
