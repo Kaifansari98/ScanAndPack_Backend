@@ -507,6 +507,21 @@ export class DesigingStageController {
                 tag: true,
               },
             },
+            productType: {
+              select: {
+                id: true,
+                type: true,
+              },
+            },
+            productStructureInstance: {
+              select: {
+                id: true,
+                title: true,
+                productType: {
+                  select: { id: true, type: true },
+                },
+              },
+            },
             specificationDocumentMappings: {
               select: {
                 specification: {
@@ -1199,16 +1214,22 @@ export class DesigingStageController {
           const accountId = lead.account_id; // ✅ derived safely
           const vendor = await tx.vendorMaster.findUnique({
             where: { id: Number(vendorId) },
-            select: { is_this_vendor_is_custom_usertype_only: true },
+            select: {
+              is_this_vendor_is_custom_usertype_only: true,
+              handlesLargeScaleProjects: true,
+            },
           });
-          const useCustomVendorFlow =
+          const isCustomVendor =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
+          const handlesLargeScaleProjects =
+            vendor?.handlesLargeScaleProjects === true;
+          const useCustomVendorFlow = isCustomVendor || handlesLargeScaleProjects;
           const selectedDesignType =
             typeof req.body.design_type === "string"
               ? req.body.design_type.trim()
               : "";
 
-          if (useCustomVendorFlow && !selectedDesignType) {
+          if (isCustomVendor && !selectedDesignType) {
             throw new Error("Design type is required");
           }
           const requestedInstanceIds = Array.isArray(rawInstanceIds)
@@ -1234,8 +1255,20 @@ export class DesigingStageController {
               select: {
                 id: true,
                 title: true,
+                product_type_id: true,
                 productType: {
-                  select: { type: true },
+                  select: { id: true, type: true },
+                },
+                productItemCode: {
+                  select: {
+                    id: true,
+                    productStructure: {
+                      select: {
+                        product_type_id: true,
+                        productType: { select: { id: true, type: true } },
+                      },
+                    },
+                  },
                 },
               },
               orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
@@ -1318,6 +1351,7 @@ export class DesigingStageController {
           let structureSegment = "";
           let dateSegment = "";
           let instanceIdToPersist: number | null = null;
+          let productTypeIdToPersist: number | null = null;
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
@@ -1395,6 +1429,13 @@ export class DesigingStageController {
 
             if (selectedInstances.length === 1) {
               instanceIdToPersist = selectedInstances[0].id;
+              const inst = selectedInstances[0] as any;
+              productTypeIdToPersist =
+                inst.product_type_id ??
+                inst.productType?.id ??
+                inst.productItemCode?.productStructure?.product_type_id ??
+                inst.productItemCode?.productStructure?.productType?.id ??
+                null;
             } else if (selectedInstances.length > 1) {
               const uniqueSelectedProductTypes = [
                 ...new Set(
@@ -1408,8 +1449,30 @@ export class DesigingStageController {
                 uniqueSelectedProductTypes.length === 1
                   ? selectedInstances[0].id
                   : null;
+
+              const instanceProductTypeIds = [
+                ...new Set(
+                  selectedInstances
+                    .map(
+                      (inst: any) =>
+                        inst.product_type_id ??
+                        inst.productType?.id ??
+                        inst.productItemCode?.productStructure?.product_type_id ??
+                        inst.productItemCode?.productStructure?.productType?.id,
+                    )
+                    .filter(
+                      (id: any): id is number =>
+                        typeof id === "number" && id > 0,
+                    ),
+                ),
+              ];
+
+              if (instanceProductTypeIds.length === 1) {
+                productTypeIdToPersist = instanceProductTypeIds[0];
+              }
             } else {
               instanceIdToPersist = null;
+              productTypeIdToPersist = null;
             }
           }
 
@@ -1446,6 +1509,7 @@ export class DesigingStageController {
                 doc_type_id: designDocType.id,
                 created_by: Number(userId),
                 product_structure_instance_id: instanceIdToPersist,
+                product_type_id: productTypeIdToPersist,
               },
             });
 
