@@ -360,6 +360,21 @@ export const deleteScanAndPackItemById = async (
   |--------------------------------------------------------------------------
   */
 
+  const project = await prisma.projectMaster.findFirst({
+    where: { id: Number(project_id), vendor_id: Number(vendor_id) },
+    select: { id: true, isDeleted: true, project_status: true },
+  });
+
+  if (
+    !project ||
+    project.isDeleted ||
+    ["deactivated", "deleted", "deactive", "inactive"].includes(
+      (project.project_status || "").toLowerCase(),
+    )
+  ) {
+    throw new Error("Project is deleted or deactivated");
+  }
+
   const box = await prisma.boxMaster.findFirst({
     where: {
       id: Number(box_id),

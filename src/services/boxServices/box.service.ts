@@ -49,6 +49,28 @@ export const createBox = async (data: CreateBoxInput) => {
     ...boxData
   } = data;
 
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      id: Number(project_id),
+      vendor_id: Number(vendor_id),
+    },
+    select: {
+      id: true,
+      isDeleted: true,
+      project_status: true,
+    },
+  });
+
+  if (
+    !project ||
+    project.isDeleted ||
+    ["deactivated", "deleted", "deactive", "inactive"].includes(
+      (project.project_status || "").toLowerCase(),
+    )
+  ) {
+    throw new Error("Project is deleted or deactivated");
+  }
+
   const existingBox = await prisma.boxMaster.findFirst({
     where: {
       vendor_id: Number(vendor_id),
@@ -115,6 +137,21 @@ export const updateBoxName = async (
   box_info_values: BoxInfoValueInput[] = [],
   updated_by?: number | null,
 ) => {
+  const project = await prisma.projectMaster.findFirst({
+    where: { id: project_id, vendor_id },
+    select: { id: true, isDeleted: true, project_status: true },
+  });
+
+  if (
+    !project ||
+    project.isDeleted ||
+    ["deactivated", "deleted", "deactive", "inactive"].includes(
+      (project.project_status || "").toLowerCase(),
+    )
+  ) {
+    throw new Error("Project is deleted or deactivated");
+  }
+
   const existingBox = await prisma.boxMaster.findFirst({
     where: {
       id,
@@ -856,10 +893,29 @@ export const updateBoxStatus = async (
       id: boxId,
       is_deleted: false,
     },
+    include: {
+      project: {
+        select: {
+          id: true,
+          isDeleted: true,
+          project_status: true,
+        },
+      },
+    },
   });
 
   if (!box) {
     throw new Error("Box not found or is deleted");
+  }
+
+  if (
+    !box.project ||
+    box.project.isDeleted ||
+    ["deactivated", "deleted", "deactive", "inactive"].includes(
+      (box.project.project_status || "").toLowerCase(),
+    )
+  ) {
+    throw new Error("Project is deleted or deactivated");
   }
   const now = new Date();
 

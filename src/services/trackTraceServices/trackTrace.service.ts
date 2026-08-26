@@ -3887,6 +3887,12 @@ export const getQualityCheckProjects = async (
     const whereCondition: any = {
       vendor_id,
       isDeleted: false,
+      NOT: [
+        { project_status: { equals: "Deactivated", mode: "insensitive" } },
+        { project_status: { equals: "Deleted", mode: "insensitive" } },
+        { project_status: { equals: "Deactive", mode: "insensitive" } },
+        { project_status: { equals: "Inactive", mode: "insensitive" } },
+      ],
     };
 
     if (search) {
@@ -4531,7 +4537,16 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
       prisma.projectMaster.findMany({
-        where: { vendor_id, isDeleted: false },
+        where: {
+          vendor_id,
+          isDeleted: false,
+          NOT: [
+            { project_status: { equals: "Deactivated", mode: "insensitive" } },
+            { project_status: { equals: "Deleted", mode: "insensitive" } },
+            { project_status: { equals: "Deactive", mode: "insensitive" } },
+            { project_status: { equals: "Inactive", mode: "insensitive" } },
+          ],
+        },
         select: {
           id: true,
           project_name: true,
@@ -11095,11 +11110,19 @@ export const addManualPackingItemService = async (
         id: true,
         project_name: true,
         packing_type: true,
+        isDeleted: true,
+        project_status: true,
       },
     });
 
-    if (!project) {
-      return validationResponse(0, "Project not found");
+    if (
+      !project ||
+      project.isDeleted ||
+      ["deactivated", "deleted", "deactive", "inactive"].includes(
+        (project.project_status || "").toLowerCase(),
+      )
+    ) {
+      return validationResponse(0, "Project is deleted or deactivated");
     }
 
     /*

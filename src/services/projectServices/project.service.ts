@@ -1821,6 +1821,13 @@ export const getProjectsByVendorIdService = async (
 
   const whereCondition: any = {
     vendor_id: vendorId,
+    isDeleted: false,
+    NOT: [
+      { project_status: { equals: "Deactivated", mode: "insensitive" } },
+      { project_status: { equals: "Deleted", mode: "insensitive" } },
+      { project_status: { equals: "Deactive", mode: "insensitive" } },
+      { project_status: { equals: "Inactive", mode: "insensitive" } },
+    ],
   };
 
   if (search) {
