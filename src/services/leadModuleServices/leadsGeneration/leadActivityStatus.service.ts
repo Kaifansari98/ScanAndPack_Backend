@@ -118,6 +118,13 @@ const clonePartialLeadForScopedStatus = async (
 
   const sourceLead = await tx.leadMaster.findUnique({
     where: { id: leadId, vendor_id: vendorId },
+    include: {
+      statusType: {
+        select: {
+          tag: true,
+        },
+      },
+    },
   });
 
   if (!sourceLead) {
@@ -155,6 +162,25 @@ const clonePartialLeadForScopedStatus = async (
     );
   }
 
+  const type3Status =
+    targetStatus === ActivityStatus.onHold
+      ? await tx.statusTypeMaster.findFirst({
+          where: {
+            vendor_id: vendorId,
+            tag: "Type 3",
+          },
+          select: { id: true },
+        })
+      : null;
+
+  if (targetStatus === ActivityStatus.onHold && !type3Status) {
+    throw new Error('StatusTypeMaster row with tag "Type 3" not found.');
+  }
+
+  const shouldMoveLeadToType3 =
+    targetStatus === ActivityStatus.onHold &&
+    !["Type 1", "Type 2", "Type 3"].includes(sourceLead.statusType?.tag ?? "");
+
   const touchedProductTypeIds = Array.from(
     new Set(selectedInstances.map((instance) => instance.product_type_id)),
   );
@@ -184,6 +210,7 @@ const clonePartialLeadForScopedStatus = async (
     deleted_by: _sourceDeletedBy,
     activity_status: _sourceActivityStatus,
     activity_status_remark: _sourceActivityStatusRemark,
+    statusType: _sourceStatusType,
     ...clonedLeadScalars
   } = sourceLead;
 
@@ -191,6 +218,10 @@ const clonePartialLeadForScopedStatus = async (
     data: {
       ...clonedLeadScalars,
       lead_code: newLeadCode,
+      status_id:
+        shouldMoveLeadToType3 && type3Status
+          ? type3Status.id
+          : clonedLeadScalars.status_id,
       activity_status: targetStatus,
       activity_status_remark: remark,
       created_by: createdBy,
@@ -354,6 +385,16 @@ const clonePartialLeadForScopedStatus = async (
     await tx.cHSSelectionTypeMapping.updateMany({
       where: { selection_id: { in: movedSelectionIds } },
       data: { lead_id: clonedLead.id, updated_by: createdBy },
+    });
+  }
+
+  if (shouldMoveLeadToType3 && type3Status) {
+    await tx.leadMaster.update({
+      where: { id: leadId, vendor_id: vendorId },
+      data: {
+        status_id: type3Status.id,
+        updated_by: createdBy,
+      },
     });
   }
 
