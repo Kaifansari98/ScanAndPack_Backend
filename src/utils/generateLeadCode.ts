@@ -46,8 +46,16 @@ export async function generateLeadCode(
     );
   }
 
+  const franchise = input.franchiseId
+    ? await tx.franchiseMaster.findUnique({
+        where: { id: input.franchiseId },
+        select: { franchise_code: true },
+      })
+    : null;
+
   const basePrefix = vendor.vendor_code || "SH";
   const normalizedVendorCode = basePrefix.trim().toUpperCase();
+  const normalizedFranchiseCode = franchise?.franchise_code?.trim().toUpperCase() || null;
   const shouldUseYearWiseLeadCode =
     vendor.handlesLargeScaleProjects === true ||
     vendor.is_this_vendor_is_custom_usertype_only === true ||
@@ -136,19 +144,7 @@ export async function generateLeadCode(
     return generatedCode;
   }
 
-  let prefix = basePrefix;
-
-  if (input.franchiseId) {
-    const franchise = await tx.franchiseMaster.findUnique({
-      where: { id: input.franchiseId },
-      select: { franchise_code: true },
-    });
-
-    if (franchise?.franchise_code) {
-      // Use franchise_code directly (e.g. SHMUM, SHPN) — never hardcoded
-      prefix = franchise.franchise_code.trim().toUpperCase();
-    }
-  }
+  let prefix = normalizedFranchiseCode || basePrefix;
 
   // Get latest lead for this prefix across the entire vendor
   const lastLead = await tx.leadMaster.findFirst({
@@ -230,6 +226,7 @@ export async function generateLeadCode(
 
   logger.debug("[LEAD CODE GENERATED]", {
     franchiseId: input.franchiseId,
+    franchiseCode: normalizedFranchiseCode,
     prefix,
     generatedCode,
   });
