@@ -71,7 +71,15 @@ export const getAllProductTypes = async (vendor_id: number): Promise<ProductType
     })
 
     console.log("[SERVICE] Found product types", { count: types.length });
-  return types as ProductType[];
+
+    let filteredTypes = types;
+    if (!vendor.handlesLargeScaleProjects) {
+        filteredTypes = types.filter(
+            (t) => t.type?.trim().toLowerCase() !== "small order"
+        );
+    }
+
+    return filteredTypes as ProductType[];
 };
 
 export const deleteProductType = async (id: number): Promise<boolean> => {

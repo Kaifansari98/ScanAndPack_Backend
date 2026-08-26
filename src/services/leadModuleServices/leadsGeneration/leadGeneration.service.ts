@@ -860,7 +860,7 @@ export const getLeadsByVendor = async (vendorId: number) => {
     include: {
       account: true,
       leadProductStructureMapping: {
-        include: { productStructure: true },
+        include: { productStructure: { include: { productType: true } } },
       },
       productMappings: {
         include: { productType: true },
@@ -1114,7 +1114,7 @@ export const getLeadById = async (
         productMappings: { include: { productType: true } },
         leadB2BReqMappings: { include: { b2bRequirementType: true } },
         leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
-        leadProductStructureMapping: { include: { productStructure: true } },
+        leadProductStructureMapping: { include: { productStructure: { include: { productType: true } } } },
         documents: {
           where: { deleted_at: null, documentType: { tag: "Type 1" } },
         },
@@ -2810,7 +2810,7 @@ export const getSalesExecutivesByVendor = async (
         where: {
           vendor_id: vendorId,
           status: "active",
-          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+          ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
         },
         include: {
           user_type: true,
@@ -2854,7 +2854,7 @@ export const getSalesExecutivesByVendor = async (
         where: {
           vendor_id: vendorId,
           status: "active",
-          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+          ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
           user_type: {
             user_type: { equals: "designer", mode: "insensitive" },
           },
@@ -2898,30 +2898,36 @@ export const getSalesExecutivesByVendor = async (
         where: {
           vendor_id: vendorId,
           status: "active",
-          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
-          OR: [
+          AND: [
+            ...(franchiseId !== undefined
+              ? [{ OR: [{ franchise_id: franchiseId }, { franchise_id: null }] }]
+              : []),
             {
-              user_type: {
-                user_type: { in: ["super-admin"] },
-              },
-            },
-            {
-              user_type: {
-                user_type: { equals: "custom", mode: "insensitive" },
-              },
-              ...(options?.requiredPrivilegeCode
-                ? {
-                    userPrivilegeMappings: {
-                      some: {
-                        is_allowed: true,
-                        privilege: {
-                          code: options.requiredPrivilegeCode,
-                          is_active: true,
+              OR: [
+                {
+                  user_type: {
+                    user_type: { in: ["super-admin"] },
+                  },
+                },
+                {
+                  user_type: {
+                    user_type: { equals: "custom", mode: "insensitive" },
+                  },
+                  ...(options?.requiredPrivilegeCode
+                    ? {
+                        userPrivilegeMappings: {
+                          some: {
+                            is_allowed: true,
+                            privilege: {
+                              code: options.requiredPrivilegeCode,
+                              is_active: true,
+                            },
+                          },
                         },
-                      },
-                    },
-                  }
-                : {}),
+                      }
+                    : {}),
+                },
+              ],
             },
           ],
         },
@@ -2968,7 +2974,7 @@ export const getSalesExecutivesByVendor = async (
         },
         // Optionally filter only active users
         status: "active",
-        ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+        ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
       },
       include: {
         user_type: true,
