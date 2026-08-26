@@ -46,7 +46,7 @@ export async function generateLeadCode(
     );
   }
 
-  const basePrefix = input.vendorId === 1 ? "SH" : (vendor.vendor_code || "SH");
+  const basePrefix = vendor.vendor_code || "SH";
   const normalizedVendorCode = basePrefix.trim().toUpperCase();
   const shouldUseYearWiseLeadCode =
     vendor.handlesLargeScaleProjects === true ||
