@@ -791,6 +791,165 @@ private static mapTaskWithLead(task: any) {
     // ============================
     // NON-ADMIN FLOW
     // ============================
+ 
+    if (normalizedUserType === "telecaller" || normalizedUserType === "telecaller-team-lead" || normalizedUserType === "telecaller team lead") {
+      const baseWhere: any = {
+        vendor_id: vendorId,
+        assign_to: userId,
+      };
+ 
+      const lostStatusFilter: any = {
+        online_lead_followup_status: {
+          status_name: {
+            equals: "lost",
+            mode: "insensitive"
+          }
+        }
+      };
+ 
+      let todayCount = 0;
+      let upcomingCount = 0;
+      let overdueCount = 0;
+      let completedCount = 0;
+ 
+      [todayCount, upcomingCount, overdueCount, completedCount] = await Promise.all([
+        prisma.online_leads.count({
+          where: {
+            ...baseWhere,
+            follow_up_date: { gte: todayStart, lte: todayEnd },
+            online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+          }
+        }),
+        prisma.online_leads.count({
+          where: {
+            ...baseWhere,
+            follow_up_date: { gt: todayEnd },
+            online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+          }
+        }),
+        prisma.online_leads.count({
+          where: {
+            ...baseWhere,
+            follow_up_date: { lt: todayStart },
+            online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+          }
+        }),
+        prisma.online_leads.count({
+          where: {
+            ...baseWhere,
+            OR: [
+              lostStatusFilter,
+              { online_lead_followup_status: { status_name: { in: ["converted", "store assigned"], mode: "insensitive" } } }
+            ]
+          }
+        })
+      ]);
+ 
+      let dataWhereClause: any = { ...baseWhere };
+      if (filters.due_filter === "today") {
+        dataWhereClause = {
+          ...baseWhere,
+          follow_up_date: { gte: todayStart, lte: todayEnd },
+          online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+        };
+      } else if (filters.due_filter === "upcoming") {
+        dataWhereClause = {
+          ...baseWhere,
+          follow_up_date: { gt: todayEnd },
+          online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+        };
+      } else if (filters.due_filter === "overdue") {
+        dataWhereClause = {
+          ...baseWhere,
+          follow_up_date: { lt: todayStart },
+          online_lead_followup_status: { status_name: { not: "lost", mode: "insensitive" } }
+        };
+      } else if (filters.due_filter === "completed") {
+        dataWhereClause = {
+          ...baseWhere,
+          OR: [
+            lostStatusFilter,
+            { online_lead_followup_status: { status_name: { in: ["converted", "store assigned"], mode: "insensitive" } } }
+          ]
+        };
+      } else {
+        dataWhereClause = {
+          ...baseWhere,
+          OR: [
+            { follow_up_date: { not: null } },
+            lostStatusFilter
+          ]
+        };
+      }
+ 
+      const total = await prisma.online_leads.count({ where: dataWhereClause });
+      const onlineLeads = await prisma.online_leads.findMany({
+        where: dataWhereClause,
+        include: {
+          online_lead_followup_status: true,
+          UserMaster_online_leads_assign_toToUserMaster: true,
+        },
+        orderBy: {
+          created_at: filters.created_at === "asc" ? "asc" : "desc",
+        },
+        skip,
+        take: limit,
+      });
+ 
+      const mappedTasks = onlineLeads.map((lead: any) => {
+        const isLost = lead.online_lead_followup_status?.status_name.toLowerCase() === "lost";
+        const taskType = isLost ? "Lost Lead" : "Follow Up";
+        const taskStatus = isLost ? "lost" : "open";
+ 
+        return {
+          userLeadTask: {
+            id: lead.id,
+            status: taskStatus,
+            due_date: lead.follow_up_date,
+            task_type: taskType,
+            remark: lead.remark || null,
+            closed_by: isLost ? lead.assign_to : null,
+            closed_at: isLost ? lead.updated_at : null,
+            created_by: lead.assign_to || null,
+            created_by_name: lead.UserMaster_online_leads_assign_toToUserMaster?.user_name || null,
+            assigned_to_name: lead.UserMaster_online_leads_assign_toToUserMaster?.user_name || null,
+            created_at: lead.created_at,
+            updated_by: null,
+            updated_at: lead.updated_at,
+            instance_id: null,
+          },
+          leadMaster: {
+            id: lead.id,
+            account_id: null,
+            vendor_id: lead.vendor_id,
+            lead_code: lead.lead_code || `Lead #${lead.id}`,
+            site_map_link: null,
+            name: lead.leads_name || "—",
+            phone_number: lead.contact,
+            site_type: null,
+            lead_status: lead.online_lead_followup_status?.status_name || "New Lead",
+            product_type: lead.product_types || [],
+            product_structure: lead.product_structures || [],
+            instance_id: null,
+            is_blocked: false,
+            lead_blocked_at: null,
+            isOnlineLead: true,
+          },
+          instanceDetails: null,
+        };
+      });
+ 
+      return {
+        tasks: mappedTasks,
+        count: total,
+        summary: {
+          today: todayCount,
+          upcoming: upcomingCount,
+          overdue: overdueCount,
+          completed: completedCount,
+        },
+      };
+    }
 
     const ownedTasks = await prisma.userLeadTask.findMany({
       where: {

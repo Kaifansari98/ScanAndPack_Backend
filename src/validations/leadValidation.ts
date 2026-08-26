@@ -4,7 +4,8 @@ import { UserRoleInfo } from "../types/leadModule.types";
 import { validateIndianMobileRisk } from "../utils/phoneRiskValidator";
 
 const joiPhoneRiskValidator = (value: string, helpers: any) => {
-  const result = validateIndianMobileRisk(value);
+  const isB2B = helpers.state.ancestors?.[0]?.client_id != null;
+  const result = validateIndianMobileRisk(value, isB2B);
   if (!result.isValid) {
     return helpers.message(result.reason || "Invalid or fake phone number");
   }
@@ -221,6 +222,7 @@ export const validateUpdateLeadInput = (
   input: UpdateLeadInput
 ): UpdateLeadValidationResult => {
   const errors: string[] = [];
+  const isB2B = input.client_id != null;
 
   // Only validate fields that are provided (partial update support)
   if (input.firstname !== undefined) {
@@ -302,7 +304,7 @@ export const validateUpdateLeadInput = (
     if (typeof input.alt_contact_no !== "string") {
       errors.push("alt_contact_no must be a string if provided");
     } else if (input.alt_contact_no.trim() !== "") {
-      const riskResult = validateIndianMobileRisk(input.alt_contact_no);
+      const riskResult = validateIndianMobileRisk(input.alt_contact_no, isB2B);
       if (!riskResult.isValid) {
         errors.push(`alt_contact_no: ${riskResult.reason}`);
       }
@@ -343,7 +345,7 @@ export const validateUpdateLeadInput = (
       if (!/^\+?\d{7,20}$/.test(input.archetech_number.trim())) {
         errors.push("archetech_number must be a valid phone number if provided");
       } else {
-        const riskResult = validateIndianMobileRisk(input.archetech_number);
+        const riskResult = validateIndianMobileRisk(input.archetech_number, isB2B);
         if (!riskResult.isValid) {
           errors.push(`archetech_number: ${riskResult.reason}`);
         }
@@ -364,7 +366,7 @@ export const validateUpdateLeadInput = (
     if (input.contact_no.length < 7 || input.contact_no.length > 15) {
       errors.push("contact_no must be between 7 and 15 characters");
     } else {
-      const riskResult = validateIndianMobileRisk(input.contact_no);
+      const riskResult = validateIndianMobileRisk(input.contact_no, isB2B);
       if (!riskResult.isValid) {
         errors.push(`contact_no: ${riskResult.reason}`);
       }

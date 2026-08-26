@@ -62,7 +62,6 @@ export const createLeadRequirementMaterialHandler = async (
     const result = await addLeadRequirementMaterial({
       lead_id: Number(lead_id),
       vendor_id: Number(vendor_id),
-      product_type_id: rawTypeId ? Number(rawTypeId) : undefined,
       b2b_requirement_type_id: rawTypeId ? Number(rawTypeId) : undefined,
       product_id: product_id ? Number(product_id) : undefined,
       product_ids: Array.isArray(product_ids) ? product_ids.map(Number) : undefined,

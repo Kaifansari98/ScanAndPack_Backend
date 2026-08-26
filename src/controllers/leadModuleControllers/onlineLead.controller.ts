@@ -766,14 +766,24 @@ export class OnlineLeadController {
         store_preference_option,
         store_id,
       } = req.body;
-
-      if (isNaN(id) || !telecaller_id || !online_lead_status_id || !store_id) {
+ 
+      const status = await prisma.online_lead_followup_status.findUnique({
+        where: { id: Number(online_lead_status_id) },
+      });
+ 
+      if (!status) {
+        return res.status(404).json({ success: false, error: "Status not found" });
+      }
+ 
+      const isLostStatus = status.status_name.toLowerCase() === "lost";
+ 
+      if (isNaN(id) || !telecaller_id || !online_lead_status_id || (!isLostStatus && !store_id) || !remark || !remark.trim()) {
         return res.status(400).json({
           success: false,
-          error: "Required fields: telecaller_id, online_lead_status_id, store_id (Store Selection)",
+          error: "Required fields: telecaller_id, online_lead_status_id, store_id (unless status is Lost), remark (Call Log Remark)",
         });
       }
-
+ 
       // Ensure the logged-in user matches the telecaller_id in the payload to prevent spoofing
       const authUser = (req as any).user;
       if (!authUser || Number(authUser.id) !== Number(telecaller_id)) {
@@ -782,19 +792,19 @@ export class OnlineLeadController {
           error: "Unauthorized: telecaller_id does not match the authenticated user",
         });
       }
-
+ 
       // Fetch caller details to verify if they have the "telecaller" role
       const callerUser = await prisma.userMaster.findUnique({
         where: { id: Number(telecaller_id) },
         include: { user_type: true },
       });
       const isCallerTelecaller = callerUser?.user_type?.user_type?.toLowerCase() === "telecaller";
-
+ 
       const lead = await prisma.online_leads.findUnique({ where: { id } });
       if (!lead) {
         return res.status(404).json({ success: false, error: "Lead not found" });
       }
-
+ 
       // Enforce product types and product structures presence before follow-up
       const productTypes = lead.product_types || [];
       const productStructures = lead.product_structures || [];
@@ -803,14 +813,6 @@ export class OnlineLeadController {
           success: false,
           error: "Cannot log follow-up. Please add Product Types and Product Structures to this lead first.",
         });
-      }
-
-      const status = await prisma.online_lead_followup_status.findUnique({
-        where: { id: Number(online_lead_status_id) },
-      });
-
-      if (!status) {
-        return res.status(404).json({ success: false, error: "Status not found" });
       }
 
       // Check validation rule: followup_required = Yes (true) -> follow_up_date must be entered
@@ -874,21 +876,25 @@ export class OnlineLeadController {
 
         // 3. Update main OnlineLead for quick reference
         let targetStoreId: number | null = lead.store_id;
-        if (store_preference_option === "No Preference") {
-          targetStoreId = null;
-        } else if (store_preference_option === "Another Store" && store_id !== undefined) {
-          targetStoreId = store_id ? Number(store_id) : null;
-        } else if (store_id !== undefined) {
-          targetStoreId = store_id ? Number(store_id) : null;
+        if (!isLostStatus) {
+          if (store_preference_option === "No Preference") {
+            targetStoreId = null;
+          } else if (store_preference_option === "Another Store" && store_id !== undefined) {
+            targetStoreId = store_id ? Number(store_id) : null;
+          } else if (store_id !== undefined) {
+            targetStoreId = store_id ? Number(store_id) : null;
+          }
         }
-
-        const finalLeadCode = await this.updateLeadCodeForStore(
-          tx,
-          lead.id,
-          targetStoreId,
-          lead.vendor_id,
-          lead.lead_code
-        );
+ 
+        const finalLeadCode = isLostStatus
+          ? lead.lead_code
+          : await this.updateLeadCodeForStore(
+              tx,
+              lead.id,
+              targetStoreId,
+              lead.vendor_id,
+              lead.lead_code
+            );
 
         // Atomic conditional update: Auto-assign lead to the caller only if it is currently unassigned
         // and the user logging the call has the "telecaller" role.
@@ -2561,31 +2567,23 @@ export class OnlineLeadController {
     vendorId: number,
     currentLeadCode: string | null | undefined
   ): Promise<string | null | undefined> {
-    let storePrefix = "SH";
+    // Determine expected prefix for the target store using franchise_code directly
+    let storePrefix: string | null = null;
     if (toStoreId) {
       const franchise = await tx.franchiseMaster.findUnique({
         where: { id: toStoreId },
-        select: { city_id: true },
+        select: { franchise_code: true },
       });
 
-      if (franchise && franchise.city_id) {
-        const city = await tx.cityMaster.findUnique({
-          where: { id: franchise.city_id },
-          select: { name: true },
-        });
-
-        if (city && city.name) {
-          const citySegment = city.name.replace(/[^A-Za-z]/g, "").toUpperCase();
-          if (citySegment) {
-            storePrefix = `SH${citySegment}`;
-          }
-        }
+      if (franchise?.franchise_code) {
+        storePrefix = franchise.franchise_code.trim().toUpperCase();
       }
     }
 
+    // Regenerate if: no current code, no franchise_code found, or prefix mismatch
     const needsNewCode = !currentLeadCode ||
-      (storePrefix === "SH" && !currentLeadCode.startsWith("SH-")) ||
-      (storePrefix !== "SH" && !currentLeadCode.startsWith(`${storePrefix}-`));
+      !storePrefix ||
+      !currentLeadCode.startsWith(`${storePrefix}-`);
 
     if (needsNewCode) {
       return await generateLeadCode(tx, {

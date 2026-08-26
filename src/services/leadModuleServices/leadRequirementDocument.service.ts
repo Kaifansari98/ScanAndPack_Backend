@@ -99,7 +99,7 @@ export const uploadRequirementDocument = async ({
         lead_id,
         vendor_id,
         b2b_requirement_type_id,
-        is_deleted: false,
+        doc_type_id: resolvedDocTypeId || undefined,
       },
     });
   } else if (product_type_id) {
@@ -108,7 +108,6 @@ export const uploadRequirementDocument = async ({
         lead_id,
         vendor_id,
         product_type_id,
-        is_deleted: false,
       },
     });
   }

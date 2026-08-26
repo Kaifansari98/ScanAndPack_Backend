@@ -908,6 +908,7 @@ export const LeadProductMappingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   product_type_id: 'product_type_id',
+  is_archived: 'is_archived',
   created_by: 'created_by',
   created_at: 'created_at',
   approximate_budget: 'approximate_budget',
@@ -946,7 +947,6 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
   process_brief_id: 'process_brief_id',
   created_at: 'created_at',
   created_by: 'created_by',
@@ -962,7 +962,6 @@ export const LeadRequirementMaterialMappingScalarFieldEnum = {
   id: 'id',
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
   product_id: 'product_id',
   quantity: 'quantity',
   unit_id: 'unit_id',
@@ -1229,6 +1228,7 @@ export const LeadDocumentsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   doc_type_id: 'doc_type_id',
   is_deleted: 'is_deleted',
+  is_archived: 'is_archived',
   tech_check_status: 'tech_check_status',
   product_structure_instance_id: 'product_structure_instance_id',
   product_type_id: 'product_type_id',
@@ -1386,6 +1386,7 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   product_type_id: 'product_type_id',
+  is_archived: 'is_archived',
   product_structure_id: 'product_structure_id',
   quantity_index: 'quantity_index',
   title: 'title',
@@ -1447,6 +1448,7 @@ export const PaymentInfoScalarFieldEnum = {
   payment_type_id: 'payment_type_id',
   status_id: 'status_id',
   product_type_id: 'product_type_id',
+  is_archived: 'is_archived',
   basic_amount: 'basic_amount',
   gst_amount: 'gst_amount',
   gst_percentage: 'gst_percentage',
@@ -1468,7 +1470,8 @@ export const LedgerScalarFieldEnum = {
   type: 'type',
   created_by: 'created_by',
   created_at: 'created_at',
-  product_type_id: 'product_type_id'
+  product_type_id: 'product_type_id',
+  is_archived: 'is_archived'
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
@@ -1895,7 +1898,8 @@ export const LeadDetailedLogsScalarFieldEnum = {
   history_type: 'history_type',
   stage_id: 'stage_id',
   task_id: 'task_id',
-  product_type_id: 'product_type_id'
+  product_type_id: 'product_type_id',
+  is_archived: 'is_archived'
 } as const
 
 export type LeadDetailedLogsScalarFieldEnum = (typeof LeadDetailedLogsScalarFieldEnum)[keyof typeof LeadDetailedLogsScalarFieldEnum]
@@ -3889,6 +3893,7 @@ export const LeadBillingAddressScalarFieldEnum = {
   lead_id: 'lead_id',
   vendor_id: 'vendor_id',
   product_type_id: 'product_type_id',
+  is_archived: 'is_archived',
   address_type: 'address_type',
   name: 'name',
   address: 'address',
