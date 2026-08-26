@@ -1,14 +1,23 @@
-import { validationResponse } from '../../../src/utils/validationResponse';
+import { validationResponse } from "../../../src/utils/validationResponse";
 import axios from "axios";
-import { prisma,Prisma } from '../../prisma/client';
+import { prisma, Prisma } from "../../prisma/client";
 
-import { PackingType } from '../../prisma/generated';
-import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
+import { PackingType } from "../../prisma/generated";
+import {
+  CutListSavePayload,
+  MarkDefectPayload,
+  QRParam,
+  TrackTraceDashboardPayload,
+} from "../../../src/types/track-trace";
 import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
-import { getVendorSettingValue } from '../vendor.service';
-import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from '../../../src/utils/wasabiClient';
+import { getVendorSettingValue } from "../vendor.service";
+import {
+  generateSignedUrl,
+  uploadToWasabiCompletionPhotos,
+  uploadToWasabiDefectedItems,
+} from "../../../src/utils/wasabiClient";
 
 interface TrackTracePayload {
   project_id: number;
@@ -38,12 +47,11 @@ export const updateScannedItem_old = async (
       box_id,
     } = payload;
 
-    const projectFilter =
-      project_id
-        ? {
+    const projectFilter = project_id
+      ? {
           project_id,
         }
-        : {};
+      : {};
 
     /*
     |--------------------------------------------------------------------------
@@ -53,25 +61,21 @@ export const updateScannedItem_old = async (
     */
 
     if (box_id) {
-      const box =
-        await prisma.boxMaster.findFirst({
-          where: {
-            id:
-              box_id,
+      const box = await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id,
 
-            vendor_id,
+          vendor_id,
 
-            ...projectFilter,
+          ...projectFilter,
 
-            is_deleted:
-              false,
-          },
+          is_deleted: false,
+        },
 
-          select: {
-            id:
-              true,
-          },
-        });
+        select: {
+          id: true,
+        },
+      });
 
       if (!box) {
         return validationResponse(
@@ -88,31 +92,27 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const mappingExists =
-      await prisma.cutListMachineMapping.findFirst({
-        where: {
-          machine_id,
+    const mappingExists = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        machine_id,
 
-          vendor_id,
+        vendor_id,
 
-          ...projectFilter,
+        ...projectFilter,
 
-          cut_list: {
-            unique_code: {
-              equals:
-                unique_code,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
 
-              mode:
-                "insensitive",
-            },
+            mode: "insensitive",
           },
         },
+      },
 
-        select: {
-          id:
-            true,
-        },
-      });
+      select: {
+        id: true,
+      },
+    });
 
     if (!mappingExists) {
       return validationResponse(
@@ -131,112 +131,84 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const pendingMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          machine_id,
+    const pendingMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        machine_id,
 
-          vendor_id,
+        vendor_id,
 
-          ...projectFilter,
+        ...projectFilter,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at:
-            null,
+        actual_in_at: null,
 
-          cut_list: {
-            unique_code: {
-              equals:
-                unique_code,
+        cut_list: {
+          unique_code: {
+            equals: unique_code,
 
-              mode:
-                "insensitive",
-            },
+            mode: "insensitive",
+          },
+        },
+      },
+
+      orderBy: [
+        {
+          cut_list_id: "asc",
+        },
+
+        {
+          id: "asc",
+        },
+      ],
+
+      select: {
+        id: true,
+
+        sequence_no: true,
+
+        cut_list_id: true,
+
+        project_id: true,
+
+        actual_in_at: true,
+
+        machine_id: true,
+
+        machine: {
+          select: {
+            id: true,
+
+            machine_name: true,
           },
         },
 
-        orderBy: [
-          {
-            cut_list_id:
-              "asc",
-          },
+        cut_list: {
+          select: {
+            unique_code: true,
 
-          {
-            id:
-              "asc",
-          },
-        ],
+            description: true,
 
-        select: {
-          id:
-            true,
+            item_name: true,
 
-          sequence_no:
-            true,
-
-          cut_list_id:
-            true,
-
-          project_id:
-            true,
-
-          actual_in_at:
-            true,
-
-          machine_id:
-            true,
-
-          machine: {
-            select: {
-              id:
-                true,
-
-              machine_name:
-                true,
-            },
-          },
-
-          cut_list: {
-            select: {
-              unique_code:
-                true,
-
-              description:
-                true,
-
-              item_name:
-                true,
-
-              group_name:
-                true,
-            },
-          },
-
-          project: {
-            select: {
-              track_trace_status:
-                true,
-
-              project_name:
-                true,
-
-              packing_type:
-                true,
-            },
+            group_name: true,
           },
         },
-      });
 
-    if (
-      pendingMappings.length ===
-      0
-    ) {
-      return validationResponse(
-        0,
-        "Already Scanned",
-      );
+        project: {
+          select: {
+            track_trace_status: true,
+
+            project_name: true,
+
+            packing_type: true,
+          },
+        },
+      },
+    });
+
+    if (pendingMappings.length === 0) {
+      return validationResponse(0, "Already Scanned");
     }
 
     /*
@@ -246,22 +218,14 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    let eligibleMapping:
-      (typeof pendingMappings)[number] |
-      null =
-      null;
+    let eligibleMapping: (typeof pendingMappings)[number] | null = null;
 
-    for (
-      const item
-      of pendingMappings
-    ) {
-      const itemProjectFilter =
-        item.project_id
-          ? {
-            project_id:
-              item.project_id,
+    for (const item of pendingMappings) {
+      const itemProjectFilter = item.project_id
+        ? {
+            project_id: item.project_id,
           }
-          : {};
+        : {};
 
       /*
       |--------------------------------------------------------------------------
@@ -272,41 +236,33 @@ export const updateScannedItem_old = async (
       const previousNonPassMappings =
         await prisma.cutListMachineMapping.findMany({
           where: {
-            cut_list_id:
-              item.cut_list_id,
+            cut_list_id: item.cut_list_id,
 
             vendor_id,
 
             ...itemProjectFilter,
 
-            expected_in:
-              true,
+            expected_in: true,
 
             sequence_no: {
-              lt:
-                item.sequence_no,
+              lt: item.sequence_no,
             },
 
             machine: {
               scan_type: {
-                not:
-                  "PASS",
+                not: "PASS",
               },
             },
           },
 
           select: {
-            id:
-              true,
+            id: true,
 
-            machine_id:
-              true,
+            machine_id: true,
 
-            sequence_no:
-              true,
+            sequence_no: true,
 
-            actual_in_at:
-              true,
+            actual_in_at: true,
           },
         });
 
@@ -316,12 +272,8 @@ export const updateScannedItem_old = async (
       |--------------------------------------------------------------------------
       */
 
-      if (
-        previousNonPassMappings.length ===
-        0
-      ) {
-        eligibleMapping =
-          item;
+      if (previousNonPassMappings.length === 0) {
+        eligibleMapping = item;
 
         break;
       }
@@ -332,78 +284,46 @@ export const updateScannedItem_old = async (
       |--------------------------------------------------------------------------
       */
 
-      const previousMachineScanMap =
-        new Map<
-          string,
-          {
-            scannedQty:
-            number;
+      const previousMachineScanMap = new Map<
+        string,
+        {
+          scannedQty: number;
 
-            totalQty:
-            number;
-          }
-        >();
+          totalQty: number;
+        }
+      >();
 
-      for (
-        const previousItem
-        of previousNonPassMappings
-      ) {
-        const key =
-          `${previousItem.sequence_no}_${previousItem.machine_id}`;
+      for (const previousItem of previousNonPassMappings) {
+        const key = `${previousItem.sequence_no}_${previousItem.machine_id}`;
 
-        if (
-          !previousMachineScanMap.has(
-            key,
-          )
-        ) {
+        if (!previousMachineScanMap.has(key)) {
           previousMachineScanMap.set(
             key,
 
             {
-              scannedQty:
-                0,
+              scannedQty: 0,
 
-              totalQty:
-                0,
+              totalQty: 0,
             },
           );
         }
 
-        const currentData =
-          previousMachineScanMap.get(
-            key,
-          )!;
+        const currentData = previousMachineScanMap.get(key)!;
 
-        currentData.totalQty +=
-          1;
+        currentData.totalQty += 1;
 
-        if (
-          previousItem.actual_in_at
-        ) {
-          currentData.scannedQty +=
-            1;
+        if (previousItem.actual_in_at) {
+          currentData.scannedQty += 1;
         }
 
-        previousMachineScanMap.set(
-          key,
-          currentData,
-        );
+        previousMachineScanMap.set(key, currentData);
       }
 
-      const previousScannedQtyList =
-        Array.from(
-          previousMachineScanMap.values(),
-        ).map(
-          (
-            data,
-          ) =>
-            data.scannedQty,
-        );
+      const previousScannedQtyList = Array.from(
+        previousMachineScanMap.values(),
+      ).map((data) => data.scannedQty);
 
-      const allowedQtyForCurrentMachine =
-        Math.min(
-          ...previousScannedQtyList,
-        );
+      const allowedQtyForCurrentMachine = Math.min(...previousScannedQtyList);
 
       /*
       |--------------------------------------------------------------------------
@@ -411,11 +331,10 @@ export const updateScannedItem_old = async (
       |--------------------------------------------------------------------------
       */
 
-      const currentMachineScannedQty =
-        await prisma.cutListMachineMapping.count({
+      const currentMachineScannedQty = await prisma.cutListMachineMapping.count(
+        {
           where: {
-            cut_list_id:
-              item.cut_list_id,
+            cut_list_id: item.cut_list_id,
 
             vendor_id,
 
@@ -423,57 +342,41 @@ export const updateScannedItem_old = async (
 
             machine_id,
 
-            sequence_no:
-              item.sequence_no,
+            sequence_no: item.sequence_no,
 
-            expected_in:
-              true,
+            expected_in: true,
 
             actual_in_at: {
-              not:
-                null,
+              not: null,
             },
           },
-        });
+        },
+      );
 
       console.log({
-        cut_list_id:
-          item.cut_list_id,
+        cut_list_id: item.cut_list_id,
 
         machine_id,
 
-        sequence_no:
-          item.sequence_no,
+        sequence_no: item.sequence_no,
 
         allowedQtyForCurrentMachine,
 
         currentMachineScannedQty,
       });
 
-      if (
-        currentMachineScannedQty <
-        allowedQtyForCurrentMachine
-      ) {
-        eligibleMapping =
-          item;
+      if (currentMachineScannedQty < allowedQtyForCurrentMachine) {
+        eligibleMapping = item;
 
         break;
       }
     }
 
     if (!eligibleMapping) {
-      return validationResponse(
-        0,
-        "Scan on other machine first",
-      );
+      return validationResponse(0, "Scan on other machine first");
     }
 
-    const {
-      id,
-      sequence_no,
-      cut_list_id,
-    } =
-      eligibleMapping;
+    const { id, sequence_no, cut_list_id } = eligibleMapping;
 
     /*
     |--------------------------------------------------------------------------
@@ -483,123 +386,82 @@ export const updateScannedItem_old = async (
     */
 
     if (is_check) {
-      const value =
-        await getVendorSettingValue(
-          vendor_id,
+      const value = await getVendorSettingValue(
+        vendor_id,
 
-          "SHOW_STATUS_ON_SCAN",
-        );
+        "SHOW_STATUS_ON_SCAN",
+      );
 
-      if (
-        value ===
-        "1"
-      ) {
-        const mappedItem =
-          eligibleMapping;
+      if (value === "1") {
+        const mappedItem = eligibleMapping;
 
-        let activeDefect:
-          any =
-          null;
+        let activeDefect: any = null;
 
-        if (
-          mappedItem.cut_list_id
-        ) {
-          activeDefect =
-            await prisma.defectedItem.findFirst({
-              where: {
-                cut_list_id:
-                  mappedItem.cut_list_id,
+        if (mappedItem.cut_list_id) {
+          activeDefect = await prisma.defectedItem.findFirst({
+            where: {
+              cut_list_id: mappedItem.cut_list_id,
 
-                defect_status: {
-                  not:
-                    "Completed",
+              defect_status: {
+                not: "Completed",
+              },
+            },
+
+            orderBy: {
+              created_at: "desc",
+            },
+
+            select: {
+              id: true,
+
+              defect_id: true,
+
+              remark: true,
+
+              action: true,
+
+              rework_machine_id: true,
+
+              defect_status: true,
+
+              created_at: true,
+
+              defect: {
+                select: {
+                  id: true,
+
+                  defect_name: true,
                 },
               },
 
-              orderBy: {
-                created_at:
-                  "desc",
-              },
+              images: {
+                select: {
+                  id: true,
 
-              select: {
-                id:
-                  true,
+                  doc_og_name: true,
 
-                defect_id:
-                  true,
+                  doc_sys_name: true,
 
-                remark:
-                  true,
-
-                action:
-                  true,
-
-                rework_machine_id:
-                  true,
-
-                defect_status:
-                  true,
-
-                created_at:
-                  true,
-
-                defect: {
-                  select: {
-                    id:
-                      true,
-
-                    defect_name:
-                      true,
-                  },
-                },
-
-                images: {
-                  select: {
-                    id:
-                      true,
-
-                    doc_og_name:
-                      true,
-
-                    doc_sys_name:
-                      true,
-
-                    created_at:
-                      true,
-                  },
+                  created_at: true,
                 },
               },
-            });
+            },
+          });
         }
 
-        if (
-          activeDefect &&
-          activeDefect.images.length >
-          0
-        ) {
-          const imagesWithUrls =
-            await Promise.all(
-              activeDefect.images.map(
-                async (
-                  image:
-                    any,
-                ) => ({
-                  ...image,
+        if (activeDefect && activeDefect.images.length > 0) {
+          const imagesWithUrls = await Promise.all(
+            activeDefect.images.map(async (image: any) => ({
+              ...image,
 
-                  signed_url:
-                    await generateSignedUrl(
-                      image.doc_sys_name,
-                    ),
-                }),
-              ),
-            );
+              signed_url: await generateSignedUrl(image.doc_sys_name),
+            })),
+          );
 
-          activeDefect =
-          {
+          activeDefect = {
             ...activeDefect,
 
-            images:
-              imagesWithUrls,
+            images: imagesWithUrls,
           };
         }
 
@@ -613,8 +475,7 @@ export const updateScannedItem_old = async (
 
             activeDefect,
 
-            countdown_timer:
-              3,
+            countdown_timer: 3,
           },
         );
       }
@@ -642,29 +503,22 @@ export const updateScannedItem_old = async (
       |--------------------------------------------------------------------------
       */
 
-      const currentProject =
-        await prisma.projectMaster.findFirst({
-          where: {
-            id:
-              eligibleMapping.project_id,
+      const currentProject = await prisma.projectMaster.findFirst({
+        where: {
+          id: eligibleMapping.project_id,
 
-            vendor_id,
-          },
+          vendor_id,
+        },
 
-          select: {
-            id:
-              true,
+        select: {
+          id: true,
 
-            packing_type:
-              true,
-          },
-        });
+          packing_type: true,
+        },
+      });
 
       if (!currentProject) {
-        return validationResponse(
-          0,
-          "Project not found",
-        );
+        return validationResponse(0, "Project not found");
       }
 
       /*
@@ -673,54 +527,38 @@ export const updateScannedItem_old = async (
       |--------------------------------------------------------------------------
       */
 
-      if (
-        currentProject.packing_type ===
-        PackingType.GROUPWISE
-      ) {
+      if (currentProject.packing_type === PackingType.GROUPWISE) {
         /*
         |--------------------------------------------------------------------------
         | Get incoming item's group
         |--------------------------------------------------------------------------
         */
 
-        const incomingItem =
-          await prisma.cutList.findFirst({
-            where: {
-              id:
-                cut_list_id,
+        const incomingItem = await prisma.cutList.findFirst({
+          where: {
+            id: cut_list_id,
 
-              vendor_id,
+            vendor_id,
 
-              project_id:
-                eligibleMapping.project_id,
-            },
+            project_id: eligibleMapping.project_id,
+          },
 
-            select: {
-              id:
-                true,
+          select: {
+            id: true,
 
-              item_name:
-                true,
+            item_name: true,
 
-              group_name:
-                true,
-            },
-          });
+            group_name: true,
+          },
+        });
 
         if (!incomingItem) {
-          return validationResponse(
-            0,
-            "Cutlist item not found",
-          );
+          return validationResponse(0, "Cutlist item not found");
         }
 
-        const incomingGroupName =
-          incomingItem.group_name
-            ?.trim();
+        const incomingGroupName = incomingItem.group_name?.trim();
 
-        const incomingGroup =
-          incomingGroupName
-            ?.toLowerCase();
+        const incomingGroup = incomingGroupName?.toLowerCase();
 
         /*
         |--------------------------------------------------------------------------
@@ -745,52 +583,43 @@ export const updateScannedItem_old = async (
         |--------------------------------------------------------------------------
         */
 
-        const existingBoxItem =
-          await prisma.cutListMachineMapping.findFirst({
-            where: {
-              box_id,
+        const existingBoxItem = await prisma.cutListMachineMapping.findFirst({
+          where: {
+            box_id,
 
-              vendor_id,
+            vendor_id,
 
-              project_id:
-                eligibleMapping.project_id,
+            project_id: eligibleMapping.project_id,
 
-              actual_in_at: {
-                not:
-                  null,
-              },
+            actual_in_at: {
+              not: null,
+            },
+          },
+
+          orderBy: [
+            {
+              actual_in_at: "asc",
             },
 
-            orderBy: [
-              {
-                actual_in_at:
-                  "asc",
-              },
+            {
+              id: "asc",
+            },
+          ],
 
-              {
-                id:
-                  "asc",
-              },
-            ],
+          select: {
+            id: true,
 
-            select: {
-              id:
-                true,
+            cut_list: {
+              select: {
+                id: true,
 
-              cut_list: {
-                select: {
-                  id:
-                    true,
+                item_name: true,
 
-                  item_name:
-                    true,
-
-                  group_name:
-                    true,
-                },
+                group_name: true,
               },
             },
-          });
+          },
+        });
 
         /*
         |--------------------------------------------------------------------------
@@ -798,19 +627,10 @@ export const updateScannedItem_old = async (
         |--------------------------------------------------------------------------
         */
 
-        if (
-          existingBoxItem
-            ?.cut_list
-        ) {
-          const existingGroupName =
-            existingBoxItem
-              .cut_list
-              .group_name
-              ?.trim();
+        if (existingBoxItem?.cut_list) {
+          const existingGroupName = existingBoxItem.cut_list.group_name?.trim();
 
-          const existingGroup =
-            existingGroupName
-              ?.toLowerCase();
+          const existingGroup = existingGroupName?.toLowerCase();
 
           /*
           |--------------------------------------------------------------------------
@@ -832,10 +652,7 @@ export const updateScannedItem_old = async (
           |--------------------------------------------------------------------------
           */
 
-          if (
-            existingGroup !==
-            incomingGroup
-          ) {
+          if (existingGroup !== incomingGroup) {
             return validationResponse(
               0,
 
@@ -853,57 +670,47 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const previousPassMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          cut_list_id,
+    const previousPassMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        cut_list_id,
 
-          vendor_id,
+        vendor_id,
 
-          ...(eligibleMapping.project_id
-            ? {
-              project_id:
-                eligibleMapping.project_id,
+        ...(eligibleMapping.project_id
+          ? {
+              project_id: eligibleMapping.project_id,
             }
-            : {}),
+          : {}),
 
-          sequence_no: {
-            lt:
-              sequence_no,
-          },
-
-          actual_in_at:
-            null,
-
-          machine: {
-            scan_type:
-              "PASS",
-          },
+        sequence_no: {
+          lt: sequence_no,
         },
 
-        orderBy: [
-          {
-            sequence_no:
-              "asc",
-          },
+        actual_in_at: null,
 
-          {
-            id:
-              "asc",
-          },
-        ],
-
-        select: {
-          id:
-            true,
-
-          sequence_no:
-            true,
-
-          machine_id:
-            true,
+        machine: {
+          scan_type: "PASS",
         },
-      });
+      },
+
+      orderBy: [
+        {
+          sequence_no: "asc",
+        },
+
+        {
+          id: "asc",
+        },
+      ],
+
+      select: {
+        id: true,
+
+        sequence_no: true,
+
+        machine_id: true,
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -911,32 +718,17 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const passMappingIdsToUpdate:
-      number[] =
-      [];
+    const passMappingIdsToUpdate: number[] = [];
 
-    const passMachineKeySet =
-      new Set<string>();
+    const passMachineKeySet = new Set<string>();
 
-    for (
-      const passMapping
-      of previousPassMappings
-    ) {
-      const key =
-        `${passMapping.sequence_no}_${passMapping.machine_id}`;
+    for (const passMapping of previousPassMappings) {
+      const key = `${passMapping.sequence_no}_${passMapping.machine_id}`;
 
-      if (
-        !passMachineKeySet.has(
-          key,
-        )
-      ) {
-        passMachineKeySet.add(
-          key,
-        );
+      if (!passMachineKeySet.has(key)) {
+        passMachineKeySet.add(key);
 
-        passMappingIdsToUpdate.push(
-          passMapping.id,
-        );
+        passMappingIdsToUpdate.push(passMapping.id);
       }
     }
 
@@ -947,81 +739,60 @@ export const updateScannedItem_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const scanUpdate =
-      await prisma.$transaction(
-        async (
-          tx,
-        ) => {
-          /*
+    const scanUpdate = await prisma.$transaction(async (tx) => {
+      /*
           |--------------------------------------------------------------------------
           | Auto-pass pending PASS rows
           |--------------------------------------------------------------------------
           */
 
-          if (
-            passMappingIdsToUpdate.length >
-            0
-          ) {
-            await tx.cutListMachineMapping.updateMany({
-              where: {
-                id: {
-                  in:
-                    passMappingIdsToUpdate,
-                },
+      if (passMappingIdsToUpdate.length > 0) {
+        await tx.cutListMachineMapping.updateMany({
+          where: {
+            id: {
+              in: passMappingIdsToUpdate,
+            },
 
-                actual_in_at:
-                  null,
-              },
+            actual_in_at: null,
+          },
 
-              data: {
-                actual_in_at:
-                  new Date(),
+          data: {
+            actual_in_at: new Date(),
 
-                in_operator:
-                  created_by,
-              },
-            });
-          }
+            in_operator: created_by,
+          },
+        });
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Scan current machine row
           |--------------------------------------------------------------------------
           */
 
-          return await tx.cutListMachineMapping.updateMany({
-            where: {
-              id,
+      return await tx.cutListMachineMapping.updateMany({
+        where: {
+          id,
 
-              actual_in_at:
-                null,
-            },
-
-            data: {
-              actual_in_at:
-                new Date(),
-
-              in_operator:
-                created_by,
-
-              ...(box_id
-                ? {
-                  box_id,
-                }
-                : {}),
-            },
-          });
+          actual_in_at: null,
         },
-      );
 
-    if (
-      scanUpdate.count ===
-      0
-    ) {
-      return validationResponse(
-        0,
-        "Already Scanned",
-      );
+        data: {
+          actual_in_at: new Date(),
+
+          in_operator: created_by,
+
+          ...(box_id
+            ? {
+                box_id,
+              }
+            : {}),
+        },
+      });
+    });
+
+    if (scanUpdate.count === 0) {
+      return validationResponse(0, "Already Scanned");
     }
 
     /*
@@ -1032,36 +803,28 @@ export const updateScannedItem_old = async (
     */
 
     if (cut_list_id) {
-      const pendingDefect =
-        await prisma.defectedItem.findFirst({
-          where: {
-            cut_list_id,
+      const pendingDefect = await prisma.defectedItem.findFirst({
+        where: {
+          cut_list_id,
 
-            defect_status: {
-              not:
-                "Completed",
-            },
+          defect_status: {
+            not: "Completed",
           },
-        });
+        },
+      });
 
-      if (
-        pendingDefect
-      ) {
+      if (pendingDefect) {
         await prisma.defectedItem.update({
           where: {
-            id:
-              pendingDefect.id,
+            id: pendingDefect.id,
           },
 
           data: {
-            defect_status:
-              "Completed",
+            defect_status: "Completed",
 
-            defect_completed_by:
-              created_by,
+            defect_completed_by: created_by,
 
-            defect_completed_at:
-              new Date(),
+            defect_completed_at: new Date(),
           },
         });
 
@@ -1071,44 +834,31 @@ export const updateScannedItem_old = async (
         |--------------------------------------------------------------------------
         */
 
-        if (
-          files.length >
-          0
-        ) {
-          const uploadedPhotos =
-            await uploadToWasabiCompletionPhotos(
-              files,
+        if (files.length > 0) {
+          const uploadedPhotos = await uploadToWasabiCompletionPhotos(
+            files,
+
+            vendor_id,
+
+            id,
+          );
+
+          await prisma.defectCompletionPhoto.createMany({
+            data: uploadedPhotos.map((photo) => ({
+              cut_list_machine_mapping_id: id,
+
+              cut_list_id,
 
               vendor_id,
 
-              id,
-            );
+              defected_item_id: pendingDefect.id,
 
-          await prisma.defectCompletionPhoto.createMany({
-            data:
-              uploadedPhotos.map(
-                (
-                  photo,
-                ) => ({
-                  cut_list_machine_mapping_id:
-                    id,
+              doc_og_name: photo.originalName,
 
-                  cut_list_id,
+              doc_sys_name: photo.systemName,
 
-                  vendor_id,
-
-                  defected_item_id:
-                    pendingDefect.id,
-
-                  doc_og_name:
-                    photo.originalName,
-
-                  doc_sys_name:
-                    photo.systemName,
-
-                  created_by,
-                }),
-              ),
+              created_by,
+            })),
           });
 
           console.log(
@@ -1128,31 +878,16 @@ export const updateScannedItem_old = async (
     await updateProjectStatus(
       eligibleMapping.project_id,
 
-      eligibleMapping.project
-        .track_trace_status,
+      eligibleMapping.project.track_trace_status,
     );
-    return validationResponse(
-      1,
-      "Scan done",
-    );
-
-  } catch (
-  error: unknown
-  ) {
-    console.error(
-      "updateScannedItem error:",
-      error,
-    );
+    return validationResponse(1, "Scan done");
+  } catch (error: unknown) {
+    console.error("updateScannedItem error:", error);
 
     const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "Something went wrong";
+      error instanceof Error ? error.message : "Something went wrong";
 
-    return validationResponse(
-      0,
-      errorMessage,
-    );
+    return validationResponse(0, errorMessage);
   }
 };
 
@@ -1176,7 +911,7 @@ export const updateScannedItem = async (
     const normalizedUniqueCode = unique_code.trim().toUpperCase();
     const barcodeRelationFilter = {
       unique_code: {
-        equals: normalizedUniqueCode        
+        equals: normalizedUniqueCode,
       },
     };
 
@@ -1232,6 +967,7 @@ export const updateScannedItem = async (
             track_trace_status: true,
             project_name: true,
             packing_type: true,
+            isDeleted: true,
           },
         },
       },
@@ -1241,18 +977,19 @@ export const updateScannedItem = async (
       ? getVendorSettingValue(vendor_id, "SHOW_STATUS_ON_SCAN")
       : Promise.resolve(null);
 
-    const [selectedBox, pendingMappings, showStatusSetting] =
-      await Promise.all([
-        selectedBoxPromise,
-        pendingMappingsPromise,
-        showStatusSettingPromise,
-      ]);
+    const [selectedBox, pendingMappings, showStatusSetting] = await Promise.all(
+      [selectedBoxPromise, pendingMappingsPromise, showStatusSettingPromise],
+    );
 
     if (box_id && !selectedBox) {
       return validationResponse(
         0,
         "Invalid box_id: box not found for this project",
       );
+    }
+
+    if (pendingMappings.length > 0 && pendingMappings[0].project?.isDeleted) {
+      return validationResponse(0, "Project is deleted or deactivated");
     }
 
     /*
@@ -1269,6 +1006,12 @@ export const updateScannedItem = async (
         },
         select: {
           id: true,
+          project: {
+            select: {
+              isDeleted: true,
+              project_name: true,
+            },
+          },
         },
       });
 
@@ -1279,6 +1022,10 @@ export const updateScannedItem = async (
             ? "Item not found for this machine in the selected project"
             : "Machine mapping not found",
         );
+      }
+
+      if (mappingExists.project?.isDeleted) {
+        return validationResponse(0, "Project is deleted or deactivated");
       }
 
       return validationResponse(0, "Already Scanned");
@@ -1375,8 +1122,7 @@ export const updateScannedItem = async (
             continue;
           }
 
-          const previousMachineKey =
-            `${flowMapping.sequence_no}:${flowMapping.machine_id}`;
+          const previousMachineKey = `${flowMapping.sequence_no}:${flowMapping.machine_id}`;
 
           if (!previousMachineScannedQuantity.has(previousMachineKey)) {
             previousMachineScannedQuantity.set(previousMachineKey, 0);
@@ -1528,27 +1274,26 @@ export const updateScannedItem = async (
         })
       : Promise.resolve(null);
 
-    const previousPassMappingsPromise =
-      prisma.cutListMachineMapping.findMany({
-        where: {
-          cut_list_id,
-          vendor_id,
-          project_id: eligibleMapping.project_id,
-          sequence_no: {
-            lt: sequence_no,
-          },
-          actual_in_at: null,
-          machine: {
-            scan_type: "PASS",
-          },
+    const previousPassMappingsPromise = prisma.cutListMachineMapping.findMany({
+      where: {
+        cut_list_id,
+        vendor_id,
+        project_id: eligibleMapping.project_id,
+        sequence_no: {
+          lt: sequence_no,
         },
-        orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
-        select: {
-          id: true,
-          sequence_no: true,
-          machine_id: true,
+        actual_in_at: null,
+        machine: {
+          scan_type: "PASS",
         },
-      });
+      },
+      orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
+      select: {
+        id: true,
+        sequence_no: true,
+        machine_id: true,
+      },
+    });
 
     const pendingDefectPromise = prisma.defectedItem.findFirst({
       where: {
@@ -1585,8 +1330,7 @@ export const updateScannedItem = async (
       }
 
       if (existingBoxItem?.cut_list) {
-        const existingGroupName =
-          existingBoxItem.cut_list.group_name?.trim();
+        const existingGroupName = existingBoxItem.cut_list.group_name?.trim();
         const existingGroup = existingGroupName?.toLowerCase();
 
         if (!existingGroup) {
@@ -1622,18 +1366,17 @@ export const updateScannedItem = async (
 
     /* Update the current row and PASS rows atomically. */
     const scanUpdate = await prisma.$transaction(async (tx) => {
-      const currentMappingUpdate =
-        await tx.cutListMachineMapping.updateMany({
-          where: {
-            id,
-            actual_in_at: null,
-          },
-          data: {
-            actual_in_at: scanTime,
-            in_operator: created_by,
-            ...(box_id ? { box_id } : {}),
-          },
-        });
+      const currentMappingUpdate = await tx.cutListMachineMapping.updateMany({
+        where: {
+          id,
+          actual_in_at: null,
+        },
+        data: {
+          actual_in_at: scanTime,
+          in_operator: created_by,
+          ...(box_id ? { box_id } : {}),
+        },
+      });
 
       // Another request already scanned the row. Do not update PASS rows.
       if (currentMappingUpdate.count === 0) {
@@ -1719,13 +1462,11 @@ export const updateScannedItem = async (
   }
 };
 
-
-
-
 export const check_defect = async (payload: TrackTracePayload) => {
   console.log(payload);
   try {
-    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
+    const { project_id, vendor_id, machine_id, unique_code, created_by } =
+      payload;
 
     const projectFilter = project_id ? { project_id } : {};
 
@@ -1762,6 +1503,7 @@ export const check_defect = async (payload: TrackTracePayload) => {
           select: {
             track_trace_status: true,
             project_name: true,
+            isDeleted: true,
           },
         },
       },
@@ -1769,29 +1511,34 @@ export const check_defect = async (payload: TrackTracePayload) => {
 
     console.log("mappedItem", mappedItem);
     if (!mappedItem) {
-      return validationResponse(0, project_id
-        ? 'Item not found for this machine in the selected project'
-        : 'Item not found for this machine'
+      return validationResponse(
+        0,
+        project_id
+          ? "Item not found for this machine in the selected project"
+          : "Item not found for this machine",
       );
     }
-    return validationResponse(1, '', mappedItem);
+
+    if (mappedItem.project?.isDeleted) {
+      return validationResponse(0, "Project is deleted or deactivated");
+    }
+
+    return validationResponse(1, "", mappedItem);
   } catch (error) {
     console.log("Error in api", error);
-    return validationResponse(0, 'Something went wrong');
+    return validationResponse(0, "Something went wrong");
   }
 };
 
-
-
 export const updateProjectStatus = async (
   project_id: number,
-  current_status: string
+  current_status: string,
 ) => {
   try {
     const projectId = Number(project_id);
 
     if (current_status === "Not Started") {
-      return await prisma.projectMaster.update({
+      return await prisma.projectMaster.update({                
         where: {
           id: projectId,
         },
@@ -1823,16 +1570,13 @@ export const updateProjectStatus = async (
         },
       });
     }
-
   } catch (error) {
     console.error("Error updating project:", error);
     throw error;
   }
 };
 
-export const getPendingCutListMachineMappings = async (
-  project_id: number
-) => {
+export const getPendingCutListMachineMappings = async (project_id: number) => {
   try {
     const projectId = Number(project_id);
 
@@ -1850,14 +1594,7 @@ export const getPendingCutListMachineMappings = async (
   }
 };
 
-
-
-
-
-
-
 export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
-
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
 
@@ -1871,6 +1608,9 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
     actual_in_at: {
       gte: todayStart,
       lte: tomorrow,
+    },
+    project: {
+      isDeleted: false,
     },
   };
 
@@ -1910,15 +1650,14 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
     },
   });
 
-  const totalSqft = Math.round(
-    processedItemsToday.reduce((sum, item) => {
-      const length = Number(item.cut_list?.length ?? 0);
-      const width = Number(item.cut_list?.width ?? 0);
-      return sum + (length * width) / 92903;
-    }, 0) * 100
-  ) / 100;
-
-
+  const totalSqft =
+    Math.round(
+      processedItemsToday.reduce((sum, item) => {
+        const length = Number(item.cut_list?.length ?? 0);
+        const width = Number(item.cut_list?.width ?? 0);
+        return sum + (length * width) / 92903;
+      }, 0) * 100,
+    ) / 100;
 
   const baseWhereYesterday: any = {
     vendor_id: payload.vendor_id,
@@ -1953,34 +1692,34 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
     },
   });
 
-  const yesterdaySqft = Math.round(
-    processedItemsYesterday.reduce((sum, item) => {
-      const length = Number(item.cut_list?.length ?? 0);
-      const width = Number(item.cut_list?.width ?? 0);
-      return sum + (length * width) / 92903;
-    }, 0) * 100
-  ) / 100;
-
+  const yesterdaySqft =
+    Math.round(
+      processedItemsYesterday.reduce((sum, item) => {
+        const length = Number(item.cut_list?.length ?? 0);
+        const width = Number(item.cut_list?.width ?? 0);
+        return sum + (length * width) / 92903;
+      }, 0) * 100,
+    ) / 100;
 
   const sqftChange =
     yesterdaySqft > 0
       ? Math.round(((totalSqft - yesterdaySqft) / yesterdaySqft) * 100)
       : 0;
 
-  const sqftTrend = totalSqft >= yesterdaySqft ? 'up' : 'down';
+  const sqftTrend = totalSqft >= yesterdaySqft ? "up" : "down";
 
-  const sqftSubtitle = `${sqftTrend === 'up' ? '↑' : '↓'} ${Math.abs(
-    totalSqft - yesterdaySqft
+  const sqftSubtitle = `${sqftTrend === "up" ? "↑" : "↓"} ${Math.abs(
+    totalSqft - yesterdaySqft,
   ).toFixed(2)} sqft`;
-
 
   const itemsYesterday = await prisma.cutListMachineMapping.count({
     where: baseWhereYesterday,
   });
 
-  const itemsChange = itemsYesterday > 0
-    ? Math.round(((itemsToday - itemsYesterday) / itemsYesterday) * 100)
-    : 0;
+  const itemsChange =
+    itemsYesterday > 0
+      ? Math.round(((itemsToday - itemsYesterday) / itemsYesterday) * 100)
+      : 0;
 
   const totalMachines = await prisma.machineMaster.count({
     where: {
@@ -1989,70 +1728,67 @@ export const getKPIS = async (payload: TrackTraceDashboardPayload) => {
   });
   const activeMachines = await prisma.machineMaster.count({
     where: {
-      status: 'ACTIVE',
-      vendor_id: payload.vendor_id
-    }
+      status: "ACTIVE",
+      vendor_id: payload.vendor_id,
+    },
   });
 
-  const machineUtilization = totalMachines > 0
-    ? Math.round((activeMachines / totalMachines) * 100)
-    : 0;
+  const machineUtilization =
+    totalMachines > 0 ? Math.round((activeMachines / totalMachines) * 100) : 0;
 
   const totalOperators = await prisma.userMaster.count({
     where: {
-      status: 'active',
-      vendor_id: payload.vendor_id
-    }
+      status: "active",
+      vendor_id: payload.vendor_id,
+    },
   });
 
   const activeOperatorGroups = await prisma.userMachineMapping.groupBy({
-    by: ['user_id'],
+    by: ["user_id"],
     where: {
-      status: 'ACTIVE',
+      status: "ACTIVE",
       vendor_id: payload.vendor_id,
     },
   });
 
   const activeOperatorMappings = activeOperatorGroups.length;
 
-  const operatorAvailability = totalOperators > 0
-    ? Math.round((activeOperatorMappings / totalOperators) * 100)
-    : 0;
+  const operatorAvailability =
+    totalOperators > 0
+      ? Math.round((activeOperatorMappings / totalOperators) * 100)
+      : 0;
 
   return {
     totalItemsProcessed: {
       value: itemsToday,
-      change: `${itemsChange >= 0 ? '+' : ''}${itemsChange}% vs yesterday`,
-      subtitle: `${itemsChange >= 0 ? '↑' : '↓'} ${Math.abs(itemsToday - itemsYesterday)}`,
-      trend: itemsChange >= 0 ? 'up' : 'down',
+      change: `${itemsChange >= 0 ? "+" : ""}${itemsChange}% vs yesterday`,
+      subtitle: `${itemsChange >= 0 ? "↑" : "↓"} ${Math.abs(itemsToday - itemsYesterday)}`,
+      trend: itemsChange >= 0 ? "up" : "down",
       sqft: {
         value: totalSqft,
-        change: `${sqftChange >= 0 ? '+' : ''}${sqftChange}% vs yesterday`,
+        change: `${sqftChange >= 0 ? "+" : ""}${sqftChange}% vs yesterday`,
         subtitle: sqftSubtitle,
         trend: sqftTrend,
       },
-
     },
     activeMachines: {
       value: `${activeMachines}/${totalMachines}`,
       change: `${machineUtilization}% utilization`,
       subtitle: `${totalMachines - activeMachines} idle`,
-      trend: 'neutral',
+      trend: "neutral",
     },
     activeOperators: {
       value: `${activeOperatorMappings}/${totalOperators}`,
       change: `${operatorAvailability}% availability`,
       subtitle: `${totalOperators - activeOperatorMappings} available`,
-      trend: 'neutral',
+      trend: "neutral",
     },
   };
-
-
 };
 
-
-export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayload) => {
-
+export const getRealTimeItemTracking = async (
+  payload: TrackTraceDashboardPayload,
+) => {
   // const searchParams = request.nextUrl.searchParams;
   const project = payload.project_id;
   const machine = payload.machine_id;
@@ -2063,6 +1799,9 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
     vendor_id: vendor_id,
     actual_in_at: {
       not: null,
+    },
+    project: {
+      isDeleted: false,
     },
   };
 
@@ -2078,8 +1817,6 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
   if (payload.created_by) {
     baseWhere.operator = Number(payload.created_by);
   }
-
-
 
   const result = await prisma.cutListMachineMapping.findMany({
     where: baseWhere,
@@ -2122,36 +1859,34 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
       },
     },
     orderBy: {
-      actual_in_at: 'desc',
+      actual_in_at: "desc",
     },
     take: 10,
   });
 
-
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-
-  const formattedResult = result.map(item => {
+  const formattedResult = result.map((item) => {
     const date = new Date(item.actual_in_at ?? new Date());
     const isToday = date >= today;
 
     const formattedDate = isToday
-      ? date.toLocaleTimeString('en-IN', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-        timeZone: 'Asia/Kolkata',
-      })
-      : date.toLocaleString('en-IN', {
-        day: 'numeric',
-        month: 'short',
-        year: '2-digit',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-        timeZone: 'Asia/Kolkata',
-      });
+      ? date.toLocaleTimeString("en-IN", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Kolkata",
+        })
+      : date.toLocaleString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "2-digit",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+          timeZone: "Asia/Kolkata",
+        });
 
     return {
       ...item,
@@ -2162,15 +1897,11 @@ export const getRealTimeItemTracking = async (payload: TrackTraceDashboardPayloa
   console.log("********************************************");
   console.log(formattedResult);
   return formattedResult;
-
-
-
 };
 
-
-
-
-export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => {
+export const getMachineStatus1 = async (
+  payload: TrackTraceDashboardPayload,
+) => {
   try {
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
@@ -2178,22 +1909,22 @@ export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => 
       include: {
         userMachineMappings: {
           where: {
-            status: 'ACTIVE'
+            status: "ACTIVE",
           },
           include: {
             user: {
               select: {
                 user_name: true,
-                id: true
-              }
-            }
+                id: true,
+              },
+            },
           },
-          take: 1
-        }
+          take: 1,
+        },
       },
       orderBy: {
-        machine_name: 'asc'
-      }
+        machine_name: "asc",
+      },
     });
 
     // Calculate utilization for each machine
@@ -2204,17 +1935,17 @@ export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => 
           where: {
             machine_id: machine.id,
             actual_in_at: {
-              gte: todayStart
-            }
+              gte: todayStart,
+            },
           },
           orderBy: {
-            actual_in_at: 'asc'
+            actual_in_at: "asc",
           },
           select: {
             id: true,
             actual_in_at: true,
             cut_list_id: true,
-          }
+          },
         });
 
         // Calculate active time by pairing IN and OUT scans
@@ -2237,22 +1968,26 @@ export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => 
 
         // Calculate utilization
         const workingSeconds = 8 * 60 * 60; // 8 hours
-        const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
-          ? 0
-          : Math.min(Math.round((totalActiveSeconds / workingSeconds) * 100), 100);
+        const utilization =
+          machine.status === "MAINTENANCE" || machine.status === "INACTIVE"
+            ? 0
+            : Math.min(
+                Math.round((totalActiveSeconds / workingSeconds) * 100),
+                100,
+              );
 
         // Check if currently processing (has items with IN scan but no matching OUT)
         const currentlyProcessing = itemSessions.size > 0;
 
         // Count completed items today (items that have both IN and OUT scans)
         const completedItems = await prisma.cutListMachineMapping.groupBy({
-          by: ['cut_list_id'],
+          by: ["cut_list_id"],
           where: {
             machine_id: machine.id,
             actual_in_at: {
-              gte: todayStart
-            }
-          }
+              gte: todayStart,
+            },
+          },
         });
 
         const operator = machine.userMachineMappings[0]?.user
@@ -2262,30 +1997,29 @@ export const getMachineStatus1 = async (payload: TrackTraceDashboardPayload) => 
         return {
           id: machine.id,
           name: machine.machine_name,
-          status: currentlyProcessing && machine.status === 'ACTIVE'
-            ? 'ACTIVE'
-            : machine.status === 'ACTIVE'
-              ? 'IDLE'
-              : machine.status,
+          status:
+            currentlyProcessing && machine.status === "ACTIVE"
+              ? "ACTIVE"
+              : machine.status === "ACTIVE"
+                ? "IDLE"
+                : machine.status,
           operator,
           utilization,
-          itemsProcessedToday: completedItems.length
+          itemsProcessedToday: completedItems.length,
         };
-      })
+      }),
     );
 
-    machinesWithUtilization.sort(
-      (a, b) => b.utilization - a.utilization
-    );
+    machinesWithUtilization.sort((a, b) => b.utilization - a.utilization);
     return machinesWithUtilization;
   } catch (error) {
-    console.error('Error fetching machines:', error);
+    console.error("Error fetching machines:", error);
   }
 };
 
-
-export const getHourlyProduction1 = async (payload: TrackTraceDashboardPayload) => {
-
+export const getHourlyProduction1 = async (
+  payload: TrackTraceDashboardPayload,
+) => {
   try {
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
     const hours = [];
@@ -2304,16 +2038,13 @@ export const getHourlyProduction1 = async (payload: TrackTraceDashboardPayload) 
           actual_in_at: {
             gte: hourStart,
             lt: hourEnd,
-            not: null
-          }
-        }
+            not: null,
+          },
+        },
       });
 
-      const hourLabel = hour === 12
-        ? '12 PM'
-        : hour > 12
-          ? `${hour - 12} PM`
-          : `${hour} AM`;
+      const hourLabel =
+        hour === 12 ? "12 PM" : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
 
       labels.push(hourLabel);
       data.push(count);
@@ -2326,40 +2057,41 @@ export const getHourlyProduction1 = async (payload: TrackTraceDashboardPayload) 
       labels,
       datasets: [
         {
-          label: 'Items Processed',
+          label: "Items Processed",
           data,
-          borderColor: '#111827',
-          backgroundColor: 'rgba(17, 24, 39, 0.1)',
+          borderColor: "#111827",
+          backgroundColor: "rgba(17, 24, 39, 0.1)",
         },
         {
-          label: 'Target',
+          label: "Target",
           data: target,
-          borderColor: '#9CA3AF',
-          backgroundColor: 'transparent',
-        }
-      ]
+          borderColor: "#9CA3AF",
+          backgroundColor: "transparent",
+        },
+      ],
     };
   } catch (error) {
-    console.error('Error fetching hourly production:', error);
+    console.error("Error fetching hourly production:", error);
   }
 };
 
 export const getHourlyProduction = async (
-  payload: TrackTraceDashboardPayload
+  payload: TrackTraceDashboardPayload,
 ) => {
   try {
-    const timeZone = 'Asia/Kolkata';
+    const timeZone = "Asia/Kolkata";
 
     // Today's date in vendor timezone
-    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone }); // "2025-04-08"
+    const todayStr = new Date().toLocaleDateString("en-CA", { timeZone }); // "2025-04-08"
 
     // Get vendor's UTC offset in ms
     // e.g. Asia/Kolkata = +5:30 = +19800000ms
     const offsetMs = (() => {
       const utcDate = new Date(`${todayStr}T12:00:00Z`);
-      const localStr = utcDate.toLocaleString('en-CA', { timeZone, hour12: false })
-        .replace(',', '');
-      const localDate = new Date(localStr + 'Z');
+      const localStr = utcDate
+        .toLocaleString("en-CA", { timeZone, hour12: false })
+        .replace(",", "");
+      const localDate = new Date(localStr + "Z");
       return localDate.getTime() - utcDate.getTime();
     })();
 
@@ -2369,10 +2101,14 @@ export const getHourlyProduction = async (
     for (let hour = 8; hour <= 20; hour++) {
       // Build hour boundaries as if in vendor timezone, then shift to UTC
       const hourStartUTC = new Date(
-        new Date(`${todayStr}T${String(hour).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+        new Date(
+          `${todayStr}T${String(hour).padStart(2, "0")}:00:00Z`,
+        ).getTime() - offsetMs,
       );
       const hourEndUTC = new Date(
-        new Date(`${todayStr}T${String(hour + 1).padStart(2, '0')}:00:00Z`).getTime() - offsetMs
+        new Date(
+          `${todayStr}T${String(hour + 1).padStart(2, "0")}:00:00Z`,
+        ).getTime() - offsetMs,
       );
 
       const baseWhere: any = {
@@ -2408,7 +2144,7 @@ export const getHourlyProduction = async (
       }
 
       const hourLabel =
-        hour === 12 ? '12 PM' : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
+        hour === 12 ? "12 PM" : hour > 12 ? `${hour - 12} PM` : `${hour} AM`;
 
       labels.push(hourLabel);
       data.push(Math.round(sqftThisHour * 100) / 100);
@@ -2421,28 +2157,29 @@ export const getHourlyProduction = async (
       labels,
       datasets: [
         {
-          label: 'SQFT Processed',
+          label: "SQFT Processed",
           data,
-          borderColor: '#111827',
-          backgroundColor: 'rgba(17, 24, 39, 0.1)',
+          borderColor: "#111827",
+          backgroundColor: "rgba(17, 24, 39, 0.1)",
         },
         {
-          label: 'Target SQFT',
+          label: "Target SQFT",
           data: target,
-          borderColor: '#9CA3AF',
-          backgroundColor: 'transparent',
+          borderColor: "#9CA3AF",
+          backgroundColor: "transparent",
           borderDash: [6, 6],
         },
       ],
     };
   } catch (error) {
-    console.error('Error fetching hourly production:', error);
+    console.error("Error fetching hourly production:", error);
     throw error;
   }
 };
 
-
-export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload) => {
+export const getMachineUtilization1 = async (
+  payload: TrackTraceDashboardPayload,
+) => {
   try {
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
@@ -2451,8 +2188,8 @@ export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload
       select: {
         id: true,
         machine_name: true,
-        status: true
-      }
+        status: true,
+      },
     });
 
     // Group machines by type (extracted from name)
@@ -2474,18 +2211,18 @@ export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload
         where: {
           machine_id: machine.id,
           actual_in_at: {
-            gte: todayStart
-          }
+            gte: todayStart,
+          },
         },
         orderBy: {
-          actual_in_at: 'asc'
+          actual_in_at: "asc",
         },
         select: {
           cut_list_id: true,
           actual_in_at: true,
           actual_out_at: true,
-          created_at: true
-        }
+          created_at: true,
+        },
       });
 
       // Calculate active time by pairing IN and OUT scans
@@ -2508,9 +2245,10 @@ export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload
 
       // Calculate utilization
       const workingSeconds = 8 * 60 * 60; // 8 hours
-      const utilization = machine.status === 'MAINTENANCE' || machine.status === 'INACTIVE'
-        ? 0
-        : Math.min(Math.round((activeSeconds / workingSeconds) * 100), 100);
+      const utilization =
+        machine.status === "MAINTENANCE" || machine.status === "INACTIVE"
+          ? 0
+          : Math.min(Math.round((activeSeconds / workingSeconds) * 100), 100);
 
       stats.total += utilization;
       stats.active += 1;
@@ -2522,15 +2260,19 @@ export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload
     const colors: string[] = [];
 
     const colorPalette = [
-      '#111827', '#1F2937', '#374151', '#4B5563', '#6B7280', '#9CA3AF'
+      "#111827",
+      "#1F2937",
+      "#374151",
+      "#4B5563",
+      "#6B7280",
+      "#9CA3AF",
     ];
 
     let colorIndex = 0;
     machineTypes.forEach((stats, type) => {
       labels.push(type);
-      const avgUtilization = stats.active > 0
-        ? Math.round(stats.total / stats.active)
-        : 0;
+      const avgUtilization =
+        stats.active > 0 ? Math.round(stats.total / stats.active) : 0;
       data.push(avgUtilization);
       colors.push(colorPalette[colorIndex % colorPalette.length]);
       colorIndex++;
@@ -2540,21 +2282,20 @@ export const getMachineUtilization1 = async (payload: TrackTraceDashboardPayload
       labels,
       datasets: [
         {
-          label: 'Utilization %',
+          label: "Utilization %",
           data,
           backgroundColor: colors,
-        }
-      ]
+        },
+      ],
     };
   } catch (error) {
-    console.error('Error fetching machine utilization:', error);
-    throw new Error('Failed to fetch machine utilization data');
+    console.error("Error fetching machine utilization:", error);
+    throw new Error("Failed to fetch machine utilization data");
   }
 };
 
-
 export const getMachineUtilization = async (
-  payload: TrackTraceDashboardPayload
+  payload: TrackTraceDashboardPayload,
 ) => {
   try {
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
@@ -2590,7 +2331,7 @@ export const getMachineUtilization = async (
     });
 
     console.log("=============");
-    console.log(machines)
+    console.log(machines);
 
     const machineTypes = new Map<
       string,
@@ -2605,14 +2346,14 @@ export const getMachineUtilization = async (
         machineTypes.set(type, { weightedSeconds: 0, count: 0 });
       }
 
-      if (machine.status !== 'ACTIVE') continue;
+      if (machine.status !== "ACTIVE") continue;
 
       const scans = await prisma.cutListMachineMapping.findMany({
         where: {
           machine_id: machine.id,
           actual_in_at: { gte: todayStart },
         },
-        orderBy: { actual_in_at: 'asc' },
+        orderBy: { actual_in_at: "asc" },
         include: {
           cut_list: {
             select: {
@@ -2636,11 +2377,11 @@ export const getMachineUtilization = async (
         const start = current.actual_in_at;
         const end = next?.actual_in_at ?? now;
 
-        const durationSeconds =
-          (end.getTime() - start.getTime()) / 1000;
+        const durationSeconds = (end.getTime() - start.getTime()) / 1000;
 
         const sqft =
-          (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
+          (Number(current.cut_list.length) * Number(current.cut_list.width)) /
+          92903;
 
         weightedActiveSeconds += durationSeconds * sqft;
         // console.log(weightedActiveSeconds);
@@ -2656,16 +2397,15 @@ export const getMachineUtilization = async (
     const colors: string[] = [];
 
     const colorPalette = [
-      '#111827',
-      '#1F2937',
-      '#374151',
-      '#4B5563',
-      '#6B7280',
-      '#9CA3AF',
+      "#111827",
+      "#1F2937",
+      "#374151",
+      "#4B5563",
+      "#6B7280",
+      "#9CA3AF",
     ];
 
     let colorIndex = 0;
-
 
     machineTypes.forEach((stats, type) => {
       const maxWeightedSeconds =
@@ -2674,11 +2414,9 @@ export const getMachineUtilization = async (
       const utilization =
         maxWeightedSeconds > 0
           ? Math.min(
-            Math.round(
-              (stats.weightedSeconds / maxWeightedSeconds) * 100
-            ),
-            100
-          )
+              Math.round((stats.weightedSeconds / maxWeightedSeconds) * 100),
+              100,
+            )
           : 0;
 
       labels.push(type);
@@ -2693,29 +2431,26 @@ export const getMachineUtilization = async (
       labels,
       datasets: [
         {
-          label: 'SQFT Weighted Utilization %',
+          label: "SQFT Weighted Utilization %",
           data,
           backgroundColor: colors,
         },
       ],
     };
   } catch (error) {
-    console.error('Error fetching machine utilization:', error);
-    throw new Error('Failed to fetch machine utilization data');
+    console.error("Error fetching machine utilization:", error);
+    throw new Error("Failed to fetch machine utilization data");
   }
 };
-
 
 export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
   try {
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
     const now = new Date();
 
-
-
     const baseWhere: any = {
       vendor_id: payload.vendor_id,
-      status: 'ACTIVE'
+      status: "ACTIVE",
     };
 
     // if (payload.project_id) {
@@ -2736,15 +2471,12 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
 
     const baseWhereMachine: any = {
       vendor_id: payload.vendor_id,
-      status: 'ACTIVE'
+      status: "ACTIVE",
     };
 
     if (payload.machine_id) {
       baseWhereMachine.id = Number(payload.machine_id);
     }
-
-
-
 
     console.log("baseWhere", baseWhere);
     const machines = await prisma.machineMaster.findMany({
@@ -2753,18 +2485,13 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
         userMachineMappings: {
           where: baseWhere,
           include: {
-            user: { select: { user_name: true, id: true } }
+            user: { select: { user_name: true, id: true } },
           },
-          take: 1
-        }
+          take: 1,
+        },
       },
-      orderBy: { machine_name: 'asc' }
+      orderBy: { machine_name: "asc" },
     });
-
-
-
-
-
 
     // if (payload.project_id) {
     //     baseWhere.project_id = Number(payload.project_id);
@@ -2782,21 +2509,17 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
       baseWhere.operator = Number(payload.created_by);
     }
 
-
-
     const machinesWithMetrics = await Promise.all(
       machines.map(async (machine) => {
-
         const baseWhereMatrics: any = {
           vendor_id: payload.vendor_id,
           machine_id: machine.id,
-          actual_in_at: { gte: todayStart }
+          actual_in_at: { gte: todayStart },
         };
 
         if (payload.project_id) {
           baseWhereMatrics.project_id = Number(payload.project_id);
         }
-
 
         if (payload.machine_id) {
           baseWhereMatrics.id = Number(payload.machine_id);
@@ -2808,16 +2531,16 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
 
         const scans = await prisma.cutListMachineMapping.findMany({
           where: baseWhereMatrics,
-          orderBy: { actual_in_at: 'asc' },
+          orderBy: { actual_in_at: "asc" },
           include: {
             cut_list: {
               select: {
                 id: true,
                 length: true,
-                width: true
-              }
-            }
-          }
+                width: true,
+              },
+            },
+          },
         });
 
         let totalActiveSeconds = 0;
@@ -2833,13 +2556,13 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
           const start = current.actual_in_at;
           const end = next?.actual_in_at ?? now;
 
-          const durationSeconds =
-            (end.getTime() - start.getTime()) / 1000;
+          const durationSeconds = (end.getTime() - start.getTime()) / 1000;
 
           totalActiveSeconds += durationSeconds;
 
           const sqft =
-            (Number(current.cut_list.length) * Number(current.cut_list.width)) / 92903;
+            (Number(current.cut_list.length) * Number(current.cut_list.width)) /
+            92903;
 
           if (next) {
             sqftProcessedToday += sqft;
@@ -2851,12 +2574,12 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
         const workingSeconds = 8 * 60 * 60;
 
         const utilization =
-          machine.status !== 'ACTIVE'
+          machine.status !== "ACTIVE"
             ? 0
             : Math.min(
-              Math.round((totalActiveSeconds / workingSeconds) * 100),
-              100
-            );
+                Math.round((totalActiveSeconds / workingSeconds) * 100),
+                100,
+              );
 
         const operator = machine.userMachineMappings[0]?.user?.user_name;
 
@@ -2864,38 +2587,33 @@ export const getMachineStatus = async (payload: TrackTraceDashboardPayload) => {
           id: machine.id,
           name: machine.machine_name,
           status:
-            sqftInProcess > 0 && machine.status === 'ACTIVE'
-              ? 'ACTIVE'
-              : machine.status === 'ACTIVE'
-                ? 'IDLE'
+            sqftInProcess > 0 && machine.status === "ACTIVE"
+              ? "ACTIVE"
+              : machine.status === "ACTIVE"
+                ? "IDLE"
                 : machine.status,
           operator,
           utilization,
           sqftProcessedToday: Math.round(sqftProcessedToday * 100) / 100,
-          sqftInProcess: Math.round(sqftInProcess * 100) / 100
+          sqftInProcess: Math.round(sqftInProcess * 100) / 100,
         };
-      })
+      }),
     );
 
-    return machinesWithMetrics.sort(
-      (a, b) => b.utilization - a.utilization
-    );
+    return machinesWithMetrics.sort((a, b) => b.utilization - a.utilization);
   } catch (error) {
-    console.error('Error fetching machines:', error);
+    console.error("Error fetching machines:", error);
     throw error;
   }
 };
-
-
 
 export const getTopPerformer = async (payload: TrackTraceDashboardPayload) => {
   try {
     // Get today's start
     const todayStart = new Date(new Date().setHours(0, 0, 0, 0));
 
-
     const baseWhere: any = {
-      status: 'ACTIVE',
+      status: "ACTIVE",
       vendor_id: payload.vendor_id,
     };
 
@@ -2919,15 +2637,15 @@ export const getTopPerformer = async (payload: TrackTraceDashboardPayload) => {
           select: {
             id: true,
             user_name: true,
-          }
+          },
         },
         machine: {
           select: {
             id: true,
-            machine_name: true
-          }
-        }
-      }
+            machine_name: true,
+          },
+        },
+      },
     });
 
     const operatorPerformance = await Promise.all(
@@ -2938,16 +2656,16 @@ export const getTopPerformer = async (payload: TrackTraceDashboardPayload) => {
             machine_id: mapping.machine_id,
             actual_in_at: {
               gte: todayStart,
-              not: null
-            }
+              not: null,
+            },
           },
           orderBy: {
-            actual_in_at: 'asc'
+            actual_in_at: "asc",
           },
           select: {
             cut_list_id: true,
             actual_in_at: true,
-          }
+          },
         });
 
         const itemsProcessed = scannedItems.length;
@@ -2955,51 +2673,56 @@ export const getTopPerformer = async (payload: TrackTraceDashboardPayload) => {
         // Calculate average time between scans (throughput rate)
         let totalGapSeconds = 0;
         for (let i = 1; i < scannedItems.length; i++) {
-          const gap = (scannedItems[i].actual_in_at!.getTime() - scannedItems[i - 1].actual_in_at!.getTime()) / 1000;
+          const gap =
+            (scannedItems[i].actual_in_at!.getTime() -
+              scannedItems[i - 1].actual_in_at!.getTime()) /
+            1000;
           totalGapSeconds += gap;
         }
 
-        const avgTimeSeconds = scannedItems.length > 1
-          ? totalGapSeconds / (scannedItems.length - 1)
-          : 0;
-        const avgTimeMinutes = Math.round(avgTimeSeconds / 60 * 10) / 10;
+        const avgTimeSeconds =
+          scannedItems.length > 1
+            ? totalGapSeconds / (scannedItems.length - 1)
+            : 0;
+        const avgTimeMinutes = Math.round((avgTimeSeconds / 60) * 10) / 10;
 
         // Calculate efficiency based on throughput
         // Target: 1 item every 10 minutes (6 items per hour)
         const targetTimeSeconds = 10 * 60;
-        const efficiency = avgTimeSeconds > 0
-          ? Math.min(Math.round((targetTimeSeconds / avgTimeSeconds) * 100), 100)
-          : 0;
+        const efficiency =
+          avgTimeSeconds > 0
+            ? Math.min(
+                Math.round((targetTimeSeconds / avgTimeSeconds) * 100),
+                100,
+              )
+            : 0;
 
         return {
           id: mapping.user_id,
           name: `${mapping.user.user_name}`,
           machine: mapping.machine.machine_name,
           itemsProcessed,
-          avgTime: itemsProcessed > 1 ? `${avgTimeMinutes}m` : '-',
-          efficiency: itemsProcessed > 1 ? efficiency : 0
+          avgTime: itemsProcessed > 1 ? `${avgTimeMinutes}m` : "-",
+          efficiency: itemsProcessed > 1 ? efficiency : 0,
         };
-      })
+      }),
     );
 
     const sortedOperators = operatorPerformance
-      .filter(op => op.itemsProcessed > 0)
+      .filter((op) => op.itemsProcessed > 0)
       .sort((a, b) => b.itemsProcessed - a.itemsProcessed)
       .slice(0, 10);
 
-
     return sortedOperators;
   } catch (error) {
-    console.error('Error fetching operator performance:', error);
-
+    console.error("Error fetching operator performance:", error);
   }
 };
 
-
-
-export const getProjectProgress = async (payload: TrackTraceDashboardPayload) => {
+export const getProjectProgress = async (
+  payload: TrackTraceDashboardPayload,
+) => {
   try {
-
     const result = await prisma.$queryRaw<
       {
         item_name: string;
@@ -3009,7 +2732,6 @@ export const getProjectProgress = async (payload: TrackTraceDashboardPayload) =>
         pending: number;
         sqft_processed: number;
         sqft_pending: number;
-
       }[]
     >`
 SELECT
@@ -3032,80 +2754,69 @@ FROM public."CutList" cl
 INNER JOIN public."CutListMachineMapping" clmm ON clmm.cut_list_id = cl.id
 INNER JOIN public."ProjectMaster" pm ON clmm.project_id = pm.id
 INNER JOIN public."LeadMaster" lm ON clmm.lead_id = lm.id
-WHERE clmm.vendor_id = ${payload.vendor_id}
+WHERE clmm.vendor_id = ${payload.vendor_id} AND pm."isDeleted" = false
 GROUP BY
     cl.item_name,
     lm.lead_code,
     pm.project_name
 `;
 
-
-    const enrichedResult = result.map(item => {
+    const enrichedResult = result.map((item) => {
       const total = item.pending + item.processed;
       const progress =
-        total > 0
-          ? Math.round((item.processed / total) * 100)
-          : 0;
+        total > 0 ? Math.round((item.processed / total) * 100) : 0;
 
       const total_sqft = item.sqft_pending + item.sqft_processed;
       const progress_sqft =
-        total > 0
-          ? Math.round((item.sqft_processed / total_sqft) * 100)
-          : 0;
+        total > 0 ? Math.round((item.sqft_processed / total_sqft) * 100) : 0;
 
       return {
         ...item,
         total,
         progress, // percentage
-        progress_sqft
+        progress_sqft,
       };
     });
 
-
-
-
     return enrichedResult;
-
-
   } catch (error) {
-    console.error('Error fetching projects:', error);
-
+    console.error("Error fetching projects:", error);
   }
-}
+};
 
 export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
   try {
     const machines = await prisma.machineMaster.findMany({
       where: {
         status: {
-          in: ['ACTIVE']
+          in: ["ACTIVE"],
         },
-        vendor_id: payload.vendor_id
+        vendor_id: payload.vendor_id,
       },
       include: {
         userMachineMappings: {
           where: {
-            status: 'ACTIVE',
-            vendor_id: payload.vendor_id
+            status: "ACTIVE",
+            vendor_id: payload.vendor_id,
           },
           include: {
             user: {
               select: {
                 user_name: true,
-              }
-            }
+              },
+            },
           },
-          take: 1
+          take: 1,
         },
         cutListMachineMapping: {
           where: {
-            actual_in_at: null  // Items not yet completed (queued items)
+            actual_in_at: null, // Items not yet completed (queued items)
           },
           include: {
-            cut_list: true
-          }
-        }
-      }
+            cut_list: true,
+          },
+        },
+      },
     });
 
     const bottlenecks = await Promise.all(
@@ -3119,16 +2830,16 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
             machine_id: machine.id,
             actual_in_at: {
               not: null,
-              gte: new Date(Date.now() - 24 * 60 * 60 * 1000) // Last 24 hours
-            }
+              gte: new Date(Date.now() - 24 * 60 * 60 * 1000), // Last 24 hours
+            },
           },
           orderBy: {
-            actual_in_at: 'asc'
+            actual_in_at: "asc",
           },
           select: {
             actual_in_at: true,
           },
-          take: 20
+          take: 20,
         });
 
         let avgWaitMinutes = 10; // Default: 10 minutes per item
@@ -3137,31 +2848,40 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
         if (recentScans.length > 1) {
           let totalGapSeconds = 0;
           for (let i = 1; i < recentScans.length; i++) {
-            const gap = (recentScans[i].actual_in_at!.getTime() - recentScans[i - 1].actual_in_at!.getTime()) / 1000;
+            const gap =
+              (recentScans[i].actual_in_at!.getTime() -
+                recentScans[i - 1].actual_in_at!.getTime()) /
+              1000;
             totalGapSeconds += gap;
           }
-          avgWaitMinutes = Math.round((totalGapSeconds / (recentScans.length - 1)) / 60);
+          avgWaitMinutes = Math.round(
+            totalGapSeconds / (recentScans.length - 1) / 60,
+          );
         }
 
-        const avgWait = avgWaitMinutes >= 60
-          ? `${Math.round(avgWaitMinutes / 60)}h ${avgWaitMinutes % 60}m`
-          : `${avgWaitMinutes}m`;
+        const avgWait =
+          avgWaitMinutes >= 60
+            ? `${Math.round(avgWaitMinutes / 60)}h ${avgWaitMinutes % 60}m`
+            : `${avgWaitMinutes}m`;
 
         // Estimate total wait time for queue
         const estimatedWaitMinutes = avgWaitMinutes * queueCount;
 
         // Determine severity based on queue size and estimated wait
-        let severity: 'high' | 'medium' | 'low';
+        let severity: "high" | "medium" | "low";
         let percentage: number;
 
         if (queueCount > 20 || estimatedWaitMinutes > 120) {
-          severity = 'high';
-          percentage = Math.min(100, Math.round((estimatedWaitMinutes / 180) * 100));
+          severity = "high";
+          percentage = Math.min(
+            100,
+            Math.round((estimatedWaitMinutes / 180) * 100),
+          );
         } else if (queueCount > 10 || estimatedWaitMinutes > 60) {
-          severity = 'medium';
+          severity = "medium";
           percentage = Math.round((estimatedWaitMinutes / 120) * 100);
         } else {
-          severity = 'low';
+          severity = "low";
           percentage = Math.round((estimatedWaitMinutes / 60) * 100);
         }
 
@@ -3175,9 +2895,9 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
           queueCount,
           avgWait,
           severity,
-          percentage: Math.min(percentage, 100)
+          percentage: Math.min(percentage, 100),
         };
-      })
+      }),
     );
 
     // Sort by severity (high first) and queue count
@@ -3193,25 +2913,22 @@ export const getBottleNeck = async (payload: TrackTraceDashboardPayload) => {
 
     return sortedBottlenecks;
   } catch (error) {
-    console.error('Error fetching bottlenecks:', error);
-    throw new Error('Failed to fetch bottleneck data');
+    console.error("Error fetching bottlenecks:", error);
+    throw new Error("Failed to fetch bottleneck data");
   }
 };
-
-
 
 export const getAllProjectsByVendorId = (vendor_id: number) => {
   return prisma.projectMaster.findMany({
     where: {
       vendor_id: vendor_id,
+      isDeleted: false,
     },
     orderBy: {
-      project_name: 'asc', // or 'desc'
+      project_name: "asc", // or 'desc'
     },
-
   });
 };
-
 
 export const getAllMachinesByVendorId = (vendor_id: number) => {
   return prisma.machineMaster.findMany({
@@ -3219,9 +2936,8 @@ export const getAllMachinesByVendorId = (vendor_id: number) => {
       vendor_id: vendor_id,
     },
     orderBy: {
-      machine_name: 'asc', // or 'desc'
+      machine_name: "asc", // or 'desc'
     },
-
   });
 };
 
@@ -3231,15 +2947,10 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
       vendor_id: vendor_id,
     },
     orderBy: {
-      user_name: 'asc', // or 'desc'
+      user_name: "asc", // or 'desc'
     },
-
   });
 };
-
-
-
-
 
 // export const getTrackTraceMatrix = async (
 //     vendor_id: number,
@@ -3336,9 +3047,6 @@ export const getAllUsersByVendorId = (vendor_id: number) => {
 
 //     return Array.from(resultMap.values());
 // };
-
-
-
 
 export const getCutListMachine = async (
   vendorId: number,
@@ -3440,20 +3148,16 @@ export const getCutListMachine = async (
   };
 };
 
-
-
-
 export const assignMachine = async (payload: CutListSavePayload) => {
-
   try {
     console.log("payload.project_id", payload.project_id);
     const projectMaster = await prisma.projectMaster.findFirst({
       where: {
-        unique_project_id: payload.project_id
+        unique_project_id: payload.project_id,
       },
       select: {
-        id: true
-      }
+        id: true,
+      },
     });
 
     console.log("projectMaster", projectMaster);
@@ -3461,38 +3165,37 @@ export const assignMachine = async (payload: CutListSavePayload) => {
     const projectId = projectMaster?.id;
 
     if (!projectId) {
-      return validationResponse(0, 'Project not found');
+      return validationResponse(0, "Project not found");
     }
 
     const cutListIdArray = payload.cutListIds
       .split(",")
-      .map(id => Number(id.trim()))
-      .filter(id => !isNaN(id));
+      .map((id) => Number(id.trim()))
+      .filter((id) => !isNaN(id));
 
     return await prisma.$transaction(async (tx) => {
-
       if (!payload.assigned) {
         await tx.cutListMachineMapping.deleteMany({
           where: {
             cut_list_id: { in: cutListIdArray },
             machine_id: payload.machine_id,
-            project_id: Number(projectId)
-          }
+            project_id: Number(projectId),
+          },
         });
 
-        return validationResponse(1, 'Machine unmapped');
+        return validationResponse(1, "Machine unmapped");
       }
 
       // ✅ Fetch cutList rows to get qty and lead_id per cut_list_id
       const cutListRows = await tx.cutList.findMany({
         where: {
-          id: { in: cutListIdArray }
+          id: { in: cutListIdArray },
         },
         select: {
           id: true,
           qty: true,
-          lead_id: true
-        }
+          lead_id: true,
+        },
       });
 
       console.log(cutListRows);
@@ -3502,29 +3205,31 @@ export const assignMachine = async (payload: CutListSavePayload) => {
         where: {
           cut_list_id: { in: cutListIdArray },
           machine_id: payload.machine_id,
-          project_id: Number(projectId)
+          project_id: Number(projectId),
         },
-        select: { cut_list_id: true }
+        select: { cut_list_id: true },
       });
 
-      const existingIds = new Set(existing.map(e => e.cut_list_id));
+      const existingIds = new Set(existing.map((e) => e.cut_list_id));
 
       // ✅ Only process cut_list_ids that don't already have a mapping
-      const newCutListRows = cutListRows.filter(row => !existingIds.has(row.id));
+      const newCutListRows = cutListRows.filter(
+        (row) => !existingIds.has(row.id),
+      );
 
       if (newCutListRows.length === 0) {
-        return validationResponse(1, 'Machine mapped successfully');
+        return validationResponse(1, "Machine mapped successfully");
       }
 
       const machine = await tx.machineMaster.findFirst({
         where: {
-          id: payload.machine_id
-        }
+          id: payload.machine_id,
+        },
       });
 
       const sequence = machine?.sequence_no;
       if (sequence == null) {
-        return validationResponse(0, 'Machine sequence not set');
+        return validationResponse(0, "Machine sequence not set");
       }
 
       // ✅ Build mapping rows — one entry per qty unit per cut_list_id
@@ -3554,38 +3259,33 @@ export const assignMachine = async (payload: CutListSavePayload) => {
             sequence_no: sequence,
             status: "Pending",
             created_by: Number(payload.created_by),
-            expected_in: true
+            expected_in: true,
           });
         }
       }
 
       await tx.cutListMachineMapping.createMany({
-        data: mappingData
+        data: mappingData,
       });
 
-      return validationResponse(1, 'Machine mapped successfully');
-
+      return validationResponse(1, "Machine mapped successfully");
     });
   } catch (error) {
     console.log(error);
-    return validationResponse(0, 'Something went wrong');
+    return validationResponse(0, "Something went wrong");
   }
 };
 
-
 export const createQR = async (payload: QRParam) => {
-
   try {
-
-
     const projectId = await prisma.projectMaster.findFirst({
       where: {
-        unique_project_id: payload.projectId
+        unique_project_id: payload.projectId,
       },
       select: {
-        id: true
-      }
-    })
+        id: true,
+      },
+    });
 
     // console.log(payload.cutListIds)
     if (projectId) {
@@ -3597,8 +3297,7 @@ export const createQR = async (payload: QRParam) => {
           .filter((id) => !isNaN(id));
       }
 
-
-      console.log("cutListIds", cutListIds)
+      console.log("cutListIds", cutListIds);
 
       const cutLists = await prisma.cutListMachineMapping.findMany({
         where: {
@@ -3608,7 +3307,7 @@ export const createQR = async (payload: QRParam) => {
             ? { cut_list_id: { in: cutListIds } }
             : {}),
         },
-        distinct: ['cut_list_id'],
+        distinct: ["cut_list_id"],
         select: {
           id: true, // clmm.id
           cut_list: {
@@ -3620,7 +3319,7 @@ export const createQR = async (payload: QRParam) => {
         },
       });
 
-      console.log("cutLists", cutLists)
+      console.log("cutLists", cutLists);
       if (cutLists.length > 0) {
         return cutLists;
       } else {
@@ -3644,27 +3343,12 @@ export const createQR = async (payload: QRParam) => {
       //         description: true,
       //     },
       // });
-
-
     }
-
-
-
-
-
-
-
   } catch (error) {
-    console.error('Error generating QR code:', error);
+    console.error("Error generating QR code:", error);
     throw error;
   }
-}
-
-
-
-
-
-
+};
 
 export const downloadCutListExcel = async (
   vendorId: number,
@@ -3715,7 +3399,9 @@ export const downloadCutListExcel = async (
 
   // Set columns from keys of first row
   const headers = excelData.length > 0 ? Object.keys(excelData[0]) : [];
-  const fixedWidths: number[] = [30, 12, 12, 12, 8, 35, 30, 20, 20, 15, 15, 15, 15];
+  const fixedWidths: number[] = [
+    30, 12, 12, 12, 8, 35, 30, 20, 20, 15, 15, 15, 15,
+  ];
   worksheet.columns = headers.map((header, i) => ({
     header,
     key: header,
@@ -3748,28 +3434,25 @@ export const downloadCutListExcel = async (
   return filename;
 };
 
-
-
-
 export const getVendorLead = async (vendorId: number, search?: string) => {
   const leads = await prisma.leadMaster.findMany({
     where: {
       vendor_id: vendorId,
       ...(search?.trim()
         ? {
-          OR: [
-            { lead_code: { contains: search, mode: "insensitive" } },
-            { firstname: { contains: search, mode: "insensitive" } },
-            { lastname: { contains: search, mode: "insensitive" } },
-          ],
-        }
+            OR: [
+              { lead_code: { contains: search, mode: "insensitive" } },
+              { firstname: { contains: search, mode: "insensitive" } },
+              { lastname: { contains: search, mode: "insensitive" } },
+            ],
+          }
         : {}),
     },
     select: {
       id: true,
       lead_code: true,
       firstname: true,
-      lastname: true
+      lastname: true,
     },
     orderBy: {
       lead_code: "asc",
@@ -3780,8 +3463,11 @@ export const getVendorLead = async (vendorId: number, search?: string) => {
   return leads;
 };
 
-
-export const linkLeadToProject = async (vendorId: number, leadId: number, projectId: number) => {
+export const linkLeadToProject = async (
+  vendorId: number,
+  leadId: number,
+  projectId: number,
+) => {
   return await prisma.$transaction(async (tx) => {
     // 1. Update lead_id on ProjectMaster
     await tx.projectMaster.update({
@@ -3801,31 +3487,22 @@ export const linkLeadToProject = async (vendorId: number, leadId: number, projec
       data: { lead_id: leadId },
     });
 
-    return validationResponse(1, 'Lead Updated Successfully');
+    return validationResponse(1, "Lead Updated Successfully");
   });
-
-
 };
 
-
-
-
 export const get_defect = async (vendorId: number) => {
-
   const defects = await prisma.defectMaster.findMany({
     where: {
-      OR: [
-        { vendor_id: null },
-        { vendor_id: vendorId }
-      ]
+      OR: [{ vendor_id: null }, { vendor_id: vendorId }],
     },
     select: {
       id: true,
-      defect_name: true
+      defect_name: true,
     },
     orderBy: {
-      defect_name: "asc"
-    }
+      defect_name: "asc",
+    },
   });
   return {
     data: defects,
@@ -3833,10 +3510,11 @@ export const get_defect = async (vendorId: number) => {
 };
 
 export const mark_Defect_old = async (payload: MarkDefectPayload) => {
-
-  console.log("payload.cut_list_machine_mapping_id", payload.cut_list_machine_mapping_id);
+  console.log(
+    "payload.cut_list_machine_mapping_id",
+    payload.cut_list_machine_mapping_id,
+  );
   return await prisma.$transaction(async (tx) => {
-
     const cut_list_id = payload.cut_list_id;
 
     const mapping = await tx.cutListMachineMapping.findFirst({
@@ -3879,10 +3557,8 @@ export const mark_Defect_old = async (payload: MarkDefectPayload) => {
         remark: payload.defect_name,
         created_by: payload.created_by,
         cut_list_id: payload.cut_list_id,
-
       },
     });
-
 
     //console.log("previous_scanned_id", previous_scanned_id);
 
@@ -3908,8 +3584,6 @@ export const mark_Defect_old = async (payload: MarkDefectPayload) => {
       },
     });
 
-
-
     return validationResponse(1, "Defect Marked Successfully");
   });
 };
@@ -3917,9 +3591,17 @@ export const mark_Defect_old = async (payload: MarkDefectPayload) => {
 export const mark_Defect = async (
   payload: MarkDefectPayload,
   files: Express.Multer.File[],
-  vendorId: number
+  vendorId: number,
 ) => {
   return await prisma.$transaction(async (tx) => {
+    const project = await tx.projectMaster.findUnique({
+      where: { id: payload.project_id },
+      select: { isDeleted: true, project_name: true },
+    });
+
+    if (!project || project.isDeleted) {
+      return validationResponse(0, "Project is deleted or deactivated");
+    }
 
     const existingDefect = await tx.defectedItem.findFirst({
       where: {
@@ -3930,9 +3612,11 @@ export const mark_Defect = async (
     });
 
     if (existingDefect) {
-      return validationResponse(0, "Item is already marked as defected and has not been completed yet");
+      return validationResponse(
+        0,
+        "Item is already marked as defected and has not been completed yet",
+      );
     }
-
 
     const defectedItem = await tx.defectedItem.create({
       data: {
@@ -3945,12 +3629,16 @@ export const mark_Defect = async (
         created_by: payload.created_by,
         cut_list_id: payload.cut_list_id,
         action: payload.action,
-        rework_machine_id: payload.rework_machine_id
+        rework_machine_id: payload.rework_machine_id,
       },
     });
 
     // upload to wasabi now that we have defectedItem.id
-    const uploadedImages = await uploadToWasabiDefectedItems(files, vendorId, defectedItem.id);
+    const uploadedImages = await uploadToWasabiDefectedItems(
+      files,
+      vendorId,
+      defectedItem.id,
+    );
 
     if (uploadedImages.length > 0) {
       await tx.defectedItemImage.createMany({
@@ -3970,8 +3658,7 @@ export const mark_Defect = async (
         where: { cut_list_id: payload.cut_list_id },
         data: { actual_in_at: null, in_operator: null },
       });
-    }
-    else if (payload.action == "rework" && payload.rework_machine_id) {
+    } else if (payload.action == "rework" && payload.rework_machine_id) {
       console.log("Triggered");
       await tx.cutListMachineMapping.updateMany({
         where: {
@@ -3981,7 +3668,6 @@ export const mark_Defect = async (
         data: { actual_in_at: null, in_operator: null },
       });
     }
-
 
     /*else if (payload.action === "rework" && payload.rework_machine_id) {
 
@@ -4016,30 +3702,27 @@ export const mark_Defect = async (
       }
     }*/
 
-
-
-
     return validationResponse(1, "Defect Marked Successfully");
   });
 };
 
-
-export const getScanStatsDashboard = async (vendor_id: number, user_id: number) => {
+export const getScanStatsDashboard = async (
+  vendor_id: number,
+  user_id: number,
+) => {
   try {
-
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
 
-    const total_items_scanned_today =
-      await prisma.cutListMachineMapping.count({
-        where: {
-          vendor_id,
-          in_operator: user_id,
-          actual_in_at: {
-            gte: startOfToday,
-          },
+    const total_items_scanned_today = await prisma.cutListMachineMapping.count({
+      where: {
+        vendor_id,
+        in_operator: user_id,
+        actual_in_at: {
+          gte: startOfToday,
         },
-      });
+      },
+    });
 
     const total_items_pending_to_scan =
       await prisma.cutListMachineMapping.count({
@@ -4060,21 +3743,21 @@ export const getScanStatsDashboard = async (vendor_id: number, user_id: number) 
       total_items_scanned_today,
       total_items_pending_to_scan,
     });
-
   } catch (error) {
     console.error(error);
     return validationResponse(0, "Failed to fetch stats");
   }
 };
-export const getReworkMachines = async (vendor_id: number, machine_id: number) => {
-
-
+export const getReworkMachines = async (
+  vendor_id: number,
+  machine_id: number,
+) => {
   const currentMachine = await prisma.machineMaster.findFirst({
     where: { id: machine_id, vendor_id },
     select: { sequence_no: true },
   });
 
-  console.log(currentMachine)
+  console.log(currentMachine);
 
   if (!currentMachine || currentMachine.sequence_no === null) return [];
 
@@ -4134,7 +3817,7 @@ export const getUserModules = async (vendor_id: number, user_id: number) => {
       ...new Set(
         mappings
           .map((m) => m.machine?.machine_type_id)
-          .filter((id): id is number => id !== null && id !== undefined)
+          .filter((id): id is number => id !== null && id !== undefined),
       ),
     ];
 
@@ -4178,9 +3861,52 @@ export const getUserModules = async (vendor_id: number, user_id: number) => {
   }
 };
 
+export interface GetQualityProjectsOptions {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: string;
+}
 
-export const getQualityCheckProjects = async (vendor_id: number) => {
+export const getQualityCheckProjects = async (
+  vendor_id: number,
+  options: GetQualityProjectsOptions = {},
+) => {
   try {
+    const { page, limit, search, status } = options;
+    const isPaginated =
+      page !== undefined ||
+      limit !== undefined ||
+      search !== undefined ||
+      status !== undefined;
+
+    const currentPage = Math.max(1, page || 1);
+    const currentLimit = Math.max(1, limit || 10);
+    const skip = (currentPage - 1) * currentLimit;
+
+    const whereCondition: any = {
+      vendor_id,
+      isDeleted: false,
+    };
+
+    if (search) {
+      whereCondition.OR = [
+        { project_name: { contains: search, mode: "insensitive" } },
+        { lead: { lead_code: { contains: search, mode: "insensitive" } } },
+      ];
+    }
+
+    if (status && status.toLowerCase() !== "all") {
+      whereCondition.AND = [
+        {
+          OR: [
+            { track_trace_status: { equals: status, mode: "insensitive" } },
+            { project_status: { equals: status, mode: "insensitive" } },
+          ],
+        },
+      ];
+    }
+
     // Get the quality check machine for this vendor
     const qualityMachine = await prisma.machineMaster.findFirst({
       where: {
@@ -4196,29 +3922,38 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
     });
 
     if (!qualityMachine) {
-      return validationResponse(1, "", { projects: [] });
+      return validationResponse(1, "", {
+        projects: [],
+        pagination: isPaginated
+          ? { page: currentPage, limit: currentLimit, total: 0, totalPages: 0 }
+          : undefined,
+      });
     }
 
     const qualityMachineId = qualityMachine.id;
 
     /**
-     * Show all projects for this vendor.
+     * Total count & Paginated projects for this vendor.
      */
-    const projects = await prisma.projectMaster.findMany({
-      where: {
-        vendor_id,
-      },
-      select: {
-        id: true,
-        project_name: true,
-        project_status: true,
-        track_trace_status: true,
-        created_at: true,
-      },
-      orderBy: {
-        id: "desc",
-      },
-    });
+    const [totalProjects, projects] = await Promise.all([
+      prisma.projectMaster.count({
+        where: whereCondition,
+      }),
+      prisma.projectMaster.findMany({
+        where: whereCondition,
+        select: {
+          id: true,
+          project_name: true,
+          project_status: true,
+          track_trace_status: true,
+          created_at: true,
+        },
+        orderBy: {
+          id: "desc",
+        },
+        ...(isPaginated ? { skip, take: currentLimit } : {}),
+      }),
+    ]);
 
     const projectsWithCount = await Promise.all(
       projects.map(async (project) => {
@@ -4429,20 +4164,19 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
           /**
            * Count already scanned qty on quality machine for same cut_list_id.
            */
-          const qualityScannedQty =
-            await prisma.cutListMachineMapping.count({
-              where: {
-                project_id: project.id,
-                vendor_id,
-                cut_list_id: group.cut_list_id,
-                machine_id: qualityMachineId,
-                sequence_no: group.sequence_no,
-                expected_in: true,
-                actual_in_at: {
-                  not: null,
-                },
+          const qualityScannedQty = await prisma.cutListMachineMapping.count({
+            where: {
+              project_id: project.id,
+              vendor_id,
+              cut_list_id: group.cut_list_id,
+              machine_id: qualityMachineId,
+              sequence_no: group.sequence_no,
+              expected_in: true,
+              actual_in_at: {
+                not: null,
               },
-            });
+            },
+          });
 
           /**
            * Available qty for QC.
@@ -4495,13 +4229,20 @@ export const getQualityCheckProjects = async (vendor_id: number) => {
 
     return validationResponse(1, "", {
       projects: projectsWithCount,
+      pagination: isPaginated
+        ? {
+            page: currentPage,
+            limit: currentLimit,
+            total: totalProjects,
+            totalPages: Math.ceil(totalProjects / currentLimit),
+          }
+        : undefined,
     });
   } catch (error) {
     console.log("Error in getQualityCheckProjects", error);
     return validationResponse(0, "Something went wrong");
   }
 };
-
 
 // ─── Helper: sum qty of cut_lists by their ids ────────────────────────────────
 async function sumQty(cutListIds: number[]): Promise<number> {
@@ -4513,8 +4254,6 @@ async function sumQty(cutListIds: number[]): Promise<number> {
   return result._sum.qty ?? 0;
 }
 
-
-
 // ─── Helper: sum qty of cut_list rows from CutListMachineMapping ──────────────
 // Each mapping row corresponds to one panel instance.
 // We use the cut_list.qty indirectly — one mapping row per panel is already
@@ -4523,7 +4262,6 @@ async function sumQty(cutListIds: number[]): Promise<number> {
 
 export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   try {
-
     // ── 1. Fetch all projects for this vendor ──────────────────────────────
     const projects = await prisma.projectMaster.findMany({
       where: { vendor_id },
@@ -4544,13 +4282,17 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
         status: "ACTIVE",
         scan_type: { not: "PASS" },
       },
-      select: { id: true, machine_name: true, sequence_no: true, machine_type_id: true },
+      select: {
+        id: true,
+        machine_name: true,
+        sequence_no: true,
+        machine_type_id: true,
+      },
       orderBy: { sequence_no: "asc" },
     });
 
     // ── 3. For each project, compute per-machine counts ────────────────────
     const buildProjectStatus = async (project: (typeof projects)[0]) => {
-
       // Pre-compute scanned count per machine for this project (used for waterfall)
       const scannedPerMachine: Map<number, number> = new Map();
       for (const machine of machines) {
@@ -4588,12 +4330,12 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
           // This correctly handles cut_lists that skip intermediate machines.
           let total: number;
 
-          const isQCStation = machine.machine_type_id === 17 || machine.machine_type_id === 18;
+          const isQCStation =
+            machine.machine_type_id === 17 || machine.machine_type_id === 18;
 
           if (index === 0) {
             // First machine: total = all assigned rows
             total = assigned;
-
           } else if (isQCStation) {
             // QC Station:
             // Part A — cut_lists that DO have a prior machine assignment:
@@ -4602,17 +4344,20 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
             //   always eligible (count all their QC rows)
 
             // Find cut_list_ids that have at least one row at seq < QC seq
-            const cutListsWithPrior = await prisma.cutListMachineMapping.findMany({
-              where: {
-                project_id: project.id,
-                vendor_id,
-                sequence_no: { lt: machine.sequence_no ?? 0 },
-                expected_in: true,
-              },
-              select: { cut_list_id: true },
-              distinct: ["cut_list_id"],
-            });
-            const cutListIdsWithPrior = cutListsWithPrior.map((r) => r.cut_list_id);
+            const cutListsWithPrior =
+              await prisma.cutListMachineMapping.findMany({
+                where: {
+                  project_id: project.id,
+                  vendor_id,
+                  sequence_no: { lt: machine.sequence_no ?? 0 },
+                  expected_in: true,
+                },
+                select: { cut_list_id: true },
+                distinct: ["cut_list_id"],
+              });
+            const cutListIdsWithPrior = cutListsWithPrior.map(
+              (r) => r.cut_list_id,
+            );
 
             // Part A: rows at QC where cut_list HAS prior machines
             // eligible = the immediately previous assigned machine for that cut_list is scanned
@@ -4623,9 +4368,10 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
                 vendor_id,
                 machine_id: machine.id,
                 expected_in: true,
-                cut_list_id: cutListIdsWithPrior.length > 0
-                  ? { in: cutListIdsWithPrior }
-                  : { in: [-1] }, // empty set
+                cut_list_id:
+                  cutListIdsWithPrior.length > 0
+                    ? { in: cutListIdsWithPrior }
+                    : { in: [-1] }, // empty set
               },
               select: { cut_list_id: true, id: true },
             });
@@ -4634,17 +4380,19 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
             let partAEligible = 0;
             for (const row of partARows) {
               // Find the highest sequence_no prior machine row for this cut_list
-              const lastPriorRow = await prisma.cutListMachineMapping.findFirst({
-                where: {
-                  project_id: project.id,
-                  vendor_id,
-                  cut_list_id: row.cut_list_id,
-                  sequence_no: { lt: machine.sequence_no ?? 0 },
-                  expected_in: true,
+              const lastPriorRow = await prisma.cutListMachineMapping.findFirst(
+                {
+                  where: {
+                    project_id: project.id,
+                    vendor_id,
+                    cut_list_id: row.cut_list_id,
+                    sequence_no: { lt: machine.sequence_no ?? 0 },
+                    expected_in: true,
+                  },
+                  orderBy: { sequence_no: "desc" },
+                  select: { actual_in_at: true },
                 },
-                orderBy: { sequence_no: "desc" },
-                select: { actual_in_at: true },
-              });
+              );
               if (lastPriorRow?.actual_in_at !== null) {
                 partAEligible++;
               }
@@ -4659,40 +4407,42 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
                 expected_in: true,
                 ...(cutListIdsWithPrior.length > 0
                   ? { cut_list_id: { notIn: cutListIdsWithPrior } }
-                  : { cut_list_id: { notIn: [-1] } } // empty set — nothing qualifies as prior-less if no prior exists at all
-                ),
+                  : { cut_list_id: { notIn: [-1] } }), // empty set — nothing qualifies as prior-less if no prior exists at all
               },
             });
 
             total = partAEligible + partBCount;
-
           } else {
             // Normal machines: count rows at this machine where
             // the last assigned machine before this one (for that cut_list) is scanned
-            const thisMachineRows = await prisma.cutListMachineMapping.findMany({
-              where: {
-                project_id: project.id,
-                vendor_id,
-                machine_id: machine.id,
-                expected_in: true,
+            const thisMachineRows = await prisma.cutListMachineMapping.findMany(
+              {
+                where: {
+                  project_id: project.id,
+                  vendor_id,
+                  machine_id: machine.id,
+                  expected_in: true,
+                },
+                select: { cut_list_id: true },
               },
-              select: { cut_list_id: true },
-            });
+            );
 
             let eligible = 0;
             for (const row of thisMachineRows) {
               // Find the last machine assigned to this cut_list before current seq
-              const lastPriorRow = await prisma.cutListMachineMapping.findFirst({
-                where: {
-                  project_id: project.id,
-                  vendor_id,
-                  cut_list_id: row.cut_list_id,
-                  sequence_no: { lt: machine.sequence_no ?? 0 },
-                  expected_in: true,
+              const lastPriorRow = await prisma.cutListMachineMapping.findFirst(
+                {
+                  where: {
+                    project_id: project.id,
+                    vendor_id,
+                    cut_list_id: row.cut_list_id,
+                    sequence_no: { lt: machine.sequence_no ?? 0 },
+                    expected_in: true,
+                  },
+                  orderBy: { sequence_no: "desc" },
+                  select: { actual_in_at: true },
                 },
-                orderBy: { sequence_no: "desc" },
-                select: { actual_in_at: true },
-              });
+              );
 
               if (!lastPriorRow) {
                 // No prior machine for this cut_list — not eligible yet
@@ -4719,7 +4469,7 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
             pending,
             all_scanned: total > 0 && scanned >= total,
           };
-        })
+        }),
       );
 
       // ── Panels: total and fully scanned ───────────────────────────────────
@@ -4728,13 +4478,13 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 
       const total_panels = firstMachine
         ? await prisma.cutListMachineMapping.count({
-          where: {
-            project_id: project.id,
-            vendor_id,
-            machine_id: firstMachine.id,
-            expected_in: true,
-          },
-        })
+            where: {
+              project_id: project.id,
+              vendor_id,
+              machine_id: firstMachine.id,
+              expected_in: true,
+            },
+          })
         : 0;
 
       const panels_scanned = lastMachine
@@ -4757,8 +4507,12 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
 
     // ── 4. Split into active vs archived ───────────────────────────────────
     const activeStatuses = ["Initiated", "Started"];
-    const active = allStatuses.filter((p) => activeStatuses.includes(p.project_status));
-    const archived = allStatuses.filter((p) => !activeStatuses.includes(p.project_status));
+    const active = allStatuses.filter((p) =>
+      activeStatuses.includes(p.project_status),
+    );
+    const archived = allStatuses.filter(
+      (p) => !activeStatuses.includes(p.project_status),
+    );
 
     return validationResponse(1, "", {
       active,
@@ -4772,13 +4526,12 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   }
 };
 
-
 export const getTraceTraceDashboard = async (vendor_id: number) => {
   try {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
       prisma.projectMaster.findMany({
-        where: { vendor_id },
+        where: { vendor_id, isDeleted: false },
         select: {
           id: true,
           project_name: true,
@@ -4819,20 +4572,20 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     // ── 2. Fetch all mappings ONCE ─────────────────────────────────────────
     const mappings = machines.length
       ? await prisma.cutListMachineMapping.findMany({
-        where: {
-          vendor_id,
-          project_id: { in: projectIds },
-          expected_in: true,
-        },
-        select: {
-          id: true,
-          project_id: true,
-          machine_id: true,
-          cut_list_id: true,
-          sequence_no: true,
-          actual_in_at: true,
-        },
-      })
+          where: {
+            vendor_id,
+            project_id: { in: projectIds },
+            expected_in: true,
+          },
+          select: {
+            id: true,
+            project_id: true,
+            machine_id: true,
+            cut_list_id: true,
+            sequence_no: true,
+            actual_in_at: true,
+          },
+        })
       : [];
 
     type Mapping = (typeof mappings)[number];
@@ -4852,7 +4605,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
 
     const projectCutListKey = (
       projectId: number,
-      cutListId: Mapping["cut_list_id"]
+      cutListId: Mapping["cut_list_id"],
     ) => `${projectId}:${String(cutListId)}`;
 
     const pushToMap = <T>(map: Map<string, T[]>, key: string, value: T) => {
@@ -4879,13 +4632,13 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
 
       assignedCountByProjectMachine.set(
         pmKey,
-        (assignedCountByProjectMachine.get(pmKey) ?? 0) + 1
+        (assignedCountByProjectMachine.get(pmKey) ?? 0) + 1,
       );
 
       if (row.actual_in_at !== null) {
         scannedCountByProjectMachine.set(
           pmKey,
-          (scannedCountByProjectMachine.get(pmKey) ?? 0) + 1
+          (scannedCountByProjectMachine.get(pmKey) ?? 0) + 1,
         );
       }
     }
@@ -4898,10 +4651,10 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     const getLastPriorRow = (
       projectId: number,
       cutListId: Mapping["cut_list_id"],
-      currentSequenceNo: number
+      currentSequenceNo: number,
     ) => {
       const rows = rowsByProjectCutList.get(
-        projectCutListKey(projectId, cutListId)
+        projectCutListKey(projectId, cutListId),
       );
 
       if (!rows || rows.length === 0) return null;
@@ -4947,7 +4700,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               const lastPriorRow = getLastPriorRow(
                 project.id,
                 row.cut_list_id,
-                machineSequenceNo
+                machineSequenceNo,
               );
 
               if (isQCStation) {
@@ -4987,15 +4740,15 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
       const lastMachine = machines[machines.length - 1];
 
       const total_panels = firstMachine
-        ? assignedCountByProjectMachine.get(
-          projectMachineKey(project.id, firstMachine.id)
-        ) ?? 0
+        ? (assignedCountByProjectMachine.get(
+            projectMachineKey(project.id, firstMachine.id),
+          ) ?? 0)
         : 0;
 
       const panels_scanned = lastMachine
-        ? scannedCountByProjectMachine.get(
-          projectMachineKey(project.id, lastMachine.id)
-        ) ?? 0
+        ? (scannedCountByProjectMachine.get(
+            projectMachineKey(project.id, lastMachine.id),
+          ) ?? 0)
         : 0;
 
       return {
@@ -5016,11 +4769,11 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     const activeStatuses = new Set(["Initiated", "Started"]);
 
     const active = allStatuses.filter((p) =>
-      activeStatuses.has(p.project_status ?? "")
+      activeStatuses.has(p.project_status ?? ""),
     );
 
     const archived = allStatuses.filter(
-      (p) => !activeStatuses.has(p.project_status ?? "")
+      (p) => !activeStatuses.has(p.project_status ?? ""),
     );
 
     return validationResponse(1, "", {
@@ -5034,7 +4787,6 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
     return validationResponse(0, "Something went wrong");
   }
 };
-
 
 export const getProjectCategories = async (vendor_id: number) => {
   try {
@@ -5106,11 +4858,13 @@ export const createProjectCategory = async (
   scan_pack_validate: boolean = false,
   use_in_assembled_packing: boolean = false,
   prefix?: string | null,
-  naming_structure?: { delimiter?: string; fields: string[] } | null
+  naming_structure?: { delimiter?: string; fields: string[] } | null,
 ) => {
   try {
     const finalScanPackValidate = Boolean(scan_pack_validate);
-    const finalIncludeInPacking = finalScanPackValidate ? true : Boolean(include_in_packing);
+    const finalIncludeInPacking = finalScanPackValidate
+      ? true
+      : Boolean(include_in_packing);
 
     const result = await prisma.$transaction(async (tx) => {
       const category = await tx.projectCategoriesMaster.create({
@@ -5159,7 +4913,9 @@ export const createProjectCategory = async (
       return category;
     });
 
-    return validationResponse(1, "Category created successfully", { id: result.id });
+    return validationResponse(1, "Category created successfully", {
+      id: result.id,
+    });
   } catch (error) {
     console.error("Error in createProjectCategory", error);
     return validationResponse(0, "Something went wrong");
@@ -5179,7 +4935,7 @@ export const updateProjectCategory = async (
   scan_pack_validate?: boolean,
   use_in_assembled_packing?: boolean,
   prefix?: string | null,
-  naming_structure?: { delimiter?: string; fields: string[] } | null
+  naming_structure?: { delimiter?: string; fields: string[] } | null,
 ) => {
   try {
     await prisma.$transaction(async (tx) => {
@@ -5256,7 +5012,7 @@ export const updateProjectCategory = async (
 // ─── Toggle status ────────────────────────────────────────────────────────────
 export const toggleProjectCategoryStatus = async (
   id: number,
-  status: "Yes" | "No"
+  status: "Yes" | "No",
 ) => {
   try {
     await prisma.projectCategoriesMaster.update({
@@ -5264,7 +5020,10 @@ export const toggleProjectCategoryStatus = async (
       data: { status },
     });
 
-    return validationResponse(1, `Category ${status === "Yes" ? "activated" : "deactivated"} successfully`);
+    return validationResponse(
+      1,
+      `Category ${status === "Yes" ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleProjectCategoryStatus", error);
     return validationResponse(0, "Something went wrong");
@@ -5290,7 +5049,7 @@ export const createBrandMaster = async (
   brand_name: string,
   brand_short_name?: string | null,
   logo?: string | null,
-  created_by?: number | null
+  created_by?: number | null,
 ) => {
   try {
     const brand = await prisma.brandMaster.create({
@@ -5319,7 +5078,7 @@ export const updateBrandMaster = async (
   brand_short_name?: string | null,
   logo?: string | null,
   is_active?: boolean,
-  updated_by?: number | null
+  updated_by?: number | null,
 ) => {
   try {
     const brand = await prisma.brandMaster.update({
@@ -5340,7 +5099,10 @@ export const updateBrandMaster = async (
   }
 };
 
-export const toggleBrandMasterStatus = async (id: number, is_active: boolean) => {
+export const toggleBrandMasterStatus = async (
+  id: number,
+  is_active: boolean,
+) => {
   try {
     await prisma.brandMaster.update({
       where: { id },
@@ -5349,7 +5111,10 @@ export const toggleBrandMasterStatus = async (id: number, is_active: boolean) =>
         active: is_active ? "Yes" : "No",
       },
     });
-    return validationResponse(1, `Brand ${is_active ? "activated" : "deactivated"} successfully`);
+    return validationResponse(
+      1,
+      `Brand ${is_active ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleBrandMasterStatus", error);
     return validationResponse(0, "Failed to toggle brand status");
@@ -5382,20 +5147,35 @@ export const getGradeMasters = async (vendor_id: number) => {
   }
 };
 
-export const createGradeMaster = async (vendor_id: number, grade_name: string, created_by?: number | null) => {
+export const createGradeMaster = async (
+  vendor_id: number,
+  grade_name: string,
+  created_by?: number | null,
+) => {
   try {
     const grade = await prisma.gradeMaster.create({
-      data: { vendor_id, grade_name: grade_name.trim(), is_active: true, created_by, updated_by: created_by },
+      data: {
+        vendor_id,
+        grade_name: grade_name.trim(),
+        is_active: true,
+        created_by,
+        updated_by: created_by,
+      },
     });
     return validationResponse(1, "Grade created successfully", grade);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Grade name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Grade name already exists");
     console.error("Error in createGradeMaster", error);
     return validationResponse(0, "Failed to create grade");
   }
 };
 
-export const updateGradeMaster = async (id: number, grade_name: string, updated_by?: number | null) => {
+export const updateGradeMaster = async (
+  id: number,
+  grade_name: string,
+  updated_by?: number | null,
+) => {
   try {
     const grade = await prisma.gradeMaster.update({
       where: { id },
@@ -5403,16 +5183,23 @@ export const updateGradeMaster = async (id: number, grade_name: string, updated_
     });
     return validationResponse(1, "Grade updated successfully", grade);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Grade name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Grade name already exists");
     console.error("Error in updateGradeMaster", error);
     return validationResponse(0, "Failed to update grade");
   }
 };
 
-export const toggleGradeMasterStatus = async (id: number, is_active: boolean) => {
+export const toggleGradeMasterStatus = async (
+  id: number,
+  is_active: boolean,
+) => {
   try {
     await prisma.gradeMaster.update({ where: { id }, data: { is_active } });
-    return validationResponse(1, `Grade ${is_active ? "activated" : "deactivated"} successfully`);
+    return validationResponse(
+      1,
+      `Grade ${is_active ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleGradeMasterStatus", error);
     return validationResponse(0, "Failed to toggle grade status");
@@ -5443,20 +5230,35 @@ export const getFinishMasters = async (vendor_id: number) => {
   }
 };
 
-export const createFinishMaster = async (vendor_id: number, finish_name: string, created_by?: number | null) => {
+export const createFinishMaster = async (
+  vendor_id: number,
+  finish_name: string,
+  created_by?: number | null,
+) => {
   try {
     const finish = await prisma.finishMaster.create({
-      data: { vendor_id, finish_name: finish_name.trim(), is_active: true, created_by, updated_by: created_by },
+      data: {
+        vendor_id,
+        finish_name: finish_name.trim(),
+        is_active: true,
+        created_by,
+        updated_by: created_by,
+      },
     });
     return validationResponse(1, "Finish created successfully", finish);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Finish name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Finish name already exists");
     console.error("Error in createFinishMaster", error);
     return validationResponse(0, "Failed to create finish");
   }
 };
 
-export const updateFinishMaster = async (id: number, finish_name: string, updated_by?: number | null) => {
+export const updateFinishMaster = async (
+  id: number,
+  finish_name: string,
+  updated_by?: number | null,
+) => {
   try {
     const finish = await prisma.finishMaster.update({
       where: { id },
@@ -5464,16 +5266,23 @@ export const updateFinishMaster = async (id: number, finish_name: string, update
     });
     return validationResponse(1, "Finish updated successfully", finish);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Finish name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Finish name already exists");
     console.error("Error in updateFinishMaster", error);
     return validationResponse(0, "Failed to update finish");
   }
 };
 
-export const toggleFinishMasterStatus = async (id: number, is_active: boolean) => {
+export const toggleFinishMasterStatus = async (
+  id: number,
+  is_active: boolean,
+) => {
   try {
     await prisma.finishMaster.update({ where: { id }, data: { is_active } });
-    return validationResponse(1, `Finish ${is_active ? "activated" : "deactivated"} successfully`);
+    return validationResponse(
+      1,
+      `Finish ${is_active ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleFinishMasterStatus", error);
     return validationResponse(0, "Failed to toggle finish status");
@@ -5504,20 +5313,35 @@ export const getTypeMasters = async (vendor_id: number) => {
   }
 };
 
-export const createTypeMaster = async (vendor_id: number, type_name: string, created_by?: number | null) => {
+export const createTypeMaster = async (
+  vendor_id: number,
+  type_name: string,
+  created_by?: number | null,
+) => {
   try {
     const type = await prisma.typeMaster.create({
-      data: { vendor_id, type_name: type_name.trim(), is_active: true, created_by, updated_by: created_by },
+      data: {
+        vendor_id,
+        type_name: type_name.trim(),
+        is_active: true,
+        created_by,
+        updated_by: created_by,
+      },
     });
     return validationResponse(1, "Type created successfully", type);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Type name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Type name already exists");
     console.error("Error in createTypeMaster", error);
     return validationResponse(0, "Failed to create type");
   }
 };
 
-export const updateTypeMaster = async (id: number, type_name: string, updated_by?: number | null) => {
+export const updateTypeMaster = async (
+  id: number,
+  type_name: string,
+  updated_by?: number | null,
+) => {
   try {
     const type = await prisma.typeMaster.update({
       where: { id },
@@ -5525,16 +5349,23 @@ export const updateTypeMaster = async (id: number, type_name: string, updated_by
     });
     return validationResponse(1, "Type updated successfully", type);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Type name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Type name already exists");
     console.error("Error in updateTypeMaster", error);
     return validationResponse(0, "Failed to update type");
   }
 };
 
-export const toggleTypeMasterStatus = async (id: number, is_active: boolean) => {
+export const toggleTypeMasterStatus = async (
+  id: number,
+  is_active: boolean,
+) => {
   try {
     await prisma.typeMaster.update({ where: { id }, data: { is_active } });
-    return validationResponse(1, `Type ${is_active ? "activated" : "deactivated"} successfully`);
+    return validationResponse(
+      1,
+      `Type ${is_active ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleTypeMasterStatus", error);
     return validationResponse(0, "Failed to toggle type status");
@@ -5565,37 +5396,70 @@ export const getCoreProductMasters = async (vendor_id: number) => {
   }
 };
 
-export const createCoreProductMaster = async (vendor_id: number, core_product_name: string, created_by?: number | null) => {
+export const createCoreProductMaster = async (
+  vendor_id: number,
+  core_product_name: string,
+  created_by?: number | null,
+) => {
   try {
     const coreProduct = await prisma.coreProductMaster.create({
-      data: { vendor_id, core_product_name: core_product_name.trim(), is_active: true, created_by, updated_by: created_by },
+      data: {
+        vendor_id,
+        core_product_name: core_product_name.trim(),
+        is_active: true,
+        created_by,
+        updated_by: created_by,
+      },
     });
-    return validationResponse(1, "Core Product created successfully", coreProduct);
+    return validationResponse(
+      1,
+      "Core Product created successfully",
+      coreProduct,
+    );
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Core Product name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Core Product name already exists");
     console.error("Error in createCoreProductMaster", error);
     return validationResponse(0, "Failed to create core product");
   }
 };
 
-export const updateCoreProductMaster = async (id: number, core_product_name: string, updated_by?: number | null) => {
+export const updateCoreProductMaster = async (
+  id: number,
+  core_product_name: string,
+  updated_by?: number | null,
+) => {
   try {
     const coreProduct = await prisma.coreProductMaster.update({
       where: { id },
       data: { core_product_name: core_product_name.trim(), updated_by },
     });
-    return validationResponse(1, "Core Product updated successfully", coreProduct);
+    return validationResponse(
+      1,
+      "Core Product updated successfully",
+      coreProduct,
+    );
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Core Product name already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Core Product name already exists");
     console.error("Error in updateCoreProductMaster", error);
     return validationResponse(0, "Failed to update core product");
   }
 };
 
-export const toggleCoreProductMasterStatus = async (id: number, is_active: boolean) => {
+export const toggleCoreProductMasterStatus = async (
+  id: number,
+  is_active: boolean,
+) => {
   try {
-    await prisma.coreProductMaster.update({ where: { id }, data: { is_active } });
-    return validationResponse(1, `Core Product ${is_active ? "activated" : "deactivated"} successfully`);
+    await prisma.coreProductMaster.update({
+      where: { id },
+      data: { is_active },
+    });
+    return validationResponse(
+      1,
+      `Core Product ${is_active ? "activated" : "deactivated"} successfully`,
+    );
   } catch (error) {
     console.error("Error in toggleCoreProductMasterStatus", error);
     return validationResponse(0, "Failed to toggle core product status");
@@ -5615,12 +5479,9 @@ export const deleteCoreProductMaster = async (id: number) => {
 export const unsetBoxFromMappingService = async (
   mapping_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   try {
-
-
-
     // ── 1. Find the mapping row scoped to project + vendor ───────────────────
     const mapping = await prisma.cutListMachineMapping.findFirst({
       where: {
@@ -5635,7 +5496,8 @@ export const unsetBoxFromMappingService = async (
     });
 
     if (!mapping) return validationResponse(0, "Mapping not found");
-    if (!mapping.box_id) return validationResponse(0, "Item is not assigned to any box");
+    if (!mapping.box_id)
+      return validationResponse(0, "Item is not assigned to any box");
 
     // ── 2. Get project_details_id from the box ───────────────────────────────
     const box = await prisma.boxMaster.findFirst({
@@ -5673,21 +5535,17 @@ export const unsetBoxFromMappingService = async (
       mapping_id,
       project_details_id: box.project_details_id,
     });
-
   } catch (error) {
     console.error("Error in unsetBoxFromMappingService:", error);
     return validationResponse(0, "Failed to remove item from box");
   }
 };
 
-
-
-
 export const markBoxFactoryOutService = async (
   box_id: number,
   project_id: number,
   vendor_id: number,
-  user_id: number
+  user_id: number,
 ) => {
   try {
     const box = await prisma.boxMaster.findFirst({
@@ -5696,8 +5554,13 @@ export const markBoxFactoryOutService = async (
     });
 
     if (!box) return validationResponse(0, "Box not found");
-    if (box.box_status !== "packed") return validationResponse(0, "Only packed boxes can be marked as factory out");
-    if (box.factory_out_at) return validationResponse(0, "Box already marked as factory out");
+    if (box.box_status !== "packed")
+      return validationResponse(
+        0,
+        "Only packed boxes can be marked as factory out",
+      );
+    if (box.factory_out_at)
+      return validationResponse(0, "Box already marked as factory out");
 
     const updated = await prisma.boxMaster.update({
       where: { id: box_id },
@@ -5705,11 +5568,19 @@ export const markBoxFactoryOutService = async (
         factory_out_at: new Date(),
         factory_out_by: user_id,
       },
-      select: { id: true, box_name: true, factory_out_at: true, factory_out_by: true },
+      select: {
+        id: true,
+        box_name: true,
+        factory_out_at: true,
+        factory_out_by: true,
+      },
     });
 
-    return validationResponse(1, "Box marked as factory out successfully", updated);
-
+    return validationResponse(
+      1,
+      "Box marked as factory out successfully",
+      updated,
+    );
   } catch (error) {
     console.error("Error in markBoxFactoryOutService:", error);
     return validationResponse(0, "Failed to mark factory out");
@@ -5721,18 +5592,32 @@ export const markBoxSiteInService = async (
   box_id: number,
   project_id: number,
   vendor_id: number,
-  user_id: number
+  user_id: number,
 ) => {
   try {
     const box = await prisma.boxMaster.findFirst({
       where: { id: box_id, project_id, vendor_id, is_deleted: false },
-      select: { id: true, box_status: true, factory_out_at: true, site_in_at: true },
+      select: {
+        id: true,
+        box_status: true,
+        factory_out_at: true,
+        site_in_at: true,
+      },
     });
 
     if (!box) return validationResponse(0, "Box not found");
-    if (box.box_status !== "packed") return validationResponse(0, "Only packed boxes can be marked as site in");
-    if (!box.factory_out_at) return validationResponse(0, "Box has not been marked as factory out yet");
-    if (box.site_in_at) return validationResponse(0, "Box already marked as site in");
+    if (box.box_status !== "packed")
+      return validationResponse(
+        0,
+        "Only packed boxes can be marked as site in",
+      );
+    if (!box.factory_out_at)
+      return validationResponse(
+        0,
+        "Box has not been marked as factory out yet",
+      );
+    if (box.site_in_at)
+      return validationResponse(0, "Box already marked as site in");
 
     const updated = await prisma.boxMaster.update({
       where: { id: box_id },
@@ -5744,20 +5629,17 @@ export const markBoxSiteInService = async (
     });
 
     return validationResponse(1, "Box marked as site in successfully", updated);
-
   } catch (error) {
     console.error("Error in markBoxSiteInService:", error);
     return validationResponse(0, "Failed to mark site in");
   }
 };
 
-
 const CADBID_API_URL = process.env.CADBID_URL + "/api/category/get-ct";
 const CADBID_PLATFORM_ID = 1;
 
 export const syncCategoriesFromExternalService = async (vendor_id: number) => {
   try {
-
     // ── 1. Check ExternalPlatformToken for this vendor ───────────────────────
     const tokenRecord = await prisma.externalPlatformToken.findFirst({
       where: {
@@ -5770,7 +5652,10 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
 
     console.log("tokenRecord.token:", tokenRecord?.token);
     if (!tokenRecord) {
-      return validationResponse(0, "No active token found for this vendor. Please connect your CadBid account first.");
+      return validationResponse(
+        0,
+        "No active token found for this vendor. Please connect your CadBid account first.",
+      );
     }
 
     // ── 2. Call CadBid API ───────────────────────────────────────────────────
@@ -5779,18 +5664,26 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
     try {
       const response = await axios.get(CADBID_API_URL, {
         headers: {
-          "Authorization": `Bearer ${tokenRecord.token}`,
+          Authorization: `Bearer ${tokenRecord.token}`,
         },
         timeout: 15000,
       });
 
       // externalCategories = Array.isArray(response.data.categories) ? response.data : [];
-      externalCategories = Array.isArray(response.data?.categories) ? response.data.categories : [];
+      externalCategories = Array.isArray(response.data?.categories)
+        ? response.data.categories
+        : [];
 
       console.log("externalCategories count:", externalCategories.length);
     } catch (apiErr: any) {
-      console.error("CadBid API error:", apiErr?.response?.data ?? apiErr.message);
-      return validationResponse(0, "Failed to fetch categories from CadBid. Please check your token.");
+      console.error(
+        "CadBid API error:",
+        apiErr?.response?.data ?? apiErr.message,
+      );
+      return validationResponse(
+        0,
+        "Failed to fetch categories from CadBid. Please check your token.",
+      );
     }
 
     if (externalCategories.length === 0) {
@@ -5839,13 +5732,16 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
       }
     }
 
-    return validationResponse(1, `Sync complete. ${created} created, ${updated} updated.`, {
-      total: externalCategories.length,
-      created,
-      updated,
-      skipped: externalCategories.length - created - updated,
-    });
-
+    return validationResponse(
+      1,
+      `Sync complete. ${created} created, ${updated} updated.`,
+      {
+        total: externalCategories.length,
+        created,
+        updated,
+        skipped: externalCategories.length - created - updated,
+      },
+    );
   } catch (error) {
     console.error("Error in syncCategoriesFromExternalService:", error);
     return validationResponse(0, "Sync failed");
@@ -5864,19 +5760,19 @@ export const checkExternalTokenService = async (vendor_id: number) => {
       select: { id: true, name: true, email: true, created_at: true },
     });
 
-    return validationResponse(1, "Token status fetched", { has_token: !!token, token });
+    return validationResponse(1, "Token status fetched", {
+      has_token: !!token,
+      token,
+    });
   } catch (error) {
     console.error("Error in checkExternalTokenService:", error);
     return validationResponse(0, "Failed to check token");
   }
 };
 
-
-
-
 export const getProjectDetailService_old = async (
   vendor_id: number,
-  unique_project_id: string
+  unique_project_id: string,
 ) => {
   try {
     /*
@@ -5885,27 +5781,22 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const projectLookup =
-      await prisma.projectMaster.findFirst({
-        where: {
-          unique_project_id,
-          vendor_id,
-        },
+    const projectLookup = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-        },
-      });
+      select: {
+        id: true,
+      },
+    });
 
     if (!projectLookup) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
-    const project_id =
-      projectLookup.id;
+    const project_id = projectLookup.id;
 
     /*
     |--------------------------------------------------------------------------
@@ -5913,41 +5804,37 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const project =
-      await prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
-          vendor_id,
-        },
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        id: project_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-          project_name: true,
-          project_status: true,
-          track_trace_status: true,
-          lead_id: true,
+      select: {
+        id: true,
+        project_name: true,
+        project_status: true,
+        track_trace_status: true,
+        lead_id: true,
 
-          details: {
-            select: {
-              id: true,
-              total_items: true,
-              total_packed: true,
-              total_unpacked: true,
-              estimated_completion_date: true,
-              start_date: true,
-              room_name: true,
-            },
-
-            take: 1,
+        details: {
+          select: {
+            id: true,
+            total_items: true,
+            total_packed: true,
+            total_unpacked: true,
+            estimated_completion_date: true,
+            start_date: true,
+            room_name: true,
           },
+
+          take: 1,
         },
-      });
+      },
+    });
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     /*
@@ -5964,19 +5851,18 @@ export const getProjectDetailService_old = async (
     } | null = null;
 
     if (project.lead_id) {
-      lead =
-        await prisma.leadMaster.findUnique({
-          where: {
-            id: project.lead_id,
-          },
+      lead = await prisma.leadMaster.findUnique({
+        where: {
+          id: project.lead_id,
+        },
 
-          select: {
-            firstname: true,
-            contact_no: true,
-            email: true,
-            site_address: true,
-          },
-        });
+        select: {
+          firstname: true,
+          contact_no: true,
+          email: true,
+          site_address: true,
+        },
+      });
     }
 
     /*
@@ -5985,48 +5871,47 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxes =
-      await prisma.boxMaster.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
+    const boxes = await prisma.boxMaster.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
 
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          factory_out_at: true,
-          factory_out_by: true,
-          site_in_at: true,
-          site_in_by: true,
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        factory_out_by: true,
+        site_in_at: true,
+        site_in_by: true,
 
-          box_info_values: {
-            select: {
-              id: true,
-              field_id: true,
-              field_value: true,
+        box_info_values: {
+          select: {
+            id: true,
+            field_id: true,
+            field_value: true,
 
-              field: {
-                select: {
-                  id: true,
-                  field_label: true,
-                  field_key: true,
-                  field_type: true,
-                  is_required: true,
-                  sort_order: true,
-                  active: true,
-                },
+            field: {
+              select: {
+                id: true,
+                field_label: true,
+                field_key: true,
+                field_type: true,
+                is_required: true,
+                sort_order: true,
+                active: true,
               },
             },
           },
         },
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -6039,22 +5924,22 @@ export const getProjectDetailService_old = async (
     const boxItemStats =
       boxIds.length > 0
         ? await prisma.cutListMachineMapping.groupBy({
-          by: ["box_id"],
-          where: {
-            box_id: {
-              in: boxIds,
+            by: ["box_id"],
+            where: {
+              box_id: {
+                in: boxIds,
+              },
+              project_id,
+              vendor_id,
+              expected_in: true,
             },
-            project_id,
-            vendor_id,
-            expected_in: true,
-          },
-          _count: {
-            id: true,
-          },
-          _sum: {
-            weight: true,
-          },
-        })
+            _count: {
+              id: true,
+            },
+            _sum: {
+              weight: true,
+            },
+          })
         : [];
 
     const boxItemCountMap = new Map<number, number>();
@@ -6065,23 +5950,12 @@ export const getProjectDetailService_old = async (
         continue;
       }
 
-      boxItemCountMap.set(
-        Number(stat.box_id),
-        Number(stat._count.id || 0)
-      );
+      boxItemCountMap.set(Number(stat.box_id), Number(stat._count.id || 0));
 
-      boxWeightMap.set(
-        Number(stat.box_id),
-        Number(stat._sum.weight || 0)
-      );
+      boxWeightMap.set(Number(stat.box_id), Number(stat._sum.weight || 0));
     }
 
-    const boxNameMap = new Map(
-      boxes.map((box) => [
-        box.id,
-        box.box_name,
-      ])
-    );
+    const boxNameMap = new Map(boxes.map((box) => [box.id, box.box_name]));
 
     /*
     |--------------------------------------------------------------------------
@@ -6089,42 +5963,33 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const operatorIds =
-      [
-        ...new Set([
-          ...boxes
-            .map((box) => box.factory_out_by)
-            .filter(Boolean),
+    const operatorIds = [
+      ...new Set([
+        ...boxes.map((box) => box.factory_out_by).filter(Boolean),
 
-          ...boxes
-            .map((box) => box.site_in_by)
-            .filter(Boolean),
-        ]),
-      ] as number[];
+        ...boxes.map((box) => box.site_in_by).filter(Boolean),
+      ]),
+    ] as number[];
 
     const operators =
       operatorIds.length > 0
         ? await prisma.userMaster.findMany({
-          where: {
-            id: {
-              in: operatorIds,
+            where: {
+              id: {
+                in: operatorIds,
+              },
             },
-          },
 
-          select: {
-            id: true,
-            user_name: true,
-          },
-        })
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
         : [];
 
-    const operatorMap =
-      new Map(
-        operators.map((user) => [
-          user.id,
-          user.user_name,
-        ])
-      );
+    const operatorMap = new Map(
+      operators.map((user) => [user.id, user.user_name]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -6132,98 +5997,80 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const distinctMachines =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          expected_in: true,
-        },
+    const distinctMachines = await prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
+      },
 
-        distinct: ["machine_id"],
+      distinct: ["machine_id"],
 
-        select: {
-          machine_id: true,
-          sequence_no: true,
+      select: {
+        machine_id: true,
+        sequence_no: true,
 
-          machine: {
-            select: {
-              id: true,
-              machine_name: true,
-              sequence_no: true,
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
+            sequence_no: true,
 
-              machineType: {
-                select: {
-                  machine_type: true,
-                },
+            machineType: {
+              select: {
+                machine_type: true,
               },
             },
           },
         },
-      });
+      },
+    });
 
-    const machineStats =
-      await Promise.all(
-        distinctMachines.map(async (machineRow) => {
-          const [
-            total,
-            scanned,
-          ] =
-            await Promise.all([
-              prisma.cutListMachineMapping.count({
-                where: {
-                  project_id,
-                  vendor_id,
-                  machine_id: machineRow.machine_id,
-                  expected_in: true,
-                },
-              }),
+    const machineStats = await Promise.all(
+      distinctMachines.map(async (machineRow) => {
+        const [total, scanned] = await Promise.all([
+          prisma.cutListMachineMapping.count({
+            where: {
+              project_id,
+              vendor_id,
+              machine_id: machineRow.machine_id,
+              expected_in: true,
+            },
+          }),
 
-              prisma.cutListMachineMapping.count({
-                where: {
-                  project_id,
-                  vendor_id,
-                  machine_id: machineRow.machine_id,
-                  expected_in: true,
-                  actual_in_at: {
-                    not: null,
-                  },
-                },
-              }),
-            ]);
+          prisma.cutListMachineMapping.count({
+            where: {
+              project_id,
+              vendor_id,
+              machine_id: machineRow.machine_id,
+              expected_in: true,
+              actual_in_at: {
+                not: null,
+              },
+            },
+          }),
+        ]);
 
-          return {
-            machine_id:
-              machineRow.machine_id,
+        return {
+          machine_id: machineRow.machine_id,
 
-            machine_name:
-              machineRow.machine.machine_name,
+          machine_name: machineRow.machine.machine_name,
 
-            machine_type:
-              machineRow.machine.machineType
-                ?.machine_type ?? null,
+          machine_type: machineRow.machine.machineType?.machine_type ?? null,
 
-            sequence_no:
-              machineRow.sequence_no ??
-              machineRow.machine.sequence_no ??
-              0,
+          sequence_no:
+            machineRow.sequence_no ?? machineRow.machine.sequence_no ?? 0,
 
-            total,
+          total,
 
-            scanned,
+          scanned,
 
-            pending:
-              total - scanned,
+          pending: total - scanned,
 
-            pct:
-              total > 0
-                ? Math.round(
-                  (scanned / total) * 100
-                )
-                : 0,
-          };
-        })
-      );
+          pct: total > 0 ? Math.round((scanned / total) * 100) : 0,
+        };
+      }),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -6231,60 +6078,59 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const allMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          expected_in: true,
-        },
+    const allMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
+      },
 
-        select: {
-          id: true,
-          cut_list_id: true,
-          machine_id: true,
-          sequence_no: true,
-          actual_in_at: true,
-          box_id: true,
-          in_operator: true,
-          weight: true,
+      select: {
+        id: true,
+        cut_list_id: true,
+        machine_id: true,
+        sequence_no: true,
+        actual_in_at: true,
+        box_id: true,
+        in_operator: true,
+        weight: true,
 
-          machine: {
-            select: {
-              id: true,
-              machine_name: true,
-            },
-          },
-
-          cut_list: {
-            select: {
-              id: true,
-              item_name: true,
-              unique_code: true,
-              description: true,
-              qty: true,
-              category_name: true,
-              group_name: true,
-              length: true,
-              width: true,
-              thickness: true,
-              weight: true,
-            },
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
           },
         },
 
-        orderBy: [
-          {
-            cut_list_id: "asc",
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            unique_code: true,
+            description: true,
+            qty: true,
+            category_name: true,
+            group_name: true,
+            length: true,
+            width: true,
+            thickness: true,
+            weight: true,
           },
-          {
-            machine_id: "asc",
-          },
-          {
-            id: "asc",
-          },
-        ],
-      });
+        },
+      },
+
+      orderBy: [
+        {
+          cut_list_id: "asc",
+        },
+        {
+          machine_id: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -6292,38 +6138,31 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const allInOperatorIds =
-      [
-        ...new Set(
-          allMappings
-            .map((mapping) => mapping.in_operator)
-            .filter(Boolean)
-        ),
-      ] as number[];
+    const allInOperatorIds = [
+      ...new Set(
+        allMappings.map((mapping) => mapping.in_operator).filter(Boolean),
+      ),
+    ] as number[];
 
     const allOperators =
       allInOperatorIds.length > 0
         ? await prisma.userMaster.findMany({
-          where: {
-            id: {
-              in: allInOperatorIds,
+            where: {
+              id: {
+                in: allInOperatorIds,
+              },
             },
-          },
 
-          select: {
-            id: true,
-            user_name: true,
-          },
-        })
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
         : [];
 
-    const allOperatorMap =
-      new Map(
-        allOperators.map((user) => [
-          user.id,
-          user.user_name,
-        ])
-      );
+    const allOperatorMap = new Map(
+      allOperators.map((user) => [user.id, user.user_name]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -6331,27 +6170,14 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const cutlistByItem =
-      new Map<
-        number,
-        typeof allMappings
-      >();
+    const cutlistByItem = new Map<number, typeof allMappings>();
 
     for (const mapping of allMappings) {
-      if (
-        !cutlistByItem.has(
-          mapping.cut_list_id
-        )
-      ) {
-        cutlistByItem.set(
-          mapping.cut_list_id,
-          []
-        );
+      if (!cutlistByItem.has(mapping.cut_list_id)) {
+        cutlistByItem.set(mapping.cut_list_id, []);
       }
 
-      cutlistByItem
-        .get(mapping.cut_list_id)!
-        .push(mapping);
+      cutlistByItem.get(mapping.cut_list_id)!.push(mapping);
     }
 
     /*
@@ -6389,98 +6215,55 @@ export const getProjectDetailService_old = async (
       }[];
     }[] = [];
 
-    let rowNumber =
-      1;
+    let rowNumber = 1;
 
-    for (const [
-      cut_list_id,
-      rows,
-    ] of cutlistByItem) {
-      const cutList =
-        rows[0].cut_list;
+    for (const [cut_list_id, rows] of cutlistByItem) {
+      const cutList = rows[0].cut_list;
 
-      const byMachine =
-        new Map<
-          number,
-          typeof rows
-        >();
+      const byMachine = new Map<number, typeof rows>();
 
       for (const row of rows) {
-        if (
-          !byMachine.has(
-            row.machine_id
-          )
-        ) {
-          byMachine.set(
-            row.machine_id,
-            []
-          );
+        if (!byMachine.has(row.machine_id)) {
+          byMachine.set(row.machine_id, []);
         }
 
-        byMachine
-          .get(row.machine_id)!
-          .push(row);
+        byMachine.get(row.machine_id)!.push(row);
       }
 
-      const unitCount =
-        Math.max(
-          ...[
-            ...byMachine.values(),
-          ].map(
-            (machineRows) =>
-              machineRows.length
-          )
-        );
+      const unitCount = Math.max(
+        ...[...byMachine.values()].map((machineRows) => machineRows.length),
+      );
 
-      for (
-        let unitIndex = 0;
-        unitIndex < unitCount;
-        unitIndex++
-      ) {
+      for (let unitIndex = 0; unitIndex < unitCount; unitIndex++) {
         const machineColumns = [];
 
-        for (const [
-          ,
-          machineRows,
-        ] of byMachine) {
-          const row =
-            machineRows[unitIndex];
+        for (const [, machineRows] of byMachine) {
+          const row = machineRows[unitIndex];
 
           if (!row) {
             continue;
           }
 
           machineColumns.push({
-            mapping_id:
-              row.id,
+            mapping_id: row.id,
 
-            machine_id:
-              row.machine_id,
+            machine_id: row.machine_id,
 
-            machine_name:
-              row.machine.machine_name,
+            machine_name: row.machine.machine_name,
 
-            sequence_no:
-              row.sequence_no,
+            sequence_no: row.sequence_no,
 
-            box_id:
-              row.box_id,
+            box_id: row.box_id,
 
-            weight:
-              Number(row.weight || 0),
+            weight: Number(row.weight || 0),
 
-            scanned:
-              row.actual_in_at !== null,
+            scanned: row.actual_in_at !== null,
 
-            scanned_at:
-              row.actual_in_at,
+            scanned_at: row.actual_in_at,
 
-            scanned_by:
-              row.in_operator
-                ? allOperatorMap.get(
-                  row.in_operator
-                ) ?? null
-                : null,
+            scanned_by: row.in_operator
+              ? (allOperatorMap.get(row.in_operator) ?? null)
+              : null,
           });
         }
 
@@ -6488,70 +6271,56 @@ export const getProjectDetailService_old = async (
           machineColumns.find((machineColumn) => machineColumn.box_id)
             ?.box_id ?? null;
 
-        const packageBoxName =
-          packageBoxId
-            ? boxNameMap.get(packageBoxId) ?? null
-            : null;
+        const packageBoxName = packageBoxId
+          ? (boxNameMap.get(packageBoxId) ?? null)
+          : null;
 
         const mappedWeight =
-          machineColumns.find((machineColumn) => Number(machineColumn.weight || 0) > 0)
-            ?.weight ?? 0;
+          machineColumns.find(
+            (machineColumn) => Number(machineColumn.weight || 0) > 0,
+          )?.weight ?? 0;
 
         const fallbackWeight =
           Number(cutList.weight || 0) > 0 && Number(cutList.qty || 0) > 0
             ? Number(cutList.weight || 0) / Number(cutList.qty || 1)
             : 0;
 
-        const unitWeight =
-          Number(Number(mappedWeight || fallbackWeight || 0).toFixed(4));
+        const unitWeight = Number(
+          Number(mappedWeight || fallbackWeight || 0).toFixed(4),
+        );
 
         unitRows.push({
-          row_number:
-            rowNumber++,
+          row_number: rowNumber++,
 
           cut_list_id,
 
-          item_name:
-            cutList.item_name,
+          item_name: cutList.item_name,
 
-          unique_code:
-            cutList.unique_code,
+          unique_code: cutList.unique_code,
 
-          description:
-            cutList.description,
+          description: cutList.description,
 
-          qty:
-            cutList.qty,
+          qty: cutList.qty,
 
-          unit_index:
-            unitIndex + 1,
+          unit_index: unitIndex + 1,
 
-          category:
-            cutList.category_name,
+          category: cutList.category_name,
 
-          group:
-            cutList.group_name,
+          group: cutList.group_name,
 
-          length:
-            cutList.length,
+          length: cutList.length,
 
-          width:
-            cutList.width,
+          width: cutList.width,
 
-          thickness:
-            cutList.thickness,
+          thickness: cutList.thickness,
 
-          weight:
-            unitWeight,
+          weight: unitWeight,
 
-          package_box_id:
-            packageBoxId,
+          package_box_id: packageBoxId,
 
-          package_box_name:
-            packageBoxName,
+          package_box_name: packageBoxName,
 
-          machines:
-            machineColumns,
+          machines: machineColumns,
         });
       }
     }
@@ -6562,20 +6331,17 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalPanels =
-      unitRows.length;
+    const totalPanels = unitRows.length;
 
-    const uniqueItems =
-      cutlistByItem.size;
+    const uniqueItems = cutlistByItem.size;
 
-    const sortedMachineStats =
-      machineStats.sort((a, b) => {
-        return Number(a.sequence_no || 0) - Number(b.sequence_no || 0);
-      });
+    const sortedMachineStats = machineStats.sort((a, b) => {
+      return Number(a.sequence_no || 0) - Number(b.sequence_no || 0);
+    });
 
     const totalBoxWeight = Array.from(boxWeightMap.values()).reduce(
       (total, weight) => total + Number(weight || 0),
-      0
+      0,
     );
 
     /*
@@ -6584,90 +6350,57 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    const formattedBoxes =
-      boxes.map((box) => {
-        const boxInfoValues =
-          box.box_info_values
-            .filter(
-              (item) =>
-                item.field &&
-                item.field.active
-            )
-            .sort(
-              (a, b) =>
-                Number(
-                  a.field.sort_order || 0
-                ) -
-                Number(
-                  b.field.sort_order || 0
-                )
-            )
-            .map((item) => ({
-              id:
-                item.id,
+    const formattedBoxes = boxes.map((box) => {
+      const boxInfoValues = box.box_info_values
+        .filter((item) => item.field && item.field.active)
+        .sort(
+          (a, b) =>
+            Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
+        )
+        .map((item) => ({
+          id: item.id,
 
-              field_id:
-                item.field_id,
+          field_id: item.field_id,
 
-              field_label:
-                item.field.field_label,
+          field_label: item.field.field_label,
 
-              field_key:
-                item.field.field_key,
+          field_key: item.field.field_key,
 
-              field_type:
-                item.field.field_type,
+          field_type: item.field.field_type,
 
-              is_required:
-                item.field.is_required,
+          is_required: item.field.is_required,
 
-              sort_order:
-                item.field.sort_order,
+          sort_order: item.field.sort_order,
 
-              field_value:
-                item.field_value || "",
-            }));
+          field_value: item.field_value || "",
+        }));
 
-        return {
-          id:
-            box.id,
+      return {
+        id: box.id,
 
-          box_name:
-            box.box_name,
+        box_name: box.box_name,
 
-          box_status:
-            box.box_status,
+        box_status: box.box_status,
 
-          items_count:
-            boxItemCountMap.get(box.id) || 0,
+        items_count: boxItemCountMap.get(box.id) || 0,
 
-          total_weight:
-            Number((boxWeightMap.get(box.id) || 0).toFixed(4)),
+        total_weight: Number((boxWeightMap.get(box.id) || 0).toFixed(4)),
 
-          factory_out_at:
-            box.factory_out_at,
+        factory_out_at: box.factory_out_at,
 
-          factory_out_by:
-            box.factory_out_by
-              ? operatorMap.get(
-                box.factory_out_by
-              ) ?? null
-              : null,
+        factory_out_by: box.factory_out_by
+          ? (operatorMap.get(box.factory_out_by) ?? null)
+          : null,
 
-          site_in_at:
-            box.site_in_at,
+        site_in_at: box.site_in_at,
 
-          site_in_by:
-            box.site_in_by
-              ? operatorMap.get(
-                box.site_in_by
-              ) ?? null
-              : null,
+        site_in_by: box.site_in_by
+          ? (operatorMap.get(box.site_in_by) ?? null)
+          : null,
 
-          box_info_values:
-            boxInfoValues,
-        };
-      });
+        box_info_values: boxInfoValues,
+      };
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -6675,101 +6408,77 @@ export const getProjectDetailService_old = async (
     |--------------------------------------------------------------------------
     */
 
-    return validationResponse(
-      1,
-      "Project detail fetched",
-      {
-        project: {
-          id:
-            project.id,
+    return validationResponse(1, "Project detail fetched", {
+      project: {
+        id: project.id,
 
-          project_name:
-            project.project_name,
+        project_name: project.project_name,
 
-          project_status:
-            project.project_status,
+        project_status: project.project_status,
 
-          track_trace_status:
-            project.track_trace_status,
+        track_trace_status: project.track_trace_status,
 
-          lead_id:
-            project.lead_id,
+        lead_id: project.lead_id,
 
-          lead:
-            lead
-              ? {
-                lead_name:
-                  lead.firstname,
+        lead: lead
+          ? {
+              lead_name: lead.firstname,
 
-                lead_phone:
-                  lead.contact_no,
+              lead_phone: lead.contact_no,
 
-                lead_email:
-                  lead.email,
+              lead_email: lead.email,
 
-                lead_address:
-                  lead.site_address,
-              }
-              : null,
+              lead_address: lead.site_address,
+            }
+          : null,
 
-          details:
-            project.details[0] ?? null,
-        },
+        details: project.details[0] ?? null,
+      },
 
-        stats: {
-          total_panels:
-            totalPanels,
+      stats: {
+        total_panels: totalPanels,
 
-          total_items:
-            uniqueItems,
+        total_items: uniqueItems,
 
-          total_boxes:
-            boxes.length,
+        total_boxes: boxes.length,
 
-          packed_boxes:
-            boxes.filter(
-              (box) =>
-                box.box_status === "packed"
-            ).length,
+        packed_boxes: boxes.filter((box) => box.box_status === "packed").length,
 
-          unpacked_boxes:
-            boxes.filter(
-              (box) =>
-                box.box_status === "unpacked"
-            ).length,
+        unpacked_boxes: boxes.filter((box) => box.box_status === "unpacked")
+          .length,
 
-          total_weight:
-            Number(totalBoxWeight.toFixed(4)),
-        },
+        total_weight: Number(totalBoxWeight.toFixed(4)),
+      },
 
-        machines:
-          sortedMachineStats,
+      machines: sortedMachineStats,
 
-        boxes:
-          formattedBoxes,
+      boxes: formattedBoxes,
 
-        cutlist:
-          unitRows,
-      }
-    );
+      cutlist: unitRows,
+    });
   } catch (error) {
-    console.error(
-      "getProjectDetailService error:",
-      error
-    );
+    console.error("getProjectDetailService error:", error);
 
-    return validationResponse(
-      0,
-      "Failed to fetch project detail"
-    );
+    return validationResponse(0, "Failed to fetch project detail");
   }
 };
 
+export interface GetProjectDetailOptions {
+  search?: string;
+  group?: string;
+  category?: string;
+  machine_id?: string;
+  box_id?: string;
+  box_status?: string;
+}
+
 export const getProjectDetailService = async (
   vendor_id: number,
-  unique_project_id: string
+  unique_project_id: string,
+  options: GetProjectDetailOptions = {}
 ) => {
   try {
+    const { search, group, category, machine_id, box_id, box_status } = options;
     /*
     |--------------------------------------------------------------------------
     | Resolve unique_project_id → project_id
@@ -6921,28 +6630,114 @@ export const getProjectDetailService = async (
     ]);
 
     const manualCutListIds = new Set<number>(
-      manualCutListItems.map((item) => item.id)
+      manualCutListItems.map((item) => item.id),
     );
 
     const manualCutListQtyMap = new Map<number, number>(
       manualCutListItems.map((item) => [
         item.id,
         Math.max(0, Number(item.qty || 0)),
-      ])
+      ]),
     );
 
     /*
     |--------------------------------------------------------------------------
-    | 3. Boxes with dynamic BoxInfoFieldValue
+    | 3. Boxes with dynamic BoxInfoFieldValue (filtered by options)
     |--------------------------------------------------------------------------
     */
 
-    const boxes = await prisma.boxMaster.findMany({
-      where: {
+    let filteredBoxIds: number[] | null = null;
+
+    if (
+      (group && group !== "all") ||
+      (category && category !== "all") ||
+      (machine_id && machine_id !== "all")
+    ) {
+      const mappingWhere: any = {
         project_id,
         vendor_id,
-        is_deleted: false,
-      },
+        box_id: { not: null },
+      };
+
+      if (machine_id && machine_id !== "all") {
+        const parsedMachineId = Number(machine_id);
+        if (!isNaN(parsedMachineId)) {
+          mappingWhere.machine_id = parsedMachineId;
+        }
+      }
+
+      const cutListWhere: any = {};
+      if (group && group !== "all") {
+        cutListWhere.group_name = { equals: group, mode: "insensitive" };
+      }
+      if (category && category !== "all") {
+        cutListWhere.category_name = { equals: category, mode: "insensitive" };
+      }
+
+      if (Object.keys(cutListWhere).length > 0) {
+        mappingWhere.cut_list = cutListWhere;
+      }
+
+      const matchingMappings = await prisma.cutListMachineMapping.findMany({
+        where: mappingWhere,
+        select: { box_id: true },
+        distinct: ["box_id"],
+      });
+
+      filteredBoxIds = matchingMappings
+        .map((m) => m.box_id)
+        .filter((id): id is number => id !== null);
+    }
+
+    const whereBox: any = {
+      project_id,
+      vendor_id,
+      is_deleted: false,
+    };
+
+    if (filteredBoxIds !== null) {
+      whereBox.id = { in: filteredBoxIds };
+    }
+
+    if (box_id && box_id !== "all") {
+      const parsedBoxId = Number(box_id);
+      if (!isNaN(parsedBoxId)) {
+        whereBox.id = parsedBoxId;
+      }
+    }
+
+    if (box_status && box_status !== "all") {
+      if (box_status === "packed") {
+        whereBox.box_status = "packed";
+      } else if (box_status === "unpacked") {
+        whereBox.box_status = { not: "packed" };
+      } else if (box_status === "factory_out") {
+        whereBox.factory_out_at = { not: null };
+      } else if (box_status === "site_in") {
+        whereBox.site_in_at = { not: null };
+      }
+    }
+
+    if (search) {
+      whereBox.AND = [
+        {
+          OR: [
+            { box_name: { contains: search, mode: "insensitive" } },
+            { box_status: { contains: search, mode: "insensitive" } },
+            {
+              box_info_values: {
+                some: {
+                  field_value: { contains: search, mode: "insensitive" },
+                },
+              },
+            },
+          ],
+        },
+      ];
+    }
+
+    const boxes = await prisma.boxMaster.findMany({
+      where: whereBox,
       select: {
         id: true,
         box_name: true,
@@ -7037,11 +6832,9 @@ export const getProjectDetailService = async (
           })
         : [];
 
-    const boxItemCountMap =
-      new Map<number, number>();
+    const boxItemCountMap = new Map<number, number>();
 
-    const boxWeightMap =
-      new Map<number, number>();
+    const boxWeightMap = new Map<number, number>();
 
     /*
     |--------------------------------------------------------------------------
@@ -7049,45 +6842,31 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxReceivedQtyMap =
-      new Map<number, number>();
+    const boxReceivedQtyMap = new Map<number, number>();
 
-    const boxScannedPackedQtyMap =
-      new Map<number, number>();
+    const boxScannedPackedQtyMap = new Map<number, number>();
 
-    const boxScannedReceivedQtyMap =
-      new Map<number, number>();
+    const boxScannedReceivedQtyMap = new Map<number, number>();
 
-    const boxManualPackedQtyMap =
-      new Map<number, number>();
+    const boxManualPackedQtyMap = new Map<number, number>();
 
-    const boxManualReceivedQtyMap =
-      new Map<number, number>();
+    const boxManualReceivedQtyMap = new Map<number, number>();
 
     for (const row of boxPackingRows) {
       if (!row.box_id) {
         continue;
       }
 
-      const boxId =
-        Number(row.box_id);
+      const boxId = Number(row.box_id);
 
-      const rowQty =
-        Math.max(
-          0,
-          Number(row.qty ?? 1)
-        );
+      const rowQty = Math.max(0, Number(row.qty ?? 1));
 
-      const perItemWeight =
-        Number(row.weight || 0);
+      const perItemWeight = Number(row.weight || 0);
 
       const isManual =
-        String(
-          row.row_created_source ?? ""
-        )
+        String(row.row_created_source ?? "")
           .trim()
-          .toLowerCase() ===
-        "manual";
+          .toLowerCase() === "manual";
 
       /*
       |--------------------------------------------------------------------------
@@ -7099,11 +6878,7 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
-      const scannedReceivedQty =
-        !isManual &&
-        row.site_in_at
-          ? rowQty
-          : 0;
+      const scannedReceivedQty = !isManual && row.site_in_at ? rowQty : 0;
 
       /*
       |--------------------------------------------------------------------------
@@ -7120,75 +6895,48 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
-      const manualReceivedQty =
-        isManual
-          ? Math.min(
-              rowQty,
-              Math.max(
-                0,
-                Number(
-                  row.received_qty ?? 0
-                )
-              )
-            )
-          : 0;
+      const manualReceivedQty = isManual
+        ? Math.min(rowQty, Math.max(0, Number(row.received_qty ?? 0)))
+        : 0;
 
-      const rowReceivedQty =
-        scannedReceivedQty +
-        manualReceivedQty;
+      const rowReceivedQty = scannedReceivedQty + manualReceivedQty;
 
-      boxItemCountMap.set(
-        boxId,
-        (boxItemCountMap.get(boxId) ?? 0) +
-          rowQty
-      );
+      boxItemCountMap.set(boxId, (boxItemCountMap.get(boxId) ?? 0) + rowQty);
 
       boxWeightMap.set(
         boxId,
-        (boxWeightMap.get(boxId) ?? 0) +
-          perItemWeight *
-            rowQty
+        (boxWeightMap.get(boxId) ?? 0) + perItemWeight * rowQty,
       );
 
       boxReceivedQtyMap.set(
         boxId,
-        (boxReceivedQtyMap.get(boxId) ?? 0) +
-          rowReceivedQty
+        (boxReceivedQtyMap.get(boxId) ?? 0) + rowReceivedQty,
       );
 
       if (isManual) {
         boxManualPackedQtyMap.set(
           boxId,
-          (boxManualPackedQtyMap.get(boxId) ?? 0) +
-            rowQty
+          (boxManualPackedQtyMap.get(boxId) ?? 0) + rowQty,
         );
 
         boxManualReceivedQtyMap.set(
           boxId,
-          (boxManualReceivedQtyMap.get(boxId) ?? 0) +
-            manualReceivedQty
+          (boxManualReceivedQtyMap.get(boxId) ?? 0) + manualReceivedQty,
         );
       } else {
         boxScannedPackedQtyMap.set(
           boxId,
-          (boxScannedPackedQtyMap.get(boxId) ?? 0) +
-            rowQty
+          (boxScannedPackedQtyMap.get(boxId) ?? 0) + rowQty,
         );
 
         boxScannedReceivedQtyMap.set(
           boxId,
-          (boxScannedReceivedQtyMap.get(boxId) ?? 0) +
-            scannedReceivedQty
+          (boxScannedReceivedQtyMap.get(boxId) ?? 0) + scannedReceivedQty,
         );
       }
     }
 
-    const boxNameMap = new Map(
-      boxes.map((box) => [
-        box.id,
-        box.box_name,
-      ])
-    );
+    const boxNameMap = new Map(boxes.map((box) => [box.id, box.box_name]));
 
     /*
     |--------------------------------------------------------------------------
@@ -7198,13 +6946,9 @@ export const getProjectDetailService = async (
 
     const operatorIds = [
       ...new Set([
-        ...boxes
-          .map((box) => box.factory_out_by)
-          .filter(Boolean),
+        ...boxes.map((box) => box.factory_out_by).filter(Boolean),
 
-        ...boxes
-          .map((box) => box.site_in_by)
-          .filter(Boolean),
+        ...boxes.map((box) => box.site_in_by).filter(Boolean),
       ]),
     ] as number[];
 
@@ -7224,10 +6968,7 @@ export const getProjectDetailService = async (
         : [];
 
     const operatorMap = new Map(
-      operators.map((user) => [
-        user.id,
-        user.user_name,
-      ])
+      operators.map((user) => [user.id, user.user_name]),
     );
 
     /*
@@ -7236,33 +6977,32 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const distinctMachines =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          expected_in: true,
-        },
-        distinct: ["machine_id"],
-        select: {
-          machine_id: true,
-          sequence_no: true,
+    const distinctMachines = await prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
+      },
+      distinct: ["machine_id"],
+      select: {
+        machine_id: true,
+        sequence_no: true,
 
-          machine: {
-            select: {
-              id: true,
-              machine_name: true,
-              sequence_no: true,
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
+            sequence_no: true,
 
-              machineType: {
-                select: {
-                  machine_type: true,
-                },
+            machineType: {
+              select: {
+                machine_type: true,
               },
             },
           },
         },
-      });
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -7278,29 +7018,22 @@ export const getProjectDetailService = async (
     const normalizedMachines = distinctMachines.map((row) => ({
       machine_id: row.machine_id,
       machine_name: row.machine.machine_name,
-      machine_type:
-        row.machine.machineType?.machine_type ?? null,
-      sequence_no:
-        row.sequence_no ??
-        row.machine.sequence_no ??
-        0,
+      machine_type: row.machine.machineType?.machine_type ?? null,
+      sequence_no: row.sequence_no ?? row.machine.sequence_no ?? 0,
     }));
 
     if (
       packagingMachine &&
       manualCutListItems.length > 0 &&
       !normalizedMachines.some(
-        (machine) =>
-          Number(machine.machine_id) === Number(packagingMachine.id)
+        (machine) => Number(machine.machine_id) === Number(packagingMachine.id),
       )
     ) {
       normalizedMachines.push({
         machine_id: packagingMachine.id,
         machine_name: packagingMachine.machine_name,
-        machine_type:
-          packagingMachine.machineType?.machine_type ?? null,
-        sequence_no:
-          packagingMachine.sequence_no ?? 0,
+        machine_type: packagingMachine.machineType?.machine_type ?? null,
+        sequence_no: packagingMachine.sequence_no ?? 0,
       });
     }
 
@@ -7312,27 +7045,25 @@ export const getProjectDetailService = async (
 
     const machineStats = await Promise.all(
       normalizedMachines.map(async (machineRow) => {
-        const mappingRows =
-          await prisma.cutListMachineMapping.findMany({
-            where: {
-              project_id,
-              vendor_id,
-              machine_id: machineRow.machine_id,
-              expected_in: true,
-            },
-            select: {
-              cut_list_id: true,
-              qty: true,
-              box_id: true,
-              actual_in_at: true,
-              row_created_source: true,
-            },
-          });
+        const mappingRows = await prisma.cutListMachineMapping.findMany({
+          where: {
+            project_id,
+            vendor_id,
+            machine_id: machineRow.machine_id,
+            expected_in: true,
+          },
+          select: {
+            cut_list_id: true,
+            qty: true,
+            box_id: true,
+            actual_in_at: true,
+            row_created_source: true,
+          },
+        });
 
         const isPackagingMachine =
           packagingMachine &&
-          Number(machineRow.machine_id) ===
-            Number(packagingMachine.id);
+          Number(machineRow.machine_id) === Number(packagingMachine.id);
 
         let total = 0;
         let scanned = 0;
@@ -7344,40 +7075,22 @@ export const getProjectDetailService = async (
           |--------------------------------------------------------------------------
           */
 
-          const normalRows =
-            mappingRows.filter(
-              (row) =>
-                !manualCutListIds.has(
-                  row.cut_list_id
-                )
-            );
+          const normalRows = mappingRows.filter(
+            (row) => !manualCutListIds.has(row.cut_list_id),
+          );
 
           total += normalRows.reduce(
-            (sum, row) =>
-              sum +
-              Math.max(
-                0,
-                Number(row.qty ?? 1)
-              ),
-            0
+            (sum, row) => sum + Math.max(0, Number(row.qty ?? 1)),
+            0,
           );
 
-          scanned += normalRows.reduce(
-            (sum, row) => {
-              if (!row.actual_in_at) {
-                return sum;
-              }
+          scanned += normalRows.reduce((sum, row) => {
+            if (!row.actual_in_at) {
+              return sum;
+            }
 
-              return (
-                sum +
-                Math.max(
-                  0,
-                  Number(row.qty ?? 1)
-                )
-              );
-            },
-            0
-          );
+            return sum + Math.max(0, Number(row.qty ?? 1));
+          }, 0);
 
           /*
           |--------------------------------------------------------------------------
@@ -7390,39 +7103,21 @@ export const getProjectDetailService = async (
           */
 
           for (const manualItem of manualCutListItems) {
-            const itemTotal =
-              Math.max(
-                0,
-                Number(manualItem.qty || 0)
-              );
+            const itemTotal = Math.max(0, Number(manualItem.qty || 0));
 
             total += itemTotal;
 
-            const itemPacked =
-              mappingRows
-                .filter(
-                  (row) =>
-                    row.cut_list_id === manualItem.id &&
-                    row.row_created_source
-                      ?.trim()
-                      .toLowerCase() === "manual" &&
-                    row.box_id !== null &&
-                    row.actual_in_at !== null
-                )
-                .reduce(
-                  (sum, row) =>
-                    sum +
-                    Math.max(
-                      0,
-                      Number(row.qty ?? 0)
-                    ),
-                  0
-                );
+            const itemPacked = mappingRows
+              .filter(
+                (row) =>
+                  row.cut_list_id === manualItem.id &&
+                  row.row_created_source?.trim().toLowerCase() === "manual" &&
+                  row.box_id !== null &&
+                  row.actual_in_at !== null,
+              )
+              .reduce((sum, row) => sum + Math.max(0, Number(row.qty ?? 0)), 0);
 
-            scanned += Math.min(
-              itemPacked,
-              itemTotal
-            );
+            scanned += Math.min(itemPacked, itemTotal);
           }
         } else {
           /*
@@ -7435,59 +7130,32 @@ export const getProjectDetailService = async (
           |--------------------------------------------------------------------------
           */
 
-          total =
-            mappingRows.reduce(
-              (sum, row) =>
-                sum +
-                Math.max(
-                  0,
-                  Number(row.qty ?? 1)
-                ),
-              0
-            );
-
-          scanned =
-            mappingRows.reduce(
-              (sum, row) => {
-                if (!row.actual_in_at) {
-                  return sum;
-                }
-
-                return (
-                  sum +
-                  Math.max(
-                    0,
-                    Number(row.qty ?? 1)
-                  )
-                );
-              },
-              0
-            );
-        }
-
-        scanned = Math.min(
-          scanned,
-          total
-        );
-
-        const pending =
-          Math.max(
-            total - scanned,
-            0
+          total = mappingRows.reduce(
+            (sum, row) => sum + Math.max(0, Number(row.qty ?? 1)),
+            0,
           );
 
+          scanned = mappingRows.reduce((sum, row) => {
+            if (!row.actual_in_at) {
+              return sum;
+            }
+
+            return sum + Math.max(0, Number(row.qty ?? 1));
+          }, 0);
+        }
+
+        scanned = Math.min(scanned, total);
+
+        const pending = Math.max(total - scanned, 0);
+
         return {
-          machine_id:
-            machineRow.machine_id,
+          machine_id: machineRow.machine_id,
 
-          machine_name:
-            machineRow.machine_name,
+          machine_name: machineRow.machine_name,
 
-          machine_type:
-            machineRow.machine_type,
+          machine_type: machineRow.machine_type,
 
-          sequence_no:
-            machineRow.sequence_no,
+          sequence_no: machineRow.sequence_no,
 
           total,
 
@@ -7495,14 +7163,9 @@ export const getProjectDetailService = async (
 
           pending,
 
-          pct:
-            total > 0
-              ? Math.round(
-                  (scanned / total) * 100
-                )
-              : 0,
+          pct: total > 0 ? Math.round((scanned / total) * 100) : 0,
         };
-      })
+      }),
     );
 
     /*
@@ -7511,60 +7174,59 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const allMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          expected_in: true,
-        },
-        select: {
-          id: true,
-          cut_list_id: true,
-          machine_id: true,
-          sequence_no: true,
-          actual_in_at: true,
-          box_id: true,
-          in_operator: true,
-          weight: true,
-          qty: true,
-          row_created_source: true,
+    const allMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
+      },
+      select: {
+        id: true,
+        cut_list_id: true,
+        machine_id: true,
+        sequence_no: true,
+        actual_in_at: true,
+        box_id: true,
+        in_operator: true,
+        weight: true,
+        qty: true,
+        row_created_source: true,
 
-          machine: {
-            select: {
-              id: true,
-              machine_name: true,
-            },
-          },
-
-          cut_list: {
-            select: {
-              id: true,
-              item_name: true,
-              unique_code: true,
-              description: true,
-              qty: true,
-              category_name: true,
-              group_name: true,
-              length: true,
-              width: true,
-              thickness: true,
-              weight: true,
-            },
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
           },
         },
-        orderBy: [
-          {
-            cut_list_id: "asc",
+
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            unique_code: true,
+            description: true,
+            qty: true,
+            category_name: true,
+            group_name: true,
+            length: true,
+            width: true,
+            thickness: true,
+            weight: true,
           },
-          {
-            machine_id: "asc",
-          },
-          {
-            id: "asc",
-          },
-        ],
-      });
+        },
+      },
+      orderBy: [
+        {
+          cut_list_id: "asc",
+        },
+        {
+          machine_id: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -7574,9 +7236,7 @@ export const getProjectDetailService = async (
 
     const allInOperatorIds = [
       ...new Set(
-        allMappings
-          .map((mapping) => mapping.in_operator)
-          .filter(Boolean)
+        allMappings.map((mapping) => mapping.in_operator).filter(Boolean),
       ),
     ] as number[];
 
@@ -7596,10 +7256,7 @@ export const getProjectDetailService = async (
         : [];
 
     const allOperatorMap = new Map(
-      allOperators.map((user) => [
-        user.id,
-        user.user_name,
-      ])
+      allOperators.map((user) => [user.id, user.user_name]),
     );
 
     /*
@@ -7657,23 +7314,13 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const expandRowsByQty = <T extends { qty: number }>(
-      rows: T[]
-    ): T[] => {
+    const expandRowsByQty = <T extends { qty: number }>(rows: T[]): T[] => {
       const expanded: T[] = [];
 
       for (const row of rows) {
-        const rowQty =
-          Math.max(
-            1,
-            Number(row.qty ?? 1)
-          );
+        const rowQty = Math.max(1, Number(row.qty ?? 1));
 
-        for (
-          let i = 0;
-          i < rowQty;
-          i++
-        ) {
+        for (let i = 0; i < rowQty; i++) {
           expanded.push(row);
         }
       }
@@ -7690,65 +7337,31 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const normalMappings =
-      allMappings.filter(
-        (mapping) =>
-          !manualCutListIds.has(
-            mapping.cut_list_id
-          )
-      );
+    const normalMappings = allMappings.filter(
+      (mapping) => !manualCutListIds.has(mapping.cut_list_id),
+    );
 
-    const normalCutlistByItem =
-      new Map<
-        number,
-        typeof normalMappings
-      >();
+    const normalCutlistByItem = new Map<number, typeof normalMappings>();
 
     for (const mapping of normalMappings) {
-      if (
-        !normalCutlistByItem.has(
-          mapping.cut_list_id
-        )
-      ) {
-        normalCutlistByItem.set(
-          mapping.cut_list_id,
-          []
-        );
+      if (!normalCutlistByItem.has(mapping.cut_list_id)) {
+        normalCutlistByItem.set(mapping.cut_list_id, []);
       }
 
-      normalCutlistByItem
-        .get(mapping.cut_list_id)!
-        .push(mapping);
+      normalCutlistByItem.get(mapping.cut_list_id)!.push(mapping);
     }
 
-    for (const [
-      cut_list_id,
-      rows,
-    ] of normalCutlistByItem) {
-      const cutList =
-        rows[0].cut_list;
+    for (const [cut_list_id, rows] of normalCutlistByItem) {
+      const cutList = rows[0].cut_list;
 
-      const byMachine =
-        new Map<
-          number,
-          typeof rows
-        >();
+      const byMachine = new Map<number, typeof rows>();
 
       for (const row of rows) {
-        if (
-          !byMachine.has(
-            row.machine_id
-          )
-        ) {
-          byMachine.set(
-            row.machine_id,
-            []
-          );
+        if (!byMachine.has(row.machine_id)) {
+          byMachine.set(row.machine_id, []);
         }
 
-        byMachine
-          .get(row.machine_id)!
-          .push(row);
+        byMachine.get(row.machine_id)!.push(row);
       }
 
       /*
@@ -7757,183 +7370,112 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
-      const expandedByMachine =
-        new Map<
-          number,
-          typeof rows
-        >();
+      const expandedByMachine = new Map<number, typeof rows>();
 
-      for (const [
-        machineId,
-        machineRows,
-      ] of byMachine) {
-        expandedByMachine.set(
-          machineId,
-          expandRowsByQty(machineRows)
-        );
+      for (const [machineId, machineRows] of byMachine) {
+        expandedByMachine.set(machineId, expandRowsByQty(machineRows));
       }
 
-      const unitCount =
-        Math.max(
-          0,
-          ...[
-            ...expandedByMachine.values(),
-          ].map(
-            (machineRows) =>
-              machineRows.length
-          )
-        );
+      const unitCount = Math.max(
+        0,
+        ...[...expandedByMachine.values()].map(
+          (machineRows) => machineRows.length,
+        ),
+      );
 
-      for (
-        let unitIndex = 0;
-        unitIndex < unitCount;
-        unitIndex++
-      ) {
-        const machineColumns:
-          MachineColumn[] = [];
+      for (let unitIndex = 0; unitIndex < unitCount; unitIndex++) {
+        const machineColumns: MachineColumn[] = [];
 
-        for (const [
-          ,
-          machineRows,
-        ] of expandedByMachine) {
-          const row =
-            machineRows[unitIndex];
+        for (const [, machineRows] of expandedByMachine) {
+          const row = machineRows[unitIndex];
 
           if (!row) {
             continue;
           }
 
           machineColumns.push({
-            mapping_id:
-              row.id,
+            mapping_id: row.id,
 
-            machine_id:
-              row.machine_id,
+            machine_id: row.machine_id,
 
-            machine_name:
-              row.machine.machine_name,
+            machine_name: row.machine.machine_name,
 
-            sequence_no:
-              row.sequence_no,
+            sequence_no: row.sequence_no,
 
-            box_id:
-              row.box_id,
+            box_id: row.box_id,
 
-            weight:
-              Number(row.weight || 0),
+            weight: Number(row.weight || 0),
 
-            qty:
-              1,
+            qty: 1,
 
-            row_created_source:
-              row.row_created_source,
+            row_created_source: row.row_created_source,
 
-            scanned:
-              row.actual_in_at !== null,
+            scanned: row.actual_in_at !== null,
 
-            scanned_at:
-              row.actual_in_at,
+            scanned_at: row.actual_in_at,
 
-            scanned_by:
-              row.in_operator
-                ? allOperatorMap.get(
-                    row.in_operator
-                  ) ?? null
-                : null,
+            scanned_by: row.in_operator
+              ? (allOperatorMap.get(row.in_operator) ?? null)
+              : null,
           });
         }
 
         const packageBoxId =
-          machineColumns.find(
-            (machineColumn) =>
-              machineColumn.box_id
-          )?.box_id ?? null;
+          machineColumns.find((machineColumn) => machineColumn.box_id)
+            ?.box_id ?? null;
 
-        const packageBoxName =
-          packageBoxId
-            ? boxNameMap.get(
-                packageBoxId
-              ) ?? null
-            : null;
+        const packageBoxName = packageBoxId
+          ? (boxNameMap.get(packageBoxId) ?? null)
+          : null;
 
         const mappedWeight =
           machineColumns.find(
-            (machineColumn) =>
-              Number(
-                machineColumn.weight || 0
-              ) > 0
+            (machineColumn) => Number(machineColumn.weight || 0) > 0,
           )?.weight ?? 0;
 
         const fallbackWeight =
-          Number(cutList.weight || 0) > 0 &&
-          Number(cutList.qty || 0) > 0
-            ? Number(
-                cutList.weight || 0
-              ) /
-              Number(
-                cutList.qty || 1
-              )
+          Number(cutList.weight || 0) > 0 && Number(cutList.qty || 0) > 0
+            ? Number(cutList.weight || 0) / Number(cutList.qty || 1)
             : 0;
 
-        const unitWeight =
-          Number(
-            Number(
-              mappedWeight ||
-              fallbackWeight ||
-              0
-            ).toFixed(4)
-          );
+        const unitWeight = Number(
+          Number(mappedWeight || fallbackWeight || 0).toFixed(4),
+        );
 
         unitRows.push({
-          row_number:
-            rowNumber++,
+          row_number: rowNumber++,
 
           cut_list_id,
 
-          item_name:
-            cutList.item_name,
+          item_name: cutList.item_name,
 
-          unique_code:
-            cutList.unique_code,
+          unique_code: cutList.unique_code,
 
-          description:
-            cutList.description,
+          description: cutList.description,
 
-          qty:
-            1,
+          qty: 1,
 
-          total_qty:
-            Number(cutList.qty || 0),
+          total_qty: Number(cutList.qty || 0),
 
-          unit_index:
-            unitIndex + 1,
+          unit_index: unitIndex + 1,
 
-          category:
-            cutList.category_name,
+          category: cutList.category_name,
 
-          group:
-            cutList.group_name,
+          group: cutList.group_name,
 
-          length:
-            cutList.length,
+          length: cutList.length,
 
-          width:
-            cutList.width,
+          width: cutList.width,
 
-          thickness:
-            cutList.thickness,
+          thickness: cutList.thickness,
 
-          weight:
-            unitWeight,
+          weight: unitWeight,
 
-          package_box_id:
-            packageBoxId,
+          package_box_id: packageBoxId,
 
-          package_box_name:
-            packageBoxName,
+          package_box_name: packageBoxName,
 
-          machines:
-            machineColumns,
+          machines: machineColumns,
         });
       }
     }
@@ -7958,44 +7500,24 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const allMappingsByCutList =
-      new Map<
-        number,
-        typeof allMappings
-      >();
+    const allMappingsByCutList = new Map<number, typeof allMappings>();
 
     for (const mapping of allMappings) {
-      if (
-        !allMappingsByCutList.has(
-          mapping.cut_list_id
-        )
-      ) {
-        allMappingsByCutList.set(
-          mapping.cut_list_id,
-          []
-        );
+      if (!allMappingsByCutList.has(mapping.cut_list_id)) {
+        allMappingsByCutList.set(mapping.cut_list_id, []);
       }
 
-      allMappingsByCutList
-        .get(mapping.cut_list_id)!
-        .push(mapping);
+      allMappingsByCutList.get(mapping.cut_list_id)!.push(mapping);
     }
 
     for (const cutList of manualCutListItems) {
-      const totalQty =
-        Math.max(
-          0,
-          Number(cutList.qty || 0)
-        );
+      const totalQty = Math.max(0, Number(cutList.qty || 0));
 
       if (totalQty <= 0) {
         continue;
       }
 
-      const itemMappings =
-        allMappingsByCutList.get(
-          cutList.id
-        ) ?? [];
+      const itemMappings = allMappingsByCutList.get(cutList.id) ?? [];
 
       /*
       |--------------------------------------------------------------------------
@@ -8003,50 +7525,31 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
-      const nonPackagingRows =
-        itemMappings.filter(
-          (row) =>
-            !packagingMachine ||
-            Number(row.machine_id) !==
-              Number(packagingMachine.id)
-        );
+      const nonPackagingRows = itemMappings.filter(
+        (row) =>
+          !packagingMachine ||
+          Number(row.machine_id) !== Number(packagingMachine.id),
+      );
 
-      const nonPackagingByMachine =
-        new Map<
-          number,
-          typeof nonPackagingRows
-        >();
+      const nonPackagingByMachine = new Map<number, typeof nonPackagingRows>();
 
       for (const row of nonPackagingRows) {
-        if (
-          !nonPackagingByMachine.has(
-            row.machine_id
-          )
-        ) {
-          nonPackagingByMachine.set(
-            row.machine_id,
-            []
-          );
+        if (!nonPackagingByMachine.has(row.machine_id)) {
+          nonPackagingByMachine.set(row.machine_id, []);
         }
 
-        nonPackagingByMachine
-          .get(row.machine_id)!
-          .push(row);
+        nonPackagingByMachine.get(row.machine_id)!.push(row);
       }
 
-      const expandedNonPackagingByMachine =
-        new Map<
-          number,
-          typeof nonPackagingRows
-        >();
+      const expandedNonPackagingByMachine = new Map<
+        number,
+        typeof nonPackagingRows
+      >();
 
-      for (const [
-        machineId,
-        machineRows,
-      ] of nonPackagingByMachine) {
+      for (const [machineId, machineRows] of nonPackagingByMachine) {
         expandedNonPackagingByMachine.set(
           machineId,
-          expandRowsByQty(machineRows)
+          expandRowsByQty(machineRows),
         );
       }
 
@@ -8056,44 +7559,26 @@ export const getProjectDetailService = async (
       |--------------------------------------------------------------------------
       */
 
-      const manualPackagingRows =
-        itemMappings
-          .filter(
-            (row) =>
-              packagingMachine &&
-              Number(row.machine_id) ===
-                Number(packagingMachine.id) &&
-              row.row_created_source
-                ?.trim()
-                .toLowerCase() === "manual"
-          )
-          .sort(
-            (a, b) =>
-              a.id - b.id
-          );
+      const manualPackagingRows = itemMappings
+        .filter(
+          (row) =>
+            packagingMachine &&
+            Number(row.machine_id) === Number(packagingMachine.id) &&
+            row.row_created_source?.trim().toLowerCase() === "manual",
+        )
+        .sort((a, b) => a.id - b.id);
 
-      const expandedManualPackagingRows =
-        expandRowsByQty(
-          manualPackagingRows
-        ).slice(
-          0,
-          totalQty
-        );
+      const expandedManualPackagingRows = expandRowsByQty(
+        manualPackagingRows,
+      ).slice(0, totalQty);
 
       const fallbackWeight =
-        Number(cutList.weight || 0) > 0 &&
-        totalQty > 0
-          ? Number(cutList.weight || 0) /
-            totalQty
+        Number(cutList.weight || 0) > 0 && totalQty > 0
+          ? Number(cutList.weight || 0) / totalQty
           : 0;
 
-      for (
-        let unitIndex = 0;
-        unitIndex < totalQty;
-        unitIndex++
-      ) {
-        const machineColumns:
-          MachineColumn[] = [];
+      for (let unitIndex = 0; unitIndex < totalQty; unitIndex++) {
+        const machineColumns: MachineColumn[] = [];
 
         /*
         |--------------------------------------------------------------------------
@@ -8101,54 +7586,37 @@ export const getProjectDetailService = async (
         |--------------------------------------------------------------------------
         */
 
-        for (const [
-          ,
-          machineRows,
-        ] of expandedNonPackagingByMachine) {
-          const row =
-            machineRows[unitIndex];
+        for (const [, machineRows] of expandedNonPackagingByMachine) {
+          const row = machineRows[unitIndex];
 
           if (!row) {
             continue;
           }
 
           machineColumns.push({
-            mapping_id:
-              row.id,
+            mapping_id: row.id,
 
-            machine_id:
-              row.machine_id,
+            machine_id: row.machine_id,
 
-            machine_name:
-              row.machine.machine_name,
+            machine_name: row.machine.machine_name,
 
-            sequence_no:
-              row.sequence_no,
+            sequence_no: row.sequence_no,
 
-            box_id:
-              row.box_id,
+            box_id: row.box_id,
 
-            weight:
-              Number(row.weight || 0),
+            weight: Number(row.weight || 0),
 
-            qty:
-              1,
+            qty: 1,
 
-            row_created_source:
-              row.row_created_source,
+            row_created_source: row.row_created_source,
 
-            scanned:
-              row.actual_in_at !== null,
+            scanned: row.actual_in_at !== null,
 
-            scanned_at:
-              row.actual_in_at,
+            scanned_at: row.actual_in_at,
 
-            scanned_by:
-              row.in_operator
-                ? allOperatorMap.get(
-                    row.in_operator
-                  ) ?? null
-                : null,
+            scanned_by: row.in_operator
+              ? (allOperatorMap.get(row.in_operator) ?? null)
+              : null,
           });
         }
 
@@ -8158,56 +7626,34 @@ export const getProjectDetailService = async (
         |--------------------------------------------------------------------------
         */
 
-        const manualPackagingRow =
-          expandedManualPackagingRows[
-            unitIndex
-          ];
+        const manualPackagingRow = expandedManualPackagingRows[unitIndex];
 
         if (packagingMachine) {
           if (manualPackagingRow) {
             machineColumns.push({
-              mapping_id:
-                manualPackagingRow.id,
+              mapping_id: manualPackagingRow.id,
 
-              machine_id:
-                packagingMachine.id,
+              machine_id: packagingMachine.id,
 
-              machine_name:
-                packagingMachine.machine_name,
+              machine_name: packagingMachine.machine_name,
 
-              sequence_no:
-                packagingMachine.sequence_no ??
-                0,
+              sequence_no: packagingMachine.sequence_no ?? 0,
 
-              box_id:
-                manualPackagingRow.box_id,
+              box_id: manualPackagingRow.box_id,
 
-              weight:
-                Number(
-                  manualPackagingRow.weight ||
-                  fallbackWeight ||
-                  0
-                ),
+              weight: Number(manualPackagingRow.weight || fallbackWeight || 0),
 
-              qty:
-                1,
+              qty: 1,
 
-              row_created_source:
-                manualPackagingRow.row_created_source,
+              row_created_source: manualPackagingRow.row_created_source,
 
-              scanned:
-                manualPackagingRow.actual_in_at !==
-                null,
+              scanned: manualPackagingRow.actual_in_at !== null,
 
-              scanned_at:
-                manualPackagingRow.actual_in_at,
+              scanned_at: manualPackagingRow.actual_in_at,
 
-              scanned_by:
-                manualPackagingRow.in_operator
-                  ? allOperatorMap.get(
-                      manualPackagingRow.in_operator
-                    ) ?? null
-                  : null,
+              scanned_by: manualPackagingRow.in_operator
+                ? (allOperatorMap.get(manualPackagingRow.in_operator) ?? null)
+                : null,
             });
           } else {
             /*
@@ -8220,124 +7666,79 @@ export const getProjectDetailService = async (
             */
 
             machineColumns.push({
-              mapping_id:
-                0,
+              mapping_id: 0,
 
-              machine_id:
-                packagingMachine.id,
+              machine_id: packagingMachine.id,
 
-              machine_name:
-                packagingMachine.machine_name,
+              machine_name: packagingMachine.machine_name,
 
-              sequence_no:
-                packagingMachine.sequence_no ??
-                0,
+              sequence_no: packagingMachine.sequence_no ?? 0,
 
-              box_id:
-                null,
+              box_id: null,
 
-              weight:
-                Number(
-                  fallbackWeight.toFixed(4)
-                ),
+              weight: Number(fallbackWeight.toFixed(4)),
 
-              qty:
-                1,
+              qty: 1,
 
-              row_created_source:
-                "Manual",
+              row_created_source: "Manual",
 
-              scanned:
-                false,
+              scanned: false,
 
-              scanned_at:
-                null,
+              scanned_at: null,
 
-              scanned_by:
-                null,
+              scanned_by: null,
             });
           }
         }
 
-        const packageBoxId =
-          manualPackagingRow?.box_id ??
-          null;
+        const packageBoxId = manualPackagingRow?.box_id ?? null;
 
-        const packageBoxName =
-          packageBoxId
-            ? boxNameMap.get(
-                packageBoxId
-              ) ?? null
-            : null;
+        const packageBoxName = packageBoxId
+          ? (boxNameMap.get(packageBoxId) ?? null)
+          : null;
 
-        const mappedWeight =
-          manualPackagingRow
-            ? Number(
-                manualPackagingRow.weight ||
-                0
-              )
-            : 0;
+        const mappedWeight = manualPackagingRow
+          ? Number(manualPackagingRow.weight || 0)
+          : 0;
 
-        const unitWeight =
-          Number(
-            Number(
-              mappedWeight ||
-              fallbackWeight ||
-              0
-            ).toFixed(4)
-          );
+        const unitWeight = Number(
+          Number(mappedWeight || fallbackWeight || 0).toFixed(4),
+        );
 
         unitRows.push({
-          row_number:
-            rowNumber++,
+          row_number: rowNumber++,
 
-          cut_list_id:
-            cutList.id,
+          cut_list_id: cutList.id,
 
-          item_name:
-            cutList.item_name,
+          item_name: cutList.item_name,
 
-          unique_code:
-            cutList.unique_code,
+          unique_code: cutList.unique_code,
 
-          description:
-            cutList.description,
+          description: cutList.description,
 
-          qty:
-            1,
+          qty: 1,
 
-          total_qty:
-            totalQty,
+          total_qty: totalQty,
 
-          unit_index:
-            unitIndex + 1,
+          unit_index: unitIndex + 1,
 
-          category:
-            cutList.category_name,
+          category: cutList.category_name,
 
-          group:
-            cutList.group_name,
+          group: cutList.group_name,
 
-          length:
-            cutList.length,
+          length: cutList.length,
 
-          width:
-            cutList.width,
+          width: cutList.width,
 
-          thickness:
-            cutList.thickness,
+          thickness: cutList.thickness,
 
-          weight:
-            unitWeight,
+          weight: unitWeight,
 
-          package_box_id:
-            packageBoxId,
+          package_box_id: packageBoxId,
 
-          package_box_name:
-            packageBoxName,
+          package_box_name: packageBoxName,
 
-          machines:
-            machineColumns,
+          machines: machineColumns,
         });
       }
     }
@@ -8363,36 +7764,23 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalPanels =
-      unitRows.length;
+    const totalPanels = unitRows.length;
 
-    const uniqueCutListIds =
-      new Set<number>([
-        ...normalCutlistByItem.keys(),
-        ...manualCutListItems.map(
-          (item) => item.id
-        ),
-      ]);
+    const uniqueCutListIds = new Set<number>([
+      ...normalCutlistByItem.keys(),
+      ...manualCutListItems.map((item) => item.id),
+    ]);
 
-    const uniqueItems =
-      uniqueCutListIds.size;
+    const uniqueItems = uniqueCutListIds.size;
 
-    const sortedMachineStats =
-      machineStats.sort(
-        (a, b) =>
-          Number(a.sequence_no || 0) -
-          Number(b.sequence_no || 0)
-      );
+    const sortedMachineStats = machineStats.sort(
+      (a, b) => Number(a.sequence_no || 0) - Number(b.sequence_no || 0),
+    );
 
-    const totalBoxWeight =
-      Array.from(
-        boxWeightMap.values()
-      ).reduce(
-        (total, weight) =>
-          total +
-          Number(weight || 0),
-        0
-      );
+    const totalBoxWeight = Array.from(boxWeightMap.values()).reduce(
+      (total, weight) => total + Number(weight || 0),
+      0,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -8400,55 +7788,24 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalQty =
-      unitRows.reduce(
-        (total, row) =>
-          total +
-          Math.max(
-            0,
-            Number(row.qty || 1)
-          ),
-        0
-      );
+    const totalQty = unitRows.reduce(
+      (total, row) => total + Math.max(0, Number(row.qty || 1)),
+      0,
+    );
 
-    const totalPackedQty =
-      unitRows.reduce(
-        (total, row) => {
-          if (
-            row.package_box_id ===
-            null
-          ) {
-            return total;
-          }
+    const totalPackedQty = unitRows.reduce((total, row) => {
+      if (row.package_box_id === null) {
+        return total;
+      }
 
-          return (
-            total +
-            Math.max(
-              0,
-              Number(row.qty || 1)
-            )
-          );
-        },
-        0
-      );
+      return total + Math.max(0, Number(row.qty || 1));
+    }, 0);
 
-    const totalPendingQty =
-      Math.max(
-        totalQty -
-          totalPackedQty,
-        0
-      );
+    const totalPendingQty = Math.max(totalQty - totalPackedQty, 0);
 
     const packingProgressPct =
       totalQty > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (totalPackedQty /
-                totalQty) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((totalPackedQty / totalQty) * 100))
         : 0;
 
     /*
@@ -8461,53 +7818,27 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const manualPackedQty =
-      unitRows.reduce(
-        (total, row) => {
-          if (
-            row.package_box_id ===
-              null ||
-            !manualCutListIds.has(
-              row.cut_list_id
-            )
-          ) {
-            return total;
-          }
+    const manualPackedQty = unitRows.reduce((total, row) => {
+      if (
+        row.package_box_id === null ||
+        !manualCutListIds.has(row.cut_list_id)
+      ) {
+        return total;
+      }
 
-          return (
-            total +
-            Math.max(
-              0,
-              Number(row.qty || 1)
-            )
-          );
-        },
-        0
-      );
+      return total + Math.max(0, Number(row.qty || 1));
+    }, 0);
 
-    const scannedPackedQty =
-      Math.max(
-        totalPackedQty -
-          manualPackedQty,
-        0
-      );
+    const scannedPackedQty = Math.max(totalPackedQty - manualPackedQty, 0);
 
     const manualPackingPct =
       totalPackedQty > 0
-        ? Math.round(
-            (manualPackedQty /
-              totalPackedQty) *
-              100
-          )
+        ? Math.round((manualPackedQty / totalPackedQty) * 100)
         : 0;
 
     const scannedPackingPct =
       totalPackedQty > 0
-        ? Math.round(
-            (scannedPackedQty /
-              totalPackedQty) *
-              100
-          )
+        ? Math.round((scannedPackedQty / totalPackedQty) * 100)
         : 0;
 
     /*
@@ -8528,38 +7859,18 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const scannedReceivedQty =
-      Array.from(
-        boxScannedReceivedQtyMap.values()
-      ).reduce(
-        (total, qty) =>
-          total +
-          Math.max(
-            0,
-            Number(qty || 0)
-          ),
-        0
-      );
+    const scannedReceivedQty = Array.from(
+      boxScannedReceivedQtyMap.values(),
+    ).reduce((total, qty) => total + Math.max(0, Number(qty || 0)), 0);
 
-    const manualReceivedQty =
-      Array.from(
-        boxManualReceivedQtyMap.values()
-      ).reduce(
-        (total, qty) =>
-          total +
-          Math.max(
-            0,
-            Number(qty || 0)
-          ),
-        0
-      );
+    const manualReceivedQty = Array.from(
+      boxManualReceivedQtyMap.values(),
+    ).reduce((total, qty) => total + Math.max(0, Number(qty || 0)), 0);
 
-    const totalReceivedQty =
-      Math.min(
-        totalPackedQty,
-        scannedReceivedQty +
-          manualReceivedQty
-      );
+    const totalReceivedQty = Math.min(
+      totalPackedQty,
+      scannedReceivedQty + manualReceivedQty,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -8572,61 +7883,37 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalPendingReceiptQty =
-      Math.max(
-        totalPackedQty -
-          totalReceivedQty,
-        0
-      );
+    const totalPendingReceiptQty = Math.max(
+      totalPackedQty - totalReceivedQty,
+      0,
+    );
 
     const itemReceiptProgressPct =
       totalPackedQty > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (totalReceivedQty /
-                totalPackedQty) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((totalReceivedQty / totalPackedQty) * 100))
         : 0;
 
-    const scannedPendingReceiptQty =
-      Math.max(
-        scannedPackedQty -
-          scannedReceivedQty,
-        0
-      );
+    const scannedPendingReceiptQty = Math.max(
+      scannedPackedQty - scannedReceivedQty,
+      0,
+    );
 
-    const manualPendingReceiptQty =
-      Math.max(
-        manualPackedQty -
-          manualReceivedQty,
-        0
-      );
+    const manualPendingReceiptQty = Math.max(
+      manualPackedQty - manualReceivedQty,
+      0,
+    );
 
     const scannedReceiptProgressPct =
       scannedPackedQty > 0
         ? Math.min(
             100,
-            Math.round(
-              (scannedReceivedQty /
-                scannedPackedQty) *
-                100
-            )
+            Math.round((scannedReceivedQty / scannedPackedQty) * 100),
           )
         : 0;
 
     const manualReceiptProgressPct =
       manualPackedQty > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (manualReceivedQty /
-                manualPackedQty) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((manualReceivedQty / manualPackedQty) * 100))
         : 0;
 
     /*
@@ -8638,79 +7925,33 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const siteInBoxIds =
-      new Set<number>(
-        boxes
-          .filter(
-            (box) =>
-              box.site_in_at !==
-              null
-          )
-          .map(
-            (box) =>
-              box.id
-          )
-      );
+    const siteInBoxIds = new Set<number>(
+      boxes.filter((box) => box.site_in_at !== null).map((box) => box.id),
+    );
 
-    const siteInQty =
-      Array.from(
-        siteInBoxIds
-      ).reduce(
-        (total, boxId) =>
-          total +
-          Math.max(
-            0,
-            Number(
-              boxItemCountMap.get(
-                boxId
-              ) ?? 0
-            )
-          ),
-        0
-      );
+    const siteInQty = Array.from(siteInBoxIds).reduce(
+      (total, boxId) =>
+        total + Math.max(0, Number(boxItemCountMap.get(boxId) ?? 0)),
+      0,
+    );
 
-    const siteInReceivedQty =
-      Array.from(
-        siteInBoxIds
-      ).reduce(
-        (total, boxId) =>
-          total +
-          Math.max(
-            0,
-            Number(
-              boxReceivedQtyMap.get(
-                boxId
-              ) ?? 0
-            )
-          ),
-        0
-      );
+    const siteInReceivedQty = Array.from(siteInBoxIds).reduce(
+      (total, boxId) =>
+        total + Math.max(0, Number(boxReceivedQtyMap.get(boxId) ?? 0)),
+      0,
+    );
 
-    const siteInPendingVerificationQty =
-      Math.max(
-        siteInQty -
-          siteInReceivedQty,
-        0
-      );
+    const siteInPendingVerificationQty = Math.max(
+      siteInQty - siteInReceivedQty,
+      0,
+    );
 
     const siteItemVerificationPct =
       siteInQty > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (siteInReceivedQty /
-                siteInQty) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((siteInReceivedQty / siteInQty) * 100))
         : 0;
 
-    const notAtSiteQty =
-      Math.max(
-        totalPackedQty -
-          siteInQty,
-        0
-      );
+    const notAtSiteQty = Math.max(totalPackedQty - siteInQty, 0);
 
     /*
     |--------------------------------------------------------------------------
@@ -8723,41 +7964,20 @@ export const getProjectDetailService = async (
     let notReceivedBoxes = 0;
 
     for (const box of boxes) {
-      const boxQty =
-        Math.max(
-          0,
-          Number(
-            boxItemCountMap.get(
-              box.id
-            ) ?? 0
-          )
-        );
+      const boxQty = Math.max(0, Number(boxItemCountMap.get(box.id) ?? 0));
 
       if (boxQty <= 0) {
         continue;
       }
 
-      const receivedQty =
-        Math.min(
-          boxQty,
-          Math.max(
-            0,
-            Number(
-              boxReceivedQtyMap.get(
-                box.id
-              ) ?? 0
-            )
-          )
-        );
+      const receivedQty = Math.min(
+        boxQty,
+        Math.max(0, Number(boxReceivedQtyMap.get(box.id) ?? 0)),
+      );
 
-      if (
-        receivedQty >=
-        boxQty
-      ) {
+      if (receivedQty >= boxQty) {
         fullyReceivedBoxes++;
-      } else if (
-        receivedQty > 0
-      ) {
+      } else if (receivedQty > 0) {
         partiallyReceivedBoxes++;
       } else {
         notReceivedBoxes++;
@@ -8775,50 +7995,30 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const productPackingMap =
-      new Map<
-        number,
-        {
-          total_qty: number;
-          packed_qty: number;
-        }
-      >();
+    const productPackingMap = new Map<
+      number,
+      {
+        total_qty: number;
+        packed_qty: number;
+      }
+    >();
 
     for (const row of unitRows) {
-      if (
-        !productPackingMap.has(
-          row.cut_list_id
-        )
-      ) {
-        productPackingMap.set(
-          row.cut_list_id,
-          {
-            total_qty: 0,
-            packed_qty: 0,
-          }
-        );
+      if (!productPackingMap.has(row.cut_list_id)) {
+        productPackingMap.set(row.cut_list_id, {
+          total_qty: 0,
+          packed_qty: 0,
+        });
       }
 
-      const productStats =
-        productPackingMap.get(
-          row.cut_list_id
-        )!;
+      const productStats = productPackingMap.get(row.cut_list_id)!;
 
-      const rowQty =
-        Math.max(
-          0,
-          Number(row.qty || 1)
-        );
+      const rowQty = Math.max(0, Number(row.qty || 1));
 
-      productStats.total_qty +=
-        rowQty;
+      productStats.total_qty += rowQty;
 
-      if (
-        row.package_box_id !==
-        null
-      ) {
-        productStats.packed_qty +=
-          rowQty;
+      if (row.package_box_id !== null) {
+        productStats.packed_qty += rowQty;
       }
     }
 
@@ -8826,19 +8026,13 @@ export const getProjectDetailService = async (
     let partiallyPackedProducts = 0;
     let notStartedProducts = 0;
 
-    for (
-      const productStats
-      of productPackingMap.values()
-    ) {
+    for (const productStats of productPackingMap.values()) {
       if (
         productStats.total_qty > 0 &&
-        productStats.packed_qty >=
-          productStats.total_qty
+        productStats.packed_qty >= productStats.total_qty
       ) {
         fullyPackedProducts++;
-      } else if (
-        productStats.packed_qty > 0
-      ) {
+      } else if (productStats.packed_qty > 0) {
         partiallyPackedProducts++;
       } else {
         notStartedProducts++;
@@ -8851,63 +8045,34 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxesWithItems =
-      boxes.filter(
-        (box) =>
-          Number(
-            boxItemCountMap.get(
-              box.id
-            ) || 0
-          ) > 0
-      ).length;
+    const boxesWithItems = boxes.filter(
+      (box) => Number(boxItemCountMap.get(box.id) || 0) > 0,
+    ).length;
 
-    const emptyBoxes =
-      Math.max(
-        boxes.length -
-          boxesWithItems,
-        0
-      );
+    const emptyBoxes = Math.max(boxes.length - boxesWithItems, 0);
 
-    const packedBoxes =
-      boxes.filter(
-        (box) =>
-          String(
-            box.box_status || ""
-          )
-            .trim()
-            .toLowerCase() ===
-          "packed"
-      ).length;
+    const packedBoxes = boxes.filter(
+      (box) =>
+        String(box.box_status || "")
+          .trim()
+          .toLowerCase() === "packed",
+    ).length;
 
-    const unpackedBoxes =
-      boxes.filter(
-        (box) =>
-          String(
-            box.box_status || ""
-          )
-            .trim()
-            .toLowerCase() ===
-          "unpacked"
-      ).length;
+    const unpackedBoxes = boxes.filter(
+      (box) =>
+        String(box.box_status || "")
+          .trim()
+          .toLowerCase() === "unpacked",
+    ).length;
 
     const averageBoxWeight =
       boxesWithItems > 0
-        ? Number(
-            (
-              totalBoxWeight /
-              boxesWithItems
-            ).toFixed(4)
-          )
+        ? Number((totalBoxWeight / boxesWithItems).toFixed(4))
         : 0;
 
     const averageQtyPerBox =
       boxesWithItems > 0
-        ? Number(
-            (
-              totalPackedQty /
-              boxesWithItems
-            ).toFixed(2)
-          )
+        ? Number((totalPackedQty / boxesWithItems).toFixed(2))
         : 0;
 
     /*
@@ -8916,42 +8081,22 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const factoryOutBoxes =
-      boxes.filter(
-        (box) =>
-          box.factory_out_at !==
-          null
-      ).length;
+    const factoryOutBoxes = boxes.filter(
+      (box) => box.factory_out_at !== null,
+    ).length;
 
-    const siteReceivedBoxes =
-      boxes.filter(
-        (box) =>
-          box.site_in_at !==
-          null
-      ).length;
+    const siteReceivedBoxes = boxes.filter(
+      (box) => box.site_in_at !== null,
+    ).length;
 
     const dispatchProgressPct =
       boxes.length > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (factoryOutBoxes /
-                boxes.length) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((factoryOutBoxes / boxes.length) * 100))
         : 0;
 
     const siteReceiptProgressPct =
       boxes.length > 0
-        ? Math.min(
-            100,
-            Math.round(
-              (siteReceivedBoxes /
-                boxes.length) *
-                100
-            )
-          )
+        ? Math.min(100, Math.round((siteReceivedBoxes / boxes.length) * 100))
         : 0;
 
     /*
@@ -8960,59 +8105,33 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packagingMachineStats =
-      packagingMachine
-        ? sortedMachineStats.find(
-            (machine) =>
-              Number(
-                machine.machine_id
-              ) ===
-              Number(
-                packagingMachine.id
-              )
-          )
-        : undefined;
-
-    const pendingAtPackaging =
-      Math.max(
-        0,
-        Number(
-          packagingMachineStats?.pending ||
-            0
+    const packagingMachineStats = packagingMachine
+      ? sortedMachineStats.find(
+          (machine) =>
+            Number(machine.machine_id) === Number(packagingMachine.id),
         )
-      );
+      : undefined;
 
-    const totalMachineQty =
-      sortedMachineStats.reduce(
-        (total, machine) =>
-          total +
-          Math.max(
-            0,
-            Number(machine.total || 0)
-          ),
-        0
-      );
+    const pendingAtPackaging = Math.max(
+      0,
+      Number(packagingMachineStats?.pending || 0),
+    );
 
-    const totalMachineScannedQty =
-      sortedMachineStats.reduce(
-        (total, machine) =>
-          total +
-          Math.max(
-            0,
-            Number(machine.scanned || 0)
-          ),
-        0
-      );
+    const totalMachineQty = sortedMachineStats.reduce(
+      (total, machine) => total + Math.max(0, Number(machine.total || 0)),
+      0,
+    );
+
+    const totalMachineScannedQty = sortedMachineStats.reduce(
+      (total, machine) => total + Math.max(0, Number(machine.scanned || 0)),
+      0,
+    );
 
     const machineCompletionPct =
       totalMachineQty > 0
         ? Math.min(
             100,
-            Math.round(
-              (totalMachineScannedQty /
-                totalMachineQty) *
-                100
-            )
+            Math.round((totalMachineScannedQty / totalMachineQty) * 100),
           )
         : 0;
 
@@ -9022,481 +8141,207 @@ export const getProjectDetailService = async (
     |--------------------------------------------------------------------------
     */
 
-    const formattedBoxes =
-      boxes.map((box) => {
-        const boxInfoValues =
-          box.box_info_values
-            .filter(
-              (item) =>
-                item.field &&
-                item.field.active
-            )
-            .sort(
-              (a, b) =>
-                Number(
-                  a.field.sort_order ||
-                    0
-                ) -
-                Number(
-                  b.field.sort_order ||
-                    0
-                )
-            )
-            .map((item) => ({
-              id:
-                item.id,
+    const formattedBoxes = boxes.map((box) => {
+      const boxInfoValues = box.box_info_values
+        .filter((item) => item.field && item.field.active)
+        .sort(
+          (a, b) =>
+            Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
+        )
+        .map((item) => ({
+          id: item.id,
 
-              field_id:
-                item.field_id,
+          field_id: item.field_id,
 
-              field_label:
-                item.field.field_label,
+          field_label: item.field.field_label,
 
-              field_key:
-                item.field.field_key,
+          field_key: item.field.field_key,
 
-              field_type:
-                item.field.field_type,
+          field_type: item.field.field_type,
 
-              is_required:
-                item.field.is_required,
+          is_required: item.field.is_required,
 
-              sort_order:
-                item.field.sort_order,
+          sort_order: item.field.sort_order,
 
-              field_value:
-                item.field_value ||
-                "",
-            }));
+          field_value: item.field_value || "",
+        }));
 
-        return {
-          id:
-            box.id,
+      return {
+        id: box.id,
 
-          box_name:
-            box.box_name,
+        box_name: box.box_name,
 
-          box_status:
-            box.box_status,
+        box_status: box.box_status,
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Actual physical quantity in box
           |--------------------------------------------------------------------------
           */
-          items_count:
-            boxItemCountMap.get(
-              box.id
-            ) || 0,
+        items_count: boxItemCountMap.get(box.id) || 0,
 
-          total_weight:
-            Number(
-              (
-                boxWeightMap.get(
-                  box.id
-                ) || 0
-              ).toFixed(4)
-            ),
+        total_weight: Number((boxWeightMap.get(box.id) || 0).toFixed(4)),
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Site item receipt quantities
           |--------------------------------------------------------------------------
           */
 
-          received_qty:
-            Math.min(
-              Number(
-                boxItemCountMap.get(
-                  box.id
-                ) || 0
-              ),
-              Number(
-                boxReceivedQtyMap.get(
-                  box.id
-                ) || 0
-              )
-            ),
+        received_qty: Math.min(
+          Number(boxItemCountMap.get(box.id) || 0),
+          Number(boxReceivedQtyMap.get(box.id) || 0),
+        ),
 
-          pending_received_qty:
-            Math.max(
-              Number(
-                boxItemCountMap.get(
-                  box.id
-                ) || 0
-              ) -
-                Number(
-                  boxReceivedQtyMap.get(
-                    box.id
-                  ) || 0
+        pending_received_qty: Math.max(
+          Number(boxItemCountMap.get(box.id) || 0) -
+            Number(boxReceivedQtyMap.get(box.id) || 0),
+          0,
+        ),
+
+        receipt_progress_pct:
+          Number(boxItemCountMap.get(box.id) || 0) > 0
+            ? Math.min(
+                100,
+                Math.round(
+                  (Number(boxReceivedQtyMap.get(box.id) || 0) /
+                    Number(boxItemCountMap.get(box.id) || 1)) *
+                    100,
                 ),
-              0
-            ),
-
-          receipt_progress_pct:
-            Number(
-              boxItemCountMap.get(
-                box.id
-              ) || 0
-            ) > 0
-              ? Math.min(
-                  100,
-                  Math.round(
-                    (
-                      Number(
-                        boxReceivedQtyMap.get(
-                          box.id
-                        ) || 0
-                      ) /
-                      Number(
-                        boxItemCountMap.get(
-                          box.id
-                        ) || 1
-                      )
-                    ) *
-                      100
-                  )
-                )
-              : 0,
-
-          scanned_packed_qty:
-            Number(
-              boxScannedPackedQtyMap.get(
-                box.id
-              ) || 0
-            ),
-
-          scanned_received_qty:
-            Number(
-              boxScannedReceivedQtyMap.get(
-                box.id
-              ) || 0
-            ),
-
-          manual_packed_qty:
-            Number(
-              boxManualPackedQtyMap.get(
-                box.id
-              ) || 0
-            ),
-
-          manual_received_qty:
-            Number(
-              boxManualReceivedQtyMap.get(
-                box.id
-              ) || 0
-            ),
-
-          factory_out_at:
-            box.factory_out_at,
-
-          factory_out_by:
-            box.factory_out_by
-              ? operatorMap.get(
-                  box.factory_out_by
-                ) ?? null
-              : null,
-
-          site_in_at:
-            box.site_in_at,
-
-          site_in_by:
-            box.site_in_by
-              ? operatorMap.get(
-                  box.site_in_by
-                ) ?? null
-              : null,
-
-          box_info_values:
-            boxInfoValues,
-        };
-      });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Final response
-    |--------------------------------------------------------------------------
-    */
-
-    return validationResponse(
-      1,
-      "Project detail fetched",
-      {
-        project: {
-          id:
-            project.id,
-
-          project_name:
-            project.project_name,
-
-          project_status:
-            project.project_status,
-
-          track_trace_status:
-            project.track_trace_status,
-
-          lead_id:
-            project.lead_id,
-
-          lead:
-            lead
-              ? {
-                  lead_name:
-                    lead.firstname,
-
-                  lead_phone:
-                    lead.contact_no,
-
-                  lead_email:
-                    lead.email,
-
-                  lead_address:
-                    lead.site_address,
-                }
-              : null,
-
-          details:
-            project.details[0] ??
-            null,
-        },
-
-        stats: {
-          /*
-          |--------------------------------------------------------------------
-          | Product / quantity overview
-          |--------------------------------------------------------------------
-          */
-
-          product_types:
-            uniqueItems,
-
-          // Backward compatibility
-          total_items:
-            uniqueItems,
-
-          total_panels:
-            totalPanels,
-
-          total_qty:
-            totalQty,
-
-          total_packed_qty:
-            totalPackedQty,
-
-          total_pending_qty:
-            totalPendingQty,
-
-          packing_progress_pct:
-            packingProgressPct,
-
-          /*
-          |--------------------------------------------------------------------
-          | Packing method
-          |--------------------------------------------------------------------
-          */
-
-          scanned_packed_qty:
-            scannedPackedQty,
-
-          manual_packed_qty:
-            manualPackedQty,
-
-          scanned_packing_pct:
-            scannedPackingPct,
-
-          manual_packing_pct:
-            manualPackingPct,
-
-          pending_at_packaging:
-            pendingAtPackaging,
-
-          /*
-          |--------------------------------------------------------------------
-          | Item receipt / site verification
-          |--------------------------------------------------------------------
-          */
-
-          total_received_qty:
-            totalReceivedQty,
-
-          total_pending_receipt_qty:
-            totalPendingReceiptQty,
-
-          item_receipt_progress_pct:
-            itemReceiptProgressPct,
-
-          scanned_received_qty:
-            scannedReceivedQty,
-
-          scanned_pending_receipt_qty:
-            scannedPendingReceiptQty,
-
-          scanned_receipt_progress_pct:
-            scannedReceiptProgressPct,
-
-          manual_received_qty:
-            manualReceivedQty,
-
-          manual_pending_receipt_qty:
-            manualPendingReceiptQty,
-
-          manual_receipt_progress_pct:
-            manualReceiptProgressPct,
-
-          site_in_qty:
-            siteInQty,
-
-          site_in_received_qty:
-            siteInReceivedQty,
-
-          site_in_pending_verification_qty:
-            siteInPendingVerificationQty,
-
-          site_item_verification_pct:
-            siteItemVerificationPct,
-
-          not_at_site_qty:
-            notAtSiteQty,
-
-          fully_received_boxes:
-            fullyReceivedBoxes,
-
-          partially_received_boxes:
-            partiallyReceivedBoxes,
-
-          not_received_boxes:
-            notReceivedBoxes,
-
-          /*
-          |--------------------------------------------------------------------
-          | Product packing status
-          |--------------------------------------------------------------------
-          */
-
-          fully_packed_products:
-            fullyPackedProducts,
-
-          partially_packed_products:
-            partiallyPackedProducts,
-
-          not_started_products:
-            notStartedProducts,
-
-          /*
-          |--------------------------------------------------------------------
-          | Box statistics
-          |--------------------------------------------------------------------
-          */
-
-          total_boxes:
-            boxes.length,
-
-          boxes_with_items:
-            boxesWithItems,
-
-          empty_boxes:
-            emptyBoxes,
-
-          packed_boxes:
-            packedBoxes,
-
-          unpacked_boxes:
-            unpackedBoxes,
-
-          /*
-          |--------------------------------------------------------------------
-          | Weight statistics
-          |--------------------------------------------------------------------
-          */
-
-          total_weight:
-            Number(
-              totalBoxWeight.toFixed(
-                4
               )
-            ),
+            : 0,
 
-          total_packed_weight:
-            Number(
-              totalBoxWeight.toFixed(
-                4
-              )
-            ),
+        scanned_packed_qty: Number(boxScannedPackedQtyMap.get(box.id) || 0),
 
-          average_box_weight:
-            averageBoxWeight,
+        scanned_received_qty: Number(boxScannedReceivedQtyMap.get(box.id) || 0),
 
-          average_qty_per_box:
-            averageQtyPerBox,
+        manual_packed_qty: Number(boxManualPackedQtyMap.get(box.id) || 0),
 
-          /*
-          |--------------------------------------------------------------------
-          | Dispatch / site progress
-          |--------------------------------------------------------------------
-          */
+        manual_received_qty: Number(boxManualReceivedQtyMap.get(box.id) || 0),
 
-          factory_out_boxes:
-            factoryOutBoxes,
+        factory_out_at: box.factory_out_at,
 
-          site_received_boxes:
-            siteReceivedBoxes,
+        factory_out_by: box.factory_out_by
+          ? (operatorMap.get(box.factory_out_by) ?? null)
+          : null,
 
-          dispatch_progress_pct:
-            dispatchProgressPct,
+        site_in_at: box.site_in_at,
 
-          site_receipt_progress_pct:
-            siteReceiptProgressPct,
+        site_in_by: box.site_in_by
+          ? (operatorMap.get(box.site_in_by) ?? null)
+          : null,
 
-          /*
-          |--------------------------------------------------------------------
-          | Machine progress
-          |--------------------------------------------------------------------
-          */
+        box_info_values: boxInfoValues,
+      };
+    });
 
-          machine_completion_pct:
-            machineCompletionPct,
 
-          machine_total_qty:
-            totalMachineQty,
+    const [allGroupsRes, allCategoriesRes] = await Promise.all([
+      prisma.cutList.findMany({
+        where: { project_id, vendor_id, status: "Active", group_name: { not: null } },
+        select: { group_name: true },
+        distinct: ["group_name"],
+      }),
+      prisma.cutList.findMany({
+        where: { project_id, vendor_id, status: "Active", category_name: { not: null } },
+        select: { category_name: true },
+        distinct: ["category_name"],
+      }),
+    ]);
 
-          machine_scanned_qty:
-            totalMachineScannedQty,
-        },
+    const filterOptions = {
+      groups: allGroupsRes.map((r) => r.group_name!).filter(Boolean).sort(),
+      categories: allCategoriesRes.map((r) => r.category_name!).filter(Boolean).sort(),
+      machines: sortedMachineStats.map((m) => ({ id: m.machine_id, name: m.machine_name })),
+    };
 
-        machines:
-          sortedMachineStats,
-
-        boxes:
-          formattedBoxes,
-
-        cutlist:
-          unitRows,
-      }
-    );
+    return validationResponse(1, "Project detail fetched", {
+      project: {
+        id: project.id,
+        project_name: project.project_name,
+        project_status: project.project_status,
+        track_trace_status: project.track_trace_status,
+        lead_id: project.lead_id,
+        lead: lead
+          ? {
+              lead_name: lead.firstname,
+              lead_phone: lead.contact_no,
+              lead_email: lead.email,
+              lead_address: lead.site_address,
+            }
+          : null,
+        details: project.details[0] ?? null,
+      },
+      stats: {
+        product_types: uniqueItems,
+        total_items: uniqueItems,
+        total_panels: totalPanels,
+        total_qty: totalQty,
+        total_packed_qty: totalPackedQty,
+        total_pending_qty: totalPendingQty,
+        packing_progress_pct: packingProgressPct,
+        manual_packed_qty: manualPackedQty,
+        scanned_packed_qty: scannedPackedQty,
+        manual_packing_pct: manualPackingPct,
+        scanned_packing_pct: scannedPackingPct,
+        pending_at_packaging: pendingAtPackaging,
+        total_received_qty: totalReceivedQty,
+        scanned_received_qty: scannedReceivedQty,
+        manual_received_qty: manualReceivedQty,
+        total_pending_receipt_qty: totalPendingReceiptQty,
+        scanned_pending_receipt_qty: scannedPendingReceiptQty,
+        manual_pending_receipt_qty: manualPendingReceiptQty,
+        item_receipt_progress_pct: itemReceiptProgressPct,
+        scanned_receipt_progress_pct: scannedReceiptProgressPct,
+        manual_receipt_progress_pct: manualReceiptProgressPct,
+        site_in_qty: siteInQty,
+        site_in_received_qty: siteInReceivedQty,
+        site_in_pending_verification_qty: siteInPendingVerificationQty,
+        site_item_verification_pct: siteItemVerificationPct,
+        not_at_site_qty: notAtSiteQty,
+        fully_received_boxes: fullyReceivedBoxes,
+        partially_received_boxes: partiallyReceivedBoxes,
+        not_received_boxes: notReceivedBoxes,
+        fully_packed_products: fullyPackedProducts,
+        partially_packed_products: partiallyPackedProducts,
+        not_started_products: notStartedProducts,
+        total_boxes: boxes.length,
+        boxes_with_items: boxesWithItems,
+        empty_boxes: emptyBoxes,
+        packed_boxes: packedBoxes,
+        unpacked_boxes: unpackedBoxes,
+        total_weight: Number(totalBoxWeight.toFixed(4)),
+        total_packed_weight: Number(totalBoxWeight.toFixed(4)),
+        average_box_weight: averageBoxWeight,
+        average_qty_per_box: averageQtyPerBox,
+        factory_out_boxes: factoryOutBoxes,
+        site_received_boxes: siteReceivedBoxes,
+        dispatch_progress_pct: dispatchProgressPct,
+        site_receipt_progress_pct: siteReceiptProgressPct,
+        machine_completion_pct: machineCompletionPct,
+        machine_total_qty: totalMachineQty,
+        machine_scanned_qty: totalMachineScannedQty,
+      },
+      machines: sortedMachineStats,
+      boxes: formattedBoxes,
+      cutlist: unitRows,
+      filterOptions,
+    });
   } catch (error) {
-    console.error(
-      "getProjectDetailService error:",
-      error
-    );
+    console.error("getProjectDetailService error:", error);
 
-    return validationResponse(
-      0,
-      "Failed to fetch project detail"
-    );
+    return validationResponse(0, "Failed to fetch project detail");
   }
 };
-
-
 
 // ─── GET box items ────────────────────────────────────────────────────────────
 
 export const getBoxItemsService_old = async (
   vendor_id: number,
   unique_project_id: string,
-  box_id: number
+  box_id: number,
 ) => {
   try {
-
     const projectLookup = await prisma.projectMaster.findFirst({
       where: { unique_project_id, vendor_id },
       select: { id: true },
@@ -9506,7 +8351,13 @@ export const getBoxItemsService_old = async (
 
     const box = await prisma.boxMaster.findFirst({
       where: { id: box_id, project_id, vendor_id, is_deleted: false },
-      select: { id: true, box_name: true, box_status: true, factory_out_at: true, site_in_at: true },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        site_in_at: true,
+      },
     });
 
     if (!box) return validationResponse(0, "Box not found");
@@ -9524,9 +8375,16 @@ export const getBoxItemsService_old = async (
         machine: { select: { machine_name: true } },
         cut_list: {
           select: {
-            id: true, item_name: true, unique_code: true,
-            qty: true, category_name: true, group_name: true,
-            length: true, width: true, thickness: true, weight: true,
+            id: true,
+            item_name: true,
+            unique_code: true,
+            qty: true,
+            category_name: true,
+            group_name: true,
+            length: true,
+            width: true,
+            thickness: true,
+            weight: true,
           },
         },
       },
@@ -9535,25 +8393,31 @@ export const getBoxItemsService_old = async (
 
     const boxTotalWeight = mappings.reduce(
       (total, mapping) => total + Number(mapping.weight || 0),
-      0
+      0,
     );
 
-    const opIds = [...new Set([
-      ...mappings.map(m => m.in_operator).filter(Boolean),
-      ...mappings.map(m => m.site_in_by).filter(Boolean),
-    ])] as number[];
+    const opIds = [
+      ...new Set([
+        ...mappings.map((m) => m.in_operator).filter(Boolean),
+        ...mappings.map((m) => m.site_in_by).filter(Boolean),
+      ]),
+    ] as number[];
 
-    const ops = opIds.length > 0
-      ? await prisma.userMaster.findMany({ where: { id: { in: opIds } }, select: { id: true, user_name: true } })
-      : [];
-    const opMap = new Map(ops.map(u => [u.id, u.user_name]));
+    const ops =
+      opIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: { id: { in: opIds } },
+            select: { id: true, user_name: true },
+          })
+        : [];
+    const opMap = new Map(ops.map((u) => [u.id, u.user_name]));
 
     return validationResponse(1, "Box items fetched", {
       box: {
         ...box,
         total_weight: Number(boxTotalWeight.toFixed(4)),
       },
-      items: mappings.map(m => ({
+      items: mappings.map((m) => ({
         id: m.id,
         machine: { machine_name: m.machine.machine_name },
         actual_in_at: m.actual_in_at,
@@ -9563,20 +8427,19 @@ export const getBoxItemsService_old = async (
         site_in_by: m.site_in_by ? (opMap.get(m.site_in_by) ?? null) : null,
         inOperator: m.in_operator
           ? {
-            id: m.in_operator,
-            name: opMap.get(m.in_operator) ?? "",
-          }
+              id: m.in_operator,
+              name: opMap.get(m.in_operator) ?? "",
+            }
           : null,
         siteInByUser: m.site_in_by
           ? {
-            id: m.site_in_by,
-            name: opMap.get(m.site_in_by) ?? "",
-          }
+              id: m.site_in_by,
+              name: opMap.get(m.site_in_by) ?? "",
+            }
           : null,
         cut_list: m.cut_list,
       })),
     });
-
   } catch (error) {
     console.error("getBoxItemsService error:", error);
     return validationResponse(0, "Failed to fetch box items");
@@ -9598,117 +8461,97 @@ export const getBoxItemsService_old = async (
 export const getBoxItemsService = async (
   vendor_id: number,
   unique_project_id: string,
-  box_id: number
+  box_id: number,
 ) => {
   try {
-    const projectLookup =
-      await prisma.projectMaster.findFirst({
-        where: {
-          unique_project_id,
-          vendor_id,
-        },
-        select: {
-          id: true,
-        },
-      });
+    const projectLookup = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id,
+        vendor_id,
+      },
+      select: {
+        id: true,
+      },
+    });
 
     if (!projectLookup) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
-    const project_id =
-      projectLookup.id;
+    const project_id = projectLookup.id;
 
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          factory_out_at: true,
-          site_in_at: true,
-        },
-      });
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        site_in_at: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
-    const mappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          box_id,
-          project_id,
-          vendor_id,
-          expected_in: true,
-        },
+    const mappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+        expected_in: true,
+      },
 
-        select: {
-          id: true,
-          machine_id: true,
-          actual_in_at: true,
-          site_in_at: true,
-          in_operator: true,
-          site_in_by: true,
+      select: {
+        id: true,
+        machine_id: true,
+        actual_in_at: true,
+        site_in_at: true,
+        in_operator: true,
+        site_in_by: true,
 
-          qty: true,
-          weight: true,
-          row_created_source: true,
+        qty: true,
+        weight: true,
+        row_created_source: true,
 
-          machine: {
-            select: {
-              machine_name: true,
-            },
-          },
-
-          cut_list: {
-            select: {
-              id: true,
-              item_name: true,
-              unique_code: true,
-              qty: true,
-              category_name: true,
-              group_name: true,
-              length: true,
-              width: true,
-              thickness: true,
-              weight: true,
-            },
+        machine: {
+          select: {
+            machine_name: true,
           },
         },
 
-        orderBy: {
-          id: "asc",
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            unique_code: true,
+            qty: true,
+            category_name: true,
+            group_name: true,
+            length: true,
+            width: true,
+            thickness: true,
+            weight: true,
+          },
         },
-      });
+      },
+
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     const opIds = [
       ...new Set([
-        ...mappings
-          .map(
-            (mapping) =>
-              mapping.in_operator
-          )
-          .filter(Boolean),
+        ...mappings.map((mapping) => mapping.in_operator).filter(Boolean),
 
-        ...mappings
-          .map(
-            (mapping) =>
-              mapping.site_in_by
-          )
-          .filter(Boolean),
+        ...mappings.map((mapping) => mapping.site_in_by).filter(Boolean),
       ]),
     ] as number[];
 
@@ -9727,114 +8570,61 @@ export const getBoxItemsService = async (
           })
         : [];
 
-    const opMap =
-      new Map(
-        ops.map(
-          (user) => [
-            user.id,
-            user.user_name,
-          ]
-        )
-      );
+    const opMap = new Map(ops.map((user) => [user.id, user.user_name]));
 
-    return validationResponse(
-      1,
-      "Box items fetched",
-      {
-        box,
+    return validationResponse(1, "Box items fetched", {
+      box,
 
-        items:
-          mappings.map(
-            (mapping) => ({
-              id:
-                mapping.id,
+      items: mappings.map((mapping) => ({
+        id: mapping.id,
 
-              machine: {
-                machine_name:
-                  mapping.machine
-                    .machine_name,
-              },
+        machine: {
+          machine_name: mapping.machine.machine_name,
+        },
 
-              actual_in_at:
-                mapping.actual_in_at,
+        actual_in_at: mapping.actual_in_at,
 
-              site_in_at:
-                mapping.site_in_at,
+        site_in_at: mapping.site_in_at,
 
-              qty:
-                Number(
-                  mapping.qty ??
-                  1
-                ),
+        qty: Number(mapping.qty ?? 1),
 
-              weight:
-                Number(
-                  mapping.weight ||
-                  0
-                ),
+        weight: Number(mapping.weight || 0),
 
-              row_created_source:
-                mapping.row_created_source,
+        row_created_source: mapping.row_created_source,
 
-              scanned_by:
-                mapping.in_operator
-                  ? opMap.get(
-                      mapping.in_operator
-                    ) ?? null
-                  : null,
+        scanned_by: mapping.in_operator
+          ? (opMap.get(mapping.in_operator) ?? null)
+          : null,
 
-              site_in_by:
-                mapping.site_in_by
-                  ? opMap.get(
-                      mapping.site_in_by
-                    ) ?? null
-                  : null,
+        site_in_by: mapping.site_in_by
+          ? (opMap.get(mapping.site_in_by) ?? null)
+          : null,
 
-              inOperator:
-                mapping.in_operator
-                  ? {
-                      id:
-                        mapping.in_operator,
+        inOperator: mapping.in_operator
+          ? {
+              id: mapping.in_operator,
 
-                      name:
-                        opMap.get(
-                          mapping.in_operator
-                        ) ?? "",
-                    }
-                  : null,
+              name: opMap.get(mapping.in_operator) ?? "",
+            }
+          : null,
 
-              siteInByUser:
-                mapping.site_in_by
-                  ? {
-                      id:
-                        mapping.site_in_by,
+        siteInByUser: mapping.site_in_by
+          ? {
+              id: mapping.site_in_by,
 
-                      name:
-                        opMap.get(
-                          mapping.site_in_by
-                        ) ?? "",
-                    }
-                  : null,
+              name: opMap.get(mapping.site_in_by) ?? "",
+            }
+          : null,
 
-              cut_list:
-                mapping.cut_list,
-            })
-          ),
-      }
-    );
+        cut_list: mapping.cut_list,
+      })),
+    });
   } catch (error) {
-    console.error(
-      "getBoxItemsService error:",
-      error
-    );
+    console.error("getBoxItemsService error:", error);
 
-    return validationResponse(
-      0,
-      "Failed to fetch box items"
-    );
+    return validationResponse(0, "Failed to fetch box items");
   }
 };
-
 
 /*
 |--------------------------------------------------------------------------
@@ -9859,20 +8649,11 @@ export const getBoxItemsService = async (
 |--------------------------------------------------------------------------
 */
 
-export type ProjectCutListMachineStatus =
-  | "all"
-  | "done"
-  | "pending";
+export type ProjectCutListMachineStatus = "all" | "done" | "pending";
 
-export type ProjectCutListPackingStatus =
-  | "all"
-  | "packed"
-  | "pending";
+export type ProjectCutListPackingStatus = "all" | "packed" | "pending";
 
-export type ProjectCutListPackingMethod =
-  | "all"
-  | "manual"
-  | "scanned";
+export type ProjectCutListPackingMethod = "all" | "manual" | "scanned";
 
 export type ProjectCutListSortBy =
   | "row_number"
@@ -9883,9 +8664,7 @@ export type ProjectCutListSortBy =
   | "weight"
   | "box";
 
-export type ProjectCutListSortOrder =
-  | "asc"
-  | "desc";
+export type ProjectCutListSortOrder = "asc" | "desc";
 
 export interface ProjectCutListFilters {
   page?: number;
@@ -9960,46 +8739,30 @@ type ProjectCutListUnitRow = {
   machines: CutListMachineColumn[];
 };
 
-const normalizeText = (
-  value: unknown
-): string => {
+const normalizeText = (value: unknown): string => {
   return String(value ?? "")
     .trim()
     .toLowerCase();
 };
 
-const normalizePageNumber = (
-  value: unknown,
-  fallback: number
-): number => {
+const normalizePageNumber = (value: unknown, fallback: number): number => {
   const parsed = Number(value);
 
-  if (
-    !Number.isFinite(parsed) ||
-    parsed <= 0
-  ) {
+  if (!Number.isFinite(parsed) || parsed <= 0) {
     return fallback;
   }
 
   return Math.floor(parsed);
 };
 
-const normalizeNullableNumber = (
-  value: unknown
-): number | null => {
-  if (
-    value === undefined ||
-    value === null ||
-    value === ""
-  ) {
+const normalizeNullableNumber = (value: unknown): number | null => {
+  if (value === undefined || value === null || value === "") {
     return null;
   }
 
   const parsed = Number(value);
 
-  return Number.isFinite(parsed)
-    ? parsed
-    : null;
+  return Number.isFinite(parsed) ? parsed : null;
 };
 
 /*
@@ -10029,7 +8792,7 @@ const normalizeNullableNumber = (
 export const getProjectCutListPaginatedService = async (
   vendor_id: number,
   unique_project_id: string,
-  filters: ProjectCutListFilters = {}
+  filters: ProjectCutListFilters = {},
 ) => {
   try {
     /*
@@ -10038,21 +8801,11 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    if (
-      !vendor_id ||
-      !unique_project_id
-    ) {
-      return validationResponse(
-        0,
-        "vendor_id and project_id are required"
-      );
+    if (!vendor_id || !unique_project_id) {
+      return validationResponse(0, "vendor_id and project_id are required");
     }
 
-    const page =
-      normalizePageNumber(
-        filters.page,
-        1
-      );
+    const page = normalizePageNumber(filters.page, 1);
 
     /*
     |--------------------------------------------------------------------------
@@ -10063,82 +8816,37 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const requestedLimit =
-      normalizePageNumber(
-        filters.limit,
-        25
-      );
+    const requestedLimit = normalizePageNumber(filters.limit, 25);
 
-    const limit =
-      Math.min(
-        Math.max(
-          requestedLimit,
-          10
-        ),
-        100
-      );
+    const limit = Math.min(Math.max(requestedLimit, 10), 100);
 
-    const search =
-      String(
-        filters.search ?? ""
-      ).trim();
+    const search = String(filters.search ?? "").trim();
 
-    const selectedGroup =
-      String(
-        filters.group ?? "all"
-      ).trim();
+    const selectedGroup = String(filters.group ?? "all").trim();
 
-    const selectedCategory =
-      String(
-        filters.category ?? "all"
-      ).trim();
+    const selectedCategory = String(filters.category ?? "all").trim();
 
-    const machineId =
-      normalizeNullableNumber(
-        filters.machine_id
-      );
+    const machineId = normalizeNullableNumber(filters.machine_id);
 
-    const machineStatus:
-      ProjectCutListMachineStatus =
-        filters.machine_status ??
-        "all";
+    const machineStatus: ProjectCutListMachineStatus =
+      filters.machine_status ?? "all";
 
-    const packingStatus:
-      ProjectCutListPackingStatus =
-        filters.packing_status ??
-        "all";
+    const packingStatus: ProjectCutListPackingStatus =
+      filters.packing_status ?? "all";
 
-    const packingMethod:
-      ProjectCutListPackingMethod =
-        filters.packing_method ??
-        "all";
+    const packingMethod: ProjectCutListPackingMethod =
+      filters.packing_method ?? "all";
 
-    const boxId =
-      normalizeNullableNumber(
-        filters.box_id
-      );
+    const boxId = normalizeNullableNumber(filters.box_id);
 
-    const minWeight =
-      normalizeNullableNumber(
-        filters.min_weight
-      );
+    const minWeight = normalizeNullableNumber(filters.min_weight);
 
-    const maxWeight =
-      normalizeNullableNumber(
-        filters.max_weight
-      );
+    const maxWeight = normalizeNullableNumber(filters.max_weight);
 
-    const sortBy:
-      ProjectCutListSortBy =
-        filters.sort_by ??
-        "row_number";
+    const sortBy: ProjectCutListSortBy = filters.sort_by ?? "row_number";
 
-    const sortOrder:
-      ProjectCutListSortOrder =
-        filters.sort_order ===
-        "desc"
-          ? "desc"
-          : "asc";
+    const sortOrder: ProjectCutListSortOrder =
+      filters.sort_order === "desc" ? "desc" : "asc";
 
     /*
     |--------------------------------------------------------------------------
@@ -10146,29 +8854,24 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const project =
-      await prisma.projectMaster.findFirst({
-        where: {
-          unique_project_id,
-          vendor_id,
-        },
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-          project_name: true,
-          unique_project_id: true,
-        },
-      });
+      select: {
+        id: true,
+        project_name: true,
+        unique_project_id: true,
+      },
+    });
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
-    const project_id =
-      project.id;
+    const project_id = project.id;
 
     /*
     |--------------------------------------------------------------------------
@@ -10176,68 +8879,52 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [
-      packagingMachine,
-      boxes,
-    ] =
-      await Promise.all([
-        prisma.machineMaster.findFirst({
-          where: {
-            vendor_id,
-            machine_type_id: 18,
-          },
+    const [packagingMachine, boxes] = await Promise.all([
+      prisma.machineMaster.findFirst({
+        where: {
+          vendor_id,
+          machine_type_id: 18,
+        },
 
-          select: {
-            id: true,
-            machine_name: true,
-            sequence_no: true,
-          },
+        select: {
+          id: true,
+          machine_name: true,
+          sequence_no: true,
+        },
 
-          orderBy: {
-            id: "asc",
-          },
-        }),
+        orderBy: {
+          id: "asc",
+        },
+      }),
 
-        prisma.boxMaster.findMany({
-          where: {
-            vendor_id,
-            project_id,
-            is_deleted: false,
-          },
+      prisma.boxMaster.findMany({
+        where: {
+          vendor_id,
+          project_id,
+          is_deleted: false,
+        },
 
-          select: {
-            id: true,
-            box_name: true,
+        select: {
+          id: true,
+          box_name: true,
 
-            // Used by Cut List receipt status.
-            site_in_at: true,
-          },
+          // Used by Cut List receipt status.
+          site_in_at: true,
+        },
 
-          orderBy: {
-            id: "asc",
-          },
-        }),
-      ]);
+        orderBy: {
+          id: "asc",
+        },
+      }),
+    ]);
 
-    const boxNameMap =
-      new Map<number, string>(
-        boxes.map(
-          (box) => [
-            box.id,
-            box.box_name,
-          ]
-        )
-      );
+    const boxNameMap = new Map<number, string>(
+      boxes.map((box) => [box.id, box.box_name]),
+    );
 
-    const boxSiteInMap =
-      new Map<number, Date | null>(
-        boxes.map(
-          (box) => [
-            box.id,
-            box.site_in_at,
-          ]
-        )
-      );
+    const boxSiteInMap = new Map<number, Date | null>(
+      boxes.map((box) => [box.id, box.site_in_at]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -10250,52 +8937,48 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const allProjectCutLists =
-      await prisma.cutList.findMany({
-        where: {
-          project_id,
-          vendor_id,
+    const allProjectCutLists = await prisma.cutList.findMany({
+      where: {
+        project_id,
+        vendor_id,
 
-          status: {
-            in: [
-              "Active",
-              "active",
-            ],
-          },
+        status: {
+          in: ["Active", "active"],
         },
+      },
 
-        select: {
-          id: true,
-          project_id: true,
-          vendor_id: true,
+      select: {
+        id: true,
+        project_id: true,
+        vendor_id: true,
 
-          item_name: true,
-          unique_code: true,
-          unique_code_2: true,
-          description: true,
+        item_name: true,
+        unique_code: true,
+        unique_code_2: true,
+        description: true,
 
-          material_details: true,
-          procurement: true,
+        material_details: true,
+        procurement: true,
 
-          qty: true,
+        qty: true,
 
-          category_name: true,
-          group_name: true,
+        category_name: true,
+        group_name: true,
 
-          length: true,
-          width: true,
-          thickness: true,
+        length: true,
+        width: true,
+        thickness: true,
 
-          weight: true,
+        weight: true,
 
-          include_in_packing: true,
-          scan_pack_validate: true,
-        },
+        include_in_packing: true,
+        scan_pack_validate: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -10303,47 +8986,21 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const groupOptions =
-      Array.from(
-        new Set(
-          allProjectCutLists
-            .map(
-              (item) =>
-                item.group_name
-                  ?.trim()
-            )
-            .filter(
-              (
-                value
-              ): value is string =>
-                Boolean(value)
-            )
-        )
-      ).sort(
-        (a, b) =>
-          a.localeCompare(b)
-      );
+    const groupOptions = Array.from(
+      new Set(
+        allProjectCutLists
+          .map((item) => item.group_name?.trim())
+          .filter((value): value is string => Boolean(value)),
+      ),
+    ).sort((a, b) => a.localeCompare(b));
 
-    const categoryOptions =
-      Array.from(
-        new Set(
-          allProjectCutLists
-            .map(
-              (item) =>
-                item.category_name
-                  ?.trim()
-            )
-            .filter(
-              (
-                value
-              ): value is string =>
-                Boolean(value)
-            )
-        )
-      ).sort(
-        (a, b) =>
-          a.localeCompare(b)
-      );
+    const categoryOptions = Array.from(
+      new Set(
+        allProjectCutLists
+          .map((item) => item.category_name?.trim())
+          .filter((value): value is string => Boolean(value)),
+      ),
+    ).sort((a, b) => a.localeCompare(b));
 
     /*
     |--------------------------------------------------------------------------
@@ -10351,69 +9008,38 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const candidateCutLists =
-      allProjectCutLists.filter(
-        (item) => {
-          const isManual =
-            item.include_in_packing ===
-              true &&
-            item.scan_pack_validate ===
-              false;
+    const candidateCutLists = allProjectCutLists.filter((item) => {
+      const isManual =
+        item.include_in_packing === true && item.scan_pack_validate === false;
 
-          if (
-            selectedGroup &&
-            normalizeText(
-              selectedGroup
-            ) !== "all" &&
-            normalizeText(
-              item.group_name
-            ) !==
-              normalizeText(
-                selectedGroup
-              )
-          ) {
-            return false;
-          }
+      if (
+        selectedGroup &&
+        normalizeText(selectedGroup) !== "all" &&
+        normalizeText(item.group_name) !== normalizeText(selectedGroup)
+      ) {
+        return false;
+      }
 
-          if (
-            selectedCategory &&
-            normalizeText(
-              selectedCategory
-            ) !== "all" &&
-            normalizeText(
-              item.category_name
-            ) !==
-              normalizeText(
-                selectedCategory
-              )
-          ) {
-            return false;
-          }
+      if (
+        selectedCategory &&
+        normalizeText(selectedCategory) !== "all" &&
+        normalizeText(item.category_name) !== normalizeText(selectedCategory)
+      ) {
+        return false;
+      }
 
-          if (
-            packingMethod ===
-              "manual" &&
-            !isManual
-          ) {
-            return false;
-          }
+      if (packingMethod === "manual" && !isManual) {
+        return false;
+      }
 
-          if (
-            packingMethod ===
-              "scanned" &&
-            isManual
-          ) {
-            return false;
-          }
+      if (packingMethod === "scanned" && isManual) {
+        return false;
+      }
 
-          return true;
-        }
-      );
+      return true;
+    });
 
-    const candidateCutListIds =
-      candidateCutLists.map(
-        (item) => item.id
-      );
+    const candidateCutListIds = candidateCutLists.map((item) => item.id);
 
     /*
     |--------------------------------------------------------------------------
@@ -10421,91 +9047,66 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    if (
-      candidateCutListIds.length ===
-      0
-    ) {
-      return validationResponse(
-        1,
-        "Project cut list fetched",
-        {
-          project,
+    if (candidateCutListIds.length === 0) {
+      return validationResponse(1, "Project cut list fetched", {
+        project,
 
-          items: [],
+        items: [],
 
-          pagination: {
-            page: 1,
-            limit,
-            total: 0,
-            total_pages: 0,
-            from: 0,
-            to: 0,
-            has_previous: false,
-            has_next: false,
-          },
+        pagination: {
+          page: 1,
+          limit,
+          total: 0,
+          total_pages: 0,
+          from: 0,
+          to: 0,
+          has_previous: false,
+          has_next: false,
+        },
 
-          summary: {
-            total_project_qty:
-              allProjectCutLists.reduce(
-                (
-                  sum,
-                  item
-                ) =>
-                  sum +
-                  Math.max(
-                    0,
-                    Number(
-                      item.qty || 0
-                    )
-                  ),
-                0
-              ),
+        summary: {
+          total_project_qty: allProjectCutLists.reduce(
+            (sum, item) => sum + Math.max(0, Number(item.qty || 0)),
+            0,
+          ),
 
-            filtered_qty: 0,
-            packed_qty: 0,
-            pending_qty: 0,
-            filtered_weight: 0,
+          filtered_qty: 0,
+          packed_qty: 0,
+          pending_qty: 0,
+          filtered_weight: 0,
 
-            /*
+          /*
             |--------------------------------------------------------------------------
             | Site receipt / verification
             |--------------------------------------------------------------------------
             */
-            received_qty: 0,
-            pending_receipt_qty: 0,
-            receipt_progress_pct: 0,
+          received_qty: 0,
+          pending_receipt_qty: 0,
+          receipt_progress_pct: 0,
 
-            scanned_received_qty: 0,
-            manual_received_qty: 0,
+          scanned_received_qty: 0,
+          manual_received_qty: 0,
 
-            site_in_qty: 0,
-            site_in_received_qty: 0,
-            pending_verification_qty: 0,
-            site_verification_pct: 0,
-          },
+          site_in_qty: 0,
+          site_in_received_qty: 0,
+          pending_verification_qty: 0,
+          site_verification_pct: 0,
+        },
 
-          filter_options: {
-            groups:
-              groupOptions,
+        filter_options: {
+          groups: groupOptions,
 
-            categories:
-              categoryOptions,
+          categories: categoryOptions,
 
-            machines: [],
+          machines: [],
 
-            boxes:
-              boxes.map(
-                (box) => ({
-                  id:
-                    box.id,
+          boxes: boxes.map((box) => ({
+            id: box.id,
 
-                  name:
-                    box.box_name,
-                })
-              ),
-          },
-        }
-      );
+            name: box.box_name,
+          })),
+        },
+      });
     }
 
     /*
@@ -10514,31 +9115,29 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const allMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          expected_in: true,
+    const allMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
 
-          cut_list_id: {
-            in:
-              candidateCutListIds,
-          },
+        cut_list_id: {
+          in: candidateCutListIds,
         },
+      },
 
-        select: {
-          id: true,
+      select: {
+        id: true,
 
-          cut_list_id: true,
-          machine_id: true,
-          sequence_no: true,
+        cut_list_id: true,
+        machine_id: true,
+        sequence_no: true,
 
-          actual_in_at: true,
-          box_id: true,
-          in_operator: true,
+        actual_in_at: true,
+        box_id: true,
+        in_operator: true,
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Site receipt / verification
           |--------------------------------------------------------------------------
@@ -10550,40 +9149,37 @@ export const getProjectCutListPaginatedService = async (
           |   received_qty is the physical quantity verified at site.
           |--------------------------------------------------------------------------
           */
-          site_in_at: true,
-          site_in_by: true,
-          received_qty: true,
+        site_in_at: true,
+        site_in_by: true,
+        received_qty: true,
 
-          weight: true,
-          qty: true,
+        weight: true,
+        qty: true,
 
-          row_created_source: true,
+        row_created_source: true,
 
-          machine: {
-            select: {
-              id: true,
-              machine_name: true,
-              sequence_no: true,
-              machine_type_id: true,
-            },
+        machine: {
+          select: {
+            id: true,
+            machine_name: true,
+            sequence_no: true,
+            machine_type_id: true,
           },
         },
+      },
 
-        orderBy: [
-          {
-            cut_list_id:
-              "asc",
-          },
-          {
-            sequence_no:
-              "asc",
-          },
-          {
-            id:
-              "asc",
-          },
-        ],
-      });
+      orderBy: [
+        {
+          cut_list_id: "asc",
+        },
+        {
+          sequence_no: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -10591,32 +9187,20 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const operatorIds =
-      [
-        ...new Set([
-          ...allMappings
-            .map(
-              (mapping) =>
-                mapping.in_operator
-            )
-            .filter(Boolean),
+    const operatorIds = [
+      ...new Set([
+        ...allMappings.map((mapping) => mapping.in_operator).filter(Boolean),
 
-          ...allMappings
-            .map(
-              (mapping) =>
-                mapping.site_in_by
-            )
-            .filter(Boolean),
-        ]),
-      ] as number[];
+        ...allMappings.map((mapping) => mapping.site_in_by).filter(Boolean),
+      ]),
+    ] as number[];
 
     const operators =
       operatorIds.length > 0
         ? await prisma.userMaster.findMany({
             where: {
               id: {
-                in:
-                  operatorIds,
+                in: operatorIds,
               },
             },
 
@@ -10627,15 +9211,9 @@ export const getProjectCutListPaginatedService = async (
           })
         : [];
 
-    const operatorMap =
-      new Map<number, string>(
-        operators.map(
-          (user) => [
-            user.id,
-            user.user_name,
-          ]
-        )
-      );
+    const operatorMap = new Map<number, string>(
+      operators.map((user) => [user.id, user.user_name]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -10643,42 +9221,24 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const machineOptionMap =
-      new Map<
-        number,
-        {
-          id: number;
-          name: string;
-          sequence_no: number;
-        }
-      >();
+    const machineOptionMap = new Map<
+      number,
+      {
+        id: number;
+        name: string;
+        sequence_no: number;
+      }
+    >();
 
-    for (
-      const mapping
-      of allMappings
-    ) {
-      if (
-        !machineOptionMap.has(
-          mapping.machine_id
-        )
-      ) {
-        machineOptionMap.set(
-          mapping.machine_id,
-          {
-            id:
-              mapping.machine_id,
+    for (const mapping of allMappings) {
+      if (!machineOptionMap.has(mapping.machine_id)) {
+        machineOptionMap.set(mapping.machine_id, {
+          id: mapping.machine_id,
 
-            name:
-              mapping.machine
-                .machine_name,
+          name: mapping.machine.machine_name,
 
-            sequence_no:
-              mapping.sequence_no ??
-              mapping.machine
-                .sequence_no ??
-              0,
-          }
-        );
+          sequence_no: mapping.sequence_no ?? mapping.machine.sequence_no ?? 0,
+        });
       }
     }
 
@@ -10688,47 +9248,28 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const containsManualItem =
-      candidateCutLists.some(
-        (item) =>
-          item.include_in_packing ===
-            true &&
-          item.scan_pack_validate ===
-            false
-      );
+    const containsManualItem = candidateCutLists.some(
+      (item) =>
+        item.include_in_packing === true && item.scan_pack_validate === false,
+    );
 
     if (
       packagingMachine &&
       containsManualItem &&
-      !machineOptionMap.has(
-        packagingMachine.id
-      )
+      !machineOptionMap.has(packagingMachine.id)
     ) {
-      machineOptionMap.set(
-        packagingMachine.id,
-        {
-          id:
-            packagingMachine.id,
+      machineOptionMap.set(packagingMachine.id, {
+        id: packagingMachine.id,
 
-          name:
-            packagingMachine.machine_name,
+        name: packagingMachine.machine_name,
 
-          sequence_no:
-            packagingMachine.sequence_no ??
-            0,
-        }
-      );
+        sequence_no: packagingMachine.sequence_no ?? 0,
+      });
     }
 
-    const machineOptions =
-      Array.from(
-        machineOptionMap.values()
-      ).sort(
-        (a, b) =>
-          a.sequence_no -
-            b.sequence_no ||
-          a.id - b.id
-      );
+    const machineOptions = Array.from(machineOptionMap.values()).sort(
+      (a, b) => a.sequence_no - b.sequence_no || a.id - b.id,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -10736,32 +9277,14 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mappingsByCutList =
-      new Map<
-        number,
-        typeof allMappings
-      >();
+    const mappingsByCutList = new Map<number, typeof allMappings>();
 
-    for (
-      const mapping
-      of allMappings
-    ) {
-      if (
-        !mappingsByCutList.has(
-          mapping.cut_list_id
-        )
-      ) {
-        mappingsByCutList.set(
-          mapping.cut_list_id,
-          []
-        );
+    for (const mapping of allMappings) {
+      if (!mappingsByCutList.has(mapping.cut_list_id)) {
+        mappingsByCutList.set(mapping.cut_list_id, []);
       }
 
-      mappingsByCutList
-        .get(
-          mapping.cut_list_id
-        )!
-        .push(mapping);
+      mappingsByCutList.get(mapping.cut_list_id)!.push(mapping);
     }
 
     /*
@@ -10770,42 +9293,25 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const expandRowsByQty =
-      <
-        T extends {
-          qty: number;
+    const expandRowsByQty = <
+      T extends {
+        qty: number;
+      },
+    >(
+      rows: T[],
+    ): T[] => {
+      const expanded: T[] = [];
+
+      for (const row of rows) {
+        const rowQty = Math.max(1, Number(row.qty ?? 1));
+
+        for (let index = 0; index < rowQty; index++) {
+          expanded.push(row);
         }
-      >(
-        rows: T[]
-      ): T[] => {
-        const expanded: T[] =
-          [];
+      }
 
-        for (
-          const row
-          of rows
-        ) {
-          const rowQty =
-            Math.max(
-              1,
-              Number(
-                row.qty ?? 1
-              )
-            );
-
-          for (
-            let index = 0;
-            index < rowQty;
-            index++
-          ) {
-            expanded.push(
-              row
-            );
-          }
-        }
-
-        return expanded;
-      };
+      return expanded;
+    };
 
     /*
     |--------------------------------------------------------------------------
@@ -10813,34 +9319,18 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const unitRows:
-      ProjectCutListUnitRow[] =
-      [];
+    const unitRows: ProjectCutListUnitRow[] = [];
 
     let rowNumber = 1;
 
-    for (
-      const cutList
-      of candidateCutLists
-    ) {
-      const itemMappings =
-        mappingsByCutList.get(
-          cutList.id
-        ) ?? [];
+    for (const cutList of candidateCutLists) {
+      const itemMappings = mappingsByCutList.get(cutList.id) ?? [];
 
       const isManual =
-        cutList.include_in_packing ===
-          true &&
-        cutList.scan_pack_validate ===
-          false;
+        cutList.include_in_packing === true &&
+        cutList.scan_pack_validate === false;
 
-      const totalQty =
-        Math.max(
-          0,
-          Number(
-            cutList.qty || 0
-          )
-        );
+      const totalQty = Math.max(0, Number(cutList.qty || 0));
 
       /*
       |--------------------------------------------------------------------------
@@ -10848,32 +9338,14 @@ export const getProjectCutListPaginatedService = async (
       |--------------------------------------------------------------------------
       */
 
-      const byMachine =
-        new Map<
-          number,
-          typeof itemMappings
-        >();
+      const byMachine = new Map<number, typeof itemMappings>();
 
-      for (
-        const mapping
-        of itemMappings
-      ) {
-        if (
-          !byMachine.has(
-            mapping.machine_id
-          )
-        ) {
-          byMachine.set(
-            mapping.machine_id,
-            []
-          );
+      for (const mapping of itemMappings) {
+        if (!byMachine.has(mapping.machine_id)) {
+          byMachine.set(mapping.machine_id, []);
         }
 
-        byMachine
-          .get(
-            mapping.machine_id
-          )!
-          .push(mapping);
+        byMachine.get(mapping.machine_id)!.push(mapping);
       }
 
       /*
@@ -10883,9 +9355,7 @@ export const getProjectCutListPaginatedService = async (
       */
 
       if (isManual) {
-        if (
-          totalQty <= 0
-        ) {
+        if (totalQty <= 0) {
           continue;
         }
 
@@ -10895,36 +9365,22 @@ export const getProjectCutListPaginatedService = async (
         |--------------------------------------------------------------------------
         */
 
-        const expandedNonPackagingByMachine =
-          new Map<
-            number,
-            typeof itemMappings
-          >();
+        const expandedNonPackagingByMachine = new Map<
+          number,
+          typeof itemMappings
+        >();
 
-        for (
-          const [
-            currentMachineId,
-            machineRows,
-          ]
-          of byMachine
-        ) {
+        for (const [currentMachineId, machineRows] of byMachine) {
           if (
             packagingMachine &&
-            Number(
-              currentMachineId
-            ) ===
-              Number(
-                packagingMachine.id
-              )
+            Number(currentMachineId) === Number(packagingMachine.id)
           ) {
             continue;
           }
 
           expandedNonPackagingByMachine.set(
             currentMachineId,
-            expandRowsByQty(
-              machineRows
-            )
+            expandRowsByQty(machineRows),
           );
         }
 
@@ -10934,54 +9390,25 @@ export const getProjectCutListPaginatedService = async (
         |--------------------------------------------------------------------------
         */
 
-        const manualPackagingRows =
-          packagingMachine
-            ? (
-                byMachine.get(
-                  packagingMachine.id
-                ) ?? []
+        const manualPackagingRows = packagingMachine
+          ? (byMachine.get(packagingMachine.id) ?? [])
+              .filter(
+                (row) => normalizeText(row.row_created_source) === "manual",
               )
-                .filter(
-                  (row) =>
-                    normalizeText(
-                      row.row_created_source
-                    ) ===
-                    "manual"
-                )
-                .sort(
-                  (a, b) =>
-                    a.id - b.id
-                )
-            : [];
+              .sort((a, b) => a.id - b.id)
+          : [];
 
-        const expandedManualPackagingRows =
-          expandRowsByQty(
-            manualPackagingRows
-          ).slice(
-            0,
-            totalQty
-          );
+        const expandedManualPackagingRows = expandRowsByQty(
+          manualPackagingRows,
+        ).slice(0, totalQty);
 
         const fallbackWeight =
-          Number(
-            cutList.weight || 0
-          ) > 0 &&
-          totalQty > 0
-            ? Number(
-                cutList.weight || 0
-              ) /
-              totalQty
+          Number(cutList.weight || 0) > 0 && totalQty > 0
+            ? Number(cutList.weight || 0) / totalQty
             : 0;
 
-        for (
-          let unitIndex = 0;
-          unitIndex <
-          totalQty;
-          unitIndex++
-        ) {
-          const machineColumns:
-            CutListMachineColumn[] =
-            [];
+        for (let unitIndex = 0; unitIndex < totalQty; unitIndex++) {
+          const machineColumns: CutListMachineColumn[] = [];
 
           /*
           |--------------------------------------------------------------------------
@@ -10989,66 +9416,37 @@ export const getProjectCutListPaginatedService = async (
           |--------------------------------------------------------------------------
           */
 
-          for (
-            const [
-              ,
-              machineRows,
-            ]
-            of expandedNonPackagingByMachine
-          ) {
-            const row =
-              machineRows[
-                unitIndex
-              ];
+          for (const [, machineRows] of expandedNonPackagingByMachine) {
+            const row = machineRows[unitIndex];
 
             if (!row) {
               continue;
             }
 
             machineColumns.push({
-              mapping_id:
-                row.id,
+              mapping_id: row.id,
 
-              machine_id:
-                row.machine_id,
+              machine_id: row.machine_id,
 
-              machine_name:
-                row.machine
-                  .machine_name,
+              machine_name: row.machine.machine_name,
 
-              sequence_no:
-                row.sequence_no ??
-                row.machine
-                  .sequence_no ??
-                0,
+              sequence_no: row.sequence_no ?? row.machine.sequence_no ?? 0,
 
-              box_id:
-                row.box_id,
+              box_id: row.box_id,
 
-              weight:
-                Number(
-                  row.weight || 0
-                ),
+              weight: Number(row.weight || 0),
 
-              qty:
-                1,
+              qty: 1,
 
-              row_created_source:
-                row.row_created_source,
+              row_created_source: row.row_created_source,
 
-              scanned:
-                row.actual_in_at !==
-                null,
+              scanned: row.actual_in_at !== null,
 
-              scanned_at:
-                row.actual_in_at,
+              scanned_at: row.actual_in_at,
 
-              scanned_by:
-                row.in_operator
-                  ? operatorMap.get(
-                      row.in_operator
-                    ) ?? null
-                  : null,
+              scanned_by: row.in_operator
+                ? (operatorMap.get(row.in_operator) ?? null)
+                : null,
             });
           }
 
@@ -11058,69 +9456,36 @@ export const getProjectCutListPaginatedService = async (
           |--------------------------------------------------------------------------
           */
 
-          const manualPackagingRow =
-            expandedManualPackagingRows[
-              unitIndex
-            ];
+          const manualPackagingRow = expandedManualPackagingRows[unitIndex];
 
-          if (
-            packagingMachine
-          ) {
-            if (
-              manualPackagingRow
-            ) {
+          if (packagingMachine) {
+            if (manualPackagingRow) {
               machineColumns.push({
-                mapping_id:
-                  manualPackagingRow.id,
+                mapping_id: manualPackagingRow.id,
 
-                machine_id:
-                  packagingMachine.id,
+                machine_id: packagingMachine.id,
 
-                machine_name:
-                  packagingMachine
-                    .machine_name,
+                machine_name: packagingMachine.machine_name,
 
-                sequence_no:
-                  packagingMachine
-                    .sequence_no ??
-                  0,
+                sequence_no: packagingMachine.sequence_no ?? 0,
 
-                box_id:
-                  manualPackagingRow
-                    .box_id,
+                box_id: manualPackagingRow.box_id,
 
-                weight:
-                  Number(
-                    manualPackagingRow
-                      .weight ||
-                      fallbackWeight ||
-                      0
-                  ),
+                weight: Number(
+                  manualPackagingRow.weight || fallbackWeight || 0,
+                ),
 
-                qty:
-                  1,
+                qty: 1,
 
-                row_created_source:
-                  manualPackagingRow
-                    .row_created_source,
+                row_created_source: manualPackagingRow.row_created_source,
 
-                scanned:
-                  manualPackagingRow
-                    .actual_in_at !==
-                  null,
+                scanned: manualPackagingRow.actual_in_at !== null,
 
-                scanned_at:
-                  manualPackagingRow
-                    .actual_in_at,
+                scanned_at: manualPackagingRow.actual_in_at,
 
-                scanned_by:
-                  manualPackagingRow
-                    .in_operator
-                    ? operatorMap.get(
-                        manualPackagingRow
-                          .in_operator
-                      ) ?? null
-                    : null,
+                scanned_by: manualPackagingRow.in_operator
+                  ? (operatorMap.get(manualPackagingRow.in_operator) ?? null)
+                  : null,
               });
             } else {
               /*
@@ -11130,144 +9495,89 @@ export const getProjectCutListPaginatedService = async (
               */
 
               machineColumns.push({
-                mapping_id:
-                  0,
+                mapping_id: 0,
 
-                machine_id:
-                  packagingMachine.id,
+                machine_id: packagingMachine.id,
 
-                machine_name:
-                  packagingMachine
-                    .machine_name,
+                machine_name: packagingMachine.machine_name,
 
-                sequence_no:
-                  packagingMachine
-                    .sequence_no ??
-                  0,
+                sequence_no: packagingMachine.sequence_no ?? 0,
 
-                box_id:
-                  null,
+                box_id: null,
 
-                weight:
-                  Number(
-                    fallbackWeight.toFixed(
-                      4
-                    )
-                  ),
+                weight: Number(fallbackWeight.toFixed(4)),
 
-                qty:
-                  1,
+                qty: 1,
 
-                row_created_source:
-                  "Manual",
+                row_created_source: "Manual",
 
-                scanned:
-                  false,
+                scanned: false,
 
-                scanned_at:
-                  null,
+                scanned_at: null,
 
-                scanned_by:
-                  null,
+                scanned_by: null,
               });
             }
           }
 
-          const packageBoxId =
-            manualPackagingRow
-              ?.box_id ??
-            null;
+          const packageBoxId = manualPackagingRow?.box_id ?? null;
 
-          const packageBoxName =
-            packageBoxId
-              ? boxNameMap.get(
-                  packageBoxId
-                ) ?? null
-              : null;
+          const packageBoxName = packageBoxId
+            ? (boxNameMap.get(packageBoxId) ?? null)
+            : null;
 
-          const mappedWeight =
-            manualPackagingRow
-              ? Number(
-                  manualPackagingRow
-                    .weight || 0
-                )
-              : 0;
+          const mappedWeight = manualPackagingRow
+            ? Number(manualPackagingRow.weight || 0)
+            : 0;
 
-          const unitWeight =
-            Number(
-              Number(
-                mappedWeight ||
-                  fallbackWeight ||
-                  0
-              ).toFixed(4)
-            );
+          const unitWeight = Number(
+            Number(mappedWeight || fallbackWeight || 0).toFixed(4),
+          );
 
           unitRows.push({
-            id:
-              cutList.id,
+            id: cutList.id,
 
-            row_number:
-              rowNumber++,
+            row_number: rowNumber++,
 
-            cut_list_id:
-              cutList.id,
+            cut_list_id: cutList.id,
 
-            item_name:
-              cutList.item_name,
+            item_name: cutList.item_name,
 
-            unique_code:
-              cutList.unique_code,
+            unique_code: cutList.unique_code,
 
-            unique_code_2:
-              cutList.unique_code_2,
+            unique_code_2: cutList.unique_code_2,
 
-            description:
-              cutList.description,
+            description: cutList.description,
 
-            qty:
-              1,
+            qty: 1,
 
-            total_qty:
-              totalQty,
+            total_qty: totalQty,
 
-            unit_index:
-              unitIndex + 1,
+            unit_index: unitIndex + 1,
 
-            category:
-              cutList.category_name,
+            category: cutList.category_name,
 
-            group:
-              cutList.group_name,
+            group: cutList.group_name,
 
-            material_details:
-              cutList.material_details,
+            material_details: cutList.material_details,
 
-            procurement:
-              cutList.procurement,
+            procurement: cutList.procurement,
 
-            length:
-              cutList.length,
+            length: cutList.length,
 
-            width:
-              cutList.width,
+            width: cutList.width,
 
-            thickness:
-              cutList.thickness,
+            thickness: cutList.thickness,
 
-            weight:
-              unitWeight,
+            weight: unitWeight,
 
-            packing_method:
-              "Manual",
+            packing_method: "Manual",
 
-            package_box_id:
-              packageBoxId,
+            package_box_id: packageBoxId,
 
-            package_box_name:
-              packageBoxName,
+            package_box_name: packageBoxName,
 
-            machines:
-              machineColumns,
+            machines: machineColumns,
           });
         }
 
@@ -11280,129 +9590,62 @@ export const getProjectCutListPaginatedService = async (
       |--------------------------------------------------------------------------
       */
 
-      const expandedByMachine =
-        new Map<
-          number,
-          typeof itemMappings
-        >();
+      const expandedByMachine = new Map<number, typeof itemMappings>();
 
-      for (
-        const [
-          currentMachineId,
-          machineRows,
-        ]
-        of byMachine
-      ) {
-        expandedByMachine.set(
-          currentMachineId,
-          expandRowsByQty(
-            machineRows
-          )
-        );
+      for (const [currentMachineId, machineRows] of byMachine) {
+        expandedByMachine.set(currentMachineId, expandRowsByQty(machineRows));
       }
 
-      const unitCount =
-        Math.max(
-          0,
-          ...[
-            ...expandedByMachine.values(),
-          ].map(
-            (machineRows) =>
-              machineRows.length
-          )
-        );
+      const unitCount = Math.max(
+        0,
+        ...[...expandedByMachine.values()].map(
+          (machineRows) => machineRows.length,
+        ),
+      );
 
-      if (
-        unitCount <= 0
-      ) {
+      if (unitCount <= 0) {
         continue;
       }
 
       const fallbackWeight =
-        Number(
-          cutList.weight || 0
-        ) > 0 &&
-        Number(
-          cutList.qty || 0
-        ) > 0
-          ? Number(
-              cutList.weight || 0
-            ) /
-            Number(
-              cutList.qty || 1
-            )
+        Number(cutList.weight || 0) > 0 && Number(cutList.qty || 0) > 0
+          ? Number(cutList.weight || 0) / Number(cutList.qty || 1)
           : 0;
 
-      for (
-        let unitIndex = 0;
-        unitIndex <
-        unitCount;
-        unitIndex++
-      ) {
-        const machineColumns:
-          CutListMachineColumn[] =
-          [];
+      for (let unitIndex = 0; unitIndex < unitCount; unitIndex++) {
+        const machineColumns: CutListMachineColumn[] = [];
 
-        for (
-          const [
-            ,
-            machineRows,
-          ]
-          of expandedByMachine
-        ) {
-          const row =
-            machineRows[
-              unitIndex
-            ];
+        for (const [, machineRows] of expandedByMachine) {
+          const row = machineRows[unitIndex];
 
           if (!row) {
             continue;
           }
 
           machineColumns.push({
-            mapping_id:
-              row.id,
+            mapping_id: row.id,
 
-            machine_id:
-              row.machine_id,
+            machine_id: row.machine_id,
 
-            machine_name:
-              row.machine
-                .machine_name,
+            machine_name: row.machine.machine_name,
 
-            sequence_no:
-              row.sequence_no ??
-              row.machine
-                .sequence_no ??
-              0,
+            sequence_no: row.sequence_no ?? row.machine.sequence_no ?? 0,
 
-            box_id:
-              row.box_id,
+            box_id: row.box_id,
 
-            weight:
-              Number(
-                row.weight || 0
-              ),
+            weight: Number(row.weight || 0),
 
-            qty:
-              1,
+            qty: 1,
 
-            row_created_source:
-              row.row_created_source,
+            row_created_source: row.row_created_source,
 
-            scanned:
-              row.actual_in_at !==
-              null,
+            scanned: row.actual_in_at !== null,
 
-            scanned_at:
-              row.actual_in_at,
+            scanned_at: row.actual_in_at,
 
-            scanned_by:
-              row.in_operator
-                ? operatorMap.get(
-                    row.in_operator
-                  ) ?? null
-                : null,
+            scanned_by: row.in_operator
+              ? (operatorMap.get(row.in_operator) ?? null)
+              : null,
           });
         }
 
@@ -11412,130 +9655,76 @@ export const getProjectCutListPaginatedService = async (
         |--------------------------------------------------------------------------
         */
 
-        const packagingColumn =
-          packagingMachine
-            ? machineColumns.find(
-                (column) =>
-                  Number(
-                    column.machine_id
-                  ) ===
-                  Number(
-                    packagingMachine.id
-                  )
-              )
-            : undefined;
+        const packagingColumn = packagingMachine
+          ? machineColumns.find(
+              (column) =>
+                Number(column.machine_id) === Number(packagingMachine.id),
+            )
+          : undefined;
 
         const packageBoxId =
-          packagingColumn
-            ?.box_id ??
-          machineColumns.find(
-            (column) =>
-              column.box_id !==
-              null
-          )?.box_id ??
+          packagingColumn?.box_id ??
+          machineColumns.find((column) => column.box_id !== null)?.box_id ??
           null;
 
-        const packageBoxName =
-          packageBoxId
-            ? boxNameMap.get(
-                packageBoxId
-              ) ?? null
-            : null;
+        const packageBoxName = packageBoxId
+          ? (boxNameMap.get(packageBoxId) ?? null)
+          : null;
 
         const mappedWeight =
-          packagingColumn &&
-          Number(
-            packagingColumn.weight ||
-              0
-          ) > 0
-            ? Number(
-                packagingColumn.weight
-              )
-            : machineColumns.find(
-                (column) =>
-                  Number(
-                    column.weight || 0
-                  ) > 0
-              )?.weight ??
-              0;
+          packagingColumn && Number(packagingColumn.weight || 0) > 0
+            ? Number(packagingColumn.weight)
+            : (machineColumns.find((column) => Number(column.weight || 0) > 0)
+                ?.weight ?? 0);
 
-        const unitWeight =
-          Number(
-            Number(
-              mappedWeight ||
-                fallbackWeight ||
-                0
-            ).toFixed(4)
-          );
+        const unitWeight = Number(
+          Number(mappedWeight || fallbackWeight || 0).toFixed(4),
+        );
 
         unitRows.push({
-          id:
-            cutList.id,
+          id: cutList.id,
 
-          row_number:
-            rowNumber++,
+          row_number: rowNumber++,
 
-          cut_list_id:
-            cutList.id,
+          cut_list_id: cutList.id,
 
-          item_name:
-            cutList.item_name,
+          item_name: cutList.item_name,
 
-          unique_code:
-            cutList.unique_code,
+          unique_code: cutList.unique_code,
 
-          unique_code_2:
-            cutList.unique_code_2,
+          unique_code_2: cutList.unique_code_2,
 
-          description:
-            cutList.description,
+          description: cutList.description,
 
-          qty:
-            1,
+          qty: 1,
 
-          total_qty:
-            Number(
-              cutList.qty || 0
-            ),
+          total_qty: Number(cutList.qty || 0),
 
-          unit_index:
-            unitIndex + 1,
+          unit_index: unitIndex + 1,
 
-          category:
-            cutList.category_name,
+          category: cutList.category_name,
 
-          group:
-            cutList.group_name,
+          group: cutList.group_name,
 
-          material_details:
-            cutList.material_details,
+          material_details: cutList.material_details,
 
-          procurement:
-            cutList.procurement,
+          procurement: cutList.procurement,
 
-          length:
-            cutList.length,
+          length: cutList.length,
 
-          width:
-            cutList.width,
+          width: cutList.width,
 
-          thickness:
-            cutList.thickness,
+          thickness: cutList.thickness,
 
-          weight:
-            unitWeight,
+          weight: unitWeight,
 
-          packing_method:
-            "Scanned",
+          packing_method: "Scanned",
 
-          package_box_id:
-            packageBoxId,
+          package_box_id: packageBoxId,
 
-          package_box_name:
-            packageBoxName,
+          package_box_name: packageBoxName,
 
-          machines:
-            machineColumns,
+          machines: machineColumns,
         });
       }
     }
@@ -11569,35 +9758,22 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mappingReceiptInfoMap =
-      new Map(
-        allMappings.map(
-          (mapping) => [
-            mapping.id,
-            {
-              qty:
-                Math.max(
-                  0,
-                  Number(
-                    mapping.qty ?? 1
-                  )
-                ),
+    const mappingReceiptInfoMap = new Map(
+      allMappings.map((mapping) => [
+        mapping.id,
+        {
+          qty: Math.max(0, Number(mapping.qty ?? 1)),
 
-              received_qty:
-                mapping.received_qty,
+          received_qty: mapping.received_qty,
 
-              site_in_at:
-                mapping.site_in_at,
+          site_in_at: mapping.site_in_at,
 
-              site_in_by:
-                mapping.site_in_by,
+          site_in_by: mapping.site_in_by,
 
-              row_created_source:
-                mapping.row_created_source,
-            },
-          ]
-        )
-      );
+          row_created_source: mapping.row_created_source,
+        },
+      ]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -11605,197 +9781,126 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mappingUnitPositionMap =
-      new Map<number, number>();
+    const mappingUnitPositionMap = new Map<number, number>();
 
-    const unitRowsWithReceipt =
-      unitRows.map(
-        (row) => {
-          /*
+    const unitRowsWithReceipt = unitRows.map((row) => {
+      /*
           |--------------------------------------------------------------------------
           | Receipt is based only on packaging machine (type 18).
           |--------------------------------------------------------------------------
           */
 
-          const packagingColumn =
-            packagingMachine
-              ? row.machines.find(
-                  (machine) =>
-                    Number(
-                      machine.machine_id
-                    ) ===
-                    Number(
-                      packagingMachine.id
-                    )
-                )
-              : undefined;
+      const packagingColumn = packagingMachine
+        ? row.machines.find(
+            (machine) =>
+              Number(machine.machine_id) === Number(packagingMachine.id),
+          )
+        : undefined;
 
-          const mappingId =
-            Number(
-              packagingColumn?.mapping_id ??
-                0
-            );
+      const mappingId = Number(packagingColumn?.mapping_id ?? 0);
 
-          const mappingInfo =
-            mappingId > 0
-              ? mappingReceiptInfoMap.get(
-                  mappingId
-                )
-              : undefined;
+      const mappingInfo =
+        mappingId > 0 ? mappingReceiptInfoMap.get(mappingId) : undefined;
 
-          const isManual =
-            row.packing_method ===
-            "Manual";
+      const isManual = row.packing_method === "Manual";
 
-          const packed =
-            row.package_box_id !==
-            null;
+      const packed = row.package_box_id !== null;
 
-          const boxSiteInAt =
-            row.package_box_id
-              ? boxSiteInMap.get(
-                  row.package_box_id
-                ) ?? null
-              : null;
+      const boxSiteInAt = row.package_box_id
+        ? (boxSiteInMap.get(row.package_box_id) ?? null)
+        : null;
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | How many physical units of this mapping are received?
           |--------------------------------------------------------------------------
           */
 
-          let mappingReceivedQty = 0;
+      let mappingReceivedQty = 0;
 
-          if (mappingInfo) {
-            if (isManual) {
-              mappingReceivedQty =
-                Math.min(
-                  mappingInfo.qty,
-                  Math.max(
-                    0,
-                    Number(
-                      mappingInfo.received_qty ??
-                        0
-                    )
-                  )
-                );
-            } else {
-              mappingReceivedQty =
-                mappingInfo.site_in_at
-                  ? mappingInfo.qty
-                  : 0;
-            }
-          }
+      if (mappingInfo) {
+        if (isManual) {
+          mappingReceivedQty = Math.min(
+            mappingInfo.qty,
+            Math.max(0, Number(mappingInfo.received_qty ?? 0)),
+          );
+        } else {
+          mappingReceivedQty = mappingInfo.site_in_at ? mappingInfo.qty : 0;
+        }
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Position of this virtual unit inside the DB mapping.
           |--------------------------------------------------------------------------
           */
 
-          const mappingUnitPosition =
-            mappingInfo
-              ? (
-                  mappingUnitPositionMap.get(
-                    mappingId
-                  ) ?? 0
-                )
-              : 0;
+      const mappingUnitPosition = mappingInfo
+        ? (mappingUnitPositionMap.get(mappingId) ?? 0)
+        : 0;
 
-          if (mappingInfo) {
-            mappingUnitPositionMap.set(
-              mappingId,
-              mappingUnitPosition + 1
-            );
-          }
+      if (mappingInfo) {
+        mappingUnitPositionMap.set(mappingId, mappingUnitPosition + 1);
+      }
 
-          const isReceived =
-            Boolean(
-              mappingInfo
-            ) &&
-            mappingUnitPosition <
-              mappingReceivedQty;
+      const isReceived =
+        Boolean(mappingInfo) && mappingUnitPosition < mappingReceivedQty;
 
-          const unitReceivedQty =
-            isReceived
-              ? 1
-              : 0;
+      const unitReceivedQty = isReceived ? 1 : 0;
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Human-friendly receipt state
           |--------------------------------------------------------------------------
           */
 
-          const receiptStatus:
-            | "Not Packed"
-            | "Not At Site"
-            | "Pending Verification"
-            | "Received" =
-              !packed
-                ? "Not Packed"
-                : isReceived
-                  ? "Received"
-                  : !boxSiteInAt
-                    ? "Not At Site"
-                    : "Pending Verification";
+      const receiptStatus:
+        | "Not Packed"
+        | "Not At Site"
+        | "Pending Verification"
+        | "Received" = !packed
+        ? "Not Packed"
+        : isReceived
+          ? "Received"
+          : !boxSiteInAt
+            ? "Not At Site"
+            : "Pending Verification";
 
-          return {
-            ...row,
+      return {
+        ...row,
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Physical unit receipt information
             |--------------------------------------------------------------------------
             */
 
-            received_qty:
-              unitReceivedQty,
+        received_qty: unitReceivedQty,
 
-            is_received:
-              isReceived,
+        is_received: isReceived,
 
-            receipt_status:
-              receiptStatus,
+        receipt_status: receiptStatus,
 
-            receipt_method:
-              isManual
-                ? "Manual Verification"
-                : "QR Scan",
+        receipt_method: isManual ? "Manual Verification" : "QR Scan",
 
-            received_at:
-              isReceived
-                ? mappingInfo
-                    ?.site_in_at ??
-                  null
-                : null,
+        received_at: isReceived ? (mappingInfo?.site_in_at ?? null) : null,
 
-            received_by_id:
-              isReceived
-                ? mappingInfo
-                    ?.site_in_by ??
-                  null
-                : null,
+        received_by_id: isReceived ? (mappingInfo?.site_in_by ?? null) : null,
 
-            received_by:
-              isReceived &&
-              mappingInfo
-                ?.site_in_by
-                ? operatorMap.get(
-                    mappingInfo.site_in_by
-                  ) ?? null
-                : null,
+        received_by:
+          isReceived && mappingInfo?.site_in_by
+            ? (operatorMap.get(mappingInfo.site_in_by) ?? null)
+            : null,
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Box-level site arrival state for this unit
             |--------------------------------------------------------------------------
             */
 
-            box_site_in_at:
-              boxSiteInAt,
+        box_site_in_at: boxSiteInAt,
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Original mapping values are also returned for reference.
             |
@@ -11805,35 +9910,20 @@ export const getProjectCutListPaginatedService = async (
             |--------------------------------------------------------------------------
             */
 
-            mapping_packed_qty:
-              mappingInfo
-                ?.qty ??
-              0,
+        mapping_packed_qty: mappingInfo?.qty ?? 0,
 
-            mapping_received_qty:
-              mappingInfo
-                ? (
-                    isManual
-                      ? Math.min(
-                          mappingInfo.qty,
-                          Math.max(
-                            0,
-                            Number(
-                              mappingInfo.received_qty ??
-                                0
-                            )
-                          )
-                        )
-                      : (
-                          mappingInfo.site_in_at
-                            ? mappingInfo.qty
-                            : 0
-                        )
-                  )
-                : 0,
-          };
-        }
-      );
+        mapping_received_qty: mappingInfo
+          ? isManual
+            ? Math.min(
+                mappingInfo.qty,
+                Math.max(0, Number(mappingInfo.received_qty ?? 0)),
+              )
+            : mappingInfo.site_in_at
+              ? mappingInfo.qty
+              : 0
+          : 0,
+      };
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -11841,179 +9931,116 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const searchText =
-      normalizeText(
-        search
-      );
+    const searchText = normalizeText(search);
 
-    const filteredRows =
-      unitRowsWithReceipt.filter(
-        (row) => {
-          /*
+    const filteredRows = unitRowsWithReceipt.filter((row) => {
+      /*
           |--------------------------------------------------------------------------
           | Search
           |--------------------------------------------------------------------------
           */
 
-          if (searchText) {
-            const searchable =
-              [
-                row.item_name,
-                row.unique_code,
-                row.unique_code_2,
-                row.description,
-                row.category,
-                row.group,
-                row.material_details,
-                row.procurement,
-                row.package_box_name,
-                row.weight,
-                row.length,
-                row.width,
-                row.thickness,
-                row.packing_method,
+      if (searchText) {
+        const searchable = [
+          row.item_name,
+          row.unique_code,
+          row.unique_code_2,
+          row.description,
+          row.category,
+          row.group,
+          row.material_details,
+          row.procurement,
+          row.package_box_name,
+          row.weight,
+          row.length,
+          row.width,
+          row.thickness,
+          row.packing_method,
 
-                // Receipt information
-                row.receipt_status,
-                row.receipt_method,
-                row.received_by,
-                row.received_qty,
-              ]
-                .map(
-                  (value) =>
-                    normalizeText(
-                      value
-                    )
-                )
-                .join(" ");
+          // Receipt information
+          row.receipt_status,
+          row.receipt_method,
+          row.received_by,
+          row.received_qty,
+        ]
+          .map((value) => normalizeText(value))
+          .join(" ");
 
-            if (
-              !searchable.includes(
-                searchText
-              )
-            ) {
-              return false;
-            }
-          }
+        if (!searchable.includes(searchText)) {
+          return false;
+        }
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Machine + machine status
           |--------------------------------------------------------------------------
           */
 
-          if (
-            machineId !== null
-          ) {
-            const machineMapping =
-              row.machines.find(
-                (mapping) =>
-                  Number(
-                    mapping.machine_id
-                  ) ===
-                  Number(machineId)
-              );
+      if (machineId !== null) {
+        const machineMapping = row.machines.find(
+          (mapping) => Number(mapping.machine_id) === Number(machineId),
+        );
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Machine not applicable to this row.
             |--------------------------------------------------------------------------
             */
 
-            if (
-              !machineMapping
-            ) {
-              return false;
-            }
+        if (!machineMapping) {
+          return false;
+        }
 
-            if (
-              machineStatus ===
-                "done" &&
-              machineMapping.scanned !==
-                true
-            ) {
-              return false;
-            }
+        if (machineStatus === "done" && machineMapping.scanned !== true) {
+          return false;
+        }
 
-            if (
-              machineStatus ===
-                "pending" &&
-              machineMapping.scanned ===
-                true
-            ) {
-              return false;
-            }
-          }
+        if (machineStatus === "pending" && machineMapping.scanned === true) {
+          return false;
+        }
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Packing status
           |--------------------------------------------------------------------------
           */
 
-          if (
-            packingStatus ===
-              "packed" &&
-            row.package_box_id ===
-              null
-          ) {
-            return false;
-          }
+      if (packingStatus === "packed" && row.package_box_id === null) {
+        return false;
+      }
 
-          if (
-            packingStatus ===
-              "pending" &&
-            row.package_box_id !==
-              null
-          ) {
-            return false;
-          }
+      if (packingStatus === "pending" && row.package_box_id !== null) {
+        return false;
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Box
           |--------------------------------------------------------------------------
           */
 
-          if (
-            boxId !== null &&
-            Number(
-              row.package_box_id
-            ) !==
-              Number(boxId)
-          ) {
-            return false;
-          }
+      if (boxId !== null && Number(row.package_box_id) !== Number(boxId)) {
+        return false;
+      }
 
-          /*
+      /*
           |--------------------------------------------------------------------------
           | Weight range
           |--------------------------------------------------------------------------
           */
 
-          if (
-            minWeight !== null &&
-            Number(
-              row.weight || 0
-            ) <
-              minWeight
-          ) {
-            return false;
-          }
+      if (minWeight !== null && Number(row.weight || 0) < minWeight) {
+        return false;
+      }
 
-          if (
-            maxWeight !== null &&
-            Number(
-              row.weight || 0
-            ) >
-              maxWeight
-          ) {
-            return false;
-          }
+      if (maxWeight !== null && Number(row.weight || 0) > maxWeight) {
+        return false;
+      }
 
-          return true;
-        }
-      );
+      return true;
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -12021,106 +10048,57 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const compareText =
-      (
-        first: unknown,
-        second: unknown
-      ) => {
-        return String(
-          first ?? ""
-        ).localeCompare(
-          String(
-            second ?? ""
-          ),
-          undefined,
-          {
-            numeric: true,
-            sensitivity:
-              "base",
-          }
-        );
-      };
-
-    const sortedRows =
-      [...filteredRows].sort(
-        (a, b) => {
-          let result = 0;
-
-          switch (
-            sortBy
-          ) {
-            case "item_name":
-              result =
-                compareText(
-                  a.item_name,
-                  b.item_name
-                );
-              break;
-
-            case "unique_code":
-              result =
-                compareText(
-                  a.unique_code,
-                  b.unique_code
-                );
-              break;
-
-            case "group":
-              result =
-                compareText(
-                  a.group,
-                  b.group
-                );
-              break;
-
-            case "category":
-              result =
-                compareText(
-                  a.category,
-                  b.category
-                );
-              break;
-
-            case "weight":
-              result =
-                Number(
-                  a.weight || 0
-                ) -
-                Number(
-                  b.weight || 0
-                );
-              break;
-
-            case "box":
-              result =
-                compareText(
-                  a.package_box_name,
-                  b.package_box_name
-                );
-              break;
-
-            case "row_number":
-            default:
-              result =
-                a.row_number -
-                b.row_number;
-              break;
-          }
-
-          if (
-            result === 0
-          ) {
-            result =
-              a.row_number -
-              b.row_number;
-          }
-
-          return sortOrder ===
-            "desc"
-            ? result * -1
-            : result;
-        }
+    const compareText = (first: unknown, second: unknown) => {
+      return String(first ?? "").localeCompare(
+        String(second ?? ""),
+        undefined,
+        {
+          numeric: true,
+          sensitivity: "base",
+        },
       );
+    };
+
+    const sortedRows = [...filteredRows].sort((a, b) => {
+      let result = 0;
+
+      switch (sortBy) {
+        case "item_name":
+          result = compareText(a.item_name, b.item_name);
+          break;
+
+        case "unique_code":
+          result = compareText(a.unique_code, b.unique_code);
+          break;
+
+        case "group":
+          result = compareText(a.group, b.group);
+          break;
+
+        case "category":
+          result = compareText(a.category, b.category);
+          break;
+
+        case "weight":
+          result = Number(a.weight || 0) - Number(b.weight || 0);
+          break;
+
+        case "box":
+          result = compareText(a.package_box_name, b.package_box_name);
+          break;
+
+        case "row_number":
+        default:
+          result = a.row_number - b.row_number;
+          break;
+      }
+
+      if (result === 0) {
+        result = a.row_number - b.row_number;
+      }
+
+      return sortOrder === "desc" ? result * -1 : result;
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -12128,33 +10106,15 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const total =
-      sortedRows.length;
+    const total = sortedRows.length;
 
-    const totalPages =
-      total > 0
-        ? Math.ceil(
-            total / limit
-          )
-        : 0;
+    const totalPages = total > 0 ? Math.ceil(total / limit) : 0;
 
-    const safePage =
-      totalPages > 0
-        ? Math.min(
-            page,
-            totalPages
-          )
-        : 1;
+    const safePage = totalPages > 0 ? Math.min(page, totalPages) : 1;
 
-    const skip =
-      (safePage - 1) *
-      limit;
+    const skip = (safePage - 1) * limit;
 
-    const paginatedRows =
-      sortedRows.slice(
-        skip,
-        skip + limit
-      );
+    const paginatedRows = sortedRows.slice(skip, skip + limit);
 
     /*
     |--------------------------------------------------------------------------
@@ -12162,20 +10122,11 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const items =
-      paginatedRows.map(
-        (
-          row,
-          index
-        ) => ({
-          ...row,
+    const items = paginatedRows.map((row, index) => ({
+      ...row,
 
-          row_number:
-            skip +
-            index +
-            1,
-        })
-      );
+      row_number: skip + index + 1,
+    }));
 
     /*
     |--------------------------------------------------------------------------
@@ -12183,51 +10134,24 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const filteredPackedQty =
-      sortedRows.filter(
-        (row) =>
-          row.package_box_id !==
-          null
-      ).length;
+    const filteredPackedQty = sortedRows.filter(
+      (row) => row.package_box_id !== null,
+    ).length;
 
-    const filteredQty =
-      sortedRows.length;
+    const filteredQty = sortedRows.length;
 
-    const filteredPendingQty =
-      Math.max(
-        filteredQty -
-          filteredPackedQty,
-        0
-      );
+    const filteredPendingQty = Math.max(filteredQty - filteredPackedQty, 0);
 
-    const filteredWeight =
-      sortedRows.reduce(
-        (
-          totalWeight,
-          row
-        ) =>
-          totalWeight +
-          Number(
-            row.weight || 0
-          ),
-        0
-      );
+    const filteredWeight = sortedRows.reduce(
+      (totalWeight, row) => totalWeight + Number(row.weight || 0),
+      0,
+    );
 
-    const totalProjectQty =
-      allProjectCutLists.reduce(
-        (
-          totalQuantity,
-          item
-        ) =>
-          totalQuantity +
-          Math.max(
-            0,
-            Number(
-              item.qty || 0
-            )
-          ),
-        0
-      );
+    const totalProjectQty = allProjectCutLists.reduce(
+      (totalQuantity, item) =>
+        totalQuantity + Math.max(0, Number(item.qty || 0)),
+      0,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -12235,19 +10159,10 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const filteredReceivedQty =
-      sortedRows.reduce(
-        (sum, row) =>
-          sum +
-          Math.max(
-            0,
-            Number(
-              row.received_qty ??
-                0
-            )
-          ),
-        0
-      );
+    const filteredReceivedQty = sortedRows.reduce(
+      (sum, row) => sum + Math.max(0, Number(row.received_qty ?? 0)),
+      0,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -12257,107 +10172,57 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    const filteredPendingReceiptQty =
-      Math.max(
-        filteredPackedQty -
-          filteredReceivedQty,
-        0
-      );
+    const filteredPendingReceiptQty = Math.max(
+      filteredPackedQty - filteredReceivedQty,
+      0,
+    );
 
     const filteredReceiptProgressPct =
       filteredPackedQty > 0
         ? Math.min(
             100,
-            Math.round(
-              (
-                filteredReceivedQty /
-                filteredPackedQty
-              ) *
-                100
-            )
+            Math.round((filteredReceivedQty / filteredPackedQty) * 100),
           )
         : 0;
 
-    const filteredScannedReceivedQty =
-      sortedRows.reduce(
-        (sum, row) =>
-          row.packing_method ===
-            "Scanned"
-            ? sum +
-              Math.max(
-                0,
-                Number(
-                  row.received_qty ??
-                    0
-                )
-              )
-            : sum,
-        0
-      );
+    const filteredScannedReceivedQty = sortedRows.reduce(
+      (sum, row) =>
+        row.packing_method === "Scanned"
+          ? sum + Math.max(0, Number(row.received_qty ?? 0))
+          : sum,
+      0,
+    );
 
-    const filteredManualReceivedQty =
-      sortedRows.reduce(
-        (sum, row) =>
-          row.packing_method ===
-            "Manual"
-            ? sum +
-              Math.max(
-                0,
-                Number(
-                  row.received_qty ??
-                    0
-                )
-              )
-            : sum,
-        0
-      );
+    const filteredManualReceivedQty = sortedRows.reduce(
+      (sum, row) =>
+        row.packing_method === "Manual"
+          ? sum + Math.max(0, Number(row.received_qty ?? 0))
+          : sum,
+      0,
+    );
 
-    const filteredSiteInQty =
-      sortedRows.filter(
-        (row) =>
-          row.package_box_id !==
-            null &&
-          row.box_site_in_at !==
-            null
-      ).length;
+    const filteredSiteInQty = sortedRows.filter(
+      (row) => row.package_box_id !== null && row.box_site_in_at !== null,
+    ).length;
 
-    const filteredSiteInReceivedQty =
-      sortedRows.reduce(
-        (sum, row) =>
-          row.package_box_id !==
-            null &&
-          row.box_site_in_at !==
-            null
-            ? sum +
-              Math.max(
-                0,
-                Number(
-                  row.received_qty ??
-                    0
-                )
-              )
-            : sum,
-        0
-      );
+    const filteredSiteInReceivedQty = sortedRows.reduce(
+      (sum, row) =>
+        row.package_box_id !== null && row.box_site_in_at !== null
+          ? sum + Math.max(0, Number(row.received_qty ?? 0))
+          : sum,
+      0,
+    );
 
-    const filteredPendingVerificationQty =
-      Math.max(
-        filteredSiteInQty -
-          filteredSiteInReceivedQty,
-        0
-      );
+    const filteredPendingVerificationQty = Math.max(
+      filteredSiteInQty - filteredSiteInReceivedQty,
+      0,
+    );
 
     const filteredSiteVerificationPct =
       filteredSiteInQty > 0
         ? Math.min(
             100,
-            Math.round(
-              (
-                filteredSiteInReceivedQty /
-                filteredSiteInQty
-              ) *
-                100
-            )
+            Math.round((filteredSiteInReceivedQty / filteredSiteInQty) * 100),
           )
         : 0;
 
@@ -12367,149 +10232,97 @@ export const getProjectCutListPaginatedService = async (
     |--------------------------------------------------------------------------
     */
 
-    return validationResponse(
-      1,
-      "Project cut list fetched",
-      {
-        project,
+    return validationResponse(1, "Project cut list fetched", {
+      project,
 
-        items,
+      items,
 
-        pagination: {
-          page:
-            safePage,
+      pagination: {
+        page: safePage,
 
-          limit,
+        limit,
 
-          total,
+        total,
 
-          total_pages:
-            totalPages,
+        total_pages: totalPages,
 
-          from:
-            total > 0
-              ? skip + 1
-              : 0,
+        from: total > 0 ? skip + 1 : 0,
 
-          to:
-            total > 0
-              ? Math.min(
-                  skip + limit,
-                  total
-                )
-              : 0,
+        to: total > 0 ? Math.min(skip + limit, total) : 0,
 
-          has_previous:
-            safePage > 1,
+        has_previous: safePage > 1,
 
-          has_next:
-            totalPages > 0 &&
-            safePage <
-              totalPages,
-        },
+        has_next: totalPages > 0 && safePage < totalPages,
+      },
 
-        summary: {
-          total_project_qty:
-            totalProjectQty,
+      summary: {
+        total_project_qty: totalProjectQty,
 
-          filtered_qty:
-            filteredQty,
+        filtered_qty: filteredQty,
 
-          packed_qty:
-            filteredPackedQty,
+        packed_qty: filteredPackedQty,
 
-          pending_qty:
-            filteredPendingQty,
+        pending_qty: filteredPendingQty,
 
-          filtered_weight:
-            Number(
-              filteredWeight.toFixed(
-                4
-              )
-            ),
+        filtered_weight: Number(filteredWeight.toFixed(4)),
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Site receipt / verification summary
           |--------------------------------------------------------------------------
           */
 
-          received_qty:
-            filteredReceivedQty,
+        received_qty: filteredReceivedQty,
 
-          pending_receipt_qty:
-            filteredPendingReceiptQty,
+        pending_receipt_qty: filteredPendingReceiptQty,
 
-          receipt_progress_pct:
-            filteredReceiptProgressPct,
+        receipt_progress_pct: filteredReceiptProgressPct,
 
-          scanned_received_qty:
-            filteredScannedReceivedQty,
+        scanned_received_qty: filteredScannedReceivedQty,
 
-          manual_received_qty:
-            filteredManualReceivedQty,
+        manual_received_qty: filteredManualReceivedQty,
 
-          site_in_qty:
-            filteredSiteInQty,
+        site_in_qty: filteredSiteInQty,
 
-          site_in_received_qty:
-            filteredSiteInReceivedQty,
+        site_in_received_qty: filteredSiteInReceivedQty,
 
-          pending_verification_qty:
-            filteredPendingVerificationQty,
+        pending_verification_qty: filteredPendingVerificationQty,
 
-          site_verification_pct:
-            filteredSiteVerificationPct,
-        },
+        site_verification_pct: filteredSiteVerificationPct,
+      },
 
-        filter_options: {
-          groups:
-            groupOptions,
+      filter_options: {
+        groups: groupOptions,
 
-          categories:
-            categoryOptions,
+        categories: categoryOptions,
 
-          machines:
-            machineOptions,
+        machines: machineOptions,
 
-          boxes:
-            boxes.map(
-              (box) => ({
-                id:
-                  box.id,
+        boxes: boxes.map((box) => ({
+          id: box.id,
 
-                name:
-                  box.box_name,
-              })
-            ),
-        },
-      }
-    );
+          name: box.box_name,
+        })),
+      },
+    });
   } catch (error) {
-    console.error(
-      "getProjectCutListPaginatedService error:",
-      error
-    );
+    console.error("getProjectCutListPaginatedService error:", error);
 
-    return validationResponse(
-      0,
-      "Failed to fetch project cut list"
-    );
+    return validationResponse(0, "Failed to fetch project cut list");
   }
 };
 
-
-
-
-
 export const getDefectDashboardService = async (vendor_id: number) => {
   try {
-
     // ── 1. Summary counts ─────────────────────────────────────────────────────
     const [total, pending, completed, rework, replace] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id } }),
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Pending" } }),
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Completed" } }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Pending" },
+      }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Completed" },
+      }),
       prisma.defectedItem.count({ where: { vendor_id, action: "rework" } }),
       prisma.defectedItem.count({ where: { vendor_id, action: "replace" } }),
     ]);
@@ -12523,14 +10336,20 @@ export const getDefectDashboardService = async (vendor_id: number) => {
     });
 
     const defectMasters = await prisma.defectMaster.findMany({
-      where: { id: { in: byDefectType.map(d => d.defect_id).filter(Boolean) as number[] } },
+      where: {
+        id: {
+          in: byDefectType.map((d) => d.defect_id).filter(Boolean) as number[],
+        },
+      },
       select: { id: true, defect_name: true },
     });
-    const defectMap = new Map(defectMasters.map(d => [d.id, d.defect_name]));
+    const defectMap = new Map(defectMasters.map((d) => [d.id, d.defect_name]));
 
-    const defectBreakdown = byDefectType.map(d => ({
+    const defectBreakdown = byDefectType.map((d) => ({
       defect_id: d.defect_id,
-      defect_name: d.defect_id ? (defectMap.get(d.defect_id) ?? "Unknown") : "Unknown",
+      defect_name: d.defect_id
+        ? (defectMap.get(d.defect_id) ?? "Unknown")
+        : "Unknown",
       count: d._count.id,
     }));
 
@@ -12544,12 +10363,12 @@ export const getDefectDashboardService = async (vendor_id: number) => {
     });
 
     const projects = await prisma.projectMaster.findMany({
-      where: { id: { in: byProject.map(p => p.project_id) } },
+      where: { id: { in: byProject.map((p) => p.project_id) } },
       select: { id: true, project_name: true },
     });
-    const projectMap = new Map(projects.map(p => [p.id, p.project_name]));
+    const projectMap = new Map(projects.map((p) => [p.id, p.project_name]));
 
-    const projectBreakdown = byProject.map(p => ({
+    const projectBreakdown = byProject.map((p) => ({
       project_id: p.project_id,
       project_name: projectMap.get(p.project_id) ?? "Unknown",
       count: p._count.id,
@@ -12564,12 +10383,12 @@ export const getDefectDashboardService = async (vendor_id: number) => {
     });
 
     const machines = await prisma.machineMaster.findMany({
-      where: { id: { in: byMachine.map(m => m.machine_id) } },
+      where: { id: { in: byMachine.map((m) => m.machine_id) } },
       select: { id: true, machine_name: true },
     });
-    const machineMap = new Map(machines.map(m => [m.id, m.machine_name]));
+    const machineMap = new Map(machines.map((m) => [m.id, m.machine_name]));
 
-    const machineBreakdown = byMachine.map(m => ({
+    const machineBreakdown = byMachine.map((m) => ({
       machine_id: m.machine_id,
       machine_name: machineMap.get(m.machine_id) ?? "Unknown",
       count: m._count.id,
@@ -12595,7 +10414,9 @@ export const getDefectDashboardService = async (vendor_id: number) => {
         created_at: true,
         defect_completed_at: true,
         defect: { select: { id: true, defect_name: true } },
-        project: { select: { id: true, project_name: true, unique_project_id: true } },
+        project: {
+          select: { id: true, project_name: true, unique_project_id: true },
+        },
         machine: { select: { id: true, machine_name: true } },
         cutList: { select: { id: true, item_name: true, unique_code: true } },
         createdBy: { select: { id: true, user_name: true } },
@@ -12605,19 +10426,27 @@ export const getDefectDashboardService = async (vendor_id: number) => {
 
     // ── 7. Avg resolution time (completed defects) ────────────────────────────
     const completedWithTime = await prisma.defectedItem.findMany({
-      where: { vendor_id, defect_status: "Completed", defect_completed_at: { not: null } },
+      where: {
+        vendor_id,
+        defect_status: "Completed",
+        defect_completed_at: { not: null },
+      },
       select: { created_at: true, defect_completed_at: true },
     });
 
-    const avgResolutionMs = completedWithTime.length > 0
-      ? completedWithTime.reduce((sum, d) =>
-        sum + (d.defect_completed_at!.getTime() - d.created_at.getTime()), 0
-      ) / completedWithTime.length
-      : null;
+    const avgResolutionMs =
+      completedWithTime.length > 0
+        ? completedWithTime.reduce(
+            (sum, d) =>
+              sum + (d.defect_completed_at!.getTime() - d.created_at.getTime()),
+            0,
+          ) / completedWithTime.length
+        : null;
 
-    const avgResolutionHours = avgResolutionMs !== null
-      ? Math.round(avgResolutionMs / 1000 / 60 / 60 * 10) / 10
-      : null;
+    const avgResolutionHours =
+      avgResolutionMs !== null
+        ? Math.round((avgResolutionMs / 1000 / 60 / 60) * 10) / 10
+        : null;
 
     return validationResponse(1, "Defect dashboard fetched", {
       summary: {
@@ -12632,10 +10461,12 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       by_defect_type: defectBreakdown,
       by_project: projectBreakdown,
       by_machine: machineBreakdown,
-      by_status: byStatus.map(s => ({ status: s.defect_status, count: s._count.id })),
+      by_status: byStatus.map((s) => ({
+        status: s.defect_status,
+        count: s._count.id,
+      })),
       recent_defects: recentDefects,
     });
-
   } catch (error) {
     console.error("getDefectDashboardService error:", error);
     return validationResponse(0, "Failed to fetch defect dashboard");
@@ -12646,7 +10477,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
 
 export const getProjectDefectsService = async (
   vendor_id: number,
-  unique_project_id: string
+  unique_project_id: string,
 ) => {
   try {
     const project = await prisma.projectMaster.findFirst({
@@ -12678,24 +10509,24 @@ export const getProjectDefectsService = async (
       project: { id: project.id, project_name: project.project_name },
       defects,
     });
-
   } catch (error) {
     console.error("getProjectDefectsService error:", error);
     return validationResponse(0, "Failed to fetch project defects");
   }
 };
 
-
 const PAGE_SIZE = 15;
 
 // ─── Helper: attach signed URLs to images ─────────────────────────────────────
 
-async function signImages(images: { id: number; doc_sys_name: string; doc_og_name: string }[]) {
+async function signImages(
+  images: { id: number; doc_sys_name: string; doc_og_name: string }[],
+) {
   return Promise.all(
     images.map(async (img) => ({
       ...img,
       signed_url: await generateSignedUrl(img.doc_sys_name),
-    }))
+    })),
   );
 }
 
@@ -12705,8 +10536,12 @@ export const getDefectSummaryService = async (vendor_id: number) => {
   try {
     const [total, pending, completed, rework, replace] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id } }),
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Pending" } }),
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Completed" } }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Pending" },
+      }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Completed" },
+      }),
       prisma.defectedItem.count({ where: { vendor_id, action: "rework" } }),
       prisma.defectedItem.count({ where: { vendor_id, action: "replace" } }),
     ]);
@@ -12719,10 +10554,14 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       orderBy: { _count: { id: "desc" } },
     });
     const defectMasters = await prisma.defectMaster.findMany({
-      where: { id: { in: byDefectType.map(d => d.defect_id).filter(Boolean) as number[] } },
+      where: {
+        id: {
+          in: byDefectType.map((d) => d.defect_id).filter(Boolean) as number[],
+        },
+      },
       select: { id: true, defect_name: true },
     });
-    const defectMap = new Map(defectMasters.map(d => [d.id, d.defect_name]));
+    const defectMap = new Map(defectMasters.map((d) => [d.id, d.defect_name]));
 
     // Breakdown by machine
     const byMachine = await prisma.defectedItem.groupBy({
@@ -12732,10 +10571,10 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       orderBy: { _count: { id: "desc" } },
     });
     const machines = await prisma.machineMaster.findMany({
-      where: { id: { in: byMachine.map(m => m.machine_id) } },
+      where: { id: { in: byMachine.map((m) => m.machine_id) } },
       select: { id: true, machine_name: true },
     });
-    const machineMap = new Map(machines.map(m => [m.id, m.machine_name]));
+    const machineMap = new Map(machines.map((m) => [m.id, m.machine_name]));
 
     // Breakdown by project (top 10)
     const byProject = await prisma.defectedItem.groupBy({
@@ -12746,40 +10585,55 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       take: 10,
     });
     const projects = await prisma.projectMaster.findMany({
-      where: { id: { in: byProject.map(p => p.project_id) } },
+      where: { id: { in: byProject.map((p) => p.project_id) } },
       select: { id: true, project_name: true },
     });
-    const projectMap = new Map(projects.map(p => [p.id, p.project_name]));
+    const projectMap = new Map(projects.map((p) => [p.id, p.project_name]));
 
     // Avg resolution time
     const completedWithTime = await prisma.defectedItem.findMany({
-      where: { vendor_id, defect_status: "Completed", defect_completed_at: { not: null } },
+      where: {
+        vendor_id,
+        defect_status: "Completed",
+        defect_completed_at: { not: null },
+      },
       select: { created_at: true, defect_completed_at: true },
     });
-    const avgResolutionMs = completedWithTime.length > 0
-      ? completedWithTime.reduce((s, d) => s + (d.defect_completed_at!.getTime() - d.created_at.getTime()), 0)
-      / completedWithTime.length
-      : null;
+    const avgResolutionMs =
+      completedWithTime.length > 0
+        ? completedWithTime.reduce(
+            (s, d) =>
+              s + (d.defect_completed_at!.getTime() - d.created_at.getTime()),
+            0,
+          ) / completedWithTime.length
+        : null;
 
     return validationResponse(1, "Defect summary fetched", {
       summary: {
-        total, pending, completed, rework, replace,
+        total,
+        pending,
+        completed,
+        rework,
+        replace,
         completion_rate: total > 0 ? Math.round((completed / total) * 100) : 0,
-        avg_resolution_hours: avgResolutionMs !== null
-          ? Math.round(avgResolutionMs / 3_600_000 * 10) / 10
-          : null,
+        avg_resolution_hours:
+          avgResolutionMs !== null
+            ? Math.round((avgResolutionMs / 3_600_000) * 10) / 10
+            : null,
       },
-      by_defect_type: byDefectType.map(d => ({
+      by_defect_type: byDefectType.map((d) => ({
         defect_id: d.defect_id,
-        defect_name: d.defect_id ? (defectMap.get(d.defect_id) ?? "Unknown") : "Unknown",
+        defect_name: d.defect_id
+          ? (defectMap.get(d.defect_id) ?? "Unknown")
+          : "Unknown",
         count: d._count.id,
       })),
-      by_machine: byMachine.map(m => ({
+      by_machine: byMachine.map((m) => ({
         machine_id: m.machine_id,
         machine_name: machineMap.get(m.machine_id) ?? "Unknown",
         count: m._count.id,
       })),
-      by_project: byProject.map(p => ({
+      by_project: byProject.map((p) => ({
         project_id: p.project_id,
         project_name: projectMap.get(p.project_id) ?? "Unknown",
         count: p._count.id,
@@ -12793,12 +10647,17 @@ export const getDefectSummaryService = async (vendor_id: number) => {
 
 // ─── Pending Defects (paginated) ─────────────────────────────────────────────
 
-export const getPendingDefectsService = async (vendor_id: number, page: number) => {
+export const getPendingDefectsService = async (
+  vendor_id: number,
+  page: number,
+) => {
   try {
     const skip = (page - 1) * PAGE_SIZE;
 
     const [total, items] = await Promise.all([
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Pending" } }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Pending" },
+      }),
       prisma.defectedItem.findMany({
         where: { vendor_id, defect_status: "Pending" },
         orderBy: { created_at: "desc" },
@@ -12811,11 +10670,15 @@ export const getPendingDefectsService = async (vendor_id: number, page: number) 
           remark: true,
           created_at: true,
           defect: { select: { id: true, defect_name: true } },
-          project: { select: { id: true, project_name: true, unique_project_id: true } },
+          project: {
+            select: { id: true, project_name: true, unique_project_id: true },
+          },
           machine: { select: { id: true, machine_name: true } },
           cutList: { select: { id: true, item_name: true, unique_code: true } },
           createdBy: { select: { id: true, user_name: true } },
-          images: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
+          images: {
+            select: { id: true, doc_sys_name: true, doc_og_name: true },
+          },
         },
       }),
     ]);
@@ -12825,7 +10688,7 @@ export const getPendingDefectsService = async (vendor_id: number, page: number) 
       items.map(async (d) => ({
         ...d,
         images: await signImages(d.images),
-      }))
+      })),
     );
 
     return validationResponse(1, "Pending defects fetched", {
@@ -12843,12 +10706,17 @@ export const getPendingDefectsService = async (vendor_id: number, page: number) 
 
 // ─── Resolved Defects (paginated) ────────────────────────────────────────────
 
-export const getResolvedDefectsService = async (vendor_id: number, page: number) => {
+export const getResolvedDefectsService = async (
+  vendor_id: number,
+  page: number,
+) => {
   try {
     const skip = (page - 1) * PAGE_SIZE;
 
     const [total, items] = await Promise.all([
-      prisma.defectedItem.count({ where: { vendor_id, defect_status: "Completed" } }),
+      prisma.defectedItem.count({
+        where: { vendor_id, defect_status: "Completed" },
+      }),
       prisma.defectedItem.findMany({
         where: { vendor_id, defect_status: "Completed" },
         orderBy: { defect_completed_at: "desc" },
@@ -12862,14 +10730,20 @@ export const getResolvedDefectsService = async (vendor_id: number, page: number)
           created_at: true,
           defect_completed_at: true,
           defect: { select: { id: true, defect_name: true } },
-          project: { select: { id: true, project_name: true, unique_project_id: true } },
+          project: {
+            select: { id: true, project_name: true, unique_project_id: true },
+          },
           machine: { select: { id: true, machine_name: true } },
           cutList: { select: { id: true, item_name: true, unique_code: true } },
           createdBy: { select: { id: true, user_name: true } },
           // Defect images (original problem photos)
-          images: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
+          images: {
+            select: { id: true, doc_sys_name: true, doc_og_name: true },
+          },
           // Completion/resolution photos
-          completionPhotos: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
+          completionPhotos: {
+            select: { id: true, doc_sys_name: true, doc_og_name: true },
+          },
         },
       }),
     ]);
@@ -12879,7 +10753,7 @@ export const getResolvedDefectsService = async (vendor_id: number, page: number)
         ...d,
         images: await signImages(d.images),
         completionPhotos: await signImages(d.completionPhotos),
-      }))
+      })),
     );
 
     return validationResponse(1, "Resolved defects fetched", {
@@ -12899,7 +10773,7 @@ export const createUnitMaster = async (
   vendor_id: number,
   unit_name: string,
   short_name: string,
-  created_by?: number | null
+  created_by?: number | null,
 ) => {
   try {
     const unit = await prisma.unitMaster.create({
@@ -12915,19 +10789,18 @@ export const createUnitMaster = async (
     });
     return validationResponse(1, "Unit created successfully", unit);
   } catch (error: any) {
-    if (error?.code === "P2002") return validationResponse(0, "Unit already exists");
+    if (error?.code === "P2002")
+      return validationResponse(0, "Unit already exists");
     console.error("Error in createUnitMaster", error);
     return validationResponse(0, "Failed to create unit");
   }
 };
 
-
-
 type ApiResponseManualItems = ReturnType<typeof validationResponse>;
 
 export const getManualPackingItemsService = async (
   projectId: number,
-  vendorId: number
+  vendorId: number,
 ): Promise<ApiResponseManualItems> => {
   if (!projectId || projectId <= 0) {
     return validationResponse(0, "project_id is required");
@@ -13021,20 +10894,16 @@ export const getManualPackingItemsService = async (
   */
 
   if (cutListItems.length === 0) {
-    return validationResponse(
-      1,
-      "",
-      {
-        project,
-        summary: {
-          total_items: 0,
-          total_qty: 0,
-          packed_qty: 0,
-          pending_qty: 0,
-        },
-        items: [],
-      }
-    );
+    return validationResponse(1, "", {
+      project,
+      summary: {
+        total_items: 0,
+        total_qty: 0,
+        packed_qty: 0,
+        pending_qty: 0,
+      },
+      items: [],
+    });
   }
 
   /*
@@ -13053,9 +10922,7 @@ export const getManualPackingItemsService = async (
     },
   });
 
-  const packagingMachineIds = packagingMachines.map(
-    (machine) => machine.id
-  );
+  const packagingMachineIds = packagingMachines.map((machine) => machine.id);
 
   /*
   |--------------------------------------------------------------------------
@@ -13068,25 +10935,25 @@ export const getManualPackingItemsService = async (
   const packedQtyRows =
     packagingMachineIds.length > 0
       ? await prisma.cutListMachineMapping.groupBy({
-        by: ["cut_list_id"],
+          by: ["cut_list_id"],
 
-        where: {
-          project_id: projectId,
-          vendor_id: vendorId,
+          where: {
+            project_id: projectId,
+            vendor_id: vendorId,
 
-          cut_list_id: {
-            in: cutListIds,
+            cut_list_id: {
+              in: cutListIds,
+            },
+
+            machine_id: {
+              in: packagingMachineIds,
+            },
           },
 
-          machine_id: {
-            in: packagingMachineIds,
+          _sum: {
+            qty: true,
           },
-        },
-
-        _sum: {
-          qty: true,
-        },
-      })
+        })
       : [];
 
   /*
@@ -13098,10 +10965,7 @@ export const getManualPackingItemsService = async (
   const packedQtyMap = new Map<number, number>();
 
   for (const row of packedQtyRows) {
-    packedQtyMap.set(
-      row.cut_list_id,
-      Number(row._sum.qty ?? 0)
-    );
+    packedQtyMap.set(row.cut_list_id, Number(row._sum.qty ?? 0));
   }
 
   /*
@@ -13115,13 +10979,10 @@ export const getManualPackingItemsService = async (
 
     const packedQty = Math.min(
       Number(packedQtyMap.get(item.id) ?? 0),
-      totalQty
+      totalQty,
     );
 
-    const pendingQty = Math.max(
-      totalQty - packedQty,
-      0
-    );
+    const pendingQty = Math.max(totalQty - packedQty, 0);
 
     return {
       ...item,
@@ -13158,22 +11019,15 @@ export const getManualPackingItemsService = async (
       total_qty: 0,
       packed_qty: 0,
       pending_qty: 0,
-    }
+    },
   );
 
-  return validationResponse(
-    1,
-    "",
-    {
-      project,
-      summary,
-      items,
-    }
-  );
+  return validationResponse(1, "", {
+    project,
+    summary,
+    items,
+  });
 };
-
-
-
 
 interface AddManualPackingItemPayload {
   project_id: number;
@@ -13185,7 +11039,7 @@ interface AddManualPackingItemPayload {
 }
 
 export const addManualPackingItemService = async (
-  payload: AddManualPackingItemPayload
+  payload: AddManualPackingItemPayload,
 ): Promise<ApiResponse> => {
   try {
     const project_id = Number(payload.project_id);
@@ -13202,49 +11056,27 @@ export const addManualPackingItemService = async (
     */
 
     if (!project_id || project_id <= 0) {
-      return validationResponse(
-        0,
-        "project_id is required"
-      );
+      return validationResponse(0, "project_id is required");
     }
 
     if (!vendor_id || vendor_id <= 0) {
-      return validationResponse(
-        0,
-        "vendor_id is required"
-      );
+      return validationResponse(0, "vendor_id is required");
     }
 
     if (!box_id || box_id <= 0) {
-      return validationResponse(
-        0,
-        "box_id is required"
-      );
+      return validationResponse(0, "box_id is required");
     }
 
     if (!cut_list_id || cut_list_id <= 0) {
-      return validationResponse(
-        0,
-        "cut_list_id is required"
-      );
+      return validationResponse(0, "cut_list_id is required");
     }
 
-    if (
-      !qty ||
-      qty <= 0 ||
-      !Number.isInteger(qty)
-    ) {
-      return validationResponse(
-        0,
-        "qty must be a positive integer"
-      );
+    if (!qty || qty <= 0 || !Number.isInteger(qty)) {
+      return validationResponse(0, "qty must be a positive integer");
     }
 
     if (!user_id || user_id <= 0) {
-      return validationResponse(
-        0,
-        "user_id is required"
-      );
+      return validationResponse(0, "user_id is required");
     }
 
     /*
@@ -13253,25 +11085,21 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const project =
-      await prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
-          vendor_id,
-        },
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        id: project_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-          project_name: true,
-          packing_type: true,
-        },
-      });
+      select: {
+        id: true,
+        project_name: true,
+        packing_type: true,
+      },
+    });
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     /*
@@ -13280,37 +11108,27 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
 
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-        },
-      });
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
-    if (
-      String(box.box_status).toLowerCase() ===
-      "packed"
-    ) {
-      return validationResponse(
-        0,
-        "Packed box cannot be updated"
-      );
+    if (String(box.box_status).toLowerCase() === "packed") {
+      return validationResponse(0, "Packed box cannot be updated");
     }
 
     /*
@@ -13319,23 +11137,19 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const user =
-      await prisma.userMaster.findFirst({
-        where: {
-          id: user_id,
-          vendor_id,
-        },
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: user_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-        },
-      });
+      select: {
+        id: true,
+      },
+    });
 
     if (!user) {
-      return validationResponse(
-        0,
-        "User not found"
-      );
+      return validationResponse(0, "User not found");
     }
 
     /*
@@ -13350,41 +11164,37 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const cutList =
-      await prisma.cutList.findFirst({
-        where: {
-          id: cut_list_id,
-          project_id,
-          vendor_id,
+    const cutList = await prisma.cutList.findFirst({
+      where: {
+        id: cut_list_id,
+        project_id,
+        vendor_id,
 
-          include_in_packing: true,
-          scan_pack_validate: false,
+        include_in_packing: true,
+        scan_pack_validate: false,
 
-          status: "Active",
-        },
+        status: "Active",
+      },
 
-        select: {
-          id: true,
-          qty: true,
-          lead_id: true,
+      select: {
+        id: true,
+        qty: true,
+        lead_id: true,
 
-          item_name: true,
-          material_details: true,
+        item_name: true,
+        material_details: true,
 
-          group_name: true,
+        group_name: true,
 
-          weight: true,
+        weight: true,
 
-          include_in_packing: true,
-          scan_pack_validate: true,
-        },
-      });
+        include_in_packing: true,
+        scan_pack_validate: true,
+      },
+    });
 
     if (!cutList) {
-      return validationResponse(
-        0,
-        "Item is not available for manual packing"
-      );
+      return validationResponse(0, "Item is not available for manual packing");
     }
 
     /*
@@ -13396,30 +11206,26 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packagingMachine =
-      await prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-          status: "ACTIVE",
-        },
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 18,
+        status: "ACTIVE",
+      },
 
-        select: {
-          id: true,
-          sequence_no: true,
-          machine_name: true,
-        },
+      select: {
+        id: true,
+        sequence_no: true,
+        machine_name: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Active packaging machine not configured"
-      );
+      return validationResponse(0, "Active packaging machine not configured");
     }
 
     /*
@@ -13431,20 +11237,15 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    if (
-      project.packing_type ===
-      PackingType.GROUPWISE
-    ) {
-      const incomingGroupName =
-        cutList.group_name?.trim();
+    if (project.packing_type === PackingType.GROUPWISE) {
+      const incomingGroupName = cutList.group_name?.trim();
 
-      const incomingGroup =
-        incomingGroupName?.toLowerCase();
+      const incomingGroup = incomingGroupName?.toLowerCase();
 
       if (!incomingGroup) {
         return validationResponse(
           0,
-          `Group is not configured for item "${cutList.item_name}"`
+          `Group is not configured for item "${cutList.item_name}"`,
         );
       }
 
@@ -13454,60 +11255,55 @@ export const addManualPackingItemService = async (
       |--------------------------------------------------------------------------
       */
 
-      const existingBoxItem =
-        await prisma.cutListMachineMapping.findFirst({
-          where: {
-            box_id,
-            vendor_id,
-            project_id,
+      const existingBoxItem = await prisma.cutListMachineMapping.findFirst({
+        where: {
+          box_id,
+          vendor_id,
+          project_id,
 
-            actual_in_at: {
-              not: null,
+          actual_in_at: {
+            not: null,
+          },
+        },
+
+        orderBy: [
+          {
+            actual_in_at: "asc",
+          },
+          {
+            id: "asc",
+          },
+        ],
+
+        select: {
+          id: true,
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              group_name: true,
             },
           },
-
-          orderBy: [
-            {
-              actual_in_at: "asc",
-            },
-            {
-              id: "asc",
-            },
-          ],
-
-          select: {
-            id: true,
-
-            cut_list: {
-              select: {
-                id: true,
-                item_name: true,
-                group_name: true,
-              },
-            },
-          },
-        });
+        },
+      });
 
       if (existingBoxItem?.cut_list) {
-        const existingGroupName =
-          existingBoxItem.cut_list.group_name?.trim();
+        const existingGroupName = existingBoxItem.cut_list.group_name?.trim();
 
-        const existingGroup =
-          existingGroupName?.toLowerCase();
+        const existingGroup = existingGroupName?.toLowerCase();
 
         if (!existingGroup) {
           return validationResponse(
             0,
-            `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`
+            `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`,
           );
         }
 
-        if (
-          existingGroup !== incomingGroup
-        ) {
+        if (existingGroup !== incomingGroup) {
           return validationResponse(
             0,
-            `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`
+            `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`,
           );
         }
       }
@@ -13523,20 +11319,13 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalCutListQty =
-      Number(cutList.qty || 0);
+    const totalCutListQty = Number(cutList.qty || 0);
 
-    const totalCutListWeight =
-      Number(cutList.weight || 0);
+    const totalCutListWeight = Number(cutList.weight || 0);
 
     const perItemWeight =
       totalCutListQty > 0
-        ? Number(
-          (
-            totalCutListWeight /
-            totalCutListQty
-          ).toFixed(7)
-        )
+        ? Number((totalCutListWeight / totalCutListQty).toFixed(7))
         : 0;
 
     /*
@@ -13545,114 +11334,95 @@ export const addManualPackingItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const result =
-      await prisma.$transaction(
-        async (tx) => {
-          /*
+    const result = await prisma.$transaction(
+      async (tx) => {
+        /*
           |--------------------------------------------------------------------------
           | Re-fetch CutList inside transaction
           |--------------------------------------------------------------------------
           */
 
-          const currentCutList =
-            await tx.cutList.findFirst({
-              where: {
-                id: cut_list_id,
-                project_id,
-                vendor_id,
+        const currentCutList = await tx.cutList.findFirst({
+          where: {
+            id: cut_list_id,
+            project_id,
+            vendor_id,
 
-                include_in_packing: true,
-                scan_pack_validate: false,
+            include_in_packing: true,
+            scan_pack_validate: false,
 
-                status: "Active",
-              },
+            status: "Active",
+          },
 
-              select: {
-                id: true,
-                qty: true,
-              },
-            });
+          select: {
+            id: true,
+            qty: true,
+          },
+        });
 
-          if (!currentCutList) {
-            return validationResponse(
-              0,
-              "Item is not available for manual packing"
-            );
-          }
+        if (!currentCutList) {
+          return validationResponse(
+            0,
+            "Item is not available for manual packing",
+          );
+        }
 
-          const totalQty =
-            Number(currentCutList.qty || 0);
+        const totalQty = Number(currentCutList.qty || 0);
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Calculate total quantity already packed across ALL boxes
           |--------------------------------------------------------------------------
           */
 
-          const packedQtyResult =
-            await tx.cutListMachineMapping.aggregate({
-              where: {
-                cut_list_id,
-                project_id,
-                vendor_id,
+        const packedQtyResult = await tx.cutListMachineMapping.aggregate({
+          where: {
+            cut_list_id,
+            project_id,
+            vendor_id,
 
-                machine_id:
-                  packagingMachine.id,
+            machine_id: packagingMachine.id,
 
-                /*
+            /*
                 |--------------------------------------------------------------------------
                 | Only quantity assigned to a box is considered packed
                 |--------------------------------------------------------------------------
                 */
-                box_id: {
-                  not: null,
-                },
-              },
+            box_id: {
+              not: null,
+            },
+          },
 
-              _sum: {
-                qty: true,
-              },
-            });
+          _sum: {
+            qty: true,
+          },
+        });
 
-          const packedQty =
-            Number(
-              packedQtyResult._sum.qty ??
-              0
-            );
+        const packedQty = Number(packedQtyResult._sum.qty ?? 0);
 
-          const pendingQty =
-            Math.max(
-              totalQty - packedQty,
-              0
-            );
+        const pendingQty = Math.max(totalQty - packedQty, 0);
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Nothing pending
           |--------------------------------------------------------------------------
           */
 
-          if (pendingQty <= 0) {
-            return validationResponse(
-              0,
-              "Item is already fully packed"
-            );
-          }
+        if (pendingQty <= 0) {
+          return validationResponse(0, "Item is already fully packed");
+        }
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | User cannot add more than pending quantity
           |--------------------------------------------------------------------------
           */
 
-          if (qty > pendingQty) {
-            return validationResponse(
-              0,
-              `Only ${pendingQty} qty is pending`
-            );
-          }
+        if (qty > pendingQty) {
+          return validationResponse(0, `Only ${pendingQty} qty is pending`);
+        }
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Check same item + same box
           |--------------------------------------------------------------------------
@@ -13665,229 +11435,181 @@ export const addManualPackingItemService = async (
           |--------------------------------------------------------------------------
           */
 
-          const existingMapping =
-            await tx.cutListMachineMapping.findFirst({
-              where: {
-                cut_list_id,
-                project_id,
-                vendor_id,
+        const existingMapping = await tx.cutListMachineMapping.findFirst({
+          where: {
+            cut_list_id,
+            project_id,
+            vendor_id,
 
-                machine_id:
-                  packagingMachine.id,
+            machine_id: packagingMachine.id,
 
-                box_id,
-              },
+            box_id,
+          },
 
-              select: {
-                id: true,
-                qty: true,
-              },
-            });
+          select: {
+            id: true,
+            qty: true,
+          },
+        });
 
-          let mapping;
+        let mapping;
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Same box → UPDATE qty
           |--------------------------------------------------------------------------
           */
 
-          if (existingMapping) {
-            mapping =
-              await tx.cutListMachineMapping.update({
-                where: {
-                  id:
-                    existingMapping.id,
-                },
+        if (existingMapping) {
+          mapping = await tx.cutListMachineMapping.update({
+            where: {
+              id: existingMapping.id,
+            },
 
-                data: {
-                  qty: {
-                    increment: qty,
-                  },
+            data: {
+              qty: {
+                increment: qty,
+              },
 
-                  /*
+              /*
                   |--------------------------------------------------------------------------
                   | Manual selection means item is packed
                   |--------------------------------------------------------------------------
                   */
-                  actual_in_at:
-                    new Date(),
+              actual_in_at: new Date(),
 
-                  in_operator:
-                    user_id,
+              in_operator: user_id,
 
-                  box_id,
+              box_id,
 
-                  expected_in:
-                    true,
-                },
+              expected_in: true,
+            },
 
-                select: {
-                  id: true,
-                  cut_list_id: true,
-                  machine_id: true,
-                  project_id: true,
-                  vendor_id: true,
-                  box_id: true,
-                  qty: true,
-                  actual_in_at: true,
-                  in_operator: true,
-                },
-              });
-          }
+            select: {
+              id: true,
+              cut_list_id: true,
+              machine_id: true,
+              project_id: true,
+              vendor_id: true,
+              box_id: true,
+              qty: true,
+              actual_in_at: true,
+              in_operator: true,
+            },
+          });
+        } else {
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | New box → CREATE row
           |--------------------------------------------------------------------------
           */
+          mapping = await tx.cutListMachineMapping.create({
+            data: {
+              cut_list_id,
 
-          else {
-            mapping =
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id,
+              machine_id: packagingMachine.id,
 
-                  machine_id:
-                    packagingMachine.id,
+              vendor_id,
 
-                  vendor_id,
+              lead_id: cutList.lead_id,
 
-                  lead_id:
-                    cutList.lead_id,
+              project_id,
 
-                  project_id,
+              sequence_no: packagingMachine.sequence_no ?? 0,
 
-                  sequence_no:
-                    packagingMachine.sequence_no ??
-                    0,
+              is_optional: false,
 
-                  is_optional:
-                    false,
+              expected_in: true,
 
-                  expected_in:
-                    true,
+              expected_out: false,
 
-                  expected_out:
-                    false,
+              status: "Pending",
 
-                  status:
-                    "Pending",
+              actual_in_at: new Date(),
 
-                  actual_in_at:
-                    new Date(),
+              in_operator: user_id,
 
-                  in_operator:
-                    user_id,
+              created_by: user_id,
 
-                  created_by:
-                    user_id,
+              box_id,
 
-                  box_id,
+              qty,
 
-                  qty,
-
-                  /*
+              /*
                   |--------------------------------------------------------------------------
                   | Current convention:
                   | mapping weight stores per-piece weight
                   |--------------------------------------------------------------------------
                   */
-                  weight:
-                    perItemWeight,
-                  row_created_source: "Manual"
-                },
+              weight: perItemWeight,
+              row_created_source: "Manual",
+            },
 
-                select: {
-                  id: true,
-                  cut_list_id: true,
-                  machine_id: true,
-                  project_id: true,
-                  vendor_id: true,
-                  box_id: true,
-                  qty: true,
-                  actual_in_at: true,
-                  in_operator: true,
-                },
-              });
-          }
+            select: {
+              id: true,
+              cut_list_id: true,
+              machine_id: true,
+              project_id: true,
+              vendor_id: true,
+              box_id: true,
+              qty: true,
+              actual_in_at: true,
+              in_operator: true,
+            },
+          });
+        }
 
-          /*
+        /*
           |--------------------------------------------------------------------------
           | Calculate new totals
           |--------------------------------------------------------------------------
           */
 
-          const newPackedQty =
-            packedQty + qty;
+        const newPackedQty = packedQty + qty;
 
-          const newPendingQty =
-            Math.max(
-              totalQty -
-              newPackedQty,
-              0
-            );
+        const newPendingQty = Math.max(totalQty - newPackedQty, 0);
 
-          return validationResponse(
-            1,
-            "Product added to box successfully",
-            {
-              mapping,
+        return validationResponse(1, "Product added to box successfully", {
+          mapping,
 
-              item: {
-                cut_list_id:
-                  cut_list_id,
+          item: {
+            cut_list_id: cut_list_id,
 
-                item_name:
-                  cutList.item_name,
+            item_name: cutList.item_name,
 
-                box_id,
+            box_id,
 
-                box_name:
-                  box.box_name,
+            box_name: box.box_name,
 
-                added_qty:
-                  qty,
+            added_qty: qty,
 
-                total_qty:
-                  totalQty,
+            total_qty: totalQty,
 
-                packed_qty:
-                  newPackedQty,
+            packed_qty: newPackedQty,
 
-                pending_qty:
-                  newPendingQty,
+            pending_qty: newPendingQty,
 
-                packing_status:
-                  newPendingQty === 0
-                    ? "Packed"
-                    : "Partially Packed",
-              },
-            }
-          );
-        },
-        {
-          maxWait: 10000,
-          timeout: 30000,
-        }
-      );
+            packing_status: newPendingQty === 0 ? "Packed" : "Partially Packed",
+          },
+        });
+      },
+      {
+        maxWait: 10000,
+        timeout: 30000,
+      },
+    );
 
     return result;
   } catch (error: any) {
-    console.error(
-      "addManualPackingItemService error:",
-      error
-    );
+    console.error("addManualPackingItemService error:", error);
 
     return validationResponse(
       0,
-      error?.message ||
-      "Failed to add product to box"
+      error?.message || "Failed to add product to box",
     );
   }
 };
-
-
 
 export type ProjectItemScanFilter = "all" | "scanned" | "pending";
 
@@ -14163,11 +11885,7 @@ export const getProjectItemTrackingService = async (
     ...(baseAnd.length > 0 ? { AND: baseAnd } : {}),
   };
 
-  const pageWhere = addScanStatus(
-    baseWhere,
-    query.scanStatus,
-    mappingScope,
-  );
+  const pageWhere = addScanStatus(baseWhere, query.scanStatus, mappingScope);
   const scannedWhere = addScanStatus(baseWhere, "scanned", mappingScope);
   const pendingWhere = addScanStatus(baseWhere, "pending", mappingScope);
 

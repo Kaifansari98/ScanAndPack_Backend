@@ -5357,3 +5357,22 @@ model MetaLead {
 
   @@map("meta_leads")
 }
+
+model BoxItemDeleteLog {
+  id                          Int       @id @default(autoincrement())
+  cut_list_machine_mapping_id Int?
+  cut_list_id                 Int?
+  qty                         Int       @default(1)
+  box_id                      Int
+  project_id                  Int
+  vendor_id                   Int
+  scanned_by                  Int?
+  scanned_at                  DateTime?
+  deleted_by                  Int?
+  deleted_at                  DateTime  @default(now())
+  created_at                  DateTime  @default(now())
+
+  @@index([vendor_id, project_id, box_id])
+  @@index([deleted_by])
+  @@index([deleted_at])
+}

@@ -1218,10 +1218,6 @@ export class DesigingStageController {
               is_this_vendor_is_custom_usertype_only: true,
               handlesLargeScaleProjects: true,
             },
-            select: {
-              is_this_vendor_is_custom_usertype_only: true,
-              handlesLargeScaleProjects: true,
-            },
           });
           const isCustomVendor =
             vendor?.is_this_vendor_is_custom_usertype_only === true;
@@ -1263,7 +1259,6 @@ export class DesigingStageController {
               select: {
                 id: true,
                 title: true,
-                product_type_id: true,
                 product_type_id: true,
                 productType: {
                   select: { id: true, type: true },

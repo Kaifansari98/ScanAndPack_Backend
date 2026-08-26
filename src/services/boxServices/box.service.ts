@@ -1,6 +1,6 @@
-import { prisma } from '../../prisma/client';
-import { BoxStatus, PackingType,Prisma } from '../../prisma/generated';
-import { CreateBoxInput } from '../../types/boxTypes';
+import { prisma } from "../../prisma/client";
+import { BoxStatus, PackingType, Prisma } from "../../prisma/generated";
+import { CreateBoxInput } from "../../types/boxTypes";
 
 import QRCode from "qrcode";
 
@@ -9,8 +9,26 @@ import path from "path";
 // import htmlPdfNode from "html-pdf-node";
 import puppeteer from "puppeteer";
 
-import { validationResponse } from '../../../src/utils/validationResponse';
-import { generateSignedUrl, uploadPdfAndGetSignedUrl, uploadPdfToWasabi } from '../../../src/utils/wasabiClient';
+import { validationResponse } from "../../../src/utils/validationResponse";
+
+const getPuppeteerOptions = () => {
+  const options: any = {
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  };
+
+  const macChromePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+  if (fs.existsSync(macChromePath)) {
+    options.executablePath = macChromePath;
+  }
+
+  return options;
+};
+import {
+  generateSignedUrl,
+  uploadPdfAndGetSignedUrl,
+  uploadPdfToWasabi,
+} from "../../../src/utils/wasabiClient";
 
 // ─── Output directory ─────────────────────────────────────────────────────────
 const PDF_OUTPUT_DIR = path.join(process.cwd(), "public", "pdfs", "boxes");
@@ -20,9 +38,7 @@ if (!fs.existsSync(PDF_OUTPUT_DIR)) {
   fs.mkdirSync(PDF_OUTPUT_DIR, { recursive: true });
 }
 
-export const createBox = async (
-  data: CreateBoxInput
-) => {
+export const createBox = async (data: CreateBoxInput) => {
   const {
     vendor_id,
     project_id,
@@ -33,66 +49,61 @@ export const createBox = async (
     ...boxData
   } = data;
 
-  const existingBox =
-    await prisma.boxMaster.findFirst({
-      where: {
-        vendor_id: Number(vendor_id),
-        project_id: Number(project_id),
-        lead_id: lead_id ? Number(lead_id) : null,
-        box_name: box_name.trim(),
-        is_deleted: false,
-      },
-    });
+  const existingBox = await prisma.boxMaster.findFirst({
+    where: {
+      vendor_id: Number(vendor_id),
+      project_id: Number(project_id),
+      lead_id: lead_id ? Number(lead_id) : null,
+      box_name: box_name.trim(),
+      is_deleted: false,
+    },
+  });
 
   if (existingBox) {
     throw new Error("Box already exists");
   }
 
-  return await prisma.$transaction(
-    async (tx) => {
-      const createdBox =
-        await tx.boxMaster.create({
-          data: {
-            ...boxData,
-            vendor_id: Number(vendor_id),
-            project_id: Number(project_id),
-            lead_id: lead_id ? Number(lead_id) : null,
-            box_name: box_name.trim(),
-            created_by: created_by,
-          },
-
-          select: {
-            id: true,
-            box_name: true,
-            project_id: true,
-            vendor_id: true,
-            lead_id: true,
-            box_status: true,
-          },
-        });
-
-      await saveBoxInfoValuesTx({
-        tx,
-        box_id: createdBox.id,
-        project_id: Number(project_id),
+  return await prisma.$transaction(async (tx) => {
+    const createdBox = await tx.boxMaster.create({
+      data: {
+        ...boxData,
         vendor_id: Number(vendor_id),
-        values: box_info_values,
-        user_id: created_by,
-      });
+        project_id: Number(project_id),
+        lead_id: lead_id ? Number(lead_id) : null,
+        box_name: box_name.trim(),
+        created_by: created_by,
+      },
 
-      const boxInfoValues =
-        await getBoxInfoValuesFormatted(
-          createdBox.id,
-          Number(project_id),
-          Number(vendor_id)
-        );
+      select: {
+        id: true,
+        box_name: true,
+        project_id: true,
+        vendor_id: true,
+        lead_id: true,
+        box_status: true,
+      },
+    });
 
-      return {
-        ...createdBox,
-        box_info_values: boxInfoValues,
-      };
-    }
-  );
+    await saveBoxInfoValuesTx({
+      tx,
+      box_id: createdBox.id,
+      project_id: Number(project_id),
+      vendor_id: Number(vendor_id),
+      values: box_info_values,
+      user_id: created_by,
+    });
+
+    const boxInfoValues = await getBoxInfoValuesFormatted(
+      createdBox.id,
+      Number(project_id),
+      Number(vendor_id),
+    );
+
+    return {
+      ...createdBox,
+      box_info_values: boxInfoValues,
+    };
+  });
 };
 
 export const updateBoxName = async (
@@ -102,87 +113,79 @@ export const updateBoxName = async (
   lead_id: number,
   newBoxName: string,
   box_info_values: BoxInfoValueInput[] = [],
-  updated_by?: number | null
+  updated_by?: number | null,
 ) => {
-  const existingBox =
-    await prisma.boxMaster.findFirst({
-      where: {
-        id,
-        vendor_id,
-        project_id,
-        lead_id,
-        is_deleted: false,
-      },
-    });
+  const existingBox = await prisma.boxMaster.findFirst({
+    where: {
+      id,
+      vendor_id,
+      project_id,
+      lead_id,
+      is_deleted: false,
+    },
+  });
 
   if (!existingBox) {
     throw new Error("Box not found");
   }
 
-  const duplicate =
-    await prisma.boxMaster.findFirst({
+  const duplicate = await prisma.boxMaster.findFirst({
+    where: {
+      vendor_id,
+      project_id,
+      lead_id,
+      box_name: newBoxName.trim(),
+      is_deleted: false,
+      NOT: {
+        id,
+      },
+    },
+  });
+
+  if (duplicate) {
+    throw new Error("Another box with the same name already exists");
+  }
+
+  return await prisma.$transaction(async (tx) => {
+    const updatedBox = await tx.boxMaster.update({
       where: {
-        vendor_id,
-        project_id,
-        lead_id,
+        id,
+      },
+
+      data: {
         box_name: newBoxName.trim(),
-        is_deleted: false,
-        NOT: {
-          id,
-        },
+      },
+
+      select: {
+        id: true,
+        box_name: true,
+        project_id: true,
+        vendor_id: true,
+        lead_id: true,
+        box_status: true,
       },
     });
 
-  if (duplicate) {
-    throw new Error(
-      "Another box with the same name already exists"
+    await saveBoxInfoValuesTx({
+      tx,
+      box_id: id,
+      project_id,
+      vendor_id,
+      values: box_info_values,
+      user_id: updated_by,
+    });
+
+    const boxInfoValues = await getBoxInfoValuesFormatted(
+      id,
+      project_id,
+      vendor_id,
     );
-  }
 
-  return await prisma.$transaction(
-    async (tx) => {
-      const updatedBox =
-        await tx.boxMaster.update({
-          where: {
-            id,
-          },
-
-          data: {
-            box_name: newBoxName.trim(),
-          },
-
-          select: {
-            id: true,
-            box_name: true,
-            project_id: true,
-            vendor_id: true,
-            lead_id: true,
-            box_status: true,
-          },
-        });
-
-      await saveBoxInfoValuesTx({
-        tx,
-        box_id: id,
-        project_id,
-        vendor_id,
-        values: box_info_values,
-        user_id: updated_by,
-      });
-
-      const boxInfoValues =
-        await getBoxInfoValuesFormatted(
-          id,
-          project_id,
-          vendor_id
-        );
-
-      return {
-        ...updatedBox,
-        box_info_values: boxInfoValues,
-      };
-    }
-  );
+    return {
+      ...updatedBox,
+      box_info_values: boxInfoValues,
+    };
+  });
 };
 
 export const getAllBoxes = async () => {
@@ -200,100 +203,77 @@ export const getAllBoxes = async () => {
 
 export const getBoxesByVendorAndProject_old = async (
   vendorId: number,
-  projectId: number
+  projectId: number,
 ) => {
-  const boxes =
-    await prisma.boxMaster.findMany({
-      where: {
-        vendor_id: vendorId,
-        project_id: projectId,
-        is_deleted: false,
-      },
+  const boxes = await prisma.boxMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      project_id: projectId,
+      is_deleted: false,
+    },
 
-      include: {
-        details: true,
+    include: {
+      details: true,
 
-        box_info_values: {
-          include: {
-            field: {
-              select: {
-                id: true,
-                field_label: true,
-                field_key: true,
-                field_type: true,
-                is_required: true,
-                sort_order: true,
-                active: true,
-              },
+      box_info_values: {
+        include: {
+          field: {
+            select: {
+              id: true,
+              field_label: true,
+              field_key: true,
+              field_type: true,
+              is_required: true,
+              sort_order: true,
+              active: true,
             },
           },
         },
       },
+    },
 
-      orderBy: {
-        created_date: "asc",
-      },
-    });
+    orderBy: {
+      created_date: "asc",
+    },
+  });
 
-  const enriched =
-    await Promise.all(
-      boxes.map(
-        async (box) => {
-          const items_count =
-            await prisma.cutListMachineMapping.count({
-              where: {
-                box_id: box.id,
-                project_id: projectId,
-                vendor_id: vendorId,
-                actual_in_at: {
-                  not: null,
-                },
-              },
-            });
+  const enriched = await Promise.all(
+    boxes.map(async (box) => {
+      const items_count = await prisma.cutListMachineMapping.count({
+        where: {
+          box_id: box.id,
+          project_id: projectId,
+          vendor_id: vendorId,
+          actual_in_at: {
+            not: null,
+          },
+        },
+      });
 
-          const boxInfoValues =
-            box.box_info_values
-              .filter(
-                (item) =>
-                  item.field?.active
-              )
-              .sort(
-                (a, b) =>
-                  Number(
-                    a.field.sort_order || 0
-                  ) -
-                  Number(
-                    b.field.sort_order || 0
-                  )
-              )
-              .map(
-                (item) => ({
-                  id: item.id,
-                  field_id: item.field_id,
-                  field_label:
-                    item.field.field_label,
-                  field_key:
-                    item.field.field_key,
-                  field_type:
-                    item.field.field_type,
-                  is_required:
-                    item.field.is_required,
-                  sort_order:
-                    item.field.sort_order,
-                  field_value:
-                    item.field_value || "",
-                })
-              );
+      const boxInfoValues = box.box_info_values
+        .filter((item) => item.field?.active)
+        .sort(
+          (a, b) =>
+            Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
+        )
+        .map((item) => ({
+          id: item.id,
+          field_id: item.field_id,
+          field_label: item.field.field_label,
+          field_key: item.field.field_key,
+          field_type: item.field.field_type,
+          is_required: item.field.is_required,
+          sort_order: item.field.sort_order,
+          field_value: item.field_value || "",
+        }));
 
-          return {
-            ...box,
-            items_count,
-            box_info_values:
-              boxInfoValues,
-          };
-        }
-      )
-    );
+      return {
+        ...box,
+        items_count,
+        box_info_values: boxInfoValues,
+      };
+    }),
+  );
 
   return enriched;
 };
@@ -451,8 +431,7 @@ export const getBoxesByVendorAndProject = async (
       .filter((item) => item.field?.active)
       .sort(
         (a, b) =>
-          Number(a.field.sort_order || 0) -
-          Number(b.field.sort_order || 0),
+          Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
       )
       .map((item) => ({
         id: item.id,
@@ -577,14 +556,7 @@ export const getBoxesByVendorAndProjectV1 = async (
     box_status: unpackedStatusWhere,
   } as Prisma.BoxMasterWhereInput;
 
-  const [
-    boxes,
-    total,
-    allCount,
-    packedCount,
-    unpackedCount,
-    projectTotal,
-  ] =
+  const [boxes, total, allCount, packedCount, unpackedCount, projectTotal] =
     await Promise.all([
       prisma.boxMaster.findMany({
         where: filteredWhere,
@@ -751,13 +723,11 @@ export const getBoxesByVendorAndProjectV1 = async (
   };
 };
 
-
-
 export const getBoxDetailsWithItems = async (
   vendorId: number,
   projectId: number,
   clientId: number,
-  boxId: number
+  boxId: number,
 ) => {
   const vendor = await prisma.vendorMaster.findUnique({
     where: { id: vendorId },
@@ -807,7 +777,7 @@ export const getBoxDetailsWithItems = async (
         ...item,
         projectItem,
       };
-    })
+    }),
   );
 
   return {
@@ -821,7 +791,7 @@ export const getBoxDetailsWithItems = async (
 export const getAllBoxesWithItemCountService = async (
   vendorId: number,
   projectId: number,
-  clientId: number
+  clientId: number,
 ) => {
   const [vendor, project] = await Promise.all([
     prisma.vendorMaster.findUnique({
@@ -836,7 +806,7 @@ export const getAllBoxesWithItemCountService = async (
   ]);
 
   if (!vendor || !project) {
-    throw new Error('Vendor or Project not found');
+    throw new Error("Vendor or Project not found");
   }
 
   const boxes = await prisma.boxMaster.findMany({
@@ -865,7 +835,7 @@ export const getAllBoxesWithItemCountService = async (
         box_name: box.box_name,
         total_items: items.length,
       };
-    })
+    }),
   );
 
   return {
@@ -879,7 +849,7 @@ export const getAllBoxesWithItemCountService = async (
 export const updateBoxStatus = async (
   boxId: number,
   newStatus: BoxStatus,
-  user_id: number
+  user_id: number,
 ) => {
   const box = await prisma.boxMaster.findFirst({
     where: {
@@ -889,7 +859,7 @@ export const updateBoxStatus = async (
   });
 
   if (!box) {
-    throw new Error('Box not found or is deleted');
+    throw new Error("Box not found or is deleted");
   }
   const now = new Date();
 
@@ -899,9 +869,7 @@ export const updateBoxStatus = async (
   });
 };
 
-
-const sanitizeFileName = (name: string) =>
-  name.replace(/[^a-zA-Z0-9-_]/g, "_");
+const sanitizeFileName = (name: string) => name.replace(/[^a-zA-Z0-9-_]/g, "_");
 
 const escapeHtml = (str: string) =>
   str
@@ -912,11 +880,10 @@ const escapeHtml = (str: string) =>
 
 // ─── Main service ─────────────────────────────────────────────────────────────
 
-
 export const generateBoxPdfServiceWeb = async (
   box_id: number,
   project_id: string,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   try {
     /*
@@ -925,26 +892,20 @@ export const generateBoxPdfServiceWeb = async (
     |--------------------------------------------------------------------------
     */
 
-    const project =
-      await prisma.projectMaster.findFirst({
-        where: {
-          unique_project_id:
-            project_id,
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id: project_id,
 
-          vendor_id,
-        },
+        vendor_id,
+      },
 
-        select: {
-          id:
-            true,
-        },
-      });
+      select: {
+        id: true,
+      },
+    });
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     /*
@@ -953,26 +914,15 @@ export const generateBoxPdfServiceWeb = async (
     |--------------------------------------------------------------------------
     */
 
-    return await generateBoxPdfService(
-      box_id,
-      project.id,
-      vendor_id
-    );
+    return await generateBoxPdfService(box_id, project.id, vendor_id);
   } catch (error) {
-    console.error(
-      "generateBoxPdfServiceWeb:",
-      error
-    );
+    console.error("generateBoxPdfServiceWeb:", error);
 
-    return validationResponse(
-      0,
-      "Failed to generate box PDF"
-    );
+    return validationResponse(0, "Failed to generate box PDF");
   }
 };
 
 /* Vector */
-
 
 // const fontToBase64 = (relativePath: string) => {
 //   const fontPath = path.resolve(process.cwd(), relativePath);
@@ -984,9 +934,6 @@ export const generateBoxPdfServiceWeb = async (
 //   return fs.readFileSync(fontPath).toString("base64");
 // };
 
-
-
-
 const fontToBase64 = (fontPath: string): string => {
   if (!fs.existsSync(fontPath)) {
     throw new Error(`Font file not found: ${fontPath}`);
@@ -995,59 +942,43 @@ const fontToBase64 = (fontPath: string): string => {
   return fs.readFileSync(fontPath).toString("base64");
 };
 
-
-
-
 export const generateBoxPdfService = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-
-
-
   const calibriRegularPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-regular.ttf"
+    "../../../assets/fonts/calibri/calibri-regular.ttf",
   );
 
   const calibriBoldPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-bold.ttf"
+    "../../../assets/fonts/calibri/calibri-bold.ttf",
   );
 
   const calibriItalicPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-italic.ttf",
   );
 
   const calibriBoldItalicPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-bold-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-bold-italic.ttf",
   );
 
   console.log("Calibri font path:", calibriRegularPath);
 
   const calibriRegular = fontToBase64(calibriRegularPath);
 
-  const calibriBold = fontToBase64(
-    calibriBoldPath
-  );
+  const calibriBold = fontToBase64(calibriBoldPath);
 
-  const calibriItalic = fontToBase64(
-    calibriItalicPath
-  );
+  const calibriItalic = fontToBase64(calibriItalicPath);
 
-  const calibriBoldItalic = fontToBase64(
-    calibriBoldItalicPath
-  );
-
+  const calibriBoldItalic = fontToBase64(calibriBoldItalicPath);
 
   // return generateBoxHtmlService(box_id,project_id,vendor_id);
-  const tempDir = path.join(
-    process.cwd(),
-    "tmp"
-  );
+  const tempDir = path.join(process.cwd(), "tmp");
 
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, {
@@ -1055,8 +986,7 @@ export const generateBoxPdfService = async (
     });
   }
 
-  let tempFilePath: string | null =
-    null;
+  let tempFilePath: string | null = null;
 
   // const hardcodedCompany = {
   //   tollFreeNo: "18002674949",
@@ -1070,22 +1000,13 @@ export const generateBoxPdfService = async (
   //   fallbackName: "ADARSH INFRAINTERIO",
   // };
 
-  const toNumber = (
-    value: any
-  ) => {
-    const numberValue = Number(
-      String(value ?? "")
-        .replace(/[^0-9.]/g, "")
-    );
+  const toNumber = (value: any) => {
+    const numberValue = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
 
-    return Number.isFinite(numberValue)
-      ? numberValue
-      : 0;
+    return Number.isFinite(numberValue) ? numberValue : 0;
   };
 
-  const formatDimension = (
-    value: any
-  ) => {
+  const formatDimension = (value: any) => {
     const numberValue = toNumber(value);
 
     if (!numberValue) {
@@ -1097,22 +1018,15 @@ export const generateBoxPdfService = async (
       : numberValue.toFixed(2);
   };
 
-  const formatQuantity = (
-    value: number
-  ) => {
-    return String(value || 0).padStart(
-      2,
-      "0"
-    );
+  const formatQuantity = (value: number) => {
+    return String(value || 0).padStart(2, "0");
   };
 
-  const getItemSizeText = (
-    item: {
-      length?: any;
-      width?: any;
-      thickness?: any;
-    }
-  ) => {
+  const getItemSizeText = (item: {
+    length?: any;
+    width?: any;
+    thickness?: any;
+  }) => {
     const length = toNumber(item.length);
     const width = toNumber(item.width);
 
@@ -1127,23 +1041,14 @@ export const generateBoxPdfService = async (
     items: {
       length?: any;
       width?: any;
-    }[]
+    }[],
   ) => {
-    const maxLength =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.length)
-        )
-      );
+    const maxLength = Math.max(
+      0,
+      ...items.map((item) => toNumber(item.length)),
+    );
 
-    const maxWidth =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.width)
-        )
-      );
+    const maxWidth = Math.max(0, ...items.map((item) => toNumber(item.width)));
 
     if (!maxLength || !maxWidth) {
       return "2400 x 1200 mm";
@@ -1158,33 +1063,21 @@ export const generateBoxPdfService = async (
       field_key: string;
       field_value: string;
     }[],
-    keywords: string[]
+    keywords: string[],
   ) => {
-    const normalizedKeywords =
-      keywords.map((keyword) =>
-        keyword.toLowerCase()
+    const normalizedKeywords = keywords.map((keyword) => keyword.toLowerCase());
+
+    const matchedValue = values.find((item) => {
+      const label = String(item.field_label || "").toLowerCase();
+
+      const key = String(item.field_key || "").toLowerCase();
+
+      return normalizedKeywords.some(
+        (keyword) => label.includes(keyword) || key.includes(keyword),
       );
+    });
 
-    const matchedValue =
-      values.find((item) => {
-        const label =
-          String(item.field_label || "")
-            .toLowerCase();
-
-        const key =
-          String(item.field_key || "")
-            .toLowerCase();
-
-        return normalizedKeywords.some(
-          (keyword) =>
-            label.includes(keyword) ||
-            key.includes(keyword)
-        );
-      });
-
-    return matchedValue
-      ?.field_value
-      ?.trim() || "";
+    return matchedValue?.field_value?.trim() || "";
   };
 
   const resolveProductName = (
@@ -1192,10 +1085,9 @@ export const generateBoxPdfService = async (
       category_name?: string | null;
       group_name?: string | null;
       item_name?: string | null;
-    }[]
+    }[],
   ) => {
-    const firstItem =
-      items.find(Boolean);
+    const firstItem = items.find(Boolean);
 
     return (
       firstItem?.category_name ||
@@ -1212,141 +1104,135 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [
-      project,
-      box,
-      vendor,
-      packagingMachine,
-      projectBoxes,
-    ] = await Promise.all([
-      prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
-          vendor_id,
-        },
-
-        select: {
-          id: true,
-          project_name: true,
-          packing_type: true,
-          lead_id: true,
-          order_no: true,
-          client_name: true,
-          client_address: true,
-          client_contact_no: true,
-        },
-      }),
-
-      prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
-
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          created_date: true,
-          packed_at: true,
-          packed_by: true,
-
-          packedByUser: {
-            select: {
-              id: true,
-              user_name: true,
-            },
+    const [project, box, vendor, packagingMachine, projectBoxes] =
+      await Promise.all([
+        prisma.projectMaster.findFirst({
+          where: {
+            id: project_id,
+            vendor_id,
           },
 
-          box_info_values: {
-            select: {
-              id: true,
-              field_id: true,
-              field_value: true,
+          select: {
+            id: true,
+            project_name: true,
+            packing_type: true,
+            lead_id: true,
+            order_no: true,
+            client_name: true,
+            client_address: true,
+            client_contact_no: true,
+          },
+        }),
 
-              field: {
-                select: {
-                  id: true,
-                  field_label: true,
-                  field_key: true,
-                  field_type: true,
-                  is_required: true,
-                  sort_order: true,
-                  active: true,
+        prisma.boxMaster.findFirst({
+          where: {
+            id: box_id,
+            project_id,
+            vendor_id,
+            is_deleted: false,
+          },
+
+          select: {
+            id: true,
+            box_name: true,
+            box_status: true,
+            created_date: true,
+            packed_at: true,
+            packed_by: true,
+
+            packedByUser: {
+              select: {
+                id: true,
+                user_name: true,
+              },
+            },
+
+            box_info_values: {
+              select: {
+                id: true,
+                field_id: true,
+                field_value: true,
+
+                field: {
+                  select: {
+                    id: true,
+                    field_label: true,
+                    field_key: true,
+                    field_type: true,
+                    is_required: true,
+                    sort_order: true,
+                    active: true,
+                  },
                 },
               },
             },
           },
-        },
-      }),
+        }),
 
-      prisma.vendorMaster.findUnique({
-        where: {
-          id: vendor_id,
-        },
+        prisma.vendorMaster.findUnique({
+          where: {
+            id: vendor_id,
+          },
 
-        select: {
-          vendor_name: true,
-          primary_contact_number: true,
-          primary_contact_email: true,
-          logo: true,
-          gst_no: true,
-          toll_free_no: true,
-          website_link: true,
-          tag_line: true,
-          address: true,
-          pincode: true,
-          city: true,
-          state: {
-            select: {
-              id: true,
-              name: true,
+          select: {
+            vendor_name: true,
+            primary_contact_number: true,
+            primary_contact_email: true,
+            logo: true,
+            gst_no: true,
+            toll_free_no: true,
+            website_link: true,
+            tag_line: true,
+            address: true,
+            pincode: true,
+            city: true,
+            state: {
+              select: {
+                id: true,
+                name: true,
+              },
             },
           },
+        }),
 
-        },
-      }),
-
-      prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
-
-        select: {
-          id: true,
-        },
-
-        orderBy: {
-          id: "asc",
-        },
-      }),
-
-      prisma.boxMaster.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
-
-        select: {
-          id: true,
-          created_date: true,
-        },
-
-        orderBy: [
-          {
-            created_date: "asc",
+        prisma.machineMaster.findFirst({
+          where: {
+            vendor_id,
+            machine_type_id: 18,
           },
 
-          {
+          select: {
+            id: true,
+          },
+
+          orderBy: {
             id: "asc",
           },
-        ],
-      }),
-    ]);
+        }),
+
+        prisma.boxMaster.findMany({
+          where: {
+            project_id,
+            vendor_id,
+            is_deleted: false,
+          },
+
+          select: {
+            id: true,
+            created_date: true,
+          },
+
+          orderBy: [
+            {
+              created_date: "asc",
+            },
+
+            {
+              id: "asc",
+            },
+          ],
+        }),
+      ]);
 
     /*
     |--------------------------------------------------------------------------
@@ -1355,35 +1241,22 @@ export const generateBoxPdfService = async (
     */
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
     if (!vendor) {
-      return validationResponse(
-        0,
-        "Vendor not found"
-      );
+      return validationResponse(0, "Vendor not found");
     }
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
-    const totalBoxes =
-      projectBoxes.length;
+    const totalBoxes = projectBoxes.length;
 
     /*
     |--------------------------------------------------------------------------
@@ -1391,35 +1264,22 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxInfoValues =
-      box.box_info_values
-        .filter(
-          (item) =>
-            item.field &&
-            item.field.active
-        )
-        .sort(
-          (
-            a,
-            b
-          ) =>
-            Number(
-              a.field.sort_order || 0
-            ) -
-            Number(
-              b.field.sort_order || 0
-            )
-        )
-        .map((item) => ({
-          id: item.id,
-          field_id: item.field_id,
-          field_label: item.field.field_label,
-          field_key: item.field.field_key,
-          field_type: item.field.field_type,
-          is_required: item.field.is_required,
-          sort_order: item.field.sort_order,
-          field_value: item.field_value || "",
-        }));
+    const boxInfoValues = box.box_info_values
+      .filter((item) => item.field && item.field.active)
+      .sort(
+        (a, b) =>
+          Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
+      )
+      .map((item) => ({
+        id: item.id,
+        field_id: item.field_id,
+        field_label: item.field.field_label,
+        field_key: item.field.field_key,
+        field_type: item.field.field_type,
+        is_required: item.field.is_required,
+        sort_order: item.field.sort_order,
+        field_value: item.field_value || "",
+      }));
 
     /*
     |--------------------------------------------------------------------------
@@ -1430,35 +1290,25 @@ export const generateBoxPdfService = async (
     let logoUrl = "";
     let embeddedLogoUrl = "";
 
-
     const hardcodedCompany = {
       tollFreeNo: vendor.toll_free_no,
       email: vendor.primary_contact_email,
       website: vendor.website_link,
       addressLine1: vendor.address,
       addressLine2: vendor.city,
-      addressLine3: vendor.pincode + ' ' + vendor.state?.name,
+      addressLine3: vendor.pincode + " " + vendor.state?.name,
       gst: vendor.gst_no,
       tagline: vendor.tag_line,
-      fallbackName: vendor.vendor_name
+      fallbackName: vendor.vendor_name,
     };
 
     if (vendor.logo) {
       try {
-        logoUrl =
-          await generateSignedUrl(
-            vendor.logo
-          );
+        logoUrl = await generateSignedUrl(vendor.logo);
 
-        embeddedLogoUrl =
-          await fetchImageAsDataUrl(
-            logoUrl
-          );
+        embeddedLogoUrl = await fetchImageAsDataUrl(logoUrl);
       } catch (error) {
-        console.error(
-          "Error generating logo signed URL:",
-          error
-        );
+        console.error("Error generating logo signed URL:", error);
 
         embeddedLogoUrl = "";
       }
@@ -1470,9 +1320,8 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const lead =
-      project.lead_id
-        ? await prisma.leadMaster.findUnique({
+    const lead = project.lead_id
+      ? await prisma.leadMaster.findUnique({
           where: {
             id: project.lead_id,
           },
@@ -1485,7 +1334,7 @@ export const generateBoxPdfService = async (
             site_address: true,
           },
         })
-        : null;
+      : null;
 
     /*
     |--------------------------------------------------------------------------
@@ -1495,27 +1344,16 @@ export const generateBoxPdfService = async (
 
     const clientName =
       project.client_name ||
-      (
-        lead
-          ? `${lead.firstname || ""} ${lead.lastname || ""
-            }`.trim()
-          : ""
-      ) ||
+      (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
     const clientContact =
-      project.client_contact_no ||
-      lead?.contact_no ||
-      "N/A";
+      project.client_contact_no || lead?.contact_no || "N/A";
 
     const deliveryAddress =
-      project.client_address ||
-      lead?.site_address ||
-      "N/A";
+      project.client_address || lead?.site_address || "N/A";
 
-    const orderNumber =
-      project.order_no ||
-      "N/A";
+    const orderNumber = project.order_no || "N/A";
 
     /*
     |--------------------------------------------------------------------------
@@ -1523,74 +1361,70 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [
-      mappingRows,
-      allBoxGroupMappings,
-    ] =
-      await Promise.all([
-        prisma.cutListMachineMapping.findMany({
-          where: {
-            box_id,
-            project_id,
-            vendor_id,
-            machine_id: packagingMachine.id,
-            expected_in: true,
-          },
+    const [mappingRows, allBoxGroupMappings] = await Promise.all([
+      prisma.cutListMachineMapping.findMany({
+        where: {
+          box_id,
+          project_id,
+          vendor_id,
+          machine_id: packagingMachine.id,
+          expected_in: true,
+        },
 
-          select: {
-            id: true,
-            qty: true,
+        select: {
+          id: true,
+          qty: true,
 
-            cut_list: {
-              select: {
-                id: true,
-                item_name: true,
-                category_name: true,
-                group_name: true,
-                unique_code: true,
-                material_details: true,
-                weight: true,
-                qty: true,
-                length: true,
-                width: true,
-                thickness: true,
-              },
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              category_name: true,
+              group_name: true,
+              unique_code: true,
+              material_details: true,
+              weight: true,
+              qty: true,
+              length: true,
+              width: true,
+              thickness: true,
             },
           },
+        },
 
-          orderBy: {
-            created_at: "asc",
+        orderBy: {
+          created_at: "asc",
+        },
+      }),
+
+      prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          machine_id: packagingMachine.id,
+          expected_in: true,
+
+          box_id: {
+            not: null,
           },
-        }),
+        },
 
-        prisma.cutListMachineMapping.findMany({
-          where: {
-            project_id,
-            vendor_id,
-            machine_id: packagingMachine.id,
-            expected_in: true,
+        select: {
+          id: true,
+          box_id: true,
 
-            box_id: {
-              not: null,
+          cut_list: {
+            select: {
+              group_name: true,
             },
           },
+        },
 
-          select: {
-            id: true,
-            box_id: true,
-
-            cut_list: {
-              select: {
-                group_name: true,
-              },
-            },
-          },
-
-          orderBy: {
-            created_at: "asc",
-          },
-        }),
-      ]);
+        orderBy: {
+          created_at: "asc",
+        },
+      }),
+    ]);
 
     /*
     |--------------------------------------------------------------------------
@@ -1598,118 +1432,77 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const itemMap =
-      new Map<
-        number,
-        {
-          id: number;
-          item_name: string;
-          category_name: string | null;
-          group_name: string | null;
-          unique_code: string | null;
-          material_details: string | null;
-          length: any;
-          width: any;
-          thickness: any;
-          unit_weight: number;
-          quantity: number;
-          total_weight: number;
-        }
-      >();
+    const itemMap = new Map<
+      number,
+      {
+        id: number;
+        item_name: string;
+        category_name: string | null;
+        group_name: string | null;
+        unique_code: string | null;
+        material_details: string | null;
+        length: any;
+        width: any;
+        thickness: any;
+        unit_weight: number;
+        quantity: number;
+        total_weight: number;
+      }
+    >();
 
-      console.log("mappingRows",mappingRows);
+    console.log("mappingRows", mappingRows);
 
     for (const mapping of mappingRows) {
-      const cutList =
-        mapping.cut_list;
+      const cutList = mapping.cut_list;
 
       if (!cutList) {
         continue;
       }
 
-      const cutListWeight =
-        Number(
-          cutList.weight || 0
-        );
+      const cutListWeight = Number(cutList.weight || 0);
 
-      const cutListQuantity =
-        Number(
-          cutList.qty || 0
-        );
+      const cutListQuantity = Number(cutList.qty || 0);
 
       const unitWeight =
-        cutListQuantity > 0
-          ? cutListWeight /
-            cutListQuantity
-          : 0;
+        cutListQuantity > 0 ? cutListWeight / cutListQuantity : 0;
 
-      const mappingQuantityValue =
-        Number(
-          mapping.qty || 0
-        );
+      const mappingQuantityValue = Number(mapping.qty || 0);
 
       const mappingQuantity =
-        Number.isFinite(
-          mappingQuantityValue
-        ) &&
-        mappingQuantityValue > 0
+        Number.isFinite(mappingQuantityValue) && mappingQuantityValue > 0
           ? mappingQuantityValue
           : 0;
 
-      const existingItem =
-        itemMap.get(
-          cutList.id
-        );
+      const existingItem = itemMap.get(cutList.id);
 
       if (existingItem) {
-        existingItem.quantity +=
-          mappingQuantity;
-        existingItem.total_weight =
-          unitWeight *
-          existingItem.quantity;
+        existingItem.quantity += mappingQuantity;
+        existingItem.total_weight = unitWeight * existingItem.quantity;
       } else {
-        itemMap.set(
-          cutList.id,
-          {
-            id: cutList.id,
-            item_name: cutList.item_name,
-            category_name: cutList.category_name,
-            group_name: cutList.group_name,
-            unique_code: cutList.unique_code,
-            material_details: cutList.material_details,
-            length: cutList.length,
-            width: cutList.width,
-            thickness: cutList.thickness,
-            unit_weight: unitWeight,
-            quantity: mappingQuantity,
-            total_weight:
-              unitWeight *
-              mappingQuantity,
-          }
-        );
+        itemMap.set(cutList.id, {
+          id: cutList.id,
+          item_name: cutList.item_name,
+          category_name: cutList.category_name,
+          group_name: cutList.group_name,
+          unique_code: cutList.unique_code,
+          material_details: cutList.material_details,
+          length: cutList.length,
+          width: cutList.width,
+          thickness: cutList.thickness,
+          unit_weight: unitWeight,
+          quantity: mappingQuantity,
+          total_weight: unitWeight * mappingQuantity,
+        });
       }
     }
 
-    const items =
-      Array.from(
-        itemMap.values()
-      ).map((item) => ({
-        ...item,
+    const items = Array.from(itemMap.values()).map((item) => ({
+      ...item,
 
-        unit_weight:
-          Number(
-            item.unit_weight.toFixed(
-              2
-            )
-          ),
+      unit_weight: Number(item.unit_weight.toFixed(2)),
 
-        total_weight:
-          Number(
-            item.total_weight.toFixed(
-              2
-            )
-          ),
-      }));
+      total_weight: Number(item.total_weight.toFixed(2)),
+    }));
 
     /*
     |--------------------------------------------------------------------------
@@ -1717,27 +1510,15 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalQuantity =
-      items.reduce(
-        (
-          total,
-          item
-        ) =>
-          total +
-          item.quantity,
-        0
-      );
+    const totalQuantity = items.reduce(
+      (total, item) => total + item.quantity,
+      0,
+    );
 
-    const totalWeight =
-      items.reduce(
-        (
-          total,
-          item
-        ) =>
-          total +
-          item.total_weight,
-        0
-      );
+    const totalWeight = items.reduce(
+      (total, item) => total + item.total_weight,
+      0,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -1745,48 +1526,21 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const groupedItem =
-      items.find((item) =>
-        Boolean(
-          item.group_name
-            ?.trim()
-        )
-      );
+    const groupedItem = items.find((item) => Boolean(item.group_name?.trim()));
 
-    const currentBoxGroupName =
-      groupedItem
-        ?.group_name
-        ?.trim() ||
-      null;
+    const currentBoxGroupName = groupedItem?.group_name?.trim() || null;
 
-    const normalizeGroupName = (
-      value:
-        string |
-        null |
-        undefined
-    ) =>
-      value
-        ?.trim()
-        .toLowerCase() ||
-      null;
+    const normalizeGroupName = (value: string | null | undefined) =>
+      value?.trim().toLowerCase() || null;
 
-    const normalizedPackingType =
-      String(
-        project.packing_type ||
-        ""
-      )
-        .trim()
-        .replace(
-          /[\s_-]/g,
-          ""
-        )
-        .toUpperCase();
+    const normalizedPackingType = String(project.packing_type || "")
+      .trim()
+      .replace(/[\s_-]/g, "")
+      .toUpperCase();
 
     const isGroupWisePacking =
-      project.packing_type ===
-      PackingType.GROUPWISE ||
-      normalizedPackingType ===
-      "GROUPWISE";
+      project.packing_type === PackingType.GROUPWISE ||
+      normalizedPackingType === "GROUPWISE";
 
     /*
     |--------------------------------------------------------------------------
@@ -1796,101 +1550,55 @@ export const generateBoxPdfService = async (
 
     let currentProductBoxNumber = 1;
 
-    let productBoxTotal =
-      Math.max(
-        totalBoxes,
-        1
-      );
+    let productBoxTotal = Math.max(totalBoxes, 1);
 
-    if (
-      isGroupWisePacking
-    ) {
-      const currentGroupKey =
-        normalizeGroupName(
-          currentBoxGroupName
-        );
+    if (isGroupWisePacking) {
+      const currentGroupKey = normalizeGroupName(currentBoxGroupName);
 
       if (currentGroupKey) {
-        const currentGroupBoxIds =
-          new Set<number>();
+        const currentGroupBoxIds = new Set<number>();
 
         for (const mapping of allBoxGroupMappings) {
           if (!mapping.box_id) {
             continue;
           }
 
-          const mappingGroupKey =
-            normalizeGroupName(
-              mapping
-                .cut_list
-                ?.group_name
-            );
+          const mappingGroupKey = normalizeGroupName(
+            mapping.cut_list?.group_name,
+          );
 
-          if (
-            mappingGroupKey ===
-            currentGroupKey
-          ) {
-            currentGroupBoxIds.add(
-              mapping.box_id
-            );
+          if (mappingGroupKey === currentGroupKey) {
+            currentGroupBoxIds.add(mapping.box_id);
           }
         }
 
-        const currentGroupBoxes =
-          projectBoxes.filter(
-            (
-              projectBox
-            ) =>
-              currentGroupBoxIds.has(
-                projectBox.id
-              )
-          );
+        const currentGroupBoxes = projectBoxes.filter((projectBox) =>
+          currentGroupBoxIds.has(projectBox.id),
+        );
 
-        const currentGroupBoxIndex =
-          currentGroupBoxes.findIndex(
-            (
-              projectBox
-            ) =>
-              projectBox.id === box.id
-          );
+        const currentGroupBoxIndex = currentGroupBoxes.findIndex(
+          (projectBox) => projectBox.id === box.id,
+        );
 
         currentProductBoxNumber =
-          currentGroupBoxIndex >= 0
-            ? currentGroupBoxIndex + 1
-            : 1;
+          currentGroupBoxIndex >= 0 ? currentGroupBoxIndex + 1 : 1;
 
-        productBoxTotal =
-          Math.max(
-            currentGroupBoxes.length,
-            1
-          );
+        productBoxTotal = Math.max(currentGroupBoxes.length, 1);
       } else {
         currentProductBoxNumber = 1;
         productBoxTotal = 1;
       }
     } else {
-      const currentBoxIndex =
-        projectBoxes.findIndex(
-          (
-            projectBox
-          ) =>
-            projectBox.id === box.id
-        );
+      const currentBoxIndex = projectBoxes.findIndex(
+        (projectBox) => projectBox.id === box.id,
+      );
 
-      currentProductBoxNumber =
-        currentBoxIndex >= 0
-          ? currentBoxIndex + 1
-          : 1;
+      currentProductBoxNumber = currentBoxIndex >= 0 ? currentBoxIndex + 1 : 1;
 
-      productBoxTotal =
-        Math.max(
-          totalBoxes,
-          1
-        );
+      productBoxTotal = Math.max(totalBoxes, 1);
     }
 
-    const productBoxCount =
-      `${currentProductBoxNumber} of ${productBoxTotal}`;
+    const productBoxCount = `${currentProductBoxNumber} of ${productBoxTotal}`;
 
     /*
     |--------------------------------------------------------------------------
@@ -1898,41 +1606,23 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packageDate =
-      formatReportDate(
-        box.packed_at ||
-        box.created_date
-      );
+    const packageDate = formatReportDate(box.packed_at || box.created_date);
 
-    const packageSize =
-      getPackageSizeText(
-        items
-      );
+    const packageSize = getPackageSizeText(items);
 
-    const productName =
-      resolveProductName(
-        items
-      );
+    const productName = resolveProductName(items);
 
     const floorName =
-      findBoxInfoValue(
-        boxInfoValues,
-        [
-          "floor",
-          "floor_name",
-          "floor name",
-        ]
-      ) || "-";
+      findBoxInfoValue(boxInfoValues, ["floor", "floor_name", "floor name"]) ||
+      "-";
 
     const itemNo =
       Array.from(
         new Set(
           items
-            .map((item) =>
-              String(item.material_details || "").trim()
-            )
-            .filter(Boolean)
-        )
+            .map((item) => String(item.material_details || "").trim())
+            .filter(Boolean),
+        ),
       ).join(", ") || "-";
 
     /*
@@ -1941,23 +1631,18 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const qrValue =
-      `vendor:${vendor_id},project:${project_id},box:${box_id}`;
+    const qrValue = `vendor:${vendor_id},project:${project_id},box:${box_id}`;
 
-    const qrImage =
-      await QRCode.toDataURL(
-        qrValue,
-        {
-          width: 400,
-          margin: 1,
-          errorCorrectionLevel: "M",
+    const qrImage = await QRCode.toDataURL(qrValue, {
+      width: 400,
+      margin: 1,
+      errorCorrectionLevel: "M",
 
-          color: {
-            dark: "#000000",
-            light: "#FFFFFF",
-          },
-        }
-      );
+      color: {
+        dark: "#000000",
+        light: "#FFFFFF",
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -1995,58 +1680,39 @@ export const generateBoxPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const componentRows =
-      items
-        .map(
-          (
-            item
-          ) => `
+    const componentRows = items
+      .map(
+        (item) => `
             <tr>
               <td class="code-cell">
-                ${escapeHtml(
-            item.unique_code ||
-            "-"
-          )}
+                ${escapeHtml(item.unique_code || "-")}
               </td>
 
               <td class="component-cell">
                 <strong>
-                  ${escapeHtml(
-            item.item_name ||
-            "-"
-          )}
+                  ${escapeHtml(item.item_name || "-")}
                 </strong>
 
                 <span>
-                  ${escapeHtml(
-            getItemSizeText(
-              item
-            )
-          )}
+                  ${escapeHtml(getItemSizeText(item))}
                 </span>
               </td>
 
               <td class="qty-cell">
-                ${formatQuantity(
-            item.quantity
-          )}
+                ${formatQuantity(item.quantity)}
               </td>
 
               <td class="unit-cell">
-                ${item.unit_weight.toFixed(
-            2
-          )}
+                ${item.unit_weight.toFixed(2)}
               </td>
 
               <td class="total-cell">
-                ${item.total_weight.toFixed(
-            2
-          )}
+                ${item.total_weight.toFixed(2)}
               </td>
             </tr>
-          `
-        )
-        .join("");
+          `,
+      )
+      .join("");
 
     /*
     |--------------------------------------------------------------------------
@@ -2777,9 +2443,8 @@ color: #111827;
               <td colspan="2" class="company-cell">
                 <span class="company-name">
                   ${escapeHtml(
-      vendor.vendor_name ||
-      hardcodedCompany.fallbackName
-    )}
+                    vendor.vendor_name || hardcodedCompany.fallbackName,
+                  )}
                 </span>
               </td>
             </tr>
@@ -2787,52 +2452,38 @@ color: #111827;
             <tr>
               <td class="address-cell">
                 <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine1 ?? ""
-    )}
+                  ${escapeHtml(hardcodedCompany.addressLine1 ?? "")}
                 </span>
 
                 <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine2 ?? ""
-    )}
+                  ${escapeHtml(hardcodedCompany.addressLine2 ?? "")}
                 </span>
 
                 <span class="address-text">
-                  ${escapeHtml(
-      hardcodedCompany.addressLine3 ?? ""
-    )}
+                  ${escapeHtml(hardcodedCompany.addressLine3 ?? "")}
                 </span>
 
                 <span class="gst-text">
-                  GST: ${escapeHtml(
-      hardcodedCompany.gst ?? ""
-    )}
+                  GST: ${escapeHtml(hardcodedCompany.gst ?? "")}
                 </span>
               </td>
 
               <td class="contact-cell">
                 <span class="contact-text">
                   Toll Free No. :
-                  ${escapeHtml(
-      hardcodedCompany.tollFreeNo ?? ""
-    )}
+                  ${escapeHtml(hardcodedCompany.tollFreeNo ?? "")}
                 </span>
 
                 <span class="contact-text">
                   Email :
                   <span class="email-link">
-                    ${escapeHtml(
-      hardcodedCompany.email
-    )}
+                    ${escapeHtml(hardcodedCompany.email)}
                   </span>
                 </span>
 
                 <span class="contact-text">
                   Website :
-                  ${escapeHtml(
-      hardcodedCompany.website ?? ""
-    )}
+                  ${escapeHtml(hardcodedCompany.website ?? "")}
                 </span>
 
                 <span style="float: right;" class="package-label">
@@ -2874,9 +2525,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      clientName
-    )}
+          ${escapeHtml(clientName)}
         </div>
       </div>
 
@@ -2886,9 +2535,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      clientContact
-    )}
+          ${escapeHtml(clientContact)}
         </div>
       </div>
     </div>
@@ -2903,9 +2550,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      deliveryAddress
-    )}
+          ${escapeHtml(deliveryAddress)}
         </div>
       </div>
 
@@ -2915,9 +2560,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      project.project_name
-    )}
+          ${escapeHtml(project.project_name)}
         </div>
       </div>
     </div>
@@ -2934,9 +2577,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      orderNumber
-    )}
+          ${escapeHtml(orderNumber)}
         </div>
       </div>
 
@@ -2946,9 +2587,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      packageSize
-    )}
+          ${escapeHtml(packageSize)}
         </div>
       </div>
 
@@ -2973,9 +2612,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      floorName
-    )}
+          ${escapeHtml(floorName)}
         </div>
       </div>
 
@@ -2985,9 +2622,7 @@ color: #111827;
         </div>
 
         <div class="field-value">
-          ${escapeHtml(
-      productBoxCount
-    )}
+          ${escapeHtml(productBoxCount)}
         </div>
       </div>
 
@@ -3000,9 +2635,7 @@ color: #111827;
                 </div>
 
                 <div class="field-value filed-value-item-no">
-                  ${escapeHtml(
-            itemNo
-          )}
+                  ${escapeHtml(itemNo)}
                 </div>
               </div>
             `
@@ -3021,9 +2654,7 @@ color: #111827;
             <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
               PRODUCT :
               <span class="project-value">
-                ${escapeHtml(
-          productName
-        )}
+                ${escapeHtml(productName)}
               </span>
             </div>
           `
@@ -3085,8 +2716,9 @@ color: #111827;
       </thead>
 
       <tbody  >
-        ${componentRows ||
-      `
+        ${
+          componentRows ||
+          `
             <tr>
               <td
                 colspan="5"
@@ -3096,7 +2728,7 @@ color: #111827;
               </td>
             </tr>
           `
-      }
+        }
       </tbody>
 
       <tfoot>
@@ -3109,9 +2741,7 @@ color: #111827;
           </td>
 
           <td class="qty-cell">
-            ${formatQuantity(
-        totalQuantity
-      )}
+            ${formatQuantity(totalQuantity)}
           </td>
 
           <td class="unit-cell">
@@ -3119,9 +2749,7 @@ color: #111827;
           </td>
 
           <td class="total-cell">
-            ${totalWeight.toFixed(
-        2
-      )}KG
+            ${totalWeight.toFixed(2)}KG
           </td>
         </tr>
       </tfoot>
@@ -3163,73 +2791,36 @@ color: #111827;
   }
 })();
 </script>
-</body>`
+</body>`,
     );
 
-    return validationResponse(
-      1,
-      "Box print generated successfully",
-      {
-        print_html:
-          printHtml,
+    return validationResponse(1, "Box print generated successfully", {
+      print_html: printHtml,
 
-        box_id:
-          box.id,
+      box_id: box.id,
 
-        packing_type:
-          project.packing_type,
+      packing_type: project.packing_type,
 
-        product_box_count:
-          productBoxCount,
+      product_box_count: productBoxCount,
 
-        group_name:
-          currentBoxGroupName,
+      group_name: currentBoxGroupName,
 
-        total_quantity:
-          totalQuantity,
+      total_quantity: totalQuantity,
 
-        total_weight:
-          Number(
-            totalWeight.toFixed(
-              2
-            )
-          ),
+      total_weight: Number(totalWeight.toFixed(2)),
 
-        box_info_values:
-          boxInfoValues,
-      }
-    );
+      box_info_values: boxInfoValues,
+    });
   } catch (error) {
-    console.error(
-      "generateBoxPdfService:",
-      error
-    );
+    console.error("generateBoxPdfService:", error);
 
-    if (
-      tempFilePath &&
-      fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      fs.unlinkSync(
-        tempFilePath
-      );
+    if (tempFilePath && fs.existsSync(tempFilePath)) {
+      fs.unlinkSync(tempFilePath);
     }
 
-    return validationResponse(
-      0,
-      "Failed to generate box print"
-    );
+    return validationResponse(0, "Failed to generate box print");
   }
 };
-
-
-
-
-
-
-
-
 
 export async function generatePdf(html: string, filePath: string) {
   let browser;
@@ -3241,13 +2832,7 @@ export async function generatePdf(html: string, filePath: string) {
       fs.mkdirSync(dir, { recursive: true });
     }
 
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-
-      // Only use this on local Mac if puppeteer-core cannot find Chrome:
-      // executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-    });
+    browser = await puppeteer.launch(getPuppeteerOptions());
 
     const page = await browser.newPage();
 
@@ -3281,7 +2866,7 @@ export async function generatePdf(html: string, filePath: string) {
 
 export const generateProjectBoxPdfService = async (
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   const tempDir = path.join(process.cwd(), "tmp");
   if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
@@ -3289,7 +2874,6 @@ export const generateProjectBoxPdfService = async (
   let tempFilePath: string | null = null;
 
   try {
-
     // ── 1. Fetch project, vendor ─────────────────────────────────────────────
     const [project, vendor] = await Promise.all([
       prisma.projectMaster.findFirst({
@@ -3354,18 +2938,18 @@ export const generateProjectBoxPdfService = async (
       boxes.map(async (box) => {
         const items_count = packagingMachine
           ? await prisma.cutListMachineMapping.count({
-            where: {
-              box_id: box.id,
-              project_id,
-              vendor_id,
-              machine_id: packagingMachine.id,
-              expected_in: true,
-              actual_in_at: { not: null },
-            },
-          })
+              where: {
+                box_id: box.id,
+                project_id,
+                vendor_id,
+                machine_id: packagingMachine.id,
+                expected_in: true,
+                actual_in_at: { not: null },
+              },
+            })
           : 0;
         return { ...box, items_count };
-      })
+      }),
     );
 
     const totalBoxes = boxes.length;
@@ -3373,7 +2957,7 @@ export const generateProjectBoxPdfService = async (
 
     // ── 4. Build QR + logo URLs ──────────────────────────────────────────────
     const qrValue = encodeURIComponent(
-      `vendor:${vendor_id},project:${project_id}`
+      `vendor:${vendor_id},project:${project_id}`,
     );
     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${qrValue}&size=120x120`;
     const logoUrl = vendor.logo
@@ -3395,7 +2979,7 @@ export const generateProjectBoxPdfService = async (
               padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;
             ">${box.box_status}</span>
           </td>
-        </tr>`
+        </tr>`,
       )
       .join("");
 
@@ -3415,10 +2999,11 @@ export const generateProjectBoxPdfService = async (
  
   <!-- Header -->
   <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;">
-    ${logoUrl
+    ${
+      logoUrl
         ? `<img src="${logoUrl}" style="height:44px;object-fit:contain;" alt="Logo"/>`
         : `<div style="width:80px;height:36px;background:#1a1a2e;border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:13px;">LOGO</span></div>`
-      }
+    }
     <div style="text-align:right;">
       <p style="font-size:16px;font-weight:600;color:#111;">${escapeHtml(vendor.vendor_name)}</p>
       <p style="font-size:12px;color:#555;margin-top:3px;">Contact: ${escapeHtml(vendor.primary_contact_number)}</p>
@@ -3430,12 +3015,16 @@ export const generateProjectBoxPdfService = async (
   <!-- Lead + QR -->
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;">
     <div>
-      ${lead ? `
+      ${
+        lead
+          ? `
         <p style="font-size:13px;margin-bottom:3px;"><strong>Client Name:</strong> ${escapeHtml(`${lead.firstname} ${lead.lastname}`)}</p>
         <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(lead.contact_no)}</p>
         ${lead.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
         ${lead.site_address ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(lead.site_address)}</p>` : ""}
-      ` : `<p style="font-size:13px;color:#888;">No client information available</p>`}
+      `
+          : `<p style="font-size:13px;color:#888;">No client information available</p>`
+      }
     </div>
     <div style="width:70px;height:70px;border:1px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
       <img src="${qrUrl}" style="width:60px;height:60px;" alt="QR"/>
@@ -3491,7 +3080,6 @@ export const generateProjectBoxPdfService = async (
     const fileName = `project_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
     tempFilePath = path.join(tempDir, fileName);
 
-
     const pdfBuffer = await generatePdf(html, tempFilePath);
     // const pdfBuffer = await htmlPdfNode.generatePdf(
     //   { content: html },
@@ -3518,7 +3106,7 @@ export const generateProjectBoxPdfService = async (
       tempFilePath,
       vendor_id,
       project_id,
-      fileName
+      fileName,
     );
     tempFilePath = null; // already deleted inside uploadPdfAndGetSignedUrl
 
@@ -3527,7 +3115,6 @@ export const generateProjectBoxPdfService = async (
       file_name: fileName,
       wasabi_key: wasabiKey,
     });
-
   } catch (error) {
     console.error("Error generating project PDF:", error);
 
@@ -3543,12 +3130,9 @@ export const generateProjectBoxPdfService = async (
 //For App
 export const generateAllBoxesPdfService = async (
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-  const tempDir = path.join(
-    process.cwd(),
-    "tmp"
-  );
+  const tempDir = path.join(process.cwd(), "tmp");
 
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, {
@@ -3556,8 +3140,7 @@ export const generateAllBoxesPdfService = async (
     });
   }
 
-  let tempFilePath: string | null =
-    null;
+  let tempFilePath: string | null = null;
 
   try {
     /*
@@ -3566,64 +3149,46 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [
-      project,
-      vendor,
-      packagingMachine,
-    ] = await Promise.all([
+    const [project, vendor, packagingMachine] = await Promise.all([
       prisma.projectMaster.findFirst({
         where: {
-          id:
-            project_id,
+          id: project_id,
 
           vendor_id,
         },
 
         select: {
-          id:
-            true,
+          id: true,
 
-          project_name:
-            true,
+          project_name: true,
 
-          project_status:
-            true,
+          project_status: true,
 
-          lead_id:
-            true,
+          lead_id: true,
 
-          order_no:
-            true,
+          order_no: true,
 
-          client_name:
-            true,
+          client_name: true,
 
-          client_address:
-            true,
+          client_address: true,
 
-          client_contact_no:
-            true,
+          client_contact_no: true,
         },
       }),
 
       prisma.vendorMaster.findUnique({
         where: {
-          id:
-            vendor_id,
+          id: vendor_id,
         },
 
         select: {
-          vendor_name:
-            true,
+          vendor_name: true,
 
-          primary_contact_number:
-            true,
+          primary_contact_number: true,
 
-          primary_contact_email:
-            true,
+          primary_contact_email: true,
 
-          logo:
-            true,
+          logo: true,
         },
       }),
 
@@ -3631,41 +3196,29 @@ export const generateAllBoxesPdfService = async (
         where: {
           vendor_id,
 
-          machine_type_id:
-            18,
+          machine_type_id: 18,
         },
 
         select: {
-          id:
-            true,
+          id: true,
         },
 
         orderBy: {
-          id:
-            "asc",
+          id: "asc",
         },
       }),
     ]);
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     if (!vendor) {
-      return validationResponse(
-        0,
-        "Vendor not found"
-      );
+      return validationResponse(0, "Vendor not found");
     }
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
     /*
@@ -3674,24 +3227,13 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    let logoUrl =
-      "";
+    let logoUrl = "";
 
-    if (
-      vendor.logo
-    ) {
+    if (vendor.logo) {
       try {
-        logoUrl =
-          await generateSignedUrl(
-            vendor.logo
-          );
-      } catch (
-      error
-      ) {
-        console.error(
-          "Error generating logo signed URL:",
-          error
-        );
+        logoUrl = await generateSignedUrl(vendor.logo);
+      } catch (error) {
+        console.error("Error generating logo signed URL:", error);
       }
     }
 
@@ -3701,32 +3243,25 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const lead =
-      project.lead_id
-        ? await prisma.leadMaster.findUnique({
+    const lead = project.lead_id
+      ? await prisma.leadMaster.findUnique({
           where: {
-            id:
-              project.lead_id,
+            id: project.lead_id,
           },
 
           select: {
-            firstname:
-              true,
+            firstname: true,
 
-            lastname:
-              true,
+            lastname: true,
 
-            contact_no:
-              true,
+            contact_no: true,
 
-            email:
-              true,
+            email: true,
 
-            site_address:
-              true,
+            site_address: true,
           },
         })
-        : null;
+      : null;
 
     /*
     |--------------------------------------------------------------------------
@@ -3736,27 +3271,16 @@ export const generateAllBoxesPdfService = async (
 
     const clientName =
       project.client_name ||
-      (
-        lead
-          ? `${lead.firstname || ""} ${lead.lastname || ""
-            }`.trim()
-          : ""
-      ) ||
+      (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
     const clientContact =
-      project.client_contact_no ||
-      lead?.contact_no ||
-      "N/A";
+      project.client_contact_no || lead?.contact_no || "N/A";
 
     const deliveryAddress =
-      project.client_address ||
-      lead?.site_address ||
-      "N/A";
+      project.client_address || lead?.site_address || "N/A";
 
-    const orderNumber =
-      project.order_no ||
-      "N/A";
+    const orderNumber = project.order_no || "N/A";
 
     /*
     |--------------------------------------------------------------------------
@@ -3764,72 +3288,53 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxes =
-      await prisma.boxMaster.findMany({
-        where: {
-          project_id,
+    const boxes = await prisma.boxMaster.findMany({
+      where: {
+        project_id,
 
-          vendor_id,
+        vendor_id,
 
-          is_deleted:
-            false,
-        },
+        is_deleted: false,
+      },
 
-        select: {
-          id:
-            true,
+      select: {
+        id: true,
 
-          box_name:
-            true,
+        box_name: true,
 
-          box_status:
-            true,
+        box_status: true,
 
-          created_date:
-            true,
+        created_date: true,
 
-          packed_at:
-            true,
+        packed_at: true,
 
-          packed_by:
-            true,
+        packed_by: true,
 
-          packedByUser: {
-            select: {
-              id:
-                true,
+        packedByUser: {
+          select: {
+            id: true,
 
-              user_name:
-                true,
-            },
-          },
-
-          details: {
-            select: {
-              room_name:
-                true,
-            },
+            user_name: true,
           },
         },
 
-        orderBy: {
-          created_date:
-            "asc",
+        details: {
+          select: {
+            room_name: true,
+          },
         },
-      });
+      },
 
-    if (
-      boxes.length ===
-      0
-    ) {
-      return validationResponse(
-        0,
-        "No boxes found for this project"
-      );
+      orderBy: {
+        created_date: "asc",
+      },
+    });
+
+    if (boxes.length === 0) {
+      return validationResponse(0, "No boxes found for this project");
     }
 
-    const totalBoxes =
-      boxes.length;
+    const totalBoxes = boxes.length;
 
     /*
     |--------------------------------------------------------------------------
@@ -3837,240 +3342,140 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxesWithItems =
-      await Promise.all(
-        boxes.map(
-          async (
-            box,
-            boxIndex
-          ) => {
-            const mappingRows =
-              await prisma.cutListMachineMapping.findMany({
-                where: {
-                  box_id:
-                    box.id,
+    const boxesWithItems = await Promise.all(
+      boxes.map(async (box, boxIndex) => {
+        const mappingRows = await prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id: box.id,
 
-                  project_id,
+            project_id,
 
-                  vendor_id,
+            vendor_id,
 
-                  machine_id:
-                    packagingMachine.id,
+            machine_id: packagingMachine.id,
 
-                  expected_in:
-                    true,
-                },
+            expected_in: true,
+          },
 
-                select: {
-                  id:
-                    true,
+          select: {
+            id: true,
 
-                  cut_list: {
-                    select: {
-                      id:
-                        true,
+            cut_list: {
+              select: {
+                id: true,
 
-                      item_name:
-                        true,
+                item_name: true,
 
-                      category_name:
-                        true,
+                category_name: true,
 
-                      group_name:
-                        true,
+                group_name: true,
 
-                      unique_code:
-                        true,
+                unique_code: true,
 
-                      weight:
-                        true,
-                    },
-                  },
-                },
+                weight: true,
+              },
+            },
+          },
 
-                orderBy: {
-                  created_at:
-                    "asc",
-                },
-              });
+          orderBy: {
+            created_at: "asc",
+          },
+        });
 
-            const itemMap =
-              new Map<
-                number,
-                {
-                  id:
-                  number;
+        const itemMap = new Map<
+          number,
+          {
+            id: number;
 
-                  item_name:
-                  string;
+            item_name: string;
 
-                  category_name:
-                  string | null;
+            category_name: string | null;
 
-                  group_name:
-                  string | null;
+            group_name: string | null;
 
-                  unique_code:
-                  string | null;
+            unique_code: string | null;
 
-                  unit_weight:
-                  number;
+            unit_weight: number;
 
-                  quantity:
-                  number;
+            quantity: number;
 
-                  total_weight:
-                  number;
-                }
-              >();
-
-            for (
-              const mapping
-              of mappingRows
-            ) {
-              const cutList =
-                mapping.cut_list;
-
-              if (
-                !cutList
-              ) {
-                continue;
-              }
-
-              const weight =
-                Number(
-                  cutList.weight ||
-                  0
-                );
-
-              const existing =
-                itemMap.get(
-                  cutList.id
-                );
-
-              if (
-                existing
-              ) {
-                existing.quantity +=
-                  1;
-
-                existing.total_weight +=
-                  weight;
-              } else {
-                itemMap.set(
-                  cutList.id,
-                  {
-                    id:
-                      cutList.id,
-
-                    item_name:
-                      cutList.item_name,
-
-                    category_name:
-                      cutList.category_name,
-
-                    group_name:
-                      cutList.group_name,
-
-                    unique_code:
-                      cutList.unique_code,
-
-                    unit_weight:
-                      weight,
-
-                    quantity:
-                      1,
-
-                    total_weight:
-                      weight,
-                  }
-                );
-              }
-            }
-
-            const items =
-              Array.from(
-                itemMap.values()
-              ).map(
-                (
-                  item
-                ) => ({
-                  ...item,
-
-                  unit_weight:
-                    Number(
-                      item.unit_weight.toFixed(
-                        2
-                      )
-                    ),
-
-                  total_weight:
-                    Number(
-                      item.total_weight.toFixed(
-                        2
-                      )
-                    ),
-                })
-              );
-
-            const totalQuantity =
-              items.reduce(
-                (
-                  total,
-                  item
-                ) =>
-                  total +
-                  item.quantity,
-                0
-              );
-
-            const totalWeight =
-              items.reduce(
-                (
-                  total,
-                  item
-                ) =>
-                  total +
-                  item.total_weight,
-                0
-              );
-
-            return {
-              ...box,
-
-              items,
-
-              packet_no:
-                box.box_name,
-
-              packed_by_name:
-                box
-                  .packedByUser
-                  ?.user_name ||
-                "N/A",
-
-              package_date:
-                box.packed_at ||
-                box.created_date,
-
-              product_box_count:
-                `${boxIndex +
-                1
-                } of ${totalBoxes}`,
-
-              total_quantity:
-                totalQuantity,
-
-              total_weight:
-                Number(
-                  totalWeight.toFixed(
-                    2
-                  )
-                ),
-            };
+            total_weight: number;
           }
-        )
-      );
+        >();
+
+        for (const mapping of mappingRows) {
+          const cutList = mapping.cut_list;
+
+          if (!cutList) {
+            continue;
+          }
+
+          const weight = Number(cutList.weight || 0);
+
+          const existing = itemMap.get(cutList.id);
+
+          if (existing) {
+            existing.quantity += 1;
+
+            existing.total_weight += weight;
+          } else {
+            itemMap.set(cutList.id, {
+              id: cutList.id,
+
+              item_name: cutList.item_name,
+
+              category_name: cutList.category_name,
+
+              group_name: cutList.group_name,
+
+              unique_code: cutList.unique_code,
+
+              unit_weight: weight,
+
+              quantity: 1,
+
+              total_weight: weight,
+            });
+          }
+        }
+
+        const items = Array.from(itemMap.values()).map((item) => ({
+          ...item,
+
+          unit_weight: Number(item.unit_weight.toFixed(2)),
+
+          total_weight: Number(item.total_weight.toFixed(2)),
+        }));
+
+        const totalQuantity = items.reduce(
+          (total, item) => total + item.quantity,
+          0,
+        );
+
+        const totalWeight = items.reduce(
+          (total, item) => total + item.total_weight,
+          0,
+        );
+
+        return {
+          ...box,
+
+          items,
+
+          packet_no: box.box_name,
+
+          packed_by_name: box.packedByUser?.user_name || "N/A",
+
+          package_date: box.packed_at || box.created_date,
+
+          product_box_count: `${boxIndex + 1} of ${totalBoxes}`,
+
+          total_quantity: totalQuantity,
+
+          total_weight: Number(totalWeight.toFixed(2)),
+        };
+      }),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -4078,9 +3483,8 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const logoHtml =
-      logoUrl
-        ? `
+    const logoHtml = logoUrl
+      ? `
           <img
             src="${logoUrl}"
 
@@ -4089,13 +3493,11 @@ export const generateAllBoxesPdfService = async (
             alt="Logo"
           />
         `
-        : `
+      : `
           <div
             class="company-logo-text"
           >
-            ${escapeHtml(
-          vendor.vendor_name
-        )}
+            ${escapeHtml(vendor.vendor_name)}
           </div>
         `;
 
@@ -4124,25 +3526,17 @@ export const generateAllBoxesPdfService = async (
           <div
             class="company-name"
           >
-            ${escapeHtml(
-      vendor.vendor_name
-    )}
+            ${escapeHtml(vendor.vendor_name)}
           </div>
 
 
           <div>
-            ${escapeHtml(
-      vendor.primary_contact_number ||
-      ""
-    )}
+            ${escapeHtml(vendor.primary_contact_number || "")}
           </div>
 
 
           <div>
-            ${escapeHtml(
-      vendor.primary_contact_email ||
-      ""
-    )}
+            ${escapeHtml(vendor.primary_contact_email || "")}
           </div>
 
         </div>
@@ -4161,9 +3555,7 @@ export const generateAllBoxesPdfService = async (
           <div
             class="project-name"
           >
-            ${escapeHtml(
-      project.project_name
-    )}
+            ${escapeHtml(project.project_name)}
           </div>
 
 
@@ -4172,9 +3564,7 @@ export const generateAllBoxesPdfService = async (
           >
             Order Number:
 
-            ${escapeHtml(
-      orderNumber
-    )}
+            ${escapeHtml(orderNumber)}
           </div>
 
         </div>
@@ -4185,16 +3575,12 @@ export const generateAllBoxesPdfService = async (
         >
 
           <strong>
-            ${escapeHtml(
-      clientName
-    )}
+            ${escapeHtml(clientName)}
           </strong>
 
 
           <div>
-            ${escapeHtml(
-      clientContact
-    )}
+            ${escapeHtml(clientContact)}
           </div>
 
         </div>
@@ -4208,126 +3594,85 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxPagesArray =
-      await Promise.all(
-        boxesWithItems.map(
-          async (
-            box
-          ) => {
-            const packageDate =
-              formatReportDate(
-                box.package_date
-              );
+    const boxPagesArray = await Promise.all(
+      boxesWithItems.map(async (box) => {
+        const packageDate = formatReportDate(box.package_date);
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Embedded QR
             |--------------------------------------------------------------------------
             */
 
-            const qrValue =
-              `vendor:${vendor_id},project:${project_id},box:${box.id}`;
+        const qrValue = `vendor:${vendor_id},project:${project_id},box:${box.id}`;
 
-            const qrImage =
-              await QRCode.toDataURL(
-                qrValue,
-                {
-                  width:
-                    250,
+        const qrImage = await QRCode.toDataURL(qrValue, {
+          width: 250,
 
-                  margin:
-                    1,
+          margin: 1,
 
-                  errorCorrectionLevel:
-                    "M",
+          errorCorrectionLevel: "M",
 
-                  color: {
-                    dark:
-                      "#000000",
+          color: {
+            dark: "#000000",
 
-                    light:
-                      "#FFFFFF",
-                  },
-                }
-              );
+            light: "#FFFFFF",
+          },
+        });
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Product rows
             |--------------------------------------------------------------------------
             */
 
-            const visibleItems =
-              box.items.slice(
-                0,
-                10
-              );
+        const visibleItems = box.items.slice(0, 10);
 
-            const hiddenItemsCount =
-              box.items.length -
-              visibleItems.length;
+        const hiddenItemsCount = box.items.length - visibleItems.length;
 
-            const itemRows =
-              visibleItems
-                .map(
-                  (
-                    item,
-                    index
-                  ) => `
+        const itemRows = visibleItems
+          .map(
+            (item, index) => `
                     <tr>
 
                       <td>
-                        ${index +
-                    1
-                    }
+                        ${index + 1}
                       </td>
 
 
                       <td>
-                        ${escapeHtml(
-                      item.item_name
-                    )}
+                        ${escapeHtml(item.item_name)}
                       </td>
 
 
                       <td>
-                        ${escapeHtml(
-                      item.category_name ||
-                      "—"
-                    )}
+                        ${escapeHtml(item.category_name || "—")}
                       </td>
 
 
                       <td>
-                        ${escapeHtml(
-                      item.group_name ||
-                      "—"
-                    )}
+                        ${escapeHtml(item.group_name || "—")}
                       </td>
 
 
                       <td>
-                        ${item.quantity
-                    }
+                        ${item.quantity}
                       </td>
 
 
                       <td>
-                        ${item.total_weight.toFixed(
-                      2
-                    )}
+                        ${item.total_weight.toFixed(2)}
                         kg
                       </td>
 
                     </tr>
-                  `
-                )
-                .join("");
+                  `,
+          )
+          .join("");
 
-            const hiddenItemsRow =
-              hiddenItemsCount >
-                0
-                ? `
+        const hiddenItemsRow =
+          hiddenItemsCount > 0
+            ? `
                   <tr>
 
                     <td
@@ -4339,24 +3684,20 @@ export const generateAllBoxesPdfService = async (
 
                       ${hiddenItemsCount}
 
-                      more item${hiddenItemsCount >
-                  1
-                  ? "s"
-                  : ""
-                }
+                      more item${hiddenItemsCount > 1 ? "s" : ""}
                     </td>
 
                   </tr>
                 `
-                : "";
+            : "";
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Box page
             |--------------------------------------------------------------------------
             */
 
-            return `
+        return `
               <section
                 class="page"
               >
@@ -4391,26 +3732,21 @@ export const generateAllBoxesPdfService = async (
                         <div
                           class="box-title"
                         >
-                          ${escapeHtml(
-              box.packet_no
-            )}
+                          ${escapeHtml(box.packet_no)}
                         </div>
 
 
-                        ${box.details
-                ?.room_name
-                ? `
+                        ${
+                          box.details?.room_name
+                            ? `
                               <div
                                 class="room-name"
                               >
-                                ${escapeHtml(
-                  box.details
-                    .room_name
-                )}
+                                ${escapeHtml(box.details.room_name)}
                               </div>
                             `
-                : ""
-              }
+                            : ""
+                        }
 
                       </div>
 
@@ -4429,9 +3765,7 @@ export const generateAllBoxesPdfService = async (
 
 
                           <strong>
-                            ${escapeHtml(
-                orderNumber
-              )}
+                            ${escapeHtml(orderNumber)}
                           </strong>
 
                         </div>
@@ -4447,9 +3781,7 @@ export const generateAllBoxesPdfService = async (
 
 
                           <strong>
-                            ${escapeHtml(
-                box.packed_by_name
-              )}
+                            ${escapeHtml(box.packed_by_name)}
                           </strong>
 
                         </div>
@@ -4465,9 +3797,7 @@ export const generateAllBoxesPdfService = async (
 
 
                           <strong>
-                            ${escapeHtml(
-                box.packet_no
-              )}
+                            ${escapeHtml(box.packet_no)}
                           </strong>
 
                         </div>
@@ -4499,9 +3829,7 @@ export const generateAllBoxesPdfService = async (
 
 
                           <strong>
-                            ${escapeHtml(
-                box.product_box_count
-              )}
+                            ${escapeHtml(box.product_box_count)}
                           </strong>
 
                         </div>
@@ -4519,9 +3847,7 @@ export const generateAllBoxesPdfService = async (
                           <strong
                             class="total-weight-value"
                           >
-                            ${box.total_weight.toFixed(
-                2
-              )}
+                            ${box.total_weight.toFixed(2)}
 
                             kg
                           </strong>
@@ -4571,9 +3897,7 @@ export const generateAllBoxesPdfService = async (
 
 
                     <strong>
-                      ${escapeHtml(
-                deliveryAddress
-              )}
+                      ${escapeHtml(deliveryAddress)}
                     </strong>
 
                   </div>
@@ -4601,15 +3925,13 @@ export const generateAllBoxesPdfService = async (
                   <div
                     class="products-count"
                   >
-                    ${box.items.length
-              }
+                    ${box.items.length}
 
                     products
 
                     ·
 
-                    ${box.total_quantity
-              }
+                    ${box.total_quantity}
 
                     qty
                   </div>
@@ -4673,8 +3995,9 @@ export const generateAllBoxesPdfService = async (
 
                   <tbody>
 
-                    ${itemRows ||
-              `
+                    ${
+                      itemRows ||
+                      `
                         <tr>
 
                           <td
@@ -4687,7 +4010,7 @@ export const generateAllBoxesPdfService = async (
 
                         </tr>
                       `
-              }
+                    }
 
                     ${hiddenItemsRow}
 
@@ -4706,15 +4029,12 @@ export const generateAllBoxesPdfService = async (
 
 
                       <td>
-                        ${box.total_quantity
-              }
+                        ${box.total_quantity}
                       </td>
 
 
                       <td>
-                        ${box.total_weight.toFixed(
-                2
-              )}
+                        ${box.total_weight.toFixed(2)}
 
                         kg
                       </td>
@@ -4727,14 +4047,10 @@ export const generateAllBoxesPdfService = async (
 
               </section>
             `;
-          }
-        )
-      );
+      }),
+    );
 
-    const boxPages =
-      boxPagesArray.join(
-        ""
-      );
+    const boxPages = boxPagesArray.join("");
 
     /*
     |--------------------------------------------------------------------------
@@ -5662,16 +4978,11 @@ ${boxPages}
     |--------------------------------------------------------------------------
     */
 
-    const fileName =
-      `all_boxes_${sanitizeFileName(
-        project.project_name
-      )}_${Date.now()}.pdf`;
+    const fileName = `all_boxes_${sanitizeFileName(
+      project.project_name,
+    )}_${Date.now()}.pdf`;
 
-    tempFilePath =
-      path.join(
-        tempDir,
-        fileName
-      );
+    tempFilePath = path.join(tempDir, fileName);
 
     await generateCustomSizePdf(
       html,
@@ -5679,29 +4990,22 @@ ${boxPages}
       tempFilePath,
 
       {
-        width:
-          "3in",
+        width: "3in",
 
-        height:
-          "5in",
+        height: "5in",
 
-        printBackground:
-          true,
+        printBackground: true,
 
         margin: {
-          top:
-            "0",
+          top: "0",
 
-          bottom:
-            "0",
+          bottom: "0",
 
-          left:
-            "0",
+          left: "0",
 
-          right:
-            "0",
+          right: "0",
         },
-      }
+      },
     );
 
     /*
@@ -5710,22 +5014,17 @@ ${boxPages}
     |--------------------------------------------------------------------------
     */
 
-    const {
-      signedUrl,
-      wasabiKey,
-    } =
-      await uploadPdfAndGetSignedUrl(
-        tempFilePath,
+    const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
+      tempFilePath,
 
-        vendor_id,
+      vendor_id,
 
-        project_id,
+      project_id,
 
-        fileName
-      );
+      fileName,
+    );
 
-    tempFilePath =
-      null;
+    tempFilePath = null;
 
     return validationResponse(
       1,
@@ -5733,48 +5032,29 @@ ${boxPages}
       "All boxes PDF generated successfully",
 
       {
-        download_url:
-          signedUrl,
+        download_url: signedUrl,
 
-        file_name:
-          fileName,
+        file_name: fileName,
 
-        wasabi_key:
-          wasabiKey,
+        wasabi_key: wasabiKey,
 
-        total_boxes:
-          totalBoxes,
-      }
+        total_boxes: totalBoxes,
+      },
     );
-  } catch (
-  error
-  ) {
-    console.error(
-      "generateAllBoxesPdfService:",
-      error
-    );
+  } catch (error) {
+    console.error("generateAllBoxesPdfService:", error);
 
-    if (
-      tempFilePath &&
-      fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      fs.unlinkSync(
-        tempFilePath
-      );
+    if (tempFilePath && fs.existsSync(tempFilePath)) {
+      fs.unlinkSync(tempFilePath);
     }
 
-    return validationResponse(
-      0,
-      "Failed to generate all boxes PDF"
-    );
+    return validationResponse(0, "Failed to generate all boxes PDF");
   }
 };
 
 export const generateProjectFullReportServiceWeb = async (
   project_id: string,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   const project = await prisma.projectMaster.findFirst({
     where: {
@@ -5786,67 +5066,48 @@ export const generateProjectFullReportServiceWeb = async (
     },
   });
 
-
   if (!project) {
     return validationResponse(0, "Project not found");
   }
 
-  return await generateProjectFullReportService(
-    project.id,
-    vendor_id
-  );
+  return await generateProjectFullReportService(project.id, vendor_id);
 };
-
-
 
 export const generateProjectFullReportService = async (
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-
-
-
   const calibriRegularPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-regular.ttf"
+    "../../../assets/fonts/calibri/calibri-regular.ttf",
   );
 
   const calibriBoldPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-bold.ttf"
+    "../../../assets/fonts/calibri/calibri-bold.ttf",
   );
 
   const calibriItalicPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-italic.ttf",
   );
 
   const calibriBoldItalicPath = path.resolve(
     __dirname,
-    "../../../assets/fonts/calibri/calibri-bold-italic.ttf"
+    "../../../assets/fonts/calibri/calibri-bold-italic.ttf",
   );
 
   console.log("Calibri font path:", calibriRegularPath);
 
   const calibriRegular = fontToBase64(calibriRegularPath);
 
-  const calibriBold = fontToBase64(
-    calibriBoldPath
-  );
+  const calibriBold = fontToBase64(calibriBoldPath);
 
-  const calibriItalic = fontToBase64(
-    calibriItalicPath
-  );
+  const calibriItalic = fontToBase64(calibriItalicPath);
 
-  const calibriBoldItalic = fontToBase64(
-    calibriBoldItalicPath
-  );
+  const calibriBoldItalic = fontToBase64(calibriBoldItalicPath);
 
-
-  const tempDir = path.join(
-    process.cwd(),
-    "tmp"
-  );
+  const tempDir = path.join(process.cwd(), "tmp");
 
   if (!fs.existsSync(tempDir)) {
     fs.mkdirSync(tempDir, {
@@ -5856,24 +5117,13 @@ export const generateProjectFullReportService = async (
 
   let tempFilePath: string | null = null;
 
+  const toNumber = (value: any) => {
+    const numberValue = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
 
-
-  const toNumber = (
-    value: any
-  ) => {
-    const numberValue = Number(
-      String(value ?? "")
-        .replace(/[^0-9.]/g, "")
-    );
-
-    return Number.isFinite(numberValue)
-      ? numberValue
-      : 0;
+    return Number.isFinite(numberValue) ? numberValue : 0;
   };
 
-  const formatDimension = (
-    value: any
-  ) => {
+  const formatDimension = (value: any) => {
     const numberValue = toNumber(value);
 
     if (!numberValue) {
@@ -5885,22 +5135,15 @@ export const generateProjectFullReportService = async (
       : numberValue.toFixed(2);
   };
 
-  const formatQuantity = (
-    value: number
-  ) => {
-    return String(value || 0).padStart(
-      2,
-      "0"
-    );
+  const formatQuantity = (value: number) => {
+    return String(value || 0).padStart(2, "0");
   };
 
-  const getItemSizeText = (
-    item: {
-      length?: any;
-      width?: any;
-      thickness?: any;
-    }
-  ) => {
+  const getItemSizeText = (item: {
+    length?: any;
+    width?: any;
+    thickness?: any;
+  }) => {
     const length = toNumber(item.length);
     const width = toNumber(item.width);
 
@@ -5915,23 +5158,14 @@ export const generateProjectFullReportService = async (
     items: {
       length?: any;
       width?: any;
-    }[]
+    }[],
   ) => {
-    const maxLength =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.length)
-        )
-      );
+    const maxLength = Math.max(
+      0,
+      ...items.map((item) => toNumber(item.length)),
+    );
 
-    const maxWidth =
-      Math.max(
-        0,
-        ...items.map((item) =>
-          toNumber(item.width)
-        )
-      );
+    const maxWidth = Math.max(0, ...items.map((item) => toNumber(item.width)));
 
     if (!maxLength || !maxWidth) {
       return "2400 x 1200 mm";
@@ -5946,33 +5180,21 @@ export const generateProjectFullReportService = async (
       field_key: string;
       field_value: string;
     }[],
-    keywords: string[]
+    keywords: string[],
   ) => {
-    const normalizedKeywords =
-      keywords.map((keyword) =>
-        keyword.toLowerCase()
+    const normalizedKeywords = keywords.map((keyword) => keyword.toLowerCase());
+
+    const matchedValue = values.find((item) => {
+      const label = String(item.field_label || "").toLowerCase();
+
+      const key = String(item.field_key || "").toLowerCase();
+
+      return normalizedKeywords.some(
+        (keyword) => label.includes(keyword) || key.includes(keyword),
       );
+    });
 
-    const matchedValue =
-      values.find((item) => {
-        const label =
-          String(item.field_label || "")
-            .toLowerCase();
-
-        const key =
-          String(item.field_key || "")
-            .toLowerCase();
-
-        return normalizedKeywords.some(
-          (keyword) =>
-            label.includes(keyword) ||
-            key.includes(keyword)
-        );
-      });
-
-    return matchedValue
-      ?.field_value
-      ?.trim() || "";
+    return matchedValue?.field_value?.trim() || "";
   };
 
   const resolveProductName = (
@@ -5980,10 +5202,9 @@ export const generateProjectFullReportService = async (
       category_name?: string | null;
       group_name?: string | null;
       item_name?: string | null;
-    }[]
+    }[],
   ) => {
-    const firstItem =
-      items.find(Boolean);
+    const firstItem = items.find(Boolean);
 
     return (
       firstItem?.category_name ||
@@ -6000,11 +5221,7 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [
-      project,
-      vendor,
-      packagingMachine,
-    ] = await Promise.all([
+    const [project, vendor, packagingMachine] = await Promise.all([
       prisma.projectMaster.findFirst({
         where: {
           id: project_id,
@@ -6047,7 +5264,6 @@ export const generateProjectFullReportService = async (
               name: true,
             },
           },
-
         },
       }),
 
@@ -6068,24 +5284,15 @@ export const generateProjectFullReportService = async (
     ]);
 
     if (!project) {
-      return validationResponse(
-        0,
-        "Project not found"
-      );
+      return validationResponse(0, "Project not found");
     }
 
     if (!vendor) {
-      return validationResponse(
-        0,
-        "Vendor not found"
-      );
+      return validationResponse(0, "Vendor not found");
     }
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
     /*
@@ -6100,25 +5307,19 @@ export const generateProjectFullReportService = async (
       website: vendor.website_link,
       addressLine1: vendor.address,
       addressLine2: vendor.city,
-      addressLine3: vendor.pincode + ' ' + vendor.state?.name,
+      addressLine3: vendor.pincode + " " + vendor.state?.name,
       gst: vendor.gst_no,
       tagline: vendor.tag_line,
-      fallbackName: vendor.vendor_name
+      fallbackName: vendor.vendor_name,
     };
 
     let logoUrl = "";
 
     if (vendor.logo) {
       try {
-        logoUrl =
-          await generateSignedUrl(
-            vendor.logo
-          );
+        logoUrl = await generateSignedUrl(vendor.logo);
       } catch (error) {
-        console.error(
-          "Error generating logo signed URL:",
-          error
-        );
+        console.error("Error generating logo signed URL:", error);
       }
     }
 
@@ -6128,9 +5329,8 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const lead =
-      project.lead_id
-        ? await prisma.leadMaster.findUnique({
+    const lead = project.lead_id
+      ? await prisma.leadMaster.findUnique({
           where: {
             id: project.lead_id,
           },
@@ -6143,7 +5343,7 @@ export const generateProjectFullReportService = async (
             site_address: true,
           },
         })
-        : null;
+      : null;
 
     /*
     |--------------------------------------------------------------------------
@@ -6153,27 +5353,15 @@ export const generateProjectFullReportService = async (
 
     const clientName =
       project.client_name ||
-      (
-        lead
-          ? `${lead.firstname || ""} ${lead.lastname || ""
-            }`.trim()
-          : ""
-      ) ||
+      (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
     const clientContact =
-      project.client_contact_no ||
-      lead?.contact_no ||
-      "N/A";
+      project.client_contact_no || lead?.contact_no || "N/A";
 
-    const clientAddress =
-      project.client_address ||
-      lead?.site_address ||
-      "N/A";
+    const clientAddress = project.client_address || lead?.site_address || "N/A";
 
-    const orderNumber =
-      project.order_no ||
-      "N/A";
+    const orderNumber = project.order_no || "N/A";
 
     /*
     |--------------------------------------------------------------------------
@@ -6181,64 +5369,59 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxes =
-      await prisma.boxMaster.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          is_deleted: false,
+    const boxes = await prisma.boxMaster.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
+
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        created_date: true,
+        packed_at: true,
+        packed_by: true,
+
+        packedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
         },
 
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          created_date: true,
-          packed_at: true,
-          packed_by: true,
+        box_info_values: {
+          select: {
+            id: true,
+            field_id: true,
+            field_value: true,
 
-          packedByUser: {
-            select: {
-              id: true,
-              user_name: true,
-            },
-          },
-
-          box_info_values: {
-            select: {
-              id: true,
-              field_id: true,
-              field_value: true,
-
-              field: {
-                select: {
-                  id: true,
-                  field_label: true,
-                  field_key: true,
-                  field_type: true,
-                  is_required: true,
-                  sort_order: true,
-                  active: true,
-                },
+            field: {
+              select: {
+                id: true,
+                field_label: true,
+                field_key: true,
+                field_type: true,
+                is_required: true,
+                sort_order: true,
+                active: true,
               },
             },
           },
         },
+      },
 
-        orderBy: {
-          created_date: "asc",
-        },
-      });
+      orderBy: {
+        created_date: "asc",
+      },
+    });
 
     if (boxes.length === 0) {
-      return validationResponse(
-        0,
-        "No boxes found"
-      );
+      return validationResponse(0, "No boxes found");
     }
 
-    const totalBoxes =
-      boxes.length;
+    const totalBoxes = boxes.length;
 
     /*
     |--------------------------------------------------------------------------
@@ -6246,284 +5429,183 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const rawBoxesWithItems =
-      await Promise.all(
-        boxes.map(
-          async (
-            box
-          ) => {
-            const mappings =
-              await prisma.cutListMachineMapping.findMany({
-                where: {
-                  box_id: box.id,
-                  project_id,
-                  vendor_id,
-                  machine_id: packagingMachine.id,
-                  expected_in: true,
-                },
+    const rawBoxesWithItems = await Promise.all(
+      boxes.map(async (box) => {
+        const mappings = await prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id: box.id,
+            project_id,
+            vendor_id,
+            machine_id: packagingMachine.id,
+            expected_in: true,
+          },
 
-                select: {
-                  id: true,
+          select: {
+            id: true,
 
-                  cut_list: {
-                    select: {
-                      id: true,
-                      item_name: true,
-                      category_name: true,
-                      group_name: true,
-                      unique_code: true,
-                      material_details: true,
-                      weight: true,
-                      qty: true,
-                      length: true,
-                      width: true,
-                      thickness: true,
-                    },
-                  },
-                },
+            cut_list: {
+              select: {
+                id: true,
+                item_name: true,
+                category_name: true,
+                group_name: true,
+                unique_code: true,
+                material_details: true,
+                weight: true,
+                qty: true,
+                length: true,
+                width: true,
+                thickness: true,
+              },
+            },
+          },
 
-                orderBy: {
-                  created_at: "asc",
-                },
-              });
+          orderBy: {
+            created_at: "asc",
+          },
+        });
 
-            const itemMap =
-              new Map<
-                number,
-                {
-                  id: number;
-                  item_name: string;
-                  category_name: string | null;
-                  group_name: string | null;
-                  unique_code: string | null;
-                  material_details: string | null;
-                  length: any;
-                  width: any;
-                  thickness: any;
-                  unit_weight: number;
-                  quantity: number;
-                  total_weight: number;
-                }
-              >();
-
-            for (const mapping of mappings) {
-              const cutList =
-                mapping.cut_list;
-
-              if (!cutList) {
-                continue;
-              }
-
-              const cutListWeight =
-                Number(
-                  cutList.weight ||
-                  0
-                );
-
-              const cutListQuantity =
-                Number(
-                  cutList.qty ||
-                  0
-                );
-
-              const unitWeight =
-                cutListQuantity > 0
-                  ? cutListWeight /
-                    cutListQuantity
-                  : 0;
-
-              const existingItem =
-                itemMap.get(
-                  cutList.id
-                );
-
-              if (existingItem) {
-                existingItem.quantity += 1;
-                existingItem.total_weight =
-                  unitWeight *
-                  existingItem.quantity;
-              } else {
-                itemMap.set(
-                  cutList.id,
-                  {
-                    id: cutList.id,
-                    item_name: cutList.item_name,
-                    category_name: cutList.category_name,
-                    group_name: cutList.group_name,
-                    unique_code: cutList.unique_code,
-                    material_details: cutList.material_details,
-                    length: cutList.length,
-                    width: cutList.width,
-                    thickness: cutList.thickness,
-                    unit_weight: unitWeight,
-                    quantity: 1,
-                    total_weight: unitWeight,
-                  }
-                );
-              }
-            }
-
-            const items =
-              Array.from(
-                itemMap.values()
-              ).map((item) => ({
-                ...item,
-
-                unit_weight:
-                  Number(
-                    item.unit_weight.toFixed(
-                      2
-                    )
-                  ),
-
-                total_weight:
-                  Number(
-                    item.total_weight.toFixed(
-                      2
-                    )
-                  ),
-              }));
-
-            const totalQuantity =
-              items.reduce(
-                (
-                  total,
-                  item
-                ) =>
-                  total +
-                  item.quantity,
-                0
-              );
-
-            const totalWeight =
-              items.reduce(
-                (
-                  total,
-                  item
-                ) =>
-                  total +
-                  item.total_weight,
-                0
-              );
-
-            const groupedItem =
-              items.find((item) =>
-                Boolean(
-                  item.group_name
-                    ?.trim()
-                )
-              );
-
-            const boxGroupName =
-              groupedItem
-                ?.group_name
-                ?.trim() ||
-              null;
-
-            const boxInfoValues =
-              box.box_info_values
-                .filter(
-                  (item) =>
-                    item.field &&
-                    item.field.active
-                )
-                .sort(
-                  (
-                    a,
-                    b
-                  ) =>
-                    Number(
-                      a.field.sort_order ||
-                      0
-                    ) -
-                    Number(
-                      b.field.sort_order ||
-                      0
-                    )
-                )
-                .map((item) => ({
-                  id: item.id,
-                  field_id: item.field_id,
-                  field_label: item.field.field_label,
-                  field_key: item.field.field_key,
-                  field_type: item.field.field_type,
-                  is_required: item.field.is_required,
-                  sort_order: item.field.sort_order,
-                  field_value: item.field_value || "",
-                }));
-
-            return {
-              ...box,
-
-              items,
-
-              order_no:
-                orderNumber,
-
-              packed_by_name:
-                box.packedByUser?.user_name ||
-                "N/A",
-
-              packet_no:
-                box.box_name,
-
-              package_date:
-                box.packed_at ||
-                box.created_date,
-
-              address:
-                clientAddress,
-
-              box_group_name:
-                boxGroupName,
-
-              box_info_values:
-                boxInfoValues,
-
-              package_size:
-                getPackageSizeText(
-                  items
-                ),
-
-              product_name:
-                resolveProductName(
-                  items
-                ),
-
-              floor_name:
-                findBoxInfoValue(
-                  boxInfoValues,
-                  [
-                    "floor",
-                    "floor_name",
-                    "floor name",
-                  ]
-                ) || "-",
-
-              item_no:
-                Array.from(
-                  new Set(
-                    items
-                      .map((item) =>
-                        String(item.material_details || "").trim()
-                      )
-                      .filter(Boolean)
-                  )
-                ).join(", ") || "-",
-
-              total_quantity:
-                totalQuantity,
-
-              total_weight:
-                Number(
-                  totalWeight.toFixed(
-                    2
-                  )
-                ),
-            };
+        const itemMap = new Map<
+          number,
+          {
+            id: number;
+            item_name: string;
+            category_name: string | null;
+            group_name: string | null;
+            unique_code: string | null;
+            material_details: string | null;
+            length: any;
+            width: any;
+            thickness: any;
+            unit_weight: number;
+            quantity: number;
+            total_weight: number;
           }
-        )
-      );
+        >();
+
+        for (const mapping of mappings) {
+          const cutList = mapping.cut_list;
+
+          if (!cutList) {
+            continue;
+          }
+
+          const cutListWeight = Number(cutList.weight || 0);
+
+          const cutListQuantity = Number(cutList.qty || 0);
+
+          const unitWeight =
+            cutListQuantity > 0 ? cutListWeight / cutListQuantity : 0;
+
+          const existingItem = itemMap.get(cutList.id);
+
+          if (existingItem) {
+            existingItem.quantity += 1;
+            existingItem.total_weight = unitWeight * existingItem.quantity;
+          } else {
+            itemMap.set(cutList.id, {
+              id: cutList.id,
+              item_name: cutList.item_name,
+              category_name: cutList.category_name,
+              group_name: cutList.group_name,
+              unique_code: cutList.unique_code,
+              material_details: cutList.material_details,
+              length: cutList.length,
+              width: cutList.width,
+              thickness: cutList.thickness,
+              unit_weight: unitWeight,
+              quantity: 1,
+              total_weight: unitWeight,
+            });
+          }
+        }
+
+        const items = Array.from(itemMap.values()).map((item) => ({
+          ...item,
+
+          unit_weight: Number(item.unit_weight.toFixed(2)),
+
+          total_weight: Number(item.total_weight.toFixed(2)),
+        }));
+
+        const totalQuantity = items.reduce(
+          (total, item) => total + item.quantity,
+          0,
+        );
+
+        const totalWeight = items.reduce(
+          (total, item) => total + item.total_weight,
+          0,
+        );
+
+        const groupedItem = items.find((item) =>
+          Boolean(item.group_name?.trim()),
+        );
+
+        const boxGroupName = groupedItem?.group_name?.trim() || null;
+
+        const boxInfoValues = box.box_info_values
+          .filter((item) => item.field && item.field.active)
+          .sort(
+            (a, b) =>
+              Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
+          )
+          .map((item) => ({
+            id: item.id,
+            field_id: item.field_id,
+            field_label: item.field.field_label,
+            field_key: item.field.field_key,
+            field_type: item.field.field_type,
+            is_required: item.field.is_required,
+            sort_order: item.field.sort_order,
+            field_value: item.field_value || "",
+          }));
+
+        return {
+          ...box,
+
+          items,
+
+          order_no: orderNumber,
+
+          packed_by_name: box.packedByUser?.user_name || "N/A",
+
+          packet_no: box.box_name,
+
+          package_date: box.packed_at || box.created_date,
+
+          address: clientAddress,
+
+          box_group_name: boxGroupName,
+
+          box_info_values: boxInfoValues,
+
+          package_size: getPackageSizeText(items),
+
+          product_name: resolveProductName(items),
+
+          floor_name:
+            findBoxInfoValue(boxInfoValues, [
+              "floor",
+              "floor_name",
+              "floor name",
+            ]) || "-",
+
+          item_no:
+            Array.from(
+              new Set(
+                items
+                  .map((item) => String(item.material_details || "").trim())
+                  .filter(Boolean),
+              ),
+            ).join(", ") || "-",
+
+          total_quantity: totalQuantity,
+
+          total_weight: Number(totalWeight.toFixed(2)),
+        };
+      }),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -6531,107 +5613,51 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const boxesWithItems =
-      (() => {
-        if (
-          project.packing_type !==
-          PackingType.GROUPWISE
-        ) {
-          return rawBoxesWithItems.map(
-            (
-              box,
-              index
-            ) => ({
-              ...box,
+    const boxesWithItems = (() => {
+      if (project.packing_type !== PackingType.GROUPWISE) {
+        return rawBoxesWithItems.map((box, index) => ({
+          ...box,
 
-              product_box_count:
-                `${index + 1} of ${totalBoxes}`,
-            })
-          );
+          product_box_count: `${index + 1} of ${totalBoxes}`,
+        }));
+      }
+
+      const getGroupKey = (box: (typeof rawBoxesWithItems)[number]) => {
+        const groupName = box.box_group_name?.trim().toLowerCase();
+
+        if (!groupName) {
+          return `__ungrouped_box_${box.id}`;
         }
 
-        const getGroupKey =
-          (
-            box:
-              (
-                typeof rawBoxesWithItems
-              )[number]
-          ) => {
-            const groupName =
-              box.box_group_name
-                ?.trim()
-                .toLowerCase();
+        return groupName;
+      };
 
-            if (!groupName) {
-              return `__ungrouped_box_${box.id}`;
-            }
+      const groupTotalMap = new Map<string, number>();
 
-            return groupName;
-          };
+      for (const box of rawBoxesWithItems) {
+        const groupKey = getGroupKey(box);
 
-        const groupTotalMap =
-          new Map<
-            string,
-            number
-          >();
+        groupTotalMap.set(groupKey, (groupTotalMap.get(groupKey) || 0) + 1);
+      }
 
-        for (const box of rawBoxesWithItems) {
-          const groupKey =
-            getGroupKey(
-              box
-            );
+      const groupCurrentMap = new Map<string, number>();
 
-          groupTotalMap.set(
-            groupKey,
-            (
-              groupTotalMap.get(
-                groupKey
-              ) || 0
-            ) + 1
-          );
-        }
+      return rawBoxesWithItems.map((box) => {
+        const groupKey = getGroupKey(box);
 
-        const groupCurrentMap =
-          new Map<
-            string,
-            number
-          >();
+        const currentNumber = (groupCurrentMap.get(groupKey) || 0) + 1;
 
-        return rawBoxesWithItems.map(
-          (
-            box
-          ) => {
-            const groupKey =
-              getGroupKey(
-                box
-              );
+        groupCurrentMap.set(groupKey, currentNumber);
 
-            const currentNumber =
-              (
-                groupCurrentMap.get(
-                  groupKey
-                ) || 0
-              ) + 1;
+        const groupTotal = groupTotalMap.get(groupKey) || 1;
 
-            groupCurrentMap.set(
-              groupKey,
-              currentNumber
-            );
+        return {
+          ...box,
 
-            const groupTotal =
-              groupTotalMap.get(
-                groupKey
-              ) || 1;
-
-            return {
-              ...box,
-
-              product_box_count:
-                `${currentNumber} of ${groupTotal}`,
-            };
-          }
-        );
-      })();
+          product_box_count: `${currentNumber} of ${groupTotal}`,
+        };
+      });
+    })();
 
     /*
     |--------------------------------------------------------------------------
@@ -6639,47 +5665,24 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packedBoxes =
-      boxes.filter(
-        (box) =>
-          String(
-            box.box_status
-          ).toLowerCase() ===
-          "packed"
-      ).length;
+    const packedBoxes = boxes.filter(
+      (box) => String(box.box_status).toLowerCase() === "packed",
+    ).length;
 
-    const totalProducts =
-      boxesWithItems.reduce(
-        (
-          total,
-          box
-        ) =>
-          total +
-          box.items.length,
-        0
-      );
+    const totalProducts = boxesWithItems.reduce(
+      (total, box) => total + box.items.length,
+      0,
+    );
 
-    const totalQuantity =
-      boxesWithItems.reduce(
-        (
-          total,
-          box
-        ) =>
-          total +
-          box.total_quantity,
-        0
-      );
+    const totalQuantity = boxesWithItems.reduce(
+      (total, box) => total + box.total_quantity,
+      0,
+    );
 
-    const totalWeight =
-      boxesWithItems.reduce(
-        (
-          total,
-          box
-        ) =>
-          total +
-          box.total_weight,
-        0
-      );
+    const totalWeight = boxesWithItems.reduce(
+      (total, box) => total + box.total_weight,
+      0,
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -6687,18 +5690,15 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-
-
-    const logoHtml =
-      logoUrl
-        ? `
+    const logoHtml = logoUrl
+      ? `
           <img
             src="${logoUrl}"
             class="logo-img"
             alt="Adarsh Logo"
           />
         `
-        : `
+      : `
           <div class="fallback-logo-text">
             adarsh
           </div>
@@ -6710,38 +5710,26 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const summaryRows =
-      boxesWithItems
-        .map(
-          (
-            box,
-            index
-          ) => `
+    const summaryRows = boxesWithItems
+      .map(
+        (box, index) => `
             <tr>
               <td>${index + 1}</td>
 
               <td>
-                ${escapeHtml(
-            box.packet_no
-          )}
+                ${escapeHtml(box.packet_no)}
               </td>
 
               <td>
-                ${escapeHtml(
-            box.packed_by_name
-          )}
+                ${escapeHtml(box.packed_by_name)}
               </td>
 
               <td>
-                ${formatReportDate(
-            box.package_date
-          )}
+                ${formatReportDate(box.package_date)}
               </td>
 
               <td>
-                ${escapeHtml(
-            box.product_box_count
-          )}
+                ${escapeHtml(box.product_box_count)}
               </td>
 
               <td>${box.items.length}</td>
@@ -6749,22 +5737,16 @@ export const generateProjectFullReportService = async (
               <td>${box.total_quantity}</td>
 
               <td>
-                ${box.total_weight.toFixed(
-            2
-          )} kg
+                ${box.total_weight.toFixed(2)} kg
               </td>
 
               <td>
-                ${escapeHtml(
-            String(
-              box.box_status
-            )
-          )}
+                ${escapeHtml(String(box.box_status))}
               </td>
             </tr>
-          `
-        )
-        .join("");
+          `,
+      )
+      .join("");
 
     const summaryPage = `
       <section class="page summary-page">
@@ -6775,32 +5757,21 @@ export const generateProjectFullReportService = async (
 
           <div class="summary-company-info">
             <div class="summary-company-name">
-              ${escapeHtml(
-      vendor.vendor_name ||
-      hardcodedCompany.fallbackName
-    )}
+              ${escapeHtml(vendor.vendor_name || hardcodedCompany.fallbackName)}
             </div>
 
             <div>
-              ${escapeHtml(
-      hardcodedCompany.addressLine1 ?? ""
-    )}
-              ${escapeHtml(
-      hardcodedCompany.addressLine2 ?? ""
-    )}
+              ${escapeHtml(hardcodedCompany.addressLine1 ?? "")}
+              ${escapeHtml(hardcodedCompany.addressLine2 ?? "")}
             </div>
 
             <div>
-              ${escapeHtml(
-      hardcodedCompany.addressLine3 ?? ""
-    )}
+              ${escapeHtml(hardcodedCompany.addressLine3 ?? "")}
             </div>
 
             <div>
               GST:
-              ${escapeHtml(
-      hardcodedCompany.gst ?? ""
-    )}
+              ${escapeHtml(hardcodedCompany.gst ?? "")}
             </div>
           </div>
         </div>
@@ -6808,30 +5779,22 @@ export const generateProjectFullReportService = async (
         <div class="summary-project-heading">
           <div>
             <div class="summary-title">
-              ${escapeHtml(
-      project.project_name
-    )}
+              ${escapeHtml(project.project_name)}
             </div>
 
             <div class="summary-subtitle">
               Order Number:
-              ${escapeHtml(
-      orderNumber
-    )}
+              ${escapeHtml(orderNumber)}
             </div>
           </div>
 
           <div class="summary-client">
             <strong>
-              ${escapeHtml(
-      clientName
-    )}
+              ${escapeHtml(clientName)}
             </strong>
 
             <div>
-              ${escapeHtml(
-      clientContact
-    )}
+              ${escapeHtml(clientContact)}
             </div>
           </div>
         </div>
@@ -6856,9 +5819,7 @@ export const generateProjectFullReportService = async (
             <span>TOTAL WEIGHT</span>
 
             <strong>
-              ${totalWeight.toFixed(
-      2
-    )} kg
+              ${totalWeight.toFixed(2)} kg
             </strong>
           </div>
         </div>
@@ -6866,9 +5827,7 @@ export const generateProjectFullReportService = async (
         <div class="summary-address">
           <strong>DELIVERY ADDRESS:</strong>
 
-          ${escapeHtml(
-      clientAddress
-    )}
+          ${escapeHtml(clientAddress)}
         </div>
 
         <h3 class="section-title">
@@ -6901,9 +5860,7 @@ export const generateProjectFullReportService = async (
               <td>${totalQuantity}</td>
 
               <td>
-                ${totalWeight.toFixed(
-      2
-    )} kg
+                ${totalWeight.toFixed(2)} kg
               </td>
 
               <td>${packedBoxes}</td>
@@ -6919,98 +5876,67 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const stickerPagesArray =
-      await Promise.all(
-        boxesWithItems.map(
-          async (
-            box
-          ) => {
-            const packageDate =
-              formatReportDate(
-                box.package_date
-              );
+    const stickerPagesArray = await Promise.all(
+      boxesWithItems.map(async (box) => {
+        const packageDate = formatReportDate(box.package_date);
 
-            const qrValue =
-              `vendor:${vendor_id},project:${project_id},box:${box.id}`;
+        const qrValue = `vendor:${vendor_id},project:${project_id},box:${box.id}`;
 
-            const qrImage =
-              await QRCode.toDataURL(
-                qrValue,
-                {
-                  width: 400,
-                  margin: 1,
-                  errorCorrectionLevel: "M",
+        const qrImage = await QRCode.toDataURL(qrValue, {
+          width: 400,
+          margin: 1,
+          errorCorrectionLevel: "M",
 
-                  color: {
-                    dark: "#000000",
-                    light: "#FFFFFF",
-                  },
-                }
-              );
+          color: {
+            dark: "#000000",
+            light: "#FFFFFF",
+          },
+        });
 
-            const packageNo = String(box.packet_no || "").trim();
+        const packageNo = String(box.packet_no || "").trim();
 
-            const packageNoClass =
-              packageNo.length >= 4
-                ? "package-number package-number-4"
-                : packageNo.length === 3
-                  ? "package-number package-number-3"
-                  : "package-number";
+        const packageNoClass =
+          packageNo.length >= 4
+            ? "package-number package-number-4"
+            : packageNo.length === 3
+              ? "package-number package-number-3"
+              : "package-number";
 
-            const componentRows =
-              box.items
-                .map(
-                  (
-                    item
-                  ) => `
+        const componentRows = box.items
+          .map(
+            (item) => `
                     <tr>
                       <td class="code-cell">
-                        ${escapeHtml(
-                    item.unique_code ||
-                    "-"
-                  )}
+                        ${escapeHtml(item.unique_code || "-")}
                       </td>
 
                       <td class="component-cell">
                         <strong>
-                          ${escapeHtml(
-                    item.item_name ||
-                    "-"
-                  )}
+                          ${escapeHtml(item.item_name || "-")}
                         </strong>
 
                         <span>
-                          ${escapeHtml(
-                    getItemSizeText(
-                      item
-                    )
-                  )}
+                          ${escapeHtml(getItemSizeText(item))}
                         </span>
                       </td>
 
                       <td class="qty-cell">
-                        ${formatQuantity(
-                    item.quantity
-                  )}
+                        ${formatQuantity(item.quantity)}
                       </td>
 
                       <td class="unit-cell">
-                        ${item.unit_weight.toFixed(
-                    2
-                  )}
+                        ${item.unit_weight.toFixed(2)}
                       </td>
 
                       <td class="total-cell">
-                        ${item.total_weight.toFixed(
-                    2
-                  )}
+                        ${item.total_weight.toFixed(2)}
                       </td>
                     </tr>
-                  `
-                )
-                .join("");
+                  `,
+          )
+          .join("");
 
-            return `
+        return `
               <section class="page sticker-page">
                 <div class="sticker">
 
@@ -7037,9 +5963,8 @@ export const generateProjectFullReportService = async (
               <td colspan="2" class="company-cell">
                 <span class="company-name">
                   ${escapeHtml(
-              vendor.vendor_name ||
-              hardcodedCompany.fallbackName
-            )}
+                    vendor.vendor_name || hardcodedCompany.fallbackName,
+                  )}
                 </span>
               </td>
             </tr>
@@ -7047,52 +5972,38 @@ export const generateProjectFullReportService = async (
             <tr>
               <td class="address-cell">
                 <span class="address-text">
-                  ${escapeHtml(
-              hardcodedCompany.addressLine1 ?? ""
-            )}
+                  ${escapeHtml(hardcodedCompany.addressLine1 ?? "")}
                 </span>
 
                 <span class="address-text">
-                  ${escapeHtml(
-              hardcodedCompany.addressLine2 ?? ""
-            )}
+                  ${escapeHtml(hardcodedCompany.addressLine2 ?? "")}
                 </span>
 
                 <span class="address-text">
-                  ${escapeHtml(
-              hardcodedCompany.addressLine3 ?? ""
-            )}
+                  ${escapeHtml(hardcodedCompany.addressLine3 ?? "")}
                 </span>
 
                 <span class="gst-text">
-                  GST: ${escapeHtml(
-              hardcodedCompany.gst ?? ""
-            )}
+                  GST: ${escapeHtml(hardcodedCompany.gst ?? "")}
                 </span>
               </td>
 
               <td class="contact-cell">
                 <span class="contact-text">
                   Toll Free No. :
-                  ${escapeHtml(
-              hardcodedCompany.tollFreeNo ?? ""
-            )}
+                  ${escapeHtml(hardcodedCompany.tollFreeNo ?? "")}
                 </span>
 
                 <span class="contact-text">
                   Email :
                   <span class="email-link">
-                    ${escapeHtml(
-              hardcodedCompany.email
-            )}
+                    ${escapeHtml(hardcodedCompany.email)}
                   </span>
                 </span>
 
                 <span class="contact-text">
                   Website :
-                  ${escapeHtml(
-              hardcodedCompany.website ?? ""
-            )}
+                  ${escapeHtml(hardcodedCompany.website ?? "")}
                 </span>
 
                 <span style="float: right;" class="package-label">
@@ -7134,9 +6045,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              clientName
-            )}
+                        ${escapeHtml(clientName)}
                       </div>
                     </div>
 
@@ -7146,9 +6055,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              clientContact
-            )}
+                        ${escapeHtml(clientContact)}
                       </div>
                     </div>
                   </div>
@@ -7163,9 +6070,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              box.address
-            )}
+                        ${escapeHtml(box.address)}
                       </div>
                     </div>
 
@@ -7175,9 +6080,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              project.project_name
-            )}
+                        ${escapeHtml(project.project_name)}
                       </div>
                     </div>
                   </div>
@@ -7194,9 +6097,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              box.order_no
-            )}
+                        ${escapeHtml(box.order_no)}
                       </div>
                     </div>
 
@@ -7206,9 +6107,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              box.package_size
-            )}
+                        ${escapeHtml(box.package_size)}
                       </div>
                     </div>
 
@@ -7233,9 +6132,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              box.floor_name
-            )}
+                        ${escapeHtml(box.floor_name)}
                       </div>
                     </div>
 
@@ -7245,9 +6142,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(
-              box.product_box_count
-            )}
+                        ${escapeHtml(box.product_box_count)}
                       </div>
                     </div>
 
@@ -7257,9 +6152,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value filed-value-item-no">
-                        ${escapeHtml(
-              box.item_no
-            )}
+                        ${escapeHtml(box.item_no)}
                       </div>
                     </div>
                   </div>
@@ -7272,9 +6165,7 @@ export const generateProjectFullReportService = async (
                   <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
                     PRODUCT :
                     <span class="project-value">
-                    ${escapeHtml(
-              box.product_name
-            )}
+                    ${escapeHtml(box.product_name)}
                     </span>
                   </div>
 
@@ -7333,8 +6224,9 @@ export const generateProjectFullReportService = async (
                     </thead>
 
                     <tbody>
-                      ${componentRows ||
-              `
+                      ${
+                        componentRows ||
+                        `
                           <tr>
                             <td
                               colspan="5"
@@ -7344,7 +6236,7 @@ export const generateProjectFullReportService = async (
                             </td>
                           </tr>
                         `
-              }
+                      }
                     </tbody>
 
                     <tfoot>
@@ -7357,9 +6249,7 @@ export const generateProjectFullReportService = async (
                         </td>
 
                         <td class="qty-cell">
-                          ${formatQuantity(
-                box.total_quantity
-              )}
+                          ${formatQuantity(box.total_quantity)}
                         </td>
 
                         <td class="unit-cell">
@@ -7367,9 +6257,7 @@ export const generateProjectFullReportService = async (
                         </td>
 
                         <td class="total-cell">
-                          ${box.total_weight.toFixed(
-                2
-              )}KG
+                          ${box.total_weight.toFixed(2)}KG
                         </td>
                       </tr>
                     </tfoot>
@@ -7378,12 +6266,10 @@ export const generateProjectFullReportService = async (
                 </div>
               </section>
             `;
-          }
-        )
-      );
+      }),
+    );
 
-    const stickerPages =
-      stickerPagesArray.join("");
+    const stickerPages = stickerPagesArray.join("");
 
     /*
     |--------------------------------------------------------------------------
@@ -8094,34 +6980,25 @@ ${stickerPages}
     |--------------------------------------------------------------------------
     */
 
-    const fileName =
-      `report_${sanitizeFileName(
-        project.project_name
-      )}_${Date.now()}.pdf`;
+    const fileName = `report_${sanitizeFileName(
+      project.project_name,
+    )}_${Date.now()}.pdf`;
 
-    tempFilePath =
-      path.join(
-        tempDir,
-        fileName
-      );
+    tempFilePath = path.join(tempDir, fileName);
 
-    await generateCustomSizePdf(
-      html,
-      tempFilePath,
-      {
-        width: "3in",
-        height: "5in",
-        printBackground: true,
-        preferCSSPageSize: true,
+    await generateCustomSizePdf(html, tempFilePath, {
+      width: "3in",
+      height: "5in",
+      printBackground: true,
+      preferCSSPageSize: true,
 
-        margin: {
-          top: "0",
-          bottom: "0",
-          left: "0",
-          right: "0",
-        },
-      }
-    );
+      margin: {
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -8129,106 +7006,55 @@ ${stickerPages}
     |--------------------------------------------------------------------------
     */
 
-    const {
-      signedUrl,
-      wasabiKey,
-    } =
-      await uploadPdfAndGetSignedUrl(
-        tempFilePath,
-        vendor_id,
-        project_id,
-        fileName
-      );
+    const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
+      tempFilePath,
+      vendor_id,
+      project_id,
+      fileName,
+    );
 
     tempFilePath = null;
 
-    return validationResponse(
-      1,
-      "Project full report generated successfully",
-      {
-        download_url:
-          signedUrl,
+    return validationResponse(1, "Project full report generated successfully", {
+      download_url: signedUrl,
 
-        file_name:
-          fileName,
+      file_name: fileName,
 
-        wasabi_key:
-          wasabiKey,
+      wasabi_key: wasabiKey,
 
-        packing_type:
-          project.packing_type,
+      packing_type: project.packing_type,
 
-        total_boxes:
-          totalBoxes,
+      total_boxes: totalBoxes,
 
-        total_weight:
-          Number(
-            totalWeight.toFixed(
-              2
-            )
-          ),
-      }
-    );
-  } catch (
-  error
-  ) {
-    console.error(
-      "generateProjectFullReportService:",
-      error
-    );
+      total_weight: Number(totalWeight.toFixed(2)),
+    });
+  } catch (error: any) {
+    console.error("generateProjectFullReportService error:", error);
 
-    if (
-      tempFilePath &&
-      fs.existsSync(
-        tempFilePath
-      )
-    ) {
-      fs.unlinkSync(
-        tempFilePath
-      );
+    if (tempFilePath && fs.existsSync(tempFilePath)) {
+      fs.unlinkSync(tempFilePath);
     }
 
     return validationResponse(
       0,
-      "Failed to generate project report"
+      `Failed to generate project report: ${error?.message || String(error)}`
     );
   }
 };
 
-
-
-
-const formatReportDate = (
-  value:
-    | string
-    | Date
-    | null
-    | undefined
-) => {
+const formatReportDate = (value: string | Date | null | undefined) => {
   if (!value) {
     return "N/A";
   }
 
-  return new Date(
-    value
-  ).toLocaleDateString(
-    "en-GB",
-    {
-      day:
-        "2-digit",
+  return new Date(value).toLocaleDateString("en-GB", {
+    day: "2-digit",
 
-      month:
-        "short",
+    month: "short",
 
-      year:
-        "numeric",
-    }
-  );
+    year: "numeric",
+  });
 };
-
-
-
-
 
 type CustomPdfOptions = {
   width: string;
@@ -8249,16 +7075,14 @@ type CustomPdfOptions = {
   };
 };
 
-
 export const markItemSiteInService_old = async (
   unique_code: string,
   box_id: number,
   project_id: number,
   vendor_id: number,
-  user_id: number
+  user_id: number,
 ) => {
   try {
-
     // ── 1. Verify the box exists and is marked site_in ───────────────────────
     const box = await prisma.boxMaster.findFirst({
       where: {
@@ -8272,7 +7096,8 @@ export const markItemSiteInService_old = async (
     });
 
     if (!box) return validationResponse(0, "Box not found");
-    if (!box.site_in_at) return validationResponse(0, "Box has not been marked as site in yet");
+    if (!box.site_in_at)
+      return validationResponse(0, "Box has not been marked as site in yet");
 
     // ── 2. Look up cut_list by unique_code scoped to project + vendor ────────
     const cutList = await prisma.cutList.findFirst({
@@ -8284,7 +7109,8 @@ export const markItemSiteInService_old = async (
       select: { id: true, item_name: true, unique_code: true },
     });
 
-    if (!cutList) return validationResponse(0, "Item not found for this QR code");
+    if (!cutList)
+      return validationResponse(0, "Item not found for this QR code");
 
     // ── 3. Find the packaging machine ────────────────────────────────────────
     const packagingMachine = await prisma.machineMaster.findFirst({
@@ -8293,7 +7119,8 @@ export const markItemSiteInService_old = async (
       orderBy: { id: "asc" },
     });
 
-    if (!packagingMachine) return validationResponse(0, "Packaging machine not configured");
+    if (!packagingMachine)
+      return validationResponse(0, "Packaging machine not configured");
 
     // ── 4. Find the mapping row for this item IN THIS SPECIFIC BOX ──────────
     // A cut_list with qty > 1 creates multiple mapping rows — one per unit.
@@ -8302,13 +7129,13 @@ export const markItemSiteInService_old = async (
     const mapping = await prisma.cutListMachineMapping.findFirst({
       where: {
         cut_list_id: cutList.id,
-        box_id: box_id,       // ← scoped to this box
+        box_id: box_id, // ← scoped to this box
         project_id,
         vendor_id,
         machine_id: packagingMachine.id,
         expected_in: true,
         actual_in_at: { not: null }, // must have been scanned in
-        site_in_at: null,          // not yet received at site
+        site_in_at: null, // not yet received at site
       },
       select: {
         id: true,
@@ -8336,10 +7163,16 @@ export const markItemSiteInService_old = async (
         return validationResponse(0, "Item is not packed in this box");
       }
       if (!anyInBox.actual_in_at) {
-        return validationResponse(0, "Item has not been scanned into the box yet");
+        return validationResponse(
+          0,
+          "Item has not been scanned into the box yet",
+        );
       }
       // All units of this item in this box are already received
-      return validationResponse(0, "All units of this item are already marked as received at site");
+      return validationResponse(
+        0,
+        "All units of this item are already marked as received at site",
+      );
     }
 
     // ── 5. Mark site_in on this mapping row ──────────────────────────────────
@@ -8371,12 +7204,15 @@ export const markItemSiteInService_old = async (
       },
     });
 
-    const message = remaining > 0
-      ? `Item received. ${remaining} more unit${remaining > 1 ? "s" : ""} of this item pending`
-      : "Item marked as received at site";
+    const message =
+      remaining > 0
+        ? `Item received. ${remaining} more unit${remaining > 1 ? "s" : ""} of this item pending`
+        : "Item marked as received at site";
 
-    return validationResponse(1, message, { ...updated, remaining_units: remaining });
-
+    return validationResponse(1, message, {
+      ...updated,
+      remaining_units: remaining,
+    });
   } catch (error) {
     console.error("Error in markItemSiteInService:", error);
     return validationResponse(0, "Failed to mark item as received at site");
@@ -8387,7 +7223,7 @@ export const markItemSiteInService_old = async (
 export const getBoxSiteInStatusService_old = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   try {
     const box = await prisma.boxMaster.findFirst({
@@ -8409,7 +7245,8 @@ export const getBoxSiteInStatusService_old = async (
       orderBy: { id: "asc" },
     });
 
-    if (!packagingMachine) return validationResponse(0, "Packaging machine not configured");
+    if (!packagingMachine)
+      return validationResponse(0, "Packaging machine not configured");
 
     const items = await prisma.cutListMachineMapping.findMany({
       where: {
@@ -8458,7 +7295,6 @@ export const getBoxSiteInStatusService_old = async (
         is_received: i.site_in_at !== null,
       })),
     });
-
   } catch (error) {
     console.error("Error in getBoxSiteInStatusService:", error);
     return validationResponse(0, "Failed to fetch box site in status");
@@ -8468,46 +7304,37 @@ export const getBoxSiteInStatusService_old = async (
 const generateCustomSizePdf = async (
   html: string,
   outputPath: string,
-  options: CustomPdfOptions
+  options: CustomPdfOptions,
 ) => {
   const t0 = Date.now();
   const contentTimeoutMs = 45000;
   const assetWaitTimeoutMs = 15000;
   console.log(`[pdf-timing] launch:start`);
 
-  const browser =
-    await puppeteer.launch({
-      headless: true,
-
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-      ],
-    });
+  const browser = await puppeteer.launch(getPuppeteerOptions());
 
   console.log(`[pdf-timing] launch:done +${Date.now() - t0}ms`);
 
   try {
-    const page =
-      await browser.newPage();
+    const page = await browser.newPage();
 
     console.log(`[pdf-timing] newPage:done +${Date.now() - t0}ms`);
 
     page.on("request", (req) => {
       console.log(
-        `[pdf-timing] request-start url=${req.url()} type=${req.resourceType()} +${Date.now() - t0}ms`
+        `[pdf-timing] request-start url=${req.url()} type=${req.resourceType()} +${Date.now() - t0}ms`,
       );
     });
 
     page.on("requestfailed", (req) => {
       console.log(
-        `[pdf-timing] requestfailed url=${req.url()} errorText=${req.failure()?.errorText} +${Date.now() - t0}ms`
+        `[pdf-timing] requestfailed url=${req.url()} errorText=${req.failure()?.errorText} +${Date.now() - t0}ms`,
       );
     });
 
     page.on("requestfinished", (req) => {
       console.log(
-        `[pdf-timing] requestfinished url=${req.url()} +${Date.now() - t0}ms`
+        `[pdf-timing] requestfinished url=${req.url()} +${Date.now() - t0}ms`,
       );
     });
 
@@ -8518,104 +7345,76 @@ const generateCustomSizePdf = async (
     page.setDefaultNavigationTimeout(contentTimeoutMs);
     page.setDefaultTimeout(contentTimeoutMs);
 
-    await page.setContent(
-      html,
-      {
-        waitUntil:
-          "domcontentloaded",
-        timeout:
-          contentTimeoutMs,
-      }
-    );
+    await page.setContent(html, {
+      waitUntil: "domcontentloaded",
+      timeout: contentTimeoutMs,
+    });
 
     console.log(`[pdf-timing] setContent:done +${Date.now() - t0}ms`);
 
     try {
-      await page.evaluate(
-        async (timeoutMs) => {
-          const fonts =
-            typeof document.fonts?.ready?.then === "function"
-              ? document.fonts.ready.catch(() => undefined)
-              : Promise.resolve();
+      await page.evaluate(async (timeoutMs) => {
+        const fonts =
+          typeof document.fonts?.ready?.then === "function"
+            ? document.fonts.ready.catch(() => undefined)
+            : Promise.resolve();
 
-          const images =
-            Promise.all(
-              Array.from(document.images).map(async (image) => {
-                if (image.complete) {
-                  return;
-                }
+        const images = Promise.all(
+          Array.from(document.images).map(async (image) => {
+            if (image.complete) {
+              return;
+            }
 
-                await new Promise<void>((resolve) => {
-                  const cleanup = () => {
-                    image.removeEventListener("load", onDone);
-                    image.removeEventListener("error", onDone);
-                  };
+            await new Promise<void>((resolve) => {
+              const cleanup = () => {
+                image.removeEventListener("load", onDone);
+                image.removeEventListener("error", onDone);
+              };
 
-                  const onDone = () => {
-                    cleanup();
-                    resolve();
-                  };
+              const onDone = () => {
+                cleanup();
+                resolve();
+              };
 
-                  image.addEventListener("load", onDone, { once: true });
-                  image.addEventListener("error", onDone, { once: true });
-                });
-              })
-            );
+              image.addEventListener("load", onDone, { once: true });
+              image.addEventListener("error", onDone, { once: true });
+            });
+          }),
+        );
 
-          await Promise.race([
-            Promise.all([fonts, images]),
-            new Promise((resolve) => setTimeout(resolve, timeoutMs)),
-          ]);
-        },
-        assetWaitTimeoutMs
-      );
+        await Promise.race([
+          Promise.all([fonts, images]),
+          new Promise((resolve) => setTimeout(resolve, timeoutMs)),
+        ]);
+      }, assetWaitTimeoutMs);
 
       console.log(`[pdf-timing] assets:ready +${Date.now() - t0}ms`);
     } catch (error) {
       console.warn(
-        `[pdf-timing] assets:wait-skipped error=${error instanceof Error ? error.message : String(error)} +${Date.now() - t0}ms`
+        `[pdf-timing] assets:wait-skipped error=${error instanceof Error ? error.message : String(error)} +${Date.now() - t0}ms`,
       );
     }
 
     await page.pdf({
-      path:
-        outputPath,
+      path: outputPath,
 
-      width:
-        options.width,
+      width: options.width,
 
-      height:
-        options.height,
+      height: options.height,
 
-      printBackground:
-        options
-          .printBackground ??
-        true,
+      printBackground: options.printBackground ?? true,
 
       margin: {
-        top:
-          options.margin
-            ?.top ??
-          "0",
+        top: options.margin?.top ?? "0",
 
-        bottom:
-          options.margin
-            ?.bottom ??
-          "0",
+        bottom: options.margin?.bottom ?? "0",
 
-        left:
-          options.margin
-            ?.left ??
-          "0",
+        left: options.margin?.left ?? "0",
 
-        right:
-          options.margin
-            ?.right ??
-          "0",
+        right: options.margin?.right ?? "0",
       },
 
-      preferCSSPageSize:
-        true,
+      preferCSSPageSize: true,
     });
 
     console.log(`[pdf-timing] pdf:done +${Date.now() - t0}ms`);
@@ -8627,40 +7426,27 @@ const generateCustomSizePdf = async (
 
 const fetchImageAsDataUrl = async (
   imageUrl: string,
-  timeoutMs: number = 8000
+  timeoutMs: number = 8000,
 ) => {
   const controller = new AbortController();
-  const timeout = setTimeout(
-    () => controller.abort(),
-    timeoutMs
-  );
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetch(
-      imageUrl,
-      {
-        signal:
-          controller.signal,
-      }
-    );
+    const response = await fetch(imageUrl, {
+      signal: controller.signal,
+    });
 
     if (!response.ok) {
-      throw new Error(
-        `HTTP ${response.status}`
-      );
+      throw new Error(`HTTP ${response.status}`);
     }
 
-    const contentType =
-      response.headers.get(
-        "content-type"
-      ) || "image/png";
+    const contentType = response.headers.get("content-type") || "image/png";
 
-    const arrayBuffer =
-      await response.arrayBuffer();
+    const arrayBuffer = await response.arrayBuffer();
 
-    return `data:${contentType};base64,${Buffer.from(
-      arrayBuffer
-    ).toString("base64")}`;
+    return `data:${contentType};base64,${Buffer.from(arrayBuffer).toString(
+      "base64",
+    )}`;
   } finally {
     clearTimeout(timeout);
   }
@@ -8671,11 +7457,8 @@ type BoxInfoValueInput = {
   field_value?: string | null;
 };
 
-const normalizeValue = (
-  value: string | null | undefined
-) => {
-  const trimmed =
-    String(value ?? "").trim();
+const normalizeValue = (value: string | null | undefined) => {
+  const trimmed = String(value ?? "").trim();
 
   return trimmed || null;
 };
@@ -8683,37 +7466,35 @@ const normalizeValue = (
 const getBoxInfoValuesFormatted = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-  const rows =
-    await prisma.boxInfoFieldValue.findMany({
-      where: {
-        box_id,
-        project_id,
-        vendor_id,
-      },
+  const rows = await prisma.boxInfoFieldValue.findMany({
+    where: {
+      box_id,
+      project_id,
+      vendor_id,
+    },
 
-      include: {
-        field: {
-          select: {
-            id: true,
-            field_label: true,
-            field_key: true,
-            field_type: true,
-            is_required: true,
-            sort_order: true,
-            active: true,
-          },
+    include: {
+      field: {
+        select: {
+          id: true,
+          field_label: true,
+          field_key: true,
+          field_type: true,
+          is_required: true,
+          sort_order: true,
+          active: true,
         },
       },
-    });
+    },
+  });
 
   return rows
     .filter((row) => row.field?.active)
     .sort(
       (a, b) =>
-        Number(a.field.sort_order || 0) -
-        Number(b.field.sort_order || 0)
+        Number(a.field.sort_order || 0) - Number(b.field.sort_order || 0),
     )
     .map((row) => ({
       id: row.id,
@@ -8742,43 +7523,37 @@ const saveBoxInfoValuesTx = async ({
   values: BoxInfoValueInput[];
   user_id?: number | null;
 }) => {
-  const configuredFields =
-    await tx.projectBoxInfoField.findMany({
-      where: {
-        project_id,
-        vendor_id,
-        active: true,
+  const configuredFields = await tx.projectBoxInfoField.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      active: true,
+    },
+
+    orderBy: [
+      {
+        sort_order: "asc",
       },
-
-      orderBy: [
-        {
-          sort_order: "asc",
-        },
-        {
-          id: "asc",
-        },
-      ],
-
-      select: {
-        id: true,
-        field_label: true,
-        is_required: true,
+      {
+        id: "asc",
       },
-    });
+    ],
 
-  const valueMap =
-    new Map<number, string | null>();
+    select: {
+      id: true,
+      field_label: true,
+      is_required: true,
+    },
+  });
+
+  const valueMap = new Map<number, string | null>();
 
   for (const item of values || []) {
-    valueMap.set(
-      Number(item.field_id),
-      normalizeValue(item.field_value)
-    );
+    valueMap.set(Number(item.field_id), normalizeValue(item.field_value));
   }
 
   for (const field of configuredFields) {
-    const value =
-      valueMap.get(field.id) || null;
+    const value = valueMap.get(field.id) || null;
 
     if (field.is_required && !value) {
       throw new Error(`${field.field_label} is required`);
@@ -8786,8 +7561,7 @@ const saveBoxInfoValuesTx = async ({
   }
 
   for (const field of configuredFields) {
-    const value =
-      valueMap.get(field.id) || null;
+    const value = valueMap.get(field.id) || null;
 
     await tx.boxInfoFieldValue.upsert({
       where: {
@@ -8814,39 +7588,37 @@ const saveBoxInfoValuesTx = async ({
   }
 };
 
-
 export const getProjectBoxInfoFieldsService = async (
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-  const fields =
-    await prisma.projectBoxInfoField.findMany({
-      where: {
-        project_id,
-        vendor_id,
-        active: true,
-      },
+  const fields = await prisma.projectBoxInfoField.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      active: true,
+    },
 
-      orderBy: [
-        {
-          sort_order: "asc",
-        },
-        {
-          id: "asc",
-        },
-      ],
-
-      select: {
-        id: true,
-        project_id: true,
-        vendor_id: true,
-        field_label: true,
-        field_key: true,
-        field_type: true,
-        is_required: true,
-        sort_order: true,
+    orderBy: [
+      {
+        sort_order: "asc",
       },
-    });
+      {
+        id: "asc",
+      },
+    ],
+
+    select: {
+      id: true,
+      project_id: true,
+      vendor_id: true,
+      field_label: true,
+      field_key: true,
+      field_type: true,
+      is_required: true,
+      sort_order: true,
+    },
+  });
 
   return fields;
 };
@@ -8854,38 +7626,37 @@ export const getProjectBoxInfoFieldsService = async (
 export const getBoxInfoValuesService = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
-  const fields =
-    await prisma.projectBoxInfoField.findMany({
-      where: {
-        project_id,
-        vendor_id,
-        active: true,
+  const fields = await prisma.projectBoxInfoField.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      active: true,
+    },
+
+    orderBy: [
+      {
+        sort_order: "asc",
       },
+      {
+        id: "asc",
+      },
+    ],
 
-      orderBy: [
-        {
-          sort_order: "asc",
+    include: {
+      values: {
+        where: {
+          box_id,
         },
-        {
-          id: "asc",
-        },
-      ],
 
-      include: {
-        values: {
-          where: {
-            box_id,
-          },
-
-          select: {
-            id: true,
-            field_value: true,
-          },
+        select: {
+          id: true,
+          field_value: true,
         },
       },
-    });
+    },
+  });
 
   return fields.map((field) => ({
     field_id: field.id,
@@ -8894,49 +7665,35 @@ export const getBoxInfoValuesService = async (
     field_type: field.field_type,
     is_required: field.is_required,
     sort_order: field.sort_order,
-    field_value:
-      field.values?.[0]?.field_value || "",
+    field_value: field.values?.[0]?.field_value || "",
   }));
 };
 
-
-const isManualCreatedMapping = (
-  value: string | null | undefined
-) => {
-  return String(value ?? "")
-    .trim()
-    .toLowerCase() === "manual";
+const isManualCreatedMapping = (value: string | null | undefined) => {
+  return (
+    String(value ?? "")
+      .trim()
+      .toLowerCase() === "manual"
+  );
 };
 
 const clampReceivedQty = (
   receivedQty: number | null | undefined,
-  packedQty: number
+  packedQty: number,
 ) => {
-  const normalizedPackedQty =
-    Math.max(
-      0,
-      Number(packedQty || 0)
-    );
+  const normalizedPackedQty = Math.max(0, Number(packedQty || 0));
 
-  const normalizedReceivedQty =
-    Math.max(
-      0,
-      Number(receivedQty ?? 0)
-    );
+  const normalizedReceivedQty = Math.max(0, Number(receivedQty ?? 0));
 
-  return Math.min(
-    normalizedReceivedQty,
-    normalizedPackedQty
-  );
+  return Math.min(normalizedReceivedQty, normalizedPackedQty);
 };
-
 
 export const markItemSiteInService = async (
   unique_code: string,
   box_id: number,
   project_id: number,
   vendor_id: number,
-  user_id: number
+  user_id: number,
 ) => {
   try {
     /*
@@ -8945,34 +7702,27 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-          box_status: "packed",
-        },
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+        box_status: "packed",
+      },
 
-        select: {
-          id: true,
-          site_in_at: true,
-        },
-      });
+      select: {
+        id: true,
+        site_in_at: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
     if (!box.site_in_at) {
-      return validationResponse(
-        0,
-        "Box has not been marked as site in yet"
-      );
+      return validationResponse(0, "Box has not been marked as site in yet");
     }
 
     /*
@@ -8981,23 +7731,19 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const user =
-      await prisma.userMaster.findFirst({
-        where: {
-          id: user_id,
-          vendor_id,
-        },
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: user_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-        },
-      });
+      select: {
+        id: true,
+      },
+    });
 
     if (!user) {
-      return validationResponse(
-        0,
-        "Invalid user"
-      );
+      return validationResponse(0, "Invalid user");
     }
 
     /*
@@ -9006,29 +7752,25 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const cutList =
-      await prisma.cutList.findFirst({
-        where: {
-          unique_code,
-          project_id,
-          vendor_id,
-        },
+    const cutList = await prisma.cutList.findFirst({
+      where: {
+        unique_code,
+        project_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-          item_name: true,
-          unique_code: true,
+      select: {
+        id: true,
+        item_name: true,
+        unique_code: true,
 
-          include_in_packing: true,
-          scan_pack_validate: true,
-        },
-      });
+        include_in_packing: true,
+        scan_pack_validate: true,
+      },
+    });
 
     if (!cutList) {
-      return validationResponse(
-        0,
-        "Item not found for this QR code"
-      );
+      return validationResponse(0, "Item not found for this QR code");
     }
 
     /*
@@ -9043,7 +7785,7 @@ export const markItemSiteInService = async (
     ) {
       return validationResponse(
         0,
-        "This item was packed manually. Use Verify Manual Items."
+        "This item was packed manually. Use Verify Manual Items.",
       );
     }
 
@@ -9053,27 +7795,23 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packagingMachine =
-      await prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 18,
+      },
 
-        select: {
-          id: true,
-        },
+      select: {
+        id: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
     /*
@@ -9088,56 +7826,49 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mapping =
-      await prisma.cutListMachineMapping.findFirst({
-        where: {
-          cut_list_id:
-            cutList.id,
+    const mapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        cut_list_id: cutList.id,
 
-          box_id,
+        box_id,
 
-          project_id,
-          vendor_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
+        actual_in_at: {
+          not: null,
+        },
+
+        site_in_at: null,
+
+        OR: [
+          {
+            row_created_source: null,
           },
-
-          site_in_at:
-            null,
-
-          OR: [
-            {
-              row_created_source:
-                null,
+          {
+            row_created_source: {
+              not: "Manual",
             },
-            {
-              row_created_source: {
-                not:
-                  "Manual",
-              },
-            },
-          ],
-        },
+          },
+        ],
+      },
 
-        select: {
-          id: true,
-          box_id: true,
-          actual_in_at: true,
-          site_in_at: true,
-          row_created_source: true,
-        },
+      select: {
+        id: true,
+        box_id: true,
+        actual_in_at: true,
+        site_in_at: true,
+        row_created_source: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!mapping) {
       /*
@@ -9146,65 +7877,56 @@ export const markItemSiteInService = async (
       |--------------------------------------------------------------------------
       */
 
-      const anyInBox =
-        await prisma.cutListMachineMapping.findFirst({
-          where: {
-            cut_list_id:
-              cutList.id,
+      const anyInBox = await prisma.cutListMachineMapping.findFirst({
+        where: {
+          cut_list_id: cutList.id,
 
-            box_id,
+          box_id,
 
-            project_id,
-            vendor_id,
+          project_id,
+          vendor_id,
 
-            machine_id:
-              packagingMachine.id,
+          machine_id: packagingMachine.id,
 
-            expected_in:
-              true,
+          expected_in: true,
 
-            OR: [
-              {
-                row_created_source:
-                  null,
+          OR: [
+            {
+              row_created_source: null,
+            },
+            {
+              row_created_source: {
+                not: "Manual",
               },
-              {
-                row_created_source: {
-                  not:
-                    "Manual",
-                },
-              },
-            ],
-          },
+            },
+          ],
+        },
 
-          select: {
-            id: true,
-            site_in_at: true,
-            actual_in_at: true,
-          },
+        select: {
+          id: true,
+          site_in_at: true,
+          actual_in_at: true,
+        },
 
-          orderBy: {
-            id: "asc",
-          },
-        });
+        orderBy: {
+          id: "asc",
+        },
+      });
 
       if (!anyInBox) {
-        return validationResponse(
-          0,
-          "Item is not packed in this box"
-        );
+        return validationResponse(0, "Item is not packed in this box");
       }
 
       if (!anyInBox.actual_in_at) {
         return validationResponse(
           0,
-          "Item has not been scanned into the box yet"
+          "Item has not been scanned into the box yet",
         );
       }
 
       return validationResponse(
         0,
-        "All units of this item are already marked as received at site"
+        "All units of this item are already marked as received at site",
       );
     }
 
@@ -9214,33 +7936,30 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const updated =
-      await prisma.cutListMachineMapping.update({
-        where: {
-          id: mapping.id,
-        },
+    const updated = await prisma.cutListMachineMapping.update({
+      where: {
+        id: mapping.id,
+      },
 
-        data: {
-          site_in_at:
-            new Date(),
+      data: {
+        site_in_at: new Date(),
 
-          site_in_by:
-            user_id,
-        },
+        site_in_by: user_id,
+      },
 
-        select: {
-          id: true,
-          site_in_at: true,
-          site_in_by: true,
+      select: {
+        id: true,
+        site_in_at: true,
+        site_in_by: true,
 
-          cut_list: {
-            select: {
-              item_name: true,
-              unique_code: true,
-            },
+        cut_list: {
+          select: {
+            item_name: true,
+            unique_code: true,
           },
         },
-      });
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -9248,82 +7967,61 @@ export const markItemSiteInService = async (
     |--------------------------------------------------------------------------
     */
 
-    const remaining =
-      await prisma.cutListMachineMapping.count({
-        where: {
-          cut_list_id:
-            cutList.id,
+    const remaining = await prisma.cutListMachineMapping.count({
+      where: {
+        cut_list_id: cutList.id,
 
-          box_id,
+        box_id,
 
-          project_id,
-          vendor_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
-          },
-
-          site_in_at:
-            null,
-
-          OR: [
-            {
-              row_created_source:
-                null,
-            },
-            {
-              row_created_source: {
-                not:
-                  "Manual",
-              },
-            },
-          ],
+        actual_in_at: {
+          not: null,
         },
-      });
+
+        site_in_at: null,
+
+        OR: [
+          {
+            row_created_source: null,
+          },
+          {
+            row_created_source: {
+              not: "Manual",
+            },
+          },
+        ],
+      },
+    });
 
     const message =
       remaining > 0
         ? `Item received. ${remaining} more unit${
-            remaining > 1
-              ? "s"
-              : ""
+            remaining > 1 ? "s" : ""
           } of this item pending`
         : "Item marked as received at site";
 
-    return validationResponse(
-      1,
-      message,
-      {
-        ...updated,
+    return validationResponse(1, message, {
+      ...updated,
 
-        remaining_units:
-          remaining,
-      }
-    );
+      remaining_units: remaining,
+    });
   } catch (error) {
-    console.error(
-      "Error in markItemSiteInService:",
-      error
-    );
+    console.error("Error in markItemSiteInService:", error);
 
-    return validationResponse(
-      0,
-      "Failed to mark item as received at site"
-    );
+    return validationResponse(0, "Failed to mark item as received at site");
   }
 };
-
 
 export const getManualBoxSiteInItemsService = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   try {
     /*
@@ -9332,38 +8030,31 @@ export const getManualBoxSiteInItemsService = async (
     |--------------------------------------------------------------------------
     */
 
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-          box_status: "packed",
-        },
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+        box_status: "packed",
+      },
 
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          site_in_at: true,
-          site_in_by: true,
-          factory_out_at: true,
-        },
-      });
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        site_in_at: true,
+        site_in_by: true,
+        factory_out_at: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
     if (!box.site_in_at) {
-      return validationResponse(
-        0,
-        "Box has not been marked as site in yet"
-      );
+      return validationResponse(0, "Box has not been marked as site in yet");
     }
 
     /*
@@ -9372,28 +8063,24 @@ export const getManualBoxSiteInItemsService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packagingMachine =
-      await prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 18,
+      },
 
-        select: {
-          id: true,
-          machine_name: true,
-        },
+      select: {
+        id: true,
+        machine_name: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
     /*
@@ -9409,72 +8096,68 @@ export const getManualBoxSiteInItemsService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          box_id,
-          project_id,
-          vendor_id,
+    const mappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
-          },
-
-          row_created_source:
-            "Manual",
+        actual_in_at: {
+          not: null,
         },
 
-        select: {
-          id: true,
-          cut_list_id: true,
+        row_created_source: "Manual",
+      },
 
-          qty: true,
-          received_qty: true,
+      select: {
+        id: true,
+        cut_list_id: true,
 
-          weight: true,
+        qty: true,
+        received_qty: true,
 
-          actual_in_at: true,
+        weight: true,
 
-          site_in_at: true,
-          site_in_by: true,
+        actual_in_at: true,
 
-          row_created_source: true,
+        site_in_at: true,
+        site_in_by: true,
 
-          cut_list: {
-            select: {
-              id: true,
-              item_name: true,
-              description: true,
+        row_created_source: true,
 
-              unique_code: true,
-              unique_code_2: true,
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            description: true,
 
-              category_name: true,
-              group_name: true,
+            unique_code: true,
+            unique_code_2: true,
 
-              length: true,
-              width: true,
-              thickness: true,
+            category_name: true,
+            group_name: true,
 
-              qty: true,
-              weight: true,
+            length: true,
+            width: true,
+            thickness: true,
 
-              include_in_packing: true,
-              scan_pack_validate: true,
-            },
+            qty: true,
+            weight: true,
+
+            include_in_packing: true,
+            scan_pack_validate: true,
           },
         },
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -9483,14 +8166,7 @@ export const getManualBoxSiteInItemsService = async (
     */
 
     const siteInUserIds = [
-      ...new Set(
-        mappings
-          .map(
-            (mapping) =>
-              mapping.site_in_by
-          )
-          .filter(Boolean)
-      ),
+      ...new Set(mappings.map((mapping) => mapping.site_in_by).filter(Boolean)),
     ] as number[];
 
     const users =
@@ -9498,8 +8174,7 @@ export const getManualBoxSiteInItemsService = async (
         ? await prisma.userMaster.findMany({
             where: {
               id: {
-                in:
-                  siteInUserIds,
+                in: siteInUserIds,
               },
             },
 
@@ -9510,15 +8185,9 @@ export const getManualBoxSiteInItemsService = async (
           })
         : [];
 
-    const userMap =
-      new Map<number, string>(
-        users.map(
-          (user) => [
-            user.id,
-            user.user_name,
-          ]
-        )
-      );
+    const userMap = new Map<number, string>(
+      users.map((user) => [user.id, user.user_name]),
+    );
 
     /*
     |--------------------------------------------------------------------------
@@ -9526,99 +8195,47 @@ export const getManualBoxSiteInItemsService = async (
     |--------------------------------------------------------------------------
     */
 
-    const items =
-      mappings.map(
-        (mapping) => {
-          const packedQty =
-            Math.max(
-              0,
-              Number(
-                mapping.qty ??
-                0
-              )
-            );
+    const items = mappings.map((mapping) => {
+      const packedQty = Math.max(0, Number(mapping.qty ?? 0));
 
-          const receivedQty =
-            clampReceivedQty(
-              mapping.received_qty,
-              packedQty
-            );
+      const receivedQty = clampReceivedQty(mapping.received_qty, packedQty);
 
-          const pendingQty =
-            Math.max(
-              packedQty -
-                receivedQty,
-              0
-            );
+      const pendingQty = Math.max(packedQty - receivedQty, 0);
 
-          const isVerified =
-            mapping.received_qty !==
-            null;
+      const isVerified = mapping.received_qty !== null;
 
-          const isFullyReceived =
-            packedQty > 0 &&
-            receivedQty >=
-              packedQty;
+      const isFullyReceived = packedQty > 0 && receivedQty >= packedQty;
 
-          const perItemWeight =
-            Number(
-              mapping.weight ||
-              0
-            );
+      const perItemWeight = Number(mapping.weight || 0);
 
-          return {
-            mapping_id:
-              mapping.id,
+      return {
+        mapping_id: mapping.id,
 
-            cut_list_id:
-              mapping.cut_list_id,
+        cut_list_id: mapping.cut_list_id,
 
-            item_name:
-              mapping.cut_list
-                .item_name,
+        item_name: mapping.cut_list.item_name,
 
-            description:
-              mapping.cut_list
-                .description,
+        description: mapping.cut_list.description,
 
-            unique_code:
-              mapping.cut_list
-                .unique_code,
+        unique_code: mapping.cut_list.unique_code,
 
-            unique_code_2:
-              mapping.cut_list
-                .unique_code_2,
+        unique_code_2: mapping.cut_list.unique_code_2,
 
-            category_name:
-              mapping.cut_list
-                .category_name,
+        category_name: mapping.cut_list.category_name,
 
-            group_name:
-              mapping.cut_list
-                .group_name,
+        group_name: mapping.cut_list.group_name,
 
-            length:
-              mapping.cut_list
-                .length,
+        length: mapping.cut_list.length,
 
-            width:
-              mapping.cut_list
-                .width,
+        width: mapping.cut_list.width,
 
-            thickness:
-              mapping.cut_list
-                .thickness,
+        thickness: mapping.cut_list.thickness,
 
-            packed_qty:
-              packedQty,
+        packed_qty: packedQty,
 
-            received_qty:
-              mapping.received_qty ===
-              null
-                ? null
-                : receivedQty,
+        received_qty: mapping.received_qty === null ? null : receivedQty,
 
-            /*
+        /*
             |--------------------------------------------------------------------------
             | Initial textbox value:
             |
@@ -9627,58 +8244,32 @@ export const getManualBoxSiteInItemsService = async (
             |--------------------------------------------------------------------------
             */
 
-            suggested_received_qty:
-              mapping.received_qty ===
-              null
-                ? packedQty
-                : receivedQty,
+        suggested_received_qty:
+          mapping.received_qty === null ? packedQty : receivedQty,
 
-            pending_qty:
-              pendingQty,
+        pending_qty: pendingQty,
 
-            is_verified:
-              isVerified,
+        is_verified: isVerified,
 
-            is_fully_received:
-              isFullyReceived,
+        is_fully_received: isFullyReceived,
 
-            per_item_weight:
-              perItemWeight,
+        per_item_weight: perItemWeight,
 
-            packed_weight:
-              Number(
-                (
-                  perItemWeight *
-                  packedQty
-                ).toFixed(4)
-              ),
+        packed_weight: Number((perItemWeight * packedQty).toFixed(4)),
 
-            received_weight:
-              Number(
-                (
-                  perItemWeight *
-                  receivedQty
-                ).toFixed(4)
-              ),
+        received_weight: Number((perItemWeight * receivedQty).toFixed(4)),
 
-            site_in_at:
-              mapping.site_in_at,
+        site_in_at: mapping.site_in_at,
 
-            site_in_by:
-              mapping.site_in_by,
+        site_in_by: mapping.site_in_by,
 
-            site_in_by_name:
-              mapping.site_in_by
-                ? userMap.get(
-                    mapping.site_in_by
-                  ) ?? null
-                : null,
+        site_in_by_name: mapping.site_in_by
+          ? (userMap.get(mapping.site_in_by) ?? null)
+          : null,
 
-            row_created_source:
-              mapping.row_created_source,
-          };
-        }
-      );
+        row_created_source: mapping.row_created_source,
+      };
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -9686,103 +8277,49 @@ export const getManualBoxSiteInItemsService = async (
     |--------------------------------------------------------------------------
     */
 
-    const totalQty =
-      items.reduce(
-        (
-          sum,
-          item
-        ) =>
-          sum +
-          item.packed_qty,
-        0
-      );
+    const totalQty = items.reduce((sum, item) => sum + item.packed_qty, 0);
 
-    const receivedQty =
-      items.reduce(
-        (
-          sum,
-          item
-        ) =>
-          sum +
-          Number(
-            item.received_qty ??
-            0
-          ),
-        0
-      );
-
-    const pendingQty =
-      Math.max(
-        totalQty -
-          receivedQty,
-        0
-      );
-
-    const verifiedRows =
-      items.filter(
-        (item) =>
-          item.is_verified
-      ).length;
-
-    const fullyReceivedRows =
-      items.filter(
-        (item) =>
-          item.is_fully_received
-      ).length;
-
-    return validationResponse(
-      1,
-      "Manual box items fetched",
-      {
-        box,
-
-        summary: {
-          total_products:
-            items.length,
-
-          total_qty:
-            totalQty,
-
-          received_qty:
-            receivedQty,
-
-          pending_qty:
-            pendingQty,
-
-          verified_products:
-            verifiedRows,
-
-          fully_received_products:
-            fullyReceivedRows,
-
-          progress_pct:
-            totalQty > 0
-              ? Math.round(
-                  (
-                    receivedQty /
-                    totalQty
-                  ) *
-                    100
-                )
-              : 0,
-        },
-
-        items,
-      }
-    );
-  } catch (error) {
-    console.error(
-      "Error in getManualBoxSiteInItemsService:",
-      error
-    );
-
-    return validationResponse(
+    const receivedQty = items.reduce(
+      (sum, item) => sum + Number(item.received_qty ?? 0),
       0,
-      "Failed to fetch manual items"
     );
+
+    const pendingQty = Math.max(totalQty - receivedQty, 0);
+
+    const verifiedRows = items.filter((item) => item.is_verified).length;
+
+    const fullyReceivedRows = items.filter(
+      (item) => item.is_fully_received,
+    ).length;
+
+    return validationResponse(1, "Manual box items fetched", {
+      box,
+
+      summary: {
+        total_products: items.length,
+
+        total_qty: totalQty,
+
+        received_qty: receivedQty,
+
+        pending_qty: pendingQty,
+
+        verified_products: verifiedRows,
+
+        fully_received_products: fullyReceivedRows,
+
+        progress_pct:
+          totalQty > 0 ? Math.round((receivedQty / totalQty) * 100) : 0,
+      },
+
+      items,
+    });
+  } catch (error) {
+    console.error("Error in getManualBoxSiteInItemsService:", error);
+
+    return validationResponse(0, "Failed to fetch manual items");
   }
 };
-
 
 export const verifyManualBoxSiteInItemService = async (
   mapping_id: number,
@@ -9790,7 +8327,7 @@ export const verifyManualBoxSiteInItemService = async (
   project_id: number,
   vendor_id: number,
   user_id: number,
-  received_qty: number
+  received_qty: number,
 ) => {
   try {
     /*
@@ -9799,15 +8336,10 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    if (
-      !Number.isInteger(
-        received_qty
-      ) ||
-      received_qty < 0
-    ) {
+    if (!Number.isInteger(received_qty) || received_qty < 0) {
       return validationResponse(
         0,
-        "received_qty must be a whole number greater than or equal to 0"
+        "received_qty must be a whole number greater than or equal to 0",
       );
     }
 
@@ -9817,35 +8349,28 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-          box_status: "packed",
-        },
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+        box_status: "packed",
+      },
 
-        select: {
-          id: true,
-          box_name: true,
-          site_in_at: true,
-        },
-      });
+      select: {
+        id: true,
+        box_name: true,
+        site_in_at: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
     if (!box.site_in_at) {
-      return validationResponse(
-        0,
-        "Box has not been marked as site in yet"
-      );
+      return validationResponse(0, "Box has not been marked as site in yet");
     }
 
     /*
@@ -9854,24 +8379,20 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const user =
-      await prisma.userMaster.findFirst({
-        where: {
-          id: user_id,
-          vendor_id,
-        },
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: user_id,
+        vendor_id,
+      },
 
-        select: {
-          id: true,
-          user_name: true,
-        },
-      });
+      select: {
+        id: true,
+        user_name: true,
+      },
+    });
 
     if (!user) {
-      return validationResponse(
-        0,
-        "Invalid user"
-      );
+      return validationResponse(0, "Invalid user");
     }
 
     /*
@@ -9880,27 +8401,23 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const packagingMachine =
-      await prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 18,
+      },
 
-        select: {
-          id: true,
-        },
+      select: {
+        id: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
     /*
@@ -9909,73 +8426,55 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const mapping =
-      await prisma.cutListMachineMapping.findFirst({
-        where: {
-          id:
-            mapping_id,
+    const mapping = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        id: mapping_id,
 
-          box_id,
+        box_id,
 
-          project_id,
-          vendor_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
-          },
-
-          row_created_source:
-            "Manual",
+        actual_in_at: {
+          not: null,
         },
 
-        select: {
-          id: true,
-          cut_list_id: true,
+        row_created_source: "Manual",
+      },
 
-          qty: true,
-          received_qty: true,
+      select: {
+        id: true,
+        cut_list_id: true,
 
-          site_in_at: true,
-          site_in_by: true,
+        qty: true,
+        received_qty: true,
 
-          cut_list: {
-            select: {
-              item_name: true,
-              unique_code: true,
-            },
+        site_in_at: true,
+        site_in_by: true,
+
+        cut_list: {
+          select: {
+            item_name: true,
+            unique_code: true,
           },
         },
-      });
+      },
+    });
 
     if (!mapping) {
-      return validationResponse(
-        0,
-        "Manual item not found in this box"
-      );
+      return validationResponse(0, "Manual item not found in this box");
     }
 
-    const packedQty =
-      Math.max(
-        0,
-        Number(
-          mapping.qty ??
-          0
-        )
-      );
+    const packedQty = Math.max(0, Number(mapping.qty ?? 0));
 
-    if (
-      received_qty >
-      packedQty
-    ) {
+    if (received_qty > packedQty) {
       return validationResponse(
         0,
-        `Received quantity cannot be greater than packed quantity (${packedQty})`
+        `Received quantity cannot be greater than packed quantity (${packedQty})`,
       );
     }
 
@@ -9992,55 +8491,41 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const now =
-      new Date();
+    const now = new Date();
 
-    const updated =
-      await prisma.cutListMachineMapping.update({
-        where: {
-          id:
-            mapping.id,
-        },
+    const updated = await prisma.cutListMachineMapping.update({
+      where: {
+        id: mapping.id,
+      },
 
-        data: {
-          received_qty,
+      data: {
+        received_qty,
 
-          site_in_at:
-            received_qty > 0
-              ? now
-              : null,
+        site_in_at: received_qty > 0 ? now : null,
 
-          site_in_by:
-            received_qty > 0
-              ? user_id
-              : null,
-        },
+        site_in_by: received_qty > 0 ? user_id : null,
+      },
 
-        select: {
-          id: true,
-          cut_list_id: true,
+      select: {
+        id: true,
+        cut_list_id: true,
 
-          qty: true,
-          received_qty: true,
+        qty: true,
+        received_qty: true,
 
-          site_in_at: true,
-          site_in_by: true,
+        site_in_at: true,
+        site_in_by: true,
 
-          cut_list: {
-            select: {
-              item_name: true,
-              unique_code: true,
-            },
+        cut_list: {
+          select: {
+            item_name: true,
+            unique_code: true,
           },
         },
-      });
+      },
+    });
 
-    const pendingQty =
-      Math.max(
-        packedQty -
-          received_qty,
-        0
-      );
+    const pendingQty = Math.max(packedQty - received_qty, 0);
 
     /*
     |--------------------------------------------------------------------------
@@ -10048,271 +8533,183 @@ export const verifyManualBoxSiteInItemService = async (
     |--------------------------------------------------------------------------
     */
 
-    const allManualMappings =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          box_id,
-          project_id,
-          vendor_id,
+    const allManualMappings = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
-          },
-
-          row_created_source:
-            "Manual",
+        actual_in_at: {
+          not: null,
         },
 
-        select: {
-          qty: true,
-          received_qty: true,
-        },
-      });
+        row_created_source: "Manual",
+      },
 
-    const boxManualTotalQty =
-      allManualMappings.reduce(
-        (
-          sum,
-          item
-        ) =>
-          sum +
-          Math.max(
-            0,
-            Number(
-              item.qty ??
-              0
-            )
-          ),
-        0
-      );
+      select: {
+        qty: true,
+        received_qty: true,
+      },
+    });
 
-    const boxManualReceivedQty =
-      allManualMappings.reduce(
-        (
-          sum,
-          item
-        ) => {
-          const itemQty =
-            Math.max(
-              0,
-              Number(
-                item.qty ??
-                0
-              )
-            );
+    const boxManualTotalQty = allManualMappings.reduce(
+      (sum, item) => sum + Math.max(0, Number(item.qty ?? 0)),
+      0,
+    );
 
-          return (
-            sum +
-            clampReceivedQty(
-              item.received_qty,
-              itemQty
-            )
-          );
-        },
-        0
-      );
+    const boxManualReceivedQty = allManualMappings.reduce((sum, item) => {
+      const itemQty = Math.max(0, Number(item.qty ?? 0));
 
-    const boxManualPendingQty =
-      Math.max(
-        boxManualTotalQty -
-          boxManualReceivedQty,
-        0
-      );
+      return sum + clampReceivedQty(item.received_qty, itemQty);
+    }, 0);
+
+    const boxManualPendingQty = Math.max(
+      boxManualTotalQty - boxManualReceivedQty,
+      0,
+    );
 
     const message =
       pendingQty === 0
         ? "Manual item verified successfully"
         : `Manual item verified. ${pendingQty} unit${
-            pendingQty > 1
-              ? "s"
-              : ""
+            pendingQty > 1 ? "s" : ""
           } pending for this item`;
 
-    return validationResponse(
-      1,
-      message,
-      {
-        mapping_id:
-          updated.id,
+    return validationResponse(1, message, {
+      mapping_id: updated.id,
 
-        cut_list_id:
-          updated.cut_list_id,
+      cut_list_id: updated.cut_list_id,
 
-        item_name:
-          updated.cut_list
-            .item_name,
+      item_name: updated.cut_list.item_name,
 
-        unique_code:
-          updated.cut_list
-            .unique_code,
+      unique_code: updated.cut_list.unique_code,
 
-        packed_qty:
-          packedQty,
+      packed_qty: packedQty,
 
-        received_qty:
-          Number(
-            updated.received_qty ??
-            0
-          ),
+      received_qty: Number(updated.received_qty ?? 0),
 
-        pending_qty:
-          pendingQty,
+      pending_qty: pendingQty,
 
-        is_fully_received:
-          pendingQty === 0,
+      is_fully_received: pendingQty === 0,
 
-        site_in_at:
-          updated.site_in_at,
+      site_in_at: updated.site_in_at,
 
-        site_in_by:
-          updated.site_in_by,
+      site_in_by: updated.site_in_by,
 
-        site_in_by_name:
-          received_qty > 0
-            ? user.user_name
-            : null,
+      site_in_by_name: received_qty > 0 ? user.user_name : null,
 
-        box_summary: {
-          total_qty:
-            boxManualTotalQty,
+      box_summary: {
+        total_qty: boxManualTotalQty,
 
-          received_qty:
-            boxManualReceivedQty,
+        received_qty: boxManualReceivedQty,
 
-          pending_qty:
-            boxManualPendingQty,
+        pending_qty: boxManualPendingQty,
 
-          progress_pct:
-            boxManualTotalQty > 0
-              ? Math.round(
-                  (
-                    boxManualReceivedQty /
-                    boxManualTotalQty
-                  ) *
-                    100
-                )
-              : 0,
-        },
-      }
-    );
+        progress_pct:
+          boxManualTotalQty > 0
+            ? Math.round((boxManualReceivedQty / boxManualTotalQty) * 100)
+            : 0,
+      },
+    });
   } catch (error) {
-    console.error(
-      "Error in verifyManualBoxSiteInItemService:",
-      error
-    );
+    console.error("Error in verifyManualBoxSiteInItemService:", error);
 
-    return validationResponse(
-      0,
-      "Failed to verify manual item"
-    );
+    return validationResponse(0, "Failed to verify manual item");
   }
 };
 
 export const getBoxSiteInStatusService = async (
   box_id: number,
   project_id: number,
-  vendor_id: number
+  vendor_id: number,
 ) => {
   try {
-    const box =
-      await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
+    const box = await prisma.boxMaster.findFirst({
+      where: {
+        id: box_id,
+        project_id,
+        vendor_id,
+        is_deleted: false,
+      },
 
-        select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          site_in_at: true,
-          factory_out_at: true,
-        },
-      });
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        site_in_at: true,
+        factory_out_at: true,
+      },
+    });
 
     if (!box) {
-      return validationResponse(
-        0,
-        "Box not found"
-      );
+      return validationResponse(0, "Box not found");
     }
 
-    const packagingMachine =
-      await prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
-          machine_type_id: 18,
-        },
+    const packagingMachine = await prisma.machineMaster.findFirst({
+      where: {
+        vendor_id,
+        machine_type_id: 18,
+      },
 
-        select: {
-          id: true,
-        },
+      select: {
+        id: true,
+      },
 
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     if (!packagingMachine) {
-      return validationResponse(
-        0,
-        "Packaging machine not configured"
-      );
+      return validationResponse(0, "Packaging machine not configured");
     }
 
-    const items =
-      await prisma.cutListMachineMapping.findMany({
-        where: {
-          box_id,
-          project_id,
-          vendor_id,
+    const items = await prisma.cutListMachineMapping.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
 
-          machine_id:
-            packagingMachine.id,
+        machine_id: packagingMachine.id,
 
-          expected_in:
-            true,
+        expected_in: true,
 
-          actual_in_at: {
-            not: null,
+        actual_in_at: {
+          not: null,
+        },
+      },
+
+      select: {
+        id: true,
+
+        qty: true,
+        received_qty: true,
+
+        row_created_source: true,
+
+        site_in_at: true,
+        site_in_by: true,
+
+        cut_list: {
+          select: {
+            id: true,
+            item_name: true,
+            category_name: true,
+            group_name: true,
+            unique_code: true,
+            qty: true,
           },
         },
+      },
 
-        select: {
-          id: true,
-
-          qty: true,
-          received_qty: true,
-
-          row_created_source: true,
-
-          site_in_at: true,
-          site_in_by: true,
-
-          cut_list: {
-            select: {
-              id: true,
-              item_name: true,
-              category_name: true,
-              group_name: true,
-              unique_code: true,
-              qty: true,
-            },
-          },
-        },
-
-        orderBy: {
-          id: "asc",
-        },
-      });
+      orderBy: {
+        id: "asc",
+      },
+    });
 
     let totalItems = 0;
     let receivedItems = 0;
@@ -10323,216 +8720,125 @@ export const getBoxSiteInStatusService = async (
     let manualTotalItems = 0;
     let manualReceivedItems = 0;
 
-    const formattedItems =
-      items.map(
-        (item) => {
-          const mappingQty =
-            Math.max(
-              0,
-              Number(
-                item.qty ??
-                1
-              )
-            );
+    const formattedItems = items.map((item) => {
+      const mappingQty = Math.max(0, Number(item.qty ?? 1));
 
-          const isManual =
-            isManualCreatedMapping(
-              item.row_created_source
-            );
+      const isManual = isManualCreatedMapping(item.row_created_source);
 
-          let receivedQty = 0;
+      let receivedQty = 0;
 
-          if (isManual) {
-            receivedQty =
-              clampReceivedQty(
-                item.received_qty,
-                mappingQty
-              );
+      if (isManual) {
+        receivedQty = clampReceivedQty(item.received_qty, mappingQty);
 
-            manualTotalItems +=
-              mappingQty;
+        manualTotalItems += mappingQty;
 
-            manualReceivedItems +=
-              receivedQty;
-          } else {
-            receivedQty =
-              item.site_in_at
-                ? mappingQty
-                : 0;
+        manualReceivedItems += receivedQty;
+      } else {
+        receivedQty = item.site_in_at ? mappingQty : 0;
 
-            scannedTotalItems +=
-              mappingQty;
+        scannedTotalItems += mappingQty;
 
-            scannedReceivedItems +=
-              receivedQty;
-          }
+        scannedReceivedItems += receivedQty;
+      }
 
-          totalItems +=
-            mappingQty;
+      totalItems += mappingQty;
 
-          receivedItems +=
-            receivedQty;
+      receivedItems += receivedQty;
 
-          return {
-            mapping_id:
-              item.id,
+      return {
+        mapping_id: item.id,
 
-            cut_list_id:
-              item.cut_list.id,
+        cut_list_id: item.cut_list.id,
 
-            item_name:
-              item.cut_list
-                .item_name,
+        item_name: item.cut_list.item_name,
 
-            category_name:
-              item.cut_list
-                .category_name,
+        category_name: item.cut_list.category_name,
 
-            group_name:
-              item.cut_list
-                .group_name,
+        group_name: item.cut_list.group_name,
 
-            unique_code:
-              item.cut_list
-                .unique_code,
+        unique_code: item.cut_list.unique_code,
 
-            qty:
-              mappingQty,
+        qty: mappingQty,
 
-            received_qty:
-              isManual
-                ? item.received_qty
-                : receivedQty,
+        received_qty: isManual ? item.received_qty : receivedQty,
 
-            pending_qty:
-              Math.max(
-                mappingQty -
-                  receivedQty,
-                0
-              ),
+        pending_qty: Math.max(mappingQty - receivedQty, 0),
 
-            row_created_source:
-              item.row_created_source,
+        row_created_source: item.row_created_source,
 
-            is_manual:
-              isManual,
+        is_manual: isManual,
 
-            site_in_at:
-              item.site_in_at,
+        site_in_at: item.site_in_at,
 
-            site_in_by:
-              item.site_in_by,
+        site_in_by: item.site_in_by,
 
-            is_received:
-              receivedQty >=
-              mappingQty,
-          };
-        }
-      );
+        is_received: receivedQty >= mappingQty,
+      };
+    });
 
-    const pendingItems =
-      Math.max(
-        totalItems -
-          receivedItems,
-        0
-      );
+    const pendingItems = Math.max(totalItems - receivedItems, 0);
 
-    const scannedPendingItems =
-      Math.max(
-        scannedTotalItems -
-          scannedReceivedItems,
-        0
-      );
+    const scannedPendingItems = Math.max(
+      scannedTotalItems - scannedReceivedItems,
+      0,
+    );
 
-    const manualPendingItems =
-      Math.max(
-        manualTotalItems -
-          manualReceivedItems,
-        0
-      );
+    const manualPendingItems = Math.max(
+      manualTotalItems - manualReceivedItems,
+      0,
+    );
 
-    return validationResponse(
-      1,
-      "Box site in status fetched",
-      {
-        box,
+    return validationResponse(1, "Box site in status fetched", {
+      box,
 
-        /*
+      /*
         |--------------------------------------------------------------------------
         | Overall physical quantities
         |--------------------------------------------------------------------------
         */
 
-        total_items:
-          totalItems,
+      total_items: totalItems,
 
-        received_items:
-          receivedItems,
+      received_items: receivedItems,
 
-        pending_items:
-          pendingItems,
+      pending_items: pendingItems,
 
-        progress_pct:
-          totalItems > 0
-            ? Math.round(
-                (
-                  receivedItems /
-                  totalItems
-                ) *
-                  100
-              )
-            : 0,
+      progress_pct:
+        totalItems > 0 ? Math.round((receivedItems / totalItems) * 100) : 0,
 
-        /*
+      /*
         |--------------------------------------------------------------------------
         | Scanner flow
         |--------------------------------------------------------------------------
         */
 
-        scanned_total_items:
-          scannedTotalItems,
+      scanned_total_items: scannedTotalItems,
 
-        scanned_received_items:
-          scannedReceivedItems,
+      scanned_received_items: scannedReceivedItems,
 
-        scanned_pending_items:
-          scannedPendingItems,
+      scanned_pending_items: scannedPendingItems,
 
-        /*
+      /*
         |--------------------------------------------------------------------------
         | Manual flow
         |--------------------------------------------------------------------------
         */
 
-        manual_total_items:
-          manualTotalItems,
+      manual_total_items: manualTotalItems,
 
-        manual_received_items:
-          manualReceivedItems,
+      manual_received_items: manualReceivedItems,
 
-        manual_pending_items:
-          manualPendingItems,
+      manual_pending_items: manualPendingItems,
 
-        has_manual_items:
-          manualTotalItems > 0,
+      has_manual_items: manualTotalItems > 0,
 
-        manual_complete:
-          manualTotalItems > 0 &&
-          manualPendingItems === 0,
+      manual_complete: manualTotalItems > 0 && manualPendingItems === 0,
 
-        items:
-          formattedItems,
-      }
-    );
+      items: formattedItems,
+    });
   } catch (error) {
-    console.error(
-      "Error in getBoxSiteInStatusService:",
-      error
-    );
+    console.error("Error in getBoxSiteInStatusService:", error);
 
-    return validationResponse(
-      0,
-      "Failed to fetch box site in status"
-    );
+    return validationResponse(0, "Failed to fetch box site in status");
   }
 };

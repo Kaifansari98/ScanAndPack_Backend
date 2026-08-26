@@ -1797,44 +1797,77 @@ export const getProjectsByVendorIdService_old = async (vendorId: number) => {
   return result;
 };
 
+export interface GetProjectsOptions {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: string;
+}
+
 export const getProjectsByVendorIdService = async (
-  vendorId: number
+  vendorId: number,
+  options: GetProjectsOptions = {}
 ) => {
+  const { page, limit, search, status } = options;
+  const isPaginated =
+    page !== undefined ||
+    limit !== undefined ||
+    search !== undefined ||
+    status !== undefined;
+
+  const currentPage = Math.max(1, page || 1);
+  const currentLimit = Math.max(1, limit || 10);
+  const skip = (currentPage - 1) * currentLimit;
+
+  const whereCondition: any = {
+    vendor_id: vendorId,
+  };
+
+  if (search) {
+    whereCondition.OR = [
+      { project_name: { contains: search, mode: "insensitive" } },
+      { lead: { lead_code: { contains: search, mode: "insensitive" } } },
+    ];
+  }
+
+  if (status && status.toLowerCase() !== "all") {
+    whereCondition.AND = [
+      {
+        OR: [
+          { track_trace_status: { equals: status, mode: "insensitive" } },
+          { project_status: { equals: status, mode: "insensitive" } },
+        ],
+      },
+    ];
+  }
+
   /*
   |--------------------------------------------------------------------------
-  | STEP 1 — Fetch packaging machine
+  | STEP 1 & 2 — Fetch packaging machine, total count & projects
   |--------------------------------------------------------------------------
   */
 
-  const packagingMachine =
-    await prisma.machineMaster.findFirst({
+  const [packagingMachine, totalProjects, projects] = await Promise.all([
+    prisma.machineMaster.findFirst({
       where: {
         vendor_id: vendorId,
         machine_type_id: 18,
       },
-
       select: {
         id: true,
         sequence_no: true,
       },
-
       orderBy: {
         id: "asc",
       },
-    });
+    }),
 
-  /*
-  |--------------------------------------------------------------------------
-  | STEP 2 — Fetch projects
-  |--------------------------------------------------------------------------
-  */
+    prisma.projectMaster.count({
+      where: whereCondition,
+    }),
 
-  const projects =
-    await prisma.projectMaster.findMany({
-      where: {
-        vendor_id: vendorId,
-      },
-
+    prisma.projectMaster.findMany({
+      where: whereCondition,
       select: {
         id: true,
         project_name: true,
@@ -1842,6 +1875,7 @@ export const getProjectsByVendorIdService = async (
         lead_id: true,
         created_by: true,
         project_status: true,
+        track_trace_status: true,
         created_at: true,
 
         createdByUser: {
@@ -1869,14 +1903,25 @@ export const getProjectsByVendorIdService = async (
           },
         },
       },
-
       orderBy: {
         id: "desc",
       },
-    });
+      ...(isPaginated ? { skip, take: currentLimit } : {}),
+    }),
+  ]);
 
   if (projects.length === 0) {
-    return [];
+    return isPaginated
+      ? {
+          data: [],
+          pagination: {
+            page: currentPage,
+            limit: currentLimit,
+            total: totalProjects,
+            totalPages: Math.ceil(totalProjects / currentLimit),
+          },
+        }
+      : [];
   }
 
   const allProjectIds =
@@ -2772,6 +2817,9 @@ export const getProjectsByVendorIdService = async (
           project_status:
             project.project_status,
 
+          track_trace_status:
+            project.track_trace_status,
+
           created_at:
             project.created_at,
 
@@ -2806,6 +2854,18 @@ export const getProjectsByVendorIdService = async (
         };
       }
     );
+
+  if (isPaginated) {
+    return {
+      data: result,
+      pagination: {
+        page: currentPage,
+        limit: currentLimit,
+        total: totalProjects,
+        totalPages: Math.ceil(totalProjects / currentLimit),
+      },
+    };
+  }
 
   return result;
 };

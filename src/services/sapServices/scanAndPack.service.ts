@@ -1,5 +1,5 @@
-import { prisma } from '../../prisma/client';
-import { ItemStatus } from '../../prisma/generated'; // assuming status enum is defined there
+import { prisma } from "../../prisma/client";
+import { ItemStatus } from "../../prisma/generated"; // assuming status enum is defined there
 
 interface ScanPackPayload {
   project_id: number;
@@ -76,12 +76,12 @@ interface ScanPackPayload {
 //   });
 
 //   console.log(`📦 Total items in box: ${allItemsInBox.length}`);
-  
+
 //   if (allItemsInBox.length > 0) {
 //     // Get unique room IDs from existing items in box
 //     const existingRoomIds = [...new Set(allItemsInBox.map(item => item.project_details_id))];
 //     console.log(`📦 Existing rooms in box: ${existingRoomIds.join(', ')}`);
-    
+
 //     // Check if any existing room has is_grouping = true
 //     const existingRoomsDetails = await prisma.projectDetails.findMany({
 //       where: {
@@ -92,32 +92,32 @@ interface ScanPackPayload {
 //         is_grouping: true
 //       }
 //     });
-    
+
 //     const hasGroupingEnabledRooms = existingRoomsDetails.some(room => room.is_grouping === true);
-    
+
 //     if (hasGroupingEnabledRooms) {
 //       console.log(`🔒 Box contains items from grouping-enabled rooms - applying strict validation`);
-      
+
 //       // Find the grouping-enabled room in the box
 //       const groupingEnabledRoom = existingRoomsDetails.find(room => room.is_grouping === true);
 //       const existingGroupingRoomId = groupingEnabledRoom?.id;
-      
+
 //       console.log(`🏠 Grouping-enabled room in box: ${existingGroupingRoomId}`);
 //       console.log(`🏠 Incoming item room: ${project_details_id}`);
-      
+
 //       // Check room restriction
 //       if (project_details_id !== existingGroupingRoomId) {
 //         throw new Error(`❌ Room mismatch! This box contains items from grouping-enabled room ${existingGroupingRoomId}. Cannot add items from room ${project_details_id}.`);
 //       }
-      
+
 //       console.log(`✅ Room validation passed`);
-      
+
 //       // Check group restriction
 //       console.log(`📦 Incoming item group: "${item.group}"`);
-      
+
 //       // Get first item from the grouping-enabled room
 //       const firstItemFromGroupingRoom = allItemsInBox.find(boxItem => boxItem.project_details_id === existingGroupingRoomId);
-      
+
 //       if (firstItemFromGroupingRoom) {
 //         const firstItem = await prisma.projectItemsMaster.findFirst({
 //           where: {
@@ -152,7 +152,7 @@ interface ScanPackPayload {
 //       }
 //     } else {
 //       console.log(`🔓 Box contains only items from non-grouping rooms`);
-      
+
 //       if (isGrouping) {
 //         console.log(`🔒 But incoming item is from grouping-enabled room ${project_details_id}`);
 //         throw new Error(`❌ Cannot add items from grouping-enabled room ${project_details_id} to a box that already contains items from non-grouping rooms.`);
@@ -234,7 +234,6 @@ export const getScanItemsByFields = async ({
   client_id: number; // kept for API compatibility
   box_id: number;
 }) => {
-
   // ── Box details ────────────────────────────────────────────────────────────
   const boxDetails = await prisma.boxMaster.findFirst({
     where: {
@@ -242,6 +241,9 @@ export const getScanItemsByFields = async ({
       project_id,
       vendor_id,
       is_deleted: false,
+      project: {
+        isDeleted: false,
+      },
     },
   });
 
@@ -266,7 +268,7 @@ export const getScanItemsByFields = async ({
       actual_out_at: true,
       in_operator: true,
       created_at: true,
-      qty:true,
+      qty: true,
       cut_list: {
         select: {
           id: true,
@@ -339,7 +341,8 @@ export const deleteScanAndPackItemById = async (
   id: number,
   vendor_id: number,
   project_id: number,
-  box_id: number
+  box_id: number,
+  deleted_by?: number | null,
 ) => {
   /*
   |--------------------------------------------------------------------------
@@ -348,9 +351,7 @@ export const deleteScanAndPackItemById = async (
   */
 
   if (!id || !vendor_id || !project_id || !box_id) {
-    throw new Error(
-      "id, vendor_id, project_id and box_id are required"
-    );
+    throw new Error("id, vendor_id, project_id and box_id are required");
   }
 
   /*
@@ -378,14 +379,8 @@ export const deleteScanAndPackItemById = async (
     throw new Error("Box not found");
   }
 
-  if (
-    String(box.box_status)
-      .trim()
-      .toLowerCase() === "packed"
-  ) {
-    throw new Error(
-      "Packed box cannot be updated"
-    );
+  if (String(box.box_status).trim().toLowerCase() === "packed") {
+    throw new Error("Packed box cannot be updated");
   }
 
   /*
@@ -394,32 +389,58 @@ export const deleteScanAndPackItemById = async (
   |--------------------------------------------------------------------------
   */
 
-  const existingMapping =
-    await prisma.cutListMachineMapping.findFirst({
-      where: {
-        id: Number(id),
-        vendor_id: Number(vendor_id),
-        project_id: Number(project_id),
-        box_id: Number(box_id),
-      },
+  const existingMapping = await prisma.cutListMachineMapping.findFirst({
+    where: {
+      id: Number(id),
+      vendor_id: Number(vendor_id),
+      project_id: Number(project_id),
+      box_id: Number(box_id),
+    },
 
-      select: {
-        id: true,
-        box_id: true,
-        cut_list_id: true,
-        machine_id: true,
-        project_id: true,
-        vendor_id: true,
-
-        qty: true,
-        row_created_source: true,
-      },
-    });
+    select: {
+      id: true,
+      box_id: true,
+      cut_list_id: true,
+      machine_id: true,
+      project_id: true,
+      vendor_id: true,
+      qty: true,
+      row_created_source: true,
+      in_operator: true,
+      actual_in_at: true,
+      created_by: true,
+      created_at: true,
+    },
+  });
 
   if (!existingMapping) {
-    throw new Error(
-      "Item not found in this box"
-    );
+    throw new Error("Item not found in this box");
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | STEP 3.5 — Log item deletion in BoxItemDeleteLog
+  |--------------------------------------------------------------------------
+  */
+
+  try {
+    await prisma.boxItemDeleteLog.create({
+      data: {
+        cut_list_machine_mapping_id: existingMapping.id,
+        cut_list_id: existingMapping.cut_list_id,
+        qty: existingMapping.qty || 1,
+        box_id: Number(box_id),
+        project_id: Number(project_id),
+        vendor_id: Number(vendor_id),
+        scanned_by:
+          existingMapping.in_operator || existingMapping.created_by || null,
+        scanned_at:
+          existingMapping.actual_in_at || existingMapping.created_at || null,
+        deleted_by: deleted_by ? Number(deleted_by) : null,
+      },
+    });
+  } catch (logError) {
+    console.error("Error creating BoxItemDeleteLog entry:", logError);
   }
 
   /*
@@ -436,9 +457,7 @@ export const deleteScanAndPackItemById = async (
   */
 
   const isManualRow =
-    existingMapping.row_created_source
-      ?.trim()
-      .toLowerCase() === "manual";
+    existingMapping.row_created_source?.trim().toLowerCase() === "manual";
 
   /*
   |--------------------------------------------------------------------------
@@ -453,39 +472,28 @@ export const deleteScanAndPackItemById = async (
       },
     });
 
-    console.log(
-      "Manual item removed from box successfully"
-    );
+    console.log("Manual item removed from box successfully");
 
     return {
-      message:
-        "Manual item removed from box successfully",
+      message: "Manual item removed from box successfully",
 
       action: "deleted",
 
-      removed_mapping_id:
-        existingMapping.id,
+      removed_mapping_id: existingMapping.id,
 
-      removed_qty:
-        existingMapping.qty,
+      removed_qty: existingMapping.qty,
 
-      previous_box_id:
-        Number(box_id),
+      previous_box_id: Number(box_id),
 
-      current_box_id:
-        null,
+      current_box_id: null,
 
-      project_id:
-        existingMapping.project_id,
+      project_id: existingMapping.project_id,
 
-      vendor_id:
-        existingMapping.vendor_id,
+      vendor_id: existingMapping.vendor_id,
 
-      cut_list_id:
-        existingMapping.cut_list_id,
+      cut_list_id: existingMapping.cut_list_id,
 
-      row_created_source:
-        existingMapping.row_created_source,
+      row_created_source: existingMapping.row_created_source,
     };
   }
 
@@ -499,60 +507,50 @@ export const deleteScanAndPackItemById = async (
   |--------------------------------------------------------------------------
   */
 
-  const updatedMapping =
-    await prisma.cutListMachineMapping.update({
-      where: {
-        id: existingMapping.id,
-      },
+  const updatedMapping = await prisma.cutListMachineMapping.update({
+    where: {
+      id: existingMapping.id,
+    },
 
-      data: {
-        box_id: null,
-      },
+    data: {
+      box_id: null,
+      actual_in_at: null,
+      in_operator: null,
+    },
 
-      select: {
-        id: true,
-        box_id: true,
-        cut_list_id: true,
-        machine_id: true,
-        project_id: true,
-        vendor_id: true,
-        qty: true,
-        row_created_source: true,
-      },
-    });
+    select: {
+      id: true,
+      box_id: true,
+      cut_list_id: true,
+      machine_id: true,
+      project_id: true,
+      vendor_id: true,
+      qty: true,
+      row_created_source: true,
+    },
+  });
 
-  console.log(
-    "Item removed from box successfully"
-  );
+  console.log("Item removed from box successfully");
 
   return {
-    message:
-      "Item removed from box successfully",
+    message: "Item removed from box successfully",
 
     action: "box_unassigned",
 
-    removed_mapping_id:
-      updatedMapping.id,
+    removed_mapping_id: updatedMapping.id,
 
-    removed_qty:
-      updatedMapping.qty,
+    removed_qty: updatedMapping.qty,
 
-    previous_box_id:
-      Number(box_id),
+    previous_box_id: Number(box_id),
 
-    current_box_id:
-      updatedMapping.box_id,
+    current_box_id: updatedMapping.box_id,
 
-    project_id:
-      updatedMapping.project_id,
+    project_id: updatedMapping.project_id,
 
-    vendor_id:
-      updatedMapping.vendor_id,
+    vendor_id: updatedMapping.vendor_id,
 
-    cut_list_id:
-      updatedMapping.cut_list_id,
+    cut_list_id: updatedMapping.cut_list_id,
 
-    row_created_source:
-      updatedMapping.row_created_source,
+    row_created_source: updatedMapping.row_created_source,
   };
 };
