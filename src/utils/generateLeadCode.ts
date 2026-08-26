@@ -3,6 +3,14 @@ import logger from "./logger";
 
 type Tx = PrismaClient | Prisma.TransactionClient;
 
+const getFinancialYearLabel = (date: Date) => {
+  const month = date.getMonth() + 1;
+  const startYear = month >= 4 ? date.getFullYear() : date.getFullYear() - 1;
+  const endYear = startYear + 1;
+
+  return `${String(startYear).slice(-2)}/${String(endYear).slice(-2)}`;
+};
+
 export async function generateLeadCode(
   tx: Tx,
   input: {
@@ -14,6 +22,9 @@ export async function generateLeadCode(
     where: { id: input.vendorId },
     select: {
       vendor_code: true,
+      handlesLargeScaleProjects: true,
+      is_this_vendor_is_custom_usertype_only: true,
+      is_year_wise_lead_code_enabled: true,
     },
   });
 
@@ -36,6 +47,95 @@ export async function generateLeadCode(
   }
 
   const basePrefix = input.vendorId === 1 ? "SH" : (vendor.vendor_code || "SH");
+  const normalizedVendorCode = basePrefix.trim().toUpperCase();
+  const shouldUseYearWiseLeadCode =
+    vendor.handlesLargeScaleProjects === true ||
+    vendor.is_this_vendor_is_custom_usertype_only === true ||
+    vendor.is_year_wise_lead_code_enabled === true;
+
+  if (shouldUseYearWiseLeadCode) {
+    const financialYearLabel = getFinancialYearLabel(new Date());
+    const prefix = `${normalizedVendorCode}-${financialYearLabel}-`;
+
+    const [lastLead, lastOnlineLead] = await Promise.all([
+      tx.leadMaster.findFirst({
+        where: {
+          vendor_id: input.vendorId,
+          lead_code: {
+            startsWith: prefix,
+          },
+        },
+        orderBy: [{ created_at: "desc" }, { id: "desc" }],
+        select: {
+          lead_code: true,
+        },
+      }),
+      tx.online_leads.findFirst({
+        where: {
+          vendor_id: input.vendorId,
+          lead_code: {
+            startsWith: prefix,
+          },
+        },
+        orderBy: [{ created_at: "desc" }, { id: "desc" }],
+        select: {
+          lead_code: true,
+        },
+      }),
+    ]);
+
+    let nextNumber = 1;
+    const extractSequence = (leadCode?: string | null) => {
+      if (!leadCode) return 0;
+      const match = leadCode.match(/-(\d+)$/);
+      return match ? parseInt(match[1], 10) : 0;
+    };
+
+    nextNumber =
+      Math.max(
+        extractSequence(lastLead?.lead_code),
+        extractSequence(lastOnlineLead?.lead_code),
+      ) + 1;
+
+    let generatedCode = `${normalizedVendorCode}-${financialYearLabel}-${nextNumber}`;
+
+    let exists = true;
+    while (exists) {
+      const [existingInLead, existingInOnlineLead] = await Promise.all([
+        tx.leadMaster.findFirst({
+          where: {
+            vendor_id: input.vendorId,
+            lead_code: generatedCode,
+          },
+          select: { id: true },
+        }),
+        tx.online_leads.findFirst({
+          where: {
+            vendor_id: input.vendorId,
+            lead_code: generatedCode,
+          },
+          select: { id: true },
+        }),
+      ]);
+
+      if (!existingInLead && !existingInOnlineLead) {
+        exists = false;
+      } else {
+        nextNumber += 1;
+        generatedCode = `${normalizedVendorCode}-${financialYearLabel}-${nextNumber}`;
+      }
+    }
+
+    logger.debug("[LEAD CODE GENERATED]", {
+      franchiseId: input.franchiseId,
+      prefix: normalizedVendorCode,
+      financialYearLabel,
+      generatedCode,
+    });
+
+    return generatedCode;
+  }
+
   let prefix = basePrefix;
 
   if (input.franchiseId) {
