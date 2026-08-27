@@ -5,6 +5,10 @@ import {
   getLeadProcessBriefs,
   saveLeadProcessBriefs,
   ProcessBriefInput,
+  saveProcessBriefMachineMappings,
+  getProcessBriefMachineMappings,
+  updateProcessBrief,
+  toggleProcessBriefStatus,
 } from "../../services/leadModuleServices/processBrief.service";
 
 export const createProcessBrief = async (req: Request, res: Response) => {
@@ -99,3 +103,81 @@ export const fetchLeadProcessBriefsHandler = async (req: Request, res: Response)
     return res.status(500).json({ success: false, error: error.message });
   }
 };
+
+export const saveProcessBriefMachineMappingsHandler = async (req: Request, res: Response) => {
+  try {
+    const { process_brief_id, vendor_id, machine_ids, machine_type_ids, created_by } = req.body;
+
+    if (!process_brief_id || !vendor_id) {
+      return res.status(400).json({ error: "process_brief_id and vendor_id are required" });
+    }
+
+    const userId = Number((req as any).user?.id || created_by || 1);
+
+    const savedMappings = await saveProcessBriefMachineMappings({
+      process_brief_id: Number(process_brief_id),
+      vendor_id: Number(vendor_id),
+      machine_ids: Array.isArray(machine_ids) ? machine_ids.map(Number).filter((id) => !isNaN(id)) : [],
+      machine_type_ids: Array.isArray(machine_type_ids) ? machine_type_ids.map(Number).filter((id) => !isNaN(id)) : [],
+      created_by: isNaN(userId) ? 1 : userId,
+    });
+
+    return res.status(200).json({ success: true, data: savedMappings });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error saving process brief machine mappings", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchProcessBriefMachineMappingsHandler = async (req: Request, res: Response) => {
+  try {
+    const process_brief_id = Number(req.params.process_brief_id);
+    const vendor_id = Number(req.query.vendor_id);
+
+    if (!process_brief_id || !vendor_id) {
+      return res.status(400).json({ error: "process_brief_id and vendor_id are required" });
+    }
+
+    const mappings = await getProcessBriefMachineMappings(process_brief_id, vendor_id);
+    return res.status(200).json({ success: true, data: mappings });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error fetching process brief machine mappings", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const updateProcessBriefHandler = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const { name } = req.body;
+
+    if (!id || !name) {
+      return res.status(400).json({ error: "id and name are required" });
+    }
+
+    const updatedBrief = await updateProcessBrief(id, name);
+    return res.status(200).json({ success: true, data: updatedBrief });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error updating process brief", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const toggleProcessBriefStatusHandler = async (req: Request, res: Response) => {
+  try {
+    const id = Number(req.params.id);
+    const { is_active } = req.body;
+
+    if (!id || is_active === undefined) {
+      return res.status(400).json({ error: "id and is_active are required" });
+    }
+
+    const updatedBrief = await toggleProcessBriefStatus(id, Boolean(is_active));
+    return res.status(200).json({ success: true, data: updatedBrief });
+  } catch (error: any) {
+    console.error("[CONTROLLER] Error toggling process brief status", { error: error.message });
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+

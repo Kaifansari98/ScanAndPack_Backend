@@ -84,6 +84,7 @@ export const ModelName = {
   ProductTypeMaster: 'ProductTypeMaster',
   ProcessBriefMaster: 'ProcessBriefMaster',
   LeadProcessBriefMapping: 'LeadProcessBriefMapping',
+  ProcessBriefMachineMapping: 'ProcessBriefMachineMapping',
   LeadRequirementMaterialMapping: 'LeadRequirementMaterialMapping',
   CarcassTypeMaster: 'CarcassTypeMaster',
   CarcasMaterialMaster: 'CarcasMaterialMaster',
@@ -955,6 +956,21 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
 } as const
 
 export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]
+
+
+export const ProcessBriefMachineMappingScalarFieldEnum = {
+  id: 'id',
+  process_brief_id: 'process_brief_id',
+  machine_id: 'machine_id',
+  machine_type_id: 'machine_type_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type ProcessBriefMachineMappingScalarFieldEnum = (typeof ProcessBriefMachineMappingScalarFieldEnum)[keyof typeof ProcessBriefMachineMappingScalarFieldEnum]
 
 
 export const LeadRequirementMaterialMappingScalarFieldEnum = {
