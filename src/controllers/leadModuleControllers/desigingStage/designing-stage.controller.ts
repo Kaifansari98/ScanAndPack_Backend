@@ -246,11 +246,15 @@ export class DesigingStageController {
 
       const vendor = await prisma.vendorMaster.findUnique({
         where: { id: Number(vendorId) },
-        select: { is_this_vendor_is_custom_usertype_only: true },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
       });
 
       if (
-        vendor?.is_this_vendor_is_custom_usertype_only === true &&
+        (vendor?.is_this_vendor_is_custom_usertype_only === true ||
+          vendor?.handlesLargeScaleProjects === true) &&
         !designDocumentId
       ) {
         return res.status(400).json({
