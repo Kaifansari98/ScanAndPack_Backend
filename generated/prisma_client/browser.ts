@@ -1067,3 +1067,8 @@ export type LeadBillingAddress = Prisma.LeadBillingAddressModel
  * 
  */
 export type MetaLead = Prisma.MetaLeadModel
+/**
+ * Model BoxItemDeleteLog
+ * 
+ */
+export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
