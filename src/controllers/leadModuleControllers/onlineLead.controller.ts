@@ -79,6 +79,69 @@ export const ensureDefaultStatuses = async (vendorId: number) => {
 };
 
 export class OnlineLeadController {
+  private async generateOnlineLeadCode(
+    tx: any,
+    vendorId: number,
+  ): Promise<string> {
+    await tx.$queryRawUnsafe(
+      `SELECT id FROM "VendorMaster" WHERE id = $1 FOR UPDATE`,
+      vendorId,
+    );
+
+    const vendor = await tx.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { online_leads_lead_code: true },
+    });
+
+    const prefix = String(vendor?.online_leads_lead_code ?? "").trim().toUpperCase();
+
+    if (!prefix) {
+      throw new Error(
+        "VendorMaster online_leads_lead_code is not configured for this vendor.",
+      );
+    }
+
+    const lastOnlineLead = await tx.online_leads.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_code: {
+          startsWith: `${prefix}-`,
+        },
+      },
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: {
+        lead_code: true,
+      },
+    });
+
+    const lastSequenceMatch = lastOnlineLead?.lead_code?.match(/-(\d+)$/);
+    let nextNumber = lastSequenceMatch
+      ? parseInt(lastSequenceMatch[1], 10) + 1
+      : 1;
+
+    let generatedCode = `${prefix}-${nextNumber}`;
+
+    let exists = true;
+    while (exists) {
+      const existingOnlineLead = await tx.online_leads.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_code: generatedCode,
+        },
+        select: { id: true },
+      });
+
+      if (!existingOnlineLead) {
+        exists = false;
+      } else {
+        nextNumber += 1;
+        generatedCode = `${prefix}-${nextNumber}`;
+      }
+    }
+
+    return generatedCode;
+  }
+
   // 1. Create Lead from API / Integration (ONLINE)
   createOnlineLead = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -129,16 +192,11 @@ export class OnlineLeadController {
         },
       });
 
-      const vendor = await prisma.vendorMaster.findUnique({
-        where: { id: Number(vendor_id) },
-        select: { is_year_wise_lead_code_enabled: true },
-      });
-
       const lead = await prisma.$transaction(async (tx) => {
-        const generatedCode = await generateLeadCode(tx, {
-          franchiseId: store_id ? Number(store_id) : undefined,
-          vendorId: Number(vendor_id),
-        });
+        const generatedCode = await this.generateOnlineLeadCode(
+          tx,
+          Number(vendor_id),
+        );
 
         return await tx.online_leads.create({
           data: {
@@ -293,10 +351,10 @@ export class OnlineLeadController {
       }
 
       const lead = await prisma.$transaction(async (tx) => {
-        const generatedCode = await generateLeadCode(tx, {
-          franchiseId: Number(store_id),
-          vendorId: Number(vendor_id),
-        });
+        const generatedCode = await this.generateOnlineLeadCode(
+          tx,
+          Number(vendor_id),
+        );
 
         return await tx.online_leads.create({
           data: {
@@ -2155,11 +2213,10 @@ export class OnlineLeadController {
 
         try {
           const lead = await prisma.$transaction(async (tx) => {
-            // Generate code
-            const generatedCode = await generateLeadCode(tx, {
-              franchiseId: leadFranchiseId || undefined,
-              vendorId: Number(vendor_id),
-            });
+            const generatedCode = await this.generateOnlineLeadCode(
+              tx,
+              Number(vendor_id),
+            );
 
             // Create OnlineLead
             return await tx.online_leads.create({
