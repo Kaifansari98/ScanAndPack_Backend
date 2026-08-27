@@ -112,9 +112,19 @@ export const getProjectsByVendorId = async (req: Request, res: Response) => {
       return res.status(400).json({ message: "Invalid vendor ID" });
     }
 
-    const projects = await getProjectsByVendorIdService(vendorId);
+    const page = req.query.page ? Number(req.query.page) : undefined;
+    const limit = req.query.limit ? Number(req.query.limit) : undefined;
+    const search = req.query.search ? String(req.query.search).trim() : undefined;
+    const status = req.query.status ? String(req.query.status).trim() : undefined;
 
-    return res.status(200).json(projects);
+    const result = await getProjectsByVendorIdService(vendorId, {
+      page,
+      limit,
+      search,
+      status,
+    });
+
+    return res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching projects by vendorId:", error);
     return res.status(500).json({ message: "Internal Server Error" });

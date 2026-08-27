@@ -71,7 +71,14 @@ export const uploadRequirementDocument = async ({
   created_by: number;
   file: Express.Multer.File;
 }) => {
-  if (!lead_id || !vendor_id || (!product_type_id && !b2b_requirement_type_id) || !file) {
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendor_id },
+    select: { handlesLargeScaleProjects: true },
+  });
+
+  const isLargeScale = vendor?.handlesLargeScaleProjects === true;
+
+  if (!lead_id || !vendor_id || (!isLargeScale && !product_type_id && !b2b_requirement_type_id) || !file) {
     throw new Error("Missing required parameters (lead_id, vendor_id, requirement_type_id, or file)");
   }
 
@@ -108,6 +115,14 @@ export const uploadRequirementDocument = async ({
         lead_id,
         vendor_id,
         product_type_id,
+      },
+    });
+  } else {
+    existingCount = await prisma.leadDocuments.count({
+      where: {
+        lead_id,
+        vendor_id,
+        ...(resolvedDocTypeId ? { doc_type_id: resolvedDocTypeId } : {}),
       },
     });
   }

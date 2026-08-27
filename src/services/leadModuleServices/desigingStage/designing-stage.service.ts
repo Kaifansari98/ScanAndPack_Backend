@@ -498,8 +498,10 @@ export class DesigingStage {
         throw new Error("Design document type (Type 6) is not configured for this vendor");
       }
 
-      const useCustomNaming = vendor?.is_this_vendor_is_custom_usertype_only === true;
-      const lookupDesign = useCustomNaming || vendor?.handlesLargeScaleProjects === true;
+      const useCustomNaming =
+        vendor?.is_this_vendor_is_custom_usertype_only === true ||
+        vendor?.handlesLargeScaleProjects === true;
+      const lookupDesign = useCustomNaming;
 
       const selectedDesignDocument =
         lookupDesign && data.designDocumentId && designDocType
