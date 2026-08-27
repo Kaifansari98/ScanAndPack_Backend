@@ -12,7 +12,8 @@ export interface CutListSavePayload {
     machine_id: number;
     machine_name: string;
     assigned: boolean;
-    created_by: Number
+    created_by: Number;
+    user_role?: string;
 }
 
 
