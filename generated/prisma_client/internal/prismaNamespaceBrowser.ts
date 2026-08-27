@@ -284,6 +284,7 @@ export const VendorMasterScalarFieldEnum = {
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
+  online_leads_lead_code: 'online_leads_lead_code',
   primary_contact_number: 'primary_contact_number',
   primary_contact_email: 'primary_contact_email',
   primary_contact_name: 'primary_contact_name',
