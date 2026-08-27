@@ -3058,6 +3058,9 @@ export const getCutListMachine = async (
     },
     select: {
       id: true,
+      project_name: true,
+      project_status: true,
+      track_trace_status: true,
     },
   });
 
@@ -3142,9 +3145,34 @@ export const getCutListMachine = async (
     return row;
   });
 
+  // Count scanned items for this project in cutListMachineMapping
+  let scannedMappingCount = 0;
+  if (projectId) {
+    scannedMappingCount = await prisma.cutListMachineMapping.count({
+      where: {
+        project_id: Number(projectId),
+        OR: [
+          { actual_in_at: { not: null } },
+          { actual_out_at: { not: null } },
+          { status: { notIn: ["Pending", "pending", ""] } },
+        ],
+      },
+    });
+  }
+  const isProjectStarted = scannedMappingCount > 0;
+
   return {
     data: result,
     machineColumns: machineColumns,
+    project: projectMaster
+      ? {
+          ...projectMaster,
+          is_started: isProjectStarted,
+          scanned_mapping_count: scannedMappingCount,
+        }
+      : null,
+    is_project_started: isProjectStarted,
+    scanned_mapping_count: scannedMappingCount,
   };
 };
 
@@ -3157,6 +3185,8 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       },
       select: {
         id: true,
+        project_status: true,
+        track_trace_status: true,
       },
     });
 
@@ -3166,6 +3196,34 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
     if (!projectId) {
       return validationResponse(0, "Project not found");
+    }
+
+    // Check if project has already started (at least 1 item scanned in cutListMachineMapping)
+    const scannedMappingCount = await prisma.cutListMachineMapping.count({
+      where: {
+        project_id: Number(projectId),
+        OR: [
+          { actual_in_at: { not: null } },
+          { actual_out_at: { not: null } },
+          { status: { notIn: ["Pending", "pending", ""] } },
+        ],
+      },
+    });
+
+    const isStarted = scannedMappingCount > 0;
+
+    const role = (payload.user_role || "").trim().toLowerCase();
+    const isSuperAdmin =
+      role === "super-admin" ||
+      role === "superadmin" ||
+      role === "super admin" ||
+      role === "super_admin";
+
+    if (isStarted && !isSuperAdmin) {
+      return validationResponse(
+        0,
+        "Project Started: You cannot assign. Only Super Admin can do this."
+      );
     }
 
     const cutListIdArray = payload.cutListIds
@@ -5957,6 +6015,32 @@ export const getProjectDetailService_old = async (
           })
         : [];
 
+    const boxMappingsForWeight =
+      boxIds.length > 0
+        ? await prisma.cutListMachineMapping.findMany({
+            where: {
+              box_id: { in: boxIds },
+              project_id,
+              vendor_id,
+              expected_in: true,
+            },
+            select: {
+              box_id: true,
+              qty: true,
+              weight: true,
+              cut_list: {
+                select: {
+                  qty: true,
+                  weight: true,
+                  length: true,
+                  width: true,
+                  thickness: true,
+                },
+              },
+            },
+          })
+        : [];
+
     const boxItemCountMap = new Map<number, number>();
     const boxWeightMap = new Map<number, number>();
 
@@ -5964,10 +6048,34 @@ export const getProjectDetailService_old = async (
       if (!stat.box_id) {
         continue;
       }
-
       boxItemCountMap.set(Number(stat.box_id), Number(stat._count.id || 0));
+    }
 
-      boxWeightMap.set(Number(stat.box_id), Number(stat._sum.weight || 0));
+    for (const mapping of boxMappingsForWeight) {
+      if (!mapping.box_id) continue;
+      const bId = Number(mapping.box_id);
+
+      const qty = Number(mapping.qty ?? 1);
+      const mappedWeight = Number(mapping.weight || 0);
+      const cutListTotalWeight = Number(mapping.cut_list?.weight || 0);
+      const cutListTotalQty = Number(mapping.cut_list?.qty || 1);
+
+      let itemWeight = mappedWeight > 0 ? mappedWeight : 0;
+      if (itemWeight === 0 && cutListTotalWeight > 0) {
+        itemWeight = (cutListTotalWeight / cutListTotalQty) * qty;
+      }
+
+      if (itemWeight === 0 && mapping.cut_list) {
+        const l = Number(mapping.cut_list.length || 0);
+        const w = Number(mapping.cut_list.width || 0);
+        const t = Number(mapping.cut_list.thickness || 0);
+        if (l > 0 && w > 0 && t > 0) {
+          itemWeight = l * w * t * 0.00000075 * qty;
+        }
+      }
+
+      const currentWeight = boxWeightMap.get(bId) || 0;
+      boxWeightMap.set(bId, currentWeight + itemWeight);
     }
 
     const boxNameMap = new Map(boxes.map((box) => [box.id, box.box_name]));
@@ -6485,6 +6593,8 @@ export interface GetProjectDetailOptions {
   machine_id?: string;
   box_id?: string;
   box_status?: string;
+  page?: number | string;
+  limit?: number | string;
 }
 
 export const getProjectDetailService = async (
@@ -6668,20 +6778,11 @@ export const getProjectDetailService = async (
       (category && category !== "all") ||
       (machine_id && machine_id !== "all")
     ) {
-      const mappingWhere: any = {
+      const cutListWhere: any = {
         project_id,
         vendor_id,
-        box_id: { not: null },
       };
 
-      if (machine_id && machine_id !== "all") {
-        const parsedMachineId = Number(machine_id);
-        if (!isNaN(parsedMachineId)) {
-          mappingWhere.machine_id = parsedMachineId;
-        }
-      }
-
-      const cutListWhere: any = {};
       if (group && group !== "all") {
         cutListWhere.group_name = { equals: group, mode: "insensitive" };
       }
@@ -6689,19 +6790,65 @@ export const getProjectDetailService = async (
         cutListWhere.category_name = { equals: category, mode: "insensitive" };
       }
 
-      if (Object.keys(cutListWhere).length > 0) {
-        mappingWhere.cut_list = cutListWhere;
+      if (machine_id && machine_id !== "all") {
+        const parsedMachineId = Number(machine_id);
+        if (!isNaN(parsedMachineId)) {
+          cutListWhere.cutListMachineMapping = {
+            some: {
+              machine_id: parsedMachineId,
+            },
+          };
+        }
       }
 
-      const matchingMappings = await prisma.cutListMachineMapping.findMany({
-        where: mappingWhere,
-        select: { box_id: true },
-        distinct: ["box_id"],
+      const matchingCutLists = await prisma.cutList.findMany({
+        where: cutListWhere,
+        select: { id: true, unique_code: true },
       });
 
-      filteredBoxIds = matchingMappings
-        .map((m) => m.box_id)
-        .filter((id): id is number => id !== null);
+      const matchingCutListIds = matchingCutLists.map((c) => c.id);
+      const matchingUniqueCodes = matchingCutLists
+        .map((c) => c.unique_code)
+        .filter((code): code is string => Boolean(code));
+
+      if (matchingCutListIds.length === 0) {
+        filteredBoxIds = [];
+      } else {
+        const [matchingBoxMappings, matchingScanItems] = await Promise.all([
+          prisma.cutListMachineMapping.findMany({
+            where: {
+              project_id,
+              vendor_id,
+              cut_list_id: { in: matchingCutListIds },
+              box_id: { not: null },
+            },
+            select: { box_id: true },
+            distinct: ["box_id"],
+          }),
+          matchingUniqueCodes.length > 0
+            ? prisma.scanAndPackItem.findMany({
+                where: {
+                  project_id,
+                  vendor_id,
+                  unique_id: { in: matchingUniqueCodes },
+                  is_deleted: false,
+                },
+                select: { box_id: true },
+                distinct: ["box_id"],
+              })
+            : Promise.resolve([]),
+        ]);
+
+        const boxIdSet = new Set<number>();
+        matchingBoxMappings.forEach((m) => {
+          if (m.box_id) boxIdSet.add(m.box_id);
+        });
+        matchingScanItems.forEach((s) => {
+          if (s.box_id) boxIdSet.add(s.box_id);
+        });
+
+        filteredBoxIds = Array.from(boxIdSet);
+      }
     }
 
     const whereBox: any = {
@@ -8270,6 +8417,25 @@ export const getProjectDetailService = async (
       machines: sortedMachineStats.map((m) => ({ id: m.machine_id, name: m.machine_name })),
     };
 
+    const totalBoxesCount = formattedBoxes.length;
+    const currentPage = Math.max(1, Number(options.page || 1));
+    const currentLimit = Math.max(1, Number(options.limit || 10));
+    const totalPages = Math.ceil(totalBoxesCount / currentLimit) || 1;
+
+    const startIndex = (currentPage - 1) * currentLimit;
+    const paginatedBoxes = formattedBoxes.slice(startIndex, startIndex + currentLimit);
+
+    const boxesPagination = {
+      total: totalBoxesCount,
+      page: currentPage,
+      limit: currentLimit,
+      total_pages: totalPages,
+      has_previous: currentPage > 1,
+      has_next: currentPage < totalPages,
+      from: totalBoxesCount > 0 ? startIndex + 1 : 0,
+      to: Math.min(startIndex + currentLimit, totalBoxesCount),
+    };
+
     return validationResponse(1, "Project detail fetched", {
       project: {
         id: project.id,
@@ -8338,7 +8504,8 @@ export const getProjectDetailService = async (
         machine_scanned_qty: totalMachineScannedQty,
       },
       machines: sortedMachineStats,
-      boxes: formattedBoxes,
+      boxes: paginatedBoxes,
+      boxes_pagination: boxesPagination,
       cutlist: unitRows,
       filterOptions,
     });
@@ -8587,10 +8754,27 @@ export const getBoxItemsService = async (
 
     const opMap = new Map(ops.map((user) => [user.id, user.user_name]));
 
-    return validationResponse(1, "Box items fetched", {
-      box,
+    const items = mappings.map((mapping) => {
+      const qty = Number(mapping.qty ?? 1);
+      const mappedWeight = Number(mapping.weight || 0);
+      const cutListTotalWeight = Number(mapping.cut_list?.weight || 0);
+      const cutListTotalQty = Number(mapping.cut_list?.qty || 1);
 
-      items: mappings.map((mapping) => ({
+      let itemWeight = mappedWeight > 0 ? mappedWeight : 0;
+      if (itemWeight === 0 && cutListTotalWeight > 0) {
+        itemWeight = (cutListTotalWeight / cutListTotalQty) * qty;
+      }
+
+      if (itemWeight === 0 && mapping.cut_list) {
+        const l = Number(mapping.cut_list.length || 0);
+        const w = Number(mapping.cut_list.width || 0);
+        const t = Number(mapping.cut_list.thickness || 0);
+        if (l > 0 && w > 0 && t > 0) {
+          itemWeight = l * w * t * 0.00000075 * qty;
+        }
+      }
+
+      return {
         id: mapping.id,
 
         machine: {
@@ -8601,9 +8785,9 @@ export const getBoxItemsService = async (
 
         site_in_at: mapping.site_in_at,
 
-        qty: Number(mapping.qty ?? 1),
+        qty,
 
-        weight: Number(mapping.weight || 0),
+        weight: Number(itemWeight.toFixed(2)),
 
         row_created_source: mapping.row_created_source,
 
@@ -8632,7 +8816,21 @@ export const getBoxItemsService = async (
           : null,
 
         cut_list: mapping.cut_list,
-      })),
+      };
+    });
+
+    const totalBoxWeight = items.reduce(
+      (sum, item) => sum + Number(item.weight || 0),
+      0,
+    );
+
+    return validationResponse(1, "Box items fetched", {
+      box: {
+        ...box,
+        total_weight: Number(totalBoxWeight.toFixed(2)),
+      },
+
+      items,
     });
   } catch (error) {
     console.error("getBoxItemsService error:", error);

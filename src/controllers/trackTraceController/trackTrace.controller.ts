@@ -367,6 +367,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_id,
       machine_name,
       assigned,
+      user_role,
     } = _req.body;
 
     if (!project_id || project_id === "undefined") {
@@ -413,6 +414,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_name: String(machine_name),
       assigned: Boolean(assigned),
       created_by: Number(vendor_id),
+      user_role: user_role ? String(user_role) : undefined,
     };
 
     const serviceResponse = await trackTraceService.assignMachine(payload);
@@ -1223,11 +1225,13 @@ export const getProjectDetail = async (req: Request, res: Response) => {
     const machine_id = req.query.machine_id ? String(req.query.machine_id).trim() : undefined;
     const box_id = req.query.box_id ? String(req.query.box_id).trim() : undefined;
     const box_status = req.query.box_status ? String(req.query.box_status).trim() : undefined;
+    const page = req.query.page ? String(req.query.page).trim() : undefined;
+    const limit = req.query.limit ? String(req.query.limit).trim() : undefined;
 
     const result = await trackTraceService.getProjectDetailService(
       vendor_id,
       project_id,
-      { search, group, category, machine_id, box_id, box_status }
+      { search, group, category, machine_id, box_id, box_status, page, limit }
     );
     console.log("result", result);
     if (result.status === 0)
