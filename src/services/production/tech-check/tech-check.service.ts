@@ -82,9 +82,14 @@ export class TechCheckService {
       async (tx) => {
         const vendor = await tx.vendorMaster.findUnique({
           where: { id: vendorId },
-          select: { IsAccountLocInEnabled: true },
+          select: {
+            IsAccountLocInEnabled: true,
+            handlesLargeScaleProjects: true,
+          },
         });
         const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled === true;
+        const handlesLargeScaleProjects =
+          vendor?.handlesLargeScaleProjects === true;
         const lead = await tx.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -371,6 +376,22 @@ export class TechCheckService {
           throw new Error(
             `Order Login (Type 9) not configured for vendor ${vendorId}`,
           );
+        }
+
+        if (handlesLargeScaleProjects) {
+          await tx.leadProductStructureInstance.updateMany({
+            where: {
+              lead_id: leadId,
+              vendor_id: vendorId,
+              is_archived: false,
+            },
+            data: {
+              is_tech_check_completed: true,
+              tech_check_completed_at: new Date(),
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
         }
 
         // 2️⃣ Update Lead status
