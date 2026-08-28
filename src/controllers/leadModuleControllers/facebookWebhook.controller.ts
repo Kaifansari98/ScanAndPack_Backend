@@ -227,28 +227,55 @@ export class FacebookWebhookController {
     }
 
     const { lead } = await prisma.$transaction(async (tx) => {
-      const generatedCode = await generateLeadCode(tx, {
-        vendorId: vendor_id,
-      });
+      const cleanContact = (contactNumber || "").replace(/\D/g, "");
+      const contact10 = cleanContact.length > 10 && cleanContact.startsWith("91") ? cleanContact.slice(-10) : cleanContact;
 
-      // 7. Insert lead into PostgreSQL online_leads table
-      const lead = await tx.online_leads.create({
-        data: {
+      let lead = await tx.online_leads.findFirst({
+        where: {
           vendor_id: vendor_id,
-          leads_name: fullName,
-          lead_code: generatedCode,
-          firstname: firstName || null,
-          lastname: lastName || null,
-          email: email,
-          contact: contactNumber || "0000000000",
-          source: platform,
-          source_id: matchedSource?.id || null,
-          lead_entry_type: LeadEntryType.ONLINE,
-          remark: remarkContent,
-          status: defaultStatus?.id || null,
-          updated_at: new Date(),
+          OR: [
+            { contact: contactNumber },
+            { contact: cleanContact },
+            { contact: contact10 },
+            { contact: `91${contact10}` },
+          ],
         },
       });
+
+      if (lead) {
+        lead = await tx.online_leads.update({
+          where: { id: lead.id },
+          data: {
+            leads_name: fullName || lead.leads_name,
+            email: email || lead.email,
+            remark: `${lead.remark || ""}\n\n${remarkContent}`.trim(),
+            updated_at: new Date(),
+          },
+        });
+      } else {
+        const generatedCode = await generateLeadCode(tx, {
+          vendorId: vendor_id,
+        });
+
+        // 7. Insert lead into PostgreSQL online_leads table
+        lead = await tx.online_leads.create({
+          data: {
+            vendor_id: vendor_id,
+            leads_name: fullName,
+            lead_code: generatedCode,
+            firstname: firstName || null,
+            lastname: lastName || null,
+            email: email,
+            contact: contactNumber || "0000000000",
+            source: platform,
+            source_id: matchedSource?.id || null,
+            lead_entry_type: LeadEntryType.ONLINE,
+            remark: remarkContent,
+            status: defaultStatus?.id || null,
+            updated_at: new Date(),
+          },
+        });
+      }
 
       // 8. Log lead history status
       if (defaultStatus) {

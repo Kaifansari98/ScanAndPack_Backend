@@ -3873,6 +3873,13 @@ export const Online_leadsScalarFieldEnum = {
   archetech_name: 'archetech_name',
   archetech_number: 'archetech_number',
   priority: 'priority',
+  approval_status: 'approval_status',
+  pending_status_id: 'pending_status_id',
+  pending_store_id: 'pending_store_id',
+  pending_follow_up_date: 'pending_follow_up_date',
+  pending_remark: 'pending_remark',
+  pending_assign_to: 'pending_assign_to',
+  pending_created_by: 'pending_created_by',
   product_types: 'product_types',
   product_structures: 'product_structures'
 } as const
