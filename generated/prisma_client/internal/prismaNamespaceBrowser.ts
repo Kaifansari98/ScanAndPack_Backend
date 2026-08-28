@@ -260,7 +260,8 @@ export const ModelName = {
   online_leads: 'online_leads',
   telecaller_campaign_leads: 'telecaller_campaign_leads',
   LeadBillingAddress: 'LeadBillingAddress',
-  MetaLead: 'MetaLead'
+  MetaLead: 'MetaLead',
+  BoxItemDeleteLog: 'BoxItemDeleteLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -283,6 +284,7 @@ export const VendorMasterScalarFieldEnum = {
   id: 'id',
   vendor_name: 'vendor_name',
   vendor_code: 'vendor_code',
+  online_leads_lead_code: 'online_leads_lead_code',
   primary_contact_number: 'primary_contact_number',
   primary_contact_email: 'primary_contact_email',
   primary_contact_name: 'primary_contact_name',
@@ -3924,6 +3926,24 @@ export const MetaLeadScalarFieldEnum = {
 } as const
 
 export type MetaLeadScalarFieldEnum = (typeof MetaLeadScalarFieldEnum)[keyof typeof MetaLeadScalarFieldEnum]
+
+
+export const BoxItemDeleteLogScalarFieldEnum = {
+  id: 'id',
+  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
+  cut_list_id: 'cut_list_id',
+  qty: 'qty',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  scanned_by: 'scanned_by',
+  scanned_at: 'scanned_at',
+  deleted_by: 'deleted_by',
+  deleted_at: 'deleted_at',
+  created_at: 'created_at'
+} as const
+
+export type BoxItemDeleteLogScalarFieldEnum = (typeof BoxItemDeleteLogScalarFieldEnum)[keyof typeof BoxItemDeleteLogScalarFieldEnum]
 
 
 export const SortOrder = {

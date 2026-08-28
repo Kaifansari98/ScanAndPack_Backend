@@ -1961,15 +1961,66 @@ export class LeadActivityStatusService {
     franchiseId?: number,
     assignTo?: number,
   ) {
+    let whereClause: any = {
+      vendor_id: vendorId,
+      is_draft: { not: true },
+      is_deleted: false,
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
+    };
+
+    if (assignTo) {
+      const user = await prisma.userMaster.findUnique({
+        where: { id: assignTo },
+        include: { user_type: true },
+      });
+
+      if (user) {
+        const userType = user.user_type.user_type.toLowerCase();
+        const shouldUseMapping = ![
+          "admin",
+          "super-admin",
+          "auditor",
+        ].includes(userType);
+
+        if (shouldUseMapping) {
+          const mappingOnlyRoles = ["pre-prod", "factory"];
+          const isMappingOnly = mappingOnlyRoles.includes(userType);
+
+          const [mappedLeads, taskLeads] = await Promise.all([
+            prisma.leadUserMapping.findMany({
+              where: { vendor_id: vendorId, user_id: assignTo, status: "active" },
+              select: { lead_id: true },
+            }),
+            isMappingOnly
+              ? Promise.resolve([])
+              : prisma.userLeadTask.findMany({
+                  where: {
+                    vendor_id: vendorId,
+                    OR: [{ created_by: assignTo }, { user_id: assignTo }],
+                  },
+                  select: { lead_id: true },
+                }),
+          ]);
+
+          const leadIds = [
+            ...new Set([
+              ...mappedLeads.map((m) => m.lead_id),
+              ...taskLeads.map((t) => t.lead_id),
+            ]),
+          ];
+
+          whereClause.id = { in: leadIds.length > 0 ? leadIds : [0] };
+        } else {
+          whereClause.assign_to = assignTo;
+        }
+      } else {
+        whereClause.assign_to = assignTo;
+      }
+    }
+
     const counts = await prisma.leadMaster.groupBy({
       by: ["activity_status"],
-      where: {
-        vendor_id: vendorId,
-        ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        ...(assignTo ? { assign_to: assignTo } : {}),
-        is_draft: { not: true },
-        is_deleted: false,
-      },
+      where: whereClause,
       _count: {
         id: true,
       },
@@ -2006,11 +2057,7 @@ export class LeadActivityStatusService {
     // Query for openOnGoing (statusTypeMaster.type = 'open')
     const openOnGoingCount = await prisma.leadMaster.count({
       where: {
-        vendor_id: vendorId,
-        ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        ...(assignTo ? { assign_to: assignTo } : {}),
-        is_deleted: false,
-        is_draft: { not: true },
+        ...whereClause,
         activity_status: "onGoing",
         statusType: {
           type: "open",
@@ -2023,3 +2070,4 @@ export class LeadActivityStatusService {
     return response;
   }
 }
+

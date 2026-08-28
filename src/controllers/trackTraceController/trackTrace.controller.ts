@@ -3,7 +3,10 @@ import path from "path";
 import fs from "fs";
 import * as trackTraceService from "../../services/trackTraceServices/trackTrace.service";
 import * as machineService from "../../services/machineService/machineService.service";
-import { generateSignedUrl, uploadToWasabiCompanyVendorDocument } from "../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiCompanyVendorDocument,
+} from "../../utils/wasabiClient";
 
 import { ApiResponse } from "../../../src/utils/apiResponse";
 import {
@@ -364,6 +367,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_id,
       machine_name,
       assigned,
+      user_role,
     } = _req.body;
 
     if (!project_id || project_id === "undefined") {
@@ -410,6 +414,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
       machine_name: String(machine_name),
       assigned: Boolean(assigned),
       created_by: Number(vendor_id),
+      user_role: user_role ? String(user_role) : undefined,
     };
 
     const serviceResponse = await trackTraceService.assignMachine(payload);
@@ -800,10 +805,16 @@ export const getUserModules = async (_req: Request, res: Response) => {
     .json(ApiResponse.success(serviceResponse.data, "", 200));
 };
 
-export const getQualityCheckProjects = async (_req: Request, res: Response) => {
-  const { vendor_id } = _req.params;
+export const getQualityCheckProjects = async (req: Request, res: Response) => {
+  const { vendor_id } = req.params;
+  const page = req.query.page ? Number(req.query.page) : undefined;
+  const limit = req.query.limit ? Number(req.query.limit) : undefined;
+  const search = req.query.search ? String(req.query.search).trim() : undefined;
+  const status = req.query.status ? String(req.query.status).trim() : undefined;
+
   const serviceResponse = await trackTraceService.getQualityCheckProjects(
     Number(vendor_id),
+    { page, limit, search, status },
   );
   if (serviceResponse.status == 0) {
     return res
@@ -860,7 +871,18 @@ export const getProjectCategoryTypes = async (_req: Request, res: Response) => {
 
 // Controller
 export const createProjectCategory = async (_req: Request, res: Response) => {
-  const { vendor_id, category_name, type_ids, created_by, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing, prefix, naming_structure } = _req.body;
+  const {
+    vendor_id,
+    category_name,
+    type_ids,
+    created_by,
+    parent_id,
+    include_in_packing,
+    scan_pack_validate,
+    use_in_assembled_packing,
+    prefix,
+    naming_structure,
+  } = _req.body;
 
   const serviceResponse = await trackTraceService.createProjectCategory(
     Number(vendor_id),
@@ -870,9 +892,11 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
     parent_id ? Number(parent_id) : null,
     include_in_packing !== undefined ? Boolean(include_in_packing) : false,
     scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : false,
-    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : false,
+    use_in_assembled_packing !== undefined
+      ? Boolean(use_in_assembled_packing)
+      : false,
     prefix ? String(prefix) : null,
-    naming_structure || null
+    naming_structure || null,
   );
 
   if (serviceResponse.status == 0) {
@@ -886,8 +910,20 @@ export const createProjectCategory = async (_req: Request, res: Response) => {
 };
 
 export const updateProjectCategory = async (_req: Request, res: Response) => {
-  const { id, vendor_id, category_name, type_ids, updated_by, status, parent_id, include_in_packing, scan_pack_validate, use_in_assembled_packing, prefix, naming_structure } =
-    _req.body;
+  const {
+    id,
+    vendor_id,
+    category_name,
+    type_ids,
+    updated_by,
+    status,
+    parent_id,
+    include_in_packing,
+    scan_pack_validate,
+    use_in_assembled_packing,
+    prefix,
+    naming_structure,
+  } = _req.body;
 
   const serviceResponse = await trackTraceService.updateProjectCategory(
     Number(id),
@@ -899,9 +935,11 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
     parent_id ? Number(parent_id) : null,
     include_in_packing !== undefined ? Boolean(include_in_packing) : undefined,
     scan_pack_validate !== undefined ? Boolean(scan_pack_validate) : undefined,
-    use_in_assembled_packing !== undefined ? Boolean(use_in_assembled_packing) : undefined,
+    use_in_assembled_packing !== undefined
+      ? Boolean(use_in_assembled_packing)
+      : undefined,
     prefix !== undefined ? (prefix ? String(prefix) : null) : undefined,
-    naming_structure || null
+    naming_structure || null,
   );
 
   if (serviceResponse.status == 0) {
@@ -918,24 +956,44 @@ export const updateProjectCategory = async (_req: Request, res: Response) => {
 export const getBrandMasters = async (req: Request, res: Response) => {
   const vendor_id = Number(req.params.vendor_id);
   const result = await trackTraceService.getBrandMasters(vendor_id);
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
 
 export const createBrandMaster = async (req: Request, res: Response) => {
-  const { vendor_id, brand_name, brand_short_name, logo, created_by } = req.body;
+  const { vendor_id, brand_name, brand_short_name, logo, created_by } =
+    req.body;
   const result = await trackTraceService.createBrandMaster(
     Number(vendor_id),
     String(brand_name),
     brand_short_name,
     logo,
-    created_by ? Number(created_by) : null
+    created_by ? Number(created_by) : null,
   );
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
 
 export const updateBrandMaster = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
-  const { vendor_id, brand_name, brand_short_name, logo, is_active, updated_by } = req.body;
+  const {
+    vendor_id,
+    brand_name,
+    brand_short_name,
+    logo,
+    is_active,
+    updated_by,
+  } = req.body;
   const result = await trackTraceService.updateBrandMaster(
     id,
     Number(vendor_id),
@@ -943,23 +1001,44 @@ export const updateBrandMaster = async (req: Request, res: Response) => {
     brand_short_name,
     logo,
     is_active,
-    updated_by ? Number(updated_by) : null
+    updated_by ? Number(updated_by) : null,
   );
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
 
 export const toggleBrandMasterStatus = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const { is_active } = req.body;
-  const result = await trackTraceService.toggleBrandMasterStatus(id, Boolean(is_active));
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  const result = await trackTraceService.toggleBrandMasterStatus(
+    id,
+    Boolean(is_active),
+  );
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
 
 export const deleteBrandMaster = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const vendor_id = Number(req.body.vendor_id || req.query.vendor_id || 0);
   const result = await trackTraceService.deleteBrandMaster(id, vendor_id);
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
 
 export const toggleProjectCategoryStatus = async (
@@ -1134,16 +1213,25 @@ export const checkToken = async (req: Request, res: Response) => {
 // GET /track-trace/project-detail/:vendor_id/:project_id
 export const getProjectDetail = async (req: Request, res: Response) => {
   try {
-    
     console.log("getProjectDetailsss", req.params);
     const vendor_id = Number(req.params.vendor_id);
     const project_id = String(req.params.project_id);
     if (isNaN(vendor_id))
       return res.status(400).json(ApiResponse.error("Invalid params", 400));
 
+    const search = req.query.search ? String(req.query.search).trim() : undefined;
+    const group = req.query.group ? String(req.query.group).trim() : undefined;
+    const category = req.query.category ? String(req.query.category).trim() : undefined;
+    const machine_id = req.query.machine_id ? String(req.query.machine_id).trim() : undefined;
+    const box_id = req.query.box_id ? String(req.query.box_id).trim() : undefined;
+    const box_status = req.query.box_status ? String(req.query.box_status).trim() : undefined;
+    const page = req.query.page ? String(req.query.page).trim() : undefined;
+    const limit = req.query.limit ? String(req.query.limit).trim() : undefined;
+
     const result = await trackTraceService.getProjectDetailService(
       vendor_id,
       project_id,
+      { search, group, category, machine_id, box_id, box_status, page, limit }
     );
     console.log("result", result);
     if (result.status === 0)
@@ -1188,40 +1276,17 @@ export const getBoxItems = async (req: Request, res: Response) => {
   }
 };
 
-
-
 // GET /track-trace/project-detail/:vendor_id/:project_id/cut-list
-export const getProjectCutList = async (
-  req: Request,
-  res: Response
-) => {
+export const getProjectCutList = async (req: Request, res: Response) => {
   try {
-    const vendor_id =
-      Number(
-        req.params.vendor_id
-      );
+    const vendor_id = Number(req.params.vendor_id);
 
-    const project_id =
-      String(
-        req.params.project_id ??
-        ""
-      ).trim();
+    const project_id = String(req.params.project_id ?? "").trim();
 
-    if (
-      !vendor_id ||
-      Number.isNaN(
-        vendor_id
-      ) ||
-      !project_id
-    ) {
+    if (!vendor_id || Number.isNaN(vendor_id) || !project_id) {
       return res
         .status(400)
-        .json(
-          ApiResponse.error(
-            "Invalid vendor_id or project_id",
-            400
-          )
-        );
+        .json(ApiResponse.error("Invalid vendor_id or project_id", 400));
     }
 
     /*
@@ -1230,60 +1295,28 @@ export const getProjectCutList = async (
     |--------------------------------------------------------------------------
     */
 
-    const page =
-      req.query.page !==
-      undefined
-        ? Number(
-            req.query.page
-          )
-        : 1;
+    const page = req.query.page !== undefined ? Number(req.query.page) : 1;
 
-    const limit =
-      req.query.limit !==
-      undefined
-        ? Number(
-            req.query.limit
-          )
-        : 25;
+    const limit = req.query.limit !== undefined ? Number(req.query.limit) : 25;
 
     const machine_id =
-      req.query.machine_id !==
-        undefined &&
-      req.query.machine_id !==
-        ""
-        ? Number(
-            req.query.machine_id
-          )
+      req.query.machine_id !== undefined && req.query.machine_id !== ""
+        ? Number(req.query.machine_id)
         : null;
 
     const box_id =
-      req.query.box_id !==
-        undefined &&
-      req.query.box_id !==
-        ""
-        ? Number(
-            req.query.box_id
-          )
+      req.query.box_id !== undefined && req.query.box_id !== ""
+        ? Number(req.query.box_id)
         : null;
 
     const min_weight =
-      req.query.min_weight !==
-        undefined &&
-      req.query.min_weight !==
-        ""
-        ? Number(
-            req.query.min_weight
-          )
+      req.query.min_weight !== undefined && req.query.min_weight !== ""
+        ? Number(req.query.min_weight)
         : null;
 
     const max_weight =
-      req.query.max_weight !==
-        undefined &&
-      req.query.max_weight !==
-        ""
-        ? Number(
-            req.query.max_weight
-          )
+      req.query.max_weight !== undefined && req.query.max_weight !== ""
+        ? Number(req.query.max_weight)
         : null;
 
     /*
@@ -1295,161 +1328,77 @@ export const getProjectCutList = async (
     if (
       Number.isNaN(page) ||
       Number.isNaN(limit) ||
-      (
-        machine_id !== null &&
-        Number.isNaN(
-          machine_id
-        )
-      ) ||
-      (
-        box_id !== null &&
-        Number.isNaN(
-          box_id
-        )
-      ) ||
-      (
-        min_weight !== null &&
-        Number.isNaN(
-          min_weight
-        )
-      ) ||
-      (
-        max_weight !== null &&
-        Number.isNaN(
-          max_weight
-        )
-      )
+      (machine_id !== null && Number.isNaN(machine_id)) ||
+      (box_id !== null && Number.isNaN(box_id)) ||
+      (min_weight !== null && Number.isNaN(min_weight)) ||
+      (max_weight !== null && Number.isNaN(max_weight))
     ) {
       return res
         .status(400)
-        .json(
-          ApiResponse.error(
-            "Invalid numeric filter",
-            400
-          )
-        );
+        .json(ApiResponse.error("Invalid numeric filter", 400));
     }
 
-    const result =
-      await trackTraceService.getProjectCutListPaginatedService(
-        vendor_id,
-        project_id,
-        {
-          page,
-          limit,
+    const result = await trackTraceService.getProjectCutListPaginatedService(
+      vendor_id,
+      project_id,
+      {
+        page,
+        limit,
 
-          search:
-            String(
-              req.query.search ??
-              ""
-            ),
+        search: String(req.query.search ?? ""),
 
-          group:
-            String(
-              req.query.group ??
-              "all"
-            ),
+        group: String(req.query.group ?? "all"),
 
-          category:
-            String(
-              req.query.category ??
-              "all"
-            ),
+        category: String(req.query.category ?? "all"),
 
-          machine_id,
+        machine_id,
 
-          machine_status:
-            String(
-              req.query.machine_status ??
-              "all"
-            ) as
-              | "all"
-              | "done"
-              | "pending",
+        machine_status: String(req.query.machine_status ?? "all") as
+          | "all"
+          | "done"
+          | "pending",
 
-          packing_status:
-            String(
-              req.query.packing_status ??
-              "all"
-            ) as
-              | "all"
-              | "packed"
-              | "pending",
+        packing_status: String(req.query.packing_status ?? "all") as
+          | "all"
+          | "packed"
+          | "pending",
 
-          packing_method:
-            String(
-              req.query.packing_method ??
-              "all"
-            ) as
-              | "all"
-              | "manual"
-              | "scanned",
+        packing_method: String(req.query.packing_method ?? "all") as
+          | "all"
+          | "manual"
+          | "scanned",
 
-          box_id,
+        box_id,
 
-          min_weight,
-          max_weight,
+        min_weight,
+        max_weight,
 
-          sort_by:
-            String(
-              req.query.sort_by ??
-              "row_number"
-            ) as
-              | "row_number"
-              | "item_name"
-              | "unique_code"
-              | "group"
-              | "category"
-              | "weight"
-              | "box",
+        sort_by: String(req.query.sort_by ?? "row_number") as
+          | "row_number"
+          | "item_name"
+          | "unique_code"
+          | "group"
+          | "category"
+          | "weight"
+          | "box",
 
-          sort_order:
-            String(
-              req.query.sort_order ??
-              "asc"
-            ) as
-              | "asc"
-              | "desc",
-        }
-      );
+        sort_order: String(req.query.sort_order ?? "asc") as "asc" | "desc",
+      },
+    );
 
-    if (
-      result.status ===
-      0
-    ) {
-      return res
-        .status(404)
-        .json(
-          ApiResponse.error(
-            result.message,
-            404
-          )
-        );
+    if (result.status === 0) {
+      return res.status(404).json(ApiResponse.error(result.message, 404));
     }
 
     return res
       .status(200)
-      .json(
-        ApiResponse.success(
-          result.data,
-          result.message,
-          200
-        )
-      );
+      .json(ApiResponse.success(result.data, result.message, 200));
   } catch (error) {
-    console.error(
-      "getProjectCutList controller error:",
-      error
-    );
+    console.error("getProjectCutList controller error:", error);
 
     return res
       .status(500)
-      .json(
-        ApiResponse.error(
-          "Internal server error",
-          500
-        )
-      );
+      .json(ApiResponse.error("Internal server error", 500));
   }
 };
 
@@ -1561,27 +1510,43 @@ export const getResolvedDefects = async (req: Request, res: Response) => {
 // ─── Grade Master Controllers ──────────────────────────────────────────────────
 export const getGradeMasters = async (req: Request, res: Response) => {
   const vendor_id = Number(req.params.vendor_id);
-  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  if (isNaN(vendor_id))
+    return res.status(400).json({ message: "Invalid vendor_id" });
   const result = await trackTraceService.getGradeMasters(vendor_id);
   return res.status(result.status === 1 ? 200 : 500).json(result);
 };
 export const createGradeMaster = async (req: Request, res: Response) => {
   const { vendor_id, grade_name, created_by } = req.body;
-  if (!vendor_id || !grade_name) return res.status(400).json({ message: "vendor_id and grade_name are required" });
-  const result = await trackTraceService.createGradeMaster(Number(vendor_id), grade_name, created_by);
+  if (!vendor_id || !grade_name)
+    return res
+      .status(400)
+      .json({ message: "vendor_id and grade_name are required" });
+  const result = await trackTraceService.createGradeMaster(
+    Number(vendor_id),
+    grade_name,
+    created_by,
+  );
   return res.status(result.status === 1 ? 201 : 400).json(result);
 };
 export const updateGradeMaster = async (req: Request, res: Response) => {
   const { grade_name, updated_by } = req.body;
   const id = Number(req.params.id);
-  if (!grade_name) return res.status(400).json({ message: "grade_name is required" });
-  const result = await trackTraceService.updateGradeMaster(id, grade_name, updated_by);
+  if (!grade_name)
+    return res.status(400).json({ message: "grade_name is required" });
+  const result = await trackTraceService.updateGradeMaster(
+    id,
+    grade_name,
+    updated_by,
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const toggleGradeMasterStatus = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const { is_active } = req.body;
-  const result = await trackTraceService.toggleGradeMasterStatus(id, Boolean(is_active));
+  const result = await trackTraceService.toggleGradeMasterStatus(
+    id,
+    Boolean(is_active),
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const deleteGradeMaster = async (req: Request, res: Response) => {
@@ -1593,27 +1558,43 @@ export const deleteGradeMaster = async (req: Request, res: Response) => {
 // ─── Finish Master Controllers ─────────────────────────────────────────────────
 export const getFinishMasters = async (req: Request, res: Response) => {
   const vendor_id = Number(req.params.vendor_id);
-  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  if (isNaN(vendor_id))
+    return res.status(400).json({ message: "Invalid vendor_id" });
   const result = await trackTraceService.getFinishMasters(vendor_id);
   return res.status(result.status === 1 ? 200 : 500).json(result);
 };
 export const createFinishMaster = async (req: Request, res: Response) => {
   const { vendor_id, finish_name, created_by } = req.body;
-  if (!vendor_id || !finish_name) return res.status(400).json({ message: "vendor_id and finish_name are required" });
-  const result = await trackTraceService.createFinishMaster(Number(vendor_id), finish_name, created_by);
+  if (!vendor_id || !finish_name)
+    return res
+      .status(400)
+      .json({ message: "vendor_id and finish_name are required" });
+  const result = await trackTraceService.createFinishMaster(
+    Number(vendor_id),
+    finish_name,
+    created_by,
+  );
   return res.status(result.status === 1 ? 201 : 400).json(result);
 };
 export const updateFinishMaster = async (req: Request, res: Response) => {
   const { finish_name, updated_by } = req.body;
   const id = Number(req.params.id);
-  if (!finish_name) return res.status(400).json({ message: "finish_name is required" });
-  const result = await trackTraceService.updateFinishMaster(id, finish_name, updated_by);
+  if (!finish_name)
+    return res.status(400).json({ message: "finish_name is required" });
+  const result = await trackTraceService.updateFinishMaster(
+    id,
+    finish_name,
+    updated_by,
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const toggleFinishMasterStatus = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const { is_active } = req.body;
-  const result = await trackTraceService.toggleFinishMasterStatus(id, Boolean(is_active));
+  const result = await trackTraceService.toggleFinishMasterStatus(
+    id,
+    Boolean(is_active),
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const deleteFinishMaster = async (req: Request, res: Response) => {
@@ -1625,27 +1606,43 @@ export const deleteFinishMaster = async (req: Request, res: Response) => {
 // ─── Type Master Controllers ───────────────────────────────────────────────────
 export const getTypeMasters = async (req: Request, res: Response) => {
   const vendor_id = Number(req.params.vendor_id);
-  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  if (isNaN(vendor_id))
+    return res.status(400).json({ message: "Invalid vendor_id" });
   const result = await trackTraceService.getTypeMasters(vendor_id);
   return res.status(result.status === 1 ? 200 : 500).json(result);
 };
 export const createTypeMaster = async (req: Request, res: Response) => {
   const { vendor_id, type_name, created_by } = req.body;
-  if (!vendor_id || !type_name) return res.status(400).json({ message: "vendor_id and type_name are required" });
-  const result = await trackTraceService.createTypeMaster(Number(vendor_id), type_name, created_by);
+  if (!vendor_id || !type_name)
+    return res
+      .status(400)
+      .json({ message: "vendor_id and type_name are required" });
+  const result = await trackTraceService.createTypeMaster(
+    Number(vendor_id),
+    type_name,
+    created_by,
+  );
   return res.status(result.status === 1 ? 201 : 400).json(result);
 };
 export const updateTypeMaster = async (req: Request, res: Response) => {
   const { type_name, updated_by } = req.body;
   const id = Number(req.params.id);
-  if (!type_name) return res.status(400).json({ message: "type_name is required" });
-  const result = await trackTraceService.updateTypeMaster(id, type_name, updated_by);
+  if (!type_name)
+    return res.status(400).json({ message: "type_name is required" });
+  const result = await trackTraceService.updateTypeMaster(
+    id,
+    type_name,
+    updated_by,
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const toggleTypeMasterStatus = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const { is_active } = req.body;
-  const result = await trackTraceService.toggleTypeMasterStatus(id, Boolean(is_active));
+  const result = await trackTraceService.toggleTypeMasterStatus(
+    id,
+    Boolean(is_active),
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const deleteTypeMaster = async (req: Request, res: Response) => {
@@ -1657,27 +1654,46 @@ export const deleteTypeMaster = async (req: Request, res: Response) => {
 // ─── Core Product Master Controllers ───────────────────────────────────────────
 export const getCoreProductMasters = async (req: Request, res: Response) => {
   const vendor_id = Number(req.params.vendor_id);
-  if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+  if (isNaN(vendor_id))
+    return res.status(400).json({ message: "Invalid vendor_id" });
   const result = await trackTraceService.getCoreProductMasters(vendor_id);
   return res.status(result.status === 1 ? 200 : 500).json(result);
 };
 export const createCoreProductMaster = async (req: Request, res: Response) => {
   const { vendor_id, core_product_name, created_by } = req.body;
-  if (!vendor_id || !core_product_name) return res.status(400).json({ message: "vendor_id and core_product_name are required" });
-  const result = await trackTraceService.createCoreProductMaster(Number(vendor_id), core_product_name, created_by);
+  if (!vendor_id || !core_product_name)
+    return res
+      .status(400)
+      .json({ message: "vendor_id and core_product_name are required" });
+  const result = await trackTraceService.createCoreProductMaster(
+    Number(vendor_id),
+    core_product_name,
+    created_by,
+  );
   return res.status(result.status === 1 ? 201 : 400).json(result);
 };
 export const updateCoreProductMaster = async (req: Request, res: Response) => {
   const { core_product_name, updated_by } = req.body;
   const id = Number(req.params.id);
-  if (!core_product_name) return res.status(400).json({ message: "core_product_name is required" });
-  const result = await trackTraceService.updateCoreProductMaster(id, core_product_name, updated_by);
+  if (!core_product_name)
+    return res.status(400).json({ message: "core_product_name is required" });
+  const result = await trackTraceService.updateCoreProductMaster(
+    id,
+    core_product_name,
+    updated_by,
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
-export const toggleCoreProductMasterStatus = async (req: Request, res: Response) => {
+export const toggleCoreProductMasterStatus = async (
+  req: Request,
+  res: Response,
+) => {
   const id = Number(req.params.id);
   const { is_active } = req.body;
-  const result = await trackTraceService.toggleCoreProductMasterStatus(id, Boolean(is_active));
+  const result = await trackTraceService.toggleCoreProductMasterStatus(
+    id,
+    Boolean(is_active),
+  );
   return res.status(result.status === 1 ? 200 : 400).json(result);
 };
 export const deleteCoreProductMaster = async (req: Request, res: Response) => {
@@ -1693,12 +1709,18 @@ export const uploadBrandLogo = async (req: Request, res: Response) => {
     const vendor_id = Number(req.body?.vendor_id);
 
     if (!file) return res.status(400).json({ message: "No file uploaded" });
-    if (isNaN(vendor_id)) return res.status(400).json({ message: "Invalid vendor_id" });
+    if (isNaN(vendor_id))
+      return res.status(400).json({ message: "Invalid vendor_id" });
 
-    const ext = (file.originalname || "logo").split(".").pop()?.toLowerCase() || "png";
+    const ext =
+      (file.originalname || "logo").split(".").pop()?.toLowerCase() || "png";
     const allowedExts = ["jpg", "jpeg", "png", "svg", "webp"];
     if (!allowedExts.includes(ext)) {
-      return res.status(400).json({ message: "Only image files (jpg, jpeg, png, svg, webp) are allowed" });
+      return res
+        .status(400)
+        .json({
+          message: "Only image files (jpg, jpeg, png, svg, webp) are allowed",
+        });
     }
     if (file.size > 2 * 1024 * 1024) {
       return res.status(400).json({ message: "File size must be under 2MB" });
@@ -1712,7 +1734,13 @@ export const uploadBrandLogo = async (req: Request, res: Response) => {
     );
 
     const signedUrl = await generateSignedUrl(key);
-    return res.status(200).json({ status: 1, message: "Logo uploaded", data: { key, url: signedUrl } });
+    return res
+      .status(200)
+      .json({
+        status: 1,
+        message: "Logo uploaded",
+        data: { key, url: signedUrl },
+      });
   } catch (err) {
     console.error("Error uploading brand logo:", err);
     return res.status(500).json({ message: "Upload failed" });
@@ -1725,15 +1753,20 @@ export const createUnitMaster = async (req: Request, res: Response) => {
     Number(vendor_id),
     String(unit_name),
     String(short_name || unit_name),
-    created_by ? Number(created_by) : null
+    created_by ? Number(created_by) : null,
   );
-  return res.status(200).json(result.status ? ApiResponse.success(result.data, result.message, 200) : ApiResponse.error(result.message, 400));
+  return res
+    .status(200)
+    .json(
+      result.status
+        ? ApiResponse.success(result.data, result.message, 200)
+        : ApiResponse.error(result.message, 400),
+    );
 };
-
 
 export const getManualPackingItemsController = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
     const projectId = Number(req.query.project_id);
@@ -1755,99 +1788,60 @@ export const getManualPackingItemsController = async (
 
     const result = await trackTraceService.getManualPackingItemsService(
       projectId,
-      vendorId
+      vendorId,
     );
 
     return res
       .status(200)
-      .json(ApiResponse.success(result.data, result.message, 200));    
+      .json(ApiResponse.success(result.data, result.message, 200));
   } catch (error: any) {
     console.error("getManualPackingItemsController error:", error);
 
     return res.status(500).json({
       success: false,
-      message:
-        error?.message ||
-        "Failed to fetch manual packing items",
+      message: error?.message || "Failed to fetch manual packing items",
     });
   }
 };
 
-
-
-export const addManualPackingItem = async (
-  req: Request,
-  res: Response
-) => {
+export const addManualPackingItem = async (req: Request, res: Response) => {
   try {
-    const {
-      project_id,
-      vendor_id,
-      box_id,
-      cut_list_id,
-      qty,
-      user_id,
-    } = req.body;
+    const { project_id, vendor_id, box_id, cut_list_id, qty, user_id } =
+      req.body;
 
-    const serviceResponse =
-      await trackTraceService.addManualPackingItemService({
-        project_id:
-          Number(project_id),
+    const serviceResponse = await trackTraceService.addManualPackingItemService(
+      {
+        project_id: Number(project_id),
 
-        vendor_id:
-          Number(vendor_id),
+        vendor_id: Number(vendor_id),
 
-        box_id:
-          Number(box_id),
+        box_id: Number(box_id),
 
-        cut_list_id:
-          Number(cut_list_id),
+        cut_list_id: Number(cut_list_id),
 
-        qty:
-          Number(qty),
+        qty: Number(qty),
 
-        user_id:
-          Number(user_id),
-      });
+        user_id: Number(user_id),
+      },
+    );
 
-    if (
-      serviceResponse.status ===
-      0
-    ) {
+    if (serviceResponse.status === 0) {
       return res
         .status(200)
-        .json(
-          ApiResponse.error(
-            serviceResponse.message,
-            400
-          )
-        );
+        .json(ApiResponse.error(serviceResponse.message, 400));
     }
 
     return res
       .status(200)
       .json(
-        ApiResponse.success(
-          serviceResponse.data,
-          serviceResponse.message,
-          200
-        )
+        ApiResponse.success(serviceResponse.data, serviceResponse.message, 200),
       );
   } catch (error: any) {
-    console.error(
-      "addManualPackingItem controller error:",
-      error
-    );
+    console.error("addManualPackingItem controller error:", error);
 
     return res
       .status(500)
-      .json(
-        ApiResponse.error(
-          error?.message ||
-            "Internal server error",
-          500
-        )
-      );
+      .json(ApiResponse.error(error?.message || "Internal server error", 500));
   }
 };
 
@@ -1880,7 +1874,9 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
     const projectId = toPositiveInteger(req.params.projectId);
     const page = toPositiveInteger(req.query.page, 1);
     const limit = toPositiveInteger(req.query.limit, 10);
-    const search = String(req.query.search ?? "").trim().slice(0, 100);
+    const search = String(req.query.search ?? "")
+      .trim()
+      .slice(0, 100);
     const rawStatus = String(req.query.scanStatus ?? "all").toLowerCase();
     const machineId = toPositiveInteger(req.query.machineId);
 
@@ -1896,7 +1892,11 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
       });
     }
 
-    if (!SCAN_STATUSES.includes(rawStatus as trackTraceService.ProjectItemScanFilter)) {
+    if (
+      !SCAN_STATUSES.includes(
+        rawStatus as trackTraceService.ProjectItemScanFilter,
+      )
+    ) {
       return res.status(400).json({
         error: "scanStatus must be all, scanned, or pending",
       });
@@ -1912,13 +1912,17 @@ export const getProjectItemTracking = async (req: Request, res: Response) => {
         .json({ error: "machineId must be a positive integer" });
     }
 
-    const result = await trackTraceService.getProjectItemTrackingService(vendorId, projectId, {
-      page,
-      limit,
-      search,
-      scanStatus: rawStatus as trackTraceService.ProjectItemScanFilter,
-      machineId,
-    });
+    const result = await trackTraceService.getProjectItemTrackingService(
+      vendorId,
+      projectId,
+      {
+        page,
+        limit,
+        search,
+        scanStatus: rawStatus as trackTraceService.ProjectItemScanFilter,
+        machineId,
+      },
+    );
 
     if (!result) {
       return res.status(404).json({ error: "Project not found" });
