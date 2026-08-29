@@ -3089,10 +3089,16 @@ export class OrderLoginService {
     leadId: number,
     isSoValueReceived: boolean,
     updatedBy: number,
+    clientBaseUrl?: string,
   ) {
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId },
       select: { id: true, account_id: true },
+    });
+
+    const vendor = await prisma.vendorMaster.findFirst({
+      where: { id: vendorId },
+      select: { IsAccountLocInEnabled: true },
     });
 
     if (!lead) {
@@ -3127,6 +3133,27 @@ export class OrderLoginService {
         action_type: "UPDATE",
         created_by: updatedBy,
       });
+    }
+
+    if (isSoValueReceived && vendor?.IsAccountLocInEnabled === true) {
+      const existingOrderLoginApprovalTask = await prisma.userLeadTask.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          task_type: "Order Login Approval",
+        },
+        select: { id: true },
+      });
+
+      if (!existingOrderLoginApprovalTask) {
+        await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          created_by: updatedBy,
+          base_date: new Date(),
+          clientBaseUrl,
+        });
+      }
     }
 
     return updated;

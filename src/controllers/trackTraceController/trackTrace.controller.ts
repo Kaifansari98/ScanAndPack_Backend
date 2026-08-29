@@ -828,8 +828,10 @@ export const getQualityCheckProjects = async (req: Request, res: Response) => {
 
 export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
+  const status = (_req.query.status as string) || (_req.query.filter as string) || "all";
   const serviceResponse = await trackTraceService.getTraceTraceDashboard(
     Number(vendor_id),
+    status,
   );
   if (serviceResponse.status == 0) {
     return res
@@ -843,8 +845,19 @@ export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
 
 export const getProjectCategories = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
+  const { search, status, type, page, limit, sort_by, sort_order } = _req.query;
+
   const serviceResponse = await trackTraceService.getProjectCategories(
     Number(vendor_id),
+    {
+      search: search ? String(search) : undefined,
+      status: status ? String(status) : undefined,
+      type: type ? String(type) : undefined,
+      page: page ? Number(page) : undefined,
+      limit: limit ? Number(limit) : undefined,
+      sort_by: sort_by ? String(sort_by) : undefined,
+      sort_order: (sort_order as "asc" | "desc") || undefined,
+    }
   );
   if (serviceResponse.status == 0) {
     return res
