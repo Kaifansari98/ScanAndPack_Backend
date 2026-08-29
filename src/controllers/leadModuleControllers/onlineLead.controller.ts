@@ -588,7 +588,10 @@ export class OnlineLeadController {
             error: "userId parameter is required for 'my' tab",
           });
         }
-        where.assign_to = userId;
+        where.OR = [
+          { assign_to: userId },
+          { final_assigned_leads: userId },
+        ];
       } else if (tab === "overall") {
         // Overall leads has no assignment filter (shows all unassigned + assigned leads for that vendor)
       }
@@ -1168,13 +1171,38 @@ export class OnlineLeadController {
             leadIdForMapping = existingLead.id;
             accountIdForMapping = existingLead.account_id ?? 0;
 
-            // Soft-delete extra orphan draft leads for same contact
+            // Ensure all requirement leads for this contact get assigned to store & sales executive
             for (let k = 1; k < existingLeads.length; k++) {
-              if (existingLeads[k].is_draft) {
-                await tx.leadMaster.update({
-                  where: { id: existingLeads[k].id },
-                  data: { is_deleted: true },
+              await tx.leadMaster.update({
+                where: { id: existingLeads[k].id },
+                data: {
+                  franchise_id: lead.store_id,
+                  is_deleted: false,
+                  ...(lead.final_assigned_leads ? { assign_to: lead.final_assigned_leads } : {}),
+                },
+              });
+
+              if (lead.final_assigned_leads) {
+                const existingMapping = await tx.leadUserMapping.findFirst({
+                  where: {
+                    lead_id: existingLeads[k].id,
+                    user_id: lead.final_assigned_leads,
+                    type: "ISM",
+                  },
                 });
+                if (!existingMapping) {
+                  await tx.leadUserMapping.create({
+                    data: {
+                      vendor_id: lead.vendor_id,
+                      account_id: existingLeads[k].account_id ?? 0,
+                      lead_id: existingLeads[k].id,
+                      user_id: lead.final_assigned_leads,
+                      type: "ISM",
+                      status: "active",
+                      created_by: Number(user_id || lead.created_by || 1),
+                    },
+                  });
+                }
               }
             }
 
@@ -1650,6 +1678,11 @@ export class OnlineLeadController {
       let finalAssignedUserId: number | null = null;
       let assignmentMessage = "";
 
+      const storeSalesExecutives = storeUsers.filter((u) => {
+        const role = u.user_type?.user_type?.toLowerCase() || "";
+        return role === "sales executive" || role === "sales-executive";
+      });
+
       const storeAdmins = storeUsers.filter((u) => {
         const role = u.user_type?.user_type?.toLowerCase() || "";
         return role === "store manager" || role === "store admin";
@@ -1660,7 +1693,11 @@ export class OnlineLeadController {
         return role === "telecaller" || role === "store caller";
       });
 
-      if (storeAdmins.length > 0) {
+      if (storeSalesExecutives.length > 0) {
+        // Condition 1: Active Store Sales Executive available -> Assign to Store Sales Executive
+        finalAssignedUserId = storeSalesExecutives[0].id;
+        assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
+      } else if (storeAdmins.length > 0) {
         // Condition 2: Store Admin available -> Assign to active Store Admin
         finalAssignedUserId = storeAdmins[0].id;
         assignmentMessage = `Assigned to Store Admin: ${storeAdmins[0].user_name}`;
@@ -1745,8 +1782,32 @@ export class OnlineLeadController {
               data: {
                 franchise_id: Number(to_store_id),
                 lead_code: targetLeadCode,
+                ...(finalAssignedUserId ? { assign_to: finalAssignedUserId } : {}),
               },
             });
+
+            if (finalAssignedUserId) {
+              const existingMapping = await tx.leadUserMapping.findFirst({
+                where: {
+                  lead_id: existingLead.id,
+                  user_id: finalAssignedUserId,
+                  type: "ISM",
+                },
+              });
+              if (!existingMapping) {
+                await tx.leadUserMapping.create({
+                  data: {
+                    vendor_id: lead.vendor_id,
+                    account_id: existingLead.account_id ?? 0,
+                    lead_id: existingLead.id,
+                    user_id: finalAssignedUserId,
+                    type: "ISM",
+                    status: "active",
+                    created_by: Number(selected_by || lead.created_by || 1),
+                  },
+                });
+              }
+            }
           }
         }
 
@@ -1794,13 +1855,38 @@ export class OnlineLeadController {
             leadIdForMapping = existingLead.id;
             accountIdForMapping = existingLead.account_id ?? 0;
 
-            // Soft-delete extra orphan draft leads for same contact
+            // Ensure all requirement leads for this contact get assigned to store & sales executive
             for (let k = 1; k < existingLeads.length; k++) {
-              if (existingLeads[k].is_draft) {
-                await tx.leadMaster.update({
-                  where: { id: existingLeads[k].id },
-                  data: { is_deleted: true },
+              await tx.leadMaster.update({
+                where: { id: existingLeads[k].id },
+                data: {
+                  franchise_id: Number(to_store_id),
+                  is_deleted: false,
+                  ...(finalAssignedUserId ? { assign_to: finalAssignedUserId } : {}),
+                },
+              });
+
+              if (finalAssignedUserId) {
+                const existingMapping = await tx.leadUserMapping.findFirst({
+                  where: {
+                    lead_id: existingLeads[k].id,
+                    user_id: finalAssignedUserId,
+                    type: "ISM",
+                  },
                 });
+                if (!existingMapping) {
+                  await tx.leadUserMapping.create({
+                    data: {
+                      vendor_id: lead.vendor_id,
+                      account_id: existingLeads[k].account_id ?? 0,
+                      lead_id: existingLeads[k].id,
+                      user_id: finalAssignedUserId,
+                      type: "ISM",
+                      status: "active",
+                      created_by: Number(selected_by || lead.created_by || 1),
+                    },
+                  });
+                }
               }
             }
 
@@ -3405,7 +3491,7 @@ export class OnlineLeadController {
           leadIdForMapping = newLead.id;
           accountIdForMapping = account.id;
 
-          // Sync Caller to LeadUserMapping (type: "ISM")
+          // Sync Caller & Store Sales Executive to LeadUserMapping (type: "ISM")
           if (lead.assign_to) {
             await tx.leadUserMapping.create({
               data: {
@@ -3413,6 +3499,20 @@ export class OnlineLeadController {
                 account_id: account.id,
                 lead_id: newLead.id,
                 user_id: lead.assign_to,
+                type: "ISM",
+                status: "active",
+                created_by: Number(user_id || lead.created_by || 1),
+              },
+            });
+          }
+
+          if (lead.final_assigned_leads && lead.final_assigned_leads !== lead.assign_to) {
+            await tx.leadUserMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                account_id: account.id,
+                lead_id: newLead.id,
+                user_id: lead.final_assigned_leads,
                 type: "ISM",
                 status: "active",
                 created_by: Number(user_id || lead.created_by || 1),
