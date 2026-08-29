@@ -4590,7 +4590,10 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   }
 };
 
-export const getTraceTraceDashboard = async (vendor_id: number) => {
+export const getTraceTraceDashboard = async (
+  vendor_id: number,
+  statusFilter: string = "all",
+) => {
   try {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
@@ -4838,14 +4841,48 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
 
     const allStatuses = projects.map(buildProjectStatus);
 
-    // ── 5. Split active and archived ───────────────────────────────────────
+    // ── 5. Apply Status Filter from backend (all, not_started, pending, completed) ───
+    const normalizedFilter = (statusFilter || "all")
+      .toLowerCase()
+      .trim()
+      .replace(/[\s_-]+/g, "");
+
+    const filteredStatuses = allStatuses.filter((p) => {
+      if (normalizedFilter === "all" || normalizedFilter === "") return true;
+
+      const totalPending = p.machines.reduce((s, m) => s + m.pending, 0);
+      const totalScanned = p.machines.reduce((s, m) => s + m.scanned, 0);
+      const allDone =
+        (p.total_panels > 0 && p.panels_scanned >= p.total_panels) ||
+        (totalPending === 0 && p.machines.length > 0 && totalScanned > 0);
+
+      // Not Started: 0 panels scanned in the entire project
+      const isNotStarted = totalScanned === 0 && p.panels_scanned === 0;
+
+      // Pending (In Progress): Production has started (totalScanned > 0) but is not finished yet
+      const isPending = !allDone && (totalScanned > 0 || p.panels_scanned > 0);
+
+      if (normalizedFilter === "notstarted") {
+        return isNotStarted;
+      }
+      if (normalizedFilter === "pending" || normalizedFilter === "inprogress") {
+        return isPending;
+      }
+      if (normalizedFilter === "completed" || normalizedFilter === "done") {
+        return allDone;
+      }
+
+      return true;
+    });
+
+    // ── 6. Split active and archived ───────────────────────────────────────
     const activeStatuses = new Set(["Initiated", "Started"]);
 
-    const active = allStatuses.filter((p) =>
+    const active = filteredStatuses.filter((p) =>
       activeStatuses.has(p.project_status ?? ""),
     );
 
-    const archived = allStatuses.filter(
+    const archived = filteredStatuses.filter(
       (p) => !activeStatuses.has(p.project_status ?? ""),
     );
 
@@ -4861,11 +4898,69 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
   }
 };
 
-export const getProjectCategories = async (vendor_id: number) => {
+export const getProjectCategories = async (
+  vendor_id: number,
+  query?: {
+    search?: string;
+    status?: string;
+    type?: string;
+    page?: number;
+    limit?: number;
+    sort_by?: string;
+    sort_order?: "asc" | "desc";
+  }
+) => {
   try {
+    const where: any = { vendor_id };
+
+    if (query?.status && query.status !== "all") {
+      where.status = query.status;
+    }
+
+    if (query?.type === "main") {
+      where.parent_id = null;
+    } else if (query?.type === "sub") {
+      where.parent_id = { not: null };
+    }
+
+    if (query?.search && query.search.trim() !== "") {
+      const q = query.search.trim();
+      where.OR = [
+        { category_name: { contains: q, mode: "insensitive" } },
+        { prefix: { contains: q, mode: "insensitive" } },
+        { parent: { category_name: { contains: q, mode: "insensitive" } } },
+        {
+          projectCategoriesMasterVendorMapping: {
+            some: {
+              projectCategoriesTypeMaster: {
+                module_name: { contains: q, mode: "insensitive" },
+              },
+            },
+          },
+        },
+      ];
+    }
+
+    const sortField = query?.sort_by || "category_name";
+    const sortOrder = query?.sort_order || "asc";
+    const orderBy: any = {};
+    if (sortField === "category_name") orderBy.category_name = sortOrder;
+    else if (sortField === "prefix") orderBy.prefix = sortOrder;
+    else if (sortField === "status") orderBy.status = sortOrder;
+    else if (sortField === "created_at") orderBy.created_at = sortOrder;
+    else orderBy.category_name = "asc";
+
+    const isPaginationRequested = Boolean(query?.page || query?.limit);
+    const page = query?.page ? Number(query.page) : 1;
+    const limit = query?.limit ? Number(query.limit) : 10;
+    const skip = (page - 1) * limit;
+
+    const total = await prisma.projectCategoriesMaster.count({ where });
+
     const categories = await prisma.projectCategoriesMaster.findMany({
-      where: { vendor_id },
-      orderBy: { category_name: "asc" },
+      where,
+      orderBy,
+      ...(isPaginationRequested ? { skip, take: limit } : {}),
       select: {
         id: true,
         category_name: true,
@@ -4898,7 +4993,17 @@ export const getProjectCategories = async (vendor_id: number) => {
       },
     });
 
-    return validationResponse(1, "", { categories });
+    const totalPages = Math.ceil(total / limit) || 1;
+
+    return validationResponse(1, "", {
+      categories,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages,
+      },
+    });
   } catch (error) {
     console.error("Error in getProjectCategories", error);
     return validationResponse(0, "Something went wrong");
@@ -6054,25 +6159,9 @@ export const getProjectDetailService_old = async (
     for (const mapping of boxMappingsForWeight) {
       if (!mapping.box_id) continue;
       const bId = Number(mapping.box_id);
-
       const qty = Number(mapping.qty ?? 1);
       const mappedWeight = Number(mapping.weight || 0);
-      const cutListTotalWeight = Number(mapping.cut_list?.weight || 0);
-      const cutListTotalQty = Number(mapping.cut_list?.qty || 1);
-
-      let itemWeight = mappedWeight > 0 ? mappedWeight : 0;
-      if (itemWeight === 0 && cutListTotalWeight > 0) {
-        itemWeight = (cutListTotalWeight / cutListTotalQty) * qty;
-      }
-
-      if (itemWeight === 0 && mapping.cut_list) {
-        const l = Number(mapping.cut_list.length || 0);
-        const w = Number(mapping.cut_list.width || 0);
-        const t = Number(mapping.cut_list.thickness || 0);
-        if (l > 0 && w > 0 && t > 0) {
-          itemWeight = l * w * t * 0.00000075 * qty;
-        }
-      }
+      const itemWeight = mappedWeight * qty;
 
       const currentWeight = boxWeightMap.get(bId) || 0;
       boxWeightMap.set(bId, currentWeight + itemWeight);
@@ -8757,22 +8846,7 @@ export const getBoxItemsService = async (
     const items = mappings.map((mapping) => {
       const qty = Number(mapping.qty ?? 1);
       const mappedWeight = Number(mapping.weight || 0);
-      const cutListTotalWeight = Number(mapping.cut_list?.weight || 0);
-      const cutListTotalQty = Number(mapping.cut_list?.qty || 1);
-
-      let itemWeight = mappedWeight > 0 ? mappedWeight : 0;
-      if (itemWeight === 0 && cutListTotalWeight > 0) {
-        itemWeight = (cutListTotalWeight / cutListTotalQty) * qty;
-      }
-
-      if (itemWeight === 0 && mapping.cut_list) {
-        const l = Number(mapping.cut_list.length || 0);
-        const w = Number(mapping.cut_list.width || 0);
-        const t = Number(mapping.cut_list.thickness || 0);
-        if (l > 0 && w > 0 && t > 0) {
-          itemWeight = l * w * t * 0.00000075 * qty;
-        }
-      }
+      const itemWeight = mappedWeight * qty;
 
       return {
         id: mapping.id,
