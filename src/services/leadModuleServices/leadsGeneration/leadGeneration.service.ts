@@ -1095,33 +1095,66 @@ export const getLeadById = async (
     }
 
     // 4️⃣ Fetch the lead
-    const lead = await prisma.leadMaster.findFirst({
-      where: whereCondition,
-      include: {
-        account: {
-          select: { id: true, name: true, email: true, contact_no: true },
-        },
-        siteType: true,
-        source: true,
-        statusType: true,
-        productMappings: { include: { productType: true } },
-        leadB2BReqMappings: { include: { b2bRequirementType: true } },
-        leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
-        leadProductStructureMapping: { include: { productStructure: { include: { productType: true } } } },
-        documents: {
-          where: { deleted_at: null, documentType: { tag: "Type 1" } },
-        },
-        createdBy: {
-          select: { id: true, user_name: true, user_email: true },
-        },
-        assignedTo: {
-          select: { id: true, user_name: true, user_email: true },
-        },
-        assignedBy: {
-          select: { id: true, user_name: true, user_email: true },
-        },
+    const leadIncludeConfig = {
+      account: {
+        select: { id: true, name: true, email: true, contact_no: true },
       },
+      siteType: true,
+      source: true,
+      statusType: true,
+      productMappings: { include: { productType: true } },
+      leadB2BReqMappings: { include: { b2bRequirementType: true } },
+      leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
+      leadProductStructureMapping: { include: { productStructure: { include: { productType: true } } } },
+      documents: {
+        where: { deleted_at: null, documentType: { tag: "Type 1" } },
+      },
+      createdBy: {
+        select: { id: true, user_name: true, user_email: true },
+      },
+      assignedTo: {
+        select: { id: true, user_name: true, user_email: true },
+      },
+      assignedBy: {
+        select: { id: true, user_name: true, user_email: true },
+      },
+    };
+
+    let lead = await prisma.leadMaster.findFirst({
+      where: whereCondition,
+      include: leadIncludeConfig,
     });
+
+    // Fallback: If lead not found directly by LeadMaster ID, check if leadId is an online_leads ID
+    if (!lead) {
+      const onlineLead = await prisma.online_leads.findUnique({
+        where: { id: leadId },
+        select: { lead_code: true, contact: true, email: true },
+      });
+
+      if (onlineLead) {
+        const contactClean = onlineLead.contact ? onlineLead.contact.replace(/\D/g, "") : "";
+        const fallbackWhere: any = {
+          vendor_id: vendorId,
+          is_deleted: false,
+          OR: [
+            ...(onlineLead.lead_code ? [{ lead_code: onlineLead.lead_code }] : []),
+            ...(contactClean ? [{ contact_no: contactClean }] : []),
+            ...(onlineLead.email ? [{ email: onlineLead.email.trim() }] : []),
+          ],
+        };
+
+        if (whereCondition.AND) {
+          fallbackWhere.AND = whereCondition.AND;
+        }
+
+        lead = await prisma.leadMaster.findFirst({
+          where: fallbackWhere,
+          include: leadIncludeConfig,
+          orderBy: { id: "desc" },
+        });
+      }
+    }
 
     if (!lead) {
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
