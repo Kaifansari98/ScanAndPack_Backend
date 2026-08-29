@@ -181,16 +181,12 @@ export const isLeadComplete = (lead: any): boolean => {
 
   if (!allFieldsFilled) return false;
 
-  // Check product types (at least one required)
-  const hasProductTypes =
-    lead.productMappings && lead.productMappings.length > 0;
-
   // Check product structures (at least one required)
   const hasProductStructures =
     lead.leadProductStructureMapping &&
     lead.leadProductStructureMapping.length > 0;
 
-  return hasProductTypes && hasProductStructures;
+  return hasProductStructures;
 };
 
 interface UpdateLeadValidationResult {

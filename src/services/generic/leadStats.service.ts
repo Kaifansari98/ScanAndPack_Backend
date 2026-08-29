@@ -39,15 +39,27 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
-      const userType = user.user_type.user_type.toLowerCase();
-      const shouldIncludeFranchise = [
-        "sales-executive",
-        "custom",
-        // "site-supervisor",
-        "admin",
-        "super-admin",
-        "auditor",
-      ].includes(userType);
+      const isHO = user.franchise_id
+        ? (
+            await prisma.franchiseMaster.findUnique({
+              where: { id: user.franchise_id },
+              select: { is_head_office: true },
+            })
+          )?.is_head_office === true
+        : false;
+
+      const userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      const shouldIncludeFranchise =
+        [
+          "sales-executive",
+          "custom",
+          // "site-supervisor",
+          "admin",
+          "super-admin",
+          "auditor",
+        ].includes(userType) &&
+        userType !== "super-admin" &&
+        !isHO;
       const shouldIncludeFranchiseForMyTasks = [
         "sales-executive",
         "custom",

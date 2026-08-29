@@ -2009,7 +2009,10 @@ export class LeadActivityStatusService {
             ]),
           ];
 
-          whereClause.id = { in: leadIds.length > 0 ? leadIds : [0] };
+          whereClause.OR = [
+            { assign_to: assignTo },
+            { id: { in: leadIds.length > 0 ? leadIds : [0] } },
+          ];
         } else {
           whereClause.assign_to = assignTo;
         }
