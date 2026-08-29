@@ -4831,6 +4831,13 @@ model online_leads {
   archetech_name                                           String?
   archetech_number                                         String?
   priority                                                 String?
+  approval_status                                          String?
+  pending_status_id                                        Int?
+  pending_store_id                                         Int?
+  pending_follow_up_date                                   DateTime?
+  pending_remark                                           String?
+  pending_assign_to                                        Int?
+  pending_created_by                                       Int?
   product_types                                            String[]                     @default([])
   product_structures                                       String[]                     @default([])
   online_lead_call_log                                     online_lead_call_log[]

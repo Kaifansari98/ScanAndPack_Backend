@@ -29,6 +29,10 @@ router.put("/:id/assign", onlineLeadController.assignLead);
 router.post("/:id/call", verifyToken, onlineLeadController.logCallAndOutcome);
 router.post("/:id/assign-store", onlineLeadController.assignStore);
 router.post("/:id/move-to-draft", onlineLeadController.moveToDraft);
+router.post("/:id/approve", verifyToken, onlineLeadController.approveLead);
+router.post("/:id/reject", verifyToken, onlineLeadController.rejectLead);
+router.patch("/call-log/:logId", onlineLeadController.updateCallLogRemark);
+router.patch("/history/:historyId", onlineLeadController.updateHistoryRemark);
 router.delete("/:id", onlineLeadController.deleteLead);
 
 export default router;
