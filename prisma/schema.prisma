@@ -839,6 +839,7 @@ model LeadMaster {
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
+  online_leads                                online_leads[]
   b2bDocuments                                LeadB2BDocument[]
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
   hardwareMappings                            LeadHardwareMapping[]
@@ -4838,11 +4839,13 @@ model online_leads {
   pending_remark                                           String?
   pending_assign_to                                        Int?
   pending_created_by                                       Int?
+  lead_master_id                                           Int?
   product_types                                            String[]                     @default([])
   product_structures                                       String[]                     @default([])
   online_lead_call_log                                     online_lead_call_log[]
   online_lead_history                                      online_lead_history[]
   online_lead_store_log                                    online_lead_store_log[]
+  LeadMaster                                               LeadMaster?                  @relation(fields: [lead_master_id], references: [id], onDelete: SetNull)
   UserMaster_online_leads_assign_toToUserMaster            UserMaster?                  @relation("online_leads_assign_toToUserMaster", fields: [assign_to], references: [id])
   UserMaster_online_leads_created_byToUserMaster           UserMaster?                  @relation("online_leads_created_byToUserMaster", fields: [created_by], references: [id])
   UserMaster_online_leads_final_assigned_leadsToUserMaster UserMaster?                  @relation("online_leads_final_assigned_leadsToUserMaster", fields: [final_assigned_leads], references: [id])
