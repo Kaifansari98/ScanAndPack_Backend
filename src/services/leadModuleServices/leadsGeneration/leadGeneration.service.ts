@@ -4811,3 +4811,192 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
 
   return timelineEvents;
 };
+
+export const changeLeadStoreService = async (
+  vendorId: number,
+  leadId: number,
+  toStoreId: number,
+  updatedBy: number
+) => {
+  const result = await prisma.$transaction(async (tx) => {
+    // 1. Check if lead exists
+    const existingLead = await tx.leadMaster.findFirst({
+      where: {
+        id: leadId,
+        vendor_id: vendorId,
+        is_deleted: false,
+      },
+    });
+
+    if (!existingLead) {
+      throw new Error(`Lead with ID ${leadId} not found`);
+    }
+
+    // 2. Fetch active store users for the target store/franchise
+    let storeUsers = await tx.userMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        franchise_id: toStoreId,
+        status: { in: ["active", "Active", "ACTIVE"] },
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (storeUsers.length === 0) {
+      storeUsers = await tx.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          franchise_id: toStoreId,
+        },
+        include: {
+          user_type: true,
+        },
+      });
+    }
+
+    const salesExecutives = storeUsers.filter((u) => {
+      const role = (u.user_type?.user_type || "").toLowerCase().replace(/[-_ ]/g, "");
+      return role === "salesexecutive" || role.includes("sales");
+    });
+
+    const storeAdmins = storeUsers.filter((u) => {
+      const role = (u.user_type?.user_type || "").toLowerCase().replace(/[-_ ]/g, "");
+      return role === "storemanager" || role === "storeadmin" || role === "admin" || role === "superadmin";
+    });
+
+    let assignedUserId: number | null = null;
+    let assignedUserName: string = "";
+
+    if (salesExecutives.length > 0) {
+      assignedUserId = salesExecutives[0].id;
+      assignedUserName = salesExecutives[0].user_name;
+    } else if (storeAdmins.length > 0) {
+      assignedUserId = storeAdmins[0].id;
+      assignedUserName = storeAdmins[0].user_name;
+    } else if (storeUsers.length > 0) {
+      assignedUserId = storeUsers[0].id;
+      assignedUserName = storeUsers[0].user_name;
+    }
+
+    // 3. Generate new Lead Code for the target store & update LeadMaster
+    let newLeadCode: string | null = null;
+    if (existingLead.franchise_id !== toStoreId) {
+      newLeadCode = await generateLeadCode(tx, {
+        franchiseId: toStoreId,
+        vendorId: vendorId,
+      });
+    }
+
+    const leadUpdateData: any = {
+      franchise_id: toStoreId,
+      updated_by: updatedBy,
+      updated_at: new Date(),
+    };
+
+    if (newLeadCode) {
+      leadUpdateData.lead_code = newLeadCode;
+    }
+
+    if (assignedUserId) {
+      leadUpdateData.assign_to = assignedUserId;
+      leadUpdateData.assigned_by = updatedBy;
+    }
+
+    const updatedLead = await tx.leadMaster.update({
+      where: { id: leadId },
+      data: leadUpdateData,
+      include: {
+        assignedTo: { select: { id: true, user_name: true, user_email: true } },
+      },
+    });
+
+    // 3b. Sync active LeadUserMapping for the newly assigned sales executive
+    if (assignedUserId && existingLead.account_id) {
+      await tx.leadUserMapping.updateMany({
+        where: {
+          lead_id: leadId,
+          type: "ISM",
+          status: "active",
+        },
+        data: {
+          status: "inactive",
+          updated_at: new Date(),
+        },
+      });
+
+      await tx.leadUserMapping.create({
+        data: {
+          vendor_id: vendorId,
+          account_id: existingLead.account_id,
+          lead_id: leadId,
+          user_id: assignedUserId,
+          type: "ISM",
+          status: "active",
+          created_by: updatedBy,
+        },
+      });
+    }
+
+    // 4. Update online_leads record if matching
+    const cleanContact = existingLead.contact_no ? existingLead.contact_no.replace(/\D/g, "") : "";
+    if (cleanContact) {
+      const matchingOnlineLead = await tx.online_leads.findFirst({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            { contact: existingLead.contact_no },
+            { contact: cleanContact },
+          ],
+        },
+      });
+
+      if (matchingOnlineLead) {
+        await tx.online_leads.update({
+          where: { id: matchingOnlineLead.id },
+          data: {
+            store_id: toStoreId,
+            ...(newLeadCode ? { lead_code: newLeadCode } : {}),
+            ...(assignedUserId ? { assign_to: assignedUserId } : {}),
+            updated_at: new Date(),
+          },
+        });
+      }
+    }
+
+    // 5. Log activity
+    if (existingLead.account_id) {
+      const codeLogStr = newLeadCode ? `, lead code updated to ${newLeadCode}` : "";
+      await tx.leadActivityStatusLog.create({
+        data: {
+          vendor_id: vendorId,
+          account_id: existingLead.account_id,
+          lead_id: leadId,
+          user_id: updatedBy,
+          activity_status: (existingLead as any).activity_status || "active",
+          activity_status_remark: `Store changed to Franchise #${toStoreId}${codeLogStr}${assignedUserName ? `, assigned to ${assignedUserName}` : ""}`,
+          created_by: updatedBy,
+        },
+      });
+
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existingLead.account_id,
+        action: `Store changed to Franchise #${toStoreId}${codeLogStr}${assignedUserName ? ` and assigned to ${assignedUserName}` : ""}`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        history_type: "Lead",
+      });
+    }
+
+    return {
+      lead: updatedLead,
+      assignedUser: assignedUserId ? { id: assignedUserId, name: assignedUserName } : null,
+    };
+  });
+
+  return result;
+};
+

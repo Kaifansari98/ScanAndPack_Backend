@@ -3355,14 +3355,6 @@ export class OnlineLeadController {
 
         const rawContact = (lead.contact || "").replace(/\D/g, "");
         const contact_no = rawContact.length > 10 && rawContact.startsWith("91") ? rawContact.slice(-10) : rawContact;
-        const existingLeads = await tx.leadMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            contact_no,
-            is_deleted: false,
-          },
-          orderBy: { id: "asc" },
-        });
 
         let resolvedSourceId = null;
         const defaultOnlineSource = await tx.sourceMaster.findFirst({
@@ -3391,162 +3383,137 @@ export class OnlineLeadController {
         });
         const mainPipelineStatusId = statusType?.id || 1;
 
-        const existingLead = existingLeads[0] || null;
-
-        let leadIdForMapping: number;
-        let accountIdForMapping: number;
-
-        if (existingLead) {
-          const targetLeadCode = (existingLead.lead_code && existingLead.lead_code.trim() !== "" && existingLead.franchise_id === storeId)
-            ? existingLead.lead_code
-            : (loopLeadCode || existingLead.lead_code || "");
-
-          await tx.leadMaster.update({
-            where: { id: existingLead.id },
-            data: {
-              franchise_id: storeId,
-              lead_code: targetLeadCode,
-              status_id: mainPipelineStatusId,
-              is_draft: true,
-              assign_to: finalAssignedLeads,
-              source_id: resolvedSourceId,
+        // Find or create AccountMaster record for this customer
+        let account = null;
+        const matchConditions = [];
+        if (contact_no) {
+          matchConditions.push({ contact_no });
+          matchConditions.push({ alt_contact_no: contact_no });
+        }
+        if (lead.alt_contact_no) {
+          const alt_contact = lead.alt_contact_no.replace(/\D/g, "");
+          matchConditions.push({ contact_no: alt_contact });
+          matchConditions.push({ alt_contact_no: alt_contact });
+        }
+        if (lead.email) {
+          matchConditions.push({ email: lead.email.trim() });
+        }
+        if (matchConditions.length > 0) {
+          account = await tx.accountMaster.findFirst({
+            where: {
+              vendor_id: lead.vendor_id,
+              is_deleted: false,
+              OR: matchConditions,
             },
           });
-          leadIdForMapping = existingLead.id;
-          accountIdForMapping = existingLead.account_id ?? 0;
-
-          // Soft-delete extra orphan draft leads for same contact
-          for (let k = 1; k < existingLeads.length; k++) {
-            if (existingLeads[k].is_draft) {
-              await tx.leadMaster.update({
-                where: { id: existingLeads[k].id },
-                data: { is_deleted: true },
-              });
-            }
-          }
-
-          if (finalAssignedLeads) {
-            const existingMapping = await tx.leadUserMapping.findFirst({
-              where: {
-                lead_id: existingLead.id,
-                user_id: finalAssignedLeads,
-                type: "ISM",
-              },
-            });
-
-            if (existingMapping) {
-              await tx.leadUserMapping.update({
-                where: { id: existingMapping.id },
-                data: { status: "active" },
-              });
-            } else {
-              await tx.leadUserMapping.create({
-                data: {
-                  vendor_id: lead.vendor_id,
-                  account_id: existingLead.account_id ?? 0,
-                  lead_id: existingLead.id,
-                  user_id: finalAssignedLeads,
-                  type: "ISM",
-                  status: "active",
-                  created_by: Number(user_id || lead.created_by || 1),
-                },
-              });
-            }
-          }
-
-          if (callerId && callerId !== finalAssignedLeads) {
-            const existingCallerMapping = await tx.leadUserMapping.findFirst({
-              where: {
-                lead_id: existingLead.id,
-                user_id: callerId,
-                type: "ISM",
-              },
-            });
-
-            if (existingCallerMapping) {
-              await tx.leadUserMapping.update({
-                where: { id: existingCallerMapping.id },
-                data: { status: "active" },
-              });
-            } else {
-              await tx.leadUserMapping.create({
-                data: {
-                  vendor_id: lead.vendor_id,
-                  account_id: existingLead.account_id ?? 0,
-                  lead_id: existingLead.id,
-                  user_id: callerId,
-                  type: "ISM",
-                  status: "active",
-                  created_by: Number(user_id || lead.created_by || 1),
-                },
-              });
-            }
-          }
-        } else {
-          const matchConditions = [];
-          if (contact_no) {
-            matchConditions.push({ contact_no });
-            matchConditions.push({ alt_contact_no: contact_no });
-          }
-          if (lead.alt_contact_no) {
-            const alt_contact = lead.alt_contact_no.replace(/\D/g, "");
-            matchConditions.push({ contact_no: alt_contact });
-            matchConditions.push({ alt_contact_no: alt_contact });
-          }
-          if (lead.email) {
-            matchConditions.push({ email: lead.email.trim() });
-          }
-
-          let account = null;
-          if (matchConditions.length > 0) {
-            account = await tx.accountMaster.findFirst({
-              where: {
-                vendor_id: lead.vendor_id,
-                is_deleted: false,
-                OR: matchConditions,
-              },
-            });
-          }
-
-          if (!account) {
-            account = await tx.accountMaster.create({
-              data: {
-                name: lead.leads_name,
-                country_code: "91",
-                contact_no,
-                alt_contact_no: lead.alt_contact_no || null,
-                email: lead.email ? lead.email.trim() : "",
-                vendor_id: lead.vendor_id,
-                franchise_id: storeId,
-                created_by: Number(user_id || lead.created_by || 1),
-              },
-            });
-          }
-
-          const statusType = await tx.statusTypeMaster.findFirst({
-            where: { vendor_id: lead.vendor_id, tag: "Type 1" },
-            select: { id: true },
+        }
+        if (!account) {
+          account = await tx.accountMaster.create({
+            data: {
+              name: lead.leads_name,
+              country_code: "91",
+              contact_no,
+              alt_contact_no: lead.alt_contact_no || null,
+              email: lead.email ? lead.email.trim() : "",
+              vendor_id: lead.vendor_id,
+              franchise_id: storeId,
+              created_by: Number(user_id || lead.created_by || 1),
+            },
           });
-          const mainPipelineStatusId = statusType?.id || 1;
+        }
 
-          let leadCodeForCreate = loopLeadCode;
-          if (leadCodeForCreate) {
-            const codeInUse = await tx.leadMaster.findFirst({
-              where: { vendor_id: lead.vendor_id, lead_code: leadCodeForCreate },
+        // Soft-delete any previous premature draft leads for this contact
+        const orphanDraftLeads = await tx.leadMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            contact_no,
+            is_deleted: false,
+            is_draft: true,
+          },
+          select: { id: true },
+        });
+        for (const dl of orphanDraftLeads) {
+          await tx.leadMaster.update({
+            where: { id: dl.id },
+            data: { is_deleted: true },
+          });
+        }
+
+        // Split into separate Open Leads for each product type combination
+        const createdLeadIds: number[] = [];
+        const usedCodesInTx = new Set<string>();
+
+        for (let i = 0; i < count; i++) {
+          const combo = uniqueCombinations[i];
+
+          // 1. Find product type ID
+          let productTypeId: number | null = null;
+          if (combo.type) {
+            const foundType = await tx.productTypeMaster.findFirst({
+              where: {
+                vendor_id: lead.vendor_id,
+                type: { equals: combo.type, mode: "insensitive" },
+              },
               select: { id: true },
             });
-            if (codeInUse) {
-              leadCodeForCreate = await generateLeadCode(tx, { franchiseId: storeId ?? undefined, vendorId: lead.vendor_id });
-            }
-          } else {
-            leadCodeForCreate = await generateLeadCode(tx, { franchiseId: storeId ?? undefined, vendorId: lead.vendor_id });
+            if (foundType) productTypeId = foundType.id;
+          }
+          if (!productTypeId) {
+            const fallbackType = await tx.productTypeMaster.findFirst({
+              where: { vendor_id: lead.vendor_id },
+              select: { id: true },
+            });
+            if (fallbackType) productTypeId = fallbackType.id;
           }
 
+          // 2. Find product structure object
+          let productStructObj: { id: number; type: string } | null = null;
+          if (combo.structure) {
+            const foundStruct = await tx.productStructure.findFirst({
+              where: {
+                vendor_id: lead.vendor_id,
+                type: { equals: combo.structure, mode: "insensitive" },
+              },
+              select: { id: true, type: true },
+            });
+            if (foundStruct) productStructObj = foundStruct;
+          }
+          if (!productStructObj) {
+            const fallbackStruct = await tx.productStructure.findFirst({
+              where: { vendor_id: lead.vendor_id },
+              select: { id: true, type: true },
+            });
+            if (fallbackStruct) productStructObj = fallbackStruct;
+          }
+
+          // 3. Generate lead code for this separated lead (ensuring uniqueness)
+          let candidateCode = i === 0 && loopLeadCode ? loopLeadCode : null;
+          let finalCodeForLead = "";
+
+          while (!finalCodeForLead) {
+            if (candidateCode && !usedCodesInTx.has(candidateCode)) {
+              const codeExistsInDb = await tx.leadMaster.findFirst({
+                where: {
+                  vendor_id: lead.vendor_id,
+                  lead_code: candidateCode,
+                },
+                select: { id: true },
+              });
+              if (!codeExistsInDb) {
+                finalCodeForLead = candidateCode;
+                usedCodesInTx.add(finalCodeForLead);
+                break;
+              }
+            }
+            candidateCode = await generateLeadCode(tx, { franchiseId: storeId ?? undefined, vendorId: lead.vendor_id });
+          }
+
+          // 4. Create separate leadMaster entry with is_draft: false (Open Lead!)
           const newLead = await tx.leadMaster.create({
             data: {
-              lead_code: leadCodeForCreate,
-              firstname: lead.firstname || lead.leads_name,
-              lastname: lead.lastname || "",
+              lead_code: finalCodeForLead,
+              firstname: lead.firstname || lead.leads_name?.split(" ")[0] || lead.leads_name,
+              lastname: lead.lastname || lead.leads_name?.split(" ").slice(1).join(" ") || "",
               country_code: "91",
               contact_no,
               alt_contact_no: lead.alt_contact_no || null,
@@ -3563,13 +3530,54 @@ export class OnlineLeadController {
               created_by: Number(user_id || lead.created_by || 1),
               priority: lead.priority || "Medium",
               account_id: account.id,
-              is_draft: true,
+              is_draft: false, // ✅ Open Lead!
               assign_to: finalAssignedLeads,
             },
           });
-          leadIdForMapping = newLead.id;
-          accountIdForMapping = account.id;
 
+          createdLeadIds.push(newLead.id);
+
+          // 5. Product Type Mapping
+          if (productTypeId) {
+            await tx.leadProductMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                lead_id: newLead.id,
+                account_id: account.id,
+                product_type_id: productTypeId,
+                created_by: Number(user_id || lead.created_by || 1),
+              },
+            });
+          }
+
+          // 6. Product Structure Mapping & Instance
+          if (productStructObj) {
+            await tx.leadProductStructureMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                lead_id: newLead.id,
+                account_id: account.id,
+                product_structure_id: productStructObj.id,
+                created_by: Number(user_id || lead.created_by || 1),
+              },
+            });
+
+            const customTitleToUse = combo.customTitle || productStructObj.type || "Default Structure";
+            await tx.leadProductStructureInstance.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                lead_id: newLead.id,
+                account_id: account.id,
+                product_type_id: productTypeId || 1,
+                product_structure_id: productStructObj.id,
+                title: customTitleToUse,
+                quantity_index: 1,
+                created_by: Number(user_id || lead.created_by || 1),
+              },
+            });
+          }
+
+          // 7. User Mapping
           if (finalAssignedLeads) {
             await tx.leadUserMapping.create({
               data: {
@@ -3597,143 +3605,14 @@ export class OnlineLeadController {
               },
             });
           }
-        }
 
-        // Clean up old product mapping for this lead
-        await tx.leadProductMapping.deleteMany({
-          where: { lead_id: leadIdForMapping },
-        });
-        await tx.leadProductStructureMapping.deleteMany({
-          where: { lead_id: leadIdForMapping },
-        });
-
-        // Map ALL product types to this single lead
-        const mappedTypeIds: number[] = [];
-        for (const pType of productTypes) {
-          if (!pType || pType === "—") continue;
-          const typeStr = String(pType).trim();
-          const productTypeName = typeStr.includes(" | ") ? typeStr.split(" | ")[1].trim() : typeStr;
-          const foundType = await tx.productTypeMaster.findFirst({
-            where: {
+          // 8. Chat Room
+          await tx.leadChatRoom.create({
+            data: {
+              lead_id: newLead.id,
               vendor_id: lead.vendor_id,
-              type: { equals: productTypeName, mode: "insensitive" },
             },
-            select: { id: true },
           });
-          if (foundType) {
-            mappedTypeIds.push(foundType.id);
-            await tx.leadProductMapping.create({
-              data: {
-                vendor_id: lead.vendor_id,
-                lead_id: leadIdForMapping,
-                account_id: accountIdForMapping,
-                product_type_id: foundType.id,
-                created_by: Number(user_id || lead.created_by || 1),
-              },
-            });
-          }
-        }
-
-        // Map ALL product structures to this single lead
-        const mappedStructs: { id: number; type: string }[] = [];
-        for (const pStruct of productStructures) {
-          if (!pStruct || pStruct === "—") continue;
-          const structStr = String(pStruct).trim();
-          const foundStruct = await tx.productStructure.findFirst({
-            where: {
-              vendor_id: lead.vendor_id,
-              type: { equals: structStr, mode: "insensitive" },
-            },
-            select: { id: true, type: true },
-          });
-          if (foundStruct) {
-            mappedStructs.push(foundStruct);
-            await tx.leadProductStructureMapping.create({
-              data: {
-                vendor_id: lead.vendor_id,
-                lead_id: leadIdForMapping,
-                account_id: accountIdForMapping,
-                product_structure_id: foundStruct.id,
-                created_by: Number(user_id || lead.created_by || 1),
-              },
-            });
-          }
-        }
-
-        // Create Product Structure Instances for all combinations
-        let resolvedTypeId = mappedTypeIds[0] || null;
-        if (!resolvedTypeId) {
-          const fallbackType = await tx.productTypeMaster.findFirst({
-            where: { vendor_id: lead.vendor_id },
-            select: { id: true },
-          });
-          if (fallbackType) resolvedTypeId = fallbackType.id;
-        }
-
-        let resolvedStructObj = mappedStructs[0] || null;
-        if (!resolvedStructObj) {
-          const fallbackStruct = await tx.productStructure.findFirst({
-            where: { vendor_id: lead.vendor_id },
-            select: { id: true, type: true },
-          });
-          if (fallbackStruct) resolvedStructObj = fallbackStruct;
-        }
-
-        const loopLen = Math.max(maxLen, 1);
-        for (let idx = 0; idx < loopLen; idx++) {
-          const rawType = productTypes[idx];
-          const structObj = mappedStructs[idx] || resolvedStructObj;
-          const typeIdForInstance = mappedTypeIds[idx] || resolvedTypeId;
-
-          if (structObj && typeIdForInstance) {
-            const customTitle = (rawType && String(rawType).includes(" | "))
-              ? String(rawType).split(" | ")[0].trim()
-              : (structObj.type || "Default Structure");
-
-            const existingInstance = await tx.leadProductStructureInstance.findFirst({
-              where: {
-                lead_id: leadIdForMapping,
-                vendor_id: lead.vendor_id,
-                product_structure_id: structObj.id,
-                title: customTitle,
-              },
-              select: { id: true },
-            });
-
-            if (!existingInstance) {
-              await tx.leadProductStructureInstance.create({
-                data: {
-                  vendor_id: lead.vendor_id,
-                  lead_id: leadIdForMapping,
-                  account_id: accountIdForMapping,
-                  product_type_id: typeIdForInstance,
-                  product_structure_id: structObj.id,
-                  title: customTitle,
-                  quantity_index: idx + 1,
-                  created_by: Number(user_id || lead.created_by || 1),
-                },
-              });
-            }
-          }
-        }
-        // Soft-delete any previous premature draft leads or unassigned extra leads for this contact number
-        const orphanDraftLeads = await tx.leadMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            contact_no,
-            is_deleted: false,
-            id: { not: leadIdForMapping },
-          },
-          select: { id: true, is_draft: true, assign_to: true },
-        });
-
-        for (const draftLead of orphanDraftLeads) {
-          if (draftLead.is_draft || !draftLead.assign_to) {
-            await tx.leadMaster.update({
-              where: { id: draftLead.id },
-              data: { is_deleted: true },
-            });
-          }
         }
 
         const updated = await tx.online_leads.update({
@@ -3756,7 +3635,7 @@ export class OnlineLeadController {
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
-            remark: `Lead conversion approved and moved to Draft Lead stage`,
+            remark: `Lead conversion approved and moved to Open Lead stage (${count} separated lead(s) created)`,
             created_by: Number(user_id || lead.created_by || 1),
             store_id: storeId,
             online_lead_status_id: statusId ?? 1,
