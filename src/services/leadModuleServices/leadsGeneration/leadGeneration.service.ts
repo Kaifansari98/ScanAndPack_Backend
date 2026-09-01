@@ -1372,8 +1372,8 @@ export const getLeadById = async (
     return {
       lead: {
         ...lead,
-        remark: lead.remark || onlineLeadData?.remark || null,
-        designer_remark: lead.designer_remark || lead.remark || onlineLeadData?.remark || null,
+        remark: (lead as any).remark || onlineLeadData?.remark || null,
+        designer_remark: lead.designer_remark || (lead as any).remark || onlineLeadData?.remark || null,
         call_log: onlineLeadData?.online_lead_call_log
           ? onlineLeadData.online_lead_call_log.map((c: any) => ({
               ...c,
