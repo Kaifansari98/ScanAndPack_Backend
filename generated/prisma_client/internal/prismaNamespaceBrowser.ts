@@ -3880,6 +3880,7 @@ export const Online_leadsScalarFieldEnum = {
   pending_remark: 'pending_remark',
   pending_assign_to: 'pending_assign_to',
   pending_created_by: 'pending_created_by',
+  lead_master_id: 'lead_master_id',
   product_types: 'product_types',
   product_structures: 'product_structures'
 } as const

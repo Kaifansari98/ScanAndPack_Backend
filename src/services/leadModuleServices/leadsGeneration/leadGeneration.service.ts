@@ -1079,9 +1079,13 @@ export const getLeadById = async (
       userType === "backend" ||
       userType === "factory" ||
       userType === "pre-prod" ||
+      userType === "telecaller" ||
+      userType === "telecaller-team-lead" ||
+      userType === "telecaller team lead" ||
+      userType === "store caller" ||
       (userType === "custom" && !!customViewPrivilege)
     ) {
-      console.log("[SERVICE] Sales Executive – vendor scoped access granted");
+      console.log("[SERVICE] Sales Executive / Telecaller – vendor scoped access granted");
     } else if (["admin", "super-admin", "auditor"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
@@ -1328,9 +1332,62 @@ export const getLeadById = async (
       }),
     );
 
+    // 6️⃣ Fetch matching online_leads data (history, call_log, initial remark) if online lead feature is enabled
+    let onlineLeadData: any = null;
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+
+    if (vendorData?.is_online_lead_feature_enabled) {
+      const contactClean = lead.contact_no ? lead.contact_no.replace(/\D/g, "") : "";
+      onlineLeadData = await prisma.online_leads.findFirst({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            ...(lead.lead_code ? [{ lead_code: lead.lead_code }] : []),
+            ...(contactClean ? [{ contact: { contains: contactClean } }] : []),
+            ...(lead.email ? [{ email: lead.email.trim() }] : []),
+          ],
+        },
+        include: {
+          online_lead_history: {
+            include: {
+              UserMaster: { select: { id: true, user_name: true } },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
+          online_lead_call_log: {
+            include: {
+              UserMaster: { select: { id: true, user_name: true } },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
+        },
+      });
+    }
+
     return {
       lead: {
         ...lead,
+        remark: lead.remark || onlineLeadData?.remark || null,
+        designer_remark: lead.designer_remark || lead.remark || onlineLeadData?.remark || null,
+        call_log: onlineLeadData?.online_lead_call_log
+          ? onlineLeadData.online_lead_call_log.map((c: any) => ({
+              ...c,
+              telecaller: c.UserMaster || null,
+              status: c.online_lead_followup_status || null,
+            }))
+          : (lead as any).call_log || [],
+        online_lead_history: onlineLeadData?.online_lead_history
+          ? onlineLeadData.online_lead_history.map((h: any) => ({
+              ...h,
+              createdBy: h.UserMaster || null,
+              status: h.online_lead_followup_status || null,
+            }))
+          : (lead as any).online_lead_history || [],
         has_pending_fast_production_request: !!pendingFastProductionRequest,
         fast_production_request: !!pendingFastProductionRequest,
         smallOrderRequest:
@@ -1411,30 +1468,30 @@ export const assignDesignerToLead = async (
         ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
         ...(vendor?.is_this_vendor_is_custom_usertype_only === true
           ? {
+            user_type: {
               user_type: {
-                user_type: {
-                  equals: "custom",
-                  mode: "insensitive",
+                equals: "custom",
+                mode: "insensitive",
+              },
+            },
+            userPrivilegeMappings: {
+              some: {
+                is_allowed: true,
+                privilege: {
+                  code: requiredPrivilegeCode,
+                  is_active: true,
                 },
               },
-              userPrivilegeMappings: {
-                some: {
-                  is_allowed: true,
-                  privilege: {
-                    code: requiredPrivilegeCode,
-                    is_active: true,
-                  },
-                },
-              },
-            }
+            },
+          }
           : {
+            user_type: {
               user_type: {
-                user_type: {
-                  equals: "designer",
-                  mode: "insensitive",
-                },
+                equals: "designer",
+                mode: "insensitive",
               },
-            }),
+            },
+          }),
       },
       select: {
         id: true,
@@ -1599,7 +1656,7 @@ export const getLeadProductStructureInstances = async (
       include: {
         productStructure: true,
         productType: true,
-        
+
         subProductStructure: true,
         productItemCode: {
           include: {
@@ -1743,7 +1800,7 @@ export const clearLeadProductStructures = async (
         where: { id: leadId, vendor_id: vendorId },
         select: { account_id: true }
       });
-      
+
       if (lead) {
         await createLeadLog(prisma, {
           vendor_id: vendorId,
@@ -2247,11 +2304,272 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
     orderBy: { id: "asc" },
   });
 
-  const maxCount = Math.max(pTypes.length, pStructs.length, instances.length);
+  // const maxCount = Math.max(pTypes.length, pStructs.length, instances.length);
 
   // If online lead feature is enabled AND this is an online lead AND there are multiple product items
-  if (isOnlineLead && isOnlineLeadFeatureEnabled && maxCount > 1) {
-    // 1. Convert Item 0 on existing lead (leadId)
+  // if (isOnlineLead && isOnlineLeadFeatureEnabled && maxCount > 1) {
+  //  // 1. Convert Item 0 on existing lead (leadId)
+  //   const convertedLeadCode = await generateLeadCode(tx, {
+  //     franchiseId: lead.franchise_id ?? undefined,
+  //     vendorId: lead.vendor_id,
+  //   });
+
+  //   await tx.leadMaster.update({
+  //     where: { id: leadId },
+  //     data: {
+  //       is_draft: false,
+  //       lead_code: convertedLeadCode,
+  //     },
+  //   });
+
+  //   // Clean up extra product mappings & structures from original lead (keep item 0)
+  //   if (pTypes.length > 1 && pTypes[0]?.id) {
+  //     await tx.leadProductMapping.deleteMany({
+  //       where: {
+  //         lead_id: leadId,
+  //         id: { not: pTypes[0].id },
+  //       },
+  //     });
+  //   }
+
+  //   if (pStructs.length > 1 && pStructs[0]?.id) {
+  //     await tx.leadProductStructureMapping.deleteMany({
+  //       where: {
+  //         lead_id: leadId,
+  //         id: { not: pStructs[0].id },
+  //       },
+  //     });
+  //   }
+
+  //   if (instances.length > 1 && instances[0]?.id) {
+  //     await tx.leadProductStructureInstance.update({
+  //       where: { id: instances[0].id },
+  //       data: { quantity_index: 1 },
+  //     });
+  //   }
+
+  //   const activeLeadUserMappings = await tx.leadUserMapping.findMany({
+  //     where: {
+  //       lead_id: leadId,
+  //       status: "active",
+  //     },
+  //   });
+
+  //   let resolvedAssignTo = lead.assign_to;
+  //   if (!resolvedAssignTo && activeLeadUserMappings.length > 0) {
+  //     const ismMapping = activeLeadUserMappings.find((m: any) => m.type === "ISM" || m.user_id);
+  //     if (ismMapping) {
+  //       resolvedAssignTo = ismMapping.user_id;
+  //     }
+  //   }
+
+  //   if (!lead.assign_to && resolvedAssignTo) {
+  //     await tx.leadMaster.update({
+  //       where: { id: leadId },
+  //       data: { assign_to: resolvedAssignTo },
+  //     });
+  //   }
+
+  //   // 2. For items 1 to maxCount - 1: Create separate Open Lead for each product type / structure / instance
+  //   for (let i = 1; i < maxCount; i++) {
+  //     const itemLeadCode = await generateLeadCode(tx, {
+  //       franchiseId: lead.franchise_id ?? undefined,
+  //       vendorId: lead.vendor_id,
+  //     });
+
+  //     const newLead = await tx.leadMaster.create({
+  //       data: {
+  //         lead_code: itemLeadCode,
+  //         firstname: lead.firstname,
+  //         lastname: lead.lastname,
+  //         country_code: lead.country_code,
+  //         contact_no: lead.contact_no,
+  //         alt_contact_no: lead.alt_contact_no,
+  //         email: lead.email,
+  //         site_address: lead.site_address,
+  //         site_type_id: lead.site_type_id,
+  //         status_id: lead.status_id,
+  //         source_id: lead.source_id,
+  //         refered_by: lead.refered_by,
+  //         archetech_name: lead.archetech_name,
+  //         archetech_number: lead.archetech_number,
+  //         vendor_id: lead.vendor_id,
+  //         franchise_id: lead.franchise_id,
+  //         created_by: lead.created_by,
+  //         priority: lead.priority,
+  //         account_id: lead.account_id,
+  //         is_draft: false,
+  //         assign_to: resolvedAssignTo || lead.assign_to,
+  //       },
+  //     });
+
+  //     // Product Type Mapping for new lead
+  //     const pTypeItem = pTypes[i] || pTypes[0];
+  //     if (pTypeItem?.product_type_id) {
+  //       await tx.leadProductMapping.create({
+  //         data: {
+  //           vendor_id: lead.vendor_id,
+  //           lead_id: newLead.id,
+  //           account_id: lead.account_id,
+  //           product_type_id: pTypeItem.product_type_id,
+  //           created_by: lead.created_by,
+  //         },
+  //       });
+  //     }
+
+  //     // Product Structure Mapping for new lead
+  //     const pStructItem = pStructs[i] || pStructs[0];
+  //     if (pStructItem?.product_structure_id) {
+  //       await tx.leadProductStructureMapping.create({
+  //         data: {
+  //           vendor_id: lead.vendor_id,
+  //           lead_id: newLead.id,
+  //           account_id: lead.account_id,
+  //           product_structure_id: pStructItem.product_structure_id,
+  //           created_by: lead.created_by,
+  //         },
+  //       });
+  //     }
+
+  //     // Product Structure Instance for new lead
+  //     if (instances[i]) {
+  //       await tx.leadProductStructureInstance.update({
+  //         where: { id: instances[i].id },
+  //         data: {
+  //           lead_id: newLead.id,
+  //           quantity_index: 1,
+  //         },
+  //       });
+  //     } else if (pTypeItem?.product_type_id && pStructItem?.product_structure_id) {
+  //       const titleVal = pStructItem.productStructure?.type || pTypeItem.productType?.type || "Product Structure";
+  //       await tx.leadProductStructureInstance.create({
+  //         data: {
+  //           vendor_id: lead.vendor_id,
+  //           lead_id: newLead.id,
+  //           account_id: lead.account_id,
+  //           product_type_id: pTypeItem.product_type_id,
+  //           product_structure_id: pStructItem.product_structure_id,
+  //           title: titleVal,
+  //           quantity_index: 1,
+  //           created_by: lead.created_by,
+  //         },
+  //       });
+  //     }
+
+  //     // Sync active LeadUserMappings from original lead to newLead
+  //     if (activeLeadUserMappings.length > 0) {
+  //       for (const mapping of activeLeadUserMappings) {
+  //         await tx.leadUserMapping.create({
+  //           data: {
+  //             vendor_id: lead.vendor_id,
+  //             account_id: lead.account_id,
+  //             lead_id: newLead.id,
+  //             user_id: mapping.user_id,
+  //             type: mapping.type || "ISM",
+  //             status: "active",
+  //             created_by: mapping.created_by || lead.created_by,
+  //           },
+  //         });
+  //       }
+  //     } else {
+  //       if (lead.assign_to) {
+  //         await tx.leadUserMapping.create({
+  //           data: {
+  //             vendor_id: lead.vendor_id,
+  //             account_id: lead.account_id,
+  //             lead_id: newLead.id,
+  //             user_id: lead.assign_to,
+  //             type: "ISM",
+  //             status: "active",
+  //             created_by: lead.created_by,
+  //           },
+  //         });
+  //       }
+
+  //       if (lead.created_by && lead.created_by !== lead.assign_to) {
+  //         await tx.leadUserMapping.create({
+  //           data: {
+  //             vendor_id: lead.vendor_id,
+  //             account_id: lead.account_id,
+  //             lead_id: newLead.id,
+  //             user_id: lead.created_by,
+  //             type: "ISM",
+  //             status: "active",
+  //             created_by: lead.created_by,
+  //           },
+  //         });
+  //       }
+  //     }
+
+  //     // Create Chat Room & Members for new lead
+  //     const chatRoom = await tx.leadChatRoom.create({
+  //       data: {
+  //         lead_id: newLead.id,
+  //         vendor_id: lead.vendor_id,
+  //       },
+  //     });
+
+  //     const superAdminUsers = await tx.userMaster.findMany({
+  //       where: {
+  //         vendor_id: lead.vendor_id,
+  //         status: "active",
+  //         user_type: { user_type: "super-admin" },
+  //       },
+  //       select: { id: true },
+  //     });
+
+  //     const adminUsers = lead.franchise_id
+  //       ? await tx.userMaster.findMany({
+  //         where: {
+  //           vendor_id: lead.vendor_id,
+  //           franchise_id: lead.franchise_id,
+  //           status: "active",
+  //           user_type: { user_type: "admin" },
+  //         },
+  //         select: { id: true },
+  //       })
+  //       : [];
+
+  //     const memberIds = new Set<number>([
+  //       ...superAdminUsers.map((u: any) => u.id),
+  //       ...adminUsers.map((u: any) => u.id),
+  //     ]);
+  //     if (lead.assign_to) memberIds.add(lead.assign_to);
+  //     if (lead.created_by) memberIds.add(lead.created_by);
+
+  //     if (memberIds.size > 0) {
+  //       await tx.leadChatMember.createMany({
+  //         data: Array.from(memberIds).map((user_id) => ({
+  //           chat_room_id: chatRoom.id,
+  //           user_id,
+  //           added_by: lead.created_by || 1,
+  //         })),
+  //         skipDuplicates: true,
+  //       });
+  //     }
+  //   }
+  // } else {
+  //   // Single lead conversion (existing behavior when is_online_lead_feature_enabled === false or maxCount <= 1)
+  //   const updateData: any = { is_draft: false };
+  //   if (isOnlineLead) {
+  //     const convertedLeadCode = await generateLeadCode(tx, {
+  //       franchiseId: lead.franchise_id ?? undefined,
+  //       vendorId: lead.vendor_id,
+  //     });
+  //     updateData.lead_code = convertedLeadCode;
+  //   }
+
+    // await tx.leadMaster.update({
+    //   where: { id: leadId },
+    //   data: updateData,
+    // });
+
+    // ========================================================
+    // ✅ ACTIVE LEAD CONVERSION & MULTI-PRODUCT SEPARATION LOGIC
+    // ========================================================
+    const maxCount = Math.max(pTypes.length, pStructs.length, instances.length, 1);
+
+    // 1. Convert primary lead (leadId)
     const convertedLeadCode = await generateLeadCode(tx, {
       franchiseId: lead.franchise_id ?? undefined,
       vendorId: lead.vendor_id,
@@ -2261,161 +2579,149 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
       where: { id: leadId },
       data: {
         is_draft: false,
-        lead_code: convertedLeadCode,
+        ...(isOnlineLead || !lead.lead_code || lead.lead_code.startsWith("DRAFT") ? { lead_code: convertedLeadCode } : {}),
       },
     });
 
-    // Clean up extra product mappings & structures from original lead (keep item 0)
-    if (pTypes.length > 1 && pTypes[0]?.id) {
-      await tx.leadProductMapping.deleteMany({
+    // 2. Separate remaining product items into new individual Open Leads if maxCount > 1
+    if (maxCount > 1) {
+      if (pTypes.length > 1 && pTypes[0]?.id) {
+        await tx.leadProductMapping.deleteMany({
+          where: {
+            lead_id: leadId,
+            id: { not: pTypes[0].id },
+          },
+        });
+      }
+
+      if (pStructs.length > 1 && pStructs[0]?.id) {
+        await tx.leadProductStructureMapping.deleteMany({
+          where: {
+            lead_id: leadId,
+            id: { not: pStructs[0].id },
+          },
+        });
+      }
+
+      const activeLeadUserMappings = await tx.leadUserMapping.findMany({
         where: {
           lead_id: leadId,
-          id: { not: pTypes[0].id },
-        },
-      });
-    }
-
-    if (pStructs.length > 1 && pStructs[0]?.id) {
-      await tx.leadProductStructureMapping.deleteMany({
-        where: {
-          lead_id: leadId,
-          id: { not: pStructs[0].id },
-        },
-      });
-    }
-
-    if (instances.length > 1 && instances[0]?.id) {
-      await tx.leadProductStructureInstance.update({
-        where: { id: instances[0].id },
-        data: { quantity_index: 1 },
-      });
-    }
-
-    const activeLeadUserMappings = await tx.leadUserMapping.findMany({
-      where: {
-        lead_id: leadId,
-        status: "active",
-      },
-    });
-
-    let resolvedAssignTo = lead.assign_to;
-    if (!resolvedAssignTo && activeLeadUserMappings.length > 0) {
-      const ismMapping = activeLeadUserMappings.find((m: any) => m.type === "ISM" || m.user_id);
-      if (ismMapping) {
-        resolvedAssignTo = ismMapping.user_id;
-      }
-    }
-
-    if (!lead.assign_to && resolvedAssignTo) {
-      await tx.leadMaster.update({
-        where: { id: leadId },
-        data: { assign_to: resolvedAssignTo },
-      });
-    }
-
-    // 2. For items 1 to maxCount - 1: Create separate Open Lead for each product type / structure / instance
-    for (let i = 1; i < maxCount; i++) {
-      const itemLeadCode = await generateLeadCode(tx, {
-        franchiseId: lead.franchise_id ?? undefined,
-        vendorId: lead.vendor_id,
-      });
-
-      const newLead = await tx.leadMaster.create({
-        data: {
-          lead_code: itemLeadCode,
-          firstname: lead.firstname,
-          lastname: lead.lastname,
-          country_code: lead.country_code,
-          contact_no: lead.contact_no,
-          alt_contact_no: lead.alt_contact_no,
-          email: lead.email,
-          site_address: lead.site_address,
-          site_type_id: lead.site_type_id,
-          status_id: lead.status_id,
-          source_id: lead.source_id,
-          refered_by: lead.refered_by,
-          archetech_name: lead.archetech_name,
-          archetech_number: lead.archetech_number,
-          vendor_id: lead.vendor_id,
-          franchise_id: lead.franchise_id,
-          created_by: lead.created_by,
-          priority: lead.priority,
-          account_id: lead.account_id,
-          is_draft: false,
-          assign_to: resolvedAssignTo || lead.assign_to,
+          status: "active",
         },
       });
 
-      // Product Type Mapping for new lead
-      const pTypeItem = pTypes[i] || pTypes[0];
-      if (pTypeItem?.product_type_id) {
-        await tx.leadProductMapping.create({
-          data: {
-            vendor_id: lead.vendor_id,
-            lead_id: newLead.id,
-            account_id: lead.account_id,
-            product_type_id: pTypeItem.product_type_id,
-            created_by: lead.created_by,
-          },
+      let resolvedAssignTo = lead.assign_to;
+      if (!resolvedAssignTo && activeLeadUserMappings.length > 0) {
+        const ismMapping = activeLeadUserMappings.find((m: any) => m.type === "ISM" || m.user_id);
+        if (ismMapping) {
+          resolvedAssignTo = ismMapping.user_id;
+        }
+      }
+
+      if (!lead.assign_to && resolvedAssignTo) {
+        await tx.leadMaster.update({
+          where: { id: leadId },
+          data: { assign_to: resolvedAssignTo },
         });
       }
 
-      // Product Structure Mapping for new lead
-      const pStructItem = pStructs[i] || pStructs[0];
-      if (pStructItem?.product_structure_id) {
-        await tx.leadProductStructureMapping.create({
-          data: {
-            vendor_id: lead.vendor_id,
-            lead_id: newLead.id,
-            account_id: lead.account_id,
-            product_structure_id: pStructItem.product_structure_id,
-            created_by: lead.created_by,
-          },
+      for (let i = 1; i < maxCount; i++) {
+        const itemLeadCode = await generateLeadCode(tx, {
+          franchiseId: lead.franchise_id ?? undefined,
+          vendorId: lead.vendor_id,
         });
-      }
 
-      // Product Structure Instance for new lead
-      if (instances[i]) {
-        await tx.leadProductStructureInstance.update({
-          where: { id: instances[i].id },
+        const newLead = await tx.leadMaster.create({
           data: {
-            lead_id: newLead.id,
-            quantity_index: 1,
-          },
-        });
-      } else if (pTypeItem?.product_type_id && pStructItem?.product_structure_id) {
-        const titleVal = pStructItem.productStructure?.type || pTypeItem.productType?.type || "Product Structure";
-        await tx.leadProductStructureInstance.create({
-          data: {
+            lead_code: itemLeadCode,
+            firstname: lead.firstname,
+            lastname: lead.lastname,
+            country_code: lead.country_code,
+            contact_no: lead.contact_no,
+            alt_contact_no: lead.alt_contact_no,
+            email: lead.email,
+            site_address: lead.site_address,
+            site_type_id: lead.site_type_id,
+            status_id: lead.status_id,
+            source_id: lead.source_id,
+            refered_by: lead.refered_by,
+            archetech_name: lead.archetech_name,
+            archetech_number: lead.archetech_number,
             vendor_id: lead.vendor_id,
-            lead_id: newLead.id,
-            account_id: lead.account_id,
-            product_type_id: pTypeItem.product_type_id,
-            product_structure_id: pStructItem.product_structure_id,
-            title: titleVal,
-            quantity_index: 1,
+            franchise_id: lead.franchise_id,
             created_by: lead.created_by,
+            priority: lead.priority,
+            account_id: lead.account_id,
+            is_draft: false,
+            assign_to: resolvedAssignTo || lead.assign_to,
           },
         });
-      }
 
-      // Sync active LeadUserMappings from original lead to newLead
-      if (activeLeadUserMappings.length > 0) {
-        for (const mapping of activeLeadUserMappings) {
-          await tx.leadUserMapping.create({
+        const pTypeItem = pTypes[i] || pTypes[0];
+        if (pTypeItem?.product_type_id) {
+          await tx.leadProductMapping.create({
             data: {
               vendor_id: lead.vendor_id,
-              account_id: lead.account_id,
               lead_id: newLead.id,
-              user_id: mapping.user_id,
-              type: mapping.type || "ISM",
-              status: "active",
-              created_by: mapping.created_by || lead.created_by,
+              account_id: lead.account_id,
+              product_type_id: pTypeItem.product_type_id,
+              created_by: lead.created_by,
             },
           });
         }
-      } else {
-        if (lead.assign_to) {
+
+        const pStructItem = pStructs[i] || pStructs[0];
+        if (pStructItem?.product_structure_id) {
+          await tx.leadProductStructureMapping.create({
+            data: {
+              vendor_id: lead.vendor_id,
+              lead_id: newLead.id,
+              account_id: lead.account_id,
+              product_structure_id: pStructItem.product_structure_id,
+              created_by: lead.created_by,
+            },
+          });
+        }
+
+        if (instances[i]) {
+          await tx.leadProductStructureInstance.update({
+            where: { id: instances[i].id },
+            data: {
+              lead_id: newLead.id,
+              quantity_index: 1,
+            },
+          });
+        } else if (pTypeItem?.product_type_id && pStructItem?.product_structure_id) {
+          const titleVal = pStructItem.productStructure?.type || pTypeItem.productType?.type || "Product Structure";
+          await tx.leadProductStructureInstance.create({
+            data: {
+              vendor_id: lead.vendor_id,
+              lead_id: newLead.id,
+              account_id: lead.account_id,
+              product_type_id: pTypeItem.product_type_id,
+              product_structure_id: pStructItem.product_structure_id,
+              title: titleVal,
+              quantity_index: 1,
+              created_by: lead.created_by,
+            },
+          });
+        }
+
+        if (activeLeadUserMappings.length > 0) {
+          for (const mapping of activeLeadUserMappings) {
+            await tx.leadUserMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                account_id: lead.account_id,
+                lead_id: newLead.id,
+                user_id: mapping.user_id,
+                type: mapping.type || "ISM",
+                status: "active",
+                created_by: mapping.created_by || lead.created_by,
+              },
+            });
+          }
+        } else if (lead.assign_to) {
           await tx.leadUserMapping.create({
             data: {
               vendor_id: lead.vendor_id,
@@ -2429,85 +2735,54 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
           });
         }
 
-        if (lead.created_by && lead.created_by !== lead.assign_to) {
-          await tx.leadUserMapping.create({
-            data: {
-              vendor_id: lead.vendor_id,
-              account_id: lead.account_id,
-              lead_id: newLead.id,
-              user_id: lead.created_by,
-              type: "ISM",
-              status: "active",
-              created_by: lead.created_by,
-            },
+        const chatRoom = await tx.leadChatRoom.create({
+          data: {
+            lead_id: newLead.id,
+            vendor_id: lead.vendor_id,
+          },
+        });
+
+        const superAdminUsers = await tx.userMaster.findMany({
+          where: {
+            vendor_id: lead.vendor_id,
+            status: "active",
+            user_type: { user_type: "super-admin" },
+          },
+          select: { id: true },
+        });
+
+        const adminUsers = lead.franchise_id
+          ? await tx.userMaster.findMany({
+              where: {
+                vendor_id: lead.vendor_id,
+                franchise_id: lead.franchise_id,
+                status: "active",
+                user_type: { user_type: "admin" },
+              },
+              select: { id: true },
+            })
+          : [];
+
+        const memberIds = new Set<number>([
+          ...superAdminUsers.map((u: any) => u.id),
+          ...adminUsers.map((u: any) => u.id),
+        ]);
+        if (lead.assign_to) memberIds.add(lead.assign_to);
+        if (lead.created_by) memberIds.add(lead.created_by);
+
+        if (memberIds.size > 0) {
+          await tx.leadChatMember.createMany({
+            data: Array.from(memberIds).map((user_id) => ({
+              chat_room_id: chatRoom.id,
+              user_id,
+              added_by: lead.created_by || 1,
+            })),
+            skipDuplicates: true,
           });
         }
       }
-
-      // Create Chat Room & Members for new lead
-      const chatRoom = await tx.leadChatRoom.create({
-        data: {
-          lead_id: newLead.id,
-          vendor_id: lead.vendor_id,
-        },
-      });
-
-      const superAdminUsers = await tx.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: { user_type: "super-admin" },
-        },
-        select: { id: true },
-      });
-
-      const adminUsers = lead.franchise_id
-        ? await tx.userMaster.findMany({
-            where: {
-              vendor_id: lead.vendor_id,
-              franchise_id: lead.franchise_id,
-              status: "active",
-              user_type: { user_type: "admin" },
-            },
-            select: { id: true },
-          })
-        : [];
-
-      const memberIds = new Set<number>([
-        ...superAdminUsers.map((u: any) => u.id),
-        ...adminUsers.map((u: any) => u.id),
-      ]);
-      if (lead.assign_to) memberIds.add(lead.assign_to);
-      if (lead.created_by) memberIds.add(lead.created_by);
-
-      if (memberIds.size > 0) {
-        await tx.leadChatMember.createMany({
-          data: Array.from(memberIds).map((user_id) => ({
-            chat_room_id: chatRoom.id,
-            user_id,
-            added_by: lead.created_by || 1,
-          })),
-          skipDuplicates: true,
-        });
-      }
     }
-  } else {
-    // Single lead conversion (existing behavior when is_online_lead_feature_enabled === false or maxCount <= 1)
-    const updateData: any = { is_draft: false };
-    if (isOnlineLead) {
-      const convertedLeadCode = await generateLeadCode(tx, {
-        franchiseId: lead.franchise_id ?? undefined,
-        vendorId: lead.vendor_id,
-      });
-      updateData.lead_code = convertedLeadCode;
-    }
-
-    await tx.leadMaster.update({
-      where: { id: leadId },
-      data: updateData,
-    });
-  }
-};
+  };
 
 export const updateLeadService = async (
   leadId: number,
@@ -3224,16 +3499,16 @@ export const getSalesExecutivesByVendor = async (
                   },
                   ...(options?.requiredPrivilegeCode
                     ? {
-                        userPrivilegeMappings: {
-                          some: {
-                            is_allowed: true,
-                            privilege: {
-                              code: options.requiredPrivilegeCode,
-                              is_active: true,
-                            },
+                      userPrivilegeMappings: {
+                        some: {
+                          is_allowed: true,
+                          privilege: {
+                            code: options.requiredPrivilegeCode,
+                            is_active: true,
                           },
                         },
-                      }
+                      },
+                    }
                     : {}),
                 },
               ],
@@ -4391,19 +4666,19 @@ export const updateLeadStageService = async (
 
 export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: number }) => {
   const { lead_id, vendor_id } = input;
-  
+
   // 1. Find LeadMaster
   const leadMaster = await prisma.leadMaster.findUnique({
     where: { id: lead_id },
     select: { contact_no: true },
   });
-  
+
   if (!leadMaster) {
     return [];
   }
-  
+
   const normalizedContact = leadMaster.contact_no.replace(/\D/g, "");
-  
+
   // 2. Query online_leads
   const onlineLead = await prisma.online_leads.findFirst({
     where: {
