@@ -429,6 +429,11 @@ leadsRouter.get(
 );
 
 leadsRouter.post(
+  "/vendorId/:vendorId/leadId/:leadId/change-store",
+  leadController.changeLeadStore
+);
+
+leadsRouter.post(
   "/vendorId/:vendorId/leadId/:leadId/assign-designer",
   leadController.assignDesigner
 );
