@@ -49,22 +49,10 @@ export class LeadStatsService {
         : false;
 
       const userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
-      const shouldIncludeFranchise =
-        [
-          "sales-executive",
-          "custom",
-          // "site-supervisor",
-          "admin",
-          "super-admin",
-          "auditor",
-        ].includes(userType) &&
-        userType !== "super-admin" &&
-        !isHO;
-      const shouldIncludeFranchiseForMyTasks = [
-        "sales-executive",
-        "custom",
-        "admin",
-      ].includes(userType);
+      const targetFranchiseId =
+        franchiseId ??
+        (!isHO && userType !== "super-admin" ? user.franchise_id ?? undefined : undefined);
+
       const shouldUseMapping = ![
         "admin",
         "super-admin",
@@ -72,22 +60,30 @@ export class LeadStatsService {
       ].includes(userType);
       console.log("[LeadStatsService] role flags", {
         userType,
-        shouldIncludeFranchise,
+        targetFranchiseId,
         shouldUseMapping,
       });
 
-      if (shouldIncludeFranchise && franchiseId) {
+      if (targetFranchiseId) {
         whereClause = {
           ...whereClause,
-          franchise_id: franchiseId,
+          franchise_id: targetFranchiseId,
         };
       }
+
+      // My Task is a personal queue. Admin-level users can work across
+      // franchises, so its badge must not be limited by the active franchise.
+      const taskFranchiseId = ["admin", "super-admin", "auditor"].includes(
+        userType,
+      )
+        ? undefined
+        : targetFranchiseId;
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
-          ...(shouldIncludeFranchiseForMyTasks && franchiseId
-            ? { franchise_id: franchiseId }
+          ...(taskFranchiseId
+            ? { franchise_id: taskFranchiseId }
             : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },

@@ -1300,7 +1300,7 @@ export class OnlineLeadController {
                       user_id: lead.final_assigned_leads,
                       type: "ISM",
                       status: "active",
-                      created_by: Number(user_id || lead.created_by || 1),
+                      created_by: Number(telecaller_id || lead.created_by || 1),
                     },
                   });
                 }
