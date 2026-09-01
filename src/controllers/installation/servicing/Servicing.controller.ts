@@ -21,12 +21,14 @@ export class ServicingController {
         typeof req.body.remark === "string" ? req.body.remark : null;
 
       if (!vendorId || !leadId || !accountId || !serviceId || !userId) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "vendorId, leadId, accountId, serviceId, and userId are required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, accountId, serviceId, and userId are required",
+              400,
+            ),
+          );
       }
 
       const files = req.files as {
@@ -37,12 +39,14 @@ export class ServicingController {
       const amcContractDocs = files?.amc_contract_documents ?? [];
 
       if (completionDocs.length === 0) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "At least one service completion document is required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "At least one service completion document is required",
+              400,
+            ),
+          );
       }
 
       const uploaded = [];
@@ -96,12 +100,14 @@ export class ServicingController {
         .status(200)
         .json(ApiResponse.success(result, "Service completed successfully"));
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while completing service",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error while completing service",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -114,12 +120,14 @@ export class ServicingController {
       const remark = String(req.body.remark ?? "");
 
       if (!vendorId || !leadId || !serviceId || !updatedBy) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "vendorId, leadId, serviceId, and updated_by are required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, serviceId, and updated_by are required",
+              400,
+            ),
+          );
       }
 
       const result = await service.rejectService(
@@ -134,12 +142,14 @@ export class ServicingController {
         .status(200)
         .json(ApiResponse.success(result, "Service rejected successfully"));
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while rejecting service",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error while rejecting service",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -151,12 +161,14 @@ export class ServicingController {
       const updatedBy = Number(req.body.updated_by);
 
       if (!vendorId || !leadId || !serviceId || !updatedBy) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "vendorId, leadId, serviceId, and updated_by are required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, serviceId, and updated_by are required",
+              400,
+            ),
+          );
       }
 
       const result = await service.reopenRejectedService(
@@ -170,12 +182,14 @@ export class ServicingController {
         .status(200)
         .json(ApiResponse.success(result, "Service reopened successfully"));
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while reopening service",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error while reopening service",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -187,12 +201,14 @@ export class ServicingController {
       const updatedBy = Number(req.body.updated_by);
 
       if (!vendorId || !leadId || !serviceId || !updatedBy) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "vendorId, leadId, serviceId, and updated_by are required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, serviceId, and updated_by are required",
+              400,
+            ),
+          );
       }
 
       const result = await service.rescheduleService(
@@ -206,12 +222,14 @@ export class ServicingController {
         .status(200)
         .json(ApiResponse.success(result, "Service rescheduled successfully"));
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while rescheduling service",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message || "Internal server error while rescheduling service",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -230,14 +248,19 @@ export class ServicingController {
 
       return res
         .status(200)
-        .json(ApiResponse.success(result, "Service schedules fetched successfully"));
+        .json(
+          ApiResponse.success(result, "Service schedules fetched successfully"),
+        );
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while fetching service schedules",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message ||
+              "Internal server error while fetching service schedules",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -249,12 +272,14 @@ export class ServicingController {
       const userId = Number(req.body.userId);
 
       if (!vendorId || !leadId || !accountId || !userId) {
-        return res.status(400).json(
-          ApiResponse.error(
-            "vendorId, leadId, accountId, and userId are required",
-            400,
-          ),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId, leadId, accountId, and userId are required",
+              400,
+            ),
+          );
       }
 
       const files = req.files as {
@@ -264,9 +289,14 @@ export class ServicingController {
       const amcDocs = files?.amc_contract_documents ?? [];
 
       if (amcDocs.length === 0) {
-        return res.status(400).json(
-          ApiResponse.error("At least one AMC contract document is required", 400),
-        );
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "At least one AMC contract document is required",
+              400,
+            ),
+          );
       }
 
       const uploaded = [];
@@ -298,14 +328,22 @@ export class ServicingController {
 
       return res
         .status(200)
-        .json(ApiResponse.success(result, "AMC contract documents uploaded successfully"));
+        .json(
+          ApiResponse.success(
+            result,
+            "AMC contract documents uploaded successfully",
+          ),
+        );
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while uploading AMC documents",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message ||
+              "Internal server error while uploading AMC documents",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 
@@ -324,14 +362,22 @@ export class ServicingController {
 
       return res
         .status(200)
-        .json(ApiResponse.success(result, "AMC contract documents fetched successfully"));
+        .json(
+          ApiResponse.success(
+            result,
+            "AMC contract documents fetched successfully",
+          ),
+        );
     } catch (error: any) {
-      return res.status(error.statusCode || 500).json(
-        ApiResponse.error(
-          error.message || "Internal server error while fetching AMC documents",
-          error.statusCode || 500,
-        ),
-      );
+      return res
+        .status(error.statusCode || 500)
+        .json(
+          ApiResponse.error(
+            error.message ||
+              "Internal server error while fetching AMC documents",
+            error.statusCode || 500,
+          ),
+        );
     }
   }
 }

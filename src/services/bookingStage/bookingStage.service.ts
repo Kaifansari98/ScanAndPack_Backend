@@ -5461,7 +5461,13 @@ export class BookingStageService {
       if (c10) pendingContactsSet.add(c10);
       if (code) pendingCodesSet.add(code);
 
-      const olProdTypes = (ol.product_types || []).map((t: string) => ({ productType: { type: String(t || "").replace(/^\d+\s*\|\s*/, "") } }));
+      const cleanType = (t: string) => {
+        const str = String(t || "").trim();
+        return str.includes("|") ? str.split("|").pop()!.trim() : str;
+      };
+      const rawTypes = (ol.product_types || []).map(cleanType).filter(Boolean);
+      const uniqueTypes = Array.from(new Set<string>(rawTypes));
+      const olProdTypes = uniqueTypes.map((type: string) => ({ productType: { type } }));
       const olProdStructs = (ol.product_structures || []).map((s: string) => ({ productStructure: { type: s } }));
 
       // Deduplicate among pending online leads themselves

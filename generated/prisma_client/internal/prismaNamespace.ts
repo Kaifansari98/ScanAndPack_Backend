@@ -16324,7 +16324,8 @@ export const VendorMasterScalarFieldEnum = {
   is_broadcast_enabled: 'is_broadcast_enabled',
   is_scanpack_enabled: 'is_scanpack_enabled',
   is_online_lead_feature_enabled: 'is_online_lead_feature_enabled',
-  push_lead_to_cadbid: 'push_lead_to_cadbid'
+  push_lead_to_cadbid: 'push_lead_to_cadbid',
+  is_available_unique_code: 'is_available_unique_code'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -19880,6 +19881,7 @@ export const Online_leadsScalarFieldEnum = {
   pending_remark: 'pending_remark',
   pending_assign_to: 'pending_assign_to',
   pending_created_by: 'pending_created_by',
+  lead_master_id: 'lead_master_id',
   product_types: 'product_types',
   product_structures: 'product_structures'
 } as const
