@@ -110,17 +110,15 @@ export const generateCutListLabelsPDF = async ({
     doc
       .fillColor("#0F172A")
       .font("Helvetica-Bold")
-      .fontSize(8.5)
+      .fontSize(9)
       .text(text(item.projectName), x + 6, y + 6, {
         width: cellWidth - 12,
         align: "center",
-        ellipsis: true,
-        lineBreak: false,
       });
 
     // QR Code
     const qrSize = 74;
-    const qrX = x + cellWidth - qrSize - 10;
+    const qrX = x + cellWidth - qrSize - 8;
     const qrY = y + 26;
     const qrBuffer = await QRCode.toBuffer(text(item.value), {
       errorCorrectionLevel: "M",
@@ -137,109 +135,78 @@ export const generateCutListLabelsPDF = async ({
       .text(text(item.itemCode), qrX, qrY + qrSize + 2, {
         width: qrSize,
         align: "center",
-        ellipsis: true,
-        lineBreak: false,
       });
 
-    // Left info rows
-    const infoX = x + 10;
-    const infoWidth = cellWidth - qrSize - 20;
-    const labelWidth = 58;
+    // Left info rows with dynamic wrapping (Full text - NO ellipses)
+    const infoX = x + 8;
+    const infoWidth = qrX - infoX - 6;
+    const labelWidth = 52;
     const valueWidth = infoWidth - labelWidth;
 
-    const renderRow = (label: string, value: unknown, rowY: number) => {
+    let currentY = y + 26;
+
+    const renderDynamicRow = (label: string, value: unknown) => {
+      const valStr = text(value);
       doc
         .font("Helvetica-Bold")
-        .fontSize(7)
+        .fontSize(6.8)
         .fillColor("#334155")
-        .text(`${label}:`, infoX, rowY, {
-          width: labelWidth,
-          lineBreak: false,
-        });
+        .text(`${label}:`, infoX, currentY, { width: labelWidth });
+
+      const valY = currentY;
       doc
         .font("Helvetica")
-        .fontSize(7)
+        .fontSize(6.8)
         .fillColor("#0F172A")
-        .text(text(value), infoX + labelWidth, rowY, {
+        .text(valStr, infoX + labelWidth, valY, {
           width: valueWidth,
-          ellipsis: true,
-          lineBreak: false,
+          lineGap: 1,
         });
+
+      doc.font("Helvetica").fontSize(6.8);
+      const textHeight = doc.heightOfString(valStr, {
+        width: valueWidth,
+        lineGap: 1,
+      });
+      currentY += Math.max(textHeight, 9) + 2.5;
     };
 
     const size = [item.length, item.width, item.thickness]
       .map(text)
       .join(" x ");
-    let currentY = y + 26;
-    const rowStep = 12.5;
 
-    renderRow("Part Name", item.itemName, currentY);
-    renderRow("Module/Group", item.groupName, (currentY += rowStep));
-    renderRow("Cutting Size", size, (currentY += rowStep));
-    renderRow("Material Code", item.materialCode, (currentY += rowStep));
-    renderRow("Category", item.categoryName, (currentY += rowStep));
-    renderRow("Client Name", item.clientName, (currentY += rowStep));
-    renderRow("Order No", item.orderNo, (currentY += rowStep));
+    renderDynamicRow("Part Name", item.itemName);
+    renderDynamicRow("Module/Group", item.groupName);
+    renderDynamicRow("Cutting Size", size);
+    renderDynamicRow("Material Code", item.materialCode);
+    renderDynamicRow("Category", item.categoryName);
+    renderDynamicRow("Client Name", item.clientName);
+    renderDynamicRow("Order No", item.orderNo);
 
-    // Subtle divider above lower section
-    const divY = currentY + 15;
-    doc
-      .moveTo(infoX, divY)
-      .lineTo(x + cellWidth - 10, divY)
-      .lineWidth(0.5)
-      .stroke("#E2E8F0");
-
-    // Lower section (Full Width)
-    const lowerY = divY + 5;
-    // Edge Band
+    // Quantity & Weight placed directly below the fields (no divider line & no extra empty gap)
+    const qtyRowY = currentY + 1;
     doc
       .font("Helvetica-Bold")
-      .fontSize(7)
+      .fontSize(6.8)
       .fillColor("#334155")
-      .text("Edge Band:", infoX, lowerY, {
-        width: labelWidth,
-        lineBreak: false,
-      });
+      .text("Quantity:", infoX, qtyRowY, { width: 38 });
     doc
       .font("Helvetica")
-      .fontSize(7)
+      .fontSize(6.8)
       .fillColor("#0F172A")
-      .text(text(item.edgeBand), infoX + labelWidth, lowerY, {
-        width: cellWidth - 20 - labelWidth,
-        ellipsis: true,
-        lineBreak: false,
-      });
+      .text(text(item.quantity), infoX + 38, qtyRowY, { width: 35 });
 
-    // Quantity & Weight row
-    const qtyY = lowerY + 13;
+    const weightX = infoX + 75;
     doc
       .font("Helvetica-Bold")
-      .fontSize(7)
+      .fontSize(6.8)
       .fillColor("#334155")
-      .text("Quantity:", infoX, qtyY, { width: 42, lineBreak: false });
+      .text("Weight:", weightX, qtyRowY, { width: 34 });
     doc
       .font("Helvetica")
-      .fontSize(7)
+      .fontSize(6.8)
       .fillColor("#0F172A")
-      .text(text(item.quantity), infoX + 42, qtyY, {
-        width: 50,
-        lineBreak: false,
-      });
-
-    const weightX = x + cellWidth / 2 + 10;
-    doc
-      .font("Helvetica-Bold")
-      .fontSize(7)
-      .fillColor("#334155")
-      .text("Weight:", weightX, qtyY, { width: 36, lineBreak: false });
-    doc
-      .font("Helvetica")
-      .fontSize(7)
-      .fillColor("#0F172A")
-      .text(text(item.weight), weightX + 36, qtyY, {
-        width: 50,
-        lineBreak: false,
-      });
+      .text(text(item.weight), weightX + 34, qtyRowY, { width: 45 });
 
     // Footer Unique Code
     doc
@@ -249,8 +216,6 @@ export const generateCutListLabelsPDF = async ({
       .text(`Unique Code: ${text(item.itemCode)}`, x, y + cellHeight - 13, {
         width: cellWidth,
         align: "center",
-        ellipsis: true,
-        lineBreak: false,
       });
   }
 
