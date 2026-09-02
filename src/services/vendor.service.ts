@@ -2439,7 +2439,7 @@ export const getFastProductionReportData = async (
           leadStatusLogs: {
             select: {
               created_at: true,
-              statusType: { select: { type: true } },
+              statusType: { select: { type: true, tag: true } },
             },
             orderBy: { created_at: "asc" },
           },
@@ -2595,10 +2595,19 @@ export const getFastProductionReportData = async (
     const hardware_selection = req.hardware_selection || "-";
     const accessory_selection = req.accessory_selection || "-";
 
-    const tcDate = lead?.tech_check_reached_at || null;
-    const olDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "order-login" || l.statusType?.type?.trim().toLowerCase() === "order login")?.created_at || null;
-    const prodDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "production")?.created_at || null;
-    const rtdDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "ready to dispatch" || l.statusType?.type?.trim().toLowerCase() === "ready-to-dispatch")?.created_at || null;
+    const getStageLogDate = (tags: string[], keywords: string[]) => {
+      const log = lead?.leadStatusLogs?.find((l: any) => {
+        const tag = (l.statusType?.tag || "").trim();
+        const type = (l.statusType?.type || "").trim().toLowerCase();
+        return tags.includes(tag) || keywords.some((k) => type.includes(k));
+      });
+      return log?.created_at || null;
+    };
+
+    const tcDate = lead?.tech_check_reached_at || getStageLogDate(["Type 7"], ["tech"]);
+    const olDate = (lead as any)?.order_login_completed_at || getStageLogDate(["Type 8", "Type 9"], ["order", "login"]);
+    const prodDate = getStageLogDate(["Type 10", "Type 11", "Type 12", "Type 13", "Type 14"], ["production"]);
+    const rtdDate = getStageLogDate(["Type 15", "Type 16", "Type 17"], ["dispatch", "rtd"]);
 
     return {
       id: req.id,
