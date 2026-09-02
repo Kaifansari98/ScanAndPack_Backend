@@ -6,6 +6,7 @@ import {
   getErdReportController,
   getLeadTrackingReportController,
   getLeadsOverviewReportController,
+  getFastProductionReportController,
   getPaymentsBetweenClientAndStoreReportController,
   getSelfAssignTaskTypesController,
   getTechCheckStageReportController,
@@ -39,6 +40,7 @@ router.get("/vendor-users", getVendorUsersController);
 router.get("/status-types", getVendorStatusTypesController);
 router.get("/self-assign-task-types", getSelfAssignTaskTypesController);
 router.get("/reports/leads-overview", getLeadsOverviewReportController);
+router.get("/reports/fast-production", getFastProductionReportController);
 router.get("/reports/lead-tracking", getLeadTrackingReportController);
 router.get("/reports/techcheck-stage", getTechCheckStageReportController);
 router.get(

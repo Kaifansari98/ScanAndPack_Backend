@@ -98,7 +98,7 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
     throw error;
   }
 
-  return await prisma.franchiseMaster.findMany({
+  const franchises = await prisma.franchiseMaster.findMany({
     where: {
       vendor_id: Number(vendorId),
     },
@@ -121,6 +121,28 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
       createdAt: true,
     },
   });
+
+  const fastProdLeads = await prisma.fastProductionRequest.findMany({
+    where: {
+      vendor_id: Number(vendorId),
+    },
+    select: {
+      lead: {
+        select: {
+          franchise_id: true,
+        },
+      },
+    },
+  });
+
+  const fastProdFranchiseIds = new Set(
+    fastProdLeads.map((req) => req.lead?.franchise_id).filter(Boolean)
+  );
+
+  return franchises.map((franchise) => ({
+    ...franchise,
+    has_fast_production_leads: fastProdFranchiseIds.has(franchise.id),
+  }));
 };
 
 export type CreateHeadSiteSupervisorFranchiseMappingPayload = {

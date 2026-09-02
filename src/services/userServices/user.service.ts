@@ -473,10 +473,236 @@ export const getPrivilegeMastersByVendorService = async (
     },
   });
 
-  return privileges.map((privilege) => ({
+  const mappedPrivileges = privileges.map((privilege) => ({
     ...privilege,
     is_selected: selectedPrivilegeIds.has(privilege.id),
   }));
+
+  const getSectionChildPrivileges = (
+    parentModuleName: string,
+    childModuleIncludes: string[],
+    codePrefixes: string[]
+  ) => {
+    const normalizedKeywords = childModuleIncludes.map((val) => val.toLowerCase());
+    const normalizedCodePrefixes = codePrefixes.map((val) => val.toLowerCase());
+
+    return mappedPrivileges.filter((privilege) => {
+      const parentModule = privilege.parent_module.toLowerCase();
+      const childModule = privilege.child_module.toLowerCase();
+      const privilegeCode = privilege.code.toLowerCase();
+
+      if (
+        parentModule === parentModuleName.toLowerCase() &&
+        normalizedCodePrefixes.length > 0
+      ) {
+        return normalizedCodePrefixes.some((prefix) =>
+          privilegeCode.startsWith(prefix)
+        );
+      }
+
+      return (
+        parentModule === parentModuleName.toLowerCase() &&
+        normalizedKeywords.some((keyword) => childModule.includes(keyword))
+      );
+    });
+  };
+
+  const getDynamicGroups = (parentModuleName: string, idPrefix: string) => {
+    const groupsMap = new Map<string, { id: string; title: string; privileges: typeof mappedPrivileges }>();
+
+    mappedPrivileges.forEach((privilege) => {
+      if (privilege.parent_module.toLowerCase() !== parentModuleName.toLowerCase()) return;
+
+      const normalizedChildModule = privilege.child_module.trim();
+      if (!normalizedChildModule) return;
+
+      const groupKey = normalizedChildModule.toLowerCase();
+      const existingGroup = groupsMap.get(groupKey);
+
+      if (existingGroup) {
+        existingGroup.privileges.push(privilege);
+        return;
+      }
+
+      groupsMap.set(groupKey, {
+        id: `${idPrefix}-${groupKey.replace(/[^a-z0-9]+/g, "-")}`,
+        title: normalizedChildModule,
+        privileges: [privilege],
+      });
+    });
+
+    return Array.from(groupsMap.values()).sort((left, right) =>
+      left.title.localeCompare(right.title)
+    );
+  };
+
+  const sections = [
+    {
+      id: "leads",
+      title: "Leads",
+      description: "Manage access to lead viewing, status updates, reassignment, and task actions.",
+      children: [
+        {
+          id: "open",
+          title: "Open Leads",
+          privileges: getSectionChildPrivileges("Leads", ["Open Leads"], ["leads.open_leads."]),
+        },
+        {
+          id: "initial_site_measurement",
+          title: "Initial Site Measurement",
+          privileges: getSectionChildPrivileges("Leads", ["ISM Leads"], ["leads.ism_leads.", "leads.initial_site_measurement."]),
+        },
+        {
+          id: "designing_stage",
+          title: "Desiging Stage",
+          privileges: getSectionChildPrivileges("Leads", ["Designing Stage"], ["leads.designing_stage."]),
+        },
+        {
+          id: "booking_stage",
+          title: "Booking Stage",
+          privileges: getSectionChildPrivileges("Leads", ["Booking Done"], ["leads.booking_done.", "leads.booking_stage."]),
+        },
+      ],
+    },
+    {
+      id: "projects",
+      title: "Projects",
+      description: "Manage access to project milestones, files, approvals, and project updates.",
+      children: [
+        {
+          id: "final_measurements",
+          title: "Final Measurements",
+          privileges: getSectionChildPrivileges("Project", ["Final Measurement"], ["project.final_measurement."]),
+        },
+        {
+          id: "client_documentations",
+          title: "Client Documentations",
+          privileges: getSectionChildPrivileges("Project", ["Client Documentation"], ["project.client_documentation."]),
+        },
+        {
+          id: "client_approvals",
+          title: "Client Approvals",
+          privileges: getSectionChildPrivileges(
+            "Project",
+            ["Client Approval", "Client Approval Form", "Client Payment Details", "Client Approval Screenshots"],
+            ["project.client_approval."]
+          ),
+        },
+      ],
+    },
+    {
+      id: "productions",
+      title: "Productions",
+      description: "Manage access to production stages, planning flows, and execution actions.",
+      children: [
+        {
+          id: "tech_check_stage",
+          title: "Tech Check Stage",
+          privileges: getSectionChildPrivileges("Production", ["Tech Check"], ["production.tech_check."]),
+        },
+        {
+          id: "order_login_stage",
+          title: "Order Login Stage",
+          privileges: getSectionChildPrivileges(
+            "Production",
+            ["Order Login", "Approved Documents", "Payment Lockin", "Production Files", "Order Login Details", "Move to Production"],
+            ["production.order_login."]
+          ),
+        },
+        {
+          id: "production_stage",
+          title: "Production Stage",
+          privileges: getSectionChildPrivileges(
+            "Production",
+            [
+              "Production Files",
+              "Pre Production Files",
+              "Under Production",
+              "Post Production - Woodwork",
+              "Post Production - Hardware",
+              "Post Production - QC Photos",
+              "Set no. of boxes",
+              "Mark as Completed",
+              "Ready to Dispatch",
+            ],
+            ["production.production."]
+          ),
+        },
+        {
+          id: "ready_to_dispatch",
+          title: "Ready To Dispatch",
+          privileges: getSectionChildPrivileges("Production", ["Ready To Dispatch"], ["production.ready_to_dispatch."]),
+        },
+      ],
+    },
+    {
+      id: "installations",
+      title: "Installations",
+      description: "Manage access to installation progress, readiness, documents, and handover actions.",
+      children: [
+        {
+          id: "site_readiness",
+          title: "Site Readiness",
+          privileges: getSectionChildPrivileges(
+            "Installation",
+            ["Site Readiness", "Checklist of site readiness", "Current sites photos", "Move to Dispatch Planning"],
+            ["installation.site_readiness."]
+          ),
+        },
+        {
+          id: "dispatch_planning",
+          title: "Dispatch Planning",
+          privileges: getSectionChildPrivileges("Installation", ["Dispatch Planning"], ["installation.dispatch_planning."]),
+        },
+        {
+          id: "dispatch_stage",
+          title: "Dispatch",
+          privileges: getSectionChildPrivileges(
+            "Installation",
+            [
+              "Dispatch",
+              "Dispatch Snapshot",
+              "Dispatch Details",
+              "Dispatch Documents",
+              "Add Pending Material",
+              "Post Dispatch",
+              "Move to Under Installation",
+            ],
+            ["installation.dispatch."]
+          ),
+        },
+        {
+          id: "under_installation",
+          title: "Under Installation",
+          privileges: getSectionChildPrivileges("Installation", ["Under Installation"], ["installation.under_installation."]),
+        },
+        {
+          id: "final_handover",
+          title: "Final Handover",
+          privileges: getSectionChildPrivileges("Installation", ["Final Handover", "Pending Work"], ["installation.final_handover."]),
+        },
+      ],
+    },
+    {
+      id: "general_privileges",
+      title: "General Privileges",
+      description: "Manage access to shared tools and servicing-specific privilege actions.",
+      tabs: [
+        {
+          id: "servicing",
+          title: "Servicing",
+          groups: getDynamicGroups("Servicing", "general-servicing"),
+        },
+        {
+          id: "general_tools",
+          title: "General Tools",
+          groups: getDynamicGroups("Lead Detail", "general-tools"),
+        },
+      ],
+    },
+  ];
+
+  return sections;
 };
 
 export const updateUserPrivilegeMappingsService = async ({
