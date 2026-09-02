@@ -208,32 +208,7 @@ export class TechCheckService {
             },
           });
 
-          let orderLoginLockIn: any = null;
-
-          if (isAccountLocInEnabled) {
-            try {
-              orderLoginLockIn =
-                await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
-                  {
-                    vendor_id: vendorId,
-                    lead_id: leadId,
-                    created_by: userId,
-                    instance_id: productStructureInstanceId,
-                    clientBaseUrl: baseUrl,
-                  },
-                  tx,
-                );
-            } catch (lockInError: any) {
-              logger.warn(
-                "Order Login lock-in creation failed after tech-check instance completion",
-                {
-                  lead_id: leadId,
-                  instance_id: productStructureInstanceId,
-                  error: lockInError?.message,
-                },
-              );
-            }
-          }
+          const orderLoginLockIn: any = null;
 
           if (pendingInstances === 0) {
             if (!assignToUserId || !effectiveAccountId) {
@@ -330,20 +305,6 @@ export class TechCheckService {
               created_by: userId,
               instance_id: productStructureInstanceId,
             });
-
-            if (!orderLoginLockIn && isAccountLocInEnabled) {
-              orderLoginLockIn =
-                await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
-                  {
-                    vendor_id: vendorId,
-                    lead_id: leadId,
-                    created_by: userId,
-                    instance_id: updatedInstance.id,
-                    clientBaseUrl: baseUrl,
-                  },
-                  tx,
-                );
-            }
 
             return {
               mode: "instance_and_lead_moved",
@@ -497,17 +458,7 @@ export class TechCheckService {
           created_by: userId,
         });
 
-        const orderLoginLockIn = isAccountLocInEnabled
-          ? await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
-              {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                created_by: userId,
-                clientBaseUrl: baseUrl,
-              },
-              tx,
-            )
-          : null;
+        const orderLoginLockIn = null;
 
         return { updatedLead, mapping, order_login_lock_in: orderLoginLockIn };
       },

@@ -14,7 +14,7 @@ import {
   MarkDefectPayload,
   QRParam,
 } from "../../../src/types/track-trace";
-import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
+import { generateCutListLabelsPDF } from "../../utils/cutlist-label-generator";
 
 interface TrackTracePayload {
   project_id: number;
@@ -470,12 +470,29 @@ export const createQR = async (_req: Request, res: Response) => {
     console.log("[downloadCutListExcel] baseUrl", baseUrl);
 
     if (data) {
-      const filePath = await generateWarehouseQRPDF({
+      const filePath = await generateCutListLabelsPDF({
         itemQRs: data.map((item: any) => ({
           value: item.cut_list.unique_code,
           itemCode: item.cut_list.unique_code,
-          itemName: item.cut_list.description || "",
-          columns: 3,
+          itemName: item.cut_list.item_name || item.cut_list.description || "",
+          projectName: item.cut_list.project?.project_name || "",
+          orderNo: item.cut_list.project?.order_no || "",
+          clientName: item.cut_list.project?.client_name || "",
+          groupName: item.cut_list.group_name || "",
+          categoryName: item.cut_list.category_name || "",
+          materialCode: item.cut_list.material_details || "",
+          length: item.cut_list.length,
+          width: item.cut_list.width,
+          thickness: item.cut_list.thickness,
+          quantity: item.cut_list.qty,
+          weight: item.cut_list.weight,
+          edgeBand: [
+            item.cut_list.elf && `EL1: ${item.cut_list.elf}`,
+            item.cut_list.elb && `EL2: ${item.cut_list.elb}`,
+            item.cut_list.esl && `SL1: ${item.cut_list.esl}`,
+            item.cut_list.esr && `SL2: ${item.cut_list.esr}`,
+          ].filter(Boolean).join(" | "),
+          procurement: item.cut_list.procurement || "",
         })),
         baseUrl,
       });
@@ -828,8 +845,10 @@ export const getQualityCheckProjects = async (req: Request, res: Response) => {
 
 export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
+  const status = (_req.query.status as string) || (_req.query.filter as string) || "all";
   const serviceResponse = await trackTraceService.getTraceTraceDashboard(
     Number(vendor_id),
+    status,
   );
   if (serviceResponse.status == 0) {
     return res
@@ -843,8 +862,19 @@ export const getTraceTraceDashboard = async (_req: Request, res: Response) => {
 
 export const getProjectCategories = async (_req: Request, res: Response) => {
   const { vendor_id } = _req.params;
+  const { search, status, type, page, limit, sort_by, sort_order } = _req.query;
+
   const serviceResponse = await trackTraceService.getProjectCategories(
     Number(vendor_id),
+    {
+      search: search ? String(search) : undefined,
+      status: status ? String(status) : undefined,
+      type: type ? String(type) : undefined,
+      page: page ? Number(page) : undefined,
+      limit: limit ? Number(limit) : undefined,
+      sort_by: sort_by ? String(sort_by) : undefined,
+      sort_order: (sort_order as "asc" | "desc") || undefined,
+    }
   );
   if (serviceResponse.status == 0) {
     return res

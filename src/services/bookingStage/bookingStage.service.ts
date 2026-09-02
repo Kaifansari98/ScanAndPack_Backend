@@ -1418,13 +1418,7 @@ export class BookingStageService {
     // 3️⃣ Process and attach signed URLs
     const processedLeads = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
+
 
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
@@ -1486,13 +1480,7 @@ export class BookingStageService {
       // ✅ Auto-convert drafts to complete leads if all fields are filled
       return Promise.all(
         leads.map(async (lead: any) => {
-          if (lead.is_draft && isLeadComplete(lead)) {
-            await prisma.leadMaster.update({
-              where: { id: lead.id },
-              data: { is_draft: false },
-            });
-            lead.is_draft = false; // Update in-memory object
-          }
+
 
           const docsWithUrls = await Promise.all(
             lead.documents.map(async (doc: any) => {
@@ -1571,13 +1559,7 @@ export class BookingStageService {
     // ✅ Auto-convert drafts and attach signed URLs
     return Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
+
 
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
@@ -2187,13 +2169,7 @@ export class BookingStageService {
 
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
+
 
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
@@ -4914,13 +4890,7 @@ export class BookingStageService {
 
       const processed = await Promise.all(
         leads.map(async (lead: any) => {
-          if (lead.is_draft && isLeadComplete(lead)) {
-            await prisma.leadMaster.update({
-              where: { id: lead.id },
-              data: { is_draft: false },
-            });
-            lead.is_draft = false;
-          }
+
 
           const docsWithUrls = await Promise.all(
             lead.documents.map(async (doc: any) => {
@@ -5041,13 +5011,7 @@ export class BookingStageService {
 
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
+
 
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
@@ -5186,7 +5150,7 @@ export class BookingStageService {
 
     const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
-      include: { user_type: true },
+      include: { user_type: true, franchise: true },
     });
 
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
@@ -5194,16 +5158,19 @@ export class BookingStageService {
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
     const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
+    const isHO = creator?.franchise?.is_head_office === true;
     const shouldIncludeFranchise =
-      normalizedUserType === "admin" ||
-      normalizedUserType === "super-admin" ||
-      normalizedUserType === "auditor" ||
-      normalizedUserType === "sales-executive";
+      (normalizedUserType === "admin" ||
+       normalizedUserType === "auditor" ||
+       normalizedUserType === "sales-executive") &&
+      !isSuperAdmin &&
+      !isHO;
 
     const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at: filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc,
-    };
+    const orderBy =
+      filters.created_at === "asc"
+        ? { created_at: Prisma.SortOrder.asc }
+        : { created_at: Prisma.SortOrder.desc };
 
     const includeConfig = BookingStageService.leadIncludes("Type 1");
 
@@ -5456,6 +5423,184 @@ export class BookingStageService {
       })
     );
 
-    return { leads: processed, count: total };
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled = vendorData?.is_online_lead_feature_enabled === true;
+
+    // Include pending online_leads awaiting approval for this vendor / store ONLY if online lead feature is enabled
+    let pendingOnlineLeads: any[] = [];
+    if (isOnlineLeadFeatureEnabled) {
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (shouldIncludeFranchise && franchiseId) {
+        pendingOnlineWhere.OR = [
+          { pending_store_id: franchiseId },
+          { store_id: franchiseId },
+        ];
+      }
+
+      pendingOnlineLeads = await prisma.online_leads.findMany({
+        where: pendingOnlineWhere,
+        include: {
+          SourceMaster: true,
+          SiteTypeMaster: true,
+          UserMaster_online_leads_assign_toToUserMaster: { select: { id: true, user_name: true } },
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: { select: { id: true, user_name: true } },
+          FranchiseMaster: { select: { id: true, franchise_name: true } },
+        },
+        orderBy: { created_at: "desc" },
+      });
+    }
+
+    const pendingContactsSet = new Set<string>();
+    const pendingCodesSet = new Set<string>();
+    const formattedPendingLeads: any[] = [];
+    const seenPendingContacts = new Set<string>();
+
+    for (const ol of pendingOnlineLeads) {
+      const rawContact = String(ol.contact || "").replace(/\D/g, "");
+      const c10 = rawContact.length > 10 && rawContact.startsWith("91") ? rawContact.slice(-10) : rawContact;
+      const code = String(ol.lead_code || "").trim().toUpperCase();
+
+      if (c10) pendingContactsSet.add(c10);
+      if (code) pendingCodesSet.add(code);
+
+      const cleanType = (t: string) => {
+        const str = String(t || "").trim();
+        return str.includes("|") ? str.split("|").pop()!.trim() : str;
+      };
+      const rawTypes = (ol.product_types || []).map(cleanType).filter(Boolean);
+      const uniqueTypes = Array.from(new Set<string>(rawTypes));
+      const olProdTypes = uniqueTypes.map((type: string) => ({ productType: { type } }));
+      const olProdStructs = (ol.product_structures || []).map((s: string) => ({ productStructure: { type: s } }));
+
+      // Deduplicate among pending online leads themselves
+      if (c10 && seenPendingContacts.has(c10)) {
+        const existingPending = formattedPendingLeads.find((p: any) => {
+          const pClean = String(p.contact_no || "").replace(/\D/g, "");
+          const p10 = pClean.length > 10 && pClean.startsWith("91") ? pClean.slice(-10) : pClean;
+          return p10 === c10;
+        });
+        if (existingPending) {
+          const existingTypes = new Set(existingPending.productMappings.map((m: any) => m.productType?.type));
+          olProdTypes.forEach((m: any) => {
+            if (m.productType?.type && !existingTypes.has(m.productType.type)) {
+              existingPending.productMappings.push(m);
+              existingTypes.add(m.productType.type);
+            }
+          });
+          const existingStructs = new Set(existingPending.leadProductStructureMapping.map((m: any) => m.productStructure?.type));
+          olProdStructs.forEach((m: any) => {
+            if (m.productStructure?.type && !existingStructs.has(m.productStructure.type)) {
+              existingPending.leadProductStructureMapping.push(m);
+              existingStructs.add(m.productStructure.type);
+            }
+          });
+        }
+        continue;
+      }
+
+      if (c10) seenPendingContacts.add(c10);
+
+      formattedPendingLeads.push({
+        id: ol.id,
+        is_online_lead: true,
+        approval_status: "PENDING",
+        pending_store_id: ol.pending_store_id || ol.store_id,
+        lead_code: ol.lead_code || `OL-${ol.id}`,
+        firstname: ol.firstname || ol.leads_name,
+        lastname: ol.lastname || "",
+        country_code: "91",
+        contact_no: ol.contact,
+        alt_contact_no: ol.alt_contact_no || null,
+        email: ol.email || null,
+        site_address: ol.site_address || null,
+        site_type_id: ol.site_type_id || null,
+        source_id: ol.source_id || null,
+        refered_by: ol.refered_by || null,
+        archetech_name: ol.archetech_name || null,
+        archetech_number: ol.archetech_number || null,
+        designer_remark: ol.remark || null,
+        vendor_id: ol.vendor_id,
+        franchise_id: ol.pending_store_id || ol.store_id || franchiseId || null,
+        priority: ol.priority || "Medium",
+        created_at: ol.created_at,
+        is_draft: true,
+        productMappings: olProdTypes,
+        leadProductStructureMapping: olProdStructs,
+        source: ol.SourceMaster ? { type: ol.SourceMaster.type } : (ol.source ? { type: ol.source } : null),
+        siteType: ol.SiteTypeMaster ? { type: ol.SiteTypeMaster.type } : null,
+        assignedTo: ol.UserMaster_online_leads_final_assigned_leadsToUserMaster || ol.UserMaster_online_leads_assign_toToUserMaster || null,
+        statusType: { type: "Approval Pending", tag: "Type 1" },
+        documents: [],
+      });
+    }
+
+    // Filter out LeadMaster processed draft leads that ALREADY have a pending online lead
+    const filteredProcessed = processed.filter((lead: any) => {
+      const clean = String(lead.contact_no || "").replace(/\D/g, "");
+      const c10 = clean.length > 10 && clean.startsWith("91") ? clean.slice(-10) : clean;
+      const code = String(lead.lead_code || "").trim().toUpperCase();
+
+      if ((c10 && pendingContactsSet.has(c10)) || (code && pendingCodesSet.has(code))) {
+        // Merge productMappings from LeadMaster if pending online lead had empty product mappings
+        const matchingPending = formattedPendingLeads.find((p: any) => {
+          const pClean = String(p.contact_no || "").replace(/\D/g, "");
+          const p10 = pClean.length > 10 && pClean.startsWith("91") ? pClean.slice(-10) : pClean;
+          return p10 === c10 || (code && String(p.lead_code || "").trim().toUpperCase() === code);
+        });
+        if (matchingPending) {
+          if (!matchingPending.productMappings || matchingPending.productMappings.length === 0) {
+            matchingPending.productMappings = lead.productMappings || [];
+          }
+          if (!matchingPending.leadProductStructureMapping || matchingPending.leadProductStructureMapping.length === 0) {
+            matchingPending.leadProductStructureMapping = lead.leadProductStructureMapping || [];
+          }
+        }
+        return false; // Exclude duplicate LeadMaster row so the pending online_leads row with Approve/Reject buttons is rendered!
+      }
+      return true;
+    });
+
+    const isAsc = filters.created_at === "asc";
+    const parseLeadCodeNum = (codeStr: string) => {
+      const match = String(codeStr || "").match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    };
+
+    const combinedLeads = [...formattedPendingLeads, ...filteredProcessed];
+    const finalLeads = combinedLeads.sort((a: any, b: any) => {
+      if (isOnlineLeadFeatureEnabled) {
+        const isPendingA = a.approval_status === "PENDING" || a.statusType?.type === "Approval Pending";
+        const isPendingB = b.approval_status === "PENDING" || b.statusType?.type === "Approval Pending";
+
+        if (isPendingA && !isPendingB) return -1;
+        if (!isPendingA && isPendingB) return 1;
+      }
+
+      const numA = parseLeadCodeNum(a.lead_code);
+      const numB = parseLeadCodeNum(b.lead_code);
+
+      if (numA > 0 && numB > 0 && numA !== numB) {
+        return isAsc ? numA - numB : numB - numA;
+      }
+
+      const timeA = new Date(a.created_at).getTime() || 0;
+      const timeB = new Date(b.created_at).getTime() || 0;
+      if (timeA !== timeB) {
+        return isAsc ? timeA - timeB : timeB - timeA;
+      }
+
+      return isAsc ? (a.id || 0) - (b.id || 0) : (b.id || 0) - (a.id || 0);
+    });
+
+    const finalCount = filteredProcessed.length + formattedPendingLeads.length;
+
+    return { leads: finalLeads, count: finalCount };
   }
 }

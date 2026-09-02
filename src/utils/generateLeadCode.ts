@@ -25,6 +25,7 @@ export async function generateLeadCode(
       handlesLargeScaleProjects: true,
       is_this_vendor_is_custom_usertype_only: true,
       is_year_wise_lead_code_enabled: true,
+      is_online_lead_feature_enabled: true,
     },
   });
 
@@ -49,13 +50,47 @@ export async function generateLeadCode(
   const franchise = input.franchiseId
     ? await tx.franchiseMaster.findUnique({
         where: { id: input.franchiseId },
-        select: { franchise_code: true },
+        select: { franchise_code: true, franchise_name: true },
       })
     : null;
 
+  const isOnlineLeadFeatureEnabled = vendor.is_online_lead_feature_enabled === true;
   const basePrefix = vendor.vendor_code || "SH";
   const normalizedVendorCode = basePrefix.trim().toUpperCase();
   const normalizedFranchiseCode = franchise?.franchise_code?.trim().toUpperCase() || null;
+
+  let franchiseSuffix = "";
+  let prefix = "";
+  let legacyPrefix = "";
+
+  if (isOnlineLeadFeatureEnabled) {
+    const requiredVendorPrefix = "SH";
+    if (franchise) {
+      const rawCode = (franchise.franchise_code || "").trim().toUpperCase();
+      const rawName = (franchise.franchise_name || "").trim().toUpperCase();
+
+      const cleanedCode = rawCode
+        .replace(/^FURNIX/i, "")
+        .replace(/^SH/i, "")
+        .trim();
+
+      const cleanedName = rawName
+        .replace(/^FURNIX/i, "")
+        .replace(/^SH/i, "")
+        .replace(/STORE$/i, "")
+        .replace(/HO$/i, "")
+        .trim();
+
+      franchiseSuffix = cleanedCode || cleanedName || "";
+    }
+
+    prefix = franchiseSuffix ? `${requiredVendorPrefix}${franchiseSuffix}` : requiredVendorPrefix;
+    legacyPrefix = franchiseSuffix ? `FURNIX${franchiseSuffix}` : "FURNIX";
+  } else {
+    prefix = normalizedFranchiseCode || normalizedVendorCode;
+    legacyPrefix = prefix;
+  }
+
   const shouldUseYearWiseLeadCode =
     vendor.handlesLargeScaleProjects === true ||
     vendor.is_this_vendor_is_custom_usertype_only === true ||
@@ -63,14 +98,14 @@ export async function generateLeadCode(
 
   if (shouldUseYearWiseLeadCode) {
     const financialYearLabel = getFinancialYearLabel(new Date());
-    const prefix = `${normalizedVendorCode}-${financialYearLabel}-`;
+    const yearPrefix = `${prefix}-${financialYearLabel}-`;
 
     const [lastLead, lastOnlineLead] = await Promise.all([
       tx.leadMaster.findFirst({
         where: {
           vendor_id: input.vendorId,
           lead_code: {
-            startsWith: prefix,
+            startsWith: yearPrefix,
           },
         },
         orderBy: [{ created_at: "desc" }, { id: "desc" }],
@@ -82,7 +117,7 @@ export async function generateLeadCode(
         where: {
           vendor_id: input.vendorId,
           lead_code: {
-            startsWith: prefix,
+            startsWith: yearPrefix,
           },
         },
         orderBy: [{ created_at: "desc" }, { id: "desc" }],
@@ -105,7 +140,7 @@ export async function generateLeadCode(
         extractSequence(lastOnlineLead?.lead_code),
       ) + 1;
 
-    let generatedCode = `${normalizedVendorCode}-${financialYearLabel}-${nextNumber}`;
+    let generatedCode = `${prefix}-${financialYearLabel}-${nextNumber}`;
 
     let exists = true;
     while (exists) {
@@ -130,13 +165,13 @@ export async function generateLeadCode(
         exists = false;
       } else {
         nextNumber += 1;
-        generatedCode = `${normalizedVendorCode}-${financialYearLabel}-${nextNumber}`;
+        generatedCode = `${prefix}-${financialYearLabel}-${nextNumber}`;
       }
     }
 
     logger.debug("[LEAD CODE GENERATED]", {
       franchiseId: input.franchiseId,
-      prefix: normalizedVendorCode,
+      prefix,
       financialYearLabel,
       generatedCode,
     });
@@ -144,55 +179,56 @@ export async function generateLeadCode(
     return generatedCode;
   }
 
-  let prefix = normalizedFranchiseCode || basePrefix;
-
-  // Get latest lead for this prefix across the entire vendor
-  const lastLead = await tx.leadMaster.findFirst({
-    where: {
-      vendor_id: input.vendorId,
-      lead_code: {
-        startsWith: `${prefix}-`,
+  // Get latest lead for this prefix across the entire vendor (checking both new SH prefix and legacy FURNIX prefix)
+  const [lastLeadSH, lastLeadFURNIX, lastOnlineLeadSH, lastOnlineLeadFURNIX] = await Promise.all([
+    tx.leadMaster.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: { startsWith: `${prefix}-` },
       },
-    },
-    orderBy: [{ created_at: "desc" }, { id: "desc" }],
-    select: {
-      lead_code: true,
-    },
-  });
-
-  // Also look up in onlineLead for conflicts
-  const lastOnlineLead = await tx.online_leads.findFirst({
-    where: {
-      vendor_id: input.vendorId,
-      lead_code: {
-        startsWith: `${prefix}-`,
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: { lead_code: true },
+    }),
+    tx.leadMaster.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: { startsWith: `${legacyPrefix}-` },
       },
-    },
-    orderBy: [{ created_at: "desc" }, { id: "desc" }],
-    select: {
-      lead_code: true,
-    },
-  });
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: { lead_code: true },
+    }),
+    tx.online_leads.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: { startsWith: `${prefix}-` },
+      },
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: { lead_code: true },
+    }),
+    tx.online_leads.findFirst({
+      where: {
+        vendor_id: input.vendorId,
+        lead_code: { startsWith: `${legacyPrefix}-` },
+      },
+      orderBy: [{ created_at: "desc" }, { id: "desc" }],
+      select: { lead_code: true },
+    }),
+  ]);
 
-  let lastCode = "";
-  if (lastLead?.lead_code && lastOnlineLead?.lead_code) {
-    const m1 = lastLead.lead_code.match(/-(\d+)$/);
-    const m2 = lastOnlineLead.lead_code.match(/-(\d+)$/);
-    const n1 = m1 ? parseInt(m1[1], 10) : 0;
-    const n2 = m2 ? parseInt(m2[1], 10) : 0;
-    lastCode = n1 >= n2 ? lastLead.lead_code : lastOnlineLead.lead_code;
-  } else {
-    lastCode = lastLead?.lead_code || lastOnlineLead?.lead_code || "";
-  }
+  const extractSequenceNum = (code?: string | null) => {
+    if (!code) return 0;
+    const match = code.match(/-(\d+)$/);
+    return match ? parseInt(match[1], 10) : 0;
+  };
 
-  let nextNumber = 1;
-  if (lastCode) {
-    const match = lastCode.match(/-(\d+)$/);
-    if (match) {
-      nextNumber = parseInt(match[1], 10) + 1;
-    }
-  }
+  const maxSeq = Math.max(
+    extractSequenceNum(lastLeadSH?.lead_code),
+    extractSequenceNum(lastLeadFURNIX?.lead_code),
+    extractSequenceNum(lastOnlineLeadSH?.lead_code),
+    extractSequenceNum(lastOnlineLeadFURNIX?.lead_code),
+  );
 
+  let nextNumber = maxSeq > 0 ? maxSeq + 1 : 1;
   let numSegment = nextNumber < 10 ? `0${nextNumber}` : `${nextNumber}`;
   let generatedCode = `${prefix}-${numSegment}`;
 
@@ -226,7 +262,7 @@ export async function generateLeadCode(
 
   logger.debug("[LEAD CODE GENERATED]", {
     franchiseId: input.franchiseId,
-    franchiseCode: normalizedFranchiseCode,
+    franchiseCode: franchiseSuffix,
     prefix,
     generatedCode,
   });

@@ -52,6 +52,7 @@ model VendorMaster {
   is_scanpack_enabled                    Boolean                                @default(false)
   is_online_lead_feature_enabled         Boolean                                @default(false)
   push_lead_to_cadbid                    Boolean                                @default(false)
+  is_available_unique_code               Boolean                                @default(false)
   accounts                               AccountMaster[]
   additionalCostMasters                  AdditionalCostMaster[]                 @relation("AdditionalCostVendor")
   architechuremasters                    Architechuremaster[]
@@ -839,6 +840,7 @@ model LeadMaster {
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
+  online_leads                                online_leads[]
   b2bDocuments                                LeadB2BDocument[]
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
   hardwareMappings                            LeadHardwareMapping[]
@@ -1169,20 +1171,20 @@ model LeadProductMapping {
 }
 
 model ProductTypeMaster {
-  id                             Int                              @id @default(autoincrement())
-  type                           String
-  vendor_id                      Int
-  tag                            String
-  status                         String                           @default("active")
-  LeadDetailedLogs               LeadDetailedLogs[]
-  documents                      LeadDocuments[]                  @relation("LeadDocumentsToProductType")
-  leads                          LeadProductMapping[]
-  productStructureInstances      LeadProductStructureInstance[]
-  Ledger                         Ledger[]
-  PaymentInfo                    PaymentInfo[]
-  productStructures              ProductStructure[]
-  vendor                         VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadBillingAddresses           LeadBillingAddress[]
+  id                        Int                            @id @default(autoincrement())
+  type                      String
+  vendor_id                 Int
+  tag                       String
+  status                    String                         @default("active")
+  LeadDetailedLogs          LeadDetailedLogs[]
+  documents                 LeadDocuments[]                @relation("LeadDocumentsToProductType")
+  leads                     LeadProductMapping[]
+  productStructureInstances LeadProductStructureInstance[]
+  Ledger                    Ledger[]
+  PaymentInfo               PaymentInfo[]
+  productStructures         ProductStructure[]
+  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadBillingAddresses      LeadBillingAddress[]
 }
 
 model ProcessBriefMaster {
@@ -4831,11 +4833,20 @@ model online_leads {
   archetech_name                                           String?
   archetech_number                                         String?
   priority                                                 String?
+  approval_status                                          String?
+  pending_status_id                                        Int?
+  pending_store_id                                         Int?
+  pending_follow_up_date                                   DateTime?
+  pending_remark                                           String?
+  pending_assign_to                                        Int?
+  pending_created_by                                       Int?
+  lead_master_id                                           Int?
   product_types                                            String[]                     @default([])
   product_structures                                       String[]                     @default([])
   online_lead_call_log                                     online_lead_call_log[]
   online_lead_history                                      online_lead_history[]
   online_lead_store_log                                    online_lead_store_log[]
+  LeadMaster                                               LeadMaster?                  @relation(fields: [lead_master_id], references: [id], onDelete: SetNull)
   UserMaster_online_leads_assign_toToUserMaster            UserMaster?                  @relation("online_leads_assign_toToUserMaster", fields: [assign_to], references: [id])
   UserMaster_online_leads_created_byToUserMaster           UserMaster?                  @relation("online_leads_created_byToUserMaster", fields: [created_by], references: [id])
   UserMaster_online_leads_final_assigned_leadsToUserMaster UserMaster?                  @relation("online_leads_final_assigned_leadsToUserMaster", fields: [final_assigned_leads], references: [id])

@@ -17,7 +17,8 @@ const getPuppeteerOptions = () => {
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   };
 
-  const macChromePath = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+  const macChromePath =
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
   if (fs.existsSync(macChromePath)) {
     options.executablePath = macChromePath;
   }
@@ -7093,7 +7094,7 @@ ${stickerPages}
 
     return validationResponse(
       0,
-      `Failed to generate project report: ${error?.message || String(error)}`
+      `Failed to generate project report: ${error?.message || String(error)}`,
     );
   }
 };
