@@ -5170,7 +5170,7 @@ export class BookingStageService {
     const orderBy =
       filters.created_at === "asc"
         ? { created_at: Prisma.SortOrder.asc }
-        : { updated_at: Prisma.SortOrder.desc };
+        : { created_at: Prisma.SortOrder.desc };
 
     const includeConfig = BookingStageService.leadIncludes("Type 1");
 
@@ -5423,30 +5423,39 @@ export class BookingStageService {
       })
     );
 
-    // Include pending online_leads awaiting approval for this vendor / store
-    const pendingOnlineWhere: any = {
-      vendor_id: vendorId,
-      approval_status: "PENDING",
-    };
-
-    if (shouldIncludeFranchise && franchiseId) {
-      pendingOnlineWhere.OR = [
-        { pending_store_id: franchiseId },
-        { store_id: franchiseId },
-      ];
-    }
-
-    const pendingOnlineLeads = await prisma.online_leads.findMany({
-      where: pendingOnlineWhere,
-      include: {
-        SourceMaster: true,
-        SiteTypeMaster: true,
-        UserMaster_online_leads_assign_toToUserMaster: { select: { id: true, user_name: true } },
-        UserMaster_online_leads_final_assigned_leadsToUserMaster: { select: { id: true, user_name: true } },
-        FranchiseMaster: { select: { id: true, franchise_name: true } },
-      },
-      orderBy: { created_at: "desc" },
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
     });
+    const isOnlineLeadFeatureEnabled = vendorData?.is_online_lead_feature_enabled === true;
+
+    // Include pending online_leads awaiting approval for this vendor / store ONLY if online lead feature is enabled
+    let pendingOnlineLeads: any[] = [];
+    if (isOnlineLeadFeatureEnabled) {
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (shouldIncludeFranchise && franchiseId) {
+        pendingOnlineWhere.OR = [
+          { pending_store_id: franchiseId },
+          { store_id: franchiseId },
+        ];
+      }
+
+      pendingOnlineLeads = await prisma.online_leads.findMany({
+        where: pendingOnlineWhere,
+        include: {
+          SourceMaster: true,
+          SiteTypeMaster: true,
+          UserMaster_online_leads_assign_toToUserMaster: { select: { id: true, user_name: true } },
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: { select: { id: true, user_name: true } },
+          FranchiseMaster: { select: { id: true, franchise_name: true } },
+        },
+        orderBy: { created_at: "desc" },
+      });
+    }
 
     const pendingContactsSet = new Set<string>();
     const pendingCodesSet = new Set<string>();
@@ -5558,7 +5567,38 @@ export class BookingStageService {
       return true;
     });
 
-    const finalLeads = [...formattedPendingLeads, ...filteredProcessed];
+    const isAsc = filters.created_at === "asc";
+    const parseLeadCodeNum = (codeStr: string) => {
+      const match = String(codeStr || "").match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    };
+
+    const combinedLeads = [...formattedPendingLeads, ...filteredProcessed];
+    const finalLeads = combinedLeads.sort((a: any, b: any) => {
+      if (isOnlineLeadFeatureEnabled) {
+        const isPendingA = a.approval_status === "PENDING" || a.statusType?.type === "Approval Pending";
+        const isPendingB = b.approval_status === "PENDING" || b.statusType?.type === "Approval Pending";
+
+        if (isPendingA && !isPendingB) return -1;
+        if (!isPendingA && isPendingB) return 1;
+      }
+
+      const numA = parseLeadCodeNum(a.lead_code);
+      const numB = parseLeadCodeNum(b.lead_code);
+
+      if (numA > 0 && numB > 0 && numA !== numB) {
+        return isAsc ? numA - numB : numB - numA;
+      }
+
+      const timeA = new Date(a.created_at).getTime() || 0;
+      const timeB = new Date(b.created_at).getTime() || 0;
+      if (timeA !== timeB) {
+        return isAsc ? timeA - timeB : timeB - timeA;
+      }
+
+      return isAsc ? (a.id || 0) - (b.id || 0) : (b.id || 0) - (a.id || 0);
+    });
+
     const finalCount = filteredProcessed.length + formattedPendingLeads.length;
 
     return { leads: finalLeads, count: finalCount };
