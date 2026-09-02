@@ -2969,12 +2969,29 @@ export const getSalesExecutivesByVendor = async (
     const salesExecutives = await prisma.userMaster.findMany({
       where: {
         vendor_id: vendorId,
-        user_type: {
-          user_type: { in: ["sales-executive"] },
-        },
-        // Optionally filter only active users
         status: "active",
         ...(franchiseId !== undefined ? { OR: [{ franchise_id: franchiseId }, { franchise_id: null }] } : {}),
+        OR: [
+          {
+            user_type: {
+              user_type: { in: ["sales-executive"] },
+            },
+          },
+          {
+            user_type: {
+              user_type: { equals: "custom", mode: "insensitive" },
+            },
+            userPrivilegeMappings: {
+              some: {
+                is_allowed: true,
+                privilege: {
+                  code: "leads.open_leads.details_of_lead.reassign_lead",
+                  is_active: true,
+                },
+              },
+            },
+          },
+        ],
       },
       include: {
         user_type: true,

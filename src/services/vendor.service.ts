@@ -2379,3 +2379,242 @@ export const getLeadServicingReportData = async (
     return a.lead_id - b.lead_id;
   });
 };
+export const getFastProductionReportData = async (
+  vendorId: number,
+  franchiseId: number | null,
+  fromDate: string | null,
+  toDate: string | null,
+) => {
+  const where: any = {
+    vendor_id: vendorId,
+  };
+
+  if (franchiseId) {
+    where.lead = {
+      franchise_id: franchiseId,
+    };
+  }
+
+  if (fromDate || toDate) {
+    where.created_at = {};
+    if (fromDate) {
+      const from = new Date(fromDate);
+      from.setHours(0, 0, 0, 0);
+      where.created_at.gte = from;
+    }
+    if (toDate) {
+      const to = new Date(toDate);
+      to.setHours(23, 59, 59, 999);
+      where.created_at.lte = to;
+    }
+  }
+
+  const fastProductionRequests = await prisma.fastProductionRequest.findMany({
+    where,
+    include: {
+      createdBy: {
+        select: {
+          user_name: true,
+        },
+      },
+      lead: {
+        select: {
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+          statusType: { select: { type: true } },
+          tech_check_reached_at: true,
+          franchise: {
+            select: {
+              franchise_name: true,
+            },
+          },
+          leadStatusLogs: {
+            select: {
+              created_at: true,
+              statusType: { select: { type: true } },
+            },
+            orderBy: { created_at: "asc" },
+          },
+          productMappings: {
+            select: { productType: { select: { type: true } } },
+          },
+          userMappings: {
+            where: { status: "active" },
+            select: {
+              type: true,
+              user: {
+                select: {
+                  user_name: true,
+                  user_type: { select: { user_type: true } },
+                },
+              },
+            },
+          },
+          leadProductStructureMapping: {
+            select: {
+              productStructure: { select: { type: true } },
+            },
+          },
+        },
+      },
+      finishes: true,
+      instance: {
+        select: {
+          title: true,
+          productStructure: {
+            select: { type: true },
+          },
+          productType: {
+            select: { type: true },
+          },
+          designSelections: {
+            select: {
+              type: true,
+              desc: true,
+              chsSelectionMappings: {
+                select: {
+                  carcassType: { select: { name: true } },
+                  shutterType: { select: { name: true } },
+                  shutterSubType: { select: { name: true } },
+                  handleType: { select: { name: true } },
+                }
+              }
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return fastProductionRequests.map((req: any) => {
+    const lead = req.lead;
+
+    const designer = lead?.userMappings?.find(
+      (m: any) =>
+        m.type === "designer" ||
+        m.user?.user_type?.user_type?.trim().toLowerCase() === "designer" ||
+        m.user?.user_type?.user_type?.trim().toLowerCase() === "sales-executive"
+    )?.user?.user_name || "-";
+
+    const furniture_type =
+      req.instance?.productType?.type ||
+      [
+        ...new Set(
+          (lead?.productMappings || [])
+            .map((mapping: any) => mapping.productType?.type)
+            .filter(Boolean)
+        ),
+      ].join(", ") ||
+      "-";
+
+    const furniture_structure =
+      req.instance?.productStructure?.type ||
+      req.instance?.title ||
+      [
+        ...new Set(
+          (lead?.leadProductStructureMapping || [])
+            .map((mapping: any) => mapping.productStructure?.type)
+            .filter(Boolean)
+        ),
+      ].join(", ") ||
+      "-";
+
+    const getSelectionOrFinishVendor = (
+      typeKeys: string[],
+      finishComponent: "CARCASS" | "SHUTTER" | "HANDLE"
+    ) => {
+      const matchingSelections = (req.instance?.designSelections || []).filter(
+        (selection: any) => {
+          const type = (selection.type || "").trim().toLowerCase();
+          return typeKeys.includes(type);
+        }
+      );
+
+      // 1. Check if CHS vendor mappings exist from Client Documentation / Approval stage
+      const chsVendorNames = matchingSelections
+        .flatMap((selection: any) => {
+          if (
+            selection.chsSelectionMappings &&
+            selection.chsSelectionMappings.length > 0
+          ) {
+            return selection.chsSelectionMappings.map(
+              (mapping: any) =>
+                mapping.carcassType?.name ||
+                mapping.shutterSubType?.name ||
+                mapping.shutterType?.name ||
+                mapping.handleType?.name ||
+                ""
+            );
+          }
+          return [];
+        })
+        .filter(Boolean);
+
+      if (chsVendorNames.length > 0) {
+        return [...new Set(chsVendorNames)].join(", ");
+      }
+
+      // 2. Check if updated design selection descriptions exist from Client Documentation / Approval stage
+      const updatedDescs = matchingSelections
+        .map((s: any) => (s.desc || "").trim())
+        .filter(
+          (d: string) =>
+            d.length > 0 &&
+            d !== "-" &&
+            d.toUpperCase() !== "NULL" &&
+            d.toUpperCase() !== "N/A"
+        );
+
+      if (updatedDescs.length > 0) {
+        return [...new Set(updatedDescs)].join(", ");
+      }
+
+      // 3. Fallback to initial Fast Production request finish from when the request was created
+      const finish = req.finishes?.find(
+        (f: any) => f.component === finishComponent
+      );
+      return finish?.finish_category || "-";
+    };
+
+    const carcass_selection = getSelectionOrFinishVendor(["carcas", "carcass"], "CARCASS");
+    const shutter_selection = getSelectionOrFinishVendor(["shutter"], "SHUTTER");
+    const handle_selection = getSelectionOrFinishVendor(["handles", "handle"], "HANDLE");
+    
+    // Hardware and accessory selections from the FastProductionRequest itself
+    const hardware_selection = req.hardware_selection || "-";
+    const accessory_selection = req.accessory_selection || "-";
+
+    const tcDate = lead?.tech_check_reached_at || null;
+    const olDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "order-login" || l.statusType?.type?.trim().toLowerCase() === "order login")?.created_at || null;
+    const prodDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "production")?.created_at || null;
+    const rtdDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "ready to dispatch" || l.statusType?.type?.trim().toLowerCase() === "ready-to-dispatch")?.created_at || null;
+
+    return {
+      id: req.id,
+      parent_lead_code: lead?.lead_code || "-",
+      client_name: lead ? `${lead.firstname} ${lead.lastname}`.trim() : "-",
+      designer: designer,
+      current_stage: lead?.statusType?.type || "-",
+      furniture_type: furniture_type,
+      furniture_structure: furniture_structure,
+      carcass_selection: carcass_selection,
+      shutter_selection: shutter_selection,
+      handle_selection: handle_selection,
+      hardware: hardware_selection,
+      accessory: accessory_selection,
+      franchise_store: req.lead?.franchise?.franchise_name || "-",
+      created_at: req.created_at,
+      required_date: req.client_required_delivery_date,
+      supervisor_approved_at: req.approved_at,
+      admin_approved_at: req.approved_at,
+      tc_date: tcDate,
+      ol_date: olDate,
+      prod_date: prodDate,
+      rtd_date: rtdDate,
+    };
+  });
+};
