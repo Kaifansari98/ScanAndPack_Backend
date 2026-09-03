@@ -67,20 +67,20 @@ export class BookingStageService {
     const productStructureInstancesOrderBy =
       normalizedStageTag === "Type 9"
         ? [
-          { tech_check_completed_at: Prisma.SortOrder.desc },
-          { product_structure_id: Prisma.SortOrder.asc },
-          { quantity_index: Prisma.SortOrder.asc },
-        ]
-        : normalizedStageTag === "Type 10"
-          ? [
-            { order_login_completed_at: Prisma.SortOrder.desc },
+            { tech_check_completed_at: Prisma.SortOrder.desc },
             { product_structure_id: Prisma.SortOrder.asc },
             { quantity_index: Prisma.SortOrder.asc },
           ]
+        : normalizedStageTag === "Type 10"
+          ? [
+              { order_login_completed_at: Prisma.SortOrder.desc },
+              { product_structure_id: Prisma.SortOrder.asc },
+              { quantity_index: Prisma.SortOrder.asc },
+            ]
           : [
-            { product_structure_id: Prisma.SortOrder.asc },
-            { quantity_index: Prisma.SortOrder.asc },
-          ];
+              { product_structure_id: Prisma.SortOrder.asc },
+              { quantity_index: Prisma.SortOrder.asc },
+            ];
 
     return {
       account: { select: { id: true, name: true } },
@@ -122,7 +122,9 @@ export class BookingStageService {
       },
       leadB2BReqMappings: {
         select: {
-          b2bRequirementType: { select: { id: true, type: true, status: true } },
+          b2bRequirementType: {
+            select: { id: true, type: true, status: true },
+          },
         },
       },
       leadProductStructureMapping: {
@@ -162,25 +164,25 @@ export class BookingStageService {
       },
       ...(BookingStageService.statusLogSortedStageTags.has(normalizedStageTag)
         ? {
-          leadStatusLogs: {
-            where: {
-              statusType: {
-                tag: normalizedStageTag,
-              },
-            },
-            select: {
-              created_at: true,
-              statusType: {
-                select: {
-                  tag: true,
+            leadStatusLogs: {
+              where: {
+                statusType: {
+                  tag: normalizedStageTag,
                 },
               },
+              select: {
+                created_at: true,
+                statusType: {
+                  select: {
+                    tag: true,
+                  },
+                },
+              },
+              orderBy: {
+                created_at: Prisma.SortOrder.desc,
+              },
             },
-            orderBy: {
-              created_at: Prisma.SortOrder.desc,
-            },
-          },
-        }
+          }
         : {}),
       payments: {
         where: { paymentType: { tag: "Type 2" } },
@@ -243,7 +245,9 @@ export class BookingStageService {
 
     if (stageTag === "Type 9") {
       const latestInstance = Array.isArray(lead?.productStructureInstances)
-        ? lead.productStructureInstances.find((instance: any) => instance?.tech_check_completed_at)
+        ? lead.productStructureInstances.find(
+            (instance: any) => instance?.tech_check_completed_at,
+          )
         : null;
       return latestInstance?.tech_check_completed_at
         ? new Date(latestInstance.tech_check_completed_at).getTime()
@@ -252,7 +256,9 @@ export class BookingStageService {
 
     if (stageTag === "Type 10") {
       const latestInstance = Array.isArray(lead?.productStructureInstances)
-        ? lead.productStructureInstances.find((instance: any) => instance?.order_login_completed_at)
+        ? lead.productStructureInstances.find(
+            (instance: any) => instance?.order_login_completed_at,
+          )
         : null;
       return latestInstance?.order_login_completed_at
         ? new Date(latestInstance.order_login_completed_at).getTime()
@@ -270,19 +276,21 @@ export class BookingStageService {
   ): Promise<string> {
     try {
       // Validate that the file belongs to the vendor (security check)
-      const document = await prisma.leadDocuments.findFirst({
-        where: {
-          doc_sys_name: s3Key,
-          vendor_id: vendorId,
-          deleted_at: null,
-        },
-      }) || await prisma.leadB2BDocument.findFirst({
-        where: {
-          doc_sys_name: s3Key,
-          vendor_id: vendorId,
-          is_deleted: false,
-        },
-      });
+      const document =
+        (await prisma.leadDocuments.findFirst({
+          where: {
+            doc_sys_name: s3Key,
+            vendor_id: vendorId,
+            deleted_at: null,
+          },
+        })) ||
+        (await prisma.leadB2BDocument.findFirst({
+          where: {
+            doc_sys_name: s3Key,
+            vendor_id: vendorId,
+            is_deleted: false,
+          },
+        }));
 
       if (!document) {
         throw new Error("Document not found or access denied");
@@ -354,7 +362,7 @@ export class BookingStageService {
 
           if (uniqueB2bReqTypeIds.length === 0) {
             throw new Error(
-              "No requirement types or process briefs are mapped to this B2B lead. Please map at least one requirement type or process brief."
+              "No requirement types or process briefs are mapped to this B2B lead. Please map at least one requirement type or process brief.",
             );
           }
 
@@ -362,35 +370,35 @@ export class BookingStageService {
           const [documents, materials] = await Promise.all([
             isB2B
               ? tx.leadB2BDocument.findMany({
-                where: {
-                  lead_id: data.lead_id,
-                  vendor_id: data.vendor_id,
-                  is_deleted: false,
-                },
-                select: {
-                  b2b_requirement_type_id: true,
-                  documentType: {
-                    select: {
-                      tag: true,
+                  where: {
+                    lead_id: data.lead_id,
+                    vendor_id: data.vendor_id,
+                    is_deleted: false,
+                  },
+                  select: {
+                    b2b_requirement_type_id: true,
+                    documentType: {
+                      select: {
+                        tag: true,
+                      },
                     },
                   },
-                },
-              })
+                })
               : tx.leadDocuments.findMany({
-                where: {
-                  lead_id: data.lead_id,
-                  vendor_id: data.vendor_id,
-                  is_deleted: false,
-                },
-                select: {
-                  b2b_requirement_type_id: true,
-                  documentType: {
-                    select: {
-                      tag: true,
+                  where: {
+                    lead_id: data.lead_id,
+                    vendor_id: data.vendor_id,
+                    is_deleted: false,
+                  },
+                  select: {
+                    b2b_requirement_type_id: true,
+                    documentType: {
+                      select: {
+                        tag: true,
+                      },
                     },
                   },
-                },
-              }),
+                }),
             tx.leadRequirementMaterialMapping.findMany({
               where: {
                 lead_id: data.lead_id,
@@ -415,24 +423,24 @@ export class BookingStageService {
 
           for (const reqTypeId of uniqueB2bReqTypeIds) {
             const reqTypeObj = reqTypes.find((t: any) => t.id === reqTypeId);
-            const reqTypeName = reqTypeObj?.type || `Requirement Type #${reqTypeId}`;
+            const reqTypeName =
+              reqTypeObj?.type || `Requirement Type #${reqTypeId}`;
 
             const reqDocs = documents.filter(
-              (doc: any) => doc.b2b_requirement_type_id === reqTypeId
+              (doc: any) => doc.b2b_requirement_type_id === reqTypeId,
             );
             if (reqDocs.length === 0) {
               throw new Error(
-                `At least one requirement document must be uploaded for requirement type: "${reqTypeName}" before moving to booking.`
+                `At least one requirement document must be uploaded for requirement type: "${reqTypeName}" before moving to booking.`,
               );
             }
 
             const hasMaterial = materials.some(
-              (mat: any) =>
-                mat.b2b_requirement_type_id === reqTypeId
+              (mat: any) => mat.b2b_requirement_type_id === reqTypeId,
             );
             if (!hasMaterial) {
               throw new Error(
-                `At least one material configuration must be added for requirement type: "${reqTypeName}" before moving to booking.`
+                `At least one material configuration must be added for requirement type: "${reqTypeName}" before moving to booking.`,
               );
             }
           }
@@ -449,16 +457,17 @@ export class BookingStageService {
 
         let scopedInstanceIds: number[] = [];
         if (data.product_type_id) {
-          const scopedInstances = await tx.leadProductStructureInstance.findMany({
-            where: {
-              lead_id: data.lead_id,
-              vendor_id: data.vendor_id,
-              product_type_id: data.product_type_id,
-            },
-            select: {
-              id: true,
-            },
-          });
+          const scopedInstances =
+            await tx.leadProductStructureInstance.findMany({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                product_type_id: data.product_type_id,
+              },
+              select: {
+                id: true,
+              },
+            });
 
           if (scopedInstances.length === 0) {
             throw new Error(
@@ -466,7 +475,9 @@ export class BookingStageService {
             );
           }
 
-          scopedInstanceIds = scopedInstances.map((instance: { id: number }) => instance.id);
+          scopedInstanceIds = scopedInstances.map(
+            (instance: { id: number }) => instance.id,
+          );
           data.scopedInstanceIds = scopedInstanceIds;
           response.scopedInstanceIds = scopedInstanceIds;
         }
@@ -620,7 +631,9 @@ export class BookingStageService {
             where: { id: data.siteSupervisorId },
             include: { user_type: true },
           });
-          const supervisorRole = supervisorUser?.user_type?.user_type?.toLowerCase() || "site-supervisor";
+          const supervisorRole =
+            supervisorUser?.user_type?.user_type?.toLowerCase() ||
+            "site-supervisor";
 
           // 5. Assign Site Supervisor mapping
           const supervisor = await tx.leadSiteSupervisorMapping.create({
@@ -732,8 +745,9 @@ export class BookingStageService {
         let actionMessage = `Booking has been done successfully`;
 
         if (hasDocs) {
-          actionMessage += ` — Remark: ${docCount} document${docCount > 1 ? "s have" : " has"
-            } been uploaded successfully with it.`;
+          actionMessage += ` — Remark: ${docCount} document${
+            docCount > 1 ? "s have" : " has"
+          } been uploaded successfully with it.`;
         } else {
           actionMessage += ` — Remark: No documents were uploaded.`;
         }
@@ -907,8 +921,6 @@ export class BookingStageService {
     return response;
   }
 
-
-
   public async addBookingStageFiles(data: {
     lead_id: number;
     account_id: number;
@@ -1029,11 +1041,12 @@ export class BookingStageService {
         const franchiseId = lead?.franchise_id ?? null;
 
         // Fetch Active Admins
-        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-          vendorId: lead.vendor_id,
-          franchiseId,
-          excludeUserId: actorId,
-        });
+        const { recipients: admins, isSuperAdminFallback } =
+          await getFranchiseAdminRecipients({
+            vendorId: lead.vendor_id,
+            franchiseId,
+            excludeUserId: actorId,
+          });
 
         for (const admin of admins) {
           // 🔔 In-App Notification
@@ -1050,7 +1063,6 @@ export class BookingStageService {
               ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
               : `/dashboard/leads/details/${data.lead_id}`,
           });
-
         }
       } catch (err: any) {
         logger.warn("⚠️ Booking stage admin notification failed", {
@@ -1418,14 +1430,6 @@ export class BookingStageService {
     // 3️⃣ Process and attach signed URLs
     const processedLeads = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
-
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -1468,7 +1472,10 @@ export class BookingStageService {
     });
 
     const userRole = creator?.user_type?.user_type?.toLowerCase();
-    const isAdmin = userRole === "admin" || userRole === "super-admin" || userRole === "auditor";
+    const isAdmin =
+      userRole === "admin" ||
+      userRole === "super-admin" ||
+      userRole === "auditor";
 
     // ============= Admin Flow =============
     if (isAdmin) {
@@ -1486,14 +1493,6 @@ export class BookingStageService {
       // ✅ Auto-convert drafts to complete leads if all fields are filled
       return Promise.all(
         leads.map(async (lead: any) => {
-          if (lead.is_draft && isLeadComplete(lead)) {
-            await prisma.leadMaster.update({
-              where: { id: lead.id },
-              data: { is_draft: false },
-            });
-            lead.is_draft = false; // Update in-memory object
-          }
-
           const docsWithUrls = await Promise.all(
             lead.documents.map(async (doc: any) => {
               const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -1571,14 +1570,6 @@ export class BookingStageService {
     // ✅ Auto-convert drafts and attach signed URLs
     return Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
-
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -1648,8 +1639,7 @@ export class BookingStageService {
       page,
       limit,
     });
-    const normalizedFranchises =
-      filters.franchises ?? filters.franchise_ids;
+    const normalizedFranchises = filters.franchises ?? filters.franchise_ids;
 
     const skip = (page - 1) * limit;
 
@@ -1762,8 +1752,6 @@ export class BookingStageService {
         return { numbers, strings };
       };
 
-
-
       // ---------- GLOBAL SEARCH ----------
 
       const globalSearch = toString(filters.global_search);
@@ -1801,8 +1789,6 @@ export class BookingStageService {
         }
       }
 
-
-
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
         addAnd({
@@ -1834,7 +1820,9 @@ export class BookingStageService {
             },
             {
               leadB2BReqMappings: {
-                some: { b2b_requirement_type_id: { in: furnitureTypes.numbers } },
+                some: {
+                  b2b_requirement_type_id: { in: furnitureTypes.numbers },
+                },
               },
             },
           ],
@@ -1863,7 +1851,11 @@ export class BookingStageService {
       const shouldFilterPendingServicesBySchedule =
         filters.pending_services && (dateRange?.from || dateRange?.to);
 
-      if (dateRange && (dateRange.from || dateRange.to) && !shouldFilterPendingServicesBySchedule) {
+      if (
+        dateRange &&
+        (dateRange.from || dateRange.to) &&
+        !shouldFilterPendingServicesBySchedule
+      ) {
         let fromDate: Date | null = null;
         let toDate: Date | null = null;
 
@@ -1938,7 +1930,9 @@ export class BookingStageService {
               lte: toDate,
             };
           } else if (fromDate) {
-            const endOfDay = new Date(fromDate.getTime() + 24 * 60 * 60 * 1000 - 1);
+            const endOfDay = new Date(
+              fromDate.getTime() + 24 * 60 * 60 * 1000 - 1,
+            );
             openScheduleFilter.scheduled_for = {
               gte: fromDate,
               lte: endOfDay,
@@ -1961,7 +1955,10 @@ export class BookingStageService {
       // ASSIGN TO (MULTI SELECT)
       // --------------------
 
-      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+      if (
+        Array.isArray(normalizedFranchises) &&
+        normalizedFranchises.length > 0
+      ) {
         const franchiseIds = normalizedFranchises
           .map(Number)
           .filter((id) => !Number.isNaN(id));
@@ -2012,7 +2009,9 @@ export class BookingStageService {
           OR: [
             {
               leadProductStructureMapping: {
-                some: { product_structure_id: { in: furnitureStructures.numbers } },
+                some: {
+                  product_structure_id: { in: furnitureStructures.numbers },
+                },
               },
             },
             {
@@ -2098,12 +2097,14 @@ export class BookingStageService {
     // FINAL QUERY
     // ============================
 
-      const hasExplicitFranchiseFilter =
+    const hasExplicitFranchiseFilter =
       Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
 
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
-      ...(!hasExplicitFranchiseFilter && franchiseId && !Number.isNaN(franchiseId)
+      ...(!hasExplicitFranchiseFilter &&
+      franchiseId &&
+      !Number.isNaN(franchiseId)
         ? { franchise_id: franchiseId }
         : {}),
       is_deleted: false,
@@ -2172,29 +2173,24 @@ export class BookingStageService {
     ]);
 
     const leadIds = leads.map((l: any) => l.id);
-    const activeFastProductionBatches = leadIds.length > 0
-      ? await prisma.fastProductionRequestBatch.findMany({
-          where: {
-            lead_id: { in: leadIds },
-            status: "pending_approvals"
-          },
-          select: {
-            lead_id: true
-          }
-        })
-      : [];
-    const pendingFastProductionLeadIds = new Set(activeFastProductionBatches.map(b => b.lead_id));
+    const activeFastProductionBatches =
+      leadIds.length > 0
+        ? await prisma.fastProductionRequestBatch.findMany({
+            where: {
+              lead_id: { in: leadIds },
+              status: "pending_approvals",
+            },
+            select: {
+              lead_id: true,
+            },
+          })
+        : [];
+    const pendingFastProductionLeadIds = new Set(
+      activeFastProductionBatches.map((b) => b.lead_id),
+    );
 
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
-
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -2211,7 +2207,9 @@ export class BookingStageService {
           ...lead,
           documents: docsWithUrls,
           fast_production_request: pendingFastProductionLeadIds.has(lead.id),
-          has_pending_fast_production_request: pendingFastProductionLeadIds.has(lead.id),
+          has_pending_fast_production_request: pendingFastProductionLeadIds.has(
+            lead.id,
+          ),
         };
       }),
     );
@@ -2221,10 +2219,10 @@ export class BookingStageService {
 
     const sortedProcessed = shouldApplyStageSort
       ? [...processedWithSmallOrderRequests].sort(
-        (a, b) =>
-          BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-          BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-      )
+          (a, b) =>
+            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+        )
       : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
@@ -2353,7 +2351,7 @@ export class BookingStageService {
       ...lead,
       smallOrderRequest:
         lead?.is_small_order_request === true && lead?.lead_code
-          ? requestBySoCode.get(String(lead.lead_code)) ?? null
+          ? (requestBySoCode.get(String(lead.lead_code)) ?? null)
           : null,
     }));
   }
@@ -2609,8 +2607,9 @@ export class BookingStageService {
         },
       );
 
-      let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${data.payment_text
-        }`;
+      let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${
+        data.payment_text
+      }`;
 
       if (response.documentsUploaded.length > 0) {
         const docCount = response.documentsUploaded.length;
@@ -2671,16 +2670,18 @@ export class BookingStageService {
         }),
       ]);
 
-      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-        vendorId: data.vendor_id,
-        franchiseId: leadInfo?.franchise_id ?? null,
-        excludeUserId: data.created_by,
-      });
+      const { recipients: admins, isSuperAdminFallback } =
+        await getFranchiseAdminRecipients({
+          vendorId: data.vendor_id,
+          franchiseId: leadInfo?.franchise_id ?? null,
+          excludeUserId: data.created_by,
+        });
 
       const leadCode =
         leadInfo?.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
-      const leadName = `${leadInfo?.firstname ?? ""} ${leadInfo?.lastname ?? ""
-        }`.trim();
+      const leadName = `${leadInfo?.firstname ?? ""} ${
+        leadInfo?.lastname ?? ""
+      }`.trim();
       const updatedByName = updatedByUser?.user_name ?? "User";
       const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
       const paymentTypeName = result.paymentTypeName || "Payment";
@@ -2703,8 +2704,9 @@ export class BookingStageService {
             message: `Payment added for ${leadCode} - ${leadName} by ${updatedByName}.`,
             entity_type: "lead",
             entity_id: data.lead_id,
-            redirect_url: `/dashboard/leads/details/${data.lead_id}${leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
-              }`,
+            redirect_url: `/dashboard/leads/details/${data.lead_id}${
+              leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
+            }`,
           });
 
           if (!admin.user_email) return;
@@ -2713,7 +2715,7 @@ export class BookingStageService {
             vendor_id: data.vendor_id,
             franchise_id: franchiseId,
             allowSuperAdmin: isSuperAdminFallback,
-              toEmail: admin.user_email,
+            toEmail: admin.user_email,
             toName: admin.user_name ?? undefined,
             leadCode,
             leadName: leadName || "Lead",
@@ -2904,9 +2906,7 @@ export class BookingStageService {
     };
   }
 
-  public async upsertLeadBillingAddresses(
-    data: UpsertLeadBillingAddressesDto,
-  ) {
+  public async upsertLeadBillingAddresses(data: UpsertLeadBillingAddressesDto) {
     const billingAddress = this.normalizeBillingAddress(data.billingAddress);
     const shippingAddress = this.normalizeBillingAddress(data.shippingAddress);
     const productTypeId = data.product_type_id ?? null;
@@ -3175,15 +3175,16 @@ export class BookingStageService {
       }
 
       // Check if there's already an active supervisor before deactivating
-      const hasExistingActiveSupervisor = await tx.leadSiteSupervisorMapping.findFirst({
-        where: {
-          lead_id: lead.id,
-          vendor_id: data.vendor_id,
-          account_id: lead.account_id!,
-          status: "active",
-        },
-        select: { id: true },
-      });
+      const hasExistingActiveSupervisor =
+        await tx.leadSiteSupervisorMapping.findFirst({
+          where: {
+            lead_id: lead.id,
+            vendor_id: data.vendor_id,
+            account_id: lead.account_id!,
+            status: "active",
+          },
+          select: { id: true },
+        });
 
       await tx.leadSiteSupervisorMapping.updateMany({
         where: {
@@ -3527,7 +3528,8 @@ export class BookingStageService {
       const currentBooking = Number(existingPayment.amount ?? 0);
       const currentPending = Number(lead.pending_amount ?? 0);
       const totalProjectAmount = Number(
-        lead.total_project_amount ?? Number(lead.booking_amount ?? 0) + currentPending,
+        lead.total_project_amount ??
+          Number(lead.booking_amount ?? 0) + currentPending,
       );
       const bookingDelta = data.booking_amount - currentBooking;
       const updatedPending = currentPending - bookingDelta;
@@ -3552,7 +3554,8 @@ export class BookingStageService {
         where: { id: existingPayment.id },
         data: {
           amount: data.booking_amount,
-          product_type_id: data.product_type_id ?? existingPayment.product_type_id ?? null,
+          product_type_id:
+            data.product_type_id ?? existingPayment.product_type_id ?? null,
         },
       });
 
@@ -3681,7 +3684,9 @@ export class BookingStageService {
 
       if (!existingPayment) {
         throw Object.assign(
-          new Error("Booking amount entry not found for the selected product type"),
+          new Error(
+            "Booking amount entry not found for the selected product type",
+          ),
           { statusCode: 404 },
         );
       }
@@ -3744,7 +3749,8 @@ export class BookingStageService {
       const updatedLeadTotalProject = Number(
         totalAggregate._sum.total_amount ?? 0,
       );
-      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+      const updatedLeadPending =
+        updatedLeadTotalProject - overallReceivedAmount;
 
       if (updatedLeadPending < 0) {
         throw Object.assign(
@@ -3868,7 +3874,9 @@ export class BookingStageService {
 
       if (!existingPayment) {
         throw Object.assign(
-          new Error("Booking amount entry not found for the selected product type"),
+          new Error(
+            "Booking amount entry not found for the selected product type",
+          ),
           { statusCode: 404 },
         );
       }
@@ -3909,7 +3917,8 @@ export class BookingStageService {
       const updatedLeadTotalProject = Number(
         totalAggregate._sum.total_amount ?? 0,
       );
-      const updatedLeadPending = updatedLeadTotalProject - overallReceivedAmount;
+      const updatedLeadPending =
+        updatedLeadTotalProject - overallReceivedAmount;
 
       if (updatedLeadPending < 0) {
         throw Object.assign(
@@ -3998,10 +4007,9 @@ export class BookingStageService {
       }
 
       if (data.amount < 1) {
-        throw Object.assign(
-          new Error("Amount received must be at least ₹1"),
-          { statusCode: 400 },
-        );
+        throw Object.assign(new Error("Amount received must be at least ₹1"), {
+          statusCode: 400,
+        });
       }
 
       const payment = await tx.paymentInfo.findFirst({
@@ -4042,7 +4050,9 @@ export class BookingStageService {
       const productTotalAmount = Number(bookingPayment?.total_amount ?? 0);
       if (productTotalAmount <= 0) {
         throw Object.assign(
-          new Error("Total project amount is not available for this product type"),
+          new Error(
+            "Total project amount is not available for this product type",
+          ),
           { statusCode: 400 },
         );
       }
@@ -4076,7 +4086,8 @@ export class BookingStageService {
       }
 
       const paymentDelta = data.amount - currentPaymentAmount;
-      const updatedLeadPending = Number(lead.pending_amount ?? 0) - paymentDelta;
+      const updatedLeadPending =
+        Number(lead.pending_amount ?? 0) - paymentDelta;
 
       if (updatedLeadPending < 0) {
         throw Object.assign(
@@ -4191,8 +4202,7 @@ export class BookingStageService {
       page,
       limit,
     });
-    const normalizedFranchises =
-      filters.franchises ?? filters.franchise_ids;
+    const normalizedFranchises = filters.franchises ?? filters.franchise_ids;
 
     if (!tag) {
       throw new Error("Status tag is required to fetch universal table data");
@@ -4284,7 +4294,8 @@ export class BookingStageService {
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
-    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
+    const isAdminLikeForRange =
+      isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
     const shouldIncludeFranchiseByRole =
       isType4To16 &&
       [
@@ -4300,7 +4311,10 @@ export class BookingStageService {
       normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
-    const sortDir = filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc;
+    const sortDir =
+      filters.created_at === "asc"
+        ? Prisma.SortOrder.asc
+        : Prisma.SortOrder.desc;
     const orderBy: Prisma.LeadMasterOrderByWithRelationInput[] = [
       { updated_at: sortDir },
       { created_at: sortDir },
@@ -4344,8 +4358,6 @@ export class BookingStageService {
           .map((item) => String(item));
         return { numbers, strings };
       };
-
-
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -4499,7 +4511,11 @@ export class BookingStageService {
       const shouldFilterPendingServicesBySchedule =
         filters.pending_services && (dateRange?.from || dateRange?.to);
 
-      if (dateRange && (dateRange.from || dateRange.to) && !shouldFilterPendingServicesBySchedule) {
+      if (
+        dateRange &&
+        (dateRange.from || dateRange.to) &&
+        !shouldFilterPendingServicesBySchedule
+      ) {
         let fromDate: Date | null = null;
         let toDate: Date | null = null;
 
@@ -4574,7 +4590,9 @@ export class BookingStageService {
               lte: toDate,
             };
           } else if (fromDate) {
-            const endOfDay = new Date(fromDate.getTime() + 24 * 60 * 60 * 1000 - 1);
+            const endOfDay = new Date(
+              fromDate.getTime() + 24 * 60 * 60 * 1000 - 1,
+            );
             openScheduleFilter.scheduled_for = {
               gte: fromDate,
               lte: endOfDay,
@@ -4607,7 +4625,10 @@ export class BookingStageService {
         }
       }
 
-      if (Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0) {
+      if (
+        Array.isArray(normalizedFranchises) &&
+        normalizedFranchises.length > 0
+      ) {
         const franchiseIds = normalizedFranchises
           .map(Number)
           .filter((id) => !Number.isNaN(id));
@@ -4663,7 +4684,9 @@ export class BookingStageService {
             },
             {
               leadB2BReqMappings: {
-                some: { b2b_requirement_type_id: { in: furnitureTypes.numbers } },
+                some: {
+                  b2b_requirement_type_id: { in: furnitureTypes.numbers },
+                },
               },
             },
           ],
@@ -4678,7 +4701,9 @@ export class BookingStageService {
             },
             {
               leadB2BReqMappings: {
-                some: { b2bRequirementType: { type: { in: furnitureTypes.strings } } },
+                some: {
+                  b2bRequirementType: { type: { in: furnitureTypes.strings } },
+                },
               },
             },
           ],
@@ -4727,7 +4752,9 @@ export class BookingStageService {
             {
               leadProductStructureMapping: {
                 some: {
-                  productStructure: { type: { in: furnitureStructures.strings } },
+                  productStructure: {
+                    type: { in: furnitureStructures.strings },
+                  },
                 },
               },
             },
@@ -4869,9 +4896,9 @@ export class BookingStageService {
         status_id: { in: statusIds },
         statusType: shouldExcludeLaterStageTags
           ? {
-            vendor_id: vendorId,
-            tag: { notIn: excludedProductionStageTags },
-          }
+              vendor_id: vendorId,
+              tag: { notIn: excludedProductionStageTags },
+            }
           : { vendor_id: vendorId },
         activity_status: isAllStages
           ? "onGoing"
@@ -4914,14 +4941,6 @@ export class BookingStageService {
 
       const processed = await Promise.all(
         leads.map(async (lead: any) => {
-          if (lead.is_draft && isLeadComplete(lead)) {
-            await prisma.leadMaster.update({
-              where: { id: lead.id },
-              data: { is_draft: false },
-            });
-            lead.is_draft = false;
-          }
-
           const docsWithUrls = await Promise.all(
             lead.documents.map(async (doc: any) => {
               const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -4941,10 +4960,10 @@ export class BookingStageService {
 
       const sortedProcessed = shouldApplyStageSort
         ? [...processedWithSmallOrderRequests].sort(
-          (a, b) =>
-            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-        )
+            (a, b) =>
+              BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+              BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+          )
         : processedWithSmallOrderRequests;
 
       const paginatedLeads = shouldApplyStageSort
@@ -4996,9 +5015,9 @@ export class BookingStageService {
       status_id: { in: statusIds },
       statusType: shouldExcludeLaterStageTags
         ? {
-          vendor_id: vendorId,
-          tag: { notIn: excludedProductionStageTags },
-        }
+            vendor_id: vendorId,
+            tag: { notIn: excludedProductionStageTags },
+          }
         : { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
@@ -5041,14 +5060,6 @@ export class BookingStageService {
 
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
-        if (lead.is_draft && isLeadComplete(lead)) {
-          await prisma.leadMaster.update({
-            where: { id: lead.id },
-            data: { is_draft: false },
-          });
-          lead.is_draft = false;
-        }
-
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -5069,10 +5080,10 @@ export class BookingStageService {
 
     const sortedProcessed = shouldApplyStageSort
       ? [...processedWithSmallOrderRequests].sort(
-        (a, b) =>
-          BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-          BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-      )
+          (a, b) =>
+            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+        )
       : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
@@ -5090,27 +5101,43 @@ export class BookingStageService {
       );
     }
 
-    const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } = value;
+    const {
+      lead_id,
+      task_type,
+      due_date,
+      remark,
+      assignee_user_id,
+      created_by,
+    } = value;
 
     return prisma.$transaction(async (tx) => {
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { id: true, vendor_id: true, account_id: true, status_id: true, franchise_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          status_id: true,
+          franchise_id: true,
+        },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
       const leadStage = lead.status_id
-        ? ((await tx.statusTypeMaster.findUnique({
-          where: { id: lead.status_id },
-          select: { type: true },
-        }))?.type ?? null)
+        ? ((
+            await tx.statusTypeMaster.findUnique({
+              where: { id: lead.status_id },
+              select: { type: true },
+            })
+          )?.type ?? null)
         : null;
 
       const assignee = await tx.userMaster.findUnique({
         where: { id: assignee_user_id },
         select: { id: true, vendor_id: true },
       });
-      if (!assignee) throw new Error(`Assignee user ${assignee_user_id} not found`);
+      if (!assignee)
+        throw new Error(`Assignee user ${assignee_user_id} not found`);
       if (assignee.vendor_id !== lead.vendor_id) {
         throw new Error(`Assignee does not belong to vendor ${lead.vendor_id}`);
       }
@@ -5142,7 +5169,6 @@ export class BookingStageService {
     });
   }
 
-
   public static async getDraftLeadTableData(
     vendorId: number,
     userId: number,
@@ -5168,9 +5194,15 @@ export class BookingStageService {
       email?: string;
       designer_remark?: string;
       date_range?: { from: string; to: string };
-    } = {}
+    } = {},
   ): Promise<{ leads: any[]; count: number }> {
-    logger.info("[BookingStageService] getDraftLeadTableData called", { vendorId, userId, franchiseId, page, limit });
+    logger.info("[BookingStageService] getDraftLeadTableData called", {
+      vendorId,
+      userId,
+      franchiseId,
+      page,
+      limit,
+    });
 
     // Enforce Type 1
     const targetTags = ["Type 1"];
@@ -5186,7 +5218,7 @@ export class BookingStageService {
 
     const creator = await prisma.userMaster.findUnique({
       where: { id: userId },
-      include: { user_type: true },
+      include: { user_type: true, franchise: true },
     });
 
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
@@ -5194,20 +5226,25 @@ export class BookingStageService {
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
     const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
+    const isHO = creator?.franchise?.is_head_office === true;
     const shouldIncludeFranchise =
-      normalizedUserType === "admin" ||
-      normalizedUserType === "super-admin" ||
-      normalizedUserType === "auditor" ||
-      normalizedUserType === "sales-executive";
+      (normalizedUserType === "admin" ||
+        normalizedUserType === "auditor" ||
+        normalizedUserType === "sales-executive") &&
+      !isSuperAdmin &&
+      !isHO;
 
     const skip = (page - 1) * limit;
-    const orderBy = {
-      created_at: filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc,
-    };
+    const orderBy =
+      filters.created_at === "asc"
+        ? { created_at: Prisma.SortOrder.asc }
+        : { created_at: Prisma.SortOrder.desc };
 
     const includeConfig = BookingStageService.leadIncludes("Type 1");
 
-    const addFilterConditions = (whereClause: Prisma.LeadMasterWhereInput): Prisma.LeadMasterWhereInput => {
+    const addFilterConditions = (
+      whereClause: Prisma.LeadMasterWhereInput,
+    ): Prisma.LeadMasterWhereInput => {
       const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
         if (!whereClause.AND) whereClause.AND = [];
         if (Array.isArray(whereClause.AND)) {
@@ -5217,7 +5254,8 @@ export class BookingStageService {
         }
       };
 
-      const toString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
+      const toString = (value: unknown) =>
+        typeof value === "string" ? value.trim() : "";
       const toArray = (value: unknown): Array<number | string> => {
         if (Array.isArray(value)) return value;
         if (value === undefined || value === null) return [];
@@ -5226,11 +5264,11 @@ export class BookingStageService {
       const parseNumberList = (value: unknown) => {
         const raw = toArray(value);
         const numbers = raw.map(Number).filter((item) => !Number.isNaN(item));
-        const strings = raw.filter((item) => Number.isNaN(Number(item))).map(String);
+        const strings = raw
+          .filter((item) => Number.isNaN(Number(item)))
+          .map(String);
         return { numbers, strings };
       };
-
-
 
       const nameFilter = toString(filters.filter_name);
       if (nameFilter) {
@@ -5239,7 +5277,12 @@ export class BookingStageService {
           addAnd({
             AND: [
               { firstname: { contains: nameParts[0], mode: "insensitive" } },
-              { lastname: { contains: nameParts.slice(1).join(" "), mode: "insensitive" } },
+              {
+                lastname: {
+                  contains: nameParts.slice(1).join(" "),
+                  mode: "insensitive",
+                },
+              },
             ],
           });
         } else {
@@ -5260,8 +5303,15 @@ export class BookingStageService {
             OR: [
               {
                 AND: [
-                  { firstname: { contains: nameParts[0], mode: "insensitive" } },
-                  { lastname: { contains: nameParts.slice(1).join(" "), mode: "insensitive" } },
+                  {
+                    firstname: { contains: nameParts[0], mode: "insensitive" },
+                  },
+                  {
+                    lastname: {
+                      contains: nameParts.slice(1).join(" "),
+                      mode: "insensitive",
+                    },
+                  },
                 ],
               },
               { lead_code: { contains: globalSearch, mode: "insensitive" } },
@@ -5282,12 +5332,16 @@ export class BookingStageService {
 
       const contactFilter = toString(filters.contact);
       if (contactFilter) {
-        addAnd({ contact_no: { contains: contactFilter, mode: "insensitive" } });
+        addAnd({
+          contact_no: { contains: contactFilter, mode: "insensitive" },
+        });
       }
 
       const altContactFilter = toString(filters.alt_contact_no);
       if (altContactFilter) {
-        addAnd({ alt_contact_no: { contains: altContactFilter, mode: "insensitive" } });
+        addAnd({
+          alt_contact_no: { contains: altContactFilter, mode: "insensitive" },
+        });
       }
 
       const emailFilter = toString(filters.email);
@@ -5297,17 +5351,26 @@ export class BookingStageService {
 
       const siteAddressFilter = toString(filters.site_address);
       if (siteAddressFilter) {
-        addAnd({ site_address: { contains: siteAddressFilter, mode: "insensitive" } });
+        addAnd({
+          site_address: { contains: siteAddressFilter, mode: "insensitive" },
+        });
       }
 
       const archetechFilter = toString(filters.archetech_name);
       if (archetechFilter) {
-        addAnd({ archetech_name: { contains: archetechFilter, mode: "insensitive" } });
+        addAnd({
+          archetech_name: { contains: archetechFilter, mode: "insensitive" },
+        });
       }
 
       const designerRemarkFilter = toString(filters.designer_remark);
       if (designerRemarkFilter) {
-        addAnd({ designer_remark: { contains: designerRemarkFilter, mode: "insensitive" } });
+        addAnd({
+          designer_remark: {
+            contains: designerRemarkFilter,
+            mode: "insensitive",
+          },
+        });
       }
 
       const dateRange = filters.date_range;
@@ -5336,14 +5399,18 @@ export class BookingStageService {
       }
 
       if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
-        const assignIds = filters.assign_to.map(Number).filter((id) => !Number.isNaN(id));
+        const assignIds = filters.assign_to
+          .map(Number)
+          .filter((id) => !Number.isNaN(id));
         if (assignIds.length > 0) {
           addAnd({ assign_to: { in: assignIds } });
         }
       }
 
       if (Array.isArray(filters.priority) && filters.priority.length > 0) {
-        const priorities = filters.priority.map((item) => String(item).trim()).filter(Boolean);
+        const priorities = filters.priority
+          .map((item) => String(item).trim())
+          .filter(Boolean);
         if (priorities.length > 0) {
           addAnd({
             OR: priorities.map((priority) => ({
@@ -5369,22 +5436,43 @@ export class BookingStageService {
 
       const furnitureTypes = parseNumberList(filters.furniture_type);
       if (furnitureTypes.numbers.length > 0) {
-        addAnd({ productMappings: { some: { product_type_id: { in: furnitureTypes.numbers } } } });
+        addAnd({
+          productMappings: {
+            some: { product_type_id: { in: furnitureTypes.numbers } },
+          },
+        });
       } else if (furnitureTypes.strings.length > 0) {
-        addAnd({ productMappings: { some: { productType: { type: { in: furnitureTypes.strings } } } } });
+        addAnd({
+          productMappings: {
+            some: { productType: { type: { in: furnitureTypes.strings } } },
+          },
+        });
       }
 
       const furnitureStructures = parseNumberList(filters.furniture_structure);
       if (furnitureStructures.numbers.length > 0) {
-        addAnd({ leadProductStructureMapping: { some: { product_structure_id: { in: furnitureStructures.numbers } } } });
+        addAnd({
+          leadProductStructureMapping: {
+            some: { product_structure_id: { in: furnitureStructures.numbers } },
+          },
+        });
       } else if (furnitureStructures.strings.length > 0) {
-        addAnd({ leadProductStructureMapping: { some: { productStructure: { type: { in: furnitureStructures.strings } } } } });
+        addAnd({
+          leadProductStructureMapping: {
+            some: {
+              productStructure: { type: { in: furnitureStructures.strings } },
+            },
+          },
+        });
       }
 
       if (typeof filters.site_map_link === "boolean") {
         if (filters.site_map_link) {
           addAnd({
-            AND: [{ site_map_link: { not: null } }, { site_map_link: { not: "" } }],
+            AND: [
+              { site_map_link: { not: null } },
+              { site_map_link: { not: "" } },
+            ],
           });
         } else {
           addAnd({
@@ -5414,11 +5502,19 @@ export class BookingStageService {
       });
 
       const taskLeads = await prisma.userLeadTask.findMany({
-        where: { vendor_id: vendorId, OR: [{ created_by: userId }, { user_id: userId }] },
+        where: {
+          vendor_id: vendorId,
+          OR: [{ created_by: userId }, { user_id: userId }],
+        },
         select: { lead_id: true },
       });
 
-      const leadIds = [...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)])];
+      const leadIds = [
+        ...new Set([
+          ...mappedLeads.map((m) => m.lead_id),
+          ...taskLeads.map((t) => t.lead_id),
+        ]),
+      ];
 
       if (!leadIds.length) {
         return { leads: [], count: 0 };
@@ -5450,12 +5546,251 @@ export class BookingStageService {
               file_type: BookingStageService.getFileType(doc.doc_og_name),
               is_image: BookingStageService.isImageFile(doc.doc_og_name),
             };
-          })
+          }),
         );
         return { ...lead, documents: docsWithUrls };
-      })
+      }),
     );
 
-    return { leads: processed, count: total };
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorData?.is_online_lead_feature_enabled === true;
+
+    // Include pending online_leads awaiting approval for this vendor / store ONLY if online lead feature is enabled
+    let pendingOnlineLeads: any[] = [];
+    if (isOnlineLeadFeatureEnabled) {
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (shouldIncludeFranchise && franchiseId) {
+        pendingOnlineWhere.OR = [
+          { pending_store_id: franchiseId },
+          { store_id: franchiseId },
+        ];
+      }
+
+      pendingOnlineLeads = await prisma.online_leads.findMany({
+        where: pendingOnlineWhere,
+        include: {
+          SourceMaster: true,
+          SiteTypeMaster: true,
+          UserMaster_online_leads_assign_toToUserMaster: {
+            select: { id: true, user_name: true },
+          },
+          UserMaster_online_leads_final_assigned_leadsToUserMaster: {
+            select: { id: true, user_name: true },
+          },
+          FranchiseMaster: { select: { id: true, franchise_name: true } },
+        },
+        orderBy: { created_at: "desc" },
+      });
+    }
+
+    const pendingContactsSet = new Set<string>();
+    const pendingCodesSet = new Set<string>();
+    const formattedPendingLeads: any[] = [];
+    const seenPendingContacts = new Set<string>();
+
+    for (const ol of pendingOnlineLeads) {
+      const rawContact = String(ol.contact || "").replace(/\D/g, "");
+      const c10 =
+        rawContact.length > 10 && rawContact.startsWith("91")
+          ? rawContact.slice(-10)
+          : rawContact;
+      const code = String(ol.lead_code || "")
+        .trim()
+        .toUpperCase();
+
+      if (c10) pendingContactsSet.add(c10);
+      if (code) pendingCodesSet.add(code);
+
+      const cleanType = (t: string) => {
+        const str = String(t || "").trim();
+        return str.includes("|") ? str.split("|").pop()!.trim() : str;
+      };
+      const rawTypes = (ol.product_types || []).map(cleanType).filter(Boolean);
+      const uniqueTypes = Array.from(new Set<string>(rawTypes));
+      const olProdTypes = uniqueTypes.map((type: string) => ({
+        productType: { type },
+      }));
+      const olProdStructs = (ol.product_structures || []).map((s: string) => ({
+        productStructure: { type: s },
+      }));
+
+      // Deduplicate among pending online leads themselves
+      if (c10 && seenPendingContacts.has(c10)) {
+        const existingPending = formattedPendingLeads.find((p: any) => {
+          const pClean = String(p.contact_no || "").replace(/\D/g, "");
+          const p10 =
+            pClean.length > 10 && pClean.startsWith("91")
+              ? pClean.slice(-10)
+              : pClean;
+          return p10 === c10;
+        });
+        if (existingPending) {
+          const existingTypes = new Set(
+            existingPending.productMappings.map(
+              (m: any) => m.productType?.type,
+            ),
+          );
+          olProdTypes.forEach((m: any) => {
+            if (m.productType?.type && !existingTypes.has(m.productType.type)) {
+              existingPending.productMappings.push(m);
+              existingTypes.add(m.productType.type);
+            }
+          });
+          const existingStructs = new Set(
+            existingPending.leadProductStructureMapping.map(
+              (m: any) => m.productStructure?.type,
+            ),
+          );
+          olProdStructs.forEach((m: any) => {
+            if (
+              m.productStructure?.type &&
+              !existingStructs.has(m.productStructure.type)
+            ) {
+              existingPending.leadProductStructureMapping.push(m);
+              existingStructs.add(m.productStructure.type);
+            }
+          });
+        }
+        continue;
+      }
+
+      if (c10) seenPendingContacts.add(c10);
+
+      formattedPendingLeads.push({
+        id: ol.id,
+        is_online_lead: true,
+        approval_status: "PENDING",
+        pending_store_id: ol.pending_store_id || ol.store_id,
+        lead_code: ol.lead_code || `OL-${ol.id}`,
+        firstname: ol.firstname || ol.leads_name,
+        lastname: ol.lastname || "",
+        country_code: "91",
+        contact_no: ol.contact,
+        alt_contact_no: ol.alt_contact_no || null,
+        email: ol.email || null,
+        site_address: ol.site_address || null,
+        site_type_id: ol.site_type_id || null,
+        source_id: ol.source_id || null,
+        refered_by: ol.refered_by || null,
+        archetech_name: ol.archetech_name || null,
+        archetech_number: ol.archetech_number || null,
+        designer_remark: ol.remark || null,
+        vendor_id: ol.vendor_id,
+        franchise_id: ol.pending_store_id || ol.store_id || franchiseId || null,
+        priority: ol.priority || "Medium",
+        created_at: ol.created_at,
+        is_draft: true,
+        productMappings: olProdTypes,
+        leadProductStructureMapping: olProdStructs,
+        source: ol.SourceMaster
+          ? { type: ol.SourceMaster.type }
+          : ol.source
+            ? { type: ol.source }
+            : null,
+        siteType: ol.SiteTypeMaster ? { type: ol.SiteTypeMaster.type } : null,
+        assignedTo:
+          ol.UserMaster_online_leads_final_assigned_leadsToUserMaster ||
+          ol.UserMaster_online_leads_assign_toToUserMaster ||
+          null,
+        statusType: { type: "Approval Pending", tag: "Type 1" },
+        documents: [],
+      });
+    }
+
+    // Filter out LeadMaster processed draft leads that ALREADY have a pending online lead
+    const filteredProcessed = processed.filter((lead: any) => {
+      const clean = String(lead.contact_no || "").replace(/\D/g, "");
+      const c10 =
+        clean.length > 10 && clean.startsWith("91") ? clean.slice(-10) : clean;
+      const code = String(lead.lead_code || "")
+        .trim()
+        .toUpperCase();
+
+      if (
+        (c10 && pendingContactsSet.has(c10)) ||
+        (code && pendingCodesSet.has(code))
+      ) {
+        // Merge productMappings from LeadMaster if pending online lead had empty product mappings
+        const matchingPending = formattedPendingLeads.find((p: any) => {
+          const pClean = String(p.contact_no || "").replace(/\D/g, "");
+          const p10 =
+            pClean.length > 10 && pClean.startsWith("91")
+              ? pClean.slice(-10)
+              : pClean;
+          return (
+            p10 === c10 ||
+            (code &&
+              String(p.lead_code || "")
+                .trim()
+                .toUpperCase() === code)
+          );
+        });
+        if (matchingPending) {
+          if (
+            !matchingPending.productMappings ||
+            matchingPending.productMappings.length === 0
+          ) {
+            matchingPending.productMappings = lead.productMappings || [];
+          }
+          if (
+            !matchingPending.leadProductStructureMapping ||
+            matchingPending.leadProductStructureMapping.length === 0
+          ) {
+            matchingPending.leadProductStructureMapping =
+              lead.leadProductStructureMapping || [];
+          }
+        }
+        return false; // Exclude duplicate LeadMaster row so the pending online_leads row with Approve/Reject buttons is rendered!
+      }
+      return true;
+    });
+
+    const isAsc = filters.created_at === "asc";
+    const parseLeadCodeNum = (codeStr: string) => {
+      const match = String(codeStr || "").match(/\d+/);
+      return match ? parseInt(match[0], 10) : 0;
+    };
+
+    const combinedLeads = [...formattedPendingLeads, ...filteredProcessed];
+    const finalLeads = combinedLeads.sort((a: any, b: any) => {
+      if (isOnlineLeadFeatureEnabled) {
+        const isPendingA =
+          a.approval_status === "PENDING" ||
+          a.statusType?.type === "Approval Pending";
+        const isPendingB =
+          b.approval_status === "PENDING" ||
+          b.statusType?.type === "Approval Pending";
+
+        if (isPendingA && !isPendingB) return -1;
+        if (!isPendingA && isPendingB) return 1;
+      }
+
+      const numA = parseLeadCodeNum(a.lead_code);
+      const numB = parseLeadCodeNum(b.lead_code);
+
+      if (numA > 0 && numB > 0 && numA !== numB) {
+        return isAsc ? numA - numB : numB - numA;
+      }
+
+      const timeA = new Date(a.created_at).getTime() || 0;
+      const timeB = new Date(b.created_at).getTime() || 0;
+      if (timeA !== timeB) {
+        return isAsc ? timeA - timeB : timeB - timeA;
+      }
+
+      return isAsc ? (a.id || 0) - (b.id || 0) : (b.id || 0) - (a.id || 0);
+    });
+
+    const finalCount = filteredProcessed.length + formattedPendingLeads.length;
+
+    return { leads: finalLeads, count: finalCount };
   }
 }

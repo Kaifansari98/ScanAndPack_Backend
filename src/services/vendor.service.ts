@@ -128,6 +128,7 @@ export const createVendor = async (data: any) => {
     time_zone,
     is_inventory_enabled,
     is_tracktrace_enabled,
+    is_available_unique_code,
     is_year_wise_lead_code_enabled,
     push_lead_to_cadbid,
   } = data;
@@ -148,6 +149,7 @@ export const createVendor = async (data: any) => {
       time_zone,
       is_inventory_enabled,
       is_tracktrace_enabled,
+      is_available_unique_code,
       is_year_wise_lead_code_enabled,
       push_lead_to_cadbid,
     },
@@ -229,6 +231,7 @@ export const getAllVendorsPaginated = async ({
         is_crm_enabled: true,
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
+        is_available_unique_code: true,
         is_scanpack_enabled:true,
         push_lead_to_cadbid: true,
         is_this_vendor_is_custom_usertype_only: true,
@@ -1905,6 +1908,7 @@ export const onboardVendor = async (data: any) => {
     is_crm_enabled,
     is_inventory_enabled,
     is_tracktrace_enabled,
+    is_available_unique_code,
     is_year_wise_lead_code_enabled,
     is_scanpack_enabled,
     push_lead_to_cadbid,
@@ -1936,6 +1940,7 @@ export const onboardVendor = async (data: any) => {
       is_crm_enabled,
       is_inventory_enabled,
       is_tracktrace_enabled,
+      is_available_unique_code,
       is_year_wise_lead_code_enabled,
       is_scanpack_enabled,
       push_lead_to_cadbid,
@@ -2016,6 +2021,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
     is_crm_enabled,
     is_inventory_enabled,
     is_tracktrace_enabled,
+    is_available_unique_code,
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
     is_scanpack_enabled,
@@ -2047,6 +2053,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
       is_crm_enabled,
       is_inventory_enabled,
       is_tracktrace_enabled,
+      is_available_unique_code,
       handlesLargeScaleProjects,
       is_year_wise_lead_code_enabled,
       is_scanpack_enabled,
@@ -2432,7 +2439,7 @@ export const getFastProductionReportData = async (
           leadStatusLogs: {
             select: {
               created_at: true,
-              statusType: { select: { type: true } },
+              statusType: { select: { type: true, tag: true } },
             },
             orderBy: { created_at: "asc" },
           },
@@ -2588,10 +2595,19 @@ export const getFastProductionReportData = async (
     const hardware_selection = req.hardware_selection || "-";
     const accessory_selection = req.accessory_selection || "-";
 
-    const tcDate = lead?.tech_check_reached_at || null;
-    const olDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "order-login" || l.statusType?.type?.trim().toLowerCase() === "order login")?.created_at || null;
-    const prodDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "production")?.created_at || null;
-    const rtdDate = lead?.leadStatusLogs?.find((l: any) => l.statusType?.type?.trim().toLowerCase() === "ready to dispatch" || l.statusType?.type?.trim().toLowerCase() === "ready-to-dispatch")?.created_at || null;
+    const getStageLogDate = (tags: string[], keywords: string[]) => {
+      const log = lead?.leadStatusLogs?.find((l: any) => {
+        const tag = (l.statusType?.tag || "").trim();
+        const type = (l.statusType?.type || "").trim().toLowerCase();
+        return tags.includes(tag) || keywords.some((k) => type.includes(k));
+      });
+      return log?.created_at || null;
+    };
+
+    const tcDate = lead?.tech_check_reached_at || getStageLogDate(["Type 7"], ["tech"]);
+    const olDate = (lead as any)?.order_login_completed_at || getStageLogDate(["Type 8", "Type 9"], ["order", "login"]);
+    const prodDate = getStageLogDate(["Type 10", "Type 11", "Type 12", "Type 13", "Type 14"], ["production"]);
+    const rtdDate = getStageLogDate(["Type 15", "Type 16", "Type 17"], ["dispatch", "rtd"]);
 
     return {
       id: req.id,
