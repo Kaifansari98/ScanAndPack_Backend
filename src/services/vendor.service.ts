@@ -2394,13 +2394,12 @@ export const getFastProductionReportData = async (
 ) => {
   const where: any = {
     vendor_id: vendorId,
+    status: "approved",
+    lead: {
+      is_fast_production: true,
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
+    },
   };
-
-  if (franchiseId) {
-    where.lead = {
-      franchise_id: franchiseId,
-    };
-  }
 
   if (fromDate || toDate) {
     where.created_at = {};
@@ -2419,6 +2418,17 @@ export const getFastProductionReportData = async (
   const fastProductionRequests = await prisma.fastProductionRequest.findMany({
     where,
     include: {
+      batch: {
+        select: {
+          approvals: {
+            select: {
+              approver_role: true,
+              status: true,
+              acted_at: true,
+            },
+          },
+        },
+      },
       createdBy: {
         select: {
           user_name: true,
@@ -2429,6 +2439,7 @@ export const getFastProductionReportData = async (
           lead_code: true,
           firstname: true,
           lastname: true,
+          is_fast_production: true,
           statusType: { select: { type: true } },
           tech_check_reached_at: true,
           franchise: {
@@ -2609,6 +2620,18 @@ export const getFastProductionReportData = async (
     const prodDate = getStageLogDate(["Type 10", "Type 11", "Type 12", "Type 13", "Type 14"], ["production"]);
     const rtdDate = getStageLogDate(["Type 15", "Type 16", "Type 17"], ["dispatch", "rtd"]);
 
+    const factoryApproval =
+      req.batch?.approvals?.find(
+        (a: any) =>
+          a.approver_role === "FACTORY_ADMIN" && a.status === "approved"
+      )?.acted_at || req.approved_at;
+
+    const superAdminApproval =
+      req.batch?.approvals?.find(
+        (a: any) =>
+          a.approver_role === "SUPER_ADMIN" && a.status === "approved"
+      )?.acted_at || req.approved_at;
+
     return {
       id: req.id,
       parent_lead_code: lead?.lead_code || "-",
@@ -2625,12 +2648,13 @@ export const getFastProductionReportData = async (
       franchise_store: req.lead?.franchise?.franchise_name || "-",
       created_at: req.created_at,
       required_date: req.client_required_delivery_date,
-      supervisor_approved_at: req.approved_at,
-      admin_approved_at: req.approved_at,
+      supervisor_approved_at: factoryApproval,
+      admin_approved_at: superAdminApproval,
       tc_date: tcDate,
       ol_date: olDate,
       prod_date: prodDate,
       rtd_date: rtdDate,
+      is_fast_production: lead?.is_fast_production === true,
     };
   });
 };

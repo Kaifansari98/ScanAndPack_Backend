@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+﻿import { Request, Response } from "express";
 import { prisma } from "../../prisma/client";
 import { unmarkDraftAndSeparate } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
@@ -1672,7 +1672,7 @@ export class OnlineLeadController {
 
           const mappedTypeIds: number[] = [];
           for (const pType of prodTypes) {
-            if (!pType || pType === "—") continue;
+            if (!pType || pType === "ΓÇö") continue;
             const typeStr = String(pType).trim();
             const productTypeName = typeStr.includes(" | ")
               ? typeStr.split(" | ")[1].trim()
@@ -1701,7 +1701,7 @@ export class OnlineLeadController {
           // Map ALL product structures to this single lead
           const mappedStructs: { id: number; type: string }[] = [];
           for (const pStruct of prodStructures) {
-            if (!pStruct || pStruct === "—") continue;
+            if (!pStruct || pStruct === "ΓÇö") continue;
             const structStr = String(pStruct).trim();
             const foundStruct = await tx.productStructure.findFirst({
               where: {
@@ -2389,7 +2389,7 @@ export class OnlineLeadController {
             // Map ALL product types to this single lead
             const mappedTypeIds: number[] = [];
             for (const pType of prodTypes) {
-              if (!pType || pType === "—") continue;
+              if (!pType || pType === "ΓÇö") continue;
               const typeStr = String(pType).trim();
               const productTypeName = typeStr.includes(" | ")
                 ? typeStr.split(" | ")[1].trim()
@@ -2418,7 +2418,7 @@ export class OnlineLeadController {
             // Map ALL product structures to this single lead
             const mappedStructs: { id: number; type: string }[] = [];
             for (const pStruct of prodStructures) {
-              if (!pStruct || pStruct === "—") continue;
+              if (!pStruct || pStruct === "ΓÇö") continue;
               const structStr = String(pStruct).trim();
               const foundStruct = await tx.productStructure.findFirst({
                 where: {
@@ -3326,24 +3326,24 @@ export class OnlineLeadController {
 
         // Append Budget, Property Type, and Survey Details to remark
         const extraRemarks: string[] = [];
-        if (budget) extraRemarks.push(`**• Budget:**\n${budget}`);
+        if (budget) extraRemarks.push(`**ΓÇó Budget:**\n${budget}`);
         if (propertyType)
-          extraRemarks.push(`**• Property Type:**\n${propertyType}`);
+          extraRemarks.push(`**ΓÇó Property Type:**\n${propertyType}`);
         if (modularSolution)
           extraRemarks.push(
-            `**• What modular solution are you interested in?**\n${modularSolution}`,
+            `**ΓÇó What modular solution are you interested in?**\n${modularSolution}`,
           );
         if (whenNeedReady)
           extraRemarks.push(
-            `**• When do you need your modular kitchen/wardrobe ready?**\n${whenNeedReady}`,
+            `**ΓÇó When do you need your modular kitchen/wardrobe ready?**\n${whenNeedReady}`,
           );
         if (preferredShowroom)
           extraRemarks.push(
-            `**• Which Shambhala showroom would you prefer to visit?**\n${preferredShowroom}`,
+            `**ΓÇó Which Shambhala showroom would you prefer to visit?**\n${preferredShowroom}`,
           );
         if (projectLocation)
           extraRemarks.push(
-            `**• Where is your project located?**\n${projectLocation}`,
+            `**ΓÇó Where is your project located?**\n${projectLocation}`,
           );
 
         if (extraRemarks.length > 0) {
@@ -3838,11 +3838,11 @@ export class OnlineLeadController {
       } else {
         for (let i = 0; i < maxLen; i++) {
           const rawType =
-            productTypes[i] && productTypes[i] !== "—"
+            productTypes[i] && productTypes[i] !== "ΓÇö"
               ? String(productTypes[i]).trim()
               : "";
           const structVal =
-            productStructures[i] && productStructures[i] !== "—"
+            productStructures[i] && productStructures[i] !== "ΓÇö"
               ? String(productStructures[i]).trim()
               : "";
 
@@ -4176,7 +4176,7 @@ export class OnlineLeadController {
         // Map ALL product types to this single lead
         const mappedTypeIds: number[] = [];
         for (const pType of productTypes) {
-          if (!pType || pType === "—") continue;
+          if (!pType || pType === "ΓÇö") continue;
           const typeStr = String(pType).trim();
           const productTypeName = typeStr.includes(" | ")
             ? typeStr.split(" | ")[1].trim()
@@ -4205,7 +4205,7 @@ export class OnlineLeadController {
         // Map ALL product structures to this single lead
         const mappedStructs: { id: number; type: string }[] = [];
         for (const pStruct of productStructures) {
-          if (!pStruct || pStruct === "—") continue;
+          if (!pStruct || pStruct === "ΓÇö") continue;
           const structStr = String(pStruct).trim();
           const foundStruct = await tx.productStructure.findFirst({
             where: {
