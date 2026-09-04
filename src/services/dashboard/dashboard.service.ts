@@ -1520,6 +1520,12 @@ export class DashboardService {
   }
 
   public async getStageLeads(vendor_id: number, tag: string, franchise_id?: number) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendor_id },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const handlesLargeScale = vendor?.handlesLargeScaleProjects === true;
+
     type Row = {
       id: bigint;
       lead_code: string | null;
@@ -1530,58 +1536,151 @@ export class DashboardService {
       instance_id: bigint | null;
     };
 
+    const isInstanceStage = !handlesLargeScale && ["Type 8", "Type 9", "Type 10"].includes(tag);
+
     let rows: Row[];
-    if (franchise_id) {
-      rows = await prisma.$queryRaw<Row[]>`
-        SELECT
-          lm.id,
-          lm.lead_code,
-          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
-          fm.franchise_name,
-          lm.account_id,
-          stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id
-        FROM "LeadMaster" lm
-        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
-        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
-        WHERE lm.vendor_id = ${vendor_id}
-          AND stm.tag = ${tag}
-          AND lm.franchise_id = ${franchise_id}
-          AND lm.is_deleted = false
-          AND lm.activity_status != 'lost'
-        ORDER BY lm.id DESC
-      `;
+    if (isInstanceStage) {
+      if (franchise_id) {
+        rows = await prisma.$queryRaw<Row[]>`
+          SELECT
+            lm.id,
+            CASE 
+              WHEN lpsi.quantity_index IS NOT NULL THEN CONCAT(
+                CASE 
+                  WHEN lm.lead_code LIKE CONCAT('%.', lpsi.quantity_index) 
+                  THEN LEFT(lm.lead_code, LENGTH(lm.lead_code) - LENGTH(CONCAT('.', lpsi.quantity_index)))
+                  ELSE lm.lead_code
+                END, 
+                '.', 
+                lpsi.quantity_index
+              )
+              ELSE lm.lead_code
+            END AS lead_code,
+            CONCAT(
+              lm.firstname, ' ', lm.lastname,
+              CASE WHEN lpsi.title IS NOT NULL AND lpsi.title != '' THEN CONCAT(' (', lpsi.title, ')') ELSE '' END
+            ) AS name,
+            fm.franchise_name,
+            lm.account_id,
+            stm.tag AS stage_tag,
+            COALESCE(
+              lpsi.id,
+              (
+                SELECT sub.id
+                FROM "LeadProductStructureInstance" sub
+                WHERE sub.lead_id = lm.id
+                ORDER BY sub.id ASC
+                LIMIT 1
+              )
+            ) AS instance_id
+          FROM "LeadMaster" lm
+          LEFT JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id AND lpsi.is_archived = false
+          LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+          LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+          WHERE lm.vendor_id = ${vendor_id}
+            AND stm.tag = ${tag}
+            AND lm.franchise_id = ${franchise_id}
+            AND lm.is_deleted = false
+            AND lm.activity_status != 'lost'
+          ORDER BY lm.id DESC, lpsi.id ASC
+        `;
+      } else {
+        rows = await prisma.$queryRaw<Row[]>`
+          SELECT
+            lm.id,
+            CASE 
+              WHEN lpsi.quantity_index IS NOT NULL THEN CONCAT(
+                CASE 
+                  WHEN lm.lead_code LIKE CONCAT('%.', lpsi.quantity_index) 
+                  THEN LEFT(lm.lead_code, LENGTH(lm.lead_code) - LENGTH(CONCAT('.', lpsi.quantity_index)))
+                  ELSE lm.lead_code
+                END, 
+                '.', 
+                lpsi.quantity_index
+              )
+              ELSE lm.lead_code
+            END AS lead_code,
+            CONCAT(
+              lm.firstname, ' ', lm.lastname,
+              CASE WHEN lpsi.title IS NOT NULL AND lpsi.title != '' THEN CONCAT(' (', lpsi.title, ')') ELSE '' END
+            ) AS name,
+            fm.franchise_name,
+            lm.account_id,
+            stm.tag AS stage_tag,
+            COALESCE(
+              lpsi.id,
+              (
+                SELECT sub.id
+                FROM "LeadProductStructureInstance" sub
+                WHERE sub.lead_id = lm.id
+                ORDER BY sub.id ASC
+                LIMIT 1
+              )
+            ) AS instance_id
+          FROM "LeadMaster" lm
+          LEFT JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id AND lpsi.is_archived = false
+          LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+          LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+          WHERE lm.vendor_id = ${vendor_id}
+            AND stm.tag = ${tag}
+            AND lm.is_deleted = false
+            AND lm.activity_status != 'lost'
+          ORDER BY lm.id DESC, lpsi.id ASC
+        `;
+      }
     } else {
-      rows = await prisma.$queryRaw<Row[]>`
-        SELECT
-          lm.id,
-          lm.lead_code,
-          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
-          fm.franchise_name,
-          lm.account_id,
-          stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id
-        FROM "LeadMaster" lm
-        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
-        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
-        WHERE lm.vendor_id = ${vendor_id}
-          AND stm.tag = ${tag}
-          AND lm.is_deleted = false
-          AND lm.activity_status != 'lost'
-        ORDER BY lm.id DESC
-      `;
+      if (franchise_id) {
+        rows = await prisma.$queryRaw<Row[]>`
+          SELECT
+            lm.id,
+            lm.lead_code,
+            CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+            fm.franchise_name,
+            lm.account_id,
+            stm.tag AS stage_tag,
+            (
+              SELECT lpsi.id
+              FROM "LeadProductStructureInstance" lpsi
+              WHERE lpsi.lead_id = lm.id
+              ORDER BY lpsi.id ASC
+              LIMIT 1
+            ) AS instance_id
+          FROM "LeadMaster" lm
+          LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+          LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+          WHERE lm.vendor_id = ${vendor_id}
+            AND stm.tag = ${tag}
+            AND lm.franchise_id = ${franchise_id}
+            AND lm.is_deleted = false
+            AND lm.activity_status != 'lost'
+          ORDER BY lm.id DESC
+        `;
+      } else {
+        rows = await prisma.$queryRaw<Row[]>`
+          SELECT
+            lm.id,
+            lm.lead_code,
+            CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+            fm.franchise_name,
+            lm.account_id,
+            stm.tag AS stage_tag,
+            (
+              SELECT lpsi.id
+              FROM "LeadProductStructureInstance" lpsi
+              WHERE lpsi.lead_id = lm.id
+              ORDER BY lpsi.id ASC
+              LIMIT 1
+            ) AS instance_id
+          FROM "LeadMaster" lm
+          LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+          LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+          WHERE lm.vendor_id = ${vendor_id}
+            AND stm.tag = ${tag}
+            AND lm.is_deleted = false
+            AND lm.activity_status != 'lost'
+          ORDER BY lm.id DESC
+        `;
+      }
     }
 
     return rows.map((r) => ({
@@ -1596,6 +1695,12 @@ export class DashboardService {
   }
 
   public async getStageWiseCounts(vendor_id: number, franchise_id?: number) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendor_id },
+      select: { handlesLargeScaleProjects: true },
+    });
+    const handlesLargeScale = vendor?.handlesLargeScaleProjects === true;
+
     const statusTypes = await prisma.statusTypeMaster.findMany({
       where: { vendor_id },
       select: { id: true, tag: true, type: true },
@@ -1606,12 +1711,42 @@ export class DashboardService {
       where: {
         vendor_id,
         is_deleted: false,
+        activity_status: { not: "lost" },
         ...(franchise_id ? { franchise_id } : {}),
       },
       _count: { id: true },
     });
 
     const countMap = new Map(counts.map((c) => [c.status_id, c._count.id]));
+
+    if (!handlesLargeScale) {
+      const instanceStageTags = ["Type 8", "Type 9", "Type 10"];
+      const instanceStatusTypes = statusTypes.filter((st) =>
+        instanceStageTags.includes(st.tag)
+      );
+
+      for (const st of instanceStatusTypes) {
+        const instanceCount = await prisma.leadProductStructureInstance.count({
+          where: {
+            is_archived: false,
+            lead: {
+              vendor_id,
+              status_id: st.id,
+              is_deleted: false,
+              activity_status: { not: "lost" },
+              ...(franchise_id ? { franchise_id } : {}),
+            },
+          },
+        });
+
+        const leadCount = countMap.get(st.id) ?? 0;
+        if (instanceCount > 0) {
+          countMap.set(st.id, instanceCount);
+        } else {
+          countMap.set(st.id, leadCount);
+        }
+      }
+    }
 
     return statusTypes
       .filter((st) => /^Type \d+$/.test(st.tag))

@@ -3058,6 +3058,9 @@ export const getCutListMachine = async (
     },
     select: {
       id: true,
+      project_name: true,
+      project_status: true,
+      track_trace_status: true,
     },
   });
 
@@ -3142,9 +3145,34 @@ export const getCutListMachine = async (
     return row;
   });
 
+  // Count scanned items for this project in cutListMachineMapping
+  let scannedMappingCount = 0;
+  if (projectId) {
+    scannedMappingCount = await prisma.cutListMachineMapping.count({
+      where: {
+        project_id: Number(projectId),
+        OR: [
+          { actual_in_at: { not: null } },
+          { actual_out_at: { not: null } },
+          { status: { notIn: ["Pending", "pending", ""] } },
+        ],
+      },
+    });
+  }
+  const isProjectStarted = scannedMappingCount > 0;
+
   return {
     data: result,
     machineColumns: machineColumns,
+    project: projectMaster
+      ? {
+          ...projectMaster,
+          is_started: isProjectStarted,
+          scanned_mapping_count: scannedMappingCount,
+        }
+      : null,
+    is_project_started: isProjectStarted,
+    scanned_mapping_count: scannedMappingCount,
   };
 };
 
@@ -3157,6 +3185,8 @@ export const assignMachine = async (payload: CutListSavePayload) => {
       },
       select: {
         id: true,
+        project_status: true,
+        track_trace_status: true,
       },
     });
 
@@ -3166,6 +3196,34 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
     if (!projectId) {
       return validationResponse(0, "Project not found");
+    }
+
+    // Check if project has already started (at least 1 item scanned in cutListMachineMapping)
+    const scannedMappingCount = await prisma.cutListMachineMapping.count({
+      where: {
+        project_id: Number(projectId),
+        OR: [
+          { actual_in_at: { not: null } },
+          { actual_out_at: { not: null } },
+          { status: { notIn: ["Pending", "pending", ""] } },
+        ],
+      },
+    });
+
+    const isStarted = scannedMappingCount > 0;
+
+    const role = (payload.user_role || "").trim().toLowerCase();
+    const isSuperAdmin =
+      role === "super-admin" ||
+      role === "superadmin" ||
+      role === "super admin" ||
+      role === "super_admin";
+
+    if (isStarted && !isSuperAdmin) {
+      return validationResponse(
+        0,
+        "Project Started: You cannot assign. Only Super Admin can do this."
+      );
     }
 
     const cutListIdArray = payload.cutListIds
@@ -3314,6 +3372,27 @@ export const createQR = async (payload: QRParam) => {
             select: {
               unique_code: true,
               description: true,
+              item_name: true,
+              group_name: true,
+              category_name: true,
+              material_details: true,
+              length: true,
+              width: true,
+              thickness: true,
+              qty: true,
+              weight: true,
+              elf: true,
+              elb: true,
+              esl: true,
+              esr: true,
+              procurement: true,
+              project: {
+                select: {
+                  project_name: true,
+                  order_no: true,
+                  client_name: true,
+                },
+              },
             },
           },
         },
@@ -4532,7 +4611,10 @@ export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   }
 };
 
-export const getTraceTraceDashboard = async (vendor_id: number) => {
+export const getTraceTraceDashboard = async (
+  vendor_id: number,
+  statusFilter: string = "all",
+) => {
   try {
     // ── 1. Fetch projects and machines in parallel ─────────────────────────
     const [projects, machines] = await Promise.all([
@@ -4780,14 +4862,48 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
 
     const allStatuses = projects.map(buildProjectStatus);
 
-    // ── 5. Split active and archived ───────────────────────────────────────
+    // ── 5. Apply Status Filter from backend (all, not_started, pending, completed) ───
+    const normalizedFilter = (statusFilter || "all")
+      .toLowerCase()
+      .trim()
+      .replace(/[\s_-]+/g, "");
+
+    const filteredStatuses = allStatuses.filter((p) => {
+      if (normalizedFilter === "all" || normalizedFilter === "") return true;
+
+      const totalPending = p.machines.reduce((s, m) => s + m.pending, 0);
+      const totalScanned = p.machines.reduce((s, m) => s + m.scanned, 0);
+      const allDone =
+        (p.total_panels > 0 && p.panels_scanned >= p.total_panels) ||
+        (totalPending === 0 && p.machines.length > 0 && totalScanned > 0);
+
+      // Not Started: 0 panels scanned in the entire project
+      const isNotStarted = totalScanned === 0 && p.panels_scanned === 0;
+
+      // Pending (In Progress): Production has started (totalScanned > 0) but is not finished yet
+      const isPending = !allDone && (totalScanned > 0 || p.panels_scanned > 0);
+
+      if (normalizedFilter === "notstarted") {
+        return isNotStarted;
+      }
+      if (normalizedFilter === "pending" || normalizedFilter === "inprogress") {
+        return isPending;
+      }
+      if (normalizedFilter === "completed" || normalizedFilter === "done") {
+        return allDone;
+      }
+
+      return true;
+    });
+
+    // ── 6. Split active and archived ───────────────────────────────────────
     const activeStatuses = new Set(["Initiated", "Started"]);
 
-    const active = allStatuses.filter((p) =>
+    const active = filteredStatuses.filter((p) =>
       activeStatuses.has(p.project_status ?? ""),
     );
 
-    const archived = allStatuses.filter(
+    const archived = filteredStatuses.filter(
       (p) => !activeStatuses.has(p.project_status ?? ""),
     );
 
@@ -4803,11 +4919,69 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
   }
 };
 
-export const getProjectCategories = async (vendor_id: number) => {
+export const getProjectCategories = async (
+  vendor_id: number,
+  query?: {
+    search?: string;
+    status?: string;
+    type?: string;
+    page?: number;
+    limit?: number;
+    sort_by?: string;
+    sort_order?: "asc" | "desc";
+  }
+) => {
   try {
+    const where: any = { vendor_id };
+
+    if (query?.status && query.status !== "all") {
+      where.status = query.status;
+    }
+
+    if (query?.type === "main") {
+      where.parent_id = null;
+    } else if (query?.type === "sub") {
+      where.parent_id = { not: null };
+    }
+
+    if (query?.search && query.search.trim() !== "") {
+      const q = query.search.trim();
+      where.OR = [
+        { category_name: { contains: q, mode: "insensitive" } },
+        { prefix: { contains: q, mode: "insensitive" } },
+        { parent: { category_name: { contains: q, mode: "insensitive" } } },
+        {
+          projectCategoriesMasterVendorMapping: {
+            some: {
+              projectCategoriesTypeMaster: {
+                module_name: { contains: q, mode: "insensitive" },
+              },
+            },
+          },
+        },
+      ];
+    }
+
+    const sortField = query?.sort_by || "category_name";
+    const sortOrder = query?.sort_order || "asc";
+    const orderBy: any = {};
+    if (sortField === "category_name") orderBy.category_name = sortOrder;
+    else if (sortField === "prefix") orderBy.prefix = sortOrder;
+    else if (sortField === "status") orderBy.status = sortOrder;
+    else if (sortField === "created_at") orderBy.created_at = sortOrder;
+    else orderBy.category_name = "asc";
+
+    const isPaginationRequested = Boolean(query?.page || query?.limit);
+    const page = query?.page ? Number(query.page) : 1;
+    const limit = query?.limit ? Number(query.limit) : 10;
+    const skip = (page - 1) * limit;
+
+    const total = await prisma.projectCategoriesMaster.count({ where });
+
     const categories = await prisma.projectCategoriesMaster.findMany({
-      where: { vendor_id },
-      orderBy: { category_name: "asc" },
+      where,
+      orderBy,
+      ...(isPaginationRequested ? { skip, take: limit } : {}),
       select: {
         id: true,
         category_name: true,
@@ -4840,7 +5014,17 @@ export const getProjectCategories = async (vendor_id: number) => {
       },
     });
 
-    return validationResponse(1, "", { categories });
+    const totalPages = Math.ceil(total / limit) || 1;
+
+    return validationResponse(1, "", {
+      categories,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages,
+      },
+    });
   } catch (error) {
     console.error("Error in getProjectCategories", error);
     return validationResponse(0, "Something went wrong");
@@ -5957,6 +6141,32 @@ export const getProjectDetailService_old = async (
           })
         : [];
 
+    const boxMappingsForWeight =
+      boxIds.length > 0
+        ? await prisma.cutListMachineMapping.findMany({
+            where: {
+              box_id: { in: boxIds },
+              project_id,
+              vendor_id,
+              expected_in: true,
+            },
+            select: {
+              box_id: true,
+              qty: true,
+              weight: true,
+              cut_list: {
+                select: {
+                  qty: true,
+                  weight: true,
+                  length: true,
+                  width: true,
+                  thickness: true,
+                },
+              },
+            },
+          })
+        : [];
+
     const boxItemCountMap = new Map<number, number>();
     const boxWeightMap = new Map<number, number>();
 
@@ -5964,10 +6174,18 @@ export const getProjectDetailService_old = async (
       if (!stat.box_id) {
         continue;
       }
-
       boxItemCountMap.set(Number(stat.box_id), Number(stat._count.id || 0));
+    }
 
-      boxWeightMap.set(Number(stat.box_id), Number(stat._sum.weight || 0));
+    for (const mapping of boxMappingsForWeight) {
+      if (!mapping.box_id) continue;
+      const bId = Number(mapping.box_id);
+      const qty = Number(mapping.qty ?? 1);
+      const mappedWeight = Number(mapping.weight || 0);
+      const itemWeight = mappedWeight * qty;
+
+      const currentWeight = boxWeightMap.get(bId) || 0;
+      boxWeightMap.set(bId, currentWeight + itemWeight);
     }
 
     const boxNameMap = new Map(boxes.map((box) => [box.id, box.box_name]));
@@ -6485,6 +6703,8 @@ export interface GetProjectDetailOptions {
   machine_id?: string;
   box_id?: string;
   box_status?: string;
+  page?: number | string;
+  limit?: number | string;
 }
 
 export const getProjectDetailService = async (
@@ -6668,20 +6888,11 @@ export const getProjectDetailService = async (
       (category && category !== "all") ||
       (machine_id && machine_id !== "all")
     ) {
-      const mappingWhere: any = {
+      const cutListWhere: any = {
         project_id,
         vendor_id,
-        box_id: { not: null },
       };
 
-      if (machine_id && machine_id !== "all") {
-        const parsedMachineId = Number(machine_id);
-        if (!isNaN(parsedMachineId)) {
-          mappingWhere.machine_id = parsedMachineId;
-        }
-      }
-
-      const cutListWhere: any = {};
       if (group && group !== "all") {
         cutListWhere.group_name = { equals: group, mode: "insensitive" };
       }
@@ -6689,19 +6900,65 @@ export const getProjectDetailService = async (
         cutListWhere.category_name = { equals: category, mode: "insensitive" };
       }
 
-      if (Object.keys(cutListWhere).length > 0) {
-        mappingWhere.cut_list = cutListWhere;
+      if (machine_id && machine_id !== "all") {
+        const parsedMachineId = Number(machine_id);
+        if (!isNaN(parsedMachineId)) {
+          cutListWhere.cutListMachineMapping = {
+            some: {
+              machine_id: parsedMachineId,
+            },
+          };
+        }
       }
 
-      const matchingMappings = await prisma.cutListMachineMapping.findMany({
-        where: mappingWhere,
-        select: { box_id: true },
-        distinct: ["box_id"],
+      const matchingCutLists = await prisma.cutList.findMany({
+        where: cutListWhere,
+        select: { id: true, unique_code: true },
       });
 
-      filteredBoxIds = matchingMappings
-        .map((m) => m.box_id)
-        .filter((id): id is number => id !== null);
+      const matchingCutListIds = matchingCutLists.map((c) => c.id);
+      const matchingUniqueCodes = matchingCutLists
+        .map((c) => c.unique_code)
+        .filter((code): code is string => Boolean(code));
+
+      if (matchingCutListIds.length === 0) {
+        filteredBoxIds = [];
+      } else {
+        const [matchingBoxMappings, matchingScanItems] = await Promise.all([
+          prisma.cutListMachineMapping.findMany({
+            where: {
+              project_id,
+              vendor_id,
+              cut_list_id: { in: matchingCutListIds },
+              box_id: { not: null },
+            },
+            select: { box_id: true },
+            distinct: ["box_id"],
+          }),
+          matchingUniqueCodes.length > 0
+            ? prisma.scanAndPackItem.findMany({
+                where: {
+                  project_id,
+                  vendor_id,
+                  unique_id: { in: matchingUniqueCodes },
+                  is_deleted: false,
+                },
+                select: { box_id: true },
+                distinct: ["box_id"],
+              })
+            : Promise.resolve([]),
+        ]);
+
+        const boxIdSet = new Set<number>();
+        matchingBoxMappings.forEach((m) => {
+          if (m.box_id) boxIdSet.add(m.box_id);
+        });
+        matchingScanItems.forEach((s) => {
+          if (s.box_id) boxIdSet.add(s.box_id);
+        });
+
+        filteredBoxIds = Array.from(boxIdSet);
+      }
     }
 
     const whereBox: any = {
@@ -8270,6 +8527,25 @@ export const getProjectDetailService = async (
       machines: sortedMachineStats.map((m) => ({ id: m.machine_id, name: m.machine_name })),
     };
 
+    const totalBoxesCount = formattedBoxes.length;
+    const currentPage = Math.max(1, Number(options.page || 1));
+    const currentLimit = Math.max(1, Number(options.limit || 10));
+    const totalPages = Math.ceil(totalBoxesCount / currentLimit) || 1;
+
+    const startIndex = (currentPage - 1) * currentLimit;
+    const paginatedBoxes = formattedBoxes.slice(startIndex, startIndex + currentLimit);
+
+    const boxesPagination = {
+      total: totalBoxesCount,
+      page: currentPage,
+      limit: currentLimit,
+      total_pages: totalPages,
+      has_previous: currentPage > 1,
+      has_next: currentPage < totalPages,
+      from: totalBoxesCount > 0 ? startIndex + 1 : 0,
+      to: Math.min(startIndex + currentLimit, totalBoxesCount),
+    };
+
     return validationResponse(1, "Project detail fetched", {
       project: {
         id: project.id,
@@ -8338,7 +8614,8 @@ export const getProjectDetailService = async (
         machine_scanned_qty: totalMachineScannedQty,
       },
       machines: sortedMachineStats,
-      boxes: formattedBoxes,
+      boxes: paginatedBoxes,
+      boxes_pagination: boxesPagination,
       cutlist: unitRows,
       filterOptions,
     });
@@ -8587,10 +8864,12 @@ export const getBoxItemsService = async (
 
     const opMap = new Map(ops.map((user) => [user.id, user.user_name]));
 
-    return validationResponse(1, "Box items fetched", {
-      box,
+    const items = mappings.map((mapping) => {
+      const qty = Number(mapping.qty ?? 1);
+      const mappedWeight = Number(mapping.weight || 0);
+      const itemWeight = mappedWeight * qty;
 
-      items: mappings.map((mapping) => ({
+      return {
         id: mapping.id,
 
         machine: {
@@ -8601,9 +8880,9 @@ export const getBoxItemsService = async (
 
         site_in_at: mapping.site_in_at,
 
-        qty: Number(mapping.qty ?? 1),
+        qty,
 
-        weight: Number(mapping.weight || 0),
+        weight: Number(itemWeight.toFixed(2)),
 
         row_created_source: mapping.row_created_source,
 
@@ -8632,7 +8911,21 @@ export const getBoxItemsService = async (
           : null,
 
         cut_list: mapping.cut_list,
-      })),
+      };
+    });
+
+    const totalBoxWeight = items.reduce(
+      (sum, item) => sum + Number(item.weight || 0),
+      0,
+    );
+
+    return validationResponse(1, "Box items fetched", {
+      box: {
+        ...box,
+        total_weight: Number(totalBoxWeight.toFixed(2)),
+      },
+
+      items,
     });
   } catch (error) {
     console.error("getBoxItemsService error:", error);

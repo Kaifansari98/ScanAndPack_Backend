@@ -52,6 +52,7 @@ model VendorMaster {
   is_scanpack_enabled                    Boolean                                @default(false)
   is_online_lead_feature_enabled         Boolean                                @default(false)
   push_lead_to_cadbid                    Boolean                                @default(false)
+  is_available_unique_code               Boolean                                @default(false)
   accounts                               AccountMaster[]
   additionalCostMasters                  AdditionalCostMaster[]                 @relation("AdditionalCostVendor")
   architechuremasters                    Architechuremaster[]
@@ -1170,20 +1171,20 @@ model LeadProductMapping {
 }
 
 model ProductTypeMaster {
-  id                             Int                              @id @default(autoincrement())
-  type                           String
-  vendor_id                      Int
-  tag                            String
-  status                         String                           @default("active")
-  LeadDetailedLogs               LeadDetailedLogs[]
-  documents                      LeadDocuments[]                  @relation("LeadDocumentsToProductType")
-  leads                          LeadProductMapping[]
-  productStructureInstances      LeadProductStructureInstance[]
-  Ledger                         Ledger[]
-  PaymentInfo                    PaymentInfo[]
-  productStructures              ProductStructure[]
-  vendor                         VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadBillingAddresses           LeadBillingAddress[]
+  id                        Int                            @id @default(autoincrement())
+  type                      String
+  vendor_id                 Int
+  tag                       String
+  status                    String                         @default("active")
+  LeadDetailedLogs          LeadDetailedLogs[]
+  documents                 LeadDocuments[]                @relation("LeadDocumentsToProductType")
+  leads                     LeadProductMapping[]
+  productStructureInstances LeadProductStructureInstance[]
+  Ledger                    Ledger[]
+  PaymentInfo               PaymentInfo[]
+  productStructures         ProductStructure[]
+  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadBillingAddresses      LeadBillingAddress[]
 }
 
 model ProcessBriefMaster {

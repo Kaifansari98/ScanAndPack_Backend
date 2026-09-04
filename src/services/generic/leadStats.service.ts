@@ -71,11 +71,19 @@ export class LeadStatsService {
         };
       }
 
+      // My Task is a personal queue. Admin-level users can work across
+      // franchises, so its badge must not be limited by the active franchise.
+      const taskFranchiseId = ["admin", "super-admin", "auditor"].includes(
+        userType,
+      )
+        ? undefined
+        : targetFranchiseId;
+
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
-          ...(targetFranchiseId
-            ? { franchise_id: targetFranchiseId }
+          ...(taskFranchiseId
+            ? { franchise_id: taskFranchiseId }
             : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },

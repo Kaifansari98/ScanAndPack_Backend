@@ -296,6 +296,7 @@ export class OrderLoginController {
           created_by: true,
           created_at: true,
           tech_check_status: true,
+          product_type_id: true,
           product_structure_instance_id: true,
         },
       });
@@ -902,6 +903,7 @@ export class OrderLoginController {
         Number(leadId),
         is_so_value_received,
         Number(updated_by),
+        req.get("origin") || undefined,
       );
 
       return res.status(200).json({

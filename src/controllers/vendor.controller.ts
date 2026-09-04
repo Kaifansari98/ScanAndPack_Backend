@@ -102,6 +102,7 @@ export const createVendor = async (req: Request, res: Response) => {
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      is_available_unique_code: req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
@@ -193,6 +194,9 @@ export const updateVendorController = async (req: Request, res: Response) => {
         : undefined,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled !== undefined
         ? (req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true)
+        : undefined,
+      is_available_unique_code: req.body.is_available_unique_code !== undefined
+        ? (req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true)
         : undefined,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled !== undefined
         ? (req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true)
@@ -390,6 +394,7 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      is_available_unique_code: req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
       is_scanpack_enabled: req.body.is_scanpack_enabled === "true" || req.body.is_scanpack_enabled === true,
@@ -794,4 +799,43 @@ export const getLeadServicingReportController = async (
       message: "Internal server error",
     });
   }
+};export const getFastProductionReportController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(req.query.vendor_id);
+    const franchiseId = req.query.franchise_id
+      ? Number(req.query.franchise_id)
+      : null;
+    const fromDate = req.query.from_date ? String(req.query.from_date) : null;
+    const toDate = req.query.to_date ? String(req.query.to_date) : null;
+
+    if (!vendorId) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id is required",
+      });
+    }
+
+    const data = await vendorService.getFastProductionReportData(
+      vendorId,
+      franchiseId,
+      fromDate,
+      toDate,
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Fast production report generated successfully",
+      data,
+    });
+  } catch (error) {
+    console.error("Error in getFastProductionReportController:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };
+
