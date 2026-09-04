@@ -7,6 +7,7 @@ import {
   Prisma,
   ServiceVisitStatus,
   SupervisorStatus,
+  SuperAdminApprovalType,
 } from "../../prisma/generated";
 import {
   AddPaymentDto,
@@ -1622,6 +1623,7 @@ export class BookingStageService {
       franchise_ids?: number[];
       franchises?: Array<number | string>;
       strict_status_tag?: boolean;
+      material_issue_ready_only?: boolean;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1661,6 +1663,7 @@ export class BookingStageService {
       .trim()
       .toLowerCase();
     const strictStatusTag = filters.strict_status_tag === true;
+    const materialIssueReadyOnly = filters.material_issue_ready_only === true;
     const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
     const shouldExcludeLaterStageTags =
       normalizedTag === "type 8" ||
@@ -2115,6 +2118,16 @@ export class BookingStageService {
         : {}),
       is_deleted: false,
       ...(statusIds !== null && { status_id: { in: statusIds } }),
+      ...(materialIssueReadyOnly && {
+        is_so_value_received: true,
+        superAdminApprovalLocIns: {
+          some: {
+            vendor_id: vendorId,
+            approval_type: SuperAdminApprovalType.order_login,
+            is_approved: true,
+          },
+        },
+      }),
       ...(shouldExcludeLaterStageTags && {
         statusType: {
           vendor_id: vendorId,
