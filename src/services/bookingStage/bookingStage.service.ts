@@ -1621,6 +1621,7 @@ export class BookingStageService {
       pending_services?: boolean;
       franchise_ids?: number[];
       franchises?: Array<number | string>;
+      strict_status_tag?: boolean;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1659,6 +1660,7 @@ export class BookingStageService {
     const normalizedTag = String(tag || "")
       .trim()
       .toLowerCase();
+    const strictStatusTag = filters.strict_status_tag === true;
     const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
     const shouldExcludeLaterStageTags =
       normalizedTag === "type 8" ||
@@ -1669,7 +1671,9 @@ export class BookingStageService {
 
     if (normalizedTag !== "all") {
       const statusTags =
-        normalizedTag === "type 8"
+        strictStatusTag
+          ? [tag]
+          : normalizedTag === "type 8"
           ? ["Type 8", "Type 9"]
           : normalizedTag === "type 9"
             ? ["Type 8", "Type 9"]
