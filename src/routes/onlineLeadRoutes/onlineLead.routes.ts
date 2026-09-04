@@ -21,6 +21,8 @@ router.post("/statuses", onlineLeadController.createStatus);
 router.put("/statuses/:id", onlineLeadController.updateStatus);
 router.delete("/statuses/:id", onlineLeadController.deleteStatus);
 router.get("/store/:storeId/callers", onlineLeadController.fetchStoreCallers);
+router.get("/store/:storeId/sales-executives", onlineLeadController.fetchStoreSalesExecutives);
+router.get("/sales-executives", onlineLeadController.fetchStoreSalesExecutives);
 router.get("/telecallers", onlineLeadController.fetchTelecallers);
 router.post("/delete-bulk", onlineLeadController.deleteBulkLeads);
 router.get("/:id", onlineLeadController.fetchLeadById);

@@ -1888,6 +1888,7 @@ export const updateLeadProductStructureInstance = async ({
       where: { id: existing.id },
       data: {
         product_structure_id,
+        product_type_id: structure.product_type_id ?? undefined,
         quantity_index: nextQuantityIndex,
         title: title.trim(),
         description: description?.trim() || null,
@@ -2064,57 +2065,7 @@ export const createLeadProductStructureInstance = async ({
       .toLowerCase()
       .includes("kitchen");
 
-    if (!resolvedItemCodeId && !isKitchenType) {
-      const existingMappings =
-        await prisma.leadProductStructureMapping.findMany({
-          where: {
-            lead_id: leadId,
-            vendor_id: vendorId,
-          },
-          select: { product_structure_id: true },
-        });
-
-      if (existingMappings.length > 0) {
-        const existingInstanceStructureIds =
-          await prisma.leadProductStructureInstance.findMany({
-            where: {
-              lead_id: leadId,
-              vendor_id: vendorId,
-            },
-            select: { product_structure_id: true },
-          });
-
-        const existingInstanceSet = new Set(
-          existingInstanceStructureIds.map((row) => row.product_structure_id),
-        );
-
-        for (const mapping of existingMappings) {
-          if (existingInstanceSet.has(mapping.product_structure_id)) continue;
-          const mappingStructure = await prisma.productStructure.findFirst({
-            where: {
-              id: mapping.product_structure_id,
-              vendor_id: vendorId,
-            },
-          });
-
-          if (!mappingStructure) continue;
-
-          await prisma.leadProductStructureInstance.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: lead.account_id,
-              product_type_id: resolvedProductTypeId,
-              product_structure_id: mapping.product_structure_id,
-              quantity_index: 1,
-              title: mappingStructure.type,
-              description: null,
-              created_by,
-            },
-          });
-        }
-      }
-    }
+    /* Legacy mapping auto-creation removed to prevent unwanted extra instances */
 
     const existingMapping = await prisma.leadProductStructureMapping.findFirst({
       where: {
@@ -3554,7 +3505,10 @@ export const getSalesExecutivesByVendor = async (
       where: {
         vendor_id: vendorId,
         user_type: {
-          user_type: { in: ["sales-executive"] },
+          user_type: {
+            in: ["sales-executive", "sales executive", "sales_executive", "Sales Executive", "Sales-Executive"],
+            mode: "insensitive",
+          },
         },
         // Optionally filter only active users
         status: "active",

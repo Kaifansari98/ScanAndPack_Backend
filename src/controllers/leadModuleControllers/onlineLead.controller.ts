@@ -596,6 +596,7 @@ export class OnlineLeadController {
         where.OR = [
           { assign_to: userId },
           { final_assigned_leads: userId },
+          { pending_assign_to: userId },
         ];
       } else if (tab === "overall") {
         // Overall leads has no assignment filter (shows all unassigned + assigned leads for that vendor)
@@ -834,7 +835,7 @@ export class OnlineLeadController {
   assignLead = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id = Number(req.params.id);
-      const { assign_to, remark, created_by } = req.body;
+      const { assign_to, final_assigned_leads, remark, created_by } = req.body;
 
       if (isNaN(id) || !created_by) {
         return res.status(400).json({
@@ -844,14 +845,15 @@ export class OnlineLeadController {
       }
 
       let callerName = "";
-      if (assign_to) {
+      const targetUserId = final_assigned_leads || assign_to;
+      if (targetUserId) {
         const callerUser = await prisma.userMaster.findUnique({
-          where: { id: Number(assign_to) },
+          where: { id: Number(targetUserId) },
         });
         if (!callerUser) {
           return res.status(404).json({
             success: false,
-            error: "Caller user not found",
+            error: "User not found",
           });
         }
         callerName = callerUser.user_name;
@@ -861,7 +863,8 @@ export class OnlineLeadController {
       const lead = await prisma.online_leads.update({
         where: { id },
         data: {
-          assign_to: assign_to ? Number(assign_to) : null,
+          ...(assign_to !== undefined && { assign_to: assign_to ? Number(assign_to) : null }),
+          ...(final_assigned_leads !== undefined && { final_assigned_leads: final_assigned_leads ? Number(final_assigned_leads) : null }),
         },
       });
 
@@ -876,12 +879,42 @@ export class OnlineLeadController {
       });
 
       if (existingLead) {
+        const finalExecutiveId = final_assigned_leads !== undefined ? (final_assigned_leads ? Number(final_assigned_leads) : null) : null;
+        if (finalExecutiveId) {
+          await prisma.leadMaster.update({
+            where: { id: existingLead.id },
+            data: { assign_to: finalExecutiveId },
+          });
+
+          const existingMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              lead_id: existingLead.id,
+              user_id: finalExecutiveId,
+              type: "ISM",
+            },
+          });
+          if (!existingMapping) {
+            await prisma.leadUserMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                account_id: existingLead.account_id ?? 0,
+                lead_id: existingLead.id,
+                user_id: finalExecutiveId,
+                type: "ISM",
+                status: "active",
+                created_by: Number(created_by),
+              },
+            });
+          }
+        }
+
         // Sync Caller to LeadUserMapping (type: "ISM")
         if (assign_to) {
           const callerId = Number(assign_to);
           const existingMapping = await prisma.leadUserMapping.findFirst({
             where: {
               lead_id: existingLead.id,
+              user_id: callerId,
               type: "ISM",
             },
           });
@@ -890,7 +923,6 @@ export class OnlineLeadController {
             await prisma.leadUserMapping.update({
               where: { id: existingMapping.id },
               data: {
-                user_id: callerId,
                 status: "active",
               },
             });
@@ -907,21 +939,13 @@ export class OnlineLeadController {
               },
             });
           }
-        } else {
-          // If Caller is cleared, remove ISM mappings for this lead
-          await prisma.leadUserMapping.deleteMany({
-            where: {
-              lead_id: existingLead.id,
-              type: "ISM",
-            },
-          });
         }
       }
 
       // Prepare assignment history remark
       const descParts = [];
-      if (callerName) descParts.push(`Caller: ${callerName}`);
-      else if (!assign_to) descParts.push("Caller: Unassigned");
+      if (callerName) descParts.push(`Assigned User: ${callerName}`);
+      else if (!targetUserId) descParts.push("Assigned User: Unassigned");
 
       const finalRemark = remark || `Lead assignments updated (${descParts.join(", ")})`;
 
@@ -1272,6 +1296,13 @@ export class OnlineLeadController {
         }
       }
 
+      // Check feature flag for vendor
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: lead.vendor_id },
+        select: { is_online_lead_feature_enabled: true },
+      });
+      const isOnlineLeadFeatureEnabled = vendor?.is_online_lead_feature_enabled === true;
+
       // Run Store Assignment Logic
       // 1. Query active users for the target store
       const storeUsers = await prisma.userMaster.findMany({
@@ -1294,7 +1325,7 @@ export class OnlineLeadController {
 
       const storeAdmins = storeUsers.filter((u) => {
         const role = u.user_type?.user_type?.toLowerCase() || "";
-        return role === "store manager" || role === "store admin";
+        return role === "store manager" || role === "store admin" || role === "store-admin";
       });
 
       const storeCallers = storeUsers.filter((u) => {
@@ -1302,36 +1333,60 @@ export class OnlineLeadController {
         return role === "telecaller" || role === "store caller";
       });
 
-      if (storeSalesExecutives.length > 0) {
-        // Condition 1: Active Store Sales Executive available -> Assign to Store Sales Executive
-        finalAssignedUserId = storeSalesExecutives[0].id;
-        assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
-      } else if (storeAdmins.length > 0) {
-        // Condition 2: Store Admin available -> Assign to active Store Admin
-        finalAssignedUserId = storeAdmins[0].id;
-        assignmentMessage = `Assigned to Store Admin: ${storeAdmins[0].user_name}`;
-      } else if (storeCallers.length === 1) {
-        // Condition 3: No Store Admin + exactly 1 caller -> Auto-assign to that caller
-        finalAssignedUserId = storeCallers[0].id;
-        assignmentMessage = `Assigned to single Store Caller: ${storeCallers[0].user_name}`;
-      } else if (storeCallers.length > 1) {
-        // Condition 4: No Store Admin + more than 1 caller
-        if (assigned_to) {
-          finalAssignedUserId = Number(assigned_to);
-          const chosenUser = storeCallers.find((c) => c.id === finalAssignedUserId);
-          assignmentMessage = `Assigned to chosen Store Caller: ${chosenUser?.user_name || finalAssignedUserId}`;
+      if (isOnlineLeadFeatureEnabled) {
+        if (storeSalesExecutives.length === 1) {
+          // Condition 1: Exactly 1 Active Store Sales Executive -> Assign to that Sales Executive
+          finalAssignedUserId = storeSalesExecutives[0].id;
+          assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
+        } else if (storeSalesExecutives.length > 1) {
+          // Condition 2: Multiple Sales Executives -> Assign to Store Admin so Store Admin can choose/assign Sales Executive
+          if (storeAdmins.length > 0) {
+            finalAssignedUserId = storeAdmins[0].id;
+            assignmentMessage = `Assigned to Store Admin (${storeAdmins[0].user_name}) for Sales Executive assignment`;
+          } else if (assigned_to) {
+            finalAssignedUserId = Number(assigned_to);
+            const chosenUser = storeSalesExecutives.find((c) => c.id === finalAssignedUserId);
+            assignmentMessage = `Assigned to chosen Store Sales Executive: ${chosenUser?.user_name || finalAssignedUserId}`;
+          } else {
+            finalAssignedUserId = storeSalesExecutives[0].id;
+            assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
+          }
+        } else if (storeAdmins.length > 0) {
+          finalAssignedUserId = storeAdmins[0].id;
+          assignmentMessage = `Assigned to Store Admin: ${storeAdmins[0].user_name}`;
+        } else if (storeCallers.length === 1) {
+          finalAssignedUserId = storeCallers[0].id;
+          assignmentMessage = `Assigned to single Store Caller: ${storeCallers[0].user_name}`;
         } else {
-          // If no caller is selected, return option selection response
-          return res.status(200).json({
-            success: true,
-            requiresSelection: true,
-            message: "There is no store admin and more than 1 caller available. Please select a caller.",
-            callers: storeCallers.map((c) => ({ id: c.id, name: c.user_name })),
-          });
+          assignmentMessage = "Store assigned; no active admin or caller found for auto-assignment";
         }
       } else {
-        // Condition 5: No Store Admin + no caller
-        assignmentMessage = "Store assigned; no active admin or caller found for auto-assignment";
+        // Feature flag disabled fallback logic
+        if (storeSalesExecutives.length > 0) {
+          finalAssignedUserId = storeSalesExecutives[0].id;
+          assignmentMessage = `Assigned to Store Sales Executive: ${storeSalesExecutives[0].user_name}`;
+        } else if (storeAdmins.length > 0) {
+          finalAssignedUserId = storeAdmins[0].id;
+          assignmentMessage = `Assigned to Store Admin: ${storeAdmins[0].user_name}`;
+        } else if (storeCallers.length === 1) {
+          finalAssignedUserId = storeCallers[0].id;
+          assignmentMessage = `Assigned to single Store Caller: ${storeCallers[0].user_name}`;
+        } else if (storeCallers.length > 1) {
+          if (assigned_to) {
+            finalAssignedUserId = Number(assigned_to);
+            const chosenUser = storeCallers.find((c) => c.id === finalAssignedUserId);
+            assignmentMessage = `Assigned to chosen Store Caller: ${chosenUser?.user_name || finalAssignedUserId}`;
+          } else {
+            return res.status(200).json({
+              success: true,
+              requiresSelection: true,
+              message: "There is no store admin and more than 1 caller available. Please select a caller.",
+              callers: storeCallers.map((c) => ({ id: c.id, name: c.user_name })),
+            });
+          }
+        } else {
+          assignmentMessage = "Store assigned; no active admin or caller found for auto-assignment";
+        }
       }
 
       // Check if store log is a preference (first log) or transfer
@@ -1947,6 +2002,41 @@ export class OnlineLeadController {
       return res.status(500).json({
         success: false,
         error: error.message || "Failed to fetch store callers",
+      });
+    }
+  };
+
+  // Fetch Store Sales Executives
+  fetchStoreSalesExecutives = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const storeId = req.params.storeId ? Number(req.params.storeId) : undefined;
+      const vendorId = req.query.vendor_id ? Number(req.query.vendor_id) : undefined;
+
+      const storeUsers = await prisma.userMaster.findMany({
+        where: {
+          ...(storeId && !isNaN(storeId) ? { franchise_id: storeId } : {}),
+          ...(vendorId && !isNaN(vendorId) ? { vendor_id: vendorId } : {}),
+          status: "active",
+        },
+        include: {
+          user_type: true,
+        },
+      });
+
+      const storeSalesExecutives = storeUsers.filter((u) => {
+        const role = u.user_type?.user_type?.toLowerCase() || "";
+        return role === "sales executive" || role === "sales-executive";
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: storeSalesExecutives.map((c) => ({ id: c.id, name: c.user_name, user_name: c.user_name })),
+      });
+    } catch (error: any) {
+      console.error("[ONLINE LEAD CONTROLLER] fetchStoreSalesExecutives error:", error);
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to fetch store sales executives",
       });
     }
   };
