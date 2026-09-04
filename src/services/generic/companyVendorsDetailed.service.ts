@@ -316,6 +316,7 @@ export class CompanyVendorsDetailedService {
           pan_no: pan_no || null,
           in_house: in_house === true || in_house === "true",
           is_active: is_active === undefined ? true : (is_active === true || is_active === "true"),
+          is_inventory_company_vendor: true,
           default_payment_term_id: payment_term_id ? Number(payment_term_id) : null,
           created_by: userId,
           updated_by: userId,

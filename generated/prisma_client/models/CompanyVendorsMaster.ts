@@ -74,6 +74,7 @@ export type CompanyVendorsMasterMinAggregateOutputType = {
   primary_contact_id: number | null
   vendor_name: string | null
   is_active: boolean | null
+  is_inventory_company_vendor: boolean | null
 }
 
 export type CompanyVendorsMasterMaxAggregateOutputType = {
@@ -102,6 +103,7 @@ export type CompanyVendorsMasterMaxAggregateOutputType = {
   primary_contact_id: number | null
   vendor_name: string | null
   is_active: boolean | null
+  is_inventory_company_vendor: boolean | null
 }
 
 export type CompanyVendorsMasterCountAggregateOutputType = {
@@ -130,6 +132,7 @@ export type CompanyVendorsMasterCountAggregateOutputType = {
   primary_contact_id: number
   vendor_name: number
   is_active: number
+  is_inventory_company_vendor: number
   _all: number
 }
 
@@ -182,6 +185,7 @@ export type CompanyVendorsMasterMinAggregateInputType = {
   primary_contact_id?: true
   vendor_name?: true
   is_active?: true
+  is_inventory_company_vendor?: true
 }
 
 export type CompanyVendorsMasterMaxAggregateInputType = {
@@ -210,6 +214,7 @@ export type CompanyVendorsMasterMaxAggregateInputType = {
   primary_contact_id?: true
   vendor_name?: true
   is_active?: true
+  is_inventory_company_vendor?: true
 }
 
 export type CompanyVendorsMasterCountAggregateInputType = {
@@ -238,6 +243,7 @@ export type CompanyVendorsMasterCountAggregateInputType = {
   primary_contact_id?: true
   vendor_name?: true
   is_active?: true
+  is_inventory_company_vendor?: true
   _all?: true
 }
 
@@ -353,6 +359,7 @@ export type CompanyVendorsMasterGroupByOutputType = {
   primary_contact_id: number | null
   vendor_name: string
   is_active: boolean
+  is_inventory_company_vendor: boolean
   _count: CompanyVendorsMasterCountAggregateOutputType | null
   _avg: CompanyVendorsMasterAvgAggregateOutputType | null
   _sum: CompanyVendorsMasterSumAggregateOutputType | null
@@ -404,6 +411,7 @@ export type CompanyVendorsMasterWhereInput = {
   primary_contact_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   vendor_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   is_active?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  is_inventory_company_vendor?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   addresses?: Prisma.CompanyVendorAddressListRelationFilter
   bankAccounts?: Prisma.CompanyVendorBankAccountListRelationFilter
   contactPersons?: Prisma.CompanyVendorContactPersonListRelationFilter
@@ -454,6 +462,7 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
   primary_contact_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  is_inventory_company_vendor?: Prisma.SortOrder
   addresses?: Prisma.CompanyVendorAddressOrderByRelationAggregateInput
   bankAccounts?: Prisma.CompanyVendorBankAccountOrderByRelationAggregateInput
   contactPersons?: Prisma.CompanyVendorContactPersonOrderByRelationAggregateInput
@@ -508,6 +517,7 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   primary_contact_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   vendor_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   is_active?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  is_inventory_company_vendor?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   addresses?: Prisma.CompanyVendorAddressListRelationFilter
   bankAccounts?: Prisma.CompanyVendorBankAccountListRelationFilter
   contactPersons?: Prisma.CompanyVendorContactPersonListRelationFilter
@@ -558,6 +568,7 @@ export type CompanyVendorsMasterOrderByWithAggregationInput = {
   primary_contact_id?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  is_inventory_company_vendor?: Prisma.SortOrder
   _count?: Prisma.CompanyVendorsMasterCountOrderByAggregateInput
   _avg?: Prisma.CompanyVendorsMasterAvgOrderByAggregateInput
   _max?: Prisma.CompanyVendorsMasterMaxOrderByAggregateInput
@@ -594,6 +605,7 @@ export type CompanyVendorsMasterScalarWhereWithAggregatesInput = {
   primary_contact_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   vendor_name?: Prisma.StringWithAggregatesFilter<"CompanyVendorsMaster"> | string
   is_active?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
+  is_inventory_company_vendor?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
 }
 
 export type CompanyVendorsMasterCreateInput = {
@@ -614,6 +626,7 @@ export type CompanyVendorsMasterCreateInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -664,6 +677,7 @@ export type CompanyVendorsMasterUncheckedCreateInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -699,6 +713,7 @@ export type CompanyVendorsMasterUpdateInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -749,6 +764,7 @@ export type CompanyVendorsMasterUncheckedUpdateInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -792,6 +808,7 @@ export type CompanyVendorsMasterCreateManyInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateManyMutationInput = {
@@ -812,6 +829,7 @@ export type CompanyVendorsMasterUpdateManyMutationInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyInput = {
@@ -840,6 +858,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterListRelationFilter = {
@@ -883,6 +902,7 @@ export type CompanyVendorsMasterCountOrderByAggregateInput = {
   primary_contact_id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  is_inventory_company_vendor?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterAvgOrderByAggregateInput = {
@@ -922,6 +942,7 @@ export type CompanyVendorsMasterMaxOrderByAggregateInput = {
   primary_contact_id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  is_inventory_company_vendor?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterMinOrderByAggregateInput = {
@@ -950,6 +971,7 @@ export type CompanyVendorsMasterMinOrderByAggregateInput = {
   primary_contact_id?: Prisma.SortOrder
   vendor_name?: Prisma.SortOrder
   is_active?: Prisma.SortOrder
+  is_inventory_company_vendor?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterSumOrderByAggregateInput = {
@@ -1499,6 +1521,7 @@ export type CompanyVendorsMasterCreateWithoutVendorInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -1547,6 +1570,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -1619,6 +1643,7 @@ export type CompanyVendorsMasterScalarWhereInput = {
   primary_contact_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   vendor_name?: Prisma.StringFilter<"CompanyVendorsMaster"> | string
   is_active?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  is_inventory_company_vendor?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
 }
 
 export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
@@ -1639,6 +1664,7 @@ export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -1687,6 +1713,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -1732,6 +1759,7 @@ export type CompanyVendorsMasterCreateWithoutDeletedByInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -1780,6 +1808,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -1825,6 +1854,7 @@ export type CompanyVendorsMasterCreateWithoutUpdatedByInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -1873,6 +1903,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -1966,6 +1997,7 @@ export type CompanyVendorsMasterCreateWithoutOrderLoginLinksInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2015,6 +2047,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2065,6 +2098,7 @@ export type CompanyVendorsMasterUpdateWithoutOrderLoginLinksInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -2114,6 +2148,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -2148,6 +2183,7 @@ export type CompanyVendorsMasterCreateWithoutStateInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2196,6 +2232,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutStateInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2257,6 +2294,7 @@ export type CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput =
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2306,6 +2344,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappin
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2356,6 +2395,7 @@ export type CompanyVendorsMasterUpdateWithoutPurchaseIntentVendorMappingsInput =
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -2405,6 +2445,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappin
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -2439,6 +2480,7 @@ export type CompanyVendorsMasterCreateWithoutPurchaseOrdersInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2488,6 +2530,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2538,6 +2581,7 @@ export type CompanyVendorsMasterUpdateWithoutPurchaseOrdersInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -2587,6 +2631,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -2621,6 +2666,7 @@ export type CompanyVendorsMasterCreateWithoutGrnsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2670,6 +2716,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutGrnsInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2720,6 +2767,7 @@ export type CompanyVendorsMasterUpdateWithoutGrnsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -2769,6 +2817,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -2803,6 +2852,7 @@ export type CompanyVendorsMasterCreateWithoutDebitCreditNotesInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -2852,6 +2902,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -2902,6 +2953,7 @@ export type CompanyVendorsMasterUpdateWithoutDebitCreditNotesInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -2951,6 +3003,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -2985,6 +3038,7 @@ export type CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3034,6 +3088,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput = 
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3084,6 +3139,7 @@ export type CompanyVendorsMasterUpdateWithoutRedeliveryRequestsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -3133,6 +3189,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput = 
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -3167,6 +3224,7 @@ export type CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3215,6 +3273,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput = 
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3260,6 +3319,7 @@ export type CompanyVendorsMasterCreateWithoutPaymentTermsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3309,6 +3369,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3375,6 +3436,7 @@ export type CompanyVendorsMasterUpdateWithoutPaymentTermsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -3424,6 +3486,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -3458,6 +3521,7 @@ export type CompanyVendorsMasterCreateWithoutProductSupplierMappingsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3507,6 +3571,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutProductSupplierMappingsInp
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3557,6 +3622,7 @@ export type CompanyVendorsMasterUpdateWithoutProductSupplierMappingsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -3606,6 +3672,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutProductSupplierMappingsInp
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -3640,6 +3707,7 @@ export type CompanyVendorsMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3689,6 +3757,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPiSupplierAdditionalCostsI
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3739,6 +3808,7 @@ export type CompanyVendorsMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -3788,6 +3858,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsI
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -3822,6 +3893,7 @@ export type CompanyVendorsMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -3871,6 +3943,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPoSupplierAdditionalCostsI
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -3921,6 +3994,7 @@ export type CompanyVendorsMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -3970,6 +4044,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsI
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -4004,6 +4079,7 @@ export type CompanyVendorsMasterCreateWithoutVendorTypesInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -4053,6 +4129,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorTypesInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4103,6 +4180,7 @@ export type CompanyVendorsMasterUpdateWithoutVendorTypesInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -4152,6 +4230,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorTypesInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -4186,6 +4265,7 @@ export type CompanyVendorsMasterCreateWithoutContactPersonsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingCreateNestedManyWithoutCompanyVendorInput
@@ -4235,6 +4315,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutContactPersonsInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4274,6 +4355,7 @@ export type CompanyVendorsMasterCreateWithoutPrimaryContactInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -4322,6 +4404,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutPrimaryContactInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4378,6 +4461,7 @@ export type CompanyVendorsMasterUpdateWithoutContactPersonsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUpdateManyWithoutCompanyVendorNestedInput
@@ -4427,6 +4511,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutContactPersonsInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -4477,6 +4562,7 @@ export type CompanyVendorsMasterCreateWithoutBankAccountsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingCreateNestedManyWithoutCompanyVendorInput
@@ -4526,6 +4612,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutBankAccountsInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4576,6 +4663,7 @@ export type CompanyVendorsMasterUpdateWithoutBankAccountsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUpdateManyWithoutCompanyVendorNestedInput
@@ -4625,6 +4713,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutBankAccountsInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -4659,6 +4748,7 @@ export type CompanyVendorsMasterCreateWithoutDocumentsInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
@@ -4708,6 +4798,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDocumentsInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCompanyVendorInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4758,6 +4849,7 @@ export type CompanyVendorsMasterUpdateWithoutDocumentsInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -4807,6 +4899,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDocumentsInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -4841,6 +4934,7 @@ export type CompanyVendorsMasterCreateWithoutAddressesInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   bankAccounts?: Prisma.CompanyVendorBankAccountCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingCreateNestedManyWithoutCompanyVendorInput
@@ -4890,6 +4984,7 @@ export type CompanyVendorsMasterUncheckedCreateWithoutAddressesInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedCreateNestedManyWithoutCompanyVendorInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedCreateNestedManyWithoutCompanyVendorInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
@@ -4940,6 +5035,7 @@ export type CompanyVendorsMasterUpdateWithoutAddressesInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUpdateManyWithoutCompanyVendorNestedInput
@@ -4989,6 +5085,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutAddressesInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
   documents?: Prisma.CompanyVendorDocumentMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5030,6 +5127,7 @@ export type CompanyVendorsMasterCreateManyVendorInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutVendorInput = {
@@ -5050,6 +5148,7 @@ export type CompanyVendorsMasterUpdateWithoutVendorInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5098,6 +5197,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5140,6 +5240,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyCreatedByInput = {
@@ -5167,6 +5268,7 @@ export type CompanyVendorsMasterCreateManyCreatedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterCreateManyDeletedByInput = {
@@ -5194,6 +5296,7 @@ export type CompanyVendorsMasterCreateManyDeletedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterCreateManyUpdatedByInput = {
@@ -5221,6 +5324,7 @@ export type CompanyVendorsMasterCreateManyUpdatedByInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
@@ -5241,6 +5345,7 @@ export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5289,6 +5394,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5331,6 +5437,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
@@ -5351,6 +5458,7 @@ export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5399,6 +5507,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5441,6 +5550,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
@@ -5461,6 +5571,7 @@ export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5509,6 +5620,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5551,6 +5663,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyStateInput = {
@@ -5578,6 +5691,7 @@ export type CompanyVendorsMasterCreateManyStateInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutStateInput = {
@@ -5598,6 +5712,7 @@ export type CompanyVendorsMasterUpdateWithoutStateInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5646,6 +5761,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutStateInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5688,6 +5804,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutStateInput = {
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyDefaultPaymentTermInput = {
@@ -5715,6 +5832,7 @@ export type CompanyVendorsMasterCreateManyDefaultPaymentTermInput = {
   primary_contact_id?: number | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutDefaultPaymentTermInput = {
@@ -5735,6 +5853,7 @@ export type CompanyVendorsMasterUpdateWithoutDefaultPaymentTermInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5783,6 +5902,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDefaultPaymentTermInput = 
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5825,6 +5945,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermInpu
   primary_contact_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type CompanyVendorsMasterCreateManyPrimaryContactInput = {
@@ -5852,6 +5973,7 @@ export type CompanyVendorsMasterCreateManyPrimaryContactInput = {
   pan_no?: string | null
   vendor_name?: string
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
 export type CompanyVendorsMasterUpdateWithoutPrimaryContactInput = {
@@ -5872,6 +5994,7 @@ export type CompanyVendorsMasterUpdateWithoutPrimaryContactInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUpdateManyWithoutCompanyVendorNestedInput
@@ -5920,6 +6043,7 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutPrimaryContactInput = {
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
   addresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCompanyVendorNestedInput
   bankAccounts?: Prisma.CompanyVendorBankAccountUncheckedUpdateManyWithoutCompanyVendorNestedInput
   contactPersons?: Prisma.CompanyVendorContactPersonUncheckedUpdateManyWithoutCompanyVendorNestedInput
@@ -5962,6 +6086,7 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutPrimaryContactInput = 
   pan_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_company_vendor?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -6147,6 +6272,7 @@ export type CompanyVendorsMasterSelect<ExtArgs extends runtime.Types.Extensions.
   primary_contact_id?: boolean
   vendor_name?: boolean
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   addresses?: boolean | Prisma.CompanyVendorsMaster$addressesArgs<ExtArgs>
   bankAccounts?: boolean | Prisma.CompanyVendorsMaster$bankAccountsArgs<ExtArgs>
   contactPersons?: boolean | Prisma.CompanyVendorsMaster$contactPersonsArgs<ExtArgs>
@@ -6198,6 +6324,7 @@ export type CompanyVendorsMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   primary_contact_id?: boolean
   vendor_name?: boolean
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
@@ -6233,6 +6360,7 @@ export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   primary_contact_id?: boolean
   vendor_name?: boolean
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
@@ -6268,9 +6396,10 @@ export type CompanyVendorsMasterSelectScalar = {
   primary_contact_id?: boolean
   vendor_name?: boolean
   is_active?: boolean
+  is_inventory_company_vendor?: boolean
 }
 
-export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house" | "default_payment_term_id" | "state_id" | "alternate_email" | "alternate_mobile_no" | "gst_no" | "pan_no" | "primary_contact_id" | "vendor_name" | "is_active", ExtArgs["result"]["companyVendorsMaster"]>
+export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house" | "default_payment_term_id" | "state_id" | "alternate_email" | "alternate_mobile_no" | "gst_no" | "pan_no" | "primary_contact_id" | "vendor_name" | "is_active" | "is_inventory_company_vendor", ExtArgs["result"]["companyVendorsMaster"]>
 export type CompanyVendorsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   addresses?: boolean | Prisma.CompanyVendorsMaster$addressesArgs<ExtArgs>
   bankAccounts?: boolean | Prisma.CompanyVendorsMaster$bankAccountsArgs<ExtArgs>
@@ -6367,6 +6496,7 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     primary_contact_id: number | null
     vendor_name: string
     is_active: boolean
+    is_inventory_company_vendor: boolean
   }, ExtArgs["result"]["companyVendorsMaster"]>
   composites: {}
 }
@@ -6837,6 +6967,7 @@ export interface CompanyVendorsMasterFieldRefs {
   readonly primary_contact_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly vendor_name: Prisma.FieldRef<"CompanyVendorsMaster", 'String'>
   readonly is_active: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
+  readonly is_inventory_company_vendor: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
 }
     
 

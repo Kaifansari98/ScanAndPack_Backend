@@ -16,6 +16,18 @@ companyVendorsRoutes.get(
   controller.getCompanyVendorsByVendorIdForMaster
 );
 
+// ✅ Create & Update simple company vendor
+companyVendorsRoutes.post(
+  "/vendorId/:vendorId/create",
+  upload.none(),
+  controller.createCompanyVendor
+);
+companyVendorsRoutes.put(
+  "/vendorId/:vendorId/companyVendorId/:companyVendorId/update",
+  upload.none(),
+  controller.updateCompanyVendor
+);
+
 // ✅ Toggle company vendor status
 companyVendorsRoutes.patch(
   "/vendorId/:vendorId/companyVendorId/:companyVendorId/status",
@@ -34,4 +46,3 @@ companyVendorsRoutes.put("/:id", upload.any(), detailedController.updateDetailed
 companyVendorsRoutes.delete("/:id", upload.none(), detailedController.deleteDetailedCompanyVendor.bind(detailedController));
 
 export default companyVendorsRoutes;
-

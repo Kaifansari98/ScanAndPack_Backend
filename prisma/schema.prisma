@@ -2543,6 +2543,7 @@ model CompanyVendorsMaster {
   primary_contact_id           Int?
   vendor_name                  String                                 @default("")
   is_active                    Boolean                                @default(true)
+  is_inventory_company_vendor Boolean                                @default(false)
   addresses                    CompanyVendorAddress[]
   bankAccounts                 CompanyVendorBankAccount[]
   contactPersons               CompanyVendorContactPerson[]           @relation("CompanyVendorContacts")

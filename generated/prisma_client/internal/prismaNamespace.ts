@@ -17983,7 +17983,8 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   pan_no: 'pan_no',
   primary_contact_id: 'primary_contact_id',
   vendor_name: 'vendor_name',
-  is_active: 'is_active'
+  is_active: 'is_active',
+  is_inventory_company_vendor: 'is_inventory_company_vendor'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
