@@ -1430,6 +1430,8 @@ export class BookingStageService {
     // 3️⃣ Process and attach signed URLs
     const processedLeads = await Promise.all(
       leads.map(async (lead: any) => {
+
+
         const docsWithUrls = await Promise.all(
           lead.documents.map(async (doc: any) => {
             const signed_url = await generateSignedUrl(doc.doc_sys_name);
@@ -5227,6 +5229,7 @@ export class BookingStageService {
     const isAuditor = normalizedUserType === "auditor";
     const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
     const isHO = creator?.franchise?.is_head_office === true;
+  
     const shouldIncludeFranchise =
       (normalizedUserType === "admin" ||
         normalizedUserType === "auditor" ||
@@ -5239,6 +5242,7 @@ export class BookingStageService {
       filters.created_at === "asc"
         ? { created_at: Prisma.SortOrder.asc }
         : { created_at: Prisma.SortOrder.desc };
+
 
     const includeConfig = BookingStageService.leadIncludes("Type 1");
 

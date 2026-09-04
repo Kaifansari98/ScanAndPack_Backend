@@ -26,7 +26,7 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
 
   if (missingFields.length > 0) {
     const error = new Error(
-      `Missing required field(s): ${missingFields.join(", ")}`
+      `Missing required field(s): ${missingFields.join(", ")}`,
     );
     (error as any).statusCode = 400;
     throw error;
@@ -43,7 +43,7 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
 
     if (existing) {
       const error = new Error(
-        "Franchise with this franchise_code already exists for this vendor."
+        "Franchise with this franchise_code already exists for this vendor.",
       );
       (error as any).statusCode = 409;
       throw error;
@@ -61,9 +61,7 @@ export const createFranchise = async (payload: CreateFranchisePayload) => {
     });
 
     if (existingHeadOffice) {
-      const error = new Error(
-        "Head office already exists for this vendor."
-      );
+      const error = new Error("Head office already exists for this vendor.");
       (error as any).statusCode = 409;
       throw error;
     }
@@ -122,21 +120,21 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
     },
   });
 
-  const fastProdLeads = await prisma.fastProductionRequest.findMany({
+  const fastProdLeads = await prisma.leadMaster.findMany({
     where: {
       vendor_id: Number(vendorId),
+      OR: [
+        { is_fast_production: true },
+        { fastProductionRequests: { some: {} } },
+      ],
     },
     select: {
-      lead: {
-        select: {
-          franchise_id: true,
-        },
-      },
+      franchise_id: true,
     },
   });
 
   const fastProdFranchiseIds = new Set(
-    fastProdLeads.map((req) => req.lead?.franchise_id).filter(Boolean)
+    fastProdLeads.map((l) => l.franchise_id).filter(Boolean),
   );
 
   return franchises.map((franchise) => ({
@@ -154,7 +152,7 @@ export type CreateHeadSiteSupervisorFranchiseMappingPayload = {
 };
 
 export const createHeadSiteSupervisorFranchiseMapping = async (
-  payload: CreateHeadSiteSupervisorFranchiseMappingPayload
+  payload: CreateHeadSiteSupervisorFranchiseMappingPayload,
 ) => {
   const missingFields: string[] = [];
   if (!payload.vendor_id) missingFields.push("vendor_id");
@@ -164,7 +162,7 @@ export const createHeadSiteSupervisorFranchiseMapping = async (
 
   if (missingFields.length > 0) {
     const error = new Error(
-      `Missing required field(s): ${missingFields.join(", ")}`
+      `Missing required field(s): ${missingFields.join(", ")}`,
     );
     (error as any).statusCode = 400;
     throw error;
@@ -181,23 +179,24 @@ export const createHeadSiteSupervisorFranchiseMapping = async (
 
   if (existing) {
     const error = new Error(
-      "Mapping already exists for this vendor, user, and franchise."
+      "Mapping already exists for this vendor, user, and franchise.",
     );
     (error as any).statusCode = 409;
     throw error;
   }
 
-  const existingFranchise = await prisma.headSiteSupervisorFranchiseMapping.findFirst({
-    where: {
-      vendor_id: Number(payload.vendor_id),
-      franchise_id: Number(payload.franchise_id),
-    },
-    select: { id: true, user_id: true },
-  });
+  const existingFranchise =
+    await prisma.headSiteSupervisorFranchiseMapping.findFirst({
+      where: {
+        vendor_id: Number(payload.vendor_id),
+        franchise_id: Number(payload.franchise_id),
+      },
+      select: { id: true, user_id: true },
+    });
 
   if (existingFranchise) {
     const error = new Error(
-      "This franchise already has a head site supervisor assigned."
+      "This franchise already has a head site supervisor assigned.",
     );
     (error as any).statusCode = 409;
     throw error;
@@ -216,7 +215,7 @@ export const createHeadSiteSupervisorFranchiseMapping = async (
 
 export const updateHeadSiteSupervisorFranchiseMappingStatus = async (
   id: number,
-  status: boolean
+  status: boolean,
 ) => {
   if (!id || Number.isNaN(id)) {
     const error = new Error("Valid mapping id is required.");
@@ -238,7 +237,7 @@ export const updateHeadSiteSupervisorFranchiseMappingStatus = async (
 
 export const getHeadSiteSupervisorFranchiseMapping = async (
   vendorId: number,
-  franchiseId: number
+  franchiseId: number,
 ) => {
   if (!vendorId || Number.isNaN(vendorId)) {
     const error = new Error("Valid vendor_id is required.");
@@ -251,20 +250,18 @@ export const getHeadSiteSupervisorFranchiseMapping = async (
     throw error;
   }
 
-return await prisma.userMaster.findMany({
-  where: {
-    vendor_id: Number(vendorId),
-    franchise_id: Number(franchiseId),
-    user_type: {
-      user_type: "head-site-supervisor"
-    }
-  },
-  select: {
-    id: true,
-    user_name: true,
-    user_contact: true,
-  }
-});
+  return await prisma.userMaster.findMany({
+    where: {
+      vendor_id: Number(vendorId),
+      franchise_id: Number(franchiseId),
+      user_type: {
+        user_type: "head-site-supervisor",
+      },
+    },
+    select: {
+      id: true,
+      user_name: true,
+      user_contact: true,
+    },
+  });
 };
-
-

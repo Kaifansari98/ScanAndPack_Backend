@@ -193,23 +193,23 @@ export const getAllVendorsPaginated = async ({
 
   const where = search
     ? {
-      OR: [
-        { vendor_name: { contains: search, mode: "insensitive" as const } },
-        { vendor_code: { contains: search, mode: "insensitive" as const } },
-        {
-          primary_contact_email: {
-            contains: search,
-            mode: "insensitive" as const,
+        OR: [
+          { vendor_name: { contains: search, mode: "insensitive" as const } },
+          { vendor_code: { contains: search, mode: "insensitive" as const } },
+          {
+            primary_contact_email: {
+              contains: search,
+              mode: "insensitive" as const,
+            },
           },
-        },
-        {
-          primary_contact_name: {
-            contains: search,
-            mode: "insensitive" as const,
+          {
+            primary_contact_name: {
+              contains: search,
+              mode: "insensitive" as const,
+            },
           },
-        },
-      ],
-    }
+        ],
+      }
     : {};
 
   const [data, totalCount] = await Promise.all([
@@ -232,7 +232,7 @@ export const getAllVendorsPaginated = async ({
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
         is_available_unique_code: true,
-        is_scanpack_enabled:true,
+        is_scanpack_enabled: true,
         push_lead_to_cadbid: true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
@@ -292,7 +292,7 @@ export const getAllVendorsPaginated = async ({
         iconUrl,
         loginImageUrl,
       };
-    })
+    }),
   );
 
   return {
@@ -776,8 +776,10 @@ export const getTechCheckStageReportData = async (
         lead.userMappings.find(
           (mapping) =>
             mapping.type === "designer" ||
-            mapping.user.user_type.user_type.trim().toLowerCase() === "designer" ||
-            mapping.user.user_type.user_type.trim().toLowerCase() === "sales-executive",
+            mapping.user.user_type.user_type.trim().toLowerCase() ===
+              "designer" ||
+            mapping.user.user_type.user_type.trim().toLowerCase() ===
+              "sales-executive",
         )?.user.user_name ?? "-";
 
       return {
@@ -904,8 +906,10 @@ export const getErdReportData = async (
       lead.userMappings.find(
         (mapping) =>
           mapping.type === "designer" ||
-          mapping.user.user_type.user_type.trim().toLowerCase() === "designer" ||
-          mapping.user.user_type.user_type.trim().toLowerCase() === "sales-executive",
+          mapping.user.user_type.user_type.trim().toLowerCase() ===
+            "designer" ||
+          mapping.user.user_type.user_type.trim().toLowerCase() ===
+            "sales-executive",
       )?.user.user_name ?? "-";
 
     const olMovedDate = lead.leadStatusLogs[0]?.created_at ?? null;
@@ -935,7 +939,11 @@ export const getErdReportData = async (
     }
 
     return lead.productStructureInstances.map((instance) =>
-      buildRow(instance.id, instance.quantity_index, instance.production_erd_date),
+      buildRow(
+        instance.id,
+        instance.quantity_index,
+        instance.production_erd_date,
+      ),
     );
   });
 };
@@ -1147,14 +1155,14 @@ export const getLeadTrackingReportData = async (
     const supervisorUsers =
       normalizedUserType === "site-supervisor"
         ? lead.siteSupervisors
-          .filter(
-            (mapping) =>
-              mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
-              "site-supervisor",
-          )
-          .map((mapping) => ({
-            id: mapping.supervisor.id,
-          }))
+            .filter(
+              (mapping) =>
+                mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
+                "site-supervisor",
+            )
+            .map((mapping) => ({
+              id: mapping.supervisor.id,
+            }))
         : [];
 
     const matchedUsers = [...mappedUsers, ...supervisorUsers];
@@ -1292,11 +1300,11 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
         where: {
           ...(fromDate && toDate
             ? {
-              created_at: {
-                gte: new Date(fromDate),
-                lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
-              },
-            }
+                created_at: {
+                  gte: new Date(fromDate),
+                  lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+                },
+              }
             : {}),
         },
         select: {
@@ -1355,7 +1363,9 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
 };
 
 export const getVendorById = async (vendorId: number) => {
-  const vendor = await prisma.vendorMaster.findUnique({ where: { id: vendorId } });
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendorId },
+  });
   if (!vendor) return null;
 
   let logoUrl = "";
@@ -1363,17 +1373,23 @@ export const getVendorById = async (vendorId: number) => {
   let loginImageUrl = "";
 
   if (vendor.logo) {
-    try { logoUrl = await generateSignedUrl(vendor.logo); } catch (e) {
+    try {
+      logoUrl = await generateSignedUrl(vendor.logo);
+    } catch (e) {
       console.error("Error generating logo signed url:", e);
     }
   }
   if (vendor.icon) {
-    try { iconUrl = await generateSignedUrl(vendor.icon); } catch (e) {
+    try {
+      iconUrl = await generateSignedUrl(vendor.icon);
+    } catch (e) {
       console.error("Error generating icon signed url:", e);
     }
   }
   if (vendor.login_image) {
-    try { loginImageUrl = await generateSignedUrl(vendor.login_image); } catch (e) {
+    try {
+      loginImageUrl = await generateSignedUrl(vendor.login_image);
+    } catch (e) {
       console.error("Error generating login_image signed url:", e);
     }
   }
@@ -2012,7 +2028,6 @@ export const updateVendor = async (vendorId: number, data: any) => {
     city,
     state_id,
 
-
     status,
     logo,
     icon,
@@ -2025,7 +2040,7 @@ export const updateVendor = async (vendorId: number, data: any) => {
     handlesLargeScaleProjects,
     is_year_wise_lead_code_enabled,
     is_scanpack_enabled,
-    push_lead_to_cadbid
+    push_lead_to_cadbid,
   } = data;
 
   const vendor = await prisma.vendorMaster.update({
@@ -2122,8 +2137,8 @@ export const getVendorBySubdomain = async (subdomain: string) => {
         { subdomain_url: { equals: clean, mode: "insensitive" } },
         { subdomain_url: { contains: clean, mode: "insensitive" } },
         { subdomain_url: { equals: namePart, mode: "insensitive" } },
-        { subdomain_url: { contains: namePart, mode: "insensitive" } }
-      ]
+        { subdomain_url: { contains: namePart, mode: "insensitive" } },
+      ],
     },
     select: {
       id: true,
@@ -2131,7 +2146,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
       logo: true,
       icon: true,
       login_image: true,
-    }
+    },
   });
 
   if (!vendor) return null;
@@ -2169,7 +2184,6 @@ export const getVendorBySubdomain = async (subdomain: string) => {
     loginImageUrl,
   };
 };
-
 
 export const getStates = async () => {
   return prisma.stateMaster.findMany({
@@ -2279,34 +2293,40 @@ export const getLeadServicingReportData = async (
     const hasMultipleInstances = lead.productStructureInstances.length > 1;
 
     const freeService1 = lead.serviceSchedules.find(
-      (s) => s.service_no === 1 && s.service_type === "free"
+      (s) => s.service_no === 1 && s.service_type === "free",
     );
     const freeService2 = lead.serviceSchedules.find(
-      (s) => s.service_no === 2 && s.service_type === "free"
+      (s) => s.service_no === 2 && s.service_type === "free",
     );
     const freeService3 = lead.serviceSchedules.find(
-      (s) => s.service_no === 3 && s.service_type === "free"
+      (s) => s.service_no === 3 && s.service_type === "free",
     );
 
     const amcService1 = lead.serviceSchedules.find(
-      (s) => s.service_no === 1 && s.service_type === "amc"
+      (s) => s.service_no === 1 && s.service_type === "amc",
     );
     const amcService2 = lead.serviceSchedules.find(
-      (s) => s.service_no === 2 && s.service_type === "amc"
+      (s) => s.service_no === 2 && s.service_type === "amc",
     );
     const amcService3 = lead.serviceSchedules.find(
-      (s) => s.service_no === 3 && s.service_type === "amc"
+      (s) => s.service_no === 3 && s.service_type === "amc",
     );
 
     let amc_dates_same_as_service_dates = "-";
     if (lead.is_amc_opted) {
-      const datesMatch = (
-        freeService1 && freeService2 && freeService3 &&
-        amcService1 && amcService2 && amcService3 &&
-        amcService1.scheduled_for?.getTime() === freeService1.scheduled_for?.getTime() &&
-        amcService2.scheduled_for?.getTime() === freeService2.scheduled_for?.getTime() &&
-        amcService3.scheduled_for?.getTime() === freeService3.scheduled_for?.getTime()
-      );
+      const datesMatch =
+        freeService1 &&
+        freeService2 &&
+        freeService3 &&
+        amcService1 &&
+        amcService2 &&
+        amcService3 &&
+        amcService1.scheduled_for?.getTime() ===
+          freeService1.scheduled_for?.getTime() &&
+        amcService2.scheduled_for?.getTime() ===
+          freeService2.scheduled_for?.getTime() &&
+        amcService3.scheduled_for?.getTime() ===
+          freeService3.scheduled_for?.getTime();
       amc_dates_same_as_service_dates = datesMatch ? "Yes" : "No";
     }
 
@@ -2314,14 +2334,14 @@ export const getLeadServicingReportData = async (
       instanceId: number | null,
       quantityIndex?: number | null,
       productType?: string | null,
-      instanceTitle?: string | null
+      instanceTitle?: string | null,
     ): LeadServicingReportRow => ({
       lead_id: lead.id,
       instance_id: instanceId,
       lead_code: formatOverviewLeadCode(
         lead.lead_code,
         quantityIndex,
-        hasMultipleInstances
+        hasMultipleInstances,
       ),
       client_name: `${lead.firstname} ${lead.lastname}`.trim(),
       franchise_store: lead.franchise?.franchise_name ?? "-",
@@ -2351,14 +2371,18 @@ export const getLeadServicingReportData = async (
         instance.id,
         instance.quantity_index,
         instance.productType?.type,
-        instance.title
-      )
+        instance.title,
+      ),
     );
   });
 
   return rows.sort((a, b) => {
-    const dueA = a.service_1_due_date ? new Date(a.service_1_due_date).getTime() : null;
-    const dueB = b.service_1_due_date ? new Date(b.service_1_due_date).getTime() : null;
+    const dueA = a.service_1_due_date
+      ? new Date(a.service_1_due_date).getTime()
+      : null;
+    const dueB = b.service_1_due_date
+      ? new Date(b.service_1_due_date).getTime()
+      : null;
     const isValidDueA = dueA !== null && !isNaN(dueA);
     const isValidDueB = dueB !== null && !isNaN(dueB);
 
@@ -2370,8 +2394,12 @@ export const getLeadServicingReportData = async (
       return 1;
     }
 
-    const timeA = a.service_1_completed_date ? new Date(a.service_1_completed_date).getTime() : null;
-    const timeB = b.service_1_completed_date ? new Date(b.service_1_completed_date).getTime() : null;
+    const timeA = a.service_1_completed_date
+      ? new Date(a.service_1_completed_date).getTime()
+      : null;
+    const timeB = b.service_1_completed_date
+      ? new Date(b.service_1_completed_date).getTime()
+      : null;
     const isValidA = timeA !== null && !isNaN(timeA);
     const isValidB = timeB !== null && !isNaN(timeB);
 
@@ -2394,11 +2422,7 @@ export const getFastProductionReportData = async (
 ) => {
   const where: any = {
     vendor_id: vendorId,
-    status: "approved",
-    lead: {
-      is_fast_production: true,
-      ...(franchiseId ? { franchise_id: franchiseId } : {}),
-    },
+    ...(franchiseId ? { lead: { franchise_id: franchiseId } } : {}),
   };
 
   if (fromDate || toDate) {
@@ -2496,8 +2520,8 @@ export const getFastProductionReportData = async (
                   shutterType: { select: { name: true } },
                   shutterSubType: { select: { name: true } },
                   handleType: { select: { name: true } },
-                }
-              }
+                },
+              },
             },
           },
         },
@@ -2511,12 +2535,14 @@ export const getFastProductionReportData = async (
   return fastProductionRequests.map((req: any) => {
     const lead = req.lead;
 
-    const designer = lead?.userMappings?.find(
-      (m: any) =>
-        m.type === "designer" ||
-        m.user?.user_type?.user_type?.trim().toLowerCase() === "designer" ||
-        m.user?.user_type?.user_type?.trim().toLowerCase() === "sales-executive"
-    )?.user?.user_name || "-";
+    const designer =
+      lead?.userMappings?.find(
+        (m: any) =>
+          m.type === "designer" ||
+          m.user?.user_type?.user_type?.trim().toLowerCase() === "designer" ||
+          m.user?.user_type?.user_type?.trim().toLowerCase() ===
+            "sales-executive",
+      )?.user?.user_name || "-";
 
     const furniture_type =
       req.instance?.productType?.type ||
@@ -2524,7 +2550,7 @@ export const getFastProductionReportData = async (
         ...new Set(
           (lead?.productMappings || [])
             .map((mapping: any) => mapping.productType?.type)
-            .filter(Boolean)
+            .filter(Boolean),
         ),
       ].join(", ") ||
       "-";
@@ -2536,20 +2562,20 @@ export const getFastProductionReportData = async (
         ...new Set(
           (lead?.leadProductStructureMapping || [])
             .map((mapping: any) => mapping.productStructure?.type)
-            .filter(Boolean)
+            .filter(Boolean),
         ),
       ].join(", ") ||
       "-";
 
     const getSelectionOrFinishVendor = (
       typeKeys: string[],
-      finishComponent: "CARCASS" | "SHUTTER" | "HANDLE"
+      finishComponent: "CARCASS" | "SHUTTER" | "HANDLE",
     ) => {
       const matchingSelections = (req.instance?.designSelections || []).filter(
         (selection: any) => {
           const type = (selection.type || "").trim().toLowerCase();
           return typeKeys.includes(type);
-        }
+        },
       );
 
       // 1. Check if CHS vendor mappings exist from Client Documentation / Approval stage
@@ -2565,7 +2591,7 @@ export const getFastProductionReportData = async (
                 mapping.shutterSubType?.name ||
                 mapping.shutterType?.name ||
                 mapping.handleType?.name ||
-                ""
+                "",
             );
           }
           return [];
@@ -2584,7 +2610,7 @@ export const getFastProductionReportData = async (
             d.length > 0 &&
             d !== "-" &&
             d.toUpperCase() !== "NULL" &&
-            d.toUpperCase() !== "N/A"
+            d.toUpperCase() !== "N/A",
         );
 
       if (updatedDescs.length > 0) {
@@ -2593,15 +2619,24 @@ export const getFastProductionReportData = async (
 
       // 3. Fallback to initial Fast Production request finish from when the request was created
       const finish = req.finishes?.find(
-        (f: any) => f.component === finishComponent
+        (f: any) => f.component === finishComponent,
       );
       return finish?.finish_category || "-";
     };
 
-    const carcass_selection = getSelectionOrFinishVendor(["carcas", "carcass"], "CARCASS");
-    const shutter_selection = getSelectionOrFinishVendor(["shutter"], "SHUTTER");
-    const handle_selection = getSelectionOrFinishVendor(["handles", "handle"], "HANDLE");
-    
+    const carcass_selection = getSelectionOrFinishVendor(
+      ["carcas", "carcass"],
+      "CARCASS",
+    );
+    const shutter_selection = getSelectionOrFinishVendor(
+      ["shutter"],
+      "SHUTTER",
+    );
+    const handle_selection = getSelectionOrFinishVendor(
+      ["handles", "handle"],
+      "HANDLE",
+    );
+
     // Hardware and accessory selections from the FastProductionRequest itself
     const hardware_selection = req.hardware_selection || "-";
     const accessory_selection = req.accessory_selection || "-";
@@ -2615,21 +2650,30 @@ export const getFastProductionReportData = async (
       return log?.created_at || null;
     };
 
-    const tcDate = lead?.tech_check_reached_at || getStageLogDate(["Type 7"], ["tech"]);
-    const olDate = (lead as any)?.order_login_completed_at || getStageLogDate(["Type 8", "Type 9"], ["order", "login"]);
-    const prodDate = getStageLogDate(["Type 10", "Type 11", "Type 12", "Type 13", "Type 14"], ["production"]);
-    const rtdDate = getStageLogDate(["Type 15", "Type 16", "Type 17"], ["dispatch", "rtd"]);
+    const tcDate =
+      lead?.tech_check_reached_at || getStageLogDate(["Type 7"], ["tech"]);
+    const olDate =
+      (lead as any)?.order_login_completed_at ||
+      getStageLogDate(["Type 8", "Type 9"], ["order", "login"]);
+    const prodDate = getStageLogDate(
+      ["Type 10", "Type 11", "Type 12", "Type 13", "Type 14"],
+      ["production"],
+    );
+    const rtdDate = getStageLogDate(
+      ["Type 15", "Type 16", "Type 17"],
+      ["dispatch", "rtd"],
+    );
 
     const factoryApproval =
       req.batch?.approvals?.find(
         (a: any) =>
-          a.approver_role === "FACTORY_ADMIN" && a.status === "approved"
+          a.approver_role === "FACTORY_ADMIN" && a.status === "approved",
       )?.acted_at || req.approved_at;
 
     const superAdminApproval =
       req.batch?.approvals?.find(
         (a: any) =>
-          a.approver_role === "SUPER_ADMIN" && a.status === "approved"
+          a.approver_role === "SUPER_ADMIN" && a.status === "approved",
       )?.acted_at || req.approved_at;
 
     return {
@@ -2654,7 +2698,7 @@ export const getFastProductionReportData = async (
       ol_date: olDate,
       prod_date: prodDate,
       rtd_date: rtdDate,
-      is_fast_production: lead?.is_fast_production === true,
+      is_fast_production: true,
     };
   });
 };
