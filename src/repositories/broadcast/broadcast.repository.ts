@@ -24,7 +24,7 @@ export class BroadcastRepository {
       vendor_id: number | null;
       created_by: number;
       updated_by: number;
-    }
+    },
   ) {
     return tx.broadcastMaster.create({ data });
   }
@@ -33,7 +33,7 @@ export class BroadcastRepository {
     tx: any,
     broadcastId: number,
     audiences: Array<{ audienceType: string; targetId?: number | null }>,
-    userId: number
+    userId: number,
   ) {
     return tx.broadcastAudienceMapping.createMany({
       data: audiences.map((a) => ({
@@ -58,7 +58,7 @@ export class BroadcastRepository {
       fileType?: string | null;
       fileSize?: number | null;
     }>,
-    userId: number
+    userId: number,
   ) {
     return tx.broadcastAttachment.createMany({
       data: attachments.map((a) => ({
@@ -106,7 +106,8 @@ export class BroadcastRepository {
       userId: number;
       userTypeId?: number;
       franchiseId?: number;
-    }
+      createdAt?: Date;
+    },
   ) {
     const { vendorId, status, type, page, limit } = filters;
     const skip = (page - 1) * limit;
@@ -121,10 +122,6 @@ export class BroadcastRepository {
     // Audience-based visibility: show only broadcasts this user is allowed to see
     if (audience) {
       where.status = "ACTIVE";
-      where.OR = [
-        { publish_at: null },
-        { publish_at: { lte: new Date() } }
-      ];
 
       const audienceConditions: any[] = [
         // 1. Broadcast has no audiences defined (unrestricted)
@@ -132,7 +129,11 @@ export class BroadcastRepository {
         // 2. Broadcast is sent to ALL
         { audiences: { some: { audience_type: "ALL" } } },
         // 3. Broadcast is explicitly sent to this user ID
-        { audiences: { some: { audience_type: "USER", target_id: audience.userId } } },
+        {
+          audiences: {
+            some: { audience_type: "USER", target_id: audience.userId },
+          },
+        },
       ];
 
       // 4a. Broadcast has BOTH Franchise and Role targets -> user must match BOTH
@@ -140,9 +141,20 @@ export class BroadcastRepository {
         audienceConditions.push({
           AND: [
             { audiences: { some: { audience_type: "FRANCHISE" } } },
-            { audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } },
+            {
+              audiences: {
+                some: {
+                  audience_type: "FRANCHISE",
+                  target_id: audience.franchiseId,
+                },
+              },
+            },
             { audiences: { some: { audience_type: "ROLE" } } },
-            { audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } },
+            {
+              audiences: {
+                some: { audience_type: "ROLE", target_id: audience.userTypeId },
+              },
+            },
           ],
         });
       }
@@ -152,7 +164,14 @@ export class BroadcastRepository {
         audienceConditions.push({
           AND: [
             { audiences: { some: { audience_type: "FRANCHISE" } } },
-            { audiences: { some: { audience_type: "FRANCHISE", target_id: audience.franchiseId } } },
+            {
+              audiences: {
+                some: {
+                  audience_type: "FRANCHISE",
+                  target_id: audience.franchiseId,
+                },
+              },
+            },
             { audiences: { none: { audience_type: "ROLE" } } },
           ],
         });
@@ -164,13 +183,20 @@ export class BroadcastRepository {
           AND: [
             { audiences: { none: { audience_type: "FRANCHISE" } } },
             { audiences: { some: { audience_type: "ROLE" } } },
-            { audiences: { some: { audience_type: "ROLE", target_id: audience.userTypeId } } },
+            {
+              audiences: {
+                some: { audience_type: "ROLE", target_id: audience.userTypeId },
+              },
+            },
           ],
         });
       }
 
       where.AND = [
-        { OR: audienceConditions }
+        {
+          OR: [{ publish_at: null }, { publish_at: { lte: new Date() } }],
+        },
+        { OR: audienceConditions },
       ];
     }
 
@@ -179,7 +205,14 @@ export class BroadcastRepository {
         where,
         include: {
           ...this.defaultInclude,
-          ...(audience ? { readLogs: { where: { user_id: audience.userId }, select: { id: true } } } : {}),
+          ...(audience
+            ? {
+                readLogs: {
+                  where: { user_id: audience.userId },
+                  select: { id: true },
+                },
+              }
+            : {}),
         },
         orderBy: { created_at: "desc" },
         skip,
@@ -208,7 +241,7 @@ export class BroadcastRepository {
       publish_at?: Date | null;
       vendor_id?: number | null;
       updated_by: number;
-    }
+    },
   ) {
     return tx.broadcastMaster.update({
       where: { id },
@@ -220,14 +253,18 @@ export class BroadcastRepository {
    * Delete all existing audience rows for a broadcast (used before replacing)
    */
   async deleteAudiences(tx: any, broadcastId: number) {
-    return tx.broadcastAudienceMapping.deleteMany({ where: { broadcast_id: broadcastId } });
+    return tx.broadcastAudienceMapping.deleteMany({
+      where: { broadcast_id: broadcastId },
+    });
   }
 
   /**
    * Delete all existing attachment rows for a broadcast (used before replacing)
    */
   async deleteAttachments(tx: any, broadcastId: number) {
-    return tx.broadcastAttachment.deleteMany({ where: { broadcast_id: broadcastId } });
+    return tx.broadcastAttachment.deleteMany({
+      where: { broadcast_id: broadcastId },
+    });
   }
 
   // ─── DELETE (soft — sets status = INACTIVE) ──────────────────────────────────
@@ -246,8 +283,14 @@ export class BroadcastRepository {
    */
   async markRead(broadcastId: number, userId: number) {
     return prisma.broadcastRead.upsert({
-      where: { broadcast_id_user_id: { broadcast_id: broadcastId, user_id: userId } },
-      update: { read_at: new Date(), updated_by: userId, updated_at: new Date() },
+      where: {
+        broadcast_id_user_id: { broadcast_id: broadcastId, user_id: userId },
+      },
+      update: {
+        read_at: new Date(),
+        updated_by: userId,
+        updated_at: new Date(),
+      },
       create: {
         broadcast_id: broadcastId,
         user_id: userId,
@@ -267,8 +310,15 @@ export class BroadcastRepository {
         where: {
           user_type: {
             in: [
-              "super-admin", "superadmin", "super_admin",
-              "master-admin", "masteradmin", "master_admin", "master", "vloq master", "vloq_master"
+              "super-admin",
+              "superadmin",
+              "super_admin",
+              "master-admin",
+              "masteradmin",
+              "master_admin",
+              "master",
+              "vloq master",
+              "vloq_master",
             ],
             mode: "insensitive",
           },
@@ -299,11 +349,20 @@ export class BroadcastRepository {
           ...(superAdminTypeIds.length > 0
             ? { user_type_id: { notIn: superAdminTypeIds } }
             : {}),
-          ...(effectivePublishDate ? { created_at: { lte: effectivePublishDate } } : {}),
+          ...(effectivePublishDate
+            ? { created_at: { lte: effectivePublishDate } }
+            : {}),
         },
       },
       include: {
-        user: { select: { id: true, user_name: true, user_email: true, created_at: true } },
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            created_at: true,
+          },
+        },
       },
       orderBy: { read_at: "desc" },
     });
@@ -327,70 +386,113 @@ export class BroadcastRepository {
         },
       },
       select: {
-        user: { select: { id: true, user_name: true, user_email: true, created_at: true } },
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            created_at: true,
+          },
+        },
       },
       distinct: ["user_id"],
     });
 
-    const userMap = new Map<number, { id: number; user_name: string; email?: string }>();
+    const userMap = new Map<
+      number,
+      { id: number; user_name: string; email?: string }
+    >();
 
-    // 1. Resolve target users from audiences first (ensures the full target audience is shown immediately)
-    const isAll = broadcast.audiences.some((a) => a.audience_type === "ALL") || broadcast.audiences.length === 0;
-    if (isAll) {
-      const activeUsers = await prisma.userMaster.findMany({
-        where: {
-          status: { equals: "active", mode: "insensitive" },
-          ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
-          ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
-        },
-        select: { id: true, user_name: true, user_email: true },
-      });
-      activeUsers.forEach((u) => {
-        userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+    // 1. If notifications exist for this broadcast, use them as the primary target recipient list
+    if (notifications.length > 0) {
+      notifications.forEach((n) => {
+        if (n.user) {
+          userMap.set(n.user.id, {
+            id: n.user.id,
+            user_name: n.user.user_name,
+            email: n.user.user_email || undefined,
+          });
+        }
       });
     } else {
-      const franchiseIds = broadcast.audiences.filter((a) => a.audience_type === "FRANCHISE" && a.target_id).map((a) => a.target_id!);
-      const roleIds = broadcast.audiences.filter((a) => a.audience_type === "ROLE" && a.target_id).map((a) => a.target_id!);
-      const userIds = broadcast.audiences.filter((a) => a.audience_type === "USER" && a.target_id).map((a) => a.target_id!);
-
-      const orConds: any[] = [];
-      if (userIds.length > 0) orConds.push({ id: { in: userIds } });
-      if (franchiseIds.length > 0 && roleIds.length > 0) {
-        orConds.push({ franchise_id: { in: franchiseIds }, user_type_id: { in: roleIds } });
-      } else if (franchiseIds.length > 0) {
-        orConds.push({ franchise_id: { in: franchiseIds } });
-      } else if (roleIds.length > 0) {
-        orConds.push({ user_type_id: { in: roleIds } });
-      }
-
-      if (orConds.length > 0) {
-        const matched = await prisma.userMaster.findMany({
+      // Fallback for legacy broadcasts: resolve target users created on or before publish date
+      const isAll =
+        broadcast.audiences.some((a) => a.audience_type === "ALL") ||
+        broadcast.audiences.length === 0;
+      if (isAll) {
+        const activeUsers = await prisma.userMaster.findMany({
           where: {
             status: { equals: "active", mode: "insensitive" },
             ...(broadcast.vendor_id ? { vendor_id: broadcast.vendor_id } : {}),
-            ...(superAdminTypeIds.length > 0 ? { user_type_id: { notIn: superAdminTypeIds } } : {}),
-            OR: orConds,
+            ...(superAdminTypeIds.length > 0
+              ? { user_type_id: { notIn: superAdminTypeIds } }
+              : {}),
+            ...(effectivePublishDate
+              ? { created_at: { lte: effectivePublishDate } }
+              : {}),
           },
           select: { id: true, user_name: true, user_email: true },
         });
-        matched.forEach((u) => {
-          userMap.set(u.id, { id: u.id, user_name: u.user_name, email: u.user_email || undefined });
+        activeUsers.forEach((u) => {
+          userMap.set(u.id, {
+            id: u.id,
+            user_name: u.user_name,
+            email: u.user_email || undefined,
+          });
         });
+      } else {
+        const franchiseIds = broadcast.audiences
+          .filter((a) => a.audience_type === "FRANCHISE" && a.target_id)
+          .map((a) => a.target_id!);
+        const roleIds = broadcast.audiences
+          .filter((a) => a.audience_type === "ROLE" && a.target_id)
+          .map((a) => a.target_id!);
+        const userIds = broadcast.audiences
+          .filter((a) => a.audience_type === "USER" && a.target_id)
+          .map((a) => a.target_id!);
+
+        const orConds: any[] = [];
+        if (userIds.length > 0) orConds.push({ id: { in: userIds } });
+        if (franchiseIds.length > 0 && roleIds.length > 0) {
+          orConds.push({
+            franchise_id: { in: franchiseIds },
+            user_type_id: { in: roleIds },
+          });
+        } else if (franchiseIds.length > 0) {
+          orConds.push({ franchise_id: { in: franchiseIds } });
+        } else if (roleIds.length > 0) {
+          orConds.push({ user_type_id: { in: roleIds } });
+        }
+
+        if (orConds.length > 0) {
+          const matched = await prisma.userMaster.findMany({
+            where: {
+              status: { equals: "active", mode: "insensitive" },
+              ...(broadcast.vendor_id
+                ? { vendor_id: broadcast.vendor_id }
+                : {}),
+              ...(superAdminTypeIds.length > 0
+                ? { user_type_id: { notIn: superAdminTypeIds } }
+                : {}),
+              ...(effectivePublishDate
+                ? { created_at: { lte: effectivePublishDate } }
+                : {}),
+              OR: orConds,
+            },
+            select: { id: true, user_name: true, user_email: true },
+          });
+          matched.forEach((u) => {
+            userMap.set(u.id, {
+              id: u.id,
+              user_name: u.user_name,
+              email: u.user_email || undefined,
+            });
+          });
+        }
       }
     }
 
-    // 2. Merge users from notifications table (for completeness or legacy mapping)
-    notifications.forEach((n) => {
-      if (n.user && !userMap.has(n.user.id)) {
-        userMap.set(n.user.id, {
-          id: n.user.id,
-          user_name: n.user.user_name,
-          email: n.user.user_email || undefined,
-        });
-      }
-    });
-
-    // 3. Merge readers (in case they read it but weren't in the original target audience)
+    // 2. Merge readers
     reads.forEach((r) => {
       if (r.user && !userMap.has(r.user.id)) {
         userMap.set(r.user.id, {
