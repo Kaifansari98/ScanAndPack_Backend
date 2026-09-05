@@ -146,6 +146,7 @@ export class LeadStatsService {
     const baseLeadScope = {
       ...whereClause,
       activity_status: ActivityStatus.onGoing,
+      is_draft: { not: true },
     };
 
     const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
@@ -212,6 +213,7 @@ export class LeadStatsService {
         ...whereClause,
         statusType: { vendor_id: vendorId, tag: { in: overallStatusTags } },
         activity_status: ActivityStatus.onGoing,
+        is_draft: { not: true },
       },
     });
 
