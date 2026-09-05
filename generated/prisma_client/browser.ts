@@ -1072,3 +1072,8 @@ export type MetaLead = Prisma.MetaLeadModel
  * 
  */
 export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
+/**
+ * Model ProductsRequiredForProduction
+ * 
+ */
+export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProductionModel

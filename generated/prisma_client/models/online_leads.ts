@@ -85,6 +85,7 @@ export type Online_leadsMinAggregateOutputType = {
   lastname: string | null
   alt_contact_no: string | null
   site_address: string | null
+  city: string | null
   site_type_id: number | null
   source_id: number | null
   refered_by: string | null
@@ -124,6 +125,7 @@ export type Online_leadsMaxAggregateOutputType = {
   lastname: string | null
   alt_contact_no: string | null
   site_address: string | null
+  city: string | null
   site_type_id: number | null
   source_id: number | null
   refered_by: string | null
@@ -163,6 +165,7 @@ export type Online_leadsCountAggregateOutputType = {
   lastname: number
   alt_contact_no: number
   site_address: number
+  city: number
   site_type_id: number
   source_id: number
   refered_by: number
@@ -242,6 +245,7 @@ export type Online_leadsMinAggregateInputType = {
   lastname?: true
   alt_contact_no?: true
   site_address?: true
+  city?: true
   site_type_id?: true
   source_id?: true
   refered_by?: true
@@ -281,6 +285,7 @@ export type Online_leadsMaxAggregateInputType = {
   lastname?: true
   alt_contact_no?: true
   site_address?: true
+  city?: true
   site_type_id?: true
   source_id?: true
   refered_by?: true
@@ -320,6 +325,7 @@ export type Online_leadsCountAggregateInputType = {
   lastname?: true
   alt_contact_no?: true
   site_address?: true
+  city?: true
   site_type_id?: true
   source_id?: true
   refered_by?: true
@@ -448,6 +454,7 @@ export type Online_leadsGroupByOutputType = {
   lastname: string | null
   alt_contact_no: string | null
   site_address: string | null
+  city: string | null
   site_type_id: number | null
   source_id: number | null
   refered_by: string | null
@@ -512,6 +519,7 @@ export type online_leadsWhereInput = {
   lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
   alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  city?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
@@ -567,6 +575,7 @@ export type online_leadsOrderByWithRelationInput = {
   lastname?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   site_address?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   site_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   source_id?: Prisma.SortOrderInput | Prisma.SortOrder
   refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -626,6 +635,7 @@ export type online_leadsWhereUniqueInput = Prisma.AtLeast<{
   lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
   alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  city?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
@@ -681,6 +691,7 @@ export type online_leadsOrderByWithAggregationInput = {
   lastname?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   site_address?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
   site_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   source_id?: Prisma.SortOrderInput | Prisma.SortOrder
   refered_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -730,6 +741,7 @@ export type online_leadsScalarWhereWithAggregatesInput = {
   lastname?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
   alt_contact_no?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
   site_address?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
   site_type_id?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
   source_id?: Prisma.IntNullableWithAggregatesFilter<"online_leads"> | number | null
   refered_by?: Prisma.StringNullableWithAggregatesFilter<"online_leads"> | string | null
@@ -763,6 +775,7 @@ export type online_leadsCreateInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -815,6 +828,7 @@ export type online_leadsUncheckedCreateInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -852,6 +866,7 @@ export type online_leadsUpdateInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -904,6 +919,7 @@ export type online_leadsUncheckedUpdateInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -949,6 +965,7 @@ export type online_leadsCreateManyInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -982,6 +999,7 @@ export type online_leadsUpdateManyMutationInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1020,6 +1038,7 @@ export type online_leadsUncheckedUpdateManyInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1089,6 +1108,7 @@ export type online_leadsCountOrderByAggregateInput = {
   lastname?: Prisma.SortOrder
   alt_contact_no?: Prisma.SortOrder
   site_address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   site_type_id?: Prisma.SortOrder
   source_id?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -1148,6 +1168,7 @@ export type online_leadsMaxOrderByAggregateInput = {
   lastname?: Prisma.SortOrder
   alt_contact_no?: Prisma.SortOrder
   site_address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   site_type_id?: Prisma.SortOrder
   source_id?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -1187,6 +1208,7 @@ export type online_leadsMinOrderByAggregateInput = {
   lastname?: Prisma.SortOrder
   alt_contact_no?: Prisma.SortOrder
   site_address?: Prisma.SortOrder
+  city?: Prisma.SortOrder
   site_type_id?: Prisma.SortOrder
   source_id?: Prisma.SortOrder
   refered_by?: Prisma.SortOrder
@@ -1734,6 +1756,7 @@ export type online_leadsCreateWithoutVendorMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -1784,6 +1807,7 @@ export type online_leadsUncheckedCreateWithoutVendorMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -1858,6 +1882,7 @@ export type online_leadsScalarWhereInput = {
   lastname?: Prisma.StringNullableFilter<"online_leads"> | string | null
   alt_contact_no?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_address?: Prisma.StringNullableFilter<"online_leads"> | string | null
+  city?: Prisma.StringNullableFilter<"online_leads"> | string | null
   site_type_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   source_id?: Prisma.IntNullableFilter<"online_leads"> | number | null
   refered_by?: Prisma.StringNullableFilter<"online_leads"> | string | null
@@ -1891,6 +1916,7 @@ export type online_leadsCreateWithoutUserMaster_online_leads_assign_toToUserMast
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -1941,6 +1967,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_assign_toT
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -1988,6 +2015,7 @@ export type online_leadsCreateWithoutUserMaster_online_leads_created_byToUserMas
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2038,6 +2066,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_created_by
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2085,6 +2114,7 @@ export type online_leadsCreateWithoutUserMaster_online_leads_final_assigned_lead
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2135,6 +2165,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_final_assi
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2182,6 +2213,7 @@ export type online_leadsCreateWithoutUserMaster_online_leads_updated_byToUserMas
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2232,6 +2264,7 @@ export type online_leadsUncheckedCreateWithoutUserMaster_online_leads_updated_by
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2343,6 +2376,7 @@ export type online_leadsCreateWithoutLeadMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2394,6 +2428,7 @@ export type online_leadsUncheckedCreateWithoutLeadMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2456,6 +2491,7 @@ export type online_leadsCreateWithoutSiteTypeMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2507,6 +2543,7 @@ export type online_leadsUncheckedCreateWithoutSiteTypeMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   source_id?: number | null
   refered_by?: string | null
   archetech_name?: string | null
@@ -2569,6 +2606,7 @@ export type online_leadsCreateWithoutSourceMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2620,6 +2658,7 @@ export type online_leadsUncheckedCreateWithoutSourceMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   refered_by?: string | null
   archetech_name?: string | null
@@ -2682,6 +2721,7 @@ export type online_leadsCreateWithoutFranchiseMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2732,6 +2772,7 @@ export type online_leadsUncheckedCreateWithoutFranchiseMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2795,6 +2836,7 @@ export type online_leadsCreateWithoutOnline_lead_call_logInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -2846,6 +2888,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_call_logInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -2898,6 +2941,7 @@ export type online_leadsUpdateWithoutOnline_lead_call_logInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2949,6 +2993,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_call_logInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2985,6 +3030,7 @@ export type online_leadsCreateWithoutOnline_lead_followup_statusInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -3035,6 +3081,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_followup_statusInput =
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3098,6 +3145,7 @@ export type online_leadsCreateWithoutOnline_lead_historyInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -3149,6 +3197,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_historyInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3201,6 +3250,7 @@ export type online_leadsUpdateWithoutOnline_lead_historyInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3252,6 +3302,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_historyInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3288,6 +3339,7 @@ export type online_leadsCreateWithoutOnline_lead_store_logInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -3339,6 +3391,7 @@ export type online_leadsUncheckedCreateWithoutOnline_lead_store_logInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3391,6 +3444,7 @@ export type online_leadsUpdateWithoutOnline_lead_store_logInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3442,6 +3496,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_store_logInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3478,6 +3533,7 @@ export type online_leadsCreateWithoutTelecaller_campaign_leadsInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   refered_by?: string | null
   archetech_name?: string | null
   archetech_number?: string | null
@@ -3529,6 +3585,7 @@ export type online_leadsUncheckedCreateWithoutTelecaller_campaign_leadsInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3581,6 +3638,7 @@ export type online_leadsUpdateWithoutTelecaller_campaign_leadsInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3632,6 +3690,7 @@ export type online_leadsUncheckedUpdateWithoutTelecaller_campaign_leadsInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3675,6 +3734,7 @@ export type online_leadsCreateManyVendorMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3708,6 +3768,7 @@ export type online_leadsUpdateWithoutVendorMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3758,6 +3819,7 @@ export type online_leadsUncheckedUpdateWithoutVendorMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3802,6 +3864,7 @@ export type online_leadsUncheckedUpdateManyWithoutVendorMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3842,6 +3905,7 @@ export type online_leadsCreateManyUserMaster_online_leads_assign_toToUserMasterI
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3882,6 +3946,7 @@ export type online_leadsCreateManyUserMaster_online_leads_created_byToUserMaster
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3922,6 +3987,7 @@ export type online_leadsCreateManyUserMaster_online_leads_final_assigned_leadsTo
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3962,6 +4028,7 @@ export type online_leadsCreateManyUserMaster_online_leads_updated_byToUserMaster
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -3995,6 +4062,7 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_assign_toToUserMast
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4045,6 +4113,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_assign_toT
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4089,6 +4158,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4122,6 +4192,7 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_created_byToUserMas
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4172,6 +4243,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_created_by
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4216,6 +4288,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_create
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4249,6 +4322,7 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_final_assigned_lead
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4299,6 +4373,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_final_assi
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4343,6 +4418,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4376,6 +4452,7 @@ export type online_leadsUpdateWithoutUserMaster_online_leads_updated_byToUserMas
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4426,6 +4503,7 @@ export type online_leadsUncheckedUpdateWithoutUserMaster_online_leads_updated_by
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4470,6 +4548,7 @@ export type online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_update
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4511,6 +4590,7 @@ export type online_leadsCreateManyLeadMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -4543,6 +4623,7 @@ export type online_leadsUpdateWithoutLeadMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4594,6 +4675,7 @@ export type online_leadsUncheckedUpdateWithoutLeadMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4638,6 +4720,7 @@ export type online_leadsUncheckedUpdateManyWithoutLeadMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4678,6 +4761,7 @@ export type online_leadsCreateManySiteTypeMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   source_id?: number | null
   refered_by?: string | null
   archetech_name?: string | null
@@ -4710,6 +4794,7 @@ export type online_leadsUpdateWithoutSiteTypeMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4761,6 +4846,7 @@ export type online_leadsUncheckedUpdateWithoutSiteTypeMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4805,6 +4891,7 @@ export type online_leadsUncheckedUpdateManyWithoutSiteTypeMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4845,6 +4932,7 @@ export type online_leadsCreateManySourceMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   refered_by?: string | null
   archetech_name?: string | null
@@ -4877,6 +4965,7 @@ export type online_leadsUpdateWithoutSourceMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4928,6 +5017,7 @@ export type online_leadsUncheckedUpdateWithoutSourceMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4972,6 +5062,7 @@ export type online_leadsUncheckedUpdateManyWithoutSourceMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5011,6 +5102,7 @@ export type online_leadsCreateManyFranchiseMasterInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -5044,6 +5136,7 @@ export type online_leadsUpdateWithoutFranchiseMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5094,6 +5187,7 @@ export type online_leadsUncheckedUpdateWithoutFranchiseMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5138,6 +5232,7 @@ export type online_leadsUncheckedUpdateManyWithoutFranchiseMasterInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5178,6 +5273,7 @@ export type online_leadsCreateManyOnline_lead_followup_statusInput = {
   lastname?: string | null
   alt_contact_no?: string | null
   site_address?: string | null
+  city?: string | null
   site_type_id?: number | null
   source_id?: number | null
   refered_by?: string | null
@@ -5211,6 +5307,7 @@ export type online_leadsUpdateWithoutOnline_lead_followup_statusInput = {
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5261,6 +5358,7 @@ export type online_leadsUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5305,6 +5403,7 @@ export type online_leadsUncheckedUpdateManyWithoutOnline_lead_followup_statusInp
   lastname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5404,6 +5503,7 @@ export type online_leadsSelect<ExtArgs extends runtime.Types.Extensions.Internal
   lastname?: boolean
   alt_contact_no?: boolean
   site_address?: boolean
+  city?: boolean
   site_type_id?: boolean
   source_id?: boolean
   refered_by?: boolean
@@ -5460,6 +5560,7 @@ export type online_leadsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   lastname?: boolean
   alt_contact_no?: boolean
   site_address?: boolean
+  city?: boolean
   site_type_id?: boolean
   source_id?: boolean
   refered_by?: boolean
@@ -5511,6 +5612,7 @@ export type online_leadsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   lastname?: boolean
   alt_contact_no?: boolean
   site_address?: boolean
+  city?: boolean
   site_type_id?: boolean
   source_id?: boolean
   refered_by?: boolean
@@ -5562,6 +5664,7 @@ export type online_leadsSelectScalar = {
   lastname?: boolean
   alt_contact_no?: boolean
   site_address?: boolean
+  city?: boolean
   site_type_id?: boolean
   source_id?: boolean
   refered_by?: boolean
@@ -5580,7 +5683,7 @@ export type online_leadsSelectScalar = {
   product_structures?: boolean
 }
 
-export type online_leadsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "lead_code" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads" | "firstname" | "lastname" | "alt_contact_no" | "site_address" | "site_type_id" | "source_id" | "refered_by" | "archetech_name" | "archetech_number" | "priority" | "approval_status" | "pending_status_id" | "pending_store_id" | "pending_follow_up_date" | "pending_remark" | "pending_assign_to" | "pending_created_by" | "lead_master_id" | "product_types" | "product_structures", ExtArgs["result"]["online_leads"]>
+export type online_leadsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "leads_name" | "lead_code" | "email" | "contact" | "source" | "lead_entry_type" | "created_at" | "created_by" | "updated_at" | "updated_by" | "assign_to" | "status" | "remark" | "follow_up_date" | "store_id" | "final_assigned_leads" | "firstname" | "lastname" | "alt_contact_no" | "site_address" | "city" | "site_type_id" | "source_id" | "refered_by" | "archetech_name" | "archetech_number" | "priority" | "approval_status" | "pending_status_id" | "pending_store_id" | "pending_follow_up_date" | "pending_remark" | "pending_assign_to" | "pending_created_by" | "lead_master_id" | "product_types" | "product_structures", ExtArgs["result"]["online_leads"]>
 export type online_leadsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   online_lead_call_log?: boolean | Prisma.online_leads$online_lead_call_logArgs<ExtArgs>
   online_lead_history?: boolean | Prisma.online_leads$online_lead_historyArgs<ExtArgs>
@@ -5664,6 +5767,7 @@ export type $online_leadsPayload<ExtArgs extends runtime.Types.Extensions.Intern
     lastname: string | null
     alt_contact_no: string | null
     site_address: string | null
+    city: string | null
     site_type_id: number | null
     source_id: number | null
     refered_by: string | null
@@ -6139,6 +6243,7 @@ export interface online_leadsFieldRefs {
   readonly lastname: Prisma.FieldRef<"online_leads", 'String'>
   readonly alt_contact_no: Prisma.FieldRef<"online_leads", 'String'>
   readonly site_address: Prisma.FieldRef<"online_leads", 'String'>
+  readonly city: Prisma.FieldRef<"online_leads", 'String'>
   readonly site_type_id: Prisma.FieldRef<"online_leads", 'Int'>
   readonly source_id: Prisma.FieldRef<"online_leads", 'Int'>
   readonly refered_by: Prisma.FieldRef<"online_leads", 'String'>

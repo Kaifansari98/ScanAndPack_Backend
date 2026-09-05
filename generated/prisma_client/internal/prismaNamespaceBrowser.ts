@@ -261,7 +261,8 @@ export const ModelName = {
   telecaller_campaign_leads: 'telecaller_campaign_leads',
   LeadBillingAddress: 'LeadBillingAddress',
   MetaLead: 'MetaLead',
-  BoxItemDeleteLog: 'BoxItemDeleteLog'
+  BoxItemDeleteLog: 'BoxItemDeleteLog',
+  ProductsRequiredForProduction: 'ProductsRequiredForProduction'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3869,6 +3870,7 @@ export const Online_leadsScalarFieldEnum = {
   lastname: 'lastname',
   alt_contact_no: 'alt_contact_no',
   site_address: 'site_address',
+  city: 'city',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
   refered_by: 'refered_by',
@@ -3954,6 +3956,27 @@ export const BoxItemDeleteLogScalarFieldEnum = {
 } as const
 
 export type BoxItemDeleteLogScalarFieldEnum = (typeof BoxItemDeleteLogScalarFieldEnum)[keyof typeof BoxItemDeleteLogScalarFieldEnum]
+
+
+export const ProductsRequiredForProductionScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  franchise_id: 'franchise_id',
+  lead_id: 'lead_id',
+  product_type_id: 'product_type_id',
+  instance_id: 'instance_id',
+  product_id: 'product_id',
+  article_code: 'article_code',
+  type: 'type',
+  category: 'category',
+  qty: 'qty',
+  unit: 'unit',
+  name: 'name',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type ProductsRequiredForProductionScalarFieldEnum = (typeof ProductsRequiredForProductionScalarFieldEnum)[keyof typeof ProductsRequiredForProductionScalarFieldEnum]
 
 
 export const SortOrder = {

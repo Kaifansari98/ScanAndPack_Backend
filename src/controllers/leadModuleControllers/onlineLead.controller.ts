@@ -1,4 +1,4 @@
-﻿import { Request, Response } from "express";
+import { Request, Response } from "express";
 import { prisma } from "../../prisma/client";
 import { unmarkDraftAndSeparate } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
@@ -9,6 +9,13 @@ import {
 import { generateLeadCode } from "../../utils/generateLeadCode";
 import ExcelJS from "exceljs";
 import { Readable } from "stream";
+import { NotificationService } from "../../services/notification/notification.service";
+import {
+  sendNewLeadsAddedLeadPoolEmail,
+  sendLeadAssignedToSalesExecutiveEmail,
+  sendLeadApprovedBySalesExecutiveEmail,
+  sendLeadRejectedBySalesExecutiveEmail,
+} from "../../services/email/brevoEmail2.service";
 
 // Helpers to get path params
 const getParam = (param: any): string => {
@@ -193,6 +200,7 @@ export class OnlineLeadController {
         archetech_name,
         archetech_number,
         priority,
+        city,
         product_types,
         product_structures,
         store_id,
@@ -269,6 +277,7 @@ export class OnlineLeadController {
               remark: remark
                 ? `${existingOnlineLead.remark || ""}\n${remark.trim()}`.trim()
                 : existingOnlineLead.remark,
+              city: city || existingOnlineLead.city,
               product_types: combinedTypes,
               product_structures: combinedStructs,
               updated_at: new Date(),
@@ -304,6 +313,7 @@ export class OnlineLeadController {
             archetech_name: archetech_name || null,
             archetech_number: archetech_number || null,
             priority: priority || null,
+            city: city || null,
             product_types: Array.isArray(product_types) ? product_types : [],
             product_structures: Array.isArray(product_structures)
               ? product_structures
@@ -360,6 +370,7 @@ export class OnlineLeadController {
         archetech_name,
         archetech_number,
         priority,
+        city,
         product_types,
         product_structures,
       } = req.body;
@@ -571,6 +582,7 @@ export class OnlineLeadController {
             archetech_name: archetech_name || null,
             archetech_number: archetech_number || null,
             priority: priority || null,
+            city: city || null,
             product_types: resolvedTypes,
             product_structures: resolvedStructures,
           },
@@ -740,10 +752,29 @@ export class OnlineLeadController {
               type: true,
             },
           },
+          online_lead_history: {
+            include: {
+              UserMaster: {
+                select: { id: true, user_name: true },
+              },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
+          online_lead_call_log: {
+            include: {
+              UserMaster: {
+                select: { id: true, user_name: true },
+              },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
         },
-        orderBy: {
-          created_at: "desc",
-        },
+        orderBy: [
+          { updated_at: "desc" },
+          { created_at: "desc" },
+        ],
       });
 
       return res.status(200).json({
@@ -1036,7 +1067,7 @@ export class OnlineLeadController {
   assignLead = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id = Number(req.params.id);
-      const { assign_to, remark, created_by } = req.body;
+      const { assign_to, final_assigned_leads, remark, created_by } = req.body;
 
       if (isNaN(id) || !created_by) {
         return res.status(400).json({
@@ -1046,14 +1077,15 @@ export class OnlineLeadController {
       }
 
       let callerName = "";
-      if (assign_to) {
+      const targetUserId = final_assigned_leads || assign_to;
+      if (targetUserId) {
         const callerUser = await prisma.userMaster.findUnique({
-          where: { id: Number(assign_to) },
+          where: { id: Number(targetUserId) },
         });
         if (!callerUser) {
           return res.status(404).json({
             success: false,
-            error: "Caller user not found",
+            error: "User not found",
           });
         }
         callerName = callerUser.user_name;
@@ -1063,7 +1095,8 @@ export class OnlineLeadController {
       const lead = await prisma.online_leads.update({
         where: { id },
         data: {
-          assign_to: assign_to ? Number(assign_to) : null,
+          ...(assign_to !== undefined && { assign_to: assign_to ? Number(assign_to) : null }),
+          ...(final_assigned_leads !== undefined && { final_assigned_leads: final_assigned_leads ? Number(final_assigned_leads) : null }),
         },
       });
 
@@ -1078,12 +1111,42 @@ export class OnlineLeadController {
       });
 
       if (existingLead) {
+        const finalExecutiveId = final_assigned_leads !== undefined ? (final_assigned_leads ? Number(final_assigned_leads) : null) : null;
+        if (finalExecutiveId) {
+          await prisma.leadMaster.update({
+            where: { id: existingLead.id },
+            data: { assign_to: finalExecutiveId },
+          });
+
+          const existingMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              lead_id: existingLead.id,
+              user_id: finalExecutiveId,
+              type: "ISM",
+            },
+          });
+          if (!existingMapping) {
+            await prisma.leadUserMapping.create({
+              data: {
+                vendor_id: lead.vendor_id,
+                account_id: existingLead.account_id ?? 0,
+                lead_id: existingLead.id,
+                user_id: finalExecutiveId,
+                type: "ISM",
+                status: "active",
+                created_by: Number(created_by),
+              },
+            });
+          }
+        }
+
         // Sync Caller to LeadUserMapping (type: "ISM")
         if (assign_to) {
           const callerId = Number(assign_to);
           const existingMapping = await prisma.leadUserMapping.findFirst({
             where: {
               lead_id: existingLead.id,
+              user_id: callerId,
               type: "ISM",
             },
           });
@@ -1092,7 +1155,6 @@ export class OnlineLeadController {
             await prisma.leadUserMapping.update({
               where: { id: existingMapping.id },
               data: {
-                user_id: callerId,
                 status: "active",
               },
             });
@@ -1109,21 +1171,13 @@ export class OnlineLeadController {
               },
             });
           }
-        } else {
-          // If Caller is cleared, remove ISM mappings for this lead
-          await prisma.leadUserMapping.deleteMany({
-            where: {
-              lead_id: existingLead.id,
-              type: "ISM",
-            },
-          });
         }
       }
 
       // Prepare assignment history remark
       const descParts = [];
-      if (callerName) descParts.push(`Caller: ${callerName}`);
-      else if (!assign_to) descParts.push("Caller: Unassigned");
+      if (callerName) descParts.push(`Assigned User: ${callerName}`);
+      else if (!targetUserId) descParts.push("Assigned User: Unassigned");
 
       const finalRemark =
         remark || `Lead assignments updated (${descParts.join(", ")})`;
@@ -1138,6 +1192,63 @@ export class OnlineLeadController {
           online_lead_status_id: lead.status || 1,
         },
       });
+
+      // If assigned to a Sales Executive (final_assigned_leads), trigger notifications
+      if (final_assigned_leads) {
+        try {
+          const salesExecUser = await prisma.userMaster.findUnique({
+            where: { id: Number(final_assigned_leads) },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
+          if (salesExecUser) {
+            const detailUrl = `/dashboard/online-leads/details/${lead.id}`;
+
+            // 1. In-App Notification
+            try {
+              await NotificationService.sendLeadAssignedToSalesExecutive({
+                vendor_id: lead.vendor_id,
+                sales_executive_id: salesExecUser.id,
+                sender_id: Number(created_by),
+                leadId: lead.id,
+                leadCode: lead.lead_code || undefined,
+                leadName: lead.leads_name,
+                redirectUrl: detailUrl,
+              });
+            } catch (inAppErr: any) {
+              console.error(
+                "[ASSIGN LEAD] Failed to send in-app notification to Sales Executive:",
+                inAppErr?.message,
+              );
+            }
+
+            // 2. Email Notification
+            if (salesExecUser.user_email) {
+              try {
+                await sendLeadAssignedToSalesExecutiveEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: salesExecUser.user_email,
+                  toName: salesExecUser.user_name,
+                  sales_executive_name: salesExecUser.user_name,
+                  leadCode: lead.lead_code || undefined,
+                  leadName: lead.leads_name,
+                  leadUrl: detailUrl,
+                });
+              } catch (emailErr: any) {
+                console.error(
+                  "[ASSIGN LEAD] Failed to send email notification to Sales Executive:",
+                  emailErr?.message,
+                );
+              }
+            }
+          }
+        } catch (notifyErr: any) {
+          console.error(
+            "[ASSIGN LEAD] Error notifying Sales Executive:",
+            notifyErr?.message,
+          );
+        }
+      }
 
       return res.status(200).json({
         success: true,
@@ -1406,11 +1517,13 @@ export class OnlineLeadController {
             await tx.leadMaster.update({
               where: { id: existingLead.id },
               data: {
-                franchise_id: targetStoreId,
-                lead_code: targetLeadCode,
+                ...(targetStoreId ? { franchise_id: targetStoreId } : {}),
+                lead_code: targetLeadCode || existingLead.lead_code || "SH-000",
                 is_draft: true,
-                assign_to: lead.final_assigned_leads,
-                source_id: resolvedSourceId,
+                ...(lead.final_assigned_leads
+                  ? { assign_to: lead.final_assigned_leads }
+                  : {}),
+                ...(resolvedSourceId ? { source_id: resolvedSourceId } : {}),
               },
             });
             leadIdForMapping = existingLead.id;
@@ -1661,6 +1774,9 @@ export class OnlineLeadController {
           await tx.leadProductStructureMapping.deleteMany({
             where: { lead_id: leadIdForMapping },
           });
+          await tx.leadProductStructureInstance.deleteMany({
+            where: { lead_id: leadIdForMapping },
+          });
 
           // Map ALL product types to this single lead
           const prodTypes = Array.isArray(lead.product_types)
@@ -1803,13 +1919,26 @@ export class OnlineLeadController {
             },
           });
           if (existingLead) {
-            await tx.leadMaster.update({
-              where: { id: existingLead.id },
-              data: {
-                franchise_id: targetStoreId,
-                lead_code: finalLeadCode || existingLead.lead_code,
-              },
-            });
+            const leadMasterUpdateData: any = {};
+
+            if (
+              targetStoreId &&
+              targetStoreId > 0 &&
+              targetStoreId !== existingLead.franchise_id
+            ) {
+              leadMasterUpdateData.franchise_id = targetStoreId;
+            }
+
+            if (!existingLead.lead_code && finalLeadCode) {
+              leadMasterUpdateData.lead_code = finalLeadCode;
+            }
+
+            if (Object.keys(leadMasterUpdateData).length > 0) {
+              await tx.leadMaster.update({
+                where: { id: existingLead.id },
+                data: leadMasterUpdateData,
+              });
+            }
 
             if (isStoreVisitDone && defaultMeetingType) {
               const existingVisit = await tx.leadClientVisit.findFirst({
@@ -1910,6 +2039,15 @@ export class OnlineLeadController {
         : [];
       const maxLen = Math.max(prodTypes.length, prodStructures.length);
 
+      const targetStore = await prisma.franchiseMaster.findUnique({
+        where: { id: Number(to_store_id) },
+        select: { franchise_name: true },
+      });
+      const targetStoreName = targetStore?.franchise_name || `Store #${to_store_id}`;
+      if (targetStore) {
+        storeLocation = targetStore.franchise_name;
+      }
+
       if (mark_store_visit_done) {
         const status = await prisma.online_lead_followup_status.findFirst({
           where: {
@@ -1931,15 +2069,14 @@ export class OnlineLeadController {
           where: { vendor_id: lead.vendor_id },
           orderBy: { id: "asc" },
         });
-
-        const store = await prisma.franchiseMaster.findUnique({
-          where: { id: Number(to_store_id) },
-          select: { franchise_name: true },
-        });
-        if (store) {
-          storeLocation = store.franchise_name;
-        }
       }
+
+      // Check feature flag for vendor
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: lead.vendor_id },
+        select: { is_online_lead_feature_enabled: true },
+      });
+      const isOnlineLeadFeatureEnabled = vendor?.is_online_lead_feature_enabled === true;
 
       // Run Store Assignment Logic
       // 1. Query active users for the target store
@@ -1963,7 +2100,7 @@ export class OnlineLeadController {
 
       const storeAdmins = storeUsers.filter((u) => {
         const role = u.user_type?.user_type?.toLowerCase() || "";
-        return role === "store manager" || role === "store admin";
+        return role === "store manager" || role === "store admin" || role === "store-admin";
       });
 
       const storeCallers = storeUsers.filter((u) => {
@@ -2006,6 +2143,26 @@ export class OnlineLeadController {
         assignmentMessage =
           "Store assigned; no active admin or caller found for auto-assignment";
       }
+
+      let assignedUserName = "";
+      if (finalAssignedUserId) {
+        const foundUser = storeUsers.find((u) => u.id === finalAssignedUserId);
+        if (foundUser) {
+          assignedUserName = foundUser.user_name;
+        } else {
+          const userFromDb = await prisma.userMaster.findUnique({
+            where: { id: finalAssignedUserId },
+            select: { user_name: true },
+          });
+          if (userFromDb) {
+            assignedUserName = userFromDb.user_name;
+          }
+        }
+      }
+
+      const historyRemark = assignedUserName
+        ? `The lead has been transferred to ${targetStoreName} and assigned to ${assignedUserName}.${isStoreVisitDone ? " (Status updated to Store Visit Done)" : ""}`
+        : `The lead has been transferred to ${targetStoreName}.${isStoreVisitDone ? " (Status updated to Store Visit Done)" : ""}`;
 
       // Check if store log is a preference (first log) or transfer
       const actionType = lead.store_id
@@ -2385,6 +2542,9 @@ export class OnlineLeadController {
             await tx.leadProductStructureMapping.deleteMany({
               where: { lead_id: leadIdForMapping },
             });
+            await tx.leadProductStructureInstance.deleteMany({
+              where: { lead_id: leadIdForMapping },
+            });
 
             // Map ALL product types to this single lead
             const mappedTypeIds: number[] = [];
@@ -2548,7 +2708,7 @@ export class OnlineLeadController {
             data: {
               vendor_id: lead.vendor_id,
               online_lead_id: lead.id,
-              remark: `Store assigned/transferred to Store ID: ${to_store_id}. ${assignmentMessage}${isStoreVisitDone ? " (Status updated to Store Visit Done)" : ""}`,
+              remark: historyRemark,
               created_by: Number(selected_by),
               store_id: Number(to_store_id),
               online_lead_status_id: targetStatusId || lead.status || 1,
@@ -2561,6 +2721,67 @@ export class OnlineLeadController {
           return { updatedLead, storeLog };
         },
       );
+
+      // If a Sales Executive is assigned, trigger notifications
+      if (finalAssignedUserId) {
+        try {
+          const salesExecUser = await prisma.userMaster.findUnique({
+            where: { id: finalAssignedUserId },
+            include: { user_type: true },
+          });
+
+          const role = salesExecUser?.user_type?.user_type?.toLowerCase() || "";
+          if (
+            salesExecUser &&
+            (role === "sales executive" || role === "sales-executive")
+          ) {
+            const detailUrl = `/dashboard/online-leads/details/${lead.id}`;
+
+            // 1. In-App Notification
+            try {
+              await NotificationService.sendLeadAssignedToSalesExecutive({
+                vendor_id: lead.vendor_id,
+                sales_executive_id: salesExecUser.id,
+                sender_id: Number(selected_by),
+                leadId: lead.id,
+                leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                leadName: lead.leads_name,
+                redirectUrl: detailUrl,
+              });
+            } catch (inAppErr: any) {
+              console.error(
+                "[ASSIGN STORE] Failed to send in-app notification to Sales Executive:",
+                inAppErr?.message,
+              );
+            }
+
+            // 2. Email Notification
+            if (salesExecUser.user_email) {
+              try {
+                await sendLeadAssignedToSalesExecutiveEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: salesExecUser.user_email,
+                  toName: salesExecUser.user_name,
+                  sales_executive_name: salesExecUser.user_name,
+                  leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                  leadName: lead.leads_name,
+                  leadUrl: detailUrl,
+                });
+              } catch (emailErr: any) {
+                console.error(
+                  "[ASSIGN STORE] Failed to send email notification to Sales Executive:",
+                  emailErr?.message,
+                );
+              }
+            }
+          }
+        } catch (notifyErr: any) {
+          console.error(
+            "[ASSIGN STORE] Error notifying Sales Executive:",
+            notifyErr?.message,
+          );
+        }
+      }
 
       return res.status(200).json({
         success: true,
@@ -2654,6 +2875,41 @@ export class OnlineLeadController {
       return res.status(500).json({
         success: false,
         error: error.message || "Failed to fetch store callers",
+      });
+    }
+  };
+
+  // Fetch Store Sales Executives
+  fetchStoreSalesExecutives = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const storeId = req.params.storeId ? Number(req.params.storeId) : undefined;
+      const vendorId = req.query.vendor_id ? Number(req.query.vendor_id) : undefined;
+
+      const storeUsers = await prisma.userMaster.findMany({
+        where: {
+          ...(storeId && !isNaN(storeId) ? { franchise_id: storeId } : {}),
+          ...(vendorId && !isNaN(vendorId) ? { vendor_id: vendorId } : {}),
+          status: "active",
+        },
+        include: {
+          user_type: true,
+        },
+      });
+
+      const storeSalesExecutives = storeUsers.filter((u) => {
+        const role = u.user_type?.user_type?.toLowerCase() || "";
+        return role === "sales executive" || role === "sales-executive";
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: storeSalesExecutives.map((c) => ({ id: c.id, name: c.user_name, user_name: c.user_name })),
+      });
+    } catch (error: any) {
+      console.error("[ONLINE LEAD CONTROLLER] fetchStoreSalesExecutives error:", error);
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to fetch store sales executives",
       });
     }
   };
@@ -2844,6 +3100,7 @@ export class OnlineLeadController {
         site_address,
         remark,
         priority,
+        city,
         source_id,
         site_type_id,
         refered_by,
@@ -2914,6 +3171,7 @@ export class OnlineLeadController {
           }),
           ...(remark !== undefined && { remark: remark || null }),
           ...(priority !== undefined && { priority: priority || null }),
+          ...(city !== undefined && { city: city || null }),
           ...(source_id !== undefined && {
             source_id: source_id ? Number(source_id) : null,
           }),
@@ -3204,9 +3462,15 @@ export class OnlineLeadController {
           ["remark", "remarks", "description", "notes"].includes(k),
         );
 
-        // Optional City, Budget, Property Type & Survey Columns
+        // Optional City, Campaign, Form, Budget, Property Type & Survey Columns
         const cityKey = Object.keys(rowData).find((k) =>
           ["city", "cityname"].includes(k),
+        );
+        const campaignNameKey = Object.keys(rowData).find(
+          (k) => k === "campaignname" || k === "campaign" || (k.includes("campaign") && !k.includes("id")),
+        );
+        const formNameKey = Object.keys(rowData).find(
+          (k) => k === "formname" || k === "form" || (k.includes("form") && !k.includes("id")),
         );
         const budgetKey = Object.keys(rowData).find((k) =>
           ["budget", "leadbudget"].includes(k),
@@ -3254,7 +3518,45 @@ export class OnlineLeadController {
             .replace(/_/g, " ")
             .trim();
 
-        const city = cityKey ? cleanVal(rowData[cityKey]) : "";
+        const extractCityToken = (text: string): string => {
+          if (!text) return "";
+          const cleaned = String(text).trim();
+          if (cleaned.startsWith("c:") || cleaned.startsWith("f:") || /^\d+$/.test(cleaned)) {
+            return "";
+          }
+          const parts = cleaned.split(/[\s\/|\-_()]+/);
+          const skipWords = new Set([
+            "lead", "form", "campaign", "cbo", "retargeting", "warm", "audience",
+            "expansion", "geo", "june", "july", "august", "september", "october",
+            "november", "december", "january", "february", "march", "april", "may",
+            "2024", "2025", "2026", "ad", "set", "ads", "fb", "ig", "facebook", "instagram"
+          ]);
+          for (const part of parts) {
+            const cleanPart = part.replace(/[^a-zA-Z]/g, "").trim();
+            if (
+              cleanPart.length >= 3 &&
+              !skipWords.has(cleanPart.toLowerCase()) &&
+              !cleanPart.toLowerCase().startsWith("c")
+            ) {
+              return cleanPart.charAt(0).toUpperCase() + cleanPart.slice(1).toLowerCase();
+            }
+          }
+          for (const part of parts) {
+            const cleanPart = part.replace(/[^a-zA-Z]/g, "").trim();
+            if (cleanPart.length >= 3 && !skipWords.has(cleanPart.toLowerCase())) {
+              return cleanPart.charAt(0).toUpperCase() + cleanPart.slice(1).toLowerCase();
+            }
+          }
+          return "";
+        };
+
+        let rawCityVal = cityKey ? cleanVal(rowData[cityKey]) : "";
+        let city = extractCityToken(rawCityVal);
+        if (!city) {
+          const rawCampaign = campaignNameKey ? rowData[campaignNameKey] : "";
+          const rawForm = formNameKey ? rowData[formNameKey] : "";
+          city = extractCityToken(rawCampaign) || extractCityToken(rawForm);
+        }
         const budget = budgetKey ? cleanVal(rowData[budgetKey]) : "";
         const propertyType = propertyTypeKey
           ? cleanVal(rowData[propertyTypeKey])
@@ -3433,6 +3735,7 @@ export class OnlineLeadController {
                 lastname: lastname || null,
                 alt_contact_no: cleanAltContact,
                 site_address: siteAddress || null,
+                city: city || null,
                 priority,
                 product_types: [],
                 product_structures: [],
@@ -3471,6 +3774,77 @@ export class OnlineLeadController {
             name: leads_name,
             error: friendlyError,
           });
+        }
+      }
+
+      if (successCount > 0) {
+        try {
+          const telecallers = await prisma.userMaster.findMany({
+            where: {
+              vendor_id: Number(vendor_id),
+              status: "active",
+              user_type: {
+                user_type: {
+                  in: [
+                    "telecaller",
+                    "telecaller team lead",
+                    "telecaller-team-lead",
+                    "store caller",
+                    "caller",
+                  ],
+                  mode: "insensitive",
+                },
+              },
+            },
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+            },
+          });
+
+          const leadPoolUrl = `/dashboard/online-leads?tab=pool`;
+
+          for (const caller of telecallers) {
+            // 1. Send In-App Notification
+            try {
+              await NotificationService.sendNewLeadsAddedLeadPool({
+                vendor_id: Number(vendor_id),
+                telecaller_id: caller.id,
+                sender_id: Number(created_by),
+                leadCount: successCount,
+                redirectUrl: leadPoolUrl,
+              });
+            } catch (inAppErr: any) {
+              console.error(
+                `[BULK UPLOAD] Failed to send in-app notification to caller ${caller.id}:`,
+                inAppErr?.message,
+              );
+            }
+
+            // 2. Send Email Notification
+            if (caller.user_email) {
+              try {
+                await sendNewLeadsAddedLeadPoolEmail({
+                  vendor_id: Number(vendor_id),
+                  toEmail: caller.user_email,
+                  toName: caller.user_name,
+                  telecaller_name: caller.user_name,
+                  leadPoolUrl: leadPoolUrl,
+                });
+              } catch (emailErr: any) {
+                console.error(
+                  `[BULK UPLOAD] Failed to send email notification to caller ${caller.id}:`,
+                  emailErr?.message,
+                );
+              }
+            }
+          }
+        } catch (notifyErr: any) {
+          console.error(
+            "[BULK UPLOAD] Error notifying telecallers:",
+            notifyErr?.message,
+          );
         }
       }
 
@@ -3517,8 +3891,30 @@ export class OnlineLeadController {
           .json({ success: false, error: "Lead not found" });
       }
 
-      await prisma.online_leads.delete({
-        where: { id },
+      await prisma.$transaction(async (tx) => {
+        if (lead.lead_master_id) {
+          await tx.leadMaster.updateMany({
+            where: { id: lead.lead_master_id },
+            data: { is_deleted: true },
+          });
+        }
+
+        await tx.online_lead_history.deleteMany({
+          where: { online_lead_id: id },
+        });
+        await tx.online_lead_call_log.deleteMany({
+          where: { online_lead_id: id },
+        });
+        await tx.online_lead_store_log.deleteMany({
+          where: { online_lead_id: id },
+        });
+        await tx.telecaller_campaign_leads.deleteMany({
+          where: { online_lead_id: id },
+        });
+
+        await tx.online_leads.delete({
+          where: { id },
+        });
       });
 
       return res
@@ -3529,6 +3925,85 @@ export class OnlineLeadController {
       return res.status(500).json({
         success: false,
         error: error.message || "Failed to delete lead",
+      });
+    }
+  };
+
+  // POST /online-leads/delete-all-pool
+  deleteAllPoolLeads = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    try {
+      const { vendor_id } = req.body;
+      if (!vendor_id) {
+        return res
+          .status(400)
+          .json({ success: false, error: "vendor_id is required" });
+      }
+
+      const vendorId = Number(vendor_id);
+      const leads = await prisma.online_leads.findMany({
+        where: { vendor_id: vendorId },
+        select: { id: true, lead_master_id: true },
+      });
+
+      if (leads.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "No lead pool leads found to delete",
+          deletedCount: 0,
+        });
+      }
+
+      const leadIds = leads.map((l) => l.id);
+      const leadMasterIds = leads
+        .map((l) => l.lead_master_id)
+        .filter((id): id is number => id !== null);
+
+      let deletedCount = 0;
+
+      await prisma.$transaction(async (tx) => {
+        if (leadMasterIds.length > 0) {
+          await tx.leadMaster.updateMany({
+            where: { id: { in: leadMasterIds } },
+            data: { is_deleted: true },
+          });
+        }
+
+        await tx.online_lead_history.deleteMany({
+          where: { online_lead_id: { in: leadIds } },
+        });
+        await tx.online_lead_call_log.deleteMany({
+          where: { online_lead_id: { in: leadIds } },
+        });
+        await tx.online_lead_store_log.deleteMany({
+          where: { online_lead_id: { in: leadIds } },
+        });
+        await tx.telecaller_campaign_leads.deleteMany({
+          where: { online_lead_id: { in: leadIds } },
+        });
+
+        const deleteResult = await tx.online_leads.deleteMany({
+          where: { id: { in: leadIds } },
+        });
+
+        deletedCount = deleteResult.count;
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: `Successfully deleted ${deletedCount} leads and all associated records`,
+        deletedCount,
+      });
+    } catch (error: any) {
+      console.error(
+        "[ONLINE LEAD CONTROLLER] deleteAllPoolLeads error:",
+        error
+      );
+      return res.status(500).json({
+        success: false,
+        error: error.message || "Failed to delete all lead pool leads",
       });
     }
   };
@@ -3702,8 +4177,17 @@ export class OnlineLeadController {
           pending_remark: lead.remark,
           pending_assign_to: lead.final_assigned_leads,
           pending_created_by: Number(user_id),
+          updated_at: new Date(),
         },
       });
+
+      const cleanContact = String(lead.contact || "").replace(/\D/g, "");
+      if (cleanContact) {
+        await prisma.leadMaster.updateMany({
+          where: { vendor_id: lead.vendor_id, contact_no: cleanContact },
+          data: { updated_at: new Date() },
+        });
+      }
 
       await prisma.online_lead_history.create({
         data: {
@@ -4172,6 +4656,9 @@ export class OnlineLeadController {
         await tx.leadProductStructureMapping.deleteMany({
           where: { lead_id: leadIdForMapping },
         });
+        await tx.leadProductStructureInstance.deleteMany({
+          where: { lead_id: leadIdForMapping },
+        });
 
         // Map ALL product types to this single lead
         const mappedTypeIds: number[] = [];
@@ -4322,6 +4809,7 @@ export class OnlineLeadController {
             pending_remark: null,
             pending_assign_to: null,
             pending_created_by: null,
+            updated_at: new Date(),
           },
         });
 
@@ -4338,6 +4826,97 @@ export class OnlineLeadController {
 
         return updated;
       });
+
+      // Trigger notification to Telecaller on approval
+      let resolvedCallerId =
+        (lead as any).telecaller_id || lead.assign_to || lead.created_by;
+
+      if (!resolvedCallerId || Number(resolvedCallerId) === Number(user_id)) {
+        const lastCall = await prisma.online_lead_call_log.findFirst({
+          where: { online_lead_id: lead.id },
+          orderBy: { id: "desc" },
+          select: { telecaller_id: true },
+        });
+        if (lastCall?.telecaller_id && Number(lastCall.telecaller_id) !== Number(user_id)) {
+          resolvedCallerId = lastCall.telecaller_id;
+        } else {
+          const lastHist = await prisma.online_lead_history.findFirst({
+            where: {
+              online_lead_id: lead.id,
+              created_by: { not: Number(user_id) },
+            },
+            orderBy: { id: "desc" },
+            select: { created_by: true },
+          });
+          if (lastHist?.created_by) {
+            resolvedCallerId = lastHist.created_by;
+          }
+        }
+      }
+
+      if (resolvedCallerId) {
+        try {
+          const telecallerUser = await prisma.userMaster.findUnique({
+            where: { id: Number(resolvedCallerId) },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
+          const approverUser = await prisma.userMaster.findUnique({
+            where: { id: Number(user_id) },
+            select: { user_name: true },
+          });
+
+          const approverName = approverUser?.user_name || "Sales Executive";
+          const openLeadUrl = `/dashboard/leads/leadstable`;
+
+          if (telecallerUser) {
+            // 1. In-App Notification
+            try {
+              await NotificationService.sendLeadApprovedBySalesExecutive({
+                vendor_id: lead.vendor_id,
+                telecaller_id: telecallerUser.id,
+                sender_id: Number(user_id),
+                leadId: lead.id,
+                leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                leadName: lead.leads_name,
+                sales_executive_name: approverName,
+                redirectUrl: openLeadUrl,
+              });
+            } catch (inAppErr: any) {
+              console.error(
+                "[APPROVE LEAD] Failed to send in-app notification:",
+                inAppErr?.message,
+              );
+            }
+
+            // 2. Email Notification
+            if (telecallerUser.user_email) {
+              try {
+                await sendLeadApprovedBySalesExecutiveEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: telecallerUser.user_email,
+                  toName: telecallerUser.user_name,
+                  telecaller_name: telecallerUser.user_name,
+                  sales_executive_name: approverName,
+                  leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                  leadName: lead.leads_name,
+                  openLeadUrl,
+                });
+              } catch (emailErr: any) {
+                console.error(
+                  "[APPROVE LEAD] Failed to send email notification:",
+                  emailErr?.message,
+                );
+              }
+            }
+          }
+        } catch (notifyErr: any) {
+          console.error(
+            "[APPROVE LEAD] Error notifying Telecaller:",
+            notifyErr?.message,
+          );
+        }
+      }
 
       return res.status(200).json({
         success: true,
@@ -4573,6 +5152,102 @@ export class OnlineLeadController {
 
         return updated;
       });
+
+      // Trigger notification to Telecaller on rejection
+      let callerId =
+        (lead as any).telecaller_id || lead.assign_to || lead.created_by;
+
+      if (!callerId || Number(callerId) === Number(user_id)) {
+        const lastCall = await prisma.online_lead_call_log.findFirst({
+          where: { online_lead_id: lead.id },
+          orderBy: { id: "desc" },
+          select: { telecaller_id: true },
+        });
+        if (lastCall?.telecaller_id && Number(lastCall.telecaller_id) !== Number(user_id)) {
+          callerId = lastCall.telecaller_id;
+        } else {
+          const lastHist = await prisma.online_lead_history.findFirst({
+            where: {
+              online_lead_id: lead.id,
+              created_by: { not: Number(user_id) },
+            },
+            orderBy: { id: "desc" },
+            select: { created_by: true },
+          });
+          if (lastHist?.created_by) {
+            callerId = lastHist.created_by;
+          }
+        }
+      }
+
+      const rejectionReason =
+        req.body.reason || req.body.remark || "Lead rejected by Sales Executive";
+
+      if (callerId) {
+        try {
+          const telecallerUser = await prisma.userMaster.findUnique({
+            where: { id: Number(callerId) },
+            select: { id: true, user_name: true, user_email: true },
+          });
+
+          const rejectorUser = await prisma.userMaster.findUnique({
+            where: { id: Number(user_id) },
+            select: { user_name: true },
+          });
+
+          const rejectorName = rejectorUser?.user_name || "Sales Executive";
+          const lostLeadUrl = `/dashboard/online-leads/details/${lead.id}?tab=lost`;
+
+          if (telecallerUser) {
+            // 1. In-App Notification
+            try {
+              await NotificationService.sendLeadRejectedBySalesExecutive({
+                vendor_id: lead.vendor_id,
+                telecaller_id: telecallerUser.id,
+                sender_id: Number(user_id),
+                leadId: lead.id,
+                leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                leadName: lead.leads_name,
+                sales_executive_name: rejectorName,
+                rejection_reason: rejectionReason,
+                redirectUrl: lostLeadUrl,
+              });
+            } catch (inAppErr: any) {
+              console.error(
+                "[REJECT LEAD] Failed to send in-app notification:",
+                inAppErr?.message,
+              );
+            }
+
+            // 2. Email Notification
+            if (telecallerUser.user_email) {
+              try {
+                await sendLeadRejectedBySalesExecutiveEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: telecallerUser.user_email,
+                  toName: telecallerUser.user_name,
+                  telecaller_name: telecallerUser.user_name,
+                  sales_executive_name: rejectorName,
+                  leadCode: updatedLead.lead_code || lead.lead_code || undefined,
+                  leadName: lead.leads_name,
+                  rejection_reason: rejectionReason,
+                  lostLeadUrl,
+                });
+              } catch (emailErr: any) {
+                console.error(
+                  "[REJECT LEAD] Failed to send email notification:",
+                  emailErr?.message,
+                );
+              }
+            }
+          }
+        } catch (notifyErr: any) {
+          console.error(
+            "[REJECT LEAD] Error notifying Telecaller:",
+            notifyErr?.message,
+          );
+        }
+      }
 
       return res.status(200).json({
         success: true,
