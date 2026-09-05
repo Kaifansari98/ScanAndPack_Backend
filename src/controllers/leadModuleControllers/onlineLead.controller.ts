@@ -1100,17 +1100,16 @@ export class OnlineLeadController {
         },
       });
 
-      // Synchronize with LeadMaster if already converted
-      const contact_no = lead.contact.replace(/\D/g, "");
-      const existingLead = await prisma.leadMaster.findFirst({
-        where: {
-          vendor_id: lead.vendor_id,
-          contact_no,
-          is_deleted: false,
-        },
-      });
+      // Synchronize with LeadMaster ONLY if this online lead is already converted
+      const existingLead = lead.lead_master_id
+        ? await prisma.leadMaster.findUnique({
+            where: {
+              id: lead.lead_master_id,
+            },
+          })
+        : null;
 
-      if (existingLead) {
+      if (existingLead && !existingLead.is_deleted) {
         const finalExecutiveId = final_assigned_leads !== undefined ? (final_assigned_leads ? Number(final_assigned_leads) : null) : null;
         if (finalExecutiveId) {
           await prisma.leadMaster.update({
@@ -1478,15 +1477,6 @@ export class OnlineLeadController {
             resolvedSourceId = defaultOnlineSource.id;
           }
 
-          const existingLeads = await tx.leadMaster.findMany({
-            where: {
-              vendor_id: lead.vendor_id,
-              contact_no,
-              is_deleted: false,
-            },
-            orderBy: { id: "asc" },
-          });
-
           const loopLeadCode = await this.updateLeadCodeForStore(
             tx,
             lead.id,
@@ -1497,12 +1487,18 @@ export class OnlineLeadController {
           finalLeadCodeOnlineLead =
             loopLeadCode || finalLeadCode || lead.lead_code;
 
-          const existingLead = existingLeads[0] || null;
+          const existingLead = lead.lead_master_id
+            ? await tx.leadMaster.findUnique({
+                where: {
+                  id: lead.lead_master_id,
+                },
+              })
+            : null;
 
           let leadIdForMapping: number;
           let accountIdForMapping: number;
 
-          if (existingLead) {
+          if (existingLead && !existingLead.is_deleted) {
             const targetLeadCode =
               existingLead.lead_code &&
               existingLead.lead_code.trim() !== "" &&
@@ -1528,43 +1524,6 @@ export class OnlineLeadController {
             });
             leadIdForMapping = existingLead.id;
             accountIdForMapping = existingLead.account_id ?? 0;
-
-            // Ensure all requirement leads for this contact get assigned to store & sales executive
-            for (let k = 1; k < existingLeads.length; k++) {
-              await tx.leadMaster.update({
-                where: { id: existingLeads[k].id },
-                data: {
-                  franchise_id: lead.store_id,
-                  is_deleted: false,
-                  ...(lead.final_assigned_leads
-                    ? { assign_to: lead.final_assigned_leads }
-                    : {}),
-                },
-              });
-
-              if (lead.final_assigned_leads) {
-                const existingMapping = await tx.leadUserMapping.findFirst({
-                  where: {
-                    lead_id: existingLeads[k].id,
-                    user_id: lead.final_assigned_leads,
-                    type: "ISM",
-                  },
-                });
-                if (!existingMapping) {
-                  await tx.leadUserMapping.create({
-                    data: {
-                      vendor_id: lead.vendor_id,
-                      account_id: existingLeads[k].account_id ?? 0,
-                      lead_id: existingLeads[k].id,
-                      user_id: lead.final_assigned_leads,
-                      type: "ISM",
-                      status: "active",
-                      created_by: Number(telecaller_id || lead.created_by || 1),
-                    },
-                  });
-                }
-              }
-            }
 
             // Sync Caller to LeadUserMapping (type: "ISM")
             if (lead.assign_to) {
@@ -1911,14 +1870,14 @@ export class OnlineLeadController {
           }
         } else {
           // If not creating a draft, but the lead is already converted, sync store/code updates to the LeadMaster record
-          const existingLead = await tx.leadMaster.findFirst({
-            where: {
-              vendor_id: lead.vendor_id,
-              contact_no,
-              is_deleted: false,
-            },
-          });
-          if (existingLead) {
+          const existingLead = lead.lead_master_id
+            ? await tx.leadMaster.findUnique({
+                where: {
+                  id: lead.lead_master_id,
+                },
+              })
+            : null;
+          if (existingLead && !existingLead.is_deleted) {
             const leadMasterUpdateData: any = {};
 
             if (
@@ -2193,27 +2152,23 @@ export class OnlineLeadController {
             },
           });
 
-          // Sync with LeadMaster if already converted
-          const contact_no = lead.contact.replace(/\D/g, "");
-          const existingLeads = await tx.leadMaster.findMany({
-            where: {
-              vendor_id: lead.vendor_id,
-              contact_no,
-              is_deleted: false,
-            },
-            orderBy: { id: "asc" },
-          });
+          const contact_no = lead.contact ? lead.contact.replace(/\D/g, "") : "";
 
-          if (existingLeads.length > 0 && !isStoreVisitDone) {
-            for (let i = 0; i < existingLeads.length; i++) {
-              const existingLead = existingLeads[i];
-              const codeInput = i === 0 ? generatedCode : null;
+          // Sync with LeadMaster ONLY if this online lead is already converted
+          if (lead.lead_master_id && !isStoreVisitDone) {
+            const existingLead = await tx.leadMaster.findUnique({
+              where: {
+                id: lead.lead_master_id,
+              },
+            });
+
+            if (existingLead && !existingLead.is_deleted) {
               const loopLeadCode = await this.updateLeadCodeForStore(
                 tx,
                 lead.id,
                 Number(to_store_id),
                 lead.vendor_id,
-                codeInput,
+                generatedCode,
               );
               const targetLeadCode =
                 existingLead.lead_code && existingLead.lead_code.trim() !== ""
@@ -2277,12 +2232,18 @@ export class OnlineLeadController {
               generatedCode,
             );
 
-            const existingLead = existingLeads[0] || null;
+            const existingLead = lead.lead_master_id
+              ? await tx.leadMaster.findUnique({
+                  where: {
+                    id: lead.lead_master_id,
+                  },
+                })
+              : null;
 
             let leadIdForMapping: number;
             let accountIdForMapping: number;
 
-            if (existingLead) {
+            if (existingLead && !existingLead.is_deleted) {
               const targetLeadCode =
                 existingLead.lead_code &&
                 existingLead.lead_code.trim() !== "" &&
@@ -2302,43 +2263,6 @@ export class OnlineLeadController {
               });
               leadIdForMapping = existingLead.id;
               accountIdForMapping = existingLead.account_id ?? 0;
-
-              // Ensure all requirement leads for this contact get assigned to store & sales executive
-              for (let k = 1; k < existingLeads.length; k++) {
-                await tx.leadMaster.update({
-                  where: { id: existingLeads[k].id },
-                  data: {
-                    franchise_id: Number(to_store_id),
-                    is_deleted: false,
-                    ...(finalAssignedUserId
-                      ? { assign_to: finalAssignedUserId }
-                      : {}),
-                  },
-                });
-
-                if (finalAssignedUserId) {
-                  const existingMapping = await tx.leadUserMapping.findFirst({
-                    where: {
-                      lead_id: existingLeads[k].id,
-                      user_id: finalAssignedUserId,
-                      type: "ISM",
-                    },
-                  });
-                  if (!existingMapping) {
-                    await tx.leadUserMapping.create({
-                      data: {
-                        vendor_id: lead.vendor_id,
-                        account_id: existingLeads[k].account_id ?? 0,
-                        lead_id: existingLeads[k].id,
-                        user_id: finalAssignedUserId,
-                        type: "ISM",
-                        status: "active",
-                        created_by: Number(selected_by || lead.created_by || 1),
-                      },
-                    });
-                  }
-                }
-              }
 
               if (lead.assign_to) {
                 const callerId = lead.assign_to;
@@ -4393,14 +4317,13 @@ export class OnlineLeadController {
           rawContact.length > 10 && rawContact.startsWith("91")
             ? rawContact.slice(-10)
             : rawContact;
-        const existingLeads = await tx.leadMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            contact_no,
-            is_deleted: false,
-          },
-          orderBy: { id: "asc" },
-        });
+        const existingLead = lead.lead_master_id
+          ? await tx.leadMaster.findUnique({
+              where: {
+                id: lead.lead_master_id,
+              },
+            })
+          : null;
 
         let resolvedSourceId = null;
         const defaultOnlineSource = await tx.sourceMaster.findFirst({
@@ -4429,12 +4352,10 @@ export class OnlineLeadController {
         });
         const mainPipelineStatusId = statusType?.id || 1;
 
-        const existingLead = existingLeads[0] || null;
-
         let leadIdForMapping: number;
         let accountIdForMapping: number;
 
-        if (existingLead) {
+        if (existingLead && !existingLead.is_deleted) {
           const targetLeadCode =
             existingLead.lead_code &&
             existingLead.lead_code.trim() !== "" &&
@@ -4455,16 +4376,6 @@ export class OnlineLeadController {
           });
           leadIdForMapping = existingLead.id;
           accountIdForMapping = existingLead.account_id ?? 0;
-
-          // Soft-delete extra orphan draft leads for same contact
-          for (let k = 1; k < existingLeads.length; k++) {
-            if (existingLeads[k].is_draft) {
-              await tx.leadMaster.update({
-                where: { id: existingLeads[k].id },
-                data: { is_deleted: true },
-              });
-            }
-          }
 
           if (finalAssignedLeads) {
             const existingMapping = await tx.leadUserMapping.findFirst({
@@ -4773,26 +4684,6 @@ export class OnlineLeadController {
             }
           }
         }
-        // Soft-delete any previous premature draft leads or unassigned extra leads for this contact number
-        const orphanDraftLeads = await tx.leadMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            contact_no,
-            is_deleted: false,
-            id: { not: leadIdForMapping },
-          },
-          select: { id: true, is_draft: true, assign_to: true },
-        });
-
-        for (const draftLead of orphanDraftLeads) {
-          if (draftLead.is_draft || !draftLead.assign_to) {
-            await tx.leadMaster.update({
-              where: { id: draftLead.id },
-              data: { is_deleted: true },
-            });
-          }
-        }
-
         await unmarkDraftAndSeparate(tx, leadIdForMapping);
 
         const updated = await tx.online_leads.update({
@@ -5009,25 +4900,24 @@ export class OnlineLeadController {
           rawContact.length > 10 && rawContact.startsWith("91")
             ? rawContact.slice(-10)
             : rawContact;
-        const existingLeads = await tx.leadMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            contact_no,
-            is_deleted: false,
-          },
-          orderBy: { id: "asc" },
-        });
-
-        let targetLeadId: number | null = existingLeads[0]
-          ? existingLeads[0].id
-          : null;
-        let targetAccountId: number | null = existingLeads[0]
-          ? existingLeads[0].account_id
+        const existingLead = lead.lead_master_id
+          ? await tx.leadMaster.findUnique({
+              where: {
+                id: lead.lead_master_id,
+              },
+            })
           : null;
 
-        if (existingLeads[0]) {
+        let targetLeadId: number | null = existingLead
+          ? existingLead.id
+          : null;
+        let targetAccountId: number | null = existingLead
+          ? existingLead.account_id
+          : null;
+
+        if (existingLead && !existingLead.is_deleted) {
           await tx.leadMaster.update({
-            where: { id: existingLeads[0].id },
+            where: { id: existingLead.id },
             data: {
               activity_status: "lostApproval",
               activity_status_remark:

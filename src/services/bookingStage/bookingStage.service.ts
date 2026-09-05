@@ -1411,6 +1411,7 @@ export class BookingStageService {
     const whereClause: Prisma.LeadMasterWhereInput = {
       vendor_id: vendorId,
       is_deleted: false,
+      is_draft: { not: true },
       statusType: { tag, vendor_id: vendorId },
       activity_status: "onGoing",
       ...(excludedLeadIds.length > 0 && { id: { notIn: excludedLeadIds } }),
@@ -1486,6 +1487,7 @@ export class BookingStageService {
         where: {
           vendor_id: vendorId,
           is_deleted: false,
+          is_draft: { not: true },
           statusType: { tag: "Type 1", vendor_id: vendorId },
           activity_status: { in: ["onGoing", "lostApproval"] },
         },
@@ -1562,6 +1564,7 @@ export class BookingStageService {
       where: {
         id: { in: leadIds },
         is_deleted: false,
+        is_draft: { not: true },
         vendor_id: vendorId,
         statusType: { tag: "Type 1", vendor_id: vendorId },
         activity_status: { in: ["onGoing", "lostApproval"] },
@@ -2117,6 +2120,7 @@ export class BookingStageService {
         ? { franchise_id: franchiseId }
         : {}),
       is_deleted: false,
+      is_draft: { not: true },
       ...(statusIds !== null && { status_id: { in: statusIds } }),
       ...(materialIssueReadyOnly && {
         is_so_value_received: true,
@@ -4992,6 +4996,7 @@ export class BookingStageService {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
+        is_draft: { not: true },
         status_id: { in: statusIds },
         statusType: shouldExcludeLaterStageTags
           ? {
@@ -5119,6 +5124,7 @@ export class BookingStageService {
     const baseWhere: Prisma.LeadMasterWhereInput = {
       id: { in: leadIds },
       is_deleted: false,
+      is_draft: { not: true },
       vendor_id: vendorId,
       status_id: { in: statusIds },
       statusType: shouldExcludeLaterStageTags
