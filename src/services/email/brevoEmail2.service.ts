@@ -58,6 +58,13 @@ export const SMALL_ORDER_TEMPLATE_KEYS = {
   SMALL_ORDER_DISPATCHED: "SMALL_ORDER_DISPATCHED",
 };
 
+export const LEAD_POOL_TEMPLATE_KEYS = {
+  NEW_LEADS_ADDED_LEAD_POOL: "NEW_LEADS_ADDED_LEAD_POOL",
+  LEAD_ASSIGNED_TO_SALES_EXECUTIVE: "LEAD_ASSIGNED_TO_SALES_EXECUTIVE",
+  LEAD_APPROVED_BY_SALES_EXECUTIVE: "LEAD_APPROVED_BY_SALES_EXECUTIVE",
+  LEAD_REJECTED_BY_SALES_EXECUTIVE: "LEAD_REJECTED_BY_SALES_EXECUTIVE",
+};
+
 const renderTemplate = (template: string, values: Record<string, string>) => {
   return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, key) => {
     return Object.prototype.hasOwnProperty.call(values, key)
@@ -5350,3 +5357,726 @@ export const sendFastProductionFullyApprovedFactoryEmail = async (payload: {
     html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
   }, identity);
 };
+
+export type NewLeadsAddedLeadPoolEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  telecaller_name?: string;
+  leadPoolUrl?: string;
+};
+
+export const sendNewLeadsAddedLeadPoolEmail = async (
+  payload: NewLeadsAddedLeadPoolEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const telecallerName = payload.telecaller_name || payload.toName || "Telecaller";
+  const defaultSubject = `New Leads Added in Lead Pool`;
+
+  const defaultText = [
+    `Hi ${telecallerName},`,
+    "",
+    "New leads have been added in the Lead Pool.",
+    "Please review the lead details and do follow up.",
+    "",
+    payload.leadPoolUrl ? `View Lead: ${payload.leadPoolUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @media only screen and (max-width: 600px) {
+      .card {
+        padding: 16px !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div class="card" style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        New Leads Added in Lead Pool
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${telecallerName},
+      </p>
+      <p style="margin:0 0 8px;color:#4b5563;">
+        New leads have been added in the Lead Pool.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the lead details and do follow up.
+      </p>
+      ${
+        payload.leadPoolUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${payload.leadPoolUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: telecallerName,
+    telecaller_name: telecallerName,
+    leadPoolUrl: payload.leadPoolUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_POOL_TEMPLATE_KEYS.NEW_LEADS_ADDED_LEAD_POOL,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_POOL_TEMPLATE_KEYS.NEW_LEADS_ADDED_LEAD_POOL,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || telecallerName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export type LeadAssignedToSalesExecutiveEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  sales_executive_name?: string;
+  leadCode?: string;
+  leadName?: string;
+  leadUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendLeadAssignedToSalesExecutiveEmail = async (
+  payload: LeadAssignedToSalesExecutiveEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const salesExecutiveName =
+    payload.sales_executive_name || payload.toName || "Sales Executive";
+  const leadLabel =
+    payload.leadCode && payload.leadName
+      ? `${payload.leadCode} - ${payload.leadName}`
+      : payload.leadCode || payload.leadName || "Lead";
+
+  const targetUrl = payload.leadUrl || payload.ctaLink || payload.projectUrl || "";
+  const defaultSubject = `New Lead ${leadLabel} assigned to you`;
+
+  const defaultText = [
+    `Hi ${salesExecutiveName},`,
+    "",
+    `A new lead ${leadLabel} has been assigned to you for review.`,
+    "Please accept or reject the lead.",
+    "",
+    targetUrl ? `Review Lead: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .card {
+        padding: 16px !important;
+      }
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div class="card" style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        New Lead Assigned
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${salesExecutiveName},
+      </p>
+      <p style="margin:0 0 12px;color:#4b5563;">
+        A new lead <strong>${leadLabel}</strong> has been assigned to you for review.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode || "N/A"}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName || "N/A"}</div>
+        </div>
+      </div>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please accept or reject the lead.
+      </p>
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Lead
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: salesExecutiveName,
+    sales_executive_name: salesExecutiveName,
+    leadCode: payload.leadCode ?? "",
+    leadName: payload.leadName ?? "",
+    leadLabel,
+    leadUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_ASSIGNED_TO_SALES_EXECUTIVE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_ASSIGNED_TO_SALES_EXECUTIVE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || salesExecutiveName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export type LeadApprovedBySalesExecutiveEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  telecaller_name?: string;
+  sales_executive_name?: string;
+  leadCode?: string;
+  leadName?: string;
+  openLeadUrl?: string;
+  leadUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendLeadApprovedBySalesExecutiveEmail = async (
+  payload: LeadApprovedBySalesExecutiveEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const telecallerName =
+    payload.telecaller_name || payload.toName || "Telecaller";
+  const salesExecutiveName =
+    payload.sales_executive_name || "Sales Executive";
+  const leadLabel =
+    payload.leadCode && payload.leadName
+      ? `${payload.leadCode} - ${payload.leadName}`
+      : payload.leadCode || payload.leadName || "Lead";
+
+  const targetUrl =
+    payload.openLeadUrl ||
+    payload.leadUrl ||
+    payload.ctaLink ||
+    payload.projectUrl ||
+    "";
+  const defaultSubject = `Lead Approved`;
+
+  const defaultText = [
+    `Hi ${telecallerName},`,
+    "",
+    `Lead ${leadLabel} has been approved by ${salesExecutiveName}.`,
+    "The lead has now moved to Open Lead.",
+    "",
+    targetUrl ? `View Lead: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .card {
+        padding: 16px !important;
+      }
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div class="card" style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Approved
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${telecallerName},
+      </p>
+      <p style="margin:0 0 12px;color:#4b5563;">
+        Lead <strong>${leadLabel}</strong> has been approved by <strong>${salesExecutiveName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The lead has now moved to Open Lead.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode || "N/A"}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName || "N/A"}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${salesExecutiveName}</div>
+        </div>
+      </div>
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: telecallerName,
+    telecaller_name: telecallerName,
+    sales_executive_name: salesExecutiveName,
+    leadCode: payload.leadCode ?? "",
+    leadName: payload.leadName ?? "",
+    leadLabel,
+    openLeadUrl: targetUrl,
+    leadUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_APPROVED_BY_SALES_EXECUTIVE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_APPROVED_BY_SALES_EXECUTIVE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || telecallerName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export type LeadRejectedBySalesExecutiveEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  telecaller_name?: string;
+  sales_executive_name?: string;
+  leadCode?: string;
+  leadName?: string;
+  rejection_reason?: string;
+  lostLeadUrl?: string;
+  leadUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendLeadRejectedBySalesExecutiveEmail = async (
+  payload: LeadRejectedBySalesExecutiveEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const telecallerName =
+    payload.telecaller_name || payload.toName || "Telecaller";
+  const salesExecutiveName =
+    payload.sales_executive_name || "Sales Executive";
+  const leadLabel =
+    payload.leadCode && payload.leadName
+      ? `${payload.leadCode} - ${payload.leadName}`
+      : payload.leadCode || payload.leadName || "Lead";
+
+  const rejectionReason =
+    payload.rejection_reason || "No reason specified";
+  const targetUrl =
+    payload.lostLeadUrl ||
+    payload.leadUrl ||
+    payload.ctaLink ||
+    payload.projectUrl ||
+    "";
+  const defaultSubject = `Lead Rejected`;
+
+  const defaultText = [
+    `Hi ${telecallerName},`,
+    "",
+    `Lead ${leadLabel} has been rejected by ${salesExecutiveName}.`,
+    `Reason: ${rejectionReason}`,
+    "Please review the details.",
+    "",
+    targetUrl ? `View Lead: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .card {
+        padding: 16px !important;
+      }
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div class="card" style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Lead Rejected
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${telecallerName},
+      </p>
+      <p style="margin:0 0 12px;color:#4b5563;">
+        Lead <strong>${leadLabel}</strong> has been rejected by <strong>${salesExecutiveName}</strong>.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode || "N/A"}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName || "N/A"}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Rejected By</div>
+          <div class="lead-info-value">${salesExecutiveName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Reason</div>
+          <div class="lead-info-value" style="color:#dc2626;">${rejectionReason}</div>
+        </div>
+      </div>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the details.
+      </p>
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;font-weight:600;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Lead
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: telecallerName,
+    telecaller_name: telecallerName,
+    sales_executive_name: salesExecutiveName,
+    leadCode: payload.leadCode ?? "",
+    leadName: payload.leadName ?? "",
+    leadLabel,
+    rejection_reason: rejectionReason,
+    lostLeadUrl: targetUrl,
+    leadUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_REJECTED_BY_SALES_EXECUTIVE,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: LEAD_POOL_TEMPLATE_KEYS.LEAD_REJECTED_BY_SALES_EXECUTIVE,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || telecallerName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+
+
+

@@ -1888,6 +1888,7 @@ export const updateLeadProductStructureInstance = async ({
       where: { id: existing.id },
       data: {
         product_structure_id,
+        product_type_id: structure.product_type_id ?? undefined,
         quantity_index: nextQuantityIndex,
         title: title.trim(),
         description: description?.trim() || null,
@@ -2064,57 +2065,7 @@ export const createLeadProductStructureInstance = async ({
       .toLowerCase()
       .includes("kitchen");
 
-    if (!resolvedItemCodeId && !isKitchenType) {
-      const existingMappings =
-        await prisma.leadProductStructureMapping.findMany({
-          where: {
-            lead_id: leadId,
-            vendor_id: vendorId,
-          },
-          select: { product_structure_id: true },
-        });
-
-      if (existingMappings.length > 0) {
-        const existingInstanceStructureIds =
-          await prisma.leadProductStructureInstance.findMany({
-            where: {
-              lead_id: leadId,
-              vendor_id: vendorId,
-            },
-            select: { product_structure_id: true },
-          });
-
-        const existingInstanceSet = new Set(
-          existingInstanceStructureIds.map((row) => row.product_structure_id),
-        );
-
-        for (const mapping of existingMappings) {
-          if (existingInstanceSet.has(mapping.product_structure_id)) continue;
-          const mappingStructure = await prisma.productStructure.findFirst({
-            where: {
-              id: mapping.product_structure_id,
-              vendor_id: vendorId,
-            },
-          });
-
-          if (!mappingStructure) continue;
-
-          await prisma.leadProductStructureInstance.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: lead.account_id,
-              product_type_id: resolvedProductTypeId,
-              product_structure_id: mapping.product_structure_id,
-              quantity_index: 1,
-              title: mappingStructure.type,
-              description: null,
-              created_by,
-            },
-          });
-        }
-      }
-    }
+    /* Legacy mapping auto-creation removed to prevent unwanted extra instances */
 
     const existingMapping = await prisma.leadProductStructureMapping.findFirst({
       where: {
@@ -2567,7 +2518,22 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
     // ========================================================
     // ✅ ACTIVE LEAD CONVERSION & MULTI-PRODUCT SEPARATION LOGIC
     // ========================================================
-    const maxCount = Math.max(pTypes.length, pStructs.length, instances.length, 1);
+    const expectedItemsCount = Math.max(pTypes.length, pStructs.length);
+    const maxCount = expectedItemsCount > 0 ? expectedItemsCount : Math.max(instances.length, 1);
+
+    // Clean up any extra orphan instances beyond expectedItemsCount
+    if (expectedItemsCount > 0 && instances.length > expectedItemsCount) {
+      const extraInstanceIds = instances.slice(expectedItemsCount).map((inst: any) => inst.id);
+      await tx.leadProductStructureInstance.deleteMany({
+        where: { id: { in: extraInstanceIds } },
+      });
+    }
+
+    const now = new Date();
+    // Synchronize timestamps so all separated leads appear together at the top of Open Leads.
+    // Lead 0 (leadId, e.g. SHCOOK-11) receives now + maxCount*1000, and subsequent leads (SHCOOK-12, SHCOOK-13)
+    // receive descending offsets so they naturally sort in ascending sequence (11, 12, 13) under DESC order.
+    const primaryTimestamp = new Date(now.getTime() + maxCount * 1000);
 
     // 1. Convert primary lead (leadId)
     const convertedLeadCode = await generateLeadCode(tx, {
@@ -2579,6 +2545,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
       where: { id: leadId },
       data: {
         is_draft: false,
+        created_at: primaryTimestamp,
+        updated_at: primaryTimestamp,
         ...(isOnlineLead || !lead.lead_code || lead.lead_code.startsWith("DRAFT") ? { lead_code: convertedLeadCode } : {}),
       },
     });
@@ -2631,6 +2599,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
           vendorId: lead.vendor_id,
         });
 
+        const itemTimestamp = new Date(now.getTime() + (maxCount - i) * 1000);
+
         const newLead = await tx.leadMaster.create({
           data: {
             lead_code: itemLeadCode,
@@ -2654,6 +2624,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
             account_id: lead.account_id,
             is_draft: false,
             assign_to: resolvedAssignTo || lead.assign_to,
+            created_at: itemTimestamp,
+            updated_at: itemTimestamp,
           },
         });
 

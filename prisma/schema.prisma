@@ -4835,6 +4835,7 @@ model online_leads {
   lastname                                                 String?
   alt_contact_no                                           String?
   site_address                                             String?
+  city                                                     String?
   site_type_id                                             Int?
   source_id                                                Int?
   refered_by                                               String?

@@ -19,8 +19,17 @@ export class LeadStatsService {
       is_deleted: false,
     };
 
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorData?.is_online_lead_feature_enabled === true;
+
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
+    let userType = "";
+    let targetFranchiseId: number | undefined = franchiseId;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -48,8 +57,8 @@ export class LeadStatsService {
           )?.is_head_office === true
         : false;
 
-      const userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
-      const targetFranchiseId =
+      userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      targetFranchiseId =
         franchiseId ??
         (!isHO && userType !== "super-admin" ? user.franchise_id ?? undefined : undefined);
 
@@ -207,7 +216,46 @@ export class LeadStatsService {
     });
 
     const totalOpenLeads = await countByTag("Type 1", { is_draft: { not: true } });
-    const totalDraftLeads = await countByTag("Type 1", { is_draft: true });
+
+    let totalDraftLeads = 0;
+    if (isOnlineLeadFeatureEnabled) {
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (targetFranchiseId) {
+        if (userType === "sales-executive" && userId) {
+          pendingOnlineWhere.OR = [
+            { pending_store_id: targetFranchiseId },
+            { store_id: targetFranchiseId },
+            { final_assigned_leads: userId },
+            { assign_to: userId },
+            { pending_assign_to: userId },
+          ];
+        } else {
+          pendingOnlineWhere.OR = [
+            { pending_store_id: targetFranchiseId },
+            { store_id: targetFranchiseId },
+          ];
+        }
+      } else if (userType === "sales-executive" && userId) {
+        pendingOnlineWhere.OR = [
+          { final_assigned_leads: userId },
+          { assign_to: userId },
+          { pending_assign_to: userId },
+        ];
+      }
+
+      const pendingOnlineCount = await prisma.online_leads.count({
+        where: pendingOnlineWhere,
+      });
+
+      const draftLeadMasterCount = await countByTag("Type 1", { is_draft: true });
+      totalDraftLeads = pendingOnlineCount + draftLeadMasterCount;
+    } else {
+      totalDraftLeads = await countByTag("Type 1", { is_draft: true });
+    }
     const totalInitialSiteMeasurementLeads = await countByTag("Type 2");
     const totalDesigningStageLeads = await countByTag("Type 3");
     const totalBookingStageLeads = await countByTag("Type 4");
@@ -377,6 +425,7 @@ export class LeadStatsService {
 
     // GROUP TOTALS
     const total_leads_group =
+      totalDraftLeads +
       totalOpenLeads +
       totalInitialSiteMeasurementLeads +
       totalDesigningStageLeads +
