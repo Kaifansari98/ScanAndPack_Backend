@@ -13,6 +13,7 @@ export class CompanyVendorsService {
         vendor_id: vendorId,
         is_deleted: false,
         is_active: true,
+        is_inventory_company_vendor: false,
       },
       orderBy: { created_at: "desc" },
       include: {

@@ -437,6 +437,8 @@ export class BroadcastService {
 
     let sentCountMap = new Map<number, number>();
     let readCountMap = new Map<number, number>();
+    let userNotificationMap = new Set<number>();
+    let broadcastsWithNotifsMap = new Set<number>();
 
     try {
       if (broadcastIds.length > 0) {
@@ -446,10 +448,13 @@ export class BroadcastService {
         const sentRows = await prisma.notification.findMany({
           where: { entity_type: "broadcast", entity_id: { in: broadcastIds } },
           select: { entity_id: true, user_id: true },
-          distinct: ["entity_id", "user_id"],
         });
         for (const row of sentRows) {
           if (row.entity_id) {
+            broadcastsWithNotifsMap.add(row.entity_id);
+            if (row.user_id === currentUser.id) {
+              userNotificationMap.add(row.entity_id);
+            }
             const currentCount = sentCountMap.get(row.entity_id) ?? 0;
             sentCountMap.set(row.entity_id, currentCount + 1);
           }
@@ -489,6 +494,9 @@ export class BroadcastService {
       isRead: Array.isArray(b.readLogs) ? b.readLogs.length > 0 : false,
       readersCount: readCountMap.get(b.id) ?? 0,
       sentCount: sentCountMap.get(b.id) ?? 0,
+      wasSentToMe: broadcastsWithNotifsMap.has(b.id)
+        ? userNotificationMap.has(b.id)
+        : true,
     }));
 
     return { ...result, data: dataWithCounts };
@@ -750,10 +758,26 @@ export class BroadcastService {
         user?.created_at && effectivePublishDate && user.created_at > effectivePublishDate;
 
       if (!isUserCreatedAfterPublish) {
+        // Check if notifications were generated for this broadcast and if user was a recipient
+        const broadcastNotifications = await prisma.notification.findMany({
+          where: { entity_type: "broadcast", entity_id: broadcastId },
+          select: { user_id: true },
+          take: 1,
+        });
+
+        if (broadcastNotifications.length > 0) {
+          const userNotif = await prisma.notification.findFirst({
+            where: { entity_type: "broadcast", entity_id: broadcastId, user_id: userId },
+          });
+
+          // User was inactive or not targeted when the broadcast was sent
+          if (!userNotif) {
+            return { broadcast_id: broadcastId, user_id: userId, skipped: true };
+          }
+        }
+
         // ── Audience membership check ──────────────────────────────────────
         // Only record a read if the user is actually in the target audience.
-        // This prevents non-target users (e.g. Tech Check) from appearing in
-        // Read Activity simply by opening the broadcast URL directly.
         const audiences = (broadcast as any).audiences as Array<{
           audience_type: string;
           target_id: number | null;
