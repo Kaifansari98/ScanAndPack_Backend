@@ -25,6 +25,7 @@ router.get("/store/:storeId/sales-executives", onlineLeadController.fetchStoreSa
 router.get("/sales-executives", onlineLeadController.fetchStoreSalesExecutives);
 router.get("/telecallers", onlineLeadController.fetchTelecallers);
 router.post("/delete-bulk", onlineLeadController.deleteBulkLeads);
+router.post("/delete-all-pool", onlineLeadController.deleteAllPoolLeads);
 router.get("/:id", onlineLeadController.fetchLeadById);
 router.patch("/:id", onlineLeadController.updateLead);
 router.put("/:id/assign", onlineLeadController.assignLead);

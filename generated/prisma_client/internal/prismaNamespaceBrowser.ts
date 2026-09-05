@@ -3868,6 +3868,7 @@ export const Online_leadsScalarFieldEnum = {
   lastname: 'lastname',
   alt_contact_no: 'alt_contact_no',
   site_address: 'site_address',
+  city: 'city',
   site_type_id: 'site_type_id',
   source_id: 'source_id',
   refered_by: 'refered_by',

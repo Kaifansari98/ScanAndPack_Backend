@@ -2518,7 +2518,22 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
     // ========================================================
     // ✅ ACTIVE LEAD CONVERSION & MULTI-PRODUCT SEPARATION LOGIC
     // ========================================================
-    const maxCount = Math.max(pTypes.length, pStructs.length, instances.length, 1);
+    const expectedItemsCount = Math.max(pTypes.length, pStructs.length);
+    const maxCount = expectedItemsCount > 0 ? expectedItemsCount : Math.max(instances.length, 1);
+
+    // Clean up any extra orphan instances beyond expectedItemsCount
+    if (expectedItemsCount > 0 && instances.length > expectedItemsCount) {
+      const extraInstanceIds = instances.slice(expectedItemsCount).map((inst: any) => inst.id);
+      await tx.leadProductStructureInstance.deleteMany({
+        where: { id: { in: extraInstanceIds } },
+      });
+    }
+
+    const now = new Date();
+    // Synchronize timestamps so all separated leads appear together at the top of Open Leads.
+    // Lead 0 (leadId, e.g. SHCOOK-11) receives now + maxCount*1000, and subsequent leads (SHCOOK-12, SHCOOK-13)
+    // receive descending offsets so they naturally sort in ascending sequence (11, 12, 13) under DESC order.
+    const primaryTimestamp = new Date(now.getTime() + maxCount * 1000);
 
     // 1. Convert primary lead (leadId)
     const convertedLeadCode = await generateLeadCode(tx, {
@@ -2530,6 +2545,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
       where: { id: leadId },
       data: {
         is_draft: false,
+        created_at: primaryTimestamp,
+        updated_at: primaryTimestamp,
         ...(isOnlineLead || !lead.lead_code || lead.lead_code.startsWith("DRAFT") ? { lead_code: convertedLeadCode } : {}),
       },
     });
@@ -2582,6 +2599,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
           vendorId: lead.vendor_id,
         });
 
+        const itemTimestamp = new Date(now.getTime() + (maxCount - i) * 1000);
+
         const newLead = await tx.leadMaster.create({
           data: {
             lead_code: itemLeadCode,
@@ -2605,6 +2624,8 @@ export const unmarkDraftAndSeparate = async (tx: any, leadId: number) => {
             account_id: lead.account_id,
             is_draft: false,
             assign_to: resolvedAssignTo || lead.assign_to,
+            created_at: itemTimestamp,
+            updated_at: itemTimestamp,
           },
         });
 

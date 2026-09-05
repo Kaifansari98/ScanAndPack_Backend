@@ -2161,12 +2161,22 @@ export class BookingStageService {
       normalizedStageTag === "Type 9" ||
       normalizedStageTag === "Type 10";
 
+    const vendorForFeature = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorForFeature?.is_online_lead_feature_enabled === true;
+    const shouldApplyLeadCodeSort =
+      normalizedStageTag.toLowerCase() === "type 1" &&
+      isOnlineLeadFeatureEnabled;
+
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
         include: includeConfig,
         orderBy,
-        ...(shouldApplyStageSort ? {} : { skip, take: limit }),
+        ...(shouldApplyStageSort || shouldApplyLeadCodeSort ? {} : { skip, take: limit }),
       }),
 
       prisma.leadMaster.count({
@@ -2225,13 +2235,73 @@ export class BookingStageService {
             BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
             BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
         )
-      : processedWithSmallOrderRequests;
+      : shouldApplyLeadCodeSort
+        ? [...processedWithSmallOrderRequests].sort((a, b) => {
+            const sortDirection = filters.created_at === "asc" ? "asc" : "desc";
+            return BookingStageService.compareLeadCodeNumeric(
+              a?.lead_code,
+              b?.lead_code,
+              sortDirection,
+            );
+          })
+        : processedWithSmallOrderRequests;
 
-    const paginatedLeads = shouldApplyStageSort
+    const paginatedLeads = (shouldApplyStageSort || shouldApplyLeadCodeSort)
       ? sortedProcessed.slice(skip, skip + limit)
       : sortedProcessed;
 
     return { leads: paginatedLeads, count: total };
+  }
+
+  public static parseLeadCode(leadCode: string | null | undefined): {
+    prefix: string;
+    num: number;
+    sub: number;
+  } {
+    if (!leadCode) return { prefix: "", num: 0, sub: 0 };
+    const str = String(leadCode).trim();
+    const match = str.match(/^(.*?)(?:[-_\s/])?(\d+)(?:[.\-_](\d+))?$/);
+    if (match) {
+      return {
+        prefix: (match[1] || "").toUpperCase(),
+        num: parseInt(match[2], 10) || 0,
+        sub: match[3] ? parseInt(match[3], 10) : 0,
+      };
+    }
+    const numMatch = str.match(/(\d+)/);
+    return {
+      prefix: str.replace(/\d+/g, "").toUpperCase(),
+      num: numMatch ? parseInt(numMatch[1], 10) : 0,
+      sub: 0,
+    };
+  }
+
+  public static compareLeadCodeNumeric(
+    codeA: string | null | undefined,
+    codeB: string | null | undefined,
+    direction: "asc" | "desc" = "desc",
+  ): number {
+    const a = BookingStageService.parseLeadCode(codeA);
+    const b = BookingStageService.parseLeadCode(codeB);
+
+    if (a.prefix === b.prefix) {
+      if (a.num !== b.num) {
+        return direction === "desc" ? b.num - a.num : a.num - b.num;
+      }
+      if (a.sub !== b.sub) {
+        return a.sub - b.sub;
+      }
+      return 0;
+    }
+
+    if (a.num !== b.num) {
+      return direction === "desc" ? b.num - a.num : a.num - b.num;
+    }
+    const prefixCmp = a.prefix.localeCompare(b.prefix);
+    if (prefixCmp !== 0) {
+      return direction === "desc" ? -prefixCmp : prefixCmp;
+    }
+    return a.sub - b.sub;
   }
 
   // post filter service
@@ -4329,6 +4399,16 @@ export class BookingStageService {
       normalizedStageTag === "Type 9" ||
       normalizedStageTag === "Type 10";
 
+    const vendorForFeature = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorForFeature?.is_online_lead_feature_enabled === true;
+    const shouldApplyLeadCodeSort =
+      normalizedStageTag.toLowerCase() === "type 1" &&
+      isOnlineLeadFeatureEnabled;
+
     const addFilterConditions = (
       whereClause: Prisma.LeadMasterWhereInput,
     ): Prisma.LeadMasterWhereInput => {
@@ -4936,7 +5016,7 @@ export class BookingStageService {
           where: whereClause,
           include: includeConfig,
           orderBy,
-          ...(shouldApplyStageSort ? {} : { skip, take: limit }),
+          ...(shouldApplyStageSort || shouldApplyLeadCodeSort ? {} : { skip, take: limit }),
         }),
         prisma.leadMaster.count({ where: whereClause }),
       ]);
@@ -4966,9 +5046,18 @@ export class BookingStageService {
               BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
               BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
           )
-        : processedWithSmallOrderRequests;
+        : shouldApplyLeadCodeSort
+          ? [...processedWithSmallOrderRequests].sort((a, b) => {
+              const sortDirection = filters.created_at === "asc" ? "asc" : "desc";
+              return BookingStageService.compareLeadCodeNumeric(
+                a?.lead_code,
+                b?.lead_code,
+                sortDirection,
+              );
+            })
+          : processedWithSmallOrderRequests;
 
-      const paginatedLeads = shouldApplyStageSort
+      const paginatedLeads = (shouldApplyStageSort || shouldApplyLeadCodeSort)
         ? sortedProcessed.slice(skip, skip + limit)
         : sortedProcessed;
 
@@ -5055,7 +5144,7 @@ export class BookingStageService {
         where: whereClause,
         include: includeConfig,
         orderBy,
-        ...(shouldApplyStageSort ? {} : { skip, take: limit }),
+        ...(shouldApplyStageSort || shouldApplyLeadCodeSort ? {} : { skip, take: limit }),
       }),
       prisma.leadMaster.count({ where: whereClause }),
     ]);
@@ -5086,9 +5175,18 @@ export class BookingStageService {
             BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
             BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
         )
-      : processedWithSmallOrderRequests;
+      : shouldApplyLeadCodeSort
+        ? [...processedWithSmallOrderRequests].sort((a, b) => {
+            const sortDirection = filters.created_at === "asc" ? "asc" : "desc";
+            return BookingStageService.compareLeadCodeNumeric(
+              a?.lead_code,
+              b?.lead_code,
+              sortDirection,
+            );
+          })
+        : processedWithSmallOrderRequests;
 
-    const paginatedLeads = shouldApplyStageSort
+    const paginatedLeads = (shouldApplyStageSort || shouldApplyLeadCodeSort)
       ? sortedProcessed.slice(skip, skip + limit)
       : sortedProcessed;
 
@@ -5237,11 +5335,22 @@ export class BookingStageService {
       !isSuperAdmin &&
       !isHO;
 
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorData?.is_online_lead_feature_enabled === true;
+
     const skip = (page - 1) * limit;
-    const orderBy =
+    const sortDirection =
       filters.created_at === "asc"
-        ? { created_at: Prisma.SortOrder.asc }
-        : { created_at: Prisma.SortOrder.desc };
+        ? Prisma.SortOrder.asc
+        : Prisma.SortOrder.desc;
+
+    const orderBy: any = isOnlineLeadFeatureEnabled
+      ? [{ updated_at: sortDirection }, { created_at: sortDirection }]
+      : { created_at: sortDirection };
 
 
     const includeConfig = BookingStageService.leadIncludes("Type 1");
@@ -5556,12 +5665,7 @@ export class BookingStageService {
       }),
     );
 
-    const vendorData = await prisma.vendorMaster.findUnique({
-      where: { id: vendorId },
-      select: { is_online_lead_feature_enabled: true },
-    });
-    const isOnlineLeadFeatureEnabled =
-      vendorData?.is_online_lead_feature_enabled === true;
+
 
     // Include pending online_leads awaiting approval for this vendor / store ONLY if online lead feature is enabled
     let pendingOnlineLeads: any[] = [];
@@ -5590,6 +5694,20 @@ export class BookingStageService {
             select: { id: true, user_name: true },
           },
           FranchiseMaster: { select: { id: true, franchise_name: true } },
+          online_lead_call_log: {
+            include: {
+              UserMaster: { select: { id: true, user_name: true } },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
+          online_lead_history: {
+            include: {
+              UserMaster: { select: { id: true, user_name: true } },
+              online_lead_followup_status: true,
+            },
+            orderBy: { created_at: "desc" },
+          },
         },
         orderBy: { created_at: "desc" },
       });
@@ -5691,9 +5809,25 @@ export class BookingStageService {
         franchise_id: ol.pending_store_id || ol.store_id || franchiseId || null,
         priority: ol.priority || "Medium",
         created_at: ol.created_at,
+        updated_at: ol.updated_at || ol.created_at,
         is_draft: true,
         productMappings: olProdTypes,
         leadProductStructureMapping: olProdStructs,
+        call_log: ol.online_lead_call_log
+          ? ol.online_lead_call_log.map((c: any) => ({
+              ...c,
+              telecaller: c.UserMaster || null,
+              status: c.online_lead_followup_status || null,
+            }))
+          : [],
+        online_lead_history: ol.online_lead_history
+          ? ol.online_lead_history.map((h: any) => ({
+              ...h,
+              createdBy: h.UserMaster || null,
+              status: h.online_lead_followup_status || null,
+            }))
+          : [],
+        rawLead: ol,
         source: ol.SourceMaster
           ? { type: ol.SourceMaster.type }
           : ol.source
@@ -5775,6 +5909,14 @@ export class BookingStageService {
 
         if (isPendingA && !isPendingB) return -1;
         if (!isPendingA && isPendingB) return 1;
+
+        const timeA = new Date(a.updated_at || a.created_at).getTime() || 0;
+        const timeB = new Date(b.updated_at || b.created_at).getTime() || 0;
+        if (timeA !== timeB) {
+          return isAsc ? timeA - timeB : timeB - timeA;
+        }
+
+        return isAsc ? (a.id || 0) - (b.id || 0) : (b.id || 0) - (a.id || 0);
       }
 
       const numA = parseLeadCodeNum(a.lead_code);
