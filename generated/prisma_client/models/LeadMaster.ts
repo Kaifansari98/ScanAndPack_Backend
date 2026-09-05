@@ -1008,6 +1008,7 @@ export type LeadMasterWhereInput = {
   is_so_value_received?: Prisma.BoolFilter<"LeadMaster"> | boolean
   so_value_received_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   project_status?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   cutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
@@ -1173,6 +1174,7 @@ export type LeadMasterOrderByWithRelationInput = {
   is_so_value_received?: Prisma.SortOrder
   so_value_received_at?: Prisma.SortOrderInput | Prisma.SortOrder
   project_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   cutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
   fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
@@ -1342,6 +1344,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   is_so_value_received?: Prisma.BoolFilter<"LeadMaster"> | boolean
   so_value_received_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   project_status?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   cutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
@@ -1696,6 +1699,7 @@ export type LeadMasterCreateInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -1861,6 +1865,7 @@ export type LeadMasterUncheckedCreateInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -2001,6 +2006,7 @@ export type LeadMasterUpdateInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -2166,6 +2172,7 @@ export type LeadMasterUncheckedUpdateInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -4208,6 +4215,20 @@ export type LeadMasterUpdateOneRequiredWithoutLeadBillingAddressesNestedInput = 
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutLeadBillingAddressesInput, Prisma.LeadMasterUpdateWithoutLeadBillingAddressesInput>, Prisma.LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutProductsRequiredForProductionInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutProductsRequiredForProductionInput
+  upsert?: Prisma.LeadMasterUpsertWithoutProductsRequiredForProductionInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUpdateWithoutProductsRequiredForProductionInput>, Prisma.LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
 export type LeadMasterCreateWithoutVendorInput = {
   firstname: string
   lastname: string
@@ -4290,6 +4311,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -4453,6 +4475,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -4719,6 +4742,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -4882,6 +4906,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -5032,6 +5057,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -5195,6 +5221,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -5345,6 +5372,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -5508,6 +5536,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -5658,6 +5687,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -5821,6 +5851,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -6035,6 +6066,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -6199,6 +6231,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -6354,6 +6387,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -6518,6 +6552,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -6657,6 +6692,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -6821,6 +6857,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -6976,6 +7013,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -7140,6 +7178,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -7279,6 +7318,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -7443,6 +7483,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -7603,6 +7644,7 @@ export type LeadMasterCreateWithoutClientInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -7766,6 +7808,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -7932,6 +7975,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -8096,6 +8140,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -8251,6 +8296,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -8415,6 +8461,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -8554,6 +8601,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -8718,6 +8766,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -8873,6 +8922,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -9037,6 +9087,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -9176,6 +9227,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -9340,6 +9392,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -9495,6 +9548,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -9659,6 +9713,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -9798,6 +9853,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -9962,6 +10018,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -10117,6 +10174,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -10281,6 +10339,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -10420,6 +10479,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -10584,6 +10644,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -10739,6 +10800,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -10903,6 +10965,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -11042,6 +11105,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -11206,6 +11270,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -11361,6 +11426,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -11525,6 +11591,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -11664,6 +11731,7 @@ export type LeadMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -11828,6 +11896,7 @@ export type LeadMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = 
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -11983,6 +12052,7 @@ export type LeadMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -12147,6 +12217,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = 
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -12286,6 +12357,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -12449,6 +12521,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -12615,6 +12688,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -12778,6 +12852,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -12944,6 +13019,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -13107,6 +13183,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -13273,6 +13350,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -13437,6 +13515,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -13592,6 +13671,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -13756,6 +13836,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -13895,6 +13976,7 @@ export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -14059,6 +14141,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -14214,6 +14297,7 @@ export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -14378,6 +14462,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -14517,6 +14602,7 @@ export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -14681,6 +14767,7 @@ export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -14836,6 +14923,7 @@ export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -15000,6 +15088,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -15139,6 +15228,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -15303,6 +15393,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -15458,6 +15549,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -15622,6 +15714,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -15761,6 +15854,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -15925,6 +16019,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -16080,6 +16175,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -16244,6 +16340,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -16383,6 +16480,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -16547,6 +16645,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -16702,6 +16801,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -16866,6 +16966,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -17005,6 +17106,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -17169,6 +17271,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -17324,6 +17427,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -17488,6 +17592,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -17627,6 +17732,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -17791,6 +17897,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -17946,6 +18053,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -18110,6 +18218,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -18249,6 +18358,7 @@ export type LeadMasterCreateWithoutB2bDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -18413,6 +18523,7 @@ export type LeadMasterUncheckedCreateWithoutB2bDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -18568,6 +18679,7 @@ export type LeadMasterUpdateWithoutB2bDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -18732,6 +18844,7 @@ export type LeadMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -18871,6 +18984,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -19035,6 +19149,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -19190,6 +19305,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -19354,6 +19470,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -19493,6 +19610,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -19657,6 +19775,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -19812,6 +19931,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -19976,6 +20096,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -20115,6 +20236,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -20279,6 +20401,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -20434,6 +20557,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -20598,6 +20722,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -20737,6 +20862,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -20901,6 +21027,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -21056,6 +21183,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -21220,6 +21348,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -21359,6 +21488,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -21523,6 +21653,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -21678,6 +21809,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -21842,6 +21974,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -21981,6 +22114,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -22145,6 +22279,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -22300,6 +22435,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -22464,6 +22600,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -22603,6 +22740,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -22767,6 +22905,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -22922,6 +23061,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -23086,6 +23226,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -23225,6 +23366,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -23389,6 +23531,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -23544,6 +23687,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -23708,6 +23852,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -23847,6 +23992,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -24011,6 +24157,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -24166,6 +24313,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -24330,6 +24478,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -24469,6 +24618,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -24632,6 +24782,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -24798,6 +24949,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -24962,6 +25114,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -25117,6 +25270,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -25281,6 +25435,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -25420,6 +25575,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -25584,6 +25740,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -25739,6 +25896,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -25903,6 +26061,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -26042,6 +26201,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -26206,6 +26366,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -26361,6 +26522,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -26525,6 +26687,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -26664,6 +26827,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -26828,6 +26992,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -26983,6 +27148,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -27147,6 +27313,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -27286,6 +27453,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -27450,6 +27618,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -27605,6 +27774,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -27769,6 +27939,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -27908,6 +28079,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -28072,6 +28244,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -28227,6 +28400,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -28391,6 +28565,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -28530,6 +28705,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -28694,6 +28870,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -28849,6 +29026,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -29013,6 +29191,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -29152,6 +29331,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -29316,6 +29496,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -29471,6 +29652,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -29635,6 +29817,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -29774,6 +29957,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -29938,6 +30122,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -30093,6 +30278,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -30257,6 +30443,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -30396,6 +30583,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -30560,6 +30748,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -30715,6 +30904,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -30879,6 +31069,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -31018,6 +31209,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
@@ -31182,6 +31374,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
@@ -31337,6 +31530,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
@@ -31501,6 +31695,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
@@ -31640,6 +31835,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -31804,6 +32000,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -31959,6 +32156,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -32123,6 +32321,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -32262,6 +32461,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -32426,6 +32626,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -32581,6 +32782,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -32745,6 +32947,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -32884,6 +33087,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -33048,6 +33252,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -33203,6 +33408,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -33367,6 +33573,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -33506,6 +33713,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -33670,6 +33878,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -33825,6 +34034,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -33989,6 +34199,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -34128,6 +34339,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -34292,6 +34504,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -34447,6 +34660,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -34611,6 +34825,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -34750,6 +34965,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -34914,6 +35130,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -35069,6 +35286,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -35233,6 +35451,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -35372,6 +35591,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -35536,6 +35756,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -35691,6 +35912,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -35855,6 +36077,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -35994,6 +36217,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -36158,6 +36382,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -36313,6 +36538,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -36477,6 +36703,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -36616,6 +36843,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -36780,6 +37008,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -36935,6 +37164,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -37099,6 +37329,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -37238,6 +37469,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
@@ -37402,6 +37634,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
@@ -37557,6 +37790,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
@@ -37721,6 +37955,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
@@ -37860,6 +38095,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
@@ -38024,6 +38260,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
@@ -38179,6 +38416,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
@@ -38343,6 +38581,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
@@ -38482,6 +38721,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -38646,6 +38886,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -38801,6 +39042,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -38965,6 +39207,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -39104,6 +39347,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -39267,6 +39511,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -39433,6 +39678,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -39597,6 +39843,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -39752,6 +39999,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -39916,6 +40164,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -40055,6 +40304,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -40218,6 +40468,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -40384,6 +40635,7 @@ export type LeadMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -40548,6 +40800,7 @@ export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -40703,6 +40956,7 @@ export type LeadMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -40867,6 +41121,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -41006,6 +41261,7 @@ export type LeadMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -41170,6 +41426,7 @@ export type LeadMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -41325,6 +41582,7 @@ export type LeadMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -41489,6 +41747,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -41628,6 +41887,7 @@ export type LeadMasterCreateWithoutOnline_leadsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -41792,6 +42052,7 @@ export type LeadMasterUncheckedCreateWithoutOnline_leadsInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -41947,6 +42208,7 @@ export type LeadMasterUpdateWithoutOnline_leadsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -42111,6 +42373,7 @@ export type LeadMasterUncheckedUpdateWithoutOnline_leadsInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -42250,6 +42513,7 @@ export type LeadMasterCreateWithoutLeadBillingAddressesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
@@ -42414,6 +42678,7 @@ export type LeadMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   is_so_value_received?: boolean
   so_value_received_at?: Date | string | null
   project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
   cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
@@ -42569,6 +42834,7 @@ export type LeadMasterUpdateWithoutLeadBillingAddressesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -42733,6 +42999,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -42788,6 +43055,632 @@ export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
   specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+}
+
+export type LeadMasterCreateWithoutProductsRequiredForProductionInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  architect_id?: number | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+}
+
+export type LeadMasterUpsertWithoutProductsRequiredForProductionInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutProductsRequiredForProductionInput, Prisma.LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
+export type LeadMasterUpdateWithoutProductsRequiredForProductionInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyVendorInput = {
@@ -42968,6 +43861,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -43131,6 +44025,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -43751,6 +44646,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -43914,6 +44810,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -44150,6 +45047,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -44313,6 +45211,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -44549,6 +45448,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -44712,6 +45612,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -44948,6 +45849,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -45111,6 +46013,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -45347,6 +46250,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -45511,6 +46415,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -45843,6 +46748,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -46006,6 +46912,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -46338,6 +47245,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -46501,6 +47409,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -46833,6 +47742,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -46996,6 +47906,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -47328,6 +48239,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -47491,6 +48403,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -47823,6 +48736,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -47986,6 +48900,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -48318,6 +49233,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -48481,6 +49397,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -48813,6 +49730,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
@@ -48976,6 +49894,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
   so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
   cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
@@ -49136,6 +50055,7 @@ export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
  */
 
 export type LeadMasterCountOutputType = {
+  productsRequiredForProduction: number
   cutList: number
   cutListMachineMapping: number
   fastProductionRequests: number
@@ -49195,6 +50115,7 @@ export type LeadMasterCountOutputType = {
 }
 
 export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  productsRequiredForProduction?: boolean | LeadMasterCountOutputTypeCountProductsRequiredForProductionArgs
   cutList?: boolean | LeadMasterCountOutputTypeCountCutListArgs
   cutListMachineMapping?: boolean | LeadMasterCountOutputTypeCountCutListMachineMappingArgs
   fastProductionRequests?: boolean | LeadMasterCountOutputTypeCountFastProductionRequestsArgs
@@ -49261,6 +50182,13 @@ export type LeadMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.E
    * Select specific fields to fetch from the LeadMasterCountOutputType
    */
   select?: Prisma.LeadMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountProductsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductsRequiredForProductionWhereInput
 }
 
 /**
@@ -49751,6 +50679,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   is_so_value_received?: boolean
   so_value_received_at?: boolean
   project_status?: boolean
+  productsRequiredForProduction?: boolean | Prisma.LeadMaster$productsRequiredForProductionArgs<ExtArgs>
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>
@@ -50139,6 +51068,7 @@ export type LeadMasterSelectScalar = {
 
 export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "actual_installation_start_date" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "franchise_id" | "order_login_prod_files_remark" | "usable_handover_completed_at" | "actual_installation_completion_at" | "final_handover_marked_at" | "tech_check_completed_at" | "tech_check_reached_at" | "priority" | "amc_opted_at" | "is_amc_opted" | "amc_plan_closed_at" | "amc_plan_started_at" | "vehicle_approachability_for_dispatch" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at" | "archetech_number" | "is_small_order_request" | "material_lift_size" | "fast_production_approved_at" | "fast_production_status" | "is_fast_production" | "tentative_order_login_date" | "isLargeScaleProjectLead" | "architect_id" | "client_id" | "order_number" | "refered_by" | "is_so_value_received" | "so_value_received_at" | "project_status", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  productsRequiredForProduction?: boolean | Prisma.LeadMaster$productsRequiredForProductionArgs<ExtArgs>
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>
@@ -50241,6 +51171,7 @@ export type LeadMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadMaster"
   objects: {
+    productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
     cutList: Prisma.$CutListPayload<ExtArgs>[]
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
     fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
@@ -50799,6 +51730,7 @@ readonly fields: LeadMasterFieldRefs;
  */
 export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  productsRequiredForProduction<T extends Prisma.LeadMaster$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutList<T extends Prisma.LeadMaster$cutListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$cutListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListMachineMapping<T extends Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fastProductionRequests<T extends Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -51388,6 +52320,30 @@ export type LeadMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many LeadMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * LeadMaster.productsRequiredForProduction
+ */
+export type LeadMaster$productsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductsRequiredForProduction
+   */
+  select?: Prisma.ProductsRequiredForProductionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductsRequiredForProduction
+   */
+  omit?: Prisma.ProductsRequiredForProductionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductsRequiredForProductionInclude<ExtArgs> | null
+  where?: Prisma.ProductsRequiredForProductionWhereInput
+  orderBy?: Prisma.ProductsRequiredForProductionOrderByWithRelationInput | Prisma.ProductsRequiredForProductionOrderByWithRelationInput[]
+  cursor?: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductsRequiredForProductionScalarFieldEnum | Prisma.ProductsRequiredForProductionScalarFieldEnum[]
 }
 
 /**

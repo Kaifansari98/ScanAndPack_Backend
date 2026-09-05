@@ -8,6 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                     Int                                    @id @default(autoincrement())
   vendor_name                            String
   vendor_code                            String
@@ -262,6 +263,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                                                             Int                                    @id @default(autoincrement())
   vendor_id                                                                      Int
   user_name                                                                      String
@@ -724,6 +726,7 @@ model ClientTypeMaster {
 }
 
 model LeadMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                          Int                                   @id @default(autoincrement())
   firstname                                   String
   lastname                                    String
@@ -1171,6 +1174,7 @@ model LeadProductMapping {
 }
 
 model ProductTypeMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                        Int                            @id @default(autoincrement())
   type                      String
   vendor_id                 Int
@@ -1769,6 +1773,7 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                         Int                           @id @default(autoincrement())
   vendor_id                                  Int
   lead_id                                    Int
@@ -3144,6 +3149,7 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
   franchise_name                                                             String
@@ -3483,6 +3489,7 @@ model BrandMaster {
 }
 
 model ProductMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                       Int                              @id @default(autoincrement())
   vendor_id                Int
   item_id                  Int?
@@ -5387,4 +5394,38 @@ model BoxItemDeleteLog {
   @@index([vendor_id, project_id, box_id])
   @@index([deleted_by])
   @@index([deleted_at])
+}
+
+model ProductsRequiredForProduction {
+  id              Int      @id @default(autoincrement())
+  vendor_id       Int
+  franchise_id    Int
+  lead_id         Int
+  product_type_id Int?
+  instance_id     Int?
+  product_id      Int
+  article_code    String
+  type            String
+  category        String
+  qty             Decimal  @db.Decimal(12, 2)
+  unit            String
+  name            String
+  created_at      DateTime @default(now())
+  created_by      Int
+
+  vendor      VendorMaster                  @relation(fields: [vendor_id], references: [id])
+  franchise   FranchiseMaster               @relation(fields: [franchise_id], references: [id])
+  lead        LeadMaster                    @relation(fields: [lead_id], references: [id])
+  productType ProductTypeMaster?            @relation(fields: [product_type_id], references: [id])
+  instance    LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  product     ProductMaster                 @relation(fields: [product_id], references: [id])
+  createdBy   UserMaster                    @relation(fields: [created_by], references: [id])
+
+  @@index([vendor_id, franchise_id, lead_id])
+  @@index([franchise_id])
+  @@index([lead_id])
+  @@index([product_type_id])
+  @@index([instance_id])
+  @@index([product_id])
+  @@index([created_by])
 }

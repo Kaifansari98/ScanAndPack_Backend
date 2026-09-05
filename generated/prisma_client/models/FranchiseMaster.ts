@@ -364,6 +364,7 @@ export type FranchiseMasterWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FranchiseMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FranchiseMaster"> | Date | string
   moduled_for_b2b?: Prisma.BoolFilter<"FranchiseMaster"> | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   accounts?: Prisma.AccountMasterListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
@@ -399,6 +400,7 @@ export type FranchiseMasterOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   moduled_for_b2b?: Prisma.SortOrder
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionOrderByRelationAggregateInput
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
   fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchOrderByRelationAggregateInput
@@ -438,6 +440,7 @@ export type FranchiseMasterWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"FranchiseMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"FranchiseMaster"> | Date | string
   moduled_for_b2b?: Prisma.BoolFilter<"FranchiseMaster"> | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionListRelationFilter
   accounts?: Prisma.AccountMasterListRelationFilter
   fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
@@ -525,6 +528,7 @@ export type FranchiseMasterCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -560,6 +564,7 @@ export type FranchiseMasterUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -592,6 +597,7 @@ export type FranchiseMasterUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -627,6 +633,7 @@ export type FranchiseMasterUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1037,6 +1044,20 @@ export type FranchiseMasterUpdateOneWithoutOnline_leadsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutOnline_leadsInput, Prisma.FranchiseMasterUpdateWithoutOnline_leadsInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutOnline_leadsInput>
 }
 
+export type FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutProductsRequiredForProductionInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+}
+
+export type FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput = {
+  create?: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  connectOrCreate?: Prisma.FranchiseMasterCreateOrConnectWithoutProductsRequiredForProductionInput
+  upsert?: Prisma.FranchiseMasterUpsertWithoutProductsRequiredForProductionInput
+  connect?: Prisma.FranchiseMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FranchiseMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUpdateWithoutProductsRequiredForProductionInput>, Prisma.FranchiseMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
 export type FranchiseMasterCreateWithoutVendorInput = {
   franchise_name: string
   franchise_code?: string | null
@@ -1056,6 +1077,7 @@ export type FranchiseMasterCreateWithoutVendorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -1089,6 +1111,7 @@ export type FranchiseMasterUncheckedCreateWithoutVendorInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1173,6 +1196,7 @@ export type FranchiseMasterCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -1207,6 +1231,7 @@ export type FranchiseMasterUncheckedCreateWithoutUsersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1254,6 +1279,7 @@ export type FranchiseMasterUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -1288,6 +1314,7 @@ export type FranchiseMasterUncheckedUpdateWithoutUsersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1319,6 +1346,7 @@ export type FranchiseMasterCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -1353,6 +1381,7 @@ export type FranchiseMasterUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1400,6 +1429,7 @@ export type FranchiseMasterUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -1434,6 +1464,7 @@ export type FranchiseMasterUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1465,6 +1496,7 @@ export type FranchiseMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -1499,6 +1531,7 @@ export type FranchiseMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInp
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1546,6 +1579,7 @@ export type FranchiseMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -1580,6 +1614,7 @@ export type FranchiseMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInp
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1611,6 +1646,7 @@ export type FranchiseMasterCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
@@ -1645,6 +1681,7 @@ export type FranchiseMasterUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1692,6 +1729,7 @@ export type FranchiseMasterUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
@@ -1726,6 +1764,7 @@ export type FranchiseMasterUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1757,6 +1796,7 @@ export type FranchiseMasterCreateWithoutFastProductionRequestBatchesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
@@ -1791,6 +1831,7 @@ export type FranchiseMasterUncheckedCreateWithoutFastProductionRequestBatchesInp
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1838,6 +1879,7 @@ export type FranchiseMasterUpdateWithoutFastProductionRequestBatchesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
@@ -1872,6 +1914,7 @@ export type FranchiseMasterUncheckedUpdateWithoutFastProductionRequestBatchesInp
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -1903,6 +1946,7 @@ export type FranchiseMasterCreateWithoutFastProductionRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
@@ -1937,6 +1981,7 @@ export type FranchiseMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
@@ -1984,6 +2029,7 @@ export type FranchiseMasterUpdateWithoutFastProductionRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
@@ -2018,6 +2064,7 @@ export type FranchiseMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
   headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2049,6 +2096,7 @@ export type FranchiseMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -2083,6 +2131,7 @@ export type FranchiseMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapp
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -2130,6 +2179,7 @@ export type FranchiseMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2164,6 +2214,7 @@ export type FranchiseMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapp
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2195,6 +2246,7 @@ export type FranchiseMasterCreateWithoutOnline_lead_historyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -2229,6 +2281,7 @@ export type FranchiseMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -2276,6 +2329,7 @@ export type FranchiseMasterUpdateWithoutOnline_lead_historyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2310,6 +2364,7 @@ export type FranchiseMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2341,6 +2396,7 @@ export type FranchiseMasterCreateWithoutOnline_lead_store_log_online_lead_store_
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -2375,6 +2431,7 @@ export type FranchiseMasterUncheckedCreateWithoutOnline_lead_store_log_online_le
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -2411,6 +2468,7 @@ export type FranchiseMasterCreateWithoutOnline_lead_store_log_online_lead_store_
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -2445,6 +2503,7 @@ export type FranchiseMasterUncheckedCreateWithoutOnline_lead_store_log_online_le
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -2492,6 +2551,7 @@ export type FranchiseMasterUpdateWithoutOnline_lead_store_log_online_lead_store_
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2526,6 +2586,7 @@ export type FranchiseMasterUncheckedUpdateWithoutOnline_lead_store_log_online_le
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2568,6 +2629,7 @@ export type FranchiseMasterUpdateWithoutOnline_lead_store_log_online_lead_store_
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2602,6 +2664,7 @@ export type FranchiseMasterUncheckedUpdateWithoutOnline_lead_store_log_online_le
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2633,6 +2696,7 @@ export type FranchiseMasterCreateWithoutOnline_leadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
@@ -2667,6 +2731,7 @@ export type FranchiseMasterUncheckedCreateWithoutOnline_leadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutFranchiseInput
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
@@ -2714,6 +2779,7 @@ export type FranchiseMasterUpdateWithoutOnline_leadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2748,6 +2814,7 @@ export type FranchiseMasterUncheckedUpdateWithoutOnline_leadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2758,6 +2825,156 @@ export type FranchiseMasterUncheckedUpdateWithoutOnline_leadsInput = {
   online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutFranchiseMasterNestedInput
   online_lead_store_log_online_lead_store_log_from_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutFranchiseMaster_online_lead_store_log_from_store_idToFranchiseMasterNestedInput
   online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutFranchiseMaster_online_lead_store_log_to_store_idToFranchiseMasterNestedInput
+}
+
+export type FranchiseMasterCreateWithoutProductsRequiredForProductionInput = {
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutFranchiseInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutFranchisesInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutFranchiseInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutFranchiseInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutFranchiseMasterInput
+  online_lead_store_log_online_lead_store_log_from_store_idToFranchiseMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutFranchiseMaster_online_lead_store_log_from_store_idToFranchiseMasterInput
+  online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutFranchiseMaster_online_lead_store_log_to_store_idToFranchiseMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutFranchiseMasterInput
+}
+
+export type FranchiseMasterUncheckedCreateWithoutProductsRequiredForProductionInput = {
+  id?: number
+  vendor_id: number
+  franchise_name: string
+  franchise_code?: string | null
+  contact_number?: string | null
+  contact_email?: string | null
+  contact_person?: string | null
+  is_head_office?: boolean
+  zone_id?: number | null
+  country_id?: number | null
+  region_id?: number | null
+  state_id?: number | null
+  city_id?: number | null
+  area_id?: number | null
+  address?: string | null
+  pincode?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  moduled_for_b2b?: boolean
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutFranchiseInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutFranchiseInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutFranchiseInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutFranchiseInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutFranchiseInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutFranchiseMasterInput
+  online_lead_store_log_online_lead_store_log_from_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutFranchiseMaster_online_lead_store_log_from_store_idToFranchiseMasterInput
+  online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutFranchiseMaster_online_lead_store_log_to_store_idToFranchiseMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutFranchiseMasterInput
+}
+
+export type FranchiseMasterCreateOrConnectWithoutProductsRequiredForProductionInput = {
+  where: Prisma.FranchiseMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+}
+
+export type FranchiseMasterUpsertWithoutProductsRequiredForProductionInput = {
+  update: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+  create: Prisma.XOR<Prisma.FranchiseMasterCreateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedCreateWithoutProductsRequiredForProductionInput>
+  where?: Prisma.FranchiseMasterWhereInput
+}
+
+export type FranchiseMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput = {
+  where?: Prisma.FranchiseMasterWhereInput
+  data: Prisma.XOR<Prisma.FranchiseMasterUpdateWithoutProductsRequiredForProductionInput, Prisma.FranchiseMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
+}
+
+export type FranchiseMasterUpdateWithoutProductsRequiredForProductionInput = {
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutFranchisesNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutFranchiseNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutFranchiseNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutFranchiseMasterNestedInput
+  online_lead_store_log_online_lead_store_log_from_store_idToFranchiseMaster?: Prisma.online_lead_store_logUpdateManyWithoutFranchiseMaster_online_lead_store_log_from_store_idToFranchiseMasterNestedInput
+  online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster?: Prisma.online_lead_store_logUpdateManyWithoutFranchiseMaster_online_lead_store_log_to_store_idToFranchiseMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutFranchiseMasterNestedInput
+}
+
+export type FranchiseMasterUncheckedUpdateWithoutProductsRequiredForProductionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  franchise_name?: Prisma.StringFieldUpdateOperationsInput | string
+  franchise_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contact_person?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_head_office?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  zone_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  country_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  region_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  city_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  area_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutFranchiseNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutFranchiseNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutFranchiseNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutFranchiseMasterNestedInput
+  online_lead_store_log_online_lead_store_log_from_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutFranchiseMaster_online_lead_store_log_from_store_idToFranchiseMasterNestedInput
+  online_lead_store_log_online_lead_store_log_to_store_idToFranchiseMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutFranchiseMaster_online_lead_store_log_to_store_idToFranchiseMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutFranchiseMasterNestedInput
 }
 
 export type FranchiseMasterCreateManyVendorInput = {
@@ -2801,6 +3018,7 @@ export type FranchiseMasterUpdateWithoutVendorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutFranchiseNestedInput
@@ -2834,6 +3052,7 @@ export type FranchiseMasterUncheckedUpdateWithoutVendorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   moduled_for_b2b?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseNestedInput
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutFranchiseNestedInput
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutFranchiseNestedInput
@@ -2875,6 +3094,7 @@ export type FranchiseMasterUncheckedUpdateManyWithoutVendorInput = {
  */
 
 export type FranchiseMasterCountOutputType = {
+  productsRequiredForProduction: number
   accounts: number
   fastProductionRequests: number
   fastProductionRequestBatches: number
@@ -2889,6 +3109,7 @@ export type FranchiseMasterCountOutputType = {
 }
 
 export type FranchiseMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  productsRequiredForProduction?: boolean | FranchiseMasterCountOutputTypeCountProductsRequiredForProductionArgs
   accounts?: boolean | FranchiseMasterCountOutputTypeCountAccountsArgs
   fastProductionRequests?: boolean | FranchiseMasterCountOutputTypeCountFastProductionRequestsArgs
   fastProductionRequestBatches?: boolean | FranchiseMasterCountOutputTypeCountFastProductionRequestBatchesArgs
@@ -2910,6 +3131,13 @@ export type FranchiseMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Ty
    * Select specific fields to fetch from the FranchiseMasterCountOutputType
    */
   select?: Prisma.FranchiseMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * FranchiseMasterCountOutputType without action
+ */
+export type FranchiseMasterCountOutputTypeCountProductsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductsRequiredForProductionWhereInput
 }
 
 /**
@@ -3011,6 +3239,7 @@ export type FranchiseMasterSelect<ExtArgs extends runtime.Types.Extensions.Inter
   createdAt?: boolean
   updatedAt?: boolean
   moduled_for_b2b?: boolean
+  productsRequiredForProduction?: boolean | Prisma.FranchiseMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.FranchiseMaster$accountsArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.FranchiseMaster$fastProductionRequestsArgs<ExtArgs>
   fastProductionRequestBatches?: boolean | Prisma.FranchiseMaster$fastProductionRequestBatchesArgs<ExtArgs>
@@ -3099,6 +3328,7 @@ export type FranchiseMasterSelectScalar = {
 
 export type FranchiseMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_name" | "franchise_code" | "contact_number" | "contact_email" | "contact_person" | "is_head_office" | "zone_id" | "country_id" | "region_id" | "state_id" | "city_id" | "area_id" | "address" | "pincode" | "status" | "createdAt" | "updatedAt" | "moduled_for_b2b", ExtArgs["result"]["franchiseMaster"]>
 export type FranchiseMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  productsRequiredForProduction?: boolean | Prisma.FranchiseMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.FranchiseMaster$accountsArgs<ExtArgs>
   fastProductionRequests?: boolean | Prisma.FranchiseMaster$fastProductionRequestsArgs<ExtArgs>
   fastProductionRequestBatches?: boolean | Prisma.FranchiseMaster$fastProductionRequestBatchesArgs<ExtArgs>
@@ -3123,6 +3353,7 @@ export type FranchiseMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type $FranchiseMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FranchiseMaster"
   objects: {
+    productsRequiredForProduction: Prisma.$ProductsRequiredForProductionPayload<ExtArgs>[]
     accounts: Prisma.$AccountMasterPayload<ExtArgs>[]
     fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
     fastProductionRequestBatches: Prisma.$FastProductionRequestBatchPayload<ExtArgs>[]
@@ -3551,6 +3782,7 @@ readonly fields: FranchiseMasterFieldRefs;
  */
 export interface Prisma__FranchiseMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  productsRequiredForProduction<T extends Prisma.FranchiseMaster$productsRequiredForProductionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$productsRequiredForProductionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductsRequiredForProductionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.FranchiseMaster$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fastProductionRequests<T extends Prisma.FranchiseMaster$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   fastProductionRequestBatches<T extends Prisma.FranchiseMaster$fastProductionRequestBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FranchiseMaster$fastProductionRequestBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4010,6 +4242,30 @@ export type FranchiseMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many FranchiseMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * FranchiseMaster.productsRequiredForProduction
+ */
+export type FranchiseMaster$productsRequiredForProductionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductsRequiredForProduction
+   */
+  select?: Prisma.ProductsRequiredForProductionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductsRequiredForProduction
+   */
+  omit?: Prisma.ProductsRequiredForProductionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductsRequiredForProductionInclude<ExtArgs> | null
+  where?: Prisma.ProductsRequiredForProductionWhereInput
+  orderBy?: Prisma.ProductsRequiredForProductionOrderByWithRelationInput | Prisma.ProductsRequiredForProductionOrderByWithRelationInput[]
+  cursor?: Prisma.ProductsRequiredForProductionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductsRequiredForProductionScalarFieldEnum | Prisma.ProductsRequiredForProductionScalarFieldEnum[]
 }
 
 /**
