@@ -3942,6 +3942,108 @@ export const assignLeadToUser = async (
       },
     });
 
+    // Synchronize sibling separated leads sharing the same contact & vendor, and update online_leads
+    if (lead.contact_no) {
+      const cleanContact = (lead.contact_no || "").replace(/[^0-9]/g, "");
+      const contact10 =
+        cleanContact.length > 10 && cleanContact.startsWith("91")
+          ? cleanContact.slice(-10)
+          : cleanContact;
+
+      const siblingLeads = await prisma.leadMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          is_deleted: false,
+          id: { not: leadId },
+          OR: [
+            { contact_no: cleanContact },
+            { contact_no: contact10 },
+            { contact_no: `91${contact10}` },
+            { contact_no: { contains: contact10 } },
+          ],
+        },
+      });
+
+      for (const sibling of siblingLeads) {
+        await prisma.leadMaster.update({
+          where: { id: sibling.id },
+          data: {
+            assign_to: payload.assign_to,
+            assigned_by: payload.assign_by,
+            updated_by: payload.assign_by,
+            updated_at: new Date(),
+          },
+        });
+
+        if (sibling.assign_to) {
+          await prisma.leadUserMapping.updateMany({
+            where: {
+              lead_id: sibling.id,
+              type: "ISM",
+              status: "active",
+              user_id: { not: payload.assign_to },
+            },
+            data: {
+              status: "inactive",
+              updated_by: payload.assign_by,
+              updated_at: new Date(),
+            },
+          });
+        }
+
+        const existingSiblingMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            lead_id: sibling.id,
+            user_id: payload.assign_to,
+            type: "ISM",
+          },
+        });
+
+        if (existingSiblingMapping) {
+          if (existingSiblingMapping.status !== "active") {
+            await prisma.leadUserMapping.update({
+              where: { id: existingSiblingMapping.id },
+              data: {
+                status: "active",
+                updated_by: payload.assign_by,
+                updated_at: new Date(),
+              },
+            });
+          }
+        } else {
+          await prisma.leadUserMapping.create({
+            data: {
+              vendor_id: vendorId,
+              lead_id: sibling.id,
+              account_id: sibling.account_id ?? lead.account?.id ?? 0,
+              user_id: payload.assign_to,
+              type: "ISM",
+              status: "active",
+              created_by: payload.assign_by,
+            },
+          });
+        }
+      }
+
+      // Also sync online_leads if present
+      await prisma.online_leads.updateMany({
+        where: {
+          vendor_id: vendorId,
+          OR: [
+            { lead_master_id: leadId },
+            { contact: cleanContact },
+            { contact: contact10 },
+            { contact: `91${contact10}` },
+            { contact: { contains: contact10 } },
+          ],
+        },
+        data: {
+          final_assigned_leads: payload.assign_to,
+          updated_at: new Date(),
+        },
+      });
+    }
+
     // Invalidate old assignee snapshot
     if (oldAssignee) {
       await cache.del(`performance:snapshot:${vendorId}:${oldAssignee}`);

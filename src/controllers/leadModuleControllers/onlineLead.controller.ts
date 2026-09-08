@@ -16,6 +16,10 @@ import {
   sendLeadApprovedBySalesExecutiveEmail,
   sendLeadRejectedBySalesExecutiveEmail,
 } from "../../services/email/brevoEmail2.service";
+import { createLeadLog } from "../../utils/leadDetailedLog";
+import { AuthService } from "../../services/auth/auth.service";
+
+const authService = new AuthService();
 
 // Helpers to get path params
 const getParam = (param: any): string => {
@@ -42,6 +46,7 @@ const mapOnlineLeadToFrontend = (lead: any) => {
       lead.UserMaster_online_leads_final_assigned_leadsToUserMaster || null,
     createdBy: lead.UserMaster_online_leads_created_byToUserMaster || null,
     franchise: lead.FranchiseMaster || null,
+    vendor: lead.VendorMaster || null,
     followupStatus: lead.online_lead_followup_status || null,
     sourceRelation: lead.SourceMaster || null,
     siteTypeRelation: lead.SiteTypeMaster || null,
@@ -836,6 +841,13 @@ export class OnlineLeadController {
               franchise_name: true,
             },
           },
+          VendorMaster: {
+            select: {
+              id: true,
+              vendor_name: true,
+              is_online_lead_feature_enabled: true,
+            },
+          },
           online_lead_followup_status: true,
           SourceMaster: {
             select: {
@@ -959,6 +971,13 @@ export class OnlineLeadController {
                 select: { id: true, user_name: true },
               },
               FranchiseMaster: { select: { id: true, franchise_name: true } },
+              VendorMaster: {
+                select: {
+                  id: true,
+                  vendor_name: true,
+                  is_online_lead_feature_enabled: true,
+                },
+              },
               online_lead_followup_status: true,
               SourceMaster: { select: { id: true, type: true } },
               SiteTypeMaster: { select: { id: true, type: true } },
@@ -1035,6 +1054,46 @@ export class OnlineLeadController {
               online_lead_store_log: [],
             };
 
+            // Access control for synthetic lead
+            let requestingUserForSynth: any = (req as any).user;
+            if (!requestingUserForSynth) {
+              const authHeader = req.headers["authorization"];
+              const token = authHeader?.split(" ")[1];
+              if (token) {
+                try {
+                  requestingUserForSynth = await authService.verifySessionToken(token);
+                } catch {}
+              }
+            }
+            if (!requestingUserForSynth && req.query.userId) {
+              requestingUserForSynth = await prisma.userMaster.findUnique({
+                where: { id: Number(req.query.userId) },
+                include: { user_type: true },
+              });
+            }
+
+            if (requestingUserForSynth) {
+              const userRole = (
+                requestingUserForSynth.user_type?.user_type ||
+                requestingUserForSynth.user_type ||
+                ""
+              ).toLowerCase().trim();
+              const isSalesExec =
+                userRole === "sales-executive" || userRole === "sales executive";
+
+              if (
+                isSalesExec &&
+                masterLead.assign_to &&
+                Number(masterLead.assign_to) !== Number(requestingUserForSynth.id)
+              ) {
+                return res.status(403).json({
+                  success: false,
+                  error:
+                    "Access denied: This lead is currently assigned to another Sales Executive.",
+                });
+              }
+            }
+
             return res.status(200).json({
               success: true,
               data: mapOnlineLeadToFrontend(syntheticLead),
@@ -1048,6 +1107,52 @@ export class OnlineLeadController {
           success: false,
           error: "Lead not found",
         });
+      }
+
+      // Access control: If requesting user is a Sales Executive, verify they are assigned to this lead
+      let requestingUser: any = (req as any).user;
+      if (!requestingUser) {
+        const authHeader = req.headers["authorization"];
+        const token = authHeader?.split(" ")[1];
+        if (token) {
+          try {
+            requestingUser = await authService.verifySessionToken(token);
+          } catch {}
+        }
+      }
+      if (!requestingUser && req.query.userId) {
+        requestingUser = await prisma.userMaster.findUnique({
+          where: { id: Number(req.query.userId) },
+          include: { user_type: true },
+        });
+      }
+
+      if (requestingUser) {
+        const userRole = (
+          requestingUser.user_type?.user_type ||
+          requestingUser.user_type ||
+          ""
+        ).toLowerCase().trim();
+        const isSalesExec =
+          userRole === "sales-executive" || userRole === "sales executive";
+
+        if (isSalesExec) {
+          const assignedExecId =
+            lead.final_assigned_leads ||
+            lead.UserMaster_online_leads_final_assigned_leadsToUserMaster?.id ||
+            null;
+
+          if (
+            assignedExecId &&
+            Number(assignedExecId) !== Number(requestingUser.id)
+          ) {
+            return res.status(403).json({
+              success: false,
+              error:
+                "Access denied: This lead is currently assigned to another Sales Executive.",
+            });
+          }
+        }
       }
 
       return res.status(200).json({
@@ -1067,7 +1172,7 @@ export class OnlineLeadController {
   assignLead = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id = Number(req.params.id);
-      const { assign_to, final_assigned_leads, remark, created_by } = req.body;
+      const { assign_to, final_assigned_leads, sales_executive_id, remark, created_by } = req.body;
 
       if (isNaN(id) || !created_by) {
         return res.status(400).json({
@@ -1076,12 +1181,79 @@ export class OnlineLeadController {
         });
       }
 
-      let callerName = "";
-      const targetUserId = final_assigned_leads || assign_to;
-      if (targetUserId) {
-        const callerUser = await prisma.userMaster.findUnique({
-          where: { id: Number(targetUserId) },
+      // Resolve effectiveSalesExecId from either final_assigned_leads or sales_executive_id
+      const effectiveSalesExecId =
+        final_assigned_leads !== undefined
+          ? final_assigned_leads
+            ? Number(final_assigned_leads)
+            : null
+          : sales_executive_id !== undefined
+          ? sales_executive_id
+            ? Number(sales_executive_id)
+            : null
+          : undefined;
+
+      // Fetch existing online lead record and check vendor feature flag
+      const leadRecord = await prisma.online_leads.findUnique({
+        where: { id },
+        select: {
+          vendor_id: true,
+          final_assigned_leads: true,
+          assign_to: true,
+          status: true,
+        },
+      });
+
+      if (!leadRecord) {
+        return res.status(404).json({
+          success: false,
+          error: "Online lead not found",
         });
+      }
+
+      let isOnlineLeadFeatureEnabled = false;
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: leadRecord.vendor_id },
+        select: { is_online_lead_feature_enabled: true },
+      });
+      isOnlineLeadFeatureEnabled = vendor?.is_online_lead_feature_enabled === true;
+
+      // Verify vendor has online lead feature enabled if assigning a sales executive
+      if (effectiveSalesExecId && !isOnlineLeadFeatureEnabled) {
+        return res.status(403).json({
+          success: false,
+          error: "Online lead feature is not enabled for this vendor.",
+        });
+      }
+
+      // Identify previous and new sales executive
+      const previousSalesExecId = leadRecord.final_assigned_leads;
+      let previousSalesExecUser: { id: number; user_name: string } | null = null;
+      if (previousSalesExecId) {
+        previousSalesExecUser = await prisma.userMaster.findUnique({
+          where: { id: previousSalesExecId },
+          select: { id: true, user_name: true },
+        });
+      }
+
+      let newSalesExecUser: { id: number; user_name: string; user_email?: string | null } | null = null;
+      if (effectiveSalesExecId) {
+        newSalesExecUser = await prisma.userMaster.findUnique({
+          where: { id: Number(effectiveSalesExecId) },
+          select: { id: true, user_name: true, user_email: true },
+        });
+      }
+
+      let callerName = "";
+      const targetUserId = effectiveSalesExecId || assign_to;
+      if (targetUserId) {
+        const callerUser =
+          newSalesExecUser && Number(targetUserId) === newSalesExecUser.id
+            ? newSalesExecUser
+            : await prisma.userMaster.findUnique({
+                where: { id: Number(targetUserId) },
+                select: { id: true, user_name: true },
+              });
         if (!callerUser) {
           return res.status(404).json({
             success: false,
@@ -1096,25 +1268,82 @@ export class OnlineLeadController {
         where: { id },
         data: {
           ...(assign_to !== undefined && { assign_to: assign_to ? Number(assign_to) : null }),
-          ...(final_assigned_leads !== undefined && { final_assigned_leads: final_assigned_leads ? Number(final_assigned_leads) : null }),
+          ...(effectiveSalesExecId !== undefined && {
+            final_assigned_leads: effectiveSalesExecId,
+            pending_assign_to: effectiveSalesExecId,
+          }),
         },
       });
 
-      // Synchronize with LeadMaster ONLY if this online lead is already converted
-      const existingLead = lead.lead_master_id
-        ? await prisma.leadMaster.findUnique({
-            where: {
-              id: lead.lead_master_id,
-            },
-          })
-        : null;
+      // Synchronize with LeadMaster (all converted leads for this online lead, including multi-product separated leads)
+      const cleanContact = (lead.contact || "").replace(/[^0-9]/g, "");
+      const contact10 =
+        cleanContact.length > 10 && cleanContact.startsWith("91")
+          ? cleanContact.slice(-10)
+          : cleanContact;
 
-      if (existingLead && !existingLead.is_deleted) {
-        const finalExecutiveId = final_assigned_leads !== undefined ? (final_assigned_leads ? Number(final_assigned_leads) : null) : null;
+      const orConditions: any[] = [];
+      if (lead.lead_master_id) {
+        orConditions.push({ id: lead.lead_master_id });
+      }
+      if (lead.lead_code) {
+        orConditions.push({ lead_code: lead.lead_code });
+      }
+      if (contact10) {
+        orConditions.push(
+          { contact_no: cleanContact },
+          { contact_no: contact10 },
+          { contact_no: `91${contact10}` },
+          { contact_no: { contains: contact10 } }
+        );
+      }
+
+      const matchingLeadMasters =
+        orConditions.length > 0
+          ? await prisma.leadMaster.findMany({
+              where: {
+                vendor_id: lead.vendor_id,
+                is_deleted: false,
+                OR: orConditions,
+              },
+            })
+          : [];
+
+      if (!lead.lead_master_id && matchingLeadMasters.length > 0) {
+        await prisma.online_leads.update({
+          where: { id: lead.id },
+          data: { lead_master_id: matchingLeadMasters[0].id },
+        });
+      }
+
+      const finalExecutiveId =
+        effectiveSalesExecId !== undefined ? effectiveSalesExecId : null;
+
+      for (const existingLead of matchingLeadMasters) {
         if (finalExecutiveId) {
           await prisma.leadMaster.update({
             where: { id: existingLead.id },
-            data: { assign_to: finalExecutiveId },
+            data: {
+              assign_to: finalExecutiveId,
+              assigned_by: Number(created_by),
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+            },
+          });
+
+          // Deactivate previous sales executive mappings for this lead
+          await prisma.leadUserMapping.updateMany({
+            where: {
+              lead_id: existingLead.id,
+              type: "ISM",
+              status: "active",
+              user_id: { not: finalExecutiveId },
+            },
+            data: {
+              status: "inactive",
+              updated_by: Number(created_by),
+              updated_at: new Date(),
+            },
           });
 
           const existingMapping = await prisma.leadUserMapping.findFirst({
@@ -1124,7 +1353,18 @@ export class OnlineLeadController {
               type: "ISM",
             },
           });
-          if (!existingMapping) {
+          if (existingMapping) {
+            if (existingMapping.status !== "active") {
+              await prisma.leadUserMapping.update({
+                where: { id: existingMapping.id },
+                data: {
+                  status: "active",
+                  updated_by: Number(created_by),
+                  updated_at: new Date(),
+                },
+              });
+            }
+          } else {
             await prisma.leadUserMapping.create({
               data: {
                 vendor_id: lead.vendor_id,
@@ -1142,7 +1382,7 @@ export class OnlineLeadController {
         // Sync Caller to LeadUserMapping (type: "ISM")
         if (assign_to) {
           const callerId = Number(assign_to);
-          const existingMapping = await prisma.leadUserMapping.findFirst({
+          const existingCallerMapping = await prisma.leadUserMapping.findFirst({
             where: {
               lead_id: existingLead.id,
               user_id: callerId,
@@ -1150,13 +1390,17 @@ export class OnlineLeadController {
             },
           });
 
-          if (existingMapping) {
-            await prisma.leadUserMapping.update({
-              where: { id: existingMapping.id },
-              data: {
-                status: "active",
-              },
-            });
+          if (existingCallerMapping) {
+            if (existingCallerMapping.status !== "active") {
+              await prisma.leadUserMapping.update({
+                where: { id: existingCallerMapping.id },
+                data: {
+                  status: "active",
+                  updated_by: Number(created_by),
+                  updated_at: new Date(),
+                },
+              });
+            }
           } else {
             await prisma.leadUserMapping.create({
               data: {
@@ -1174,12 +1418,31 @@ export class OnlineLeadController {
       }
 
       // Prepare assignment history remark
-      const descParts = [];
-      if (callerName) descParts.push(`Assigned User: ${callerName}`);
-      else if (!targetUserId) descParts.push("Assigned User: Unassigned");
+      let finalRemark = "";
+      if (isOnlineLeadFeatureEnabled && effectiveSalesExecId) {
+        const oldName = previousSalesExecUser?.user_name;
+        const newName = newSalesExecUser?.user_name || callerName || "Unassigned";
 
-      const finalRemark =
-        remark || `Lead assignments updated (${descParts.join(", ")})`;
+        let actionMessage = "";
+        if (oldName && oldName !== newName) {
+          actionMessage = `Lead has been reassigned from ${oldName} to ${newName}.`;
+        } else {
+          actionMessage = `Lead has been assigned to ${newName}.`;
+        }
+
+        if (remark && remark.trim()) {
+          finalRemark = `${actionMessage} (${remark.trim()})`;
+        } else {
+          finalRemark = actionMessage;
+        }
+      } else {
+        const descParts = [];
+        if (callerName) descParts.push(`Assigned User: ${callerName}`);
+        else if (!targetUserId) descParts.push("Assigned User: Unassigned");
+
+        finalRemark =
+          remark || `Lead assignments updated (${descParts.join(", ")})`;
+      }
 
       // Create history
       await prisma.online_lead_history.create({
@@ -1192,11 +1455,47 @@ export class OnlineLeadController {
         },
       });
 
-      // If assigned to a Sales Executive (final_assigned_leads), trigger notifications
-      if (final_assigned_leads) {
+      // Also create audit log in LeadDetailedLogs for any associated converted LeadMaster records
+      if (effectiveSalesExecId && matchingLeadMasters.length > 0) {
+        const oldAssigneeName = previousSalesExecUser?.user_name ?? "Unassigned";
+        const newAssigneeName = newSalesExecUser?.user_name ?? "Unassigned";
+        const detailedLogAction =
+          oldAssigneeName !== "Unassigned" && oldAssigneeName !== newAssigneeName
+            ? `Lead has been reassigned from ${oldAssigneeName} to ${newAssigneeName}.`
+            : `Lead has been assigned to ${newAssigneeName}.`;
+
+        for (const existingLead of matchingLeadMasters) {
+          try {
+            await createLeadLog(prisma, {
+              vendor_id: lead.vendor_id,
+              lead_id: existingLead.id,
+              account_id: existingLead.account_id ?? 0,
+              action: detailedLogAction,
+              action_type: "UPDATE",
+              created_by: Number(created_by),
+              created_at: new Date(),
+            });
+          } catch (logErr: any) {
+            console.error("[ASSIGN LEAD] Failed to create LeadDetailedLogs:", logErr?.message);
+          }
+        }
+      }
+
+      // If assigned to a Sales Executive (effectiveSalesExecId), trigger notifications
+      if (effectiveSalesExecId) {
         try {
+          // Clean up any previous assignment notifications for this online lead so old assignees do not retain stale notifications
+          await prisma.notification.deleteMany({
+            where: {
+              vendor_id: lead.vendor_id,
+              entity_id: lead.id,
+              entity_type: "online_lead",
+              type: "LEAD_ASSIGNED",
+            },
+          });
+
           const salesExecUser = await prisma.userMaster.findUnique({
-            where: { id: Number(final_assigned_leads) },
+            where: { id: Number(effectiveSalesExecId) },
             select: { id: true, user_name: true, user_email: true },
           });
 
@@ -2661,6 +2960,23 @@ export class OnlineLeadController {
           ) {
             const detailUrl = `/dashboard/online-leads/details/${lead.id}`;
 
+            // Clean up old assignment notifications for this online lead
+            try {
+              await prisma.notification.deleteMany({
+                where: {
+                  vendor_id: lead.vendor_id,
+                  entity_id: lead.id,
+                  entity_type: "online_lead",
+                  type: "LEAD_ASSIGNED",
+                },
+              });
+            } catch (delNotifErr: any) {
+              console.error(
+                "[ASSIGN STORE] Failed to delete old assignment notifications:",
+                delNotifErr?.message,
+              );
+            }
+
             // 1. In-App Notification
             try {
               await NotificationService.sendLeadAssignedToSalesExecutive({
@@ -2827,7 +3143,14 @@ export class OnlineLeadController {
 
       return res.status(200).json({
         success: true,
-        data: storeSalesExecutives.map((c) => ({ id: c.id, name: c.user_name, user_name: c.user_name })),
+        data: storeSalesExecutives.map((c) => ({
+          id: c.id,
+          name: c.user_name,
+          user_name: c.user_name,
+          user_email: c.user_email,
+          user_contact: c.user_contact,
+          role: c.user_type?.user_type || "Sales Executive",
+        })),
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] fetchStoreSalesExecutives error:", error);
@@ -4169,11 +4492,14 @@ export class OnlineLeadController {
       userRole.includes("sales-executive") ||
       userRole.includes("sales executive") ||
       userRole.includes("store");
-    if (
-      (isStoreSalesExecutive || user.franchise_id != null) &&
-      targetStoreId &&
-      user.franchise_id === targetStoreId
-    ) {
+    if (isStoreSalesExecutive) {
+      const assignedExecId = lead.final_assigned_leads || lead.pending_assign_to;
+      if (assignedExecId && Number(assignedExecId) !== Number(userId)) {
+        return false;
+      }
+      return Boolean(targetStoreId && user.franchise_id === targetStoreId);
+    }
+    if (user.franchise_id != null && targetStoreId && user.franchise_id === targetStoreId) {
       return true;
     }
 
@@ -4223,7 +4549,7 @@ export class OnlineLeadController {
       const statusId = lead.pending_status_id || lead.status;
       const storeId = lead.pending_store_id || lead.store_id;
       const finalAssignedLeads =
-        lead.pending_assign_to || lead.final_assigned_leads || Number(user_id);
+        lead.final_assigned_leads || lead.pending_assign_to || Number(user_id);
       const callerId =
         (lead as any).telecaller_id || lead.assign_to || lead.created_by;
 
@@ -4378,6 +4704,21 @@ export class OnlineLeadController {
           accountIdForMapping = existingLead.account_id ?? 0;
 
           if (finalAssignedLeads) {
+            // Deactivate previous sales executive mappings for this lead
+            await tx.leadUserMapping.updateMany({
+              where: {
+                lead_id: existingLead.id,
+                type: "ISM",
+                status: "active",
+                user_id: { not: finalAssignedLeads },
+              },
+              data: {
+                status: "inactive",
+                updated_by: Number(user_id || lead.created_by || 1),
+                updated_at: new Date(),
+              },
+            });
+
             const existingMapping = await tx.leadUserMapping.findFirst({
               where: {
                 lead_id: existingLead.id,
@@ -4389,7 +4730,11 @@ export class OnlineLeadController {
             if (existingMapping) {
               await tx.leadUserMapping.update({
                 where: { id: existingMapping.id },
-                data: { status: "active" },
+                data: {
+                  status: "active",
+                  updated_by: Number(user_id || lead.created_by || 1),
+                  updated_at: new Date(),
+                },
               });
             } else {
               await tx.leadUserMapping.create({
@@ -4685,6 +5030,73 @@ export class OnlineLeadController {
           }
         }
         await unmarkDraftAndSeparate(tx, leadIdForMapping);
+
+        if (finalAssignedLeads && accountIdForMapping) {
+          const siblingLeads = await tx.leadMaster.findMany({
+            where: {
+              vendor_id: lead.vendor_id,
+              account_id: accountIdForMapping,
+              is_deleted: false,
+            },
+            select: { id: true, assign_to: true },
+          });
+
+          for (const sib of siblingLeads) {
+            if (sib.assign_to !== finalAssignedLeads) {
+              await tx.leadMaster.update({
+                where: { id: sib.id },
+                data: { assign_to: finalAssignedLeads },
+              });
+            }
+
+            await tx.leadUserMapping.updateMany({
+              where: {
+                lead_id: sib.id,
+                type: "ISM",
+                status: "active",
+                user_id: { not: finalAssignedLeads },
+              },
+              data: {
+                status: "inactive",
+                updated_by: Number(user_id || lead.created_by || 1),
+                updated_at: new Date(),
+              },
+            });
+
+            const existingSibMapping = await tx.leadUserMapping.findFirst({
+              where: {
+                lead_id: sib.id,
+                user_id: finalAssignedLeads,
+                type: "ISM",
+              },
+            });
+
+            if (existingSibMapping) {
+              if (existingSibMapping.status !== "active") {
+                await tx.leadUserMapping.update({
+                  where: { id: existingSibMapping.id },
+                  data: {
+                    status: "active",
+                    updated_by: Number(user_id || lead.created_by || 1),
+                    updated_at: new Date(),
+                  },
+                });
+              }
+            } else {
+              await tx.leadUserMapping.create({
+                data: {
+                  vendor_id: lead.vendor_id,
+                  account_id: accountIdForMapping,
+                  lead_id: sib.id,
+                  user_id: finalAssignedLeads,
+                  type: "ISM",
+                  status: "active",
+                  created_by: Number(user_id || lead.created_by || 1),
+                },
+              });
+            }
+          }
+        }
 
         const updated = await tx.online_leads.update({
           where: { id },
