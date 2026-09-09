@@ -4758,6 +4758,29 @@ export const updateLeadStageService = async (
 export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: number }) => {
   const { lead_id, vendor_id } = input;
 
+  // Check vendor feature flag
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendor_id },
+    select: { is_online_lead_feature_enabled: true },
+  });
+  const isOnlineLeadFeatureEnabled = vendor?.is_online_lead_feature_enabled === true;
+
+  const formatRemark = (text: string | null | undefined): string | null => {
+    if (!text) return text || null;
+    if (isOnlineLeadFeatureEnabled) {
+      return text
+        .replace(
+          /Lead conversion approved and moved to Draft Lead stage/gi,
+          "Lead conversion approved and moved to Online Lead stage"
+        )
+        .replace(
+          /Lead conversion to Draft submitted for approval/gi,
+          "Lead conversion to Online submitted for approval"
+        );
+    }
+    return text;
+  };
+
   // 1. Find LeadMaster
   const leadMaster = await prisma.leadMaster.findUnique({
     where: { id: lead_id },
@@ -4828,10 +4851,11 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
     if (onlineLead.online_lead_history) {
       for (const h of onlineLead.online_lead_history) {
         const isStoreRemark = h.remark?.toLowerCase().includes("store") || h.remark?.toLowerCase().includes("franchise");
+        const formattedAction = formatRemark(h.remark) || `Status updated to ${h.online_lead_followup_status?.status_name || "Unknown"}`;
         timelineEvents.push({
           id: `olh-${h.id}`,
           event_type: isStoreRemark ? "store_assignment" : "status_change",
-          action: h.remark || `Status updated to ${h.online_lead_followup_status?.status_name || "Unknown"}`,
+          action: formattedAction,
           remark: null,
           created_at: h.created_at,
           user: h.UserMaster ? {
@@ -4860,44 +4884,7 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
     }
   }
 
-  // 6. LeadDetailedLogs (main pipeline history)
-  const detailedLogs = await prisma.leadDetailedLogs.findMany({
-    where: {
-      lead_id,
-      vendor_id,
-    },
-    include: {
-      user: {
-        select: {
-          user_name: true,
-          user_email: true,
-        },
-      },
-      stage: {
-        select: {
-          type: true,
-        },
-      },
-    },
-  });
-
-  for (const dl of detailedLogs) {
-    const isStageMove = dl.action_type === "STATUS_CHANGE";
-    const isAssign = dl.action?.toLowerCase().includes("assigned") || dl.action?.toLowerCase().includes("allocated");
-    timelineEvents.push({
-      id: `ldl-${dl.id}`,
-      event_type: isStageMove ? "stage_move" : isAssign ? "assignment" : "status_change",
-      action: dl.action || `Lead activity: ${dl.history_type}`,
-      remark: null,
-      created_at: dl.created_at,
-      user: dl.user ? {
-        name: dl.user.user_name,
-        email: dl.user.user_email,
-      } : null,
-    });
-  }
-
-  // 7. Sort newest -> oldest
+  // 6. Sort newest -> oldest (Online lifecycle ends when lead is approved & moved to Open/Online Lead stage)
   timelineEvents.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
 
   return timelineEvents;

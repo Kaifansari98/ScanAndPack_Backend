@@ -4436,11 +4436,17 @@ export class OnlineLeadController {
         });
       }
 
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: lead.vendor_id },
+        select: { is_online_lead_feature_enabled: true },
+      });
+      const targetStage = vendor?.is_online_lead_feature_enabled ? "Online" : "Draft";
+
       await prisma.online_lead_history.create({
         data: {
           vendor_id: lead.vendor_id,
           online_lead_id: lead.id,
-          remark: `Lead conversion to Draft submitted for approval by ${roleLabel}.`,
+          remark: `Lead conversion to ${targetStage} submitted for approval by ${roleLabel}.`,
           created_by: Number(user_id),
           store_id: lead.store_id,
           online_lead_status_id: statusId,
@@ -5116,11 +5122,17 @@ export class OnlineLeadController {
           },
         });
 
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: lead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
+        });
+        const targetStage = vendor?.is_online_lead_feature_enabled ? "Online Lead" : "Draft Lead";
+
         await tx.online_lead_history.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
-            remark: `Lead conversion approved and moved to Draft Lead stage`,
+            remark: `Lead conversion approved and moved to ${targetStage} stage`,
             created_by: Number(user_id || lead.created_by || 1),
             store_id: storeId,
             online_lead_status_id: statusId ?? 1,
