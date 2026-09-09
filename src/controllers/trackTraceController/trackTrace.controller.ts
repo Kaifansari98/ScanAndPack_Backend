@@ -455,13 +455,28 @@ export const assignMachine = async (_req: Request, res: Response) => {
 export const createQR = async (_req: Request, res: Response) => {
   console.log("Query params:", _req.body);
 
+  const rawCutListIds = _req.body.cutListIds;
+  const cutListIdsStr = rawCutListIds
+    ? Array.isArray(rawCutListIds)
+      ? rawCutListIds.join(",")
+      : String(rawCutListIds)
+    : undefined;
+
   const payload: QRParam = {
     vendorId: Number(_req.body.vendorId),
     projectId: String(_req.body.projectId),
-    cutListIds: String(_req.body.cutListIds),
+    cutListIds: cutListIdsStr,
   };
 
-  console.log(payload);
+  const selectedMachines: string[] = Array.isArray(_req.body.selectedMachines)
+    ? _req.body.selectedMachines
+    : [];
+  const targetMachine: string | undefined =
+    typeof _req.body.targetMachine === "string" && _req.body.targetMachine.trim()
+      ? _req.body.targetMachine.trim()
+      : undefined;
+
+  console.log("createQR payload:", payload, { selectedMachines, targetMachine });
 
   try {
     const data = await trackTraceService.createQR(payload);
@@ -471,29 +486,56 @@ export const createQR = async (_req: Request, res: Response) => {
 
     if (data) {
       const filePath = await generateCutListLabelsPDF({
-        itemQRs: data.map((item: any) => ({
-          value: item.cut_list.unique_code,
-          itemCode: item.cut_list.unique_code,
-          itemName: item.cut_list.item_name || item.cut_list.description || "",
-          projectName: item.cut_list.project?.project_name || "",
-          orderNo: item.cut_list.project?.order_no || "",
-          clientName: item.cut_list.project?.client_name || "",
-          groupName: item.cut_list.group_name || "",
-          categoryName: item.cut_list.category_name || "",
-          materialCode: item.cut_list.material_details || "",
-          length: item.cut_list.length,
-          width: item.cut_list.width,
-          thickness: item.cut_list.thickness,
-          quantity: item.cut_list.qty,
-          weight: item.cut_list.weight,
-          edgeBand: [
-            item.cut_list.elf && `EL1: ${item.cut_list.elf}`,
-            item.cut_list.elb && `EL2: ${item.cut_list.elb}`,
-            item.cut_list.esl && `SL1: ${item.cut_list.esl}`,
-            item.cut_list.esr && `SL2: ${item.cut_list.esr}`,
-          ].filter(Boolean).join(" | "),
-          procurement: item.cut_list.procurement || "",
-        })),
+        itemQRs: data.map((item: any) => {
+          const machineMappings = item.cut_list?.cutListMachineMapping || [];
+          const machineNames = machineMappings
+            .map((m: any) => m.machine?.machine_name)
+            .filter(Boolean);
+
+          let filteredMachineNames = machineNames;
+          if (selectedMachines.length > 0) {
+            filteredMachineNames = machineNames.filter((mName: string) =>
+              selectedMachines.includes(mName)
+            );
+          }
+
+          // Deduplicate consecutive duplicate machine names
+          const uniqueMachineNames = (
+            filteredMachineNames.length > 0 ? filteredMachineNames : machineNames
+          ).filter(
+            (mName: string, idx: number, arr: string[]) =>
+              idx === 0 || mName !== arr[idx - 1]
+          );
+
+          const machineFlow = uniqueMachineNames.join(", ");
+
+          return {
+            value: item.cut_list.unique_code,
+            itemCode: item.cut_list.unique_code,
+            itemName: item.cut_list.item_name || item.cut_list.description || "",
+            projectName: item.cut_list.project?.project_name || "",
+            orderNo: item.cut_list.project?.order_no || "",
+            clientName: item.cut_list.project?.client_name || "",
+            groupName: item.cut_list.group_name || "",
+            categoryName: item.cut_list.category_name || "",
+            materialCode: item.cut_list.material_details || "",
+            length: item.cut_list.length,
+            width: item.cut_list.width,
+            thickness: item.cut_list.thickness,
+            quantity: item.cut_list.qty,
+            weight: item.cut_list.weight,
+            edgeBand: [
+              item.cut_list.elf && `EL1: ${item.cut_list.elf}`,
+              item.cut_list.elb && `EL2: ${item.cut_list.elb}`,
+              item.cut_list.esl && `SL1: ${item.cut_list.esl}`,
+              item.cut_list.esr && `SL2: ${item.cut_list.esr}`,
+            ].filter(Boolean).join(" | "),
+            procurement: item.cut_list.procurement || "",
+            machines: machineNames,
+            machineFlow: machineFlow,
+            targetMachine: targetMachine,
+          };
+        }),
         baseUrl,
       });
       const filename = path.basename(filePath);
