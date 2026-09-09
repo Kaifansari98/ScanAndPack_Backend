@@ -502,19 +502,29 @@ export class AuthService {
       };
     }
 
-    if (!vendor.subdomain_url) {
+    const referer = (req.headers.referer as string) || (req.headers.origin as string) || "";
+    const isLocal =
+      process.env.BACKEND_ENVIRONMENT === "LOCAL" ||
+      process.env.NODE_ENV === "development" ||
+      referer.includes("localhost") ||
+      referer.includes("127.0.0.1");
+
+    if (!vendor.subdomain_url && !isLocal) {
       return {
         status: 400,
         body: { message: "Vendor subdomain is not configured" },
       };
     }
 
-    const targetUser = await prisma.userMaster.findFirst({
+    let targetUser = await prisma.userMaster.findFirst({
       where: {
         vendor_id: vendor.id,
         status: "active",
         user_type: {
-          user_type: "super-admin",
+          user_type: {
+            equals: "super-admin",
+            mode: "insensitive",
+          },
         },
       },
       select: {
@@ -527,9 +537,25 @@ export class AuthService {
     });
 
     if (!targetUser?.id || !targetUser.user_email) {
+      targetUser = await prisma.userMaster.findFirst({
+        where: {
+          vendor_id: vendor.id,
+          status: "active",
+        },
+        select: {
+          id: true,
+          user_email: true,
+        },
+        orderBy: {
+          id: "asc",
+        },
+      });
+    }
+
+    if (!targetUser?.id || !targetUser.user_email) {
       return {
         status: 404,
-        body: { message: "Vendor super-admin user not found" },
+        body: { message: `No active user found for vendor ${vendor.vendor_name}` },
       };
     }
 
@@ -539,7 +565,7 @@ export class AuthService {
         target_user_id: targetUser.id,
         target_vendor_id: vendor.id,
         actor_user_id: actor.id,
-        subdomain_url: vendor.subdomain_url,
+        subdomain_url: vendor.subdomain_url || "localhost",
       } satisfies VendorLoginExchangePayload,
       JWT_SECRET,
       { expiresIn: "10m" },
@@ -555,10 +581,24 @@ export class AuthService {
         metadata: {
           target_vendor_id: vendor.id,
           target_user_id: targetUser.id,
-          subdomain_url: vendor.subdomain_url,
+          subdomain_url: vendor.subdomain_url || "localhost",
         },
       },
     });
+
+    let launchUrl: string;
+    if (isLocal && referer) {
+      try {
+        const origin = new URL(referer).origin;
+        launchUrl = `${origin}/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`;
+      } catch {
+        launchUrl = `http://localhost:3000/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`;
+      }
+    } else if (vendor.subdomain_url?.startsWith("http://") || vendor.subdomain_url?.startsWith("https://")) {
+      launchUrl = `${vendor.subdomain_url}/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`;
+    } else {
+      launchUrl = `https://${vendor.subdomain_url}/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`;
+    }
 
     return {
       status: 200,
@@ -568,7 +608,7 @@ export class AuthService {
           vendor_id: vendor.id,
           vendor_name: vendor.vendor_name,
           subdomain_url: vendor.subdomain_url,
-          launch_url: `https://${vendor.subdomain_url}/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`,
+          launch_url: launchUrl,
         },
       },
     };
