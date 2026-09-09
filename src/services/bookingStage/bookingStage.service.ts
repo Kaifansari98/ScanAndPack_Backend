@@ -5141,6 +5141,13 @@ export class BookingStageService {
       baseWhere.franchise_id = franchiseId;
     }
 
+    if (
+      normalizedUserType === "sales-executive" &&
+      normalizedStageTag.toLowerCase() === "type 1"
+    ) {
+      baseWhere.assign_to = userId;
+    }
+
     const includeFranchise =
       (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
       franchiseId &&
@@ -5653,9 +5660,16 @@ export class BookingStageService {
       ];
 
       if (!leadIds.length) {
-        return { leads: [], count: 0 };
+        if (!isOnlineLeadFeatureEnabled) {
+          return { leads: [], count: 0 };
+        }
+        baseWhere.id = { in: [] };
+      } else {
+        baseWhere.id = { in: leadIds };
       }
-      baseWhere.id = { in: leadIds };
+      if (normalizedUserType === "sales-executive") {
+        baseWhere.assign_to = userId;
+      }
     }
 
     const whereClause = addFilterConditions(baseWhere);
@@ -5698,7 +5712,33 @@ export class BookingStageService {
         approval_status: "PENDING",
       };
 
-      if (shouldIncludeFranchise && franchiseId) {
+      if (normalizedUserType === "sales-executive") {
+        const userCondition: any = {
+          OR: [
+            { final_assigned_leads: userId },
+            {
+              AND: [
+                { final_assigned_leads: null },
+                { OR: [{ assign_to: userId }, { pending_assign_to: userId }] },
+              ],
+            },
+          ],
+        };
+
+        if (shouldIncludeFranchise && franchiseId) {
+          pendingOnlineWhere.AND = [
+            {
+              OR: [
+                { pending_store_id: franchiseId },
+                { store_id: franchiseId },
+              ],
+            },
+            userCondition,
+          ];
+        } else {
+          Object.assign(pendingOnlineWhere, userCondition);
+        }
+      } else if (shouldIncludeFranchise && franchiseId) {
         pendingOnlineWhere.OR = [
           { pending_store_id: franchiseId },
           { store_id: franchiseId },
