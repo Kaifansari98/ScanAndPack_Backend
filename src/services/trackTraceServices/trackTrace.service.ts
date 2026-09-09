@@ -1443,13 +1443,40 @@ export const updateScannedItem = async (
       });
     };
 
-    await Promise.all([
+    const boxWeightRowsPromise = box_id
+      ? prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id,
+            project_id: eligibleMapping.project_id,
+            vendor_id,
+            expected_in: true,
+            actual_in_at: {
+              not: null,
+            },
+          },
+          select: {
+            qty: true,
+            weight: true,
+          },
+        })
+      : Promise.resolve([]);
+
+    const [, , boxWeightRows] = await Promise.all([
       completeDefect(),
       updateProjectStatus(
         eligibleMapping.project_id,
         eligibleMapping.project.track_trace_status,
       ),
+      boxWeightRowsPromise,
     ]);
+
+    const boxTotalWeight = box_id
+      ? boxWeightRows.reduce(
+          (total, row) =>
+            total + Number(row.weight || 0) * Number(row.qty || 1),
+          0,
+        )
+      : null;
 
     return validationResponse(1, "Scan done", {
       mapping_id: eligibleMapping.id,
@@ -1463,6 +1490,8 @@ export const updateScannedItem = async (
       description: eligibleMapping.cut_list.description,
       group_name: eligibleMapping.cut_list.group_name,
       box_id: box_id ?? null,
+      box_total_weight:
+        boxTotalWeight === null ? null : Number(boxTotalWeight.toFixed(2)),
       scanned_at: scanTime.toISOString(),
     });
   } catch (error: unknown) {
