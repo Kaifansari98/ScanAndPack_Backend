@@ -4,8 +4,9 @@ import {
   searchTrackTraceLeadsController,
   getTrackTraceVendorConfigController,
   getTrackTraceProjectController,
-  updateTrackTraceProjectController
-
+  updateTrackTraceProjectController,
+  getActiveMachinesByVendorController,
+  getPackagingProjectContextController,
 } from "../../../src/controllers/trackTraceController/track-trace-project.controller";
 import { uploadProjectExcel } from "../../middlewares/uploadWasabi";
 
@@ -25,6 +26,16 @@ router.post(
 router.get(
   "/onboard/:vendor_id/config",
   getTrackTraceVendorConfigController
+);
+
+router.get(
+  "/onboard/:vendor_id/machines",
+  getActiveMachinesByVendorController
+);
+
+router.get(
+  "/onboard/:vendor_id/packaging-project/:project_id",
+  getPackagingProjectContextController,
 );
 
 router.get(

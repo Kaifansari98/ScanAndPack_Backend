@@ -5,8 +5,9 @@ import {
   getTrackTraceVendorConfigService,
   getTrackTraceProjectService,
   updateTrackTraceProjectService,
-}
-  from "../../../src/services/trackTraceServices/track-trace-project.service";
+  getActiveMachinesByVendorService,
+  getPackagingProjectContextService,
+} from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 import { PackingType } from "../../../generated/prisma_client/enums";
 
@@ -60,7 +61,7 @@ export const createProjectController = async (
       box_info_fields,
       created_by,
     } = req.body;
-    
+
     if (!projectName || !vendorId) {
       return res.status(400).json({
         success: false,
@@ -208,6 +209,80 @@ export const getTrackTraceVendorConfigController = async (
     return res.status(500).json({
       success: false,
       message: error.message || "Failed to fetch vendor config",
+      data: null,
+    });
+  }
+};
+
+export const getActiveMachinesByVendorController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+        data: [],
+      });
+    }
+
+    const result = await getActiveMachinesByVendorService(vendorId);
+
+    return res.status(200).json(result);
+  } catch (error: any) {
+    logger.error("getActiveMachinesByVendorController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch active machines",
+      data: [],
+    });
+  }
+};
+
+export const getPackagingProjectContextController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+    const projectId = Number(req.params.project_id);
+
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+        data: null,
+      });
+    }
+
+    if (!Number.isInteger(projectId) || projectId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid project_id",
+        data: null,
+      });
+    }
+
+    const result = await getPackagingProjectContextService(
+      vendorId,
+      projectId,
+    );
+
+    return res.status(result.success ? 200 : 404).json(result);
+  } catch (error: any) {
+    logger.error("getPackagingProjectContextController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch packaging project context",
       data: null,
     });
   }

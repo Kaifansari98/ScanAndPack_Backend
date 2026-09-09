@@ -1451,7 +1451,20 @@ export const updateScannedItem = async (
       ),
     ]);
 
-    return validationResponse(1, "Scan done");
+    return validationResponse(1, "Scan done", {
+      mapping_id: eligibleMapping.id,
+      cut_list_id: eligibleMapping.cut_list_id,
+      project_id: eligibleMapping.project_id,
+      project_name: eligibleMapping.project.project_name,
+      machine_id: eligibleMapping.machine.id,
+      machine_name: eligibleMapping.machine.machine_name,
+      item_name: eligibleMapping.cut_list.item_name,
+      unique_code: eligibleMapping.cut_list.unique_code,
+      description: eligibleMapping.cut_list.description,
+      group_name: eligibleMapping.cut_list.group_name,
+      box_id: box_id ?? null,
+      scanned_at: scanTime.toISOString(),
+    });
   } catch (error: unknown) {
     console.error("updateScannedItem error:", error);
 
