@@ -3401,6 +3401,7 @@ export const createQR = async (payload: QRParam) => {
                       id: true,
                       machine_name: true,
                       machine_code: true,
+                      sequence_no: true,
                     },
                   },
                 },

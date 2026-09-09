@@ -84,7 +84,7 @@ export const generateCutListLabelsPDF = async ({
 
     const radius = 6;
     const headerHeight = 22;
-    const footerHeight = 16;
+    const footerHeight = 0;
 
     // Outer clipping & background fills
     doc.save();
@@ -96,16 +96,6 @@ export const generateCutListLabelsPDF = async ({
       .moveTo(x, y + headerHeight)
       .lineTo(x + cellWidth, y + headerHeight)
       .lineWidth(0.75)
-      .stroke("#CBD5E1");
-
-    // Footer background (subtle light gray fill #F8FAFC)
-    doc
-      .rect(x, y + cellHeight - footerHeight, cellWidth, footerHeight)
-      .fill("#F8FAFC");
-    doc
-      .moveTo(x, y + cellHeight - footerHeight)
-      .lineTo(x + cellWidth, y + cellHeight - footerHeight)
-      .lineWidth(0.6)
       .stroke("#CBD5E1");
 
     doc.restore();
@@ -278,20 +268,7 @@ export const generateCutListLabelsPDF = async ({
       renderFullRow("Machine Flow", rawFlow, true);
     }
 
-    if (item.edgeBand && item.edgeBand !== "-") {
-      renderFullRow("Edge Band", item.edgeBand);
-    }
 
-    // --- C. FOOTER ---
-    const footerTextY = y + cellHeight - footerHeight + (footerHeight - 9) / 2;
-    doc
-      .font("Helvetica-Bold")
-      .fontSize(7.8)
-      .fillColor("#0F172A")
-      .text(`PART ID: ${text(item.itemCode)}`, x + 4, footerTextY, {
-        width: cellWidth - 8,
-        align: "center",
-      });
   }
 
   doc.end();
