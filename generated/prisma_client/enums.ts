@@ -690,3 +690,54 @@ export const LeadStoreActionType = {
 } as const
 
 export type LeadStoreActionType = (typeof LeadStoreActionType)[keyof typeof LeadStoreActionType]
+
+
+export const RuleStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+} as const
+
+export type RuleStatus = (typeof RuleStatus)[keyof typeof RuleStatus]
+
+
+export const RuleConditionType = {
+  COLUMN: 'COLUMN',
+  CATEGORY: 'CATEGORY'
+} as const
+
+export type RuleConditionType = (typeof RuleConditionType)[keyof typeof RuleConditionType]
+
+
+export const RuleOperator = {
+  EQUALS: 'EQUALS',
+  NOT_EQUALS: 'NOT_EQUALS',
+  CONTAINS: 'CONTAINS',
+  NOT_CONTAINS: 'NOT_CONTAINS',
+  LESS_THAN: 'LESS_THAN',
+  LESS_THAN_OR_EQUAL: 'LESS_THAN_OR_EQUAL',
+  GREATER_THAN: 'GREATER_THAN',
+  GREATER_THAN_OR_EQUAL: 'GREATER_THAN_OR_EQUAL',
+  IN: 'IN',
+  NOT_IN: 'NOT_IN',
+  BETWEEN: 'BETWEEN'
+} as const
+
+export type RuleOperator = (typeof RuleOperator)[keyof typeof RuleOperator]
+
+
+export const LogicalOperator = {
+  AND: 'AND',
+  OR: 'OR'
+} as const
+
+export type LogicalOperator = (typeof LogicalOperator)[keyof typeof LogicalOperator]
+
+
+export const RuleFieldDataType = {
+  STRING: 'STRING',
+  NUMBER: 'NUMBER',
+  BOOLEAN: 'BOOLEAN',
+  ARRAY: 'ARRAY'
+} as const
+
+export type RuleFieldDataType = (typeof RuleFieldDataType)[keyof typeof RuleFieldDataType]

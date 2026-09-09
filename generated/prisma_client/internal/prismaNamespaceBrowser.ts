@@ -262,7 +262,13 @@ export const ModelName = {
   LeadBillingAddress: 'LeadBillingAddress',
   MetaLead: 'MetaLead',
   BoxItemDeleteLog: 'BoxItemDeleteLog',
-  ProductsRequiredForProduction: 'ProductsRequiredForProduction'
+  ProductsRequiredForProduction: 'ProductsRequiredForProduction',
+  CutListRuleMaster: 'CutListRuleMaster',
+  CutListRuleConditionGroup: 'CutListRuleConditionGroup',
+  CutListRuleCondition: 'CutListRuleCondition',
+  CutListRuleAction: 'CutListRuleAction',
+  RuleFieldMaster: 'RuleFieldMaster',
+  RuleActionMaster: 'RuleActionMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2380,7 +2386,8 @@ export const CutListMachineMappingScalarFieldEnum = {
   weight: 'weight',
   qty: 'qty',
   received_qty: 'received_qty',
-  row_created_source: 'row_created_source'
+  row_created_source: 'row_created_source',
+  rule_id: 'rule_id'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -3977,6 +3984,91 @@ export const ProductsRequiredForProductionScalarFieldEnum = {
 } as const
 
 export type ProductsRequiredForProductionScalarFieldEnum = (typeof ProductsRequiredForProductionScalarFieldEnum)[keyof typeof ProductsRequiredForProductionScalarFieldEnum]
+
+
+export const CutListRuleMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  machine_id: 'machine_id',
+  rule_code: 'rule_code',
+  rule_name: 'rule_name',
+  rule_tag: 'rule_tag',
+  priority: 'priority',
+  status: 'status',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleMasterScalarFieldEnum = (typeof CutListRuleMasterScalarFieldEnum)[keyof typeof CutListRuleMasterScalarFieldEnum]
+
+
+export const CutListRuleConditionGroupScalarFieldEnum = {
+  id: 'id',
+  rule_id: 'rule_id',
+  logical_operator: 'logical_operator',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleConditionGroupScalarFieldEnum = (typeof CutListRuleConditionGroupScalarFieldEnum)[keyof typeof CutListRuleConditionGroupScalarFieldEnum]
+
+
+export const CutListRuleConditionScalarFieldEnum = {
+  id: 'id',
+  group_id: 'group_id',
+  condition_type: 'condition_type',
+  field_key: 'field_key',
+  operator: 'operator',
+  value: 'value',
+  logical_operator: 'logical_operator',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleConditionScalarFieldEnum = (typeof CutListRuleConditionScalarFieldEnum)[keyof typeof CutListRuleConditionScalarFieldEnum]
+
+
+export const CutListRuleActionScalarFieldEnum = {
+  id: 'id',
+  rule_id: 'rule_id',
+  action_id: 'action_id',
+  action_value: 'action_value',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleActionScalarFieldEnum = (typeof CutListRuleActionScalarFieldEnum)[keyof typeof CutListRuleActionScalarFieldEnum]
+
+
+export const RuleFieldMasterScalarFieldEnum = {
+  id: 'id',
+  field_key: 'field_key',
+  field_name: 'field_name',
+  data_type: 'data_type',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RuleFieldMasterScalarFieldEnum = (typeof RuleFieldMasterScalarFieldEnum)[keyof typeof RuleFieldMasterScalarFieldEnum]
+
+
+export const RuleActionMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  action_code: 'action_code',
+  action_name: 'action_name',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RuleActionMasterScalarFieldEnum = (typeof RuleActionMasterScalarFieldEnum)[keyof typeof RuleActionMasterScalarFieldEnum]
 
 
 export const SortOrder = {
