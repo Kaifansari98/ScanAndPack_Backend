@@ -62,31 +62,31 @@ import metaLeadsDashboardRoutes from "./metaLeadsDashboard.routes";
 
 import inventoryRoutes from "./inventoryRoutes/inventory.routes";
 import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
-import grnRoutes from "./grnRoutes/grn.routes";
-import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
-import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
-import broadcastRouter from "./broadcast/broadcast.routes";
-const router = Router();
+  import grnRoutes from "./grnRoutes/grn.routes";
+  import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
+  import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
+  import broadcastRouter from "./broadcast/broadcast.routes";
+  const router = Router();
 
-router.use("/dashboard", DashboardRouter);
+  router.use("/dashboard", DashboardRouter);
 
-router.use("/vendors", vendorRoutes);
-router.use("/vendor-address", vendorAddressRoutes);
-router.use("/vendor-tax-info", vendorTaxInfoRoutes);
-router.use("/vendor-tokens", vendorTokenRoutes);
+  router.use("/vendors", vendorRoutes);
+  router.use("/vendor-address", vendorAddressRoutes);
+  router.use("/vendor-tax-info", vendorTaxInfoRoutes);
+  router.use("/vendor-tokens", vendorTokenRoutes);
 
-router.use("/users", userRoutes);
-router.use("/user-types", userTypeRoutes);
-router.use("/user-documents", userDocumentRoutes);
+  router.use("/users", userRoutes);
+  router.use("/user-types", userTypeRoutes);
+  router.use("/user-documents", userDocumentRoutes);
 
-router.use("/projects", projectRoutes);
-router.use("/boxes", boxRoutes);
-router.use("/scan-items", scanItemRoutes);
-router.use("/auth", authRoutes);
-router.use("/clients", clientRoutes);
-router.use("/client-types", clientTypeRoutes);
-router.use("/leads", leadModuleRoutes);
-router.use("/online-leads", onlineLeadRoutes);
+  router.use("/projects", projectRoutes);
+  router.use("/boxes", boxRoutes);
+  router.use("/scan-items", scanItemRoutes);
+  router.use("/auth", authRoutes);
+  router.use("/clients", clientRoutes);
+  router.use("/client-types", clientTypeRoutes);
+  router.use("/leads", leadModuleRoutes);
+  router.use("/online-leads", onlineLeadRoutes);
 router.use("/", metaLeadsRoutes);
 router.use("/meta-leads", metaLeadsDashboardRoutes);
 router.use("/leads/initial-site-measurement", paymentUploadRoutes);
