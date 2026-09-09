@@ -4,8 +4,15 @@ import ExcelJS from "exceljs";
 import { prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
-import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
-import { PackingType, BoxStatus } from "../../../generated/prisma_client/enums";
+import {
+  generateSignedUrl,
+  uploadToWasabiProjectExcel,
+} from "../../../src/utils/wasabiClient";
+import {
+  PackingType,
+  BoxStatus,
+  MachineStatus,
+} from "../../../generated/prisma_client/enums";
 import {
   syncProjectBoxInfoFields,
 } from "../../services/trackTraceServices/boxInfoField.service";
@@ -2802,6 +2809,155 @@ export const getTrackTraceVendorConfigService = async (vendorId: number) => {
       data: null,
     };
   }
+};
+
+export const getActiveMachinesByVendorService = async (vendorId: number) => {
+  const machines = await prisma.machineMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      status: MachineStatus.ACTIVE,
+    },
+    select: {
+      id: true,
+      machine_name: true,
+      machine_code: true,
+      machine_type_id: true,
+      image_path: true,
+      sequence_no: true,
+    },
+    orderBy: [
+      { sequence_no: "asc" },
+      { machine_name: "asc" },
+    ],
+  });
+
+  const data = await Promise.all(
+    machines.map(async (machine) => ({
+      ...machine,
+      image_path: machine.image_path
+        ? await generateSignedUrl(machine.image_path)
+        : null,
+    }))
+  );
+
+  return {
+    success: true,
+    message: "Active machines fetched successfully",
+    data,
+  };
+};
+
+export const getPackagingProjectContextService = async (
+  vendorId: number,
+  projectId: number,
+) => {
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      id: projectId,
+      vendor_id: vendorId,
+      isDeleted: false,
+    },
+    select: {
+      id: true,
+      unique_project_id: true,
+      project_name: true,
+      project_status: true,
+      track_trace_status: true,
+      order_no: true,
+      client_name: true,
+      lead_id: true,
+      packing_type: true,
+      details: {
+        where: {
+          vendor_id: vendorId,
+        },
+        select: {
+          id: true,
+          room_name: true,
+        },
+        orderBy: {
+          id: "asc",
+        },
+        take: 1,
+      },
+      box_info_fields: {
+        where: {
+          active: true,
+        },
+        select: {
+          id: true,
+          field_label: true,
+          field_key: true,
+          field_type: true,
+          is_required: true,
+          sort_order: true,
+        },
+        orderBy: [
+          { sort_order: "asc" },
+          { id: "asc" },
+        ],
+      },
+    },
+  });
+
+  if (!project) {
+    return {
+      success: false,
+      message: "Project not found or is no longer active",
+      data: null,
+    };
+  }
+
+  if (
+    ["deactivated", "deleted", "deactive", "inactive"].includes(
+      (project.project_status || "").toLocaleLowerCase(),
+    )
+  ) {
+    return {
+      success: false,
+      message: "Project is deleted or deactivated",
+      data: null,
+    };
+  }
+
+  const groupRows = await prisma.cutList.findMany({
+    where: {
+      project_id: projectId,
+      vendor_id: vendorId,
+      status: {
+        equals: "active",
+        mode: "insensitive",
+      },
+      group_name: {
+        not: null,
+      },
+    },
+    select: {
+      group_name: true,
+    },
+  });
+
+  const groupNameMap = new Map<string, string>();
+
+  for (const row of groupRows) {
+    const groupName = row.group_name?.trim();
+
+    if (groupName && !groupNameMap.has(groupName.toLocaleLowerCase())) {
+      groupNameMap.set(groupName.toLocaleLowerCase(), groupName);
+    }
+  }
+
+  return {
+    success: true,
+    message: "Packaging project context fetched successfully",
+    data: {
+      ...project,
+      project_details_id: project.details[0]?.id ?? null,
+      group_names: Array.from(groupNameMap.values()).sort((a, b) =>
+        a.localeCompare(b),
+      ),
+    },
+  };
 };
 
 export const getTrackTraceProjectService = async (

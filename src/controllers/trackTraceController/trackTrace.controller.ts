@@ -15,6 +15,7 @@ import {
   QRParam,
 } from "../../../src/types/track-trace";
 import { generateCutListLabelsPDF } from "../../utils/cutlist-label-generator";
+import { prisma } from "../../prisma/client";
 
 interface TrackTracePayload {
   project_id: number;
@@ -89,6 +90,171 @@ export const scan_item = async (_req: Request, res: Response) => {
     files.forEach((file) => {
       if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
     });
+  }
+};
+
+export const scan_machine_item = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.body.vendor_id);
+    const machine_id = Number(req.body.machine_id);
+    const created_by = Number(req.body.created_by);
+    const project_id = req.body.project_id
+      ? Number(req.body.project_id)
+      : undefined;
+    const box_id = req.body.box_id ? Number(req.body.box_id) : undefined;
+    const unique_code =
+      typeof req.body.unique_code === "string"
+        ? req.body.unique_code.trim()
+        : "";
+
+    if (!Number.isInteger(vendor_id) || vendor_id <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid vendor_id is required"));
+    }
+
+    if (!Number.isInteger(machine_id) || machine_id <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid machine_id is required"));
+    }
+
+    if (!Number.isInteger(created_by) || created_by <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid created_by is required"));
+    }
+
+    if (!unique_code) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("unique_code is required"));
+    }
+
+    if (
+      project_id !== undefined &&
+      (!Number.isInteger(project_id) || project_id <= 0)
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid project_id is required"));
+    }
+
+    if (
+      box_id !== undefined &&
+      (!Number.isInteger(box_id) || box_id <= 0)
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid box_id is required"));
+    }
+
+    const machine = await prisma.machineMaster.findFirst({
+      where: {
+        id: machine_id,
+        vendor_id,
+        status: "ACTIVE",
+      },
+      select: {
+        machine_type_id: true,
+      },
+    });
+
+    if (!machine) {
+      return res
+        .status(404)
+        .json(ApiResponse.validationError("Active machine not found"));
+    }
+
+    if (machine.machine_type_id === 18 && (!project_id || !box_id)) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.validationError(
+            "project_id and box_id are required for packaging scans",
+          ),
+        );
+    }
+
+    if (machine.machine_type_id === 18) {
+      const selectedBox = await prisma.boxMaster.findFirst({
+        where: {
+          id: box_id!,
+          vendor_id,
+          project_id: project_id!,
+          is_deleted: false,
+          box_status: "unpacked",
+        },
+        select: {
+          id: true,
+          project: {
+            select: {
+              isDeleted: true,
+              project_status: true,
+            },
+          },
+        },
+      });
+
+      if (!selectedBox) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "Select an unpacked box from the selected project",
+            ),
+          );
+      }
+
+      if (
+        selectedBox.project.isDeleted ||
+        ["deactivated", "deleted", "deactive", "inactive"].includes(
+          (selectedBox.project.project_status || "").toLocaleLowerCase(),
+        )
+      ) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "The selected project is deleted or deactivated",
+            ),
+          );
+      }
+    }
+
+    const serviceResponse = await trackTraceService.updateScannedItem(
+      {
+        // Non-packaging machines retain the vendor-wide scanner behavior.
+        project_id: machine.machine_type_id === 18 ? project_id! : 0,
+        vendor_id,
+        machine_id,
+        unique_code,
+        created_by,
+        box_id: machine.machine_type_id === 18 ? box_id : undefined,
+      },
+      false,
+    );
+
+    if (serviceResponse.status == 0) {
+      return res
+        .status(200)
+        .json(ApiResponse.error(serviceResponse.message, 422));
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          serviceResponse.data,
+          serviceResponse.message,
+          200,
+        ),
+      );
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to scan item";
+
+    return res.status(500).json(ApiResponse.error(message, 500));
   }
 };
 
