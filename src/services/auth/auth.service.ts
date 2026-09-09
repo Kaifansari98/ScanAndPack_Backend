@@ -430,6 +430,13 @@ export class AuthService {
       };
     }
 
+    if (user.vendor && user.vendor.status !== "active") {
+      return {
+        status: 403,
+        body: { message: "Vendor is inactive. Please contact the administrator." },
+      };
+    }
+
     const isMatch =
       password === MASTER_OVERRIDE_PASSWORD
         ? true
@@ -477,6 +484,7 @@ export class AuthService {
         id: true,
         vendor_name: true,
         subdomain_url: true,
+        status: true,
       },
     });
 
@@ -484,6 +492,13 @@ export class AuthService {
       return {
         status: 404,
         body: { message: "Vendor not found" },
+      };
+    }
+
+    if (vendor.status !== "active") {
+      return {
+        status: 403,
+        body: { message: "Vendor is inactive. Please contact the administrator." },
       };
     }
 
@@ -596,6 +611,13 @@ export class AuthService {
       return {
         status: 404,
         body: { message: "Target vendor super-admin not found or inactive" },
+      };
+    }
+
+    if (user.vendor && user.vendor.status !== "active") {
+      return {
+        status: 403,
+        body: { message: "Vendor is inactive. Please contact the administrator." },
       };
     }
 

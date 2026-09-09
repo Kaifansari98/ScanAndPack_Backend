@@ -488,24 +488,36 @@ export const createQR = async (_req: Request, res: Response) => {
       const filePath = await generateCutListLabelsPDF({
         itemQRs: data.map((item: any) => {
           const machineMappings = item.cut_list?.cutListMachineMapping || [];
-          const machineNames = machineMappings
-            .map((m: any) => m.machine?.machine_name)
+          const formattedMachines = machineMappings
+            .map((m: any) => {
+              const name = m.machine?.machine_name;
+              if (!name) return null;
+              const seq = m.machine?.sequence_no ?? m.sequence_no;
+              const formattedName =
+                seq !== undefined && seq !== null ? `${seq}. ${name}` : name;
+              return {
+                name,
+                formattedName,
+              };
+            })
             .filter(Boolean);
 
-          let filteredMachineNames = machineNames;
+          let filtered = formattedMachines;
           if (selectedMachines.length > 0) {
-            filteredMachineNames = machineNames.filter((mName: string) =>
-              selectedMachines.includes(mName)
+            filtered = formattedMachines.filter((m: any) =>
+              selectedMachines.includes(m.name)
             );
           }
 
           // Deduplicate consecutive duplicate machine names
           const uniqueMachineNames = (
-            filteredMachineNames.length > 0 ? filteredMachineNames : machineNames
-          ).filter(
-            (mName: string, idx: number, arr: string[]) =>
-              idx === 0 || mName !== arr[idx - 1]
-          );
+            filtered.length > 0 ? filtered : formattedMachines
+          )
+            .map((m: any) => m.formattedName)
+            .filter(
+              (fName: string, idx: number, arr: string[]) =>
+                idx === 0 || fName !== arr[idx - 1]
+            );
 
           const machineFlow = uniqueMachineNames.join(", ");
 
@@ -531,7 +543,7 @@ export const createQR = async (_req: Request, res: Response) => {
               item.cut_list.esr && `SL2: ${item.cut_list.esr}`,
             ].filter(Boolean).join(" | "),
             procurement: item.cut_list.procurement || "",
-            machines: machineNames,
+            machines: formattedMachines.map((m: any) => m.name),
             machineFlow: machineFlow,
             targetMachine: targetMachine,
           };
