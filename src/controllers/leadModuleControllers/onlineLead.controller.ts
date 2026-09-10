@@ -58,12 +58,161 @@ const mapOnlineLeadToFrontend = (lead: any) => {
         }))
       : undefined,
     online_lead_history: lead.online_lead_history
-      ? lead.online_lead_history.map((h: any) => ({
-          ...h,
-          createdBy: h.UserMaster || null,
-          status: h.online_lead_followup_status || null,
-          franchise: h.FranchiseMaster || null,
-        }))
+      ? (() => {
+          const isOnlineLeadFeatureEnabled =
+            lead.VendorMaster?.is_online_lead_feature_enabled === true ||
+            lead.vendor?.is_online_lead_feature_enabled === true;
+
+          const historyList: any[] = [];
+
+          for (const h of lead.online_lead_history) {
+            let remark = h.remark || "";
+
+            if (isOnlineLeadFeatureEnabled) {
+              remark = remark
+                .replace(
+                  /Lead conversion approved and moved to Draft Lead stage/gi,
+                  "Lead conversion approved and moved to Online Lead stage"
+                )
+                .replace(
+                  /Lead conversion to Draft submitted for approval/gi,
+                  "Lead conversion to Online submitted for approval"
+                );
+
+              // If remark has Product Types or Product Structures (combined legacy format)
+              const hasProductKeywords =
+                remark.includes("Product Types:") ||
+                remark.includes("Product Structures:") ||
+                remark.includes("Product Details:");
+
+              if (hasProductKeywords) {
+                const splitRegex = /\n\s*(?:\*\*)?(?:•\s*)?(?:Product Types:|Product Details:)/i;
+                const match = remark.match(splitRegex);
+
+                const stagePart =
+                  match && typeof match.index === "number" && match.index > 0
+                    ? remark.substring(0, match.index).trim()
+                    : (!remark.trim().startsWith("Product") &&
+                       !remark.trim().startsWith("•") &&
+                       !remark.trim().startsWith("**"))
+                    ? remark.split("\n")[0].trim()
+                    : "";
+
+                const productPart =
+                  match && typeof match.index === "number" && match.index > 0
+                    ? remark.substring(match.index).trim()
+                    : remark;
+
+                if (stagePart) {
+                  historyList.push({
+                    ...h,
+                    id: h.id,
+                    remark: stagePart,
+                    createdBy: h.UserMaster || null,
+                    status: h.online_lead_followup_status || null,
+                    franchise: h.FranchiseMaster || null,
+                  });
+                }
+
+                // Extract structures / types
+                const parseList = (str?: string) => {
+                  if (!str) return [];
+                  return str
+                    .replace(/\*\*/g, "")
+                    .split(/,|\n/)
+                    .map((s) => s.trim())
+                    .filter((s) => s && s !== "—" && s !== "Not Specified");
+                };
+
+                const structMatch = productPart.match(/(?:•\s*)?Product Structures:\s*([^\n•*]+)/i);
+                const typeMatch = productPart.match(/(?:•\s*)?Product Types:\s*([^\n•*]+)/i);
+                const structList = structMatch ? parseList(structMatch[1]) : [];
+                const typeList = typeMatch ? parseList(typeMatch[1]) : [];
+                const items = structList.length > 0 ? structList : typeList;
+
+                if (items.length > 0) {
+                  items.forEach((item, idx) => {
+                    historyList.push({
+                      ...h,
+                      id: `${h.id}-struct-${idx}`,
+                      remark: `Product structure instance added : ${item}`,
+                      created_at: new Date(new Date(h.created_at).getTime() - 1000 - idx),
+                      createdBy: h.UserMaster || null,
+                      status: h.online_lead_followup_status || null,
+                      franchise: h.FranchiseMaster || null,
+                    });
+                  });
+                }
+                continue;
+              }
+            }
+
+            historyList.push({
+              ...h,
+              remark,
+              createdBy: h.UserMaster || null,
+              status: h.online_lead_followup_status || null,
+              franchise: h.FranchiseMaster || null,
+            });
+          }
+
+          // If isOnlineLeadFeatureEnabled is true and no "Product structure instance added" entry exists, but lead has product structures:
+          if (isOnlineLeadFeatureEnabled) {
+            const hasStructEntry = historyList.some((h: any) =>
+              (h.remark || "").toLowerCase().includes("product structure instance added")
+            );
+
+            if (!hasStructEntry) {
+              const rawStructures = Array.isArray(lead.product_structures)
+                ? lead.product_structures
+                : [];
+              const rawTypes = Array.isArray(lead.product_types)
+                ? lead.product_types
+                : [];
+
+              const itemsToInject = (rawStructures.length > 0 ? rawStructures : rawTypes)
+                .map((x: any) => {
+                  if (!x || x === "—") return "";
+                  const str = String(x).trim();
+                  if (str.includes(" | ")) return str.split(" | ")[0].trim();
+                  return str;
+                })
+                .filter(Boolean);
+
+              if (itemsToInject.length > 0) {
+                const conversionEntry = historyList.find((h: any) =>
+                  (h.remark || "").toLowerCase().includes("conversion")
+                );
+                const baseTime = conversionEntry
+                  ? new Date(conversionEntry.created_at).getTime() - 1000
+                  : lead.created_at
+                  ? new Date(lead.created_at).getTime()
+                  : Date.now();
+                const baseUser = conversionEntry?.createdBy ||
+                  lead.UserMaster_online_leads_created_byToUserMaster ||
+                  { user_name: "Super Admin" };
+
+                itemsToInject.forEach((item: string, idx: number) => {
+                  historyList.push({
+                    id: `synth-struct-${idx}`,
+                    remark: `Product structure instance added : ${item}`,
+                    created_at: new Date(baseTime - idx * 500).toISOString(),
+                    createdBy: baseUser,
+                    status: conversionEntry?.status || { status_name: "Status Change" },
+                    franchise: conversionEntry?.franchise || lead.FranchiseMaster || null,
+                  });
+                });
+              }
+            }
+          }
+
+          // Sort descending by created_at
+          historyList.sort(
+            (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+
+          return historyList;
+        })()
       : undefined,
     store_logs: lead.online_lead_store_log
       ? lead.online_lead_store_log.map((sl: any) => ({
@@ -4321,10 +4470,107 @@ export class OnlineLeadController {
     }
   };
 
+  private formatProductTypesAndStructuresForHistory = async (
+    txOrPrisma: any,
+    vendorId: number,
+    rawProductTypes: any[],
+    rawProductStructures: any[],
+  ): Promise<{
+    typeDisplay: string;
+    structDisplay: string;
+    formattedTypes: string[];
+    formattedStructures: string[];
+  }> => {
+    let formattedTypes: string[] = [];
+    const typesArray = Array.isArray(rawProductTypes) ? rawProductTypes : [];
+
+    const numericTypeIds = typesArray
+      .map((t) => Number(t))
+      .filter(
+        (n) =>
+          !isNaN(n) &&
+          n > 0 &&
+          String(n) === String(typesArray.find((x) => Number(x) === n)),
+      );
+
+    const typeMasterMap = new Map<number, string>();
+    if (numericTypeIds.length > 0) {
+      const fetchedTypes = await txOrPrisma.productTypeMaster.findMany({
+        where: { id: { in: numericTypeIds }, vendor_id: vendorId },
+        select: { id: true, type: true },
+      });
+      fetchedTypes.forEach((pt: any) => typeMasterMap.set(pt.id, pt.type));
+    }
+
+    formattedTypes = typesArray
+      .map((t: any) => {
+        if (!t || t === "—") return "";
+        const idNum = Number(t);
+        if (!isNaN(idNum) && typeMasterMap.has(idNum)) {
+          return typeMasterMap.get(idNum) || "";
+        }
+        const trimmed = String(t).trim();
+        if (trimmed.includes(" | ")) {
+          const [title, typeName] = trimmed.split(" | ").map((s) => s.trim());
+          return title && title !== typeName
+            ? `${typeName} (${title})`
+            : typeName;
+        }
+        return trimmed;
+      })
+      .filter(Boolean);
+
+    let formattedStructures: string[] = [];
+    const structuresArray = Array.isArray(rawProductStructures)
+      ? rawProductStructures
+      : [];
+
+    const numericStructIds = structuresArray
+      .map((s) => Number(s))
+      .filter(
+        (n) =>
+          !isNaN(n) &&
+          n > 0 &&
+          String(n) === String(structuresArray.find((x) => Number(x) === n)),
+      );
+
+    const structMasterMap = new Map<number, string>();
+    if (numericStructIds.length > 0) {
+      const fetchedStructs = await txOrPrisma.productStructure.findMany({
+        where: { id: { in: numericStructIds }, vendor_id: vendorId },
+        select: { id: true, type: true },
+      });
+      fetchedStructs.forEach((ps: any) => structMasterMap.set(ps.id, ps.type));
+    }
+
+    formattedStructures = structuresArray
+      .map((s: any) => {
+        if (!s || s === "—") return "";
+        const idNum = Number(s);
+        if (!isNaN(idNum) && structMasterMap.has(idNum)) {
+          return structMasterMap.get(idNum) || "";
+        }
+        return String(s).trim();
+      })
+      .filter(Boolean);
+
+    const typeDisplay =
+      formattedTypes.length > 0
+        ? Array.from(new Set(formattedTypes)).join(", ")
+        : "Not Specified";
+
+    const structDisplay =
+      formattedStructures.length > 0
+        ? Array.from(new Set(formattedStructures)).join(", ")
+        : "Not Specified";
+
+    return { typeDisplay, structDisplay, formattedTypes, formattedStructures };
+  };
+
   moveToDraft = async (req: Request, res: Response): Promise<Response> => {
     try {
       const id = Number(req.params.id);
-      const { user_id } = req.body;
+      const { user_id, product_types, product_structures } = req.body;
 
       if (isNaN(id)) {
         return res.status(400).json({
@@ -4424,6 +4670,8 @@ export class OnlineLeadController {
           pending_remark: lead.remark,
           pending_assign_to: lead.final_assigned_leads,
           pending_created_by: Number(user_id),
+          ...(Array.isArray(product_types) && { product_types }),
+          ...(Array.isArray(product_structures) && { product_structures }),
           updated_at: new Date(),
         },
       });
@@ -4440,18 +4688,68 @@ export class OnlineLeadController {
         where: { id: lead.vendor_id },
         select: { is_online_lead_feature_enabled: true },
       });
-      const targetStage = vendor?.is_online_lead_feature_enabled ? "Online" : "Draft";
+      const isOnlineLeadFeatureEnabled =
+        vendor?.is_online_lead_feature_enabled === true;
+      const targetStage = isOnlineLeadFeatureEnabled ? "Online" : "Draft";
+
+      const stageRemark = `Lead conversion to ${targetStage} submitted for approval by ${roleLabel}.`;
 
       await prisma.online_lead_history.create({
         data: {
           vendor_id: lead.vendor_id,
           online_lead_id: lead.id,
-          remark: `Lead conversion to ${targetStage} submitted for approval by ${roleLabel}.`,
+          remark: stageRemark,
           created_by: Number(user_id),
           store_id: lead.store_id,
           online_lead_status_id: statusId,
         },
       });
+
+      if (isOnlineLeadFeatureEnabled) {
+        const rawTypes = Array.isArray(product_types)
+          ? product_types
+          : Array.isArray(lead.product_types)
+          ? lead.product_types
+          : [];
+
+        const rawStructures = Array.isArray(product_structures)
+          ? product_structures
+          : Array.isArray(lead.product_structures)
+          ? lead.product_structures
+          : [];
+
+        if (rawTypes.length > 0 || rawStructures.length > 0) {
+          const { formattedStructures, formattedTypes } =
+            await this.formatProductTypesAndStructuresForHistory(
+              prisma,
+              lead.vendor_id,
+              rawTypes,
+              rawStructures,
+            );
+
+          const itemsToLog =
+            formattedStructures.length > 0
+              ? Array.from(new Set(formattedStructures))
+              : formattedTypes.length > 0
+              ? Array.from(new Set(formattedTypes))
+              : [];
+
+          for (const item of itemsToLog) {
+            if (item && item !== "—" && item !== "Not Specified") {
+              await prisma.online_lead_history.create({
+                data: {
+                  vendor_id: lead.vendor_id,
+                  online_lead_id: lead.id,
+                  remark: `Product structure instance added : ${item}`,
+                  created_by: Number(user_id),
+                  store_id: lead.store_id,
+                  online_lead_status_id: statusId,
+                },
+              });
+            }
+          }
+        }
+      }
 
       return res.status(200).json({
         success: true,
@@ -4977,6 +5275,13 @@ export class OnlineLeadController {
           }
         }
 
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: lead.vendor_id },
+          select: { is_online_lead_feature_enabled: true },
+        });
+        const isOnlineLeadFeatureEnabled =
+          vendor?.is_online_lead_feature_enabled === true;
+
         // Create Product Structure Instances for all combinations
         let resolvedTypeId = mappedTypeIds[0] || null;
         if (!resolvedTypeId) {
@@ -5020,7 +5325,7 @@ export class OnlineLeadController {
               });
 
             if (!existingInstance) {
-              await tx.leadProductStructureInstance.create({
+              const instance = await tx.leadProductStructureInstance.create({
                 data: {
                   vendor_id: lead.vendor_id,
                   lead_id: leadIdForMapping,
@@ -5032,6 +5337,27 @@ export class OnlineLeadController {
                   created_by: Number(user_id || lead.created_by || 1),
                 },
               });
+
+              if (isOnlineLeadFeatureEnabled && lead.id) {
+                const existingOnlineHist = await tx.online_lead_history.findFirst({
+                  where: {
+                    online_lead_id: lead.id,
+                    remark: `Product structure instance added : ${instance.title}`,
+                  },
+                });
+                if (!existingOnlineHist) {
+                  await tx.online_lead_history.create({
+                    data: {
+                      vendor_id: lead.vendor_id,
+                      online_lead_id: lead.id,
+                      remark: `Product structure instance added : ${instance.title}`,
+                      created_by: Number(user_id || lead.created_by || 1),
+                      store_id: storeId,
+                      online_lead_status_id: statusId ?? 1,
+                    },
+                  });
+                }
+              }
             }
           }
         }
@@ -5122,17 +5448,17 @@ export class OnlineLeadController {
           },
         });
 
-        const vendor = await tx.vendorMaster.findUnique({
-          where: { id: lead.vendor_id },
-          select: { is_online_lead_feature_enabled: true },
-        });
-        const targetStage = vendor?.is_online_lead_feature_enabled ? "Online Lead" : "Draft Lead";
+        const targetStage = isOnlineLeadFeatureEnabled
+          ? "Online Lead"
+          : "Draft Lead";
+
+        const approveRemark = `Lead conversion approved and moved to ${targetStage} stage`;
 
         await tx.online_lead_history.create({
           data: {
             vendor_id: lead.vendor_id,
             online_lead_id: lead.id,
-            remark: `Lead conversion approved and moved to ${targetStage} stage`,
+            remark: approveRemark,
             created_by: Number(user_id || lead.created_by || 1),
             store_id: storeId,
             online_lead_status_id: statusId ?? 1,

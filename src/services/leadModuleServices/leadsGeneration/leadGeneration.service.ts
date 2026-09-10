@@ -4850,18 +4850,101 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
     // 4. Online Lead history events
     if (onlineLead.online_lead_history) {
       for (const h of onlineLead.online_lead_history) {
-        const isStoreRemark = h.remark?.toLowerCase().includes("store") || h.remark?.toLowerCase().includes("franchise");
-        const formattedAction = formatRemark(h.remark) || `Status updated to ${h.online_lead_followup_status?.status_name || "Unknown"}`;
+        const rawRemark = h.remark || "";
+        const isStoreRemark =
+          rawRemark.toLowerCase().includes("store") ||
+          rawRemark.toLowerCase().includes("franchise");
+
+        const hasProductKeywords =
+          rawRemark.includes("Product Types:") ||
+          rawRemark.includes("Product Structures:") ||
+          rawRemark.includes("Product Details:");
+
+        if (hasProductKeywords) {
+          // Check if it's combined with a stage movement
+          // e.g. "Lead conversion approved and moved to Online Lead stage\n\n**• Product Types:**\nModular Kitchen..."
+          const splitRegex = /\n\s*(?:\*\*)?(?:•\s*)?(?:Product Types:|Product Details:)/i;
+          const match = rawRemark.match(splitRegex);
+
+          const stagePart = match && typeof match.index === "number" && match.index > 0
+            ? rawRemark.substring(0, match.index).trim()
+            : (!rawRemark.trim().startsWith("Product") && !rawRemark.trim().startsWith("•") && !rawRemark.trim().startsWith("**"))
+            ? rawRemark.split("\n")[0].trim()
+            : "";
+
+          const productPart = match && typeof match.index === "number" && match.index > 0
+            ? rawRemark.substring(match.index).trim()
+            : rawRemark;
+
+          if (stagePart) {
+            timelineEvents.push({
+              id: `olh-${h.id}`,
+              event_type: isStoreRemark ? "store_assignment" : "status_change",
+              action: formatRemark(stagePart) || stagePart,
+              remark: null,
+              created_at: h.created_at,
+              user: h.UserMaster
+                ? {
+                    name: h.UserMaster.user_name,
+                    email: h.UserMaster.user_email,
+                  }
+                : null,
+            });
+          }
+
+          // Extract structure / type names to emit "Product structure instance added : {name}"
+          const parseList = (str?: string) => {
+            if (!str) return [];
+            return str
+              .replace(/\*\*/g, "")
+              .split(/,|\n/)
+              .map((s) => s.trim())
+              .filter((s) => s && s !== "—" && s !== "Not Specified");
+          };
+
+          const structMatch = productPart.match(/(?:•\s*)?Product Structures:\s*([^\n•*]+)/i);
+          const typeMatch = productPart.match(/(?:•\s*)?Product Types:\s*([^\n•*]+)/i);
+
+          const structList = structMatch ? parseList(structMatch[1]) : [];
+          const typeList = typeMatch ? parseList(typeMatch[1]) : [];
+          const items = structList.length > 0 ? structList : typeList;
+
+          if (items.length > 0) {
+            items.forEach((item, idx) => {
+              timelineEvents.push({
+                id: `olh-${h.id}-struct-${idx}`,
+                event_type: "product_details",
+                action: `Product structure instance added : ${item}`,
+                remark: null,
+                created_at: new Date(new Date(h.created_at).getTime() - 1000 - idx),
+                user: h.UserMaster
+                  ? {
+                      name: h.UserMaster.user_name,
+                      email: h.UserMaster.user_email,
+                    }
+                  : null,
+              });
+            });
+          }
+          continue;
+        }
+
+        const formattedAction =
+          formatRemark(h.remark) ||
+          `Status updated to ${h.online_lead_followup_status?.status_name || "Unknown"}`;
+
         timelineEvents.push({
           id: `olh-${h.id}`,
           event_type: isStoreRemark ? "store_assignment" : "status_change",
           action: formattedAction,
           remark: null,
           created_at: h.created_at,
-          user: h.UserMaster ? {
-            name: h.UserMaster.user_name,
-            email: h.UserMaster.user_email,
-          } : null,
+          user: h.UserMaster
+            ? {
+                name: h.UserMaster.user_name,
+                email: h.UserMaster.user_email,
+              }
+            : null,
         });
       }
     }
