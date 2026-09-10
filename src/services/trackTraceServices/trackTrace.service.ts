@@ -3393,6 +3393,20 @@ export const createQR = async (payload: QRParam) => {
                   client_name: true,
                 },
               },
+              cutListMachineMapping: {
+                select: {
+                  sequence_no: true,
+                  machine: {
+                    select: {
+                      id: true,
+                      machine_name: true,
+                      machine_code: true,
+                      sequence_no: true,
+                    },
+                  },
+                },
+                orderBy: { sequence_no: "asc" },
+              },
             },
           },
         },

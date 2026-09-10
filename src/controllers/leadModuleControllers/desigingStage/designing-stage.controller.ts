@@ -62,13 +62,9 @@ export class DesigingStageController {
     const isAmended = body.is_amended === true;
     const isDeleted = body.is_deleted_item === true;
     const amendedRemark =
-      typeof body.amended_remark === "string"
-        ? body.amended_remark.trim()
-        : "";
+      typeof body.amended_remark === "string" ? body.amended_remark.trim() : "";
     const deletedRemark =
-      typeof body.deleted_remark === "string"
-        ? body.deleted_remark.trim()
-        : "";
+      typeof body.deleted_remark === "string" ? body.deleted_remark.trim() : "";
     const now = new Date();
 
     return {
@@ -144,18 +140,17 @@ export class DesigingStageController {
       return specification;
     }
 
-    const latestSpecification = await prisma.leadSpecificationsMaster.findFirst({
-      where: {
-        vendor_id: specification.vendor_id,
-        lead_id: specification.lead_id,
-        item_code_id: specification.item_code_id,
+    const latestSpecification = await prisma.leadSpecificationsMaster.findFirst(
+      {
+        where: {
+          vendor_id: specification.vendor_id,
+          lead_id: specification.lead_id,
+          item_code_id: specification.item_code_id,
+        },
+        orderBy: [{ created_at: "desc" }, { id: "desc" }],
+        select: { id: true },
       },
-      orderBy: [
-        { created_at: "desc" },
-        { id: "desc" },
-      ],
-      select: { id: true },
-    });
+    );
 
     if (!latestSpecification || latestSpecification.id !== specification.id) {
       throw new Error(
@@ -277,8 +272,9 @@ export class DesigingStageController {
 
       return res.json({
         success: true,
-        message: `${docs.length} quotation${docs.length > 1 ? "s" : ""
-          } uploaded successfully`,
+        message: `${docs.length} quotation${
+          docs.length > 1 ? "s" : ""
+        } uploaded successfully`,
         documents: docs,
       });
     } catch (error: any) {
@@ -381,7 +377,9 @@ export class DesigingStageController {
         where: {
           lead_id: Number(leadId),
           vendor_id: Number(vendorId),
-          ...(designQuotationDocType ? { doc_type_id: designQuotationDocType.id } : {}),
+          ...(designQuotationDocType
+            ? { doc_type_id: designQuotationDocType.id }
+            : {}),
           is_deleted: false,
         },
         orderBy: { created_at: "desc" },
@@ -687,7 +685,9 @@ export class DesigingStageController {
       if (meetingTypes.length > 0 && !meeting_type_id) {
         return res.status(400).json({
           success: false,
-          logs: ["meeting_type_id is required when meeting types are configured"],
+          logs: [
+            "meeting_type_id is required when meeting types are configured",
+          ],
         });
       }
 
@@ -712,7 +712,11 @@ export class DesigingStageController {
         });
       }
 
-      if (meeting_start_time && meeting_end_time && meeting_start_time >= meeting_end_time) {
+      if (
+        meeting_start_time &&
+        meeting_end_time &&
+        meeting_start_time >= meeting_end_time
+      ) {
         return res.status(400).json({
           success: false,
           logs: ["meeting_end_time must be after meeting_start_time"],
@@ -761,9 +765,7 @@ export class DesigingStageController {
               lead_id: Number(leadId),
               account_id: Number(accountId),
               vendor_id: Number(vendorId),
-              meeting_type_id: meeting_type_id
-                ? Number(meeting_type_id)
-                : null,
+              meeting_type_id: meeting_type_id ? Number(meeting_type_id) : null,
               date: new Date(date),
               meeting_start_time: meeting_start_time?.trim() || null,
               meeting_end_time: meeting_end_time?.trim() || null,
@@ -888,7 +890,8 @@ export class DesigingStageController {
       if (designerMapping?.user?.user_email) {
         const redirectPath = `/dashboard/leads/designing-stage/details/${Number(leadId)}?accountId=${Number(accountId)}&tab=meetings`;
         const detailsUrl = `${resolveClientBaseUrl(req)}${redirectPath}`;
-        const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+        const leadName =
+          `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
         const notificationMessage = `A new meeting has been added on ${lead.lead_code} - ${leadName}. Click to view the meeting details`;
         const formattedMeetingDate = new Date(date).toLocaleString("en-IN", {
           day: "2-digit",
@@ -1227,7 +1230,8 @@ export class DesigingStageController {
             vendor?.is_this_vendor_is_custom_usertype_only === true;
           const handlesLargeScaleProjects =
             vendor?.handlesLargeScaleProjects === true;
-          const useCustomVendorFlow = isCustomVendor || handlesLargeScaleProjects;
+          const useCustomVendorFlow =
+            isCustomVendor || handlesLargeScaleProjects;
           const selectedDesignType =
             typeof req.body.design_type === "string"
               ? req.body.design_type.trim()
@@ -1248,46 +1252,51 @@ export class DesigingStageController {
                 ...new Set(
                   requestedInstanceIds
                     .map((value: any) => Number(value))
-                    .filter((value: any) => Number.isFinite(value) && value > 0),
+                    .filter(
+                      (value: any) => Number.isFinite(value) && value > 0,
+                    ),
                 ),
               ]
             : [];
 
           const allLeadInstances = isLargeScaleOrCustom
             ? await tx.leadProductStructureInstance.findMany({
-              where: {
-                lead_id: Number(leadId),
-                vendor_id: Number(vendorId),
-                account_id: Number(accountId),
-              },
-              select: {
-                id: true,
-                title: true,
-                product_type_id: true,
-                productType: {
-                  select: { id: true, type: true },
+                where: {
+                  lead_id: Number(leadId),
+                  vendor_id: Number(vendorId),
+                  account_id: Number(accountId),
                 },
-                productItemCode: {
-                  select: {
-                    id: true,
-                    productStructure: {
-                      select: {
-                        product_type_id: true,
-                        productType: { select: { id: true, type: true } },
+                select: {
+                  id: true,
+                  title: true,
+                  product_type_id: true,
+                  productType: {
+                    select: { id: true, type: true },
+                  },
+                  productItemCode: {
+                    select: {
+                      id: true,
+                      productStructure: {
+                        select: {
+                          product_type_id: true,
+                          productType: { select: { id: true, type: true } },
+                        },
                       },
                     },
                   },
                 },
-              },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-            })
+                orderBy: [
+                  { product_structure_id: "asc" },
+                  { quantity_index: "asc" },
+                ],
+              })
             : [];
 
           const selectedInstances = isLargeScaleOrCustom
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
-                parsedInstanceIds.includes(instance.id),
-              )
+                  parsedInstanceIds.includes(instance.id),
+                )
               : allLeadInstances
             : [];
 
@@ -1296,7 +1305,9 @@ export class DesigingStageController {
             parsedInstanceIds.length > 0 &&
             selectedInstances.length !== parsedInstanceIds.length
           ) {
-            throw new Error("One or more selected product instances are invalid for this lead");
+            throw new Error(
+              "One or more selected product instances are invalid for this lead",
+            );
           }
 
           // 2️⃣ Fetch document type
@@ -1363,7 +1374,9 @@ export class DesigingStageController {
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
-              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+              selectedInstances.length > 0
+                ? selectedInstances
+                : allLeadInstances;
             const uniqueStructureNames = [
               ...new Set(
                 structureLabelSource
@@ -1415,8 +1428,12 @@ export class DesigingStageController {
                   return maxRevision;
                 }
 
-                const [, revisionText, existingDesignType = "", nameBody = ""] = match;
-                if (existingDesignType.trim().toLowerCase() !== designTypeSegment.toLowerCase()) {
+                const [, revisionText, existingDesignType = "", nameBody = ""] =
+                  match;
+                if (
+                  existingDesignType.trim().toLowerCase() !==
+                  designTypeSegment.toLowerCase()
+                ) {
                   return maxRevision;
                 }
 
@@ -1465,7 +1482,8 @@ export class DesigingStageController {
                       (inst: any) =>
                         inst.product_type_id ??
                         inst.productType?.id ??
-                        inst.productItemCode?.productStructure?.product_type_id ??
+                        inst.productItemCode?.productStructure
+                          ?.product_type_id ??
                         inst.productItemCode?.productStructure?.productType?.id,
                     )
                     .filter(
@@ -1488,14 +1506,14 @@ export class DesigingStageController {
           for (const file of files) {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
-                const extension = path.extname(file.originalname || "");
-                const designTypePrefix = designTypeSegment
-                  ? `${designTypeSegment}_`
-                  : "";
-                const renamedOriginalName = `D${nextRevision}_${designTypePrefix}${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
-                nextRevision += 1;
-                return renamedOriginalName;
-              })()
+                  const extension = path.extname(file.originalname || "");
+                  const designTypePrefix = designTypeSegment
+                    ? `${designTypeSegment}_`
+                    : "";
+                  const renamedOriginalName = `D${nextRevision}_${designTypePrefix}${clientNameSegment}_${structureSegment}_${dateSegment}${extension}`;
+                  nextRevision += 1;
+                  return renamedOriginalName;
+                })()
               : file.originalname;
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
@@ -1634,36 +1652,41 @@ export class DesigingStageController {
               ? [rawInstanceIds]
               : [];
           const parsedInstanceIds = useCustomVendorFlow
-            ? [...new Set(
-              requestedInstanceIds
-                .map((value) => Number(value))
-                .filter((value) => Number.isFinite(value) && value > 0),
-            )]
+            ? [
+                ...new Set(
+                  requestedInstanceIds
+                    .map((value) => Number(value))
+                    .filter((value) => Number.isFinite(value) && value > 0),
+                ),
+              ]
             : [];
 
           const allLeadInstances = useCustomVendorFlow
             ? await tx.leadProductStructureInstance.findMany({
-              where: {
-                lead_id: Number(leadId),
-                vendor_id: Number(vendorId),
-                account_id: Number(accountId),
-              },
-              select: {
-                id: true,
-                title: true,
-                productType: {
-                  select: { type: true },
+                where: {
+                  lead_id: Number(leadId),
+                  vendor_id: Number(vendorId),
+                  account_id: Number(accountId),
                 },
-              },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-            })
+                select: {
+                  id: true,
+                  title: true,
+                  productType: {
+                    select: { type: true },
+                  },
+                },
+                orderBy: [
+                  { product_structure_id: "asc" },
+                  { quantity_index: "asc" },
+                ],
+              })
             : [];
 
           const selectedInstances = useCustomVendorFlow
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
-                parsedInstanceIds.includes(instance.id),
-              )
+                  parsedInstanceIds.includes(instance.id),
+                )
               : allLeadInstances
             : [];
 
@@ -1672,7 +1695,9 @@ export class DesigingStageController {
             parsedInstanceIds.length > 0 &&
             selectedInstances.length !== parsedInstanceIds.length
           ) {
-            throw new Error("One or more selected product instances are invalid for this lead");
+            throw new Error(
+              "One or more selected product instances are invalid for this lead",
+            );
           }
 
           // Get-or-create the "Costing File" document type for this vendor
@@ -1700,7 +1725,9 @@ export class DesigingStageController {
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
-              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+              selectedInstances.length > 0
+                ? selectedInstances
+                : allLeadInstances;
             const uniqueStructureNames = [
               ...new Set(
                 structureLabelSource
@@ -1753,11 +1780,11 @@ export class DesigingStageController {
           for (const file of files) {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
-                const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `C${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
-                nextRevision += 1;
-                return renamedOriginalName;
-              })()
+                  const extension = path.extname(file.originalname || "");
+                  const renamedOriginalName = `C${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  nextRevision += 1;
+                  return renamedOriginalName;
+                })()
               : file.originalname;
 
             const sysName = await uploadToWasabiCostingFile(
@@ -1886,7 +1913,10 @@ export class DesigingStageController {
         return res.status(200).json({
           success: true,
           message: "No costing file documents found",
-          logs: [...logs, "Costing File document type not yet created for vendor"],
+          logs: [
+            ...logs,
+            "Costing File document type not yet created for vendor",
+          ],
           data: {
             lead_id: Number(leadId),
             vendor_id: Number(vendorId),
@@ -1942,7 +1972,8 @@ export class DesigingStageController {
               message: error?.message || String(error),
             });
           }
-          const specification = doc.specificationDocumentMappings?.[0]?.specification || null;
+          const specification =
+            doc.specificationDocumentMappings?.[0]?.specification || null;
           const { specificationDocumentMappings, ...rest } = doc;
           return { ...rest, specification, signedUrl };
         }),
@@ -2025,36 +2056,41 @@ export class DesigingStageController {
               ? [rawInstanceIds]
               : [];
           const parsedInstanceIds = useCustomVendorFlow
-            ? [...new Set(
-              requestedInstanceIds
-                .map((value) => Number(value))
-                .filter((value) => Number.isFinite(value) && value > 0),
-            )]
+            ? [
+                ...new Set(
+                  requestedInstanceIds
+                    .map((value) => Number(value))
+                    .filter((value) => Number.isFinite(value) && value > 0),
+                ),
+              ]
             : [];
 
           const allLeadInstances = useCustomVendorFlow
             ? await tx.leadProductStructureInstance.findMany({
-              where: {
-                lead_id: Number(leadId),
-                vendor_id: Number(vendorId),
-                account_id: Number(accountId),
-              },
-              select: {
-                id: true,
-                title: true,
-                productType: {
-                  select: { type: true },
+                where: {
+                  lead_id: Number(leadId),
+                  vendor_id: Number(vendorId),
+                  account_id: Number(accountId),
                 },
-              },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-            })
+                select: {
+                  id: true,
+                  title: true,
+                  productType: {
+                    select: { type: true },
+                  },
+                },
+                orderBy: [
+                  { product_structure_id: "asc" },
+                  { quantity_index: "asc" },
+                ],
+              })
             : [];
 
           const selectedInstances = useCustomVendorFlow
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
-                parsedInstanceIds.includes(instance.id),
-              )
+                  parsedInstanceIds.includes(instance.id),
+                )
               : allLeadInstances
             : [];
 
@@ -2063,13 +2099,20 @@ export class DesigingStageController {
             parsedInstanceIds.length > 0 &&
             selectedInstances.length !== parsedInstanceIds.length
           ) {
-            throw new Error("One or more selected product instances are invalid for this lead");
+            throw new Error(
+              "One or more selected product instances are invalid for this lead",
+            );
           }
 
           // Get-or-create the "Electrical & Plumbing" document type for this vendor
-          let electricalPlumbingDocType = await tx.documentTypeMaster.findFirst({
-            where: { vendor_id: Number(vendorId), tag: "ELECTRICAL_PLUMBING" },
-          });
+          let electricalPlumbingDocType = await tx.documentTypeMaster.findFirst(
+            {
+              where: {
+                vendor_id: Number(vendorId),
+                tag: "ELECTRICAL_PLUMBING",
+              },
+            },
+          );
 
           if (!electricalPlumbingDocType) {
             electricalPlumbingDocType = await tx.documentTypeMaster.create({
@@ -2091,7 +2134,9 @@ export class DesigingStageController {
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
-              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+              selectedInstances.length > 0
+                ? selectedInstances
+                : allLeadInstances;
             const uniqueStructureNames = [
               ...new Set(
                 structureLabelSource
@@ -2144,11 +2189,11 @@ export class DesigingStageController {
           for (const file of files) {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
-                const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `E${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
-                nextRevision += 1;
-                return renamedOriginalName;
-              })()
+                  const extension = path.extname(file.originalname || "");
+                  const renamedOriginalName = `E${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  nextRevision += 1;
+                  return renamedOriginalName;
+                })()
               : file.originalname;
 
             const sysName = await uploadToWasabiElectricalPlumbing(
@@ -2222,7 +2267,10 @@ export class DesigingStageController {
     }
   }
 
-  public static async getElectricalPlumbingDocuments(req: Request, res: Response) {
+  public static async getElectricalPlumbingDocuments(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const { vendorId, leadId } = req.params;
 
@@ -2255,9 +2303,10 @@ export class DesigingStageController {
       }
       logs.push("Lead verified successfully");
 
-      const electricalPlumbingDocType = await prisma.documentTypeMaster.findFirst({
-        where: { vendor_id: Number(vendorId), tag: "ELECTRICAL_PLUMBING" },
-      });
+      const electricalPlumbingDocType =
+        await prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: Number(vendorId), tag: "ELECTRICAL_PLUMBING" },
+        });
 
       // No electrical & plumbing files have ever been uploaded for this vendor yet —
       // the type only gets created lazily on first upload.
@@ -2265,7 +2314,10 @@ export class DesigingStageController {
         return res.status(200).json({
           success: true,
           message: "No electrical & plumbing documents found",
-          logs: [...logs, "Electrical & Plumbing document type not yet created for vendor"],
+          logs: [
+            ...logs,
+            "Electrical & Plumbing document type not yet created for vendor",
+          ],
           data: {
             lead_id: Number(leadId),
             vendor_id: Number(vendorId),
@@ -2384,36 +2436,41 @@ export class DesigingStageController {
               ? [rawInstanceIds]
               : [];
           const parsedInstanceIds = useCustomVendorFlow
-            ? [...new Set(
-              requestedInstanceIds
-                .map((value) => Number(value))
-                .filter((value) => Number.isFinite(value) && value > 0),
-            )]
+            ? [
+                ...new Set(
+                  requestedInstanceIds
+                    .map((value) => Number(value))
+                    .filter((value) => Number.isFinite(value) && value > 0),
+                ),
+              ]
             : [];
 
           const allLeadInstances = useCustomVendorFlow
             ? await tx.leadProductStructureInstance.findMany({
-              where: {
-                lead_id: Number(leadId),
-                vendor_id: Number(vendorId),
-                account_id: Number(accountId),
-              },
-              select: {
-                id: true,
-                title: true,
-                productType: {
-                  select: { type: true },
+                where: {
+                  lead_id: Number(leadId),
+                  vendor_id: Number(vendorId),
+                  account_id: Number(accountId),
                 },
-              },
-              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-            })
+                select: {
+                  id: true,
+                  title: true,
+                  productType: {
+                    select: { type: true },
+                  },
+                },
+                orderBy: [
+                  { product_structure_id: "asc" },
+                  { quantity_index: "asc" },
+                ],
+              })
             : [];
 
           const selectedInstances = useCustomVendorFlow
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
-                parsedInstanceIds.includes(instance.id),
-              )
+                  parsedInstanceIds.includes(instance.id),
+                )
               : allLeadInstances
             : [];
 
@@ -2422,7 +2479,9 @@ export class DesigingStageController {
             parsedInstanceIds.length > 0 &&
             selectedInstances.length !== parsedInstanceIds.length
           ) {
-            throw new Error("One or more selected product instances are invalid for this lead");
+            throw new Error(
+              "One or more selected product instances are invalid for this lead",
+            );
           }
 
           // Get-or-create the "Final ISM Upload" document type for this vendor
@@ -2450,7 +2509,9 @@ export class DesigingStageController {
 
           if (useCustomVendorFlow) {
             const structureLabelSource =
-              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+              selectedInstances.length > 0
+                ? selectedInstances
+                : allLeadInstances;
             const uniqueStructureNames = [
               ...new Set(
                 structureLabelSource
@@ -2503,11 +2564,11 @@ export class DesigingStageController {
           for (const file of files) {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
-                const extension = path.extname(file.originalname || "");
-                const renamedOriginalName = `F${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
-                nextRevision += 1;
-                return renamedOriginalName;
-              })()
+                  const extension = path.extname(file.originalname || "");
+                  const renamedOriginalName = `F${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  nextRevision += 1;
+                  return renamedOriginalName;
+                })()
               : file.originalname;
 
             const sysName = await uploadToWasabiFinalIsmUpload(
@@ -2624,7 +2685,10 @@ export class DesigingStageController {
         return res.status(200).json({
           success: true,
           message: "No Final ISM Upload documents found",
-          logs: [...logs, "Final ISM Upload document type not yet created for vendor"],
+          logs: [
+            ...logs,
+            "Final ISM Upload document type not yet created for vendor",
+          ],
           data: {
             lead_id: Number(leadId),
             vendor_id: Number(vendorId),
@@ -3026,58 +3090,58 @@ export class DesigingStageController {
 
       const designSelection = existingSelection
         ? await prisma.leadDesignSelection.update({
-          where: { id: existingSelection.id },
-          data: {
-            desc,
-            updated_by: Number(created_by),
-            updated_at: new Date(),
-          },
-          include: {
-            createdBy: {
-              select: { id: true, user_name: true, user_email: true },
+            where: { id: existingSelection.id },
+            data: {
+              desc,
+              updated_by: Number(created_by),
+              updated_at: new Date(),
             },
-            lead: {
-              select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                contact_no: true,
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
               },
             },
-            account: { select: { id: true, name: true } },
-            productStructureInstance: {
-              select: { id: true, title: true, quantity_index: true },
-            },
-          },
-        })
+          })
         : await prisma.leadDesignSelection.create({
-          data: {
-            lead_id: Number(lead_id),
-            account_id: Number(account_id),
-            vendor_id: Number(vendor_id),
-            product_structure_instance_id: resolvedInstanceId,
-            type,
-            desc,
-            created_by: Number(created_by),
-          },
-          include: {
-            createdBy: {
-              select: { id: true, user_name: true, user_email: true },
+            data: {
+              lead_id: Number(lead_id),
+              account_id: Number(account_id),
+              vendor_id: Number(vendor_id),
+              product_structure_instance_id: resolvedInstanceId,
+              type,
+              desc,
+              created_by: Number(created_by),
             },
-            lead: {
-              select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                contact_no: true,
+            include: {
+              createdBy: {
+                select: { id: true, user_name: true, user_email: true },
+              },
+              lead: {
+                select: {
+                  id: true,
+                  firstname: true,
+                  lastname: true,
+                  contact_no: true,
+                },
+              },
+              account: { select: { id: true, name: true } },
+              productStructureInstance: {
+                select: { id: true, title: true, quantity_index: true },
               },
             },
-            account: { select: { id: true, name: true } },
-            productStructureInstance: {
-              select: { id: true, title: true, quantity_index: true },
-            },
-          },
-        });
+          });
 
       logs.push(
         existingSelection
@@ -3514,43 +3578,43 @@ export class DesigingStageController {
       const [quotationCount, designCount, selectionCount, meetingCount] =
         await Promise.all([
           quotationType
-            ? (isB2b
+            ? isB2b
               ? prisma.leadB2BDocument.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: quotationType.id,
-                  is_deleted: false,
-                },
-              })
+                  where: {
+                    lead_id: lId,
+                    vendor_id: vId,
+                    doc_type_id: quotationType.id,
+                    is_deleted: false,
+                  },
+                })
               : prisma.leadDocuments.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: quotationType.id,
-                  is_deleted: false,
-                },
-              }))
+                  where: {
+                    lead_id: lId,
+                    vendor_id: vId,
+                    doc_type_id: quotationType.id,
+                    is_deleted: false,
+                  },
+                })
             : 0,
 
           designsType
-            ? (isB2b
+            ? isB2b
               ? prisma.leadB2BDocument.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: designsType.id,
-                  is_deleted: false,
-                },
-              })
+                  where: {
+                    lead_id: lId,
+                    vendor_id: vId,
+                    doc_type_id: designsType.id,
+                    is_deleted: false,
+                  },
+                })
               : prisma.leadDocuments.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: designsType.id,
-                  is_deleted: false,
-                },
-              }))
+                  where: {
+                    lead_id: lId,
+                    vendor_id: vId,
+                    doc_type_id: designsType.id,
+                    is_deleted: false,
+                  },
+                })
             : 0,
 
           prisma.leadDesignSelection.count({
@@ -3670,7 +3734,9 @@ export class DesigingStageController {
         orderBy: { created_at: "asc" },
       });
 
-      const specificationIds = specifications.map((specification) => specification.id);
+      const specificationIds = specifications.map(
+        (specification) => specification.id,
+      );
       const otherApplianceRemarkMappings =
         specificationIds.length > 0
           ? await prisma.leadOtherAppliancesRemarkMapping.findMany({
@@ -3735,10 +3801,10 @@ export class DesigingStageController {
             remarkMap.get(specification.id)?.appliances_remark ?? null,
           stone_remark: remarkMap.get(specification.id)?.stone_remark ?? null,
           sinks_remark: remarkMap.get(specification.id)?.sinks_remark ?? null,
-          faucets_remark: remarkMap.get(specification.id)?.faucets_remark ?? null,
+          faucets_remark:
+            remarkMap.get(specification.id)?.faucets_remark ?? null,
           is_latest_for_item_code: isLatestForItemCode,
-          is_editable:
-            actorRole === "super-admin" ? true : isLatestForItemCode,
+          is_editable: actorRole === "super-admin" ? true : isLatestForItemCode,
         };
       });
 
@@ -3936,7 +4002,11 @@ export class DesigingStageController {
 
       const specification = await prisma.$transaction(async (tx) => {
         const existingLead = await tx.leadMaster.findFirst({
-          where: { id: Number(leadId), vendor_id: Number(vendorId), is_deleted: false },
+          where: {
+            id: Number(leadId),
+            vendor_id: Number(vendorId),
+            is_deleted: false,
+          },
         });
 
         if (!existingLead) {
@@ -3959,59 +4029,57 @@ export class DesigingStageController {
           where: { vendor_id: Number(vendorId), lead_id: Number(leadId) },
         });
 
-        const previousLatestSpecification = await tx.leadSpecificationsMaster.findFirst({
-          where: {
-            vendor_id: Number(vendorId),
-            lead_id: Number(leadId),
-            item_code_id: item_code_id ? Number(item_code_id) : null,
-          },
-          orderBy: [
-            { created_at: "desc" },
-            { id: "desc" },
-          ],
-          include: {
-            LeadCarcassMaterialMapping: {
-              select: {
-                carcass_type_id: true,
-                carcas_material_id: true,
-                carcass_material_finish_id: true,
+        const previousLatestSpecification =
+          await tx.leadSpecificationsMaster.findFirst({
+            where: {
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              item_code_id: item_code_id ? Number(item_code_id) : null,
+            },
+            orderBy: [{ created_at: "desc" }, { id: "desc" }],
+            include: {
+              LeadCarcassMaterialMapping: {
+                select: {
+                  carcass_type_id: true,
+                  carcas_material_id: true,
+                  carcass_material_finish_id: true,
+                },
+              },
+              LeadShutterMaterialMapping: {
+                select: {
+                  shutter_type_id: true,
+                  shutter_material_id: true,
+                  shutter_material_finish_id: true,
+                },
+              },
+              LeadHardwareMapping: {
+                select: {
+                  carcass_legs_id: true,
+                  skirting_carcass_legs_id: true,
+                  skirting_carcass_legs_color_id: true,
+                  note: true,
+                },
+              },
+              lightCarcasUnitMappings: {
+                select: {
+                  light_carcas_unit_master_id: true,
+                  custom_remark: true,
+                },
+              },
+              otherAppliancesMappings: {
+                select: {
+                  other_appliance_type: true,
+                  other_appliances_master_id: true,
+                  custom_remark: true,
+                },
+              },
+              specificationDocumentMappings: {
+                select: {
+                  document_id: true,
+                },
               },
             },
-            LeadShutterMaterialMapping: {
-              select: {
-                shutter_type_id: true,
-                shutter_material_id: true,
-                shutter_material_finish_id: true,
-              },
-            },
-            LeadHardwareMapping: {
-              select: {
-                carcass_legs_id: true,
-                skirting_carcass_legs_id: true,
-                skirting_carcass_legs_color_id: true,
-                note: true,
-              },
-            },
-            lightCarcasUnitMappings: {
-              select: {
-                light_carcas_unit_master_id: true,
-                custom_remark: true,
-              },
-            },
-            otherAppliancesMappings: {
-              select: {
-                other_appliance_type: true,
-                other_appliances_master_id: true,
-                custom_remark: true,
-              },
-            },
-            specificationDocumentMappings: {
-              select: {
-                document_id: true,
-              },
-            },
-          },
-        });
+          });
         const previousOtherApplianceRemarkMappings = previousLatestSpecification
           ? await tx.leadOtherAppliancesRemarkMapping.findMany({
               where: {
@@ -4055,7 +4123,8 @@ export class DesigingStageController {
             name: specificationName,
             created_by: Number(created_by),
             item_code_id: item_code_id ? Number(item_code_id) : undefined,
-            lights_remark: previousLatestSpecification?.lights_remark ?? undefined,
+            lights_remark:
+              previousLatestSpecification?.lights_remark ?? undefined,
           },
           include: {
             productItemCode: {
@@ -4065,7 +4134,9 @@ export class DesigingStageController {
         });
 
         if (previousLatestSpecification) {
-          if (previousLatestSpecification.LeadCarcassMaterialMapping.length > 0) {
+          if (
+            previousLatestSpecification.LeadCarcassMaterialMapping.length > 0
+          ) {
             await tx.leadCarcassMaterialMapping.createMany({
               data: previousLatestSpecification.LeadCarcassMaterialMapping.map(
                 (mapping) => ({
@@ -4074,14 +4145,17 @@ export class DesigingStageController {
                   specs_id: createdSpecification.id,
                   carcass_type_id: mapping.carcass_type_id,
                   carcas_material_id: mapping.carcas_material_id,
-                  carcass_material_finish_id: mapping.carcass_material_finish_id,
+                  carcass_material_finish_id:
+                    mapping.carcass_material_finish_id,
                   created_by: Number(created_by),
                 }),
               ),
             });
           }
 
-          if (previousLatestSpecification.LeadShutterMaterialMapping.length > 0) {
+          if (
+            previousLatestSpecification.LeadShutterMaterialMapping.length > 0
+          ) {
             await tx.leadShutterMaterialMapping.createMany({
               data: previousLatestSpecification.LeadShutterMaterialMapping.map(
                 (mapping) => ({
@@ -4162,7 +4236,9 @@ export class DesigingStageController {
             });
           }
 
-          if (previousLatestSpecification.specificationDocumentMappings.length > 0) {
+          if (
+            previousLatestSpecification.specificationDocumentMappings.length > 0
+          ) {
             await tx.specificationDocumentMapping.createMany({
               data: previousLatestSpecification.specificationDocumentMappings.map(
                 (mapping) => ({
@@ -4248,7 +4324,9 @@ export class DesigingStageController {
   ) {
     try {
       const specsId = Number(req.params.specsId);
-      const section = String(req.body.section || "").trim().toLowerCase();
+      const section = String(req.body.section || "")
+        .trim()
+        .toLowerCase();
       const remark = req.body.remark;
 
       const allowedValues = [
@@ -4457,10 +4535,13 @@ export class DesigingStageController {
       const specsId = Number(req.body.specs_id);
       const carcassTypeId = Number(req.body.carcass_type_id);
       const carcasMaterialId = Number(req.body.carcas_material_id);
-      const carcassMaterialFinishId = Number(req.body.carcass_material_finish_id);
+      const carcassMaterialFinishId = Number(
+        req.body.carcass_material_finish_id,
+      );
       const createdBy = Number(req.body.created_by);
-      const reviewStateData =
-        DesigingStageController.buildReviewStateData(req.body);
+      const reviewStateData = DesigingStageController.buildReviewStateData(
+        req.body,
+      );
 
       if (
         !vendorId ||
@@ -4495,18 +4576,19 @@ export class DesigingStageController {
         ...reviewStateData,
       };
 
-      const existingDuplicate = await prisma.leadCarcassMaterialMapping.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          specs_id: specsId,
-          carcass_type_id: carcassTypeId,
-          carcas_material_id: carcasMaterialId,
-          carcass_material_finish_id: carcassMaterialFinishId,
-          ...(id ? { NOT: { id } } : {}),
-        },
-        select: { id: true },
-      });
+      const existingDuplicate =
+        await prisma.leadCarcassMaterialMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            specs_id: specsId,
+            carcass_type_id: carcassTypeId,
+            carcas_material_id: carcasMaterialId,
+            carcass_material_finish_id: carcassMaterialFinishId,
+            ...(id ? { NOT: { id } } : {}),
+          },
+          select: { id: true },
+        });
 
       if (existingDuplicate) {
         return res.status(400).json({
@@ -4608,10 +4690,13 @@ export class DesigingStageController {
       const specsId = Number(req.body.specs_id);
       const shutterTypeId = Number(req.body.shutter_type_id);
       const shutterMaterialId = Number(req.body.shutter_material_id);
-      const shutterMaterialFinishId = Number(req.body.shutter_material_finish_id);
+      const shutterMaterialFinishId = Number(
+        req.body.shutter_material_finish_id,
+      );
       const createdBy = Number(req.body.created_by);
-      const reviewStateData =
-        DesigingStageController.buildReviewStateData(req.body);
+      const reviewStateData = DesigingStageController.buildReviewStateData(
+        req.body,
+      );
 
       if (
         !vendorId ||
@@ -4646,18 +4731,19 @@ export class DesigingStageController {
         ...reviewStateData,
       };
 
-      const existingDuplicate = await prisma.leadShutterMaterialMapping.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          specs_id: specsId,
-          shutter_type_id: shutterTypeId,
-          shutter_material_id: shutterMaterialId,
-          shutter_material_finish_id: shutterMaterialFinishId,
-          ...(id ? { NOT: { id } } : {}),
-        },
-        select: { id: true },
-      });
+      const existingDuplicate =
+        await prisma.leadShutterMaterialMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            specs_id: specsId,
+            shutter_type_id: shutterTypeId,
+            shutter_material_id: shutterMaterialId,
+            shutter_material_finish_id: shutterMaterialFinishId,
+            ...(id ? { NOT: { id } } : {}),
+          },
+          select: { id: true },
+        });
 
       if (existingDuplicate) {
         return res.status(400).json({
@@ -4763,8 +4849,9 @@ export class DesigingStageController {
           ? req.body.note
           : null;
       const createdBy = Number(req.body.created_by);
-      const reviewStateData =
-        DesigingStageController.buildReviewStateData(req.body);
+      const reviewStateData = DesigingStageController.buildReviewStateData(
+        req.body,
+      );
 
       if (
         !vendorId ||
@@ -4856,7 +4943,10 @@ export class DesigingStageController {
     }
   }
 
-  public static async getLeadLightCarcasUnitMappings(req: Request, res: Response) {
+  public static async getLeadLightCarcasUnitMappings(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
@@ -4903,7 +4993,10 @@ export class DesigingStageController {
     }
   }
 
-  public static async upsertLeadLightCarcasUnitMapping(req: Request, res: Response) {
+  public static async upsertLeadLightCarcasUnitMapping(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
@@ -4918,19 +5011,14 @@ export class DesigingStageController {
           ? req.body.custom_remark.trim()
           : "";
       const createdBy = Number(req.body.created_by);
-      const reviewStateData =
-        DesigingStageController.buildReviewStateData(req.body);
+      const reviewStateData = DesigingStageController.buildReviewStateData(
+        req.body,
+      );
 
-      if (
-        !vendorId ||
-        !leadId ||
-        !specsId ||
-        !createdBy
-      ) {
+      if (!vendorId || !leadId || !specsId || !createdBy) {
         return res.status(400).json({
           success: false,
-          message:
-            "vendor_id, lead_id, specs_id and created_by are required",
+          message: "vendor_id, lead_id, specs_id and created_by are required",
         });
       }
 
@@ -4961,23 +5049,24 @@ export class DesigingStageController {
         ...reviewStateData,
       };
 
-      const existingDuplicate = await prisma.leadLightCarcasUnitMapping.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          specs_id: specsId,
-          ...(lightCarcasUnitMasterId
-            ? { light_carcas_unit_master_id: lightCarcasUnitMasterId }
-            : {
-                custom_remark: {
-                  equals: customRemark,
-                  mode: "insensitive",
-                },
-              }),
-          ...(id ? { NOT: { id } } : {}),
-        },
-        select: { id: true },
-      });
+      const existingDuplicate =
+        await prisma.leadLightCarcasUnitMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            specs_id: specsId,
+            ...(lightCarcasUnitMasterId
+              ? { light_carcas_unit_master_id: lightCarcasUnitMasterId }
+              : {
+                  custom_remark: {
+                    equals: customRemark,
+                    mode: "insensitive",
+                  },
+                }),
+            ...(id ? { NOT: { id } } : {}),
+          },
+          select: { id: true },
+        });
 
       if (existingDuplicate) {
         return res.status(400).json({
@@ -5027,7 +5116,10 @@ export class DesigingStageController {
     }
   }
 
-  public static async getLeadOtherAppliancesMappings(req: Request, res: Response) {
+  public static async getLeadOtherAppliancesMappings(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const vendorId = Number(req.params.vendorId);
       const leadId = Number(req.params.leadId);
@@ -5074,7 +5166,10 @@ export class DesigingStageController {
     }
   }
 
-  public static async upsertLeadOtherAppliancesMapping(req: Request, res: Response) {
+  public static async upsertLeadOtherAppliancesMapping(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const id = req.body.id ? Number(req.body.id) : undefined;
       const vendorId = Number(req.body.vendor_id);
@@ -5093,19 +5188,14 @@ export class DesigingStageController {
           ? req.body.custom_remark.trim()
           : "";
       const createdBy = Number(req.body.created_by);
-      const reviewStateData =
-        DesigingStageController.buildReviewStateData(req.body);
+      const reviewStateData = DesigingStageController.buildReviewStateData(
+        req.body,
+      );
 
-      if (
-        !vendorId ||
-        !leadId ||
-        !specsId ||
-        !createdBy
-      ) {
+      if (!vendorId || !leadId || !specsId || !createdBy) {
         return res.status(400).json({
           success: false,
-          message:
-            "vendor_id, lead_id, specs_id and created_by are required",
+          message: "vendor_id, lead_id, specs_id and created_by are required",
         });
       }
 
@@ -5137,24 +5227,27 @@ export class DesigingStageController {
         ...reviewStateData,
       };
 
-      const existingDuplicate = await prisma.leadOtherAppliancesMapping.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          specs_id: specsId,
-          ...(otherApplianceType ? { other_appliance_type: otherApplianceType as any } : {}),
-          ...(otherAppliancesMasterId
-            ? { other_appliances_master_id: otherAppliancesMasterId }
-            : {
-                custom_remark: {
-                  equals: customRemark,
-                  mode: "insensitive",
-                },
-              }),
-          ...(id ? { NOT: { id } } : {}),
-        },
-        select: { id: true },
-      });
+      const existingDuplicate =
+        await prisma.leadOtherAppliancesMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            specs_id: specsId,
+            ...(otherApplianceType
+              ? { other_appliance_type: otherApplianceType as any }
+              : {}),
+            ...(otherAppliancesMasterId
+              ? { other_appliances_master_id: otherAppliancesMasterId }
+              : {
+                  custom_remark: {
+                    equals: customRemark,
+                    mode: "insensitive",
+                  },
+                }),
+            ...(id ? { NOT: { id } } : {}),
+          },
+          select: { id: true },
+        });
 
       if (existingDuplicate) {
         return res.status(400).json({
@@ -5234,9 +5327,10 @@ export class DesigingStageController {
     }
   }
 
-
-
-  public static async getLeadStatusForNotification(req: Request, res: Response) {
+  public static async getLeadStatusForNotification(
+    req: Request,
+    res: Response,
+  ) {
     try {
       const { lead_id, vendor_id } = req.params;
       const { instance_id } = req.query;

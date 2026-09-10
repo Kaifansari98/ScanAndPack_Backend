@@ -282,14 +282,66 @@ export const NotificationService = {
       }),
     ]);
 
-    // Attach a default delivery_summary so the return type is satisfied.
-    // The delivery logs groupBy was removed — it ran sequentially after the
-    // main query, adding an extra DB round-trip that the frontend never used.
-    const notificationsWithDelivery: NotificationWithDelivery[] = notifications.map(
-      (n) => ({ ...n, delivery_summary: { sent: 0, failed: 0 } }),
+    // Clean up & filter out any stale LEAD_ASSIGNED notifications for online leads no longer assigned to this user
+    const leadAssignedNotifs = notifications.filter(
+      (n) => n.type === "LEAD_ASSIGNED" && n.entity_type === "online_lead" && n.entity_id,
     );
 
-    return { notifications: notificationsWithDelivery, unread_count, total_count };
+    let filteredNotifications = notifications;
+    if (leadAssignedNotifs.length > 0) {
+      const leadIds = [
+        ...new Set(leadAssignedNotifs.map((n) => n.entity_id as number)),
+      ];
+      const onlineLeads = await prisma.online_leads.findMany({
+        where: { id: { in: leadIds } },
+        select: { id: true, final_assigned_leads: true, assign_to: true },
+      });
+      const leadMap = new Map<
+        number,
+        { final_assigned_leads: number | null; assign_to: number | null }
+      >();
+      onlineLeads.forEach((l) => leadMap.set(l.id, l));
+
+      const staleNotificationIds: number[] = [];
+      filteredNotifications = notifications.filter((n) => {
+        if (
+          n.type === "LEAD_ASSIGNED" &&
+          n.entity_type === "online_lead" &&
+          n.entity_id
+        ) {
+          const lead = leadMap.get(n.entity_id);
+          if (lead) {
+            const currentAssignee = lead.final_assigned_leads || lead.assign_to;
+            if (currentAssignee && Number(currentAssignee) !== Number(userId)) {
+              staleNotificationIds.push(n.id);
+              return false;
+            }
+          }
+        }
+        return true;
+      });
+
+      if (staleNotificationIds.length > 0) {
+        prisma.notification
+          .deleteMany({
+            where: { id: { in: staleNotificationIds } },
+          })
+          .catch(() => {});
+      }
+    }
+
+    const notificationsWithDelivery: NotificationWithDelivery[] =
+      filteredNotifications.map((n) => ({
+        ...n,
+        delivery_summary: { sent: 0, failed: 0 },
+      }));
+
+    const removedCount = notifications.length - filteredNotifications.length;
+    return {
+      notifications: notificationsWithDelivery,
+      unread_count: Math.max(0, unread_count - removedCount),
+      total_count: Math.max(0, total_count - removedCount),
+    };
   },
 
   async markRead(notificationId: number, userId: number) {
