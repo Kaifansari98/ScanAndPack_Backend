@@ -247,7 +247,8 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
-      userType === "backend";
+      userType === "backend" ||
+      userType === "miscellaneous";
     const franchiseId =
       !skipFranchiseFilter && req.body.franchise_id
         ? Number(req.body.franchise_id)
@@ -378,7 +379,8 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
-      userType === "backend";
+      userType === "backend" ||
+      userType === "miscellaneous";
     const franchiseId =
       !skipFranchiseFilter && req.query.franchise_id
         ? Number(req.query.franchise_id)

@@ -126,7 +126,7 @@ export class UnderInstallationStageController {
         : req.params.vendorId;
       const vendorId = Number(vendorIdParam);
       const userId = Number(req.body.userId);
-      const franchiseId = Number(req.body.franchise_id);
+      const franchiseId = req.body.franchise_id ? Number(req.body.franchise_id) : undefined;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -198,18 +198,17 @@ export class UnderInstallationStageController {
       // ============================
       // VALIDATION GATE
       // ============================
-      if (!vendorId || !userId || !franchiseId) {
+      if (!vendorId || !userId) {
         logger.warn(
-          "[UnderInstallationStageController] Missing vendorId or userId or franchiseId",
+          "[UnderInstallationStageController] Missing vendorId or userId",
           {
             vendorId,
             userId,
-            franchiseId,
           },
         );
         return res.status(400).json({
           success: false,
-          message: "Vendor ID, User ID, and Franchise ID are required",
+          message: "Vendor ID and User ID are required",
         });
       }
 

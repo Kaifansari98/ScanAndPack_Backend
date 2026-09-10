@@ -1257,24 +1257,41 @@ export class UnderInstallationStageService {
       });
 
       // -----------------------------
-      // Factory Assignment Logic
+      // Miscellaneous User Assignment Logic
       // -----------------------------
 
-      const factoryMapping = await tx.leadUserMapping.findFirst({
+      const miscUserMapping = await tx.leadUserMapping.findFirst({
         where: {
           vendor_id,
           lead_id,
           status: "active",
-          type: "production-stage",
           user: {
             status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
           },
         },
         orderBy: { created_at: "asc" },
         select: { user_id: true },
       });
 
-      const factoryAssigneeId = factoryMapping?.user_id ?? null;
+      let miscAssigneeId = miscUserMapping?.user_id ?? null;
+
+      if (!miscAssigneeId) {
+        const vendorMiscUser = await tx.userMaster.findFirst({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
+          },
+          orderBy: { id: "asc" },
+          select: { id: true },
+        });
+        miscAssigneeId = vendorMiscUser?.id ?? null;
+      }
 
       // -----------------------------
       // Lead Stage Resolution
@@ -1306,7 +1323,7 @@ export class UnderInstallationStageService {
           lead_id,
           account_id,
           franchise_id: leadStageRecord?.franchise_id ?? null,
-          user_id: factoryAssigneeId ?? created_by,
+          user_id: miscAssigneeId ?? created_by,
           task_type: "Miscellaneous",
           lead_stage: leadStage,
           due_date: expected_ready_date
@@ -1385,29 +1402,19 @@ export class UnderInstallationStageService {
 
     try {
       // -----------------------------
-      // Fetch Factory Role
+      // Fetch Miscellaneous Users
       // -----------------------------
 
-      const factoryRole = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: { equals: "factory", mode: "insensitive" },
-        },
-        select: { id: true },
-      });
-
-      if (!factoryRole) return misc.misc;
-
-      // -----------------------------
-      // Fetch Factory Users
-      // -----------------------------
-
-      const factoryUsers = await prisma.leadUserMapping.findMany({
+      const mappedMiscUsers = await prisma.leadUserMapping.findMany({
         where: {
           vendor_id,
           lead_id,
           status: "active",
           user: {
-            user_type_id: factoryRole.id,
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
           },
         },
         select: {
@@ -1421,7 +1428,29 @@ export class UnderInstallationStageService {
         },
       });
 
-      if (!factoryUsers.length) return misc.misc;
+      let recipientUsers = mappedMiscUsers.map((m) => m.user);
+
+      if (!recipientUsers.length) {
+        recipientUsers = await prisma.userMaster.findMany({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        });
+      }
+
+      // Filter out creator (if created by a miscellaneous user, don't send notification to self)
+      const notifyUsers = recipientUsers.filter((user) => user.id !== created_by);
+
+      if (!notifyUsers.length) return misc.misc;
 
       // -----------------------------
       // Fetch Lead Meta (Single Query)
@@ -1476,7 +1505,7 @@ export class UnderInstallationStageService {
       // ===============================
 
       await Promise.allSettled(
-        factoryUsers.map(async ({ user }) => {
+        notifyUsers.map(async (user) => {
           await NotificationService.createAndSend({
             vendor_id,
             user_id: user.id,
@@ -1508,7 +1537,7 @@ export class UnderInstallationStageService {
       logger.info("Miscellaneous notification dispatched", {
         misc_id: misc.misc.id,
         task_id: misc.taskId,
-        receivers: factoryUsers.length,
+        receivers: notifyUsers.length,
       });
     } catch (err: any) {
       logger.warn("Miscellaneous notification failed", {

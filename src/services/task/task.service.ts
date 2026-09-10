@@ -1215,7 +1215,7 @@ private static mapTaskWithLead(task: any) {
 
   static async getTasksFilterByVendor2(
     vendorId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
     page: number = 1,
     limit: number = 10,
     filters: {
@@ -1258,7 +1258,7 @@ private static mapTaskWithLead(task: any) {
 
   static async getTasksFilterByVendorReport(
     vendorId: number,
-    franchiseId: number,
+    franchiseId: number | undefined,
     page: number = 1,
     limit: number = 10,
     filters: {
