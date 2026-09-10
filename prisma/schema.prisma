@@ -2702,6 +2702,7 @@ model MiscellaneousMaster {
   exp_of_rejection         String?
   misc_approved            Boolean?
   required_delivery_date   DateTime?
+  solution                 String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)

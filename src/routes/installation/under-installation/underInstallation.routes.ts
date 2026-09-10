@@ -145,6 +145,33 @@ underInstallationStageRoutes.post(
   controller.uploadMiscCompletionDocumentsByTaskId,
 );
 
+/**
+ * ✅ GET → Get eligible followup users (site-supervisor, head-site-supervisor, factory, miscellaneous)
+ * @route GET /vendorId/:vendorId/miscellaneous/followup-users
+ */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/miscellaneous/followup-users",
+  controller.getMiscFollowupEligibleUsers,
+);
+
+/**
+ * ✅ POST → Create Miscellaneous Followup Task
+ * @route POST /vendorId/:vendorId/miscId/:miscId/followup
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/miscId/:miscId/followup",
+  controller.createMiscFollowupTask,
+);
+
+/**
+ * ✅ GET → Get Miscellaneous Followup Tasks
+ * @route GET /vendorId/:vendorId/miscId/:miscId/followups
+ */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/miscId/:miscId/followups",
+  controller.getMiscFollowupTasks,
+);
+
 underInstallationStageRoutes.post(
   "/issue-log/create",
   controller.createInstallationIssueLog,
@@ -211,6 +238,7 @@ underInstallationStageRoutes.put(
 
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/mark-ready",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
   controller.markMiscellaneousTaskReady,
 );
 

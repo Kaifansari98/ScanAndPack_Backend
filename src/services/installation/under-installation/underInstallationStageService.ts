@@ -23,6 +23,7 @@ interface MiscPayload {
   cost?: number;
   supervisor_remark?: string;
   expected_ready_date?: Date;
+  solution?: string;
   is_resolved: boolean;
   created_by: number;
   teams: number[];
@@ -34,6 +35,7 @@ interface UpdateERDInput {
   vendor_id: number;
   misc_id: number;
   expected_ready_date: string;
+  solution?: string;
   updated_by: number;
   baseUrl: string;
 }
@@ -1176,6 +1178,7 @@ export class UnderInstallationStageService {
       cost,
       supervisor_remark,
       expected_ready_date,
+      solution,
       is_resolved,
       created_by,
       teams,
@@ -1247,6 +1250,8 @@ export class UnderInstallationStageService {
             expected_ready_date
               ? new Date(expected_ready_date)
               : null,
+
+          solution: solution?.trim() || null,
 
           // Boolean
           is_resolved:
@@ -1648,6 +1653,9 @@ export class UnderInstallationStageService {
         remark: true,
         status: true,
         due_date: true,
+        closed_at: true,
+        closed_by: true,
+        closedBy: { select: { id: true, user_name: true } },
       },
     });
 
@@ -1665,6 +1673,7 @@ export class UnderInstallationStageService {
               original_name: docLink.document.doc_og_name,
               file_key: docLink.document.doc_sys_name,
               doc_type_tag: docLink.document.documentType?.tag ?? null,
+              doc_type_name: docLink.document.documentType?.doc_title ?? docLink.document.documentType?.type ?? null,
               signed_url,
               uploaded_at: docLink.document.created_at,
             };
@@ -1706,6 +1715,7 @@ export class UnderInstallationStageService {
           cost: m.cost,
           supervisor_remark: m.supervisor_remark,
           expected_ready_date: m.expected_ready_date,
+          solution: (m as any).solution ?? null,
           required_delivery_date: m.required_delivery_date,
           is_resolved: m.is_resolved,
           resolved_at: m.resolved_at,
@@ -1722,6 +1732,14 @@ export class UnderInstallationStageService {
               id: taskForMisc.id,
               task_type: taskForMisc.task_type,
               status: taskForMisc.status,
+              closed_at: taskForMisc.closed_at ?? null,
+              closed_by: taskForMisc.closed_by ?? null,
+              closed_user: taskForMisc.closedBy
+                ? {
+                    id: taskForMisc.closedBy.id,
+                    user_name: taskForMisc.closedBy.user_name,
+                  }
+                : null,
             }
             : null,
           delivery_task: deliveryTaskForMisc
@@ -2485,6 +2503,7 @@ export class UnderInstallationStageService {
     vendor_id,
     misc_id,
     expected_ready_date,
+    solution,
     updated_by,
     baseUrl,
   }: UpdateERDInput) {
@@ -2516,6 +2535,7 @@ export class UnderInstallationStageService {
         where: { id: misc_id },
         data: {
           expected_ready_date: new Date(expected_ready_date),
+          ...(solution !== undefined ? { solution: solution ? solution.trim() : null } : {}),
           updated_by,
         },
       });
@@ -3780,9 +3800,10 @@ export class UnderInstallationStageService {
     lead_id: number;
     misc_id: number;
     ready_by: number;
+    files?: { originalName: string; sysName: string }[];
     baseUrl: string;
   }) {
-    const { vendor_id, lead_id, misc_id, ready_by, baseUrl } = payload;
+    const { vendor_id, lead_id, misc_id, ready_by, files, baseUrl } = payload;
 
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -3807,6 +3828,47 @@ export class UnderInstallationStageService {
         throw Object.assign(new Error("Miscellaneous entry not found"), {
           statusCode: 404,
         });
+      }
+
+      // Save optional ready documents (Type 41)
+      if (files && files.length > 0) {
+        let docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 41" },
+        });
+
+        if (!docType) {
+          docType = await tx.documentTypeMaster.create({
+            data: {
+              vendor_id,
+              tag: "Type 41",
+              type: "Miscellaneous Ready Documents",
+              doc_title: "Miscellaneous Ready Documents",
+              stage: "Under Installation",
+            },
+          });
+        }
+
+        for (const file of files) {
+          const leadDoc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
+              vendor_id,
+              lead_id,
+              created_by: ready_by,
+              doc_type_id: docType.id,
+            },
+          });
+
+          await tx.miscellaneousDocument.create({
+            data: {
+              vendor_id,
+              miscellaneous_id: misc_id,
+              document_id: leadDoc.id,
+              created_by: ready_by,
+            },
+          });
+        }
       }
 
       const miscTaskKey = `[misc:${existing.id}]`;
@@ -4338,5 +4400,200 @@ export class UnderInstallationStageService {
     return [...miscRows, ...issueRows].sort(
       (a, b) => a.created_at.getTime() - b.created_at.getTime(),
     );
+  }
+
+  // ── Miscellaneous Followup Services ───────────────────────────────────────
+
+  static async getMiscFollowupEligibleUsersService(vendor_id: number) {
+    const targetRoles = [
+      "site-supervisor",
+      "head-site-supervisor",
+      "factory",
+      "miscellaneous",
+    ];
+
+    const users = await prisma.userMaster.findMany({
+      where: {
+        vendor_id,
+        status: "active",
+        user_type: {
+          user_type: {
+            in: targetRoles,
+            mode: "insensitive",
+          },
+        },
+      },
+      select: {
+        id: true,
+        user_name: true,
+        user_email: true,
+        user_contact: true,
+        user_type: {
+          select: {
+            id: true,
+            user_type: true,
+          },
+        },
+      },
+      orderBy: [
+        { user_type: { user_type: "asc" } },
+        { user_name: "asc" },
+      ],
+    });
+
+    return users;
+  }
+
+  static async createMiscFollowupTaskService(data: {
+    vendor_id: number;
+    misc_id: number;
+    lead_id: number;
+    user_id: number;
+    due_date: string | Date;
+    remark: string;
+    created_by: number;
+  }) {
+    const { vendor_id, misc_id, lead_id, user_id, due_date, remark, created_by } = data;
+
+    if (!user_id) throw new Error("Assigned user is required");
+    if (!due_date) throw new Error("Due date is required");
+    if (!remark || !remark.trim()) throw new Error("Remark is required");
+
+    // Verify user belongs to vendor
+    const assignee = await prisma.userMaster.findFirst({
+      where: {
+        id: user_id,
+        vendor_id,
+        status: "active",
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (!assignee) {
+      throw new Error("Assignee user not found or inactive for this vendor");
+    }
+
+    // Verify lead
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { id: true, account_id: true, franchise_id: true, status_id: true },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const leadStage = lead.status_id
+      ? ((
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: lead.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+      : null;
+
+    // Verify misc exists
+    const misc = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id, lead_id },
+    });
+
+    if (!misc) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    const miscTaskRemark = `[misc:${misc_id}] ${remark.trim()}`;
+
+    const task = await prisma.userLeadTask.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: misc.account_id,
+        franchise_id: lead.franchise_id ?? null,
+        user_id,
+        task_type: "Miscellaneous Followup",
+        lead_stage: leadStage,
+        due_date: new Date(due_date),
+        remark: miscTaskRemark,
+        status: "open",
+        created_by,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: { select: { id: true, user_type: true } },
+          },
+        },
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+      },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy: created_by,
+      actionType: "CREATE",
+      action: `Miscellaneous Followup task created for ${assignee.user_name} (${assignee.user_type.user_type}). Remark: ${remark.trim()}`,
+    });
+
+    return {
+      ...task,
+      display_remark: remark.trim(),
+    };
+  }
+
+  static async getMiscFollowupTasksService(vendor_id: number, misc_id: number) {
+    const miscTag = `[misc:${misc_id}]`;
+
+    const tasks = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id,
+        task_type: "Miscellaneous Followup",
+        remark: {
+          contains: miscTag,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: {
+              select: { id: true, user_type: true },
+            },
+          },
+        },
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        closedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return tasks.map((t) => {
+      const cleanRemark = t.remark ? t.remark.replace(miscTag, "").trim() : "";
+      return {
+        ...t,
+        display_remark: cleanRemark,
+      };
+    });
   }
 }

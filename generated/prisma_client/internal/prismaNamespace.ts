@@ -18175,7 +18175,8 @@ export const MiscellaneousMasterScalarFieldEnum = {
   updated_at: 'updated_at',
   exp_of_rejection: 'exp_of_rejection',
   misc_approved: 'misc_approved',
-  required_delivery_date: 'required_delivery_date'
+  required_delivery_date: 'required_delivery_date',
+  solution: 'solution'
 } as const
 
 export type MiscellaneousMasterScalarFieldEnum = (typeof MiscellaneousMasterScalarFieldEnum)[keyof typeof MiscellaneousMasterScalarFieldEnum]

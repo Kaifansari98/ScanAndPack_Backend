@@ -71,6 +71,7 @@ export type MiscellaneousMasterMinAggregateOutputType = {
   exp_of_rejection: string | null
   misc_approved: boolean | null
   required_delivery_date: Date | null
+  solution: string | null
 }
 
 export type MiscellaneousMasterMaxAggregateOutputType = {
@@ -94,6 +95,7 @@ export type MiscellaneousMasterMaxAggregateOutputType = {
   exp_of_rejection: string | null
   misc_approved: boolean | null
   required_delivery_date: Date | null
+  solution: string | null
 }
 
 export type MiscellaneousMasterCountAggregateOutputType = {
@@ -117,6 +119,7 @@ export type MiscellaneousMasterCountAggregateOutputType = {
   exp_of_rejection: number
   misc_approved: number
   required_delivery_date: number
+  solution: number
   _all: number
 }
 
@@ -166,6 +169,7 @@ export type MiscellaneousMasterMinAggregateInputType = {
   exp_of_rejection?: true
   misc_approved?: true
   required_delivery_date?: true
+  solution?: true
 }
 
 export type MiscellaneousMasterMaxAggregateInputType = {
@@ -189,6 +193,7 @@ export type MiscellaneousMasterMaxAggregateInputType = {
   exp_of_rejection?: true
   misc_approved?: true
   required_delivery_date?: true
+  solution?: true
 }
 
 export type MiscellaneousMasterCountAggregateInputType = {
@@ -212,6 +217,7 @@ export type MiscellaneousMasterCountAggregateInputType = {
   exp_of_rejection?: true
   misc_approved?: true
   required_delivery_date?: true
+  solution?: true
   _all?: true
 }
 
@@ -322,6 +328,7 @@ export type MiscellaneousMasterGroupByOutputType = {
   exp_of_rejection: string | null
   misc_approved: boolean | null
   required_delivery_date: Date | null
+  solution: string | null
   _count: MiscellaneousMasterCountAggregateOutputType | null
   _avg: MiscellaneousMasterAvgAggregateOutputType | null
   _sum: MiscellaneousMasterSumAggregateOutputType | null
@@ -368,6 +375,7 @@ export type MiscellaneousMasterWhereInput = {
   exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
   required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  solution?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   documents?: Prisma.MiscellaneousDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -399,6 +407,7 @@ export type MiscellaneousMasterOrderByWithRelationInput = {
   exp_of_rejection?: Prisma.SortOrderInput | Prisma.SortOrder
   misc_approved?: Prisma.SortOrderInput | Prisma.SortOrder
   required_delivery_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  solution?: Prisma.SortOrderInput | Prisma.SortOrder
   documents?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -433,6 +442,7 @@ export type MiscellaneousMasterWhereUniqueInput = Prisma.AtLeast<{
   exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
   required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  solution?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   documents?: Prisma.MiscellaneousDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterScalarRelationFilter, Prisma.AccountMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -464,6 +474,7 @@ export type MiscellaneousMasterOrderByWithAggregationInput = {
   exp_of_rejection?: Prisma.SortOrderInput | Prisma.SortOrder
   misc_approved?: Prisma.SortOrderInput | Prisma.SortOrder
   required_delivery_date?: Prisma.SortOrderInput | Prisma.SortOrder
+  solution?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.MiscellaneousMasterCountOrderByAggregateInput
   _avg?: Prisma.MiscellaneousMasterAvgOrderByAggregateInput
   _max?: Prisma.MiscellaneousMasterMaxOrderByAggregateInput
@@ -495,6 +506,7 @@ export type MiscellaneousMasterScalarWhereWithAggregatesInput = {
   exp_of_rejection?: Prisma.StringNullableWithAggregatesFilter<"MiscellaneousMaster"> | string | null
   misc_approved?: Prisma.BoolNullableWithAggregatesFilter<"MiscellaneousMaster"> | boolean | null
   required_delivery_date?: Prisma.DateTimeNullableWithAggregatesFilter<"MiscellaneousMaster"> | Date | string | null
+  solution?: Prisma.StringNullableWithAggregatesFilter<"MiscellaneousMaster"> | string | null
 }
 
 export type MiscellaneousMasterCreateInput = {
@@ -511,6 +523,7 @@ export type MiscellaneousMasterCreateInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -542,6 +555,7 @@ export type MiscellaneousMasterUncheckedCreateInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -560,6 +574,7 @@ export type MiscellaneousMasterUpdateInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -591,6 +606,7 @@ export type MiscellaneousMasterUncheckedUpdateInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -616,6 +632,7 @@ export type MiscellaneousMasterCreateManyInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateManyMutationInput = {
@@ -632,6 +649,7 @@ export type MiscellaneousMasterUpdateManyMutationInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterUncheckedUpdateManyInput = {
@@ -655,6 +673,7 @@ export type MiscellaneousMasterUncheckedUpdateManyInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterListRelationFilter = {
@@ -688,6 +707,7 @@ export type MiscellaneousMasterCountOrderByAggregateInput = {
   exp_of_rejection?: Prisma.SortOrder
   misc_approved?: Prisma.SortOrder
   required_delivery_date?: Prisma.SortOrder
+  solution?: Prisma.SortOrder
 }
 
 export type MiscellaneousMasterAvgOrderByAggregateInput = {
@@ -723,6 +743,7 @@ export type MiscellaneousMasterMaxOrderByAggregateInput = {
   exp_of_rejection?: Prisma.SortOrder
   misc_approved?: Prisma.SortOrder
   required_delivery_date?: Prisma.SortOrder
+  solution?: Prisma.SortOrder
 }
 
 export type MiscellaneousMasterMinOrderByAggregateInput = {
@@ -746,6 +767,7 @@ export type MiscellaneousMasterMinOrderByAggregateInput = {
   exp_of_rejection?: Prisma.SortOrder
   misc_approved?: Prisma.SortOrder
   required_delivery_date?: Prisma.SortOrder
+  solution?: Prisma.SortOrder
 }
 
 export type MiscellaneousMasterSumOrderByAggregateInput = {
@@ -1059,6 +1081,7 @@ export type MiscellaneousMasterCreateWithoutVendorInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -1088,6 +1111,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutVendorInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1142,6 +1166,7 @@ export type MiscellaneousMasterScalarWhereInput = {
   exp_of_rejection?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
   misc_approved?: Prisma.BoolNullableFilter<"MiscellaneousMaster"> | boolean | null
   required_delivery_date?: Prisma.DateTimeNullableFilter<"MiscellaneousMaster"> | Date | string | null
+  solution?: Prisma.StringNullableFilter<"MiscellaneousMaster"> | string | null
 }
 
 export type MiscellaneousMasterCreateWithoutCreatedByInput = {
@@ -1158,6 +1183,7 @@ export type MiscellaneousMasterCreateWithoutCreatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
@@ -1187,6 +1213,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutCreatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1215,6 +1242,7 @@ export type MiscellaneousMasterCreateWithoutUpdatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -1244,6 +1272,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutUpdatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1304,6 +1333,7 @@ export type MiscellaneousMasterCreateWithoutLeadInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -1333,6 +1363,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutLeadInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1377,6 +1408,7 @@ export type MiscellaneousMasterCreateWithoutAccountInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
@@ -1406,6 +1438,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutAccountInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1450,6 +1483,7 @@ export type MiscellaneousMasterCreateWithoutTypeInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -1479,6 +1513,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutTypeInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
@@ -1523,6 +1558,7 @@ export type MiscellaneousMasterCreateWithoutTeamsInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutMiscellaneousInput
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
@@ -1553,6 +1589,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutTeamsInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
@@ -1586,6 +1623,7 @@ export type MiscellaneousMasterUpdateWithoutTeamsInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -1616,6 +1654,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutTeamsInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
@@ -1633,6 +1672,7 @@ export type MiscellaneousMasterCreateWithoutDocumentsInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   account: Prisma.AccountMasterCreateNestedOneWithoutMiscellaneousMasterInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutMiscCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutMiscellaneousMasterInput
@@ -1663,6 +1703,7 @@ export type MiscellaneousMasterUncheckedCreateWithoutDocumentsInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
   teams?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutMiscellaneousInput
 }
 
@@ -1696,6 +1737,7 @@ export type MiscellaneousMasterUpdateWithoutDocumentsInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
@@ -1726,6 +1768,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutDocumentsInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
 
@@ -1749,6 +1792,7 @@ export type MiscellaneousMasterCreateManyVendorInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutVendorInput = {
@@ -1765,6 +1809,7 @@ export type MiscellaneousMasterUpdateWithoutVendorInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -1794,6 +1839,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutVendorInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -1818,6 +1864,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutVendorInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterCreateManyCreatedByInput = {
@@ -1840,6 +1887,7 @@ export type MiscellaneousMasterCreateManyCreatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterCreateManyUpdatedByInput = {
@@ -1862,6 +1910,7 @@ export type MiscellaneousMasterCreateManyUpdatedByInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutCreatedByInput = {
@@ -1878,6 +1927,7 @@ export type MiscellaneousMasterUpdateWithoutCreatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
@@ -1907,6 +1957,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutCreatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -1931,6 +1982,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutUpdatedByInput = {
@@ -1947,6 +1999,7 @@ export type MiscellaneousMasterUpdateWithoutUpdatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -1976,6 +2029,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutUpdatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -2000,6 +2054,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterCreateManyLeadInput = {
@@ -2022,6 +2077,7 @@ export type MiscellaneousMasterCreateManyLeadInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutLeadInput = {
@@ -2038,6 +2094,7 @@ export type MiscellaneousMasterUpdateWithoutLeadInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -2067,6 +2124,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutLeadInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -2091,6 +2149,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutLeadInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterCreateManyAccountInput = {
@@ -2113,6 +2172,7 @@ export type MiscellaneousMasterCreateManyAccountInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutAccountInput = {
@@ -2129,6 +2189,7 @@ export type MiscellaneousMasterUpdateWithoutAccountInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
@@ -2158,6 +2219,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutAccountInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -2182,6 +2244,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutAccountInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type MiscellaneousMasterCreateManyTypeInput = {
@@ -2204,6 +2267,7 @@ export type MiscellaneousMasterCreateManyTypeInput = {
   exp_of_rejection?: string | null
   misc_approved?: boolean | null
   required_delivery_date?: Date | string | null
+  solution?: string | null
 }
 
 export type MiscellaneousMasterUpdateWithoutTypeInput = {
@@ -2220,6 +2284,7 @@ export type MiscellaneousMasterUpdateWithoutTypeInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUpdateManyWithoutMiscellaneousNestedInput
   account?: Prisma.AccountMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput
@@ -2249,6 +2314,7 @@ export type MiscellaneousMasterUncheckedUpdateWithoutTypeInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutMiscellaneousNestedInput
   teams?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutMiscellaneousNestedInput
 }
@@ -2273,6 +2339,7 @@ export type MiscellaneousMasterUncheckedUpdateManyWithoutTypeInput = {
   exp_of_rejection?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   misc_approved?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   required_delivery_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -2336,6 +2403,7 @@ export type MiscellaneousMasterSelect<ExtArgs extends runtime.Types.Extensions.I
   exp_of_rejection?: boolean
   misc_approved?: boolean
   required_delivery_date?: boolean
+  solution?: boolean
   documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -2368,6 +2436,7 @@ export type MiscellaneousMasterSelectCreateManyAndReturn<ExtArgs extends runtime
   exp_of_rejection?: boolean
   misc_approved?: boolean
   required_delivery_date?: boolean
+  solution?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2397,6 +2466,7 @@ export type MiscellaneousMasterSelectUpdateManyAndReturn<ExtArgs extends runtime
   exp_of_rejection?: boolean
   misc_approved?: boolean
   required_delivery_date?: boolean
+  solution?: boolean
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2426,9 +2496,10 @@ export type MiscellaneousMasterSelectScalar = {
   exp_of_rejection?: boolean
   misc_approved?: boolean
   required_delivery_date?: boolean
+  solution?: boolean
 }
 
-export type MiscellaneousMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "misc_type_id" | "problem_description" | "reorder_material_details" | "quantity" | "cost" | "supervisor_remark" | "expected_ready_date" | "is_resolved" | "resolved_at" | "created_by" | "updated_by" | "created_at" | "updated_at" | "exp_of_rejection" | "misc_approved" | "required_delivery_date", ExtArgs["result"]["miscellaneousMaster"]>
+export type MiscellaneousMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "account_id" | "misc_type_id" | "problem_description" | "reorder_material_details" | "quantity" | "cost" | "supervisor_remark" | "expected_ready_date" | "is_resolved" | "resolved_at" | "created_by" | "updated_by" | "created_at" | "updated_at" | "exp_of_rejection" | "misc_approved" | "required_delivery_date" | "solution", ExtArgs["result"]["miscellaneousMaster"]>
 export type MiscellaneousMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.MiscellaneousMaster$documentsArgs<ExtArgs>
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -2490,6 +2561,7 @@ export type $MiscellaneousMasterPayload<ExtArgs extends runtime.Types.Extensions
     exp_of_rejection: string | null
     misc_approved: boolean | null
     required_delivery_date: Date | null
+    solution: string | null
   }, ExtArgs["result"]["miscellaneousMaster"]>
   composites: {}
 }
@@ -2941,6 +3013,7 @@ export interface MiscellaneousMasterFieldRefs {
   readonly exp_of_rejection: Prisma.FieldRef<"MiscellaneousMaster", 'String'>
   readonly misc_approved: Prisma.FieldRef<"MiscellaneousMaster", 'Boolean'>
   readonly required_delivery_date: Prisma.FieldRef<"MiscellaneousMaster", 'DateTime'>
+  readonly solution: Prisma.FieldRef<"MiscellaneousMaster", 'String'>
 }
     
 
