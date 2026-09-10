@@ -1083,9 +1083,10 @@ export const getLeadById = async (
       userType === "telecaller-team-lead" ||
       userType === "telecaller team lead" ||
       userType === "store caller" ||
+      userType === "miscellaneous" ||
       (userType === "custom" && !!customViewPrivilege)
     ) {
-      console.log("[SERVICE] Sales Executive / Telecaller – vendor scoped access granted");
+      console.log("[SERVICE] Sales Executive / Telecaller / Misc – vendor scoped access granted");
     } else if (["admin", "super-admin", "auditor"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {

@@ -196,7 +196,7 @@ export const getPendingMiscellaneousLeads = async (
   
   // We need to fetch mapped leads first if we have a restrictive user
   let mappedLeadIds: number[] = [];
-  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+  if (userId && !["admin", "super-admin", "auditor", "miscellaneous"].includes(userType || "")) {
     const mappedLeads = await prisma.leadUserMapping.findMany({
       where: { user_id: userId, vendor_id: vendorId, status: "active" },
       select: { lead_id: true }
@@ -239,7 +239,7 @@ export const getPendingMiscellaneousLeads = async (
     (where.AND as Prisma.LeadMasterWhereInput[]).push(condition);
   };
 
-  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+  if (userId && !["admin", "super-admin", "auditor", "miscellaneous"].includes(userType || "")) {
     addAnd({
       OR: [
         { assign_to: userId },
@@ -433,7 +433,7 @@ export const getPendingMiscellaneousLeadCountService = async (
   const leadFilter: any = {};
   if (franchiseId) leadFilter.franchise_id = franchiseId;
   
-  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+  if (userId && !["admin", "super-admin", "auditor", "miscellaneous"].includes(userType || "")) {
     // Get leads mapped to this user (e.g. site-supervisor, factory, backend)
     const mappedLeads = await prisma.leadUserMapping.findMany({
       where: { user_id: userId, vendor_id: vendorId, status: "active" },
