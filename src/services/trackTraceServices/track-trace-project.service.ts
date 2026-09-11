@@ -1322,6 +1322,7 @@ export const createProjectService_old = async (
           machine,
           quantity,
           perItemWeight,
+          ruleId,
         }: {
           cutListId: number;
           machine: {
@@ -1331,6 +1332,7 @@ export const createProjectService_old = async (
           };
           quantity: number;
           perItemWeight: number;
+          ruleId?: number | null;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -1343,6 +1345,7 @@ export const createProjectService_old = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
               | Weight is stored only against packaging machine type 18
@@ -2268,6 +2271,7 @@ export const createProjectService = async (
           machine,
           quantity,
           perItemWeight,
+          ruleId,
         }: {
           cutListId: number;
           machine: {
@@ -2277,6 +2281,7 @@ export const createProjectService = async (
           };
           quantity: number;
           perItemWeight: number;
+          ruleId?: number | null;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -2289,6 +2294,7 @@ export const createProjectService = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
               | Weight is stored only against packaging machine type 18
