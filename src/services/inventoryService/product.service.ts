@@ -158,6 +158,7 @@ const validateProductSuppliers = async (payload: ProductPayload) => {
         in: supplierIds,
       },
       is_deleted: false,
+      is_inventory_company_vendor: true,
     },
     select: {
       id: true,
@@ -414,11 +415,13 @@ export const getProductMasters = async (vendor_id: number) => {
         where: {
           vendor_id,
           is_deleted: false,
+          is_inventory_company_vendor: true,
         },
         select: {
           id: true,
           company_name: true,
           vendor_code: true,
+          is_inventory_company_vendor: true,
         },
         orderBy: {
           company_name: "asc",
