@@ -4214,6 +4214,7 @@ model ProductSupplierMapping {
   company_vendor_id          Int
   supplier_item_code         String?
   amount                     Decimal?             @db.Decimal(18, 2)
+  final_amount               Decimal?             @db.Decimal(18, 2)
   is_active                  Boolean              @default(true)
   created_by                 Int?
   updated_by                 Int?
