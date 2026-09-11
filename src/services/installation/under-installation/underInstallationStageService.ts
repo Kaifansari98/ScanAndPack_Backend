@@ -1,3 +1,4 @@
+import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
@@ -2250,31 +2251,7 @@ export class UnderInstallationStageService {
         throw new Error("Miscellaneous task not found");
       }
 
-      const remark = task.remark || "";
-      const match =
-        remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
-        remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
-
-      if (!match) {
-        throw new Error("Unable to parse miscellaneous details from remark");
-      }
-
-      const reorder_material_details = match[1];
-      const problem_description = match[2];
-
-      const misc = await tx.miscellaneousMaster.findFirst({
-        where: {
-          vendor_id,
-          lead_id: task.lead_id,
-          reorder_material_details,
-          problem_description,
-        },
-        select: {
-          id: true,
-          misc_approved: true,
-          is_resolved: true,
-        },
-      });
+      const misc = await resolveMiscTask(tx, vendor_id, task);
 
       if (!misc) {
         throw new Error("Miscellaneous entry not found for this task");
@@ -2432,27 +2409,7 @@ export class UnderInstallationStageService {
         throw new Error("Miscellaneous task not found");
       }
 
-      const remark = task.remark || "";
-      const match =
-        remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
-        remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
-
-      if (!match) {
-        throw new Error("Unable to parse miscellaneous details from remark");
-      }
-
-      const reorder_material_details = match[1];
-      const problem_description = match[2];
-
-      const misc = await tx.miscellaneousMaster.findFirst({
-        where: {
-          vendor_id,
-          lead_id: task.lead_id,
-          reorder_material_details,
-          problem_description,
-        },
-        select: { id: true },
-      });
+      const misc = await resolveMiscTask(tx, vendor_id, task);
 
       if (!misc) {
         throw new Error("Miscellaneous entry not found for this task");
