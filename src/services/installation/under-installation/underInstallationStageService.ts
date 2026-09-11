@@ -1795,12 +1795,6 @@ export class UnderInstallationStageService {
       );
     }
 
-    if (misc_approved === true && !approval_remark?.trim()) {
-      throw new Error(
-        "Approval remark is required when approving miscellaneous",
-      );
-    }
-
     const shouldResolve = misc_approved === false && !!exp_of_rejection?.trim();
 
     const updated = await prisma.miscellaneousMaster.update({
@@ -1822,7 +1816,7 @@ export class UnderInstallationStageService {
       lead_id: existing.lead_id,
       account_id: existing.account_id,
       action: misc_approved
-        ? `Miscellaneous request approved. Remark: ${approval_remark?.trim()}`
+        ? `Miscellaneous request approved${approval_remark?.trim() ? `. Remark: ${approval_remark.trim()}` : "."}`
         : `Miscellaneous request rejected. Reason: ${exp_of_rejection?.trim()}`,
       action_type: "UPDATE",
       history_type: "Lead",
