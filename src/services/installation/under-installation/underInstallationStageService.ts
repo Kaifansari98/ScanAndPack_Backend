@@ -1647,6 +1647,7 @@ export class UnderInstallationStageService {
         lead_id,
         task_type: { in: ["Miscellaneous", "Pending Materials"] },
       },
+      orderBy: { id: "desc" },
       select: {
         id: true,
         task_type: true,
@@ -1694,8 +1695,9 @@ export class UnderInstallationStageService {
           (t) =>
             typeof t.remark === "string" &&
             t.remark.includes("Required delivery date set for") &&
-            t.remark.includes(m.reorder_material_details) &&
-            t.remark.includes(m.problem_description),
+            (t.remark.includes(miscTaskKey) ||
+              ((!m.reorder_material_details || t.remark.includes(m.reorder_material_details)) &&
+                (!m.problem_description || t.remark.includes(m.problem_description)))),
         );
 
         return {
@@ -1795,12 +1797,6 @@ export class UnderInstallationStageService {
       );
     }
 
-    if (misc_approved === true && !approval_remark?.trim()) {
-      throw new Error(
-        "Approval remark is required when approving miscellaneous",
-      );
-    }
-
     const shouldResolve = misc_approved === false && !!exp_of_rejection?.trim();
 
     const updated = await prisma.miscellaneousMaster.update({
@@ -1822,7 +1818,7 @@ export class UnderInstallationStageService {
       lead_id: existing.lead_id,
       account_id: existing.account_id,
       action: misc_approved
-        ? `Miscellaneous request approved. Remark: ${approval_remark?.trim()}`
+        ? `Miscellaneous request approved${approval_remark?.trim() ? `. Remark: ${approval_remark.trim()}` : "."}`
         : `Miscellaneous request rejected. Reason: ${exp_of_rejection?.trim()}`,
       action_type: "UPDATE",
       history_type: "Lead",
@@ -2039,14 +2035,19 @@ export class UnderInstallationStageService {
         )?.type ?? null)
         : null;
 
-      const deliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+      const deliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description} [misc:${existing.id}]`;
+      const legacyDeliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
 
       const existingDeliveryTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: "Miscellaneous",
-          remark: deliveryRemark,
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: deliveryRemark },
+            { remark: legacyDeliveryRemark },
+          ],
         },
         orderBy: { id: "desc" },
         select: { id: true },

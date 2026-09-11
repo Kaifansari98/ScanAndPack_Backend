@@ -12,6 +12,8 @@ import {
   toggleMiscTeamStatus,
   getPendingMiscellaneousLeads,
   getPendingMiscellaneousLeadCount,
+  getMiscellaneousLeadsByStatus,
+  getMiscellaneousStatusCounts,
 } from "../controllers/leadModuleControllers/miscellaneousMaster.controller";
 
 const miscRoutes = Router();
@@ -56,6 +58,22 @@ miscRoutes.post(
 miscRoutes.get(
   "/vendor/:vendorId/pending-miscellaneous/count",
   getPendingMiscellaneousLeadCount,
+);
+
+/* ----------------------------- Misc Status Module --------------------------- */
+
+// POST → Get Leads by Miscellaneous Status
+// @route POST /miscellaneous-master/vendor/:vendorId/status-leads
+miscRoutes.post(
+  "/vendor/:vendorId/status-leads",
+  getMiscellaneousLeadsByStatus,
+);
+
+// GET → Get Counts across all Statuses (Sidebar Badges)
+// @route GET /miscellaneous-master/vendor/:vendorId/status-counts
+miscRoutes.get(
+  "/vendor/:vendorId/status-counts",
+  getMiscellaneousStatusCounts,
 );
 
 export default miscRoutes;
