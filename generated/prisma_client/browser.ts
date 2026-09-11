@@ -1077,3 +1077,33 @@ export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
  * 
  */
 export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProductionModel
+/**
+ * Model CutListRuleMaster
+ * 
+ */
+export type CutListRuleMaster = Prisma.CutListRuleMasterModel
+/**
+ * Model CutListRuleConditionGroup
+ * 
+ */
+export type CutListRuleConditionGroup = Prisma.CutListRuleConditionGroupModel
+/**
+ * Model CutListRuleCondition
+ * 
+ */
+export type CutListRuleCondition = Prisma.CutListRuleConditionModel
+/**
+ * Model CutListRuleAction
+ * 
+ */
+export type CutListRuleAction = Prisma.CutListRuleActionModel
+/**
+ * Model RuleFieldMaster
+ * 
+ */
+export type RuleFieldMaster = Prisma.RuleFieldMasterModel
+/**
+ * Model RuleActionMaster
+ * 
+ */
+export type RuleActionMaster = Prisma.RuleActionMasterModel

@@ -4992,7 +4992,7 @@ export class BookingStageService {
     };
 
     // ============= Admin Flow =============
-    if (isAdminLikeForRange || (!isType4To16 && isAdmin)) {
+    if (isAdminLikeForRange || (!isType4To16 && isAdmin) || normalizedUserType === "miscellaneous") {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
