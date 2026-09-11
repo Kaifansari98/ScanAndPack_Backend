@@ -1,4 +1,4 @@
-import { prisma } from "../../prisma/client";
+import { prisma, type Prisma } from "../../prisma/client";
 import { validationResponse } from "../../utils/validationResponse";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -376,26 +376,6 @@ const PI_DETAIL_INCLUDE = {
               },
             },
           },
-          supplierAdditionalCosts: {
-            include: {
-              companyVendor: {
-                select: {
-                  id: true,
-                  company_name: true,
-                  vendor_code: true,
-                },
-              },
-              additionalCost: {
-                select: {
-                  id: true,
-                  cost_name: true,
-                  cost_code: true,
-                  is_taxable: true,
-                  tax_pct: true,
-                },
-              },
-            },
-          },
         },
       },
 
@@ -426,6 +406,27 @@ const PI_DETAIL_INCLUDE = {
     },
   },
 
+  supplierAdditionalCosts: {
+    include: {
+      companyVendor: {
+        select: {
+          id: true,
+          company_name: true,
+          vendor_code: true,
+        },
+      },
+      additionalCost: {
+        select: {
+          id: true,
+          cost_name: true,
+          cost_code: true,
+          is_taxable: true,
+          tax_pct: true,
+        },
+      },
+    },
+  },
+
   statusLogs: {
     include: {
       changedBy: {
@@ -439,7 +440,7 @@ const PI_DETAIL_INCLUDE = {
       created_at: "asc" as const,
     },
   },
-} as const;
+} as const satisfies Prisma.PurchaseIntentMasterInclude;
 
 // ─── CREATE ───────────────────────────────────────────────────────────────────
 
