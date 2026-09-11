@@ -103,42 +103,43 @@ export const getPIProducts = async (
     });
 
     // Flatten HSN rates into product row for frontend convenience
-    const enriched = products.map((p) => ({
-      ...p,
-      hsn_code: p.hsn?.hsn_code ?? null,
-      cgst_rate: p.hsn?.cgst_rate ? String(p.hsn.cgst_rate) : null,
-      sgst_rate: p.hsn?.sgst_rate ? String(p.hsn.sgst_rate) : null,
-      igst_rate: p.hsn?.igst_rate ? String(p.hsn.igst_rate) : null,
-      // tax_pct = CGST + SGST for intra-state
-      tax_pct: p.hsn
-        ? String(
-            parseFloat(p.hsn.cgst_rate.toString()) +
-              parseFloat(p.hsn.sgst_rate.toString()),
-          )
-        : null,
-      hsn: undefined, // strip nested object
-      supplierMappings: p.supplierMappings.map((mapping) => ({
-        id: mapping.id,
-        company_vendor_id: mapping.company_vendor_id,
-        supplier_item_code: mapping.supplier_item_code,
+    const enriched = products.map((p) => {
+      const cgst = p.hsn?.cgst_rate ? Number(p.hsn.cgst_rate) : 0;
+      const sgst = p.hsn?.sgst_rate ? Number(p.hsn.sgst_rate) : 0;
+      const igst = p.hsn?.igst_rate ? Number(p.hsn.igst_rate) : 0;
+      const totalTax = igst > 0 ? igst : (cgst + sgst);
 
-        amount: mapping.amount ? String(mapping.amount) : null,
+      return {
+        ...p,
+        hsn_code: p.hsn?.hsn_code ?? null,
+        cgst_rate: p.hsn?.cgst_rate ? String(p.hsn.cgst_rate) : (totalTax > 0 ? String(totalTax / 2) : null),
+        sgst_rate: p.hsn?.sgst_rate ? String(p.hsn.sgst_rate) : (totalTax > 0 ? String(totalTax / 2) : null),
+        igst_rate: p.hsn?.igst_rate ? String(p.hsn.igst_rate) : (totalTax > 0 ? String(totalTax) : null),
+        tax_pct: totalTax > 0 ? String(totalTax) : (p.hsn ? "0" : null),
+        hsn: undefined, // strip nested object
+        supplierMappings: p.supplierMappings.map((mapping) => ({
+          id: mapping.id,
+          company_vendor_id: mapping.company_vendor_id,
+          supplier_item_code: mapping.supplier_item_code,
 
-        procurement_expense_amount: mapping.procurement_expense_amount
-          ? String(mapping.procurement_expense_amount)
-          : null,
+          amount: mapping.amount ? String(mapping.amount) : null,
 
-        procurement_expense_pct: mapping.procurement_expense_pct
-          ? String(mapping.procurement_expense_pct)
-          : null,
+          procurement_expense_amount: mapping.procurement_expense_amount
+            ? String(mapping.procurement_expense_amount)
+            : null,
 
-        procurement_expense_total: mapping.procurement_expense_total
-          ? String(mapping.procurement_expense_total)
-          : null,
+          procurement_expense_pct: mapping.procurement_expense_pct
+            ? String(mapping.procurement_expense_pct)
+            : null,
 
-        companyVendor: mapping.companyVendor,
-      })),
-    }));
+          procurement_expense_total: mapping.procurement_expense_total
+            ? String(mapping.procurement_expense_total)
+            : null,
+
+          companyVendor: mapping.companyVendor,
+        })),
+      };
+    });
 
     return validationResponse(1, "Products fetched", enriched);
   } catch (e) {
@@ -175,6 +176,9 @@ export const getPICompanyVendors = async (
         point_of_contact: true,
         contact_no: true,
         email: true,
+        state_id: true,
+        default_payment_term_id: true,
+        is_inventory_company_vendor: true,
       },
       orderBy: { company_name: "asc" },
       take: 100,

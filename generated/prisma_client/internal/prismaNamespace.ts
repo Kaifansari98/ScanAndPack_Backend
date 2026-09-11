@@ -19871,6 +19871,7 @@ export const ProductSupplierMappingScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   supplier_item_code: 'supplier_item_code',
   amount: 'amount',
+  final_amount: 'final_amount',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
