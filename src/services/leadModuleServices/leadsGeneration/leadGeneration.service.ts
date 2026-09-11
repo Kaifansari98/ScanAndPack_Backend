@@ -4784,11 +4784,47 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
   // 1. Find LeadMaster
   const leadMaster = await prisma.leadMaster.findUnique({
     where: { id: lead_id },
-    select: { contact_no: true },
+    select: { contact_no: true, account_id: true },
   });
 
   if (!leadMaster) {
     return [];
+  }
+
+  // Fetch product structure instances, structure mappings, and product types for this specific lead
+  const [leadInstances, leadStructMappings, leadProductMappings] = await Promise.all([
+    prisma.leadProductStructureInstance.findMany({
+      where: { lead_id, is_archived: false },
+      include: {
+        productStructure: true,
+        productType: true,
+      },
+    }),
+    prisma.leadProductStructureMapping.findMany({
+      where: { lead_id },
+      include: {
+        productStructure: true,
+      },
+    }),
+    prisma.leadProductMapping.findMany({
+      where: { lead_id },
+      include: {
+        productType: true,
+      },
+    }),
+  ]);
+
+  const allowedProductNames = new Set<string>();
+  for (const inst of leadInstances) {
+    if (inst.title) allowedProductNames.add(inst.title.toLowerCase().trim());
+    if (inst.productStructure?.type) allowedProductNames.add(inst.productStructure.type.toLowerCase().trim());
+    if (inst.productType?.type) allowedProductNames.add(inst.productType.type.toLowerCase().trim());
+  }
+  for (const sm of leadStructMappings) {
+    if (sm.productStructure?.type) allowedProductNames.add(sm.productStructure.type.toLowerCase().trim());
+  }
+  for (const pm of leadProductMappings) {
+    if (pm.productType?.type) allowedProductNames.add(pm.productType.type.toLowerCase().trim());
   }
 
   const normalizedContact = leadMaster.contact_no.replace(/\D/g, "");
@@ -4967,10 +5003,89 @@ export const getLeadOnlineHistory = async (input: { lead_id: number; vendor_id: 
     }
   }
 
-  // 6. Sort newest -> oldest (Online lifecycle ends when lead is approved & moved to Open/Online Lead stage)
-  timelineEvents.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+  // 6. Filter product structure instance events so that each separated lead only sees its own structure/instance
+  let finalEvents = timelineEvents;
 
-  return timelineEvents;
+  if (allowedProductNames.size > 0) {
+    const seenProductActions = new Set<string>();
+
+    finalEvents = timelineEvents.filter((ev) => {
+      const isProductEvent =
+        ev.event_type === "product_details" ||
+        (typeof ev.action === "string" &&
+          ev.action.toLowerCase().includes("product structure instance added"));
+
+      if (!isProductEvent) {
+        return true;
+      }
+
+      const colonIndex = ev.action.indexOf(":");
+      const itemName = colonIndex !== -1 ? ev.action.substring(colonIndex + 1).trim() : "";
+      const normalizedItem = itemName.toLowerCase().trim();
+
+      if (!normalizedItem) return true;
+
+      const belongsToThisLead = Array.from(allowedProductNames).some((allowed) => {
+        return (
+          normalizedItem === allowed ||
+          normalizedItem.includes(allowed) ||
+          allowed.includes(normalizedItem)
+        );
+      });
+
+      if (!belongsToThisLead) {
+        return false;
+      }
+
+      const dedupeKey = `prod_${normalizedItem}`;
+      if (seenProductActions.has(dedupeKey)) {
+        return false;
+      }
+      seenProductActions.add(dedupeKey);
+
+      return true;
+    });
+
+    // If online lead feature is enabled and this lead has instances, ensure its own instances are shown
+    const hasProductEntry = finalEvents.some(
+      (ev) =>
+        ev.event_type === "product_details" ||
+        (typeof ev.action === "string" &&
+          ev.action.toLowerCase().includes("product structure instance added"))
+    );
+
+    if (!hasProductEntry && leadInstances.length > 0) {
+      const conversionEntry = finalEvents.find(
+        (ev) =>
+          typeof ev.action === "string" &&
+          ev.action.toLowerCase().includes("conversion")
+      );
+      const baseTime = conversionEntry
+        ? new Date(new Date(conversionEntry.created_at).getTime() - 1000)
+        : new Date();
+      const baseUser = conversionEntry?.user || {
+        name: "Super Admin",
+        email: "",
+      };
+
+      leadInstances.forEach((inst, idx) => {
+        const itemTitle = inst.title || inst.productStructure?.type || "Product Structure";
+        finalEvents.push({
+          id: `synth-${lead_id}-struct-${idx}`,
+          event_type: "product_details",
+          action: `Product structure instance added : ${itemTitle}`,
+          remark: null,
+          created_at: new Date(baseTime.getTime() - idx * 500),
+          user: baseUser,
+        });
+      });
+    }
+  }
+
+  // 7. Sort newest -> oldest (Online lifecycle ends when lead is approved & moved to Open/Online Lead stage)
+  finalEvents.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  return finalEvents;
 };
 
 export const changeLeadStoreService = async (
