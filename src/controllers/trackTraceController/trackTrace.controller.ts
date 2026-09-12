@@ -166,50 +166,42 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         .json(ApiResponse.validationError("Active machine not found"));
     }
 
-    if (machine.machine_type_id === 18 && (!project_id || !box_id)) {
-      return res
-        .status(400)
-        .json(
-          ApiResponse.validationError(
-            "project_id and box_id are required for packaging scans",
-          ),
-        );
-    }
+    let packagingRequiresBox = false;
 
     if (machine.machine_type_id === 18) {
-      const selectedBox = await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id!,
-          vendor_id,
-          project_id: project_id!,
-          is_deleted: false,
-          box_status: "unpacked",
-        },
-        select: {
-          id: true,
-          project: {
-            select: {
-              isDeleted: true,
-              project_status: true,
-            },
-          },
-        },
-      });
-
-      if (!selectedBox) {
+      if (!project_id) {
         return res
           .status(400)
           .json(
             ApiResponse.validationError(
-              "Select an unpacked box from the selected project",
+              "project_id is required for packaging scans",
             ),
           );
       }
 
+      const selectedProject = await prisma.projectMaster.findFirst({
+        where: {
+          id: project_id,
+          vendor_id,
+          isDeleted: false,
+        },
+        select: {
+          packing_type: true,
+          project_status: true,
+        },
+      });
+
+      if (!selectedProject) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError("The selected project is unavailable"),
+          );
+      }
+
       if (
-        selectedBox.project.isDeleted ||
         ["deactivated", "deleted", "deactive", "inactive"].includes(
-          (selectedBox.project.project_status || "").toLocaleLowerCase(),
+          (selectedProject.project_status || "").toLocaleLowerCase(),
         )
       ) {
         return res
@@ -219,6 +211,43 @@ export const scan_machine_item = async (req: Request, res: Response) => {
               "The selected project is deleted or deactivated",
             ),
           );
+      }
+
+      packagingRequiresBox = selectedProject.packing_type !== "CUSTOM_GROUP";
+
+      if (packagingRequiresBox && !box_id) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "box_id is required for this project's packing type",
+            ),
+          );
+      }
+
+      if (packagingRequiresBox) {
+        const selectedBox = await prisma.boxMaster.findFirst({
+          where: {
+            id: box_id!,
+            vendor_id,
+            project_id,
+            is_deleted: false,
+            box_status: "unpacked",
+          },
+          select: {
+            id: true,
+          },
+        });
+
+        if (!selectedBox) {
+          return res
+            .status(400)
+            .json(
+              ApiResponse.validationError(
+                "Select an unpacked box from the selected project",
+              ),
+            );
+        }
       }
     }
 
@@ -230,7 +259,10 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         machine_id,
         unique_code,
         created_by,
-        box_id: machine.machine_type_id === 18 ? box_id : undefined,
+        box_id:
+          machine.machine_type_id === 18 && packagingRequiresBox
+            ? box_id
+            : undefined,
       },
       false,
     );

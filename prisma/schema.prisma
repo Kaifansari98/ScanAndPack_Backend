@@ -530,6 +530,7 @@ model ProjectMaster {
   updated_at         DateTime?   @updatedAt
   updated_by         Int?
   packing_type       PackingType @default(DEFAULT)
+  is_multi_location  Boolean     @default(false)
   no_of_boxes        Int         @default(0)
   isDeleted          Boolean     @default(false)
   deleted_by         Int?
@@ -548,11 +549,27 @@ model ProjectMaster {
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
+  locationQuantities    ProjectLocationProductQuantity[]
   deletedByUser         UserMaster?             @relation("ProjectDeletedByUser", fields: [deleted_by], references: [id])
   userMaster            UserMaster?             @relation(fields: [userMasterId], references: [id])
   userMasterId          Int?
 
   @@index([vendor_id, isDeleted])
+}
+
+model ProjectLocationProductQuantity {
+  id            Int           @id @default(autoincrement())
+  project_id    Int
+  vendor_id     Int
+  location_name String
+  group_name    String
+  qty           Int
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @updatedAt
+  project       ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+
+  @@unique([project_id, location_name, group_name])
+  @@index([vendor_id, project_id])
 }
 
 model ProjectDetails {
@@ -2966,6 +2983,7 @@ model CutList {
   use_in_assembled_packing Boolean?
   include_in_packing       Boolean?
   scan_pack_validate       Boolean?
+  custom_packing_group     String?
   lead                     LeadMaster?              @relation(fields: [lead_id], references: [id])
   project                  ProjectMaster            @relation(fields: [project_id], references: [id])
   vendor                   VendorMaster             @relation(fields: [vendor_id], references: [id])
@@ -4893,6 +4911,7 @@ enum BoxInfoFieldType {
 enum PackingType {
   DEFAULT
   GROUPWISE
+  CUSTOM_GROUP
 }
 
 enum AdditionalCostCalculationType {

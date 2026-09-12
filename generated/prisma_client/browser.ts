@@ -68,6 +68,11 @@ export type UserPrivilegeMapping = Prisma.UserPrivilegeMappingModel
  */
 export type ProjectMaster = Prisma.ProjectMasterModel
 /**
+ * Model ProjectLocationProductQuantity
+ *
+ */
+export type ProjectLocationProductQuantity = Prisma.ProjectLocationProductQuantityModel
+/**
  * Model ProjectDetails
  * 
  */

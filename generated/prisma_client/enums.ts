@@ -30,7 +30,8 @@ export type BoxInfoFieldType = (typeof BoxInfoFieldType)[keyof typeof BoxInfoFie
 
 export const PackingType = {
   DEFAULT: 'DEFAULT',
-  GROUPWISE: 'GROUPWISE'
+  GROUPWISE: 'GROUPWISE',
+  CUSTOM_GROUP: 'CUSTOM_GROUP'
 } as const
 
 export type PackingType = (typeof PackingType)[keyof typeof PackingType]

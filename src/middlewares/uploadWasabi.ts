@@ -729,6 +729,24 @@ export const uploadProjectExcel = multer({
   },
 });
 
+export const uploadLocationExcel = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+    files: 1,
+  },
+  fileFilter: (_req, file, cb) => {
+    const isXlsx =
+      file.mimetype ===
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+      file.originalname.toLowerCase().endsWith(".xlsx");
+
+    isXlsx
+      ? cb(null, true)
+      : cb(new Error("Only .xlsx Excel files are allowed"));
+  },
+});
+
 export const uploadVendorAssets = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {

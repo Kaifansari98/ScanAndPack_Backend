@@ -7,10 +7,15 @@ import {
   updateTrackTraceProjectService,
   getActiveMachinesByVendorService,
   getPackagingProjectContextService,
+  generateMultiLocationTemplateService,
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 import { PackingType } from "../../../generated/prisma_client/enums";
 
+const parseBooleanFlag = (value: unknown): boolean =>
+  value === true || ["true", "1", "yes"].includes(
+    String(value ?? "").trim().toLowerCase()
+  );
 
 const parseBoxInfoFields = (
   value: any
@@ -57,6 +62,7 @@ export const createProjectController = async (
       client_address,
       client_contact_no,
       packing_type,
+      is_multi_location,
       no_of_boxes,
       box_info_fields,
       created_by,
@@ -84,9 +90,11 @@ export const createProjectController = async (
         : null;
 
     const resolvedPackingType: PackingType =
-      packing_type === PackingType.GROUPWISE
-        ? PackingType.GROUPWISE
-        : PackingType.DEFAULT;
+      packing_type === PackingType.CUSTOM_GROUP
+        ? PackingType.CUSTOM_GROUP
+        : packing_type === PackingType.GROUPWISE
+          ? PackingType.GROUPWISE
+          : PackingType.DEFAULT;
 
     const parsedBoxInfoFields =
       parseBoxInfoFields(box_info_fields);
@@ -107,6 +115,8 @@ export const createProjectController = async (
       client_contact_no,
 
       packing_type: resolvedPackingType,
+
+      is_multi_location: parseBooleanFlag(is_multi_location),
 
       no_of_boxes,
 
@@ -352,6 +362,66 @@ export const getTrackTraceProjectController = async (
 
         data: null,
       });
+  }
+};
+
+export const downloadMultiLocationTemplateController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const uniqueProjectIdParam = req.params.unique_project_id;
+    const uniqueProjectId = Array.isArray(uniqueProjectIdParam)
+      ? uniqueProjectIdParam[0]
+      : uniqueProjectIdParam;
+    const vendorId = Number(req.query.vendorId ?? req.query.vendor_id);
+
+    if (!uniqueProjectId) {
+      return res.status(400).json({
+        success: false,
+        message: "unique_project_id is required",
+        data: null,
+      });
+    }
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid vendorId is required",
+        data: null,
+      });
+    }
+
+    const result = await generateMultiLocationTemplateService(
+      uniqueProjectId,
+      vendorId
+    );
+
+    if (!result.success || !result.data) {
+      return res.status(400).json(result);
+    }
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${result.fileName}"`
+    );
+    res.setHeader("Content-Length", result.data.length);
+
+    return res.status(200).send(result.data);
+  } catch (error: any) {
+    logger.error("downloadMultiLocationTemplateController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to generate Multi Location Excel",
+      data: null,
+    });
   }
 };
 

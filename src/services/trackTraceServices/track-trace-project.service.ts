@@ -30,12 +30,14 @@ type BoxRemovalOption = {
 export interface CadbidPayload {
   projectName: string;
   lead_id: number;
+  packing_type?: PackingType;
   items: CadbidItem[];
 }
 
 export interface CadbidItem {
   articleCode: string;
   groupName: string;
+  customPackingGroup?: string | null;
   categoryName?: string | null;
   procurement?: string | null;
 
@@ -113,6 +115,18 @@ const normalizeNoOfBoxes = (value: unknown): number => {
   }
 
   return parsed;
+};
+
+const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
+  if (typeof value === "boolean") return value;
+  if (typeof value === "number") return value === 1;
+
+  const normalized = String(value ?? "").trim().toLowerCase();
+
+  if (["true", "1", "yes"].includes(normalized)) return true;
+  if (["false", "0", "no"].includes(normalized)) return false;
+
+  return fallback;
 };
 
 const parseNumberArray = (value: unknown): number[] => {
@@ -475,6 +489,7 @@ const optionalWeight = z.preprocess((value) => {
  * Article Code   -> articleCode
  * Category Name  -> categoryName
  * Group Name     -> groupName
+ * Custom Packing Group -> customPackingGroup
  * Length         -> l1
  * Width          -> l2
  * Thickness      -> l3
@@ -505,6 +520,7 @@ const HEADER_FIELD_MAP: Record<string, keyof CadbidItem | "customer_id"> = {
 
   "group name": "groupName",
   "group": "groupName",
+  "custom packing group": "customPackingGroup",
 
   "length": "l1",
   "l1": "l1",
@@ -571,6 +587,7 @@ function getCellValue(cell: ExcelJS.Cell): unknown {
 
 async function parseProjectExcel(filePath: string): Promise<{
   customerIdFromExcel: number | null;
+  hasCustomPackingGroupColumn: boolean;
   items: CadbidItem[];
 }> {
   const workbook = new ExcelJS.Workbook();
@@ -584,6 +601,7 @@ async function parseProjectExcel(filePath: string): Promise<{
 
   const headerMap: Record<number, keyof CadbidItem | "customer_id"> = {};
   let customerIdFromExcel: number | null = null;
+  let hasCustomPackingGroupColumn = false;
 
   const headerRow = sheet.getRow(1);
 
@@ -592,6 +610,10 @@ async function parseProjectExcel(filePath: string): Promise<{
     const normalized = normalizeHeader(rawHeader);
 
     if (!normalized) return;
+
+    if (normalized === "custom packing group") {
+      hasCustomPackingGroupColumn = true;
+    }
 
     const mappedField = HEADER_FIELD_MAP[normalized];
 
@@ -662,6 +684,7 @@ async function parseProjectExcel(filePath: string): Promise<{
 
   return {
     customerIdFromExcel,
+    hasCustomPackingGroupColumn,
     items: cleanAndDeduplicateRows(items),
   };
 }
@@ -682,6 +705,7 @@ function cleanAndDeduplicateRows(rows: CadbidItem[]): CadbidItem[] {
     const rowKey = JSON.stringify({
       articleCode: cleanText(row.articleCode),
       groupName: cleanText(row.groupName),
+      customPackingGroup: cleanText(row.customPackingGroup),
       categoryName: cleanText(row.categoryName),
       name: cleanText(row.name),
       l1: row.l1,
@@ -715,6 +739,7 @@ function cleanAndDeduplicateRows(rows: CadbidItem[]): CadbidItem[] {
 const itemSchema = z.object({
   articleCode: requiredString("articleCode"),
   groupName: requiredString("groupName"),
+  customPackingGroup: z.string().optional().nullable(),
   categoryName: z.string().optional().nullable(),
   procurement: z.string().optional().nullable(),
 
@@ -743,7 +768,30 @@ const itemSchema = z.object({
 const payloadSchema = z.object({
   projectName: requiredString("projectName"),
   lead_id: z.coerce.number({ error: "lead_id missing" }),
+  packing_type: z.enum(PackingType).default(PackingType.DEFAULT),
+  hasCustomPackingGroupColumn: z.boolean().default(false),
   items: z.array(itemSchema).min(1, "items missing"),
+}).superRefine((data, ctx) => {
+  if (data.packing_type !== PackingType.CUSTOM_GROUP) return;
+
+  if (!data.hasCustomPackingGroupColumn) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: 'The "Custom Packing Group" column is required',
+      path: ["items"],
+    });
+    return;
+  }
+
+  data.items.forEach((item, index) => {
+    if (!item.customPackingGroup?.trim()) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Custom Packing Group is required",
+        path: ["items", index, "customPackingGroup"],
+      });
+    }
+  });
 });
 
 type ValidationSuccess = {
@@ -810,6 +858,7 @@ export type CreateProjectServicePayload = {
   client_contact_no?: string;
 
   packing_type?: PackingType;
+  is_multi_location?: boolean;
 
   no_of_boxes?: number | string | null;
 
@@ -835,6 +884,7 @@ export const createProjectService_old = async (
     client_address,
     client_contact_no,
     packing_type,
+    is_multi_location = false,
     no_of_boxes,
     box_info_fields = [],
     created_by,
@@ -877,10 +927,11 @@ export const createProjectService_old = async (
 
     const resolvedPackingType:
       PackingType =
-      packing_type ===
-        PackingType.GROUPWISE
-        ? PackingType.GROUPWISE
-        : PackingType.DEFAULT;
+      packing_type === PackingType.CUSTOM_GROUP
+        ? PackingType.CUSTOM_GROUP
+        : packing_type === PackingType.GROUPWISE
+          ? PackingType.GROUPWISE
+          : PackingType.DEFAULT;
 
     const requestedBoxCount = normalizeNoOfBoxes(no_of_boxes);
 
@@ -1025,6 +1076,9 @@ export const createProjectService_old = async (
     const payload = {
       projectName,
       lead_id,
+      packing_type: resolvedPackingType,
+      hasCustomPackingGroupColumn:
+        parsedExcel.hasCustomPackingGroupColumn,
       items: parsedExcel.items,
     };
 
@@ -1210,6 +1264,7 @@ export const createProjectService_old = async (
             is_grouping: false,
             lead_id,
             packing_type,
+            is_multi_location: normalizeBooleanFlag(is_multi_location),
             order_no: resolvedOrderNo,
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
@@ -1411,6 +1466,7 @@ export const createProjectService_old = async (
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
+              custom_packing_group: item.customPackingGroup || null,
               category_name: item.categoryName || null,
               procurement: item.procurement || null,
               weight: excelRowWeight,
@@ -1678,6 +1734,7 @@ export const createProjectService = async (
     client_address,
     client_contact_no,
     packing_type,
+    is_multi_location = false,
     no_of_boxes,
     box_info_fields = [],
     created_by,
@@ -1720,10 +1777,11 @@ export const createProjectService = async (
 
     const resolvedPackingType:
       PackingType =
-      packing_type ===
-        PackingType.GROUPWISE
-        ? PackingType.GROUPWISE
-        : PackingType.DEFAULT;
+      packing_type === PackingType.CUSTOM_GROUP
+        ? PackingType.CUSTOM_GROUP
+        : packing_type === PackingType.GROUPWISE
+          ? PackingType.GROUPWISE
+          : PackingType.DEFAULT;
 
     const requestedBoxCount = normalizeNoOfBoxes(no_of_boxes);
 
@@ -1900,6 +1958,9 @@ export const createProjectService = async (
     const payload = {
       projectName,
       lead_id,
+      packing_type: resolvedPackingType,
+      hasCustomPackingGroupColumn:
+        parsedExcel.hasCustomPackingGroupColumn,
       items: parsedExcel.items,
     };
 
@@ -2205,6 +2266,7 @@ export const createProjectService = async (
             is_grouping: false,
             lead_id,
             packing_type: resolvedPackingType,
+            is_multi_location: normalizeBooleanFlag(is_multi_location),
             order_no: resolvedOrderNo,
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
@@ -2380,6 +2442,7 @@ export const createProjectService = async (
               unique_code: "",
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
+              custom_packing_group: item.customPackingGroup || null,
               category_name: item.categoryName || null,
               category_id: categoryConfig?.id ?? null,
 
@@ -2980,6 +3043,7 @@ export const getTrackTraceProjectService = async (
         client_address: true,
         client_contact_no: true,
         packing_type: true,
+        is_multi_location: true,
         no_of_boxes: true,
 
         lead: {
@@ -3044,6 +3108,177 @@ export const getTrackTraceProjectService = async (
   }
 };
 
+export const generateMultiLocationTemplateService = async (
+  uniqueProjectId: string,
+  vendorId: number
+) => {
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      unique_project_id: uniqueProjectId,
+      vendor_id: vendorId,
+      isDeleted: false,
+    },
+    select: {
+      id: true,
+      project_name: true,
+      is_multi_location: true,
+    },
+  });
+
+  if (!project) {
+    return {
+      success: false as const,
+      message: "Project not found",
+      data: null,
+    };
+  }
+
+  if (!project.is_multi_location) {
+    return {
+      success: false as const,
+      message: "Multi Location is not enabled for this project",
+      data: null,
+    };
+  }
+
+  const cutListGroups = await prisma.cutList.findMany({
+    where: {
+      project_id: project.id,
+      vendor_id: vendorId,
+      group_name: {
+        not: null,
+      },
+    },
+    select: {
+      group_name: true,
+    },
+  });
+
+  const distinctGroups = new Map<string, string>();
+
+  for (const item of cutListGroups) {
+    const groupName = item.group_name?.trim();
+    const normalizedGroupName = groupName
+      ?.toLocaleLowerCase()
+      .replace(/\s+/g, " ");
+
+    if (groupName && normalizedGroupName && !distinctGroups.has(normalizedGroupName)) {
+      distinctGroups.set(normalizedGroupName, groupName);
+    }
+  }
+
+  const groupNames = Array.from(distinctGroups.values()).sort((a, b) =>
+    a.localeCompare(b)
+  );
+  const canonicalGroups = new Map(
+    groupNames.map((groupName) => [
+      groupName.toLocaleLowerCase().replace(/\s+/g, " "),
+      groupName,
+    ])
+  );
+  const savedLocationQuantities =
+    await prisma.projectLocationProductQuantity.findMany({
+      where: {
+        project_id: project.id,
+        vendor_id: vendorId,
+      },
+      select: {
+        location_name: true,
+        group_name: true,
+        qty: true,
+      },
+    });
+  const locations = new Map<
+    string,
+    { locationName: string; quantities: Record<string, number> }
+  >();
+
+  for (const savedQuantity of savedLocationQuantities) {
+    const locationName = savedQuantity.location_name.trim();
+    const normalizedLocationName = locationName
+      .toLocaleLowerCase()
+      .replace(/\s+/g, " ");
+    const normalizedGroupName = savedQuantity.group_name
+      .trim()
+      .toLocaleLowerCase()
+      .replace(/\s+/g, " ");
+    const canonicalGroupName = canonicalGroups.get(normalizedGroupName);
+
+    if (!locationName || !canonicalGroupName) continue;
+
+    const location = locations.get(normalizedLocationName) ?? {
+      locationName,
+      quantities: Object.fromEntries(
+        groupNames.map((groupName) => [groupName, 0])
+      ),
+    };
+
+    location.quantities[canonicalGroupName] = savedQuantity.qty;
+    locations.set(normalizedLocationName, location);
+  }
+
+  const headers = ["Location Name", ...groupNames];
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Locations");
+  const headerRow = worksheet.addRow(headers);
+
+  headerRow.font = {
+    bold: true,
+    color: { argb: "FFFFFFFF" },
+  };
+  headerRow.alignment = {
+    horizontal: "center",
+    vertical: "middle",
+  };
+  headerRow.eachCell((cell) => {
+    cell.fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FF4F46E5" },
+    };
+  });
+  headerRow.height = 22;
+
+  headers.forEach((header, index) => {
+    worksheet.getColumn(index + 1).width = Math.max(18, header.length + 4);
+  });
+
+  Array.from(locations.values())
+    .sort((a, b) => a.locationName.localeCompare(b.locationName))
+    .forEach((location) => {
+      const row = worksheet.addRow([
+        location.locationName,
+        ...groupNames.map((groupName) => location.quantities[groupName] ?? 0),
+      ]);
+
+      row.eachCell((cell, columnNumber) => {
+        cell.alignment = {
+          horizontal: columnNumber === 1 ? "left" : "center",
+          vertical: "middle",
+        };
+
+        if (columnNumber > 1) {
+          cell.numFmt = "0";
+        }
+      });
+    });
+
+  worksheet.views = [{ state: "frozen", ySplit: 1 }];
+
+  const workbookBuffer = await workbook.xlsx.writeBuffer();
+  const safeProjectName = project.project_name
+    .trim()
+    .replace(/[^a-zA-Z0-9_-]+/g, "_")
+    .replace(/^_+|_+$/g, "") || "project";
+
+  return {
+    success: true as const,
+    message: "Multi Location Excel generated successfully",
+    data: Buffer.from(workbookBuffer),
+    fileName: `${safeProjectName}_Multi_Location.xlsx`,
+  };
+};
+
 
 type UpdateTrackTraceProjectPayload = {
   vendorId: number | string;
@@ -3055,6 +3290,7 @@ type UpdateTrackTraceProjectPayload = {
   client_address?: string | null;
   client_contact_no?: string | null;
   packing_type?: PackingType | string;
+  is_multi_location?: boolean | string | number;
   updated_by?: number;
 
   box_info_fields?: BoxInfoFieldPayload[];
@@ -3114,6 +3350,8 @@ export const updateTrackTraceProjectService = async (
         lead_id: true,
         created_by: true,
         no_of_boxes: true,
+        packing_type: true,
+        is_multi_location: true,
       },
     });
 
@@ -3124,6 +3362,27 @@ export const updateTrackTraceProjectService = async (
         data: null,
       };
     }
+
+    const requestedPackingType =
+      typeof payload.packing_type === "string"
+        ? payload.packing_type.trim()
+        : payload.packing_type;
+
+    if (
+      requestedPackingType &&
+      requestedPackingType !== existingProject.packing_type
+    ) {
+      return {
+        success: false,
+        message: "Packing Type cannot be changed after project creation",
+        data: null,
+      };
+    }
+
+    const resolvedIsMultiLocation = normalizeBooleanFlag(
+      payload.is_multi_location,
+      existingProject.is_multi_location
+    );
 
     const vendor = await prisma.vendorMaster.findFirst({
       where: {
@@ -3228,13 +3487,6 @@ export const updateTrackTraceProjectService = async (
         };
       }
     }
-    const resolvedPackingType:
-      PackingType =
-      payload.packing_type ===
-        PackingType.GROUPWISE
-        ? PackingType.GROUPWISE
-        : PackingType.DEFAULT;
-
     const requestedBoxCount = normalizeNoOfBoxes(payload.no_of_boxes);
     const selectedRemoveBoxIds = parseNumberArray(payload.remove_box_ids);
 
@@ -3327,13 +3579,6 @@ export const updateTrackTraceProjectService = async (
                 lead_id:
                   resolvedLeadId,
 
-                packing_type:
-                  resolvedPackingType,
-
-                is_grouping:
-                  resolvedPackingType ===
-                  PackingType.GROUPWISE,
-
                 order_no:
                   resolvedOrderNo,
 
@@ -3345,6 +3590,9 @@ export const updateTrackTraceProjectService = async (
 
                 client_contact_no:
                   resolvedClientContactNo,
+
+                is_multi_location:
+                  resolvedIsMultiLocation,
 
                 no_of_boxes:
                   requestedBoxCount,
