@@ -37,6 +37,10 @@ export type BoxMasterAvgAggregateOutputType = {
   lead_id: number | null
   site_in_by: number | null
   packed_by: number | null
+  sequence_no: number | null
+  product_set_no: number | null
+  box_position: number | null
+  boxes_per_product: number | null
 }
 
 export type BoxMasterSumAggregateOutputType = {
@@ -50,6 +54,10 @@ export type BoxMasterSumAggregateOutputType = {
   lead_id: number | null
   site_in_by: number | null
   packed_by: number | null
+  sequence_no: number | null
+  product_set_no: number | null
+  box_position: number | null
+  boxes_per_product: number | null
 }
 
 export type BoxMasterMinAggregateOutputType = {
@@ -71,6 +79,13 @@ export type BoxMasterMinAggregateOutputType = {
   site_in_by: number | null
   packed_at: Date | null
   packed_by: number | null
+  sequence_no: number | null
+  product_group_name: string | null
+  packing_group_name: string | null
+  product_set_no: number | null
+  box_position: number | null
+  boxes_per_product: number | null
+  is_auto_created: boolean | null
 }
 
 export type BoxMasterMaxAggregateOutputType = {
@@ -92,6 +107,13 @@ export type BoxMasterMaxAggregateOutputType = {
   site_in_by: number | null
   packed_at: Date | null
   packed_by: number | null
+  sequence_no: number | null
+  product_group_name: string | null
+  packing_group_name: string | null
+  product_set_no: number | null
+  box_position: number | null
+  boxes_per_product: number | null
+  is_auto_created: boolean | null
 }
 
 export type BoxMasterCountAggregateOutputType = {
@@ -113,6 +135,13 @@ export type BoxMasterCountAggregateOutputType = {
   site_in_by: number
   packed_at: number
   packed_by: number
+  sequence_no: number
+  product_group_name: number
+  packing_group_name: number
+  product_set_no: number
+  box_position: number
+  boxes_per_product: number
+  is_auto_created: number
   _all: number
 }
 
@@ -128,6 +157,10 @@ export type BoxMasterAvgAggregateInputType = {
   lead_id?: true
   site_in_by?: true
   packed_by?: true
+  sequence_no?: true
+  product_set_no?: true
+  box_position?: true
+  boxes_per_product?: true
 }
 
 export type BoxMasterSumAggregateInputType = {
@@ -141,6 +174,10 @@ export type BoxMasterSumAggregateInputType = {
   lead_id?: true
   site_in_by?: true
   packed_by?: true
+  sequence_no?: true
+  product_set_no?: true
+  box_position?: true
+  boxes_per_product?: true
 }
 
 export type BoxMasterMinAggregateInputType = {
@@ -162,6 +199,13 @@ export type BoxMasterMinAggregateInputType = {
   site_in_by?: true
   packed_at?: true
   packed_by?: true
+  sequence_no?: true
+  product_group_name?: true
+  packing_group_name?: true
+  product_set_no?: true
+  box_position?: true
+  boxes_per_product?: true
+  is_auto_created?: true
 }
 
 export type BoxMasterMaxAggregateInputType = {
@@ -183,6 +227,13 @@ export type BoxMasterMaxAggregateInputType = {
   site_in_by?: true
   packed_at?: true
   packed_by?: true
+  sequence_no?: true
+  product_group_name?: true
+  packing_group_name?: true
+  product_set_no?: true
+  box_position?: true
+  boxes_per_product?: true
+  is_auto_created?: true
 }
 
 export type BoxMasterCountAggregateInputType = {
@@ -204,6 +255,13 @@ export type BoxMasterCountAggregateInputType = {
   site_in_by?: true
   packed_at?: true
   packed_by?: true
+  sequence_no?: true
+  product_group_name?: true
+  packing_group_name?: true
+  product_set_no?: true
+  box_position?: true
+  boxes_per_product?: true
+  is_auto_created?: true
   _all?: true
 }
 
@@ -312,6 +370,13 @@ export type BoxMasterGroupByOutputType = {
   site_in_by: number | null
   packed_at: Date | null
   packed_by: number | null
+  sequence_no: number | null
+  product_group_name: string | null
+  packing_group_name: string | null
+  product_set_no: number | null
+  box_position: number | null
+  boxes_per_product: number | null
+  is_auto_created: boolean
   _count: BoxMasterCountAggregateOutputType | null
   _avg: BoxMasterAvgAggregateOutputType | null
   _sum: BoxMasterSumAggregateOutputType | null
@@ -356,6 +421,13 @@ export type BoxMasterWhereInput = {
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   packed_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  sequence_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  product_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  packing_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  product_set_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  box_position?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  boxes_per_product?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_auto_created?: Prisma.BoolFilter<"BoxMaster"> | boolean
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   factoryOutByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   packedByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -387,6 +459,13 @@ export type BoxMasterOrderByWithRelationInput = {
   site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  sequence_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_group_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  packing_group_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_set_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  box_position?: Prisma.SortOrderInput | Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_created?: Prisma.SortOrder
   box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   factoryOutByUser?: Prisma.UserMasterOrderByWithRelationInput
   packedByUser?: Prisma.UserMasterOrderByWithRelationInput
@@ -401,6 +480,7 @@ export type BoxMasterOrderByWithRelationInput = {
 
 export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  project_id_sequence_no?: Prisma.BoxMasterProject_idSequence_noCompoundUniqueInput
   AND?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
   OR?: Prisma.BoxMasterWhereInput[]
   NOT?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
@@ -421,6 +501,13 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   packed_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  sequence_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  product_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  packing_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  product_set_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  box_position?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  boxes_per_product?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_auto_created?: Prisma.BoolFilter<"BoxMaster"> | boolean
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   factoryOutByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   packedByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -431,7 +518,7 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
   items?: Prisma.ScanAndPackItemListRelationFilter
   leadMaster?: Prisma.LeadMasterListRelationFilter
-}, "id">
+}, "id" | "project_id_sequence_no">
 
 export type BoxMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -452,6 +539,13 @@ export type BoxMasterOrderByWithAggregationInput = {
   site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_at?: Prisma.SortOrderInput | Prisma.SortOrder
   packed_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  sequence_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_group_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  packing_group_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  product_set_no?: Prisma.SortOrderInput | Prisma.SortOrder
+  box_position?: Prisma.SortOrderInput | Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_auto_created?: Prisma.SortOrder
   _count?: Prisma.BoxMasterCountOrderByAggregateInput
   _avg?: Prisma.BoxMasterAvgOrderByAggregateInput
   _max?: Prisma.BoxMasterMaxOrderByAggregateInput
@@ -481,6 +575,13 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   site_in_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
   packed_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  sequence_no?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  product_group_name?: Prisma.StringNullableWithAggregatesFilter<"BoxMaster"> | string | null
+  packing_group_name?: Prisma.StringNullableWithAggregatesFilter<"BoxMaster"> | string | null
+  product_set_no?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  box_position?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  boxes_per_product?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  is_auto_created?: Prisma.BoolWithAggregatesFilter<"BoxMaster"> | boolean
 }
 
 export type BoxMasterCreateInput = {
@@ -495,6 +596,13 @@ export type BoxMasterCreateInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -526,6 +634,13 @@ export type BoxMasterUncheckedCreateInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -544,6 +659,13 @@ export type BoxMasterUpdateInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -575,6 +697,13 @@ export type BoxMasterUncheckedUpdateInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -600,6 +729,13 @@ export type BoxMasterCreateManyInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterUpdateManyMutationInput = {
@@ -614,6 +750,13 @@ export type BoxMasterUpdateManyMutationInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterUncheckedUpdateManyInput = {
@@ -635,6 +778,13 @@ export type BoxMasterUncheckedUpdateManyInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterListRelationFilter = {
@@ -645,6 +795,11 @@ export type BoxMasterListRelationFilter = {
 
 export type BoxMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type BoxMasterProject_idSequence_noCompoundUniqueInput = {
+  project_id: number
+  sequence_no: number
 }
 
 export type BoxMasterCountOrderByAggregateInput = {
@@ -666,6 +821,13 @@ export type BoxMasterCountOrderByAggregateInput = {
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
+  sequence_no?: Prisma.SortOrder
+  product_group_name?: Prisma.SortOrder
+  packing_group_name?: Prisma.SortOrder
+  product_set_no?: Prisma.SortOrder
+  box_position?: Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrder
+  is_auto_created?: Prisma.SortOrder
 }
 
 export type BoxMasterAvgOrderByAggregateInput = {
@@ -679,6 +841,10 @@ export type BoxMasterAvgOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
+  sequence_no?: Prisma.SortOrder
+  product_set_no?: Prisma.SortOrder
+  box_position?: Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrder
 }
 
 export type BoxMasterMaxOrderByAggregateInput = {
@@ -700,6 +866,13 @@ export type BoxMasterMaxOrderByAggregateInput = {
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
+  sequence_no?: Prisma.SortOrder
+  product_group_name?: Prisma.SortOrder
+  packing_group_name?: Prisma.SortOrder
+  product_set_no?: Prisma.SortOrder
+  box_position?: Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrder
+  is_auto_created?: Prisma.SortOrder
 }
 
 export type BoxMasterMinOrderByAggregateInput = {
@@ -721,6 +894,13 @@ export type BoxMasterMinOrderByAggregateInput = {
   site_in_by?: Prisma.SortOrder
   packed_at?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
+  sequence_no?: Prisma.SortOrder
+  product_group_name?: Prisma.SortOrder
+  packing_group_name?: Prisma.SortOrder
+  product_set_no?: Prisma.SortOrder
+  box_position?: Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrder
+  is_auto_created?: Prisma.SortOrder
 }
 
 export type BoxMasterSumOrderByAggregateInput = {
@@ -734,6 +914,10 @@ export type BoxMasterSumOrderByAggregateInput = {
   lead_id?: Prisma.SortOrder
   site_in_by?: Prisma.SortOrder
   packed_by?: Prisma.SortOrder
+  sequence_no?: Prisma.SortOrder
+  product_set_no?: Prisma.SortOrder
+  box_position?: Prisma.SortOrder
+  boxes_per_product?: Prisma.SortOrder
 }
 
 export type BoxMasterScalarRelationFilter = {
@@ -1096,6 +1280,13 @@ export type BoxMasterCreateWithoutVendorInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1125,6 +1316,13 @@ export type BoxMasterUncheckedCreateWithoutVendorInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1179,6 +1377,13 @@ export type BoxMasterScalarWhereInput = {
   site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   packed_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   packed_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  sequence_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  product_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  packing_group_name?: Prisma.StringNullableFilter<"BoxMaster"> | string | null
+  product_set_no?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  box_position?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  boxes_per_product?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  is_auto_created?: Prisma.BoolFilter<"BoxMaster"> | boolean
 }
 
 export type BoxMasterCreateWithoutFactoryOutByUserInput = {
@@ -1193,6 +1398,13 @@ export type BoxMasterCreateWithoutFactoryOutByUserInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
@@ -1222,6 +1434,13 @@ export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1250,6 +1469,13 @@ export type BoxMasterCreateWithoutPackedByUserInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
@@ -1279,6 +1505,13 @@ export type BoxMasterUncheckedCreateWithoutPackedByUserInput = {
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1307,6 +1540,13 @@ export type BoxMasterCreateWithoutSiteInByUserInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1336,6 +1576,13 @@ export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1412,6 +1659,13 @@ export type BoxMasterCreateWithoutProjectInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1441,6 +1695,13 @@ export type BoxMasterUncheckedCreateWithoutProjectInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1485,6 +1746,13 @@ export type BoxMasterCreateWithoutDetailsInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1514,6 +1782,13 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1558,6 +1833,13 @@ export type BoxMasterCreateWithoutItemsInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1588,6 +1870,13 @@ export type BoxMasterUncheckedCreateWithoutItemsInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
@@ -1621,6 +1910,13 @@ export type BoxMasterUpdateWithoutItemsInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -1651,6 +1947,13 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
@@ -1668,6 +1971,13 @@ export type BoxMasterCreateWithoutLeadMasterInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1698,6 +2008,13 @@ export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
@@ -1736,6 +2053,13 @@ export type BoxMasterCreateWithoutCutListMachineMappingInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutBoxInput
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
@@ -1766,6 +2090,13 @@ export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutBoxInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
@@ -1799,6 +2130,13 @@ export type BoxMasterUpdateWithoutCutListMachineMappingInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -1829,6 +2167,13 @@ export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
@@ -1846,6 +2191,13 @@ export type BoxMasterCreateWithoutBox_info_valuesInput = {
   lead_id?: number | null
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
   packedByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesPackedByInput
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
@@ -1876,6 +2228,13 @@ export type BoxMasterUncheckedCreateWithoutBox_info_valuesInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
   leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
@@ -1909,6 +2268,13 @@ export type BoxMasterUpdateWithoutBox_info_valuesInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
@@ -1939,6 +2305,13 @@ export type BoxMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
   leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
@@ -1962,6 +2335,13 @@ export type BoxMasterCreateManyVendorInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterUpdateWithoutVendorInput = {
@@ -1976,6 +2356,13 @@ export type BoxMasterUpdateWithoutVendorInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -2005,6 +2392,13 @@ export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2029,6 +2423,13 @@ export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterCreateManyFactoryOutByUserInput = {
@@ -2049,6 +2450,13 @@ export type BoxMasterCreateManyFactoryOutByUserInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterCreateManyPackedByUserInput = {
@@ -2069,6 +2477,13 @@ export type BoxMasterCreateManyPackedByUserInput = {
   site_in_at?: Date | string | null
   site_in_by?: number | null
   packed_at?: Date | string | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterCreateManySiteInByUserInput = {
@@ -2089,6 +2504,13 @@ export type BoxMasterCreateManySiteInByUserInput = {
   site_in_at?: Date | string | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
@@ -2103,6 +2525,13 @@ export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
@@ -2132,6 +2561,13 @@ export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2156,6 +2592,13 @@ export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterUpdateWithoutPackedByUserInput = {
@@ -2170,6 +2613,13 @@ export type BoxMasterUpdateWithoutPackedByUserInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
@@ -2199,6 +2649,13 @@ export type BoxMasterUncheckedUpdateWithoutPackedByUserInput = {
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2223,6 +2680,13 @@ export type BoxMasterUncheckedUpdateManyWithoutPackedByUserInput = {
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterUpdateWithoutSiteInByUserInput = {
@@ -2237,6 +2701,13 @@ export type BoxMasterUpdateWithoutSiteInByUserInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -2266,6 +2737,13 @@ export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2290,6 +2768,13 @@ export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterCreateManyProjectInput = {
@@ -2310,6 +2795,13 @@ export type BoxMasterCreateManyProjectInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterUpdateWithoutProjectInput = {
@@ -2324,6 +2816,13 @@ export type BoxMasterUpdateWithoutProjectInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -2353,6 +2852,13 @@ export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2377,6 +2883,13 @@ export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterCreateManyDetailsInput = {
@@ -2397,6 +2910,13 @@ export type BoxMasterCreateManyDetailsInput = {
   site_in_by?: number | null
   packed_at?: Date | string | null
   packed_by?: number | null
+  sequence_no?: number | null
+  product_group_name?: string | null
+  packing_group_name?: string | null
+  product_set_no?: number | null
+  box_position?: number | null
+  boxes_per_product?: number | null
+  is_auto_created?: boolean
 }
 
 export type BoxMasterUpdateWithoutDetailsInput = {
@@ -2411,6 +2931,13 @@ export type BoxMasterUpdateWithoutDetailsInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -2440,6 +2967,13 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2464,6 +2998,13 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type BoxMasterUpdateWithoutLeadMasterInput = {
@@ -2478,6 +3019,13 @@ export type BoxMasterUpdateWithoutLeadMasterInput = {
   lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutBoxNestedInput
   factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
   packedByUser?: Prisma.UserMasterUpdateOneWithoutBoxesPackedByNestedInput
@@ -2508,6 +3056,13 @@ export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutBoxNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
@@ -2532,6 +3087,13 @@ export type BoxMasterUncheckedUpdateManyWithoutLeadMasterInput = {
   site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   packed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   packed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  sequence_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  packing_group_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_set_no?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  box_position?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  boxes_per_product?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_auto_created?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -2611,6 +3173,13 @@ export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   site_in_by?: boolean
   packed_at?: boolean
   packed_by?: boolean
+  sequence_no?: boolean
+  product_group_name?: boolean
+  packing_group_name?: boolean
+  product_set_no?: boolean
+  box_position?: boolean
+  boxes_per_product?: boolean
+  is_auto_created?: boolean
   box_info_values?: boolean | Prisma.BoxMaster$box_info_valuesArgs<ExtArgs>
   factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
   packedByUser?: boolean | Prisma.BoxMaster$packedByUserArgs<ExtArgs>
@@ -2643,6 +3212,13 @@ export type BoxMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   site_in_by?: boolean
   packed_at?: boolean
   packed_by?: boolean
+  sequence_no?: boolean
+  product_group_name?: boolean
+  packing_group_name?: boolean
+  product_set_no?: boolean
+  box_position?: boolean
+  boxes_per_product?: boolean
+  is_auto_created?: boolean
   factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
   packedByUser?: boolean | Prisma.BoxMaster$packedByUserArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
@@ -2670,6 +3246,13 @@ export type BoxMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   site_in_by?: boolean
   packed_at?: boolean
   packed_by?: boolean
+  sequence_no?: boolean
+  product_group_name?: boolean
+  packing_group_name?: boolean
+  product_set_no?: boolean
+  box_position?: boolean
+  boxes_per_product?: boolean
+  is_auto_created?: boolean
   factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
   packedByUser?: boolean | Prisma.BoxMaster$packedByUserArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
@@ -2697,9 +3280,16 @@ export type BoxMasterSelectScalar = {
   site_in_by?: boolean
   packed_at?: boolean
   packed_by?: boolean
+  sequence_no?: boolean
+  product_group_name?: boolean
+  packing_group_name?: boolean
+  product_set_no?: boolean
+  box_position?: boolean
+  boxes_per_product?: boolean
+  is_auto_created?: boolean
 }
 
-export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id" | "factory_out_at" | "factory_out_by" | "lead_id" | "site_in_at" | "site_in_by" | "packed_at" | "packed_by", ExtArgs["result"]["boxMaster"]>
+export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id" | "factory_out_at" | "factory_out_by" | "lead_id" | "site_in_at" | "site_in_by" | "packed_at" | "packed_by" | "sequence_no" | "product_group_name" | "packing_group_name" | "product_set_no" | "box_position" | "boxes_per_product" | "is_auto_created", ExtArgs["result"]["boxMaster"]>
 export type BoxMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   box_info_values?: boolean | Prisma.BoxMaster$box_info_valuesArgs<ExtArgs>
   factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
@@ -2763,6 +3353,13 @@ export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     site_in_by: number | null
     packed_at: Date | null
     packed_by: number | null
+    sequence_no: number | null
+    product_group_name: string | null
+    packing_group_name: string | null
+    product_set_no: number | null
+    box_position: number | null
+    boxes_per_product: number | null
+    is_auto_created: boolean
   }, ExtArgs["result"]["boxMaster"]>
   composites: {}
 }
@@ -3214,6 +3811,13 @@ export interface BoxMasterFieldRefs {
   readonly site_in_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly packed_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
   readonly packed_by: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly sequence_no: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly product_group_name: Prisma.FieldRef<"BoxMaster", 'String'>
+  readonly packing_group_name: Prisma.FieldRef<"BoxMaster", 'String'>
+  readonly product_set_no: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly box_position: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly boxes_per_product: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly is_auto_created: Prisma.FieldRef<"BoxMaster", 'Boolean'>
 }
     
 

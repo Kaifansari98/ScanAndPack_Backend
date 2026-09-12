@@ -2930,6 +2930,7 @@ export const getPackagingProjectContextService = async (
       client_name: true,
       lead_id: true,
       packing_type: true,
+      is_multi_location: true,
       details: {
         where: {
           vendor_id: vendorId,
@@ -2983,22 +2984,40 @@ export const getPackagingProjectContextService = async (
     };
   }
 
-  const groupRows = await prisma.cutList.findMany({
-    where: {
-      project_id: projectId,
-      vendor_id: vendorId,
-      status: {
-        equals: "active",
-        mode: "insensitive",
+  const [groupRows, locationRows] = await Promise.all([
+    prisma.cutList.findMany({
+      where: {
+        project_id: projectId,
+        vendor_id: vendorId,
+        status: {
+          equals: "active",
+          mode: "insensitive",
+        },
+        group_name: {
+          not: null,
+        },
       },
-      group_name: {
-        not: null,
+      select: {
+        group_name: true,
       },
-    },
-    select: {
-      group_name: true,
-    },
-  });
+    }),
+    project.packing_type === PackingType.CUSTOM_GROUP &&
+    project.is_multi_location
+      ? prisma.projectLocationProductQuantity.findMany({
+          where: {
+            project_id: projectId,
+            vendor_id: vendorId,
+          },
+          select: {
+            location_name: true,
+          },
+          distinct: ["location_name"],
+          orderBy: {
+            location_name: "asc",
+          },
+        })
+      : Promise.resolve([]),
+  ]);
 
   const groupNameMap = new Map<string, string>();
 
@@ -3019,6 +3038,9 @@ export const getPackagingProjectContextService = async (
       group_names: Array.from(groupNameMap.values()).sort((a, b) =>
         a.localeCompare(b),
       ),
+      locations: locationRows.map((location) => ({
+        location_name: location.location_name,
+      })),
     },
   };
 };

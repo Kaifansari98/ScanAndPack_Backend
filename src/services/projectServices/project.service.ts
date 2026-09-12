@@ -2903,61 +2903,6 @@ export const getProjectsByVendorIdService = async (
 //   });
 // };
 
-// export const getProjectItemCounts = async ({
-//   project_id,
-//   vendor_id,
-//   client_id,
-// }: {
-//   project_id: number;
-//   vendor_id: number;
-//   client_id: number;
-// }) => {
-//   // 1. Total qty from ProjectItemsMaster
-//   const totalQty = await prisma.projectItemsMaster.aggregate({
-//     _sum: { qty: true },
-//     where: {
-//       project_id,
-//       vendor_id,
-//       client_id,
-//     },
-//   });
-
-//   // 2. Total packed qty from ScanAndPackItem (SUM qty, not just COUNT)
-//   const packedQty = await prisma.scanAndPackItem.aggregate({
-//     _sum: { qty: true },
-//     where: {
-//       project_id,
-//       vendor_id,
-//       client_id,
-//       status: 'packed',
-//     },
-//   });
-
-//   const total_items = totalQty._sum.qty || 0;
-//   const total_packed = packedQty._sum.qty || 0;
-//   const total_unpacked = total_items - total_packed;
-
-//   // 3. Update ProjectDetails here (optional step)
-//   await prisma.projectDetails.updateMany({
-//     where: {
-//       project_id,
-//       vendor_id,
-//       client_id,
-//     },
-//     data: {
-//       total_items,
-//       total_packed,
-//       total_unpacked,
-//     },
-//   });
-
-//   return {
-//     total_items,
-//     total_packed,
-//     total_unpacked,
-//   };
-// };
-
 // export const createOrUpdateFullProject = async (
 //   vendorToken: string,
 //   payload: FullProjectCreateInput
@@ -3174,18 +3119,28 @@ export const calculateProjectAndBoxWeight = async (
 
   if (!project) throw new Error('Project not found for this vendor');
 
-  const [projectItems, boxWeightResult] = await Promise.all([
+  const [projectItems, packedMappings] = await Promise.all([
     prisma.projectItemsMaster.findMany({
       where: { project_id: project.id },
       select: { weight: true, qty: true }
     }),
-    prisma.scanAndPackItem.aggregate({
+    prisma.cutListMachineMapping.findMany({
       where: {
         project_id: project.id,
+        vendor_id: vendorId,
         box_id: boxId,
-        is_deleted: false
+        expected_in: true,
+        actual_in_at: { not: null },
       },
-      _sum: { weight: true }
+      select: {
+        qty: true,
+        cut_list: {
+          select: {
+            qty: true,
+            weight: true,
+          },
+        },
+      },
     })
   ]);
 
@@ -3194,7 +3149,23 @@ export const calculateProjectAndBoxWeight = async (
     return sum + itemWeight;
   }, 0);
 
-  const box_weight = boxWeightResult._sum?.weight ?? 0;
+  const box_weight = packedMappings.reduce((sum, mapping) => {
+    const packedQuantity = Number(mapping.qty ?? 0);
+    const cutListQuantity = Number(mapping.cut_list.qty ?? 0);
+    const cutListWeight = Number(mapping.cut_list.weight ?? 0);
+
+    if (
+      !Number.isFinite(packedQuantity) ||
+      packedQuantity <= 0 ||
+      !Number.isFinite(cutListQuantity) ||
+      cutListQuantity <= 0 ||
+      !Number.isFinite(cutListWeight)
+    ) {
+      return sum;
+    }
+
+    return sum + (cutListWeight / cutListQuantity) * packedQuantity;
+  }, 0);
 
   return { project_weight, box_weight };
 };
@@ -3407,13 +3378,20 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
     for (const box of unpackedBoxes) {
       try {
         // Get all items currently in this box
-        const itemsInBox = await prisma.scanAndPackItem.findMany({
+        const itemsInBox = await prisma.cutListMachineMapping.findMany({
           where: {
             box_id: box.id,
-            is_deleted: false,
+            project_id: project.id,
+            vendor_id: vendorId,
+            expected_in: true,
+            actual_in_at: { not: null },
           },
           select: {
-            unique_id: true,
+            cut_list: {
+              select: {
+                group_name: true,
+              },
+            },
           },
         });
 
@@ -3422,41 +3400,34 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
           continue;
         }
 
-        // Get the first item to determine the group
-        const firstItemUniqueId = itemsInBox[0].unique_id;
+        // The packed mapping joins directly to its source CutList record.
+        const boxGroup = itemsInBox[0].cut_list.group_name?.trim();
 
-        const firstItemDetails = await prisma.projectItemsMaster.findFirst({
-          where: {
-            project_id: project.id,
-            vendor_id: vendorId,
-            unique_id: firstItemUniqueId,
-          },
-          select: {
-            group: true,
-            project_details_id: true,
-          },
-        });
-
-        if (!firstItemDetails || !firstItemDetails.group) {
+        if (!boxGroup) {
           console.log(`⚠️ Box "${box.box_name}": First item has no group, skipping...`);
           continue;
         }
 
-        const boxGroup = firstItemDetails.group;
-        const projectDetailsId = firstItemDetails.project_details_id;
+        const projectDetailsId = box.project_details_id;
 
         console.log(`📦 Checking box "${box.box_name}" for group "${boxGroup}"`);
 
         // Step 5: Get all items that should be in this group for this room
-        const allGroupItems = await prisma.projectItemsMaster.findMany({
+        const allGroupItems = await prisma.cutList.findMany({
           where: {
             project_id: project.id,
             vendor_id: vendorId,
-            project_details_id: projectDetailsId,
-            group: boxGroup,
+            status: {
+              equals: "active",
+              mode: "insensitive",
+            },
+            group_name: {
+              equals: boxGroup,
+              mode: "insensitive",
+            },
           },
           select: {
-            unique_id: true,
+            id: true,
             qty: true,
           },
         });
@@ -3465,17 +3436,24 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
         const totalGroupQty = allGroupItems.reduce((sum, item) => sum + item.qty, 0);
 
         // Count how many items from this group are currently packed (in any box)
-        const packedGroupItems = await prisma.scanAndPackItem.count({
+        const packedGroupMappings = await prisma.cutListMachineMapping.findMany({
           where: {
             project_id: project.id,
             vendor_id: vendorId,
-            project_details_id: projectDetailsId,
-            unique_id: {
-              in: allGroupItems.map(item => item.unique_id),
+            cut_list_id: {
+              in: allGroupItems.map(item => item.id),
             },
-            is_deleted: false,
+            box_id: { not: null },
+            expected_in: true,
+            actual_in_at: { not: null },
           },
+          select: { qty: true },
         });
+
+        const packedGroupItems = packedGroupMappings.reduce((sum, item) => {
+          const quantity = Number(item.qty ?? 0);
+          return sum + (Number.isFinite(quantity) && quantity > 0 ? quantity : 0);
+        }, 0);
 
         console.log(`📊 Group "${boxGroup}": ${packedGroupItems}/${totalGroupQty} items packed`);
 
@@ -5007,5 +4985,3 @@ export const handelItems = async (
     };
   }
 };
-
-

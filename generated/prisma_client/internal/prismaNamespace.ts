@@ -16703,7 +16703,14 @@ export const BoxMasterScalarFieldEnum = {
   site_in_at: 'site_in_at',
   site_in_by: 'site_in_by',
   packed_at: 'packed_at',
-  packed_by: 'packed_by'
+  packed_by: 'packed_by',
+  sequence_no: 'sequence_no',
+  product_group_name: 'product_group_name',
+  packing_group_name: 'packing_group_name',
+  product_set_no: 'product_set_no',
+  box_position: 'box_position',
+  boxes_per_product: 'boxes_per_product',
+  is_auto_created: 'is_auto_created'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -18545,7 +18552,8 @@ export const CutListMachineMappingScalarFieldEnum = {
   weight: 'weight',
   qty: 'qty',
   received_qty: 'received_qty',
-  row_created_source: 'row_created_source'
+  row_created_source: 'row_created_source',
+  project_location_product_quantity_id: 'project_location_product_quantity_id'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]

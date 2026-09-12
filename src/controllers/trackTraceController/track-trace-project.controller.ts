@@ -11,6 +11,9 @@ import {
 } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 import { PackingType } from "../../../generated/prisma_client/enums";
+import {
+  generateDispatchDocumentService,
+} from "../../services/trackTraceServices/dispatch-document.service";
 
 const parseBooleanFlag = (value: unknown): boolean =>
   value === true || ["true", "1", "yes"].includes(
@@ -420,6 +423,84 @@ export const downloadMultiLocationTemplateController = async (
     return res.status(500).json({
       success: false,
       message: error.message || "Failed to generate Multi Location Excel",
+      data: null,
+    });
+  }
+};
+
+export const downloadDispatchDocumentController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const uniqueProjectIdParam = req.params.unique_project_id;
+    const uniqueProjectId = Array.isArray(uniqueProjectIdParam)
+      ? uniqueProjectIdParam[0]
+      : uniqueProjectIdParam;
+    const vendorId = Number(req.body.vendorId ?? req.body.vendor_id);
+    const rawLocations = req.body.locations;
+
+    if (!uniqueProjectId) {
+      return res.status(400).json({
+        success: false,
+        message: "unique_project_id is required",
+        data: null,
+      });
+    }
+
+    if (!Number.isInteger(vendorId) || vendorId <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Valid vendorId is required",
+        data: null,
+      });
+    }
+
+    if (rawLocations !== undefined && !Array.isArray(rawLocations)) {
+      return res.status(400).json({
+        success: false,
+        message: "locations must be an array",
+        data: null,
+      });
+    }
+
+    const locations = Array.isArray(rawLocations)
+      ? rawLocations
+          .filter((location): location is string => typeof location === "string")
+          .map((location) => location.trim())
+          .filter(Boolean)
+      : [];
+
+    const result = await generateDispatchDocumentService(
+      uniqueProjectId,
+      vendorId,
+      locations,
+    );
+
+    if (!result.success) {
+      return res.status(result.statusCode).json({
+        success: false,
+        message: result.message,
+        data: null,
+      });
+    }
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${result.fileName}"`,
+    );
+    res.setHeader("Content-Length", result.data.length);
+
+    return res.status(200).send(result.data);
+  } catch (error: any) {
+    logger.error("downloadDispatchDocumentController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to generate dispatch document",
       data: null,
     });
   }

@@ -764,7 +764,7 @@ export const getBoxesByVendorAndProjectV1 = async (
 export const getBoxDetailsWithItems = async (
   vendorId: number,
   projectId: number,
-  clientId: number,
+  _clientId: number,
   boxId: number,
 ) => {
   const vendor = await prisma.vendorMaster.findUnique({
@@ -775,6 +775,8 @@ export const getBoxDetailsWithItems = async (
     where: {
       id: boxId,
       project_id: projectId,
+      vendor_id: vendorId,
+      is_deleted: false,
     },
     include: {
       details: true,
@@ -786,37 +788,63 @@ export const getBoxDetailsWithItems = async (
     },
   });
 
-  const items = await prisma.scanAndPackItem.findMany({
+  const items = await prisma.cutListMachineMapping.findMany({
     where: {
       vendor_id: vendorId,
       project_id: projectId,
-      client_id: clientId,
       box_id: boxId,
-      is_deleted: false,
+      expected_in: true,
+      actual_in_at: { not: null },
     },
-    include: {
-      user: true,
-      details: true,
+    select: {
+      id: true,
+      cut_list_id: true,
+      machine_id: true,
+      sequence_no: true,
+      status: true,
+      actual_in_at: true,
+      actual_out_at: true,
+      in_operator: true,
+      created_at: true,
+      qty: true,
+      weight: true,
+      project_location_product_quantity_id: true,
+      operator: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+      cut_list: true,
     },
+    orderBy: [{ actual_in_at: "desc" }, { id: "desc" }],
   });
 
-  // 🔥 Enrich each item with its ProjectItemsMaster record
-  const enrichedItems = await Promise.all(
-    items.map(async (item) => {
-      const projectItem = await prisma.projectItemsMaster.findFirst({
-        where: {
-          project_id: item.project_id,
-          vendor_id: item.vendor_id,
-          unique_id: item.unique_id,
-        },
-      });
-
-      return {
-        ...item,
-        projectItem,
-      };
-    }),
-  );
+  // Keep the response useful to older clients while using the mapping row ID as
+  // the packed-item ID. Delete/unassign APIs also operate on this mapping ID.
+  const enrichedItems = items.map((item) => ({
+    id: item.id,
+    mapping_id: item.id,
+    cut_list_id: item.cut_list_id,
+    machine_id: item.machine_id,
+    sequence_no: item.sequence_no,
+    project_id: projectId,
+    vendor_id: vendorId,
+    box_id: boxId,
+    unique_id: item.cut_list.unique_code,
+    qty: item.qty,
+    weight: item.weight,
+    status: item.status,
+    actual_in_at: item.actual_in_at,
+    actual_out_at: item.actual_out_at,
+    in_operator: item.in_operator,
+    created_date: item.created_at,
+    project_location_product_quantity_id:
+      item.project_location_product_quantity_id,
+    user: item.operator,
+    projectItem: item.cut_list,
+    project_item_details: item.cut_list,
+  }));
 
   return {
     vendor,
@@ -829,7 +857,7 @@ export const getBoxDetailsWithItems = async (
 export const getAllBoxesWithItemCountService = async (
   vendorId: number,
   projectId: number,
-  clientId: number,
+  _clientId: number,
 ) => {
   const [vendor, project] = await Promise.all([
     prisma.vendorMaster.findUnique({
@@ -851,30 +879,44 @@ export const getAllBoxesWithItemCountService = async (
     where: {
       project_id: projectId,
       vendor_id: vendorId,
-      lead_id: clientId,
       is_deleted: false,
     },
   });
 
-  const enrichedBoxes = await Promise.all(
-    boxes.map(async (box) => {
-      const items = await prisma.scanAndPackItem.findMany({
+  const boxIds = boxes.map((box) => box.id);
+  const packedMappings = boxIds.length
+    ? await prisma.cutListMachineMapping.findMany({
         where: {
           vendor_id: vendorId,
           project_id: projectId,
-          client_id: clientId,
-          box_id: box.id,
-          is_deleted: false,
+          box_id: { in: boxIds },
+          expected_in: true,
+          actual_in_at: { not: null },
         },
-      });
+        select: {
+          box_id: true,
+          qty: true,
+        },
+      })
+    : [];
 
-      return {
-        box_id: box.id,
-        box_name: box.box_name,
-        total_items: items.length,
-      };
-    }),
-  );
+  const itemCountByBox = new Map<number, number>();
+  for (const mapping of packedMappings) {
+    if (mapping.box_id === null) continue;
+
+    const quantity = Number(mapping.qty ?? 0);
+    itemCountByBox.set(
+      mapping.box_id,
+      (itemCountByBox.get(mapping.box_id) ?? 0) +
+        (Number.isFinite(quantity) && quantity > 0 ? quantity : 0),
+    );
+  }
+
+  const enrichedBoxes = boxes.map((box) => ({
+    box_id: box.id,
+    box_name: box.box_name,
+    total_items: itemCountByBox.get(box.id) ?? 0,
+  }));
 
   return {
     vendor,
@@ -1196,6 +1238,13 @@ export const generateBoxPdfService = async (
             created_date: true,
             packed_at: true,
             packed_by: true,
+            sequence_no: true,
+            product_group_name: true,
+            packing_group_name: true,
+            product_set_no: true,
+            box_position: true,
+            boxes_per_product: true,
+            is_auto_created: true,
 
             packedByUser: {
               select: {
@@ -1432,6 +1481,13 @@ export const generateBoxPdfService = async (
           id: true,
           qty: true,
 
+          projectLocationProductQuantity: {
+            select: {
+              id: true,
+              location_name: true,
+            },
+          },
+
           cut_list: {
             select: {
               id: true,
@@ -1598,6 +1654,9 @@ export const generateBoxPdfService = async (
     const isGroupWisePacking =
       project.packing_type === PackingType.GROUPWISE ||
       normalizedPackingType === "GROUPWISE";
+    const isCustomGroupPacking =
+      project.packing_type === PackingType.CUSTOM_GROUP ||
+      normalizedPackingType === "CUSTOMGROUP";
 
     /*
     |--------------------------------------------------------------------------
@@ -1609,7 +1668,15 @@ export const generateBoxPdfService = async (
 
     let productBoxTotal = Math.max(totalBoxes, 1);
 
-    if (isGroupWisePacking) {
+    if (
+      isCustomGroupPacking &&
+      box.is_auto_created &&
+      box.box_position &&
+      box.boxes_per_product
+    ) {
+      currentProductBoxNumber = box.box_position;
+      productBoxTotal = box.boxes_per_product;
+    } else if (isGroupWisePacking) {
       const currentGroupKey = normalizeGroupName(currentBoxGroupName);
 
       if (currentGroupKey) {
@@ -1667,11 +1734,26 @@ export const generateBoxPdfService = async (
 
     const packageSize = getPackageSizeText(items);
 
-    const productName = resolveProductName(items);
+    const productName =
+      (isCustomGroupPacking && box.product_group_name?.trim()) ||
+      resolveProductName(items);
+
+    const automaticLocationName =
+      mappingRows
+        .find((mapping) => mapping.projectLocationProductQuantity)
+        ?.projectLocationProductQuantity?.location_name.trim() || "";
 
     const floorName =
+      automaticLocationName ||
       findBoxInfoValue(boxInfoValues, ["floor", "floor_name", "floor name"]) ||
       "-";
+
+    const customPackingLabel = [
+      box.packing_group_name?.trim(),
+      box.product_set_no ? `Set ${box.product_set_no}` : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
 
     const itemNo =
       Array.from(
@@ -2665,7 +2747,7 @@ color: #111827;
     <div class="info-row row-3col">
       <div class="info-cell">
         <div class="field-label">
-          FLOOR
+          ${isCustomGroupPacking ? "LOCATION" : "FLOOR"}
         </div>
 
         <div class="field-value">
@@ -2696,6 +2778,18 @@ color: #111827;
                 </div>
               </div>
             `
+          : isCustomGroupPacking
+            ? `
+                <div class="info-cell">
+                  <div class="field-label">
+                    PACKING GROUP
+                  </div>
+
+                  <div class="field-value filed-value-item-no">
+                    ${escapeHtml(customPackingLabel || "-")}
+                  </div>
+                </div>
+              `
           : ""
       }
     </div>
@@ -2703,7 +2797,7 @@ color: #111827;
     <div class="section-separator"></div>
 
     ${
-      isGroupWisePacking
+      isGroupWisePacking || isCustomGroupPacking
         ? `
             <!-- ============================== -->
             <!-- PRODUCT TITLE                  -->
@@ -2856,11 +2950,23 @@ color: #111827;
 
       box_id: box.id,
 
+      sequence_no: box.sequence_no,
+
       packing_type: project.packing_type,
 
       product_box_count: productBoxCount,
 
       group_name: currentBoxGroupName,
+
+      packing_group_name: box.packing_group_name,
+
+      product_set_no: box.product_set_no,
+
+      box_position: box.box_position,
+
+      boxes_per_product: box.boxes_per_product,
+
+      location_name: automaticLocationName || null,
 
       total_quantity: totalQuantity,
 

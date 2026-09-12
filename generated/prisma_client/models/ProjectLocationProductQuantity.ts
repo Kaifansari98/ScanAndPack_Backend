@@ -253,6 +253,7 @@ export type ProjectLocationProductQuantityWhereInput = {
   created_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
+  cutListMachineMappings?: Prisma.CutListMachineMappingListRelationFilter
 }
 
 export type ProjectLocationProductQuantityOrderByWithRelationInput = {
@@ -265,6 +266,7 @@ export type ProjectLocationProductQuantityOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   project?: Prisma.ProjectMasterOrderByWithRelationInput
+  cutListMachineMappings?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
 }
 
 export type ProjectLocationProductQuantityWhereUniqueInput = Prisma.AtLeast<{
@@ -281,6 +283,7 @@ export type ProjectLocationProductQuantityWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
+  cutListMachineMappings?: Prisma.CutListMachineMappingListRelationFilter
 }, "id" | "project_id_location_name_group_name">
 
 export type ProjectLocationProductQuantityOrderByWithAggregationInput = {
@@ -321,6 +324,7 @@ export type ProjectLocationProductQuantityCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   project: Prisma.ProjectMasterCreateNestedOneWithoutLocationQuantitiesInput
+  cutListMachineMappings?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectLocationProductQuantityInput
 }
 
 export type ProjectLocationProductQuantityUncheckedCreateInput = {
@@ -332,6 +336,7 @@ export type ProjectLocationProductQuantityUncheckedCreateInput = {
   qty: number
   created_at?: Date | string
   updated_at?: Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectLocationProductQuantityInput
 }
 
 export type ProjectLocationProductQuantityUpdateInput = {
@@ -342,6 +347,7 @@ export type ProjectLocationProductQuantityUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutLocationQuantitiesNestedInput
+  cutListMachineMappings?: Prisma.CutListMachineMappingUpdateManyWithoutProjectLocationProductQuantityNestedInput
 }
 
 export type ProjectLocationProductQuantityUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectLocationProductQuantityNestedInput
 }
 
 export type ProjectLocationProductQuantityCreateManyInput = {
@@ -449,6 +456,11 @@ export type ProjectLocationProductQuantitySumOrderByAggregateInput = {
   qty?: Prisma.SortOrder
 }
 
+export type ProjectLocationProductQuantityNullableScalarRelationFilter = {
+  is?: Prisma.ProjectLocationProductQuantityWhereInput | null
+  isNot?: Prisma.ProjectLocationProductQuantityWhereInput | null
+}
+
 export type ProjectLocationProductQuantityCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.ProjectLocationProductQuantityCreateWithoutProjectInput, Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutProjectInput> | Prisma.ProjectLocationProductQuantityCreateWithoutProjectInput[] | Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.ProjectLocationProductQuantityCreateOrConnectWithoutProjectInput | Prisma.ProjectLocationProductQuantityCreateOrConnectWithoutProjectInput[]
@@ -491,6 +503,22 @@ export type ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectNeste
   deleteMany?: Prisma.ProjectLocationProductQuantityScalarWhereInput | Prisma.ProjectLocationProductQuantityScalarWhereInput[]
 }
 
+export type ProjectLocationProductQuantityCreateNestedOneWithoutCutListMachineMappingsInput = {
+  create?: Prisma.XOR<Prisma.ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMappingsInput>
+  connectOrCreate?: Prisma.ProjectLocationProductQuantityCreateOrConnectWithoutCutListMachineMappingsInput
+  connect?: Prisma.ProjectLocationProductQuantityWhereUniqueInput
+}
+
+export type ProjectLocationProductQuantityUpdateOneWithoutCutListMachineMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMappingsInput>
+  connectOrCreate?: Prisma.ProjectLocationProductQuantityCreateOrConnectWithoutCutListMachineMappingsInput
+  upsert?: Prisma.ProjectLocationProductQuantityUpsertWithoutCutListMachineMappingsInput
+  disconnect?: Prisma.ProjectLocationProductQuantityWhereInput | boolean
+  delete?: Prisma.ProjectLocationProductQuantityWhereInput | boolean
+  connect?: Prisma.ProjectLocationProductQuantityWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectLocationProductQuantityUpdateToOneWithWhereWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUpdateWithoutCutListMachineMappingsInput>, Prisma.ProjectLocationProductQuantityUncheckedUpdateWithoutCutListMachineMappingsInput>
+}
+
 export type ProjectLocationProductQuantityCreateWithoutProjectInput = {
   vendor_id: number
   location_name: string
@@ -498,6 +526,7 @@ export type ProjectLocationProductQuantityCreateWithoutProjectInput = {
   qty: number
   created_at?: Date | string
   updated_at?: Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingCreateNestedManyWithoutProjectLocationProductQuantityInput
 }
 
 export type ProjectLocationProductQuantityUncheckedCreateWithoutProjectInput = {
@@ -508,6 +537,7 @@ export type ProjectLocationProductQuantityUncheckedCreateWithoutProjectInput = {
   qty: number
   created_at?: Date | string
   updated_at?: Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutProjectLocationProductQuantityInput
 }
 
 export type ProjectLocationProductQuantityCreateOrConnectWithoutProjectInput = {
@@ -550,6 +580,64 @@ export type ProjectLocationProductQuantityScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
 }
 
+export type ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput = {
+  vendor_id: number
+  location_name: string
+  group_name: string
+  qty: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  project: Prisma.ProjectMasterCreateNestedOneWithoutLocationQuantitiesInput
+}
+
+export type ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMappingsInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  location_name: string
+  group_name: string
+  qty: number
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type ProjectLocationProductQuantityCreateOrConnectWithoutCutListMachineMappingsInput = {
+  where: Prisma.ProjectLocationProductQuantityWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMappingsInput>
+}
+
+export type ProjectLocationProductQuantityUpsertWithoutCutListMachineMappingsInput = {
+  update: Prisma.XOR<Prisma.ProjectLocationProductQuantityUpdateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedUpdateWithoutCutListMachineMappingsInput>
+  create: Prisma.XOR<Prisma.ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMappingsInput>
+  where?: Prisma.ProjectLocationProductQuantityWhereInput
+}
+
+export type ProjectLocationProductQuantityUpdateToOneWithWhereWithoutCutListMachineMappingsInput = {
+  where?: Prisma.ProjectLocationProductQuantityWhereInput
+  data: Prisma.XOR<Prisma.ProjectLocationProductQuantityUpdateWithoutCutListMachineMappingsInput, Prisma.ProjectLocationProductQuantityUncheckedUpdateWithoutCutListMachineMappingsInput>
+}
+
+export type ProjectLocationProductQuantityUpdateWithoutCutListMachineMappingsInput = {
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  group_name?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutLocationQuantitiesNestedInput
+}
+
+export type ProjectLocationProductQuantityUncheckedUpdateWithoutCutListMachineMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  group_name?: Prisma.StringFieldUpdateOperationsInput | string
+  qty?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ProjectLocationProductQuantityCreateManyProjectInput = {
   id?: number
   vendor_id: number
@@ -567,6 +655,7 @@ export type ProjectLocationProductQuantityUpdateWithoutProjectInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingUpdateManyWithoutProjectLocationProductQuantityNestedInput
 }
 
 export type ProjectLocationProductQuantityUncheckedUpdateWithoutProjectInput = {
@@ -577,6 +666,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateWithoutProjectInput = {
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cutListMachineMappings?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutProjectLocationProductQuantityNestedInput
 }
 
 export type ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectInput = {
@@ -590,6 +680,35 @@ export type ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectInput
 }
 
 
+/**
+ * Count Type ProjectLocationProductQuantityCountOutputType
+ */
+
+export type ProjectLocationProductQuantityCountOutputType = {
+  cutListMachineMappings: number
+}
+
+export type ProjectLocationProductQuantityCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cutListMachineMappings?: boolean | ProjectLocationProductQuantityCountOutputTypeCountCutListMachineMappingsArgs
+}
+
+/**
+ * ProjectLocationProductQuantityCountOutputType without action
+ */
+export type ProjectLocationProductQuantityCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectLocationProductQuantityCountOutputType
+   */
+  select?: Prisma.ProjectLocationProductQuantityCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectLocationProductQuantityCountOutputType without action
+ */
+export type ProjectLocationProductQuantityCountOutputTypeCountCutListMachineMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CutListMachineMappingWhereInput
+}
+
 
 export type ProjectLocationProductQuantitySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -601,6 +720,8 @@ export type ProjectLocationProductQuantitySelect<ExtArgs extends runtime.Types.E
   created_at?: boolean
   updated_at?: boolean
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  cutListMachineMappings?: boolean | Prisma.ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectLocationProductQuantityCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectLocationProductQuantity"]>
 
 export type ProjectLocationProductQuantitySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -641,6 +762,8 @@ export type ProjectLocationProductQuantitySelectScalar = {
 export type ProjectLocationProductQuantityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "location_name" | "group_name" | "qty" | "created_at" | "updated_at", ExtArgs["result"]["projectLocationProductQuantity"]>
 export type ProjectLocationProductQuantityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
+  cutListMachineMappings?: boolean | Prisma.ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectLocationProductQuantityCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectLocationProductQuantityIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
@@ -653,6 +776,7 @@ export type $ProjectLocationProductQuantityPayload<ExtArgs extends runtime.Types
   name: "ProjectLocationProductQuantity"
   objects: {
     project: Prisma.$ProjectMasterPayload<ExtArgs>
+    cutListMachineMappings: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1058,6 +1182,7 @@ readonly fields: ProjectLocationProductQuantityFieldRefs;
 export interface Prisma__ProjectLocationProductQuantityClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cutListMachineMappings<T extends Prisma.ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1493,6 +1618,30 @@ export type ProjectLocationProductQuantityDeleteManyArgs<ExtArgs extends runtime
    * Limit how many ProjectLocationProductQuantities to delete.
    */
   limit?: number
+}
+
+/**
+ * ProjectLocationProductQuantity.cutListMachineMappings
+ */
+export type ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CutListMachineMapping
+   */
+  select?: Prisma.CutListMachineMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CutListMachineMapping
+   */
+  omit?: Prisma.CutListMachineMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CutListMachineMappingInclude<ExtArgs> | null
+  where?: Prisma.CutListMachineMappingWhereInput
+  orderBy?: Prisma.CutListMachineMappingOrderByWithRelationInput | Prisma.CutListMachineMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CutListMachineMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
 }
 
 /**

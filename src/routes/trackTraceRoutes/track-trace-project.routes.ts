@@ -8,6 +8,7 @@ import {
   getActiveMachinesByVendorController,
   getPackagingProjectContextController,
   downloadMultiLocationTemplateController,
+  downloadDispatchDocumentController,
 } from "../../../src/controllers/trackTraceController/track-trace-project.controller";
 import {
   uploadLocationExcel,
@@ -50,6 +51,11 @@ router.get(
 router.get(
   "/onboard/project/:unique_project_id/multi-location-template",
   downloadMultiLocationTemplateController
+);
+
+router.post(
+  "/onboard/project/:unique_project_id/dispatch-document",
+  downloadDispatchDocumentController,
 );
 
 router.get(

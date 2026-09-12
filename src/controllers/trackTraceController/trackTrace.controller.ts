@@ -24,6 +24,7 @@ interface TrackTracePayload {
   unique_code: string;
   created_by: number;
   box_id?: number;
+  location_name?: string;
 }
 export const scan_item_old = async (req: Request, res: Response) => {
   console.log("Query params:", req.body);
@@ -102,6 +103,10 @@ export const scan_machine_item = async (req: Request, res: Response) => {
       ? Number(req.body.project_id)
       : undefined;
     const box_id = req.body.box_id ? Number(req.body.box_id) : undefined;
+    const location_name =
+      typeof req.body.location_name === "string"
+        ? req.body.location_name.trim()
+        : undefined;
     const unique_code =
       typeof req.body.unique_code === "string"
         ? req.body.unique_code.trim()
@@ -149,6 +154,16 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         .json(ApiResponse.validationError("Valid box_id is required"));
     }
 
+    if (location_name && location_name.length > 200) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.validationError(
+            "location_name must not exceed 200 characters",
+          ),
+        );
+    }
+
     const machine = await prisma.machineMaster.findFirst({
       where: {
         id: machine_id,
@@ -167,6 +182,7 @@ export const scan_machine_item = async (req: Request, res: Response) => {
     }
 
     let packagingRequiresBox = false;
+    let packagingLocationName: string | undefined;
 
     if (machine.machine_type_id === 18) {
       if (!project_id) {
@@ -188,6 +204,7 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         select: {
           packing_type: true,
           project_status: true,
+          is_multi_location: true,
         },
       });
 
@@ -214,6 +231,20 @@ export const scan_machine_item = async (req: Request, res: Response) => {
       }
 
       packagingRequiresBox = selectedProject.packing_type !== "CUSTOM_GROUP";
+
+      if (location_name && !selectedProject.is_multi_location) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "Location cannot be selected because Multi Location is not enabled for this project",
+            ),
+          );
+      }
+
+      packagingLocationName = selectedProject.is_multi_location
+        ? location_name
+        : undefined;
 
       if (packagingRequiresBox && !box_id) {
         return res
@@ -262,6 +293,10 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         box_id:
           machine.machine_type_id === 18 && packagingRequiresBox
             ? box_id
+            : undefined,
+        location_name:
+          machine.machine_type_id === 18 && !packagingRequiresBox
+            ? packagingLocationName
             : undefined,
       },
       false,

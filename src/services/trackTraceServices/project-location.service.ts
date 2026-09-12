@@ -73,9 +73,13 @@ const getProjectLocationContext = async (
       distinctGroups.set(normalizedGroupName, groupName);
     }
 
+    const currentLimit = groupQuantityLimits.get(normalizedGroupName);
+
     groupQuantityLimits.set(
       normalizedGroupName,
-      (groupQuantityLimits.get(normalizedGroupName) ?? 0) + item.qty
+      currentLimit === undefined
+        ? item.qty
+        : Math.min(currentLimit, item.qty)
     );
   }
 
@@ -220,16 +224,114 @@ const replaceProjectLocationEntries = async (
   entries: ProjectLocationEntry[]
 ) => {
   await prisma.$transaction(async (tx) => {
-    await tx.projectLocationProductQuantity.deleteMany({
+    const existingEntries = await tx.projectLocationProductQuantity.findMany({
       where: {
         project_id: projectId,
         vendor_id: vendorId,
       },
+      select: {
+        id: true,
+        location_name: true,
+        group_name: true,
+        _count: {
+          select: {
+            cutListMachineMappings: true,
+          },
+        },
+      },
     });
+    const existingByKey = new Map(
+      existingEntries.map((entry) => [
+        `${normalizeName(entry.location_name)}::${normalizeName(entry.group_name)}`,
+        entry,
+      ])
+    );
+    const matchedExistingIds = new Set<number>();
+    const usedEntryIds = existingEntries
+      .filter((entry) => entry._count.cutListMachineMappings > 0)
+      .map((entry) => entry.id);
+    const scannedQuantities =
+      usedEntryIds.length > 0
+        ? await tx.cutListMachineMapping.groupBy({
+            by: ["project_location_product_quantity_id", "cut_list_id"],
+            where: {
+              project_location_product_quantity_id: {
+                in: usedEntryIds,
+              },
+              actual_in_at: {
+                not: null,
+              },
+            },
+            _count: {
+              _all: true,
+            },
+          })
+        : [];
+    const minimumQuantityByEntryId = new Map<number, number>();
 
-    if (entries.length > 0) {
-      await tx.projectLocationProductQuantity.createMany({
-        data: entries,
+    for (const scannedQuantity of scannedQuantities) {
+      const entryId = scannedQuantity.project_location_product_quantity_id;
+
+      if (!entryId) continue;
+
+      minimumQuantityByEntryId.set(
+        entryId,
+        Math.max(
+          minimumQuantityByEntryId.get(entryId) ?? 0,
+          scannedQuantity._count._all
+        )
+      );
+    }
+
+    for (const entry of entries) {
+      const entryKey = `${normalizeName(entry.location_name)}::${normalizeName(entry.group_name)}`;
+      const existingEntry = existingByKey.get(entryKey);
+
+      if (!existingEntry) {
+        await tx.projectLocationProductQuantity.create({ data: entry });
+        continue;
+      }
+
+      const minimumQuantity =
+        minimumQuantityByEntryId.get(existingEntry.id) ?? 0;
+
+      if (entry.qty < minimumQuantity) {
+        throw new Error(
+          `Quantity for "${entry.group_name}" at location "${entry.location_name}" cannot be less than the already packed quantity ${minimumQuantity}`
+        );
+      }
+
+      matchedExistingIds.add(existingEntry.id);
+      await tx.projectLocationProductQuantity.update({
+        where: { id: existingEntry.id },
+        data: {
+          location_name: entry.location_name,
+          group_name: entry.group_name,
+          qty: entry.qty,
+        },
+      });
+    }
+
+    const removedEntries = existingEntries.filter(
+      (entry) => !matchedExistingIds.has(entry.id)
+    );
+    const usedRemovedEntry = removedEntries.find(
+      (entry) => entry._count.cutListMachineMappings > 0
+    );
+
+    if (usedRemovedEntry) {
+      throw new Error(
+        `Location "${usedRemovedEntry.location_name}" cannot be removed because packed items are linked to it`
+      );
+    }
+
+    if (removedEntries.length > 0) {
+      await tx.projectLocationProductQuantity.deleteMany({
+        where: {
+          id: {
+            in: removedEntries.map((entry) => entry.id),
+          },
+        },
       });
     }
   });
