@@ -295,7 +295,7 @@ export const scan_machine_item = async (req: Request, res: Response) => {
             ? box_id
             : undefined,
         location_name:
-          machine.machine_type_id === 18 && !packagingRequiresBox
+          machine.machine_type_id === 18
             ? packagingLocationName
             : undefined,
       },

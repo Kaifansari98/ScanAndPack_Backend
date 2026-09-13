@@ -129,6 +129,40 @@ const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
   return fallback;
 };
 
+const resolvePackingConfiguration = ({
+  packingType,
+  noOfBoxes,
+  isMultiLocation,
+  fallbackBoxCount = 0,
+  fallbackIsMultiLocation = false,
+}: {
+  packingType: PackingType;
+  noOfBoxes: unknown;
+  isMultiLocation: unknown;
+  fallbackBoxCount?: number;
+  fallbackIsMultiLocation?: boolean;
+}) => {
+  const submittedBoxCount = normalizeNoOfBoxes(
+    noOfBoxes === undefined ? fallbackBoxCount : noOfBoxes
+  );
+  const resolvedBoxCount =
+    packingType === PackingType.CUSTOM_GROUP ? 0 : submittedBoxCount;
+  const submittedIsMultiLocation = normalizeBooleanFlag(
+    isMultiLocation,
+    fallbackIsMultiLocation
+  );
+  const mustUseSingleLocation =
+    packingType === PackingType.DEFAULT ||
+    (packingType === PackingType.GROUPWISE && resolvedBoxCount > 0);
+
+  return {
+    noOfBoxes: resolvedBoxCount,
+    isMultiLocation: mustUseSingleLocation
+      ? false
+      : submittedIsMultiLocation,
+  };
+};
+
 const parseNumberArray = (value: unknown): number[] => {
   if (value === null || value === undefined || value === "") {
     return [];
@@ -1783,7 +1817,13 @@ export const createProjectService = async (
           ? PackingType.GROUPWISE
           : PackingType.DEFAULT;
 
-    const requestedBoxCount = normalizeNoOfBoxes(no_of_boxes);
+    const packingConfiguration = resolvePackingConfiguration({
+      packingType: resolvedPackingType,
+      noOfBoxes: no_of_boxes,
+      isMultiLocation: is_multi_location,
+    });
+    const requestedBoxCount = packingConfiguration.noOfBoxes;
+    const resolvedIsMultiLocation = packingConfiguration.isMultiLocation;
 
     resolvedVendorId = vendor.id;
 
@@ -2266,7 +2306,7 @@ export const createProjectService = async (
             is_grouping: false,
             lead_id,
             packing_type: resolvedPackingType,
-            is_multi_location: normalizeBooleanFlag(is_multi_location),
+            is_multi_location: resolvedIsMultiLocation,
             order_no: resolvedOrderNo,
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
@@ -3001,7 +3041,8 @@ export const getPackagingProjectContextService = async (
         group_name: true,
       },
     }),
-    project.packing_type === PackingType.CUSTOM_GROUP &&
+    (project.packing_type === PackingType.CUSTOM_GROUP ||
+      project.packing_type === PackingType.GROUPWISE) &&
     project.is_multi_location
       ? prisma.projectLocationProductQuantity.findMany({
           where: {
@@ -3401,11 +3442,6 @@ export const updateTrackTraceProjectService = async (
       };
     }
 
-    const resolvedIsMultiLocation = normalizeBooleanFlag(
-      payload.is_multi_location,
-      existingProject.is_multi_location
-    );
-
     const vendor = await prisma.vendorMaster.findFirst({
       where: {
         id: vendorId,
@@ -3509,17 +3545,31 @@ export const updateTrackTraceProjectService = async (
         };
       }
     }
-    const requestedBoxCount = normalizeNoOfBoxes(payload.no_of_boxes);
+    const packingConfiguration = resolvePackingConfiguration({
+      packingType: existingProject.packing_type,
+      noOfBoxes: payload.no_of_boxes,
+      isMultiLocation: payload.is_multi_location,
+      fallbackBoxCount: existingProject.no_of_boxes,
+      fallbackIsMultiLocation: existingProject.is_multi_location,
+    });
+    const requestedBoxCount = packingConfiguration.noOfBoxes;
+    const resolvedIsMultiLocation = packingConfiguration.isMultiLocation;
     const selectedRemoveBoxIds = parseNumberArray(payload.remove_box_ids);
+    const managesConfiguredBoxes =
+      existingProject.packing_type !== PackingType.CUSTOM_GROUP;
 
-    const projectBoxOptions = await getProjectBoxRemovalOptions(
-      prisma,
-      existingProject.id,
-      vendorId
-    );
+    const projectBoxOptions = managesConfiguredBoxes
+      ? await getProjectBoxRemovalOptions(
+          prisma,
+          existingProject.id,
+          vendorId
+        )
+      : [];
 
     const currentBoxCount = projectBoxOptions.length;
-    const boxCountDifference = currentBoxCount - requestedBoxCount;
+    const boxCountDifference = managesConfiguredBoxes
+      ? currentBoxCount - requestedBoxCount
+      : 0;
 
     const projectDetails = await prisma.projectDetails.findFirst({
       where: {

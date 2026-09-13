@@ -1268,6 +1268,87 @@ export const updateScannedItem = async (
     const isAutomaticCustomPacking =
       eligibleMapping.machine.machine_type_id === 18 &&
       eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP;
+    const supportsPackingLocation =
+      eligibleMapping.machine.machine_type_id === 18 &&
+      (eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP ||
+        eligibleMapping.project.packing_type === PackingType.GROUPWISE);
+    let selectedLocationAllocation: {
+      id: number;
+      locationName: string;
+      qty: number;
+    } | null = null;
+
+    if (location_name && supportsPackingLocation) {
+      const productGroupName = eligibleMapping.cut_list.group_name?.trim();
+
+      if (!productGroupName) {
+        return validationResponse(
+          0,
+          `Product Group is not configured for item "${eligibleMapping.cut_list.item_name}"`,
+        );
+      }
+
+      const locationAllocation =
+        await prisma.projectLocationProductQuantity.findFirst({
+          where: {
+            project_id: eligibleMapping.project_id,
+            vendor_id,
+            location_name: {
+              equals: location_name,
+              mode: "insensitive",
+            },
+            group_name: {
+              equals: productGroupName,
+              mode: "insensitive",
+            },
+          },
+          select: {
+            id: true,
+            location_name: true,
+            qty: true,
+          },
+        });
+
+      if (!locationAllocation) {
+        return validationResponse(
+          0,
+          `Location "${location_name}" is not configured for Product Group "${productGroupName}"`,
+        );
+      }
+
+      if (locationAllocation.qty <= 0) {
+        return validationResponse(
+          0,
+          `No quantity is allocated to Product Group "${productGroupName}" at location "${locationAllocation.location_name}"`,
+        );
+      }
+
+      const scannedAtLocation = await prisma.cutListMachineMapping.count({
+        where: {
+          project_id: eligibleMapping.project_id,
+          vendor_id,
+          cut_list_id,
+          project_location_product_quantity_id: locationAllocation.id,
+          actual_in_at: {
+            not: null,
+          },
+        },
+      });
+
+      if (scannedAtLocation >= locationAllocation.qty) {
+        return validationResponse(
+          0,
+          `Allocated quantity ${locationAllocation.qty} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${locationAllocation.location_name}"`,
+        );
+      }
+
+      selectedLocationAllocation = {
+        id: locationAllocation.id,
+        locationName: locationAllocation.location_name,
+        qty: locationAllocation.qty,
+      };
+    }
+
     let automaticPackingDefinition: {
       productGroupName: string;
       packingGroupName: string;
@@ -1373,77 +1454,14 @@ export const updateScannedItem = async (
         );
       }
 
-      let projectLocationProductQuantityId: number | null = null;
-      let locationQuantity: number | null = null;
-      let resolvedLocationName: string | null = null;
-
-      if (location_name) {
-        const locationAllocation =
-          await prisma.projectLocationProductQuantity.findFirst({
-            where: {
-              project_id: eligibleMapping.project_id,
-              vendor_id,
-              location_name: {
-                equals: location_name,
-                mode: "insensitive",
-              },
-              group_name: {
-                equals: productGroupName,
-                mode: "insensitive",
-              },
-            },
-            select: {
-              id: true,
-              location_name: true,
-              qty: true,
-            },
-          });
-
-        if (!locationAllocation) {
-          return validationResponse(
-            0,
-            `Location "${location_name}" is not configured for Product Group "${productGroupName}"`,
-          );
-        }
-
-        if (locationAllocation.qty <= 0) {
-          return validationResponse(
-            0,
-            `No quantity is allocated to Product Group "${productGroupName}" at location "${locationAllocation.location_name}"`,
-          );
-        }
-
-        const scannedAtLocation = await prisma.cutListMachineMapping.count({
-          where: {
-            project_id: eligibleMapping.project_id,
-            vendor_id,
-            cut_list_id,
-            project_location_product_quantity_id: locationAllocation.id,
-            actual_in_at: {
-              not: null,
-            },
-          },
-        });
-
-        if (scannedAtLocation >= locationAllocation.qty) {
-          return validationResponse(
-            0,
-            `Allocated quantity ${locationAllocation.qty} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${locationAllocation.location_name}"`,
-          );
-        }
-
-        projectLocationProductQuantityId = locationAllocation.id;
-        locationQuantity = locationAllocation.qty;
-        resolvedLocationName = locationAllocation.location_name;
-      }
-
       automaticPackingDefinition = {
         productGroupName,
         packingGroupName,
         packingGroupItems,
-        projectLocationProductQuantityId,
-        locationQuantity,
-        locationName: resolvedLocationName,
+        projectLocationProductQuantityId:
+          selectedLocationAllocation?.id ?? null,
+        locationQuantity: selectedLocationAllocation?.qty ?? null,
+        locationName: selectedLocationAllocation?.locationName ?? null,
         projectDetailsId,
         leadId: eligibleMapping.project.lead_id,
         boxPosition:
@@ -1468,6 +1486,11 @@ export const updateScannedItem = async (
           orderBy: [{ actual_in_at: "asc" }, { id: "asc" }],
           select: {
             id: true,
+            projectLocationProductQuantity: {
+              select: {
+                location_name: true,
+              },
+            },
             cut_list: {
               select: {
                 id: true,
@@ -1551,6 +1574,36 @@ export const updateScannedItem = async (
             `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`,
           );
         }
+
+        const existingLocationName =
+          existingBoxItem.projectLocationProductQuantity?.location_name.trim() ||
+          null;
+        const incomingLocationName =
+          selectedLocationAllocation?.locationName ?? null;
+
+        if (
+          existingLocationName?.toLocaleLowerCase() !==
+          incomingLocationName?.toLocaleLowerCase()
+        ) {
+          if (!existingLocationName) {
+            return validationResponse(
+              0,
+              "This box is being packed without a location. Continue without a location or select another box.",
+            );
+          }
+
+          if (!incomingLocationName) {
+            return validationResponse(
+              0,
+              `This box belongs to location "${existingLocationName}". Select that location or choose another box.`,
+            );
+          }
+
+          return validationResponse(
+            0,
+            `This box belongs to location "${existingLocationName}". Items for location "${incomingLocationName}" cannot be packed in this box.`,
+          );
+        }
       }
     }
 
@@ -1569,8 +1622,8 @@ export const updateScannedItem = async (
 
     const scanTime = new Date();
 
-    /* Update the scan and perform automatic custom-group box assignment. */
-    const executeAutomaticPackingTransaction = () =>
+    /* Save the scan, enforce location capacity, and assign automatic boxes. */
+    const executePackingTransaction = () =>
       prisma.$transaction(async (tx) => {
       const currentMappingUpdate = await tx.cutListMachineMapping.updateMany({
         where: {
@@ -1581,10 +1634,10 @@ export const updateScannedItem = async (
           actual_in_at: scanTime,
           in_operator: created_by,
           ...(box_id ? { box_id } : {}),
-          ...(automaticPackingDefinition?.projectLocationProductQuantityId
+          ...(selectedLocationAllocation
             ? {
                 project_location_product_quantity_id:
-                  automaticPackingDefinition.projectLocationProductQuantityId,
+                  selectedLocationAllocation.id,
               }
             : {}),
         },
@@ -1604,8 +1657,7 @@ export const updateScannedItem = async (
       }
 
       if (
-        automaticPackingDefinition?.projectLocationProductQuantityId &&
-        automaticPackingDefinition.locationQuantity !== null
+        selectedLocationAllocation
       ) {
         const locationScanCount = await tx.cutListMachineMapping.count({
           where: {
@@ -1613,16 +1665,16 @@ export const updateScannedItem = async (
             vendor_id,
             cut_list_id,
             project_location_product_quantity_id:
-              automaticPackingDefinition.projectLocationProductQuantityId,
+              selectedLocationAllocation.id,
             actual_in_at: {
               not: null,
             },
           },
         });
 
-        if (locationScanCount > automaticPackingDefinition.locationQuantity) {
+        if (locationScanCount > selectedLocationAllocation.qty) {
           throw new Error(
-            `Allocated quantity ${automaticPackingDefinition.locationQuantity} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${automaticPackingDefinition.locationName}"`,
+            `Allocated quantity ${selectedLocationAllocation.qty} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${selectedLocationAllocation.locationName}"`,
           );
         }
       }
@@ -1852,32 +1904,32 @@ export const updateScannedItem = async (
           boxPosition,
           boxesPerProduct,
         };
-      }, automaticPackingDefinition
+      }, automaticPackingDefinition || selectedLocationAllocation
         ? { isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
         : undefined);
     let scanUpdate: Awaited<
-      ReturnType<typeof executeAutomaticPackingTransaction>
+      ReturnType<typeof executePackingTransaction>
     > | null = null;
 
     for (let attempt = 0; attempt < 3; attempt += 1) {
       try {
-        scanUpdate = await executeAutomaticPackingTransaction();
+        scanUpdate = await executePackingTransaction();
         break;
       } catch (error: unknown) {
         const errorCode = (error as { code?: string })?.code;
-        const canRetryAutomaticBoxAssignment =
-          automaticPackingDefinition &&
+        const canRetryPackingTransaction =
+          (automaticPackingDefinition || selectedLocationAllocation) &&
           (errorCode === "P2002" || errorCode === "P2034") &&
           attempt < 2;
 
-        if (!canRetryAutomaticBoxAssignment) {
+        if (!canRetryPackingTransaction) {
           throw error;
         }
       }
     }
 
     if (!scanUpdate) {
-      throw new Error("Unable to assign an automatic packing box");
+      throw new Error("Unable to save the packing scan");
     }
 
     if (scanUpdate.count === 0) {
@@ -1981,9 +2033,9 @@ export const updateScannedItem = async (
         product_set_no: scanUpdate.productSetNo,
         box_position: scanUpdate.boxPosition,
         boxes_per_product: scanUpdate.boxesPerProduct,
-        location_name: automaticPackingDefinition?.locationName ?? null,
+        location_name: selectedLocationAllocation?.locationName ?? null,
         project_location_product_quantity_id:
-          automaticPackingDefinition?.projectLocationProductQuantityId ?? null,
+          selectedLocationAllocation?.id ?? null,
         box_total_weight:
           boxTotalWeight === null ? null : Number(boxTotalWeight.toFixed(2)),
         scanned_at: scanTime.toISOString(),
