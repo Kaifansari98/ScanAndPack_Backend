@@ -947,6 +947,8 @@ export const getLeadsByVendorAndUser = async (
             id: true,
             b2b_requirement_type_id: true,
             process_brief_id: true,
+            machine_id: true,
+            machine: { select: { id: true, machine_name: true, machine_code: true } },
             processBrief: { select: { id: true, name: true } },
             b2bRequirementType: { select: { id: true, type: true } },
           },
@@ -1109,7 +1111,7 @@ export const getLeadById = async (
       statusType: true,
       productMappings: { include: { productType: true } },
       leadB2BReqMappings: { include: { b2bRequirementType: true } },
-      leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
+      leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true, machine: true } },
       leadProductStructureMapping: { include: { productStructure: { include: { productType: true } } } },
       documents: {
         where: { deleted_at: null, documentType: { tag: "Type 1" } },

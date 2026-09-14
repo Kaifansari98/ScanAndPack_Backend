@@ -17554,7 +17554,8 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   created_by: 'created_by',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  b2b_requirement_type_id: 'b2b_requirement_type_id'
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  machine_id: 'machine_id'
 } as const
 
 export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]

@@ -1228,9 +1228,11 @@ model LeadProcessBriefMapping {
   updated_at              DateTime                  @updatedAt @map("updated_at")
   updated_by              Int?                      @map("updated_by")
   b2b_requirement_type_id Int                       @map("b2b_requirement_type_id")
+  machine_id              Int?                      @map("machine_id")
   b2bRequirementType      B2BRequirementTypeMaster? @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   createdBy               UserMaster                @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  machine                 MachineMaster?            @relation(fields: [machine_id], references: [id], onDelete: SetNull)
   processBrief            ProcessBriefMaster        @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
   updatedBy               UserMaster?               @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1239,6 +1241,7 @@ model LeadProcessBriefMapping {
   @@index([vendor_id])
   @@index([b2b_requirement_type_id])
   @@index([process_brief_id])
+  @@index([machine_id])
   @@map("LeadProcessBriefMapping")
 }
 
@@ -2966,6 +2969,7 @@ model MachineMaster {
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
   processBriefMappings  ProcessBriefMachineMapping[]
+  leadProcessBriefs     LeadProcessBriefMapping[]
   cutListRules          CutListRuleMaster[]     @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")

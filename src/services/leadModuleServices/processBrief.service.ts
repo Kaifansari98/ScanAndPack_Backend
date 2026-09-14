@@ -59,6 +59,7 @@ export interface ProcessBriefMappingItem {
   product_type_id?: number;
   b2b_requirement_type_id?: number;
   process_brief_id: number;
+  machine_id?: number | null;
 }
 
 export interface SaveLeadProcessBriefsInput {
@@ -127,16 +128,22 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
         if (!briefId) return null;
         if (reqTypeId === null) return null;
 
+        const machineId =
+          m.machine_id !== undefined && m.machine_id !== null && !isNaN(Number(m.machine_id)) && Number(m.machine_id) > 0
+            ? Number(m.machine_id)
+            : null;
+
         return {
           lead_id,
           vendor_id,
           b2b_requirement_type_id: reqTypeId,
           process_brief_id: briefId,
+          machine_id: machineId,
           created_by: validCreatedBy,
         };
       })
       .filter(
-        (item): item is { lead_id: number; vendor_id: number; b2b_requirement_type_id: number; process_brief_id: number; created_by: number } =>
+        (item): item is { lead_id: number; vendor_id: number; b2b_requirement_type_id: number; process_brief_id: number; machine_id: number | null; created_by: number } =>
           item !== null
       );
 
@@ -161,6 +168,7 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
             vendor_id,
             b2b_requirement_type_id: defaultTypeId,
             process_brief_id: briefId,
+            machine_id: null,
             created_by: validCreatedBy,
           };
         })
@@ -182,6 +190,13 @@ export const getLeadProcessBriefs = async (lead_id: number, vendor_id: number) =
     where: { lead_id, vendor_id },
     include: {
       processBrief: true,
+      machine: {
+        select: {
+          id: true,
+          machine_name: true,
+          machine_code: true,
+        },
+      },
       b2bRequirementType: {
         select: {
           id: true,

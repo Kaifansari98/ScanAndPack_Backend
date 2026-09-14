@@ -70,10 +70,15 @@ export const saveLeadProcessBriefsHandler = async (req: Request, res: Response) 
         ? mappings.map((m: any) => {
             const rawTypeId = m.b2b_requirement_type_id ?? m.product_type_id;
             const parsedTypeId = rawTypeId !== undefined && rawTypeId !== null && !isNaN(Number(rawTypeId)) ? Number(rawTypeId) : undefined;
+            const parsedMachineId =
+              m.machine_id !== undefined && m.machine_id !== null && !isNaN(Number(m.machine_id)) && Number(m.machine_id) > 0
+                ? Number(m.machine_id)
+                : null;
             return {
               b2b_requirement_type_id: parsedTypeId,
               product_type_id: parsedTypeId,
               process_brief_id: Number(m.process_brief_id),
+              machine_id: parsedMachineId,
             };
           })
         : undefined,
