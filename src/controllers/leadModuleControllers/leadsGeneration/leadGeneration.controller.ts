@@ -26,6 +26,7 @@ import {
   blockLeadService,
   unblockLeadService,
   getLeadOnlineHistory,
+  changeLeadStoreService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -3275,6 +3276,36 @@ export class LeadController {
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  changeLeadStore = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const { to_store_id, updated_by } = req.body;
+
+      if (isNaN(leadId) || isNaN(vendorId) || !to_store_id || !updated_by) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Required fields: to_store_id, updated_by, vendorId, leadId"));
+      }
+
+      const result = await changeLeadStoreService(
+        vendorId,
+        leadId,
+        Number(to_store_id),
+        Number(updated_by)
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Lead store changed successfully"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] changeLeadStore error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Failed to change lead store"));
     }
   };
 }

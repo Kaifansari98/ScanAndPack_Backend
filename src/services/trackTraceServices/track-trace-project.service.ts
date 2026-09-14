@@ -860,6 +860,7 @@ export const createProjectService_old = async (
         is_crm_enabled: true,
         is_tracktrace_enabled: true,
         is_scanpack_enabled: true,
+        is_available_unique_code: true,
       },
     });
 
@@ -1045,6 +1046,24 @@ export const createProjectService_old = async (
     const uniqueCodesToInsert = validPayload.items
       .map((item) => cleanText(item.barcode1))
       .filter(Boolean);
+
+    if (vendor.is_available_unique_code) {
+      const rowsWithoutUniqueCode = validPayload.items
+        .map((item, index) => ({
+          rowNumber: index + 2,
+          uniqueCode: cleanText(item.barcode1),
+        }))
+        .filter((item) => !item.uniqueCode)
+        .map((item) => item.rowNumber);
+
+      if (rowsWithoutUniqueCode.length > 0) {
+        throw new Error(
+          `Unique Code is required in Excel row${
+            rowsWithoutUniqueCode.length > 1 ? "s" : ""
+          }: ${rowsWithoutUniqueCode.join(", ")}`
+        );
+      }
+    }
 
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
@@ -1303,6 +1322,7 @@ export const createProjectService_old = async (
           machine,
           quantity,
           perItemWeight,
+          ruleId,
         }: {
           cutListId: number;
           machine: {
@@ -1312,6 +1332,7 @@ export const createProjectService_old = async (
           };
           quantity: number;
           perItemWeight: number;
+          ruleId?: number | null;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -1324,6 +1345,7 @@ export const createProjectService_old = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
               | Weight is stored only against packaging machine type 18
@@ -1392,7 +1414,7 @@ export const createProjectService_old = async (
           });
 
           const uniqueCode =
-            cleanText(item.barcode1) || `${row.id}-${project.id}`;
+            cleanText(item.barcode1) || String(row.id);
 
           await tx.cutList.update({
             where: {
@@ -1684,6 +1706,7 @@ export const createProjectService = async (
         is_crm_enabled: true,
         is_tracktrace_enabled: true,
         is_scanpack_enabled: true,
+        is_available_unique_code: true,
       },
     });
 
@@ -1901,6 +1924,24 @@ export const createProjectService = async (
     const uniqueCodesToInsert = validPayload.items
       .map((item) => cleanText(item.barcode1))
       .filter(Boolean);
+
+    if (vendor.is_available_unique_code) {
+      const rowsWithoutUniqueCode = validPayload.items
+        .map((item, index) => ({
+          rowNumber: index + 2,
+          uniqueCode: cleanText(item.barcode1),
+        }))
+        .filter((item) => !item.uniqueCode)
+        .map((item) => item.rowNumber);
+
+      if (rowsWithoutUniqueCode.length > 0) {
+        throw new Error(
+          `Unique Code is required in Excel row${
+            rowsWithoutUniqueCode.length > 1 ? "s" : ""
+          }: ${rowsWithoutUniqueCode.join(", ")}`
+        );
+      }
+    }
 
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
@@ -2230,6 +2271,7 @@ export const createProjectService = async (
           machine,
           quantity,
           perItemWeight,
+          ruleId,
         }: {
           cutListId: number;
           machine: {
@@ -2239,6 +2281,7 @@ export const createProjectService = async (
           };
           quantity: number;
           perItemWeight: number;
+          ruleId?: number | null;
         }) => {
           for (let i = 0; i < quantity; i++) {
             cutListMachineMappingRows.push({
@@ -2251,6 +2294,7 @@ export const createProjectService = async (
               status: "Pending",
               created_by: createdByUserId,
               expected_in: true,
+              rule_id: ruleId ?? null,
               /*
               |--------------------------------------------------------------------------
               | Weight is stored only against packaging machine type 18
@@ -2361,7 +2405,7 @@ export const createProjectService = async (
           });
 
           const uniqueCode =
-            cleanText(item.barcode1) || `${row.id}-${project.id}`;
+            cleanText(item.barcode1) || String(row.id);
 
           await tx.cutList.update({
             where: {
@@ -2735,6 +2779,7 @@ export const getTrackTraceVendorConfigService = async (vendorId: number) => {
       select: {
         id: true,
         is_crm_enabled: true,
+        is_available_unique_code: true,
       },
     });
 

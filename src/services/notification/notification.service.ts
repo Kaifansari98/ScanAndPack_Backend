@@ -282,14 +282,66 @@ export const NotificationService = {
       }),
     ]);
 
-    // Attach a default delivery_summary so the return type is satisfied.
-    // The delivery logs groupBy was removed — it ran sequentially after the
-    // main query, adding an extra DB round-trip that the frontend never used.
-    const notificationsWithDelivery: NotificationWithDelivery[] = notifications.map(
-      (n) => ({ ...n, delivery_summary: { sent: 0, failed: 0 } }),
+    // Clean up & filter out any stale LEAD_ASSIGNED notifications for online leads no longer assigned to this user
+    const leadAssignedNotifs = notifications.filter(
+      (n) => n.type === "LEAD_ASSIGNED" && n.entity_type === "online_lead" && n.entity_id,
     );
 
-    return { notifications: notificationsWithDelivery, unread_count, total_count };
+    let filteredNotifications = notifications;
+    if (leadAssignedNotifs.length > 0) {
+      const leadIds = [
+        ...new Set(leadAssignedNotifs.map((n) => n.entity_id as number)),
+      ];
+      const onlineLeads = await prisma.online_leads.findMany({
+        where: { id: { in: leadIds } },
+        select: { id: true, final_assigned_leads: true, assign_to: true },
+      });
+      const leadMap = new Map<
+        number,
+        { final_assigned_leads: number | null; assign_to: number | null }
+      >();
+      onlineLeads.forEach((l) => leadMap.set(l.id, l));
+
+      const staleNotificationIds: number[] = [];
+      filteredNotifications = notifications.filter((n) => {
+        if (
+          n.type === "LEAD_ASSIGNED" &&
+          n.entity_type === "online_lead" &&
+          n.entity_id
+        ) {
+          const lead = leadMap.get(n.entity_id);
+          if (lead) {
+            const currentAssignee = lead.final_assigned_leads || lead.assign_to;
+            if (currentAssignee && Number(currentAssignee) !== Number(userId)) {
+              staleNotificationIds.push(n.id);
+              return false;
+            }
+          }
+        }
+        return true;
+      });
+
+      if (staleNotificationIds.length > 0) {
+        prisma.notification
+          .deleteMany({
+            where: { id: { in: staleNotificationIds } },
+          })
+          .catch(() => {});
+      }
+    }
+
+    const notificationsWithDelivery: NotificationWithDelivery[] =
+      filteredNotifications.map((n) => ({
+        ...n,
+        delivery_summary: { sent: 0, failed: 0 },
+      }));
+
+    const removedCount = notifications.length - filteredNotifications.length;
+    return {
+      notifications: notificationsWithDelivery,
+      unread_count: Math.max(0, unread_count - removedCount),
+      total_count: Math.max(0, total_count - removedCount),
+    };
   },
 
   async markRead(notificationId: number, userId: number) {
@@ -466,6 +518,136 @@ async deactivatePushToken(data: {
   logger.info("Push token deactivated", { affectedRows: result.count });
 
   return { success: true, affected: result.count };
-}
+},
+
+  async sendLeadAssignedToSalesExecutive(input: {
+    vendor_id: number;
+    sales_executive_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const title = `New Lead ${leadLabel} assigned to you`;
+    const message = `A new lead ${leadLabel} has been assigned to you for review.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads/details/${input.leadId}`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.sales_executive_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.LEAD_ASSIGNED,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendLeadApprovedBySalesExecutive(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    sales_executive_name?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const salesExecutiveName = input.sales_executive_name || "Sales Executive";
+    const title = `Lead Approved`;
+    const message = `Lead ${leadLabel} has been approved by ${salesExecutiveName}. The lead has now moved to Open Lead.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads?tab=open`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.APPROVAL,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendLeadRejectedBySalesExecutive(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadId: number;
+    leadCode?: string;
+    leadName?: string;
+    sales_executive_name?: string;
+    rejection_reason?: string;
+    redirectUrl?: string;
+  }) {
+    const leadLabel =
+      input.leadCode && input.leadName
+        ? `${input.leadCode} - ${input.leadName}`
+        : input.leadCode || input.leadName || `#${input.leadId}`;
+
+    const salesExecutiveName = input.sales_executive_name || "Sales Executive";
+    const title = `Lead Rejected`;
+    const message = `Lead ${leadLabel} has been rejected by ${salesExecutiveName}. The lead moved into the Lost lead.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads/details/${input.leadId}?tab=lost`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.APPROVAL,
+      title,
+      message,
+      entity_type: "online_lead",
+      entity_id: input.leadId,
+      redirect_url,
+    });
+  },
+
+  async sendNewLeadsAddedLeadPool(input: {
+    vendor_id: number;
+    telecaller_id: number;
+    sender_id?: number | null;
+    leadCount?: number;
+    redirectUrl?: string;
+  }) {
+    const title = `New Leads Added in Lead Pool`;
+    const message = `New leads have been added in the Lead Pool. Please review the lead details and do follow up.`;
+    const redirect_url =
+      input.redirectUrl || `/dashboard/online-leads?tab=pool`;
+
+    return this.createAndSend({
+      vendor_id: input.vendor_id,
+      user_id: input.telecaller_id,
+      sender_id: input.sender_id ?? null,
+      type: NotificationType.LEAD_ASSIGNED,
+      title,
+      message,
+      entity_type: "online_lead_pool",
+      entity_id: null,
+      redirect_url,
+    });
+  },
 
 };
+
+
+
+

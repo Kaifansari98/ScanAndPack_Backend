@@ -33,7 +33,7 @@ export const applyVendorDomain = async <T extends { vendor_id?: number }>(payloa
   domain = domain.replace(/\/$/, ""); // remove trailing slash
 
   const newPayload = { ...payload } as any;
-  const urlKeys = ['projectUrl', 'leadUrl', 'taskUrl', 'conversationUrl', 'detailsUrl', 'loginUrl', 'dashboardUrl', 'vendorUrl'];
+  const urlKeys = ['projectUrl', 'leadUrl', 'taskUrl', 'conversationUrl', 'detailsUrl', 'loginUrl', 'dashboardUrl', 'vendorUrl', 'leadPoolUrl', 'openLeadUrl', 'lostLeadUrl', 'ctaLink'];
   
   for (const key of urlKeys) {
     let originalUrl = newPayload[key];

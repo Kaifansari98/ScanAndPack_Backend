@@ -19,8 +19,17 @@ export class LeadStatsService {
       is_deleted: false,
     };
 
+    const vendorData = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: { is_online_lead_feature_enabled: true },
+    });
+    const isOnlineLeadFeatureEnabled =
+      vendorData?.is_online_lead_feature_enabled === true;
+
     // ✅ Total My Tasks count (for current user)
     let totalMyTasks: number | null = null;
+    let userType = "";
+    let targetFranchiseId: number | undefined = franchiseId;
 
     // If userId is provided, check user type and apply appropriate filters
     if (userId) {
@@ -39,20 +48,20 @@ export class LeadStatsService {
         throw new Error("User does not belong to the specified vendor");
       }
 
-      const userType = user.user_type.user_type.toLowerCase();
-      const shouldIncludeFranchise = [
-        "sales-executive",
-        "custom",
-        // "site-supervisor",
-        "admin",
-        "super-admin",
-        "auditor",
-      ].includes(userType);
-      const shouldIncludeFranchiseForMyTasks = [
-        "sales-executive",
-        "custom",
-        "admin",
-      ].includes(userType);
+      const isHO = user.franchise_id
+        ? (
+            await prisma.franchiseMaster.findUnique({
+              where: { id: user.franchise_id },
+              select: { is_head_office: true },
+            })
+          )?.is_head_office === true
+        : false;
+
+      userType = user.user_type.user_type.toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+      targetFranchiseId =
+        franchiseId ??
+        (!isHO && userType !== "super-admin" ? user.franchise_id ?? undefined : undefined);
+
       const shouldUseMapping = ![
         "admin",
         "super-admin",
@@ -60,22 +69,30 @@ export class LeadStatsService {
       ].includes(userType);
       console.log("[LeadStatsService] role flags", {
         userType,
-        shouldIncludeFranchise,
+        targetFranchiseId,
         shouldUseMapping,
       });
 
-      if (shouldIncludeFranchise && franchiseId) {
+      if (targetFranchiseId) {
         whereClause = {
           ...whereClause,
-          franchise_id: franchiseId,
+          franchise_id: targetFranchiseId,
         };
       }
+
+      // My Task is a personal queue. Admin-level users can work across
+      // franchises, so its badge must not be limited by the active franchise.
+      const taskFranchiseId = ["admin", "super-admin", "auditor"].includes(
+        userType,
+      )
+        ? undefined
+        : targetFranchiseId;
 
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
-          ...(shouldIncludeFranchiseForMyTasks && franchiseId
-            ? { franchise_id: franchiseId }
+          ...(taskFranchiseId
+            ? { franchise_id: taskFranchiseId }
             : {}),
           user_id: userId,
           status: { in: ["open", "in_progress"] },
@@ -120,6 +137,9 @@ export class LeadStatsService {
           ...whereClause,
           id: { in: leadIds.length > 0 ? leadIds : [0] }, // avoid empty "in []"
         };
+        if (userType === "sales-executive" && userId) {
+          whereClause.assign_to = userId;
+        }
       }
       // ✅ Admin/super-admin → see all vendor leads
 
@@ -129,6 +149,7 @@ export class LeadStatsService {
     const baseLeadScope = {
       ...whereClause,
       activity_status: ActivityStatus.onGoing,
+      is_draft: { not: true },
     };
 
     const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
@@ -195,11 +216,61 @@ export class LeadStatsService {
         ...whereClause,
         statusType: { vendor_id: vendorId, tag: { in: overallStatusTags } },
         activity_status: ActivityStatus.onGoing,
+        is_draft: { not: true },
       },
     });
 
     const totalOpenLeads = await countByTag("Type 1", { is_draft: { not: true } });
-    const totalDraftLeads = await countByTag("Type 1", { is_draft: true });
+
+    let totalDraftLeads = 0;
+    if (isOnlineLeadFeatureEnabled) {
+      const pendingOnlineWhere: any = {
+        vendor_id: vendorId,
+        approval_status: "PENDING",
+      };
+
+      if (userType === "sales-executive" && userId) {
+        const userCondition: any = {
+          OR: [
+            { final_assigned_leads: userId },
+            {
+              AND: [
+                { final_assigned_leads: null },
+                { OR: [{ assign_to: userId }, { pending_assign_to: userId }] },
+              ],
+            },
+          ],
+        };
+
+        if (targetFranchiseId) {
+          pendingOnlineWhere.AND = [
+            {
+              OR: [
+                { pending_store_id: targetFranchiseId },
+                { store_id: targetFranchiseId },
+              ],
+            },
+            userCondition,
+          ];
+        } else {
+          Object.assign(pendingOnlineWhere, userCondition);
+        }
+      } else if (targetFranchiseId) {
+        pendingOnlineWhere.OR = [
+          { pending_store_id: targetFranchiseId },
+          { store_id: targetFranchiseId },
+        ];
+      }
+
+      const pendingOnlineCount = await prisma.online_leads.count({
+        where: pendingOnlineWhere,
+      });
+
+      const draftLeadMasterCount = await countByTag("Type 1", { is_draft: true });
+      totalDraftLeads = pendingOnlineCount + draftLeadMasterCount;
+    } else {
+      totalDraftLeads = await countByTag("Type 1", { is_draft: true });
+    }
     const totalInitialSiteMeasurementLeads = await countByTag("Type 2");
     const totalDesigningStageLeads = await countByTag("Type 3");
     const totalBookingStageLeads = await countByTag("Type 4");
@@ -369,6 +440,7 @@ export class LeadStatsService {
 
     // GROUP TOTALS
     const total_leads_group =
+      totalDraftLeads +
       totalOpenLeads +
       totalInitialSiteMeasurementLeads +
       totalDesigningStageLeads +

@@ -11,7 +11,9 @@ import {
   updateMiscType,
   updateMiscTypeStatus,
   getPendingMiscellaneousLeads as getPendingMiscellaneousLeadsService,
-  getPendingMiscellaneousLeadCountService
+  getPendingMiscellaneousLeadCountService,
+  getMiscellaneousLeadsByStatusService,
+  getMiscellaneousStatusCountsService,
 } from "../../services/leadModuleServices/miscellaneousMaster.service";
 import logger from "../../../src/utils/logger";
 
@@ -247,7 +249,8 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
-      userType === "backend";
+      userType === "backend" ||
+      userType === "miscellaneous";
     const franchiseId =
       !skipFranchiseFilter && req.body.franchise_id
         ? Number(req.body.franchise_id)
@@ -378,7 +381,8 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
-      userType === "backend";
+      userType === "backend" ||
+      userType === "miscellaneous";
     const franchiseId =
       !skipFranchiseFilter && req.query.franchise_id
         ? Number(req.query.franchise_id)
@@ -411,6 +415,142 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
     return res.status(500).json({
       success: false,
       message: "Internal server error",
+    });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/* 🔹 GET Leads by Status (Miscellaneous Module)                             */
+/* -------------------------------------------------------------------------- */
+export const getMiscellaneousLeadsByStatus = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    if (!vendorId) {
+      return res.status(400).json({
+        success: false,
+        message: "Vendor ID is required",
+      });
+    }
+
+    const {
+      status,
+      franchise_id,
+      page = 1,
+      limit = 10,
+      global_search,
+      filter_lead_code,
+      filter_name,
+      contact,
+      date_range,
+      user_id,
+      user_type,
+    } = req.body || {};
+
+    const statusSlug = String(status || req.query.status || "awaiting-approval");
+    const userType = String(user_type || req.query.user_type || "").toLowerCase();
+    const userId = user_id || (req.query.user_id ? Number(req.query.user_id) : undefined);
+    const franchiseId = franchise_id || (req.query.franchise_id ? Number(req.query.franchise_id) : undefined);
+
+    const filters = {
+      global_search,
+      filter_lead_code,
+      filter_name,
+      contact,
+      date_range,
+    };
+
+    logger.info("[MiscellaneousController] getMiscellaneousLeadsByStatus called", {
+      vendorId,
+      statusSlug,
+      franchiseId,
+      userType,
+      userId,
+      page,
+      limit,
+    });
+
+    const { miscellaneous, count } = await getMiscellaneousLeadsByStatusService(
+      vendorId,
+      statusSlug,
+      franchiseId,
+      Number(page),
+      Number(limit),
+      filters,
+      userId,
+      userType,
+    );
+
+    return res.status(200).json({
+      success: true,
+      status: statusSlug,
+      count,
+      miscellaneous,
+      data: miscellaneous,
+      leads: miscellaneous,
+      pagination: {
+        currentPage: Number(page),
+        totalPages: Math.ceil(count / Number(limit)),
+        totalRecords: count,
+        hasNext: Number(page) * Number(limit) < count,
+        hasPrev: Number(page) > 1,
+      },
+    });
+  } catch (error: any) {
+    logger.error("[MiscellaneousController] getMiscellaneousLeadsByStatus Error", {
+      error: error.message,
+      stack: error.stack,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch status leads",
+    });
+  }
+};
+
+/* -------------------------------------------------------------------------- */
+/* 🔹 GET Counts across all Statuses (Miscellaneous Sidebar Badges)           */
+/* -------------------------------------------------------------------------- */
+export const getMiscellaneousStatusCounts = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendorId);
+    if (!vendorId) {
+      return res.status(400).json({
+        success: false,
+        message: "Vendor ID is required",
+      });
+    }
+
+    const userType = String(req.query.user_type || "").toLowerCase();
+    const userId = req.query.user_id ? Number(req.query.user_id) : undefined;
+    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+
+    logger.info("[MiscellaneousController] getMiscellaneousStatusCounts called", {
+      vendorId,
+      franchiseId,
+      userType,
+      userId,
+    });
+
+    const counts = await getMiscellaneousStatusCountsService(
+      vendorId,
+      franchiseId,
+      userId,
+      userType,
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: counts,
+    });
+  } catch (error: any) {
+    logger.error("[MiscellaneousController] getMiscellaneousStatusCounts Error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch status counts",
     });
   }
 };

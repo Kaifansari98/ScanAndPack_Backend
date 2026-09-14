@@ -8,9 +8,11 @@ datasource db {
 }
 
 model VendorMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                     Int                                    @id @default(autoincrement())
   vendor_name                            String
   vendor_code                            String
+  online_leads_lead_code                 String?
   primary_contact_number                 String
   primary_contact_email                  String
   primary_contact_name                   String
@@ -51,6 +53,7 @@ model VendorMaster {
   is_scanpack_enabled                    Boolean                                @default(false)
   is_online_lead_feature_enabled         Boolean                                @default(false)
   push_lead_to_cadbid                    Boolean                                @default(false)
+  is_available_unique_code               Boolean                                @default(false)
   accounts                               AccountMaster[]
   additionalCostMasters                  AdditionalCostMaster[]                 @relation("AdditionalCostVendor")
   architechuremasters                    Architechuremaster[]
@@ -71,6 +74,8 @@ model VendorMaster {
   coreProducts                           CoreProductMaster[]
   CutList                                CutList[]
   cutListMachineMapping                  CutListMachineMapping[]
+  cutListRules                           CutListRuleMaster[]
+  ruleActions                            RuleActionMaster[]
   debitCreditNotes                       DebitCreditNote[]                      @relation("DCNVendor")
   completionPhotos                       DefectCompletionPhoto[]
   defectMaster                           DefectMaster[]
@@ -261,6 +266,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                                                             Int                                    @id @default(autoincrement())
   vendor_id                                                                      Int
   user_name                                                                      String
@@ -294,6 +300,8 @@ model UserMaster {
   companyVendorsUpdated                                                          CompanyVendorsMaster[]                 @relation("CompanyVendorUpdatedBy")
   operator                                                                       CutListMachineMapping[]
   mappingSiteIns                                                                 CutListMachineMapping[]                @relation("MappingSiteInBy")
+  cutListRulesCreated                                                            CutListRuleMaster[]                    @relation("CutListRulesCreated")
+  cutListRulesUpdated                                                            CutListRuleMaster[]                    @relation("CutListRulesUpdated")
   dcnsCreated                                                                    DebitCreditNote[]                      @relation("DCNCreatedBy")
   dcnsSettled                                                                    DebitCreditNote[]                      @relation("DCNSettledBy")
   completionPhotos                                                               DefectCompletionPhoto[]
@@ -725,6 +733,7 @@ model ClientTypeMaster {
 }
 
 model LeadMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                          Int                                   @id @default(autoincrement())
   firstname                                   String
   lastname                                    String
@@ -841,6 +850,7 @@ model LeadMaster {
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
+  online_leads                                online_leads[]
   b2bDocuments                                LeadB2BDocument[]
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
   hardwareMappings                            LeadHardwareMapping[]
@@ -1171,20 +1181,21 @@ model LeadProductMapping {
 }
 
 model ProductTypeMaster {
-  id                             Int                              @id @default(autoincrement())
-  type                           String
-  vendor_id                      Int
-  tag                            String
-  status                         String                           @default("active")
-  LeadDetailedLogs               LeadDetailedLogs[]
-  documents                      LeadDocuments[]                  @relation("LeadDocumentsToProductType")
-  leads                          LeadProductMapping[]
-  productStructureInstances      LeadProductStructureInstance[]
-  Ledger                         Ledger[]
-  PaymentInfo                    PaymentInfo[]
-  productStructures              ProductStructure[]
-  vendor                         VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadBillingAddresses           LeadBillingAddress[]
+  productsRequiredForProduction ProductsRequiredForProduction[]
+  id                        Int                            @id @default(autoincrement())
+  type                      String
+  vendor_id                 Int
+  tag                       String
+  status                    String                         @default("active")
+  LeadDetailedLogs          LeadDetailedLogs[]
+  documents                 LeadDocuments[]                @relation("LeadDocumentsToProductType")
+  leads                     LeadProductMapping[]
+  productStructureInstances LeadProductStructureInstance[]
+  Ledger                    Ledger[]
+  PaymentInfo               PaymentInfo[]
+  productStructures         ProductStructure[]
+  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadBillingAddresses      LeadBillingAddress[]
 }
 
 model ProcessBriefMaster {
@@ -1796,6 +1807,7 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                         Int                           @id @default(autoincrement())
   vendor_id                                  Int
   lead_id                                    Int
@@ -2570,6 +2582,7 @@ model CompanyVendorsMaster {
   primary_contact_id           Int?
   vendor_name                  String                                 @default("")
   is_active                    Boolean                                @default(true)
+  is_inventory_company_vendor Boolean                                @default(false)
   addresses                    CompanyVendorAddress[]
   bankAccounts                 CompanyVendorBankAccount[]
   contactPersons               CompanyVendorContactPerson[]           @relation("CompanyVendorContacts")
@@ -2723,6 +2736,7 @@ model MiscellaneousMaster {
   exp_of_rejection         String?
   misc_approved            Boolean?
   required_delivery_date   DateTime?
+  solution                 String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -2952,6 +2966,7 @@ model MachineMaster {
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
   processBriefMappings  ProcessBriefMachineMapping[]
+  cutListRules          CutListRuleMaster[]     @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
   @@index([vendor_id, status])
@@ -3033,10 +3048,13 @@ model CutListMachineMapping {
   machine            MachineMaster           @relation(fields: [machine_id], references: [id])
   project            ProjectMaster           @relation(fields: [project_id], references: [id])
   siteInByUser       UserMaster?             @relation("MappingSiteInBy", fields: [site_in_by], references: [id])
+  rule_id            Int?
+  rule               CutListRuleMaster?      @relation(fields: [rule_id], references: [id], onDelete: SetNull)
   vendor             VendorMaster            @relation(fields: [vendor_id], references: [id])
   completionPhotos   DefectCompletionPhoto[]
   defectedItems      DefectedItem[]
 
+  @@index([rule_id])
   @@index([cut_list_id])
   @@index([machine_id])
   @@index([project_id])
@@ -3172,6 +3190,7 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
   franchise_name                                                             String
@@ -3511,6 +3530,7 @@ model BrandMaster {
 }
 
 model ProductMaster {
+  productsRequiredForProduction ProductsRequiredForProduction[]
   id                       Int                              @id @default(autoincrement())
   vendor_id                Int
   item_id                  Int?
@@ -4226,6 +4246,7 @@ model ProductSupplierMapping {
   company_vendor_id          Int
   supplier_item_code         String?
   amount                     Decimal?             @db.Decimal(18, 2)
+  final_amount               Decimal?             @db.Decimal(18, 2)
   is_active                  Boolean              @default(true)
   created_by                 Int?
   updated_by                 Int?
@@ -4856,17 +4877,27 @@ model online_leads {
   lastname                                                 String?
   alt_contact_no                                           String?
   site_address                                             String?
+  city                                                     String?
   site_type_id                                             Int?
   source_id                                                Int?
   refered_by                                               String?
   archetech_name                                           String?
   archetech_number                                         String?
   priority                                                 String?
+  approval_status                                          String?
+  pending_status_id                                        Int?
+  pending_store_id                                         Int?
+  pending_follow_up_date                                   DateTime?
+  pending_remark                                           String?
+  pending_assign_to                                        Int?
+  pending_created_by                                       Int?
+  lead_master_id                                           Int?
   product_types                                            String[]                     @default([])
   product_structures                                       String[]                     @default([])
   online_lead_call_log                                     online_lead_call_log[]
   online_lead_history                                      online_lead_history[]
   online_lead_store_log                                    online_lead_store_log[]
+  LeadMaster                                               LeadMaster?                  @relation(fields: [lead_master_id], references: [id], onDelete: SetNull)
   UserMaster_online_leads_assign_toToUserMaster            UserMaster?                  @relation("online_leads_assign_toToUserMaster", fields: [assign_to], references: [id])
   UserMaster_online_leads_created_byToUserMaster           UserMaster?                  @relation("online_leads_created_byToUserMaster", fields: [created_by], references: [id])
   UserMaster_online_leads_final_assigned_leadsToUserMaster UserMaster?                  @relation("online_leads_final_assigned_leadsToUserMaster", fields: [final_assigned_leads], references: [id])
@@ -5388,3 +5419,193 @@ model MetaLead {
 
   @@map("meta_leads")
 }
+
+model BoxItemDeleteLog {
+  id                          Int       @id @default(autoincrement())
+  cut_list_machine_mapping_id Int?
+  cut_list_id                 Int?
+  qty                         Int       @default(1)
+  box_id                      Int
+  project_id                  Int
+  vendor_id                   Int
+  scanned_by                  Int?
+  scanned_at                  DateTime?
+  deleted_by                  Int?
+  deleted_at                  DateTime  @default(now())
+  created_at                  DateTime  @default(now())
+
+  @@index([vendor_id, project_id, box_id])
+  @@index([deleted_by])
+  @@index([deleted_at])
+}
+
+model ProductsRequiredForProduction {
+  id              Int      @id @default(autoincrement())
+  vendor_id       Int
+  franchise_id    Int
+  lead_id         Int
+  product_type_id Int?
+  instance_id     Int?
+  product_id      Int
+  article_code    String
+  type            String
+  category        String
+  qty             Decimal  @db.Decimal(12, 2)
+  unit            String
+  name            String
+  created_at      DateTime @default(now())
+  created_by      Int
+
+  vendor      VendorMaster                  @relation(fields: [vendor_id], references: [id])
+  franchise   FranchiseMaster               @relation(fields: [franchise_id], references: [id])
+  lead        LeadMaster                    @relation(fields: [lead_id], references: [id])
+  productType ProductTypeMaster?            @relation(fields: [product_type_id], references: [id])
+  instance    LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  product     ProductMaster                 @relation(fields: [product_id], references: [id])
+  createdBy   UserMaster                    @relation(fields: [created_by], references: [id])
+
+  @@index([vendor_id, franchise_id, lead_id])
+  @@index([franchise_id])
+  @@index([lead_id])
+  @@index([product_type_id])
+  @@index([instance_id])
+  @@index([product_id])
+  @@index([created_by])
+}
+
+enum RuleStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RuleConditionType {
+  COLUMN
+  CATEGORY
+}
+
+enum RuleOperator {
+  EQUALS
+  NOT_EQUALS
+  CONTAINS
+  NOT_CONTAINS
+  LESS_THAN
+  LESS_THAN_OR_EQUAL
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL
+  IN
+  NOT_IN
+  BETWEEN
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+enum RuleFieldDataType {
+  STRING
+  NUMBER
+  BOOLEAN
+  ARRAY
+}
+
+model CutListRuleMaster {
+  id                     Int                         @id @default(autoincrement())
+  vendor_id              Int
+  machine_id             Int
+  rule_code              String
+  rule_name              String
+  rule_tag               String?                     @default("CUTLIST_MACHINE_ROUTING")
+  priority               Int                         @default(10)
+  status                 RuleStatus                  @default(ACTIVE)
+  created_by             Int?
+  updated_by             Int?
+  created_at             DateTime                    @default(now())
+  updated_at             DateTime                    @updatedAt
+
+  vendor                 VendorMaster                @relation(fields: [vendor_id], references: [id])
+  machine                MachineMaster               @relation("CutListRules", fields: [machine_id], references: [id])
+  createdBy              UserMaster?                 @relation("CutListRulesCreated", fields: [created_by], references: [id])
+  updatedBy              UserMaster?                 @relation("CutListRulesUpdated", fields: [updated_by], references: [id])
+
+  conditionGroups        CutListRuleConditionGroup[]
+  actions                CutListRuleAction[]
+  cutListMachineMappings CutListMachineMapping[]
+
+  @@unique([vendor_id, machine_id, rule_code], name: "vendor_machine_rule_code_unique")
+  @@index([vendor_id, machine_id, status])
+}
+
+model CutListRuleConditionGroup {
+  id               Int                    @id @default(autoincrement())
+  rule_id          Int
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime               @default(now())
+  updated_at       DateTime               @updatedAt
+
+  rule             CutListRuleMaster      @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  conditions       CutListRuleCondition[]
+
+  @@index([rule_id])
+}
+
+model CutListRuleCondition {
+  id               Int                       @id @default(autoincrement())
+  group_id         Int
+  condition_type   RuleConditionType
+  field_key        String?
+  operator         RuleOperator
+  value            Json
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime                  @default(now())
+  updated_at       DateTime                  @updatedAt
+
+  group            CutListRuleConditionGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+
+  @@index([group_id])
+}
+
+model CutListRuleAction {
+  id           Int               @id @default(autoincrement())
+  rule_id      Int
+  action_id    Int
+  action_value Json?
+  sequence_no  Int
+  created_at   DateTime          @default(now())
+  updated_at   DateTime          @updatedAt
+
+  rule         CutListRuleMaster @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  actionMaster RuleActionMaster  @relation(fields: [action_id], references: [id])
+
+  @@index([rule_id])
+  @@index([action_id])
+}
+
+model RuleFieldMaster {
+  id         Int               @id @default(autoincrement())
+  field_key  String            @unique
+  field_name String
+  data_type  RuleFieldDataType
+  status     RuleStatus        @default(ACTIVE)
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
+}
+
+model RuleActionMaster {
+  id          Int                 @id @default(autoincrement())
+  vendor_id   Int
+  action_code String
+  action_name String
+  status      RuleStatus          @default(ACTIVE)
+  created_at  DateTime            @default(now())
+  updated_at  DateTime            @updatedAt
+
+  vendor      VendorMaster        @relation(fields: [vendor_id], references: [id])
+  ruleActions CutListRuleAction[]
+
+  @@unique([vendor_id, action_code], name: "vendor_action_code_unique")
+  @@index([vendor_id])
+}
+

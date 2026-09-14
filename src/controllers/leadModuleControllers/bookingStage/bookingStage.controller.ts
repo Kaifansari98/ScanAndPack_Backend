@@ -704,6 +704,8 @@ export class BookingStageController {
         production_status: req.body.production_status,
         pending_services: req.body.pending_services,
         franchises: req.body.franchises,
+        strict_status_tag: req.body.strict_status_tag === true,
+        material_issue_ready_only: req.body.material_issue_ready_only === true,
       };
 
       // ============================
