@@ -875,6 +875,101 @@ export class UnderInstallationStageController {
     }
   }
 
+  async updateMiscellaneousEntry(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId || req.body.lead_id);
+      const miscId = Number(req.params.miscId);
+
+      const {
+        misc_type_id,
+        problem_description,
+        reorder_material_details,
+        quantity,
+        cost,
+        supervisor_remark,
+        expected_ready_date,
+        solution,
+        teams, // comma-separated string "1,2,3" or array
+        updated_by,
+      } = req.body;
+
+      const files = req.files as Express.Multer.File[];
+
+      let parsedTeams: number[] | undefined = undefined;
+      if (teams !== undefined) {
+        parsedTeams = Array.isArray(teams)
+          ? teams.map(Number)
+          : typeof teams === "string" && teams.trim().length > 0
+          ? teams.split(",").map((t: string) => Number(t.trim()))
+          : [];
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype,
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
+      const payload = {
+        misc_id: miscId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+        misc_type_id: misc_type_id ? Number(misc_type_id) : undefined,
+        problem_description,
+        reorder_material_details,
+        quantity:
+          quantity !== undefined && quantity !== null && quantity !== ""
+            ? Number(quantity)
+            : undefined,
+        cost:
+          cost !== undefined && cost !== null && cost !== ""
+            ? Number(cost)
+            : undefined,
+        supervisor_remark: supervisor_remark || undefined,
+        expected_ready_date: expected_ready_date
+          ? new Date(expected_ready_date)
+          : undefined,
+        solution: typeof solution === "string" ? solution : undefined,
+        updated_by: Number(updated_by),
+        teams: parsedTeams,
+        files: uploadedFiles,
+      };
+
+      const result =
+        await UnderInstallationStageService.updateMiscellaneousService(payload);
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous entry updated successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in updateMiscellaneousEntry:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+
 
 
   
@@ -988,12 +1083,19 @@ export class UnderInstallationStageController {
         });
       }
 
+      if (!solution || typeof solution !== "string" || !solution.trim()) {
+        return res.status(400).json({
+          success: false,
+          error: "Solution is required",
+        });
+      }
+
       const baseUrl = resolveClientBaseUrl(req);
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
-        solution: typeof solution === "string" ? solution : undefined,
+        solution: solution.trim(),
         updated_by,
         baseUrl,
       });
@@ -1208,7 +1310,9 @@ export class UnderInstallationStageController {
         "Error uploading misc completion documents:",
         error.message,
       );
-      return res.status(500).json({ success: false, error: error.message });
+      return res
+        .status(error.statusCode || 500)
+        .json({ success: false, error: error.message });
     }
   }
 
@@ -1740,7 +1844,7 @@ export class UnderInstallationStageController {
       });
     } catch (err: any) {
       console.error("❌ Error in markMiscellaneousTaskReady:", err.message);
-      return res.status(500).json({
+      return res.status(err.statusCode || 500).json({
         success: false,
         error: err.message || "Something went wrong",
       });

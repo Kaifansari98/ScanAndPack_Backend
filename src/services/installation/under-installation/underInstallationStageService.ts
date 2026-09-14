@@ -31,11 +31,28 @@ interface MiscPayload {
   baseUrl: string;
 }
 
+interface UpdateMiscPayload {
+  misc_id: number;
+  vendor_id: number;
+  lead_id?: number;
+  misc_type_id?: number;
+  problem_description?: string;
+  reorder_material_details?: string;
+  quantity?: number | null;
+  cost?: number | null;
+  supervisor_remark?: string | null;
+  expected_ready_date?: Date | null;
+  solution?: string | null;
+  teams?: number[];
+  files?: { originalName: string; sysName: string }[];
+  updated_by: number;
+}
+
 interface UpdateERDInput {
   vendor_id: number;
   misc_id: number;
   expected_ready_date: string;
-  solution?: string;
+  solution: string;
   updated_by: number;
   baseUrl: string;
 }
@@ -1554,6 +1571,175 @@ export class UnderInstallationStageService {
     return misc.misc;
   }
 
+  static async updateMiscellaneousService(payload: UpdateMiscPayload) {
+    const {
+      misc_id,
+      vendor_id,
+      lead_id,
+      misc_type_id,
+      problem_description,
+      reorder_material_details,
+      quantity,
+      cost,
+      supervisor_remark,
+      expected_ready_date,
+      solution,
+      teams,
+      files,
+      updated_by,
+    } = payload;
+
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      const updatingUser = await tx.userMaster.findUnique({
+        where: { id: updated_by },
+        include: { user_type: true },
+      });
+      const normalizedType = updatingUser?.user_type?.user_type
+        ?.toLowerCase()
+        .trim()
+        .replace(/_/g, "-");
+
+      const isSuperAdmin = normalizedType === "super-admin";
+      const isMiscellaneousUser = normalizedType === "miscellaneous";
+
+      if (!isSuperAdmin && !isMiscellaneousUser) {
+        throw new Error(
+          "Only Miscellaneous user and Super Admin are permitted to edit miscellaneous details",
+        );
+      }
+
+      if (existing.misc_approved === true && !isSuperAdmin) {
+        throw new Error(
+          "Only Super Admin can edit approved miscellaneous issues",
+        );
+      }
+
+      const dataToUpdate: any = {
+        updated_by,
+      };
+
+      if (misc_type_id !== undefined && misc_type_id !== null) {
+        dataToUpdate.misc_type_id = Number(misc_type_id);
+      }
+      if (problem_description !== undefined) {
+        dataToUpdate.problem_description = problem_description.trim();
+      }
+      if (reorder_material_details !== undefined && reorder_material_details.trim()) {
+        dataToUpdate.reorder_material_details = reorder_material_details.trim();
+      }
+      if (supervisor_remark !== undefined) {
+        dataToUpdate.supervisor_remark = supervisor_remark?.trim() || null;
+      }
+      if (quantity !== undefined) {
+        dataToUpdate.quantity =
+          quantity !== null && quantity !== undefined ? Number(quantity) : null;
+      }
+      if (cost !== undefined) {
+        dataToUpdate.cost =
+          cost !== null && cost !== undefined ? Number(cost) : null;
+      }
+      if (expected_ready_date !== undefined) {
+        dataToUpdate.expected_ready_date = expected_ready_date
+          ? new Date(expected_ready_date)
+          : null;
+      }
+      if (solution !== undefined) {
+        dataToUpdate.solution = solution?.trim() || null;
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: dataToUpdate,
+      });
+
+      // Update teams if provided
+      if (teams && Array.isArray(teams)) {
+        await tx.miscellaneousTeamMapping.deleteMany({
+          where: { miscellaneous_id: misc_id },
+        });
+        if (teams.length > 0) {
+          await tx.miscellaneousTeamMapping.createMany({
+            data: teams.map((teamId) => ({
+              miscellaneous_id: misc_id,
+              team_id: Number(teamId),
+            })),
+          });
+        }
+      }
+
+      // Add new files if uploaded
+      if (files && files.length > 0) {
+        const docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 24" },
+        });
+
+        if (docType) {
+          for (const doc of files) {
+            const leadDoc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: doc.originalName,
+                doc_sys_name: doc.sysName,
+                vendor_id,
+                lead_id: lead_id || existing.lead_id,
+                created_by: updated_by,
+                doc_type_id: docType.id,
+              },
+            });
+
+            await tx.miscellaneousDocument.create({
+              data: {
+                vendor_id,
+                miscellaneous_id: misc_id,
+                document_id: leadDoc.id,
+                created_by: updated_by,
+              },
+            });
+          }
+        }
+      }
+
+      // Update associated task remark if found
+      const oldRemarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const newRemarkKey = `${updated.reorder_material_details} - ${updated.problem_description}`;
+      const miscTaskKey = `[misc:${misc_id}]`;
+
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: oldRemarkKey },
+            { remark: { contains: existing.reorder_material_details } },
+          ],
+        },
+      });
+
+      if (task) {
+        await tx.userLeadTask.update({
+          where: { id: task.id },
+          data: {
+            remark: `${newRemarkKey} ${miscTaskKey}`,
+            due_date: updated.expected_ready_date ? updated.expected_ready_date : task.due_date,
+          },
+        });
+      }
+
+      return updated;
+    });
+
+    return result;
+  }
+
   static async addMiscDocumentsService(payload: {
     misc_id: number;
     vendor_id: number;
@@ -2418,6 +2604,7 @@ export class UnderInstallationStageService {
           id: true,
           lead_id: true,
           remark: true,
+          due_date: true,
         },
       });
 
@@ -2444,11 +2631,46 @@ export class UnderInstallationStageService {
           reorder_material_details,
           problem_description,
         },
-        select: { id: true },
+        select: { id: true, required_delivery_date: true },
       });
 
       if (!misc) {
         throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      // Check role permissions: Non-super-admin cannot complete before Required Delivery Date
+      const uploadingUser = await tx.userMaster.findUnique({
+        where: { id: created_by },
+        include: { user_type: true },
+      });
+      const normalizedType =
+        uploadingUser?.user_type?.user_type
+          ?.toLowerCase()
+          .trim()
+          .replace(/_/g, "-")
+          .replace(/\s+/g, "-") || "";
+      const isSuperAdmin = normalizedType === "super-admin";
+
+      const deliveryDate = misc.required_delivery_date || task.due_date;
+      if (!isSuperAdmin && deliveryDate) {
+        const dDate = new Date(deliveryDate);
+        const dIso = dDate.toISOString().slice(0, 10);
+        const now = new Date();
+        const kolkataToday = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(now);
+
+        if (kolkataToday < dIso) {
+          throw Object.assign(
+            new Error(
+              `Cannot mark as completed before Required Delivery Date (${dIso}). Only super-admin can complete before Required Delivery Date.`
+            ),
+            { statusCode: 400 }
+          );
+        }
       }
 
       let docType = await tx.documentTypeMaster.findFirst({
@@ -2524,12 +2746,15 @@ export class UnderInstallationStageService {
       if (existing.misc_approved !== true) {
         throw new Error("Miscellaneous entry is not approved");
       }
+      if (!solution || typeof solution !== "string" || !solution.trim()) {
+        throw new Error("Solution is required");
+      }
 
       const updated = await tx.miscellaneousMaster.update({
         where: { id: misc_id },
         data: {
           expected_ready_date: new Date(expected_ready_date),
-          ...(solution !== undefined ? { solution: solution ? solution.trim() : null } : {}),
+          solution: solution.trim(),
           updated_by,
         },
       });
@@ -3815,6 +4040,7 @@ export class UnderInstallationStageService {
           account_id: true,
           reorder_material_details: true,
           problem_description: true,
+          expected_ready_date: true,
         },
       });
 
@@ -3822,6 +4048,40 @@ export class UnderInstallationStageService {
         throw Object.assign(new Error("Miscellaneous entry not found"), {
           statusCode: 404,
         });
+      }
+
+      // Check role permissions: Factory users cannot mark as ready before expected_ready_date; Super-admin can
+      const readyByUser = await tx.userMaster.findUnique({
+        where: { id: ready_by },
+        include: { user_type: true },
+      });
+      const normalizedType =
+        readyByUser?.user_type?.user_type
+          ?.toLowerCase()
+          .trim()
+          .replace(/_/g, "-")
+          .replace(/\s+/g, "-") || "";
+      const isSuperAdmin = normalizedType === "super-admin";
+
+      if (!isSuperAdmin && existing.expected_ready_date) {
+        const erd = new Date(existing.expected_ready_date);
+        const erdIso = erd.toISOString().slice(0, 10);
+        const now = new Date();
+        const kolkataToday = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(now);
+
+        if (kolkataToday < erdIso) {
+          throw Object.assign(
+            new Error(
+              `Cannot mark as ready before Expected Ready Date (${erdIso}). Only super-admin can mark as ready before ERD.`
+            ),
+            { statusCode: 400 }
+          );
+        }
       }
 
       // Save optional ready documents (Type 41)

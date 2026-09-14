@@ -100,6 +100,16 @@ underInstallationStageRoutes.get(
 );
 
 /**
+ * ✅ PUT → Update Miscellaneous Entry Details
+ * @route PUT /vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.updateMiscellaneousEntry,
+);
+
+/**
  * ✅ PUT → Update Expected Ready Date
  * @route PUT /miscellaneous/vendorId/:vendorId/miscId/:miscId/update-erd
  */
