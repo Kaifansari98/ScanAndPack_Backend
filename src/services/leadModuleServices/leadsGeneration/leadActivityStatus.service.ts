@@ -307,6 +307,7 @@ const clonePartialLeadForScopedStatus = async (
         vendor_id: mapping.vendor_id,
         process_brief_id: mapping.process_brief_id,
         b2b_requirement_type_id: mapping.b2b_requirement_type_id,
+        machine_id: mapping.machine_id,
         created_by: createdBy,
         created_at: new Date(),
         updated_by: createdBy,

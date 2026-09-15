@@ -253,6 +253,7 @@ export type ProcessBriefMasterWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"ProcessBriefMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProcessBriefMaster"> | number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  machineMappings?: Prisma.ProcessBriefMachineMappingListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -268,6 +269,7 @@ export type ProcessBriefMasterOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingOrderByRelationAggregateInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingOrderByRelationAggregateInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -286,6 +288,7 @@ export type ProcessBriefMasterWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"ProcessBriefMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProcessBriefMaster"> | number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingListRelationFilter
+  machineMappings?: Prisma.ProcessBriefMachineMappingListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -327,6 +330,7 @@ export type ProcessBriefMasterCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
@@ -342,6 +346,7 @@ export type ProcessBriefMasterUncheckedCreateInput = {
   updated_at?: Date | string
   updated_by?: number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterUpdateInput = {
@@ -350,6 +355,7 @@ export type ProcessBriefMasterUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
@@ -365,6 +371,7 @@ export type ProcessBriefMasterUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterCreateManyInput = {
@@ -598,12 +605,27 @@ export type ProcessBriefMasterUpdateOneRequiredWithoutLeadProcessBriefsNestedInp
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessBriefMasterUpdateToOneWithWhereWithoutLeadProcessBriefsInput, Prisma.ProcessBriefMasterUpdateWithoutLeadProcessBriefsInput>, Prisma.ProcessBriefMasterUncheckedUpdateWithoutLeadProcessBriefsInput>
 }
 
+export type ProcessBriefMasterCreateNestedOneWithoutMachineMappingsInput = {
+  create?: Prisma.XOR<Prisma.ProcessBriefMasterCreateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedCreateWithoutMachineMappingsInput>
+  connectOrCreate?: Prisma.ProcessBriefMasterCreateOrConnectWithoutMachineMappingsInput
+  connect?: Prisma.ProcessBriefMasterWhereUniqueInput
+}
+
+export type ProcessBriefMasterUpdateOneRequiredWithoutMachineMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProcessBriefMasterCreateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedCreateWithoutMachineMappingsInput>
+  connectOrCreate?: Prisma.ProcessBriefMasterCreateOrConnectWithoutMachineMappingsInput
+  upsert?: Prisma.ProcessBriefMasterUpsertWithoutMachineMappingsInput
+  connect?: Prisma.ProcessBriefMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProcessBriefMasterUpdateToOneWithWhereWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUpdateWithoutMachineMappingsInput>, Prisma.ProcessBriefMasterUncheckedUpdateWithoutMachineMappingsInput>
+}
+
 export type ProcessBriefMasterCreateWithoutVendorInput = {
   name: string
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
 }
@@ -617,6 +639,7 @@ export type ProcessBriefMasterUncheckedCreateWithoutVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterCreateOrConnectWithoutVendorInput = {
@@ -665,6 +688,7 @@ export type ProcessBriefMasterCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutProcessBriefInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
@@ -678,6 +702,7 @@ export type ProcessBriefMasterUncheckedCreateWithoutCreatedByInput = {
   updated_at?: Date | string
   updated_by?: number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterCreateOrConnectWithoutCreatedByInput = {
@@ -696,6 +721,7 @@ export type ProcessBriefMasterCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
 }
@@ -709,6 +735,7 @@ export type ProcessBriefMasterUncheckedCreateWithoutUpdatedByInput = {
   created_by: number
   updated_at?: Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProcessBriefInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -758,6 +785,7 @@ export type ProcessBriefMasterCreateWithoutLeadProcessBriefsInput = {
   is_active?: boolean
   created_at?: Date | string
   updated_at?: Date | string
+  machineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutProcessBriefInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
@@ -772,6 +800,7 @@ export type ProcessBriefMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   created_by: number
   updated_at?: Date | string
   updated_by?: number | null
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutProcessBriefInput
 }
 
 export type ProcessBriefMasterCreateOrConnectWithoutLeadProcessBriefsInput = {
@@ -795,6 +824,7 @@ export type ProcessBriefMasterUpdateWithoutLeadProcessBriefsInput = {
   is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  machineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
@@ -809,6 +839,69 @@ export type ProcessBriefMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
+}
+
+export type ProcessBriefMasterCreateWithoutMachineMappingsInput = {
+  name: string
+  is_active?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutProcessBriefInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsCreatedInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutProcessBriefsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProcessBriefsInput
+}
+
+export type ProcessBriefMasterUncheckedCreateWithoutMachineMappingsInput = {
+  id?: number
+  vendor_id: number
+  name: string
+  is_active?: boolean
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by?: number | null
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutProcessBriefInput
+}
+
+export type ProcessBriefMasterCreateOrConnectWithoutMachineMappingsInput = {
+  where: Prisma.ProcessBriefMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProcessBriefMasterCreateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedCreateWithoutMachineMappingsInput>
+}
+
+export type ProcessBriefMasterUpsertWithoutMachineMappingsInput = {
+  update: Prisma.XOR<Prisma.ProcessBriefMasterUpdateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedUpdateWithoutMachineMappingsInput>
+  create: Prisma.XOR<Prisma.ProcessBriefMasterCreateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedCreateWithoutMachineMappingsInput>
+  where?: Prisma.ProcessBriefMasterWhereInput
+}
+
+export type ProcessBriefMasterUpdateToOneWithWhereWithoutMachineMappingsInput = {
+  where?: Prisma.ProcessBriefMasterWhereInput
+  data: Prisma.XOR<Prisma.ProcessBriefMasterUpdateWithoutMachineMappingsInput, Prisma.ProcessBriefMasterUncheckedUpdateWithoutMachineMappingsInput>
+}
+
+export type ProcessBriefMasterUpdateWithoutMachineMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
+}
+
+export type ProcessBriefMasterUncheckedUpdateWithoutMachineMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterCreateManyVendorInput = {
@@ -827,6 +920,7 @@ export type ProcessBriefMasterUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
 }
@@ -840,6 +934,7 @@ export type ProcessBriefMasterUncheckedUpdateWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -878,6 +973,7 @@ export type ProcessBriefMasterUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutProcessBriefNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutProcessBriefsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
@@ -891,6 +987,7 @@ export type ProcessBriefMasterUncheckedUpdateWithoutCreatedByInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -909,6 +1006,7 @@ export type ProcessBriefMasterUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutProcessBriefNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutProcessBriefsCreatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProcessBriefsNestedInput
 }
@@ -922,6 +1020,7 @@ export type ProcessBriefMasterUncheckedUpdateWithoutUpdatedByInput = {
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
+  machineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutProcessBriefNestedInput
 }
 
 export type ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -941,10 +1040,12 @@ export type ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByInput = {
 
 export type ProcessBriefMasterCountOutputType = {
   leadProcessBriefs: number
+  machineMappings: number
 }
 
 export type ProcessBriefMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadProcessBriefs?: boolean | ProcessBriefMasterCountOutputTypeCountLeadProcessBriefsArgs
+  machineMappings?: boolean | ProcessBriefMasterCountOutputTypeCountMachineMappingsArgs
 }
 
 /**
@@ -964,6 +1065,13 @@ export type ProcessBriefMasterCountOutputTypeCountLeadProcessBriefsArgs<ExtArgs 
   where?: Prisma.LeadProcessBriefMappingWhereInput
 }
 
+/**
+ * ProcessBriefMasterCountOutputType without action
+ */
+export type ProcessBriefMasterCountOutputTypeCountMachineMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcessBriefMachineMappingWhereInput
+}
+
 
 export type ProcessBriefMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -975,6 +1083,7 @@ export type ProcessBriefMasterSelect<ExtArgs extends runtime.Types.Extensions.In
   updated_at?: boolean
   updated_by?: boolean
   leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
+  machineMappings?: boolean | Prisma.ProcessBriefMaster$machineMappingsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1023,6 +1132,7 @@ export type ProcessBriefMasterSelectScalar = {
 export type ProcessBriefMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "is_active" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["processBriefMaster"]>
 export type ProcessBriefMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   leadProcessBriefs?: boolean | Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>
+  machineMappings?: boolean | Prisma.ProcessBriefMaster$machineMappingsArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1043,6 +1153,7 @@ export type $ProcessBriefMasterPayload<ExtArgs extends runtime.Types.Extensions.
   name: "ProcessBriefMaster"
   objects: {
     leadProcessBriefs: Prisma.$LeadProcessBriefMappingPayload<ExtArgs>[]
+    machineMappings: Prisma.$ProcessBriefMachineMappingPayload<ExtArgs>[]
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -1451,6 +1562,7 @@ readonly fields: ProcessBriefMasterFieldRefs;
 export interface Prisma__ProcessBriefMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   leadProcessBriefs<T extends Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProcessBriefMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  machineMappings<T extends Prisma.ProcessBriefMaster$machineMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$machineMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcessBriefMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProcessBriefMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1913,6 +2025,30 @@ export type ProcessBriefMaster$leadProcessBriefsArgs<ExtArgs extends runtime.Typ
   take?: number
   skip?: number
   distinct?: Prisma.LeadProcessBriefMappingScalarFieldEnum | Prisma.LeadProcessBriefMappingScalarFieldEnum[]
+}
+
+/**
+ * ProcessBriefMaster.machineMappings
+ */
+export type ProcessBriefMaster$machineMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcessBriefMachineMapping
+   */
+  select?: Prisma.ProcessBriefMachineMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcessBriefMachineMapping
+   */
+  omit?: Prisma.ProcessBriefMachineMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcessBriefMachineMappingInclude<ExtArgs> | null
+  where?: Prisma.ProcessBriefMachineMappingWhereInput
+  orderBy?: Prisma.ProcessBriefMachineMappingOrderByWithRelationInput | Prisma.ProcessBriefMachineMappingOrderByWithRelationInput[]
+  cursor?: Prisma.ProcessBriefMachineMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcessBriefMachineMappingScalarFieldEnum | Prisma.ProcessBriefMachineMappingScalarFieldEnum[]
 }
 
 /**

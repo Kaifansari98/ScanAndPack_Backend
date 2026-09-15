@@ -1065,6 +1065,7 @@ export type LeadMasterWhereInput = {
   userMappings?: Prisma.LeadUserMappingListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
   miscellaneousMaster?: Prisma.MiscellaneousMasterListRelationFilter
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupListRelationFilter
   orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
   payments?: Prisma.PaymentInfoListRelationFilter
@@ -1231,6 +1232,7 @@ export type LeadMasterOrderByWithRelationInput = {
   userMappings?: Prisma.LeadUserMappingOrderByRelationAggregateInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupOrderByRelationAggregateInput
   orderLoginDetails?: Prisma.OrderLoginDetailsOrderByRelationAggregateInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
   payments?: Prisma.PaymentInfoOrderByRelationAggregateInput
@@ -1401,6 +1403,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   userMappings?: Prisma.LeadUserMappingListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
   miscellaneousMaster?: Prisma.MiscellaneousMasterListRelationFilter
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupListRelationFilter
   orderLoginDetails?: Prisma.OrderLoginDetailsListRelationFilter
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
   payments?: Prisma.PaymentInfoListRelationFilter
@@ -1756,6 +1759,7 @@ export type LeadMasterCreateInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -1910,6 +1914,7 @@ export type LeadMasterUncheckedCreateInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -2063,6 +2068,7 @@ export type LeadMasterUpdateInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -2217,6 +2223,7 @@ export type LeadMasterUncheckedUpdateInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -3999,6 +4006,20 @@ export type LeadMasterUpdateOneRequiredWithoutMiscellaneousMasterNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutMiscellaneousMasterInput, Prisma.LeadMasterUpdateWithoutMiscellaneousMasterInput>, Prisma.LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutMiscellaneousFollowupsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutMiscellaneousFollowupsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutMiscellaneousFollowupsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutMiscellaneousFollowupsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutMiscellaneousFollowupsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUpdateWithoutMiscellaneousFollowupsInput>, Prisma.LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput>
+}
+
 export type LeadMasterCreateNestedOneWithoutInstallationIssueLogMasterInput = {
   create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutInstallationIssueLogMasterInput, Prisma.LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput>
   connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutInstallationIssueLogMasterInput
@@ -4367,6 +4388,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -4520,6 +4542,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -4798,6 +4821,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -4951,6 +4975,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -5113,6 +5138,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -5266,6 +5292,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -5428,6 +5455,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -5581,6 +5609,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -5743,6 +5772,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -5896,6 +5926,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -6123,6 +6154,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -6276,6 +6308,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -6444,6 +6477,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -6597,6 +6631,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -6749,6 +6784,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -6902,6 +6938,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -7070,6 +7107,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -7223,6 +7261,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -7375,6 +7414,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -7528,6 +7568,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -7700,6 +7741,7 @@ export type LeadMasterCreateWithoutClientInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -7853,6 +7895,7 @@ export type LeadMasterUncheckedCreateWithoutClientInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -8031,6 +8074,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -8184,6 +8228,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -8352,6 +8397,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -8505,6 +8551,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -8657,6 +8704,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -8810,6 +8858,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -8978,6 +9027,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -9131,6 +9181,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -9283,6 +9334,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -9436,6 +9488,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -9604,6 +9657,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -9757,6 +9811,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -9909,6 +9964,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -10062,6 +10118,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -10230,6 +10287,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -10383,6 +10441,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -10535,6 +10594,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -10688,6 +10748,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -10856,6 +10917,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -11009,6 +11071,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -11161,6 +11224,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -11314,6 +11378,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -11482,6 +11547,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -11635,6 +11701,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -11787,6 +11854,7 @@ export type LeadMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -11940,6 +12008,7 @@ export type LeadMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput = 
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -12108,6 +12177,7 @@ export type LeadMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -12261,6 +12331,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput = 
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -12413,6 +12484,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -12566,6 +12638,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -12744,6 +12817,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -12897,6 +12971,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -13075,6 +13150,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -13228,6 +13304,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -13406,6 +13483,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -13559,6 +13637,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -13727,6 +13806,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -13880,6 +13960,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -14032,6 +14113,7 @@ export type LeadMasterCreateWithoutLeadProcessBriefsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -14185,6 +14267,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -14353,6 +14436,7 @@ export type LeadMasterUpdateWithoutLeadProcessBriefsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -14506,6 +14590,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -14658,6 +14743,7 @@ export type LeadMasterCreateWithoutLeadRequirementMaterialsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -14811,6 +14897,7 @@ export type LeadMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -14979,6 +15066,7 @@ export type LeadMasterUpdateWithoutLeadRequirementMaterialsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -15132,6 +15220,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -15284,6 +15373,7 @@ export type LeadMasterCreateWithoutHardwareMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -15437,6 +15527,7 @@ export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -15605,6 +15696,7 @@ export type LeadMasterUpdateWithoutHardwareMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -15758,6 +15850,7 @@ export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -15910,6 +16003,7 @@ export type LeadMasterCreateWithoutLightCarcasUnitMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -16063,6 +16157,7 @@ export type LeadMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -16231,6 +16326,7 @@ export type LeadMasterUpdateWithoutLightCarcasUnitMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -16384,6 +16480,7 @@ export type LeadMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -16536,6 +16633,7 @@ export type LeadMasterCreateWithoutOtherAppliancesMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -16689,6 +16787,7 @@ export type LeadMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -16857,6 +16956,7 @@ export type LeadMasterUpdateWithoutOtherAppliancesMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -17010,6 +17110,7 @@ export type LeadMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -17163,6 +17264,7 @@ export type LeadMasterCreateWithoutSpecificationDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -17316,6 +17418,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput =
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -17484,6 +17587,7 @@ export type LeadMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -17637,6 +17741,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput =
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -17788,6 +17893,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -17941,6 +18047,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -18109,6 +18216,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -18262,6 +18370,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -18414,6 +18523,7 @@ export type LeadMasterCreateWithoutB2bDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -18567,6 +18677,7 @@ export type LeadMasterUncheckedCreateWithoutB2bDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -18735,6 +18846,7 @@ export type LeadMasterUpdateWithoutB2bDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -18888,6 +19000,7 @@ export type LeadMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -19040,6 +19153,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -19193,6 +19307,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -19361,6 +19476,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -19514,6 +19630,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -19666,6 +19783,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -19819,6 +19937,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -19987,6 +20106,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -20140,6 +20260,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -20292,6 +20413,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -20445,6 +20567,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -20613,6 +20736,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -20766,6 +20890,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -20918,6 +21043,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -21071,6 +21197,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -21239,6 +21366,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -21392,6 +21520,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -21545,6 +21674,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
@@ -21698,6 +21828,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
@@ -21866,6 +21997,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
@@ -22019,6 +22151,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
@@ -22170,6 +22303,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -22323,6 +22457,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -22491,6 +22626,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -22644,6 +22780,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -22797,6 +22934,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -22950,6 +23088,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -23118,6 +23257,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -23271,6 +23411,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -23422,6 +23563,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -23575,6 +23717,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -23743,6 +23886,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -23896,6 +24040,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -24048,6 +24193,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -24201,6 +24347,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -24369,6 +24516,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -24522,6 +24670,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -24674,6 +24823,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -24827,6 +24977,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -25005,6 +25156,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -25158,6 +25310,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -25326,6 +25479,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -25479,6 +25633,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -25631,6 +25786,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -25784,6 +25940,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -25952,6 +26109,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -26105,6 +26263,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -26257,6 +26416,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -26410,6 +26570,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -26578,6 +26739,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -26731,6 +26893,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -26883,6 +27046,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -27036,6 +27200,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -27204,6 +27369,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -27357,6 +27523,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -27509,6 +27676,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -27662,6 +27830,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -27830,6 +27999,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -27983,6 +28153,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -28135,6 +28306,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -28288,6 +28460,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -28456,6 +28629,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -28609,6 +28783,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -28762,6 +28937,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -28915,6 +29091,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -29083,6 +29260,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -29236,6 +29414,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -29387,6 +29566,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -29540,6 +29720,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -29708,6 +29889,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -29861,6 +30043,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -30014,6 +30197,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -30167,6 +30351,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -30335,6 +30520,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -30488,6 +30674,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -30639,6 +30826,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -30792,6 +30980,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -30960,6 +31149,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -31113,6 +31303,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -31265,6 +31456,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -31418,6 +31610,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -31586,6 +31779,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -31739,6 +31933,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -31891,6 +32086,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -32044,6 +32240,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -32212,6 +32409,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -32365,6 +32563,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -32517,6 +32716,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -32670,6 +32870,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -32838,6 +33039,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -32991,6 +33193,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -33143,6 +33346,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -33296,6 +33500,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -33464,6 +33669,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -33617,6 +33823,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -33770,6 +33977,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
@@ -33923,6 +34131,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
@@ -34091,6 +34300,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
@@ -34244,6 +34454,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
@@ -34396,6 +34607,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -34549,6 +34761,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -34717,6 +34930,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -34870,6 +35084,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -35021,6 +35236,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -35174,6 +35390,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -35342,6 +35559,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -35495,6 +35713,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -35647,6 +35866,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -35800,6 +36020,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -35968,6 +36189,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -36121,6 +36343,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -36273,6 +36496,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -36426,6 +36650,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -36594,6 +36819,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -36747,6 +36973,637 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutMiscellaneousFollowupsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  client?: Prisma.ClientMasterCreateNestedOneWithoutLeadsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  actual_installation_start_date?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  usable_handover_completed_at?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  tech_check_reached_at?: Date | string | null
+  priority?: string | null
+  amc_opted_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_plan_closed_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  archetech_number?: string | null
+  is_small_order_request?: boolean
+  material_lift_size?: string | null
+  fast_production_approved_at?: Date | string | null
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  is_fast_production?: boolean
+  tentative_order_login_date?: Date | string | null
+  isLargeScaleProjectLead?: boolean
+  architect_id?: number | null
+  client_id?: number | null
+  order_number?: string | null
+  refered_by?: string | null
+  is_so_value_received?: boolean
+  so_value_received_at?: Date | string | null
+  project_status?: string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutLeadInput
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutLeadMasterInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutLeadInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutLeadInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutMiscellaneousFollowupsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput>
+}
+
+export type LeadMasterUpsertWithoutMiscellaneousFollowupsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedCreateWithoutMiscellaneousFollowupsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutMiscellaneousFollowupsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutMiscellaneousFollowupsInput, Prisma.LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput>
+}
+
+export type LeadMasterUpdateWithoutMiscellaneousFollowupsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutLeadNestedInput
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  client?: Prisma.ClientMasterUpdateOneWithoutLeadsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutLeadNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  client_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  refered_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_so_value_received?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  so_value_received_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  project_status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadNestedInput
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutLeadNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutLeadNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutLeadMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -36899,6 +37756,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -37052,6 +37910,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -37220,6 +38079,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -37373,6 +38233,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -37525,6 +38386,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -37678,6 +38540,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -37846,6 +38709,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -37999,6 +38863,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -38151,6 +39016,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -38304,6 +39170,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -38472,6 +39339,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -38625,6 +39493,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -38778,6 +39647,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
@@ -38931,6 +39801,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
@@ -39099,6 +39970,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
@@ -39252,6 +40124,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
@@ -39403,6 +40276,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -39556,6 +40430,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -39734,6 +40609,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -39887,6 +40763,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -40055,6 +40932,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -40208,6 +41086,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -40360,6 +41239,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -40513,6 +41393,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -40691,6 +41572,7 @@ export type LeadMasterCreateWithoutLeadB2BReqMappingsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -40844,6 +41726,7 @@ export type LeadMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -41012,6 +41895,7 @@ export type LeadMasterUpdateWithoutLeadB2BReqMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -41165,6 +42049,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -41317,6 +42202,7 @@ export type LeadMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -41470,6 +42356,7 @@ export type LeadMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -41638,6 +42525,7 @@ export type LeadMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -41791,6 +42679,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -41943,6 +42832,7 @@ export type LeadMasterCreateWithoutOnline_leadsInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -42096,6 +42986,7 @@ export type LeadMasterUncheckedCreateWithoutOnline_leadsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -42264,6 +43155,7 @@ export type LeadMasterUpdateWithoutOnline_leadsInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -42417,6 +43309,7 @@ export type LeadMasterUncheckedUpdateWithoutOnline_leadsInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -42570,6 +43463,7 @@ export type LeadMasterCreateWithoutLeadBillingAddressesInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -42723,6 +43617,7 @@ export type LeadMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -42891,6 +43786,7 @@ export type LeadMasterUpdateWithoutLeadBillingAddressesInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -43044,6 +43940,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -43195,6 +44092,7 @@ export type LeadMasterCreateWithoutProductsRequiredForProductionInput = {
   userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
@@ -43348,6 +44246,7 @@ export type LeadMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutLeadInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
   payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
@@ -43516,6 +44415,7 @@ export type LeadMasterUpdateWithoutProductsRequiredForProductionInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -43669,6 +44569,7 @@ export type LeadMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -43917,6 +44818,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -44070,6 +44972,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -44702,6 +45605,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -44855,6 +45759,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -45103,6 +46008,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -45256,6 +46162,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -45504,6 +46411,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -45657,6 +46565,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -45905,6 +46814,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -46058,6 +46968,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -46307,6 +47218,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -46460,6 +47372,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -46804,6 +47717,7 @@ export type LeadMasterUpdateWithoutClientInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -46957,6 +47871,7 @@ export type LeadMasterUncheckedUpdateWithoutClientInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -47301,6 +48216,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -47454,6 +48370,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -47798,6 +48715,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -47951,6 +48869,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -48295,6 +49214,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -48448,6 +49368,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -48792,6 +49713,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -48945,6 +49867,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -49289,6 +50212,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -49442,6 +50366,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -49786,6 +50711,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
@@ -49939,6 +50865,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
@@ -50100,6 +51027,7 @@ export type LeadMasterCountOutputType = {
   userMappings: number
   ledgers: number
   miscellaneousMaster: number
+  miscellaneousFollowups: number
   orderLoginDetails: number
   orderLoginPoFiles: number
   payments: number
@@ -50160,6 +51088,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   userMappings?: boolean | LeadMasterCountOutputTypeCountUserMappingsArgs
   ledgers?: boolean | LeadMasterCountOutputTypeCountLedgersArgs
   miscellaneousMaster?: boolean | LeadMasterCountOutputTypeCountMiscellaneousMasterArgs
+  miscellaneousFollowups?: boolean | LeadMasterCountOutputTypeCountMiscellaneousFollowupsArgs
   orderLoginDetails?: boolean | LeadMasterCountOutputTypeCountOrderLoginDetailsArgs
   orderLoginPoFiles?: boolean | LeadMasterCountOutputTypeCountOrderLoginPoFilesArgs
   payments?: boolean | LeadMasterCountOutputTypeCountPaymentsArgs
@@ -50502,6 +51431,13 @@ export type LeadMasterCountOutputTypeCountMiscellaneousMasterArgs<ExtArgs extend
 /**
  * LeadMasterCountOutputType without action
  */
+export type LeadMasterCountOutputTypeCountMiscellaneousFollowupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MiscellaneousFollowupWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
 export type LeadMasterCountOutputTypeCountOrderLoginDetailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrderLoginDetailsWhereInput
 }
@@ -50736,6 +51672,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   userMappings?: boolean | Prisma.LeadMaster$userMappingsArgs<ExtArgs>
   ledgers?: boolean | Prisma.LeadMaster$ledgersArgs<ExtArgs>
   miscellaneousMaster?: boolean | Prisma.LeadMaster$miscellaneousMasterArgs<ExtArgs>
+  miscellaneousFollowups?: boolean | Prisma.LeadMaster$miscellaneousFollowupsArgs<ExtArgs>
   orderLoginDetails?: boolean | Prisma.LeadMaster$orderLoginDetailsArgs<ExtArgs>
   orderLoginPoFiles?: boolean | Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>
   payments?: boolean | Prisma.LeadMaster$paymentsArgs<ExtArgs>
@@ -51125,6 +52062,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   userMappings?: boolean | Prisma.LeadMaster$userMappingsArgs<ExtArgs>
   ledgers?: boolean | Prisma.LeadMaster$ledgersArgs<ExtArgs>
   miscellaneousMaster?: boolean | Prisma.LeadMaster$miscellaneousMasterArgs<ExtArgs>
+  miscellaneousFollowups?: boolean | Prisma.LeadMaster$miscellaneousFollowupsArgs<ExtArgs>
   orderLoginDetails?: boolean | Prisma.LeadMaster$orderLoginDetailsArgs<ExtArgs>
   orderLoginPoFiles?: boolean | Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>
   payments?: boolean | Prisma.LeadMaster$paymentsArgs<ExtArgs>
@@ -51228,6 +52166,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     userMappings: Prisma.$LeadUserMappingPayload<ExtArgs>[]
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
     miscellaneousMaster: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
+    miscellaneousFollowups: Prisma.$MiscellaneousFollowupPayload<ExtArgs>[]
     orderLoginDetails: Prisma.$OrderLoginDetailsPayload<ExtArgs>[]
     orderLoginPoFiles: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
     payments: Prisma.$PaymentInfoPayload<ExtArgs>[]
@@ -51787,6 +52726,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   userMappings<T extends Prisma.LeadMaster$userMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$userMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgers<T extends Prisma.LeadMaster$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscellaneousMaster<T extends Prisma.LeadMaster$miscellaneousMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$miscellaneousMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  miscellaneousFollowups<T extends Prisma.LeadMaster$miscellaneousFollowupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$miscellaneousFollowupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousFollowupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderLoginDetails<T extends Prisma.LeadMaster$orderLoginDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$orderLoginDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orderLoginPoFiles<T extends Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$orderLoginPoFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.LeadMaster$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -53590,6 +54530,30 @@ export type LeadMaster$miscellaneousMasterArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.MiscellaneousMasterScalarFieldEnum | Prisma.MiscellaneousMasterScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.miscellaneousFollowups
+ */
+export type LeadMaster$miscellaneousFollowupsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MiscellaneousFollowup
+   */
+  select?: Prisma.MiscellaneousFollowupSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MiscellaneousFollowup
+   */
+  omit?: Prisma.MiscellaneousFollowupOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MiscellaneousFollowupInclude<ExtArgs> | null
+  where?: Prisma.MiscellaneousFollowupWhereInput
+  orderBy?: Prisma.MiscellaneousFollowupOrderByWithRelationInput | Prisma.MiscellaneousFollowupOrderByWithRelationInput[]
+  cursor?: Prisma.MiscellaneousFollowupWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MiscellaneousFollowupScalarFieldEnum | Prisma.MiscellaneousFollowupScalarFieldEnum[]
 }
 
 /**

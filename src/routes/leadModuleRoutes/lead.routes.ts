@@ -12,6 +12,10 @@ import {
   fetchAllProcessBriefs,
   fetchLeadProcessBriefsHandler,
   saveLeadProcessBriefsHandler,
+  saveProcessBriefMachineMappingsHandler,
+  fetchProcessBriefMachineMappingsHandler,
+  updateProcessBriefHandler,
+  toggleProcessBriefStatusHandler,
 } from "../../controllers/leadModuleControllers/processBrief.controller";
 import {
   createLeadRequirementMaterialHandler,
@@ -160,6 +164,10 @@ leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
 leadsRouter.get("/get-all-process-briefs/:vendor_id", fetchAllProcessBriefs);
 leadsRouter.post("/save-lead-process-briefs", saveLeadProcessBriefsHandler);
 leadsRouter.get("/get-lead-process-briefs/:lead_id", fetchLeadProcessBriefsHandler);
+leadsRouter.post("/save-process-brief-machine-mappings", saveProcessBriefMachineMappingsHandler);
+leadsRouter.get("/get-process-brief-machine-mappings/:process_brief_id", fetchProcessBriefMachineMappingsHandler);
+leadsRouter.put("/update-process-brief/:id", updateProcessBriefHandler);
+leadsRouter.patch("/toggle-process-brief-status/:id", toggleProcessBriefStatusHandler);
 leadsRouter.post("/create-lead-requirement-material", createLeadRequirementMaterialHandler);
 leadsRouter.get("/get-lead-requirement-materials/:lead_id", getLeadRequirementMaterialsHandler);
 leadsRouter.put("/update-lead-requirement-material/:id", updateLeadRequirementMaterialHandler);

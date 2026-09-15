@@ -84,6 +84,7 @@ export const ModelName = {
   ProductTypeMaster: 'ProductTypeMaster',
   ProcessBriefMaster: 'ProcessBriefMaster',
   LeadProcessBriefMapping: 'LeadProcessBriefMapping',
+  ProcessBriefMachineMapping: 'ProcessBriefMachineMapping',
   LeadRequirementMaterialMapping: 'LeadRequirementMaterialMapping',
   CarcassTypeMaster: 'CarcassTypeMaster',
   CarcasMaterialMaster: 'CarcasMaterialMaster',
@@ -160,6 +161,7 @@ export const ModelName = {
   MiscellaneousTeamMaster: 'MiscellaneousTeamMaster',
   MiscellaneousTeamMapping: 'MiscellaneousTeamMapping',
   MiscellaneousDocument: 'MiscellaneousDocument',
+  MiscellaneousFollowup: 'MiscellaneousFollowup',
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
@@ -961,10 +963,26 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   created_by: 'created_by',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  b2b_requirement_type_id: 'b2b_requirement_type_id'
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  machine_id: 'machine_id'
 } as const
 
 export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]
+
+
+export const ProcessBriefMachineMappingScalarFieldEnum = {
+  id: 'id',
+  process_brief_id: 'process_brief_id',
+  machine_id: 'machine_id',
+  machine_type_id: 'machine_type_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type ProcessBriefMachineMappingScalarFieldEnum = (typeof ProcessBriefMachineMappingScalarFieldEnum)[keyof typeof ProcessBriefMachineMappingScalarFieldEnum]
 
 
 export const LeadRequirementMaterialMappingScalarFieldEnum = {
@@ -2157,6 +2175,21 @@ export const MiscellaneousDocumentScalarFieldEnum = {
 } as const
 
 export type MiscellaneousDocumentScalarFieldEnum = (typeof MiscellaneousDocumentScalarFieldEnum)[keyof typeof MiscellaneousDocumentScalarFieldEnum]
+
+
+export const MiscellaneousFollowupScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  miscellaneous_id: 'miscellaneous_id',
+  followup_date: 'followup_date',
+  solution: 'solution',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MiscellaneousFollowupScalarFieldEnum = (typeof MiscellaneousFollowupScalarFieldEnum)[keyof typeof MiscellaneousFollowupScalarFieldEnum]
 
 
 export const InstallationIssueLogMasterScalarFieldEnum = {

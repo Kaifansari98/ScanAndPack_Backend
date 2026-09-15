@@ -183,6 +183,11 @@ export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
  */
 export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
 /**
+ * Model ProcessBriefMachineMapping
+ * 
+ */
+export type ProcessBriefMachineMapping = Prisma.ProcessBriefMachineMappingModel
+/**
  * Model LeadRequirementMaterialMapping
  * 
  */
@@ -562,6 +567,11 @@ export type MiscellaneousTeamMapping = Prisma.MiscellaneousTeamMappingModel
  * 
  */
 export type MiscellaneousDocument = Prisma.MiscellaneousDocumentModel
+/**
+ * Model MiscellaneousFollowup
+ * 
+ */
+export type MiscellaneousFollowup = Prisma.MiscellaneousFollowupModel
 /**
  * Model InstallationIssueLogMaster
  * 

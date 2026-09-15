@@ -142,6 +142,7 @@ model VendorMaster {
   meetingTypes                           MeetingTypeMaster[]
   miscellaneousDocument                  MiscellaneousDocument[]
   miscellaneousMaster                    MiscellaneousMaster[]
+  miscellaneousFollowups                 MiscellaneousFollowup[]
   miscellaneousTeamMaster                MiscellaneousTeamMaster[]
   miscellaneousTypeMaster                MiscellaneousTypeMaster[]
   notifications                          Notification[]
@@ -155,6 +156,7 @@ model VendorMaster {
   paymentTypeMaster                      PaymentTypeMaster[]
   privilegeMasters                       PrivilegeMaster[]
   processBriefs                          ProcessBriefMaster[]
+  processBriefMachineMappings            ProcessBriefMachineMapping[]
   productItemCodes                       ProductItemCode[]
   products                               ProductMaster[]
   stockHistories                         ProductStockHistory[]                  @relation("StockHistoryVendor")
@@ -363,6 +365,8 @@ model UserMaster {
   LeadOtherAppliancesRemarkMapping                                               LeadOtherAppliancesRemarkMapping[]
   leadProcessBriefsCreated                                                       LeadProcessBriefMapping[]              @relation("LeadProcessBriefCreatedBy")
   leadProcessBriefsUpdated                                                       LeadProcessBriefMapping[]              @relation("LeadProcessBriefUpdatedBy")
+  pbmCreated                                                                     ProcessBriefMachineMapping[]           @relation("PBM_CreatedBy")
+  pbmUpdated                                                                     ProcessBriefMachineMapping[]           @relation("PBM_UpdatedBy")
   leadProductsCreated                                                            LeadProductMapping[]                   @relation("LeadProductCreatedBy")
   productStructureInstances                                                      LeadProductStructureInstance[]
   leadReqMaterialsCreated                                                        LeadRequirementMaterialMapping[]       @relation("LeadReqMatCreatedBy")
@@ -387,6 +391,7 @@ model UserMaster {
   miscDocumentsCreated                                                           MiscellaneousDocument[]                @relation("MiscDocCreatedBy")
   miscCreated                                                                    MiscellaneousMaster[]                  @relation("MiscCreatedBy")
   miscUpdated                                                                    MiscellaneousMaster[]                  @relation("MiscUpdatedBy")
+  miscFollowupsCreated                                                           MiscellaneousFollowup[]                @relation("MiscFollowupCreatedBy")
   notificationsSent                                                              Notification[]                         @relation("NotificationSender")
   notificationsReceived                                                          Notification[]                         @relation("NotificationUser")
   notificationQueuesCreated                                                      NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
@@ -881,6 +886,7 @@ model LeadMaster {
   userMappings                                LeadUserMapping[]
   ledgers                                     Ledger[]
   miscellaneousMaster                         MiscellaneousMaster[]
+  miscellaneousFollowups                      MiscellaneousFollowup[]
   orderLoginDetails                           OrderLoginDetails[]
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
@@ -1205,6 +1211,7 @@ model ProcessBriefMaster {
   updated_at        DateTime                  @updatedAt @map("updated_at")
   updated_by        Int?                      @map("updated_by")
   leadProcessBriefs LeadProcessBriefMapping[]
+  machineMappings   ProcessBriefMachineMapping[]
   createdBy         UserMaster                @relation("ProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   updatedBy         UserMaster?               @relation("ProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor            VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1224,9 +1231,11 @@ model LeadProcessBriefMapping {
   updated_at              DateTime                  @updatedAt @map("updated_at")
   updated_by              Int?                      @map("updated_by")
   b2b_requirement_type_id Int                       @map("b2b_requirement_type_id")
+  machine_id              Int?                      @map("machine_id")
   b2bRequirementType      B2BRequirementTypeMaster? @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   createdBy               UserMaster                @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  machine                 MachineMaster?            @relation(fields: [machine_id], references: [id], onDelete: SetNull)
   processBrief            ProcessBriefMaster        @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
   updatedBy               UserMaster?               @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1235,7 +1244,34 @@ model LeadProcessBriefMapping {
   @@index([vendor_id])
   @@index([b2b_requirement_type_id])
   @@index([process_brief_id])
+  @@index([machine_id])
   @@map("LeadProcessBriefMapping")
+}
+
+model ProcessBriefMachineMapping {
+  id               Int                @id @default(autoincrement())
+  process_brief_id Int                @map("process_brief_id")
+  machine_id       Int?               @map("machine_id")
+  machine_type_id  Int?               @map("machine_type_id")
+  vendor_id        Int                @map("vendor_id")
+  created_at       DateTime           @default(now()) @map("created_at")
+  created_by       Int                @map("created_by")
+  updated_at       DateTime           @updatedAt @map("updated_at")
+  updated_by       Int?               @map("updated_by")
+
+  processBrief     ProcessBriefMaster @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
+  machine          MachineMaster?     @relation(fields: [machine_id], references: [id], onDelete: Cascade)
+  machineType      MachineTypeMaster? @relation(fields: [machine_type_id], references: [id], onDelete: Cascade)
+  vendor           VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy        UserMaster         @relation("PBM_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy        UserMaster?        @relation("PBM_UpdatedBy", fields: [updated_by], references: [id])
+
+  @@unique([process_brief_id, machine_id, machine_type_id], name: "process_brief_machine_type_unique")
+  @@index([process_brief_id])
+  @@index([machine_id])
+  @@index([machine_type_id])
+  @@index([vendor_id])
+  @@map("ProcessBriefMachineMapping")
 }
 
 model LeadRequirementMaterialMapping {
@@ -2715,6 +2751,7 @@ model MiscellaneousMaster {
   updatedBy                UserMaster?                @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
   vendor                   VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   teams                    MiscellaneousTeamMapping[]
+  followups                MiscellaneousFollowup[]
 }
 
 model MiscellaneousTypeMaster {
@@ -2761,6 +2798,27 @@ model MiscellaneousDocument {
   document         LeadDocuments       @relation(fields: [document_id], references: [id])
   miscellaneous    MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id])
   vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model MiscellaneousFollowup {
+  id               Int                 @id @default(autoincrement())
+  vendor_id        Int
+  lead_id          Int
+  miscellaneous_id Int
+  followup_date    DateTime
+  solution         String              @db.Text
+  created_by       Int
+  created_at       DateTime            @default(now())
+  updated_at       DateTime            @updatedAt
+
+  miscellaneous    MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id], onDelete: Cascade)
+  lead             LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy        UserMaster          @relation("MiscFollowupCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, miscellaneous_id])
+  @@index([lead_id])
+  @@index([created_by])
 }
 
 model InstallationIssueLogMaster {
@@ -2935,6 +2993,8 @@ model MachineMaster {
   machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+  processBriefMappings  ProcessBriefMachineMapping[]
+  leadProcessBriefs     LeadProcessBriefMapping[]
   cutListRules          CutListRuleMaster[]     @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
@@ -3083,6 +3143,7 @@ model MachineTypeMaster {
   created_at       DateTime                @default(now())
   updated_at       DateTime                @updatedAt
   machineMaster    MachineMaster[]
+  processBriefMappings ProcessBriefMachineMapping[]
 }
 
 model VendorSettingKey {
