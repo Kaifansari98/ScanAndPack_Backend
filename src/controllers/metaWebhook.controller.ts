@@ -29,6 +29,12 @@ export class MetaWebhookController {
 
         if (isValidToken) {
           logger.info("[META WEBHOOK] Handshake verification successful.");
+          // Handshake request query parameters ko table me save karein
+          await prisma.metaWebhook.create({
+            data: {
+              data: req.query ?? {},
+            },
+          });
           return res.status(200).send(challenge);
         } else {
           logger.warn(
@@ -38,7 +44,59 @@ export class MetaWebhookController {
         }
       }
 
-      // Fetch saved data list from database
+      // GET request ka incoming data (query params ya body) table me save karein
+      let incomingData: any = {};
+      const hasQuery = req.query && Object.keys(req.query).length > 0;
+      const hasBody =
+        req.body &&
+        (Array.isArray(req.body)
+          ? req.body.length > 0
+          : typeof req.body === "object"
+          ? Object.keys(req.body).length > 0
+          : true);
+
+      if (hasBody) {
+        if (typeof req.body === "object" && !Array.isArray(req.body) && hasQuery) {
+          incomingData = { ...req.query, ...req.body };
+        } else {
+          incomingData = req.body;
+        }
+      } else if (hasQuery) {
+        incomingData = req.query;
+      }
+
+      const savedPayload = await prisma.metaWebhook.create({
+        data: {
+          data: incomingData ?? {},
+        },
+      });
+
+      logger.info(
+        `[META WEBHOOK] Successfully saved GET webhook data to database. ID: ${savedPayload.id}`
+      );
+
+      // Response me records ka data show nahi karna, sirf confirmation response return karna hai
+      return res.status(200).json({
+        success: true,
+        message: "Webhook data received and stored successfully in database",
+        id: savedPayload.id,
+      });
+    } catch (error: any) {
+      logger.error("[META WEBHOOK] Error in GET /metawebhook:", error);
+      return res.status(500).json({
+        success: false,
+        error: "Failed to process GET /metawebhook",
+        details: error.message,
+      });
+    }
+  };
+
+  /**
+   * GET /metawebhook/list or /metawebhook/payloads
+   * Fetch saved webhook entries from database table with pagination (agar records dekhne ho).
+   */
+  getWebhookPayloads = async (req: Request, res: Response): Promise<Response> => {
+    try {
       const page = Math.max(1, parseInt(String(req.query.page || 1), 10) || 1);
       const limit = Math.min(
         100,
@@ -66,10 +124,10 @@ export class MetaWebhookController {
         data: records,
       });
     } catch (error: any) {
-      logger.error("[META WEBHOOK] Error in GET /metawebhook:", error);
+      logger.error("[META WEBHOOK] Error fetching webhook data:", error);
       return res.status(500).json({
         success: false,
-        error: "Failed to process GET /metawebhook",
+        error: "Failed to fetch webhook data",
         details: error.message,
       });
     }
