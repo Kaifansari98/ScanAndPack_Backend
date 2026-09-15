@@ -1,3 +1,4 @@
+import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
@@ -1976,6 +1977,7 @@ export class UnderInstallationStageService {
           ],
         },
       },
+      orderBy: { id: "desc" },
       orderBy: { id: "desc" },
       select: {
         id: true,

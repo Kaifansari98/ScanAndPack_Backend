@@ -2459,6 +2459,7 @@ export class DashboardService {
 
     const miscTasks = await prisma.userLeadTask.findMany({
       where: { vendor_id, lead_id: { in: leadIds }, task_type: "Miscellaneous" },
+      orderBy: { id: "desc" },
       select: { id: true, lead_id: true, task_type: true, remark: true, status: true },
     });
 
@@ -2478,10 +2479,9 @@ export class DashboardService {
         (t) =>
           typeof t.remark === "string" &&
           t.remark.includes("Required delivery date set for") &&
-          item.reorder_material_details != null &&
-          item.problem_description != null &&
-          t.remark.includes(item.reorder_material_details) &&
-          t.remark.includes(item.problem_description)
+          (t.remark.includes(miscTaskKey) ||
+            ((!item.reorder_material_details || t.remark.includes(item.reorder_material_details)) &&
+              (!item.problem_description || t.remark.includes(item.problem_description))))
       );
 
       return {

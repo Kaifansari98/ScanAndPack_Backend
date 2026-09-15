@@ -536,6 +536,7 @@ export const findMiscTask = (
 export const findDeliveryTask = (
   m: {
     id?: number;
+    id?: number;
     lead_id: number;
     misc_approved: boolean | null;
     required_delivery_date: Date | string | null;
@@ -811,6 +812,7 @@ export const getMiscellaneousLeadsByStatusService = async (
           lead_id: { in: leadIds },
           task_type: { in: ["Miscellaneous", "Pending Materials"] },
         },
+        orderBy: { id: "desc" },
         select: {
           id: true,
           lead_id: true,
@@ -842,6 +844,7 @@ export const getMiscellaneousLeadsByStatusService = async (
               lead_id: { in: leadIds },
               task_type: { in: ["Miscellaneous", "Pending Materials"] },
             },
+            orderBy: { id: "desc" },
             select: {
               id: true,
               lead_id: true,
@@ -1068,6 +1071,7 @@ export const getMiscellaneousStatusCountsService = async (
             lead_id: { in: allCandidateLeadIds },
             task_type: { in: ["Miscellaneous", "Pending Materials"] },
           },
+          orderBy: { id: "desc" },
           select: {
             id: true,
             lead_id: true,
