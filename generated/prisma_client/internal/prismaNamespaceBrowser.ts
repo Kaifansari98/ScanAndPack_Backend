@@ -262,7 +262,8 @@ export const ModelName = {
   LeadBillingAddress: 'LeadBillingAddress',
   MetaLead: 'MetaLead',
   BoxItemDeleteLog: 'BoxItemDeleteLog',
-  ProductsRequiredForProduction: 'ProductsRequiredForProduction'
+  ProductsRequiredForProduction: 'ProductsRequiredForProduction',
+  MetaWebhook: 'MetaWebhook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -3977,6 +3978,15 @@ export const ProductsRequiredForProductionScalarFieldEnum = {
 } as const
 
 export type ProductsRequiredForProductionScalarFieldEnum = (typeof ProductsRequiredForProductionScalarFieldEnum)[keyof typeof ProductsRequiredForProductionScalarFieldEnum]
+
+
+export const MetaWebhookScalarFieldEnum = {
+  id: 'id',
+  data: 'data',
+  created_at: 'created_at'
+} as const
+
+export type MetaWebhookScalarFieldEnum = (typeof MetaWebhookScalarFieldEnum)[keyof typeof MetaWebhookScalarFieldEnum]
 
 
 export const SortOrder = {

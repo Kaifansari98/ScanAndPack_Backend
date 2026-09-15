@@ -1099,3 +1099,8 @@ export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
  * 
  */
 export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProductionModel
+/**
+ * Model MetaWebhook
+ * 
+ */
+export type MetaWebhook = Prisma.MetaWebhookModel

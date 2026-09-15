@@ -5430,3 +5430,13 @@ model ProductsRequiredForProduction {
   @@index([product_id])
   @@index([created_by])
 }
+
+model MetaWebhook {
+  id         Int      @id @default(autoincrement())
+  data       Json
+  created_at DateTime @default(now())
+
+  @@index([created_at])
+}
+
+
