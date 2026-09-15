@@ -4022,6 +4022,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
 //5
 export const sendMarkAsReadyEmail = async (payload: {
   allowSuperAdmin?: boolean;
+  includeResolutionInstruction?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -4196,6 +4197,12 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
     ? renderTemplate(template.html, templateValues)
     : defaultHtml;
 
+  // Apply this after rendering so saved vendor templates follow the recipient rule too.
+  const omitResolutionInstruction = (content: string) =>
+    payload.includeResolutionInstruction === false
+      ? content.replace(/You may now verify the delivery and mark the requirement as resolved\./g, "")
+      : content;
+
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
@@ -4203,8 +4210,8 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
-      text,
-      html,
+      text: omitResolutionInstruction(text),
+      html: omitResolutionInstruction(html),
     },
     identity,
   );

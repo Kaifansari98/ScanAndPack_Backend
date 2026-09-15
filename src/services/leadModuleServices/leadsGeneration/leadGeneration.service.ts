@@ -1,3 +1,5 @@
+import { UnderInstallationStageService } from "../../installation/under-installation/underInstallationStageService";
+import { resolveMiscTask } from "../../installation/under-installation/resolveMiscTask";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
@@ -4244,7 +4246,7 @@ export const assignLeadToUser = async (
   }
 };
 
-export const editTaskISMService = async (payload: EditTaskISMInput) => {
+export const editTaskISMService = async (payload: EditTaskISMInput, baseUrl = "http://localhost:3000") => {
   const { error, value } = editTaskISMSchema.validate(payload);
   if (error) {
     throw new Error(
@@ -4265,7 +4267,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
     closed_by,
   } = value;
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     // 1️⃣ Validate task existence
     const task = await tx.userLeadTask.findFirst({
       where: { id: task_id, lead_id },
@@ -4283,6 +4285,11 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
     const vendor_id = task.lead.vendor_id;
     const account_id = task.lead.account_id;
+
+    const completedMisc = status === "completed" && task.status !== "completed" &&
+      ["Miscellaneous", "Pending Materials"].includes(task.task_type)
+      ? await resolveMiscTask(tx, vendor_id, task)
+      : null;
 
     const updateData: any = {
       updated_by,
@@ -4419,8 +4426,20 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       updated_by,
     });
 
-    return updatedTask;
+    return { updatedTask, miscId: completedMisc?.id };
   });
+
+  if (result.miscId) {
+    await UnderInstallationStageService.notifyMiscTaskReady({
+      vendor_id: result.updatedTask.vendor_id,
+      lead_id,
+      misc_id: result.miscId,
+      ready_by: closed_by ?? updated_by,
+      taskId: result.updatedTask.id,
+      baseUrl,
+    });
+  }
+  return result.updatedTask;
 };
 
 export const verifyUserTokenService = async (token: string) => {
