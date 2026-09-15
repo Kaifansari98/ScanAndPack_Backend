@@ -342,6 +342,9 @@ const LEAD_LOST_REJECTED_TEMPLATE_KEY = "LEAD_LOST_REJECTED";
 const PAYMENT_ADDED_TEMPLATE_KEY = "PAYMENT_ADDED";
 const READY_TO_DISPATCH_TEMPLATE_KEY = "READY_TO_DISPATCH";
 const MISC_REQUIREMENT_TEMPLATE_KEY = "MISC_REQUIREMENT";
+const MISC_APPROVED_TEMPLATE_KEY = "MISC_APPROVED";
+const MISC_APPROVED_FACTORY_TEMPLATE_KEY = "MISC_APPROVED_FACTORY";
+const MISC_REJECTED_TEMPLATE_KEY = "MISC_REJECTED";
 const MISC_ERD_UPDATED_TEMPLATE_KEY = "MISC_ERD_UPDATED";
 const MISC_READY_TEMPLATE_KEY = "MISC_READY";
 const MISC_RESOLVED_TEMPLATE_KEY = "MISC_RESOLVED";
@@ -3339,6 +3342,465 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
       template_key: MISC_REQUIREMENT_TEMPLATE_KEY,
       active: true,
     },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface MiscApprovalEmailPayload {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  isApproved: boolean;
+  actionBy: string;
+  actionAt: string;
+  approvalRemark?: string;
+  rejectionReason?: string;
+  projectUrl?: string;
+}
+
+export const sendMiscApprovalEmail = async (
+  payload: MiscApprovalEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const statusLabel = payload.isApproved ? "Approved" : "Rejected";
+  const statusColor = payload.isApproved ? "#16a34a" : "#dc2626";
+  const statusBg = payload.isApproved ? "#dcfce7" : "#fee2e2";
+
+  const defaultSubject = payload.isApproved
+    ? `Miscellaneous Request Approved for ${payload.leadCode} - ${payload.leadName}`
+    : `Miscellaneous Request Rejected for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    payload.isApproved
+      ? "The miscellaneous requirement raised for the following lead has been Approved."
+      : "The miscellaneous requirement raised for the following lead has been Rejected.",
+    "",
+    "Lead Details",
+    `Lead Code: ${payload.leadCode}`,
+    `Lead Name: ${payload.leadName}`,
+    `Status: ${statusLabel}`,
+    `${payload.isApproved ? "Approved By" : "Rejected By"}: ${payload.actionBy}`,
+    `${payload.isApproved ? "Approval Date" : "Rejection Date"}: ${payload.actionAt}`,
+    payload.isApproved && payload.approvalRemark
+      ? `Approval Remark: ${payload.approvalRemark}`
+      : "",
+    !payload.isApproved && payload.rejectionReason
+      ? `Reason for Rejection: ${payload.rejectionReason}`
+      : "",
+    "",
+    payload.projectUrl ? `View Requirement: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:${statusColor};">
+        Miscellaneous Request ${statusLabel}
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        ${
+          payload.isApproved
+            ? "The miscellaneous requirement raised for the following lead has been <strong>Approved</strong>."
+            : "The miscellaneous requirement raised for the following lead has been <strong>Rejected</strong>."
+        }
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Status</div>
+          <div class="lead-info-value">
+            <span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:12px;font-weight:600;color:${statusColor};background:${statusBg};">
+              ${statusLabel}
+            </span>
+          </div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">${payload.isApproved ? "Approved By" : "Rejected By"}</div>
+          <div class="lead-info-value">${payload.actionBy}</div>
+        </div>
+
+        <div class="lead-info-row ${!payload.isApproved && payload.rejectionReason ? "" : (!payload.approvalRemark ? "no-border" : "")}">
+          <div class="lead-info-label">${payload.isApproved ? "Approval Date" : "Rejection Date"}</div>
+          <div class="lead-info-value">${payload.actionAt}</div>
+        </div>
+
+        ${
+          payload.isApproved && payload.approvalRemark
+            ? `<div class="lead-info-row no-border">
+                <div class="lead-info-label">Approval Remark</div>
+                <div class="lead-info-value">${payload.approvalRemark}</div>
+              </div>`
+            : ""
+        }
+
+        ${
+          !payload.isApproved && payload.rejectionReason
+            ? `<div class="lead-info-row no-border">
+                <div class="lead-info-label">Reason for Rejection</div>
+                <div class="lead-info-value" style="color:#dc2626;">${payload.rejectionReason}</div>
+              </div>`
+            : ""
+        }
+
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Requirement
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateKey = payload.isApproved
+    ? MISC_APPROVED_TEMPLATE_KEY
+    : MISC_REJECTED_TEMPLATE_KEY;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    status: statusLabel,
+    actionBy: payload.actionBy,
+    actionAt: payload.actionAt,
+    approvalRemark: payload.approvalRemark ?? "",
+    rejectionReason: payload.rejectionReason ?? "",
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: templateKey,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: templateKey,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface MiscApprovedFactoryEmailPayload {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl?: string;
+}
+
+export const sendMiscApprovedFactoryEmail = async (
+  payload: MiscApprovedFactoryEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const defaultSubject = `Miscellaneous Approved for ${payload.leadCode} - ${payload.leadName}, set the ERD.`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `Miscellaneous has been approved for ${payload.leadCode} - ${payload.leadName}`,
+    "Kindly review the requirement in detail and set the Expected Ready Date for it.",
+    "",
+    payload.projectUrl ? `View Miscellaneous Detail: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+        padding-bottom: 4px !important;
+        border-bottom: 1px solid #e5e7eb !important;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+      .lead-info-label {
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-row.no-border {
+        border-bottom: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Miscellaneous Approved, set the ERD
+      </h2>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Hello ${payload.toName ?? "there"},
+      </p>
+
+      <p style="margin:0 0 12px;color:#111827;">
+        Miscellaneous has been approved for <strong>${payload.leadCode} - ${payload.leadName}</strong>
+      </p>
+
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Kindly review the requirement in detail and set the Expected Ready Date for it.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <p style="margin:0 0 4px;font-weight:600;color:#111827;">
+          Lead Details
+        </p>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+
+        <div class="lead-info-row no-border">
+          <div class="lead-info-label">Status</div>
+          <div class="lead-info-value">
+            <span style="display:inline-block;padding:2px 8px;border-radius:9999px;font-size:12px;font-weight:600;color:#16a34a;background:#dcfce7;">
+              Approved
+            </span>
+          </div>
+        </div>
+      </div>
+
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Miscellaneous Detail
+              </a>
+            </div>`
+          : ""
+      }
+
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateKey = MISC_APPROVED_FACTORY_TEMPLATE_KEY;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: templateKey,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: templateKey,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
   });
 
   const subject = template?.subject?.trim()

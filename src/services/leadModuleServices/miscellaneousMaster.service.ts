@@ -535,6 +535,7 @@ export const findMiscTask = (
 
 export const findDeliveryTask = (
   m: {
+    id?: number;
     lead_id: number;
     misc_approved: boolean | null;
     required_delivery_date: Date | string | null;
@@ -543,17 +544,27 @@ export const findDeliveryTask = (
   },
   tasks: any[],
 ) => {
-  if (m.misc_approved !== true || !m.required_delivery_date) return null;
+  if (!m.required_delivery_date) return null;
+  const miscDeliveryKey = `[misc-delivery:${m.id}]`;
   return (
     tasks.find(
       (t) =>
         t.lead_id === m.lead_id &&
         typeof t.remark === "string" &&
-        t.remark.includes("Required delivery date set for") &&
-        ((m.reorder_material_details &&
-          t.remark.includes(m.reorder_material_details)) ||
-          (m.problem_description && t.remark.includes(m.problem_description))),
-    ) || null
+        (t.remark.includes(miscDeliveryKey) ||
+          (t.remark.includes("Required delivery date set for") &&
+            ((m.reorder_material_details &&
+              t.remark.includes(m.reorder_material_details)) ||
+              (m.problem_description &&
+                t.remark.includes(m.problem_description))))),
+    ) ||
+    tasks.find(
+      (t) =>
+        t.lead_id === m.lead_id &&
+        typeof t.remark === "string" &&
+        t.remark.includes("Required delivery date set for"),
+    ) ||
+    null
   );
 };
 
@@ -905,7 +916,7 @@ export const getMiscellaneousLeadsByStatusService = async (
         supervisor_remark: m.supervisor_remark,
         expected_ready_date: m.expected_ready_date,
         solution: (m as any).solution ?? null,
-        required_delivery_date: m.required_delivery_date,
+        required_delivery_date: deliveryTaskForMisc?.due_date ?? m.required_delivery_date,
         is_resolved: m.is_resolved,
         resolved_at: m.resolved_at,
         created_by: m.created_by,

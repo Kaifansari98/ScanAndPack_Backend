@@ -170,16 +170,16 @@ underInstallationStageRoutes.get(
  */
 underInstallationStageRoutes.post(
   "/vendorId/:vendorId/miscId/:miscId/followup",
-  controller.createMiscFollowupTask,
+  controller.createMiscFollowup,
 );
 
 /**
- * ✅ GET → Get Miscellaneous Followup Tasks
+ * ✅ GET → Get Miscellaneous Followups
  * @route GET /vendorId/:vendorId/miscId/:miscId/followups
  */
 underInstallationStageRoutes.get(
   "/vendorId/:vendorId/miscId/:miscId/followups",
-  controller.getMiscFollowupTasks,
+  controller.getMiscFollowups,
 );
 
 underInstallationStageRoutes.post(

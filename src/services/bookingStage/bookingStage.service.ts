@@ -1706,30 +1706,45 @@ export class BookingStageService {
     let excludedLeadIds: number[] = [];
 
     if (userId) {
-      const mappedLeads = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id: vendorId,
-          user_id: userId,
-          status: "active",
-        },
-        select: { lead_id: true },
+      const creator = await prisma.userMaster.findUnique({
+        where: { id: userId },
+        include: { user_type: true },
       });
+      const normalizedUserType =
+        creator?.user_type?.user_type?.toLowerCase().trim() || "";
+      const isFactory =
+        normalizedUserType === "factory" ||
+        normalizedUserType === "factory-user" ||
+        normalizedUserType === "factory_user" ||
+        /factory/i.test(normalizedUserType);
+      const isFactoryInstallation = isFactory && normalizedTag === "type 15";
 
-      const taskLeads = await prisma.userLeadTask.findMany({
-        where: {
-          vendor_id: vendorId,
-          ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          OR: [{ created_by: userId }, { user_id: userId }],
-        },
-        select: { lead_id: true },
-      });
+      if (!isFactoryInstallation) {
+        const mappedLeads = await prisma.leadUserMapping.findMany({
+          where: {
+            vendor_id: vendorId,
+            user_id: userId,
+            status: "active",
+          },
+          select: { lead_id: true },
+        });
 
-      excludedLeadIds = [
-        ...new Set([
-          ...mappedLeads.map((m) => m.lead_id),
-          ...taskLeads.map((t) => t.lead_id),
-        ]),
-      ];
+        const taskLeads = await prisma.userLeadTask.findMany({
+          where: {
+            vendor_id: vendorId,
+            ...(franchiseId ? { franchise_id: franchiseId } : {}),
+            OR: [{ created_by: userId }, { user_id: userId }],
+          },
+          select: { lead_id: true },
+        });
+
+        excludedLeadIds = [
+          ...new Set([
+            ...mappedLeads.map((m) => m.lead_id),
+            ...taskLeads.map((t) => t.lead_id),
+          ]),
+        ];
+      }
     }
 
     // ============================
@@ -2116,7 +2131,8 @@ export class BookingStageService {
       vendor_id: vendorId,
       ...(!hasExplicitFranchiseFilter &&
       franchiseId &&
-      !Number.isNaN(franchiseId)
+      !Number.isNaN(franchiseId) &&
+      normalizedTag !== "type 15"
         ? { franchise_id: franchiseId }
         : {}),
       is_deleted: false,
@@ -4309,10 +4325,14 @@ export class BookingStageService {
       ? tagNumber >= 4 && tagNumber <= 16
       : false;
 
-    const isTechCheckStage = normalizedTag === "Type 8";
-    const isOrderLoginStage = normalizedTag === "Type 9";
-    const isProductionStage = normalizedTag === "Type 10";
-    const isInstallationStage = normalizedTag === "Type 15";
+    const isTechCheckStage =
+      normalizedTag === "Type 8" || normalizedTag.toLowerCase() === "type 8";
+    const isOrderLoginStage =
+      normalizedTag === "Type 9" || normalizedTag.toLowerCase() === "type 9";
+    const isProductionStage =
+      normalizedTag === "Type 10" || normalizedTag.toLowerCase() === "type 10";
+    const isInstallationStage =
+      normalizedTag === "Type 15" || normalizedTag.toLowerCase() === "type 15";
     const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
     const shouldExcludeLaterStageTags =
       isTechCheckStage || isOrderLoginStage || isProductionStage;
@@ -4321,7 +4341,7 @@ export class BookingStageService {
       isOrderLoginStage ||
       isProductionStage ||
       isInstallationStage;
-    const ignoreFranchiseForStage =
+    let ignoreFranchiseForStage =
       isTechCheckStage || isOrderLoginStage || isProductionStage;
 
     let statusIds: number[] = [];
@@ -4383,10 +4403,22 @@ export class BookingStageService {
       include: { user_type: true },
     });
 
-    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase().trim();
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
     const isAuditor = normalizedUserType === "auditor";
+    const isFactory =
+      normalizedUserType === "factory" ||
+      normalizedUserType === "factory-user" ||
+      normalizedUserType === "factory_user" ||
+      Boolean(
+        creator?.user_type?.user_type &&
+          /factory/i.test(creator.user_type.user_type),
+      );
+    const isFactoryInstallation = isFactory && isInstallationStage;
+    if (isFactoryInstallation) {
+      ignoreFranchiseForStage = true;
+    }
     const isAdminLikeForRange =
       isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
     const shouldIncludeFranchiseByRole =
@@ -4394,6 +4426,7 @@ export class BookingStageService {
       [
         "sales-executive",
         "site-supervisor",
+        "head-site-supervisor",
         "admin",
         "super-admin",
         "auditor",
@@ -4402,7 +4435,17 @@ export class BookingStageService {
       normalizedUserType === "admin" ||
       normalizedUserType === "super-admin" ||
       normalizedUserType === "auditor" ||
-      normalizedUserType === "sales-executive";
+      normalizedUserType === "sales-executive" ||
+      normalizedUserType === "site-supervisor" ||
+      normalizedUserType === "head-site-supervisor";
+    const effectiveFranchiseId =
+      franchiseId && !Number.isNaN(franchiseId)
+        ? franchiseId
+        : normalizedUserType === "site-supervisor" ||
+            normalizedUserType === "head-site-supervisor" ||
+            normalizedUserType === "sales-executive"
+          ? creator?.franchise_id ?? undefined
+          : undefined;
     const skip = (page - 1) * limit;
     const sortDir =
       filters.created_at === "asc"
@@ -4992,7 +5035,12 @@ export class BookingStageService {
     };
 
     // ============= Admin Flow =============
-    if (isAdminLikeForRange || (!isType4To16 && isAdmin) || normalizedUserType === "miscellaneous") {
+    if (
+      isAdminLikeForRange ||
+      (!isType4To16 && isAdmin) ||
+      normalizedUserType === "miscellaneous" ||
+      isFactoryInstallation
+    ) {
       const baseWhere: Prisma.LeadMasterWhereInput = {
         vendor_id: vendorId,
         is_deleted: false,
@@ -5013,11 +5061,12 @@ export class BookingStageService {
 
       const includeFranchise =
         !hasExplicitFranchiseFilter &&
+        !isFactoryInstallation &&
         (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
-        franchiseId &&
+        effectiveFranchiseId &&
         !ignoreFranchiseForStage;
       if (includeFranchise) {
-        baseWhere.franchise_id = franchiseId;
+        baseWhere.franchise_id = effectiveFranchiseId;
       }
 
       const whereClause = addFilterConditions(baseWhere);
@@ -5137,8 +5186,8 @@ export class BookingStageService {
         ? "onGoing"
         : { in: ["onGoing", "lostApproval"] },
     };
-    if (shouldIncludeFranchise && franchiseId && !ignoreFranchiseForStage) {
-      baseWhere.franchise_id = franchiseId;
+    if (shouldIncludeFranchise && effectiveFranchiseId && !ignoreFranchiseForStage) {
+      baseWhere.franchise_id = effectiveFranchiseId;
     }
 
     if (
@@ -5150,10 +5199,10 @@ export class BookingStageService {
 
     const includeFranchise =
       (isType4To16 ? shouldIncludeFranchiseByRole : shouldIncludeFranchise) &&
-      franchiseId &&
+      effectiveFranchiseId &&
       !ignoreFranchiseForStage;
     if (includeFranchise) {
-      baseWhere.franchise_id = franchiseId;
+      baseWhere.franchise_id = effectiveFranchiseId;
     }
 
     const whereClause = addFilterConditions(baseWhere);

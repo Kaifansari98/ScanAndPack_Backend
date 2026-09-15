@@ -1136,6 +1136,8 @@ export class UnderInstallationStageController {
 
 
 
+      const baseUrl = resolveClientBaseUrl(req);
+
       const data =
         await UnderInstallationStageService.updateMiscApprovalService({
           vendor_id: vendorId,
@@ -1144,6 +1146,7 @@ export class UnderInstallationStageController {
           exp_of_rejection,
           approval_remark,
           updated_by,
+          baseUrl,
         });
 
       return res.status(200).json({ success: true, data });
@@ -1783,7 +1786,7 @@ export class UnderInstallationStageController {
       });
     } catch (err: any) {
       console.error("❌ Error in resolveMiscellaneousEntry:", err.message);
-      return res.status(500).json({
+      return res.status(err.statusCode || 500).json({
         success: false,
         error: err.message || "Something went wrong",
       });
@@ -2016,43 +2019,45 @@ export class UnderInstallationStageController {
     }
   }
 
-  async createMiscFollowupTask(req: Request, res: Response) {
+  async createMiscFollowup(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
-      const { lead_id, user_id, due_date, remark, created_by } = req.body;
+      const { lead_id, followup_date, due_date, date, solution, remark, created_by } = req.body;
 
       if (!vendorId || !miscId) {
         return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
       }
 
-      if (!lead_id || !user_id || !due_date || !remark) {
+      const targetDate = followup_date || due_date || date;
+      const targetSolution = solution || remark;
+
+      if (!lead_id || !targetDate || !targetSolution) {
         return res.status(400).json({
           success: false,
-          error: "lead_id, user_id, due_date, and remark are required",
+          error: "lead_id, followup_date, and solution are required",
         });
       }
 
       const creatorId = Number(created_by || (req as any).user?.id || 1);
 
-      const task = await UnderInstallationStageService.createMiscFollowupTaskService({
+      const followup = await UnderInstallationStageService.createMiscellaneousFollowupService({
         vendor_id: vendorId,
         misc_id: miscId,
         lead_id: Number(lead_id),
-        user_id: Number(user_id),
-        due_date,
-        remark,
+        followup_date: targetDate,
+        solution: targetSolution,
         created_by: creatorId,
       });
 
-      return res.status(201).json({ success: true, data: task, message: "Followup task created successfully" });
+      return res.status(201).json({ success: true, data: followup, message: "Followup recorded successfully" });
     } catch (error: any) {
-      console.error("Error creating followup task:", error);
+      console.error("Error creating followup:", error);
       return res.status(500).json({ success: false, error: error.message });
     }
   }
 
-  async getMiscFollowupTasks(req: Request, res: Response) {
+  async getMiscFollowups(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
@@ -2061,11 +2066,19 @@ export class UnderInstallationStageController {
         return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
       }
 
-      const tasks = await UnderInstallationStageService.getMiscFollowupTasksService(vendorId, miscId);
-      return res.status(200).json({ success: true, data: tasks });
+      const followups = await UnderInstallationStageService.getMiscellaneousFollowupsService(vendorId, miscId);
+      return res.status(200).json({ success: true, data: followups });
     } catch (error: any) {
-      console.error("Error fetching followup tasks:", error);
+      console.error("Error fetching followups:", error);
       return res.status(500).json({ success: false, error: error.message });
     }
+  }
+
+  async createMiscFollowupTask(req: Request, res: Response) {
+    return this.createMiscFollowup(req, res);
+  }
+
+  async getMiscFollowupTasks(req: Request, res: Response) {
+    return this.getMiscFollowups(req, res);
   }
 }
