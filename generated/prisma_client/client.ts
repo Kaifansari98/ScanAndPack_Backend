@@ -590,6 +590,11 @@ export type MiscellaneousTeamMapping = Prisma.MiscellaneousTeamMappingModel
  */
 export type MiscellaneousDocument = Prisma.MiscellaneousDocumentModel
 /**
+ * Model MiscellaneousFollowup
+ * 
+ */
+export type MiscellaneousFollowup = Prisma.MiscellaneousFollowupModel
+/**
  * Model InstallationIssueLogMaster
  * 
  */

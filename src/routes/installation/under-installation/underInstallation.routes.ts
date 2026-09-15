@@ -100,6 +100,16 @@ underInstallationStageRoutes.get(
 );
 
 /**
+ * ✅ PUT → Update Miscellaneous Entry Details
+ * @route PUT /vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.updateMiscellaneousEntry,
+);
+
+/**
  * ✅ PUT → Update Expected Ready Date
  * @route PUT /miscellaneous/vendorId/:vendorId/miscId/:miscId/update-erd
  */
@@ -160,16 +170,16 @@ underInstallationStageRoutes.get(
  */
 underInstallationStageRoutes.post(
   "/vendorId/:vendorId/miscId/:miscId/followup",
-  controller.createMiscFollowupTask,
+  controller.createMiscFollowup,
 );
 
 /**
- * ✅ GET → Get Miscellaneous Followup Tasks
+ * ✅ GET → Get Miscellaneous Followups
  * @route GET /vendorId/:vendorId/miscId/:miscId/followups
  */
 underInstallationStageRoutes.get(
   "/vendorId/:vendorId/miscId/:miscId/followups",
-  controller.getMiscFollowupTasks,
+  controller.getMiscFollowups,
 );
 
 underInstallationStageRoutes.post(

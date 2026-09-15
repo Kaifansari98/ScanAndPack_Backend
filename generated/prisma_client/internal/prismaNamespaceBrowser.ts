@@ -161,6 +161,7 @@ export const ModelName = {
   MiscellaneousTeamMaster: 'MiscellaneousTeamMaster',
   MiscellaneousTeamMapping: 'MiscellaneousTeamMapping',
   MiscellaneousDocument: 'MiscellaneousDocument',
+  MiscellaneousFollowup: 'MiscellaneousFollowup',
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
@@ -2174,6 +2175,21 @@ export const MiscellaneousDocumentScalarFieldEnum = {
 } as const
 
 export type MiscellaneousDocumentScalarFieldEnum = (typeof MiscellaneousDocumentScalarFieldEnum)[keyof typeof MiscellaneousDocumentScalarFieldEnum]
+
+
+export const MiscellaneousFollowupScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  miscellaneous_id: 'miscellaneous_id',
+  followup_date: 'followup_date',
+  solution: 'solution',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MiscellaneousFollowupScalarFieldEnum = (typeof MiscellaneousFollowupScalarFieldEnum)[keyof typeof MiscellaneousFollowupScalarFieldEnum]
 
 
 export const InstallationIssueLogMasterScalarFieldEnum = {

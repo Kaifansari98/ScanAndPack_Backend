@@ -142,6 +142,7 @@ model VendorMaster {
   meetingTypes                           MeetingTypeMaster[]
   miscellaneousDocument                  MiscellaneousDocument[]
   miscellaneousMaster                    MiscellaneousMaster[]
+  miscellaneousFollowups                 MiscellaneousFollowup[]
   miscellaneousTeamMaster                MiscellaneousTeamMaster[]
   miscellaneousTypeMaster                MiscellaneousTypeMaster[]
   notifications                          Notification[]
@@ -390,6 +391,7 @@ model UserMaster {
   miscDocumentsCreated                                                           MiscellaneousDocument[]                @relation("MiscDocCreatedBy")
   miscCreated                                                                    MiscellaneousMaster[]                  @relation("MiscCreatedBy")
   miscUpdated                                                                    MiscellaneousMaster[]                  @relation("MiscUpdatedBy")
+  miscFollowupsCreated                                                           MiscellaneousFollowup[]                @relation("MiscFollowupCreatedBy")
   notificationsSent                                                              Notification[]                         @relation("NotificationSender")
   notificationsReceived                                                          Notification[]                         @relation("NotificationUser")
   notificationQueuesCreated                                                      NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
@@ -884,6 +886,7 @@ model LeadMaster {
   userMappings                                LeadUserMapping[]
   ledgers                                     Ledger[]
   miscellaneousMaster                         MiscellaneousMaster[]
+  miscellaneousFollowups                      MiscellaneousFollowup[]
   orderLoginDetails                           OrderLoginDetails[]
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
@@ -2748,6 +2751,7 @@ model MiscellaneousMaster {
   updatedBy                UserMaster?                @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
   vendor                   VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   teams                    MiscellaneousTeamMapping[]
+  followups                MiscellaneousFollowup[]
 }
 
 model MiscellaneousTypeMaster {
@@ -2794,6 +2798,27 @@ model MiscellaneousDocument {
   document         LeadDocuments       @relation(fields: [document_id], references: [id])
   miscellaneous    MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id])
   vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model MiscellaneousFollowup {
+  id               Int                 @id @default(autoincrement())
+  vendor_id        Int
+  lead_id          Int
+  miscellaneous_id Int
+  followup_date    DateTime
+  solution         String              @db.Text
+  created_by       Int
+  created_at       DateTime            @default(now())
+  updated_at       DateTime            @updatedAt
+
+  miscellaneous    MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id], onDelete: Cascade)
+  lead             LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy        UserMaster          @relation("MiscFollowupCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, miscellaneous_id])
+  @@index([lead_id])
+  @@index([created_by])
 }
 
 model InstallationIssueLogMaster {
