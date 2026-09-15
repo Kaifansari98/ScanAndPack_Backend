@@ -267,6 +267,31 @@ const replaceProjectLocationEntries = async (
             },
           })
         : [];
+    const scannedCutListIds = Array.from(
+      new Set(scannedQuantities.map((row) => row.cut_list_id))
+    );
+    const scannedCutListRows =
+      scannedCutListIds.length > 0
+        ? await tx.cutList.findMany({
+            where: {
+              id: {
+                in: scannedCutListIds,
+              },
+            },
+            select: {
+              id: true,
+              no_of_qty_in_boxes: true,
+            },
+          })
+        : [];
+    const qtyPerBoxByCutListId = new Map<number, number>(
+      scannedCutListRows.map(
+        (row: { id: number; no_of_qty_in_boxes: number }) => [
+          row.id,
+          Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
+        ]
+      )
+    );
     const minimumQuantityByEntryId = new Map<number, number>();
 
     for (const scannedQuantity of scannedQuantities) {
@@ -278,7 +303,10 @@ const replaceProjectLocationEntries = async (
         entryId,
         Math.max(
           minimumQuantityByEntryId.get(entryId) ?? 0,
-          scannedQuantity._count._all
+          Math.ceil(
+            scannedQuantity._count._all /
+              (qtyPerBoxByCutListId.get(scannedQuantity.cut_list_id) ?? 1)
+          )
         )
       );
     }

@@ -129,6 +129,93 @@ const normalizeBooleanFlag = (value: unknown, fallback = false): boolean => {
   return fallback;
 };
 
+const calculateQtyPerCustomPackingBox = (
+  items: Array<Pick<CadbidItem, "groupName" | "name" | "qty">>,
+  packingType: PackingType
+): number[] => {
+  if (packingType !== PackingType.CUSTOM_GROUP) {
+    return items.map(() => 1);
+  }
+
+  const minimumQtyByGroup = new Map<string, number>();
+
+  for (const item of items) {
+    const groupKey = cleanText(item.groupName).toLocaleLowerCase();
+    const quantity = Number(item.qty);
+    const currentMinimum = minimumQtyByGroup.get(groupKey);
+
+    if (currentMinimum === undefined || quantity < currentMinimum) {
+      minimumQtyByGroup.set(groupKey, quantity);
+    }
+  }
+
+  return items.map((item, index) => {
+    const groupName = cleanText(item.groupName);
+    const minimumQty = minimumQtyByGroup.get(groupName.toLocaleLowerCase());
+    const quantity = Number(item.qty);
+
+    if (!minimumQty || quantity % minimumQty !== 0) {
+      throw new Error(
+        `Qty ${quantity} for item "${item.name}" in Product Group "${groupName}" must be a multiple of the minimum group quantity ${minimumQty || 0} (Excel row ${index + 2})`
+      );
+    }
+
+    return Math.max(1, quantity / minimumQty);
+  });
+};
+
+const recalculateStoredQtyPerCustomPackingBox = async (
+  client: any,
+  projectId: number
+) => {
+  const storedItems = await client.cutList.findMany({
+    where: {
+      project_id: projectId,
+    },
+    select: {
+      id: true,
+      item_name: true,
+      group_name: true,
+      qty: true,
+      no_of_qty_in_boxes: true,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+  const calculatedQuantities = calculateQtyPerCustomPackingBox(
+    storedItems.map(
+      (item: {
+        item_name: string;
+        group_name: string | null;
+        qty: number;
+      }) => ({
+        name: item.item_name,
+        groupName: item.group_name || "",
+        qty: item.qty,
+      })
+    ),
+    PackingType.CUSTOM_GROUP
+  );
+
+  for (const [index, item] of storedItems.entries()) {
+    const calculatedQuantity = calculatedQuantities[index] ?? 1;
+
+    if (item.no_of_qty_in_boxes === calculatedQuantity) {
+      continue;
+    }
+
+    await client.cutList.update({
+      where: {
+        id: item.id,
+      },
+      data: {
+        no_of_qty_in_boxes: calculatedQuantity,
+      },
+    });
+  }
+};
+
 const resolvePackingConfiguration = ({
   packingType,
   noOfBoxes,
@@ -1127,6 +1214,10 @@ export const createProjectService_old = async (
     }
 
     const validPayload = validation.data;
+    const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
+      validPayload.items,
+      resolvedPackingType
+    );
 
     logger.info("Validation passed", {
       validItemsCount: validPayload.items.length,
@@ -1457,7 +1548,7 @@ export const createProjectService_old = async (
         | Create cutlist rows and machine mappings
         |--------------------------------------------------------------------------
         */
-        for (const item of validPayload.items) {
+        for (const [itemIndex, item] of validPayload.items.entries()) {
           const quantity = Number(item.qty);
 
           /*
@@ -1501,6 +1592,7 @@ export const createProjectService_old = async (
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
               custom_packing_group: item.customPackingGroup || null,
+              no_of_qty_in_boxes: qtyPerCustomPackingBox[itemIndex] ?? 1,
               category_name: item.categoryName || null,
               procurement: item.procurement || null,
               weight: excelRowWeight,
@@ -1640,6 +1732,10 @@ export const createProjectService_old = async (
               perItemWeight,
             });
           }
+        }
+
+        if (resolvedPackingType === PackingType.CUSTOM_GROUP) {
+          await recalculateStoredQtyPerCustomPackingBox(tx, project.id);
         }
 
         /*
@@ -2015,6 +2111,11 @@ export const createProjectService = async (
     }
 
     const validPayload = validation.data;
+
+    const qtyPerCustomPackingBox = calculateQtyPerCustomPackingBox(
+      validPayload.items,
+      resolvedPackingType
+    );
 
     logger.info("Validation passed", {
       validItemsCount: validPayload.items.length,
@@ -2416,7 +2517,7 @@ export const createProjectService = async (
         | Create cutlist rows and machine mappings
         |--------------------------------------------------------------------------
         */
-        for (const item of validPayload.items) {
+        for (const [itemIndex, item] of validPayload.items.entries()) {
           const quantity = Number(item.qty);
 
           /*
@@ -2483,6 +2584,7 @@ export const createProjectService = async (
               unique_code_2: item.barcode2 || null,
               group_name: item.groupName || null,
               custom_packing_group: item.customPackingGroup || null,
+              no_of_qty_in_boxes: qtyPerCustomPackingBox[itemIndex] ?? 1,
               category_name: item.categoryName || null,
               category_id: categoryConfig?.id ?? null,
 
@@ -2680,6 +2782,10 @@ export const createProjectService = async (
               });
             }
           }
+        }
+
+        if (resolvedPackingType === PackingType.CUSTOM_GROUP) {
+          await recalculateStoredQtyPerCustomPackingBox(tx, project.id);
         }
 
         /*

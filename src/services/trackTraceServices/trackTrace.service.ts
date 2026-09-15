@@ -964,6 +964,7 @@ export const updateScannedItem = async (
             item_name: true,
             group_name: true,
             custom_packing_group: true,
+            no_of_qty_in_boxes: true,
           },
         },
         project: {
@@ -1275,7 +1276,7 @@ export const updateScannedItem = async (
     let selectedLocationAllocation: {
       id: number;
       locationName: string;
-      qty: number;
+      maximumItemQty: number;
     } | null = null;
 
     if (location_name && supportsPackingLocation) {
@@ -1334,18 +1335,23 @@ export const updateScannedItem = async (
           },
         },
       });
+      const qtyPerBox = Math.max(
+        1,
+        Number(eligibleMapping.cut_list.no_of_qty_in_boxes || 1),
+      );
+      const maximumItemQty = locationAllocation.qty * qtyPerBox;
 
-      if (scannedAtLocation >= locationAllocation.qty) {
+      if (scannedAtLocation >= maximumItemQty) {
         return validationResponse(
           0,
-          `Allocated quantity ${locationAllocation.qty} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${locationAllocation.location_name}"`,
+          `All ${maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed for the allocated product quantity ${locationAllocation.qty} at location "${locationAllocation.location_name}"`,
         );
       }
 
       selectedLocationAllocation = {
         id: locationAllocation.id,
         locationName: locationAllocation.location_name,
-        qty: locationAllocation.qty,
+        maximumItemQty,
       };
     }
 
@@ -1354,10 +1360,9 @@ export const updateScannedItem = async (
       packingGroupName: string;
       packingGroupItems: Array<{
         cutListId: number;
-        qty: number;
+        qtyPerBox: number;
       }>;
       projectLocationProductQuantityId: number | null;
-      locationQuantity: number | null;
       locationName: string | null;
       projectDetailsId: number;
       leadId: number | null;
@@ -1409,7 +1414,7 @@ export const updateScannedItem = async (
           id: true,
           item_name: true,
           custom_packing_group: true,
-          qty: true,
+          no_of_qty_in_boxes: true,
         },
         orderBy: {
           id: "asc",
@@ -1444,7 +1449,7 @@ export const updateScannedItem = async (
         )
         .map((row) => ({
           cutListId: row.id,
-          qty: Math.max(0, Number(row.qty || 0)),
+          qtyPerBox: Math.max(1, Number(row.no_of_qty_in_boxes || 1)),
         }));
 
       if (packingGroupItems.length === 0) {
@@ -1460,7 +1465,6 @@ export const updateScannedItem = async (
         packingGroupItems,
         projectLocationProductQuantityId:
           selectedLocationAllocation?.id ?? null,
-        locationQuantity: selectedLocationAllocation?.qty ?? null,
         locationName: selectedLocationAllocation?.locationName ?? null,
         projectDetailsId,
         leadId: eligibleMapping.project.lead_id,
@@ -1672,9 +1676,9 @@ export const updateScannedItem = async (
           },
         });
 
-        if (locationScanCount > selectedLocationAllocation.qty) {
+        if (locationScanCount > selectedLocationAllocation.maximumItemQty) {
           throw new Error(
-            `Allocated quantity ${selectedLocationAllocation.qty} is already packed for item "${eligibleMapping.cut_list.item_name}" at location "${selectedLocationAllocation.locationName}"`,
+            `All ${selectedLocationAllocation.maximumItemQty} required pieces of item "${eligibleMapping.cut_list.item_name}" are already packed at location "${selectedLocationAllocation.locationName}"`,
           );
         }
       }
@@ -1687,6 +1691,17 @@ export const updateScannedItem = async (
       let boxesPerProduct: number | null = null;
 
       if (automaticPackingDefinition) {
+        const incomingItemRequirement =
+          automaticPackingDefinition.packingGroupItems.find(
+            (item) => item.cutListId === cut_list_id,
+          );
+
+        if (!incomingItemRequirement) {
+          throw new Error(
+            `Packing requirement is not configured for item "${eligibleMapping.cut_list.item_name}"`,
+          );
+        }
+
         const locationMappingFilter = {
           project_location_product_quantity_id:
             automaticPackingDefinition.projectLocationProductQuantityId,
@@ -1730,16 +1745,25 @@ export const updateScannedItem = async (
               },
               select: {
                 cut_list_id: true,
+                qty: true,
               },
             },
           },
           orderBy: [{ sequence_no: "asc" }, { id: "asc" }],
         });
         let targetBox = openBoxes.find(
-          (candidate) =>
-            !candidate.cutListMachineMapping.some(
-              (mapping) => mapping.cut_list_id === cut_list_id,
-            ),
+          (candidate) => {
+            const packedIncomingQuantity =
+              candidate.cutListMachineMapping.reduce(
+                (quantity, mapping) =>
+                  mapping.cut_list_id === cut_list_id
+                    ? quantity + Math.max(1, Number(mapping.qty || 1))
+                    : quantity,
+                0,
+              );
+
+            return packedIncomingQuantity < incomingItemRequirement.qtyPerBox;
+          },
         );
 
         if (!targetBox) {
@@ -1811,6 +1835,7 @@ export const updateScannedItem = async (
               cutListMachineMapping: {
                 select: {
                   cut_list_id: true,
+                  qty: true,
                 },
               },
             },
@@ -1832,14 +1857,10 @@ export const updateScannedItem = async (
           },
         });
 
-        const productSetNumber = Math.max(
-          1,
-          targetBox.product_set_no ?? 1,
-        );
         const requiredCutListIds =
-          automaticPackingDefinition.packingGroupItems
-            .filter((item) => item.qty >= productSetNumber)
-            .map((item) => item.cutListId);
+          automaticPackingDefinition.packingGroupItems.map(
+            (item) => item.cutListId,
+          );
 
         const packedComponents = await tx.cutListMachineMapping.findMany({
           where: {
@@ -1855,15 +1876,23 @@ export const updateScannedItem = async (
           },
           select: {
             cut_list_id: true,
+            qty: true,
           },
-          distinct: ["cut_list_id"],
         });
-        const packedCutListIds = new Set(
-          packedComponents.map((component) => component.cut_list_id),
-        );
+        const packedQuantityByCutListId = new Map<number, number>();
 
-        boxCompleted = requiredCutListIds.every(
-          (requiredCutListId) => packedCutListIds.has(requiredCutListId),
+        for (const component of packedComponents) {
+          packedQuantityByCutListId.set(
+            component.cut_list_id,
+            (packedQuantityByCutListId.get(component.cut_list_id) ?? 0) +
+              Math.max(1, Number(component.qty || 1)),
+          );
+        }
+
+        boxCompleted = automaticPackingDefinition.packingGroupItems.every(
+          (item) =>
+            (packedQuantityByCutListId.get(item.cutListId) ?? 0) >=
+            item.qtyPerBox,
         );
 
         if (boxCompleted) {

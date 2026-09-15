@@ -18522,7 +18522,8 @@ export const CutListScalarFieldEnum = {
   use_in_assembled_packing: 'use_in_assembled_packing',
   include_in_packing: 'include_in_packing',
   scan_pack_validate: 'scan_pack_validate',
-  custom_packing_group: 'custom_packing_group'
+  custom_packing_group: 'custom_packing_group',
+  no_of_qty_in_boxes: 'no_of_qty_in_boxes'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
