@@ -137,6 +137,9 @@ export class LeadStatsService {
           ...whereClause,
           id: { in: leadIds.length > 0 ? leadIds : [0] }, // avoid empty "in []"
         };
+        if (userType === "sales-executive" && userId) {
+          whereClause.assign_to = userId;
+        }
       }
       // ✅ Admin/super-admin → see all vendor leads
 
@@ -226,26 +229,36 @@ export class LeadStatsService {
         approval_status: "PENDING",
       };
 
-      if (targetFranchiseId) {
-        if (userType === "sales-executive" && userId) {
-          pendingOnlineWhere.OR = [
-            { pending_store_id: targetFranchiseId },
-            { store_id: targetFranchiseId },
+      if (userType === "sales-executive" && userId) {
+        const userCondition: any = {
+          OR: [
             { final_assigned_leads: userId },
-            { assign_to: userId },
-            { pending_assign_to: userId },
+            {
+              AND: [
+                { final_assigned_leads: null },
+                { OR: [{ assign_to: userId }, { pending_assign_to: userId }] },
+              ],
+            },
+          ],
+        };
+
+        if (targetFranchiseId) {
+          pendingOnlineWhere.AND = [
+            {
+              OR: [
+                { pending_store_id: targetFranchiseId },
+                { store_id: targetFranchiseId },
+              ],
+            },
+            userCondition,
           ];
         } else {
-          pendingOnlineWhere.OR = [
-            { pending_store_id: targetFranchiseId },
-            { store_id: targetFranchiseId },
-          ];
+          Object.assign(pendingOnlineWhere, userCondition);
         }
-      } else if (userType === "sales-executive" && userId) {
+      } else if (targetFranchiseId) {
         pendingOnlineWhere.OR = [
-          { final_assigned_leads: userId },
-          { assign_to: userId },
-          { pending_assign_to: userId },
+          { pending_store_id: targetFranchiseId },
+          { store_id: targetFranchiseId },
         ];
       }
 

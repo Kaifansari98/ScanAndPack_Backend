@@ -6,7 +6,7 @@
 /*
  * This file should be your main import to use Prisma-related types and utilities in a browser. 
  * Use it to get access to models, enums, and input types.
- *
+ * 
  * This file does not contain a `PrismaClient` class, nor several other helpers that are intended as server-side only.
  * See `client.ts` for the standard, server-side entry point.
  *
@@ -69,7 +69,7 @@ export type UserPrivilegeMapping = Prisma.UserPrivilegeMappingModel
 export type ProjectMaster = Prisma.ProjectMasterModel
 /**
  * Model ProjectLocationProductQuantity
- *
+ * 
  */
 export type ProjectLocationProductQuantity = Prisma.ProjectLocationProductQuantityModel
 /**
@@ -1082,3 +1082,33 @@ export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
  * 
  */
 export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProductionModel
+/**
+ * Model CutListRuleMaster
+ * 
+ */
+export type CutListRuleMaster = Prisma.CutListRuleMasterModel
+/**
+ * Model CutListRuleConditionGroup
+ * 
+ */
+export type CutListRuleConditionGroup = Prisma.CutListRuleConditionGroupModel
+/**
+ * Model CutListRuleCondition
+ * 
+ */
+export type CutListRuleCondition = Prisma.CutListRuleConditionModel
+/**
+ * Model CutListRuleAction
+ * 
+ */
+export type CutListRuleAction = Prisma.CutListRuleActionModel
+/**
+ * Model RuleFieldMaster
+ * 
+ */
+export type RuleFieldMaster = Prisma.RuleFieldMasterModel
+/**
+ * Model RuleActionMaster
+ * 
+ */
+export type RuleActionMaster = Prisma.RuleActionMasterModel

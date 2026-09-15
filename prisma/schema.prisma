@@ -74,6 +74,8 @@ model VendorMaster {
   coreProducts                           CoreProductMaster[]
   CutList                                CutList[]
   cutListMachineMapping                  CutListMachineMapping[]
+  cutListRules                           CutListRuleMaster[]
+  ruleActions                            RuleActionMaster[]
   debitCreditNotes                       DebitCreditNote[]                      @relation("DCNVendor")
   completionPhotos                       DefectCompletionPhoto[]
   defectMaster                           DefectMaster[]
@@ -297,6 +299,8 @@ model UserMaster {
   companyVendorsUpdated                                                          CompanyVendorsMaster[]                 @relation("CompanyVendorUpdatedBy")
   operator                                                                       CutListMachineMapping[]
   mappingSiteIns                                                                 CutListMachineMapping[]                @relation("MappingSiteInBy")
+  cutListRulesCreated                                                            CutListRuleMaster[]                    @relation("CutListRulesCreated")
+  cutListRulesUpdated                                                            CutListRuleMaster[]                    @relation("CutListRulesUpdated")
   dcnsCreated                                                                    DebitCreditNote[]                      @relation("DCNCreatedBy")
   dcnsSettled                                                                    DebitCreditNote[]                      @relation("DCNSettledBy")
   completionPhotos                                                               DefectCompletionPhoto[]
@@ -2730,6 +2734,7 @@ model MiscellaneousMaster {
   exp_of_rejection         String?
   misc_approved            Boolean?
   required_delivery_date   DateTime?
+  solution                 String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -2958,6 +2963,7 @@ model MachineMaster {
   machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+  cutListRules          CutListRuleMaster[]     @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
   @@index([vendor_id, status])
@@ -3010,6 +3016,7 @@ model CutList {
 }
 
 model CutListMachineMapping {
+
   id                                   Int                             @id @default(autoincrement())
   cut_list_id                          Int
   machine_id                           Int
@@ -3046,7 +3053,10 @@ model CutListMachineMapping {
   vendor                               VendorMaster                    @relation(fields: [vendor_id], references: [id])
   completionPhotos                     DefectCompletionPhoto[]
   defectedItems                        DefectedItem[]
+  rule_id            Int?
+  rule               CutListRuleMaster?      @relation(fields: [rule_id], references: [id], onDelete: SetNull)
 
+  @@index([rule_id])
   @@index([cut_list_id])
   @@index([machine_id])
   @@index([project_id])
@@ -4238,6 +4248,7 @@ model ProductSupplierMapping {
   company_vendor_id          Int
   supplier_item_code         String?
   amount                     Decimal?             @db.Decimal(18, 2)
+  final_amount               Decimal?             @db.Decimal(18, 2)
   is_active                  Boolean              @default(true)
   created_by                 Int?
   updated_by                 Int?
@@ -5464,3 +5475,140 @@ model ProductsRequiredForProduction {
   @@index([product_id])
   @@index([created_by])
 }
+
+enum RuleStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum RuleConditionType {
+  COLUMN
+  CATEGORY
+}
+
+enum RuleOperator {
+  EQUALS
+  NOT_EQUALS
+  CONTAINS
+  NOT_CONTAINS
+  LESS_THAN
+  LESS_THAN_OR_EQUAL
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL
+  IN
+  NOT_IN
+  BETWEEN
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+enum RuleFieldDataType {
+  STRING
+  NUMBER
+  BOOLEAN
+  ARRAY
+}
+
+model CutListRuleMaster {
+  id                     Int                         @id @default(autoincrement())
+  vendor_id              Int
+  machine_id             Int
+  rule_code              String
+  rule_name              String
+  rule_tag               String?                     @default("CUTLIST_MACHINE_ROUTING")
+  priority               Int                         @default(10)
+  status                 RuleStatus                  @default(ACTIVE)
+  created_by             Int?
+  updated_by             Int?
+  created_at             DateTime                    @default(now())
+  updated_at             DateTime                    @updatedAt
+
+  vendor                 VendorMaster                @relation(fields: [vendor_id], references: [id])
+  machine                MachineMaster               @relation("CutListRules", fields: [machine_id], references: [id])
+  createdBy              UserMaster?                 @relation("CutListRulesCreated", fields: [created_by], references: [id])
+  updatedBy              UserMaster?                 @relation("CutListRulesUpdated", fields: [updated_by], references: [id])
+
+  conditionGroups        CutListRuleConditionGroup[]
+  actions                CutListRuleAction[]
+  cutListMachineMappings CutListMachineMapping[]
+
+  @@unique([vendor_id, machine_id, rule_code], name: "vendor_machine_rule_code_unique")
+  @@index([vendor_id, machine_id, status])
+}
+
+model CutListRuleConditionGroup {
+  id               Int                    @id @default(autoincrement())
+  rule_id          Int
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime               @default(now())
+  updated_at       DateTime               @updatedAt
+
+  rule             CutListRuleMaster      @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  conditions       CutListRuleCondition[]
+
+  @@index([rule_id])
+}
+
+model CutListRuleCondition {
+  id               Int                       @id @default(autoincrement())
+  group_id         Int
+  condition_type   RuleConditionType
+  field_key        String?
+  operator         RuleOperator
+  value            Json
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime                  @default(now())
+  updated_at       DateTime                  @updatedAt
+
+  group            CutListRuleConditionGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+
+  @@index([group_id])
+}
+
+model CutListRuleAction {
+  id           Int               @id @default(autoincrement())
+  rule_id      Int
+  action_id    Int
+  action_value Json?
+  sequence_no  Int
+  created_at   DateTime          @default(now())
+  updated_at   DateTime          @updatedAt
+
+  rule         CutListRuleMaster @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  actionMaster RuleActionMaster  @relation(fields: [action_id], references: [id])
+
+  @@index([rule_id])
+  @@index([action_id])
+}
+
+model RuleFieldMaster {
+  id         Int               @id @default(autoincrement())
+  field_key  String            @unique
+  field_name String
+  data_type  RuleFieldDataType
+  status     RuleStatus        @default(ACTIVE)
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
+}
+
+model RuleActionMaster {
+  id          Int                 @id @default(autoincrement())
+  vendor_id   Int
+  action_code String
+  action_name String
+  status      RuleStatus          @default(ACTIVE)
+  created_at  DateTime            @default(now())
+  updated_at  DateTime            @updatedAt
+
+  vendor      VendorMaster        @relation(fields: [vendor_id], references: [id])
+  ruleActions CutListRuleAction[]
+
+  @@unique([vendor_id, action_code], name: "vendor_action_code_unique")
+  @@index([vendor_id])
+}
+

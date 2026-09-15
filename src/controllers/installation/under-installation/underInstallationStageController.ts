@@ -126,7 +126,7 @@ export class UnderInstallationStageController {
         : req.params.vendorId;
       const vendorId = Number(vendorIdParam);
       const userId = Number(req.body.userId);
-      const franchiseId = Number(req.body.franchise_id);
+      const franchiseId = req.body.franchise_id ? Number(req.body.franchise_id) : undefined;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -198,18 +198,17 @@ export class UnderInstallationStageController {
       // ============================
       // VALIDATION GATE
       // ============================
-      if (!vendorId || !userId || !franchiseId) {
+      if (!vendorId || !userId) {
         logger.warn(
-          "[UnderInstallationStageController] Missing vendorId or userId or franchiseId",
+          "[UnderInstallationStageController] Missing vendorId or userId",
           {
             vendorId,
             userId,
-            franchiseId,
           },
         );
         return res.status(400).json({
           success: false,
-          message: "Vendor ID, User ID, and Franchise ID are required",
+          message: "Vendor ID and User ID are required",
         });
       }
 
@@ -803,6 +802,7 @@ export class UnderInstallationStageController {
         cost,
         supervisor_remark,
         expected_ready_date,
+        solution,
         is_resolved,
         teams, // comma-separated string "1,2,3"
         created_by,
@@ -850,6 +850,7 @@ export class UnderInstallationStageController {
         expected_ready_date: expected_ready_date
           ? new Date(expected_ready_date)
           : undefined,
+        solution: typeof solution === "string" ? solution : undefined,
         is_resolved: is_resolved === "true" ? true : false,
         created_by: Number(created_by),
         teams: parsedTeams,
@@ -971,7 +972,7 @@ export class UnderInstallationStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
-      const { expected_ready_date, updated_by } = req.body;
+      const { expected_ready_date, updated_by, solution } = req.body;
 
       if (!vendorId || !miscId) {
         return res.status(400).json({
@@ -992,6 +993,7 @@ export class UnderInstallationStageController {
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
+        solution: typeof solution === "string" ? solution : undefined,
         updated_by,
         baseUrl,
       });
@@ -1704,12 +1706,36 @@ export class UnderInstallationStageController {
         });
       }
 
+      const files = req.files as Express.Multer.File[];
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              vendorId,
+              leadId,
+              file.originalname,
+              file.mimetype,
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
       const baseUrl = resolveClientBaseUrl(req);
       await UnderInstallationStageService.markMiscTaskReady({
         vendor_id: vendorId,
         lead_id: leadId,
         misc_id: miscId,
         ready_by: Number(ready_by),
+        files: uploadedFiles,
         baseUrl,
       });
 
@@ -1873,4 +1899,74 @@ export class UnderInstallationStageController {
       );
     }
   };
+
+  // ── Miscellaneous Followup Controllers ────────────────────────────────────
+
+  async getMiscFollowupEligibleUsers(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      if (!vendorId) {
+        return res.status(400).json({ success: false, error: "vendorId is required" });
+      }
+
+      const users = await UnderInstallationStageService.getMiscFollowupEligibleUsersService(vendorId);
+      return res.status(200).json({ success: true, data: users });
+    } catch (error: any) {
+      console.error("Error fetching eligible followup users:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async createMiscFollowupTask(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { lead_id, user_id, due_date, remark, created_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
+      }
+
+      if (!lead_id || !user_id || !due_date || !remark) {
+        return res.status(400).json({
+          success: false,
+          error: "lead_id, user_id, due_date, and remark are required",
+        });
+      }
+
+      const creatorId = Number(created_by || (req as any).user?.id || 1);
+
+      const task = await UnderInstallationStageService.createMiscFollowupTaskService({
+        vendor_id: vendorId,
+        misc_id: miscId,
+        lead_id: Number(lead_id),
+        user_id: Number(user_id),
+        due_date,
+        remark,
+        created_by: creatorId,
+      });
+
+      return res.status(201).json({ success: true, data: task, message: "Followup task created successfully" });
+    } catch (error: any) {
+      console.error("Error creating followup task:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async getMiscFollowupTasks(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
+      }
+
+      const tasks = await UnderInstallationStageService.getMiscFollowupTasksService(vendorId, miscId);
+      return res.status(200).json({ success: true, data: tasks });
+    } catch (error: any) {
+      console.error("Error fetching followup tasks:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
 }

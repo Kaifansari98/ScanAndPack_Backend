@@ -569,6 +569,8 @@ export type VendorMasterWhereInput = {
   coreProducts?: Prisma.CoreProductMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  cutListRules?: Prisma.CutListRuleMasterListRelationFilter
+  ruleActions?: Prisma.RuleActionMasterListRelationFilter
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   defectMaster?: Prisma.DefectMasterListRelationFilter
@@ -771,6 +773,8 @@ export type VendorMasterOrderByWithRelationInput = {
   coreProducts?: Prisma.CoreProductMasterOrderByRelationAggregateInput
   CutList?: Prisma.CutListOrderByRelationAggregateInput
   cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
+  cutListRules?: Prisma.CutListRuleMasterOrderByRelationAggregateInput
+  ruleActions?: Prisma.RuleActionMasterOrderByRelationAggregateInput
   debitCreditNotes?: Prisma.DebitCreditNoteOrderByRelationAggregateInput
   completionPhotos?: Prisma.DefectCompletionPhotoOrderByRelationAggregateInput
   defectMaster?: Prisma.DefectMasterOrderByRelationAggregateInput
@@ -976,6 +980,8 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   coreProducts?: Prisma.CoreProductMasterListRelationFilter
   CutList?: Prisma.CutListListRelationFilter
   cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  cutListRules?: Prisma.CutListRuleMasterListRelationFilter
+  ruleActions?: Prisma.RuleActionMasterListRelationFilter
   debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
   completionPhotos?: Prisma.DefectCompletionPhotoListRelationFilter
   defectMaster?: Prisma.DefectMasterListRelationFilter
@@ -1280,6 +1286,8 @@ export type VendorMasterCreateInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -1482,6 +1490,8 @@ export type VendorMasterUncheckedCreateInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -1681,6 +1691,8 @@ export type VendorMasterUpdateInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -1883,6 +1895,8 @@ export type VendorMasterUncheckedUpdateInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -4561,6 +4575,34 @@ export type VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNes
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutProductsRequiredForProductionInput, Prisma.VendorMasterUpdateWithoutProductsRequiredForProductionInput>, Prisma.VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutCutListRulesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedCreateWithoutCutListRulesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCutListRulesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutCutListRulesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedCreateWithoutCutListRulesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCutListRulesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutCutListRulesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutCutListRulesInput, Prisma.VendorMasterUpdateWithoutCutListRulesInput>, Prisma.VendorMasterUncheckedUpdateWithoutCutListRulesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutRuleActionsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedCreateWithoutRuleActionsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutRuleActionsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutRuleActionsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedCreateWithoutRuleActionsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutRuleActionsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutRuleActionsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutRuleActionsInput, Prisma.VendorMasterUpdateWithoutRuleActionsInput>, Prisma.VendorMasterUncheckedUpdateWithoutRuleActionsInput>
+}
+
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
@@ -4626,6 +4668,8 @@ export type VendorMasterCreateWithoutAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -4827,6 +4871,8 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -5041,6 +5087,8 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -5242,6 +5290,8 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -5440,6 +5490,8 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -5641,6 +5693,8 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -5855,6 +5909,8 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -6056,6 +6112,8 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -6254,6 +6312,8 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -6455,6 +6515,8 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -6669,6 +6731,8 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -6870,6 +6934,8 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -7068,6 +7134,8 @@ export type VendorMasterCreateWithoutUsersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -7269,6 +7337,8 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -7483,6 +7553,8 @@ export type VendorMasterUpdateWithoutUsersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -7684,6 +7756,8 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -7882,6 +7956,8 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -8083,6 +8159,8 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -8297,6 +8375,8 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -8498,6 +8578,8 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -8696,6 +8778,8 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -8897,6 +8981,8 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -9111,6 +9197,8 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -9312,6 +9400,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -9510,6 +9600,8 @@ export type VendorMasterCreateWithoutProjectsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -9711,6 +9803,8 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -9925,6 +10019,8 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -10126,6 +10222,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -10324,6 +10422,8 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -10525,6 +10625,8 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -10739,6 +10841,8 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -10940,6 +11044,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -11138,6 +11244,8 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -11339,6 +11447,8 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -11553,6 +11663,8 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -11754,6 +11866,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -11951,6 +12065,8 @@ export type VendorMasterCreateWithoutBoxesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -12152,6 +12268,8 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -12366,6 +12484,8 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -12567,6 +12687,8 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -12766,6 +12888,8 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -12967,6 +13091,8 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -13181,6 +13307,8 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -13382,6 +13510,8 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -13580,6 +13710,8 @@ export type VendorMasterCreateWithoutTokensInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -13781,6 +13913,8 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -13995,6 +14129,8 @@ export type VendorMasterUpdateWithoutTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -14196,6 +14332,8 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -14393,6 +14531,8 @@ export type VendorMasterCreateWithoutClientsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -14594,6 +14734,8 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -14808,6 +14950,8 @@ export type VendorMasterUpdateWithoutClientsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -15009,6 +15153,8 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -15207,6 +15353,8 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -15408,6 +15556,8 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -15622,6 +15772,8 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -15823,6 +15975,8 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -16021,6 +16175,8 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -16222,6 +16378,8 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -16436,6 +16594,8 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -16637,6 +16797,8 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -16836,6 +16998,8 @@ export type VendorMasterCreateWithoutLeadsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -17037,6 +17201,8 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -17251,6 +17417,8 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -17452,6 +17620,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -17650,6 +17820,8 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -17851,6 +18023,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -18065,6 +18239,8 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -18266,6 +18442,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -18464,6 +18642,8 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -18665,6 +18845,8 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -18879,6 +19061,8 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -19080,6 +19264,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -19278,6 +19464,8 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -19479,6 +19667,8 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -19693,6 +19883,8 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -19894,6 +20086,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -20092,6 +20286,8 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -20293,6 +20489,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -20507,6 +20705,8 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -20708,6 +20908,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -20906,6 +21108,8 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -21107,6 +21311,8 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -21321,6 +21527,8 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -21522,6 +21730,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -21720,6 +21930,8 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -21921,6 +22133,8 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -22135,6 +22349,8 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -22336,6 +22552,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -22534,6 +22752,8 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -22735,6 +22955,8 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -22949,6 +23171,8 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -23150,6 +23374,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -23348,6 +23574,8 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -23549,6 +23777,8 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -23763,6 +23993,8 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -23964,6 +24196,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -24162,6 +24396,8 @@ export type VendorMasterCreateWithoutSourcesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -24363,6 +24599,8 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -24577,6 +24815,8 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -24778,6 +25018,8 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -24975,6 +25217,8 @@ export type VendorMasterCreateWithoutAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -25176,6 +25420,8 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -25390,6 +25636,8 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -25591,6 +25839,8 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -25790,6 +26040,8 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -25991,6 +26243,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -26205,6 +26459,8 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -26406,6 +26662,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -26604,6 +26862,8 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -26805,6 +27065,8 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -27019,6 +27281,8 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -27220,6 +27484,8 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -27418,6 +27684,8 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -27619,6 +27887,8 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -27833,6 +28103,8 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -28034,6 +28306,8 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -28232,6 +28506,8 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -28433,6 +28709,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -28647,6 +28925,8 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -28848,6 +29128,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -29046,6 +29328,8 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -29247,6 +29531,8 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -29461,6 +29747,8 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -29662,6 +29950,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -29859,6 +30149,8 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -30060,6 +30352,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -30274,6 +30568,8 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -30475,6 +30771,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -30673,6 +30971,8 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -30874,6 +31174,8 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -31088,6 +31390,8 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -31289,6 +31593,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -31488,6 +31794,8 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -31689,6 +31997,8 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -31903,6 +32213,8 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -32104,6 +32416,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -32302,6 +32616,8 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -32503,6 +32819,8 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -32717,6 +33035,8 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -32918,6 +33238,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -33115,6 +33437,8 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -33316,6 +33640,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -33530,6 +33856,8 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -33731,6 +34059,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -33930,6 +34260,8 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -34131,6 +34463,8 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -34345,6 +34679,8 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -34546,6 +34882,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -34744,6 +35082,8 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -34945,6 +35285,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -35159,6 +35501,8 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -35360,6 +35704,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -35558,6 +35904,8 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -35759,6 +36107,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -35973,6 +36323,8 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -36174,6 +36526,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -36372,6 +36726,8 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -36573,6 +36929,8 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -36787,6 +37145,8 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -36988,6 +37348,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -37186,6 +37548,8 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -37387,6 +37751,8 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -37601,6 +37967,8 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -37802,6 +38170,8 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -38000,6 +38370,8 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -38201,6 +38573,8 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -38415,6 +38789,8 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -38616,6 +38992,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -38814,6 +39192,8 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -39015,6 +39395,8 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -39229,6 +39611,8 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -39430,6 +39814,8 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -39628,6 +40014,8 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -39829,6 +40217,8 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -40043,6 +40433,8 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -40244,6 +40636,8 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -40442,6 +40836,8 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -40643,6 +41039,8 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -40857,6 +41255,8 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -41058,6 +41458,8 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -41256,6 +41658,8 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -41457,6 +41861,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -41671,6 +42077,8 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -41872,6 +42280,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -42070,6 +42480,8 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -42271,6 +42683,8 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -42485,6 +42899,8 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -42686,6 +43102,8 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -42884,6 +43302,8 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -43085,6 +43505,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -43299,6 +43721,8 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -43500,6 +43924,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -43698,6 +44124,8 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -43899,6 +44327,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -44113,6 +44543,8 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -44314,6 +44746,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -44512,6 +44946,8 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -44713,6 +45149,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -44927,6 +45365,8 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -45128,6 +45568,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -45326,6 +45768,8 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -45527,6 +45971,8 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -45741,6 +46187,8 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -45942,6 +46390,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -46140,6 +46590,8 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -46341,6 +46793,8 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -46555,6 +47009,8 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -46756,6 +47212,8 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -46954,6 +47412,8 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -47155,6 +47615,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -47369,6 +47831,8 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -47570,6 +48034,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -47768,6 +48234,8 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -47969,6 +48437,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -48183,6 +48653,8 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -48384,6 +48856,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -48582,6 +49056,8 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -48783,6 +49259,8 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -48997,6 +49475,8 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -49198,6 +49678,8 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -49396,6 +49878,8 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -49597,6 +50081,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -49811,6 +50297,8 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -50012,6 +50500,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -50210,6 +50700,8 @@ export type VendorMasterCreateWithoutLedgersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -50411,6 +50903,8 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -50625,6 +51119,8 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -50826,6 +51322,8 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -51024,6 +51522,8 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -51225,6 +51725,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -51439,6 +51941,8 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -51640,6 +52144,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -51838,6 +52344,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -52039,6 +52547,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -52253,6 +52763,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -52454,6 +52966,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -52652,6 +53166,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -52853,6 +53369,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -53067,6 +53585,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -53268,6 +53788,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -53466,6 +53988,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -53667,6 +54191,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -53881,6 +54407,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -54082,6 +54610,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -54280,6 +54810,8 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -54481,6 +55013,8 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -54695,6 +55229,8 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -54896,6 +55432,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -55094,6 +55632,8 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -55295,6 +55835,8 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -55509,6 +56051,8 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -55710,6 +56254,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -55908,6 +56454,8 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -56109,6 +56657,8 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -56323,6 +56873,8 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -56524,6 +57076,8 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -56722,6 +57276,8 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -56923,6 +57479,8 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -57137,6 +57695,8 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -57338,6 +57898,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -57536,6 +58098,8 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -57737,6 +58301,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -57951,6 +58517,8 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -58152,6 +58720,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -58350,6 +58920,8 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -58551,6 +59123,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -58765,6 +59339,8 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -58966,6 +59542,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -59164,6 +59742,8 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -59365,6 +59945,8 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -59579,6 +60161,8 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -59780,6 +60364,8 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -59978,6 +60564,8 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -60179,6 +60767,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -60393,6 +60983,8 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -60594,6 +61186,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -60792,6 +61386,8 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -60993,6 +61589,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -61207,6 +61805,8 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -61408,6 +62008,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -61606,6 +62208,8 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -61807,6 +62411,8 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -62021,6 +62627,8 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -62222,6 +62830,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -62420,6 +63030,8 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -62621,6 +63233,8 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -62835,6 +63449,8 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -63036,6 +63652,8 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -63234,6 +63852,8 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -63435,6 +64055,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -63649,6 +64271,8 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -63850,6 +64474,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -64048,6 +64674,8 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -64249,6 +64877,8 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -64463,6 +65093,8 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -64664,6 +65296,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -64862,6 +65496,8 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -65063,6 +65699,8 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -65277,6 +65915,8 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -65478,6 +66118,8 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -65676,6 +66318,8 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -65877,6 +66521,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -66091,6 +66737,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -66292,6 +66940,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -66490,6 +67140,8 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -66691,6 +67343,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -66905,6 +67559,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -67106,6 +67762,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -67304,6 +67962,8 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -67505,6 +68165,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -67719,6 +68381,8 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -67920,6 +68584,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -68118,6 +68784,8 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -68319,6 +68987,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -68533,6 +69203,8 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -68734,6 +69406,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -68932,6 +69606,8 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -69133,6 +69809,8 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -69347,6 +70025,8 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -69548,6 +70228,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -69745,6 +70427,8 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -69946,6 +70630,8 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -70160,6 +70846,8 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -70361,6 +71049,8 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -70560,6 +71250,8 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -70761,6 +71453,8 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -70975,6 +71669,8 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -71176,6 +71872,8 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -71374,6 +72072,8 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -71575,6 +72275,8 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -71789,6 +72491,8 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -71990,6 +72694,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -72188,6 +72894,8 @@ export type VendorMasterCreateWithoutInstallersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -72389,6 +73097,8 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -72603,6 +73313,8 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -72804,6 +73516,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -73002,6 +73716,8 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -73203,6 +73919,8 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -73417,6 +74135,8 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -73618,6 +74338,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -73816,6 +74538,8 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -74017,6 +74741,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -74231,6 +74957,8 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -74432,6 +75160,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -74630,6 +75360,8 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -74831,6 +75563,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -75045,6 +75779,8 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -75246,6 +75982,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -75444,6 +76182,8 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -75645,6 +76385,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -75859,6 +76601,8 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -76060,6 +76804,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -76258,6 +77004,8 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -76459,6 +77207,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -76673,6 +77423,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -76874,6 +77626,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -77072,6 +77826,8 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -77273,6 +78029,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -77487,6 +78245,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -77688,6 +78448,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -77886,6 +78648,8 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -78087,6 +78851,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -78301,6 +79067,8 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -78502,6 +79270,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -78700,6 +79470,8 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -78901,6 +79673,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -79115,6 +79889,8 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -79316,6 +80092,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -79514,6 +80292,8 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -79715,6 +80495,8 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -79929,6 +80711,8 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -80130,6 +80914,8 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -80328,6 +81114,8 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -80529,6 +81317,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -80743,6 +81533,8 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -80944,6 +81736,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -81142,6 +81936,8 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -81343,6 +82139,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -81557,6 +82355,8 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -81758,6 +82558,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -81956,6 +82758,8 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -82157,6 +82961,8 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -82371,6 +83177,8 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -82572,6 +83380,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -82770,6 +83580,8 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -82971,6 +83783,8 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -83185,6 +83999,8 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -83386,6 +84202,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -83584,6 +84402,8 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -83785,6 +84605,8 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -83999,6 +84821,8 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -84200,6 +85024,8 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -84397,6 +85223,8 @@ export type VendorMasterCreateWithoutCutListInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -84598,6 +85426,8 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -84812,6 +85642,8 @@ export type VendorMasterUpdateWithoutCutListInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -85013,6 +85845,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -85211,6 +86045,8 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -85412,6 +86248,8 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -85626,6 +86464,8 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -85827,6 +86667,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -86026,6 +86868,8 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -86227,6 +87071,8 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -86441,6 +87287,8 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -86642,6 +87490,8 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -86840,6 +87690,8 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -87041,6 +87893,8 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -87255,6 +88109,8 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -87456,6 +88312,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -87654,6 +88512,8 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
@@ -87855,6 +88715,8 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
@@ -88069,6 +88931,8 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
@@ -88270,6 +89134,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
@@ -88468,6 +89334,8 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -88669,6 +89537,8 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -88883,6 +89753,8 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -89084,6 +89956,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -89282,6 +90156,8 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -89483,6 +90359,8 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -89697,6 +90575,8 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -89898,6 +90778,8 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -90096,6 +90978,8 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -90297,6 +91181,8 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -90511,6 +91397,8 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -90712,6 +91600,8 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -90910,6 +91800,8 @@ export type VendorMasterCreateWithoutStateInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -91110,6 +92002,8 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -91386,6 +92280,8 @@ export type VendorMasterCreateWithoutThemesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -91587,6 +92483,8 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -91801,6 +92699,8 @@ export type VendorMasterUpdateWithoutThemesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -92002,6 +92902,8 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -92200,6 +93102,8 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -92401,6 +93305,8 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -92615,6 +93521,8 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -92816,6 +93724,8 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -93014,6 +93924,8 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -93215,6 +94127,8 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -93429,6 +94343,8 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -93630,6 +94546,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -93828,6 +94746,8 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
@@ -94029,6 +94949,8 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
@@ -94243,6 +95165,8 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
@@ -94444,6 +95368,8 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
@@ -94642,6 +95568,8 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -94843,6 +95771,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -95057,6 +95987,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -95258,6 +96190,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -95455,6 +96389,8 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -95656,6 +96592,8 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -95870,6 +96808,8 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -96071,6 +97011,8 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -96270,6 +97212,8 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -96471,6 +97415,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -96685,6 +97631,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -96886,6 +97834,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -97083,6 +98033,8 @@ export type VendorMasterCreateWithoutBrandsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -97284,6 +98236,8 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -97498,6 +98452,8 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -97699,6 +98655,8 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -97898,6 +98856,8 @@ export type VendorMasterCreateWithoutProductsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -98099,6 +99059,8 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -98313,6 +99275,8 @@ export type VendorMasterUpdateWithoutProductsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -98514,6 +99478,8 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -98711,6 +99677,8 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -98912,6 +99880,8 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -99126,6 +100096,8 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -99327,6 +100299,8 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -99526,6 +100500,8 @@ export type VendorMasterCreateWithoutGradesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -99727,6 +100703,8 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -99941,6 +100919,8 @@ export type VendorMasterUpdateWithoutGradesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -100142,6 +101122,8 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -100340,6 +101322,8 @@ export type VendorMasterCreateWithoutFinishesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -100541,6 +101525,8 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -100755,6 +101741,8 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -100956,6 +101944,8 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -101154,6 +102144,8 @@ export type VendorMasterCreateWithoutTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -101355,6 +102347,8 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -101569,6 +102563,8 @@ export type VendorMasterUpdateWithoutTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -101770,6 +102766,8 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -101968,6 +102966,8 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -102169,6 +103169,8 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -102383,6 +103385,8 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -102584,6 +103588,8 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -102782,6 +103788,8 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -102983,6 +103991,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -103197,6 +104207,8 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -103398,6 +104410,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -103596,6 +104610,8 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -103797,6 +104813,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -104011,6 +105029,8 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -104212,6 +105232,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -104410,6 +105432,8 @@ export type VendorMasterCreateWithoutGrnsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -104611,6 +105635,8 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -104825,6 +105851,8 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -105026,6 +106054,8 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -105224,6 +106254,8 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
   defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
@@ -105425,6 +106457,8 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
   defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
@@ -105639,6 +106673,8 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
   defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
@@ -105840,6 +106876,8 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
   defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
@@ -106038,6 +107076,8 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -106239,6 +107279,8 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -106453,6 +107495,8 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -106654,6 +107698,8 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -106852,6 +107898,8 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -107053,6 +108101,8 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -107267,6 +108317,8 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -107468,6 +108520,8 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -107666,6 +108720,8 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -107867,6 +108923,8 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -108081,6 +109139,8 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -108282,6 +109342,8 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -108480,6 +109542,8 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -108681,6 +109745,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -108895,6 +109961,8 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -109096,6 +110164,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -109294,6 +110364,8 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -109495,6 +110567,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -109709,6 +110783,8 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -109910,6 +110986,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -110108,6 +111186,8 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -110309,6 +111389,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -110523,6 +111605,8 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -110724,6 +111808,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -110922,6 +112008,8 @@ export type VendorMasterCreateWithoutUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -111123,6 +112211,8 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -111337,6 +112427,8 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -111538,6 +112630,8 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -111736,6 +112830,8 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -111937,6 +113033,8 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -112151,6 +113249,8 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -112352,6 +113452,8 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -112550,6 +113652,8 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -112751,6 +113855,8 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -112965,6 +114071,8 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -113166,6 +114274,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -113364,6 +114474,8 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -113565,6 +114677,8 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -113779,6 +114893,8 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -113980,6 +115096,8 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -114177,6 +115295,8 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -114378,6 +115498,8 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -114592,6 +115714,8 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -114793,6 +115917,8 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -114991,6 +116117,8 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -115192,6 +116320,8 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -115406,6 +116536,8 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -115607,6 +116739,8 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -115806,6 +116940,8 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -116007,6 +117143,8 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -116221,6 +117359,8 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -116422,6 +117562,8 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -116620,6 +117762,8 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -116821,6 +117965,8 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -117035,6 +118181,8 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -117236,6 +118384,8 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -117434,6 +118584,8 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -117635,6 +118787,8 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -117849,6 +119003,8 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -118050,6 +119206,8 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -118247,6 +119405,8 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -118448,6 +119608,8 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -118662,6 +119824,8 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -118863,6 +120027,8 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -119061,6 +120227,8 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -119262,6 +120430,8 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -119476,6 +120646,8 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -119677,6 +120849,8 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -119875,6 +121049,8 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -120076,6 +121252,8 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -120290,6 +121468,8 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -120491,6 +121671,8 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -120689,6 +121871,8 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -120890,6 +122074,8 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -121104,6 +122290,8 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -121305,6 +122493,8 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -121504,6 +122694,8 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -121705,6 +122897,8 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -121919,6 +123113,8 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -122120,6 +123316,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -122318,6 +123516,8 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -122519,6 +123719,8 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -122733,6 +123935,8 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -122934,6 +124138,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -123132,6 +124338,8 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -123333,6 +124541,8 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -123547,6 +124757,8 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -123748,6 +124960,8 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -123946,6 +125160,8 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -124147,6 +125363,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -124361,6 +125579,8 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -124562,6 +125782,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -124760,6 +125982,8 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -124961,6 +126185,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -125175,6 +126401,8 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -125376,6 +126604,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -125574,6 +126804,8 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -125775,6 +127007,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -125989,6 +127223,8 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -126190,6 +127426,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -126388,6 +127626,8 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -126589,6 +127829,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -126803,6 +128045,8 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -127004,6 +128248,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -127202,6 +128448,8 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -127403,6 +128651,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -127617,6 +128867,8 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -127818,6 +129070,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -128016,6 +129270,8 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -128217,6 +129473,8 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -128431,6 +129689,8 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -128632,6 +129892,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -128829,6 +130091,8 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -129030,6 +130294,8 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -129244,6 +130510,8 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -129445,6 +130713,1652 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutCutListRulesInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutCutListRulesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedCreateWithoutCutListRulesInput>
+}
+
+export type VendorMasterUpsertWithoutCutListRulesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedUpdateWithoutCutListRulesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedCreateWithoutCutListRulesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutCutListRulesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCutListRulesInput, Prisma.VendorMasterUncheckedUpdateWithoutCutListRulesInput>
+}
+
+export type VendorMasterUpdateWithoutCutListRulesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutRuleActionsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutRuleActionsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedCreateWithoutRuleActionsInput>
+}
+
+export type VendorMasterUpsertWithoutRuleActionsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedUpdateWithoutRuleActionsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedCreateWithoutRuleActionsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutRuleActionsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutRuleActionsInput, Prisma.VendorMasterUncheckedUpdateWithoutRuleActionsInput>
+}
+
+export type VendorMasterUpdateWithoutRuleActionsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -129691,6 +132605,8 @@ export type VendorMasterUpdateWithoutStateInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -129891,6 +132807,8 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -130099,6 +133017,8 @@ export type VendorMasterCountOutputType = {
   coreProducts: number
   CutList: number
   cutListMachineMapping: number
+  cutListRules: number
+  ruleActions: number
   debitCreditNotes: number
   completionPhotos: number
   defectMaster: number
@@ -130255,6 +133175,8 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   coreProducts?: boolean | VendorMasterCountOutputTypeCountCoreProductsArgs
   CutList?: boolean | VendorMasterCountOutputTypeCountCutListArgs
   cutListMachineMapping?: boolean | VendorMasterCountOutputTypeCountCutListMachineMappingArgs
+  cutListRules?: boolean | VendorMasterCountOutputTypeCountCutListRulesArgs
+  ruleActions?: boolean | VendorMasterCountOutputTypeCountRuleActionsArgs
   debitCreditNotes?: boolean | VendorMasterCountOutputTypeCountDebitCreditNotesArgs
   completionPhotos?: boolean | VendorMasterCountOutputTypeCountCompletionPhotosArgs
   defectMaster?: boolean | VendorMasterCountOutputTypeCountDefectMasterArgs
@@ -130544,6 +133466,20 @@ export type VendorMasterCountOutputTypeCountCutListArgs<ExtArgs extends runtime.
  */
 export type VendorMasterCountOutputTypeCountCutListMachineMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CutListMachineMappingWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountCutListRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CutListRuleMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountRuleActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RuleActionMasterWhereInput
 }
 
 /**
@@ -131538,6 +134474,8 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   coreProducts?: boolean | Prisma.VendorMaster$coreProductsArgs<ExtArgs>
   CutList?: boolean | Prisma.VendorMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.VendorMaster$cutListMachineMappingArgs<ExtArgs>
+  cutListRules?: boolean | Prisma.VendorMaster$cutListRulesArgs<ExtArgs>
+  ruleActions?: boolean | Prisma.VendorMaster$ruleActionsArgs<ExtArgs>
   debitCreditNotes?: boolean | Prisma.VendorMaster$debitCreditNotesArgs<ExtArgs>
   completionPhotos?: boolean | Prisma.VendorMaster$completionPhotosArgs<ExtArgs>
   defectMaster?: boolean | Prisma.VendorMaster$defectMasterArgs<ExtArgs>
@@ -131843,6 +134781,8 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   coreProducts?: boolean | Prisma.VendorMaster$coreProductsArgs<ExtArgs>
   CutList?: boolean | Prisma.VendorMaster$CutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.VendorMaster$cutListMachineMappingArgs<ExtArgs>
+  cutListRules?: boolean | Prisma.VendorMaster$cutListRulesArgs<ExtArgs>
+  ruleActions?: boolean | Prisma.VendorMaster$ruleActionsArgs<ExtArgs>
   debitCreditNotes?: boolean | Prisma.VendorMaster$debitCreditNotesArgs<ExtArgs>
   completionPhotos?: boolean | Prisma.VendorMaster$completionPhotosArgs<ExtArgs>
   defectMaster?: boolean | Prisma.VendorMaster$defectMasterArgs<ExtArgs>
@@ -132009,6 +134949,8 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     coreProducts: Prisma.$CoreProductMasterPayload<ExtArgs>[]
     CutList: Prisma.$CutListPayload<ExtArgs>[]
     cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
+    cutListRules: Prisma.$CutListRuleMasterPayload<ExtArgs>[]
+    ruleActions: Prisma.$RuleActionMasterPayload<ExtArgs>[]
     debitCreditNotes: Prisma.$DebitCreditNotePayload<ExtArgs>[]
     completionPhotos: Prisma.$DefectCompletionPhotoPayload<ExtArgs>[]
     defectMaster: Prisma.$DefectMasterPayload<ExtArgs>[]
@@ -132604,6 +135546,8 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   coreProducts<T extends Prisma.VendorMaster$coreProductsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$coreProductsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CoreProductMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   CutList<T extends Prisma.VendorMaster$CutListArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$CutListArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cutListMachineMapping<T extends Prisma.VendorMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cutListRules<T extends Prisma.VendorMaster$cutListRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$cutListRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListRuleMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ruleActions<T extends Prisma.VendorMaster$ruleActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$ruleActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RuleActionMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   debitCreditNotes<T extends Prisma.VendorMaster$debitCreditNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$debitCreditNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebitCreditNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   completionPhotos<T extends Prisma.VendorMaster$completionPhotosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$completionPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectCompletionPhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   defectMaster<T extends Prisma.VendorMaster$defectMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$defectMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DefectMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -133713,6 +136657,54 @@ export type VendorMaster$cutListMachineMappingArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.cutListRules
+ */
+export type VendorMaster$cutListRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CutListRuleMaster
+   */
+  select?: Prisma.CutListRuleMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CutListRuleMaster
+   */
+  omit?: Prisma.CutListRuleMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CutListRuleMasterInclude<ExtArgs> | null
+  where?: Prisma.CutListRuleMasterWhereInput
+  orderBy?: Prisma.CutListRuleMasterOrderByWithRelationInput | Prisma.CutListRuleMasterOrderByWithRelationInput[]
+  cursor?: Prisma.CutListRuleMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CutListRuleMasterScalarFieldEnum | Prisma.CutListRuleMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.ruleActions
+ */
+export type VendorMaster$ruleActionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RuleActionMaster
+   */
+  select?: Prisma.RuleActionMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RuleActionMaster
+   */
+  omit?: Prisma.RuleActionMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RuleActionMasterInclude<ExtArgs> | null
+  where?: Prisma.RuleActionMasterWhereInput
+  orderBy?: Prisma.RuleActionMasterOrderByWithRelationInput | Prisma.RuleActionMasterOrderByWithRelationInput[]
+  cursor?: Prisma.RuleActionMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RuleActionMasterScalarFieldEnum | Prisma.RuleActionMasterScalarFieldEnum[]
 }
 
 /**

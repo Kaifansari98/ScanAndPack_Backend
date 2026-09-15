@@ -1792,6 +1792,12 @@ export const seedVendorMasters = async (vendorId: number) => {
       doc_title: "Final Production Documents",
       stage: "Production",
     },
+    {
+      type: "Miscellaneous Ready Documents",
+      tag: "Type 41",
+      doc_title: "Miscellaneous Ready Documents",
+      stage: "Under Installation",
+    },
   ]
     .filter((item) => !existingDocTypeSet.has(item.type))
     .map((item) => ({ vendor_id: vendorId, ...item }));
