@@ -79855,6 +79855,8 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
@@ -80057,6 +80059,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
   CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
   defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
@@ -80272,6 +80276,8 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
@@ -80474,6 +80480,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
   CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
   cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
   debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
   defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
@@ -132233,6 +132241,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
@@ -132433,6 +132442,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
@@ -132636,6 +132646,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
@@ -132852,6 +132863,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
@@ -133055,6 +133067,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
@@ -133255,6 +133268,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
@@ -133458,6 +133472,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
@@ -133674,6 +133689,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
   miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
   miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
   miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
