@@ -1978,7 +1978,6 @@ export class UnderInstallationStageService {
         },
       },
       orderBy: { id: "desc" },
-      orderBy: { id: "desc" },
       select: {
         id: true,
         task_type: true,
@@ -5068,6 +5067,21 @@ export class UnderInstallationStageService {
       };
     });
 
+    await UnderInstallationStageService.notifyMiscTaskReady({
+      vendor_id, lead_id, misc_id, ready_by, baseUrl, taskId: result.taskId,
+    });
+    return { ok: true };
+  }
+
+  static async notifyMiscTaskReady(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    ready_by: number;
+    baseUrl: string;
+    taskId?: number;
+  }) {
+    const { vendor_id, lead_id, misc_id, ready_by, baseUrl, taskId } = payload;
     // ===============================
     // 2️⃣ COMMUNICATION LAYER
     // ===============================
@@ -5118,66 +5132,31 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
-      if (result.taskId) qp.set("taskId", String(result.taskId));
+      if (taskId) qp.set("taskId", String(taskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // -------------------------
-      // Broadcast to Site Supervisors
-      // -------------------------
-      await Promise.allSettled(
-        supervisors.map(async (user) => {
-          // 🔔 In-App Notification
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: ready_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Requirement Ready",
-            message: `The factory has marked a miscellaneous requirement as Ready for ${leadCode} - ${leadName}.`,
-            entity_type: "miscellaneous",
-            entity_id: misc_id,
-            redirect_url: redirectPath,
-          });
-
-          // 📧 Email Notification
-          if (user.user_email) {
-            await sendMarkAsReadyEmail({
-              vendor_id,
-              toEmail: user.user_email,
-              toName: user.user_name ?? undefined,
-              leadCode,
-              leadName,
-              readyAt,
-              projectUrl,
-            });
-          }
-        }),
+      const recipients = new Map(
+        [...supervisors, ...miscUsers].map((user) => [user.id, user]),
       );
-
-      // -------------------------
-      // Broadcast to Miscellaneous Users (excluding ready_by)
-      // -------------------------
-      const notifyMiscUsers = miscUsers.filter((u) => u.id !== ready_by);
-      await Promise.allSettled(
-        notifyMiscUsers.map(async (user) => {
-          // 🔔 In-App Notification
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: ready_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Requirement Ready",
-            message: `The factory has marked a miscellaneous requirement as Ready for ${leadCode} - ${leadName}.`,
-            entity_type: "miscellaneous",
-            entity_id: misc_id,
-            redirect_url: redirectPath,
-          });
-
-          // 📧 Email Notification
-          if (user.user_email) {
-            await sendMarkAsReadyEmail({
+      const miscUserIds = new Set(miscUsers.map((user) => user.id));
+      await Promise.all(
+        [...recipients.values()].map(async (user) => {
+          // Run both channels independently so an in-app failure cannot skip email.
+          const results = await Promise.allSettled([
+            NotificationService.createAndSend({
+              vendor_id,
+              user_id: user.id,
+              sender_id: ready_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Miscellaneous Requirement Ready",
+              message: `The factory has marked a miscellaneous requirement as Ready for ${leadCode} - ${leadName}.`,
+              entity_type: "miscellaneous",
+              entity_id: misc_id,
+              redirect_url: redirectPath,
+            }),
+            ...(user.user_email ? [sendMarkAsReadyEmail({
               vendor_id,
               toEmail: user.user_email,
               toName: user.user_name ?? undefined,
@@ -5185,8 +5164,23 @@ export class UnderInstallationStageService {
               leadName,
               readyAt,
               projectUrl,
-            });
-          }
+              includeResolutionInstruction: !miscUserIds.has(user.id),
+            }).then((result) => {
+              if (!result.success) {
+                throw new Error("error" in result ? result.error || "Ready email failed" : "Ready email skipped");
+              }
+            })] : []),
+          ]);
+          results.forEach((result, index) => {
+            if (result.status === "rejected") {
+              logger.warn("Misc Ready notification failed", {
+                misc_id,
+                user_id: user.id,
+                channel: index === 0 ? "in-app" : "email",
+                error: result.reason?.message,
+              });
+            }
+          });
         }),
       );
     } catch (err: any) {
