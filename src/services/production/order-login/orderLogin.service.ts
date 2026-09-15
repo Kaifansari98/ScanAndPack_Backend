@@ -1108,6 +1108,7 @@ export class OrderLoginService {
     userId: number,
     files: { originalName: string; sysName: string }[],
     instanceId?: number | null,
+    materials?: { rows: any[]; replace: boolean },
   ) {
     if (!vendorId || !leadId || !userId) {
       const error = new Error("vendorId, leadId, and userId are required");
@@ -1121,58 +1122,83 @@ export class OrderLoginService {
       throw error;
     }
 
-    const uploadedDocs = [];
+    return prisma.$transaction(async (tx) => {
+      if (materials) {
+        // Serialize replacement and first uploads for this lead, including concurrent requests.
+        await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+        const lead = await tx.leadMaster.findFirst({ where: { id: leadId, vendor_id: vendorId } });
+        if (!lead?.franchise_id) throw Object.assign(new Error("Lead franchise not found"), { statusCode: 400 });
+        const scope = { vendor_id: vendorId, franchise_id: lead.franchise_id, lead_id: leadId, instance_id: instanceId ?? null };
+        const existing = await tx.productsRequiredForProduction.count({ where: scope });
+        if (existing && !materials.replace) throw Object.assign(new Error("Confirm replacement of the previous material list."), { statusCode: 409 });
+        if (!Array.isArray(materials.rows) || !materials.rows.length || materials.rows.length > 10000) {
+          throw Object.assign(new Error("Provide between 1 and 10,000 material rows."), { statusCode: 400 });
+        }
+        const products = await tx.productMaster.findMany({ where: { vendor_id: vendorId }, select: { id: true, article_code: true, active: true } });
+        const rows = materials.rows.flatMap((row) => {
+          if (!row || ["articleCode", "type", "category", "unit", "name"].some((field) => typeof row[field] !== "string" || !row[field].trim()) ||
+            typeof row.qty !== "number" || !Number.isFinite(row.qty) || row.qty <= 0 || row.qty > 9999999999.99 || Math.abs(row.qty * 100 - Math.round(row.qty * 100)) > 0.0001) return [];
+          const matches = products.filter((product) => product.article_code?.trim() === row.articleCode.trim());
+          if (matches.length !== 1 || matches[0].active !== "Yes") return [];
+          return [{ ...scope, product_id: matches[0].id, article_code: row.articleCode.trim(), type: row.type.trim(), category: row.category.trim(), qty: row.qty, unit: row.unit.trim(), name: row.name.trim(), created_by: userId }];
+        });
+        if (!rows.length) throw Object.assign(new Error("No valid active products found. Previous materials have been kept."), { statusCode: 400 });
+        await tx.productsRequiredForProduction.deleteMany({ where: scope });
+        await tx.productsRequiredForProduction.createMany({ data: rows });
+      }
+      const uploadedDocs = [];
 
-    // ✅ Step 1: Upload Client Approval Screenshots
-    const ProductionDocType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 14" },
-    });
-    if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
-
-    for (const file of files) {
-      // ✅ Store record in DB
-      const savedDoc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          created_by: userId,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId || null,
-          doc_type_id: ProductionDocType.id, // ✅ Type 14 = Production Files
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
+      // ✅ Step 1: Upload Client Approval Screenshots
+      const ProductionDocType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 14" },
       });
+      if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
 
-      uploadedDocs.push(savedDoc);
-    }
+      for (const file of files) {
+        // ✅ Store record in DB
+        const savedDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            created_by: userId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId || null,
+            doc_type_id: ProductionDocType.id, // ✅ Type 14 = Production Files
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
 
-    if (accountId) {
-      const detailedLog = await createLeadLog(prisma, {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: accountId,
-        action: `Production files uploaded: ${files.length} file(s)`,
-        action_type: "CREATE",
-        created_by: userId,
-        instance_id: instanceId ?? undefined,
-      });
+        uploadedDocs.push(savedDoc);
+      }
 
-      await prisma.leadDocumentLogs.createMany({
-        data: uploadedDocs.map((doc) => ({
+      if (accountId) {
+        const detailedLog = await createLeadLog(tx, {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,
-          doc_id: doc.id,
-          lead_logs_id: detailedLog.id,
+          action: `Production files uploaded: ${files.length} file(s)`,
+          action_type: "CREATE",
           created_by: userId,
-          created_at: new Date(),
-        })),
-      });
-    }
+          instance_id: instanceId ?? undefined,
+        });
 
-    return uploadedDocs;
+        await tx.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          })),
+        });
+      }
+
+      return uploadedDocs;
+    }, { timeout: 30000 });
   }
 
   async getLeadProductionReadiness(
