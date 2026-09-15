@@ -1,5 +1,6 @@
 import express from "express";
 import { router } from "./routes";
+import metaWebhookRoutes from "./routes/webhookRoutes/metaWebhook.routes";
 import path from "path";
 import cors from "cors";
 
@@ -122,6 +123,7 @@ app.get("/", (_req, res) => {
 // ✅ API ROUTES
 // ===============================
 app.use("/api", router);
+app.use("/", metaWebhookRoutes);
 
 // ===============================
 // ✅ ERROR LOGGER

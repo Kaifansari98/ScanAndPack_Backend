@@ -265,6 +265,7 @@ export const ModelName = {
   MetaLead: 'MetaLead',
   BoxItemDeleteLog: 'BoxItemDeleteLog',
   ProductsRequiredForProduction: 'ProductsRequiredForProduction',
+  MetaWebhook: 'MetaWebhook',
   CutListRuleMaster: 'CutListRuleMaster',
   CutListRuleConditionGroup: 'CutListRuleConditionGroup',
   CutListRuleCondition: 'CutListRuleCondition',
@@ -4019,6 +4020,15 @@ export const ProductsRequiredForProductionScalarFieldEnum = {
 } as const
 
 export type ProductsRequiredForProductionScalarFieldEnum = (typeof ProductsRequiredForProductionScalarFieldEnum)[keyof typeof ProductsRequiredForProductionScalarFieldEnum]
+
+
+export const MetaWebhookScalarFieldEnum = {
+  id: 'id',
+  data: 'data',
+  created_at: 'created_at'
+} as const
+
+export type MetaWebhookScalarFieldEnum = (typeof MetaWebhookScalarFieldEnum)[keyof typeof MetaWebhookScalarFieldEnum]
 
 
 export const CutListRuleMasterScalarFieldEnum = {
