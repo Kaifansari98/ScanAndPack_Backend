@@ -2127,6 +2127,14 @@ export class BookingStageService {
     const hasExplicitFranchiseFilter =
       Array.isArray(normalizedFranchises) && normalizedFranchises.length > 0;
 
+    const vendorForFeature = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: {
+        is_online_lead_feature_enabled: true,
+        handlesLargeScaleProjects: true,
+      },
+    });
+
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
       ...(!hasExplicitFranchiseFilter &&
@@ -2138,16 +2146,23 @@ export class BookingStageService {
       is_deleted: false,
       is_draft: { not: true },
       ...(statusIds !== null && { status_id: { in: statusIds } }),
-      ...(materialIssueReadyOnly && {
-        is_so_value_received: true,
-        superAdminApprovalLocIns: {
-          some: {
-            vendor_id: vendorId,
-            approval_type: SuperAdminApprovalType.order_login,
-            is_approved: true,
-          },
-        },
-      }),
+      ...(materialIssueReadyOnly &&
+        (vendorForFeature?.handlesLargeScaleProjects === true
+          ? {
+              productsRequiredForProduction: {
+                some: { vendor_id: vendorId },
+              },
+            }
+          : {
+              is_so_value_received: true,
+              superAdminApprovalLocIns: {
+                some: {
+                  vendor_id: vendorId,
+                  approval_type: SuperAdminApprovalType.order_login,
+                  is_approved: true,
+                },
+              },
+            })),
       ...(shouldExcludeLaterStageTags && {
         statusType: {
           vendor_id: vendorId,
@@ -2198,10 +2213,6 @@ export class BookingStageService {
       normalizedStageTag === "Type 9" ||
       normalizedStageTag === "Type 10";
 
-    const vendorForFeature = await prisma.vendorMaster.findUnique({
-      where: { id: vendorId },
-      select: { is_online_lead_feature_enabled: true },
-    });
     const isOnlineLeadFeatureEnabled =
       vendorForFeature?.is_online_lead_feature_enabled === true;
     const shouldApplyLeadCodeSort =

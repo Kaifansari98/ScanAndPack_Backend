@@ -85,7 +85,8 @@ export type PaymentTriggerType = (typeof PaymentTriggerType)[keyof typeof Paymen
 export const StockChangeSource = {
   GRNConfirmation: 'GRNConfirmation',
   ExcelUpload: 'ExcelUpload',
-  ManualAdjustment: 'ManualAdjustment'
+  ManualAdjustment: 'ManualAdjustment',
+  MaterialIssue: 'MaterialIssue'
 } as const
 
 export type StockChangeSource = (typeof StockChangeSource)[keyof typeof StockChangeSource]

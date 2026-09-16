@@ -436,7 +436,7 @@ export class OrderLoginController {
       const data = await prisma.productsRequiredForProduction.findMany({
         where: { vendor_id, lead_id, instance_id: req.query.instance_id ? Number(req.query.instance_id) : null },
         include: { product: { select: {
-          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, active: true,
+          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
           unit_of_measure: true, stockUnit: { select: { unit_name: true } },
           primaryUnit: { select: { unit_name: true, short_name: true } },
         } } },
@@ -446,6 +446,24 @@ export class OrderLoginController {
     } catch (error) {
       console.error("Failed to load required materials", error);
       return res.status(500).json({ message: "Failed to load required materials" });
+    }
+  }
+
+  async freezeRequiredMaterials(req: Request, res: Response) {
+    try {
+      const actor = (req as any).user;
+      const vendor_id = Number(req.params.vendorId);
+      const lead_id = Number(req.params.leadId);
+      if (actor?.vendor_id !== vendor_id) return res.status(403).json({ message: "Vendor access denied" });
+      const items = Array.isArray(req.body?.items) ? req.body.items : [];
+      const updated = await service.freezeRequiredMaterials(vendor_id, lead_id, Number(actor.id), items);
+      return res.json({ success: true, message: "Selected materials frozen successfully", data: updated });
+    } catch (error: any) {
+      console.error("Failed to freeze required materials:", error);
+      return res.status(error.statusCode || 500).json({
+        success: false,
+        message: error.message || "Failed to freeze required materials",
+      });
     }
   }
 

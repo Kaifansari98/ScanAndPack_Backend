@@ -4015,6 +4015,7 @@ export const ProductsRequiredForProductionScalarFieldEnum = {
   qty: 'qty',
   unit: 'unit',
   name: 'name',
+  issued_item_qty: 'issued_item_qty',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
