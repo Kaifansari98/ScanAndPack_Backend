@@ -436,7 +436,7 @@ export class OrderLoginController {
       const data = await prisma.productsRequiredForProduction.findMany({
         where: { vendor_id, lead_id, instance_id: req.query.instance_id ? Number(req.query.instance_id) : null },
         include: { product: { select: {
-          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, active: true,
+          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
           unit_of_measure: true, stockUnit: { select: { unit_name: true } },
           primaryUnit: { select: { unit_name: true, short_name: true } },
         } } },
