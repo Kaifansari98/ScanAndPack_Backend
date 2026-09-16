@@ -1934,22 +1934,15 @@ export class UnderInstallationStageService {
         actionType: "CREATE",
       });
 
+
       // 7. Documents Mapping
       if (files && files.length > 0) {
-        let docType = await tx.documentTypeMaster.findFirst({
+        const docType = await tx.documentTypeMaster.findFirst({
           where: { vendor_id, tag: "Type 24" },
         });
 
         if (!docType) {
-          docType = await tx.documentTypeMaster.create({
-            data: {
-              vendor_id,
-              tag: "Type 24",
-              type: "under-installation-miscellaneous-documents",
-              doc_title: "Under Installation Miscellaneous Documents",
-              stage: "Under Installation",
-            },
-          });
+          throw new Error("Document type Type 24 not configured");
         }
 
         for (const doc of files) {
@@ -2603,6 +2596,8 @@ export class UnderInstallationStageService {
         reorder_material_details: true,
         problem_description: true,
         expected_ready_date: true,
+        return_order_delivery_method: true,
+        return_order_date: true,
       },
     });
 
@@ -2661,6 +2656,8 @@ export class UnderInstallationStageService {
           in: [
             "Miscellaneous",
             "Miscellaneous Approval",
+            "Miscellaneous Return Order Approval",
+            "Return Order Confirmation",
             "Miscellaneous Production ERD",
             "Pending Materials",
           ],
@@ -2786,43 +2783,84 @@ export class UnderInstallationStageService {
         )?.type ?? null)
         : null;
 
-      const erdRemark = `[misc-erd:${misc_id}] Set ERD date for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+      if (existing.return_order_delivery_method === "SELF_DELIVERY") {
+        const confirmRemark = `[misc-return-confirm:${misc_id}] Return Order Self Delivery Confirmation: **${existing.reorder_material_details}** - ${existing.problem_description}`;
 
-      const existingErdTask = await prisma.userLeadTask.findFirst({
-        where: {
-          vendor_id,
-          lead_id: existing.lead_id,
-          task_type: "Miscellaneous Production ERD",
-          status: "open",
-          remark: { contains: `[misc-erd:${misc_id}]` },
-        },
-      });
-
-      if (!existingErdTask) {
-        const erdTask = await prisma.userLeadTask.create({
-          data: {
+        const existingConfirmTask = await prisma.userLeadTask.findFirst({
+          where: {
             vendor_id,
             lead_id: existing.lead_id,
-            account_id: existing.account_id,
-            franchise_id: leadStageRecord?.franchise_id ?? null,
-            user_id: factoryUserId ?? updated_by,
-            task_type: "Miscellaneous Production ERD",
-            lead_stage: leadStage,
-            due_date: existing.expected_ready_date
-              ? new Date(existing.expected_ready_date)
-              : new Date(),
-            remark: erdRemark,
+            task_type: "Return Order Confirmation",
             status: "open",
-            created_by: updated_by,
+            remark: { contains: `[misc-return-confirm:${misc_id}]` },
           },
         });
 
-        await createTaskHistoryLog({
-          db: prisma,
-          task: erdTask,
-          createdBy: updated_by,
-          actionType: "CREATE",
+        if (!existingConfirmTask) {
+          const confirmTask = await prisma.userLeadTask.create({
+            data: {
+              vendor_id,
+              lead_id: existing.lead_id,
+              account_id: existing.account_id,
+              franchise_id: leadStageRecord?.franchise_id ?? null,
+              user_id: factoryUserId ?? updated_by,
+              task_type: "Return Order Confirmation",
+              lead_stage: leadStage,
+              due_date: existing.return_order_date
+                ? new Date(existing.return_order_date)
+                : new Date(),
+              remark: confirmRemark,
+              status: "open",
+              created_by: updated_by,
+            },
+          });
+
+          await createTaskHistoryLog({
+            db: prisma,
+            task: confirmTask,
+            createdBy: updated_by,
+            actionType: "CREATE",
+          });
+        }
+      } else {
+        const erdRemark = `[misc-erd:${misc_id}] Set ERD date for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+
+        const existingErdTask = await prisma.userLeadTask.findFirst({
+          where: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            task_type: "Miscellaneous Production ERD",
+            status: "open",
+            remark: { contains: `[misc-erd:${misc_id}]` },
+          },
         });
+
+        if (!existingErdTask) {
+          const erdTask = await prisma.userLeadTask.create({
+            data: {
+              vendor_id,
+              lead_id: existing.lead_id,
+              account_id: existing.account_id,
+              franchise_id: leadStageRecord?.franchise_id ?? null,
+              user_id: factoryUserId ?? updated_by,
+              task_type: "Miscellaneous Production ERD",
+              lead_stage: leadStage,
+              due_date: existing.expected_ready_date
+                ? new Date(existing.expected_ready_date)
+                : new Date(),
+              remark: erdRemark,
+              status: "open",
+              created_by: updated_by,
+            },
+          });
+
+          await createTaskHistoryLog({
+            db: prisma,
+            task: erdTask,
+            createdBy: updated_by,
+            actionType: "CREATE",
+          });
+        }
       }
     }
 
@@ -2885,19 +2923,21 @@ export class UnderInstallationStageService {
           const redirectPath = `${uiBase}?${uiParams.toString()}`;
           const projectUrl = `${baseUrl}${redirectPath}`;
 
+          const isReturnOrder = !!existing.return_order_delivery_method;
+
           const supervisorTitle = misc_approved
-            ? "Miscellaneous Request Approved"
-            : "Miscellaneous Request Rejected";
+            ? (isReturnOrder ? "Return Order Approved" : "Miscellaneous Request Approved")
+            : (isReturnOrder ? "Return Order Rejected" : "Miscellaneous Request Rejected");
           const supervisorMessage = misc_approved
-            ? `Your miscellaneous request for ${leadCode} - ${leadName} has been approved.`
-            : `Your miscellaneous request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
+            ? `Your ${isReturnOrder ? "return order" : "miscellaneous"} request for ${leadCode} - ${leadName} has been approved.`
+            : `Your ${isReturnOrder ? "return order" : "miscellaneous"} request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
 
           const miscUserTitle = misc_approved
-            ? "Miscellaneous Request Approved"
-            : "Miscellaneous Request Rejected";
+            ? (isReturnOrder ? "Return Order Approved" : "Miscellaneous Request Approved")
+            : (isReturnOrder ? "Return Order Rejected" : "Miscellaneous Request Rejected");
           const miscUserMessage = misc_approved
-            ? `Miscellaneous request for ${leadCode} - ${leadName} has been approved.`
-            : `Miscellaneous request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
+            ? `${isReturnOrder ? "Return order" : "Miscellaneous"} request for ${leadCode} - ${leadName} has been approved.`
+            : `${isReturnOrder ? "Return order" : "Miscellaneous"} request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
 
           // 1️⃣ Notify Site Supervisors (In-App + Email)
           await Promise.allSettled(
@@ -2968,8 +3008,16 @@ export class UnderInstallationStageService {
 
           // 3️⃣ If Approved → Notify Factory Users (In-App + Email)
           if (misc_approved) {
-            const factoryTitle = "Miscellaneous Approved, set the ERD";
-            const factoryMessage = `Miscellaneous Approved for ${leadCode} - ${leadName}, review the requirement and set the ERD.`;
+            const factoryTitle = isReturnOrder
+              ? (existing.return_order_delivery_method === "SELF_DELIVERY"
+                ? "Return Order Approved - Return Order Confirmation"
+                : "Return Order Approved")
+              : "Miscellaneous Approved, set the ERD";
+            const factoryMessage = isReturnOrder
+              ? (existing.return_order_delivery_method === "SELF_DELIVERY"
+                ? `Return Order Approved for ${leadCode} - ${leadName}, please confirm return order details.`
+                : `Return Order Approved for ${leadCode} - ${leadName}, review the requirement.`)
+              : `Miscellaneous Approved for ${leadCode} - ${leadName}, review the requirement and set the ERD.`;
 
             await Promise.allSettled(
               factoryUsers.map(async (factoryUser) => {
