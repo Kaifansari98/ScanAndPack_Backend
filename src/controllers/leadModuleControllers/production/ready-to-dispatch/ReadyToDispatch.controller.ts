@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../../prisma/generated";
 import {
   sendTaskAssignedEmail,
@@ -28,14 +29,18 @@ import { ReadyToDispatchService } from "../../../../services/production/ready-to
 import { uploadToWasabiCurrentSitePhotosReadyToDispatchFile } from "../../../../utils/wasabiClient";
 import logger from "../../../../utils/logger";
 import fs from "node:fs/promises";
+import { STAGE_PATH_BY_TAG } from "../../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 
 const service = new ReadyToDispatchService();
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
 
 export class ReadyToDispatchController {
   async getAllReadyToDispatchLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId));
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -218,6 +223,37 @@ export class ReadyToDispatchController {
     }
   }
 
+  public async getSiteReadinessTaskConflicts(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const leadId = Number(req.params.leadId);
+
+      if (!leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+      }
+
+      const conflicts = await service.getSiteReadinessTaskConflicts(leadId);
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] getSiteReadinessTaskConflicts:", { err: error });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
+      });
+    }
+  }
+
   /** ✅ Assign Site Readiness Task */
   public async assignTaskSiteReadiness(
     req: Request,
@@ -258,7 +294,7 @@ export class ReadyToDispatchController {
       });
 
       try {
-        const [assignee, lead, assignedBy] = await Promise.all([
+        const [assignee, lead, assignedBy, firstInstance] = await Promise.all([
           prisma.userMaster.findUnique({
             where: { id: Number(user_id) },
             select: {
@@ -270,7 +306,14 @@ export class ReadyToDispatchController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+              account_id: true,
+              statusType: { select: { tag: true } },
+            },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -278,6 +321,11 @@ export class ReadyToDispatchController {
                 select: { user_name: true },
               })
             : Promise.resolve(null),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id: result.lead.vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
@@ -286,6 +334,7 @@ export class ReadyToDispatchController {
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (
           !isSelfAssigned &&
@@ -297,14 +346,21 @@ export class ReadyToDispatchController {
             user_id: Number(user_id),
             sender_id: Number(actorId) || null,
             type: NotificationType.LEAD_ASSIGNED,
-            title: "Lead assigned",
+            title: "Lead assigned", 
             message:
               leadName.length > 0
                 ? `Lead ${leadName} has been assigned to you.`
                 : "A lead has been assigned to you.",
             entity_type: "lead",
             entity_id: result.lead.id,
-            redirect_url: `/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`,
+            redirect_url: (() => {
+              const base = `/dashboard/leads/details/${result.lead.id}`;
+              const qp = new URLSearchParams();
+              if (lead?.account_id) qp.set("accountId", String(lead.account_id));
+              if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+              const qs = qp.toString();
+              return qs ? `${base}?${qs}` : base;
+            })(),
           });
         }
 
@@ -353,91 +409,94 @@ export class ReadyToDispatchController {
       try {
         const vendorId = result.lead.vendor_id;
         const accountId = result.lead.account_id;
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: vendorId,
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
-          prisma.leadUserMapping.findMany({
-            where: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              status: "active",
-            },
-            select: { user_id: true },
-          }),
+        const [lead, firstInstance] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: {
+              firstname: true,
+              lastname: true,
+              lead_code: true,
+              franchise_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id: vendorId },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
           }),
         ]);
 
         const leadName = `${lead?.firstname ?? ""} ${lead?.lastname ?? ""}`.trim();
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+        const franchiseId = lead?.franchise_id ?? null;
+        const stageTag = lead?.statusType?.tag;
+        const instanceId = firstInstance?.id;
 
-        if (recipientIds.size > 0) {
-          const redirectUrl = accountId
-            ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
-            : `/dashboard/leads/details/${leadId}`;
+        // Build redirect URL using STAGE_PATH_BY_TAG
+        const stagePath =
+          stageTag && STAGE_PATH_BY_TAG[stageTag]
+            ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+            : `/dashboard/installation/site-readiness/details/${leadId}`;
 
-          await Promise.all(
-            Array.from(recipientIds).map((recipientId) =>
-              NotificationService.createAndSend({
-                vendor_id: vendorId,
-                user_id: recipientId,
-                sender_id: Number(actorId) || null,
-                type: NotificationType.LEAD_MILESTONE,
-                title: "Lead moved to Installation",
-                message:
-                  leadName.length > 0
-                    ? `Lead ${leadName} moved to Installation stage.`
-                    : "Lead moved to Installation stage.",
-                entity_type: "lead",
-                entity_id: leadId,
-                redirect_url: redirectUrl,
+        const queryParams = new URLSearchParams();
+        if (accountId) queryParams.set("accountId", String(accountId));
+        if (instanceId) queryParams.set("instance_id", String(instanceId));
+        const qs = queryParams.toString();
+        const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
+
+        // Only admins matching vendor_id + franchise_id
+        const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: Number(actorId) || null,
+        });
+
+        await Promise.all(
+          users.map((user) =>
+            NotificationService.createAndSend({
+              vendor_id: vendorId,
+              user_id: user.id,
+              sender_id: Number(actorId) || null,
+              type: NotificationType.LEAD_MILESTONE,
+              title: "Lead moved to Installation",
+              message:
+                leadName.length > 0
+                  ? `Lead ${leadName} moved to Installation stage.`
+                  : "Lead moved to Installation stage.",
+              entity_type: "lead",
+              entity_id: leadId,
+              redirect_url: redirectUrl,
+            })
+          )
+        );
+
+        const clientBaseUrl = resolveClientBaseUrl(req);
+        const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
+        const completedOn = new Date().toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+
+        await Promise.allSettled(
+          users
+            .filter((user) => user.user_email)
+            .map((user) =>
+              sendMajorMilestoneEmail({
+                vendor_id: result.lead.vendor_id,
+                allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
+                toName: user.user_name ?? undefined,
+                leadCode,
+                leadName: leadName || "Lead",
+                milestoneName: "Production to Installation",
+                completedOn,
+                detailsUrl,
               })
             )
-          );
-
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-            },
-            select: { id: true, user_name: true, user_email: true },
-          });
-          const clientBaseUrl = resolveClientBaseUrl(req);
-          const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
-          const completedOn = new Date().toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
-
-          await Promise.allSettled(
-            users
-              .filter((user) => user.user_email)
-              .map((user) =>
-                sendMajorMilestoneEmail({
-                  vendor_id: result.lead.vendor_id,
-                  toEmail: user.user_email!,
-                  toName: user.user_name ?? undefined,
-                  leadCode,
-                  leadName: leadName || "Lead",
-                  milestoneName: "Production to Installation",
-                  completedOn,
-                  detailsUrl,
-                })
-              )
-          );
-        }
+        );
       } catch (milestoneError: any) {
         logger.warn("⚠️ Failed to send production-to-installation notification", {
           error: milestoneError?.message,
@@ -454,12 +513,21 @@ export class ReadyToDispatchController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        (errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed") ||
+          errorMessage.toLowerCase().includes("follow up task is already assigned"));
+
       logger.error("[ERROR] assignTaskSiteReadiness:", { err: error });
-      return res.status(500).json({
+      return res.status(isConflict ? 409 : 500).json({
         success: false,
-        error: "Internal server error",
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
         details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       });
     }
   }

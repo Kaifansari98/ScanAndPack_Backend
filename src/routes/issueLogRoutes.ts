@@ -5,6 +5,8 @@ import {
   createIssueType,
   getIssueTypes,
   deleteIssueType,
+  editIssueType,
+  toggleIssueTypeStatus,
 } from "../controllers/leadModuleControllers/issueType.controller";
 
 const issueLogRoutes = Router();
@@ -20,5 +22,7 @@ issueLogRoutes.get("/issue-type/vendor/:vendor_id", getIssueTypes);
 // DELETE → Delete Issue Type by ID
 // @route DELETE /installation/issue-type/:id
 issueLogRoutes.delete("/issue-type/:id", deleteIssueType);
+issueLogRoutes.patch("/issue-type/:id", editIssueType);
+issueLogRoutes.patch("/issue-type/:id/status", toggleIssueTypeStatus);
 
 export default issueLogRoutes;

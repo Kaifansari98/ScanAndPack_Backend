@@ -6,7 +6,10 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from '../../../utils/logger'
 import { NotificationService } from "../../notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import { sendPaymentAddedEmail } from "../../email/brevoEmail.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export class ClientApprovalService {
   public async addApprovalDocuments(data: {
@@ -14,6 +17,7 @@ export class ClientApprovalService {
     vendor_id: number;
     account_id: number;
     created_by: number;
+    product_type_id?: number;
     documents: { originalName: string; sysName: string }[];
   }) {
     if (!data.documents || data.documents.length === 0) {
@@ -36,6 +40,7 @@ export class ClientApprovalService {
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
         },
       });
       createdDocs.push(docEntry);
@@ -63,6 +68,7 @@ export class ClientApprovalService {
           account_id: data.account_id,
           lead_id: data.lead_id,
           vendor_id: data.vendor_id,
+          product_type_id: data.product_type_id,
         },
       });
       response.screenshots.push(docEntry);
@@ -103,12 +109,18 @@ export class ClientApprovalService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_type_id: data.product_type_id,
             },
           });
           uploadedPaymentDocs.push(docEntry);
         }
         paymentFileId = uploadedPaymentDocs[0]?.id || null;
       }
+
+      const leadForPayment = await prisma.leadMaster.findUnique({
+        where: { id: data.lead_id },
+        select: { status_id: true },
+      });
 
       // ✅ Payment Entry
       const paymentInfo = await prisma.paymentInfo.create({
@@ -117,11 +129,13 @@ export class ClientApprovalService {
           vendor_id: data.vendor_id,
           account_id: data.account_id,
           created_by: data.created_by,
+          status_id: leadForPayment?.status_id ?? null,
           payment_type_id: paymentType.id,
           amount: data.amount_paid,
           payment_text: data.payment_text,
           payment_file_id: paymentFileId,
           payment_date: new Date(data.advance_payment_date),
+          product_type_id: data.product_type_id,
         },
       });
 
@@ -162,21 +176,19 @@ export class ClientApprovalService {
       }
 
       // ✅ Step 5: Log this event in LeadDetailedLogs
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: `₹${formatIndianCurrency(
-            data.amount_paid
-          )} has been received during Client Approval`,
-          action_type: "CREATE", // enum ActionType
-          created_by: data.created_by,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: `₹${formatIndianCurrency(
+          data.amount_paid
+        )} has been received during Client Approval`,
+        action_type: "CREATE",
+        created_by: data.created_by,
       });
 
       try {
-        const [leadInfo, updatedByUser, admins] = await Promise.all([
+        const [leadInfo, updatedByUser] = await Promise.all([
           prisma.leadMaster.findUnique({
             where: { id: data.lead_id },
             select: {
@@ -184,23 +196,20 @@ export class ClientApprovalService {
               firstname: true,
               lastname: true,
               account_id: true,
+              franchise_id: true,
             },
           }),
           prisma.userMaster.findUnique({
             where: { id: data.created_by },
             select: { user_name: true },
           }),
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: data.vendor_id,
-              status: "active",
-              user_type: {
-                user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-              },
-            },
-            select: { id: true, user_name: true, user_email: true },
-          }),
         ]);
+
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+          vendorId: data.vendor_id,
+          franchiseId: leadInfo?.franchise_id ?? null,
+          excludeUserId: data.created_by,
+        });
 
         const leadCode =
           leadInfo?.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
@@ -217,6 +226,7 @@ export class ClientApprovalService {
         const leadUrl = leadInfo?.account_id
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${leadInfo.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
+        const franchiseId = leadInfo?.franchise_id ?? null;
 
         await Promise.allSettled(
           admins.map(async (admin) => {
@@ -238,6 +248,8 @@ export class ClientApprovalService {
 
             await sendPaymentAddedEmail({
               vendor_id: data.vendor_id,
+              franchise_id: franchiseId,
+              allowSuperAdmin: isSuperAdminFallback,
               toEmail: admin.user_email,
               toName: admin.user_name ?? undefined,
               leadCode,
@@ -268,41 +280,81 @@ export class ClientApprovalService {
         `[SERVICE] Fetching Backend Users for vendor ID: ${vendorId}`
       );
 
-      // First, find the user type ID for 'backend'
-      const BackendUserType = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: {
-            equals: "backend",
-            mode: "insensitive", // Case insensitive search
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+
+      const useCustomUsersOnly =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+      let backendUsers;
+
+      if (useCustomUsersOnly) {
+        backendUsers = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: {
+              user_type: {
+                equals: "custom",
+                mode: "insensitive",
+              },
+            },
+            userPrivilegeMappings: {
+              some: {
+                is_allowed: true,
+                privilege: {
+                  code: "production.order_login.order_login_details.enable_disable",
+                  is_active: true,
+                },
+              },
+            },
           },
-        },
-      });
+          include: {
+            user_type: true,
+            documents: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
+      } else {
+        // First, find the user type ID for 'backend'
+        const BackendUserType = await prisma.userTypeMaster.findFirst({
+          where: {
+            user_type: {
+              equals: "backend",
+              mode: "insensitive",
+            },
+          },
+        });
 
-      if (!BackendUserType) {
-        console.log("[SERVICE] Backend user type not found");
-        return [];
+        if (!BackendUserType) {
+          console.log("[SERVICE] Backend user type not found");
+          return [];
+        }
+
+        console.log(
+          `[SERVICE] Found BackendUserType type ID: ${BackendUserType.id}`
+        );
+
+        // Fetch all users with backend role for the specified vendor
+        backendUsers = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            user_type_id: BackendUserType.id,
+            status: "active",
+          },
+          include: {
+            user_type: true,
+            documents: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
       }
-
-      console.log(
-        `[SERVICE] Found BackendUserType type ID: ${BackendUserType.id}`
-      );
-
-      // Fetch all users with backend role for the specified vendor
-      const backendUsers = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: vendorId,
-          user_type_id: BackendUserType.id,
-          // Optionally filter only active users
-          status: "active",
-        },
-        include: {
-          user_type: true,
-          documents: true,
-        },
-        orderBy: {
-          created_at: "desc",
-        },
-      });
 
       console.log(`[SERVICE] Found ${backendUsers.length} Site Supervisors`);
 
@@ -411,7 +463,11 @@ export class ClientApprovalService {
     });
   }
 
-  public async getClientApprovalDetails(vendorId: number, leadId: number) {
+  public async getClientApprovalDetails(
+    vendorId: number,
+    leadId: number,
+    productTypeId?: number,
+  ) {
     // Step 1️⃣. Fetch DocType for approval screenshots
     const approvalDocType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 13" }, // Client Approval Documents
@@ -424,6 +480,7 @@ export class ClientApprovalService {
         vendor_id: vendorId,
         lead_id: leadId,
         paymentType: { tag: "Type 3" },
+        product_type_id: productTypeId || undefined,
       },
       orderBy: { created_at: "desc" },
     });
@@ -437,6 +494,7 @@ export class ClientApprovalService {
           lead_id: leadId,
           doc_type_id: approvalDocType.id,
           is_deleted: false,
+          product_type_id: productTypeId || undefined,
           NOT: paymentInfo?.payment_file_id
             ? { id: paymentInfo.payment_file_id }
             : undefined, // exclude payment proof file
@@ -563,7 +621,6 @@ export class ClientApprovalService {
     account_id: number;
     assign_to_user_id: number;
     created_by: number;
-    required_date: Date;
   }) {
     const response: any = {};
 
@@ -579,29 +636,57 @@ export class ClientApprovalService {
       );
     }
 
-    // Step 2. Update lead status + store date
+    // Step 2. Update lead status
     const updatedLead = await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         status_id: techCheckStatus.id,
-        client_required_order_login_complition_date: data.required_date,
+        tech_check_reached_at: new Date(),
         updated_by: data.created_by,
         updated_at: new Date(),
       },
     });
 
-    // Step 3. Create LeadUserMapping (assign to backend user)
-    const leadUserMapping = await prisma.leadUserMapping.create({
-      data: {
-        account_id: data.account_id,
+    await ensureLeadStatusLog(prisma, {
+      vendorId: data.vendor_id,
+      leadId: data.lead_id,
+      accountId: data.account_id,
+      statusId: techCheckStatus.id,
+      createdBy: data.created_by,
+    });
+
+    // Step 3. Create or update LeadUserMapping (assign to backend user as single lead mapping)
+    const existingMapping = await prisma.leadUserMapping.findFirst({
+      where: {
         lead_id: data.lead_id,
         vendor_id: data.vendor_id,
-        user_id: data.assign_to_user_id,
         type: "tech-check",
         status: "active",
-        created_by: data.created_by,
       },
     });
+
+    let leadUserMapping;
+    if (existingMapping) {
+      leadUserMapping = await prisma.leadUserMapping.update({
+        where: { id: existingMapping.id },
+        data: {
+          user_id: data.assign_to_user_id,
+          updated_at: new Date(),
+        },
+      });
+    } else {
+      leadUserMapping = await prisma.leadUserMapping.create({
+        data: {
+          account_id: data.account_id,
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+          user_id: data.assign_to_user_id,
+          type: "tech-check",
+          status: "active",
+          created_by: data.created_by,
+        },
+      });
+    }
 
     // ✅ Ensure assigned tech-check user is in lead chat members
     let chatRoom = await prisma.leadChatRoom.findFirst({
@@ -647,15 +732,13 @@ export class ClientApprovalService {
     }
 
     // Step 4. Log the action
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        account_id: data.account_id,
-        action: `Lead moved to Tech Check stage. Client's Required order-login completion date is ${data.required_date.toLocaleDateString()}`,
-        action_type: "UPDATE",
-        created_by: data.created_by,
-      },
+    await createLeadLog(prisma, {
+      vendor_id: data.vendor_id,
+      lead_id: data.lead_id,
+      account_id: data.account_id,
+      action: `Client approval received, lead is requested for Tech-Check.`,
+      action_type: "UPDATE",
+      created_by: data.created_by,
     });
 
     response.lead = updatedLead;
@@ -672,40 +755,81 @@ export class ClientApprovalService {
         `[SERVICE] Fetching Tech-Check Users for vendor ID: ${vendorId}`
       );
 
-      // 1. Find the user type ID for 'tech-check'
-      const techCheckUserType = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: {
-            equals: "tech-check",
-            mode: "insensitive",
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+
+      const useCustomUsersOnly =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+      let techCheckUsers;
+
+      if (useCustomUsersOnly) {
+        techCheckUsers = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: {
+              user_type: {
+                equals: "custom",
+                mode: "insensitive",
+              },
+            },
+            userPrivilegeMappings: {
+              some: {
+                is_allowed: true,
+                privilege: {
+                  code: "production.tech_check.tech_check_action.tech_check_workflow_action",
+                  is_active: true,
+                },
+              },
+            },
           },
-        },
-      });
+          include: {
+            user_type: true,
+            documents: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
+      } else {
+        // 1. Find the user type ID for 'tech-check'
+        const techCheckUserType = await prisma.userTypeMaster.findFirst({
+          where: {
+            user_type: {
+              equals: "tech-check",
+              mode: "insensitive",
+            },
+          },
+        });
 
-      if (!techCheckUserType) {
-        console.log("[SERVICE] Tech-Check user type not found");
-        return [];
+        if (!techCheckUserType) {
+          console.log("[SERVICE] Tech-Check user type not found");
+          return [];
+        }
+
+        console.log(
+          `[SERVICE] Found Tech-Check user type ID: ${techCheckUserType.id}`
+        );
+
+        // 2. Fetch all users with tech-check role for the specified vendor
+        techCheckUsers = await prisma.userMaster.findMany({
+          where: {
+            vendor_id: vendorId,
+            user_type_id: techCheckUserType.id,
+            status: "active",
+          },
+          include: {
+            user_type: true,
+            documents: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
       }
-
-      console.log(
-        `[SERVICE] Found Tech-Check user type ID: ${techCheckUserType.id}`
-      );
-
-      // 2. Fetch all users with tech-check role for the specified vendor
-      const techCheckUsers = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: vendorId,
-          user_type_id: techCheckUserType.id,
-          status: "active",
-        },
-        include: {
-          user_type: true,
-          documents: true,
-        },
-        orderBy: {
-          created_at: "desc",
-        },
-      });
 
       console.log(`[SERVICE] Found ${techCheckUsers.length} Tech-Check Users`);
 

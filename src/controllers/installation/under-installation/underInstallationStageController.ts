@@ -10,6 +10,8 @@ import {
 import logger from "../../../utils/logger";
 import fs from "node:fs/promises";
 import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
+import { resolveClientBaseUrl } from "../../../utils/fileUtils";
+import { prisma } from "../../../prisma/client";
 
 const service = new UnderInstallationStageService();
 
@@ -35,11 +37,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToUnderInstallation(
           vendorId,
           leadId,
           updated_by,
+          baseUrl,
         );
 
       return res
@@ -64,8 +68,14 @@ export class UnderInstallationStageController {
   /** ✅ Get all leads under Post-Dispatch Stage (Type 15) */
   async getAllUnderInstallationStageLeads(req: Request, res: Response) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const userIdParam = Array.isArray(req.params.userId)
+        ? req.params.userId[0]
+        : req.params.userId;
+      const vendorId = Number(vendorIdParam);
+      const userId = Number(userIdParam);
 
       if (!vendorId || !userId) {
         return res
@@ -111,8 +121,12 @@ export class UnderInstallationStageController {
     res: Response,
   ) {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorIdParam = Array.isArray(req.params.vendorId)
+        ? req.params.vendorId[0]
+        : req.params.vendorId;
+      const vendorId = Number(vendorIdParam);
       const userId = Number(req.body.userId);
+      const franchiseId = req.body.franchise_id ? Number(req.body.franchise_id) : undefined;
       const page = parseInt((req.body.page as string) || "1");
       const limit = parseInt((req.body.limit as string) || "10");
 
@@ -216,6 +230,8 @@ export class UnderInstallationStageController {
       const { leads, count } = await BookingStageService.getUniversalTableData(
         vendorId,
         userId,
+        franchiseId,
+        undefined,
         "Type 15",
         page,
         limit,
@@ -786,6 +802,7 @@ export class UnderInstallationStageController {
         cost,
         supervisor_remark,
         expected_ready_date,
+        solution,
         is_resolved,
         teams, // comma-separated string "1,2,3"
         created_by,
@@ -819,6 +836,7 @@ export class UnderInstallationStageController {
         }
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const payload = {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -832,10 +850,12 @@ export class UnderInstallationStageController {
         expected_ready_date: expected_ready_date
           ? new Date(expected_ready_date)
           : undefined,
+        solution: typeof solution === "string" ? solution : undefined,
         is_resolved: is_resolved === "true" ? true : false,
         created_by: Number(created_by),
         teams: parsedTeams,
         files: uploadedFiles,
+        baseUrl,
       };
 
       const result =
@@ -851,6 +871,170 @@ export class UnderInstallationStageController {
       return res.status(500).json({
         success: false,
         error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+  async updateMiscellaneousEntry(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId || req.body.lead_id);
+      const miscId = Number(req.params.miscId);
+
+      const {
+        misc_type_id,
+        problem_description,
+        reorder_material_details,
+        quantity,
+        cost,
+        supervisor_remark,
+        expected_ready_date,
+        solution,
+        teams, // comma-separated string "1,2,3" or array
+        updated_by,
+      } = req.body;
+
+      const files = req.files as Express.Multer.File[];
+
+      let parsedTeams: number[] | undefined = undefined;
+      if (teams !== undefined) {
+        parsedTeams = Array.isArray(teams)
+          ? teams.map(Number)
+          : typeof teams === "string" && teams.trim().length > 0
+          ? teams.split(",").map((t: string) => Number(t.trim()))
+          : [];
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype,
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
+      const payload = {
+        misc_id: miscId,
+        vendor_id: vendorId,
+        lead_id: leadId,
+        misc_type_id: misc_type_id ? Number(misc_type_id) : undefined,
+        problem_description,
+        reorder_material_details,
+        quantity:
+          quantity !== undefined && quantity !== null && quantity !== ""
+            ? Number(quantity)
+            : undefined,
+        cost:
+          cost !== undefined && cost !== null && cost !== ""
+            ? Number(cost)
+            : undefined,
+        supervisor_remark: supervisor_remark || undefined,
+        expected_ready_date: expected_ready_date
+          ? new Date(expected_ready_date)
+          : undefined,
+        solution: typeof solution === "string" ? solution : undefined,
+        updated_by: Number(updated_by),
+        teams: parsedTeams,
+        files: uploadedFiles,
+      };
+
+      const result =
+        await UnderInstallationStageService.updateMiscellaneousService(payload);
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous entry updated successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in updateMiscellaneousEntry:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
+
+
+
+  
+  async addMiscDocumentsController(req: Request, res: Response) {
+    try {
+      const miscId = Number(req.params.miscId);
+      const vendor_id = Number(req.body.vendor_id); // ✅ parse
+      const lead_id = Number(req.body.lead_id); // ✅ parse
+      const created_by = Number(req.body.created_by); // ✅ parse
+
+      // validate parsed values
+      if (!vendor_id || !lead_id || !created_by) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id, lead_id, and created_by are required",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+
+      if (!files?.length) {
+        return res.status(400).json({
+          success: false,
+          message: "No files uploaded",
+        });
+      }
+
+      const uploadedFiles = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+            file.path,
+            vendor_id,
+            lead_id,
+            file.originalname,
+            file.mimetype,
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.addMiscDocumentsService({
+          misc_id: miscId,
+          vendor_id,
+          lead_id,
+          created_by,
+          files: uploadedFiles,
+        });
+
+      return res.status(201).json({
+        success: true,
+        message: "Documents uploaded successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      return res.status(500).json({
+        success: false,
+        error: err.message,
       });
     }
   }
@@ -883,7 +1067,7 @@ export class UnderInstallationStageController {
     try {
       const vendorId = Number(req.params.vendorId);
       const miscId = Number(req.params.miscId);
-      const { expected_ready_date, updated_by } = req.body;
+      const { expected_ready_date, updated_by, solution } = req.body;
 
       if (!vendorId || !miscId) {
         return res.status(400).json({
@@ -899,17 +1083,239 @@ export class UnderInstallationStageController {
         });
       }
 
+      if (!solution || typeof solution !== "string" || !solution.trim()) {
+        return res.status(400).json({
+          success: false,
+          error: "Solution is required",
+        });
+      }
+
+      const baseUrl = resolveClientBaseUrl(req);
       const data = await UnderInstallationStageService.updateERDService({
         vendor_id: vendorId,
         misc_id: miscId,
         expected_ready_date,
+        solution: solution.trim(),
         updated_by,
+        baseUrl,
       });
 
       return res.status(200).json({ success: true, data });
     } catch (error: any) {
       console.error("Error updating ERD:", error.message);
       return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateMiscApproval(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { misc_approved, exp_of_rejection, approval_remark, updated_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and miscId are required",
+        });
+      }
+
+      if (typeof misc_approved !== "boolean" || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "misc_approved and updated_by are required",
+        });
+      }
+
+      if (misc_approved === false && !exp_of_rejection) {
+        return res.status(400).json({
+          success: false,
+          error: "exp_of_rejection is required when rejecting",
+        });
+      }
+
+
+
+      const baseUrl = resolveClientBaseUrl(req);
+
+      const data =
+        await UnderInstallationStageService.updateMiscApprovalService({
+          vendor_id: vendorId,
+          misc_id: miscId,
+          misc_approved,
+          exp_of_rejection,
+          approval_remark,
+          updated_by,
+          baseUrl,
+        });
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating misc approval:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateMiscRequiredDeliveryDate(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { required_delivery_date, updated_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and miscId are required",
+        });
+      }
+
+      if (!required_delivery_date || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "required_delivery_date and updated_by are required",
+        });
+      }
+
+      const baseUrl = resolveClientBaseUrl(req);
+      const data =
+        await UnderInstallationStageService.updateMiscRequiredDeliveryDateService(
+          {
+            vendor_id: vendorId,
+            misc_id: miscId,
+            required_delivery_date,
+            updated_by,
+            baseUrl,
+          },
+        );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error updating required delivery date:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async updateMiscRequiredDeliveryDateByTaskId(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const taskId = Number(req.params.taskId);
+      const { required_delivery_date, updated_by } = req.body;
+
+      if (!vendorId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId and taskId are required",
+        });
+      }
+
+      if (!required_delivery_date || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "required_delivery_date and updated_by are required",
+        });
+      }
+
+      const baseUrl = resolveClientBaseUrl(req);
+      const data =
+        await UnderInstallationStageService.updateMiscRequiredDeliveryDateByTaskIdService(
+          {
+            vendor_id: vendorId,
+            task_id: taskId,
+            required_delivery_date,
+            updated_by,
+            baseUrl,
+          },
+        );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error(
+        "Error updating required delivery date by task:",
+        error.message,
+      );
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async uploadMiscCompletionDocumentsByTaskId(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const taskId = Number(req.params.taskId);
+      const { created_by } = req.body;
+
+      if (!vendorId || !taskId || !created_by) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId, taskId and created_by are required",
+        });
+      }
+
+      const task = await prisma.userLeadTask.findFirst({
+        where: {
+          id: taskId,
+          vendor_id: vendorId,
+          task_type: "Miscellaneous",
+        },
+        select: { lead_id: true },
+      });
+
+      if (!task?.lead_id) {
+        return res.status(404).json({
+          success: false,
+          error: "Miscellaneous task not found",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          error: "At least one file is required",
+        });
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+            file.path,
+            vendorId,
+            task.lead_id,
+            file.originalname,
+            file.mimetype,
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.uploadMiscCompletionDocumentsByTaskIdService(
+          {
+            vendor_id: vendorId,
+            task_id: taskId,
+            created_by: Number(created_by),
+            files: uploadedFiles,
+          },
+        );
+
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    } catch (error: any) {
+      console.error(
+        "Error uploading misc completion documents:",
+        error.message,
+      );
+      return res
+        .status(error.statusCode || 500)
+        .json({ success: false, error: error.message });
     }
   }
 
@@ -963,8 +1369,14 @@ export class UnderInstallationStageController {
 
   async getInstallationIssueLogs(req: Request, res: Response) {
     try {
-      const vendor_id = parseInt(req.params.vendor_id);
-      const lead_id = parseInt(req.params.lead_id);
+      const vendorIdParam = Array.isArray(req.params.vendor_id)
+        ? req.params.vendor_id[0]
+        : req.params.vendor_id;
+      const leadIdParam = Array.isArray(req.params.lead_id)
+        ? req.params.lead_id[0]
+        : req.params.lead_id;
+      const vendor_id = Number(vendorIdParam);
+      const lead_id = Number(leadIdParam);
 
       if (!vendor_id || !lead_id) {
         return res.status(400).json({
@@ -987,7 +1399,10 @@ export class UnderInstallationStageController {
 
   async getInstallationIssueLogById(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
+      const idParam = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+      const id = Number(idParam);
 
       if (!id) {
         return res.status(400).json({
@@ -1015,7 +1430,10 @@ export class UnderInstallationStageController {
 
   async updateInstallationIssueLog(req: Request, res: Response) {
     try {
-      const id = parseInt(req.params.id);
+      const idParam = Array.isArray(req.params.id)
+        ? req.params.id[0]
+        : req.params.id;
+      const id = Number(idParam);
 
       if (!id)
         return res.status(400).json({
@@ -1096,19 +1514,19 @@ export class UnderInstallationStageController {
         const isImage = file.mimetype.startsWith("image/");
         const sysName = isImage
           ? await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile(
-              file.path,
-              Number(vendor_id),
-              Number(lead_id),
-              file.originalname,
-              file.mimetype,
-            )
+            file.path,
+            Number(vendor_id),
+            Number(lead_id),
+            file.originalname,
+            file.mimetype,
+          )
           : await uploadToWasabiUnderInstallationUsableHandoverDocumentsFile(
-              file.path,
-              Number(vendor_id),
-              Number(lead_id),
-              file.originalname,
-              file.mimetype,
-            );
+            file.path,
+            Number(vendor_id),
+            Number(lead_id),
+            file.originalname,
+            file.mimetype,
+          );
 
         await fs.unlink(file.path);
 
@@ -1186,6 +1604,33 @@ export class UnderInstallationStageController {
     }
   }
 
+  async markUsableHandoverCompleted(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const { updated_by } = req.body;
+
+      if (!vendorId || !leadId || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId, leadId and updated_by are required",
+        });
+      }
+
+      const data =
+        await UnderInstallationStageService.markUsableHandoverCompleted(
+          vendorId,
+          leadId,
+          Number(updated_by),
+        );
+
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      console.error("Error marking usable handover completed:", error.message);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
   /**
    * ✅ Move Lead to Final Handover Stage (Type 16)
    * @route PUT /leads/installation/under-installation/vendorId/:vendorId/leadId/:leadId/move-to-final-handover
@@ -1207,11 +1652,13 @@ export class UnderInstallationStageController {
           );
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.moveLeadToFinalHandover(
           vendorId,
           leadId,
           updated_by,
+          baseUrl,
         );
 
       return res
@@ -1322,12 +1769,14 @@ export class UnderInstallationStageController {
         });
       }
 
+      const baseUrl = resolveClientBaseUrl(req);
       const result =
         await UnderInstallationStageService.resolveMiscellaneousService({
           vendor_id: vendorId,
           lead_id: leadId,
           misc_id: miscId,
           resolved_by: Number(resolved_by),
+          baseUrl,
         });
 
       return res.status(200).json({
@@ -1337,7 +1786,7 @@ export class UnderInstallationStageController {
       });
     } catch (err: any) {
       console.error("❌ Error in resolveMiscellaneousEntry:", err.message);
-      return res.status(500).json({
+      return res.status(err.statusCode || 500).json({
         success: false,
         error: err.message || "Something went wrong",
       });
@@ -1359,11 +1808,37 @@ export class UnderInstallationStageController {
         });
       }
 
+      const files = req.files as Express.Multer.File[];
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              vendorId,
+              leadId,
+              file.originalname,
+              file.mimetype,
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
+      const baseUrl = resolveClientBaseUrl(req);
       await UnderInstallationStageService.markMiscTaskReady({
         vendor_id: vendorId,
         lead_id: leadId,
         misc_id: miscId,
         ready_by: Number(ready_by),
+        files: uploadedFiles,
+        baseUrl,
       });
 
       return res.status(200).json({
@@ -1372,10 +1847,238 @@ export class UnderInstallationStageController {
       });
     } catch (err: any) {
       console.error("❌ Error in markMiscellaneousTaskReady:", err.message);
-      return res.status(500).json({
+      return res.status(err.statusCode || 500).json({
         success: false,
         error: err.message || "Something went wrong",
       });
     }
+  }
+
+  async getMiscellaneousResolutionStatus(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid vendorId or leadId",
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.checkMiscellaneousResolved(
+          vendorId,
+          leadId,
+        );
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("Misc status error:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to evaluate miscellaneous status",
+      });
+    }
+  }
+
+  /**
+   * GET /leads/installation/under-installation/vendorId/:vendorId/report/installation-data
+   * Query params: franchise_id (optional), from_date (optional), to_date (optional)
+   */
+  getInstallationReportData = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : null;
+      const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
+      const fromDate = req.query.from_date ? String(req.query.from_date) : null;
+      const toDate = req.query.to_date ? String(req.query.to_date) : null;
+
+      if (!vendorId) {
+        return res.status(400).json(ApiResponse.error("vendorId is required", 400));
+      }
+
+      console.log("[InstallationReport] Fetching report data", { vendorId, franchiseId, leadId, fromDate, toDate });
+
+      const data = await UnderInstallationStageService.getInstallationReportData(
+        vendorId,
+        franchiseId,
+        leadId,
+        fromDate,
+        toDate,
+      );
+
+      console.log(`[InstallationReport] Returning ${data.length} leads`);
+
+      return res.status(200).json(ApiResponse.success(data, `Fetched ${data.length} installation leads`));
+    } catch (error: any) {
+      console.error("[InstallationReport] Error:", error);
+      return res.status(500).json(ApiResponse.error("Failed to fetch installation report data"));
+    }
+  };
+
+  /**
+   * GET /leads/installation/under-installation/vendorId/:vendorId/report/misc-issue-log-data
+   * Query params: franchise_id (optional), from_date (optional), to_date (optional)
+   */
+  getMiscIssueLogReportData = async (
+    req: Request,
+    res: Response,
+  ) => {
+    try {
+      const vendorId = Number(req.params.vendorId);
+
+      const franchiseId =
+        req.query.franchise_id
+          ? Number(req.query.franchise_id)
+          : null;
+
+      const leadId =
+        req.query.lead_id
+          ? Number(req.query.lead_id)
+          : null;
+
+      const fromDate =
+        req.query.from_date
+          ? String(req.query.from_date)
+          : null;
+
+      const toDate =
+        req.query.to_date
+          ? String(req.query.to_date)
+          : null;
+
+      // NEW
+      const teamIds =
+        req.query.team_ids
+          ? String(req.query.team_ids)
+            .split(",")
+            .map((id) => Number(id))
+            .filter((id) => !isNaN(id))
+          : undefined;
+
+      if (!vendorId) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.error(
+              "vendorId is required",
+              400,
+            ),
+          );
+      }
+
+      const data =
+        await UnderInstallationStageService.getMiscIssueLogReportData(
+          vendorId,
+          franchiseId,
+          leadId,
+          fromDate,
+          toDate,
+          teamIds, // NEW
+        );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          data,
+          `Fetched ${data.length} misc and issue log rows`,
+        ),
+      );
+
+    } catch (error: any) {
+      console.error(
+        "[MiscIssueLogReport] Error:",
+        error,
+      );
+
+      return res.status(500).json(
+        ApiResponse.error(
+          "Failed to fetch misc and issue log report data",
+        ),
+      );
+    }
+  };
+
+  // ── Miscellaneous Followup Controllers ────────────────────────────────────
+
+  async getMiscFollowupEligibleUsers(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      if (!vendorId) {
+        return res.status(400).json({ success: false, error: "vendorId is required" });
+      }
+
+      const users = await UnderInstallationStageService.getMiscFollowupEligibleUsersService(vendorId);
+      return res.status(200).json({ success: true, data: users });
+    } catch (error: any) {
+      console.error("Error fetching eligible followup users:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async createMiscFollowup(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { lead_id, followup_date, due_date, date, solution, remark, created_by } = req.body;
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
+      }
+
+      const targetDate = followup_date || due_date || date;
+      const targetSolution = solution || remark;
+
+      if (!lead_id || !targetDate || !targetSolution) {
+        return res.status(400).json({
+          success: false,
+          error: "lead_id, followup_date, and solution are required",
+        });
+      }
+
+      const creatorId = Number(created_by || (req as any).user?.id || 1);
+
+      const followup = await UnderInstallationStageService.createMiscellaneousFollowupService({
+        vendor_id: vendorId,
+        misc_id: miscId,
+        lead_id: Number(lead_id),
+        followup_date: targetDate,
+        solution: targetSolution,
+        created_by: creatorId,
+      });
+
+      return res.status(201).json({ success: true, data: followup, message: "Followup recorded successfully" });
+    } catch (error: any) {
+      console.error("Error creating followup:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async getMiscFollowups(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+
+      if (!vendorId || !miscId) {
+        return res.status(400).json({ success: false, error: "vendorId and miscId are required" });
+      }
+
+      const followups = await UnderInstallationStageService.getMiscellaneousFollowupsService(vendorId, miscId);
+      return res.status(200).json({ success: true, data: followups });
+    } catch (error: any) {
+      console.error("Error fetching followups:", error);
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  async createMiscFollowupTask(req: Request, res: Response) {
+    return this.createMiscFollowup(req, res);
+  }
+
+  async getMiscFollowupTasks(req: Request, res: Response) {
+    return this.getMiscFollowups(req, res);
   }
 }

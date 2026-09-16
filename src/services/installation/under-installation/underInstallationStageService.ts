@@ -1,18 +1,28 @@
+import { findMiscProductionTask } from "./miscProductionTask";
+import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import { NotificationType } from "../../../prisma/generated";
+import { NotificationType, LeadUserStatus } from "../../../prisma/generated";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import {
-  sendMiscERDUpdatedEmail,
-  sendMiscRequirementEmail,
-  sendMarkAsReadyEmail,
-  sendMiscResolvedEmail,
-  sendFinalHandoverEmail,
   sendLeadMovedToUnderInstallationEmail,
+  sendMiscRequirementEmail,
+  sendMiscApprovalEmail,
+  sendMiscApprovedFactoryEmail,
+  sendMiscERDUpdatedEmail,
+  sendMarkAsReadyEmail,
+  sendMiscRequiredDeliveryDateEmail,
+  sendMiscResolvedEmail,
+  sendLeadMovedToFinalHandoverEmail,
 } from "../../../../src/services/email/brevoEmail.service";
-import { sendUnderInstallationAssignedEmail } from "../../../../src/services/email/brevoEmail2.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { sendSmallOrderDispatchedForInstallationEmail, sendSmallOrderDispatchedEmail } from "../../email/brevoEmail2.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -25,17 +35,38 @@ interface MiscPayload {
   cost?: number;
   supervisor_remark?: string;
   expected_ready_date?: Date;
+  solution?: string;
   is_resolved: boolean;
   created_by: number;
   teams: number[];
   files: { originalName: string; sysName: string }[];
+  baseUrl: string;
+}
+
+interface UpdateMiscPayload {
+  misc_id: number;
+  vendor_id: number;
+  lead_id?: number;
+  misc_type_id?: number;
+  problem_description?: string;
+  reorder_material_details?: string;
+  quantity?: number | null;
+  cost?: number | null;
+  supervisor_remark?: string | null;
+  expected_ready_date?: Date | null;
+  solution?: string | null;
+  teams?: number[];
+  files?: { originalName: string; sysName: string }[];
+  updated_by: number;
 }
 
 interface UpdateERDInput {
   vendor_id: number;
   misc_id: number;
   expected_ready_date: string;
+  solution: string;
   updated_by: number;
+  baseUrl: string;
 }
 
 interface InstallIssueLogPayload {
@@ -59,6 +90,23 @@ interface UsableHandoverPayload {
 }
 
 export class UnderInstallationStageService {
+  private static addMonthsPreservingDay(date: Date, monthsToAdd: number) {
+    const result = new Date(date);
+    const originalDay = result.getDate();
+
+    result.setMonth(result.getMonth() + monthsToAdd, 1);
+
+    const lastDayOfTargetMonth = new Date(
+      result.getFullYear(),
+      result.getMonth() + 1,
+      0,
+    ).getDate();
+
+    result.setDate(Math.min(originalDay, lastDayOfTargetMonth));
+
+    return result;
+  }
+
   /**
    * ✅ Move Lead to Under Installation Stage (Type 15)
    */
@@ -66,6 +114,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -101,17 +150,66 @@ export class UnderInstallationStageService {
         },
       });
 
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
+      });
+
       // 4️⃣ Activity Log
-      await tx.leadDetailedLogs.create({
-        data: {
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Under Installation stage.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
+      });
+
+      // 5️⃣ Close Dispatch Planning Task (if any)
+      const dispatchTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: leadId,
           vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Under Installation stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+          status: "open",
         },
       });
+
+      if (dispatchTask) {
+        const updatedTask = await tx.userLeadTask.update({
+          where: { id: dispatchTask.id },
+          data: {
+            status: "completed",
+            closed_at: new Date(),
+            closed_by: updatedBy,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+            remark:
+              (dispatchTask.remark ?? "") +
+              " | Auto-closed after lead moved to Dispatch stage.",
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: updatedTask,
+          createdBy: updatedBy,
+          actionType: "UPDATE",
+        });
+
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id!,
+          action: "Dispatch preparation task marked as Completed.",
+          action_type: "UPDATE",
+          created_by: updatedBy,
+        });
+      }
 
       return updatedLead;
     });
@@ -123,7 +221,7 @@ export class UnderInstallationStageService {
     try {
       const actorId = updatedBy;
 
-      const [lead, actor] = await Promise.all([
+      const [lead, actor, firstInstance] = await Promise.all([
         prisma.leadMaster.findUnique({
           where: { id: leadId },
           select: {
@@ -132,150 +230,237 @@ export class UnderInstallationStageService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
+            statusType: { select: { tag: true } },
+            is_small_order_request: true,
+            dispatch_date: true,
           },
         }),
-
         prisma.userMaster.findUnique({
           where: { id: actorId },
           select: { user_name: true },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
       ]);
 
       if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
+      const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const dispatchedBy = actor?.user_name ?? "System";
-
       const dispatchedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
+      const franchiseId = lead.franchise_id ?? null;
+      const stageTag = lead.statusType?.tag;
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
-
+      // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
+      const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+        : `/dashboard/installation/under-installation/details/${leadId}`;
+      const uiParams = new URLSearchParams();
+      if (lead.account_id) uiParams.set("accountId", String(lead.account_id));
+      if (firstInstance?.id) uiParams.set("instance_id", String(firstInstance.id));
+      const uiQs = uiParams.toString();
+      const redirectPath = uiQs ? `${uiBase}?${uiQs}` : uiBase;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Fetch Admin Users
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      // Admins — franchise-filtered, no super-admin
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId,
+        excludeUserId: actorId,
       });
 
-      // Notify Each Admin
-      for (const admin of admins) {
-        if (admin.id === actorId) continue;
-
-        // 🔔 In-App Notification
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: admin.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Lead Moved To Under Installation",
-          message: `${leadCode} - ${leadName} moved to Under Installation stage by ${dispatchedBy}.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectPath,
-        });
-
-        // 📧 Email Notification
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToUnderInstallationEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          dispatchedBy,
-          dispatchedAt,
-          projectUrl,
-        });
-      }
-
-      // ===============================
-      // SITE SUPERVISOR NOTIFICATION
-      // ===============================
-
+      // Site supervisor from lead mapping
       const siteSupervisorMapping = await prisma.leadUserMapping.findFirst({
         where: {
           lead_id: leadId,
           vendor_id: lead.vendor_id,
           status: "active",
           user: {
-            user_type: {
-              user_type: {
-                equals: "site-supervisor",
-                mode: "insensitive",
-              },
-            },
+            user_type: { user_type: { equals: "site-supervisor", mode: "insensitive" } },
           },
         },
         select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
+          user: { select: { id: true, user_name: true, user_email: true } },
         },
       });
 
-      if (siteSupervisorMapping?.user) {
-        const supervisor = siteSupervisorMapping.user;
+      // Deduplicate recipients, exclude actor
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of admins) recipientMap.set(u.id, u);
+      if (siteSupervisorMapping?.user && siteSupervisorMapping.user.id !== actorId) {
+        recipientMap.set(siteSupervisorMapping.user.id, siteSupervisorMapping.user);
+      }
 
-        // 🔔 IN-APP (OPTIONAL BUT RECOMMENDED)
-        await NotificationService.createAndSend({
-          vendor_id: lead.vendor_id,
-          user_id: supervisor.id,
-          sender_id: actorId,
-          type: NotificationType.LEAD_MILESTONE,
-          title: "Lead Assigned For Installation",
-          message: `${leadCode} - ${leadName} is now Under Installation.`,
-          entity_type: "lead",
-          entity_id: leadId,
-          redirect_url: redirectPath,
-        });
+      await Promise.allSettled(
+        Array.from(recipientMap.values()).map(async (user) => {
+          const isAdmin = admins.some((a) => a.id === user.id);
 
-        // 📧 EMAIL (YOUR REQUIREMENT)
-        if (supervisor.user_email) {
-          await sendUnderInstallationAssignedEmail({
+          await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,
-            toEmail: supervisor.user_email,
-            toName: supervisor.user_name,
+            user_id: user.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_MILESTONE,
+            title: isAdmin ? "Lead Moved To Under Installation" : "Lead Assigned For Installation",
+            message: isAdmin
+              ? `${leadCode} - ${leadName} moved to Under Installation stage by ${dispatchedBy}.`
+              : `${leadCode} - ${leadName} is now Under Installation.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendLeadMovedToUnderInstallationEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
             leadCode,
             leadName,
             dispatchedBy,
             dispatchedAt,
             projectUrl,
           });
+        }),
+      );
+
+      if (lead.is_small_order_request) {
+        // Collect all mapped users for this lead
+        const leadMappings = await prisma.leadUserMapping.findMany({
+          where: { lead_id: leadId, vendor_id: vendorId, status: "active" },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_type: { select: { user_type: true } },
+              },
+            },
+          },
+        });
+
+        const mappedUsers = leadMappings.map((m) => m.user).filter(Boolean);
+
+        // Sales executives from mapping
+        const salesExecs = mappedUsers.filter(
+          (u) => u.user_type.user_type.toLowerCase() === "sales-executive",
+        );
+
+        const supervisorUser = siteSupervisorMapping?.user ?? null;
+        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
+        const dispatchDateStr = lead.dispatch_date
+          ? new Date(lead.dispatch_date).toLocaleString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
+          : "N/A";
+
+        // Notify Site Supervisor
+        if (supervisorUser) {
+          await Promise.allSettled([
+            (async () => {
+              try {
+                await NotificationService.createAndSend({
+                  vendor_id: lead.vendor_id,
+                  user_id: supervisorUser.id,
+                  sender_id: actorId,
+                  type: NotificationType.LEAD_MILESTONE,
+                  title: "Small Order Dispatched for Installation",
+                  message: `The Small Order for ${leadCode} - ${leadName} has been dispatched and moved to Under Installation. Please review the details and update the installation progress as required.`,
+                  entity_type: "lead",
+                  entity_id: leadId,
+                  redirect_url: smallOrderRedirectPath,
+                });
+                console.log(`✅ Small Order Dispatched for Installation In-App sent to Site Supervisor ${supervisorUser.id}`);
+              } catch (err: any) {
+                logger.warn(`⚠️ Small Order Dispatched for Installation In-App to Site Supervisor ${supervisorUser.id} failed:`, err.message);
+              }
+            })(),
+            (async () => {
+              if (supervisorUser.user_email) {
+                try {
+                  await sendSmallOrderDispatchedForInstallationEmail({
+                    vendor_id: lead.vendor_id,
+                    toEmail: supervisorUser.user_email,
+                    site_supervisor_name: supervisorUser.user_name || "Site Supervisor",
+                    leadCode,
+                    leadName,
+                    dispatch_date: dispatchDateStr,
+                    projectUrl: smallOrderProjectUrl,
+                  });
+                  console.log(`✅ Small Order Dispatched for Installation Email sent to Site Supervisor ${supervisorUser.user_email}`);
+                } catch (err: any) {
+                  logger.warn(`⚠️ Small Order Dispatched for Installation Email to ${supervisorUser.user_email} failed:`, err.message);
+                }
+              }
+            })(),
+          ]);
+        }
+
+        // Notify Sales Executives
+        if (salesExecs.length > 0) {
+          await Promise.allSettled(
+            salesExecs.map(async (exec) => {
+              await Promise.allSettled([
+                (async () => {
+                  try {
+                    await NotificationService.createAndSend({
+                      vendor_id: lead.vendor_id,
+                      user_id: exec.id,
+                      sender_id: actorId,
+                      type: NotificationType.LEAD_MILESTONE,
+                      title: "Small Order Dispatched",
+                      message: `The Small Order for ${leadCode} - ${leadName} has been dispatched successfully.`,
+                      entity_type: "lead",
+                      entity_id: leadId,
+                      redirect_url: smallOrderRedirectPath,
+                    });
+                    console.log(`✅ Small Order Dispatched In-App sent to Sales Executive ${exec.id}`);
+                  } catch (err: any) {
+                    logger.warn(`⚠️ Small Order Dispatched In-App to Sales Executive ${exec.id} failed:`, err.message);
+                  }
+                })(),
+                (async () => {
+                  if (exec.user_email) {
+                    try {
+                      await sendSmallOrderDispatchedEmail({
+                        vendor_id: lead.vendor_id,
+                        toEmail: exec.user_email,
+                        sales_executive_name: exec.user_name || "Sales Executive",
+                        leadCode,
+                        leadName,
+                        dispatch_date: dispatchDateStr,
+                        projectUrl: smallOrderProjectUrl,
+                      });
+                      console.log(`✅ Small Order Dispatched Email sent to Sales Executive ${exec.user_email}`);
+                    } catch (err: any) {
+                      logger.warn(`⚠️ Small Order Dispatched Email to ${exec.user_email} failed:`, err.message);
+                    }
+                  }
+                })(),
+              ]);
+            })
+          );
         }
       }
+
+      logger.info("✅ Under Installation notifications sent", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        recipients: recipientMap.size,
+      });
     } catch (err: any) {
       logger.warn("⚠️ Under Installation notification failed", {
         lead_id: leadId,
@@ -314,9 +499,18 @@ export class UnderInstallationStageService {
       include: { user_type: true },
     });
 
+    const normalizedUserType =
+      creator?.user_type?.user_type?.toLowerCase().trim() || "";
+    const isFactory =
+      normalizedUserType === "factory" ||
+      normalizedUserType === "factory-user" ||
+      normalizedUserType === "factory_user" ||
+      /factory/i.test(normalizedUserType);
+
     const isAdmin =
-      creator?.user_type?.user_type?.toLowerCase() === "admin" ||
-      creator?.user_type?.user_type?.toLowerCase() === "super-admin";
+      normalizedUserType === "admin" ||
+      normalizedUserType === "super-admin" ||
+      isFactory;
 
     const baseWhere: any = {
       vendor_id: vendorId,
@@ -449,16 +643,14 @@ export class UnderInstallationStageService {
       });
 
       // 3️⃣ Log the update
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: `Installation has been started`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: `Installation has been started`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Actual installation start date set", {
@@ -555,19 +747,25 @@ export class UnderInstallationStageService {
         data: mappingsData,
       });
 
-      // 5️⃣ Log action in detailed logs
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: `Set expected installation end date (${expectedEndDate.toISOString()}) & added ${
-            installers.length
-          } installer(s)`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
+      const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+        "en-GB",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
         },
+      );
+
+      // 5️⃣ Log action in detailed logs
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${installers.length
+          } installer(s)`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installers added & expected end date set", {
@@ -662,6 +860,15 @@ export class UnderInstallationStageService {
 
       // 2️⃣ Update expected installation end date (if provided)
       if (expectedEndDate) {
+        const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+          "en-GB",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          },
+        );
+
         await tx.leadMaster.update({
           where: { id: lead.id },
           data: {
@@ -671,7 +878,7 @@ export class UnderInstallationStageService {
           },
         });
         updates.push(
-          `expected installation end date → ${expectedEndDate.toISOString()}`,
+          `expected installation end date → ${formattedExpectedEndDate}`,
         );
       }
 
@@ -705,16 +912,14 @@ export class UnderInstallationStageService {
           ? `Updated ${updates.join(" and ")}`
           : "No changes were made";
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installation details updated", {
@@ -804,16 +1009,14 @@ export class UnderInstallationStageService {
       // 5️⃣ Log the action
       const logMessage = actionMessages.join(" & ");
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: logMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: logMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installation completion status updated", {
@@ -924,16 +1127,14 @@ export class UnderInstallationStageService {
       }
 
       // Log action
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: finalAccountId,
-          action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
-          action_type: "UPLOAD",
-          created_by: userId,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: finalAccountId,
+        action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
+        action_type: "UPLOAD",
+        created_by: userId,
+        created_at: new Date(),
       });
 
       return uploadedDocs;
@@ -946,15 +1147,25 @@ export class UnderInstallationStageService {
   static async getInstallationUpdatesDayWise(vendorId: number, leadId: number) {
     // 1️⃣ Fetch all updates (Day wise)
     const updates = await prisma.installationUpdate.findMany({
-      where: { vendor_id: vendorId, lead_id: leadId },
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+      },
       include: {
         documents: {
+          where: {
+            document: {
+              is_deleted: false,
+            },
+          },
           include: {
-            document: true, // LeadDocuments
+            document: true,
           },
         },
       },
-      orderBy: { update_date: "desc" },
+      orderBy: {
+        update_date: "desc",
+      },
     });
 
     // 2️⃣ Format data
@@ -993,6 +1204,133 @@ export class UnderInstallationStageService {
     return result;
   }
 
+  public static async getMiscellaneousRecipients(vendor_id: number, lead_id: number) {
+    const mapped = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id,
+        lead_id,
+        status: "active",
+        user: {
+          status: "active",
+          user_type: {
+            user_type: { equals: "miscellaneous", mode: "insensitive" },
+          },
+        },
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        },
+      },
+    });
+
+    let users = mapped.map((m) => m.user);
+    if (!users.length) {
+      users = await prisma.userMaster.findMany({
+        where: {
+          vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { equals: "miscellaneous", mode: "insensitive" },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+    }
+    return users;
+  }
+
+  public static async getSiteSupervisorRecipients(vendor_id: number, lead_id: number) {
+    const supervisorRole = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: { equals: "site-supervisor", mode: "insensitive" },
+      },
+      select: { id: true },
+    });
+
+    if (!supervisorRole) return [];
+
+    const mapped = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id,
+        lead_id,
+        status: "active",
+        user: {
+          status: "active",
+          user_type_id: supervisorRole.id,
+        },
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        },
+      },
+    });
+
+    return mapped.map((m) => m.user);
+  }
+
+  public static async getFactoryRecipients(vendor_id: number, lead_id: number) {
+    const factoryRole = await prisma.userTypeMaster.findFirst({
+      where: {
+        user_type: { equals: "factory", mode: "insensitive" },
+      },
+      select: { id: true },
+    });
+
+    if (!factoryRole) return [];
+
+    const mapped = await prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id,
+        lead_id,
+        status: "active",
+        user: {
+          status: "active",
+          user_type_id: factoryRole.id,
+        },
+      },
+      select: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        },
+      },
+    });
+
+    let users = mapped.map((m) => m.user);
+    if (!users.length) {
+      users = await prisma.userMaster.findMany({
+        where: {
+          vendor_id,
+          status: "active",
+          user_type_id: factoryRole.id,
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      });
+    }
+    return users;
+  }
+
   static async createMiscellaneousService(payload: MiscPayload) {
     const {
       vendor_id,
@@ -1005,59 +1343,139 @@ export class UnderInstallationStageService {
       cost,
       supervisor_remark,
       expected_ready_date,
+      solution,
       is_resolved,
       created_by,
       teams,
       files,
+      baseUrl,
     } = payload;
 
     // ====================================
     // 1️⃣ TRANSACTION LAYER
     // ====================================
 
+
+    if (
+      !reorder_material_details ||
+      !reorder_material_details.trim()
+    ) {
+      throw new Error(
+        "Reorder material details is required"
+      );
+    }
+
+
     const misc = await prisma.$transaction(async (tx) => {
+      // -----------------------------
+      // Validation
+      // -----------------------------
+
+      if (
+        !reorder_material_details ||
+        !reorder_material_details.trim()
+      ) {
+        throw new Error(
+          "Reorder material details is required"
+        );
+      }
+
       const misc = await tx.miscellaneousMaster.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
           misc_type_id,
-          problem_description,
-          reorder_material_details,
-          quantity,
-          cost,
-          supervisor_remark,
-          expected_ready_date,
-          is_resolved,
+
+          // String fields
+          problem_description:
+            problem_description?.trim() || "",
+
+          reorder_material_details:
+            reorder_material_details.trim(),
+
+          supervisor_remark:
+            supervisor_remark?.trim() || null,
+
+          // Number fields
+          quantity:
+            quantity !== undefined &&
+              quantity !== null
+              ? Number(quantity)
+              : null,
+
+          cost:
+            cost !== undefined &&
+              cost !== null
+              ? Number(cost)
+              : null,
+
+          // Date fields
+          expected_ready_date:
+            expected_ready_date
+              ? new Date(expected_ready_date)
+              : null,
+
+          solution: solution?.trim() || null,
+
+          // Boolean
+          is_resolved:
+            is_resolved ?? false,
+
           created_by,
         },
       });
 
       // -----------------------------
-      // Factory Assignment Logic
+      // Miscellaneous User Assignment Logic
       // -----------------------------
 
-      let factoryAssigneeId: number | null = null;
-
-      const factoryType = await tx.userTypeMaster.findFirst({
+      const miscUserMapping = await tx.leadUserMapping.findFirst({
         where: {
-          user_type: { equals: "factory", mode: "insensitive" },
+          vendor_id,
+          lead_id,
+          status: "active",
+          user: {
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
+          },
         },
-        select: { id: true },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
       });
 
-      if (factoryType) {
-        const factoryMapping = await tx.leadUserMapping.findFirst({
+      let miscAssigneeId = miscUserMapping?.user_id ?? null;
+
+      if (!miscAssigneeId) {
+        const vendorMiscUser = await tx.userMaster.findFirst({
           where: {
             vendor_id,
-            lead_id,
             status: "active",
-            user: { user_type_id: factoryType.id },
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
           },
-          select: { user_id: true },
+          orderBy: { id: "asc" },
+          select: { id: true },
         });
+        miscAssigneeId = vendorMiscUser?.id ?? null;
+      }
 
-        factoryAssigneeId = factoryMapping?.user_id ?? null;
+      if (!miscAssigneeId) {
+        const superAdmin = await tx.userMaster.findFirst({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["super-admin", "admin"], mode: "insensitive" },
+            },
+          },
+          orderBy: { id: "asc" },
+          select: { id: true },
+        });
+        miscAssigneeId = superAdmin?.id ?? created_by;
       }
 
       // -----------------------------
@@ -1066,31 +1484,32 @@ export class UnderInstallationStageService {
 
       const leadStageRecord = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { status_id: true },
+        select: { status_id: true, franchise_id: true },
       });
 
       const leadStage = leadStageRecord?.status_id
         ? ((
-            await tx.statusTypeMaster.findUnique({
-              where: { id: leadStageRecord.status_id },
-              select: { type: true },
-            })
-          )?.type ?? null)
+          await tx.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
         : null;
 
       // -----------------------------
-      // Task Creation
+      // Task Creation: Miscellaneous Approval
       // -----------------------------
 
-      const miscRemark = `[misc:${misc.id}] **${reorder_material_details}** - ${problem_description}`;
+      const miscRemark = `[misc:${misc.id}] ${reorder_material_details} - ${problem_description}`;
 
       const task = await tx.userLeadTask.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
-          user_id: factoryAssigneeId ?? created_by,
-          task_type: "Miscellaneous",
+          franchise_id: leadStageRecord?.franchise_id ?? null,
+          user_id: miscAssigneeId ?? created_by,
+          task_type: "Miscellaneous Approval",
           lead_stage: leadStage,
           due_date: expected_ready_date
             ? new Date(expected_ready_date)
@@ -1099,6 +1518,13 @@ export class UnderInstallationStageService {
           status: "open",
           created_by,
         },
+      });
+
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
       });
 
       // -----------------------------
@@ -1152,6 +1578,7 @@ export class UnderInstallationStageService {
       return {
         misc,
         taskId: task.id,
+        assigneeId: miscAssigneeId,
       };
     });
 
@@ -1161,131 +1588,116 @@ export class UnderInstallationStageService {
 
     try {
       // -----------------------------
-      // Fetch Factory Role
+      // Fetch Miscellaneous Users
       // -----------------------------
 
-      const factoryRole = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: { equals: "factory", mode: "insensitive" },
-        },
-        select: { id: true },
-      });
+      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id);
 
-      if (!factoryRole) return misc.misc;
+      // Also ensure assigned miscellaneous user is included if found
+      if (misc.assigneeId && !miscUsers.some((u) => u.id === misc.assigneeId)) {
+        const assigneeUser = await prisma.userMaster.findUnique({
+          where: { id: misc.assigneeId },
+          select: { id: true, user_name: true, user_email: true },
+        });
+        if (assigneeUser) {
+          miscUsers.push(assigneeUser);
+        }
+      }
 
-      // -----------------------------
-      // Fetch Factory Users
-      // -----------------------------
+      // Filter out creator if other miscellaneous users exist
+      const notifyUsers = miscUsers.filter((user) => user.id !== created_by);
+      const finalRecipients = notifyUsers.length > 0 ? notifyUsers : miscUsers;
 
-      const factoryUsers = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id,
-          lead_id,
-          status: "active",
-          user: {
-            user_type_id: factoryRole.id,
-          },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
-
-      if (!factoryUsers.length) return misc.misc;
+      if (!finalRecipients.length) return misc.misc;
 
       // -----------------------------
       // Fetch Lead Meta (Single Query)
       // -----------------------------
 
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
-
-      const creator = await prisma.userMaster.findUnique({
-        where: { id: created_by },
-        select: { user_name: true },
-      });
+      const [leadMeta, creator, firstInstance] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: created_by },
+          select: { user_name: true },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
-      const leadName =
-        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const assignedBy = creator?.user_name ?? "System";
       const assignedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
-      // -----------------------------
-      // Build Deep-Link Redirect URL
-      // -----------------------------
-
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${misc.taskId}`
-          : `/dashboard/leads/details/${lead_id}?tab=misc&taskId=${misc.taskId}`;
-
+      // Build redirect URL using STAGE_PATH_BY_TAG + instance_id
+      const stageTag = leadMeta?.statusType?.tag;
+      const miscBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+        : `/dashboard/installation/under-installation/details/${lead_id}`;
+      const miscParams = new URLSearchParams();
+      if (leadMeta?.account_id) miscParams.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) miscParams.set("instance_id", String(firstInstance.id));
+      if (misc.taskId) miscParams.set("taskId", String(misc.taskId));
+      miscParams.set("tab", "misc");
+      const redirectPath = `${miscBase}?${miscParams.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // ===============================
-      // Broadcast Notification + Email
+      // Broadcast In-App & Email to Miscellaneous Users
       // ===============================
 
       await Promise.allSettled(
-        factoryUsers.map(async ({ user }) => {
+        finalRecipients.map(async (user) => {
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id,
             user_id: user.id,
             sender_id: created_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Requirement Raised",
-            message: `A new miscellaneous requirement has been raised for ${leadCode} - ${leadName}. Please review and provide a fulfillment date.`,
+            title: "New Miscellaneous Requirement Raised",
+            message: `A new miscellaneous requirement has been raised for ${leadCode} - ${leadName} by ${assignedBy}.`,
             entity_type: "miscellaneous",
             entity_id: misc.misc.id,
             redirect_url: redirectPath,
           });
 
           // 📧 Email Notification
-          if (!user.user_email) return;
-
-          await sendMiscRequirementEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            assignedBy: creator?.user_name ?? "Sales Team",
-            assignedAt,
-            requirementDescription: problem_description,
-            projectUrl,
-          });
+          if (user.user_email) {
+            await sendMiscRequirementEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              assignedBy,
+              assignedAt,
+              requirementDescription: problem_description,
+              projectUrl,
+            });
+          }
         }),
       );
 
       logger.info("Miscellaneous notification dispatched", {
         misc_id: misc.misc.id,
         task_id: misc.taskId,
-        receivers: factoryUsers.length,
+        receivers: finalRecipients.length,
       });
     } catch (err: any) {
       logger.warn("Miscellaneous notification failed", {
@@ -1297,6 +1709,233 @@ export class UnderInstallationStageService {
     return misc.misc;
   }
 
+  static async updateMiscellaneousService(payload: UpdateMiscPayload) {
+    const {
+      misc_id,
+      vendor_id,
+      lead_id,
+      misc_type_id,
+      problem_description,
+      reorder_material_details,
+      quantity,
+      cost,
+      supervisor_remark,
+      expected_ready_date,
+      solution,
+      teams,
+      files,
+      updated_by,
+    } = payload;
+
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      const updatingUser = await tx.userMaster.findUnique({
+        where: { id: updated_by },
+        include: { user_type: true },
+      });
+      const normalizedType = updatingUser?.user_type?.user_type
+        ?.toLowerCase()
+        .trim()
+        .replace(/_/g, "-");
+
+      const isSuperAdmin = normalizedType === "super-admin";
+      const isMiscellaneousUser = normalizedType === "miscellaneous";
+
+      if (!isSuperAdmin && !isMiscellaneousUser) {
+        throw new Error(
+          "Only Miscellaneous user and Super Admin are permitted to edit miscellaneous details",
+        );
+      }
+
+      if (existing.misc_approved === true && !isSuperAdmin) {
+        throw new Error(
+          "Only Super Admin can edit approved miscellaneous issues",
+        );
+      }
+
+      const dataToUpdate: any = {
+        updated_by,
+      };
+
+      if (misc_type_id !== undefined && misc_type_id !== null) {
+        dataToUpdate.misc_type_id = Number(misc_type_id);
+      }
+      if (problem_description !== undefined) {
+        dataToUpdate.problem_description = problem_description.trim();
+      }
+      if (reorder_material_details !== undefined && reorder_material_details.trim()) {
+        dataToUpdate.reorder_material_details = reorder_material_details.trim();
+      }
+      if (supervisor_remark !== undefined) {
+        dataToUpdate.supervisor_remark = supervisor_remark?.trim() || null;
+      }
+      if (quantity !== undefined) {
+        dataToUpdate.quantity =
+          quantity !== null && quantity !== undefined ? Number(quantity) : null;
+      }
+      if (cost !== undefined) {
+        dataToUpdate.cost =
+          cost !== null && cost !== undefined ? Number(cost) : null;
+      }
+      if (expected_ready_date !== undefined) {
+        dataToUpdate.expected_ready_date = expected_ready_date
+          ? new Date(expected_ready_date)
+          : null;
+      }
+      if (solution !== undefined) {
+        dataToUpdate.solution = solution?.trim() || null;
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: dataToUpdate,
+      });
+
+      // Update teams if provided
+      if (teams && Array.isArray(teams)) {
+        await tx.miscellaneousTeamMapping.deleteMany({
+          where: { miscellaneous_id: misc_id },
+        });
+        if (teams.length > 0) {
+          await tx.miscellaneousTeamMapping.createMany({
+            data: teams.map((teamId) => ({
+              miscellaneous_id: misc_id,
+              team_id: Number(teamId),
+            })),
+          });
+        }
+      }
+
+      // Add new files if uploaded
+      if (files && files.length > 0) {
+        const docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 24" },
+        });
+
+        if (docType) {
+          for (const doc of files) {
+            const leadDoc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: doc.originalName,
+                doc_sys_name: doc.sysName,
+                vendor_id,
+                lead_id: lead_id || existing.lead_id,
+                created_by: updated_by,
+                doc_type_id: docType.id,
+              },
+            });
+
+            await tx.miscellaneousDocument.create({
+              data: {
+                vendor_id,
+                miscellaneous_id: misc_id,
+                document_id: leadDoc.id,
+                created_by: updated_by,
+              },
+            });
+          }
+        }
+      }
+
+      // Update associated task remark if found
+      const oldRemarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const newRemarkKey = `${updated.reorder_material_details} - ${updated.problem_description}`;
+      const miscTaskKey = `[misc:${misc_id}]`;
+
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: [
+            { remark: { contains: miscTaskKey } },
+            { remark: oldRemarkKey },
+            { remark: { contains: existing.reorder_material_details } },
+          ],
+        },
+      });
+
+      if (task) {
+        await tx.userLeadTask.update({
+          where: { id: task.id },
+          data: {
+            remark: `${newRemarkKey} ${miscTaskKey}`,
+            due_date: updated.expected_ready_date ? updated.expected_ready_date : task.due_date,
+          },
+        });
+      }
+
+      return updated;
+    });
+
+    return result;
+  }
+
+  static async addMiscDocumentsService(payload: {
+    misc_id: number;
+    vendor_id: number;
+    lead_id: number;
+    created_by: number;
+    files: { originalName: string; sysName: string }[];
+  }) {
+    const { misc_id, vendor_id, lead_id, created_by, files } = payload;
+
+    return await prisma.$transaction(async (tx) => {
+      const misc = await tx.miscellaneousMaster.findUnique({
+        where: { id: misc_id },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous not found");
+      }
+
+      const docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 24" },
+      });
+
+      if (!docType) {
+        throw new Error("Doc type not found");
+      }
+
+      const result = [];
+
+      for (const file of files) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            vendor_id,
+            lead_id,
+            created_by,
+            doc_type_id: docType.id,
+          },
+        });
+
+        const miscDoc = await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc_id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+
+        result.push({
+          doc_id: leadDoc.id,
+          misc_doc_id: miscDoc.id,
+        });
+      }
+
+      return result;
+    });
+  }
   static async getAllMiscellaneousService(vendor_id: number, lead_id: number) {
     const miscList = await prisma.miscellaneousMaster.findMany({
       where: { vendor_id, lead_id },
@@ -1311,7 +1950,11 @@ export class UnderInstallationStageService {
         },
         documents: {
           include: {
-            document: true,
+            document: {
+              include: {
+                documentType: true,
+              },
+            },
           },
           where: {
             document: {
@@ -1326,9 +1969,26 @@ export class UnderInstallationStageService {
       where: {
         vendor_id,
         lead_id,
-        task_type: "Miscellaneous",
+        task_type: {
+          in: [
+            "Miscellaneous",
+            "Miscellaneous Approval",
+            "Miscellaneous Production ERD",
+            "Pending Materials",
+          ],
+        },
       },
-      select: { id: true, task_type: true, remark: true, status: true },
+      orderBy: { id: "desc" },
+      select: {
+        id: true,
+        task_type: true,
+        remark: true,
+        status: true,
+        due_date: true,
+        closed_at: true,
+        closed_by: true,
+        closedBy: { select: { id: true, user_name: true } },
+      },
     });
 
     // ➜ Attach signed URLs for documents
@@ -1344,25 +2004,158 @@ export class UnderInstallationStageService {
               document_id: docLink.document.id,
               original_name: docLink.document.doc_og_name,
               file_key: docLink.document.doc_sys_name,
+              doc_type_tag: docLink.document.documentType?.tag ?? null,
+              doc_type_name: docLink.document.documentType?.doc_title ?? docLink.document.documentType?.type ?? null,
               signed_url,
               uploaded_at: docLink.document.created_at,
             };
           }),
         );
 
-        const remarkKey = `**${m.reorder_material_details}** - ${m.problem_description}`;
+        const remarkKey = `${m.reorder_material_details} - ${m.problem_description}`;
         const miscTaskKey = `[misc:${m.id}]`;
-        const taskForMisc = miscTasks.find(
+        const miscErdKey = `[misc-erd:${m.id}]`;
+        const pendingMaterialKey = m.problem_description;
+        const erdTaskForMisc = miscTasks.find(
           (t) =>
-            (t.remark && t.remark.includes(miscTaskKey)) ||
-            t.remark === remarkKey,
+            t.task_type === "Miscellaneous Production ERD" &&
+            typeof t.remark === "string" &&
+            (t.remark.includes(miscErdKey) ||
+              (m.reorder_material_details &&
+                t.remark.includes(m.reorder_material_details))),
         );
+        let taskForMisc = m.misc_approved === true && m.expected_ready_date
+          ? findMiscProductionTask(m, miscTasks)
+          : undefined;
+
+        // Self-heal: If approved and ERD is set, but no production task exists yet, create open production task for factory
+        if (m.misc_approved === true && m.expected_ready_date && !taskForMisc) {
+          let factoryUserId = m.created_by;
+          const factoryMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              vendor_id,
+              lead_id: m.lead_id,
+              status: "active",
+              type: "production-stage",
+              user: { status: "active" },
+            },
+            orderBy: { created_at: "asc" },
+            select: { user_id: true },
+          });
+          if (factoryMapping?.user_id) {
+            factoryUserId = factoryMapping.user_id;
+          } else {
+            const vendorFactoryUser = await prisma.userMaster.findFirst({
+              where: {
+                vendor_id,
+                status: "active",
+                user_type: {
+                  user_type: { in: ["factory", "factory-user"], mode: "insensitive" },
+                },
+              },
+              orderBy: { id: "asc" },
+              select: { id: true },
+            });
+            if (vendorFactoryUser?.id) factoryUserId = vendorFactoryUser.id;
+          }
+
+          const prodRemark = `[misc:${m.id}] ${m.reorder_material_details} - ${m.problem_description}`;
+          const newTask = await prisma.userLeadTask.create({
+            data: {
+              vendor_id,
+              lead_id: m.lead_id,
+              account_id: m.account_id,
+              task_type: "Miscellaneous",
+              due_date: new Date(m.expected_ready_date),
+              remark: prodRemark,
+              status: "open",
+              created_by: m.created_by,
+              user_id: factoryUserId,
+            },
+            select: {
+              id: true,
+              task_type: true,
+              remark: true,
+              status: true,
+              due_date: true,
+              closed_at: true,
+              closed_by: true,
+              closedBy: { select: { id: true, user_name: true } },
+            },
+          });
+          taskForMisc = newTask as any;
+        }
+
+        const miscDeliveryKey = `[misc-delivery:${m.id}]`;
+        let deliveryTaskForMisc =
+          m.required_delivery_date
+            ? miscTasks.find(
+                (t) =>
+                  typeof t.remark === "string" &&
+                  (t.remark.includes(miscDeliveryKey) ||
+                    (t.remark.includes("Required delivery date set for") &&
+                      ((m.reorder_material_details &&
+                        t.remark.includes(m.reorder_material_details)) ||
+                        (m.problem_description &&
+                          t.remark.includes(m.problem_description))))),
+              ) ||
+              miscTasks.find(
+                (t) =>
+                  typeof t.remark === "string" &&
+                  t.remark.includes("Required delivery date set for"),
+              ) ||
+              null
+            : null;
+
+        if (m.required_delivery_date && !deliveryTaskForMisc) {
+          const deliveryRemark = `[misc-delivery:${m.id}] Required delivery date set for **${m.reorder_material_details}** - ${m.problem_description}`;
+          const newTask = await prisma.userLeadTask.create({
+            data: {
+              vendor_id,
+              lead_id: m.lead_id,
+              account_id: m.account_id,
+              task_type: "Miscellaneous",
+              due_date: new Date(m.required_delivery_date),
+              remark: deliveryRemark,
+              status: "open",
+              created_by: m.created_by,
+              user_id: m.created_by,
+            },
+            select: {
+              id: true,
+              task_type: true,
+              remark: true,
+              status: true,
+              due_date: true,
+              closed_at: true,
+              closed_by: true,
+              closedBy: { select: { id: true, user_name: true } },
+            },
+          });
+          deliveryTaskForMisc = newTask as any;
+        }
+
+        if (
+          deliveryTaskForMisc?.due_date &&
+          (!m.required_delivery_date ||
+            new Date(deliveryTaskForMisc.due_date).getTime() !==
+              new Date(m.required_delivery_date).getTime())
+        ) {
+          prisma.miscellaneousMaster
+            .update({
+              where: { id: m.id },
+              data: { required_delivery_date: deliveryTaskForMisc.due_date },
+            })
+            .catch(() => {});
+        }
 
         return {
           id: m.id,
           vendor_id: m.vendor_id,
           lead_id: m.lead_id,
           account_id: m.account_id,
+          misc_approved: m.misc_approved,
+          exp_of_rejection: m.exp_of_rejection,
           type: {
             id: m.type.id,
             name: m.type.name,
@@ -1373,6 +2166,8 @@ export class UnderInstallationStageService {
           cost: m.cost,
           supervisor_remark: m.supervisor_remark,
           expected_ready_date: m.expected_ready_date,
+          solution: (m as any).solution ?? null,
+          required_delivery_date: deliveryTaskForMisc?.due_date ?? m.required_delivery_date,
           is_resolved: m.is_resolved,
           resolved_at: m.resolved_at,
           created_by: m.created_by,
@@ -1385,10 +2180,36 @@ export class UnderInstallationStageService {
           documents: docs,
           task: taskForMisc
             ? {
-                id: taskForMisc.id,
-                task_type: taskForMisc.task_type,
-                status: taskForMisc.status,
-              }
+              id: taskForMisc.id,
+              task_type: taskForMisc.task_type,
+              status: taskForMisc.status,
+              closed_at: taskForMisc.closed_at ?? null,
+              closed_by: taskForMisc.closed_by ?? null,
+              closed_user: taskForMisc.closedBy
+                ? {
+                    id: taskForMisc.closedBy.id,
+                    user_name: taskForMisc.closedBy.user_name,
+                  }
+                : null,
+            }
+            : null,
+          delivery_task: deliveryTaskForMisc
+            ? {
+              id: deliveryTaskForMisc.id,
+              task_type: deliveryTaskForMisc.task_type,
+              status: deliveryTaskForMisc.status,
+              remark: deliveryTaskForMisc.remark ?? null,
+              due_date: deliveryTaskForMisc.due_date ?? null,
+            }
+            : null,
+          erd_task: erdTaskForMisc
+            ? {
+              id: erdTaskForMisc.id,
+              task_type: erdTaskForMisc.task_type,
+              status: erdTaskForMisc.status,
+              remark: erdTaskForMisc.remark ?? null,
+              due_date: erdTaskForMisc.due_date ?? null,
+            }
             : null,
         };
       }),
@@ -1397,11 +2218,1153 @@ export class UnderInstallationStageService {
     return finalResult;
   }
 
+  static async updateMiscApprovalService({
+    vendor_id,
+    misc_id,
+    misc_approved,
+    exp_of_rejection,
+    approval_remark,
+    updated_by,
+    baseUrl = "",
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    misc_approved: boolean;
+    exp_of_rejection?: string | null;
+    approval_remark?: string | null;
+    updated_by: number;
+    baseUrl?: string;
+  }) {
+    const existing = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id },
+      select: {
+        id: true,
+        lead_id: true,
+        account_id: true,
+        reorder_material_details: true,
+        problem_description: true,
+        expected_ready_date: true,
+      },
+    });
+
+    if (!existing) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    // ✅ VALIDATION: Reject must have reason
+    if (misc_approved === false && !exp_of_rejection?.trim()) {
+      throw new Error(
+        "Rejection reason is required when rejecting miscellaneous",
+      );
+    }
+
+    const shouldResolve = misc_approved === false && !!exp_of_rejection?.trim();
+
+    const updated = await prisma.miscellaneousMaster.update({
+      where: { id: misc_id },
+      data: {
+        misc_approved,
+        exp_of_rejection: misc_approved ? null : exp_of_rejection,
+
+        // ✅ ONLY reject-with-reason will resolve
+        is_resolved: shouldResolve,
+        resolved_at: shouldResolve ? new Date() : null,
+
+        updated_by,
+      },
+    });
+
+    await createLeadLog(prisma, {
+      vendor_id,
+      lead_id: existing.lead_id,
+      account_id: existing.account_id,
+      action: misc_approved
+        ? `Miscellaneous request approved${approval_remark?.trim() ? `. Remark: ${approval_remark.trim()}` : "."}`
+        : `Miscellaneous request rejected. Reason: ${exp_of_rejection?.trim()}`,
+      action_type: "UPDATE",
+      history_type: "Lead",
+      created_by: updated_by,
+      created_at: new Date(),
+    });
+
+    // ✅ Close related miscellaneous approval task on approve or reject
+    const miscTaskKey = `[misc:${misc_id}]`;
+    const miscApprovalKey = `[misc-approval:${misc_id}]`;
+    const remarkKey = existing
+      ? `${existing.reorder_material_details} - ${existing.problem_description}`
+      : undefined;
+
+    const tasksToClose = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id,
+        lead_id: existing.lead_id,
+        task_type: {
+          in: [
+            "Miscellaneous",
+            "Miscellaneous Approval",
+            "Miscellaneous Production ERD",
+            "Pending Materials",
+          ],
+        },
+        status: "open",
+        NOT: [
+          { remark: { contains: "misc-delivery" } },
+          { remark: { contains: "Required delivery date set for" } },
+        ],
+        OR: [
+          { remark: { contains: miscTaskKey } },
+          { remark: { contains: miscApprovalKey } },
+          ...(remarkKey ? [{ remark: remarkKey }] : []),
+          ...(existing?.reorder_material_details
+            ? [
+                {
+                  AND: [
+                    { remark: { contains: existing.reorder_material_details } },
+                    { remark: { contains: existing.problem_description } },
+                  ],
+                },
+              ]
+            : []),
+        ],
+      },
+    });
+
+    for (const t of tasksToClose) {
+      const updatedTask = await prisma.userLeadTask.update({
+        where: { id: t.id },
+        data: {
+          status: "completed",
+          closed_at: new Date(),
+          closed_by: updated_by,
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      await createTaskHistoryLog({
+        db: prisma,
+        task: {
+          ...updatedTask,
+          vendor_id,
+          lead_id: existing.lead_id,
+          account_id: existing.account_id,
+          task_type: updatedTask.task_type,
+        },
+        createdBy: updated_by,
+        actionType: "UPDATE",
+      });
+    }
+
+    // ✅ If approved → Create "Miscellaneous Production ERD" task for Factory User
+    if (misc_approved === true) {
+      const factoryMapping = await prisma.leadUserMapping.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
+      });
+
+      let factoryUserId = factoryMapping?.user_id ?? null;
+
+      if (!factoryUserId) {
+        const factoryRole = await prisma.userTypeMaster.findFirst({
+          where: {
+            user_type: { in: ["factory", "factory-user"], mode: "insensitive" },
+          },
+          select: { id: true },
+        });
+
+        if (factoryRole) {
+          const leadFactoryMapping = await prisma.leadUserMapping.findFirst({
+            where: {
+              vendor_id,
+              lead_id: existing.lead_id,
+              status: "active",
+              user: {
+                status: "active",
+                user_type_id: factoryRole.id,
+              },
+            },
+            select: { user_id: true },
+          });
+          factoryUserId = leadFactoryMapping?.user_id ?? null;
+        }
+      }
+
+      if (!factoryUserId) {
+        const vendorFactoryUser = await prisma.userMaster.findFirst({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["factory", "factory-user"], mode: "insensitive" },
+            },
+          },
+          orderBy: { id: "asc" },
+          select: { id: true },
+        });
+        factoryUserId = vendorFactoryUser?.id ?? null;
+      }
+
+      const leadStageRecord = await prisma.leadMaster.findUnique({
+        where: { id: existing.lead_id },
+        select: { status_id: true, franchise_id: true },
+      });
+
+      const leadStage = leadStageRecord?.status_id
+        ? ((
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+        : null;
+
+      const erdRemark = `[misc-erd:${misc_id}] Set ERD date for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+
+      const existingErdTask = await prisma.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous Production ERD",
+          status: "open",
+          remark: { contains: `[misc-erd:${misc_id}]` },
+        },
+      });
+
+      if (!existingErdTask) {
+        const erdTask = await prisma.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            franchise_id: leadStageRecord?.franchise_id ?? null,
+            user_id: factoryUserId ?? updated_by,
+            task_type: "Miscellaneous Production ERD",
+            lead_stage: leadStage,
+            due_date: existing.expected_ready_date
+              ? new Date(existing.expected_ready_date)
+              : new Date(),
+            remark: erdRemark,
+            status: "open",
+            created_by: updated_by,
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: prisma,
+          task: erdTask,
+          createdBy: updated_by,
+          actionType: "CREATE",
+        });
+      }
+    }
+
+    // ===============================
+    // NOTIFY SITE SUPERVISOR & MISCELLANEOUS USERS
+    // ===============================
+
+    try {
+      const miscFull = await prisma.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: { lead_id: true },
+      });
+
+      if (miscFull) {
+        const leadId = miscFull.lead_id;
+
+        const [lead, firstInstance, actionUser, supervisors, miscRecipients, factoryUsers] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: leadId },
+            select: {
+              lead_code: true,
+              firstname: true,
+              lastname: true,
+              account_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id: leadId, vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: updated_by },
+            select: { user_name: true },
+          }),
+          UnderInstallationStageService.getSiteSupervisorRecipients(vendor_id, leadId),
+          UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, leadId),
+          UnderInstallationStageService.getFactoryRecipients(vendor_id, leadId),
+        ]);
+
+        if (lead) {
+          const leadCode = lead.lead_code ?? `LEAD-${leadId}`;
+          const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+          const actionBy = actionUser?.user_name ?? "System";
+          const actionAt = new Date().toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+
+          const stageTag = lead.statusType?.tag;
+          const uiBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+            ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+            : `/dashboard/installation/under-installation/details/${leadId}`;
+          const uiParams = new URLSearchParams();
+          if (lead.account_id) uiParams.set("accountId", String(lead.account_id));
+          if (firstInstance?.id) uiParams.set("instance_id", String(firstInstance.id));
+          uiParams.set("tab", "misc");
+          const redirectPath = `${uiBase}?${uiParams.toString()}`;
+          const projectUrl = `${baseUrl}${redirectPath}`;
+
+          const supervisorTitle = misc_approved
+            ? "Miscellaneous Request Approved"
+            : "Miscellaneous Request Rejected";
+          const supervisorMessage = misc_approved
+            ? `Your miscellaneous request for ${leadCode} - ${leadName} has been approved.`
+            : `Your miscellaneous request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
+
+          const miscUserTitle = misc_approved
+            ? "Miscellaneous Request Approved"
+            : "Miscellaneous Request Rejected";
+          const miscUserMessage = misc_approved
+            ? `Miscellaneous request for ${leadCode} - ${leadName} has been approved.`
+            : `Miscellaneous request for ${leadCode} - ${leadName} has been rejected. Reason: ${exp_of_rejection ?? "No reason provided"}.`;
+
+          // 1️⃣ Notify Site Supervisors (In-App + Email)
+          await Promise.allSettled(
+            supervisors.map(async (supervisor) => {
+              await NotificationService.createAndSend({
+                vendor_id,
+                user_id: supervisor.id,
+                sender_id: updated_by,
+                type: NotificationType.LEAD_ACTION,
+                title: supervisorTitle,
+                message: supervisorMessage,
+                entity_type: "miscellaneous",
+                entity_id: misc_id,
+                redirect_url: redirectPath,
+              });
+
+              if (supervisor.user_email) {
+                await sendMiscApprovalEmail({
+                  vendor_id,
+                  toEmail: supervisor.user_email,
+                  toName: supervisor.user_name ?? undefined,
+                  leadCode,
+                  leadName,
+                  isApproved: misc_approved,
+                  actionBy,
+                  actionAt,
+                  approvalRemark: approval_remark ?? undefined,
+                  rejectionReason: exp_of_rejection ?? undefined,
+                  projectUrl,
+                });
+              }
+            }),
+          );
+
+          // 2️⃣ Notify Miscellaneous Users (In-App + Email, excluding sender)
+          const notifyMiscUsers = miscRecipients.filter((u) => u.id !== updated_by);
+          await Promise.allSettled(
+            notifyMiscUsers.map(async (miscUser) => {
+              await NotificationService.createAndSend({
+                vendor_id,
+                user_id: miscUser.id,
+                sender_id: updated_by,
+                type: NotificationType.LEAD_ACTION,
+                title: miscUserTitle,
+                message: miscUserMessage,
+                entity_type: "miscellaneous",
+                entity_id: misc_id,
+                redirect_url: redirectPath,
+              });
+
+              if (miscUser.user_email) {
+                await sendMiscApprovalEmail({
+                  vendor_id,
+                  toEmail: miscUser.user_email,
+                  toName: miscUser.user_name ?? undefined,
+                  leadCode,
+                  leadName,
+                  isApproved: misc_approved,
+                  actionBy,
+                  actionAt,
+                  approvalRemark: approval_remark ?? undefined,
+                  rejectionReason: exp_of_rejection ?? undefined,
+                  projectUrl,
+                });
+              }
+            }),
+          );
+
+          // 3️⃣ If Approved → Notify Factory Users (In-App + Email)
+          if (misc_approved) {
+            const factoryTitle = "Miscellaneous Approved, set the ERD";
+            const factoryMessage = `Miscellaneous Approved for ${leadCode} - ${leadName}, review the requirement and set the ERD.`;
+
+            await Promise.allSettled(
+              factoryUsers.map(async (factoryUser) => {
+                await NotificationService.createAndSend({
+                  vendor_id,
+                  user_id: factoryUser.id,
+                  sender_id: updated_by,
+                  type: NotificationType.LEAD_ACTION,
+                  title: factoryTitle,
+                  message: factoryMessage,
+                  entity_type: "miscellaneous",
+                  entity_id: misc_id,
+                  redirect_url: redirectPath,
+                });
+
+                if (factoryUser.user_email) {
+                  await sendMiscApprovedFactoryEmail({
+                    vendor_id,
+                    toEmail: factoryUser.user_email,
+                    toName: factoryUser.user_name ?? undefined,
+                    leadCode,
+                    leadName,
+                    projectUrl,
+                  });
+                }
+              }),
+            );
+          }
+        }
+      }
+    } catch (err: any) {
+      logger.warn("Misc approval notification failed", {
+        misc_id,
+        error: err?.message,
+      });
+    }
+
+    return updated;
+  }
+
+  static async updateMiscRequiredDeliveryDateService({
+    vendor_id,
+    misc_id,
+    required_delivery_date,
+    updated_by,
+    baseUrl,
+  }: {
+    vendor_id: number;
+    misc_id: number;
+    required_delivery_date: string;
+    updated_by: number;
+    baseUrl: string;
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: { id: misc_id, vendor_id },
+        select: {
+          id: true,
+          lead_id: true,
+          account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
+          misc_approved: true,
+        },
+      });
+
+      if (!existing) {
+        throw new Error("Miscellaneous record not found");
+      }
+
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
+      }
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
+
+      const readyTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
+          NOT: [
+            { remark: { contains: "misc-delivery" } },
+            { remark: { contains: "Required delivery date set for" } },
+          ],
+          status: "completed",
+        },
+        select: { id: true },
+      });
+
+      if (!readyTask) {
+        throw new Error("Miscellaneous entry is not marked as ready");
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: {
+          required_delivery_date: new Date(required_delivery_date),
+          updated_by,
+        },
+      });
+
+      const factoryMapping = await tx.leadUserMapping.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
+      });
+
+      const factoryAssigneeId = factoryMapping?.user_id ?? null;
+
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: existing.lead_id },
+        select: { status_id: true },
+      });
+
+      const leadStage = leadStageRecord?.status_id
+        ? ((
+          await tx.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+        : null;
+
+      const miscDeliveryKey = `[misc-delivery:${existing.id}]`;
+      const deliveryRemark = `[misc-delivery:${existing.id}] Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
+
+      const existingDeliveryTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: "Miscellaneous",
+          OR: [
+            { remark: { contains: miscDeliveryKey } },
+            { remark: deliveryRemark },
+            {
+              remark: `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`,
+            },
+          ],
+        },
+        orderBy: { id: "desc" },
+        select: { id: true },
+      });
+
+      if (existingDeliveryTask) {
+        const updatedTask = await tx.userLeadTask.update({
+          where: { id: existingDeliveryTask.id },
+          data: {
+            due_date: new Date(required_delivery_date),
+            updated_by,
+            updated_at: new Date(),
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: "Miscellaneous",
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
+        });
+      } else {
+        const leadFranchise = await tx.leadMaster.findUnique({
+          where: { id: existing.lead_id },
+          select: { franchise_id: true },
+        });
+        const task = await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            franchise_id: leadFranchise?.franchise_id ?? null,
+            user_id: factoryAssigneeId ?? updated_by,
+            task_type: "Miscellaneous",
+            lead_stage: leadStage,
+            due_date: new Date(required_delivery_date),
+            remark: deliveryRemark,
+            status: "open",
+            created_by: updated_by,
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updated_by,
+          actionType: "CREATE",
+        });
+      }
+
+      return updated;
+    });
+
+    // ===============================
+    // COMMUNICATION LAYER
+    // ===============================
+
+    try {
+      const miscRecord = await prisma.miscellaneousMaster.findUnique({
+        where: { id: misc_id },
+        select: { lead_id: true, account_id: true },
+      });
+
+      if (!miscRecord) return result;
+
+      const [leadMeta, firstInstance, factoryRole, setByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: miscRecord.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: miscRecord.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.userTypeMaster.findFirst({
+          where: { user_type: { equals: "factory", mode: "insensitive" } },
+          select: { id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updated_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      const leadCode = leadMeta?.lead_code ?? `LEAD-${miscRecord.lead_id}`;
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const setBy = setByUser?.user_name ?? "Admin";
+
+      const deliveryDate = new Date(required_delivery_date).toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${miscRecord.lead_id}`
+          : `/dashboard/installation/under-installation/details/${miscRecord.lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // Notify factory user
+      if (factoryRole) {
+        const factoryMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: miscRecord.lead_id,
+            status: "active",
+            user: { user_type_id: factoryRole.id },
+          },
+          select: { user: { select: { id: true, user_name: true, user_email: true } } },
+        });
+
+        if (factoryMapping?.user) {
+          const { user } = factoryMapping;
+
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }
+      }
+
+      // Notify miscellaneous users (In-App + Email, excluding updater)
+      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, miscRecord.lead_id);
+      const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
+
+      await Promise.allSettled(
+        notifyMiscUsers.map(async (user) => {
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }),
+      );
+    } catch (err: any) {
+      logger.warn("Required delivery date notification failed", {
+        misc_id,
+        error: err?.message,
+      });
+    }
+
+    return result;
+  }
+
+  static async updateMiscRequiredDeliveryDateByTaskIdService({
+    vendor_id,
+    task_id,
+    required_delivery_date,
+    updated_by,
+    baseUrl,
+  }: {
+    vendor_id: number;
+    task_id: number;
+    required_delivery_date: string;
+    updated_by: number;
+    baseUrl: string;
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          vendor_id,
+          task_type: "Miscellaneous",
+        },
+        select: {
+          id: true,
+          lead_id: true,
+          remark: true,
+        },
+      });
+
+      if (!task) {
+        throw new Error("Miscellaneous task not found");
+      }
+
+      const remark = task.remark || "";
+      const idMatch = remark.match(/\[misc(?:-delivery)?:(\d+)\]/);
+      let misc = null;
+
+      if (idMatch) {
+        misc = await tx.miscellaneousMaster.findFirst({
+          where: {
+            id: Number(idMatch[1]),
+            vendor_id,
+          },
+          select: {
+            id: true,
+            misc_approved: true,
+            is_resolved: true,
+          },
+        });
+      }
+
+      if (!misc) {
+        const match =
+          remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
+          remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
+
+        const boldMatch = remark.match(/\*\*(.+?)\*\*/);
+        const reorder_material_details = boldMatch ? boldMatch[1] : (match ? match[1] : null);
+
+        misc = await tx.miscellaneousMaster.findFirst({
+          where: {
+            vendor_id,
+            lead_id: task.lead_id,
+            ...(reorder_material_details ? { reorder_material_details } : {}),
+            required_delivery_date: { not: null },
+          },
+          orderBy: { id: "desc" },
+          select: {
+            id: true,
+            misc_approved: true,
+            is_resolved: true,
+          },
+        });
+      }
+
+      if (!misc) {
+        misc = await tx.miscellaneousMaster.findFirst({
+          where: {
+            vendor_id,
+            lead_id: task.lead_id,
+            required_delivery_date: { not: null },
+          },
+          orderBy: { id: "desc" },
+          select: {
+            id: true,
+            misc_approved: true,
+            is_resolved: true,
+          },
+        });
+      }
+
+      if (!misc) {
+        throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      if (misc.is_resolved) {
+        throw new Error("Miscellaneous entry is already resolved");
+      }
+
+      const updated = await tx.miscellaneousMaster.update({
+        where: { id: misc.id },
+        data: {
+          required_delivery_date: new Date(required_delivery_date),
+          updated_by,
+        },
+      });
+
+      await tx.userLeadTask.update({
+        where: { id: task.id },
+        data: {
+          due_date: new Date(required_delivery_date),
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      return { updated, lead_id: task.lead_id, misc_id: misc.id };
+    });
+
+    // ===============================
+    // COMMUNICATION LAYER
+    // ===============================
+
+    try {
+      const [leadMeta, firstInstance, factoryRole, setByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: result.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: result.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.userTypeMaster.findFirst({
+          where: { user_type: { equals: "factory", mode: "insensitive" } },
+          select: { id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updated_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      const leadCode = leadMeta?.lead_code ?? `LEAD-${result.lead_id}`;
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const setBy = setByUser?.user_name ?? "Admin";
+      const deliveryDate = new Date(required_delivery_date).toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${result.lead_id}`
+          : `/dashboard/installation/under-installation/details/${result.lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      if (factoryRole) {
+        const factoryMapping = await prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: result.lead_id,
+            status: "active",
+            user: { user_type_id: factoryRole.id },
+          },
+          select: { user: { select: { id: true, user_name: true, user_email: true } } },
+        });
+
+        if (factoryMapping?.user) {
+          const { user } = factoryMapping;
+
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: result.misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }
+      }
+
+      // Notify miscellaneous users (In-App + Email, excluding updater)
+      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, result.lead_id);
+      const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
+
+      await Promise.allSettled(
+        notifyMiscUsers.map(async (user) => {
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Required Delivery Date Set",
+            message: `A required delivery date (${deliveryDate}) has been set for a miscellaneous requirement on ${leadCode} - ${leadName}.`,
+            entity_type: "miscellaneous",
+            entity_id: result.misc_id,
+            redirect_url: redirectPath,
+          });
+
+          if (user.user_email) {
+            await sendMiscRequiredDeliveryDateEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              setBy,
+              deliveryDate,
+              projectUrl,
+            });
+          }
+        }),
+      );
+    } catch (err: any) {
+      logger.warn("Required delivery date (by task) notification failed", {
+        task_id,
+        error: err?.message,
+      });
+    }
+
+    return result.updated;
+  }
+
+  static async uploadMiscCompletionDocumentsByTaskIdService({
+    vendor_id,
+    task_id,
+    created_by,
+    files,
+  }: {
+    vendor_id: number;
+    task_id: number;
+    created_by: number;
+    files: { originalName: string; sysName: string }[];
+  }) {
+    const result = await prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          vendor_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+        },
+        select: {
+          id: true,
+          lead_id: true,
+          remark: true,
+          due_date: true,
+        },
+      });
+
+      if (!task) {
+        throw new Error("Miscellaneous task not found");
+      }
+
+      const remark = task.remark || "";
+      const match =
+        remark.match(/\*\*(.+?)\*\*\s*-\s*([\s\S]+)$/) ||
+        remark.match(/^(.+?)\s*-\s*([\s\S]+)$/);
+
+      if (!match) {
+        throw new Error("Unable to parse miscellaneous details from remark");
+      }
+
+      const reorder_material_details = match[1];
+      const problem_description = match[2];
+
+      const misc = await tx.miscellaneousMaster.findFirst({
+        where: {
+          vendor_id,
+          lead_id: task.lead_id,
+          reorder_material_details,
+          problem_description,
+        },
+        select: { id: true, required_delivery_date: true },
+      });
+
+      if (!misc) {
+        throw new Error("Miscellaneous entry not found for this task");
+      }
+
+      // Check role permissions: Non-super-admin cannot complete before Required Delivery Date
+      const uploadingUser = await tx.userMaster.findUnique({
+        where: { id: created_by },
+        include: { user_type: true },
+      });
+      const normalizedType =
+        uploadingUser?.user_type?.user_type
+          ?.toLowerCase()
+          .trim()
+          .replace(/_/g, "-")
+          .replace(/\s+/g, "-") || "";
+      const isSuperAdmin = normalizedType === "super-admin";
+
+      const deliveryDate = misc.required_delivery_date || task.due_date;
+      if (!isSuperAdmin && deliveryDate) {
+        const dDate = new Date(deliveryDate);
+        const dIso = dDate.toISOString().slice(0, 10);
+        const now = new Date();
+        const kolkataToday = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(now);
+
+        if (kolkataToday < dIso) {
+          throw Object.assign(
+            new Error(
+              `Cannot mark as completed before Required Delivery Date (${dIso}). Only super-admin can complete before Required Delivery Date.`
+            ),
+            { statusCode: 400 }
+          );
+        }
+      }
+
+      let docType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id, tag: "Type 37" },
+      });
+
+      if (!docType) {
+        docType = await tx.documentTypeMaster.create({
+          data: {
+            vendor_id,
+            tag: "Type 37",
+            type: "Miscellaneous Completion Documents",
+          },
+        });
+      }
+
+      for (const doc of files) {
+        const leadDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: doc.originalName,
+            doc_sys_name: doc.sysName,
+            vendor_id,
+            lead_id: task.lead_id,
+            created_by,
+            doc_type_id: docType.id,
+          },
+        });
+
+        await tx.miscellaneousDocument.create({
+          data: {
+            vendor_id,
+            miscellaneous_id: misc.id,
+            document_id: leadDoc.id,
+            created_by,
+          },
+        });
+      }
+
+      return { misc_id: misc.id, uploaded: files.length };
+    });
+
+    return result;
+  }
+
   static async updateERDService({
     vendor_id,
     misc_id,
     expected_ready_date,
+    solution,
     updated_by,
+    baseUrl,
   }: UpdateERDInput) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -1416,62 +3379,153 @@ export class UnderInstallationStageService {
           account_id: true,
           reorder_material_details: true,
           problem_description: true,
+          misc_approved: true,
+          expected_ready_date: true,
         },
       });
 
       if (!existing) {
         throw new Error("Miscellaneous record not found");
       }
+      if (existing.misc_approved !== true) {
+        throw new Error("Miscellaneous entry is not approved");
+      }
+      if (!solution || typeof solution !== "string" || !solution.trim()) {
+        throw new Error("Solution is required");
+      }
 
       const updated = await tx.miscellaneousMaster.update({
         where: { id: misc_id },
         data: {
           expected_ready_date: new Date(expected_ready_date),
+          solution: solution.trim(),
           updated_by,
         },
       });
 
       const miscTaskKey = `[misc:${existing.id}]`;
-
-      const existingTask = await tx.userLeadTask.findFirst({
+      const miscErdKey = `[misc-erd:${existing.id}]`;
+      // 1. Close open ERD tasks for this miscellaneous item
+      const openErdTasks = await tx.userLeadTask.findMany({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
-          task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          task_type: "Miscellaneous Production ERD",
+          OR: [
+            { remark: { contains: miscErdKey } },
+            { remark: `Set ERD date for **${existing.reorder_material_details}** - ${existing.problem_description}` },
+          ],
+          status: "open",
         },
-        select: { id: true },
       });
 
-      let taskId: number;
+      let taskId = openErdTasks[0]?.id;
 
-      if (existingTask) {
-        await tx.userLeadTask.update({
-          where: { id: existingTask.id },
+      for (const t of openErdTasks) {
+        const updatedTask = await tx.userLeadTask.update({
+          where: { id: t.id },
           data: {
             due_date: new Date(expected_ready_date),
-            remark: `${miscTaskKey} ERD date updated.`,
+            status: "completed",
+            closed_at: new Date(),
+            closed_by: updated_by,
             updated_by,
+            updated_at: new Date(),
           },
         });
 
-        taskId = existingTask.id;
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: t.task_type,
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
+        });
+      }
+
+      // 2. Ensure open production task exists with the updated ERD due_date
+      const productionTasks = await tx.userLeadTask.findMany({
+        where: {
+          vendor_id,
+          lead_id: existing.lead_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          // The first ERD starts production; historical completed tasks cannot fulfill it.
+          ...(!existing.expected_ready_date ? { status: "open" as const } : {}),
+        },
+        orderBy: { id: "desc" },
+      });
+      const existingProdTask = findMiscProductionTask(existing, productionTasks);
+
+      if (existingProdTask) {
+        if (existingProdTask.status === "open") {
+          await tx.userLeadTask.update({
+            where: { id: existingProdTask.id },
+            data: {
+              due_date: new Date(expected_ready_date),
+              remark: `[misc:${existing.id}] ${existing.reorder_material_details} - ${existing.problem_description}`,
+              updated_by,
+              updated_at: new Date(),
+            },
+          });
+        }
+        if (!taskId) taskId = existingProdTask.id;
       } else {
-        const newTask = await tx.userLeadTask.create({
+        const leadFranchise = await tx.leadMaster.findUnique({
+          where: { id: existing.lead_id },
+          select: { franchise_id: true, status_id: true },
+        });
+        const leadStage = leadFranchise?.status_id
+          ? ((
+              await tx.statusTypeMaster.findUnique({
+                where: { id: leadFranchise.status_id },
+                select: { type: true },
+              })
+            )?.type ?? null)
+          : null;
+
+        const factoryMapping = await tx.leadUserMapping.findFirst({
+          where: {
+            vendor_id,
+            lead_id: existing.lead_id,
+            status: "active",
+            type: "production-stage",
+            user: { status: "active" },
+          },
+          orderBy: { created_at: "asc" },
+          select: { user_id: true },
+        });
+        const factoryUserId = factoryMapping?.user_id ?? updated_by;
+
+        const prodRemark = `[misc:${existing.id}] ${existing.reorder_material_details} - ${existing.problem_description}`;
+        const newProdTask = await tx.userLeadTask.create({
           data: {
             vendor_id,
             lead_id: existing.lead_id,
             account_id: existing.account_id,
+            franchise_id: leadFranchise?.franchise_id ?? null,
+            user_id: factoryUserId,
             task_type: "Miscellaneous",
-            user_id: updated_by,
+            lead_stage: leadStage,
             due_date: new Date(expected_ready_date),
-            remark: miscTaskKey,
+            remark: prodRemark,
             status: "open",
             created_by: updated_by,
           },
         });
 
-        taskId = newTask.id;
+        await createTaskHistoryLog({
+          db: tx,
+          task: newProdTask,
+          createdBy: updated_by,
+          actionType: "CREATE",
+        });
+
+        if (!taskId) taskId = newProdTask.id;
       }
 
       return {
@@ -1488,53 +3542,28 @@ export class UnderInstallationStageService {
 
     try {
       // -------------------------
-      // Resolve Site Supervisor
+      // Fetch Supervisors, Misc Users, and Lead Meta
       // -------------------------
 
-      const supervisorRole = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: { equals: "site-supervisor", mode: "insensitive" },
-        },
-        select: { id: true },
-      });
-
-      if (!supervisorRole) return result.updated;
-
-      const supervisors = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id,
-          lead_id: result.lead_id,
-          status: "active",
-          user: {
-            user_type_id: supervisorRole.id,
+      const [supervisors, miscUsers, leadMeta, firstInstance] = await Promise.all([
+        UnderInstallationStageService.getSiteSupervisorRecipients(vendor_id, result.lead_id),
+        UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, result.lead_id),
+        prisma.leadMaster.findUnique({
+          where: { id: result.lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
           },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
-
-      if (!supervisors.length) return result.updated;
-
-      // -------------------------
-      // Lead Meta
-      // -------------------------
-
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: result.lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: result.lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${result.lead_id}`;
       const leadName =
@@ -1553,49 +3582,87 @@ export class UnderInstallationStageService {
       // Deep Link Builder
       // -------------------------
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${result.lead_id}`
+          : `/dashboard/installation/under-installation/details/${result.lead_id}`;
 
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${result.lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
-          : `/dashboard/leads/details/${result.lead_id}?tab=misc&taskId=${result.taskId}`;
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      qp.set("taskId", String(result.taskId));
+      const redirectPath = `${stagePath}?${qp.toString()}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // -------------------------
-      // Broadcast
+      // Broadcast to Site Supervisors
       // -------------------------
 
       await Promise.allSettled(
-        supervisors.map(async ({ user }) => {
+        supervisors.map(async (user) => {
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id,
             user_id: user.id,
             sender_id: updated_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Fulfillment Date Updated",
+            title: "Miscellaneous ERD Date has been Updated",
             message: `Factory has updated the fulfillment date for a miscellaneous requirement on ${leadCode} - ${leadName}. Expected Date: ${fulfillmentDate}`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
           });
 
-          // 📧 Email
-          if (!user.user_email) return;
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMiscERDUpdatedEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              fulfillmentDate,
+              projectUrl,
+            });
+          }
+        }),
+      );
 
-          await sendMiscERDUpdatedEmail({
+      // -------------------------
+      // Broadcast to Miscellaneous Users (excluding updater)
+      // -------------------------
+
+      const notifyMiscUsers = miscUsers.filter((u) => u.id !== updated_by);
+      await Promise.allSettled(
+        notifyMiscUsers.map(async (user) => {
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
             vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            fulfillmentDate,
-            projectUrl,
+            user_id: user.id,
+            sender_id: updated_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Miscellaneous ERD Date has been Updated",
+            message: `Factory has updated the fulfillment date for a miscellaneous requirement on ${leadCode} - ${leadName}. Expected Date: ${fulfillmentDate}`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
           });
+
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMiscERDUpdatedEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              fulfillmentDate,
+              projectUrl,
+            });
+          }
         }),
       );
     } catch (err: any) {
@@ -1837,6 +3904,8 @@ export class UnderInstallationStageService {
     // 3️⃣ Save Documents
     // -----------------------------------------
     const uploadedDocs = [];
+    const uploadedFinalSitePhotos: any[] = [];
+    const uploadedHandoverDocuments: any[] = [];
 
     for (const file of files) {
       const docTypeId = file.isImage
@@ -1856,6 +3925,57 @@ export class UnderInstallationStageService {
       });
 
       uploadedDocs.push(savedDoc);
+      if (file.isImage) {
+        uploadedFinalSitePhotos.push(savedDoc);
+      } else {
+        uploadedHandoverDocuments.push(savedDoc);
+      }
+    }
+
+    if (account_id && uploadedFinalSitePhotos.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id,
+        lead_id,
+        account_id,
+        action: `${uploadedFinalSitePhotos.length} Final Site Photo${uploadedFinalSitePhotos.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedFinalSitePhotos.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
+    }
+
+    if (account_id && uploadedHandoverDocuments.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id,
+        lead_id,
+        account_id,
+        action: `${uploadedHandoverDocuments.length} Handover Document${uploadedHandoverDocuments.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedHandoverDocuments.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
     }
 
     return {
@@ -1868,7 +3988,10 @@ export class UnderInstallationStageService {
     // 1️⃣ Fetch pending work details from LeadMaster
     const lead = await prisma.leadMaster.findUnique({
       where: { id: lead_id },
-      select: { usable_handover_pending_work_details: true },
+      select: {
+        usable_handover_pending_work_details: true,
+        usable_handover_completed: true,
+      },
     });
 
     if (!lead) throw new Error("Lead not found");
@@ -1885,24 +4008,24 @@ export class UnderInstallationStageService {
 
     const finalSitePhotos = finalSitePhotoType
       ? await prisma.leadDocuments.findMany({
-          where: {
-            vendor_id,
-            lead_id,
-            doc_type_id: finalSitePhotoType.id,
-            is_deleted: false,
-          },
-        })
+        where: {
+          vendor_id,
+          lead_id,
+          doc_type_id: finalSitePhotoType.id,
+          is_deleted: false,
+        },
+      })
       : [];
 
     const handoverDocuments = handoverDocType
       ? await prisma.leadDocuments.findMany({
-          where: {
-            vendor_id,
-            lead_id,
-            doc_type_id: handoverDocType.id,
-            is_deleted: false,
-          },
-        })
+        where: {
+          vendor_id,
+          lead_id,
+          doc_type_id: handoverDocType.id,
+          is_deleted: false,
+        },
+      })
       : [];
 
     // 4️⃣ Attach Signed URLs
@@ -1926,9 +4049,111 @@ export class UnderInstallationStageService {
 
     return {
       pending_work_details: lead.usable_handover_pending_work_details,
+      usable_handover_completed: lead.usable_handover_completed ?? false,
       final_site_photos: finalSitePhotosWithUrl,
       handover_documents: handoverDocumentsWithUrl,
     };
+  }
+
+  static async markUsableHandoverCompleted(
+    vendor_id: number,
+    lead_id: number,
+    updated_by: number,
+  ) {
+    const updatedLead = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findFirst({
+        where: {
+          id: lead_id,
+          vendor_id,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          usable_handover_completed_at: true,
+          productMappings: {
+            select: {
+              productType: {
+                select: {
+                  tag: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!existingLead) {
+        throw new Error("Lead not found");
+      }
+
+      if (!existingLead.account_id) {
+        throw new Error("Account ID not found for this lead");
+      }
+
+      const usableHandoverCompletedAt =
+        existingLead.usable_handover_completed_at ?? new Date();
+
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: lead_id, vendor_id },
+        data: {
+          usable_handover_completed: true,
+          usable_handover_completed_at: usableHandoverCompletedAt,
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      const isSmallOrderLead = existingLead.productMappings.some(
+        (mapping) => mapping.productType?.tag === "Type 7",
+      );
+
+      if (!isSmallOrderLead) {
+        for (const [index, monthGap] of [4, 8, 12].entries()) {
+          const scheduledDate =
+            UnderInstallationStageService.addMonthsPreservingDay(
+              usableHandoverCompletedAt,
+              monthGap,
+            );
+
+          await tx.leadServiceSchedule.upsert({
+            where: {
+              uniq_lead_service_no_type: {
+                lead_id,
+                service_no: index + 1,
+                service_type: "free",
+              },
+            },
+            update: {},
+            create: {
+              vendor_id,
+              lead_id,
+              account_id: existingLead.account_id,
+              service_no: index + 1,
+              service_type: "free",
+              scheduled_for: scheduledDate,
+              original_scheduled_for: scheduledDate,
+              created_by: updated_by,
+              updated_by,
+            },
+          });
+        }
+      }
+
+      await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id: existingLead.account_id,
+        action: "Usable handover marked as completed.",
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
+      });
+
+      return updatedLead;
+    });
+
+    return updatedLead;
   }
 
   // ----------------------------------------
@@ -1956,6 +4181,7 @@ export class UnderInstallationStageService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -1986,22 +4212,29 @@ export class UnderInstallationStageService {
         where: { id: lead.id },
         data: {
           status_id: toStatus.id,
+          actual_installation_completion_at: new Date(),
           updated_by: updatedBy,
           updated_at: new Date(),
         },
       });
 
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
+      });
+
       // Detailed Log
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Final Handover stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Final Handover stage.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       return {
@@ -2017,81 +4250,83 @@ export class UnderInstallationStageService {
     // ===============================
 
     try {
-      // Sales + Admin Roles
-      const targetRoles = await prisma.userTypeMaster.findMany({
-        where: {
-          user_type: {
-            in: ["sales-executive", "admin"],
-            mode: "insensitive",
+      const [leadMeta, firstInstance, mappedUsers, updatedByUser] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            franchise_id: true,
           },
-        },
-        select: { id: true },
-      });
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.leadUserMapping.findMany({
+          where: { vendor_id: vendorId, lead_id: leadId, status: "active" },
+          select: { user_id: true },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updatedBy },
+          select: { user_name: true },
+        }),
+      ]);
 
-      if (!targetRoles.length) return result;
+      const franchiseId = leadMeta?.franchise_id ?? null;
+      const salesUserIds = Array.from(new Set(mappedUsers.map((m) => m.user_id)));
 
-      const roleIds = targetRoles.map((r) => r.id);
-
-      // Fetch Receivers
-      const receivers = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          status: "active",
-          user: {
-            user_type_id: { in: roleIds },
-          },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
+      const [admins, salesExecutives] = await Promise.all([
+        getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: updatedBy,
+        }),
+        salesUserIds.length > 0
+          ? prisma.userMaster.findMany({
+            where: {
+              id: { in: salesUserIds },
+              status: "active",
+              user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
             },
-          },
-        },
-      });
+            select: { id: true, user_name: true, user_email: true },
+          })
+          : Promise.resolve([]),
+      ]);
 
-      if (!receivers.length) return result;
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...admins.recipients, ...salesExecutives]) recipientMap.set(u.id, u);
+      const recipients = Array.from(recipientMap.values());
 
-      // Lead Meta
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: leadId },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+      if (!recipients.length) return result;
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${leadId}`;
-      const leadName =
-        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const updatedByName = updatedByUser?.user_name ?? "Admin";
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
 
-      // Deep Link (Final Handover Tab)
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
-          : `/dashboard/leads/details/${leadId}`;
-
+      const stagePath = `${STAGE_PATH_BY_TAG["Type 16"]}/${leadId}`;
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      const redirectPath = qp.toString() ? `${stagePath}?${qp.toString()}` : stagePath;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Broadcast
       await Promise.allSettled(
-        receivers.map(async ({ user }) => {
+        recipients.map(async (user) => {
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id: vendorId,
             user_id: user.id,
             sender_id: updatedBy,
-            type: NotificationType.LEAD_ACTION,
+            type: NotificationType.LEAD_MILESTONE,
             title: "Lead Moved to Final Handover",
             message: `${leadCode} - ${leadName} has been moved to the Final Handover stage.`,
             entity_type: "lead",
@@ -2100,16 +4335,19 @@ export class UnderInstallationStageService {
           });
 
           // 📧 Email
-          if (!user.user_email) return;
-
-          await sendFinalHandoverEmail({
-            vendor_id: vendorId,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            projectUrl,
-          });
+          if (user.user_email) {
+            await sendLeadMovedToFinalHandoverEmail({
+              vendor_id: vendorId,
+              allowSuperAdmin: admins.isSuperAdminFallback,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              updatedBy: updatedByName,
+              updatedAt,
+              projectUrl,
+            });
+          }
         }),
       );
     } catch (err: any) {
@@ -2218,11 +4456,11 @@ export class UnderInstallationStageService {
       msg: isReady
         ? null
         : this.getInstallationFailMessage(
-            lead.is_carcass_installation_completed,
-            lead.is_shutter_installation_completed,
-            lead.expected_installation_end_date,
-            installerCount,
-          ),
+          lead.is_carcass_installation_completed,
+          lead.is_shutter_installation_completed,
+          lead.expected_installation_end_date,
+          installerCount,
+        ),
     };
   }
 
@@ -2243,23 +4481,6 @@ export class UnderInstallationStageService {
     return "Installation requirements not met.";
   }
 
-  private async checkMiscellaneous(vendorId: number, leadId: number) {
-    const pending = await prisma.miscellaneousMaster.count({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        is_resolved: false,
-      },
-    });
-
-    return {
-      ok: pending === 0,
-      msg:
-        pending === 0
-          ? null
-          : "Miscellaneous items are still pending to be resolved.",
-    };
-  }
 
   private async checkRequiredDocuments(vendorId: number, leadId: number) {
     const requiredTags = ["Type 25", "Type 26"]; // Final Site + Handover Docs
@@ -2278,7 +4499,7 @@ export class UnderInstallationStageService {
       },
     });
 
-    const uploadedTags = docs.map((d) => d.documentType.tag);
+    const uploadedTags = docs.map((d) => d.documentType?.tag).filter(Boolean);
     const missing = requiredTags.filter((tag) => !uploadedTags.includes(tag));
 
     return {
@@ -2300,14 +4521,6 @@ export class UnderInstallationStageService {
         step: "installationBase",
       };
 
-    // Step 2: Miscellaneous
-    const misc = await this.checkMiscellaneous(vendorId, leadId);
-    if (!misc.ok)
-      return {
-        isReady: false,
-        message: misc.msg,
-        step: "miscPending",
-      };
 
     // Step 3: Documents
     const docs = await this.checkRequiredDocuments(vendorId, leadId);
@@ -2330,189 +4543,9 @@ export class UnderInstallationStageService {
     lead_id: number;
     misc_id: number;
     resolved_by: number;
+    baseUrl: string;
   }) {
-    const { vendor_id, lead_id, misc_id, resolved_by } = payload;
-
-    // ===============================
-    // 1️⃣ TRANSACTION LAYER
-    // ===============================
-
-    const result = await prisma.$transaction(async (tx) => {
-      const existing = await tx.miscellaneousMaster.findFirst({
-        where: {
-          id: misc_id,
-          vendor_id,
-          lead_id,
-        },
-        select: {
-          id: true,
-          account_id: true,
-        },
-      });
-
-      if (!existing) {
-        throw Object.assign(new Error("Miscellaneous entry not found"), {
-          statusCode: 404,
-        });
-      }
-
-      // Mark misc resolved
-      await tx.miscellaneousMaster.update({
-        where: { id: misc_id },
-        data: {
-          is_resolved: true,
-          resolved_at: new Date(),
-          updated_by: resolved_by,
-        },
-      });
-
-      const miscTaskKey = `[misc:${existing.id}]`;
-
-      // Fetch latest misc task (for deep link)
-      const resolvedTask = await tx.userLeadTask.findFirst({
-        where: {
-          vendor_id,
-          lead_id,
-          task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
-        },
-        orderBy: { id: "desc" },
-        select: { id: true },
-      });
-
-      return {
-        account_id: existing.account_id,
-        taskId: resolvedTask?.id,
-      };
-    });
-
-    // ===============================
-    // 2️⃣ COMMUNICATION LAYER
-    // ===============================
-
-    try {
-      // Resolve Factory Role
-      const factoryRole = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: { equals: "factory", mode: "insensitive" },
-        },
-        select: { id: true },
-      });
-
-      if (!factoryRole) return result;
-
-      // Fetch Factory Users
-      const factoryUsers = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id,
-          lead_id,
-          status: "active",
-          user: {
-            user_type_id: factoryRole.id,
-          },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
-
-      if (!factoryUsers.length) return result;
-
-      // Lead Meta
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
-
-      const supervisor = await prisma.userMaster.findUnique({
-        where: { id: resolved_by },
-        select: { user_name: true },
-      });
-
-      const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
-      const leadName =
-        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
-
-      const resolvedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      // Deep Link
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
-          : `/dashboard/leads/details/${lead_id}?tab=misc&taskId=${result.taskId}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
-
-      // Broadcast
-      await Promise.allSettled(
-        factoryUsers.map(async ({ user }) => {
-          // 🔔 In-App Notification
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: resolved_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Requirement Resolved",
-            message: `The miscellaneous requirement for ${leadCode} - ${leadName} has been marked Resolved by Site Supervisor.`,
-            entity_type: "miscellaneous",
-            entity_id: misc_id,
-            redirect_url: redirectPath,
-          });
-
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendMiscResolvedEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            resolvedBy: supervisor?.user_name ?? "Site Supervisor",
-            resolvedAt,
-            projectUrl,
-          });
-        }),
-      );
-    } catch (err: any) {
-      logger.warn("Misc resolved notification failed", {
-        misc_id,
-        error: err?.message,
-      });
-    }
-
-    return { ok: true };
-  }
-
-  static async markMiscTaskReady(payload: {
-    vendor_id: number;
-    lead_id: number;
-    misc_id: number;
-    ready_by: number;
-  }) {
-    const { vendor_id, lead_id, misc_id, ready_by } = payload;
+    const { vendor_id, lead_id, misc_id, resolved_by, baseUrl } = payload;
 
     // ===============================
     // 1️⃣ TRANSACTION LAYER
@@ -2530,6 +4563,8 @@ export class UnderInstallationStageService {
           account_id: true,
           reorder_material_details: true,
           problem_description: true,
+          misc_approved: true,
+          required_delivery_date: true,
         },
       });
 
@@ -2539,16 +4574,420 @@ export class UnderInstallationStageService {
         });
       }
 
+      if (existing.misc_approved !== true) {
+        throw Object.assign(new Error("Miscellaneous entry is not approved"), {
+          statusCode: 400,
+        });
+      }
+
+      if (!existing.required_delivery_date) {
+        throw Object.assign(
+          new Error("Cannot mark as resolved: Required delivery date is not set."),
+          { statusCode: 400 }
+        );
+      }
+
+      // Check role permissions: Only super-admin and site-supervisor can mark miscellaneous as resolved
+      const resolvingUser = await tx.userMaster.findUnique({
+        where: { id: resolved_by },
+        include: { user_type: true },
+      });
+      const normalizedType =
+        resolvingUser?.user_type?.user_type
+          ?.toLowerCase()
+          .trim()
+          .replace(/_/g, "-")
+          .replace(/\s+/g, "-") || "";
+      const isAllowedRole =
+        normalizedType === "super-admin" ||
+        normalizedType === "site-supervisor" ||
+        normalizedType === "head-site-supervisor";
+
+      if (!isAllowedRole) {
+        throw Object.assign(
+          new Error("Only super-admin and site-supervisor can mark miscellaneous as resolved"),
+          { statusCode: 403 }
+        );
+      }
+
+      const miscDeliveryKey = `[misc-delivery:${existing.id}]`;
+      const deliveryTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id,
+          task_type: "Miscellaneous",
+          OR: [
+            { remark: { contains: miscDeliveryKey } },
+            {
+              remark: {
+                contains: "Required delivery date set for",
+              },
+              AND: [
+                { remark: { contains: existing.reorder_material_details } },
+                { remark: { contains: existing.problem_description } },
+              ],
+            },
+          ],
+        },
+        orderBy: { id: "desc" },
+        select: { id: true, status: true },
+      });
+
+      if (deliveryTask && deliveryTask.status !== "completed") {
+        throw Object.assign(
+          new Error("Cannot mark as resolved: Delivery task is not completed yet."),
+          { statusCode: 400 }
+        );
+      }
+
+      // Mark misc resolved
+      await tx.miscellaneousMaster.update({
+        where: { id: misc_id },
+        data: {
+          is_resolved: true,
+          resolved_at: new Date(),
+          updated_by: resolved_by,
+        },
+      });
+
       const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
+
+      // Fetch latest misc task (for deep link)
+      const resolvedTask = await tx.userLeadTask.findFirst({
+        where: {
+          vendor_id,
+          lead_id,
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
+        },
+        orderBy: { id: "desc" },
+        select: { id: true },
+      });
+
+      return {
+        account_id: existing.account_id,
+        taskId: resolvedTask?.id,
+      };
+    });
+
+    // ===============================
+    // 2️⃣ COMMUNICATION LAYER
+    // ===============================
+
+    try {
+      // Resolve Factory Role & Users
+      const factoryRole = await prisma.userTypeMaster.findFirst({
+        where: {
+          user_type: { equals: "factory", mode: "insensitive" },
+        },
+        select: { id: true },
+      });
+
+      let factoryUsers: { id: number; user_name: string | null; user_email: string | null }[] = [];
+      if (factoryRole) {
+        const factoryMappings = await prisma.leadUserMapping.findMany({
+          where: {
+            vendor_id,
+            lead_id,
+            status: "active",
+            user: {
+              user_type_id: factoryRole.id,
+            },
+          },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+              },
+            },
+          },
+        });
+        factoryUsers = factoryMappings.map((m) => m.user);
+      }
+
+      // Fetch Miscellaneous Users
+      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id);
+
+      // Lead Meta & Supervisor Details
+      const [leadMeta, supervisor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
+          },
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: resolved_by },
+          select: { user_name: true },
+        }),
+      ]);
+
+      const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
+      const leadName =
+        `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+      const supervisorName = supervisor?.user_name ?? "Site Supervisor";
+
+      const resolvedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+          : `/dashboard/installation/under-installation/details/${lead_id}`;
+
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      qp.set("tab", "misc");
+      if (result.taskId) qp.set("taskId", String(result.taskId));
+      const redirectPath = `${stagePath}?${qp.toString()}`;
+
+      const projectUrl = `${baseUrl}${redirectPath}`;
+
+      // -------------------------
+      // 1️⃣ Broadcast to Factory Users (In-App + Email)
+      // -------------------------
+      await Promise.allSettled(
+        factoryUsers.map(async (user) => {
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: resolved_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Miscellaneous Requirement Resolved",
+            message: `The miscellaneous requirement for ${leadCode} - ${leadName} has been marked Resolved by Site Supervisor.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMiscResolvedEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              resolvedBy: supervisorName,
+              resolvedAt,
+              projectUrl,
+            });
+          }
+        }),
+      );
+
+      // -------------------------
+      // 2️⃣ Broadcast to Miscellaneous Users (In-App + Email, excluding resolver)
+      // -------------------------
+      const notifyMiscUsers = miscUsers.filter((u) => u.id !== resolved_by);
+      await Promise.allSettled(
+        notifyMiscUsers.map(async (user) => {
+          // 🔔 In-App Notification
+          await NotificationService.createAndSend({
+            vendor_id,
+            user_id: user.id,
+            sender_id: resolved_by,
+            type: NotificationType.LEAD_ACTION,
+            title: "Miscellaneous Requirement Resolved",
+            message: `The miscellaneous requirement for ${leadCode} - ${leadName} has been marked Resolved by Site Supervisor.`,
+            entity_type: "miscellaneous",
+            entity_id: misc_id,
+            redirect_url: redirectPath,
+          });
+
+          // 📧 Email Notification
+          if (user.user_email) {
+            await sendMiscResolvedEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              resolvedBy: supervisorName,
+              resolvedAt,
+              projectUrl,
+            });
+          }
+        }),
+      );
+    } catch (err: any) {
+      logger.warn("Misc resolved notification failed", {
+        misc_id,
+        error: err?.message,
+      });
+    }
+
+    return { ok: true };
+  }
+
+  static async markMiscTaskReady(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    ready_by: number;
+    files?: { originalName: string; sysName: string }[];
+    baseUrl: string;
+  }) {
+    const { vendor_id, lead_id, misc_id, ready_by, files, baseUrl } = payload;
+
+    // ===============================
+    // 1️⃣ TRANSACTION LAYER
+    // ===============================
+
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: {
+          id: misc_id,
+          vendor_id,
+          lead_id,
+        },
+        select: {
+          id: true,
+          account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
+          expected_ready_date: true,
+        },
+      });
+
+      if (!existing) {
+        throw Object.assign(new Error("Miscellaneous entry not found"), {
+          statusCode: 404,
+        });
+      }
+
+      if (!existing.expected_ready_date) {
+        throw Object.assign(new Error("Set the Expected Ready Date before marking this requirement as ready."), {
+          statusCode: 400,
+        });
+      }
+
+      // Check role permissions: Factory users cannot mark as ready before expected_ready_date; Super-admin can
+      const readyByUser = await tx.userMaster.findUnique({
+        where: { id: ready_by },
+        include: { user_type: true },
+      });
+      const normalizedType =
+        readyByUser?.user_type?.user_type
+          ?.toLowerCase()
+          .trim()
+          .replace(/_/g, "-")
+          .replace(/\s+/g, "-") || "";
+      const isSuperAdmin = normalizedType === "super-admin";
+
+      if (!isSuperAdmin && existing.expected_ready_date) {
+        const erd = new Date(existing.expected_ready_date);
+        const erdIso = erd.toISOString().slice(0, 10);
+        const now = new Date();
+        const kolkataToday = new Intl.DateTimeFormat("en-CA", {
+          timeZone: "Asia/Kolkata",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        }).format(now);
+
+        if (kolkataToday < erdIso) {
+          throw Object.assign(
+            new Error(
+              `Cannot mark as ready before Expected Ready Date (${erdIso}). Only super-admin can mark as ready before ERD.`
+            ),
+            { statusCode: 400 }
+          );
+        }
+      }
+
+      // Save optional ready documents (Type 41)
+      if (files && files.length > 0) {
+        let docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 41" },
+        });
+
+        if (!docType) {
+          docType = await tx.documentTypeMaster.create({
+            data: {
+              vendor_id,
+              tag: "Type 41",
+              type: "Miscellaneous Ready Documents",
+              doc_title: "Miscellaneous Ready Documents",
+              stage: "Under Installation",
+            },
+          });
+        }
+
+        for (const file of files) {
+          const leadDoc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: file.originalName,
+              doc_sys_name: file.sysName,
+              vendor_id,
+              lead_id,
+              created_by: ready_by,
+              doc_type_id: docType.id,
+            },
+          });
+
+          await tx.miscellaneousDocument.create({
+            data: {
+              vendor_id,
+              miscellaneous_id: misc_id,
+              document_id: leadDoc.id,
+              created_by: ready_by,
+            },
+          });
+        }
+      }
+
+      const miscTaskKey = `[misc:${existing.id}]`;
+      const miscErdKey = `[misc-erd:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: { contains: miscErdKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
 
       // Close misc task
-      const updatedTasks = await tx.userLeadTask.updateMany({
+      await tx.userLeadTask.updateMany({
         where: {
           vendor_id,
           lead_id,
           account_id: existing.account_id,
-          task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          task_type: {
+            in: [
+              "Miscellaneous",
+              "Pending Materials",
+            ],
+          },
+          OR: orConditions,
+          NOT: [
+            { remark: { contains: "misc-delivery" } },
+            { remark: { contains: "Required delivery date set for" } },
+          ],
           status: "open",
         },
         data: {
@@ -2561,16 +5000,48 @@ export class UnderInstallationStageService {
       });
 
       // Get closed task id (for deep link)
-      const closedTask = await tx.userLeadTask.findFirst({
+      let closedTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id,
-          task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          task_type: {
+            in: [
+              "Miscellaneous",
+              "Pending Materials",
+            ],
+          },
+          NOT: [
+            { remark: { contains: "misc-delivery" } },
+            { remark: { contains: "Required delivery date set for" } },
+          ],
+          OR: orConditions,
+          status: "completed",
         },
         orderBy: { id: "desc" },
         select: { id: true },
       });
+
+      if (!closedTask) {
+        const prodRemark = `[misc:${existing.id}] ${existing.reorder_material_details} - ${existing.problem_description}`;
+        const createdTask = await tx.userLeadTask.create({
+          data: {
+            vendor_id,
+            lead_id,
+            account_id: existing.account_id,
+            user_id: ready_by,
+            task_type: "Miscellaneous",
+            due_date: existing.expected_ready_date ? new Date(existing.expected_ready_date) : new Date(),
+            remark: prodRemark,
+            status: "completed",
+            closed_by: ready_by,
+            closed_at: new Date(),
+            created_by: ready_by,
+            updated_by: ready_by,
+          },
+          select: { id: true },
+        });
+        closedTask = createdTask;
+      }
 
       return {
         account_id: existing.account_id,
@@ -2578,54 +5049,49 @@ export class UnderInstallationStageService {
       };
     });
 
+    await UnderInstallationStageService.notifyMiscTaskReady({
+      vendor_id, lead_id, misc_id, ready_by, baseUrl, taskId: result.taskId,
+    });
+    return { ok: true };
+  }
+
+  static async notifyMiscTaskReady(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    ready_by: number;
+    baseUrl: string;
+    taskId?: number;
+  }) {
+    const { vendor_id, lead_id, misc_id, ready_by, baseUrl, taskId } = payload;
     // ===============================
     // 2️⃣ COMMUNICATION LAYER
     // ===============================
 
     try {
-      // Resolve Site Supervisor Role
-      const supervisorRole = await prisma.userTypeMaster.findFirst({
-        where: {
-          user_type: { equals: "site-supervisor", mode: "insensitive" },
-        },
-        select: { id: true },
-      });
+      // -----------------------------
+      // Fetch Supervisors, Misc Users, and Lead Meta
+      // -----------------------------
 
-      if (!supervisorRole) return { ok: true };
-
-      // Fetch Supervisors
-      const supervisors = await prisma.leadUserMapping.findMany({
-        where: {
-          vendor_id,
-          lead_id,
-          status: "active",
-          user: {
-            user_type_id: supervisorRole.id,
+      const [supervisors, miscUsers, leadMeta, firstInstance] = await Promise.all([
+        UnderInstallationStageService.getSiteSupervisorRecipients(vendor_id, lead_id),
+        UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id),
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+            statusType: { select: { tag: true } },
           },
-        },
-        select: {
-          user: {
-            select: {
-              id: true,
-              user_name: true,
-              user_email: true,
-            },
-          },
-        },
-      });
-
-      if (!supervisors.length) return { ok: true };
-
-      // Fetch Lead Meta
-      const leadMeta = await prisma.leadMaster.findUnique({
-        where: { id: lead_id },
-        select: {
-          lead_code: true,
-          firstname: true,
-          lastname: true,
-          account_id: true,
-        },
-      });
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id, vendor_id },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+      ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
       const leadName =
@@ -2635,50 +5101,67 @@ export class UnderInstallationStageService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
       // Build Deep Link
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      const stageTag = leadMeta?.statusType?.tag;
+      const stagePath =
+        stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+          : `/dashboard/installation/under-installation/details/${lead_id}`;
 
-      const redirectPath =
-        leadMeta?.account_id && leadMeta.account_id > 0
-          ? `/dashboard/leads/details/${lead_id}?accountId=${leadMeta.account_id}&tab=misc&taskId=${result.taskId}`
-          : `/dashboard/leads/details/${lead_id}?tab=misc&taskId=${result.taskId}`;
+      const qp = new URLSearchParams();
+      if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
+      qp.set("tab", "misc");
+      if (taskId) qp.set("taskId", String(taskId));
+      const redirectPath = `${stagePath}?${qp.toString()}`;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // Broadcast Notifications
-      await Promise.allSettled(
-        supervisors.map(async ({ user }) => {
-          // 🔔 In-App Notification
-          await NotificationService.createAndSend({
-            vendor_id,
-            user_id: user.id,
-            sender_id: ready_by,
-            type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Requirement Ready",
-            message: `The factory has marked a miscellaneous requirement as Ready for ${leadCode} - ${leadName}.`,
-            entity_type: "miscellaneous",
-            entity_id: misc_id,
-            redirect_url: redirectPath,
-          });
-
-          // 📧 Email
-          if (!user.user_email) return;
-
-          await sendMarkAsReadyEmail({
-            vendor_id,
-            toEmail: user.user_email,
-            toName: user.user_name ?? undefined,
-            leadCode,
-            leadName,
-            readyAt,
-            projectUrl,
+      const recipients = new Map(
+        [...supervisors, ...miscUsers].map((user) => [user.id, user]),
+      );
+      const miscUserIds = new Set(miscUsers.map((user) => user.id));
+      await Promise.all(
+        [...recipients.values()].map(async (user) => {
+          // Run both channels independently so an in-app failure cannot skip email.
+          const results = await Promise.allSettled([
+            NotificationService.createAndSend({
+              vendor_id,
+              user_id: user.id,
+              sender_id: ready_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "Miscellaneous Requirement Ready",
+              message: `The factory has marked a miscellaneous requirement as Ready for ${leadCode} - ${leadName}.`,
+              entity_type: "miscellaneous",
+              entity_id: misc_id,
+              redirect_url: redirectPath,
+            }),
+            ...(user.user_email ? [sendMarkAsReadyEmail({
+              vendor_id,
+              toEmail: user.user_email,
+              toName: user.user_name ?? undefined,
+              leadCode,
+              leadName,
+              readyAt,
+              projectUrl,
+              includeResolutionInstruction: !miscUserIds.has(user.id),
+            }).then((result) => {
+              if (!result.success) {
+                throw new Error("error" in result ? result.error || "Ready email failed" : "Ready email skipped");
+              }
+            })] : []),
+          ]);
+          results.forEach((result, index) => {
+            if (result.status === "rejected") {
+              logger.warn("Misc Ready notification failed", {
+                misc_id,
+                user_id: user.id,
+                channel: index === 0 ? "in-app" : "email",
+                error: result.reason?.message,
+              });
+            }
           });
         }),
       );
@@ -2691,4 +5174,640 @@ export class UnderInstallationStageService {
 
     return { ok: true };
   }
+
+  static async checkMiscellaneousResolved(vendorId: number, leadId: number) {
+    // Count unresolved records
+    const unresolvedCount = await prisma.miscellaneousMaster.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        OR: [{ is_resolved: false }],
+      },
+    });
+
+    return {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      all_resolved: unresolvedCount === 0,
+    };
+  }
+
+  /**
+   * ✅ Installation Report — fetch all installation-stage leads with misc + issue counts
+   * Covers Type 15 (Under Installation), Type 16 (Final Handover), Type 17 (Project Completed)
+   */
+  static async getInstallationReportData(
+    vendorId: number,
+    franchiseId: number | null, // null = all franchises
+    leadId: number | null,
+    fromDate: string | null,
+    toDate: string | null,
+  ) {
+    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 17"];
+
+    // Resolve status IDs for all installation tags
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: { in: INSTALLATION_TAGS } },
+      select: { id: true },
+    });
+
+    if (!statuses.length) {
+      return [];
+    }
+
+    const statusIds = statuses.map((s) => s.id);
+
+    const where: any = {
+      vendor_id: vendorId,
+      is_deleted: false,
+      status_id: { in: statusIds },
+    };
+
+    if (franchiseId !== null) {
+      where.franchise_id = franchiseId;
+    }
+
+    if (leadId !== null) {
+      where.id = leadId;
+    }
+
+    if (fromDate && toDate) {
+      where.actual_installation_start_date = {
+        gte: new Date(fromDate),
+        lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+      };
+    }
+
+    const leads = await prisma.leadMaster.findMany({
+      where,
+      select: {
+        id: true,
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        franchise_id: true,
+        actual_installation_start_date: true,
+        expected_installation_end_date: true,
+        actual_installation_completion_at: true,
+        carcass_installation_completion_date: true,
+        shutter_installation_completion_date: true,
+        usable_handover_completed_at: true,
+        final_handover_marked_at: true,
+        franchise: {
+          select: { franchise_name: true },
+        },
+        installationUpdates: {
+          select: { update_date: true },
+          orderBy: { update_date: "asc" },
+        },
+        _count: {
+          select: {
+            miscellaneousMaster: true,
+            installationIssueLogMaster: true,
+          },
+        },
+      },
+      orderBy: { actual_installation_start_date: "asc" },
+    });
+
+    return leads.map((lead) => {
+      const sortedUpdates = lead.installationUpdates || [];
+      return {
+        id: lead.id,
+        lead_code: lead.lead_code,
+        firstname: lead.firstname,
+        lastname: lead.lastname,
+        franchise_id: lead.franchise_id,
+        franchise_name: lead.franchise?.franchise_name ?? null,
+        actual_installation_start_date: lead.actual_installation_start_date,
+        expected_installation_end_date: lead.expected_installation_end_date,
+        actual_installation_completion_at: lead.actual_installation_completion_at,
+        carcass_installation_completion_date: lead.carcass_installation_completion_date,
+        shutter_installation_completion_date: lead.shutter_installation_completion_date,
+        usable_handover_completed_at: lead.usable_handover_completed_at,
+        final_handover_marked_at: lead.final_handover_marked_at,
+        misc_count: lead._count.miscellaneousMaster,
+        issue_count: lead._count.installationIssueLogMaster,
+        installation_day_1: sortedUpdates[0]?.update_date ?? null,
+        installation_day_2: sortedUpdates[1]?.update_date ?? null,
+        installation_day_3: sortedUpdates[2]?.update_date ?? null,
+      };
+    });
+  }
+  static async getMiscIssueLogReportData(
+    vendorId: number,
+    franchiseId: number | null,
+    leadId: number | null,
+    fromDate: string | null,
+    toDate: string | null,
+    teamIds?: number[],
+  ) {
+    const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 17"];
+
+    const dateFilter =
+      fromDate && toDate
+        ? {
+          gte: new Date(fromDate),
+          lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+        }
+        : undefined;
+
+    const leadWhere = {
+      is_deleted: false,
+      statusType: {
+        tag: { in: INSTALLATION_TAGS },
+      },
+      ...(leadId !== null && { id: leadId }),
+      ...(franchiseId !== null && { franchise_id: franchiseId }),
+    };
+
+    // ─── shared userMappings include ────────────────────────────────────────────
+    // We fetch ALL ISM + site-supervisor type mappings, then double-check
+    // against UserTypeMaster so admins accidentally mapped with those types
+    // don't sneak through.
+    const userMappingsInclude = {
+      where: {
+        type: { in: ["ISM", "site-supervisor"] },
+        status: LeadUserStatus.active,   // only active mappings
+      },
+      orderBy: { created_at: "asc" as const },
+      select: {
+        type: true,
+        user: {
+          select: {
+            user_name: true,
+            // ✅ pull actual user_type from UserTypeMaster
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const miscEntries = await prisma.miscellaneousMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        ...(dateFilter && { created_at: dateFilter }),
+        lead: leadWhere,
+        ...(teamIds &&
+          teamIds.length > 0 && {
+          teams: { some: { team_id: { in: teamIds } } },
+        }),
+      },
+
+      include: {
+        type: { select: { name: true } },
+        teams: {
+          include: { team: { select: { name: true } } },
+        },
+        lead: {
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            dispatch_date: true,
+            franchise: { select: { franchise_name: true } },
+            userMappings: userMappingsInclude,
+          },
+        },
+      },
+
+      orderBy: { created_at: "asc" },
+    });
+
+    const issueLogs = await prisma.installationIssueLogMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        ...(dateFilter && { created_at: dateFilter }),
+        lead: leadWhere,
+        ...(teamIds &&
+          teamIds.length > 0 && {
+          responsibleTeams: { some: { team_id: { in: teamIds } } },
+        }),
+      },
+
+      include: {
+        issueTypes: {
+          include: { type: { select: { name: true } } },
+        },
+        responsibleTeams: {
+          include: { team: { select: { name: true } } },
+        },
+        lead: {
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            franchise: { select: { franchise_name: true } },
+            userMappings: userMappingsInclude,
+          },
+        },
+      },
+
+      orderBy: { created_at: "asc" },
+    });
+
+    // ─── helpers ──────────────────────────────────────────────────────────────
+
+    const splitMiscMaterial = (value: string | null) => {
+      const raw = value?.trim() ?? "";
+      if (!raw) return { instance: "-", reorderMaterialType: "-" };
+
+      const delimiter = " - ";
+      const delimiterIndex = raw.indexOf(delimiter);
+
+      if (delimiterIndex === -1) {
+        return { instance: "-", reorderMaterialType: raw };
+      }
+
+      const instance = raw.slice(0, delimiterIndex).trim() || "-";
+      const reorderMaterialType =
+        raw.slice(delimiterIndex + delimiter.length).trim() || "-";
+
+      return { instance, reorderMaterialType };
+    };
+
+    // ✅ Resolve sales-executive: mapping type must be "ISM" AND
+    //    UserTypeMaster.user_type must be "sales-executive" (case-insensitive)
+    const resolveSalesExecutive = (
+      mappings: Array<{
+        type: string;
+        user: {
+          user_name: string;
+          user_type: { user_type: string } | null;
+        } | null;
+      }>,
+    ): string => {
+      const match = mappings.find(
+        (x) =>
+          x.type === "ISM" &&
+          x.user?.user_type?.user_type?.toLowerCase() === "sales-executive",
+      );
+      return match?.user?.user_name ?? "-";
+    };
+
+    // ✅ Resolve site-supervisor: mapping type must be "site-supervisor" AND
+    //    UserTypeMaster.user_type must be "site-supervisor" (case-insensitive)
+    const resolveSiteSupervisor = (
+      mappings: Array<{
+        type: string;
+        user: {
+          user_name: string;
+          user_type: { user_type: string } | null;
+        } | null;
+      }>,
+    ): string => {
+      const match = mappings.find(
+        (x) =>
+          x.type === "site-supervisor" &&
+          x.user?.user_type?.user_type?.toLowerCase() === "site-supervisor",
+      );
+      return match?.user?.user_name ?? "-";
+    };
+
+    // ─── map rows ─────────────────────────────────────────────────────────────
+
+    const miscRows = miscEntries.map((entry) => {
+      const { instance, reorderMaterialType } = splitMiscMaterial(
+        entry.reorder_material_details,
+      );
+
+      return {
+        row_type: "misc" as const,
+        row_id: entry.id,
+        lead_id: entry.lead_id,
+        lead_code: entry.lead.lead_code,
+        client_name: `${entry.lead.firstname ?? ""} ${entry.lead.lastname ?? ""}`.trim(),
+        franchise_store: entry.lead.franchise?.franchise_name ?? null,
+        miscl_issue_type: entry.type.name,
+        sales_executive: resolveSalesExecutive(entry.lead.userMappings),   // ✅
+        site_supervisor: resolveSiteSupervisor(entry.lead.userMappings),   // ✅
+        responsible_team: entry.teams.map((t) => t.team.name).join(", ") || "-",
+        issue_impact: "-",
+        instance,
+        reorder_material_type: reorderMaterialType,
+        problem_description: entry.problem_description ?? "-",
+        reorder_material_details: entry.reorder_material_details ?? "-",
+        approve_reject_date: entry.misc_approved === null ? null : entry.updated_at,
+        rtd_date: entry.expected_ready_date,
+        dispatch_req_date: entry.required_delivery_date,
+        dispatch_date: entry.lead.dispatch_date,
+        resolved_date: entry.resolved_at,
+        created_at: entry.created_at,
+      };
+    });
+
+    const issueRows = issueLogs.map((entry) => {
+      return {
+        row_type: "issue" as const,
+        row_id: entry.id,
+        lead_id: entry.lead_id,
+        lead_code: entry.lead.lead_code,
+        client_name: `${entry.lead.firstname ?? ""} ${entry.lead.lastname ?? ""}`.trim(),
+        franchise_store: entry.lead.franchise?.franchise_name ?? null,
+        miscl_issue_type:
+          entry.issueTypes.map((i) => i.type.name).join(", ") || "Issue",
+        sales_executive: resolveSalesExecutive(entry.lead.userMappings),   // ✅
+        site_supervisor: resolveSiteSupervisor(entry.lead.userMappings),   // ✅
+        responsible_team:
+          entry.responsibleTeams.map((t) => t.team.name).join(", ") || "-",
+        issue_impact: entry.issue_impact ?? "-",
+        instance: "-",
+        reorder_material_type: "-",
+        problem_description: "-",
+        reorder_material_details: "-",
+        issue_description: entry.issue_description ?? "-",
+        approve_reject_date: null,
+        rtd_date: null,
+        dispatch_req_date: null,
+        dispatch_date: null,
+        resolved_date: null,
+        created_at: entry.created_at,
+      };
+    });
+
+    return [...miscRows, ...issueRows].sort(
+      (a, b) => a.created_at.getTime() - b.created_at.getTime(),
+    );
+  }
+
+  // ── Miscellaneous Followup Services ───────────────────────────────────────
+
+  static async getMiscFollowupEligibleUsersService(vendor_id: number) {
+    const targetRoles = [
+      "site-supervisor",
+      "head-site-supervisor",
+      "factory",
+      "miscellaneous",
+    ];
+
+    const users = await prisma.userMaster.findMany({
+      where: {
+        vendor_id,
+        status: "active",
+        user_type: {
+          user_type: {
+            in: targetRoles,
+            mode: "insensitive",
+          },
+        },
+      },
+      select: {
+        id: true,
+        user_name: true,
+        user_email: true,
+        user_contact: true,
+        user_type: {
+          select: {
+            id: true,
+            user_type: true,
+          },
+        },
+      },
+      orderBy: [
+        { user_type: { user_type: "asc" } },
+        { user_name: "asc" },
+      ],
+    });
+
+    return users;
+  }
+
+  static async createMiscFollowupTaskService(data: {
+    vendor_id: number;
+    misc_id: number;
+    lead_id: number;
+    user_id: number;
+    due_date: string | Date;
+    remark: string;
+    created_by: number;
+  }) {
+    const { vendor_id, misc_id, lead_id, user_id, due_date, remark, created_by } = data;
+
+    if (!user_id) throw new Error("Assigned user is required");
+    if (!due_date) throw new Error("Due date is required");
+    if (!remark || !remark.trim()) throw new Error("Remark is required");
+
+    // Verify user belongs to vendor
+    const assignee = await prisma.userMaster.findFirst({
+      where: {
+        id: user_id,
+        vendor_id,
+        status: "active",
+      },
+      include: {
+        user_type: true,
+      },
+    });
+
+    if (!assignee) {
+      throw new Error("Assignee user not found or inactive for this vendor");
+    }
+
+    // Verify lead
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: lead_id },
+      select: { id: true, account_id: true, franchise_id: true, status_id: true },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const leadStage = lead.status_id
+      ? ((
+          await prisma.statusTypeMaster.findUnique({
+            where: { id: lead.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+      : null;
+
+    // Verify misc exists
+    const misc = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id, lead_id },
+    });
+
+    if (!misc) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    const miscTaskRemark = `[misc:${misc_id}] ${remark.trim()}`;
+
+    const task = await prisma.userLeadTask.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: misc.account_id,
+        franchise_id: lead.franchise_id ?? null,
+        user_id,
+        task_type: "Miscellaneous Followup",
+        lead_stage: leadStage,
+        due_date: new Date(due_date),
+        remark: miscTaskRemark,
+        status: "open",
+        created_by,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: { select: { id: true, user_type: true } },
+          },
+        },
+        createdBy: {
+          select: { id: true, user_name: true },
+        },
+      },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy: created_by,
+      actionType: "CREATE",
+      action: `Miscellaneous Followup task created for ${assignee.user_name} (${assignee.user_type.user_type}). Remark: ${remark.trim()}`,
+    });
+
+    return {
+      ...task,
+      display_remark: remark.trim(),
+    };
+  }
+
+  static async getMiscFollowupTasksService(vendor_id: number, misc_id: number) {
+    const miscTag = `[misc:${misc_id}]`;
+
+    const tasks = await prisma.userLeadTask.findMany({
+      where: {
+        vendor_id,
+        task_type: "Miscellaneous Followup",
+        remark: {
+          contains: miscTag,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: {
+              select: { id: true, user_type: true },
+            },
+          },
+        },
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        closedBy: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return tasks.map((t) => {
+      const cleanRemark = t.remark ? t.remark.replace(miscTag, "").trim() : "";
+      return {
+        ...t,
+        display_remark: cleanRemark,
+      };
+    });
+  }
+
+  static async createMiscellaneousFollowupService(data: {
+    vendor_id: number;
+    misc_id: number;
+    lead_id: number;
+    followup_date: string | Date;
+    solution: string;
+    created_by: number;
+  }) {
+    const { vendor_id, misc_id, lead_id, followup_date, solution, created_by } = data;
+
+    if (!followup_date) throw new Error("Followup date is required");
+    if (!solution || !solution.trim()) throw new Error("Solution / Discussion text is required");
+
+    // Verify misc exists
+    const misc = await prisma.miscellaneousMaster.findFirst({
+      where: { id: misc_id, vendor_id, lead_id },
+    });
+
+    if (!misc) {
+      throw new Error("Miscellaneous record not found");
+    }
+
+    const followup = await prisma.miscellaneousFollowup.create({
+      data: {
+        vendor_id,
+        lead_id,
+        miscellaneous_id: misc_id,
+        followup_date: new Date(followup_date),
+        solution: solution.trim(),
+        created_by,
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: {
+              select: {
+                id: true,
+                user_type: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return followup;
+  }
+
+  static async getMiscellaneousFollowupsService(vendor_id: number, misc_id: number) {
+    const followups = await prisma.miscellaneousFollowup.findMany({
+      where: {
+        vendor_id,
+        miscellaneous_id: misc_id,
+      },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+            user_type: {
+              select: {
+                id: true,
+                user_type: true,
+              },
+            },
+          },
+        },
+      },
+      orderBy: [
+        { followup_date: "desc" },
+        { created_at: "desc" },
+      ],
+    });
+
+    return followups;
+  }
 }
+

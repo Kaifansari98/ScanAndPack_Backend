@@ -2,7 +2,11 @@ import { Request, Response } from "express";
 import { FinalMeasurementService } from "../../../services/leadModuleServices/finalMeasurementStage/finalMeasurement.service";
 import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
+import { sanitizeFilename } from "../../../utils/fileUtils";
+import path from "path";
+
 import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 import {
   sendMajorMilestoneEmail,
@@ -26,6 +30,9 @@ const resolveClientBaseUrl = (req: Request): string => {
 
   return "http://localhost:3000";
 };
+
+const getParam = (param: string | string[] | undefined): string | undefined =>
+  Array.isArray(param) ? param[0] : param;
 import {
   uploadToWasabiFinalMeasurementDocFile,
   uploadToWasabiFinalMeasurementSitePhotoFile,
@@ -34,7 +41,94 @@ import fs from "node:fs/promises";
 
 const finalMeasurementService = new FinalMeasurementService();
 
+const ensureTempFileExists = async (file: Express.Multer.File) => {
+  if (!file?.path) {
+    throw new Error(`Uploaded file path missing for ${file?.originalname || "file"}`);
+  }
+  try {
+    await fs.access(file.path);
+  } catch {
+    throw new Error(
+      `Temporary upload file missing for ${file.originalname}. Please re-upload and try again.`
+    );
+  }
+};
+
+const safeUnlink = async (filePath?: string) => {
+  if (!filePath) return;
+  try {
+    await fs.unlink(filePath);
+  } catch {
+    // ignore temp cleanup failures
+  }
+};
+
+const parseInstanceIds = (
+  rawValue: unknown,
+  expectedLength: number,
+  fieldLabel: string,
+): Array<number | null> => {
+  if (rawValue == null || rawValue === "") {
+    return Array.from({ length: expectedLength }, () => null);
+  }
+
+  const parsed =
+    typeof rawValue === "string" ? JSON.parse(rawValue) : rawValue;
+
+  if (!Array.isArray(parsed)) {
+    throw new Error(`${fieldLabel} must be an array`);
+  }
+
+  if (parsed.length !== expectedLength) {
+    throw new Error(
+      `${fieldLabel} count must match uploaded file count`,
+    );
+  }
+
+  return parsed.map((value) => {
+    if (value === null || value === "" || value === undefined) return null;
+    const parsedValue = Number(value);
+    if (!Number.isInteger(parsedValue) || parsedValue <= 0) {
+      throw new Error(`${fieldLabel} contains an invalid instance id`);
+    }
+    return parsedValue;
+  });
+};
+
 export class FinalMeasurementController {
+  public getRestrictedTaskConflicts = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+
+      if (!leadId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+        return;
+      }
+
+      const conflicts =
+        await finalMeasurementService.getRestrictedTaskConflicts(leadId);
+
+      res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[FinalMeasurementController] getRestrictedTaskConflicts error", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
+      });
+    }
+  };
+
   public createFinalMeasurementStage = async (
     req: Request,
     res: Response
@@ -61,15 +155,111 @@ export class FinalMeasurementController {
         ...(files?.site_photos || []),
         ...(files?.["site_photos[]"] || []),
       ];
+      const finalMeasurementDocInstanceIds = parseInstanceIds(
+        req.body.final_measurement_doc_instance_ids,
+        finalMeasurementDocs.length,
+        "final_measurement_doc_instance_ids",
+      );
+      const sitePhotoInstanceIds = parseInstanceIds(
+        req.body.site_photo_instance_ids,
+        sitePhotos.length,
+        "site_photo_instance_ids",
+      );
 
-      if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
+      });
+      const isCustomVendorFlow =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+      const handlesLargeScaleProjects =
+        vendor?.handlesLargeScaleProjects === true;
+
+      const instances = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: Number(lead_id),
+          vendor_id: Number(vendor_id),
+        },
+        select: { id: true },
+      });
+
+      const isMultiInstanceFlow = handlesLargeScaleProjects && instances.length >= 1;
+      let canUseExistingInstanceFilesOnly = false;
+
+      if (
+        isCustomVendorFlow &&
+        finalMeasurementDocs.length === 0 &&
+        sitePhotos.length === 0
+      ) {
+        const [measurementDocType, sitePhotoType] = await Promise.all([
+          prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendor_id), tag: "Type 9" },
+            select: { id: true },
+          }),
+          prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendor_id), tag: "Type 10" },
+            select: { id: true },
+          }),
+        ]);
+
+        if (!measurementDocType || !sitePhotoType) {
+          res.status(400).json({
+            success: false,
+            message: "At least one Final Measurement document is required",
+          });
+          return;
+        }
+
+        if (isMultiInstanceFlow) {
+          const existingDocs = await prisma.leadDocuments.findMany({
+            where: {
+              lead_id: Number(lead_id),
+              vendor_id: Number(vendor_id),
+              is_deleted: false,
+              doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
+              product_structure_instance_id: {
+                in: instances.map((instance) => instance.id),
+              },
+            },
+            select: {
+              doc_type_id: true,
+              product_structure_instance_id: true,
+            },
+          });
+
+          const hasAtLeastOneDoc = existingDocs.some(
+            (doc) => doc.doc_type_id === measurementDocType.id,
+          );
+
+          if (!hasAtLeastOneDoc) {
+            res.status(400).json({
+              success: false,
+              message: "At least one Final Measurement document is required",
+            });
+            return;
+          }
+
+          canUseExistingInstanceFilesOnly = true;
+        }
+      }
+
+      if (
+        (!finalMeasurementDocs || finalMeasurementDocs.length === 0) &&
+        !canUseExistingInstanceFilesOnly
+      ) {
         res.status(400).json({
           success: false,
           message: "At least one Final Measurement document is required",
         });
         return;
       }
-      if (!sitePhotos || sitePhotos.length === 0) {
+      if (
+        (!sitePhotos || sitePhotos.length === 0) &&
+        !canUseExistingInstanceFilesOnly
+      ) {
         res.status(400).json({
           success: false,
           message: "At least one site photo is required",
@@ -80,9 +270,11 @@ export class FinalMeasurementController {
       const uploadedFinalMeasurementDocs: {
         originalName: string;
         sysName: string;
+        product_structure_instance_id: number | null;
       }[] = [];
 
-      for (const doc of finalMeasurementDocs) {
+      for (const [index, doc] of finalMeasurementDocs.entries()) {
+        await ensureTempFileExists(doc);
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
@@ -91,20 +283,24 @@ export class FinalMeasurementController {
           doc.mimetype
         );
 
-        await fs.unlink(doc.path);
+        await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
           originalName: doc.originalname,
           sysName,
+          product_structure_instance_id:
+            finalMeasurementDocInstanceIds[index] ?? null,
         });
       }
 
       const uploadedSitePhotos: {
         originalName: string;
         sysName: string;
+        product_structure_instance_id: number | null;
       }[] = [];
 
-      for (const photo of sitePhotos) {
+      for (const [index, photo] of sitePhotos.entries()) {
+        await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
@@ -113,11 +309,12 @@ export class FinalMeasurementController {
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
           originalName: photo.originalname,
           sysName,
+          product_structure_instance_id: sitePhotoInstanceIds[index] ?? null,
         });
       }
 
@@ -126,6 +323,7 @@ export class FinalMeasurementController {
         account_id: parseInt(account_id),
         vendor_id: parseInt(vendor_id),
         created_by: parseInt(created_by),
+        baseUrl: resolveClientBaseUrl(req),
         critical_discussion_notes: critical_discussion_notes || null,
         finalMeasurementDocs: uploadedFinalMeasurementDocs,
         sitePhotos: uploadedSitePhotos,
@@ -137,6 +335,77 @@ export class FinalMeasurementController {
       res.status(201).json({
         success: true,
         message: "Final measurement stage completed",
+        data: result,
+      });
+    } catch (error: any) {
+      console.error("[FinalMeasurementController] Error:", error);
+      if (
+        typeof error?.message === "string" &&
+        error.message.toLowerCase().includes("temporary upload file missing")
+      ) {
+        res.status(400).json({
+          success: false,
+          message: error.message,
+        });
+        return;
+      }
+      res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
+  public skipFinalMeasurementStage = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const {
+        lead_id,
+        account_id,
+        vendor_id,
+        created_by,
+        critical_discussion_notes,
+      } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !created_by) {
+        res
+          .status(400)
+          .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: {
+          is_this_vendor_is_custom_usertype_only: true,
+          handlesLargeScaleProjects: true,
+        },
+      });
+
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only !== true ||
+        vendor?.handlesLargeScaleProjects !== true
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Vendor does not support skipping Final Measurement",
+        });
+        return;
+      }
+
+      const result = await finalMeasurementService.skipFinalMeasurementStage({
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        vendor_id: Number(vendor_id),
+        created_by: Number(created_by),
+        critical_discussion_notes,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Final measurement stage skipped successfully",
         data: result,
       });
     } catch (error: any) {
@@ -153,7 +422,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
+      const vendorId = Number(getParam(req.params.vendorId));
       const userId = Number(req.query.userId);
 
       if (!vendorId || !userId) {
@@ -192,8 +461,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
 
       if (!vendorId || !leadId) {
         res.status(400).json({
@@ -227,8 +496,8 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const leadId = parseInt(req.params.leadId);
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
       const { notes } = req.body;
 
       if (!notes) {
@@ -258,7 +527,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -288,6 +557,7 @@ export class FinalMeasurementController {
       }[] = [];
 
       for (const photo of sitePhotos) {
+        await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
@@ -296,7 +566,7 @@ export class FinalMeasurementController {
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
           originalName: photo.originalname,
@@ -309,6 +579,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           sitePhotos: uploadedSitePhotos,
         }
       );
@@ -332,7 +605,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -360,19 +633,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const sitePhotoDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 10" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && sitePhotoDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: sitePhotoDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-CSP-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const photo of sitePhotos) {
+        await ensureTempFileExists(photo);
+
+        let finalOriginalName = photo.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(photo.originalname || "");
+          finalOriginalName = `FM${currentRev}-CSP-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
           Number(vendor_id),
           Number(lead_id),
-          photo.originalname,
+          finalOriginalName,
           photo.mimetype
         );
 
-        await fs.unlink(photo.path);
+        await safeUnlink(photo.path);
 
         uploadedSitePhotos.push({
-          originalName: photo.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }
@@ -382,6 +726,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           sitePhotos: uploadedSitePhotos,
         });
 
@@ -404,7 +751,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -429,19 +776,90 @@ export class FinalMeasurementController {
         sysName: string;
       }[] = [];
 
+      // Custom renaming logic
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: parseInt(vendor_id) },
+        select: { is_custom_doc_nomenclature_enabled: true },
+      });
+      const useCustomVendorFlow = vendor?.is_custom_doc_nomenclature_enabled === true;
+
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: parseInt(lead_id) },
+        select: { firstname: true, lastname: true, account_id: true },
+      });
+
+      const fmDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: parseInt(vendor_id), tag: "Type 9" },
+      });
+
+      let clientNameSegment = "";
+      let dateSegment = "";
+      let structureSegment = "General";
+      let currentRev = -1;
+
+      if (useCustomVendorFlow && lead && fmDocType) {
+        clientNameSegment = sanitizeFilename(`${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client")
+          .replace(/_+/g, "_").slice(0, 50);
+
+        const now = new Date();
+        dateSegment = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0"),
+        ].join("-");
+
+        if (product_structure_instance_id) {
+          const inst = await prisma.leadProductStructureInstance.findUnique({
+            where: { id: Number(product_structure_instance_id) },
+            select: { productType: { select: { type: true } } }
+          });
+          if (inst && inst.productType?.type) {
+            structureSegment = sanitizeFilename(inst.productType.type).replace(/_+/g, "_").slice(0, 80);
+          }
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            vendor_id: parseInt(vendor_id),
+            lead_id: parseInt(lead_id),
+            doc_type_id: fmDocType.id,
+            product_structure_instance_id: product_structure_instance_id ? Number(product_structure_instance_id) : null,
+            is_deleted: false,
+          },
+          select: { doc_og_name: true },
+        });
+
+        for (const doc of existingDocs) {
+          const match = doc.doc_og_name?.match(/^FM(\d+)-FMD-/i);
+          if (match) {
+            const rev = Number(match[1]);
+            currentRev = Math.max(currentRev, rev);
+          }
+        }
+      }
+
       for (const doc of finalMeasurementDocs) {
+        await ensureTempFileExists(doc);
+        
+        let finalOriginalName = doc.originalname;
+        if (useCustomVendorFlow) {
+          currentRev += 1;
+          const extension = path.extname(doc.originalname || "");
+          finalOriginalName = `FM${currentRev}-FMD-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+        }
+
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
           Number(vendor_id),
           Number(lead_id),
-          doc.originalname,
+          finalOriginalName,
           doc.mimetype
         );
 
-        await fs.unlink(doc.path);
+        await safeUnlink(doc.path);
 
         uploadedFinalMeasurementDocs.push({
-          originalName: doc.originalname,
+          originalName: finalOriginalName,
           sysName,
         });
       }
@@ -451,6 +869,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           finalMeasurementDocs: uploadedFinalMeasurementDocs,
         });
 
@@ -470,8 +891,8 @@ export class FinalMeasurementController {
 
   public getFinalMeasurementLeads = async (req: Request, res: Response) => {
     try {
-      const vendorId = parseInt(req.params.vendorId);
-      const userId = parseInt(req.params.userId); // ✅ take userId also
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(getParam(req.params.userId)); // ✅ take userId also
 
       if (!vendorId || !userId) {
         return res.status(400).json({
@@ -543,6 +964,7 @@ export class FinalMeasurementController {
         remark,
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
+        baseUrl: resolveClientBaseUrl(req),
       });
 
       try {
@@ -558,7 +980,7 @@ export class FinalMeasurementController {
           }),
           prisma.leadMaster.findUnique({
             where: { id: leadId },
-            select: { firstname: true, lastname: true, lead_code: true },
+            select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
           }),
           actorId
             ? prisma.userMaster.findUnique({
@@ -574,6 +996,7 @@ export class FinalMeasurementController {
         const assigneeRole = assignee?.user_type?.user_type?.toLowerCase();
         const isSelfAssigned =
           Boolean(actorId) && Number(actorId) === Number(user_id);
+        const franchiseId = lead?.franchise_id ?? null;
 
         if (
           !isSelfAssigned &&
@@ -648,7 +1071,7 @@ export class FinalMeasurementController {
             prisma.userMaster.findMany({
               where: {
                 vendor_id: vendorId,
-                user_type: { user_type: { in: ["admin", "super-admin"] } },
+                user_type: { user_type: { in: ["admin"] } },
               },
               select: { id: true },
             }),
@@ -662,7 +1085,7 @@ export class FinalMeasurementController {
             }),
             prisma.leadMaster.findUnique({
               where: { id: leadId },
-              select: { firstname: true, lastname: true, lead_code: true },
+              select: { firstname: true, lastname: true, lead_code: true, franchise_id: true },
             }),
           ]);
 
@@ -672,17 +1095,25 @@ export class FinalMeasurementController {
           const recipientIds = new Set<number>();
           admins.forEach((admin) => recipientIds.add(admin.id));
           mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
+          const franchiseId = lead?.franchise_id ?? null;
 
           if (recipientIds.size > 0) {
             const redirectUrl = accountId
               ? `/dashboard/leads/details/${leadId}?accountId=${accountId}`
               : `/dashboard/leads/details/${leadId}`;
 
+            // Only admin users (matching franchise) receive the milestone notification and email
+            const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+              vendorId,
+              franchiseId,
+              candidateUserIds: Array.from(recipientIds),
+            });
+
             await Promise.all(
-              Array.from(recipientIds).map((recipientId) =>
+              users.map((user) =>
                 NotificationService.createAndSend({
                   vendor_id: vendorId,
-                  user_id: recipientId,
+                  user_id: user.id,
                   sender_id: Number(actorId) || null,
                   type: NotificationType.LEAD_MILESTONE,
                   title: "Lead moved to Project",
@@ -696,14 +1127,6 @@ export class FinalMeasurementController {
                 })
               )
             );
-
-            const users = await prisma.userMaster.findMany({
-              where: {
-                id: { in: Array.from(recipientIds) },
-                status: "active",
-              },
-              select: { id: true, user_name: true, user_email: true },
-            });
             const clientBaseUrl = resolveClientBaseUrl(req);
             const detailsUrl = `${clientBaseUrl}${redirectUrl}`;
             const completedOn = new Date().toLocaleDateString("en-IN", {
@@ -718,7 +1141,8 @@ export class FinalMeasurementController {
                 .map((user) =>
                   sendMajorMilestoneEmail({
                     vendor_id: vendorId,
-                    toEmail: user.user_email!,
+                    allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
                     toName: user.user_name ?? undefined,
                     leadCode,
                     leadName: leadName || "Lead",
@@ -743,12 +1167,82 @@ export class FinalMeasurementController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        (errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed") ||
+          errorMessage.toLowerCase().includes("follow up task is already assigned"));
+
       logger.error("[ERROR] assignTaskISM:", { err: error });
+      return res.status(isConflict ? 409 : 500).json({
+        success: false,
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
+        details:
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
+      });
+    }
+  }
+
+  public async rescheduleFinalMeasurementTask(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { due_date, remark, updated_by } = req.body;
+
+      if (!leadId || !taskId || !due_date || !remark || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "Validation failed",
+          details: [
+            !leadId && {
+              field: "leadId",
+              message: "leadId (param) is required",
+            },
+            !taskId && {
+              field: "taskId",
+              message: "taskId (param) is required",
+            },
+            !due_date && {
+              field: "due_date",
+              message: "due_date is required",
+            },
+            !remark && {
+              field: "remark",
+              message: "remark is required",
+            },
+            !updated_by && {
+              field: "updated_by",
+              message: "updated_by is required",
+            },
+          ].filter(Boolean),
+        });
+      }
+
+      const result = await finalMeasurementService.rescheduleFinalMeasurementTask(
+        {
+          lead_id: leadId,
+          task_id: taskId,
+          due_date,
+          remark,
+          updated_by: Number(updated_by),
+        },
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Final Measurement task rescheduled successfully",
+        data: result,
+      });
+    } catch (error: any) {
       return res.status(500).json({
         success: false,
-        error: "Internal server error",
-        details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+        message: error.message || "Internal server error",
       });
     }
   }

@@ -4,13 +4,13 @@ import path from "path";
 import { PaymentUploadController } from "../../controllers/leadModuleControllers/leadsGeneration/initial-site_measurement.controller";
 import {
   validatePaymentUpload,
-  handleMulterError,
   validateFiles,
   validateGetRequest,
   validatePaginationRequest,
   handleGetErrors,
 } from "../../middlewares/initial-site-measurement.middleware";
 import { uploadInitialSiteMeasurement } from "../../utils/wasabiClient";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 const router = Router();
 const paymentUploadController = new PaymentUploadController();
@@ -23,8 +23,12 @@ const memoryUpload = multer({
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
   },
   fileFilter: (_req, file, cb) => {
+    if (file.fieldname === "upload_pdf") {
+      cb(null, true);
+      return;
+    }
+
     const isImage = file.mimetype.startsWith("image/");
-    const isPdf = file.mimetype === "application/pdf";
     const ext = path.extname(file.originalname || "").toLowerCase();
     const imageExtensions = [
       ".jpg",
@@ -42,23 +46,23 @@ const memoryUpload = multer({
       ".jfif",
     ];
 
-    if (isImage || isPdf || imageExtensions.includes(ext)) {
+    if (isImage || imageExtensions.includes(ext)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type. Only PDF and image files are allowed."));
+      cb(new Error("Invalid file type. Only image files are allowed for this field."));
     }
   },
 });
 
 const diskUploadFields = uploadInitialSiteMeasurement.fields([
   { name: "current_site_photos", maxCount: 10 },
-  { name: "upload_pdf", maxCount: 1 },
+  { name: "upload_pdf", maxCount: 10 },
   { name: "payment_image", maxCount: 1 },
 ]);
 
 const memoryUploadFields = memoryUpload.fields([
   { name: "current_site_photos", maxCount: 10 }, // Allow up to 10 site photos
-  { name: "upload_pdf", maxCount: 1 }, // Only 1 PDF file
+  { name: "upload_pdf", maxCount: 10 }, // Allow multiple measurement documents
   { name: "payment_image", maxCount: 1 }, // Only 1 payment image
 ]);
 
@@ -77,22 +81,32 @@ const memoryUploadFields = memoryUpload.fields([
  *
  * File fields expected:
  * - current_site_photos (optional): multiple image files (JPEG, JPG, PNG, GIF) - doc_type_id = 1
- * - upload_pdf (required): single PDF or image file - doc_type_id = 3
+ * - upload_pdf (required): one or more files of any type - doc_type_id = 3
  * - payment_image (optional): single image file - if uploaded, payment_text becomes required
  */
 router.post(
   "/payment-upload",
-  diskUploadFields,
-  handleMulterError,
+  handleMulterUpload(diskUploadFields),
   validatePaymentUpload,
   validateFiles,
   paymentUploadController.createPaymentUpload
 );
 
 router.post(
+  "/site-photos/upload",
+  handleMulterUpload(diskUploadFields),
+  paymentUploadController.uploadAdditionalSitePhotos
+);
+
+router.post(
+  "/measurement-documents/upload",
+  handleMulterUpload(diskUploadFields),
+  paymentUploadController.uploadMeasurementDocuments
+);
+
+router.post(
   "/booking-done-ism/upload",
-  diskUploadFields,
-  handleMulterError,
+  handleMulterUpload(diskUploadFields),
   validatePaymentUpload,
   validateFiles,
   paymentUploadController.createBookingDoneIsmUpload
@@ -255,8 +269,19 @@ router.post(
   paymentUploadController.assignTaskISM
 );
 
+router.get(
+  "/leadId/:leadId/task-conflicts",
+  paymentUploadController.getTaskConflicts
+);
+
 // GET ISM details by leadId
 router.get("/leadId/:leadId", paymentUploadController.getISMDetailsByLeadId);
+
+// GET check if ISM is uploaded
+router.get(
+  "/leadId/:leadId/check-ism-uploaded",
+  paymentUploadController.checkIsmUploaded
+);
 
 // GET only payment info by leadId
 router.get(

@@ -1,8 +1,11 @@
 import { Router } from "express";
 import {
   createInstallerUser,
+  editInstallerUser,
   fetchAllInstallerUsers,
+  fetchAllInstallerUsersForMaster,
   removeInstallerUser,
+  toggleInstallerUserStatus,
 } from "../controllers/leadModuleControllers/installerUser.controller";
 
 const installerUserRoutes = Router();
@@ -18,11 +21,20 @@ installerUserRoutes.post("/create-installer-user", createInstallerUser);
  * @route GET /installation/installer-users/vendor/:vendor_id
  */
 installerUserRoutes.get("/vendorId/:vendor_id/get-all-installers", fetchAllInstallerUsers);
+installerUserRoutes.get(
+  "/vendorId/:vendor_id/get-all-installers-master",
+  fetchAllInstallerUsersForMaster,
+);
 
 /**
  * ✅ DELETE → Delete Installer User by ID
  * @route DELETE /installation/installer-users/:id
  */
 installerUserRoutes.delete("/installerId/:id/delete-installer", removeInstallerUser);
+installerUserRoutes.patch("/installerId/:id/update-installer", editInstallerUser);
+installerUserRoutes.patch(
+  "/installerId/:id/update-installer-status",
+  toggleInstallerUserStatus,
+);
 
 export default installerUserRoutes;

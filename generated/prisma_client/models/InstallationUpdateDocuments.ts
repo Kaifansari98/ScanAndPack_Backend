@@ -204,7 +204,7 @@ export type InstallationUpdateDocumentsGroupByOutputType = {
   _max: InstallationUpdateDocumentsMaxAggregateOutputType | null
 }
 
-type GetInstallationUpdateDocumentsGroupByPayload<T extends InstallationUpdateDocumentsGroupByArgs> = Prisma.PrismaPromise<
+export type GetInstallationUpdateDocumentsGroupByPayload<T extends InstallationUpdateDocumentsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InstallationUpdateDocumentsGroupByOutputType, T['by']> &
       {
@@ -1415,6 +1415,11 @@ export type InstallationUpdateDocumentsFindManyArgs<ExtArgs extends runtime.Type
    * Skip the first `n` InstallationUpdateDocuments.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of InstallationUpdateDocuments.
+   */
   distinct?: Prisma.InstallationUpdateDocumentsScalarFieldEnum | Prisma.InstallationUpdateDocumentsScalarFieldEnum[]
 }
 

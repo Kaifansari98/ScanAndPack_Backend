@@ -44,6 +44,7 @@ export type MiscellaneousTeamMasterMinAggregateOutputType = {
   name: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTeamMasterMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type MiscellaneousTeamMasterMaxAggregateOutputType = {
   name: string | null
   created_by: number | null
   created_at: Date | null
+  status: string | null
 }
 
 export type MiscellaneousTeamMasterCountAggregateOutputType = {
@@ -60,6 +62,7 @@ export type MiscellaneousTeamMasterCountAggregateOutputType = {
   name: number
   created_by: number
   created_at: number
+  status: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type MiscellaneousTeamMasterMinAggregateInputType = {
   name?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTeamMasterMaxAggregateInputType = {
@@ -90,6 +94,7 @@ export type MiscellaneousTeamMasterMaxAggregateInputType = {
   name?: true
   created_by?: true
   created_at?: true
+  status?: true
 }
 
 export type MiscellaneousTeamMasterCountAggregateInputType = {
@@ -98,6 +103,7 @@ export type MiscellaneousTeamMasterCountAggregateInputType = {
   name?: true
   created_by?: true
   created_at?: true
+  status?: true
   _all?: true
 }
 
@@ -193,6 +199,7 @@ export type MiscellaneousTeamMasterGroupByOutputType = {
   name: string
   created_by: number
   created_at: Date
+  status: string
   _count: MiscellaneousTeamMasterCountAggregateOutputType | null
   _avg: MiscellaneousTeamMasterAvgAggregateOutputType | null
   _sum: MiscellaneousTeamMasterSumAggregateOutputType | null
@@ -200,7 +207,7 @@ export type MiscellaneousTeamMasterGroupByOutputType = {
   _max: MiscellaneousTeamMasterMaxAggregateOutputType | null
 }
 
-type GetMiscellaneousTeamMasterGroupByPayload<T extends MiscellaneousTeamMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetMiscellaneousTeamMasterGroupByPayload<T extends MiscellaneousTeamMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MiscellaneousTeamMasterGroupByOutputType, T['by']> &
       {
@@ -224,6 +231,7 @@ export type MiscellaneousTeamMasterWhereInput = {
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -235,6 +243,7 @@ export type MiscellaneousTeamMasterOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingOrderByRelationAggregateInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -249,6 +258,7 @@ export type MiscellaneousTeamMasterWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingListRelationFilter
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -260,6 +270,7 @@ export type MiscellaneousTeamMasterOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   _count?: Prisma.MiscellaneousTeamMasterCountOrderByAggregateInput
   _avg?: Prisma.MiscellaneousTeamMasterAvgOrderByAggregateInput
   _max?: Prisma.MiscellaneousTeamMasterMaxOrderByAggregateInput
@@ -276,12 +287,14 @@ export type MiscellaneousTeamMasterScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringWithAggregatesFilter<"MiscellaneousTeamMaster"> | string
 }
 
 export type MiscellaneousTeamMasterCreateInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
@@ -293,6 +306,7 @@ export type MiscellaneousTeamMasterUncheckedCreateInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
@@ -301,6 +315,7 @@ export type MiscellaneousTeamMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
@@ -312,6 +327,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
@@ -322,12 +338,14 @@ export type MiscellaneousTeamMasterCreateManyInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTeamMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTeamMasterUncheckedUpdateManyInput = {
@@ -336,6 +354,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type MiscellaneousTeamMasterListRelationFilter = {
@@ -354,6 +373,7 @@ export type MiscellaneousTeamMasterCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterAvgOrderByAggregateInput = {
@@ -368,6 +388,7 @@ export type MiscellaneousTeamMasterMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterMinOrderByAggregateInput = {
@@ -376,6 +397,7 @@ export type MiscellaneousTeamMasterMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  status?: Prisma.SortOrder
 }
 
 export type MiscellaneousTeamMasterSumOrderByAggregateInput = {
@@ -463,6 +485,7 @@ export type MiscellaneousTeamMasterCreateWithoutVendorInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
 }
@@ -472,6 +495,7 @@ export type MiscellaneousTeamMasterUncheckedCreateWithoutVendorInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
@@ -511,12 +535,14 @@ export type MiscellaneousTeamMasterScalarWhereInput = {
   name?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
   created_by?: Prisma.IntFilter<"MiscellaneousTeamMaster"> | number
   created_at?: Prisma.DateTimeFilter<"MiscellaneousTeamMaster"> | Date | string
+  status?: Prisma.StringFilter<"MiscellaneousTeamMaster"> | string
 }
 
 export type MiscellaneousTeamMasterCreateWithoutMiscTeamMappingInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
 }
@@ -527,6 +553,7 @@ export type MiscellaneousTeamMasterUncheckedCreateWithoutMiscTeamMappingInput = 
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
 
@@ -550,6 +577,7 @@ export type MiscellaneousTeamMasterUpdateWithoutMiscTeamMappingInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
 }
@@ -560,6 +588,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutMiscTeamMappingInput = 
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
@@ -567,6 +596,7 @@ export type MiscellaneousTeamMasterCreateWithoutIssueLogResponsibleTeamMappingIn
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingCreateNestedManyWithoutTeamInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMiscellaneousTeamMasterInput
 }
@@ -577,6 +607,7 @@ export type MiscellaneousTeamMasterUncheckedCreateWithoutIssueLogResponsibleTeam
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedCreateNestedManyWithoutTeamInput
 }
 
@@ -600,6 +631,7 @@ export type MiscellaneousTeamMasterUpdateWithoutIssueLogResponsibleTeamMappingIn
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMiscellaneousTeamMasterNestedInput
 }
@@ -610,6 +642,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutIssueLogResponsibleTeam
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
 
@@ -618,12 +651,14 @@ export type MiscellaneousTeamMasterCreateManyVendorInput = {
   name: string
   created_by: number
   created_at?: Date | string
+  status?: string
 }
 
 export type MiscellaneousTeamMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUpdateManyWithoutTeamNestedInput
 }
@@ -633,6 +668,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   issueLogResponsibleTeamMapping?: Prisma.IssueLogResponsibleTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
   miscTeamMapping?: Prisma.MiscellaneousTeamMappingUncheckedUpdateManyWithoutTeamNestedInput
 }
@@ -642,6 +678,7 @@ export type MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -690,6 +727,7 @@ export type MiscellaneousTeamMasterSelect<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   issueLogResponsibleTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$issueLogResponsibleTeamMappingArgs<ExtArgs>
   miscTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$miscTeamMappingArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -702,6 +740,7 @@ export type MiscellaneousTeamMasterSelectCreateManyAndReturn<ExtArgs extends run
   name?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTeamMaster"]>
 
@@ -711,6 +750,7 @@ export type MiscellaneousTeamMasterSelectUpdateManyAndReturn<ExtArgs extends run
   name?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["miscellaneousTeamMaster"]>
 
@@ -720,9 +760,10 @@ export type MiscellaneousTeamMasterSelectScalar = {
   name?: boolean
   created_by?: boolean
   created_at?: boolean
+  status?: boolean
 }
 
-export type MiscellaneousTeamMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at", ExtArgs["result"]["miscellaneousTeamMaster"]>
+export type MiscellaneousTeamMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "name" | "created_by" | "created_at" | "status", ExtArgs["result"]["miscellaneousTeamMaster"]>
 export type MiscellaneousTeamMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   issueLogResponsibleTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$issueLogResponsibleTeamMappingArgs<ExtArgs>
   miscTeamMapping?: boolean | Prisma.MiscellaneousTeamMaster$miscTeamMappingArgs<ExtArgs>
@@ -749,6 +790,7 @@ export type $MiscellaneousTeamMasterPayload<ExtArgs extends runtime.Types.Extens
     name: string
     created_by: number
     created_at: Date
+    status: string
   }, ExtArgs["result"]["miscellaneousTeamMaster"]>
   composites: {}
 }
@@ -1180,6 +1222,7 @@ export interface MiscellaneousTeamMasterFieldRefs {
   readonly name: Prisma.FieldRef<"MiscellaneousTeamMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"MiscellaneousTeamMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"MiscellaneousTeamMaster", 'DateTime'>
+  readonly status: Prisma.FieldRef<"MiscellaneousTeamMaster", 'String'>
 }
     
 
@@ -1376,6 +1419,11 @@ export type MiscellaneousTeamMasterFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` MiscellaneousTeamMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MiscellaneousTeamMasters.
+   */
   distinct?: Prisma.MiscellaneousTeamMasterScalarFieldEnum | Prisma.MiscellaneousTeamMasterScalarFieldEnum[]
 }
 

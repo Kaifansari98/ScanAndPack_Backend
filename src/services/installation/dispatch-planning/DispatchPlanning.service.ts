@@ -1,8 +1,14 @@
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
-import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail2.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
+import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendSmallOrderReadyForDispatchEmail } from "../../email/brevoEmail2.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -130,6 +136,46 @@ export class DispatchPlanningService {
     };
   }
 
+  private async syncDispatchCommitmentDate(
+    tx: any,
+    params: {
+      vendor_id: number;
+      lead_id: number;
+      dispatchDate: Date;
+      updated_by: number;
+    },
+  ) {
+    const { vendor_id, lead_id, dispatchDate, updated_by } = params;
+
+    /**
+     * Update LeadMaster Dispatch Date
+     */
+    await tx.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        required_date_for_dispatch: dispatchDate,
+        updated_by,
+      },
+    });
+
+    /**
+     * Update Task Due Date (if already exists)
+     */
+    await tx.userLeadTask.updateMany({
+      where: {
+        lead_id,
+        vendor_id,
+        task_type: "Dispatch",
+        lead_stage: "dispatch-planning-stage",
+        status: "open",
+      },
+      data: {
+        due_date: dispatchDate,
+        updated_by,
+      },
+    });
+  }
+
   /** ✅ 1️⃣ Save Dispatch Planning Information */
   async saveDispatchPlanningInfoService(payload: any) {
     const {
@@ -141,33 +187,61 @@ export class DispatchPlanningService {
       alt_onsite_contact_person_name,
       alt_onsite_contact_person_number,
       material_lift_availability,
+      material_lift_size,
+      vehicle_approachability,
       dispatch_planning_remark,
       created_by,
     } = payload;
-
-    // 🧹 Removed backend date validation
-    // The frontend already ensures this is >= 2 days ahead
 
     const dispatchDate = required_date_for_dispatch
       ? new Date(required_date_for_dispatch)
       : null;
 
-    // ✅ Update LeadMaster directly
-    const leadUpdate = await prisma.leadMaster.update({
-      where: { id: lead_id },
-      data: {
-        required_date_for_dispatch: dispatchDate,
-        onsite_contact_person_name,
-        onsite_contact_person_number,
-        alt_onsite_contact_person_name,
-        alt_onsite_contact_person_number,
-        material_lift_availability,
-        dispatch_planning_remark,
-        updated_by: created_by,
-      },
-    });
+    if (!dispatchDate) {
+      throw new Error("Dispatch date is required.");
+    }
 
-    return { lead_id, vendor_id, updated: true, leadUpdate };
+    if (
+      vehicle_approachability === null ||
+      vehicle_approachability === undefined
+    ) {
+      throw new Error("Vehicle approachability is required.");
+    }
+
+    return await prisma.$transaction(async (tx) => {
+      /**
+       * STEP 1 — Update Remaining Dispatch Fields
+       */
+      await tx.leadMaster.update({
+        where: { id: lead_id },
+        data: {
+          onsite_contact_person_name,
+          onsite_contact_person_number,
+          alt_onsite_contact_person_name,
+          alt_onsite_contact_person_number,
+          material_lift_availability,
+          material_lift_size,
+          vehicle_approachability_for_dispatch: vehicle_approachability,
+          dispatch_planning_remark,
+          updated_by: created_by,
+        },
+      });
+
+      /**
+       * STEP 2 — Sync Dispatch Date ↔ Task Due Date
+       */
+      await this.syncDispatchCommitmentDate(tx, {
+        vendor_id,
+        lead_id,
+        dispatchDate,
+        updated_by: created_by,
+      });
+
+      /**
+       * STEP 3 — Ensure Factory Task Exists
+       */
+      return { lead_id, vendor_id, updated: true };
+    });
   }
 
   /** ✅ 2️⃣ Save Dispatch Planning Payment Info */
@@ -215,12 +289,18 @@ export class DispatchPlanningService {
         throw new Error("Payment Type (Type 5) not found for this vendor");
 
       // 3️⃣ Create PaymentInfo Record
+      const leadForPayment = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { status_id: true },
+      });
+
       const payment = await tx.paymentInfo.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
           created_by,
+          status_id: leadForPayment?.status_id ?? null,
           payment_type_id: paymentType.id,
           payment_date: new Date(),
           amount: pending_payment,
@@ -265,15 +345,13 @@ export class DispatchPlanningService {
       }
 
       // 5️⃣ Create LeadDetailedLogs Entry
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id,
-          created_by,
-          action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
-          action_type: "UPDATE", // or "create" depending on your enum usage
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id,
+        created_by,
+        action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
+        action_type: "UPDATE",
       });
 
       // 6️⃣ If document uploaded → create LeadDocumentLogs entry
@@ -314,6 +392,8 @@ export class DispatchPlanningService {
         alt_onsite_contact_person_name: true,
         alt_onsite_contact_person_number: true,
         material_lift_availability: true,
+        material_lift_size: true,
+        vehicle_approachability_for_dispatch: true,
         dispatch_planning_remark: true,
         updated_at: true,
       },
@@ -425,6 +505,8 @@ export class DispatchPlanningService {
         onsite_contact_person_name: true,
         onsite_contact_person_number: true,
         material_lift_availability: true,
+        material_lift_size: true,
+        vehicle_approachability_for_dispatch: true,
         dispatch_planning_remark: true,
       },
     });
@@ -445,6 +527,11 @@ export class DispatchPlanningService {
       lead.material_lift_availability === undefined
     )
       missingFields.push("Material Lift Availability");
+    if (
+      lead.vehicle_approachability_for_dispatch === null ||
+      lead.vehicle_approachability_for_dispatch === undefined
+    )
+      missingFields.push("Vehicle Approachability for Dispatch");
 
     const isReadyForDispatch = missingFields.length === 0;
 
@@ -460,6 +547,7 @@ export class DispatchPlanningService {
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // CORE TRANSACTION LAYER
@@ -491,16 +579,117 @@ export class DispatchPlanningService {
         },
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Dispatch stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
+      await ensureLeadStatusLog(tx, {
+        vendorId,
+        leadId: lead.id,
+        accountId: lead.account_id,
+        statusId: toStatus.id,
+        createdBy: updatedBy,
+      });
+
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Dispatch stage.",
+        action_type: "UPDATE",
+        history_type: "Lead",
+        created_by: updatedBy,
+      });
+
+      const leadPlanningData = await tx.leadMaster.findUnique({
+        where: { id: leadId },
+        select: {
+          account_id: true,
+          franchise_id: true,
+          required_date_for_dispatch: true,
+          dispatch_planning_remark: true,
         },
       });
+
+      if (!leadPlanningData?.account_id) {
+        throw new Error("Lead Account not found.");
+      }
+
+      if (!leadPlanningData.required_date_for_dispatch) {
+        throw new Error("Required date for dispatch is missing.");
+      }
+
+      const factoryUser = await tx.leadUserMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
+      });
+
+      if (!factoryUser) {
+        throw new Error("Production-stage factory mapping not found for this lead.");
+      }
+
+      const existingTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          task_type: "Dispatch",
+          lead_stage: "dispatch-planning-stage",
+        },
+      });
+
+      if (existingTask) {
+        const updatedTask = await tx.userLeadTask.update({
+          where: { id: existingTask.id },
+          data: {
+            due_date: leadPlanningData.required_date_for_dispatch,
+            updated_by: updatedBy,
+            updated_at: new Date(),
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: leadPlanningData.account_id,
+            task_type: "Dispatch",
+          },
+          createdBy: updatedBy,
+          actionType: "UPDATE",
+        });
+      } else {
+        const task = await tx.userLeadTask.create({
+          data: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: leadPlanningData.account_id,
+            franchise_id: leadPlanningData.franchise_id ?? null,
+            user_id: factoryUser.user_id,
+            task_type: "Dispatch",
+            due_date: leadPlanningData.required_date_for_dispatch,
+            remark:
+              leadPlanningData.dispatch_planning_remark ||
+              "Prepare material for dispatch",
+            status: "open",
+            created_by: updatedBy,
+            lead_stage: "dispatch-planning-stage",
+          },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updatedBy,
+          actionType: "CREATE",
+        });
+      }
 
       return updatedLead;
     });
@@ -512,136 +701,176 @@ export class DispatchPlanningService {
     try {
       const actorId = updatedBy;
 
-      const lead = await prisma.leadMaster.findUnique({
-        where: { id: leadId },
-        select: {
-          firstname: true,
-          lastname: true,
-          lead_code: true,
-          vendor_id: true,
-          account_id: true,
-
-          onsite_contact_person_name: true,
-          onsite_contact_person_number: true,
-          required_date_for_dispatch: true,
-          material_lift_availability: true,
-        },
-      });
-
-      const actor = await prisma.userMaster.findUnique({
-        where: { id: actorId },
-        select: { user_name: true },
-      });
+      const [lead, firstInstance, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+            franchise_id: true,
+            statusType: { select: { tag: true } },
+            is_small_order_request: true,
+          },
+        }),
+        prisma.leadProductStructureInstance.findFirst({
+          where: { lead_id: leadId, vendor_id: vendorId },
+          select: { id: true },
+          orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: updatedBy },
+          select: { user_name: true },
+        }),
+      ]);
 
       if (!lead) return result;
 
       const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
-
-      const leadCode =
-        lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
-
+      const leadCode = lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
       const movedBy = actor?.user_name ?? "System";
-
       const movedAt = new Date().toLocaleString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
+      const franchiseId = lead.franchise_id ?? null;
+      const stageTag = lead.statusType?.tag;
+      const instanceId = firstInstance?.id;
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
-
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
-
+      // Build redirect using STAGE_PATH_BY_TAG
+      const dpBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+        ? `${STAGE_PATH_BY_TAG[stageTag]}/${leadId}`
+        : `/dashboard/installation/dispatch-stage/details/${leadId}`;
+      const dpParams = new URLSearchParams();
+      if (lead.account_id) dpParams.set("accountId", String(lead.account_id));
+      if (instanceId) dpParams.set("instance_id", String(instanceId));
+      const dpQs = dpParams.toString();
+      const redirectPath = dpQs ? `${dpBase}?${dpQs}` : dpBase;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
-      // ===============================
-      // FACTORY SME FETCH
-      // ===============================
-
-      const factoryMapping = await prisma.leadUserMapping.findFirst({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          status: "active",
-          user: {
-            user_type: {
-              user_type: {
-                equals: "factory",
-                mode: "insensitive",
-              },
-            },
-          },
-        },
+      // Collect all mapped users for this lead
+      const leadMappings = await prisma.leadUserMapping.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId, status: "active" },
         select: {
           user: {
             select: {
               id: true,
               user_name: true,
               user_email: true,
+              user_type: { select: { user_type: true } },
             },
           },
         },
       });
 
-      if (!factoryMapping?.user) return result;
+      const mappedUsers = leadMappings.map((m) => m.user).filter(Boolean);
 
-      const factoryUser = factoryMapping.user;
+      // Factory user
+      const factoryUser = mappedUsers.find(
+        (u) => u.user_type.user_type.toLowerCase() === "factory",
+      ) ?? null;
 
-      // ===============================
-      // 🔔 FACTORY IN-APP
-      // ===============================
+      // Sales executives from mapping
+      const salesExecs = mappedUsers.filter(
+        (u) => u.user_type.user_type.toLowerCase() === "sales-executive",
+      );
 
-      await NotificationService.createAndSend({
-        vendor_id: vendorId,
-        user_id: factoryUser.id,
-        sender_id: actorId,
-        type: NotificationType.LEAD_MILESTONE,
-        title: "Lead Dispatched To Factory",
-        message: `${leadCode} - ${leadName} moved to Dispatch stage.`,
-        entity_type: "lead",
-        entity_id: leadId,
-        redirect_url: redirectPath,
+      // Admins — franchise-filtered, no super-admin
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId,
+        excludeUserId: actorId,
       });
 
-      // ===============================
-      // 📧 FACTORY EMAIL
-      // ===============================
-
-      if (factoryUser.user_email) {
-        await sendLeadMovedToDispatchEmail({
-          vendor_id: vendorId,
-          toEmail: factoryUser.user_email,
-          toName: factoryUser.user_name,
-
-          leadCode,
-          leadName,
-
-          onsiteContactName: lead.onsite_contact_person_name ?? "N/A",
-
-          onsiteContactNumber: lead.onsite_contact_person_number ?? "N/A",
-
-          requiredDeliveryDate: lead.required_date_for_dispatch
-            ? new Date(lead.required_date_for_dispatch).toLocaleDateString(
-                "en-IN",
-              )
-            : "N/A",
-
-          liftAvailability: lead.material_lift_availability ? "Yes" : "No",
-
-          movedBy,
-          movedAt,
-          projectUrl,
-        });
+      // Deduplicate all recipients, exclude actor
+      const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+      for (const u of [...(factoryUser ? [factoryUser] : []), ...salesExecs, ...admins]) {
+        if (u.id !== actorId) recipientMap.set(u.id, u);
       }
+      const recipients = Array.from(recipientMap.values());
+
+      await Promise.allSettled(
+        recipients.map(async (user) => {
+          await NotificationService.createAndSend({
+            vendor_id: lead.vendor_id,
+            user_id: user.id,
+            sender_id: actorId,
+            type: NotificationType.LEAD_ACTION,
+            title: "Lead moved To Dispatch",
+            message: `${leadCode} - ${leadName} moved to Dispatch stage.`,
+            entity_type: "lead",
+            entity_id: leadId,
+            redirect_url: redirectPath,
+          });
+
+          if (!user.user_email) return;
+
+          await sendLeadMovedToDispatchEmail({
+            vendor_id: lead.vendor_id,
+            toEmail: user.user_email,
+            toName: user.user_name ?? undefined,
+            leadCode,
+            leadName,
+            movedBy,
+            movedAt,
+            projectUrl,
+          });
+        }),
+      );
+
+      if (lead.is_small_order_request && factoryUser) {
+        const smallOrderRedirectPath = `/dashboard/installation/dispatch-stage/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
+
+        await Promise.allSettled([
+          (async () => {
+            try {
+              await NotificationService.createAndSend({
+                vendor_id: lead.vendor_id,
+                user_id: factoryUser.id,
+                sender_id: actorId,
+                type: NotificationType.LEAD_ACTION,
+                title: "Small Order Ready for Dispatch",
+                message: `Dispatch Planning for ${leadCode} - ${leadName} is completed. Please update the dispatch details.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: smallOrderRedirectPath,
+              });
+              console.log(`✅ Small Order Ready for Dispatch In-App sent to Factory User ${factoryUser.id}`);
+            } catch (err: any) {
+              logger.warn(`⚠️ Small Order Ready for Dispatch In-App to Factory User ${factoryUser.id} failed:`, err.message);
+            }
+          })(),
+          (async () => {
+            if (factoryUser.user_email) {
+              try {
+                await sendSmallOrderReadyForDispatchEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: factoryUser.user_email,
+                  factory_user_name: factoryUser.user_name || "Factory User",
+                  leadCode,
+                  leadName,
+                  projectUrl: smallOrderProjectUrl,
+                });
+                console.log(`✅ Small Order Ready for Dispatch Email sent to Factory User ${factoryUser.user_email}`);
+              } catch (err: any) {
+                logger.warn(`⚠️ Small Order Ready for Dispatch Email to ${factoryUser.user_email} failed:`, err.message);
+              }
+            }
+          })(),
+        ]);
+      }
+
+      logger.info("✅ Move to Dispatch notifications sent", {
+        vendor_id: lead.vendor_id,
+        lead_id: leadId,
+        recipients: recipients.length,
+      });
     } catch (err: any) {
-      logger.warn("⚠️ Dispatch Factory notification failed", {
+      logger.warn("⚠️ Move to Dispatch notification failed", {
         lead_id: leadId,
         error: err?.message,
       });

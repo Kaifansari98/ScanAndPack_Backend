@@ -193,7 +193,7 @@ export type LeadChatAttachmentGroupByOutputType = {
   _max: LeadChatAttachmentMaxAggregateOutputType | null
 }
 
-type GetLeadChatAttachmentGroupByPayload<T extends LeadChatAttachmentGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadChatAttachmentGroupByPayload<T extends LeadChatAttachmentGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatAttachmentGroupByOutputType, T['by']> &
       {
@@ -216,8 +216,8 @@ export type LeadChatAttachmentWhereInput = {
   msg_id?: Prisma.IntFilter<"LeadChatAttachment"> | number
   doc_id?: Prisma.IntFilter<"LeadChatAttachment"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatAttachment"> | Date | string
-  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
   document?: Prisma.XOR<Prisma.LeadChatDocumentScalarRelationFilter, Prisma.LeadChatDocumentWhereInput>
+  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
 }
 
 export type LeadChatAttachmentOrderByWithRelationInput = {
@@ -225,8 +225,8 @@ export type LeadChatAttachmentOrderByWithRelationInput = {
   msg_id?: Prisma.SortOrder
   doc_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  message?: Prisma.LeadChatMessageOrderByWithRelationInput
   document?: Prisma.LeadChatDocumentOrderByWithRelationInput
+  message?: Prisma.LeadChatMessageOrderByWithRelationInput
 }
 
 export type LeadChatAttachmentWhereUniqueInput = Prisma.AtLeast<{
@@ -238,8 +238,8 @@ export type LeadChatAttachmentWhereUniqueInput = Prisma.AtLeast<{
   msg_id?: Prisma.IntFilter<"LeadChatAttachment"> | number
   doc_id?: Prisma.IntFilter<"LeadChatAttachment"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatAttachment"> | Date | string
-  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
   document?: Prisma.XOR<Prisma.LeadChatDocumentScalarRelationFilter, Prisma.LeadChatDocumentWhereInput>
+  message?: Prisma.XOR<Prisma.LeadChatMessageScalarRelationFilter, Prisma.LeadChatMessageWhereInput>
 }, "id" | "msg_id_doc_id">
 
 export type LeadChatAttachmentOrderByWithAggregationInput = {
@@ -266,8 +266,8 @@ export type LeadChatAttachmentScalarWhereWithAggregatesInput = {
 
 export type LeadChatAttachmentCreateInput = {
   created_at?: Date | string
-  message: Prisma.LeadChatMessageCreateNestedOneWithoutAttachmentsInput
   document: Prisma.LeadChatDocumentCreateNestedOneWithoutAttachmentsInput
+  message: Prisma.LeadChatMessageCreateNestedOneWithoutAttachmentsInput
 }
 
 export type LeadChatAttachmentUncheckedCreateInput = {
@@ -279,8 +279,8 @@ export type LeadChatAttachmentUncheckedCreateInput = {
 
 export type LeadChatAttachmentUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  message?: Prisma.LeadChatMessageUpdateOneRequiredWithoutAttachmentsNestedInput
   document?: Prisma.LeadChatDocumentUpdateOneRequiredWithoutAttachmentsNestedInput
+  message?: Prisma.LeadChatMessageUpdateOneRequiredWithoutAttachmentsNestedInput
 }
 
 export type LeadChatAttachmentUncheckedUpdateInput = {
@@ -577,8 +577,8 @@ export type LeadChatAttachmentSelect<ExtArgs extends runtime.Types.Extensions.In
   msg_id?: boolean
   doc_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatAttachment"]>
 
 export type LeadChatAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -586,8 +586,8 @@ export type LeadChatAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.
   msg_id?: boolean
   doc_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatAttachment"]>
 
 export type LeadChatAttachmentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -595,8 +595,8 @@ export type LeadChatAttachmentSelectUpdateManyAndReturn<ExtArgs extends runtime.
   msg_id?: boolean
   doc_id?: boolean
   created_at?: boolean
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatAttachment"]>
 
 export type LeadChatAttachmentSelectScalar = {
@@ -608,23 +608,23 @@ export type LeadChatAttachmentSelectScalar = {
 
 export type LeadChatAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "msg_id" | "doc_id" | "created_at", ExtArgs["result"]["leadChatAttachment"]>
 export type LeadChatAttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 export type LeadChatAttachmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 export type LeadChatAttachmentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
   document?: boolean | Prisma.LeadChatDocumentDefaultArgs<ExtArgs>
+  message?: boolean | Prisma.LeadChatMessageDefaultArgs<ExtArgs>
 }
 
 export type $LeadChatAttachmentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadChatAttachment"
   objects: {
-    message: Prisma.$LeadChatMessagePayload<ExtArgs>
     document: Prisma.$LeadChatDocumentPayload<ExtArgs>
+    message: Prisma.$LeadChatMessagePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1025,8 +1025,8 @@ readonly fields: LeadChatAttachmentFieldRefs;
  */
 export interface Prisma__LeadChatAttachmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  message<T extends Prisma.LeadChatMessageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessageDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatMessageClient<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   document<T extends Prisma.LeadChatDocumentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatDocumentDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatDocumentClient<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  message<T extends Prisma.LeadChatMessageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessageDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatMessageClient<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1256,6 +1256,11 @@ export type LeadChatAttachmentFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` LeadChatAttachments.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadChatAttachments.
+   */
   distinct?: Prisma.LeadChatAttachmentScalarFieldEnum | Prisma.LeadChatAttachmentScalarFieldEnum[]
 }
 

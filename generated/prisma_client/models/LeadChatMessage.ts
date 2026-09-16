@@ -30,12 +30,14 @@ export type LeadChatMessageAvgAggregateOutputType = {
   id: number | null
   chat_room_id: number | null
   sender_id: number | null
+  reply_to_message_id: number | null
 }
 
 export type LeadChatMessageSumAggregateOutputType = {
   id: number | null
   chat_room_id: number | null
   sender_id: number | null
+  reply_to_message_id: number | null
 }
 
 export type LeadChatMessageMinAggregateOutputType = {
@@ -45,6 +47,7 @@ export type LeadChatMessageMinAggregateOutputType = {
   message_type: $Enums.LeadChatMessageType | null
   message_text: string | null
   created_at: Date | null
+  reply_to_message_id: number | null
 }
 
 export type LeadChatMessageMaxAggregateOutputType = {
@@ -54,6 +57,7 @@ export type LeadChatMessageMaxAggregateOutputType = {
   message_type: $Enums.LeadChatMessageType | null
   message_text: string | null
   created_at: Date | null
+  reply_to_message_id: number | null
 }
 
 export type LeadChatMessageCountAggregateOutputType = {
@@ -63,6 +67,7 @@ export type LeadChatMessageCountAggregateOutputType = {
   message_type: number
   message_text: number
   created_at: number
+  reply_to_message_id: number
   _all: number
 }
 
@@ -71,12 +76,14 @@ export type LeadChatMessageAvgAggregateInputType = {
   id?: true
   chat_room_id?: true
   sender_id?: true
+  reply_to_message_id?: true
 }
 
 export type LeadChatMessageSumAggregateInputType = {
   id?: true
   chat_room_id?: true
   sender_id?: true
+  reply_to_message_id?: true
 }
 
 export type LeadChatMessageMinAggregateInputType = {
@@ -86,6 +93,7 @@ export type LeadChatMessageMinAggregateInputType = {
   message_type?: true
   message_text?: true
   created_at?: true
+  reply_to_message_id?: true
 }
 
 export type LeadChatMessageMaxAggregateInputType = {
@@ -95,6 +103,7 @@ export type LeadChatMessageMaxAggregateInputType = {
   message_type?: true
   message_text?: true
   created_at?: true
+  reply_to_message_id?: true
 }
 
 export type LeadChatMessageCountAggregateInputType = {
@@ -104,6 +113,7 @@ export type LeadChatMessageCountAggregateInputType = {
   message_type?: true
   message_text?: true
   created_at?: true
+  reply_to_message_id?: true
   _all?: true
 }
 
@@ -200,6 +210,7 @@ export type LeadChatMessageGroupByOutputType = {
   message_type: $Enums.LeadChatMessageType
   message_text: string | null
   created_at: Date
+  reply_to_message_id: number | null
   _count: LeadChatMessageCountAggregateOutputType | null
   _avg: LeadChatMessageAvgAggregateOutputType | null
   _sum: LeadChatMessageSumAggregateOutputType | null
@@ -207,7 +218,7 @@ export type LeadChatMessageGroupByOutputType = {
   _max: LeadChatMessageMaxAggregateOutputType | null
 }
 
-type GetLeadChatMessageGroupByPayload<T extends LeadChatMessageGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadChatMessageGroupByPayload<T extends LeadChatMessageGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatMessageGroupByOutputType, T['by']> &
       {
@@ -232,10 +243,13 @@ export type LeadChatMessageWhereInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFilter<"LeadChatMessage"> | $Enums.LeadChatMessageType
   message_text?: Prisma.StringNullableFilter<"LeadChatMessage"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadChatMessage"> | Date | string
-  chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
-  sender?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  reply_to_message_id?: Prisma.IntNullableFilter<"LeadChatMessage"> | number | null
   attachments?: Prisma.LeadChatAttachmentListRelationFilter
   mentions?: Prisma.LeadChatMentionListRelationFilter
+  chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
+  repliedToMessage?: Prisma.XOR<Prisma.LeadChatMessageNullableScalarRelationFilter, Prisma.LeadChatMessageWhereInput> | null
+  replies?: Prisma.LeadChatMessageListRelationFilter
+  sender?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }
 
 export type LeadChatMessageOrderByWithRelationInput = {
@@ -245,10 +259,13 @@ export type LeadChatMessageOrderByWithRelationInput = {
   message_type?: Prisma.SortOrder
   message_text?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  chatRoom?: Prisma.LeadChatRoomOrderByWithRelationInput
-  sender?: Prisma.UserMasterOrderByWithRelationInput
+  reply_to_message_id?: Prisma.SortOrderInput | Prisma.SortOrder
   attachments?: Prisma.LeadChatAttachmentOrderByRelationAggregateInput
   mentions?: Prisma.LeadChatMentionOrderByRelationAggregateInput
+  chatRoom?: Prisma.LeadChatRoomOrderByWithRelationInput
+  repliedToMessage?: Prisma.LeadChatMessageOrderByWithRelationInput
+  replies?: Prisma.LeadChatMessageOrderByRelationAggregateInput
+  sender?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type LeadChatMessageWhereUniqueInput = Prisma.AtLeast<{
@@ -261,10 +278,13 @@ export type LeadChatMessageWhereUniqueInput = Prisma.AtLeast<{
   message_type?: Prisma.EnumLeadChatMessageTypeFilter<"LeadChatMessage"> | $Enums.LeadChatMessageType
   message_text?: Prisma.StringNullableFilter<"LeadChatMessage"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadChatMessage"> | Date | string
-  chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
-  sender?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  reply_to_message_id?: Prisma.IntNullableFilter<"LeadChatMessage"> | number | null
   attachments?: Prisma.LeadChatAttachmentListRelationFilter
   mentions?: Prisma.LeadChatMentionListRelationFilter
+  chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
+  repliedToMessage?: Prisma.XOR<Prisma.LeadChatMessageNullableScalarRelationFilter, Prisma.LeadChatMessageWhereInput> | null
+  replies?: Prisma.LeadChatMessageListRelationFilter
+  sender?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
 }, "id">
 
 export type LeadChatMessageOrderByWithAggregationInput = {
@@ -274,6 +294,7 @@ export type LeadChatMessageOrderByWithAggregationInput = {
   message_type?: Prisma.SortOrder
   message_text?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeadChatMessageCountOrderByAggregateInput
   _avg?: Prisma.LeadChatMessageAvgOrderByAggregateInput
   _max?: Prisma.LeadChatMessageMaxOrderByAggregateInput
@@ -291,16 +312,19 @@ export type LeadChatMessageScalarWhereWithAggregatesInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeWithAggregatesFilter<"LeadChatMessage"> | $Enums.LeadChatMessageType
   message_text?: Prisma.StringNullableWithAggregatesFilter<"LeadChatMessage"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadChatMessage"> | Date | string
+  reply_to_message_id?: Prisma.IntNullableWithAggregatesFilter<"LeadChatMessage"> | number | null
 }
 
 export type LeadChatMessageCreateInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
-  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
   attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
 }
 
 export type LeadChatMessageUncheckedCreateInput = {
@@ -310,18 +334,22 @@ export type LeadChatMessageUncheckedCreateInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageUpdateInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
   attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateInput = {
@@ -331,8 +359,10 @@ export type LeadChatMessageUncheckedUpdateInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageCreateManyInput = {
@@ -342,6 +372,7 @@ export type LeadChatMessageCreateManyInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
 }
 
 export type LeadChatMessageUpdateManyMutationInput = {
@@ -357,6 +388,7 @@ export type LeadChatMessageUncheckedUpdateManyInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadChatMessageListRelationFilter = {
@@ -369,6 +401,11 @@ export type LeadChatMessageOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type LeadChatMessageNullableScalarRelationFilter = {
+  is?: Prisma.LeadChatMessageWhereInput | null
+  isNot?: Prisma.LeadChatMessageWhereInput | null
+}
+
 export type LeadChatMessageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   chat_room_id?: Prisma.SortOrder
@@ -376,12 +413,14 @@ export type LeadChatMessageCountOrderByAggregateInput = {
   message_type?: Prisma.SortOrder
   message_text?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrder
 }
 
 export type LeadChatMessageAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   chat_room_id?: Prisma.SortOrder
   sender_id?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrder
 }
 
 export type LeadChatMessageMaxOrderByAggregateInput = {
@@ -391,6 +430,7 @@ export type LeadChatMessageMaxOrderByAggregateInput = {
   message_type?: Prisma.SortOrder
   message_text?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrder
 }
 
 export type LeadChatMessageMinOrderByAggregateInput = {
@@ -400,12 +440,14 @@ export type LeadChatMessageMinOrderByAggregateInput = {
   message_type?: Prisma.SortOrder
   message_text?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrder
 }
 
 export type LeadChatMessageSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   chat_room_id?: Prisma.SortOrder
   sender_id?: Prisma.SortOrder
+  reply_to_message_id?: Prisma.SortOrder
 }
 
 export type LeadChatMessageScalarRelationFilter = {
@@ -497,8 +539,66 @@ export type LeadChatMessageUncheckedUpdateManyWithoutChatRoomNestedInput = {
   deleteMany?: Prisma.LeadChatMessageScalarWhereInput | Prisma.LeadChatMessageScalarWhereInput[]
 }
 
+export type LeadChatMessageCreateNestedOneWithoutRepliesInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliesInput>
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliesInput
+  connect?: Prisma.LeadChatMessageWhereUniqueInput
+}
+
+export type LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput> | Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput[] | Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput[]
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput | Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput[]
+  createMany?: Prisma.LeadChatMessageCreateManyRepliedToMessageInputEnvelope
+  connect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+}
+
+export type LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput> | Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput[] | Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput[]
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput | Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput[]
+  createMany?: Prisma.LeadChatMessageCreateManyRepliedToMessageInputEnvelope
+  connect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+}
+
 export type EnumLeadChatMessageTypeFieldUpdateOperationsInput = {
   set?: $Enums.LeadChatMessageType
+}
+
+export type LeadChatMessageUpdateOneWithoutRepliesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliesInput>
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliesInput
+  upsert?: Prisma.LeadChatMessageUpsertWithoutRepliesInput
+  disconnect?: Prisma.LeadChatMessageWhereInput | boolean
+  delete?: Prisma.LeadChatMessageWhereInput | boolean
+  connect?: Prisma.LeadChatMessageWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadChatMessageUpdateToOneWithWhereWithoutRepliesInput, Prisma.LeadChatMessageUpdateWithoutRepliesInput>, Prisma.LeadChatMessageUncheckedUpdateWithoutRepliesInput>
+}
+
+export type LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput> | Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput[] | Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput[]
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput | Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput[]
+  upsert?: Prisma.LeadChatMessageUpsertWithWhereUniqueWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpsertWithWhereUniqueWithoutRepliedToMessageInput[]
+  createMany?: Prisma.LeadChatMessageCreateManyRepliedToMessageInputEnvelope
+  set?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  disconnect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  delete?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  connect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  update?: Prisma.LeadChatMessageUpdateWithWhereUniqueWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpdateWithWhereUniqueWithoutRepliedToMessageInput[]
+  updateMany?: Prisma.LeadChatMessageUpdateManyWithWhereWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpdateManyWithWhereWithoutRepliedToMessageInput[]
+  deleteMany?: Prisma.LeadChatMessageScalarWhereInput | Prisma.LeadChatMessageScalarWhereInput[]
+}
+
+export type LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput> | Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput[] | Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput[]
+  connectOrCreate?: Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput | Prisma.LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput[]
+  upsert?: Prisma.LeadChatMessageUpsertWithWhereUniqueWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpsertWithWhereUniqueWithoutRepliedToMessageInput[]
+  createMany?: Prisma.LeadChatMessageCreateManyRepliedToMessageInputEnvelope
+  set?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  disconnect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  delete?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  connect?: Prisma.LeadChatMessageWhereUniqueInput | Prisma.LeadChatMessageWhereUniqueInput[]
+  update?: Prisma.LeadChatMessageUpdateWithWhereUniqueWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpdateWithWhereUniqueWithoutRepliedToMessageInput[]
+  updateMany?: Prisma.LeadChatMessageUpdateManyWithWhereWithoutRepliedToMessageInput | Prisma.LeadChatMessageUpdateManyWithWhereWithoutRepliedToMessageInput[]
+  deleteMany?: Prisma.LeadChatMessageScalarWhereInput | Prisma.LeadChatMessageScalarWhereInput[]
 }
 
 export type LeadChatMessageCreateNestedOneWithoutAttachmentsInput = {
@@ -533,9 +633,11 @@ export type LeadChatMessageCreateWithoutSenderInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
-  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
   attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageUncheckedCreateWithoutSenderInput = {
@@ -544,8 +646,10 @@ export type LeadChatMessageUncheckedCreateWithoutSenderInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageCreateOrConnectWithoutSenderInput = {
@@ -584,15 +688,18 @@ export type LeadChatMessageScalarWhereInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFilter<"LeadChatMessage"> | $Enums.LeadChatMessageType
   message_text?: Prisma.StringNullableFilter<"LeadChatMessage"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadChatMessage"> | Date | string
+  reply_to_message_id?: Prisma.IntNullableFilter<"LeadChatMessage"> | number | null
 }
 
 export type LeadChatMessageCreateWithoutChatRoomInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
-  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
   attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
 }
 
 export type LeadChatMessageUncheckedCreateWithoutChatRoomInput = {
@@ -601,8 +708,10 @@ export type LeadChatMessageUncheckedCreateWithoutChatRoomInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
   mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageCreateOrConnectWithoutChatRoomInput = {
@@ -631,13 +740,126 @@ export type LeadChatMessageUpdateManyWithWhereWithoutChatRoomInput = {
   data: Prisma.XOR<Prisma.LeadChatMessageUpdateManyMutationInput, Prisma.LeadChatMessageUncheckedUpdateManyWithoutChatRoomInput>
 }
 
+export type LeadChatMessageCreateWithoutRepliesInput = {
+  message_type?: $Enums.LeadChatMessageType
+  message_text?: string | null
+  created_at?: Date | string
+  attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
+  mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
+}
+
+export type LeadChatMessageUncheckedCreateWithoutRepliesInput = {
+  id?: number
+  chat_room_id: number
+  sender_id: number
+  message_type?: $Enums.LeadChatMessageType
+  message_text?: string | null
+  created_at?: Date | string
+  reply_to_message_id?: number | null
+  attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
+  mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+}
+
+export type LeadChatMessageCreateOrConnectWithoutRepliesInput = {
+  where: Prisma.LeadChatMessageWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliesInput>
+}
+
+export type LeadChatMessageCreateWithoutRepliedToMessageInput = {
+  message_type?: $Enums.LeadChatMessageType
+  message_text?: string | null
+  created_at?: Date | string
+  attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
+  mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
+}
+
+export type LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput = {
+  id?: number
+  chat_room_id: number
+  sender_id: number
+  message_type?: $Enums.LeadChatMessageType
+  message_text?: string | null
+  created_at?: Date | string
+  attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
+  mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
+}
+
+export type LeadChatMessageCreateOrConnectWithoutRepliedToMessageInput = {
+  where: Prisma.LeadChatMessageWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput>
+}
+
+export type LeadChatMessageCreateManyRepliedToMessageInputEnvelope = {
+  data: Prisma.LeadChatMessageCreateManyRepliedToMessageInput | Prisma.LeadChatMessageCreateManyRepliedToMessageInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadChatMessageUpsertWithoutRepliesInput = {
+  update: Prisma.XOR<Prisma.LeadChatMessageUpdateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedUpdateWithoutRepliesInput>
+  create: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliesInput>
+  where?: Prisma.LeadChatMessageWhereInput
+}
+
+export type LeadChatMessageUpdateToOneWithWhereWithoutRepliesInput = {
+  where?: Prisma.LeadChatMessageWhereInput
+  data: Prisma.XOR<Prisma.LeadChatMessageUpdateWithoutRepliesInput, Prisma.LeadChatMessageUncheckedUpdateWithoutRepliesInput>
+}
+
+export type LeadChatMessageUpdateWithoutRepliesInput = {
+  message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
+  message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
+  mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
+}
+
+export type LeadChatMessageUncheckedUpdateWithoutRepliesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sender_id?: Prisma.IntFieldUpdateOperationsInput | number
+  message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
+  message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
+  mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+}
+
+export type LeadChatMessageUpsertWithWhereUniqueWithoutRepliedToMessageInput = {
+  where: Prisma.LeadChatMessageWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadChatMessageUpdateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedUpdateWithoutRepliedToMessageInput>
+  create: Prisma.XOR<Prisma.LeadChatMessageCreateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedCreateWithoutRepliedToMessageInput>
+}
+
+export type LeadChatMessageUpdateWithWhereUniqueWithoutRepliedToMessageInput = {
+  where: Prisma.LeadChatMessageWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadChatMessageUpdateWithoutRepliedToMessageInput, Prisma.LeadChatMessageUncheckedUpdateWithoutRepliedToMessageInput>
+}
+
+export type LeadChatMessageUpdateManyWithWhereWithoutRepliedToMessageInput = {
+  where: Prisma.LeadChatMessageScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadChatMessageUpdateManyMutationInput, Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageInput>
+}
+
 export type LeadChatMessageCreateWithoutAttachmentsInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
-  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
   mentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
 }
 
 export type LeadChatMessageUncheckedCreateWithoutAttachmentsInput = {
@@ -647,7 +869,9 @@ export type LeadChatMessageUncheckedCreateWithoutAttachmentsInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
   mentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageCreateOrConnectWithoutAttachmentsInput = {
@@ -670,9 +894,11 @@ export type LeadChatMessageUpdateWithoutAttachmentsInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
   mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateWithoutAttachmentsInput = {
@@ -682,16 +908,20 @@ export type LeadChatMessageUncheckedUpdateWithoutAttachmentsInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageCreateWithoutMentionsInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
-  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
-  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
   attachments?: Prisma.LeadChatAttachmentCreateNestedManyWithoutMessageInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMessagesInput
+  repliedToMessage?: Prisma.LeadChatMessageCreateNestedOneWithoutRepliesInput
+  replies?: Prisma.LeadChatMessageCreateNestedManyWithoutRepliedToMessageInput
+  sender: Prisma.UserMasterCreateNestedOneWithoutLeadChatMessagesSentInput
 }
 
 export type LeadChatMessageUncheckedCreateWithoutMentionsInput = {
@@ -701,7 +931,9 @@ export type LeadChatMessageUncheckedCreateWithoutMentionsInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedCreateNestedManyWithoutMessageInput
+  replies?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutRepliedToMessageInput
 }
 
 export type LeadChatMessageCreateOrConnectWithoutMentionsInput = {
@@ -724,9 +956,11 @@ export type LeadChatMessageUpdateWithoutMentionsInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
-  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
   attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateWithoutMentionsInput = {
@@ -736,7 +970,9 @@ export type LeadChatMessageUncheckedUpdateWithoutMentionsInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageCreateManySenderInput = {
@@ -745,15 +981,18 @@ export type LeadChatMessageCreateManySenderInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
 }
 
 export type LeadChatMessageUpdateWithoutSenderInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
   attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateWithoutSenderInput = {
@@ -762,8 +1001,10 @@ export type LeadChatMessageUncheckedUpdateWithoutSenderInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateManyWithoutSenderInput = {
@@ -772,6 +1013,7 @@ export type LeadChatMessageUncheckedUpdateManyWithoutSenderInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeadChatMessageCreateManyChatRoomInput = {
@@ -780,15 +1022,18 @@ export type LeadChatMessageCreateManyChatRoomInput = {
   message_type?: $Enums.LeadChatMessageType
   message_text?: string | null
   created_at?: Date | string
+  reply_to_message_id?: number | null
 }
 
 export type LeadChatMessageUpdateWithoutChatRoomInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
   attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  repliedToMessage?: Prisma.LeadChatMessageUpdateOneWithoutRepliesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateWithoutChatRoomInput = {
@@ -797,12 +1042,56 @@ export type LeadChatMessageUncheckedUpdateWithoutChatRoomInput = {
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
   mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
 }
 
 export type LeadChatMessageUncheckedUpdateManyWithoutChatRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
+  sender_id?: Prisma.IntFieldUpdateOperationsInput | number
+  message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
+  message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reply_to_message_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadChatMessageCreateManyRepliedToMessageInput = {
+  id?: number
+  chat_room_id: number
+  sender_id: number
+  message_type?: $Enums.LeadChatMessageType
+  message_text?: string | null
+  created_at?: Date | string
+}
+
+export type LeadChatMessageUpdateWithoutRepliedToMessageInput = {
+  message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
+  message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.LeadChatAttachmentUpdateManyWithoutMessageNestedInput
+  mentions?: Prisma.LeadChatMentionUpdateManyWithoutMessageNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput
+  replies?: Prisma.LeadChatMessageUpdateManyWithoutRepliedToMessageNestedInput
+  sender?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMessagesSentNestedInput
+}
+
+export type LeadChatMessageUncheckedUpdateWithoutRepliedToMessageInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
+  sender_id?: Prisma.IntFieldUpdateOperationsInput | number
+  message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
+  message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.LeadChatAttachmentUncheckedUpdateManyWithoutMessageNestedInput
+  mentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMessageNestedInput
+  replies?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageNestedInput
+}
+
+export type LeadChatMessageUncheckedUpdateManyWithoutRepliedToMessageInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
   sender_id?: Prisma.IntFieldUpdateOperationsInput | number
   message_type?: Prisma.EnumLeadChatMessageTypeFieldUpdateOperationsInput | $Enums.LeadChatMessageType
   message_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -817,11 +1106,13 @@ export type LeadChatMessageUncheckedUpdateManyWithoutChatRoomInput = {
 export type LeadChatMessageCountOutputType = {
   attachments: number
   mentions: number
+  replies: number
 }
 
 export type LeadChatMessageCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attachments?: boolean | LeadChatMessageCountOutputTypeCountAttachmentsArgs
   mentions?: boolean | LeadChatMessageCountOutputTypeCountMentionsArgs
+  replies?: boolean | LeadChatMessageCountOutputTypeCountRepliesArgs
 }
 
 /**
@@ -848,6 +1139,13 @@ export type LeadChatMessageCountOutputTypeCountMentionsArgs<ExtArgs extends runt
   where?: Prisma.LeadChatMentionWhereInput
 }
 
+/**
+ * LeadChatMessageCountOutputType without action
+ */
+export type LeadChatMessageCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadChatMessageWhereInput
+}
+
 
 export type LeadChatMessageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -856,10 +1154,13 @@ export type LeadChatMessageSelect<ExtArgs extends runtime.Types.Extensions.Inter
   message_type?: boolean
   message_text?: boolean
   created_at?: boolean
-  chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
-  sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  reply_to_message_id?: boolean
   attachments?: boolean | Prisma.LeadChatMessage$attachmentsArgs<ExtArgs>
   mentions?: boolean | Prisma.LeadChatMessage$mentionsArgs<ExtArgs>
+  chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
+  replies?: boolean | Prisma.LeadChatMessage$repliesArgs<ExtArgs>
+  sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeadChatMessageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMessage"]>
 
@@ -870,7 +1171,9 @@ export type LeadChatMessageSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   message_type?: boolean
   message_text?: boolean
   created_at?: boolean
+  reply_to_message_id?: boolean
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
   sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMessage"]>
 
@@ -881,7 +1184,9 @@ export type LeadChatMessageSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   message_type?: boolean
   message_text?: boolean
   created_at?: boolean
+  reply_to_message_id?: boolean
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
   sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMessage"]>
 
@@ -892,32 +1197,39 @@ export type LeadChatMessageSelectScalar = {
   message_type?: boolean
   message_text?: boolean
   created_at?: boolean
+  reply_to_message_id?: boolean
 }
 
-export type LeadChatMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "chat_room_id" | "sender_id" | "message_type" | "message_text" | "created_at", ExtArgs["result"]["leadChatMessage"]>
+export type LeadChatMessageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "chat_room_id" | "sender_id" | "message_type" | "message_text" | "created_at" | "reply_to_message_id", ExtArgs["result"]["leadChatMessage"]>
 export type LeadChatMessageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
-  sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   attachments?: boolean | Prisma.LeadChatMessage$attachmentsArgs<ExtArgs>
   mentions?: boolean | Prisma.LeadChatMessage$mentionsArgs<ExtArgs>
+  chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
+  replies?: boolean | Prisma.LeadChatMessage$repliesArgs<ExtArgs>
+  sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeadChatMessageCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadChatMessageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
   sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 export type LeadChatMessageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
+  repliedToMessage?: boolean | Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>
   sender?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
 }
 
 export type $LeadChatMessagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadChatMessage"
   objects: {
-    chatRoom: Prisma.$LeadChatRoomPayload<ExtArgs>
-    sender: Prisma.$UserMasterPayload<ExtArgs>
     attachments: Prisma.$LeadChatAttachmentPayload<ExtArgs>[]
     mentions: Prisma.$LeadChatMentionPayload<ExtArgs>[]
+    chatRoom: Prisma.$LeadChatRoomPayload<ExtArgs>
+    repliedToMessage: Prisma.$LeadChatMessagePayload<ExtArgs> | null
+    replies: Prisma.$LeadChatMessagePayload<ExtArgs>[]
+    sender: Prisma.$UserMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -926,6 +1238,7 @@ export type $LeadChatMessagePayload<ExtArgs extends runtime.Types.Extensions.Int
     message_type: $Enums.LeadChatMessageType
     message_text: string | null
     created_at: Date
+    reply_to_message_id: number | null
   }, ExtArgs["result"]["leadChatMessage"]>
   composites: {}
 }
@@ -1320,10 +1633,12 @@ readonly fields: LeadChatMessageFieldRefs;
  */
 export interface Prisma__LeadChatMessageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  chatRoom<T extends Prisma.LeadChatRoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatRoomDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatRoomClient<runtime.Types.Result.GetResult<Prisma.$LeadChatRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  sender<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   attachments<T extends Prisma.LeadChatMessage$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessage$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mentions<T extends Prisma.LeadChatMessage$mentionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessage$mentionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatMentionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatRoom<T extends Prisma.LeadChatRoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatRoomDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatRoomClient<runtime.Types.Result.GetResult<Prisma.$LeadChatRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  repliedToMessage<T extends Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessage$repliedToMessageArgs<ExtArgs>>): Prisma.Prisma__LeadChatMessageClient<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  replies<T extends Prisma.LeadChatMessage$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMessage$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sender<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1359,6 +1674,7 @@ export interface LeadChatMessageFieldRefs {
   readonly message_type: Prisma.FieldRef<"LeadChatMessage", 'LeadChatMessageType'>
   readonly message_text: Prisma.FieldRef<"LeadChatMessage", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadChatMessage", 'DateTime'>
+  readonly reply_to_message_id: Prisma.FieldRef<"LeadChatMessage", 'Int'>
 }
     
 
@@ -1555,6 +1871,11 @@ export type LeadChatMessageFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` LeadChatMessages.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadChatMessages.
+   */
   distinct?: Prisma.LeadChatMessageScalarFieldEnum | Prisma.LeadChatMessageScalarFieldEnum[]
 }
 
@@ -1800,6 +2121,49 @@ export type LeadChatMessage$mentionsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.LeadChatMentionScalarFieldEnum | Prisma.LeadChatMentionScalarFieldEnum[]
+}
+
+/**
+ * LeadChatMessage.repliedToMessage
+ */
+export type LeadChatMessage$repliedToMessageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadChatMessage
+   */
+  select?: Prisma.LeadChatMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadChatMessage
+   */
+  omit?: Prisma.LeadChatMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadChatMessageInclude<ExtArgs> | null
+  where?: Prisma.LeadChatMessageWhereInput
+}
+
+/**
+ * LeadChatMessage.replies
+ */
+export type LeadChatMessage$repliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadChatMessage
+   */
+  select?: Prisma.LeadChatMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadChatMessage
+   */
+  omit?: Prisma.LeadChatMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadChatMessageInclude<ExtArgs> | null
+  where?: Prisma.LeadChatMessageWhereInput
+  orderBy?: Prisma.LeadChatMessageOrderByWithRelationInput | Prisma.LeadChatMessageOrderByWithRelationInput[]
+  cursor?: Prisma.LeadChatMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadChatMessageScalarFieldEnum | Prisma.LeadChatMessageScalarFieldEnum[]
 }
 
 /**

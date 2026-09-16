@@ -10,8 +10,16 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { sanitizeFilename } from "./sanitizeFilename";
+import { prisma } from "../prisma/client";
 
 console.log("[DEBUG] WASABI_ENDPOINT:", process.env.WASABI_ENDPOINT);
+
+const buildUniqueMulterFilename = (originalName: string) => {
+  const ext = path.extname(originalName || "");
+  const baseName = path.basename(originalName || "upload", ext);
+  const safeBaseName = sanitizeFilename(baseName || "upload");
+  return `${Date.now()}-${uuidv4()}-${safeBaseName}${ext}`;
+};
 
 const wasabi = new S3Client({
   endpoint:
@@ -27,12 +35,30 @@ const wasabi = new S3Client({
 export const generateSignedUrl = async (
   key: string,
   expiresIn: number = 3600,
-  disposition: "inline" | "attachment" = "inline" // 👈 default inline
+  disposition: "inline" | "attachment" = "inline",
+  originalName?: string
 ) => {
+  let contentDisposition = disposition as string;
+  if (originalName && disposition === "attachment") {
+    const safeName = originalName.replace(/"/g, '');
+    contentDisposition = `${disposition}; filename="${safeName}"`;
+  }
+
+  let contentType: string | undefined = undefined;
+  const ext = (originalName || key).split(".").pop()?.toLowerCase();
+  if (ext === "pdf") contentType = "application/pdf";
+  else if (ext === "png") contentType = "image/png";
+  else if (ext === "jpg" || ext === "jpeg") contentType = "image/jpeg";
+  else if (ext === "webp") contentType = "image/webp";
+  else if (ext === "gif") contentType = "image/gif";
+  else if (ext === "svg") contentType = "image/svg+xml";
+  else if (ext === "txt") contentType = "text/plain";
+
   const command = new GetObjectCommand({
     Bucket: process.env.WASABI_BUCKET_NAME!,
     Key: key,
-    ResponseContentDisposition: disposition, // 👈 this controls browser behavior
+    ResponseContentDisposition: contentDisposition,
+    ResponseContentType: contentType,
   });
 
   return await getSignedUrl(wasabi, command, { expiresIn });
@@ -42,7 +68,7 @@ export const uploadToWasabi = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `design_quotation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -53,7 +79,7 @@ export const uploadToWasabi = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // relative path
@@ -63,7 +89,7 @@ export const uploadToWasabiMeetingDocs = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `meeting_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -74,7 +100,7 @@ export const uploadToWasabiMeetingDocs = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // relative path
@@ -84,7 +110,7 @@ export const uploadToWasabStage1Desings = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `stage_1_design/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -95,10 +121,72 @@ export const uploadToWasabStage1Desings = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // relative path
+};
+
+export const validateCompanyVendorFile = (file: Express.Multer.File) => {
+  const allowedExtensions = ["pdf", "jpg", "jpeg", "png"];
+  const allowedMimeTypes = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+  const maxSizeBytes = 5 * 1024 * 1024; // 5 MB
+
+  const ext = (file.originalname || "").split(".").pop()?.toLowerCase() || "";
+
+  if (!allowedExtensions.includes(ext)) {
+    throw new Error(`Invalid file extension .${ext}. Only pdf, jpg, jpeg, and png are allowed.`);
+  }
+
+  if (!allowedMimeTypes.includes(file.mimetype)) {
+    throw new Error(`Invalid MIME type ${file.mimetype}. Only pdf, jpg, jpeg, and png are allowed.`);
+  }
+
+  if (file.size > maxSizeBytes) {
+    throw new Error(`File size of ${file.originalname} exceeds the 5 MB limit.`);
+  }
+};
+
+export const uploadToWasabiCompanyVendorDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop()?.toLowerCase() || "";
+  const sysName = `company_vendor_documents/${vendorId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: contentType || "application/octet-stream",
+    }),
+  );
+
+  return sysName; // returns key
+};
+
+export const uploadToWasabiClientBankDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop()?.toLowerCase() || "";
+  const sysName = `client_bank_documents/${vendorId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: contentType || "application/octet-stream",
+    }),
+  );
+
+  return sysName;
 };
 
 export const uploadToWasabStage1DesingsFile = async (
@@ -106,7 +194,7 @@ export const uploadToWasabStage1DesingsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `stage_1_design/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -133,7 +221,7 @@ export const uploadToWasabClientDocumentation = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -144,7 +232,7 @@ export const uploadToWasabClientDocumentation = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // relative path
@@ -156,7 +244,7 @@ export const uploadToWasabClientDocumentationFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
-  folder: string = "client_documentations"
+  folder: string = "client_documentations",
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -182,7 +270,7 @@ export const uploadToWasabClientApprovalDocumentation = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `client_approval_documentation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -193,7 +281,7 @@ export const uploadToWasabClientApprovalDocumentation = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // relative path
@@ -204,7 +292,7 @@ export const uploadToWasabClientApprovalDocumentationFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `client_approval_documentation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -232,7 +320,7 @@ export const uploadToWasabiProductionFiles = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -243,7 +331,7 @@ export const uploadToWasabiProductionFiles = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // stored path in Wasabi
@@ -254,7 +342,7 @@ export const uploadToWasabiProductionFilesFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -282,7 +370,7 @@ export const uploadToWasabiOrderLoginPoFile = async (
   leadId: number,
   cardName: string,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const safeCardName = sanitizeFilename(cardName || "card");
@@ -309,7 +397,7 @@ export const uploadToWasabiProductionFilesQcPhotos = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_qc_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -320,7 +408,7 @@ export const uploadToWasabiProductionFilesQcPhotos = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName; // stored path in Wasabi
@@ -331,7 +419,7 @@ export const uploadToWasabiProductionFilesQcPhotosFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_qc_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -357,7 +445,7 @@ export const uploadToWasabiProductionFilesHardwarePackingDocs = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -368,7 +456,7 @@ export const uploadToWasabiProductionFilesHardwarePackingDocs = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -379,7 +467,7 @@ export const uploadToWasabiProductionFilesHardwarePackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_hardware_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -405,7 +493,7 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocs = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -416,7 +504,7 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocs = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -427,10 +515,37 @@ export const uploadToWasabiProductionFilesWoodworkPackingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `production_files_woodwork_packing_details_docs/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiPreProductionFilesFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `pre_production_files/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -453,7 +568,7 @@ export const uploadToWasabiCurrentSitePhotosReadyToDispatch = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -464,7 +579,7 @@ export const uploadToWasabiCurrentSitePhotosReadyToDispatch = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -475,7 +590,7 @@ export const uploadToWasabiCurrentSitePhotosReadyToDispatchFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -501,7 +616,7 @@ export const uploadToWasabiCurrentSitePhotosSiteReadiness = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `site_readiness/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -512,7 +627,7 @@ export const uploadToWasabiCurrentSitePhotosSiteReadiness = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -523,7 +638,7 @@ export const uploadToWasabiCurrentSitePhotosSiteReadinessFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `site_readiness/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -549,7 +664,7 @@ export const uploadToWasabiPaymentProffDispatchPlanning = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `site_readiness/current_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -560,7 +675,7 @@ export const uploadToWasabiPaymentProffDispatchPlanning = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -571,7 +686,7 @@ export const uploadToWasabiPaymentProffDispatchPlanningFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `dispatch_planning/payment_proof/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -597,7 +712,7 @@ export const uploadToWasabiDispatchDocuments = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -608,7 +723,7 @@ export const uploadToWasabiDispatchDocuments = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -619,7 +734,7 @@ export const uploadToWasabiDispatchDocumentsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -645,7 +760,7 @@ export const uploadToWasabiPostDispatchDocuments = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `post_dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -656,7 +771,7 @@ export const uploadToWasabiPostDispatchDocuments = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -667,7 +782,7 @@ export const uploadToWasabiPostDispatchDocumentsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `post_dispatch/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -693,7 +808,7 @@ export const uploadToWasabiUnderInstallationDayWiseDocuments = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `under_installation_day_wise_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -704,7 +819,7 @@ export const uploadToWasabiUnderInstallationDayWiseDocuments = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -715,7 +830,7 @@ export const uploadToWasabiUnderInstallationDayWiseDocumentsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `under_installation_day_wise_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -741,7 +856,7 @@ export const uploadToWasabiUnderInstallationMiscellaneousDocuments = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `under_installation_miscellaneous_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -752,7 +867,7 @@ export const uploadToWasabiUnderInstallationMiscellaneousDocuments = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -763,7 +878,7 @@ export const uploadToWasabiUnderInstallationMiscellaneousDocumentsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `under_installation_miscellaneous_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -785,26 +900,27 @@ export const uploadToWasabiUnderInstallationMiscellaneousDocumentsFile = async (
   return sysName;
 };
 
-export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos = async (
-  buffer: Buffer,
-  vendorId: number,
-  leadId: number,
-  originalName: string
-) => {
-  const ext = originalName.split(".").pop();
-  const sysName = `under_installation_usable_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotos =
+  async (
+    buffer: Buffer,
+    vendorId: number,
+    leadId: number,
+    originalName: string,
+  ) => {
+    const ext = originalName.split(".").pop();
+    const sysName = `under_installation_usable_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
-  await wasabi.send(
-    new PutObjectCommand({
-      Bucket: process.env.WASABI_BUCKET_NAME!,
-      Key: sysName,
-      Body: buffer,
-      ContentType: "application/octet-stream",
-    })
-  );
+    await wasabi.send(
+      new PutObjectCommand({
+        Bucket: process.env.WASABI_BUCKET_NAME!,
+        Key: sysName,
+        Body: buffer,
+        ContentType: "application/octet-stream",
+      }),
+    );
 
-  return sysName;
-};
+    return sysName;
+  };
 
 export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile =
   async (
@@ -812,7 +928,7 @@ export const uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile =
     vendorId: number,
     leadId: number,
     originalName: string,
-    contentType: string
+    contentType: string,
   ) => {
     const ext = originalName.split(".").pop();
     const sysName = `under_installation_usable_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -838,7 +954,7 @@ export const uploadToWasabiUnderInstallationUsableHandoverDocuments = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `under_installation_usable_handover/handover_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -849,7 +965,7 @@ export const uploadToWasabiUnderInstallationUsableHandoverDocuments = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -861,7 +977,7 @@ export const uploadToWasabiUnderInstallationUsableHandoverDocumentsFile =
     vendorId: number,
     leadId: number,
     originalName: string,
-    contentType: string
+    contentType: string,
   ) => {
     const ext = originalName.split(".").pop();
     const sysName = `under_installation_usable_handover/handover_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -887,7 +1003,7 @@ export const uploadToWasabiFinalHandoverFinalSitePhotos = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -898,7 +1014,7 @@ export const uploadToWasabiFinalHandoverFinalSitePhotos = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -909,7 +1025,7 @@ export const uploadToWasabiFinalHandoverFinalSitePhotosFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/final_site_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -935,7 +1051,7 @@ export const uploadToWasabiFinalHandoverWarrantyCardPhotos = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/warranty_card_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -946,7 +1062,7 @@ export const uploadToWasabiFinalHandoverWarrantyCardPhotos = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -957,7 +1073,7 @@ export const uploadToWasabiFinalHandoverWarrantyCardPhotosFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/warranty_card_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -983,7 +1099,7 @@ export const uploadToWasabiFinalHandoverBookletPhoto = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/booklet_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -994,7 +1110,7 @@ export const uploadToWasabiFinalHandoverBookletPhoto = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -1005,7 +1121,7 @@ export const uploadToWasabiFinalHandoverBookletPhotoFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/booklet_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1031,7 +1147,7 @@ export const uploadToWasabiFinalHandoverFormPhoto = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/form_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1042,7 +1158,7 @@ export const uploadToWasabiFinalHandoverFormPhoto = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -1053,7 +1169,7 @@ export const uploadToWasabiFinalHandoverFormPhotoFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/form_photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1079,7 +1195,7 @@ export const uploadToWasabiFinalHandoverQCDocument = async (
   buffer: Buffer,
   vendorId: number,
   leadId: number,
-  originalName: string
+  originalName: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/qc_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1090,7 +1206,7 @@ export const uploadToWasabiFinalHandoverQCDocument = async (
       Key: sysName,
       Body: buffer,
       ContentType: "application/octet-stream",
-    })
+    }),
   );
 
   return sysName;
@@ -1101,10 +1217,64 @@ export const uploadToWasabiFinalHandoverQCDocumentFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `final_handover/qc_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiServicingAmcContractDocumentFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `servicing/amc_contract_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiServicingCompletionDocumentFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `servicing/completion_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -1153,13 +1323,16 @@ export const uploadChatAttachments = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
     fileSize: 200 * 1024 * 1024, // 200 MB
   },
 });
+
+const UPLOAD_MAX_SIZE_MB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400", 10);
+const UPLOAD_MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
 
 export const uploadLeadSitePhotos = multer({
   storage: multer.diskStorage({
@@ -1169,12 +1342,12 @@ export const uploadLeadSitePhotos = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
-    fileSize: 200 * 1024 * 1024, // 200 MB
-    files: 10,
+    fileSize: UPLOAD_MAX_SIZE_MB * 1024 * 1024,
+    files: UPLOAD_MAX_FILES,
   },
 });
 
@@ -1186,7 +1359,58 @@ export const uploadDesignQuotationFiles = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
+export const uploadCostingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/costing_file";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
+export const uploadElectricalPlumbingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/electrical_plumbing";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
+export const uploadFinalIsmFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/final_ism_upload";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
@@ -1203,15 +1427,19 @@ export const uploadInitialSiteMeasurement = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
     fileSize: 200 * 1024 * 1024, // 200 MB
   },
   fileFilter: (_req, file, cb) => {
+    if (file.fieldname === "upload_pdf") {
+      cb(null, true);
+      return;
+    }
+
     const isImage = file.mimetype.startsWith("image/");
-    const isPdf = file.mimetype === "application/pdf";
     const ext = path.extname(file.originalname || "").toLowerCase();
     const imageExtensions = [
       ".jpg",
@@ -1229,10 +1457,10 @@ export const uploadInitialSiteMeasurement = multer({
       ".jfif",
     ];
 
-    if (isImage || isPdf || imageExtensions.includes(ext)) {
+    if (isImage || imageExtensions.includes(ext)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type. Only PDF and image files are allowed."));
+      cb(new Error("Invalid file type. Only image files are allowed for this field."));
     }
   },
 });
@@ -1242,7 +1470,7 @@ export const uploadToWasabiLeadChatAttachment = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `lead_chat/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1269,10 +1497,91 @@ export const uploadToWasabiDesignQuotationFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `design_quotation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiCostingFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `costing_file/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiElectricalPlumbing = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `electrical_plumbing/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalIsmUpload = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_ism_upload/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -1296,7 +1605,7 @@ export const uploadToWasabiBookingFinalDocumentFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `final-documents-booking/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1323,7 +1632,7 @@ export const uploadToWasabiBookingPaymentDetailsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `booking-amount-payment-details/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1350,7 +1659,7 @@ export const uploadToWasabiFinalMeasurementDocFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `final-measurement-documents/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1377,7 +1686,7 @@ export const uploadToWasabiFinalMeasurementSitePhotoFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `final-current-site-photos/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1404,7 +1713,7 @@ export const uploadToWasabiAdditionalPaymentFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `additional-payments/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1431,7 +1740,7 @@ export const uploadToWasabiCSPBookingPhotoFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const sanitizedName = sanitizeFilename(originalName);
   const sysName = `current-site-photos-at-booking-stage/${vendorId}/${leadId}/${Date.now()}-${sanitizedName}`;
@@ -1458,7 +1767,7 @@ export const uploadToWasabiMeetingDocsFile = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `meeting_documents/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1486,7 +1795,7 @@ export const uploadToWasabiInitialSiteMeasurementFile = async (
   leadId: number,
   originalName: string,
   contentType: string,
-  folder: string
+  folder: string,
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `${folder}/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
@@ -1513,8 +1822,38 @@ export const uploadToWasabiLeadSitePhoto = async (
   vendorId: number,
   leadId: number,
   originalName: string,
-  contentType: string
+  contentType: string,
 ) => {
+  // 1️⃣ File size check from environment variable (UPLOAD_MAX_SIZE_MB)
+  const maxFileSizeMB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400");
+  const stats = fs.statSync(filePath);
+  const fileSizeInMB = stats.size / (1024 * 1024);
+  if (fileSizeInMB > maxFileSizeMB) {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+    throw new Error(`File size exceeds the maximum limit of ${maxFileSizeMB} MB`);
+  }
+
+  // 2️⃣ Max files count check from environment variable (UPLOAD_MAX_FILES)
+  const maxFiles = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+  const currentFilesCount = await prisma.leadDocuments.count({
+    where: {
+      lead_id: leadId,
+      deleted_at: null,
+      documentType: {
+        tag: "Type 1",
+      },
+    },
+  });
+
+  if (currentFilesCount >= maxFiles) {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+    throw new Error(`Maximum files upload limit of ${maxFiles} reached for this lead`);
+  }
+
   const ext = originalName.split(".").pop();
   const sysName = `site-photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
@@ -1532,5 +1871,289 @@ export const uploadToWasabiLeadSitePhoto = async (
 
   await upload.done();
 
+  return sysName;
+};
+
+export const uploadToWasabiMachineImage = async (
+  filePath: string,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+): Promise<string> => {
+  const sanitizedName = sanitizeFilename(originalName);
+
+  const key = `machine-images/${vendorId}/${Date.now()}-${sanitizedName}`;
+
+  // 1️⃣ Upload file
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return key;
+};
+
+export const uploadToWasabiProjectExcel = async (
+  filePath: string,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+): Promise<{ key: string; url: string }> => {
+  try {
+    const ext = path.extname(originalName);
+    const baseName = path
+      .basename(originalName, ext)
+      .replace(/[^a-zA-Z0-9-_]/g, "_");
+
+    const safeName = `${baseName}${ext}`;
+    const key = `project-excels/${vendorId}/${Date.now()}-${safeName}`;
+    const upload = new Upload({
+      client: wasabi,
+      params: {
+        Bucket: process.env.WASABI_BUCKET_NAME!,
+        Key: key,
+        Body: fs.createReadStream(filePath),
+        ContentType: contentType,
+      },
+      partSize: 10 * 1024 * 1024,
+      queueSize: 4,
+    });
+
+    await upload.done();
+
+    const command = new GetObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      ResponseContentDisposition: `attachment; filename="${safeName}"`,
+    });
+
+    const signedUrl = await getSignedUrl(wasabi, command, {
+      expiresIn: 60 * 60 * 24, // 24 hours
+    });
+
+    return {
+      key,
+      url: signedUrl,
+    };
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+
+
+export const uploadToWasabiItems = async (
+  filePath: string,
+  vendorId: number,
+  defected_item_id: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `defect/${vendorId}/${defected_item_id}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export interface UploadedImage {
+  url: string;
+  key: string;
+  originalName: string;
+  systemName: string;
+}
+export const uploadToWasabiDefectedItems = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  defectedItemId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiItems(
+      file.path,
+      vendorId,
+      defectedItemId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
+};
+
+
+export const uploadToWasabiCompletionItem = async (
+  filePath: string,
+  vendorId: number,
+  mappingId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `completion/${vendorId}/${mappingId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+  return sysName;
+};
+
+export const uploadToWasabiCompletionPhotos = async (
+  files: Express.Multer.File[],
+  vendorId: number,
+  mappingId: number
+): Promise<UploadedImage[]> => {
+  const uploads = files.map(async (file) => {
+    const sysName = await uploadToWasabiCompletionItem(
+      file.path,
+      vendorId,
+      mappingId,
+      file.originalname,
+      file.mimetype,
+    );
+
+    const url = `${process.env.WASABI_ENDPOINT}/${process.env.WASABI_BUCKET_NAME}/${sysName}`;
+
+    return {
+      url,
+      key: sysName,
+      originalName: file.originalname,
+      systemName: sysName,
+    };
+  });
+
+  return Promise.all(uploads);
+};
+
+export const uploadPdfToWasabi = async (
+  localFilePath: string,
+  vendorId: number,
+  boxId: number,
+  fileName: string
+): Promise<string> => {
+  const key = `pdfs/boxes/${vendorId}/${boxId}/${uuidv4()}_${fileName}`;
+ 
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: key,
+      Body: fs.createReadStream(localFilePath),
+      ContentType: "application/pdf",
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+ 
+  await upload.done();
+  return key;
+};
+ 
+// ── Generate a signed download URL for a Wasabi object ────────────────────────
+// disposition: "attachment" triggers browser download, "inline" opens in browser
+ 
+export const getPdfSignedUrl = async (
+  key: string,
+  expiresIn: number = 3600,
+  disposition: "inline" | "attachment" = "attachment"
+): Promise<string> => {
+  const command = new GetObjectCommand({
+    Bucket: process.env.WASABI_BUCKET_NAME!,
+    Key: key,
+    ResponseContentDisposition: disposition,
+  });
+ 
+  return getSignedUrl(wasabi, command, { expiresIn });
+};
+
+
+export const uploadPdfAndGetSignedUrl = async (
+  localFilePath: string,
+  vendorId: number,
+  boxId: number,
+  fileName: string,
+  expiresIn: number = 3600
+): Promise<{ signedUrl: string; wasabiKey: string }> => {
+  try {
+    const wasabiKey = await uploadPdfToWasabi(
+      localFilePath,
+      vendorId,
+      boxId,
+      fileName
+    );
+ 
+    const signedUrl = await getPdfSignedUrl(wasabiKey, expiresIn, "attachment");
+ 
+    return { signedUrl, wasabiKey };
+  } finally {
+    // Always delete temp file whether upload succeeded or failed
+    if (fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+    }
+  }
+};
+
+export const uploadToWasabiVendorAsset = async (
+  filePath: string,
+  assetType: "logo" | "icon" | "login_image",
+  originalName: string,
+  contentType: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `vendor-${assetType}s/${Date.now()}-${sanitizeFilename(originalName)}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 5 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
   return sysName;
 };

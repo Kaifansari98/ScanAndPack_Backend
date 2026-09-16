@@ -210,7 +210,7 @@ export type VendorTaxInfoGroupByOutputType = {
   _max: VendorTaxInfoMaxAggregateOutputType | null
 }
 
-type GetVendorTaxInfoGroupByPayload<T extends VendorTaxInfoGroupByArgs> = Prisma.PrismaPromise<
+export type GetVendorTaxInfoGroupByPayload<T extends VendorTaxInfoGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorTaxInfoGroupByOutputType, T['by']> &
       {
@@ -1237,6 +1237,11 @@ export type VendorTaxInfoFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` VendorTaxInfos.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VendorTaxInfos.
+   */
   distinct?: Prisma.VendorTaxInfoScalarFieldEnum | Prisma.VendorTaxInfoScalarFieldEnum[]
 }
 

@@ -193,7 +193,7 @@ export type LeadChatRoomGroupByOutputType = {
   _max: LeadChatRoomMaxAggregateOutputType | null
 }
 
-type GetLeadChatRoomGroupByPayload<T extends LeadChatRoomGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadChatRoomGroupByPayload<T extends LeadChatRoomGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatRoomGroupByOutputType, T['by']> &
       {
@@ -216,10 +216,10 @@ export type LeadChatRoomWhereInput = {
   lead_id?: Prisma.IntFilter<"LeadChatRoom"> | number
   vendor_id?: Prisma.IntFilter<"LeadChatRoom"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatRoom"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   members?: Prisma.LeadChatMemberListRelationFilter
   messages?: Prisma.LeadChatMessageListRelationFilter
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
 export type LeadChatRoomOrderByWithRelationInput = {
@@ -227,10 +227,10 @@ export type LeadChatRoomOrderByWithRelationInput = {
   lead_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  lead?: Prisma.LeadMasterOrderByWithRelationInput
-  vendor?: Prisma.VendorMasterOrderByWithRelationInput
   members?: Prisma.LeadChatMemberOrderByRelationAggregateInput
   messages?: Prisma.LeadChatMessageOrderByRelationAggregateInput
+  lead?: Prisma.LeadMasterOrderByWithRelationInput
+  vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
 export type LeadChatRoomWhereUniqueInput = Prisma.AtLeast<{
@@ -242,10 +242,10 @@ export type LeadChatRoomWhereUniqueInput = Prisma.AtLeast<{
   lead_id?: Prisma.IntFilter<"LeadChatRoom"> | number
   vendor_id?: Prisma.IntFilter<"LeadChatRoom"> | number
   created_at?: Prisma.DateTimeFilter<"LeadChatRoom"> | Date | string
-  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
-  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   members?: Prisma.LeadChatMemberListRelationFilter
   messages?: Prisma.LeadChatMessageListRelationFilter
+  lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id" | "uniq_lead_vendor_chat_room">
 
 export type LeadChatRoomOrderByWithAggregationInput = {
@@ -272,10 +272,10 @@ export type LeadChatRoomScalarWhereWithAggregatesInput = {
 
 export type LeadChatRoomCreateInput = {
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
   members?: Prisma.LeadChatMemberCreateNestedManyWithoutChatRoomInput
   messages?: Prisma.LeadChatMessageCreateNestedManyWithoutChatRoomInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
 }
 
 export type LeadChatRoomUncheckedCreateInput = {
@@ -289,10 +289,10 @@ export type LeadChatRoomUncheckedCreateInput = {
 
 export type LeadChatRoomUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
   members?: Prisma.LeadChatMemberUpdateManyWithoutChatRoomNestedInput
   messages?: Prisma.LeadChatMessageUpdateManyWithoutChatRoomNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
 }
 
 export type LeadChatRoomUncheckedUpdateInput = {
@@ -489,9 +489,9 @@ export type LeadChatRoomUpdateOneRequiredWithoutMessagesNestedInput = {
 
 export type LeadChatRoomCreateWithoutVendorInput = {
   created_at?: Date | string
-  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
   members?: Prisma.LeadChatMemberCreateNestedManyWithoutChatRoomInput
   messages?: Prisma.LeadChatMessageCreateNestedManyWithoutChatRoomInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
 }
 
 export type LeadChatRoomUncheckedCreateWithoutVendorInput = {
@@ -540,9 +540,9 @@ export type LeadChatRoomScalarWhereInput = {
 
 export type LeadChatRoomCreateWithoutLeadInput = {
   created_at?: Date | string
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
   members?: Prisma.LeadChatMemberCreateNestedManyWithoutChatRoomInput
   messages?: Prisma.LeadChatMessageCreateNestedManyWithoutChatRoomInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
 }
 
 export type LeadChatRoomUncheckedCreateWithoutLeadInput = {
@@ -581,9 +581,9 @@ export type LeadChatRoomUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadChatRoomCreateWithoutMembersInput = {
   created_at?: Date | string
+  messages?: Prisma.LeadChatMessageCreateNestedManyWithoutChatRoomInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
-  messages?: Prisma.LeadChatMessageCreateNestedManyWithoutChatRoomInput
 }
 
 export type LeadChatRoomUncheckedCreateWithoutMembersInput = {
@@ -612,9 +612,9 @@ export type LeadChatRoomUpdateToOneWithWhereWithoutMembersInput = {
 
 export type LeadChatRoomUpdateWithoutMembersInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.LeadChatMessageUpdateManyWithoutChatRoomNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
-  messages?: Prisma.LeadChatMessageUpdateManyWithoutChatRoomNestedInput
 }
 
 export type LeadChatRoomUncheckedUpdateWithoutMembersInput = {
@@ -627,9 +627,9 @@ export type LeadChatRoomUncheckedUpdateWithoutMembersInput = {
 
 export type LeadChatRoomCreateWithoutMessagesInput = {
   created_at?: Date | string
+  members?: Prisma.LeadChatMemberCreateNestedManyWithoutChatRoomInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutLeadChatRoomsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadChatRoomsInput
-  members?: Prisma.LeadChatMemberCreateNestedManyWithoutChatRoomInput
 }
 
 export type LeadChatRoomUncheckedCreateWithoutMessagesInput = {
@@ -658,9 +658,9 @@ export type LeadChatRoomUpdateToOneWithWhereWithoutMessagesInput = {
 
 export type LeadChatRoomUpdateWithoutMessagesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.LeadChatMemberUpdateManyWithoutChatRoomNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
-  members?: Prisma.LeadChatMemberUpdateManyWithoutChatRoomNestedInput
 }
 
 export type LeadChatRoomUncheckedUpdateWithoutMessagesInput = {
@@ -679,9 +679,9 @@ export type LeadChatRoomCreateManyVendorInput = {
 
 export type LeadChatRoomUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
   members?: Prisma.LeadChatMemberUpdateManyWithoutChatRoomNestedInput
   messages?: Prisma.LeadChatMessageUpdateManyWithoutChatRoomNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
 }
 
 export type LeadChatRoomUncheckedUpdateWithoutVendorInput = {
@@ -706,9 +706,9 @@ export type LeadChatRoomCreateManyLeadInput = {
 
 export type LeadChatRoomUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
   members?: Prisma.LeadChatMemberUpdateManyWithoutChatRoomNestedInput
   messages?: Prisma.LeadChatMessageUpdateManyWithoutChatRoomNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadChatRoomsNestedInput
 }
 
 export type LeadChatRoomUncheckedUpdateWithoutLeadInput = {
@@ -770,10 +770,10 @@ export type LeadChatRoomSelect<ExtArgs extends runtime.Types.Extensions.Internal
   lead_id?: boolean
   vendor_id?: boolean
   created_at?: boolean
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   members?: boolean | Prisma.LeadChatRoom$membersArgs<ExtArgs>
   messages?: boolean | Prisma.LeadChatRoom$messagesArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeadChatRoomCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatRoom"]>
 
@@ -804,10 +804,10 @@ export type LeadChatRoomSelectScalar = {
 
 export type LeadChatRoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "vendor_id" | "created_at", ExtArgs["result"]["leadChatRoom"]>
 export type LeadChatRoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
-  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   members?: boolean | Prisma.LeadChatRoom$membersArgs<ExtArgs>
   messages?: boolean | Prisma.LeadChatRoom$messagesArgs<ExtArgs>
+  lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.LeadChatRoomCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadChatRoomIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -822,10 +822,10 @@ export type LeadChatRoomIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $LeadChatRoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadChatRoom"
   objects: {
-    lead: Prisma.$LeadMasterPayload<ExtArgs>
-    vendor: Prisma.$VendorMasterPayload<ExtArgs>
     members: Prisma.$LeadChatMemberPayload<ExtArgs>[]
     messages: Prisma.$LeadChatMessagePayload<ExtArgs>[]
+    lead: Prisma.$LeadMasterPayload<ExtArgs>
+    vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1226,10 +1226,10 @@ readonly fields: LeadChatRoomFieldRefs;
  */
 export interface Prisma__LeadChatRoomClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   members<T extends Prisma.LeadChatRoom$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatRoom$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   messages<T extends Prisma.LeadChatRoom$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatRoom$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1459,6 +1459,11 @@ export type LeadChatRoomFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` LeadChatRooms.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadChatRooms.
+   */
   distinct?: Prisma.LeadChatRoomScalarFieldEnum | Prisma.LeadChatRoomScalarFieldEnum[]
 }
 

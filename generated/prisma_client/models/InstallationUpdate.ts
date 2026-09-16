@@ -229,7 +229,7 @@ export type InstallationUpdateGroupByOutputType = {
   _max: InstallationUpdateMaxAggregateOutputType | null
 }
 
-type GetInstallationUpdateGroupByPayload<T extends InstallationUpdateGroupByArgs> = Prisma.PrismaPromise<
+export type GetInstallationUpdateGroupByPayload<T extends InstallationUpdateGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InstallationUpdateGroupByOutputType, T['by']> &
       {
@@ -1833,6 +1833,11 @@ export type InstallationUpdateFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` InstallationUpdates.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of InstallationUpdates.
+   */
   distinct?: Prisma.InstallationUpdateScalarFieldEnum | Prisma.InstallationUpdateScalarFieldEnum[]
 }
 

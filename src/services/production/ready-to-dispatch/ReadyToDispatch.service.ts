@@ -5,6 +5,10 @@ import logger from "../../../utils/logger";
 import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import Joi from "joi";
 import { cache } from "../../../utils/cache";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -15,7 +19,84 @@ const assignTaskSiteReadinessSchema = Joi.object({
   created_by: Joi.number().required(),
 });
 
+const RESTRICTED_TASK_TYPE = "Site Readiness" as const;
+const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
+
 export class ReadyToDispatchService {
+  async getSiteReadinessTaskConflicts(leadId: number) {
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { id: true },
+    });
+
+    if (!lead) {
+      throw new Error(`Lead ${leadId} not found`);
+    }
+
+    const restrictedTaskConflicts = await prisma.userLeadTask.findMany({
+      where: {
+        lead_id: leadId,
+        task_type: RESTRICTED_TASK_TYPE,
+        status: { not: "completed" },
+      },
+      select: {
+        id: true,
+        task_type: true,
+        status: true,
+        due_date: true,
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    const followUpConflicts = await prisma.userLeadTask.findMany({
+      where: {
+        lead_id: leadId,
+        task_type: FOLLOW_UP_TASK_TYPE,
+        status: { not: "completed" },
+      },
+      select: {
+        id: true,
+        task_type: true,
+        status: true,
+        due_date: true,
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return {
+      restrictedTaskConflicts: restrictedTaskConflicts.map((task) => ({
+        id: task.id,
+        task_type: task.task_type,
+        status: task.status,
+        due_date: task.due_date,
+        assignee: task.user,
+      })),
+      followUpConflicts: followUpConflicts.map((task) => ({
+        id: task.id,
+        task_type: task.task_type,
+        status: task.status,
+        due_date: task.due_date,
+        assignee: task.user,
+      })),
+    };
+  }
+
   async getLeadsWithStatusReadyToDispatch(
     vendorId: number,
     userId: number,
@@ -209,13 +290,16 @@ export class ReadyToDispatchService {
         { statusCode: 404 }
       );
 
+    const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
+
     // 🔹 Fetch all uploaded Current Site Photos for this lead
     const documents = await prisma.leadDocuments.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
-        is_deleted: false
+        is_deleted: false,
+        doc_sys_name: { startsWith: prefix }
       },
       orderBy: { created_at: "desc" },
     });
@@ -251,12 +335,15 @@ export class ReadyToDispatchService {
         { statusCode: 404 }
       );
 
+    const prefix = `ready_to_dispatch/current_site_photos/${vendorId}/${leadId}/`;
+
     // 🔹 Count all uploaded Current Site Photos for this lead
     const count = await prisma.leadDocuments.count({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
         doc_type_id: sitePhotoDocType.id,
+        doc_sys_name: { startsWith: prefix },
       },
     });
 
@@ -288,7 +375,13 @@ export class ReadyToDispatchService {
       // 1️⃣ Validate lead
       const lead = await tx.leadMaster.findUnique({
         where: { id: lead_id },
-        select: { id: true, vendor_id: true, account_id: true, status_id: true },
+        select: {
+          id: true,
+          vendor_id: true,
+          account_id: true,
+          status_id: true,
+          franchise_id: true,
+        },
       });
       if (!lead) throw new Error(`Lead ${lead_id} not found`);
 
@@ -314,12 +407,66 @@ export class ReadyToDispatchService {
         );
       }
 
+      const isSelfAssignTask = await validateSelfAssignTask({
+        tx,
+        vendorId: lead.vendor_id,
+        taskType: task_type,
+        assigneeUserId: assignee_user_id,
+        createdBy: created_by,
+      });
+
+      if (
+        task_type === FOLLOW_UP_TASK_TYPE &&
+        assignee_user_id !== created_by
+      ) {
+        const existingFollowUpTask = await tx.userLeadTask.findFirst({
+          where: {
+            lead_id: lead.id,
+            task_type: FOLLOW_UP_TASK_TYPE,
+            user_id: assignee_user_id,
+            status: { not: "completed" },
+          },
+          select: { id: true },
+          orderBy: { created_at: "desc" },
+        });
+
+        if (existingFollowUpTask) {
+          throw new Error(
+            "A Follow Up Task is already assigned to this user, which is not yet completed"
+          );
+        }
+      }
+
+      if (task_type === RESTRICTED_TASK_TYPE) {
+        const existingTask = await tx.userLeadTask.findFirst({
+          where: {
+            lead_id: lead.id,
+            task_type,
+            status: { not: "completed" },
+          },
+          select: {
+            id: true,
+            status: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
+
+        if (existingTask) {
+          throw new Error(
+            `${task_type} task already exists for this lead and is not completed`
+          );
+        }
+      }
+
       // 3️⃣ Create task record
       const task = await tx.userLeadTask.create({
         data: {
           lead_id: lead.id,
           account_id: lead.account_id!,
           vendor_id: lead.vendor_id,
+          franchise_id: lead.franchise_id ?? null,
           user_id: assignee_user_id,
           task_type,
           lead_stage: leadStage,
@@ -328,6 +475,12 @@ export class ReadyToDispatchService {
           status: "open",
           created_by,
         },
+      });
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
       });
 
       // 🧹 Refresh Sales-Executive Dashboard Task Cache
@@ -341,7 +494,7 @@ export class ReadyToDispatchService {
         status_id: number | null;
       } = { ...lead, status_id: null };
 
-      if (task_type.toLowerCase() !== "follow up") {
+      if (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) {
         const toStatus = await tx.statusTypeMaster.findFirst({
           where: { vendor_id: lead.vendor_id, tag: "Type 12" }, // 🔸 Use Type 12 for Site Readiness
           select: { id: true },
@@ -362,14 +515,14 @@ export class ReadyToDispatchService {
             status_id: true,
           },
         });
-      }
 
-      // 5️⃣ Create log entry
-      let actionMessage = "";
-      if (task_type.toLowerCase() === "follow up") {
-        actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
-      } else {
-        actionMessage = `Lead has been assigned to ${assignee.user_name} for Site Readiness.`;
+        await ensureLeadStatusLog(tx, {
+          vendorId: lead.vendor_id,
+          leadId: lead.id,
+          accountId: lead.account_id,
+          statusId: toStatus.id,
+          createdBy: created_by,
+        });
       }
 
       const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
@@ -377,7 +530,16 @@ export class ReadyToDispatchService {
         month: "short",
         year: "numeric",
       });
-      actionMessage += ` Due Date: ${formattedDate}.`;
+
+      // 5️⃣ Create log entry
+      let actionMessage = "";
+      if (task_type.toLowerCase() === "follow up") {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
+      } else if (isSelfAssignTask) {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type}. Due Date: ${formattedDate}.`;
+      } else {
+        actionMessage = `Site Readiness task has been created for ${assignee.user_name}. Due Date: ${formattedDate}.`;
+      }
 
       if (remark && remark.trim()) {
         actionMessage += ` — Remark: ${remark.trim()}`;
@@ -385,16 +547,14 @@ export class ReadyToDispatchService {
         actionMessage += ` — Remark: No remark provided.`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Site Readiness task assigned successfully", {

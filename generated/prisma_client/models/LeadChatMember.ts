@@ -204,7 +204,7 @@ export type LeadChatMemberGroupByOutputType = {
   _max: LeadChatMemberMaxAggregateOutputType | null
 }
 
-type GetLeadChatMemberGroupByPayload<T extends LeadChatMemberGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadChatMemberGroupByPayload<T extends LeadChatMemberGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatMemberGroupByOutputType, T['by']> &
       {
@@ -228,9 +228,9 @@ export type LeadChatMemberWhereInput = {
   user_id?: Prisma.IntFilter<"LeadChatMember"> | number
   joined_at?: Prisma.DateTimeFilter<"LeadChatMember"> | Date | string
   added_by?: Prisma.IntNullableFilter<"LeadChatMember"> | number | null
+  addedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  addedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }
 
 export type LeadChatMemberOrderByWithRelationInput = {
@@ -239,9 +239,9 @@ export type LeadChatMemberOrderByWithRelationInput = {
   user_id?: Prisma.SortOrder
   joined_at?: Prisma.SortOrder
   added_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  addedBy?: Prisma.UserMasterOrderByWithRelationInput
   chatRoom?: Prisma.LeadChatRoomOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
-  addedBy?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type LeadChatMemberWhereUniqueInput = Prisma.AtLeast<{
@@ -254,9 +254,9 @@ export type LeadChatMemberWhereUniqueInput = Prisma.AtLeast<{
   user_id?: Prisma.IntFilter<"LeadChatMember"> | number
   joined_at?: Prisma.DateTimeFilter<"LeadChatMember"> | Date | string
   added_by?: Prisma.IntNullableFilter<"LeadChatMember"> | number | null
+  addedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   chatRoom?: Prisma.XOR<Prisma.LeadChatRoomScalarRelationFilter, Prisma.LeadChatRoomWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
-  addedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }, "id" | "uniq_chat_member">
 
 export type LeadChatMemberOrderByWithAggregationInput = {
@@ -285,9 +285,9 @@ export type LeadChatMemberScalarWhereWithAggregatesInput = {
 
 export type LeadChatMemberCreateInput = {
   joined_at?: Date | string
+  addedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersAddedInput
   chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMembersInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersInput
-  addedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersAddedInput
 }
 
 export type LeadChatMemberUncheckedCreateInput = {
@@ -300,9 +300,9 @@ export type LeadChatMemberUncheckedCreateInput = {
 
 export type LeadChatMemberUpdateInput = {
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addedBy?: Prisma.UserMasterUpdateOneWithoutLeadChatMembersAddedNestedInput
   chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMembersNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMembersNestedInput
-  addedBy?: Prisma.UserMasterUpdateOneWithoutLeadChatMembersAddedNestedInput
 }
 
 export type LeadChatMemberUncheckedUpdateInput = {
@@ -386,13 +386,6 @@ export type LeadChatMemberSumOrderByAggregateInput = {
   added_by?: Prisma.SortOrder
 }
 
-export type LeadChatMemberCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput> | Prisma.LeadChatMemberCreateWithoutUserInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutUserInput | Prisma.LeadChatMemberCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.LeadChatMemberCreateManyUserInputEnvelope
-  connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
-}
-
 export type LeadChatMemberCreateNestedManyWithoutAddedByInput = {
   create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutAddedByInput, Prisma.LeadChatMemberUncheckedCreateWithoutAddedByInput> | Prisma.LeadChatMemberCreateWithoutAddedByInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutAddedByInput[]
   connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutAddedByInput | Prisma.LeadChatMemberCreateOrConnectWithoutAddedByInput[]
@@ -400,7 +393,7 @@ export type LeadChatMemberCreateNestedManyWithoutAddedByInput = {
   connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
 }
 
-export type LeadChatMemberUncheckedCreateNestedManyWithoutUserInput = {
+export type LeadChatMemberCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput> | Prisma.LeadChatMemberCreateWithoutUserInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutUserInput | Prisma.LeadChatMemberCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.LeadChatMemberCreateManyUserInputEnvelope
@@ -414,18 +407,11 @@ export type LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput = {
   connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
 }
 
-export type LeadChatMemberUpdateManyWithoutUserNestedInput = {
+export type LeadChatMemberUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput> | Prisma.LeadChatMemberCreateWithoutUserInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutUserInput | Prisma.LeadChatMemberCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput[]
   createMany?: Prisma.LeadChatMemberCreateManyUserInputEnvelope
-  set?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
-  disconnect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
-  delete?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
   connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
-  update?: Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.LeadChatMemberUpdateManyWithWhereWithoutUserInput | Prisma.LeadChatMemberUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
 }
 
 export type LeadChatMemberUpdateManyWithoutAddedByNestedInput = {
@@ -442,7 +428,7 @@ export type LeadChatMemberUpdateManyWithoutAddedByNestedInput = {
   deleteMany?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
 }
 
-export type LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput = {
+export type LeadChatMemberUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput> | Prisma.LeadChatMemberCreateWithoutUserInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutUserInput | Prisma.LeadChatMemberCreateOrConnectWithoutUserInput[]
   upsert?: Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput[]
@@ -467,6 +453,20 @@ export type LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput = {
   connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
   update?: Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutAddedByInput | Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutAddedByInput[]
   updateMany?: Prisma.LeadChatMemberUpdateManyWithWhereWithoutAddedByInput | Prisma.LeadChatMemberUpdateManyWithWhereWithoutAddedByInput[]
+  deleteMany?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
+}
+
+export type LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput> | Prisma.LeadChatMemberCreateWithoutUserInput[] | Prisma.LeadChatMemberUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.LeadChatMemberCreateOrConnectWithoutUserInput | Prisma.LeadChatMemberCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput | Prisma.LeadChatMemberUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.LeadChatMemberCreateManyUserInputEnvelope
+  set?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
+  disconnect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
+  delete?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
+  connect?: Prisma.LeadChatMemberWhereUniqueInput | Prisma.LeadChatMemberWhereUniqueInput[]
+  update?: Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutUserInput | Prisma.LeadChatMemberUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.LeadChatMemberUpdateManyWithWhereWithoutUserInput | Prisma.LeadChatMemberUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
 }
 
@@ -512,29 +512,6 @@ export type LeadChatMemberUncheckedUpdateManyWithoutChatRoomNestedInput = {
   deleteMany?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
 }
 
-export type LeadChatMemberCreateWithoutUserInput = {
-  joined_at?: Date | string
-  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMembersInput
-  addedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersAddedInput
-}
-
-export type LeadChatMemberUncheckedCreateWithoutUserInput = {
-  id?: number
-  chat_room_id: number
-  joined_at?: Date | string
-  added_by?: number | null
-}
-
-export type LeadChatMemberCreateOrConnectWithoutUserInput = {
-  where: Prisma.LeadChatMemberWhereUniqueInput
-  create: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput>
-}
-
-export type LeadChatMemberCreateManyUserInputEnvelope = {
-  data: Prisma.LeadChatMemberCreateManyUserInput | Prisma.LeadChatMemberCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
 export type LeadChatMemberCreateWithoutAddedByInput = {
   joined_at?: Date | string
   chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMembersInput
@@ -558,31 +535,27 @@ export type LeadChatMemberCreateManyAddedByInputEnvelope = {
   skipDuplicates?: boolean
 }
 
-export type LeadChatMemberUpsertWithWhereUniqueWithoutUserInput = {
+export type LeadChatMemberCreateWithoutUserInput = {
+  joined_at?: Date | string
+  addedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersAddedInput
+  chatRoom: Prisma.LeadChatRoomCreateNestedOneWithoutMembersInput
+}
+
+export type LeadChatMemberUncheckedCreateWithoutUserInput = {
+  id?: number
+  chat_room_id: number
+  joined_at?: Date | string
+  added_by?: number | null
+}
+
+export type LeadChatMemberCreateOrConnectWithoutUserInput = {
   where: Prisma.LeadChatMemberWhereUniqueInput
-  update: Prisma.XOR<Prisma.LeadChatMemberUpdateWithoutUserInput, Prisma.LeadChatMemberUncheckedUpdateWithoutUserInput>
   create: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput>
 }
 
-export type LeadChatMemberUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.LeadChatMemberWhereUniqueInput
-  data: Prisma.XOR<Prisma.LeadChatMemberUpdateWithoutUserInput, Prisma.LeadChatMemberUncheckedUpdateWithoutUserInput>
-}
-
-export type LeadChatMemberUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.LeadChatMemberScalarWhereInput
-  data: Prisma.XOR<Prisma.LeadChatMemberUpdateManyMutationInput, Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserInput>
-}
-
-export type LeadChatMemberScalarWhereInput = {
-  AND?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
-  OR?: Prisma.LeadChatMemberScalarWhereInput[]
-  NOT?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
-  id?: Prisma.IntFilter<"LeadChatMember"> | number
-  chat_room_id?: Prisma.IntFilter<"LeadChatMember"> | number
-  user_id?: Prisma.IntFilter<"LeadChatMember"> | number
-  joined_at?: Prisma.DateTimeFilter<"LeadChatMember"> | Date | string
-  added_by?: Prisma.IntNullableFilter<"LeadChatMember"> | number | null
+export type LeadChatMemberCreateManyUserInputEnvelope = {
+  data: Prisma.LeadChatMemberCreateManyUserInput | Prisma.LeadChatMemberCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type LeadChatMemberUpsertWithWhereUniqueWithoutAddedByInput = {
@@ -601,10 +574,37 @@ export type LeadChatMemberUpdateManyWithWhereWithoutAddedByInput = {
   data: Prisma.XOR<Prisma.LeadChatMemberUpdateManyMutationInput, Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByInput>
 }
 
+export type LeadChatMemberScalarWhereInput = {
+  AND?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
+  OR?: Prisma.LeadChatMemberScalarWhereInput[]
+  NOT?: Prisma.LeadChatMemberScalarWhereInput | Prisma.LeadChatMemberScalarWhereInput[]
+  id?: Prisma.IntFilter<"LeadChatMember"> | number
+  chat_room_id?: Prisma.IntFilter<"LeadChatMember"> | number
+  user_id?: Prisma.IntFilter<"LeadChatMember"> | number
+  joined_at?: Prisma.DateTimeFilter<"LeadChatMember"> | Date | string
+  added_by?: Prisma.IntNullableFilter<"LeadChatMember"> | number | null
+}
+
+export type LeadChatMemberUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.LeadChatMemberWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadChatMemberUpdateWithoutUserInput, Prisma.LeadChatMemberUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.LeadChatMemberCreateWithoutUserInput, Prisma.LeadChatMemberUncheckedCreateWithoutUserInput>
+}
+
+export type LeadChatMemberUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.LeadChatMemberWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadChatMemberUpdateWithoutUserInput, Prisma.LeadChatMemberUncheckedUpdateWithoutUserInput>
+}
+
+export type LeadChatMemberUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.LeadChatMemberScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadChatMemberUpdateManyMutationInput, Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserInput>
+}
+
 export type LeadChatMemberCreateWithoutChatRoomInput = {
   joined_at?: Date | string
-  user: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersInput
   addedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersAddedInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadChatMembersInput
 }
 
 export type LeadChatMemberUncheckedCreateWithoutChatRoomInput = {
@@ -640,13 +640,6 @@ export type LeadChatMemberUpdateManyWithWhereWithoutChatRoomInput = {
   data: Prisma.XOR<Prisma.LeadChatMemberUpdateManyMutationInput, Prisma.LeadChatMemberUncheckedUpdateManyWithoutChatRoomInput>
 }
 
-export type LeadChatMemberCreateManyUserInput = {
-  id?: number
-  chat_room_id: number
-  joined_at?: Date | string
-  added_by?: number | null
-}
-
 export type LeadChatMemberCreateManyAddedByInput = {
   id?: number
   chat_room_id: number
@@ -654,24 +647,11 @@ export type LeadChatMemberCreateManyAddedByInput = {
   joined_at?: Date | string
 }
 
-export type LeadChatMemberUpdateWithoutUserInput = {
-  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMembersNestedInput
-  addedBy?: Prisma.UserMasterUpdateOneWithoutLeadChatMembersAddedNestedInput
-}
-
-export type LeadChatMemberUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
-  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  added_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-}
-
-export type LeadChatMemberUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
-  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  added_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+export type LeadChatMemberCreateManyUserInput = {
+  id?: number
+  chat_room_id: number
+  joined_at?: Date | string
+  added_by?: number | null
 }
 
 export type LeadChatMemberUpdateWithoutAddedByInput = {
@@ -694,6 +674,26 @@ export type LeadChatMemberUncheckedUpdateManyWithoutAddedByInput = {
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type LeadChatMemberUpdateWithoutUserInput = {
+  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addedBy?: Prisma.UserMasterUpdateOneWithoutLeadChatMembersAddedNestedInput
+  chatRoom?: Prisma.LeadChatRoomUpdateOneRequiredWithoutMembersNestedInput
+}
+
+export type LeadChatMemberUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
+  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  added_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type LeadChatMemberUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  chat_room_id?: Prisma.IntFieldUpdateOperationsInput | number
+  joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  added_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
 export type LeadChatMemberCreateManyChatRoomInput = {
   id?: number
   user_id: number
@@ -703,8 +703,8 @@ export type LeadChatMemberCreateManyChatRoomInput = {
 
 export type LeadChatMemberUpdateWithoutChatRoomInput = {
   joined_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMembersNestedInput
   addedBy?: Prisma.UserMasterUpdateOneWithoutLeadChatMembersAddedNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadChatMembersNestedInput
 }
 
 export type LeadChatMemberUncheckedUpdateWithoutChatRoomInput = {
@@ -729,9 +729,9 @@ export type LeadChatMemberSelect<ExtArgs extends runtime.Types.Extensions.Intern
   user_id?: boolean
   joined_at?: boolean
   added_by?: boolean
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMember"]>
 
 export type LeadChatMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -740,9 +740,9 @@ export type LeadChatMemberSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   user_id?: boolean
   joined_at?: boolean
   added_by?: boolean
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMember"]>
 
 export type LeadChatMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -751,9 +751,9 @@ export type LeadChatMemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   user_id?: boolean
   joined_at?: boolean
   added_by?: boolean
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }, ExtArgs["result"]["leadChatMember"]>
 
 export type LeadChatMemberSelectScalar = {
@@ -766,27 +766,27 @@ export type LeadChatMemberSelectScalar = {
 
 export type LeadChatMemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "chat_room_id" | "user_id" | "joined_at" | "added_by", ExtArgs["result"]["leadChatMember"]>
 export type LeadChatMemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }
 export type LeadChatMemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }
 export type LeadChatMemberIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
   chatRoom?: boolean | Prisma.LeadChatRoomDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
-  addedBy?: boolean | Prisma.LeadChatMember$addedByArgs<ExtArgs>
 }
 
 export type $LeadChatMemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "LeadChatMember"
   objects: {
+    addedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     chatRoom: Prisma.$LeadChatRoomPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
-    addedBy: Prisma.$UserMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1188,9 +1188,9 @@ readonly fields: LeadChatMemberFieldRefs;
  */
 export interface Prisma__LeadChatMemberClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  addedBy<T extends Prisma.LeadChatMember$addedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMember$addedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   chatRoom<T extends Prisma.LeadChatRoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatRoomDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadChatRoomClient<runtime.Types.Result.GetResult<Prisma.$LeadChatRoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  addedBy<T extends Prisma.LeadChatMember$addedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadChatMember$addedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1421,6 +1421,11 @@ export type LeadChatMemberFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` LeadChatMembers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadChatMembers.
+   */
   distinct?: Prisma.LeadChatMemberScalarFieldEnum | Prisma.LeadChatMemberScalarFieldEnum[]
 }
 

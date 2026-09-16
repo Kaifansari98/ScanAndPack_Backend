@@ -3,9 +3,17 @@ import {
   createMiscType,
   getMiscTypes,
   deleteMiscType,
+  editMiscType,
+  toggleMiscTypeStatus,
   createMiscTeam,
   getMiscTeams,
   deleteMiscTeam,
+  editMiscTeam,
+  toggleMiscTeamStatus,
+  getPendingMiscellaneousLeads,
+  getPendingMiscellaneousLeadCount,
+  getMiscellaneousLeadsByStatus,
+  getMiscellaneousStatusCounts,
 } from "../controllers/leadModuleControllers/miscellaneousMaster.controller";
 
 const miscRoutes = Router();
@@ -23,6 +31,8 @@ miscRoutes.get("/type/vendor/:vendor_id", getMiscTypes);
 // DELETE → Delete Misc Type by ID
 // @route DELETE /miscellaneous-master/type/:id
 miscRoutes.delete("/type/:id", deleteMiscType);
+miscRoutes.patch("/type/:id", editMiscType);
+miscRoutes.patch("/type/:id/status", toggleMiscTypeStatus);
 
 /* ----------------------------- Misc Team Master ----------------------------- */
 
@@ -37,5 +47,33 @@ miscRoutes.get("/team/vendor/:vendor_id", getMiscTeams);
 // DELETE → Delete Team by ID
 // @route DELETE /miscellaneous-master/team/:id
 miscRoutes.delete("/team/:id", deleteMiscTeam);
+miscRoutes.patch("/team/:id", editMiscTeam);
+miscRoutes.patch("/team/:id/status", toggleMiscTeamStatus);
+
+miscRoutes.post(
+  "/vendor/:vendorId/pending-miscellaneous",
+  getPendingMiscellaneousLeads,
+);
+
+miscRoutes.get(
+  "/vendor/:vendorId/pending-miscellaneous/count",
+  getPendingMiscellaneousLeadCount,
+);
+
+/* ----------------------------- Misc Status Module --------------------------- */
+
+// POST → Get Leads by Miscellaneous Status
+// @route POST /miscellaneous-master/vendor/:vendorId/status-leads
+miscRoutes.post(
+  "/vendor/:vendorId/status-leads",
+  getMiscellaneousLeadsByStatus,
+);
+
+// GET → Get Counts across all Statuses (Sidebar Badges)
+// @route GET /miscellaneous-master/vendor/:vendorId/status-counts
+miscRoutes.get(
+  "/vendor/:vendorId/status-counts",
+  getMiscellaneousStatusCounts,
+);
 
 export default miscRoutes;

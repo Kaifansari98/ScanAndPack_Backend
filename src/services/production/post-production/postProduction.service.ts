@@ -1,9 +1,14 @@
 import logger from "../../../../src/utils/logger";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
-import { sendLeadMovedToReadyToDispatchEmail, sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
+import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
+import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -12,6 +17,7 @@ export class PostProductionService {
     accountId: number | null,
     userId: number,
     files: { originalName: string; sysName: string }[],
+    instanceId?: number | null
   ) {
     if (!vendorId || !leadId || !userId)
       throw Object.assign(
@@ -44,10 +50,44 @@ export class PostProductionService {
           account_id: accountId,
           created_by: userId,
           doc_type_id: qcDocType.id, // Type 15 → QC Photos
+          product_structure_instance_id:
+            typeof instanceId !== "undefined" ? instanceId : null,
         },
       });
 
       uploadedDocs.push(doc);
+    }
+
+    if (accountId) {
+      let instanceTitle: string | undefined;
+      if (instanceId) {
+        const inst = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { title: true },
+        });
+        instanceTitle = inst?.title ?? undefined;
+      }
+
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `QC Photos uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+        action_type: "CREATE",
+        created_by: userId,
+        instance_id: instanceId ?? undefined,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -60,6 +100,7 @@ export class PostProductionService {
     userId: number,
     remark: string | undefined,
     files: { originalName: string; sysName: string }[],
+    instanceId?: number | null
   ) {
     // ✅ 1. Verify Document Type exists (Type 16)
     const docType = await prisma.documentTypeMaster.findFirst({
@@ -75,25 +116,71 @@ export class PostProductionService {
       );
 
     const uploadedDocs = [];
+    let instanceTitle: string | undefined;
 
     // ✅ 2. If remark provided, update LeadMaster
     if (remark && remark.trim() !== "") {
-      await prisma.leadMaster.update({
-        where: { id: leadId },
-        data: { hardware_packing_details_remark: remark, updated_by: userId },
-      });
+      if (instanceId) {
+        const instance =
+          await prisma.leadProductStructureInstance.findFirst({
+            where: {
+              id: instanceId,
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { id: true, title: true },
+          });
+
+        if (!instance) {
+          throw new Error("Product structure instance not found for this lead");
+        }
+
+        instanceTitle = instance.title ?? undefined;
+
+        await prisma.leadProductStructureInstance.update({
+          where: { id: instanceId },
+          data: {
+            hardware_packing_details_remark: remark,
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        const remaining = await prisma.leadProductStructureInstance.count({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            OR: [
+              { hardware_packing_details_remark: null },
+              { hardware_packing_details_remark: "" },
+            ],
+          },
+        });
+
+        if (remaining === 0) {
+          await prisma.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              hardware_packing_details_remark:
+                "hardware packing details added",
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+        }
+      }
 
       // Log the remark update
-      await prisma.leadDetailedLogs.create({
-        data: {
+      if (accountId) {
+        await createLeadLog(prisma, {
           vendor_id: vendorId,
           lead_id: leadId,
-          account_id: accountId ?? 0,
-          action: `Hardware Packing Details Remark added/updated: "${remark}"`,
+          account_id: accountId,
+          action: `Hardware Packing Details remark added/updated${instanceTitle ? ` for instance "${instanceTitle}"` : ""}: "${remark}"`,
           action_type: "UPDATE",
           created_by: userId,
-        },
-      });
+        });
+      }
     }
 
     // ✅ 3. Handle File Uploads
@@ -108,10 +195,43 @@ export class PostProductionService {
             account_id: accountId,
             created_by: userId,
             doc_type_id: docType.id, // ✅ Type 16
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
           },
         });
 
         uploadedDocs.push(doc);
+      }
+
+      if (accountId) {
+        if (instanceId && !instanceTitle) {
+          const inst = await prisma.leadProductStructureInstance.findFirst({
+            where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+            select: { title: true },
+          });
+          instanceTitle = inst?.title ?? undefined;
+        }
+
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+          action_type: "CREATE",
+          created_by: userId,
+          instance_id: instanceId ?? undefined,
+        });
+
+        await prisma.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+          })),
+        });
       }
     }
 
@@ -129,6 +249,7 @@ export class PostProductionService {
     userId: number,
     remark: string | undefined,
     files: { originalName: string; sysName: string }[],
+    instanceId?: number | null
   ) {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 17" },
@@ -143,23 +264,72 @@ export class PostProductionService {
       );
 
     const uploadedDocs = [];
+    let instanceTitle: string | undefined;
 
     if (remark && remark.trim() !== "") {
-      await prisma.leadMaster.update({
-        where: { id: leadId },
-        data: { woodwork_packing_details_remark: remark, updated_by: userId },
-      });
+      if (instanceId) {
+        const instance =
+          await prisma.leadProductStructureInstance.findFirst({
+            where: {
+              id: instanceId,
+              lead_id: leadId,
+              vendor_id: vendorId,
+            },
+            select: { id: true, title: true },
+          });
 
-      await prisma.leadDetailedLogs.create({
-        data: {
+        if (!instance) {
+          throw new Error("Product structure instance not found for this lead");
+        }
+
+        instanceTitle = instance.title ?? undefined;
+
+        await prisma.leadProductStructureInstance.update({
+          where: { id: instanceId },
+          data: {
+            woodwork_packing_details_remark: remark,
+            updated_by: userId,
+            updated_at: new Date(),
+          },
+        });
+
+        const remaining = await prisma.leadProductStructureInstance.count({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            OR: [
+              { woodwork_packing_details_remark: null },
+              { woodwork_packing_details_remark: "" },
+            ],
+          },
+        });
+
+        if (remaining === 0) {
+          await prisma.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              woodwork_packing_details_remark:
+                "woodwork packing details added",
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+        }
+      }
+
+      if (accountId) {
+        await createLeadLog(prisma, {
           vendor_id: vendorId,
           lead_id: leadId,
-          account_id: accountId ?? 0,
-          action: `Woodwork Packing Details Remark added/updated: "${remark}"`,
+          account_id: accountId,
+          action: instanceTitle
+            ? `Woodwork Packing Details remark added/updated for instance "${instanceTitle}": "${remark}"`
+            : `Woodwork Packing Details remark added/updated: "${remark}"`,
           action_type: "UPDATE",
+          history_type: "Lead",
           created_by: userId,
-        },
-      });
+        });
+      }
     }
 
     if (files && files.length > 0) {
@@ -173,10 +343,44 @@ export class PostProductionService {
             account_id: accountId,
             created_by: userId,
             doc_type_id: docType.id,
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
           },
         });
 
         uploadedDocs.push(doc);
+      }
+
+      if (accountId) {
+        if (instanceId && !instanceTitle) {
+          const inst = await prisma.leadProductStructureInstance.findFirst({
+            where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+            select: { title: true },
+          });
+          instanceTitle = inst?.title ?? undefined;
+        }
+
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by: userId,
+          instance_id: instanceId ?? undefined,
+        });
+
+        await prisma.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+          })),
+        });
       }
     }
 
@@ -188,7 +392,11 @@ export class PostProductionService {
   }
 
   // ✅ 1. GET QC Photos
-  async getQcPhotos(vendorId: number, leadId: number) {
+  async getQcPhotos(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 15" },
     });
@@ -205,6 +413,9 @@ export class PostProductionService {
         lead_id: leadId,
         doc_type_id: docType.id,
         is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
       },
       orderBy: { created_at: "asc" },
     });
@@ -221,7 +432,11 @@ export class PostProductionService {
   }
 
   // ✅ 2. GET Hardware Packing Details
-  async getHardwarePackingDetails(vendorId: number, leadId: number) {
+  async getHardwarePackingDetails(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 16" },
     });
@@ -238,6 +453,9 @@ export class PostProductionService {
         lead_id: leadId,
         doc_type_id: docType.id,
         is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
       },
       orderBy: { created_at: "asc" },
     });
@@ -249,25 +467,42 @@ export class PostProductionService {
       })),
     );
 
-    const hardwarePackingDetailsRemark = await prisma.leadMaster.findFirst({
-      where: { id: leadId, vendor_id: vendorId },
-      select: {
-        id: true,
-        firstname: true,
-        lastname: true,
-        hardware_packing_details_remark: true,
-      },
-    });
+    let remark: string | null = null;
+    if (typeof instanceId !== "undefined") {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId ?? 0, lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          hardware_packing_details_remark: true,
+        },
+      });
+      remark = instance?.hardware_packing_details_remark || null;
+    } else {
+      const hardwarePackingDetailsRemark = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          hardware_packing_details_remark: true,
+        },
+      });
+      remark =
+        hardwarePackingDetailsRemark?.hardware_packing_details_remark || null;
+    }
 
     return {
-      remark:
-        hardwarePackingDetailsRemark?.hardware_packing_details_remark || null,
+      remark,
       documents: withUrls,
     };
   }
 
   // ✅ 3. GET Woodwork Packing Details
-  async getWoodworkPackingDetails(vendorId: number, leadId: number) {
+  async getWoodworkPackingDetails(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 17" },
     });
@@ -284,6 +519,9 @@ export class PostProductionService {
         lead_id: leadId,
         doc_type_id: docType.id,
         is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
       },
       orderBy: { created_at: "asc" },
     });
@@ -295,19 +533,32 @@ export class PostProductionService {
       })),
     );
 
-    const woodWorkPackingDetailsRemark = await prisma.leadMaster.findFirst({
-      where: { id: leadId, vendor_id: vendorId },
-      select: {
-        id: true,
-        firstname: true,
-        lastname: true,
-        woodwork_packing_details_remark: true,
-      },
-    });
+    let remark: string | null = null;
+    if (typeof instanceId !== "undefined") {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId ?? 0, lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          woodwork_packing_details_remark: true,
+        },
+      });
+      remark = instance?.woodwork_packing_details_remark || null;
+    } else {
+      const woodWorkPackingDetailsRemark = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          woodwork_packing_details_remark: true,
+        },
+      });
+      remark =
+        woodWorkPackingDetailsRemark?.woodwork_packing_details_remark || null;
+    }
 
     return {
-      remark:
-        woodWorkPackingDetailsRemark?.woodwork_packing_details_remark || null,
+      remark,
       documents: withUrls,
     };
   }
@@ -318,8 +569,62 @@ export class PostProductionService {
     accountId: number | null,
     userId: number,
     noOfBoxes: number,
+    instanceId?: number | null
   ) {
-    // ✅ Validate Lead Exists
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          id: instanceId,
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true, title: true, no_of_boxes: true },
+      });
+
+      if (!instance) {
+        throw Object.assign(
+          new Error("Product structure instance not found for this lead"),
+          {
+            statusCode: 404,
+          }
+        );
+      }
+
+      const updatedInstance = await prisma.leadProductStructureInstance.update({
+        where: { id: instanceId },
+        data: {
+          no_of_boxes: noOfBoxes,
+          updated_by: userId,
+          updated_at: new Date(),
+        },
+        select: {
+          id: true,
+          no_of_boxes: true,
+          updated_at: true,
+        },
+      });
+
+      if (accountId) {
+        const action =
+          instance.no_of_boxes == null
+            ? `Number of boxes set to ${noOfBoxes} for instance "${instance.title}"`
+            : `Number of boxes updated from ${instance.no_of_boxes} to ${noOfBoxes} for instance "${instance.title}"`;
+
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action,
+          action_type: "UPDATE",
+          history_type: "Lead",
+          created_by: userId,
+          instance_id: instanceId,
+        });
+      }
+
+      return updatedInstance;
+    }
+
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: { id: true, no_of_boxes: true },
@@ -331,7 +636,6 @@ export class PostProductionService {
       });
     }
 
-    // ✅ Update the number of boxes
     const updatedLead = await prisma.leadMaster.update({
       where: { id: leadId },
       data: {
@@ -341,45 +645,88 @@ export class PostProductionService {
       },
       select: {
         id: true,
-        lead_code: true,
         no_of_boxes: true,
         updated_at: true,
       },
     });
 
     // ✅ Log the update
-    await prisma.leadDetailedLogs.create({
-      data: {
+    if (accountId) {
+      const action =
+        lead.no_of_boxes == null
+          ? `Number of boxes set to ${noOfBoxes}`
+          : `Number of boxes updated from ${lead.no_of_boxes} to ${noOfBoxes}`;
+
+      await createLeadLog(prisma, {
         vendor_id: vendorId,
         lead_id: leadId,
-        account_id: accountId ?? 0,
-        action: `Number of Boxes updated to ${noOfBoxes}`,
+        account_id: accountId,
+        action,
         action_type: "UPDATE",
+        history_type: "Lead",
         created_by: userId,
-        created_at: new Date(),
-      },
-    });
+      });
+    }
 
     return updatedLead;
   }
 
   // ✅ Fetch No. of Boxes
-  async getNoOfBoxes(vendorId: number, leadId: number) {
+  async getNoOfBoxes(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    if (instanceId) {
+      const instance = await prisma.leadProductStructureInstance.findFirst({
+        where: { id: instanceId, vendor_id: vendorId, lead_id: leadId },
+        select: {
+          id: true,
+          no_of_boxes: true,
+          updated_at: true,
+        },
+      });
+
+      if (instance?.no_of_boxes != null) {
+        return { ...instance, source: "instance" as const };
+      }
+    }
+
     const lead = await prisma.leadMaster.findFirst({
       where: { id: leadId, vendor_id: vendorId, is_deleted: false },
       select: {
         id: true,
-        lead_code: true,
         no_of_boxes: true,
         updated_at: true,
       },
     });
 
-    return lead;
+    return lead ? { ...lead, source: "lead" as const } : null;
   }
 
   // ✅ Check Post-Production Completeness
-  async checkPostProductionCompleteness(vendorId: number, leadId: number) {
+  async checkPostProductionCompleteness(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: { lead_id: leadId, vendor_id: vendorId },
+      select: {
+        id: true,
+        title: true,
+        is_production_completed: true,
+        no_of_boxes: true,
+      },
+    });
+
+    const incompleteProduction = instances.filter(
+      (instance) => instance.is_production_completed !== true
+    );
+    const incompleteBoxes = instances.filter(
+      (instance) => !instance.no_of_boxes || instance.no_of_boxes <= 0
+    );
+
     // 🟦 1. QC Photos (Type 15)
     const qcDocType = await prisma.documentTypeMaster.findFirst({
       where: { vendor_id: vendorId, tag: "Type 15" },
@@ -393,6 +740,9 @@ export class PostProductionService {
           lead_id: leadId,
           doc_type_id: qcDocType.id,
           is_deleted: false,
+          ...(typeof instanceId !== "undefined"
+            ? { product_structure_instance_id: instanceId ?? null }
+            : {}),
         },
       });
       qcPhotosExist = qcCount > 0;
@@ -412,15 +762,26 @@ export class PostProductionService {
           lead_id: leadId,
           doc_type_id: hardwareDocType.id,
           is_deleted: false,
+          ...(typeof instanceId !== "undefined"
+            ? { product_structure_instance_id: instanceId ?? null }
+            : {}),
         },
       });
       hardwareDocsExist = hardwareCount > 0;
 
-      const hardwareRemark = await prisma.leadMaster.findFirst({
-        where: { id: leadId, vendor_id: vendorId },
-        select: { hardware_packing_details_remark: true },
-      });
-      hardwareRemarkExist = !!hardwareRemark?.hardware_packing_details_remark;
+      if (typeof instanceId !== "undefined") {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId ?? 0, lead_id: leadId, vendor_id: vendorId },
+          select: { id: true, hardware_packing_details_remark: true },
+        });
+        hardwareRemarkExist = !!instance?.hardware_packing_details_remark;
+      } else {
+        const hardwareRemark = await prisma.leadMaster.findFirst({
+          where: { id: leadId, vendor_id: vendorId },
+          select: { hardware_packing_details_remark: true },
+        });
+        hardwareRemarkExist = !!hardwareRemark?.hardware_packing_details_remark;
+      }
     }
 
     // 🟨 3. Woodwork Packing Details (Type 17)
@@ -437,15 +798,26 @@ export class PostProductionService {
           lead_id: leadId,
           doc_type_id: woodworkDocType.id,
           is_deleted: false,
+          ...(typeof instanceId !== "undefined"
+            ? { product_structure_instance_id: instanceId ?? null }
+            : {}),
         },
       });
       woodworkDocsExist = woodworkCount > 0;
 
-      const woodworkRemark = await prisma.leadMaster.findFirst({
-        where: { id: leadId, vendor_id: vendorId },
-        select: { woodwork_packing_details_remark: true },
-      });
-      woodworkRemarkExist = !!woodworkRemark?.woodwork_packing_details_remark;
+      if (typeof instanceId !== "undefined") {
+        const instance = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId ?? 0, lead_id: leadId, vendor_id: vendorId },
+          select: { id: true, woodwork_packing_details_remark: true },
+        });
+        woodworkRemarkExist = !!instance?.woodwork_packing_details_remark;
+      } else {
+        const woodworkRemark = await prisma.leadMaster.findFirst({
+          where: { id: leadId, vendor_id: vendorId },
+          select: { woodwork_packing_details_remark: true },
+        });
+        woodworkRemarkExist = !!woodworkRemark?.woodwork_packing_details_remark;
+      }
     }
 
     // 🧾 Return Combined Result
@@ -455,14 +827,308 @@ export class PostProductionService {
       hardware_remark: hardwareRemarkExist,
       woodwork_docs: woodworkDocsExist,
       woodwork_remark: woodworkRemarkExist,
+      instances_ready: incompleteProduction.length === 0,
+      boxes_ready: incompleteBoxes.length === 0,
+      missing_production_titles: incompleteProduction.map(
+        (instance) => instance.title
+      ),
+      missing_boxes_titles: incompleteBoxes.map((instance) => instance.title),
       all_exists: qcPhotosExist && hardwareDocsExist && woodworkDocsExist,
     };
+  }
+
+  async uploadPreProductionFiles(
+    vendorId: number,
+    leadId: number,
+    accountId: number | null,
+    userId: number,
+    files: { originalName: string; sysName: string }[],
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType)
+      throw Object.assign(
+        new Error("Document type (Type 38) not found for this vendor"),
+        { statusCode: 404 },
+      );
+
+    const uploadedDocs = [];
+
+    for (const file of files) {
+      const doc = await prisma.leadDocuments.create({
+        data: {
+          doc_og_name: file.originalName,
+          doc_sys_name: file.sysName,
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          created_by: userId,
+          doc_type_id: docType.id,
+          product_structure_instance_id:
+            typeof instanceId !== "undefined" ? instanceId : null,
+        },
+      });
+      uploadedDocs.push(doc);
+    }
+
+    if (accountId) {
+      let instanceTitle: string | undefined;
+      if (instanceId) {
+        const inst = await prisma.leadProductStructureInstance.findFirst({
+          where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+          select: { title: true },
+        });
+        instanceTitle = inst?.title ?? undefined;
+      }
+
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `Pre-production files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+        action_type: "CREATE",
+        created_by: userId,
+        instance_id: instanceId ?? undefined,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
+    }
+
+    return uploadedDocs;
+  }
+
+  async markPreProdDone(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    userId: number,
+  ) {
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
+      select: { id: true, is_pre_prod_done: true, is_order_login_filled: true },
+    });
+
+    if (!instance) {
+      throw Object.assign(new Error("Instance not found"), { statusCode: 404 });
+    }
+
+    if (instance.is_pre_prod_done) {
+      throw Object.assign(new Error("Pre-prod already marked as done"), { statusCode: 400 });
+    }
+
+    await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: {
+        is_pre_prod_done: true,
+        pre_prod_done_at: new Date(),
+        ...(instance.is_order_login_filled === true
+          ? {
+              is_under_production: true,
+              under_production_at: new Date(),
+            }
+          : {}),
+      },
+    });
+
+    const leadMeta = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: {
+        account_id: true,
+        franchise_id: true,
+        firstname: true,
+        lastname: true,
+      },
+    });
+
+    const factoryMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+        type: "production-stage",
+        user: {
+          status: "active",
+        },
+      },
+      orderBy: { created_at: "asc" },
+      select: { user_id: true },
+    });
+
+    if (factoryMapping?.user_id && leadMeta?.account_id) {
+      const existingTask = await prisma.userLeadTask.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          instance_id: instanceId,
+          user_id: factoryMapping.user_id,
+          task_type: "Pre Prod Completed",
+          status: { in: ["open", "in_progress"] },
+        },
+        select: { id: true },
+      });
+
+      if (!existingTask) {
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 1);
+
+        const task = await prisma.userLeadTask.create({
+          data: {
+            lead_id: leadId,
+            account_id: leadMeta.account_id,
+            vendor_id: vendorId,
+            franchise_id: leadMeta.franchise_id ?? null,
+            user_id: factoryMapping.user_id,
+            instance_id: instanceId,
+            task_type: "Pre Prod Completed",
+            lead_stage: "production-stage",
+            due_date: dueDate,
+            remark: "Pre Prod Completed",
+            status: "open",
+            created_by: userId,
+          },
+        });
+        await createTaskHistoryLog({
+          db: prisma,
+          task,
+          createdBy: userId,
+          actionType: "CREATE",
+        });
+      }
+    }
+
+    return {
+      instanceId,
+      is_pre_prod_done: true,
+      is_under_production: instance.is_order_login_filled === true,
+    };
+  }
+
+  async getPreProductionFiles(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType) return [];
+
+    const docs = await prisma.leadDocuments.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: docType.id,
+        is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
+      },
+      orderBy: { created_at: "asc" },
+    });
+
+    const withUrls = await Promise.all(
+      docs.map(async (doc) => ({
+        ...doc,
+        signed_url: await generateSignedUrl(doc.doc_sys_name, 3600, "inline"),
+      })),
+    );
+
+    return withUrls;
+  }
+
+  async checkPreProductionFilesReady(
+    vendorId: number,
+    leadId: number,
+    instanceId?: number | null
+  ) {
+    const docType = await prisma.documentTypeMaster.findFirst({
+      where: { vendor_id: vendorId, tag: "Type 38" },
+    });
+
+    if (!docType) return { readyForUnderProduction: false };
+
+    const count = await prisma.leadDocuments.count({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        doc_type_id: docType.id,
+        is_deleted: false,
+        ...(typeof instanceId !== "undefined"
+          ? { product_structure_instance_id: instanceId ?? null }
+          : {}),
+      },
+    });
+
+    return { readyForUnderProduction: count > 0 };
+  }
+
+  async markProductionCompleted(
+    vendorId: number,
+    leadId: number,
+    instanceId: number,
+    updatedBy: number
+  ) {
+    const instance = await prisma.leadProductStructureInstance.findFirst({
+      where: {
+        id: instanceId,
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        title: true,
+        account_id: true,
+        is_production_completed: true,
+      },
+    });
+
+    if (!instance) {
+      throw new Error("Product structure instance not found for this lead");
+    }
+
+    const updatedInstance = await prisma.leadProductStructureInstance.update({
+      where: { id: instanceId },
+      data: {
+        is_production_completed: true,
+        production_completed_at: new Date(),
+        updated_by: updatedBy,
+        updated_at: new Date(),
+      },
+    });
+
+    if (instance.account_id) {
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: instance.account_id,
+        action: `Production marked as completed for instance "${instance.title}"`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        instance_id: instanceId,
+      });
+    }
+
+    return updatedInstance;
   }
 
   async moveLeadToReadyToDispatch(
     vendorId: number,
     leadId: number,
     updatedBy: number,
+    baseUrl: string,
   ) {
     // ==========================
     // TRANSACTIONAL CORE
@@ -498,27 +1164,50 @@ export class PostProductionService {
         throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
       }
 
-      // 3️⃣ Update lead status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: leadId },
+      // 3️⃣ Update lead status only if it is not already in Ready To Dispatch.
+      // This keeps the action idempotent and prevents duplicate history rows
+      // if the endpoint is triggered multiple times.
+      const updateResult = await tx.leadMaster.updateMany({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+          NOT: { status_id: readyToDispatchStatus.id },
+        },
         data: {
           status_id: readyToDispatchStatus.id,
           updated_by: updatedBy,
         },
       });
 
+      const updatedLead =
+        updateResult.count > 0
+          ? await tx.leadMaster.findUniqueOrThrow({
+              where: { id: leadId },
+            })
+          : currentLead;
+
+      if (updateResult.count > 0) {
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId,
+          accountId: currentLead.account_id,
+          statusId: readyToDispatchStatus.id,
+          createdBy: updatedBy,
+        });
+      }
+
       // 4️⃣ Audit log
-      await tx.leadDetailedLogs.create({
-        data: {
+      if (updateResult.count > 0 && currentLead.account_id) {
+        await createLeadLog(tx, {
           vendor_id: vendorId,
           lead_id: leadId,
-          account_id: currentLead.account_id ?? 0,
+          account_id: currentLead.account_id,
           action: "Lead moved to Ready To Dispatch stage",
           action_type: "STATUS_CHANGE",
           created_by: updatedBy,
-          created_at: new Date(),
-        },
-      });
+        });
+      }
 
       return {
         updatedLead,
@@ -601,18 +1290,20 @@ export class PostProductionService {
         day: "2-digit",
         month: "short",
         year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
       });
 
-      const redirectPath = leadMeta.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${leadMeta.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
+      const firstInstance = await prisma.leadProductStructureInstance.findFirst({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: { id: true },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+      });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      const leadDetailsBase = `/dashboard/leads/details/${leadId}`;
+      const rtdParams = new URLSearchParams();
+      if (leadMeta.account_id) rtdParams.set("accountId", String(leadMeta.account_id));
+      if (firstInstance?.id) rtdParams.set("instance_id", String(firstInstance.id));
+      const rtdQs = rtdParams.toString();
+      const redirectPath = rtdQs ? `${leadDetailsBase}?${rtdQs}` : leadDetailsBase;
 
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -671,23 +1362,17 @@ export class PostProductionService {
     try {
       const actorId = updatedBy; // factory user who marked dispatch ready
 
-      const [lead, actor] = await Promise.all([
-        prisma.leadMaster.findUnique({
-          where: { id: leadId },
-          select: {
-            firstname: true,
-            lastname: true,
-            lead_code: true,
-            vendor_id: true,
-            account_id: true,
-          },
-        }),
-
-        prisma.userMaster.findUnique({
-          where: { id: actorId },
-          select: { user_name: true },
-        }),
-      ]);
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: {
+          firstname: true,
+          lastname: true,
+          lead_code: true,
+          vendor_id: true,
+          account_id: true,
+          franchise_id: true,
+        },
+      });
 
       // Safety guard
       if (!lead) return result.updatedLead;
@@ -697,47 +1382,27 @@ export class PostProductionService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
 
-      const markedBy = actor?.user_name ?? "Factory Team";
-
-      const markedAt = new Date().toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
+      const adminFirstInstance = await prisma.leadProductStructureInstance.findFirst({
+        where: { lead_id: leadId, vendor_id: lead.vendor_id },
+        select: { id: true },
+        orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
       });
 
-      const baseUrl =
-        process.env.CLIENT_BASE_URL ||
-        process.env.FRONTEND_URL ||
-        "http://localhost:3000";
+      const adminLeadDetailsBase = `/dashboard/leads/details/${leadId}`;
+      const adminRtdParams = new URLSearchParams();
+      if (lead.account_id) adminRtdParams.set("accountId", String(lead.account_id));
+      if (adminFirstInstance?.id) adminRtdParams.set("instance_id", String(adminFirstInstance.id));
+      const adminRtdQs = adminRtdParams.toString();
+      const redirectPath = adminRtdQs ? `${adminLeadDetailsBase}?${adminRtdQs}` : adminLeadDetailsBase;
 
-      const redirectPath = lead.account_id
-        ? `/dashboard/leads/details/${leadId}?accountId=${lead.account_id}`
-        : `/dashboard/leads/details/${leadId}`;
-
-      const projectUrl = `${baseUrl}${redirectPath}`;
-
-      // Fetch Active Admin Users
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      // Fetch Active Admin Users for the lead franchise only
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id ?? null,
+        excludeUserId: actorId,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self notification
-        if (admin.id === actorId) continue;
-
         // 🔔 In-App Notification (ADMIN)
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,
@@ -751,19 +1416,6 @@ export class PostProductionService {
           redirect_url: redirectPath,
         });
 
-        // 📧 Email Notification (ADMIN)
-        if (!admin.user_email) continue;
-
-        await sendLeadMovedToReadyToDispatchEmail({
-          vendor_id: lead.vendor_id,
-          toEmail: admin.user_email,
-          toName: admin.user_name,
-          leadCode,
-          leadName,
-          markedBy,
-          markedAt,
-          projectUrl,
-        });
       }
     } catch (adminNotifyErr: any) {
       logger.warn("⚠️ Ready To Dispatch admin notification failed", {

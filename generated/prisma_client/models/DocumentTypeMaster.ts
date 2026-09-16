@@ -41,6 +41,8 @@ export type DocumentTypeMasterMinAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  doc_title: string | null
+  stage: string | null
 }
 
 export type DocumentTypeMasterMaxAggregateOutputType = {
@@ -48,6 +50,8 @@ export type DocumentTypeMasterMaxAggregateOutputType = {
   type: string | null
   vendor_id: number | null
   tag: string | null
+  doc_title: string | null
+  stage: string | null
 }
 
 export type DocumentTypeMasterCountAggregateOutputType = {
@@ -55,6 +59,8 @@ export type DocumentTypeMasterCountAggregateOutputType = {
   type: number
   vendor_id: number
   tag: number
+  doc_title: number
+  stage: number
   _all: number
 }
 
@@ -74,6 +80,8 @@ export type DocumentTypeMasterMinAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
 }
 
 export type DocumentTypeMasterMaxAggregateInputType = {
@@ -81,6 +89,8 @@ export type DocumentTypeMasterMaxAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
 }
 
 export type DocumentTypeMasterCountAggregateInputType = {
@@ -88,6 +98,8 @@ export type DocumentTypeMasterCountAggregateInputType = {
   type?: true
   vendor_id?: true
   tag?: true
+  doc_title?: true
+  stage?: true
   _all?: true
 }
 
@@ -182,6 +194,8 @@ export type DocumentTypeMasterGroupByOutputType = {
   type: string
   vendor_id: number
   tag: string
+  doc_title: string | null
+  stage: string | null
   _count: DocumentTypeMasterCountAggregateOutputType | null
   _avg: DocumentTypeMasterAvgAggregateOutputType | null
   _sum: DocumentTypeMasterSumAggregateOutputType | null
@@ -189,7 +203,7 @@ export type DocumentTypeMasterGroupByOutputType = {
   _max: DocumentTypeMasterMaxAggregateOutputType | null
 }
 
-type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DocumentTypeMasterGroupByOutputType, T['by']> &
       {
@@ -212,8 +226,11 @@ export type DocumentTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.LeadDocumentsListRelationFilter
+  b2bDocuments?: Prisma.LeadB2BDocumentListRelationFilter
 }
 
 export type DocumentTypeMasterOrderByWithRelationInput = {
@@ -221,8 +238,11 @@ export type DocumentTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
+  b2bDocuments?: Prisma.LeadB2BDocumentOrderByRelationAggregateInput
 }
 
 export type DocumentTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -233,8 +253,11 @@ export type DocumentTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.LeadDocumentsListRelationFilter
+  b2bDocuments?: Prisma.LeadB2BDocumentListRelationFilter
 }, "id">
 
 export type DocumentTypeMasterOrderByWithAggregationInput = {
@@ -242,6 +265,8 @@ export type DocumentTypeMasterOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrderInput | Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DocumentTypeMasterCountOrderByAggregateInput
   _avg?: Prisma.DocumentTypeMasterAvgOrderByAggregateInput
   _max?: Prisma.DocumentTypeMasterMaxOrderByAggregateInput
@@ -257,13 +282,18 @@ export type DocumentTypeMasterScalarWhereWithAggregatesInput = {
   type?: Prisma.StringWithAggregatesFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringWithAggregatesFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableWithAggregatesFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableWithAggregatesFilter<"DocumentTypeMaster"> | string | null
 }
 
 export type DocumentTypeMasterCreateInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentTypesInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutDocumentTypeInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterUncheckedCreateInput = {
@@ -271,14 +301,20 @@ export type DocumentTypeMasterUncheckedCreateInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDocumentTypeInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentTypesNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutDocumentTypeNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterUncheckedUpdateInput = {
@@ -286,7 +322,10 @@ export type DocumentTypeMasterUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterCreateManyInput = {
@@ -294,11 +333,15 @@ export type DocumentTypeMasterCreateManyInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
 }
 
 export type DocumentTypeMasterUpdateManyMutationInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentTypeMasterUncheckedUpdateManyInput = {
@@ -306,6 +349,8 @@ export type DocumentTypeMasterUncheckedUpdateManyInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type DocumentTypeMasterListRelationFilter = {
@@ -323,11 +368,18 @@ export type DocumentTypeMasterScalarRelationFilter = {
   isNot?: Prisma.DocumentTypeMasterWhereInput
 }
 
+export type DocumentTypeMasterNullableScalarRelationFilter = {
+  is?: Prisma.DocumentTypeMasterWhereInput | null
+  isNot?: Prisma.DocumentTypeMasterWhereInput | null
+}
+
 export type DocumentTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterAvgOrderByAggregateInput = {
@@ -340,6 +392,8 @@ export type DocumentTypeMasterMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterMinOrderByAggregateInput = {
@@ -347,6 +401,8 @@ export type DocumentTypeMasterMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   tag?: Prisma.SortOrder
+  doc_title?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
 }
 
 export type DocumentTypeMasterSumOrderByAggregateInput = {
@@ -410,17 +466,39 @@ export type DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentTypeMasterUpdateToOneWithWhereWithoutDocumentsInput, Prisma.DocumentTypeMasterUpdateWithoutDocumentsInput>, Prisma.DocumentTypeMasterUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type DocumentTypeMasterCreateNestedOneWithoutB2bDocumentsInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeMasterCreateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedCreateWithoutB2bDocumentsInput>
+  connectOrCreate?: Prisma.DocumentTypeMasterCreateOrConnectWithoutB2bDocumentsInput
+  connect?: Prisma.DocumentTypeMasterWhereUniqueInput
+}
+
+export type DocumentTypeMasterUpdateOneWithoutB2bDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentTypeMasterCreateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedCreateWithoutB2bDocumentsInput>
+  connectOrCreate?: Prisma.DocumentTypeMasterCreateOrConnectWithoutB2bDocumentsInput
+  upsert?: Prisma.DocumentTypeMasterUpsertWithoutB2bDocumentsInput
+  disconnect?: Prisma.DocumentTypeMasterWhereInput | boolean
+  delete?: Prisma.DocumentTypeMasterWhereInput | boolean
+  connect?: Prisma.DocumentTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DocumentTypeMasterUpdateToOneWithWhereWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUpdateWithoutB2bDocumentsInput>, Prisma.DocumentTypeMasterUncheckedUpdateWithoutB2bDocumentsInput>
+}
+
 export type DocumentTypeMasterCreateWithoutVendorInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutDocumentTypeInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDocumentTypeInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -457,12 +535,17 @@ export type DocumentTypeMasterScalarWhereInput = {
   type?: Prisma.StringFilter<"DocumentTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"DocumentTypeMaster"> | number
   tag?: Prisma.StringFilter<"DocumentTypeMaster"> | string
+  doc_title?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
+  stage?: Prisma.StringNullableFilter<"DocumentTypeMaster"> | string | null
 }
 
 export type DocumentTypeMasterCreateWithoutDocumentsInput = {
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentTypesInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterUncheckedCreateWithoutDocumentsInput = {
@@ -470,6 +553,9 @@ export type DocumentTypeMasterUncheckedCreateWithoutDocumentsInput = {
   type: string
   vendor_id: number
   tag: string
+  doc_title?: string | null
+  stage?: string | null
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutDocumentTypeInput
 }
 
 export type DocumentTypeMasterCreateOrConnectWithoutDocumentsInput = {
@@ -491,7 +577,10 @@ export type DocumentTypeMasterUpdateToOneWithWhereWithoutDocumentsInput = {
 export type DocumentTypeMasterUpdateWithoutDocumentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentTypesNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -499,31 +588,98 @@ export type DocumentTypeMasterUncheckedUpdateWithoutDocumentsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutDocumentTypeNestedInput
+}
+
+export type DocumentTypeMasterCreateWithoutB2bDocumentsInput = {
+  type: string
+  tag: string
+  doc_title?: string | null
+  stage?: string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentTypesInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutDocumentTypeInput
+}
+
+export type DocumentTypeMasterUncheckedCreateWithoutB2bDocumentsInput = {
+  id?: number
+  type: string
+  vendor_id: number
+  tag: string
+  doc_title?: string | null
+  stage?: string | null
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDocumentTypeInput
+}
+
+export type DocumentTypeMasterCreateOrConnectWithoutB2bDocumentsInput = {
+  where: Prisma.DocumentTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentTypeMasterCreateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedCreateWithoutB2bDocumentsInput>
+}
+
+export type DocumentTypeMasterUpsertWithoutB2bDocumentsInput = {
+  update: Prisma.XOR<Prisma.DocumentTypeMasterUpdateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedUpdateWithoutB2bDocumentsInput>
+  create: Prisma.XOR<Prisma.DocumentTypeMasterCreateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedCreateWithoutB2bDocumentsInput>
+  where?: Prisma.DocumentTypeMasterWhereInput
+}
+
+export type DocumentTypeMasterUpdateToOneWithWhereWithoutB2bDocumentsInput = {
+  where?: Prisma.DocumentTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.DocumentTypeMasterUpdateWithoutB2bDocumentsInput, Prisma.DocumentTypeMasterUncheckedUpdateWithoutB2bDocumentsInput>
+}
+
+export type DocumentTypeMasterUpdateWithoutB2bDocumentsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentTypesNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutDocumentTypeNestedInput
+}
+
+export type DocumentTypeMasterUncheckedUpdateWithoutB2bDocumentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterCreateManyVendorInput = {
   id?: number
   type: string
   tag: string
+  doc_title?: string | null
+  stage?: string | null
 }
 
 export type DocumentTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUpdateManyWithoutDocumentTypeNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDocumentTypeNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutDocumentTypeNestedInput
 }
 
 export type DocumentTypeMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   tag?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -533,10 +689,12 @@ export type DocumentTypeMasterUncheckedUpdateManyWithoutVendorInput = {
 
 export type DocumentTypeMasterCountOutputType = {
   documents: number
+  b2bDocuments: number
 }
 
 export type DocumentTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | DocumentTypeMasterCountOutputTypeCountDocumentsArgs
+  b2bDocuments?: boolean | DocumentTypeMasterCountOutputTypeCountB2bDocumentsArgs
 }
 
 /**
@@ -556,14 +714,24 @@ export type DocumentTypeMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends 
   where?: Prisma.LeadDocumentsWhereInput
 }
 
+/**
+ * DocumentTypeMasterCountOutputType without action
+ */
+export type DocumentTypeMasterCountOutputTypeCountB2bDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadB2BDocumentWhereInput
+}
+
 
 export type DocumentTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.DocumentTypeMaster$documentsArgs<ExtArgs>
+  b2bDocuments?: boolean | Prisma.DocumentTypeMaster$b2bDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentTypeMaster"]>
 
@@ -572,6 +740,8 @@ export type DocumentTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentTypeMaster"]>
 
@@ -580,6 +750,8 @@ export type DocumentTypeMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentTypeMaster"]>
 
@@ -588,12 +760,15 @@ export type DocumentTypeMasterSelectScalar = {
   type?: boolean
   vendor_id?: boolean
   tag?: boolean
+  doc_title?: boolean
+  stage?: boolean
 }
 
-export type DocumentTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag", ExtArgs["result"]["documentTypeMaster"]>
+export type DocumentTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "tag" | "doc_title" | "stage", ExtArgs["result"]["documentTypeMaster"]>
 export type DocumentTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.DocumentTypeMaster$documentsArgs<ExtArgs>
+  b2bDocuments?: boolean | Prisma.DocumentTypeMaster$b2bDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.DocumentTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DocumentTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -608,12 +783,15 @@ export type $DocumentTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
+    b2bDocuments: Prisma.$LeadB2BDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     type: string
     vendor_id: number
     tag: string
+    doc_title: string | null
+    stage: string | null
   }, ExtArgs["result"]["documentTypeMaster"]>
   composites: {}
 }
@@ -1010,6 +1188,7 @@ export interface Prisma__DocumentTypeMasterClient<T, Null = never, ExtArgs exten
   readonly [Symbol.toStringTag]: "PrismaPromise"
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.DocumentTypeMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentTypeMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  b2bDocuments<T extends Prisma.DocumentTypeMaster$b2bDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentTypeMaster$b2bDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadB2BDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1043,6 +1222,8 @@ export interface DocumentTypeMasterFieldRefs {
   readonly type: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
   readonly vendor_id: Prisma.FieldRef<"DocumentTypeMaster", 'Int'>
   readonly tag: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
+  readonly doc_title: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
+  readonly stage: Prisma.FieldRef<"DocumentTypeMaster", 'String'>
 }
     
 
@@ -1239,6 +1420,11 @@ export type DocumentTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` DocumentTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DocumentTypeMasters.
+   */
   distinct?: Prisma.DocumentTypeMasterScalarFieldEnum | Prisma.DocumentTypeMasterScalarFieldEnum[]
 }
 
@@ -1460,6 +1646,30 @@ export type DocumentTypeMaster$documentsArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
+}
+
+/**
+ * DocumentTypeMaster.b2bDocuments
+ */
+export type DocumentTypeMaster$b2bDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadB2BDocument
+   */
+  select?: Prisma.LeadB2BDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadB2BDocument
+   */
+  omit?: Prisma.LeadB2BDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadB2BDocumentInclude<ExtArgs> | null
+  where?: Prisma.LeadB2BDocumentWhereInput
+  orderBy?: Prisma.LeadB2BDocumentOrderByWithRelationInput | Prisma.LeadB2BDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.LeadB2BDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadB2BDocumentScalarFieldEnum | Prisma.LeadB2BDocumentScalarFieldEnum[]
 }
 
 /**
