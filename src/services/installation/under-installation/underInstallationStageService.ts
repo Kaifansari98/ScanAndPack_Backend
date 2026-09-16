@@ -1,3 +1,4 @@
+import { findMiscProductionTask } from "./miscProductionTask";
 import { resolveMiscTask } from "./resolveMiscTask";
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
@@ -2023,17 +2024,9 @@ export class UnderInstallationStageService {
               (m.reorder_material_details &&
                 t.remark.includes(m.reorder_material_details))),
         );
-        let taskForMisc = miscTasks.find(
-          (t) =>
-            (t.task_type === "Miscellaneous" || t.task_type === "Pending Materials") &&
-            typeof t.remark === "string" &&
-            !t.remark.includes("[misc-delivery") &&
-            !t.remark.includes("Required delivery date set for") &&
-            (t.remark.includes(miscTaskKey) ||
-              t.remark === remarkKey ||
-              (m.reorder_material_details === "Pending Material" &&
-                t.remark === pendingMaterialKey)),
-        );
+        let taskForMisc = m.misc_approved === true && m.expected_ready_date
+          ? findMiscProductionTask(m, miscTasks)
+          : undefined;
 
         // Self-heal: If approved and ERD is set, but no production task exists yet, create open production task for factory
         if (m.misc_approved === true && m.expected_ready_date && !taskForMisc) {
@@ -3387,6 +3380,7 @@ export class UnderInstallationStageService {
           reorder_material_details: true,
           problem_description: true,
           misc_approved: true,
+          expected_ready_date: true,
         },
       });
 
@@ -3411,17 +3405,6 @@ export class UnderInstallationStageService {
 
       const miscTaskKey = `[misc:${existing.id}]`;
       const miscErdKey = `[misc-erd:${existing.id}]`;
-      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
-      const pendingMaterialKey = existing.problem_description;
-      const orConditions = [
-        { remark: { contains: miscTaskKey } },
-        { remark: { contains: miscErdKey } },
-        { remark: remarkKey },
-      ];
-      if (existing.reorder_material_details === "Pending Material") {
-        orConditions.push({ remark: pendingMaterialKey });
-      }
-
       // 1. Close open ERD tasks for this miscellaneous item
       const openErdTasks = await tx.userLeadTask.findMany({
         where: {
@@ -3430,10 +3413,7 @@ export class UnderInstallationStageService {
           task_type: "Miscellaneous Production ERD",
           OR: [
             { remark: { contains: miscErdKey } },
-            { remark: { contains: `[misc-erd:${existing.id}]` } },
-            ...(existing.reorder_material_details
-              ? [{ remark: { contains: existing.reorder_material_details } }]
-              : []),
+            { remark: `Set ERD date for **${existing.reorder_material_details}** - ${existing.problem_description}` },
           ],
           status: "open",
         },
@@ -3469,22 +3449,17 @@ export class UnderInstallationStageService {
       }
 
       // 2. Ensure open production task exists with the updated ERD due_date
-      const existingProdTask = await tx.userLeadTask.findFirst({
+      const productionTasks = await tx.userLeadTask.findMany({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
           task_type: { in: ["Miscellaneous", "Pending Materials"] },
-          OR: [
-            { remark: { contains: miscTaskKey } },
-            { remark: remarkKey },
-          ],
-          NOT: [
-            { remark: { contains: "misc-delivery" } },
-            { remark: { contains: "Required delivery date set for" } },
-          ],
+          // The first ERD starts production; historical completed tasks cannot fulfill it.
+          ...(!existing.expected_ready_date ? { status: "open" as const } : {}),
         },
         orderBy: { id: "desc" },
       });
+      const existingProdTask = findMiscProductionTask(existing, productionTasks);
 
       if (existingProdTask) {
         if (existingProdTask.status === "open") {
@@ -3492,6 +3467,7 @@ export class UnderInstallationStageService {
             where: { id: existingProdTask.id },
             data: {
               due_date: new Date(expected_ready_date),
+              remark: `[misc:${existing.id}] ${existing.reorder_material_details} - ${existing.problem_description}`,
               updated_by,
               updated_at: new Date(),
             },
@@ -4897,6 +4873,12 @@ export class UnderInstallationStageService {
       if (!existing) {
         throw Object.assign(new Error("Miscellaneous entry not found"), {
           statusCode: 404,
+        });
+      }
+
+      if (!existing.expected_ready_date) {
+        throw Object.assign(new Error("Set the Expected Ready Date before marking this requirement as ready."), {
+          statusCode: 400,
         });
       }
 
