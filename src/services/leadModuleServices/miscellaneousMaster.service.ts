@@ -520,7 +520,6 @@ export const findMiscTask = (
 export const findDeliveryTask = (
   m: {
     id?: number;
-    id?: number;
     lead_id: number;
     misc_approved: boolean | null;
     required_delivery_date: Date | string | null;

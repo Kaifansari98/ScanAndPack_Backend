@@ -88,6 +88,15 @@ underInstallationStageRoutes.post(
   controller.createMiscellaneousEntry,
 );
 
+/**
+ * POST → Create Miscellaneous Return Order with documents
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create-return-order",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.createMiscellaneousReturnOrder,
+);
+
 underInstallationStageRoutes.post(
   "/miscellaneous/:miscId/documents",
   handleMulterUpload(uploadUnderInstallationFiles.array("files")),

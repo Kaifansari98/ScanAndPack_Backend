@@ -339,6 +339,7 @@ export type OrderLoginDetailsWhereInput = {
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   poFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingListRelationFilter
 }
 
 export type OrderLoginDetailsOrderByWithRelationInput = {
@@ -365,6 +366,7 @@ export type OrderLoginDetailsOrderByWithRelationInput = {
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   poFiles?: Prisma.OrderLoginPoFileMappingOrderByRelationAggregateInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingOrderByRelationAggregateInput
 }
 
 export type OrderLoginDetailsWhereUniqueInput = Prisma.AtLeast<{
@@ -394,6 +396,7 @@ export type OrderLoginDetailsWhereUniqueInput = Prisma.AtLeast<{
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   poFiles?: Prisma.OrderLoginPoFileMappingListRelationFilter
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingListRelationFilter
 }, "id">
 
 export type OrderLoginDetailsOrderByWithAggregationInput = {
@@ -459,6 +462,7 @@ export type OrderLoginDetailsCreateInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateInput = {
@@ -479,6 +483,7 @@ export type OrderLoginDetailsUncheckedCreateInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUpdateInput = {
@@ -498,6 +503,7 @@ export type OrderLoginDetailsUpdateInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateInput = {
@@ -518,6 +524,7 @@ export type OrderLoginDetailsUncheckedUpdateInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsCreateManyInput = {
@@ -916,6 +923,20 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput 
   deleteMany?: Prisma.OrderLoginDetailsScalarWhereInput | Prisma.OrderLoginDetailsScalarWhereInput[]
 }
 
+export type OrderLoginDetailsCreateNestedOneWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  create?: Prisma.XOR<Prisma.OrderLoginDetailsCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+  connectOrCreate?: Prisma.OrderLoginDetailsCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput
+  connect?: Prisma.OrderLoginDetailsWhereUniqueInput
+}
+
+export type OrderLoginDetailsUpdateOneRequiredWithoutMiscellaneousReorderInstancesMaterialMappingNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderLoginDetailsCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+  connectOrCreate?: Prisma.OrderLoginDetailsCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput
+  upsert?: Prisma.OrderLoginDetailsUpsertWithoutMiscellaneousReorderInstancesMaterialMappingInput
+  connect?: Prisma.OrderLoginDetailsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrderLoginDetailsUpdateToOneWithWhereWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput>, Prisma.OrderLoginDetailsUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+}
+
 export type OrderLoginDetailsCreateNestedOneWithoutPoFilesInput = {
   create?: Prisma.XOR<Prisma.OrderLoginDetailsCreateWithoutPoFilesInput, Prisma.OrderLoginDetailsUncheckedCreateWithoutPoFilesInput>
   connectOrCreate?: Prisma.OrderLoginDetailsCreateOrConnectWithoutPoFilesInput
@@ -946,6 +967,7 @@ export type OrderLoginDetailsCreateWithoutVendorInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutVendorInput = {
@@ -965,6 +987,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutVendorInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutVendorInput = {
@@ -1031,6 +1054,7 @@ export type OrderLoginDetailsCreateWithoutCreatedByInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutCreatedByInput = {
@@ -1050,6 +1074,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutCreatedByInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutCreatedByInput = {
@@ -1078,6 +1103,7 @@ export type OrderLoginDetailsCreateWithoutUpdatedByInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutUpdatedByInput = {
@@ -1097,6 +1123,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutUpdatedByInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutUpdatedByInput = {
@@ -1157,6 +1184,7 @@ export type OrderLoginDetailsCreateWithoutLeadInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutLeadInput = {
@@ -1176,6 +1204,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutLeadInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutLeadInput = {
@@ -1220,6 +1249,7 @@ export type OrderLoginDetailsCreateWithoutAccountInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutAccountInput = {
@@ -1239,6 +1269,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutAccountInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutAccountInput = {
@@ -1283,6 +1314,7 @@ export type OrderLoginDetailsCreateWithoutCompanyVendorInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
   poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutCompanyVendorInput = {
@@ -1302,6 +1334,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutCompanyVendorInput = {
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutCompanyVendorInput = {
@@ -1330,6 +1363,100 @@ export type OrderLoginDetailsUpdateManyWithWhereWithoutCompanyVendorInput = {
   data: Prisma.XOR<Prisma.OrderLoginDetailsUpdateManyMutationInput, Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput>
 }
 
+export type OrderLoginDetailsCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  item_type: string
+  item_desc: string
+  estimated_completion_date?: Date | string | null
+  completion_date?: Date | string | null
+  is_completed?: boolean
+  created_at?: Date | string
+  updated_at?: Date | string
+  factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
+  account: Prisma.AccountMasterCreateNestedOneWithoutOrderLoginDetailsInput
+  companyVendor?: Prisma.CompanyVendorsMasterCreateNestedOneWithoutOrderLoginLinksInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutOrderLoginDetailsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
+  poFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutOrderLoginInput
+}
+
+export type OrderLoginDetailsUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  item_type: string
+  item_desc: string
+  estimated_completion_date?: Date | string | null
+  completion_date?: Date | string | null
+  is_completed?: boolean
+  created_at?: Date | string
+  created_by: number
+  company_vendor_id?: number | null
+  updated_at?: Date | string
+  updated_by?: number | null
+  factory_user_vendor_selection_remark?: string | null
+  instance_id?: number | null
+  poFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutOrderLoginInput
+}
+
+export type OrderLoginDetailsCreateOrConnectWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  where: Prisma.OrderLoginDetailsWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderLoginDetailsCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+}
+
+export type OrderLoginDetailsUpsertWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  update: Prisma.XOR<Prisma.OrderLoginDetailsUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+  create: Prisma.XOR<Prisma.OrderLoginDetailsCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedCreateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+  where?: Prisma.OrderLoginDetailsWhereInput
+}
+
+export type OrderLoginDetailsUpdateToOneWithWhereWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  where?: Prisma.OrderLoginDetailsWhereInput
+  data: Prisma.XOR<Prisma.OrderLoginDetailsUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput, Prisma.OrderLoginDetailsUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput>
+}
+
+export type OrderLoginDetailsUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  item_type?: Prisma.StringFieldUpdateOperationsInput | string
+  item_desc?: Prisma.StringFieldUpdateOperationsInput | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
+  companyVendor?: Prisma.CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
+  poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+}
+
+export type OrderLoginDetailsUncheckedUpdateWithoutMiscellaneousReorderInstancesMaterialMappingInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_type?: Prisma.StringFieldUpdateOperationsInput | string
+  item_desc?: Prisma.StringFieldUpdateOperationsInput | string
+  estimated_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_completed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  company_vendor_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+}
+
 export type OrderLoginDetailsCreateWithoutPoFilesInput = {
   item_type: string
   item_desc: string
@@ -1346,6 +1473,7 @@ export type OrderLoginDetailsCreateWithoutPoFilesInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutOrderLoginDetailsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutOrderLoginsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutOrderLoginDetailsInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsUncheckedCreateWithoutPoFilesInput = {
@@ -1365,6 +1493,7 @@ export type OrderLoginDetailsUncheckedCreateWithoutPoFilesInput = {
   updated_by?: number | null
   factory_user_vendor_selection_remark?: string | null
   instance_id?: number | null
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutOrderLoginDetailInput
 }
 
 export type OrderLoginDetailsCreateOrConnectWithoutPoFilesInput = {
@@ -1399,6 +1528,7 @@ export type OrderLoginDetailsUpdateWithoutPoFilesInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutPoFilesInput = {
@@ -1418,6 +1548,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutPoFilesInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsCreateManyVendorInput = {
@@ -1454,6 +1585,7 @@ export type OrderLoginDetailsUpdateWithoutVendorInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutVendorInput = {
@@ -1473,6 +1605,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutVendorInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutVendorInput = {
@@ -1545,6 +1678,7 @@ export type OrderLoginDetailsUpdateWithoutCreatedByInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutCreatedByInput = {
@@ -1564,6 +1698,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCreatedByInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1600,6 +1735,7 @@ export type OrderLoginDetailsUpdateWithoutUpdatedByInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutUpdatedByInput = {
@@ -1619,6 +1755,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutUpdatedByInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1673,6 +1810,7 @@ export type OrderLoginDetailsUpdateWithoutLeadInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutLeadInput = {
@@ -1692,6 +1830,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutLeadInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutLeadInput = {
@@ -1746,6 +1885,7 @@ export type OrderLoginDetailsUpdateWithoutAccountInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutAccountInput = {
@@ -1765,6 +1905,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutAccountInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutAccountInput = {
@@ -1819,6 +1960,7 @@ export type OrderLoginDetailsUpdateWithoutCompanyVendorInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutOrderLoginsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutOrderLoginDetailsNestedInput
   poFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateWithoutCompanyVendorInput = {
@@ -1838,6 +1980,7 @@ export type OrderLoginDetailsUncheckedUpdateWithoutCompanyVendorInput = {
   factory_user_vendor_selection_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   poFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutOrderLoginNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutOrderLoginDetailNestedInput
 }
 
 export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput = {
@@ -1865,10 +2008,12 @@ export type OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorInput = {
 
 export type OrderLoginDetailsCountOutputType = {
   poFiles: number
+  miscellaneousReorderInstancesMaterialMapping: number
 }
 
 export type OrderLoginDetailsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   poFiles?: boolean | OrderLoginDetailsCountOutputTypeCountPoFilesArgs
+  miscellaneousReorderInstancesMaterialMapping?: boolean | OrderLoginDetailsCountOutputTypeCountMiscellaneousReorderInstancesMaterialMappingArgs
 }
 
 /**
@@ -1886,6 +2031,13 @@ export type OrderLoginDetailsCountOutputTypeDefaultArgs<ExtArgs extends runtime.
  */
 export type OrderLoginDetailsCountOutputTypeCountPoFilesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrderLoginPoFileMappingWhereInput
+}
+
+/**
+ * OrderLoginDetailsCountOutputType without action
+ */
+export type OrderLoginDetailsCountOutputTypeCountMiscellaneousReorderInstancesMaterialMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MiscellaneousReorderInstancesMaterialMappingWhereInput
 }
 
 
@@ -1913,6 +2065,7 @@ export type OrderLoginDetailsSelect<ExtArgs extends runtime.Types.Extensions.Int
   updatedBy?: boolean | Prisma.OrderLoginDetails$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   poFiles?: boolean | Prisma.OrderLoginDetails$poFilesArgs<ExtArgs>
+  miscellaneousReorderInstancesMaterialMapping?: boolean | Prisma.OrderLoginDetails$miscellaneousReorderInstancesMaterialMappingArgs<ExtArgs>
   _count?: boolean | Prisma.OrderLoginDetailsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderLoginDetails"]>
 
@@ -1994,6 +2147,7 @@ export type OrderLoginDetailsInclude<ExtArgs extends runtime.Types.Extensions.In
   updatedBy?: boolean | Prisma.OrderLoginDetails$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   poFiles?: boolean | Prisma.OrderLoginDetails$poFilesArgs<ExtArgs>
+  miscellaneousReorderInstancesMaterialMapping?: boolean | Prisma.OrderLoginDetails$miscellaneousReorderInstancesMaterialMappingArgs<ExtArgs>
   _count?: boolean | Prisma.OrderLoginDetailsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrderLoginDetailsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2023,6 +2177,7 @@ export type $OrderLoginDetailsPayload<ExtArgs extends runtime.Types.Extensions.I
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     poFiles: Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>[]
+    miscellaneousReorderInstancesMaterialMapping: Prisma.$MiscellaneousReorderInstancesMaterialMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2442,6 +2597,7 @@ export interface Prisma__OrderLoginDetailsClient<T, Null = never, ExtArgs extend
   updatedBy<T extends Prisma.OrderLoginDetails$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginDetails$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   poFiles<T extends Prisma.OrderLoginDetails$poFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginDetails$poFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginPoFileMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  miscellaneousReorderInstancesMaterialMapping<T extends Prisma.OrderLoginDetails$miscellaneousReorderInstancesMaterialMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrderLoginDetails$miscellaneousReorderInstancesMaterialMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousReorderInstancesMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2947,6 +3103,30 @@ export type OrderLoginDetails$poFilesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.OrderLoginPoFileMappingScalarFieldEnum | Prisma.OrderLoginPoFileMappingScalarFieldEnum[]
+}
+
+/**
+ * OrderLoginDetails.miscellaneousReorderInstancesMaterialMapping
+ */
+export type OrderLoginDetails$miscellaneousReorderInstancesMaterialMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MiscellaneousReorderInstancesMaterialMapping
+   */
+  select?: Prisma.MiscellaneousReorderInstancesMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MiscellaneousReorderInstancesMaterialMapping
+   */
+  omit?: Prisma.MiscellaneousReorderInstancesMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MiscellaneousReorderInstancesMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.MiscellaneousReorderInstancesMaterialMappingWhereInput
+  orderBy?: Prisma.MiscellaneousReorderInstancesMaterialMappingOrderByWithRelationInput | Prisma.MiscellaneousReorderInstancesMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.MiscellaneousReorderInstancesMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum | Prisma.MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum[]
 }
 
 /**

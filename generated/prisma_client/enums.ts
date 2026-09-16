@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const ReturnOrderDeliveryMethod = {
+  SELF_DELIVERY: 'SELF_DELIVERY',
+  PICKUP_SCHEDULE: 'PICKUP_SCHEDULE'
+} as const
+
+export type ReturnOrderDeliveryMethod = (typeof ReturnOrderDeliveryMethod)[keyof typeof ReturnOrderDeliveryMethod]
+
+
 export const MaterialSupplyType = {
   Frankvin: 'Frankvin',
   Client: 'Client',

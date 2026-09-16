@@ -6,7 +6,7 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import { NotificationType, LeadUserStatus } from "../../../prisma/generated";
+import { NotificationType, LeadUserStatus, ReturnOrderDeliveryMethod } from "../../../prisma/generated";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import {
   sendLeadMovedToUnderInstallationEmail,
@@ -39,6 +39,23 @@ interface MiscPayload {
   is_resolved: boolean;
   created_by: number;
   teams: number[];
+  files: { originalName: string; sysName: string }[];
+  baseUrl: string;
+}
+
+interface ReturnOrderPayload {
+  vendor_id: number;
+  lead_id: number;
+  account_id?: number;
+  misc_type_id?: number;
+  orderlogindetails_ids?: number[];
+  instance_id?: number;
+  reorder_material_details: string;
+  problem_description?: string;
+  supervisor_remark?: string;
+  return_order_date?: Date | string | null;
+  return_order_delivery_method: ReturnOrderDeliveryMethod;
+  created_by: number;
   files: { originalName: string; sysName: string }[];
   baseUrl: string;
 }
@@ -1709,6 +1726,340 @@ export class UnderInstallationStageService {
     return misc.misc;
   }
 
+  static async createMiscellaneousReturnOrderService(payload: ReturnOrderPayload) {
+    const {
+      vendor_id,
+      lead_id,
+      account_id,
+      misc_type_id,
+      orderlogindetails_ids,
+      reorder_material_details,
+      problem_description,
+      supervisor_remark,
+      return_order_date,
+      return_order_delivery_method,
+      created_by,
+      files,
+      baseUrl,
+    } = payload;
+
+    if (!reorder_material_details || !reorder_material_details.trim()) {
+      throw new Error("Return order material details is required");
+    }
+
+    if (!return_order_delivery_method) {
+      throw new Error("Return order delivery method is required");
+    }
+
+    const misc = await prisma.$transaction(async (tx) => {
+      // 1. Resolve or Create "Return Order" Misc Type
+      let finalMiscTypeId = misc_type_id;
+      if (!finalMiscTypeId) {
+        const returnOrderType = await tx.miscellaneousTypeMaster.findFirst({
+          where: {
+            vendor_id,
+            name: { equals: "Return Order", mode: "insensitive" },
+          },
+        });
+        if (returnOrderType) {
+          finalMiscTypeId = returnOrderType.id;
+        } else {
+          const createdType = await tx.miscellaneousTypeMaster.create({
+            data: {
+              vendor_id,
+              name: "Return Order",
+              created_by,
+              status: "active",
+            },
+          });
+          finalMiscTypeId = createdType.id;
+        }
+      }
+
+      // 2. Create MiscellaneousMaster record
+      let resolvedAccountId = account_id;
+      if (!resolvedAccountId) {
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: { account_id: true },
+        });
+        resolvedAccountId = lead?.account_id ?? 0;
+      }
+
+      const createdMisc = await tx.miscellaneousMaster.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id: resolvedAccountId,
+          misc_type_id: finalMiscTypeId,
+          problem_description: problem_description?.trim() || "Return Order",
+          reorder_material_details: reorder_material_details.trim(),
+          supervisor_remark: supervisor_remark?.trim() || null,
+          return_order_date: return_order_date ? new Date(return_order_date) : null,
+          return_order_delivery_method,
+          is_resolved: false,
+          created_by,
+        },
+      });
+
+      // 3. Create mapping for orderlogindetails in MiscellaneousReorderInstancesMaterialMapping
+      const orderLoginIds = (orderlogindetails_ids || []).filter(Boolean);
+      if (orderLoginIds.length > 0) {
+        const uniqueIds = Array.from(new Set(orderLoginIds));
+        await tx.miscellaneousReorderInstancesMaterialMapping.createMany({
+          data: uniqueIds.map((orderLoginId) => ({
+            vendor_id,
+            lead_id,
+            misc_id: createdMisc.id,
+            orderlogindetails_id: orderLoginId,
+            created_by,
+          })),
+        });
+      } else if (payload.instance_id) {
+        const matchingOrderLogin = await tx.orderLoginDetails.findFirst({
+          where: {
+            lead_id,
+            vendor_id,
+            instance_id: Number(payload.instance_id),
+            OR: [
+              { item_desc: { contains: reorder_material_details.trim(), mode: "insensitive" } },
+              { item_type: { contains: reorder_material_details.trim(), mode: "insensitive" } },
+            ],
+          },
+        });
+        if (matchingOrderLogin) {
+          await tx.miscellaneousReorderInstancesMaterialMapping.create({
+            data: {
+              vendor_id,
+              lead_id,
+              misc_id: createdMisc.id,
+              orderlogindetails_id: matchingOrderLogin.id,
+              created_by,
+            },
+          });
+        }
+      }
+
+      // 4. Miscellaneous Assignee
+      const miscUserMapping = await tx.leadUserMapping.findFirst({
+        where: {
+          vendor_id,
+          lead_id,
+          status: "active",
+          user: {
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
+          },
+        },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
+      });
+
+      let miscAssigneeId = miscUserMapping?.user_id ?? null;
+
+      if (!miscAssigneeId) {
+        const vendorMiscUser = await tx.userMaster.findFirst({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { equals: "miscellaneous", mode: "insensitive" },
+            },
+          },
+          orderBy: { id: "asc" },
+          select: { id: true },
+        });
+        miscAssigneeId = vendorMiscUser?.id ?? null;
+      }
+
+      if (!miscAssigneeId) {
+        const superAdmin = await tx.userMaster.findFirst({
+          where: {
+            vendor_id,
+            status: "active",
+            user_type: {
+              user_type: { in: ["super-admin", "admin"], mode: "insensitive" },
+            },
+          },
+          orderBy: { id: "asc" },
+          select: { id: true },
+        });
+        miscAssigneeId = superAdmin?.id ?? created_by;
+      }
+
+      // 5. Lead Stage Resolution
+      const leadStageRecord = await tx.leadMaster.findUnique({
+        where: { id: lead_id },
+        select: { status_id: true, franchise_id: true },
+      });
+
+      const leadStage = leadStageRecord?.status_id
+        ? ((
+          await tx.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
+        : null;
+
+      // 6. Create Task: Miscellaneous Approval
+      const returnMethodLabel =
+        return_order_delivery_method === "SELF_DELIVERY"
+          ? "Self Delivery"
+          : "Pickup Schedule";
+      const miscRemark = `[misc:${createdMisc.id}] Return Order (${returnMethodLabel}): ${reorder_material_details}`;
+
+      const task = await tx.userLeadTask.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id: resolvedAccountId,
+          franchise_id: leadStageRecord?.franchise_id ?? null,
+          user_id: miscAssigneeId ?? created_by,
+          task_type: "Miscellaneous Return Order Approval",
+          lead_stage: leadStage,
+          due_date: return_order_date ? new Date(return_order_date) : new Date(),
+          remark: miscRemark,
+          status: "open",
+          created_by,
+        },
+      });
+
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
+      });
+
+      // 7. Documents Mapping
+      if (files && files.length > 0) {
+        let docType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id, tag: "Type 24" },
+        });
+
+        if (!docType) {
+          docType = await tx.documentTypeMaster.create({
+            data: {
+              vendor_id,
+              tag: "Type 24",
+              type: "under-installation-miscellaneous-documents",
+              doc_title: "Under Installation Miscellaneous Documents",
+              stage: "Under Installation",
+            },
+          });
+        }
+
+        for (const doc of files) {
+          const leadDoc = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: doc.originalName,
+              doc_sys_name: doc.sysName,
+              vendor_id,
+              lead_id,
+              created_by,
+              doc_type_id: docType.id,
+            },
+          });
+
+          await tx.miscellaneousDocument.create({
+            data: {
+              vendor_id,
+              miscellaneous_id: createdMisc.id,
+              document_id: leadDoc.id,
+              created_by,
+            },
+          });
+        }
+      }
+
+      return {
+        misc: createdMisc,
+        taskId: task.id,
+        assigneeId: miscAssigneeId,
+      };
+    });
+
+    // 8. Communication Layer (Notifications)
+    try {
+      const miscUsers = await UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id);
+      if (misc.assigneeId && !miscUsers.some((u) => u.id === misc.assigneeId)) {
+        const assigneeUser = await prisma.userMaster.findUnique({
+          where: { id: misc.assigneeId },
+          select: { id: true, user_name: true, user_email: true },
+        });
+        if (assigneeUser) {
+          miscUsers.push(assigneeUser);
+        }
+      }
+
+      const notifyUsers = miscUsers.filter((user) => user.id !== created_by);
+      const finalRecipients = notifyUsers.length > 0 ? notifyUsers : miscUsers;
+
+      if (finalRecipients.length) {
+        const [leadMeta, creator, firstInstance] = await Promise.all([
+          prisma.leadMaster.findUnique({
+            where: { id: lead_id },
+            select: {
+              lead_code: true,
+              firstname: true,
+              lastname: true,
+              account_id: true,
+              statusType: { select: { tag: true } },
+            },
+          }),
+          prisma.userMaster.findUnique({
+            where: { id: created_by },
+            select: { user_name: true },
+          }),
+          prisma.leadProductStructureInstance.findFirst({
+            where: { lead_id, vendor_id },
+            select: { id: true },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          }),
+        ]);
+
+        const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
+        const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
+        const stageTag = leadMeta?.statusType?.tag;
+        const miscBase = stageTag && STAGE_PATH_BY_TAG[stageTag]
+          ? `${STAGE_PATH_BY_TAG[stageTag]}/${lead_id}`
+          : `/dashboard/installation/under-installation/details/${lead_id}`;
+        const miscParams = new URLSearchParams();
+        if (leadMeta?.account_id) miscParams.set("accountId", String(leadMeta.account_id));
+        if (firstInstance?.id) miscParams.set("instance_id", String(firstInstance.id));
+        if (misc.taskId) miscParams.set("taskId", String(misc.taskId));
+        miscParams.set("tab", "misc");
+        const redirectPath = `${miscBase}?${miscParams.toString()}`;
+
+        await Promise.allSettled(
+          finalRecipients.map((user) =>
+            NotificationService.createAndSend({
+              vendor_id,
+              user_id: user.id,
+              sender_id: created_by,
+              type: NotificationType.LEAD_ACTION,
+              title: "New Return Order Request",
+              message: `A return order request has been submitted for ${leadCode} - ${leadName}.`,
+              entity_type: "miscellaneous",
+              entity_id: misc.misc.id,
+              redirect_url: redirectPath,
+            })
+          )
+        );
+      }
+    } catch (notifyErr: any) {
+      logger.warn("Return order notification failed", {
+        misc_id: misc.misc.id,
+        error: notifyErr?.message,
+      });
+    }
+
+    return misc.misc;
+  }
+
   static async updateMiscellaneousService(payload: UpdateMiscPayload) {
     const {
       misc_id,
@@ -1962,6 +2313,11 @@ export class UnderInstallationStageService {
             },
           },
         },
+        reorderInstancesMaterialMappings: {
+          include: {
+            orderLoginDetail: true,
+          },
+        },
       },
     });
 
@@ -2166,6 +2522,9 @@ export class UnderInstallationStageService {
           cost: m.cost,
           supervisor_remark: m.supervisor_remark,
           expected_ready_date: m.expected_ready_date,
+          return_order_date: m.return_order_date ?? null,
+          return_order_delivery_method: m.return_order_delivery_method ?? null,
+          reorder_instances_material_mappings: (m as any).reorderInstancesMaterialMappings ?? [],
           solution: (m as any).solution ?? null,
           required_delivery_date: deliveryTaskForMisc?.due_date ?? m.required_delivery_date,
           is_resolved: m.is_resolved,
