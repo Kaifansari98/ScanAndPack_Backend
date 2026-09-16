@@ -1201,6 +1201,75 @@ export class OrderLoginService {
     }, { timeout: 30000 });
   }
 
+  async freezeRequiredMaterials(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+    items: { id: number; qty: number }[],
+  ) {
+    if (!vendorId || !leadId || !userId) {
+      throw Object.assign(new Error("vendorId, leadId, and userId are required"), { statusCode: 400 });
+    }
+    const cleanItems = (Array.isArray(items) ? items : [])
+      .map((item) => ({ id: Number(item?.id), qty: Math.round(Number(item?.qty) * 100) / 100 }))
+      .filter((item) => Number.isInteger(item.id) && item.id > 0 && Number.isFinite(item.qty) && item.qty > 0);
+    if (!cleanItems.length) {
+      throw Object.assign(new Error("Provide at least one item with a freeze quantity greater than 0."), { statusCode: 400 });
+    }
+    const qtyById = new Map(cleanItems.map((item) => [item.id, item.qty]));
+
+    return prisma.$transaction(async (tx) => {
+      const rows = await tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] }, vendor_id: vendorId, lead_id: leadId },
+        include: { product: { select: { id: true, current_stock: true, product_name: true } } },
+      });
+      if (rows.length !== qtyById.size) {
+        throw Object.assign(new Error("Some selected items were not found for this lead."), { statusCode: 404 });
+      }
+
+      const now = new Date();
+      for (const row of rows) {
+        const freezeQty = qtyById.get(row.id)!;
+        const required = parseFloat(row.qty.toString());
+        const alreadyIssued = parseFloat(row.issued_item_qty.toString());
+        const remaining = Math.round((required - alreadyIssued) * 100) / 100;
+        if (freezeQty > remaining + 1e-6) {
+          throw Object.assign(new Error(`Cannot freeze ${freezeQty} of "${row.name}" — only ${remaining} left to freeze.`), { statusCode: 400 });
+        }
+        const currentStock = parseFloat(row.product.current_stock.toString());
+        if (freezeQty > currentStock + 1e-6) {
+          throw Object.assign(new Error(`Cannot freeze ${freezeQty} of "${row.name}" — only ${currentStock} in stock.`), { statusCode: 400 });
+        }
+        const newStock = Math.round((currentStock - freezeQty) * 100) / 100;
+        const newIssuedQty = Math.round((alreadyIssued + freezeQty) * 100) / 100;
+
+        await tx.productMaster.update({ where: { id: row.product_id }, data: { current_stock: newStock, stock_updated_at: now } });
+        await tx.productsRequiredForProduction.update({ where: { id: row.id }, data: { issued_item_qty: newIssuedQty } });
+        await tx.productStockHistory.create({
+          data: {
+            vendor_id: vendorId,
+            product_id: row.product_id,
+            old_stock: currentStock,
+            new_stock: newStock,
+            change: newStock - currentStock,
+            source: "MaterialIssue",
+            changed_by: userId,
+            remarks: `Frozen ${freezeQty} for lead #${leadId}`,
+          },
+        });
+      }
+
+      return tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] } },
+        include: { product: { select: {
+          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
+          unit_of_measure: true, stockUnit: { select: { unit_name: true } },
+          primaryUnit: { select: { unit_name: true, short_name: true } },
+        } } },
+      });
+    }, { timeout: 30000 });
+  }
+
   async getLeadProductionReadiness(
     vendorId: number,
     leadId: number,

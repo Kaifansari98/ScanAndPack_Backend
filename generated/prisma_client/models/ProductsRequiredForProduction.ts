@@ -35,6 +35,7 @@ export type ProductsRequiredForProductionAvgAggregateOutputType = {
   instance_id: number | null
   product_id: number | null
   qty: runtime.Decimal | null
+  issued_item_qty: runtime.Decimal | null
   created_by: number | null
 }
 
@@ -47,6 +48,7 @@ export type ProductsRequiredForProductionSumAggregateOutputType = {
   instance_id: number | null
   product_id: number | null
   qty: runtime.Decimal | null
+  issued_item_qty: runtime.Decimal | null
   created_by: number | null
 }
 
@@ -64,6 +66,7 @@ export type ProductsRequiredForProductionMinAggregateOutputType = {
   qty: runtime.Decimal | null
   unit: string | null
   name: string | null
+  issued_item_qty: runtime.Decimal | null
   created_at: Date | null
   created_by: number | null
 }
@@ -82,6 +85,7 @@ export type ProductsRequiredForProductionMaxAggregateOutputType = {
   qty: runtime.Decimal | null
   unit: string | null
   name: string | null
+  issued_item_qty: runtime.Decimal | null
   created_at: Date | null
   created_by: number | null
 }
@@ -100,6 +104,7 @@ export type ProductsRequiredForProductionCountAggregateOutputType = {
   qty: number
   unit: number
   name: number
+  issued_item_qty: number
   created_at: number
   created_by: number
   _all: number
@@ -115,6 +120,7 @@ export type ProductsRequiredForProductionAvgAggregateInputType = {
   instance_id?: true
   product_id?: true
   qty?: true
+  issued_item_qty?: true
   created_by?: true
 }
 
@@ -127,6 +133,7 @@ export type ProductsRequiredForProductionSumAggregateInputType = {
   instance_id?: true
   product_id?: true
   qty?: true
+  issued_item_qty?: true
   created_by?: true
 }
 
@@ -144,6 +151,7 @@ export type ProductsRequiredForProductionMinAggregateInputType = {
   qty?: true
   unit?: true
   name?: true
+  issued_item_qty?: true
   created_at?: true
   created_by?: true
 }
@@ -162,6 +170,7 @@ export type ProductsRequiredForProductionMaxAggregateInputType = {
   qty?: true
   unit?: true
   name?: true
+  issued_item_qty?: true
   created_at?: true
   created_by?: true
 }
@@ -180,6 +189,7 @@ export type ProductsRequiredForProductionCountAggregateInputType = {
   qty?: true
   unit?: true
   name?: true
+  issued_item_qty?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -285,6 +295,7 @@ export type ProductsRequiredForProductionGroupByOutputType = {
   qty: runtime.Decimal
   unit: string
   name: string
+  issued_item_qty: runtime.Decimal
   created_at: Date
   created_by: number
   _count: ProductsRequiredForProductionCountAggregateOutputType | null
@@ -326,6 +337,7 @@ export type ProductsRequiredForProductionWhereInput = {
   qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
   name?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
+  issued_item_qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -351,6 +363,7 @@ export type ProductsRequiredForProductionOrderByWithRelationInput = {
   qty?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -379,6 +392,7 @@ export type ProductsRequiredForProductionWhereUniqueInput = Prisma.AtLeast<{
   qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
   name?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
+  issued_item_qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -404,6 +418,7 @@ export type ProductsRequiredForProductionOrderByWithAggregationInput = {
   qty?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.ProductsRequiredForProductionCountOrderByAggregateInput
@@ -430,6 +445,7 @@ export type ProductsRequiredForProductionScalarWhereWithAggregatesInput = {
   qty?: Prisma.DecimalWithAggregatesFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringWithAggregatesFilter<"ProductsRequiredForProduction"> | string
   name?: Prisma.StringWithAggregatesFilter<"ProductsRequiredForProduction"> | string
+  issued_item_qty?: Prisma.DecimalWithAggregatesFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"ProductsRequiredForProduction"> | number
 }
@@ -441,6 +457,7 @@ export type ProductsRequiredForProductionCreateInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -465,6 +482,7 @@ export type ProductsRequiredForProductionUncheckedCreateInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -476,6 +494,7 @@ export type ProductsRequiredForProductionUpdateInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -500,6 +519,7 @@ export type ProductsRequiredForProductionUncheckedUpdateInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -518,6 +538,7 @@ export type ProductsRequiredForProductionCreateManyInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -529,6 +550,7 @@ export type ProductsRequiredForProductionUpdateManyMutationInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -546,6 +568,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -574,6 +597,7 @@ export type ProductsRequiredForProductionCountOrderByAggregateInput = {
   qty?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -587,6 +611,7 @@ export type ProductsRequiredForProductionAvgOrderByAggregateInput = {
   instance_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -604,6 +629,7 @@ export type ProductsRequiredForProductionMaxOrderByAggregateInput = {
   qty?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -622,6 +648,7 @@ export type ProductsRequiredForProductionMinOrderByAggregateInput = {
   qty?: Prisma.SortOrder
   unit?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -635,6 +662,7 @@ export type ProductsRequiredForProductionSumOrderByAggregateInput = {
   instance_id?: Prisma.SortOrder
   product_id?: Prisma.SortOrder
   qty?: Prisma.SortOrder
+  issued_item_qty?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
 
@@ -939,6 +967,7 @@ export type ProductsRequiredForProductionCreateWithoutVendorInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -961,6 +990,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutVendorInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1008,6 +1038,7 @@ export type ProductsRequiredForProductionScalarWhereInput = {
   qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
   name?: Prisma.StringFilter<"ProductsRequiredForProduction"> | string
+  issued_item_qty?: Prisma.DecimalFilter<"ProductsRequiredForProduction"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"ProductsRequiredForProduction"> | Date | string
   created_by?: Prisma.IntFilter<"ProductsRequiredForProduction"> | number
 }
@@ -1019,6 +1050,7 @@ export type ProductsRequiredForProductionCreateWithoutCreatedByInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1042,6 +1074,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutCreatedByInput = 
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
 }
 
@@ -1078,6 +1111,7 @@ export type ProductsRequiredForProductionCreateWithoutLeadInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1100,6 +1134,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutLeadInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1137,6 +1172,7 @@ export type ProductsRequiredForProductionCreateWithoutProductTypeInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1159,6 +1195,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutProductTypeInput 
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1196,6 +1233,7 @@ export type ProductsRequiredForProductionCreateWithoutInstanceInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1218,6 +1256,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutInstanceInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1255,6 +1294,7 @@ export type ProductsRequiredForProductionCreateWithoutFranchiseInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1277,6 +1317,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutFranchiseInput = 
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1314,6 +1355,7 @@ export type ProductsRequiredForProductionCreateWithoutProductInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsRequiredForProductionInput
   franchise: Prisma.FranchiseMasterCreateNestedOneWithoutProductsRequiredForProductionInput
@@ -1336,6 +1378,7 @@ export type ProductsRequiredForProductionUncheckedCreateWithoutProductInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1379,6 +1422,7 @@ export type ProductsRequiredForProductionCreateManyVendorInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1390,6 +1434,7 @@ export type ProductsRequiredForProductionUpdateWithoutVendorInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1412,6 +1457,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutVendorInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1429,6 +1475,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorInput =
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1447,6 +1494,7 @@ export type ProductsRequiredForProductionCreateManyCreatedByInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
 }
 
@@ -1457,6 +1505,7 @@ export type ProductsRequiredForProductionUpdateWithoutCreatedByInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1480,6 +1529,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutCreatedByInput = 
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1497,6 +1547,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByInpu
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -1513,6 +1564,7 @@ export type ProductsRequiredForProductionCreateManyLeadInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1524,6 +1576,7 @@ export type ProductsRequiredForProductionUpdateWithoutLeadInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1546,6 +1599,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutLeadInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1563,6 +1617,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutLeadInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1580,6 +1635,7 @@ export type ProductsRequiredForProductionCreateManyProductTypeInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1591,6 +1647,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductTypeInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1613,6 +1670,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutProductTypeInput 
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1630,6 +1688,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductTypeIn
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1647,6 +1706,7 @@ export type ProductsRequiredForProductionCreateManyInstanceInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1658,6 +1718,7 @@ export type ProductsRequiredForProductionUpdateWithoutInstanceInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1680,6 +1741,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutInstanceInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1697,6 +1759,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutInstanceInput
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1714,6 +1777,7 @@ export type ProductsRequiredForProductionCreateManyFranchiseInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1725,6 +1789,7 @@ export type ProductsRequiredForProductionUpdateWithoutFranchiseInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1747,6 +1812,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutFranchiseInput = 
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1764,6 +1830,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutFranchiseInpu
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1781,6 +1848,7 @@ export type ProductsRequiredForProductionCreateManyProductInput = {
   qty: runtime.Decimal | runtime.DecimalJsLike | number | string
   unit: string
   name: string
+  issued_item_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   created_by: number
 }
@@ -1792,6 +1860,7 @@ export type ProductsRequiredForProductionUpdateWithoutProductInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
   franchise?: Prisma.FranchiseMasterUpdateOneRequiredWithoutProductsRequiredForProductionNestedInput
@@ -1814,6 +1883,7 @@ export type ProductsRequiredForProductionUncheckedUpdateWithoutProductInput = {
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1831,6 +1901,7 @@ export type ProductsRequiredForProductionUncheckedUpdateManyWithoutProductInput 
   qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   unit?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  issued_item_qty?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -1851,6 +1922,7 @@ export type ProductsRequiredForProductionSelect<ExtArgs extends runtime.Types.Ex
   qty?: boolean
   unit?: boolean
   name?: boolean
+  issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1876,6 +1948,7 @@ export type ProductsRequiredForProductionSelectCreateManyAndReturn<ExtArgs exten
   qty?: boolean
   unit?: boolean
   name?: boolean
+  issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1901,6 +1974,7 @@ export type ProductsRequiredForProductionSelectUpdateManyAndReturn<ExtArgs exten
   qty?: boolean
   unit?: boolean
   name?: boolean
+  issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -1926,11 +2000,12 @@ export type ProductsRequiredForProductionSelectScalar = {
   qty?: boolean
   unit?: boolean
   name?: boolean
+  issued_item_qty?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type ProductsRequiredForProductionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "product_type_id" | "instance_id" | "product_id" | "article_code" | "type" | "category" | "qty" | "unit" | "name" | "created_at" | "created_by", ExtArgs["result"]["productsRequiredForProduction"]>
+export type ProductsRequiredForProductionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "franchise_id" | "lead_id" | "product_type_id" | "instance_id" | "product_id" | "article_code" | "type" | "category" | "qty" | "unit" | "name" | "issued_item_qty" | "created_at" | "created_by", ExtArgs["result"]["productsRequiredForProduction"]>
 export type ProductsRequiredForProductionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   franchise?: boolean | Prisma.FranchiseMasterDefaultArgs<ExtArgs>
@@ -1984,6 +2059,7 @@ export type $ProductsRequiredForProductionPayload<ExtArgs extends runtime.Types.
     qty: runtime.Decimal
     unit: string
     name: string
+    issued_item_qty: runtime.Decimal
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["productsRequiredForProduction"]>
@@ -2429,6 +2505,7 @@ export interface ProductsRequiredForProductionFieldRefs {
   readonly qty: Prisma.FieldRef<"ProductsRequiredForProduction", 'Decimal'>
   readonly unit: Prisma.FieldRef<"ProductsRequiredForProduction", 'String'>
   readonly name: Prisma.FieldRef<"ProductsRequiredForProduction", 'String'>
+  readonly issued_item_qty: Prisma.FieldRef<"ProductsRequiredForProduction", 'Decimal'>
   readonly created_at: Prisma.FieldRef<"ProductsRequiredForProduction", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"ProductsRequiredForProduction", 'Int'>
 }
