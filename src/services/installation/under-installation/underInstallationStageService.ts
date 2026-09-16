@@ -5274,6 +5274,8 @@ export class UnderInstallationStageService {
           reorder_material_details: true,
           problem_description: true,
           expected_ready_date: true,
+          return_order_delivery_method: true,
+          return_order_date: true,
         },
       });
 
@@ -5283,7 +5285,9 @@ export class UnderInstallationStageService {
         });
       }
 
-      if (!existing.expected_ready_date) {
+      const isSelfDeliveryReturnOrder = existing.return_order_delivery_method === "SELF_DELIVERY";
+
+      if (!isSelfDeliveryReturnOrder && !existing.expected_ready_date) {
         throw Object.assign(new Error("Set the Expected Ready Date before marking this requirement as ready."), {
           statusCode: 400,
         });
@@ -5302,7 +5306,7 @@ export class UnderInstallationStageService {
           .replace(/\s+/g, "-") || "";
       const isSuperAdmin = normalizedType === "super-admin";
 
-      if (!isSuperAdmin && existing.expected_ready_date) {
+      if (!isSelfDeliveryReturnOrder && !isSuperAdmin && existing.expected_ready_date) {
         const erd = new Date(existing.expected_ready_date);
         const erdIso = erd.toISOString().slice(0, 10);
         const now = new Date();
@@ -5323,19 +5327,24 @@ export class UnderInstallationStageService {
         }
       }
 
-      // Save optional ready documents (Type 41)
+      // Save optional ready documents (Type 41 for standard misc, Type 42 for Return Order Self Delivery)
       if (files && files.length > 0) {
+        const targetTag = isSelfDeliveryReturnOrder ? "Type 42" : "Type 41";
+        const targetType = isSelfDeliveryReturnOrder
+          ? "Return Order Self Delivery Documents"
+          : "Miscellaneous Ready Documents";
+
         let docType = await tx.documentTypeMaster.findFirst({
-          where: { vendor_id, tag: "Type 41" },
+          where: { vendor_id, tag: targetTag },
         });
 
         if (!docType) {
           docType = await tx.documentTypeMaster.create({
             data: {
               vendor_id,
-              tag: "Type 41",
-              type: "Miscellaneous Ready Documents",
-              doc_title: "Miscellaneous Ready Documents",
+              tag: targetTag,
+              type: targetType,
+              doc_title: targetType,
               stage: "Under Installation",
             },
           });
@@ -5366,12 +5375,14 @@ export class UnderInstallationStageService {
 
       const miscTaskKey = `[misc:${existing.id}]`;
       const miscErdKey = `[misc-erd:${existing.id}]`;
+      const miscConfirmKey = `[misc-return-confirm:${existing.id}]`;
       const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
       const pendingMaterialKey = existing.problem_description;
 
       const orConditions = [
         { remark: { contains: miscTaskKey } },
         { remark: { contains: miscErdKey } },
+        { remark: { contains: miscConfirmKey } },
         { remark: remarkKey },
       ];
       if (existing.reorder_material_details === "Pending Material") {
@@ -5387,6 +5398,8 @@ export class UnderInstallationStageService {
           task_type: {
             in: [
               "Miscellaneous",
+              "Miscellaneous Production ERD",
+              "Return Order Confirmation",
               "Pending Materials",
             ],
           },
@@ -5414,6 +5427,8 @@ export class UnderInstallationStageService {
           task_type: {
             in: [
               "Miscellaneous",
+              "Miscellaneous Production ERD",
+              "Return Order Confirmation",
               "Pending Materials",
             ],
           },
