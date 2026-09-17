@@ -5534,6 +5534,139 @@ export class UnderInstallationStageService {
     };
   }
 
+  static async deleteMiscellaneousService(payload: {
+    vendor_id: number;
+    lead_id: number;
+    misc_id: number;
+    deleted_by: number;
+  }) {
+    const { vendor_id, lead_id, misc_id, deleted_by } = payload;
+
+    // 1. Verify user exists and has super-admin authorization
+    const user = await prisma.userMaster.findUnique({
+      where: { id: deleted_by },
+      include: { user_type: true },
+    });
+
+    if (!user) {
+      throw Object.assign(new Error("User not found"), { statusCode: 404 });
+    }
+
+    const userRole = ((user as any).user_role || "").toLowerCase().trim();
+    const userType = (user.user_type?.user_type || "").toLowerCase().trim();
+    const isSuperAdmin =
+      userRole === "super-admin" ||
+      userType === "super-admin" ||
+      userRole === "superadmin" ||
+      userType === "superadmin" ||
+      userRole === "super_admin" ||
+      userType === "super_admin";
+
+    if (!isSuperAdmin) {
+      throw Object.assign(
+        new Error("Only Super Admin is authorized to delete miscellaneous entries"),
+        { statusCode: 403 },
+      );
+    }
+
+    // 2. Perform deletion and relational cleanup inside a transaction
+    const result = await prisma.$transaction(async (tx) => {
+      const existing = await tx.miscellaneousMaster.findFirst({
+        where: {
+          id: misc_id,
+          vendor_id,
+          lead_id,
+        },
+      });
+
+      if (!existing) {
+        throw Object.assign(new Error("Miscellaneous entry not found"), {
+          statusCode: 404,
+        });
+      }
+
+      // Close related open tasks
+      await tx.userLeadTask.updateMany({
+        where: {
+          lead_id,
+          vendor_id,
+          OR: [
+            { remark: { contains: `[misc:${misc_id}]` } },
+            { remark: { contains: `[misc-approval:${misc_id}]` } },
+            { remark: { contains: `[misc-delivery:${misc_id}]` } },
+            { remark: { contains: `[misc-erd:${misc_id}]` } },
+            { remark: { contains: `[misc-return-handover:${misc_id}]` } },
+            { remark: { contains: `[misc-return-confirm:${misc_id}]` } },
+          ],
+          status: "open",
+        },
+        data: {
+          status: "closed",
+          closed_at: new Date(),
+          closed_by: deleted_by,
+        },
+      });
+
+      // Find documents to delete
+      const miscDocs = await tx.miscellaneousDocument.findMany({
+        where: { miscellaneous_id: misc_id },
+        select: { document_id: true },
+      });
+      const docIds = miscDocs.map((d) => d.document_id);
+
+      // Delete miscellaneousDocument junctions
+      await tx.miscellaneousDocument.deleteMany({
+        where: { miscellaneous_id: misc_id },
+      });
+
+      // Delete associated leadDocuments
+      if (docIds.length > 0) {
+        await tx.leadDocuments.deleteMany({
+          where: { id: { in: docIds } },
+        });
+      }
+
+      // Delete team mappings
+      await tx.miscellaneousTeamMapping.deleteMany({
+        where: { miscellaneous_id: misc_id },
+      });
+
+      // Delete followups
+      await tx.miscellaneousFollowup.deleteMany({
+        where: { miscellaneous_id: misc_id },
+      });
+
+      // Delete reorder instances material mappings
+      await tx.miscellaneousReorderInstancesMaterialMapping.deleteMany({
+        where: { misc_id: misc_id },
+      });
+
+      // Delete the miscellaneousMaster record
+      await tx.miscellaneousMaster.delete({
+        where: { id: misc_id },
+      });
+
+      return { deleted_id: misc_id, lead_id, account_id: existing.account_id };
+    });
+
+    try {
+      await createLeadLog(prisma, {
+        vendor_id,
+        lead_id,
+        account_id: result.account_id,
+        action: `Miscellaneous request #${misc_id} deleted by Super Admin.`,
+        action_type: "DELETE",
+        history_type: "Lead",
+        created_by: deleted_by,
+        created_at: new Date(),
+      });
+    } catch (logErr) {
+      logger.warn("Failed to create lead log for misc deletion:", logErr);
+    }
+
+    return { deleted_id: result.deleted_id };
+  }
+
   static async resolveMiscellaneousService(payload: {
     vendor_id: number;
     lead_id: number;
