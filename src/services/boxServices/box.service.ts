@@ -2232,7 +2232,7 @@ padding-top:25px;
 
 .filed-value-item-no{
 font-size: 18px !important;
-line-height: 12px;
+line-height: 1.2;
 }
 
 .section-separator {
@@ -2248,25 +2248,55 @@ line-height: 12px;
 |--------------------------------------------------------------------------
 */
 
-.product-title {
+.product-title-container {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.35;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin: 0 0 1.1mm;
+  margin: 0.5mm 0 1.2mm;
+  flex: 0 0 auto;
+}
+
+.product-title-label {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  vertical-align: baseline;
+  margin-right: 3px;
+  display: inline;
+}
+
+.product-title {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  margin: 0.5mm 0 1.2mm;
   flex: 0 0 auto;
 }
 
 .project-value{
 color: #111827;
-  font-size: 12pt;
-  line-height: 6px;
-  font-weight: 600;
+  font-size: 11.5pt;
+  line-height: 1.35;
+  font-weight: 700;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
    text-transform: uppercase;
+  vertical-align: baseline;
+  display: inline;
+}
+
+.field-label .project-value {
+  line-height: 1.35;
+  display: inline;
 }
 
 
@@ -2833,8 +2863,8 @@ color: #111827;
             <!-- ============================== -->
             <!-- PRODUCT TITLE                  -->
             <!-- ============================== -->
-            <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
-              PRODUCT :
+            <div class="product-title-container" style="padding-top:2px;padding-bottom:2px;">
+              <span class="product-title-label">PRODUCT :</span>
               <span class="project-value">
                 ${escapeHtml(productName)}
               </span>
@@ -6356,8 +6386,8 @@ export const generateProjectFullReportService = async (
                   <!-- ============================== -->
                   <!-- PRODUCT TITLE                  -->
                   <!-- ============================== -->
-                  <div class="field-label" style="padding-top:3px;padding-bottom:3px;">
-                    PRODUCT :
+                  <div class="product-title-container" style="padding-top:2px;padding-bottom:2px;">
+                    <span class="product-title-label">PRODUCT :</span>
                     <span class="project-value">
                     ${escapeHtml(box.product_name)}
                     </span>
@@ -6815,7 +6845,7 @@ padding-top:25px;
 
 .filed-value-item-no {
   font-size: 18px !important;
-  line-height: 12px;
+  line-height: 1.2;
 }
 
 .section-separator {
@@ -6831,25 +6861,55 @@ padding-top:25px;
 |--------------------------------------------------------------------------
 */
 
-.product-title {
+.product-title-container {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.35;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
-  margin: 0 0 1.1mm;
+  margin: 0.5mm 0 1.2mm;
+  flex: 0 0 auto;
+}
+
+.product-title-label {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  vertical-align: baseline;
+  margin-right: 3px;
+  display: inline;
+}
+
+.product-title {
+  color: #64748b;
+  font-size: 7.5pt;
+  line-height: 1.35;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05px;
+  margin: 0.5mm 0 1.2mm;
   flex: 0 0 auto;
 }
 
 .project-value{
 color: #111827;
-  font-size: 12pt;
-  line-height: 6px;
-  font-weight: 600;
+  font-size: 11.5pt;
+  line-height: 1.35;
+  font-weight: 700;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
    text-transform: uppercase;
+  vertical-align: baseline;
+  display: inline;
+}
+
+.field-label .project-value {
+  line-height: 1.35;
+  display: inline;
 }
 
 
