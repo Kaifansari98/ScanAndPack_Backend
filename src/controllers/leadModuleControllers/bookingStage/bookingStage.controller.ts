@@ -706,6 +706,7 @@ export class BookingStageController {
         franchises: req.body.franchises,
         strict_status_tag: req.body.strict_status_tag === true,
         material_issue_ready_only: req.body.material_issue_ready_only === true,
+        material_issue_completed_only: req.body.material_issue_completed_only === true,
       };
 
       // ============================

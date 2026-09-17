@@ -1627,6 +1627,7 @@ export class BookingStageService {
       franchises?: Array<number | string>;
       strict_status_tag?: boolean;
       material_issue_ready_only?: boolean;
+      material_issue_completed_only?: boolean;
     },
   ): Promise<{ leads: any[]; count: number }> {
     logger.info("[BookingStageService] getVendorLeadsByTag2 called", {
@@ -1667,6 +1668,7 @@ export class BookingStageService {
       .toLowerCase();
     const strictStatusTag = filters.strict_status_tag === true;
     const materialIssueReadyOnly = filters.material_issue_ready_only === true;
+    const materialIssueCompletedOnly = filters.material_issue_completed_only === true;
     const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
     const shouldExcludeLaterStageTags =
       normalizedTag === "type 8" ||
@@ -2135,6 +2137,34 @@ export class BookingStageService {
       },
     });
 
+    // "Fully issued" = the lead has required-material rows and none of them still have
+    // issued_item_qty short of qty. Prisma can't compare two fields of the same row in a
+    // typed filter, so this runs as a small raw lookup and folds into the `id` filter below.
+    // Needed both to build the "Issued Projects" list (in) and to keep those same leads out
+    // of the pending "Projects" list once they're done (notIn).
+    let materialIssueCompletedLeadIds: number[] | null = null;
+    if (materialIssueCompletedOnly || materialIssueReadyOnly) {
+      const completedRows = await prisma.$queryRaw<{ lead_id: number }[]>`
+        SELECT DISTINCT lead_id
+        FROM "ProductsRequiredForProduction"
+        WHERE vendor_id = ${vendorId}
+          AND lead_id NOT IN (
+            SELECT lead_id FROM "ProductsRequiredForProduction"
+            WHERE vendor_id = ${vendorId} AND issued_item_qty < qty
+          )
+      `;
+      materialIssueCompletedLeadIds = completedRows.map((row) => row.lead_id);
+    }
+    const idFilter: { in?: number[]; notIn?: number[] } = {};
+    if (materialIssueCompletedOnly && materialIssueCompletedLeadIds !== null) {
+      idFilter.in = materialIssueCompletedLeadIds;
+    }
+    const notInIds = [
+      ...(materialIssueReadyOnly && !materialIssueCompletedOnly ? materialIssueCompletedLeadIds ?? [] : []),
+      ...excludedLeadIds,
+    ];
+    if (notInIds.length) idFilter.notIn = notInIds;
+
     const whereClause = addFilterConditions({
       vendor_id: vendorId,
       ...(!hasExplicitFranchiseFilter &&
@@ -2170,7 +2200,7 @@ export class BookingStageService {
         },
       }),
       activity_status: "onGoing",
-      ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
+      ...(Object.keys(idFilter).length && { id: idFilter }),
     });
     const resolvedSmallOrderLeadExclusion =
       await BookingStageService.getResolvedSmallOrderLeadExclusion(

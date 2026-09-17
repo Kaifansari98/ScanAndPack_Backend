@@ -86,7 +86,8 @@ export const StockChangeSource = {
   GRNConfirmation: 'GRNConfirmation',
   ExcelUpload: 'ExcelUpload',
   ManualAdjustment: 'ManualAdjustment',
-  MaterialIssue: 'MaterialIssue'
+  MaterialIssue: 'MaterialIssue',
+  MaterialFreeze: 'MaterialFreeze'
 } as const
 
 export type StockChangeSource = (typeof StockChangeSource)[keyof typeof StockChangeSource]

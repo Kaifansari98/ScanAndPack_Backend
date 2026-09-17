@@ -16,6 +16,8 @@ orderLoginRoutes.get("/vendorId/:vendorId/leadId/:leadId/required-materials", ve
 
 orderLoginRoutes.post("/vendorId/:vendorId/leadId/:leadId/freeze-materials", verifyToken, controller.freezeRequiredMaterials);
 
+orderLoginRoutes.post("/vendorId/:vendorId/leadId/:leadId/issue-materials", verifyToken, controller.issueRequiredMaterials);
+
 // POST → Create Order Login entry
 orderLoginRoutes.post(
   "/vendorId/:vendorId/upload-file-breakups",
