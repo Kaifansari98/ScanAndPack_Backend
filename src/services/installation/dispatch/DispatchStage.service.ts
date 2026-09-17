@@ -186,10 +186,10 @@ export class DispatchStageService {
 
     const hadDispatchDetails = Boolean(
       lead.dispatch_date ||
-        lead.vehicle_no ||
-        lead.driver_name ||
-        lead.driver_number ||
-        lead.dispatch_remark,
+      lead.vehicle_no ||
+      lead.driver_name ||
+      lead.driver_number ||
+      lead.dispatch_remark,
     );
 
     const updated = await prisma.leadMaster.update({
@@ -217,10 +217,10 @@ export class DispatchStageService {
     if (lead.account_id) {
       const formattedDispatchDate = data.dispatch_date
         ? new Date(data.dispatch_date).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })
         : "N/A";
 
       const action = hadDispatchDetails
@@ -585,11 +585,11 @@ export class DispatchStageService {
     });
     const leadStage = leadStageRecord?.status_id
       ? (
-          await prisma.statusTypeMaster.findUnique({
-            where: { id: leadStageRecord.status_id },
-            select: { type: true },
-          })
-        )?.type ?? null
+        await prisma.statusTypeMaster.findUnique({
+          where: { id: leadStageRecord.status_id },
+          select: { type: true },
+        })
+      )?.type ?? null
       : null;
 
     let miscType = await prisma.miscellaneousTypeMaster.findFirst({
@@ -664,11 +664,11 @@ export class DispatchStageService {
     });
     const leadStage = leadStageRecord?.status_id
       ? (
-          await prisma.statusTypeMaster.findUnique({
-            where: { id: leadStageRecord.status_id },
-            select: { type: true },
-          })
-        )?.type ?? null
+        await prisma.statusTypeMaster.findUnique({
+          where: { id: leadStageRecord.status_id },
+          select: { type: true },
+        })
+      )?.type ?? null
       : null;
 
     const task = await prisma.userLeadTask.create({

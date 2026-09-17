@@ -143,6 +143,7 @@ model VendorMaster {
   miscellaneousDocument                  MiscellaneousDocument[]
   miscellaneousMaster                    MiscellaneousMaster[]
   miscellaneousFollowups                 MiscellaneousFollowup[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
   miscellaneousTeamMaster                MiscellaneousTeamMaster[]
   miscellaneousTypeMaster                MiscellaneousTypeMaster[]
   notifications                          Notification[]
@@ -391,7 +392,9 @@ model UserMaster {
   miscDocumentsCreated                                                           MiscellaneousDocument[]                @relation("MiscDocCreatedBy")
   miscCreated                                                                    MiscellaneousMaster[]                  @relation("MiscCreatedBy")
   miscUpdated                                                                    MiscellaneousMaster[]                  @relation("MiscUpdatedBy")
+  miscReturned                                                                   MiscellaneousMaster[]                  @relation("MiscReturnedBy")
   miscFollowupsCreated                                                           MiscellaneousFollowup[]                @relation("MiscFollowupCreatedBy")
+  miscReorderInstanceMaterialMappingsCreated                                     MiscellaneousReorderInstancesMaterialMapping[] @relation("MiscReorderInstanceCreatedBy")
   notificationsSent                                                              Notification[]                         @relation("NotificationSender")
   notificationsReceived                                                          Notification[]                         @relation("NotificationUser")
   notificationQueuesCreated                                                      NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
@@ -887,6 +890,7 @@ model LeadMaster {
   ledgers                                     Ledger[]
   miscellaneousMaster                         MiscellaneousMaster[]
   miscellaneousFollowups                      MiscellaneousFollowup[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
   orderLoginDetails                           OrderLoginDetails[]
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
@@ -2642,6 +2646,7 @@ model OrderLoginDetails {
   updatedBy                            UserMaster?               @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
   vendor                               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   poFiles                              OrderLoginPoFileMapping[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
 }
 
 model SiteReadiness {
@@ -2743,15 +2748,23 @@ model MiscellaneousMaster {
   misc_approved            Boolean?
   required_delivery_date   DateTime?
   solution                 String?
+  return_order_date        DateTime?
+  return_order_delivery_method ReturnOrderDeliveryMethod?
+  is_returned              Boolean                    @default(false)
+  returned_at              DateTime?
+  returned_by              Int?
+  return_handover_remark   String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                     LeadMaster                 @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   type                     MiscellaneousTypeMaster    @relation(fields: [misc_type_id], references: [id])
   updatedBy                UserMaster?                @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
+  returnedBy               UserMaster?                @relation("MiscReturnedBy", fields: [returned_by], references: [id])
   vendor                   VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   teams                    MiscellaneousTeamMapping[]
   followups                MiscellaneousFollowup[]
+  reorderInstancesMaterialMappings MiscellaneousReorderInstancesMaterialMapping[]
 }
 
 model MiscellaneousTypeMaster {
@@ -2819,6 +2832,32 @@ model MiscellaneousFollowup {
   @@index([vendor_id, miscellaneous_id])
   @@index([lead_id])
   @@index([created_by])
+}
+
+model MiscellaneousReorderInstancesMaterialMapping {
+  id                   Int                 @id @default(autoincrement())
+  vendor_id            Int
+  lead_id              Int
+  misc_id              Int
+  orderlogindetails_id Int
+  created_at           DateTime            @default(now())
+  created_by           Int
+
+  vendor               VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                 LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  miscellaneous        MiscellaneousMaster @relation(fields: [misc_id], references: [id], onDelete: Cascade)
+  orderLoginDetail     OrderLoginDetails   @relation(fields: [orderlogindetails_id], references: [id], onDelete: Cascade)
+  createdBy            UserMaster          @relation("MiscReorderInstanceCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([misc_id])
+  @@index([orderlogindetails_id])
+}
+
+enum ReturnOrderDeliveryMethod {
+  SELF_DELIVERY
+  PICKUP_SCHEDULE
 }
 
 model InstallationIssueLogMaster {

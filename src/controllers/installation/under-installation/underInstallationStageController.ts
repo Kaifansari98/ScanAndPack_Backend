@@ -12,6 +12,7 @@ import fs from "node:fs/promises";
 import { BookingStageService } from "../../../services/bookingStage/bookingStage.service";
 import { resolveClientBaseUrl } from "../../../utils/fileUtils";
 import { prisma } from "../../../prisma/client";
+import { ReturnOrderDeliveryMethod } from "../../../prisma/generated";
 
 const service = new UnderInstallationStageService();
 
@@ -875,6 +876,130 @@ export class UnderInstallationStageController {
     }
   }
 
+  /**
+   * ✅ POST → Create Miscellaneous Return Order with documents
+   * @route POST /leads/installation/under-installation/vendorId/:vendorId/leadId/:leadId/create-return-order
+   */
+  async createMiscellaneousReturnOrder(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId || req.body.vendor_id);
+      const leadId = Number(req.params.leadId || req.body.lead_id);
+
+      const {
+        account_id,
+        misc_type_id,
+        orderlogindetails_id,
+        orderlogindetails_ids,
+        order_login_details_id,
+        instance_id,
+        selected_instance_id,
+        reorder_material_details,
+        return_order_material_details,
+        problem_description,
+        supervisor_remark,
+        return_order_date,
+        return_order_delivery_method,
+        created_by,
+      } = req.body;
+
+      // Extract and normalize orderlogindetails_ids
+      let normalizedOrderLoginIds: number[] = [];
+      const rawIds = orderlogindetails_ids ?? orderlogindetails_id ?? order_login_details_id;
+      if (Array.isArray(rawIds)) {
+        normalizedOrderLoginIds = rawIds.map((id: any) => Number(id)).filter((n) => !isNaN(n) && n > 0);
+      } else if (typeof rawIds === "string") {
+        try {
+          const parsed = JSON.parse(rawIds);
+          if (Array.isArray(parsed)) {
+            normalizedOrderLoginIds = parsed.map((id: any) => Number(id)).filter((n) => !isNaN(n) && n > 0);
+          } else if (!isNaN(Number(rawIds))) {
+            normalizedOrderLoginIds = [Number(rawIds)];
+          }
+        } catch {
+          normalizedOrderLoginIds = rawIds
+            .split(",")
+            .map((s: string) => Number(s.trim()))
+            .filter((n: number) => !isNaN(n) && n > 0);
+        }
+      } else if (typeof rawIds === "number" && !isNaN(rawIds) && rawIds > 0) {
+        normalizedOrderLoginIds = [rawIds];
+      }
+
+      // Normalize delivery method enum
+      let normalizedDeliveryMethod: ReturnOrderDeliveryMethod = ReturnOrderDeliveryMethod.SELF_DELIVERY;
+      if (return_order_delivery_method) {
+        const cleaned = String(return_order_delivery_method).toUpperCase().replace(/[\s-]/g, "_");
+        if (cleaned === "PICKUP_SCHEDULE") {
+          normalizedDeliveryMethod = ReturnOrderDeliveryMethod.PICKUP_SCHEDULE;
+        } else {
+          normalizedDeliveryMethod = ReturnOrderDeliveryMethod.SELF_DELIVERY;
+        }
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      if (files && files.length > 0) {
+        for (const file of files) {
+          const sysName =
+            await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype,
+            );
+
+          await fs.unlink(file.path);
+
+          uploadedFiles.push({
+            originalName: file.originalname,
+            sysName,
+          });
+        }
+      }
+
+      const materialDetails = (
+        return_order_material_details ||
+        reorder_material_details ||
+        ""
+      ).trim();
+
+      const baseUrl = resolveClientBaseUrl(req);
+      const payload = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: account_id ? Number(account_id) : undefined,
+        misc_type_id: misc_type_id ? Number(misc_type_id) : undefined,
+        orderlogindetails_ids: normalizedOrderLoginIds,
+        instance_id: instance_id || selected_instance_id ? Number(instance_id || selected_instance_id) : undefined,
+        reorder_material_details: materialDetails,
+        problem_description: problem_description?.trim() || "Return Order",
+        supervisor_remark: supervisor_remark?.trim() || undefined,
+        return_order_date: return_order_date ? new Date(return_order_date) : null,
+        return_order_delivery_method: normalizedDeliveryMethod,
+        created_by: Number(created_by || (req as any).user?.id || 1),
+        files: uploadedFiles,
+        baseUrl,
+      };
+
+      const result =
+        await UnderInstallationStageService.createMiscellaneousReturnOrderService(payload);
+
+      return res.status(201).json({
+        success: true,
+        message: "Return order created successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in createMiscellaneousReturnOrder:", err.message);
+      return res.status(500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
   async updateMiscellaneousEntry(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
@@ -1254,7 +1379,14 @@ export class UnderInstallationStageController {
         where: {
           id: taskId,
           vendor_id: vendorId,
-          task_type: "Miscellaneous",
+          task_type: {
+            in: [
+              "Miscellaneous",
+              "Pending Materials",
+              "Return Order Pickup Schedule",
+              "Return Order Confirmation",
+            ],
+          },
         },
         select: { lead_id: true },
       });
@@ -1313,6 +1445,87 @@ export class UnderInstallationStageController {
         "Error uploading misc completion documents:",
         error.message,
       );
+      return res
+        .status(error.statusCode || 500)
+        .json({ success: false, error: error.message });
+    }
+  }
+
+  async markMiscellaneousAsReturned(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { user_id, remark } = req.body;
+
+      if (!vendorId || !miscId || !user_id) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId, miscId and user_id are required",
+        });
+      }
+
+      const misc = await prisma.miscellaneousMaster.findFirst({
+        where: { id: miscId, vendor_id: vendorId },
+        select: { id: true, lead_id: true },
+      });
+
+      if (!misc) {
+        return res.status(404).json({
+          success: false,
+          error: "Miscellaneous Return Order not found",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          error: "At least one return photo proof file is required",
+        });
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+            file.path,
+            vendorId,
+            misc.lead_id,
+            file.originalname,
+            file.mimetype,
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const baseUrl =
+        (req.headers.origin as string) ||
+        (req.headers.host ? `${req.protocol}://${req.headers.host}` : "") ||
+        "http://localhost:3000";
+
+      const data =
+        await UnderInstallationStageService.markMiscellaneousAsReturnedService({
+          vendor_id: vendorId,
+          misc_id: miscId,
+          returned_by: Number(user_id),
+          remark: remark || undefined,
+          files: uploadedFiles,
+          baseUrl,
+        });
+
+      return res.status(200).json({
+        success: true,
+        message: "Return order marked as returned successfully",
+        data,
+      });
+    } catch (error: any) {
+      console.error("Error marking return order as returned:", error.message);
       return res
         .status(error.statusCode || 500)
         .json({ success: false, error: error.message });

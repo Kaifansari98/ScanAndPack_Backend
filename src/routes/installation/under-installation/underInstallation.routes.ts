@@ -88,6 +88,15 @@ underInstallationStageRoutes.post(
   controller.createMiscellaneousEntry,
 );
 
+/**
+ * POST → Create Miscellaneous Return Order with documents
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create-return-order",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.createMiscellaneousReturnOrder,
+);
+
 underInstallationStageRoutes.post(
   "/miscellaneous/:miscId/documents",
   handleMulterUpload(uploadUnderInstallationFiles.array("files")),
@@ -153,6 +162,16 @@ underInstallationStageRoutes.post(
   "/vendorId/:vendorId/taskId/:taskId/upload-completion-docs",
   handleMulterUpload(uploadUnderInstallationFiles.array("files")),
   controller.uploadMiscCompletionDocumentsByTaskId,
+);
+
+/**
+ * ✅ POST → Mark Miscellaneous Return Order as Returned (Upload return photo proof)
+ * @route POST /vendorId/:vendorId/miscId/:miscId/mark-returned
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/miscId/:miscId/mark-returned",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.markMiscellaneousAsReturned,
 );
 
 /**

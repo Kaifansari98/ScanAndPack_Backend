@@ -1853,6 +1853,7 @@ export const seedVendorMasters = async (vendorId: number) => {
     "Misplaced Onsite",
     "Internal Team Mistake",
     "Dealer's Mistake",
+    "Return Order",
     "Others",
   ]
     .filter((name) => !existingMiscTypeSet.has(name))
