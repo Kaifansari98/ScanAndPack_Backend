@@ -935,6 +935,23 @@ export type EnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$PrismaModel
   _max?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
 }
 
+export type EnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReturnOrderDeliveryMethod | Prisma.EnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel> | $Enums.ReturnOrderDeliveryMethod | null
+}
+
+export type EnumReturnOrderDeliveryMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReturnOrderDeliveryMethod | Prisma.EnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReturnOrderDeliveryMethod | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel>
+}
+
 export type EnumNotificationTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
   in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
@@ -2773,6 +2790,23 @@ export type NestedEnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$Prism
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
+}
+
+export type NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReturnOrderDeliveryMethod | Prisma.EnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel> | $Enums.ReturnOrderDeliveryMethod | null
+}
+
+export type NestedEnumReturnOrderDeliveryMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReturnOrderDeliveryMethod | Prisma.EnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  in?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.ReturnOrderDeliveryMethod[] | Prisma.ListEnumReturnOrderDeliveryMethodFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.ReturnOrderDeliveryMethod | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReturnOrderDeliveryMethodNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {

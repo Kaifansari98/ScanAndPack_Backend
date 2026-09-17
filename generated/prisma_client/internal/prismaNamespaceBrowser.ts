@@ -162,6 +162,7 @@ export const ModelName = {
   MiscellaneousTeamMapping: 'MiscellaneousTeamMapping',
   MiscellaneousDocument: 'MiscellaneousDocument',
   MiscellaneousFollowup: 'MiscellaneousFollowup',
+  MiscellaneousReorderInstancesMaterialMapping: 'MiscellaneousReorderInstancesMaterialMapping',
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
@@ -2127,7 +2128,13 @@ export const MiscellaneousMasterScalarFieldEnum = {
   exp_of_rejection: 'exp_of_rejection',
   misc_approved: 'misc_approved',
   required_delivery_date: 'required_delivery_date',
-  solution: 'solution'
+  solution: 'solution',
+  return_order_date: 'return_order_date',
+  return_order_delivery_method: 'return_order_delivery_method',
+  is_returned: 'is_returned',
+  returned_at: 'returned_at',
+  returned_by: 'returned_by',
+  return_handover_remark: 'return_handover_remark'
 } as const
 
 export type MiscellaneousMasterScalarFieldEnum = (typeof MiscellaneousMasterScalarFieldEnum)[keyof typeof MiscellaneousMasterScalarFieldEnum]
@@ -2191,6 +2198,19 @@ export const MiscellaneousFollowupScalarFieldEnum = {
 } as const
 
 export type MiscellaneousFollowupScalarFieldEnum = (typeof MiscellaneousFollowupScalarFieldEnum)[keyof typeof MiscellaneousFollowupScalarFieldEnum]
+
+
+export const MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  misc_id: 'misc_id',
+  orderlogindetails_id: 'orderlogindetails_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum = (typeof MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum)[keyof typeof MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum]
 
 
 export const InstallationIssueLogMasterScalarFieldEnum = {

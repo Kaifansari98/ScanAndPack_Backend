@@ -35,10 +35,31 @@ export const addMiscType = async (payload: {
 export const fetchMiscTypes = async (vendor_id: number) => {
   console.log("[SERVICE] fetchMiscTypes", { vendor_id });
 
-  return prisma.miscellaneousTypeMaster.findMany({
+  let types = await prisma.miscellaneousTypeMaster.findMany({
     where: { vendor_id },
     orderBy: { created_at: "desc" },
   });
+
+  const hasReturnOrder = types.some(
+    (t) => t.name?.trim().toLowerCase() === "return order"
+  );
+  if (!hasReturnOrder && vendor_id) {
+    try {
+      const returnOrderType = await prisma.miscellaneousTypeMaster.create({
+        data: {
+          vendor_id,
+          name: "Return Order",
+          status: "active",
+          created_by: 1,
+        },
+      });
+      types = [...types, returnOrderType];
+    } catch (err: any) {
+      console.warn("Auto-creating Return Order misc type skipped:", err?.message);
+    }
+  }
+
+  return types;
 };
 
 export const removeMiscType = async (id: number) => {
@@ -519,7 +540,6 @@ export const findMiscTask = (
 
 export const findDeliveryTask = (
   m: {
-    id?: number;
     id?: number;
     lead_id: number;
     misc_approved: boolean | null;

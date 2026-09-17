@@ -595,6 +595,11 @@ export type MiscellaneousDocument = Prisma.MiscellaneousDocumentModel
  */
 export type MiscellaneousFollowup = Prisma.MiscellaneousFollowupModel
 /**
+ * Model MiscellaneousReorderInstancesMaterialMapping
+ * 
+ */
+export type MiscellaneousReorderInstancesMaterialMapping = Prisma.MiscellaneousReorderInstancesMaterialMappingModel
+/**
  * Model InstallationIssueLogMaster
  * 
  */

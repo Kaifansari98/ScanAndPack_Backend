@@ -5,9 +5,21 @@ export async function resolveMiscTask(
   vendor_id: number,
   task: { lead_id: number; remark: string | null },
 ) {
-  const remark = (task.remark || "").trim();
-  const marker = remark.match(/\[misc(?:-delivery|-erd)?:(\d+)\]/);
-  const select = { id: true, misc_approved: true, is_resolved: true } as const;
+  const remark = task.remark ?? "";
+  const marker = remark.match(
+    /\[misc(?:-delivery|-erd|-pickup|-return-confirm|-return-handover)?:(\d+)\]/,
+  );
+  const select = {
+    id: true,
+    misc_approved: true,
+    is_resolved: true,
+    reorder_material_details: true,
+    problem_description: true,
+    return_order_delivery_method: true,
+    created_by: true,
+    lead_id: true,
+    account_id: true,
+  } as const;
 
   if (marker) {
     return tx.miscellaneousMaster.findFirst({
