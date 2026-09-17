@@ -573,6 +573,11 @@ export type MiscellaneousTeamMapping = Prisma.MiscellaneousTeamMappingModel
  */
 export type MiscellaneousDocument = Prisma.MiscellaneousDocumentModel
 /**
+ * Model MiscellaneousFollowup
+ * 
+ */
+export type MiscellaneousFollowup = Prisma.MiscellaneousFollowupModel
+/**
  * Model InstallationIssueLogMaster
  * 
  */
@@ -1087,6 +1092,11 @@ export type BoxItemDeleteLog = Prisma.BoxItemDeleteLogModel
  * 
  */
 export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProductionModel
+/**
+ * Model MetaWebhook
+ * 
+ */
+export type MetaWebhook = Prisma.MetaWebhookModel
 /**
  * Model CutListRuleMaster
  * 

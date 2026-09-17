@@ -2575,7 +2575,7 @@ export class LeadController {
         status,
         closed_at,
         closed_by: closed_by ? Number(closed_by) : undefined,
-      });
+      }, resolveClientBaseUrl(req));
 
       return res.status(200).json({
         success: true,

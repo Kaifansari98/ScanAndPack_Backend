@@ -6,7 +6,7 @@ export async function resolveMiscTask(
   task: { lead_id: number; remark: string | null },
 ) {
   const remark = (task.remark || "").trim();
-  const marker = remark.match(/\[misc:(\d+)\]/);
+  const marker = remark.match(/\[misc(?:-delivery|-erd)?:(\d+)\]/);
   const select = { id: true, misc_approved: true, is_resolved: true } as const;
 
   if (marker) {

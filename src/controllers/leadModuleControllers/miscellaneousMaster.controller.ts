@@ -247,6 +247,7 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
     const userType = String(req.body.user_type || "").toLowerCase();
     const userId = req.body.user_id ? Number(req.body.user_id) : undefined;
     const skipFranchiseFilter =
+    userType === "super-admin" ||
       userType === "factory" ||
       userType === "site-supervisor" ||
       userType === "backend" ||

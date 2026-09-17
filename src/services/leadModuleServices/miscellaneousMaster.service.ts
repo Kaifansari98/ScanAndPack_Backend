@@ -1,3 +1,4 @@
+import { findMiscProductionTask } from "../installation/under-installation/miscProductionTask";
 import { Prisma, prisma } from "../../prisma/client";
 import { generateSignedUrl } from "../../utils/wasabiClient";
 
@@ -492,7 +493,7 @@ export const resolveMiscStage = (
   if (m.required_delivery_date) {
     return { slug: "dispatch-scheduled", label: "DISPATCH SCHEDULED" };
   }
-  if (taskForMisc?.status === "completed") {
+  if (m.expected_ready_date && taskForMisc?.status === "completed") {
     return { slug: "rtd", label: "RTD" };
   }
   if (m.expected_ready_date) {
@@ -513,28 +514,12 @@ export const findMiscTask = (
   tasks: any[],
 ) => {
   if (m.misc_approved !== true || !m.expected_ready_date) return null;
-  const remarkKey = `${m.reorder_material_details} - ${m.problem_description}`;
-  const miscTaskKey = `[misc:${m.id}]`;
-  const pendingMaterialKey = m.problem_description;
-  return (
-    tasks.find(
-      (t) =>
-        t.lead_id === m.lead_id &&
-        ((t.remark && t.remark.includes(miscTaskKey)) ||
-          t.remark === remarkKey ||
-          (t.remark &&
-            m.reorder_material_details &&
-            t.remark.includes(m.reorder_material_details) &&
-            m.problem_description &&
-            t.remark.includes(m.problem_description)) ||
-          (m.reorder_material_details === "Pending Material" &&
-            t.remark === pendingMaterialKey)),
-    ) || null
-  );
+  return findMiscProductionTask(m, tasks.filter((task) => task.lead_id === m.lead_id)) ?? null;
 };
 
 export const findDeliveryTask = (
   m: {
+    id?: number;
     id?: number;
     lead_id: number;
     misc_approved: boolean | null;
@@ -544,20 +529,27 @@ export const findDeliveryTask = (
   },
   tasks: any[],
 ) => {
-  if (m.misc_approved !== true || !m.required_delivery_date) return null;
-  const miscTaskKey = m.id ? `[misc:${m.id}]` : null;
+  if (!m.required_delivery_date) return null;
+  const miscDeliveryKey = `[misc-delivery:${m.id}]`;
   return (
     tasks.find(
       (t) =>
         t.lead_id === m.lead_id &&
         typeof t.remark === "string" &&
-        t.remark.includes("Required delivery date set for") &&
-        ((miscTaskKey && t.remark.includes(miscTaskKey)) ||
-          ((!m.reorder_material_details ||
-            t.remark.includes(m.reorder_material_details)) &&
-            (!m.problem_description ||
-              t.remark.includes(m.problem_description)))),
-    ) || null
+        (t.remark.includes(miscDeliveryKey) ||
+          (t.remark.includes("Required delivery date set for") &&
+            ((m.reorder_material_details &&
+              t.remark.includes(m.reorder_material_details)) ||
+              (m.problem_description &&
+                t.remark.includes(m.problem_description))))),
+    ) ||
+    tasks.find(
+      (t) =>
+        t.lead_id === m.lead_id &&
+        typeof t.remark === "string" &&
+        t.remark.includes("Required delivery date set for"),
+    ) ||
+    null
   );
 };
 
@@ -632,14 +624,12 @@ export const getMiscellaneousLeadsByStatusService = async (
   userType?: string,
 ): Promise<{ miscellaneous: any[]; count: number }> => {
   const skip = (page - 1) * limit;
-  const normRole = (userType || "").toLowerCase().trim().replace(/_/g, "-");
-  const normSlug = (statusSlug || "").toLowerCase().trim().replace(/_/g, "-");
+  const normRole = (userType || "").toLowerCase().trim().replace(/_/g, "-").replace(/\s+/g, "-");
+  const normSlug = (statusSlug || "").toLowerCase().trim().replace(/_/g, "-").replace(/\s+/g, "-");
   const targetSlug = normSlug === "ready-to-dispatch" ? "rtd" : normSlug;
 
-  // Role Scoping Rule:
-  // site-supervisor, head-site-supervisor, admin -> Franchise-wise
-  // miscellaneous, factory, super-admin, auditor -> Vendor-wise
-  const isFranchiseScoped = ["admin", "site-supervisor", "head-site-supervisor"].includes(normRole);
+  // Admin stays franchise-scoped; operational roles see every franchise in the vendor.
+  const isFranchiseScoped = normRole === "admin";
   const effectiveFranchiseId = isFranchiseScoped ? franchiseId : undefined;
 
   const leadFilter: any = {};
@@ -648,7 +638,7 @@ export const getMiscellaneousLeadsByStatusService = async (
   }
 
   // Mandatory user lead mapping restriction if non-privileged user
-  if (userId && !["admin", "super-admin", "auditor", "miscellaneous", "factory"].includes(normRole)) {
+  if (userId && !["admin", "super-admin", "auditor", "miscellaneous", "factory", "site-supervisor", "head-site-supervisor"].includes(normRole)) {
     const mappedLeads = await prisma.leadUserMapping.findMany({
       where: { user_id: userId, vendor_id: vendorId, status: "active" },
       select: { lead_id: true },
@@ -911,7 +901,7 @@ export const getMiscellaneousLeadsByStatusService = async (
         supervisor_remark: m.supervisor_remark,
         expected_ready_date: m.expected_ready_date,
         solution: (m as any).solution ?? null,
-        required_delivery_date: m.required_delivery_date,
+        required_delivery_date: deliveryTaskForMisc?.due_date ?? m.required_delivery_date,
         is_resolved: m.is_resolved,
         resolved_at: m.resolved_at,
         created_by: m.created_by,
@@ -952,9 +942,9 @@ export const getMiscellaneousStatusCountsService = async (
   rejected: number;
   total: number;
 }> => {
-  const normRole = (userType || "").toLowerCase().trim().replace(/_/g, "-");
+  const normRole = (userType || "").toLowerCase().trim().replace(/_/g, "-").replace(/\s+/g, "-");
 
-  const isFranchiseScoped = ["admin", "site-supervisor", "head-site-supervisor"].includes(normRole);
+  const isFranchiseScoped = normRole === "admin";
   const effectiveFranchiseId = isFranchiseScoped ? franchiseId : undefined;
 
   const leadFilter: any = {};
@@ -962,7 +952,7 @@ export const getMiscellaneousStatusCountsService = async (
     leadFilter.franchise_id = effectiveFranchiseId;
   }
 
-  if (userId && !["admin", "super-admin", "auditor", "miscellaneous", "factory"].includes(normRole)) {
+  if (userId && !["admin", "super-admin", "auditor", "miscellaneous", "factory", "site-supervisor", "head-site-supervisor"].includes(normRole)) {
     const mappedLeads = await prisma.leadUserMapping.findMany({
       where: { user_id: userId, vendor_id: vendorId, status: "active" },
       select: { lead_id: true },
