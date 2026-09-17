@@ -1379,7 +1379,14 @@ export class UnderInstallationStageController {
         where: {
           id: taskId,
           vendor_id: vendorId,
-          task_type: "Miscellaneous",
+          task_type: {
+            in: [
+              "Miscellaneous",
+              "Pending Materials",
+              "Return Order Pickup Schedule",
+              "Return Order Confirmation",
+            ],
+          },
         },
         select: { lead_id: true },
       });
@@ -1438,6 +1445,87 @@ export class UnderInstallationStageController {
         "Error uploading misc completion documents:",
         error.message,
       );
+      return res
+        .status(error.statusCode || 500)
+        .json({ success: false, error: error.message });
+    }
+  }
+
+  async markMiscellaneousAsReturned(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const miscId = Number(req.params.miscId);
+      const { user_id, remark } = req.body;
+
+      if (!vendorId || !miscId || !user_id) {
+        return res.status(400).json({
+          success: false,
+          error: "vendorId, miscId and user_id are required",
+        });
+      }
+
+      const misc = await prisma.miscellaneousMaster.findFirst({
+        where: { id: miscId, vendor_id: vendorId },
+        select: { id: true, lead_id: true },
+      });
+
+      if (!misc) {
+        return res.status(404).json({
+          success: false,
+          error: "Miscellaneous Return Order not found",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          success: false,
+          error: "At least one return photo proof file is required",
+        });
+      }
+
+      const uploadedFiles: { originalName: string; sysName: string }[] = [];
+
+      for (const file of files) {
+        const sysName =
+          await uploadToWasabiUnderInstallationMiscellaneousDocumentsFile(
+            file.path,
+            vendorId,
+            misc.lead_id,
+            file.originalname,
+            file.mimetype,
+          );
+
+        await fs.unlink(file.path);
+
+        uploadedFiles.push({
+          originalName: file.originalname,
+          sysName,
+        });
+      }
+
+      const baseUrl =
+        (req.headers.origin as string) ||
+        (req.headers.host ? `${req.protocol}://${req.headers.host}` : "") ||
+        "http://localhost:3000";
+
+      const data =
+        await UnderInstallationStageService.markMiscellaneousAsReturnedService({
+          vendor_id: vendorId,
+          misc_id: miscId,
+          returned_by: Number(user_id),
+          remark: remark || undefined,
+          files: uploadedFiles,
+          baseUrl,
+        });
+
+      return res.status(200).json({
+        success: true,
+        message: "Return order marked as returned successfully",
+        data,
+      });
+    } catch (error: any) {
+      console.error("Error marking return order as returned:", error.message);
       return res
         .status(error.statusCode || 500)
         .json({ success: false, error: error.message });

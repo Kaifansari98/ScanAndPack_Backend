@@ -396,6 +396,7 @@ export type UserMasterWhereInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentListRelationFilter
   miscCreated?: Prisma.MiscellaneousMasterListRelationFilter
   miscUpdated?: Prisma.MiscellaneousMasterListRelationFilter
+  miscReturned?: Prisma.MiscellaneousMasterListRelationFilter
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupListRelationFilter
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
@@ -590,6 +591,7 @@ export type UserMasterOrderByWithRelationInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentOrderByRelationAggregateInput
   miscCreated?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
   miscUpdated?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
+  miscReturned?: Prisma.MiscellaneousMasterOrderByRelationAggregateInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupOrderByRelationAggregateInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingOrderByRelationAggregateInput
   notificationsSent?: Prisma.NotificationOrderByRelationAggregateInput
@@ -787,6 +789,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentListRelationFilter
   miscCreated?: Prisma.MiscellaneousMasterListRelationFilter
   miscUpdated?: Prisma.MiscellaneousMasterListRelationFilter
+  miscReturned?: Prisma.MiscellaneousMasterListRelationFilter
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupListRelationFilter
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingListRelationFilter
   notificationsSent?: Prisma.NotificationListRelationFilter
@@ -1015,6 +1018,7 @@ export type UserMasterCreateInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -1209,6 +1213,7 @@ export type UserMasterUncheckedCreateInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -1396,6 +1401,7 @@ export type UserMasterUpdateInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -1590,6 +1596,7 @@ export type UserMasterUncheckedUpdateInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -3378,6 +3385,12 @@ export type UserMasterCreateNestedOneWithoutMiscUpdatedInput = {
   connect?: Prisma.UserMasterWhereUniqueInput
 }
 
+export type UserMasterCreateNestedOneWithoutMiscReturnedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedCreateWithoutMiscReturnedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutMiscReturnedInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
 export type UserMasterUpdateOneRequiredWithoutMiscCreatedNestedInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscCreatedInput, Prisma.UserMasterUncheckedCreateWithoutMiscCreatedInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutMiscCreatedInput
@@ -3394,6 +3407,16 @@ export type UserMasterUpdateOneWithoutMiscUpdatedNestedInput = {
   delete?: Prisma.UserMasterWhereInput | boolean
   connect?: Prisma.UserMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutMiscUpdatedInput, Prisma.UserMasterUpdateWithoutMiscUpdatedInput>, Prisma.UserMasterUncheckedUpdateWithoutMiscUpdatedInput>
+}
+
+export type UserMasterUpdateOneWithoutMiscReturnedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedCreateWithoutMiscReturnedInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutMiscReturnedInput
+  upsert?: Prisma.UserMasterUpsertWithoutMiscReturnedInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutMiscReturnedInput, Prisma.UserMasterUpdateWithoutMiscReturnedInput>, Prisma.UserMasterUncheckedUpdateWithoutMiscReturnedInput>
 }
 
 export type UserMasterCreateNestedOneWithoutMiscDocumentsCreatedInput = {
@@ -4629,6 +4652,7 @@ export type UserMasterCreateWithoutVendorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -4821,6 +4845,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -5052,6 +5077,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -5244,6 +5270,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -5457,6 +5484,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -5650,6 +5678,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -5852,6 +5881,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -6045,6 +6075,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -6231,6 +6262,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -6424,6 +6456,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -6615,6 +6648,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -6808,6 +6842,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -7010,6 +7045,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -7203,6 +7239,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -7400,6 +7437,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -7593,6 +7631,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -7779,6 +7818,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -7972,6 +8012,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -8174,6 +8215,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -8367,6 +8409,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -8553,6 +8596,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -8746,6 +8790,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -8937,6 +8982,7 @@ export type UserMasterCreateWithoutDeletedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -9130,6 +9176,7 @@ export type UserMasterUncheckedCreateWithoutDeletedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -9321,6 +9368,7 @@ export type UserMasterCreateWithoutProjectMastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -9514,6 +9562,7 @@ export type UserMasterUncheckedCreateWithoutProjectMastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -9716,6 +9765,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -9909,6 +9959,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -10106,6 +10157,7 @@ export type UserMasterUpdateWithoutDeletedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -10299,6 +10351,7 @@ export type UserMasterUncheckedUpdateWithoutDeletedProjectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -10496,6 +10549,7 @@ export type UserMasterUpdateWithoutProjectMastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -10689,6 +10743,7 @@ export type UserMasterUncheckedUpdateWithoutProjectMastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -10874,6 +10929,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -11067,6 +11123,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -11258,6 +11315,7 @@ export type UserMasterCreateWithoutBoxesPackedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -11451,6 +11509,7 @@ export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -11642,6 +11701,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -11835,6 +11895,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -12037,6 +12098,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -12230,6 +12292,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -12427,6 +12490,7 @@ export type UserMasterUpdateWithoutBoxesPackedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -12620,6 +12684,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -12817,6 +12882,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -13010,6 +13076,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -13197,6 +13264,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -13390,6 +13458,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -13592,6 +13661,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -13785,6 +13855,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -13970,6 +14041,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -14163,6 +14235,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -14354,6 +14427,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -14547,6 +14621,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -14738,6 +14813,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -14931,6 +15007,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -15122,6 +15199,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -15315,6 +15393,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -15517,6 +15596,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -15710,6 +15790,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -15907,6 +15988,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -16100,6 +16182,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -16297,6 +16380,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -16490,6 +16574,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -16687,6 +16772,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -16880,6 +16966,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -17066,6 +17153,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -17259,6 +17347,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -17461,6 +17550,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -17654,6 +17744,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -17840,6 +17931,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -18033,6 +18125,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -18235,6 +18328,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -18428,6 +18522,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -18614,6 +18709,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -18807,6 +18903,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -19009,6 +19106,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -19202,6 +19300,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -19388,6 +19487,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -19581,6 +19681,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -19772,6 +19873,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -19965,6 +20067,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -20167,6 +20270,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -20360,6 +20464,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -20557,6 +20662,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -20750,6 +20856,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -20936,6 +21043,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -21129,6 +21237,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -21320,6 +21429,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -21513,6 +21623,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -21704,6 +21815,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -21897,6 +22009,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -22099,6 +22212,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -22292,6 +22406,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -22489,6 +22604,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -22682,6 +22798,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -22879,6 +22996,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -23072,6 +23190,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -23258,6 +23377,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -23451,6 +23571,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -23653,6 +23774,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -23846,6 +23968,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -24032,6 +24155,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -24225,6 +24349,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsCreatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -24416,6 +24541,7 @@ export type UserMasterCreateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -24609,6 +24735,7 @@ export type UserMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsReleased
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -24811,6 +24938,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -25004,6 +25132,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsCreatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -25201,6 +25330,7 @@ export type UserMasterUpdateWithoutLeadScopedActivityStatusLogsReleasedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -25394,6 +25524,7 @@ export type UserMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsReleased
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -25580,6 +25711,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -25773,6 +25905,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -25964,6 +26097,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -26157,6 +26291,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -26359,6 +26494,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -26552,6 +26688,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -26749,6 +26886,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -26942,6 +27080,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -27128,6 +27267,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -27321,6 +27461,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -27523,6 +27664,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -27716,6 +27858,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -27903,6 +28046,7 @@ export type UserMasterCreateWithoutProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -28096,6 +28240,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -28287,6 +28432,7 @@ export type UserMasterCreateWithoutProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -28480,6 +28626,7 @@ export type UserMasterUncheckedCreateWithoutProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -28682,6 +28829,7 @@ export type UserMasterUpdateWithoutProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -28875,6 +29023,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -29072,6 +29221,7 @@ export type UserMasterUpdateWithoutProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -29265,6 +29415,7 @@ export type UserMasterUncheckedUpdateWithoutProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -29450,6 +29601,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -29643,6 +29795,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -29834,6 +29987,7 @@ export type UserMasterCreateWithoutLeadProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -30027,6 +30181,7 @@ export type UserMasterUncheckedCreateWithoutLeadProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -30229,6 +30384,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -30422,6 +30578,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -30619,6 +30776,7 @@ export type UserMasterUpdateWithoutLeadProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -30812,6 +30970,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProcessBriefsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -30998,6 +31157,7 @@ export type UserMasterCreateWithoutPbmCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -31191,6 +31351,7 @@ export type UserMasterUncheckedCreateWithoutPbmCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -31382,6 +31543,7 @@ export type UserMasterCreateWithoutPbmUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -31575,6 +31737,7 @@ export type UserMasterUncheckedCreateWithoutPbmUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -31777,6 +31940,7 @@ export type UserMasterUpdateWithoutPbmCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -31970,6 +32134,7 @@ export type UserMasterUncheckedUpdateWithoutPbmCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -32167,6 +32332,7 @@ export type UserMasterUpdateWithoutPbmUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -32360,6 +32526,7 @@ export type UserMasterUncheckedUpdateWithoutPbmUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -32546,6 +32713,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -32739,6 +32907,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -32930,6 +33099,7 @@ export type UserMasterCreateWithoutLeadReqMaterialsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -33123,6 +33293,7 @@ export type UserMasterUncheckedCreateWithoutLeadReqMaterialsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -33325,6 +33496,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -33518,6 +33690,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -33715,6 +33888,7 @@ export type UserMasterUpdateWithoutLeadReqMaterialsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -33908,6 +34082,7 @@ export type UserMasterUncheckedUpdateWithoutLeadReqMaterialsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -34094,6 +34269,7 @@ export type UserMasterCreateWithoutLeadHardwareMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -34287,6 +34463,7 @@ export type UserMasterUncheckedCreateWithoutLeadHardwareMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -34489,6 +34666,7 @@ export type UserMasterUpdateWithoutLeadHardwareMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -34682,6 +34860,7 @@ export type UserMasterUncheckedUpdateWithoutLeadHardwareMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -34868,6 +35047,7 @@ export type UserMasterCreateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -35061,6 +35241,7 @@ export type UserMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -35263,6 +35444,7 @@ export type UserMasterUpdateWithoutLeadLightCarcasUnitMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -35456,6 +35638,7 @@ export type UserMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -35642,6 +35825,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -35835,6 +36019,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -36037,6 +36222,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -36230,6 +36416,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -36417,6 +36604,7 @@ export type UserMasterCreateWithoutSpecificationDocumentMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -36610,6 +36798,7 @@ export type UserMasterUncheckedCreateWithoutSpecificationDocumentMappingsCreated
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -36812,6 +37001,7 @@ export type UserMasterUpdateWithoutSpecificationDocumentMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -37005,6 +37195,7 @@ export type UserMasterUncheckedUpdateWithoutSpecificationDocumentMappingsCreated
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -37190,6 +37381,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -37383,6 +37575,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -37574,6 +37767,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -37767,6 +37961,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -37969,6 +38164,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -38162,6 +38358,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -38359,6 +38556,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -38552,6 +38750,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -38738,6 +38937,7 @@ export type UserMasterCreateWithoutB2bDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -38931,6 +39131,7 @@ export type UserMasterUncheckedCreateWithoutB2bDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -39133,6 +39334,7 @@ export type UserMasterUpdateWithoutB2bDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -39326,6 +39528,7 @@ export type UserMasterUncheckedUpdateWithoutB2bDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -39512,6 +39715,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -39705,6 +39909,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -39896,6 +40101,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -40089,6 +40295,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -40291,6 +40498,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -40484,6 +40692,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -40681,6 +40890,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -40874,6 +41084,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -41060,6 +41271,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -41253,6 +41465,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -41455,6 +41668,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -41648,6 +41862,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -41834,6 +42049,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -42027,6 +42243,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -42229,6 +42446,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -42422,6 +42640,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -42608,6 +42827,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -42801,6 +43021,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -42992,6 +43213,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -43185,6 +43407,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -43387,6 +43610,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -43580,6 +43804,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -43777,6 +44002,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -43970,6 +44196,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -44156,6 +44383,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -44349,6 +44577,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -44551,6 +44780,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -44744,6 +44974,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -44931,6 +45162,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -45124,6 +45356,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -45326,6 +45559,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -45519,6 +45753,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -45704,6 +45939,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -45897,6 +46133,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -46099,6 +46336,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -46292,6 +46530,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -46479,6 +46718,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -46672,6 +46912,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -46863,6 +47104,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -47056,6 +47298,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -47258,6 +47501,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -47451,6 +47695,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -47648,6 +47893,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -47841,6 +48087,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -48027,6 +48274,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -48220,6 +48468,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -48422,6 +48671,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -48615,6 +48865,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -48800,6 +49051,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -48993,6 +49245,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -49184,6 +49437,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -49377,6 +49631,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -49579,6 +49834,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -49772,6 +50028,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -49969,6 +50226,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -50162,6 +50420,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -50348,6 +50607,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -50541,6 +50801,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -50732,6 +50993,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -50925,6 +51187,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -51116,6 +51379,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -51309,6 +51573,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -51500,6 +51765,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -51693,6 +51959,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -51895,6 +52162,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -52088,6 +52356,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -52285,6 +52554,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -52478,6 +52748,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -52675,6 +52946,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -52868,6 +53140,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -53065,6 +53338,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -53258,6 +53532,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -53444,6 +53719,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -53637,6 +53913,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -53839,6 +54116,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -54032,6 +54310,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -54218,6 +54497,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -54411,6 +54691,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -54602,6 +54883,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -54795,6 +55077,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -54997,6 +55280,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -55190,6 +55474,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -55387,6 +55672,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -55580,6 +55866,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -55766,6 +56053,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -55959,6 +56247,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -56150,6 +56439,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -56343,6 +56633,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -56545,6 +56836,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -56738,6 +57030,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -56935,6 +57228,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -57128,6 +57422,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -57314,6 +57609,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -57507,6 +57803,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -57709,6 +58006,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -57902,6 +58200,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -58088,6 +58387,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -58281,6 +58581,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -58483,6 +58784,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -58676,6 +58978,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -58862,6 +59165,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -59055,6 +59359,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -59246,6 +59551,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -59439,6 +59745,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -59641,6 +59948,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -59834,6 +60142,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -60031,6 +60340,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -60224,6 +60534,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -60411,6 +60722,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -60604,6 +60916,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -60795,6 +61108,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -60988,6 +61302,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -61190,6 +61505,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -61383,6 +61699,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -61580,6 +61897,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -61773,6 +62091,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -61958,6 +62277,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -62151,6 +62471,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -62342,6 +62663,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -62535,6 +62857,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -62737,6 +63060,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -62930,6 +63254,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -63127,6 +63452,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -63320,6 +63646,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -63507,6 +63834,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -63700,6 +64028,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -63891,6 +64220,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -64084,6 +64414,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -64275,6 +64606,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -64468,6 +64800,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -64670,6 +65003,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -64863,6 +65197,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -65060,6 +65395,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -65253,6 +65589,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -65450,6 +65787,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -65643,6 +65981,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -65828,6 +66167,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -66021,6 +66361,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -66212,6 +66553,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -66405,6 +66747,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -66596,6 +66939,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -66789,6 +67133,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -66980,6 +67325,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -67173,6 +67519,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -67375,6 +67722,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -67568,6 +67916,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -67765,6 +68114,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -67958,6 +68308,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -68155,6 +68506,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -68348,6 +68700,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -68545,6 +68898,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -68738,6 +69092,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -68924,6 +69279,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -69117,6 +69473,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -69308,6 +69665,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -69501,6 +69859,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -69692,6 +70051,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -69885,6 +70245,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -70076,6 +70437,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -70269,6 +70631,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -70471,6 +70834,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -70664,6 +71028,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -70861,6 +71226,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -71054,6 +71420,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -71251,6 +71618,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -71444,6 +71812,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -71641,6 +72010,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -71834,6 +72204,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -72020,6 +72391,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -72213,6 +72585,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -72415,6 +72788,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -72608,6 +72982,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -72794,6 +73169,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -72987,6 +73363,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -73189,6 +73566,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -73382,6 +73760,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -73568,6 +73947,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -73761,6 +74141,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -73963,6 +74344,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -74156,6 +74538,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -74342,6 +74725,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -74535,6 +74919,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -74737,6 +75122,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -74930,6 +75316,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -75116,6 +75503,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -75309,6 +75697,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -75511,6 +75900,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -75704,6 +76094,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -75890,6 +76281,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -76083,6 +76475,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -76285,6 +76678,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -76478,6 +76872,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -76664,6 +77059,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -76857,6 +77253,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -77048,6 +77445,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -77241,6 +77639,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -77432,6 +77831,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -77625,6 +78025,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -77827,6 +78228,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -78020,6 +78422,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -78217,6 +78620,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -78410,6 +78814,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -78607,6 +79012,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -78800,6 +79206,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -78987,6 +79394,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -79180,6 +79588,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -79371,6 +79780,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -79564,6 +79974,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -79766,6 +80177,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -79959,6 +80371,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -80156,6 +80569,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -80349,6 +80763,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -80535,6 +80950,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -80728,6 +81144,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -80919,6 +81336,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -81112,6 +81530,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -81314,6 +81733,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -81507,6 +81927,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -81704,6 +82125,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -81897,6 +82319,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -82082,6 +82505,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -82275,6 +82699,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -82477,6 +82902,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -82670,6 +83096,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -82856,6 +83283,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -83049,6 +83477,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -83251,6 +83680,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -83444,6 +83874,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -83630,6 +84061,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -83823,6 +84255,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -84025,6 +84458,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -84218,6 +84652,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -84404,6 +84839,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -84597,6 +85033,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -84788,6 +85225,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -84981,6 +85419,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -85050,6 +85489,392 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
   where: Prisma.UserMasterWhereUniqueInput
   create: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscUpdatedInput, Prisma.UserMasterUncheckedCreateWithoutMiscUpdatedInput>
+}
+
+export type UserMasterCreateWithoutMiscReturnedInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterCreateNestedManyWithoutDeletedByUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutMiscReturnedInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutCreatedByInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUpdatedByInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedCreateNestedManyWithoutUserInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutUserMasterInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutReleasedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutCreatedByInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutUserMasterInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_assign_toToUserMasterInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_created_byToUserMasterInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedCreateNestedManyWithoutUserMaster_online_leads_updated_byToUserMasterInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectMasters?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutUserMasterInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutDeletedByUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutMiscReturnedInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedCreateWithoutMiscReturnedInput>
 }
 
 export type UserMasterUpsertWithoutMiscCreatedInput = {
@@ -85183,6 +86008,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -85376,6 +86202,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -85573,6 +86400,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -85766,6 +86594,399 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUncheckedUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUncheckedUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutDeletedByUserNestedInput
+}
+
+export type UserMasterUpsertWithoutMiscReturnedInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedUpdateWithoutMiscReturnedInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedCreateWithoutMiscReturnedInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutMiscReturnedInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutMiscReturnedInput, Prisma.UserMasterUncheckedUpdateWithoutMiscReturnedInput>
+}
+
+export type UserMasterUpdateWithoutMiscReturnedInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
+  miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationQueuesCreated?: Prisma.NotificationQueueUpdateManyWithoutCreatedByNestedInput
+  notificationQueuesUpdated?: Prisma.NotificationQueueUpdateManyWithoutUpdatedByNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  processBriefsCreated?: Prisma.ProcessBriefMasterUpdateManyWithoutCreatedByNestedInput
+  processBriefsUpdated?: Prisma.ProcessBriefMasterUpdateManyWithoutUpdatedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_created_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_created_byToUserMasterNestedInput
+  online_lead_followup_status_online_lead_followup_status_updated_byToUserMaster?: Prisma.online_lead_followup_statusUpdateManyWithoutUserMaster_online_lead_followup_status_updated_byToUserMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_assigned_toToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_assigned_toToUserMasterNestedInput
+  online_lead_store_log_online_lead_store_log_selected_byToUserMaster?: Prisma.online_lead_store_logUpdateManyWithoutUserMaster_online_lead_store_log_selected_byToUserMasterNestedInput
+  online_leads_online_leads_assign_toToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_assign_toToUserMasterNestedInput
+  online_leads_online_leads_created_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_created_byToUserMasterNestedInput
+  online_leads_online_leads_final_assigned_leadsToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_final_assigned_leadsToUserMasterNestedInput
+  online_leads_online_leads_updated_byToUserMaster?: Prisma.online_leadsUpdateManyWithoutUserMaster_online_leads_updated_byToUserMasterNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  specificationDocumentMappingsCreated?: Prisma.specificationDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  projectMasters?: Prisma.ProjectMasterUpdateManyWithoutUserMasterNestedInput
+  deletedProjects?: Prisma.ProjectMasterUpdateManyWithoutDeletedByUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutMiscReturnedInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  broadcastAttachmentsCreated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAttachmentsUpdated?: Prisma.BroadcastAttachmentUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastAudienceCreated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastAudienceUpdated?: Prisma.BroadcastAudienceMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastCategoriesCreated?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsCreated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastsUpdated?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReadsCreated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutCreatedByNestedInput
+  broadcastReadsUpdated?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUpdatedByNestedInput
+  broadcastReads?: Prisma.BroadcastReadUncheckedUpdateManyWithoutUserNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  cutListRulesCreated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  cutListRulesUpdated?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsCreated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadB2BReqMappingsUpdated?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  b2bDocumentsCreated?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadHardwareMappingsCreated?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadLightCarcasUnitMappingsCreated?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadOtherAppliancesMappingsCreated?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutUserMasterNestedInput
+  leadProcessBriefsCreated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadProcessBriefsUpdated?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  pbmCreated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  pbmUpdated?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadReqMaterialsCreated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadReqMaterialsUpdated?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadScopedActivityStatusLogsCreated?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadScopedActivityStatusLogsReleased?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutReleasedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -85952,6 +87173,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -86145,6 +87367,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -86347,6 +87570,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -86540,6 +87764,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -86727,6 +87952,7 @@ export type UserMasterCreateWithoutMiscFollowupsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
@@ -86920,6 +88146,7 @@ export type UserMasterUncheckedCreateWithoutMiscFollowupsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -87122,6 +88349,7 @@ export type UserMasterUpdateWithoutMiscFollowupsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
@@ -87315,6 +88543,7 @@ export type UserMasterUncheckedUpdateWithoutMiscFollowupsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -87501,6 +88730,7 @@ export type UserMasterCreateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
@@ -87694,6 +88924,7 @@ export type UserMasterUncheckedCreateWithoutMiscReorderInstanceMaterialMappingsC
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -87896,6 +89127,7 @@ export type UserMasterUpdateWithoutMiscReorderInstanceMaterialMappingsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
@@ -88089,6 +89321,7 @@ export type UserMasterUncheckedUpdateWithoutMiscReorderInstanceMaterialMappingsC
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -88274,6 +89507,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -88467,6 +89701,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -88669,6 +89904,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -88862,6 +90098,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -89049,6 +90286,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
@@ -89242,6 +90480,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -89433,6 +90672,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -89626,6 +90866,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -89828,6 +91069,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
@@ -90021,6 +91263,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -90218,6 +91461,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -90411,6 +91655,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -90597,6 +91842,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -90790,6 +92036,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -90992,6 +92239,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -91185,6 +92433,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -91370,6 +92619,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -91563,6 +92813,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -91754,6 +93005,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -91947,6 +93199,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -92149,6 +93402,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -92342,6 +93596,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -92539,6 +93794,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -92732,6 +93988,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -92919,6 +94176,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -93112,6 +94370,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -93303,6 +94562,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -93496,6 +94756,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -93687,6 +94948,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -93880,6 +95142,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -94082,6 +95345,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -94275,6 +95539,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -94472,6 +95737,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -94665,6 +95931,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -94862,6 +96129,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -95055,6 +96323,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -95241,6 +96510,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -95434,6 +96704,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -95625,6 +96896,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -95818,6 +97090,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -96020,6 +97293,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -96213,6 +97487,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -96410,6 +97685,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -96603,6 +97879,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -96788,6 +98065,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -96981,6 +98259,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -97183,6 +98462,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -97376,6 +98656,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -97563,6 +98844,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -97755,6 +99037,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -97967,6 +99250,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -98160,6 +99444,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -98351,6 +99636,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -98544,6 +99830,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -98746,6 +100033,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -98939,6 +100227,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -99136,6 +100425,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -99329,6 +100619,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -99516,6 +100807,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -99709,6 +101001,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -99911,6 +101204,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -100104,6 +101398,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -100290,6 +101585,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -100483,6 +101779,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -100685,6 +101982,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -100878,6 +102176,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -101063,6 +102362,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -101256,6 +102556,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -101447,6 +102748,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -101640,6 +102942,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -101842,6 +103145,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -102035,6 +103339,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -102232,6 +103537,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -102425,6 +103731,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -102611,6 +103918,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -102804,6 +104112,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -103006,6 +104315,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -103199,6 +104509,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -103386,6 +104697,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -103579,6 +104891,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -103770,6 +105083,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -103963,6 +105277,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -104165,6 +105480,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -104358,6 +105674,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -104555,6 +105872,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -104748,6 +106066,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -104934,6 +106253,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -105127,6 +106447,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -105318,6 +106639,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -105511,6 +106833,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -105702,6 +107025,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -105895,6 +107219,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -106086,6 +107411,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -106279,6 +107605,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -106470,6 +107797,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -106663,6 +107991,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -106865,6 +108194,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -107058,6 +108388,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -107255,6 +108586,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -107448,6 +108780,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -107645,6 +108978,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -107838,6 +109172,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -108035,6 +109370,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -108228,6 +109564,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -108425,6 +109762,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -108618,6 +109956,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -108804,6 +110143,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -108997,6 +110337,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -109199,6 +110540,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -109392,6 +110734,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -109578,6 +110921,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -109771,6 +111115,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -109962,6 +111307,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -110155,6 +111501,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -110357,6 +111704,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -110550,6 +111898,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -110747,6 +112096,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -110940,6 +112290,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -111126,6 +112477,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -111319,6 +112671,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -111510,6 +112863,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -111703,6 +113057,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -111894,6 +113249,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -112087,6 +113443,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -112289,6 +113646,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -112482,6 +113840,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -112679,6 +114038,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -112872,6 +114232,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -113069,6 +114430,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -113262,6 +114624,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -113447,6 +114810,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -113640,6 +115004,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -113831,6 +115196,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -114024,6 +115390,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -114215,6 +115582,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -114408,6 +115776,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -114610,6 +115979,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -114803,6 +116173,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -115000,6 +116371,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -115193,6 +116565,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -115390,6 +116763,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -115583,6 +116957,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -115769,6 +117144,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -115962,6 +117338,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -116153,6 +117530,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -116346,6 +117724,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -116548,6 +117927,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -116741,6 +118121,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -116938,6 +118319,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -117131,6 +118513,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -117318,6 +118701,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -117511,6 +118895,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -117713,6 +119098,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -117906,6 +119292,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -118092,6 +119479,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -118285,6 +119673,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -118487,6 +119876,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -118680,6 +120070,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -118866,6 +120257,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -119059,6 +120451,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -119261,6 +120654,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -119454,6 +120848,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -119639,6 +121034,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -119832,6 +121228,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -120034,6 +121431,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -120227,6 +121625,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -120413,6 +121812,7 @@ export type UserMasterCreateWithoutBroadcastsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -120606,6 +122006,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -120797,6 +122198,7 @@ export type UserMasterCreateWithoutBroadcastsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -120990,6 +122392,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -121192,6 +122595,7 @@ export type UserMasterUpdateWithoutBroadcastsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -121385,6 +122789,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -121582,6 +122987,7 @@ export type UserMasterUpdateWithoutBroadcastsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -121775,6 +123181,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -121961,6 +123368,7 @@ export type UserMasterCreateWithoutBroadcastCategoriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -122154,6 +123562,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastCategoriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -122356,6 +123765,7 @@ export type UserMasterUpdateWithoutBroadcastCategoriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -122549,6 +123959,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastCategoriesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -122735,6 +124146,7 @@ export type UserMasterCreateWithoutBroadcastAudienceCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -122928,6 +124340,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -123119,6 +124532,7 @@ export type UserMasterCreateWithoutBroadcastAudienceUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -123312,6 +124726,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAudienceUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -123514,6 +124929,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -123707,6 +125123,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -123904,6 +125321,7 @@ export type UserMasterUpdateWithoutBroadcastAudienceUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -124097,6 +125515,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAudienceUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -124283,6 +125702,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -124476,6 +125896,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -124667,6 +126088,7 @@ export type UserMasterCreateWithoutBroadcastAttachmentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -124860,6 +126282,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastAttachmentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -125062,6 +126485,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -125255,6 +126679,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -125452,6 +126877,7 @@ export type UserMasterUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -125645,6 +127071,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastAttachmentsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -125831,6 +127258,7 @@ export type UserMasterCreateWithoutBroadcastReadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -126024,6 +127452,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -126215,6 +127644,7 @@ export type UserMasterCreateWithoutBroadcastReadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -126408,6 +127838,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -126599,6 +128030,7 @@ export type UserMasterCreateWithoutBroadcastReadsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -126792,6 +128224,7 @@ export type UserMasterUncheckedCreateWithoutBroadcastReadsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -126994,6 +128427,7 @@ export type UserMasterUpdateWithoutBroadcastReadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -127187,6 +128621,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -127384,6 +128819,7 @@ export type UserMasterUpdateWithoutBroadcastReadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -127577,6 +129013,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -127774,6 +129211,7 @@ export type UserMasterUpdateWithoutBroadcastReadsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -127967,6 +129405,7 @@ export type UserMasterUncheckedUpdateWithoutBroadcastReadsInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -128154,6 +129593,7 @@ export type UserMasterCreateWithoutNotificationQueuesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -128347,6 +129787,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -128538,6 +129979,7 @@ export type UserMasterCreateWithoutNotificationQueuesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -128731,6 +130173,7 @@ export type UserMasterUncheckedCreateWithoutNotificationQueuesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -128933,6 +130376,7 @@ export type UserMasterUpdateWithoutNotificationQueuesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -129126,6 +130570,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -129323,6 +130768,7 @@ export type UserMasterUpdateWithoutNotificationQueuesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -129516,6 +130962,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationQueuesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -129701,6 +131148,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -129894,6 +131342,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -130085,6 +131534,7 @@ export type UserMasterCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -130278,6 +131728,7 @@ export type UserMasterUncheckedCreateWithoutLeadB2BReqMappingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -130480,6 +131931,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -130673,6 +132125,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -130870,6 +132323,7 @@ export type UserMasterUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -131063,6 +132517,7 @@ export type UserMasterUncheckedUpdateWithoutLeadB2BReqMappingsUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -131249,6 +132704,7 @@ export type UserMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -131442,6 +132898,7 @@ export type UserMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingInpu
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -131644,6 +133101,7 @@ export type UserMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -131837,6 +133295,7 @@ export type UserMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingInpu
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -132024,6 +133483,7 @@ export type UserMasterCreateWithoutOnline_lead_call_logInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -132217,6 +133677,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -132419,6 +133880,7 @@ export type UserMasterUpdateWithoutOnline_lead_call_logInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -132612,6 +134074,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -132798,6 +134261,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -132991,6 +134455,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -133182,6 +134647,7 @@ export type UserMasterCreateWithoutOnline_lead_followup_status_online_lead_follo
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -133375,6 +134841,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_followup_status_online_l
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -133577,6 +135044,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -133770,6 +135238,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -133967,6 +135436,7 @@ export type UserMasterUpdateWithoutOnline_lead_followup_status_online_lead_follo
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -134160,6 +135630,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_followup_status_online_l
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -134346,6 +135817,7 @@ export type UserMasterCreateWithoutOnline_lead_historyInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -134539,6 +136011,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -134741,6 +136214,7 @@ export type UserMasterUpdateWithoutOnline_lead_historyInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -134934,6 +136408,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -135120,6 +136595,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_a
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -135313,6 +136789,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -135504,6 +136981,7 @@ export type UserMasterCreateWithoutOnline_lead_store_log_online_lead_store_log_s
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -135697,6 +137175,7 @@ export type UserMasterUncheckedCreateWithoutOnline_lead_store_log_online_lead_st
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -135899,6 +137378,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_a
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -136092,6 +137572,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -136289,6 +137770,7 @@ export type UserMasterUpdateWithoutOnline_lead_store_log_online_lead_store_log_s
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -136482,6 +137964,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_lead_store_log_online_lead_st
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -136668,6 +138151,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_assign_toToUserMast
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -136861,6 +138345,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_assign_toT
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -137052,6 +138537,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_created_byToUserMas
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -137245,6 +138731,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_created_by
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -137436,6 +138923,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_final_assigned_lead
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -137629,6 +139117,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_final_assi
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -137820,6 +139309,7 @@ export type UserMasterCreateWithoutOnline_leads_online_leads_updated_byToUserMas
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -138013,6 +139503,7 @@ export type UserMasterUncheckedCreateWithoutOnline_leads_online_leads_updated_by
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -138215,6 +139706,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_assign_toToUserMast
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -138408,6 +139900,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_assign_toT
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -138605,6 +140098,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_created_byToUserMas
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -138798,6 +140292,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_created_by
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -138995,6 +140490,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_final_assigned_lead
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -139188,6 +140684,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_final_assi
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -139385,6 +140882,7 @@ export type UserMasterUpdateWithoutOnline_leads_online_leads_updated_byToUserMas
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -139578,6 +141076,7 @@ export type UserMasterUncheckedUpdateWithoutOnline_leads_online_leads_updated_by
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -139763,6 +141262,7 @@ export type UserMasterCreateWithoutProductsRequiredForProductionInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -139956,6 +141456,7 @@ export type UserMasterUncheckedCreateWithoutProductsRequiredForProductionInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -140158,6 +141659,7 @@ export type UserMasterUpdateWithoutProductsRequiredForProductionInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -140351,6 +141853,7 @@ export type UserMasterUncheckedUpdateWithoutProductsRequiredForProductionInput =
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -140537,6 +142040,7 @@ export type UserMasterCreateWithoutCutListRulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -140730,6 +142234,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -140921,6 +142426,7 @@ export type UserMasterCreateWithoutCutListRulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
@@ -141114,6 +142620,7 @@ export type UserMasterUncheckedCreateWithoutCutListRulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutReturnedByInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutCreatedByInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
@@ -141316,6 +142823,7 @@ export type UserMasterUpdateWithoutCutListRulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -141509,6 +143017,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesCreatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -141706,6 +143215,7 @@ export type UserMasterUpdateWithoutCutListRulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -141899,6 +143409,7 @@ export type UserMasterUncheckedUpdateWithoutCutListRulesUpdatedInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -142100,6 +143611,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -142292,6 +143804,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -142507,6 +144020,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -142699,6 +144213,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -142914,6 +144429,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
@@ -143106,6 +144622,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
   miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  miscReturned?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutReturnedByNestedInput
   miscFollowupsCreated?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutCreatedByNestedInput
   miscReorderInstanceMaterialMappingsCreated?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
@@ -143304,6 +144821,7 @@ export type UserMasterCountOutputType = {
   miscDocumentsCreated: number
   miscCreated: number
   miscUpdated: number
+  miscReturned: number
   miscFollowupsCreated: number
   miscReorderInstanceMaterialMappingsCreated: number
   notificationsSent: number
@@ -143483,6 +145001,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   miscDocumentsCreated?: boolean | UserMasterCountOutputTypeCountMiscDocumentsCreatedArgs
   miscCreated?: boolean | UserMasterCountOutputTypeCountMiscCreatedArgs
   miscUpdated?: boolean | UserMasterCountOutputTypeCountMiscUpdatedArgs
+  miscReturned?: boolean | UserMasterCountOutputTypeCountMiscReturnedArgs
   miscFollowupsCreated?: boolean | UserMasterCountOutputTypeCountMiscFollowupsCreatedArgs
   miscReorderInstanceMaterialMappingsCreated?: boolean | UserMasterCountOutputTypeCountMiscReorderInstanceMaterialMappingsCreatedArgs
   notificationsSent?: boolean | UserMasterCountOutputTypeCountNotificationsSentArgs
@@ -144346,6 +145865,13 @@ export type UserMasterCountOutputTypeCountMiscUpdatedArgs<ExtArgs extends runtim
 /**
  * UserMasterCountOutputType without action
  */
+export type UserMasterCountOutputTypeCountMiscReturnedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MiscellaneousMasterWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
 export type UserMasterCountOutputTypeCountMiscFollowupsCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MiscellaneousFollowupWhereInput
 }
@@ -144917,6 +146443,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   miscDocumentsCreated?: boolean | Prisma.UserMaster$miscDocumentsCreatedArgs<ExtArgs>
   miscCreated?: boolean | Prisma.UserMaster$miscCreatedArgs<ExtArgs>
   miscUpdated?: boolean | Prisma.UserMaster$miscUpdatedArgs<ExtArgs>
+  miscReturned?: boolean | Prisma.UserMaster$miscReturnedArgs<ExtArgs>
   miscFollowupsCreated?: boolean | Prisma.UserMaster$miscFollowupsCreatedArgs<ExtArgs>
   miscReorderInstanceMaterialMappingsCreated?: boolean | Prisma.UserMaster$miscReorderInstanceMaterialMappingsCreatedArgs<ExtArgs>
   notificationsSent?: boolean | Prisma.UserMaster$notificationsSentArgs<ExtArgs>
@@ -145152,6 +146679,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   miscDocumentsCreated?: boolean | Prisma.UserMaster$miscDocumentsCreatedArgs<ExtArgs>
   miscCreated?: boolean | Prisma.UserMaster$miscCreatedArgs<ExtArgs>
   miscUpdated?: boolean | Prisma.UserMaster$miscUpdatedArgs<ExtArgs>
+  miscReturned?: boolean | Prisma.UserMaster$miscReturnedArgs<ExtArgs>
   miscFollowupsCreated?: boolean | Prisma.UserMaster$miscFollowupsCreatedArgs<ExtArgs>
   miscReorderInstanceMaterialMappingsCreated?: boolean | Prisma.UserMaster$miscReorderInstanceMaterialMappingsCreatedArgs<ExtArgs>
   notificationsSent?: boolean | Prisma.UserMaster$notificationsSentArgs<ExtArgs>
@@ -145347,6 +146875,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     miscDocumentsCreated: Prisma.$MiscellaneousDocumentPayload<ExtArgs>[]
     miscCreated: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
     miscUpdated: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
+    miscReturned: Prisma.$MiscellaneousMasterPayload<ExtArgs>[]
     miscFollowupsCreated: Prisma.$MiscellaneousFollowupPayload<ExtArgs>[]
     miscReorderInstanceMaterialMappingsCreated: Prisma.$MiscellaneousReorderInstancesMaterialMappingPayload<ExtArgs>[]
     notificationsSent: Prisma.$NotificationPayload<ExtArgs>[]
@@ -145934,6 +147463,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   miscDocumentsCreated<T extends Prisma.UserMaster$miscDocumentsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscDocumentsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscCreated<T extends Prisma.UserMaster$miscCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscUpdated<T extends Prisma.UserMaster$miscUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  miscReturned<T extends Prisma.UserMaster$miscReturnedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscReturnedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscFollowupsCreated<T extends Prisma.UserMaster$miscFollowupsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscFollowupsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousFollowupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   miscReorderInstanceMaterialMappingsCreated<T extends Prisma.UserMaster$miscReorderInstanceMaterialMappingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$miscReorderInstanceMaterialMappingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MiscellaneousReorderInstancesMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notificationsSent<T extends Prisma.UserMaster$notificationsSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$notificationsSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -149110,6 +150640,30 @@ export type UserMaster$miscCreatedArgs<ExtArgs extends runtime.Types.Extensions.
  * UserMaster.miscUpdated
  */
 export type UserMaster$miscUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MiscellaneousMaster
+   */
+  select?: Prisma.MiscellaneousMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MiscellaneousMaster
+   */
+  omit?: Prisma.MiscellaneousMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MiscellaneousMasterInclude<ExtArgs> | null
+  where?: Prisma.MiscellaneousMasterWhereInput
+  orderBy?: Prisma.MiscellaneousMasterOrderByWithRelationInput | Prisma.MiscellaneousMasterOrderByWithRelationInput[]
+  cursor?: Prisma.MiscellaneousMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MiscellaneousMasterScalarFieldEnum | Prisma.MiscellaneousMasterScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.miscReturned
+ */
+export type UserMaster$miscReturnedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the MiscellaneousMaster
    */

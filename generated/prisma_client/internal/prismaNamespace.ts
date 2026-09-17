@@ -18944,7 +18944,11 @@ export const MiscellaneousMasterScalarFieldEnum = {
   required_delivery_date: 'required_delivery_date',
   solution: 'solution',
   return_order_date: 'return_order_date',
-  return_order_delivery_method: 'return_order_delivery_method'
+  return_order_delivery_method: 'return_order_delivery_method',
+  is_returned: 'is_returned',
+  returned_at: 'returned_at',
+  returned_by: 'returned_by',
+  return_handover_remark: 'return_handover_remark'
 } as const
 
 export type MiscellaneousMasterScalarFieldEnum = (typeof MiscellaneousMasterScalarFieldEnum)[keyof typeof MiscellaneousMasterScalarFieldEnum]

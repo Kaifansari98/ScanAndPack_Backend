@@ -165,6 +165,16 @@ underInstallationStageRoutes.post(
 );
 
 /**
+ * ✅ POST → Mark Miscellaneous Return Order as Returned (Upload return photo proof)
+ * @route POST /vendorId/:vendorId/miscId/:miscId/mark-returned
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/miscId/:miscId/mark-returned",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.markMiscellaneousAsReturned,
+);
+
+/**
  * ✅ GET → Get eligible followup users (site-supervisor, head-site-supervisor, factory, miscellaneous)
  * @route GET /vendorId/:vendorId/miscellaneous/followup-users
  */

@@ -392,6 +392,7 @@ model UserMaster {
   miscDocumentsCreated                                                           MiscellaneousDocument[]                @relation("MiscDocCreatedBy")
   miscCreated                                                                    MiscellaneousMaster[]                  @relation("MiscCreatedBy")
   miscUpdated                                                                    MiscellaneousMaster[]                  @relation("MiscUpdatedBy")
+  miscReturned                                                                   MiscellaneousMaster[]                  @relation("MiscReturnedBy")
   miscFollowupsCreated                                                           MiscellaneousFollowup[]                @relation("MiscFollowupCreatedBy")
   miscReorderInstanceMaterialMappingsCreated                                     MiscellaneousReorderInstancesMaterialMapping[] @relation("MiscReorderInstanceCreatedBy")
   notificationsSent                                                              Notification[]                         @relation("NotificationSender")
@@ -2749,12 +2750,17 @@ model MiscellaneousMaster {
   solution                 String?
   return_order_date        DateTime?
   return_order_delivery_method ReturnOrderDeliveryMethod?
+  is_returned              Boolean                    @default(false)
+  returned_at              DateTime?
+  returned_by              Int?
+  return_handover_remark   String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                     LeadMaster                 @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   type                     MiscellaneousTypeMaster    @relation(fields: [misc_type_id], references: [id])
   updatedBy                UserMaster?                @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
+  returnedBy               UserMaster?                @relation("MiscReturnedBy", fields: [returned_by], references: [id])
   vendor                   VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   teams                    MiscellaneousTeamMapping[]
   followups                MiscellaneousFollowup[]
