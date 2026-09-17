@@ -47,4 +47,4 @@ router.put("/machines/:machine_id/rules/:rule_id", CutListRuleController.updateR
 router.delete("/machines/:machine_id/rules/:rule_id", CutListRuleController.deleteRule);
 router.patch("/machines/:machine_id/rules/:rule_id/status", CutListRuleController.toggleRuleStatus);
 
-export default router;
+export default router;

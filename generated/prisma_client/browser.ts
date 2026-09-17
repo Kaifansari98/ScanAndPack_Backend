@@ -188,6 +188,11 @@ export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
  */
 export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
 /**
+ * Model ProcessBriefMachineMapping
+ * 
+ */
+export type ProcessBriefMachineMapping = Prisma.ProcessBriefMachineMappingModel
+/**
  * Model LeadRequirementMaterialMapping
  * 
  */

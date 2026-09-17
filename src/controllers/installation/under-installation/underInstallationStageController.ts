@@ -1032,12 +1032,7 @@ export class UnderInstallationStageController {
         });
       }
 
-      if (misc_approved === true && !String(approval_remark ?? "").trim()) {
-        return res.status(400).json({
-          success: false,
-          error: "approval_remark is required when approving",
-        });
-      }
+
 
       const data =
         await UnderInstallationStageService.updateMiscApprovalService({

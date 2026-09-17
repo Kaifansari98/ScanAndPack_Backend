@@ -199,6 +199,18 @@ export class CutListRuleEngineService {
       itemValue = cutItem[key];
     } else if (cond.condition_type === "CATEGORY") {
       itemValue = cutItem.category_id ?? cutItem.category_name;
+      const isAll =
+        cond.value === "ALL" ||
+        cond.value === "*" ||
+        (Array.isArray(cond.value) &&
+          cond.value.some((v: any) => String(v).toUpperCase() === "ALL"));
+
+      if (isAll) {
+        if (cond.operator === "NOT_IN" || cond.operator === "NOT_EQUALS") {
+          return false;
+        }
+        return true;
+      }
     }
 
     return this.compareValues(itemValue, cond.operator, cond.value);
@@ -208,6 +220,14 @@ export class CutListRuleEngineService {
    * Comparison helper for operators
    */
   private static compareValues(itemValue: any, operator: string, ruleValue: any): boolean {
+    const isBlank =
+      itemValue === undefined ||
+      itemValue === null ||
+      String(itemValue).trim() === "";
+
+    if (operator === "IS_BLANK") return isBlank;
+    if (operator === "IS_NOT_BLANK") return !isBlank;
+
     if (itemValue === undefined || itemValue === null) {
       if (operator === "NOT_EQUALS" || operator === "NOT_IN") return true;
       return false;
@@ -217,8 +237,39 @@ export class CutListRuleEngineService {
     const itemNum = Number(itemValue);
     const isItemNumeric = !isNaN(itemNum);
 
+    // Explicit boolean handling (for Has Edge Banding, etc.)
+    const isRuleValBool =
+      typeof ruleValue === "boolean" ||
+      String(ruleValue).trim().toLowerCase() === "true" ||
+      String(ruleValue).trim().toLowerCase() === "false";
+    const isItemValBool =
+      typeof itemValue === "boolean" ||
+      itemStr === "true" ||
+      itemStr === "false";
+
+    if (isRuleValBool || isItemValBool) {
+      const boolItem =
+        itemValue === true || itemStr === "true" || itemValue === 1 || itemValue === "1";
+      const boolRule =
+        ruleValue === true ||
+        String(ruleValue).trim().toLowerCase() === "true" ||
+        ruleValue === 1 ||
+        ruleValue === "1";
+
+      if (operator === "EQUALS") return boolItem === boolRule;
+      if (operator === "NOT_EQUALS") return boolItem !== boolRule;
+    }
+
     switch (operator) {
       case "EQUALS": {
+        if (Array.isArray(ruleValue)) {
+          return ruleValue.some((val) => {
+            if (isItemNumeric && !isNaN(Number(val))) {
+              return itemNum === Number(val);
+            }
+            return itemStr === String(val).trim().toLowerCase();
+          });
+        }
         if (isItemNumeric && !isNaN(Number(ruleValue))) {
           return itemNum === Number(ruleValue);
         }
@@ -226,6 +277,14 @@ export class CutListRuleEngineService {
       }
 
       case "NOT_EQUALS": {
+        if (Array.isArray(ruleValue)) {
+          return !ruleValue.some((val) => {
+            if (isItemNumeric && !isNaN(Number(val))) {
+              return itemNum === Number(val);
+            }
+            return itemStr === String(val).trim().toLowerCase();
+          });
+        }
         if (isItemNumeric && !isNaN(Number(ruleValue))) {
           return itemNum !== Number(ruleValue);
         }
@@ -238,6 +297,14 @@ export class CutListRuleEngineService {
 
       case "NOT_CONTAINS": {
         return !itemStr.includes(String(ruleValue).trim().toLowerCase());
+      }
+
+      case "STARTS_WITH": {
+        return itemStr.startsWith(String(ruleValue ?? "").trim().toLowerCase());
+      }
+
+      case "ENDS_WITH": {
+        return itemStr.endsWith(String(ruleValue ?? "").trim().toLowerCase());
       }
 
       case "LESS_THAN": {
@@ -287,9 +354,23 @@ export class CutListRuleEngineService {
       }
 
       case "BETWEEN": {
-        if (!Array.isArray(ruleValue) || ruleValue.length < 2) return false;
-        const [min, max] = ruleValue;
-        return isItemNumeric && itemNum >= Number(min) && itemNum <= Number(max);
+        let min: number | undefined;
+        let max: number | undefined;
+
+        if (Array.isArray(ruleValue) && ruleValue.length >= 2) {
+          min = Number(ruleValue[0]);
+          max = Number(ruleValue[1]);
+        } else if (typeof ruleValue === "string" && ruleValue.includes(",")) {
+          const parts = ruleValue.split(",");
+          min = Number(parts[0].trim());
+          max = Number(parts[1].trim());
+        }
+
+        if (min === undefined || max === undefined || isNaN(min) || isNaN(max)) {
+          return false;
+        }
+
+        return isItemNumeric && itemNum >= min && itemNum <= max;
       }
 
       default:
