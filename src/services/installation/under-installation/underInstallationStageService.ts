@@ -1488,6 +1488,8 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       if (handoverTaskId) qp.set("taskId", String(handoverTaskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
@@ -1578,6 +1580,8 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       if (confirmTaskId) qp.set("taskId", String(confirmTaskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
@@ -1945,6 +1949,8 @@ export class UnderInstallationStageService {
       if (firstInstance?.id) miscParams.set("instance_id", String(firstInstance.id));
       if (misc.taskId) miscParams.set("taskId", String(misc.taskId));
       miscParams.set("tab", "misc");
+      miscParams.set("miscId", String(misc.misc.id));
+      miscParams.set("miscTab", "actions-scheduling");
       const redirectPath = `${miscBase}?${miscParams.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -2301,6 +2307,8 @@ export class UnderInstallationStageService {
         if (firstInstance?.id) miscParams.set("instance_id", String(firstInstance.id));
         if (misc.taskId) miscParams.set("taskId", String(misc.taskId));
         miscParams.set("tab", "misc");
+        miscParams.set("miscId", String(misc.misc.id));
+        miscParams.set("miscTab", "actions-scheduling");
         const redirectPath = `${miscBase}?${miscParams.toString()}`;
 
         const isSelfDelivery = return_order_delivery_method === "SELF_DELIVERY";
@@ -3442,6 +3450,8 @@ export class UnderInstallationStageService {
           if (lead.account_id) uiParams.set("accountId", String(lead.account_id));
           if (firstInstance?.id) uiParams.set("instance_id", String(firstInstance.id));
           uiParams.set("tab", "misc");
+          uiParams.set("miscId", String(misc_id));
+          uiParams.set("miscTab", "actions-scheduling");
           const redirectPath = `${uiBase}?${uiParams.toString()}`;
           const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -3826,6 +3836,8 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       const redirectPath = `${stagePath}?${qp.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -4088,6 +4100,9 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(result.misc_id));
+      qp.set("miscTab", "actions-scheduling");
+      if (task_id) qp.set("taskId", String(task_id));
       const redirectPath = `${stagePath}?${qp.toString()}`;
       const projectUrl = `${baseUrl}${redirectPath}`;
 
@@ -4571,6 +4586,8 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       qp.set("taskId", String(result.taskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
@@ -5760,6 +5777,8 @@ export class UnderInstallationStageService {
       const qp = new URLSearchParams();
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       if (result.taskId) qp.set("taskId", String(result.taskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
@@ -6154,6 +6173,8 @@ export class UnderInstallationStageService {
       if (leadMeta?.account_id) qp.set("accountId", String(leadMeta.account_id));
       if (firstInstance?.id) qp.set("instance_id", String(firstInstance.id));
       qp.set("tab", "misc");
+      qp.set("miscId", String(misc_id));
+      qp.set("miscTab", "actions-scheduling");
       if (taskId) qp.set("taskId", String(taskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
 
