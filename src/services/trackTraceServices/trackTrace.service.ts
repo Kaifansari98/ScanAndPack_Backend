@@ -1208,7 +1208,14 @@ export const updateScannedItem = async (
      * When status display is disabled, continue below. Do not recursively call
      * updateScannedItem because that repeats every lookup and validation.
      */
-    if (is_check && showStatusSetting === "1") {
+    const mustPreviewBeforeCustomGroupPacking =
+      eligibleMapping.machine.machine_type_id === 18 &&
+      eligibleMapping.project.packing_type === PackingType.CUSTOM_GROUP;
+
+    if (
+      is_check &&
+      (showStatusSetting === "1" || mustPreviewBeforeCustomGroupPacking)
+    ) {
       let activeDefect: any = await prisma.defectedItem.findFirst({
         where: {
           cut_list_id,

@@ -62,6 +62,10 @@ export const scan_item = async (_req: Request, res: Response) => {
       unique_code: String(_req.body.unique_code),
       created_by: Number(_req.body.created_by),
       box_id: _req.body.box_id ? Number(_req.body.box_id) : undefined,
+      location_name:
+        typeof _req.body.location_name === "string"
+          ? _req.body.location_name.trim() || undefined
+          : undefined,
     };
 
     const serviceResponse = await trackTraceService.updateScannedItem(
@@ -80,7 +84,7 @@ export const scan_item = async (_req: Request, res: Response) => {
       .status(200)
       .json(
         ApiResponse.success(
-          serviceResponse?.status,
+          serviceResponse?.data,
           serviceResponse?.message,
           200,
         ),

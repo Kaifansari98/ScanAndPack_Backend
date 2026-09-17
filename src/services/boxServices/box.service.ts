@@ -646,6 +646,12 @@ export const getBoxesByVendorAndProjectV1 = async (
               select: {
                 weight: true,
                 qty: true,
+                group_name: true,
+              },
+            },
+            projectLocationProductQuantity: {
+              select: {
+                location_name: true,
               },
             },
           },
@@ -656,9 +662,28 @@ export const getBoxesByVendorAndProjectV1 = async (
     number,
     Map<number, { quantity: number; unitWeight: number }>
   >();
+  const boxGroupNameMap = new Map<number, Set<string>>();
+  const boxLocationNameMap = new Map<number, Set<string>>();
 
   for (const mapping of mappingRows) {
     if (mapping.box_id === null || !mapping.cut_list) continue;
+
+    const groupName = mapping.cut_list.group_name?.trim();
+    if (groupName) {
+      const groupNames =
+        boxGroupNameMap.get(mapping.box_id) ?? new Set<string>();
+      groupNames.add(groupName);
+      boxGroupNameMap.set(mapping.box_id, groupNames);
+    }
+
+    const locationName =
+      mapping.projectLocationProductQuantity?.location_name.trim();
+    if (locationName) {
+      const locationNames =
+        boxLocationNameMap.get(mapping.box_id) ?? new Set<string>();
+      locationNames.add(locationName);
+      boxLocationNameMap.set(mapping.box_id, locationNames);
+    }
 
     const rawMappingQuantity = Number(mapping.qty ?? 0);
     const mappingQuantity =
@@ -730,6 +755,12 @@ export const getBoxesByVendorAndProjectV1 = async (
 
     return {
       ...box,
+      group_name:
+        box.product_group_name?.trim() ||
+        Array.from(boxGroupNameMap.get(box.id) ?? []).join(", ") ||
+        null,
+      location_name:
+        Array.from(boxLocationNameMap.get(box.id) ?? []).join(", ") || null,
       items_count: itemsCount,
       weight: Number(totalWeight.toFixed(2)),
       box_info_values: boxInfoValues,
