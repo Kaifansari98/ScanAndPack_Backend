@@ -1014,6 +1014,7 @@ export const generateBoxPdfServiceWeb = async (
   box_id: number,
   project_id: string,
   vendor_id: number,
+  locationNameParam?: string,
 ) => {
   try {
     /*
@@ -1044,7 +1045,12 @@ export const generateBoxPdfServiceWeb = async (
     |--------------------------------------------------------------------------
     */
 
-    return await generateBoxPdfService(box_id, project.id, vendor_id);
+    return await generateBoxPdfService(
+      box_id,
+      project.id,
+      vendor_id,
+      locationNameParam,
+    );
   } catch (error) {
     console.error("generateBoxPdfServiceWeb:", error);
 
@@ -1076,6 +1082,7 @@ export const generateBoxPdfService = async (
   box_id: number,
   project_id: number,
   vendor_id: number,
+  locationNameParam?: string,
 ) => {
   const calibriRegularPath = path.resolve(
     __dirname,
@@ -1769,15 +1776,48 @@ export const generateBoxPdfService = async (
       (isCustomGroupPacking && box.product_group_name?.trim()) ||
       resolveProductName(items);
 
-    const automaticLocationName =
-      mappingRows
-        .find((mapping) => mapping.projectLocationProductQuantity)
-        ?.projectLocationProductQuantity?.location_name.trim() || "";
+    const mappedLocations = Array.from(
+      new Set(
+        mappingRows
+          .map((mapping) =>
+            mapping.projectLocationProductQuantity?.location_name?.trim(),
+          )
+          .filter(Boolean),
+      ),
+    ).join(", ");
 
-    const floorName =
-      automaticLocationName ||
+    const packingLocation =
+      mappedLocations ||
+      locationNameParam?.trim() ||
+      "" ||
+      findBoxInfoValue(boxInfoValues, [
+        "packing location",
+        "packing_location",
+        "location",
+        "location_name",
+        "location name",
+      ]) ||
+      "";
+
+    const floorValue =
       findBoxInfoValue(boxInfoValues, ["floor", "floor_name", "floor name"]) ||
-      "-";
+      "";
+
+    const hasBothLocations = Boolean(
+      packingLocation &&
+      floorValue &&
+      packingLocation.toLowerCase() !== floorValue.toLowerCase(),
+    );
+
+    const locationLabel = hasBothLocations
+      ? "LOCATION / FLOOR"
+      : packingLocation || isCustomGroupPacking
+        ? "LOCATION"
+        : "FLOOR";
+
+    const locationDisplayValue = hasBothLocations
+      ? `${packingLocation} / ${floorValue}`
+      : packingLocation || floorValue || "-";
 
     const customPackingLabel = [
       box.packing_group_name?.trim(),
@@ -2195,11 +2235,19 @@ padding-top:25px;
 }
 
 .row-2col {
-  grid-template-columns: 62% 38%;
+  grid-template-columns: 62fr 38fr;
 }
 
 .row-3col {
-  grid-template-columns: 30% 40% 30%;
+  grid-template-columns: 28fr 36fr 36fr;
+}
+
+.row-3col .field-label {
+  white-space: nowrap;
+}
+
+.row-3col .info-cell:nth-child(3) {
+  padding-left: 3mm;
 }
 
 .info-cell {
@@ -2214,7 +2262,7 @@ padding-top:25px;
 .field-label {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.25;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
@@ -2224,7 +2272,7 @@ padding-top:25px;
 .field-value {
   color: #111827;
   font-size: 8px !important;
-  line-height: 8px;
+  line-height: 1.25;
   font-weight: 800;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
@@ -2233,6 +2281,13 @@ padding-top:25px;
 .filed-value-item-no{
 font-size: 18px !important;
 line-height: 1.2;
+}
+
+.field-value-location {
+  font-size: 13px !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
 }
 
 .section-separator {
@@ -2321,7 +2376,7 @@ color: #111827;
 }
 
 .col-component {
-  width: 55%;
+  width: 51%;
 }
 
 .col-qty {
@@ -2329,11 +2384,11 @@ color: #111827;
 }
 
 .col-unit {
-  width: 12%;
+  width: 13%;
 }
 
 .col-total {
-  width: 14%;
+  width: 17%;
 }
 
 .component-table th {
@@ -2426,15 +2481,17 @@ color: #111827;
   border-left: 1px solid #111827 !important;
   border-right: 1px solid #111827 !important;
   border-bottom: 1px solid #111827;
+  white-space: nowrap;
 }
 
 .component-table tfoot td {
   background: #fff;
   border: 1px solid #111827;
   font-size: 8px !important;
-  line-height: 5.8px;
+  line-height: 1.2;
   font-weight: 800;
-  padding: 1mm 0.65mm;
+  padding: 1mm 0.5mm;
+  white-space: nowrap;
 }
 
 .total-title {
@@ -2808,11 +2865,11 @@ color: #111827;
     <div class="info-row row-3col">
       <div class="info-cell">
         <div class="field-label">
-          ${isCustomGroupPacking ? "LOCATION" : "FLOOR"}
+          ${locationLabel}
         </div>
 
-        <div class="field-value">
-          ${escapeHtml(floorName)}
+        <div class="field-value field-value-location">
+          ${escapeHtml(locationDisplayValue)}
         </div>
       </div>
 
@@ -2851,7 +2908,7 @@ color: #111827;
                   </div>
                 </div>
               `
-          : ""
+            : ""
       }
     </div>
 
@@ -2961,7 +3018,7 @@ color: #111827;
           </td>
 
           <td class="total-cell">
-            ${totalWeight.toFixed(2)}KG
+            ${totalWeight.toFixed(2)} KG
           </td>
         </tr>
       </tfoot>
@@ -3027,7 +3084,7 @@ color: #111827;
 
       boxes_per_product: box.boxes_per_product,
 
-      location_name: automaticLocationName || null,
+      location_name: packingLocation || floorValue || null,
 
       total_quantity: totalQuantity,
 
@@ -5667,6 +5724,13 @@ export const generateProjectFullReportService = async (
           select: {
             id: true,
 
+            projectLocationProductQuantity: {
+              select: {
+                id: true,
+                location_name: true,
+              },
+            },
+
             cut_list: {
               select: {
                 id: true,
@@ -5785,6 +5849,56 @@ export const generateProjectFullReportService = async (
             field_value: item.field_value || "",
           }));
 
+        const mappedLocations = Array.from(
+          new Set(
+            mappings
+              .map((mapping) =>
+                mapping.projectLocationProductQuantity?.location_name?.trim(),
+              )
+              .filter(Boolean),
+          ),
+        ).join(", ");
+
+        const packingLocation =
+          mappedLocations ||
+          findBoxInfoValue(boxInfoValues, [
+            "packing location",
+            "packing_location",
+            "location",
+            "location_name",
+            "location name",
+          ]) ||
+          "";
+
+        const floorValue =
+          findBoxInfoValue(boxInfoValues, [
+            "floor",
+            "floor_name",
+            "floor name",
+          ]) || "";
+
+        const hasBothLocations = Boolean(
+          packingLocation &&
+          floorValue &&
+          packingLocation.toLowerCase() !== floorValue.toLowerCase(),
+        );
+
+        const isCustomGroupPacking =
+          String(project.packing_type || "")
+            .trim()
+            .replace(/[\s_-]/g, "")
+            .toUpperCase() === "CUSTOMGROUP";
+
+        const locationLabel = hasBothLocations
+          ? "LOCATION / FLOOR"
+          : packingLocation || isCustomGroupPacking
+            ? "LOCATION"
+            : "FLOOR";
+
+        const locationDisplayValue = hasBothLocations
+          ? `${packingLocation} / ${floorValue}`
+          : packingLocation || floorValue || "-";
+
         return {
           ...box,
 
@@ -5808,12 +5922,11 @@ export const generateProjectFullReportService = async (
 
           product_name: resolveProductName(items),
 
-          floor_name:
-            findBoxInfoValue(boxInfoValues, [
-              "floor",
-              "floor_name",
-              "floor name",
-            ]) || "-",
+          location_label: locationLabel,
+
+          location_value: locationDisplayValue,
+
+          floor_name: locationDisplayValue,
 
           item_no:
             Array.from(
@@ -6352,11 +6465,11 @@ export const generateProjectFullReportService = async (
                   <div class="info-row row-3col">
                     <div class="info-cell">
                       <div class="field-label">
-                        FLOOR
+                        ${box.location_label}
                       </div>
 
-                      <div class="field-value">
-                        ${escapeHtml(box.floor_name)}
+                      <div class="field-value field-value-location">
+                        ${escapeHtml(box.location_value)}
                       </div>
                     </div>
 
@@ -6481,7 +6594,7 @@ export const generateProjectFullReportService = async (
                         </td>
 
                         <td class="total-cell">
-                          ${box.total_weight.toFixed(2)}KG
+                          ${box.total_weight.toFixed(2)} KG
                         </td>
                       </tr>
                     </tfoot>
@@ -6808,11 +6921,19 @@ padding-top:25px;
 }
 
 .row-2col {
-  grid-template-columns: 62% 38%;
+  grid-template-columns: 62fr 38fr;
 }
 
 .row-3col {
-  grid-template-columns: 30% 40% 30%;
+  grid-template-columns: 28fr 36fr 36fr;
+}
+
+.row-3col .field-label {
+  white-space: nowrap;
+}
+
+.row-3col .info-cell:nth-child(3) {
+  padding-left: 3mm;
 }
 
 .info-cell {
@@ -6827,7 +6948,7 @@ padding-top:25px;
 .field-label {
   color: #64748b;
   font-size: 7.5pt;
-  line-height: 6px;
+  line-height: 1.25;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05px;
@@ -6837,7 +6958,7 @@ padding-top:25px;
 .field-value {
   color: #111827;
   font-size: 8px !important;
-  line-height: 8px;
+  line-height: 1.25;
   font-weight: 800;
   overflow-wrap: anywhere;
    margin-bottom: 0.5mm;
@@ -6845,6 +6966,13 @@ padding-top:25px;
 
 .filed-value-item-no {
   font-size: 18px !important;
+  line-height: 1.2;
+}
+
+.field-value-location {
+  font-size: 13px !important;
+  font-weight: 800;
+  text-transform: uppercase;
   line-height: 1.2;
 }
 
@@ -6926,7 +7054,7 @@ color: #111827;
 }
 
 .col-component {
-  width: 55%;
+  width: 51%;
 }
 
 .col-qty {
@@ -6934,11 +7062,11 @@ color: #111827;
 }
 
 .col-unit {
-  width: 12%;
+  width: 13%;
 }
 
 .col-total {
-  width: 14%;
+  width: 17%;
 }
 
 .component-table th {
@@ -7031,15 +7159,17 @@ color: #111827;
   border-left: 1px solid #111827 !important;
   border-right: 1px solid #111827 !important;
   border-bottom: 1px solid #111827;
+  white-space: nowrap;
 }
 
 .component-table tfoot td {
   background: #fff;
   border: 1px solid #111827;
   font-size: 8px !important;
-  line-height: 5.8px;
+  line-height: 1.2;
   font-weight: 800;
-  padding: 1mm 0.65mm;
+  padding: 1mm 0.5mm;
+  white-space: nowrap;
 }
 
 .total-title {
