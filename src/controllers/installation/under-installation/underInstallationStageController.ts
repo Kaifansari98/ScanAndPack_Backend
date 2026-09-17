@@ -1967,6 +1967,46 @@ export class UnderInstallationStageController {
     }
   }
 
+  async deleteMiscellaneousEntry(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+      const miscId = Number(req.params.miscId);
+
+      const authUser = (req as any).user;
+      const deleted_by = Number(
+        req.body?.deleted_by || req.query?.deleted_by || authUser?.id,
+      );
+
+      if (!deleted_by) {
+        return res.status(400).json({
+          success: false,
+          error: "deleted_by (userId) is required",
+        });
+      }
+
+      const result =
+        await UnderInstallationStageService.deleteMiscellaneousService({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          misc_id: miscId,
+          deleted_by,
+        });
+
+      return res.status(200).json({
+        success: true,
+        message: "Miscellaneous entry deleted successfully",
+        data: result,
+      });
+    } catch (err: any) {
+      console.error("❌ Error in deleteMiscellaneousEntry:", err.message);
+      return res.status(err.statusCode || 500).json({
+        success: false,
+        error: err.message || "Something went wrong",
+      });
+    }
+  }
+
   async resolveMiscellaneousEntry(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

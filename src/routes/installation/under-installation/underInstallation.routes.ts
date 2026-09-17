@@ -260,6 +260,16 @@ underInstallationStageRoutes.get(
   controller.checkLeadReadyForFinalHandover,
 );
 
+/** ✅ DELETE → Delete Miscellaneous Entry (Super-Admin only) */
+underInstallationStageRoutes.delete(
+  "/vendorId/:vendorId/leadId/:leadId/misc/:miscId",
+  controller.deleteMiscellaneousEntry,
+);
+underInstallationStageRoutes.delete(
+  "/vendorId/:vendorId/leadId/:leadId/miscId/:miscId",
+  controller.deleteMiscellaneousEntry,
+);
+
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/resolve",
   controller.resolveMiscellaneousEntry,
