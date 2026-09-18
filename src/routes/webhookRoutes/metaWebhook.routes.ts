@@ -7,11 +7,6 @@ const router = Router();
 router.route("/metawebhook")
   .get(metaWebhookController.handleGet)
   .post(metaWebhookController.handleGet);
-
-router.route("/webhook")
-  .get(metaWebhookController.handleGet)
-  .post(metaWebhookController.handleWebhook);
-
 // Records dekhne ke liye optional endpoints
 router.get("/metawebhook/list", metaWebhookController.getWebhookPayloads);
 router.get("/metawebhook/payloads", metaWebhookController.getWebhookPayloads);

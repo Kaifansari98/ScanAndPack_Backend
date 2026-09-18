@@ -38,7 +38,8 @@ export type BoxInfoFieldType = (typeof BoxInfoFieldType)[keyof typeof BoxInfoFie
 
 export const PackingType = {
   DEFAULT: 'DEFAULT',
-  GROUPWISE: 'GROUPWISE'
+  GROUPWISE: 'GROUPWISE',
+  CUSTOM_GROUP: 'CUSTOM_GROUP'
 } as const
 
 export type PackingType = (typeof PackingType)[keyof typeof PackingType]
@@ -723,6 +724,10 @@ export const RuleOperator = {
   NOT_EQUALS: 'NOT_EQUALS',
   CONTAINS: 'CONTAINS',
   NOT_CONTAINS: 'NOT_CONTAINS',
+  STARTS_WITH: 'STARTS_WITH',
+  ENDS_WITH: 'ENDS_WITH',
+  IS_BLANK: 'IS_BLANK',
+  IS_NOT_BLANK: 'IS_NOT_BLANK',
   LESS_THAN: 'LESS_THAN',
   LESS_THAN_OR_EQUAL: 'LESS_THAN_OR_EQUAL',
   GREATER_THAN: 'GREATER_THAN',

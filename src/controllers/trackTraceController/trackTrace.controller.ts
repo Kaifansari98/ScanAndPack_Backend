@@ -24,6 +24,7 @@ interface TrackTracePayload {
   unique_code: string;
   created_by: number;
   box_id?: number;
+  location_name?: string;
 }
 export const scan_item_old = async (req: Request, res: Response) => {
   console.log("Query params:", req.body);
@@ -61,6 +62,10 @@ export const scan_item = async (_req: Request, res: Response) => {
       unique_code: String(_req.body.unique_code),
       created_by: Number(_req.body.created_by),
       box_id: _req.body.box_id ? Number(_req.body.box_id) : undefined,
+      location_name:
+        typeof _req.body.location_name === "string"
+          ? _req.body.location_name.trim() || undefined
+          : undefined,
     };
 
     const serviceResponse = await trackTraceService.updateScannedItem(
@@ -79,7 +84,7 @@ export const scan_item = async (_req: Request, res: Response) => {
       .status(200)
       .json(
         ApiResponse.success(
-          serviceResponse?.status,
+          serviceResponse?.data,
           serviceResponse?.message,
           200,
         ),
@@ -102,6 +107,10 @@ export const scan_machine_item = async (req: Request, res: Response) => {
       ? Number(req.body.project_id)
       : undefined;
     const box_id = req.body.box_id ? Number(req.body.box_id) : undefined;
+    const location_name =
+      typeof req.body.location_name === "string"
+        ? req.body.location_name.trim()
+        : undefined;
     const unique_code =
       typeof req.body.unique_code === "string"
         ? req.body.unique_code.trim()
@@ -149,6 +158,16 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         .json(ApiResponse.validationError("Valid box_id is required"));
     }
 
+    if (location_name && location_name.length > 200) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.validationError(
+            "location_name must not exceed 200 characters",
+          ),
+        );
+    }
+
     const machine = await prisma.machineMaster.findFirst({
       where: {
         id: machine_id,
@@ -166,50 +185,44 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         .json(ApiResponse.validationError("Active machine not found"));
     }
 
-    if (machine.machine_type_id === 18 && (!project_id || !box_id)) {
-      return res
-        .status(400)
-        .json(
-          ApiResponse.validationError(
-            "project_id and box_id are required for packaging scans",
-          ),
-        );
-    }
+    let packagingRequiresBox = false;
+    let packagingLocationName: string | undefined;
 
     if (machine.machine_type_id === 18) {
-      const selectedBox = await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id!,
-          vendor_id,
-          project_id: project_id!,
-          is_deleted: false,
-          box_status: "unpacked",
-        },
-        select: {
-          id: true,
-          project: {
-            select: {
-              isDeleted: true,
-              project_status: true,
-            },
-          },
-        },
-      });
-
-      if (!selectedBox) {
+      if (!project_id) {
         return res
           .status(400)
           .json(
             ApiResponse.validationError(
-              "Select an unpacked box from the selected project",
+              "project_id is required for packaging scans",
             ),
           );
       }
 
+      const selectedProject = await prisma.projectMaster.findFirst({
+        where: {
+          id: project_id,
+          vendor_id,
+          isDeleted: false,
+        },
+        select: {
+          packing_type: true,
+          project_status: true,
+          is_multi_location: true,
+        },
+      });
+
+      if (!selectedProject) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError("The selected project is unavailable"),
+          );
+      }
+
       if (
-        selectedBox.project.isDeleted ||
         ["deactivated", "deleted", "deactive", "inactive"].includes(
-          (selectedBox.project.project_status || "").toLocaleLowerCase(),
+          (selectedProject.project_status || "").toLocaleLowerCase(),
         )
       ) {
         return res
@@ -219,6 +232,57 @@ export const scan_machine_item = async (req: Request, res: Response) => {
               "The selected project is deleted or deactivated",
             ),
           );
+      }
+
+      packagingRequiresBox = selectedProject.packing_type !== "CUSTOM_GROUP";
+
+      if (location_name && !selectedProject.is_multi_location) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "Location cannot be selected because Multi Location is not enabled for this project",
+            ),
+          );
+      }
+
+      packagingLocationName = selectedProject.is_multi_location
+        ? location_name
+        : undefined;
+
+      if (packagingRequiresBox && !box_id) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "box_id is required for this project's packing type",
+            ),
+          );
+      }
+
+      if (packagingRequiresBox) {
+        const selectedBox = await prisma.boxMaster.findFirst({
+          where: {
+            id: box_id!,
+            vendor_id,
+            project_id,
+            is_deleted: false,
+            box_status: "unpacked",
+          },
+          select: {
+            id: true,
+          },
+        });
+
+        if (!selectedBox) {
+          return res
+            .status(400)
+            .json(
+              ApiResponse.validationError(
+                "Select an unpacked box from the selected project",
+              ),
+            );
+        }
       }
     }
 
@@ -230,7 +294,14 @@ export const scan_machine_item = async (req: Request, res: Response) => {
         machine_id,
         unique_code,
         created_by,
-        box_id: machine.machine_type_id === 18 ? box_id : undefined,
+        box_id:
+          machine.machine_type_id === 18 && packagingRequiresBox
+            ? box_id
+            : undefined,
+        location_name:
+          machine.machine_type_id === 18
+            ? packagingLocationName
+            : undefined,
       },
       false,
     );

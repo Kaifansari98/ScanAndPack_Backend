@@ -61,6 +61,7 @@ export const ModelName = {
   UserSession: 'UserSession',
   UserPrivilegeMapping: 'UserPrivilegeMapping',
   ProjectMaster: 'ProjectMaster',
+  ProjectLocationProductQuantity: 'ProjectLocationProductQuantity',
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
   BoxMaster: 'BoxMaster',
@@ -484,6 +485,7 @@ export const ProjectMasterScalarFieldEnum = {
   updated_at: 'updated_at',
   updated_by: 'updated_by',
   packing_type: 'packing_type',
+  is_multi_location: 'is_multi_location',
   no_of_boxes: 'no_of_boxes',
   isDeleted: 'isDeleted',
   deleted_by: 'deleted_by',
@@ -492,6 +494,20 @@ export const ProjectMasterScalarFieldEnum = {
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
+
+
+export const ProjectLocationProductQuantityScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  location_name: 'location_name',
+  group_name: 'group_name',
+  qty: 'qty',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectLocationProductQuantityScalarFieldEnum = (typeof ProjectLocationProductQuantityScalarFieldEnum)[keyof typeof ProjectLocationProductQuantityScalarFieldEnum]
 
 
 export const ProjectDetailsScalarFieldEnum = {
@@ -549,7 +565,14 @@ export const BoxMasterScalarFieldEnum = {
   site_in_at: 'site_in_at',
   site_in_by: 'site_in_by',
   packed_at: 'packed_at',
-  packed_by: 'packed_by'
+  packed_by: 'packed_by',
+  sequence_no: 'sequence_no',
+  product_group_name: 'product_group_name',
+  packing_group_name: 'packing_group_name',
+  product_set_no: 'product_set_no',
+  box_position: 'box_position',
+  boxes_per_product: 'boxes_per_product',
+  is_auto_created: 'is_auto_created'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -2411,7 +2434,9 @@ export const CutListScalarFieldEnum = {
   category_id: 'category_id',
   use_in_assembled_packing: 'use_in_assembled_packing',
   include_in_packing: 'include_in_packing',
-  scan_pack_validate: 'scan_pack_validate'
+  scan_pack_validate: 'scan_pack_validate',
+  custom_packing_group: 'custom_packing_group',
+  no_of_qty_in_boxes: 'no_of_qty_in_boxes'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -2442,6 +2467,7 @@ export const CutListMachineMappingScalarFieldEnum = {
   qty: 'qty',
   received_qty: 'received_qty',
   row_created_source: 'row_created_source',
+  project_location_product_quantity_id: 'project_location_product_quantity_id',
   rule_id: 'rule_id'
 } as const
 
