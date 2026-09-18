@@ -12,6 +12,12 @@ export class MetaWebhookController {
     try {
       const mode = req.query["hub.mode"] as string;
 
+      await prisma.metaWebhook.create({
+            data: {
+              data: req.query ?? {},
+            },
+          });
+
       // Meta Handshake Verification
       if (mode === "subscribe") {
         const token = req.query["hub.verify_token"] as string;
@@ -37,13 +43,17 @@ export class MetaWebhookController {
           });
           return res.status(200).send(challenge);
         } else {
+          await prisma.metaWebhook.create({
+            data: {
+              data: req.query ?? {},
+            },
+          });
           logger.warn(
             `[META WEBHOOK] Handshake verification failed. Received token: ${token}, Expected: ${configuredToken}`
           );
           return res.status(403).send("Forbidden: Verification token mismatch");
         }
       }
-
       // GET request ka incoming data (query params ya body) table me save karein
       let incomingData: any = {};
       const hasQuery = req.query && Object.keys(req.query).length > 0;
