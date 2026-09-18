@@ -15,6 +15,7 @@ import {
   QRParam,
 } from "../../../src/types/track-trace";
 import { generateCutListLabelsPDF } from "../../utils/cutlist-label-generator";
+import { prisma } from "../../prisma/client";
 
 interface TrackTracePayload {
   project_id: number;
@@ -23,6 +24,7 @@ interface TrackTracePayload {
   unique_code: string;
   created_by: number;
   box_id?: number;
+  location_name?: string;
 }
 export const scan_item_old = async (req: Request, res: Response) => {
   console.log("Query params:", req.body);
@@ -60,6 +62,10 @@ export const scan_item = async (_req: Request, res: Response) => {
       unique_code: String(_req.body.unique_code),
       created_by: Number(_req.body.created_by),
       box_id: _req.body.box_id ? Number(_req.body.box_id) : undefined,
+      location_name:
+        typeof _req.body.location_name === "string"
+          ? _req.body.location_name.trim() || undefined
+          : undefined,
     };
 
     const serviceResponse = await trackTraceService.updateScannedItem(
@@ -78,7 +84,7 @@ export const scan_item = async (_req: Request, res: Response) => {
       .status(200)
       .json(
         ApiResponse.success(
-          serviceResponse?.status,
+          serviceResponse?.data,
           serviceResponse?.message,
           200,
         ),
@@ -89,6 +95,237 @@ export const scan_item = async (_req: Request, res: Response) => {
     files.forEach((file) => {
       if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
     });
+  }
+};
+
+export const scan_machine_item = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.body.vendor_id);
+    const machine_id = Number(req.body.machine_id);
+    const created_by = Number(req.body.created_by);
+    const project_id = req.body.project_id
+      ? Number(req.body.project_id)
+      : undefined;
+    const box_id = req.body.box_id ? Number(req.body.box_id) : undefined;
+    const location_name =
+      typeof req.body.location_name === "string"
+        ? req.body.location_name.trim()
+        : undefined;
+    const unique_code =
+      typeof req.body.unique_code === "string"
+        ? req.body.unique_code.trim()
+        : "";
+
+    if (!Number.isInteger(vendor_id) || vendor_id <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid vendor_id is required"));
+    }
+
+    if (!Number.isInteger(machine_id) || machine_id <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid machine_id is required"));
+    }
+
+    if (!Number.isInteger(created_by) || created_by <= 0) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid created_by is required"));
+    }
+
+    if (!unique_code) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("unique_code is required"));
+    }
+
+    if (
+      project_id !== undefined &&
+      (!Number.isInteger(project_id) || project_id <= 0)
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid project_id is required"));
+    }
+
+    if (
+      box_id !== undefined &&
+      (!Number.isInteger(box_id) || box_id <= 0)
+    ) {
+      return res
+        .status(400)
+        .json(ApiResponse.validationError("Valid box_id is required"));
+    }
+
+    if (location_name && location_name.length > 200) {
+      return res
+        .status(400)
+        .json(
+          ApiResponse.validationError(
+            "location_name must not exceed 200 characters",
+          ),
+        );
+    }
+
+    const machine = await prisma.machineMaster.findFirst({
+      where: {
+        id: machine_id,
+        vendor_id,
+        status: "ACTIVE",
+      },
+      select: {
+        machine_type_id: true,
+      },
+    });
+
+    if (!machine) {
+      return res
+        .status(404)
+        .json(ApiResponse.validationError("Active machine not found"));
+    }
+
+    let packagingRequiresBox = false;
+    let packagingLocationName: string | undefined;
+
+    if (machine.machine_type_id === 18) {
+      if (!project_id) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "project_id is required for packaging scans",
+            ),
+          );
+      }
+
+      const selectedProject = await prisma.projectMaster.findFirst({
+        where: {
+          id: project_id,
+          vendor_id,
+          isDeleted: false,
+        },
+        select: {
+          packing_type: true,
+          project_status: true,
+          is_multi_location: true,
+        },
+      });
+
+      if (!selectedProject) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError("The selected project is unavailable"),
+          );
+      }
+
+      if (
+        ["deactivated", "deleted", "deactive", "inactive"].includes(
+          (selectedProject.project_status || "").toLocaleLowerCase(),
+        )
+      ) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "The selected project is deleted or deactivated",
+            ),
+          );
+      }
+
+      packagingRequiresBox = selectedProject.packing_type !== "CUSTOM_GROUP";
+
+      if (location_name && !selectedProject.is_multi_location) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "Location cannot be selected because Multi Location is not enabled for this project",
+            ),
+          );
+      }
+
+      packagingLocationName = selectedProject.is_multi_location
+        ? location_name
+        : undefined;
+
+      if (packagingRequiresBox && !box_id) {
+        return res
+          .status(400)
+          .json(
+            ApiResponse.validationError(
+              "box_id is required for this project's packing type",
+            ),
+          );
+      }
+
+      if (packagingRequiresBox) {
+        const selectedBox = await prisma.boxMaster.findFirst({
+          where: {
+            id: box_id!,
+            vendor_id,
+            project_id,
+            is_deleted: false,
+            box_status: "unpacked",
+          },
+          select: {
+            id: true,
+          },
+        });
+
+        if (!selectedBox) {
+          return res
+            .status(400)
+            .json(
+              ApiResponse.validationError(
+                "Select an unpacked box from the selected project",
+              ),
+            );
+        }
+      }
+    }
+
+    const serviceResponse = await trackTraceService.updateScannedItem(
+      {
+        // Non-packaging machines retain the vendor-wide scanner behavior.
+        project_id: machine.machine_type_id === 18 ? project_id! : 0,
+        vendor_id,
+        machine_id,
+        unique_code,
+        created_by,
+        box_id:
+          machine.machine_type_id === 18 && packagingRequiresBox
+            ? box_id
+            : undefined,
+        location_name:
+          machine.machine_type_id === 18
+            ? packagingLocationName
+            : undefined,
+      },
+      false,
+    );
+
+    if (serviceResponse.status == 0) {
+      return res
+        .status(200)
+        .json(ApiResponse.error(serviceResponse.message, 422));
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          serviceResponse.data,
+          serviceResponse.message,
+          200,
+        ),
+      );
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error ? error.message : "Failed to scan item";
+
+    return res.status(500).json(ApiResponse.error(message, 500));
   }
 };
 

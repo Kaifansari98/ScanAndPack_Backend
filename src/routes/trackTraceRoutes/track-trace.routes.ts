@@ -86,6 +86,7 @@ import {
 
 import {
   scan_item,
+  scan_machine_item,
   check_item,
   get_defect,
   mark_Defect,
@@ -108,6 +109,7 @@ router.patch(
 );
 
 router.post("/scan/item", uploadDisk.array("photos[]", 10), scan_item);
+router.post("/scan/machine-item", scan_machine_item);
 // router.post('/scan/item', scan_item);
 router.post("/scan/check-item", check_item);
 
