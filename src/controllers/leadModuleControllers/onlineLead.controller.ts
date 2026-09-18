@@ -18,6 +18,13 @@ import {
 } from "../../services/email/brevoEmail2.service";
 import { createLeadLog } from "../../utils/leadDetailedLog";
 import { AuthService } from "../../services/auth/auth.service";
+import {
+  createOrUpdateOnlineLead,
+  generateOnlineLeadCode as generateCodeHelper,
+  ensureDefaultStatuses,
+} from "../../services/leadModuleServices/onlineLead.service";
+
+export { ensureDefaultStatuses };
 
 const authService = new AuthService();
 
@@ -232,133 +239,18 @@ const mapOnlineLeadToFrontend = (lead: any) => {
   };
 };
 
-export const ensureDefaultStatuses = async (vendorId: number) => {
-  const defaultStatuses = [
-    { name: "Pending", required: true },
-    { name: "Follow Up Done", required: true },
-    { name: "Store Assigned", required: true },
-    { name: "Store Visit Done", required: false },
-    { name: "Lost", required: false },
-  ];
-
-  for (const status of defaultStatuses) {
-    const existing = await prisma.online_lead_followup_status.findFirst({
-      where: {
-        vendor_id: vendorId,
-        status_name: { equals: status.name, mode: "insensitive" },
-      },
-    });
-
-    if (!existing) {
-      await prisma.online_lead_followup_status.create({
-        data: {
-          vendor_id: vendorId,
-          status_name: status.name,
-          followup_required: status.required,
-          is_active: true,
-          updated_at: new Date(),
-        },
-      });
-    } else if (!existing.is_active) {
-      await prisma.online_lead_followup_status.update({
-        where: { id: existing.id },
-        data: { is_active: true },
-      });
-    }
-  }
-};
-
 export class OnlineLeadController {
   private async generateOnlineLeadCode(
     tx: any,
     vendorId: number,
   ): Promise<string> {
-    await tx.$queryRawUnsafe(
-      `SELECT id FROM "VendorMaster" WHERE id = $1 FOR UPDATE`,
-      vendorId,
-    );
-
-    const vendor = await tx.vendorMaster.findUnique({
-      where: { id: vendorId },
-      select: { online_leads_lead_code: true },
-    });
-
-    const prefix = String(vendor?.online_leads_lead_code ?? "")
-      .trim()
-      .toUpperCase();
-
-    if (!prefix) {
-      throw new Error(
-        "VendorMaster online_leads_lead_code is not configured for this vendor.",
-      );
-    }
-
-    const lastOnlineLead = await tx.online_leads.findFirst({
-      where: {
-        vendor_id: vendorId,
-        lead_code: {
-          startsWith: `${prefix}-`,
-        },
-      },
-      orderBy: [{ created_at: "desc" }, { id: "desc" }],
-      select: {
-        lead_code: true,
-      },
-    });
-
-    const lastSequenceMatch = lastOnlineLead?.lead_code?.match(/-(\d+)$/);
-    let nextNumber = lastSequenceMatch
-      ? parseInt(lastSequenceMatch[1], 10) + 1
-      : 1;
-
-    let generatedCode = `${prefix}-${nextNumber}`;
-
-    let exists = true;
-    while (exists) {
-      const existingOnlineLead = await tx.online_leads.findFirst({
-        where: {
-          vendor_id: vendorId,
-          lead_code: generatedCode,
-        },
-        select: { id: true },
-      });
-
-      if (!existingOnlineLead) {
-        exists = false;
-      } else {
-        nextNumber += 1;
-        generatedCode = `${prefix}-${nextNumber}`;
-      }
-    }
-
-    return generatedCode;
+    return generateCodeHelper(tx, vendorId);
   }
 
   // 1. Create Lead from API / Integration (ONLINE)
   createOnlineLead = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const {
-        vendor_id,
-        leads_name,
-        email,
-        contact,
-        source,
-        remark,
-        firstname,
-        lastname,
-        alt_contact_no,
-        site_address,
-        site_type_id,
-        source_id,
-        refered_by,
-        archetech_name,
-        archetech_number,
-        priority,
-        city,
-        product_types,
-        product_structures,
-        store_id,
-      } = req.body;
+      const { vendor_id, leads_name, contact, source } = req.body;
 
       if (!vendor_id || !leads_name || !contact || !source) {
         return res.status(400).json({
@@ -367,127 +259,7 @@ export class OnlineLeadController {
         });
       }
 
-      const cleanContact = String(contact).replace(/\D/g, "");
-      if (cleanContact.length < 10) {
-        return res.status(400).json({
-          success: false,
-          error: "Contact number must be at least 10 digits",
-        });
-      }
-
-      // Find initial status (e.g., Interested or Call Disconnected or look for a default like "New Lead")
-      // We will look for an active status for this vendor, if none found, we use a placeholder or create one.
-      await ensureDefaultStatuses(Number(vendor_id));
-      let defaultStatus = await prisma.online_lead_followup_status.findFirst({
-        where: {
-          vendor_id: Number(vendor_id),
-          is_active: true,
-        },
-      });
-
-      const lead = await prisma.$transaction(async (tx) => {
-        const contact10 =
-          cleanContact.length > 10 && cleanContact.startsWith("91")
-            ? cleanContact.slice(-10)
-            : cleanContact;
-        const existingOnlineLead = await tx.online_leads.findFirst({
-          where: {
-            vendor_id: Number(vendor_id),
-            OR: [
-              { contact: contact },
-              { contact: cleanContact },
-              { contact: contact10 },
-              { contact: `91${contact10}` },
-            ],
-          },
-        });
-
-        if (existingOnlineLead) {
-          const existingTypes = Array.isArray(existingOnlineLead.product_types)
-            ? existingOnlineLead.product_types
-            : [];
-          const existingStructs = Array.isArray(
-            existingOnlineLead.product_structures,
-          )
-            ? existingOnlineLead.product_structures
-            : [];
-          const newTypes = Array.isArray(product_types) ? product_types : [];
-          const newStructs = Array.isArray(product_structures)
-            ? product_structures
-            : [];
-
-          const combinedTypes = Array.from(
-            new Set([...existingTypes, ...newTypes].map(String)),
-          ).filter(Boolean);
-          const combinedStructs = Array.from(
-            new Set([...existingStructs, ...newStructs].map(String)),
-          ).filter(Boolean);
-
-          return await tx.online_leads.update({
-            where: { id: existingOnlineLead.id },
-            data: {
-              leads_name: leads_name || existingOnlineLead.leads_name,
-              email: email || existingOnlineLead.email,
-              remark: remark
-                ? `${existingOnlineLead.remark || ""}\n${remark.trim()}`.trim()
-                : existingOnlineLead.remark,
-              city: city || existingOnlineLead.city,
-              product_types: combinedTypes,
-              product_structures: combinedStructs,
-              updated_at: new Date(),
-            },
-          });
-        }
-
-        const generatedCode = await this.generateOnlineLeadCode(
-          tx,
-          Number(vendor_id),
-        );
-
-        return await tx.online_leads.create({
-          data: {
-            vendor_id: Number(vendor_id),
-            leads_name,
-            lead_code: generatedCode,
-            email: email || null,
-            contact,
-            source,
-            lead_entry_type: LeadEntryType.ONLINE,
-            remark: remark ? remark.trim() : "-",
-            status: defaultStatus?.id || null,
-            store_id: store_id ? Number(store_id) : null,
-            updated_at: new Date(),
-            firstname: firstname || null,
-            lastname: lastname || null,
-            alt_contact_no: alt_contact_no || null,
-            site_address: site_address || null,
-            site_type_id: site_type_id ? Number(site_type_id) : null,
-            source_id: source_id ? Number(source_id) : null,
-            refered_by: refered_by || null,
-            archetech_name: archetech_name || null,
-            archetech_number: archetech_number || null,
-            priority: priority || null,
-            city: city || null,
-            product_types: Array.isArray(product_types) ? product_types : [],
-            product_structures: Array.isArray(product_structures)
-              ? product_structures
-              : [],
-          },
-        });
-      });
-
-      // Create history entry
-      if (defaultStatus) {
-        await prisma.online_lead_history.create({
-          data: {
-            vendor_id: Number(vendor_id),
-            online_lead_id: lead.id,
-            remark: remark || "Lead created from online source",
-            created_by: 1, // System / Admin placeholder ID for automated creation
-            online_lead_status_id: defaultStatus.id,
-          },
-        });
-      }
+      const { lead } = await createOrUpdateOnlineLead(req.body);
 
       return res.status(201).json({
         success: true,
@@ -495,7 +267,7 @@ export class OnlineLeadController {
       });
     } catch (error: any) {
       console.error("[ONLINE LEAD CONTROLLER] createOnlineLead error:", error);
-      return res.status(500).json({
+      return res.status(error.message?.includes("digits") ? 400 : 500).json({
         success: false,
         error: error.message || "Failed to create online lead",
       });

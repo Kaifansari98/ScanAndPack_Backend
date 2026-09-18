@@ -4287,9 +4287,40 @@ export const editTaskISMService = async (payload: EditTaskISMInput, baseUrl = "h
     const account_id = task.lead.account_id;
 
     const completedMisc = status === "completed" && task.status !== "completed" &&
-      ["Miscellaneous", "Pending Materials"].includes(task.task_type)
+      ["Miscellaneous", "Pending Materials", "Return Order Pickup Schedule", "Return Order Confirmation", "Return Material Handover"].includes(task.task_type)
       ? await resolveMiscTask(tx, vendor_id, task)
       : null;
+
+    if (
+      status === "completed" &&
+      task.status !== "completed" &&
+      completedMisc &&
+      (task.task_type === "Return Order Pickup Schedule" ||
+        (completedMisc.return_order_delivery_method === "PICKUP_SCHEDULE" && task.task_type === "Return Order Pickup Schedule"))
+    ) {
+      await UnderInstallationStageService.createReturnMaterialHandoverTaskOnPickupCompleted(
+        tx,
+        vendor_id,
+        task,
+        completedMisc,
+        closed_by ?? updated_by,
+      );
+    }
+
+    if (
+      status === "completed" &&
+      task.status !== "completed" &&
+      completedMisc &&
+      completedMisc.return_order_delivery_method === "PICKUP_SCHEDULE" &&
+      task.task_type === "Return Material Handover"
+    ) {
+      await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
+        tx,
+        vendor_id,
+        completedMisc,
+        closed_by ?? updated_by,
+      );
+    }
 
     const updateData: any = {
       updated_by,
@@ -4426,18 +4457,36 @@ export const editTaskISMService = async (payload: EditTaskISMInput, baseUrl = "h
       updated_by,
     });
 
-    return { updatedTask, miscId: completedMisc?.id };
+    return { updatedTask, miscId: completedMisc?.id, taskType: task.task_type };
   });
 
   if (result.miscId) {
-    await UnderInstallationStageService.notifyMiscTaskReady({
-      vendor_id: result.updatedTask.vendor_id,
-      lead_id,
-      misc_id: result.miscId,
-      ready_by: closed_by ?? updated_by,
-      taskId: result.updatedTask.id,
-      baseUrl,
-    });
+    if (result.taskType === "Return Order Pickup Schedule") {
+      await UnderInstallationStageService.notifyReturnOrderPickupCompleted({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        completed_by: closed_by ?? updated_by,
+        baseUrl,
+      });
+    } else if (result.taskType === "Return Material Handover") {
+      await UnderInstallationStageService.notifyReturnOrderHandoverCompleted({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        returned_by: closed_by ?? updated_by,
+        baseUrl,
+      });
+    } else {
+      await UnderInstallationStageService.notifyMiscTaskReady({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        ready_by: closed_by ?? updated_by,
+        taskId: result.updatedTask.id,
+        baseUrl,
+      });
+    }
   }
   return result.updatedTask;
 };

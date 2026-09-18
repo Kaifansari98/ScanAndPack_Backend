@@ -346,7 +346,10 @@ export class OrderLoginController {
 
       const actor = (req as any).user;
       if (actor?.vendor_id !== Number(vendorId)) return res.status(403).json({ message: "Vendor access denied" });
-      const lead = await prisma.leadMaster.findFirst({ where: { id: Number(leadId), vendor_id: Number(vendorId), ...(actor.franchise_id ? { franchise_id: actor.franchise_id } : {}) } });
+      // Production uploads are vendor-scoped; the user may belong to another franchise.
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: Number(leadId), vendor_id: Number(vendorId) },
+      });
       if (!lead) return res.status(404).json({ message: "Lead not found" });
       let materials: { rows: any[]; replace: boolean } | undefined;
       if (req.body.material_rows) {

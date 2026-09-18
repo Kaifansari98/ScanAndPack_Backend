@@ -65,13 +65,29 @@ export const LEAD_POOL_TEMPLATE_KEYS = {
   LEAD_REJECTED_BY_SALES_EXECUTIVE: "LEAD_REJECTED_BY_SALES_EXECUTIVE",
 };
 
+export const RETURN_ORDER_TEMPLATE_KEYS = {
+  RETURN_ORDER_REQUEST_APPROVED_FACTORY: "RETURN_ORDER_REQUEST_APPROVED_FACTORY",
+  RETURN_ORDER_APPROVED_FACTORY: "RETURN_ORDER_APPROVED_FACTORY",
+  RETURN_ORDER_PICKUP_CONFIRMED_FACTORY: "RETURN_ORDER_PICKUP_CONFIRMED_FACTORY",
+  RETURN_ORDER_PICKUP_SCHEDULED_SUPERVISOR: "RETURN_ORDER_PICKUP_SCHEDULED_SUPERVISOR",
+};
+
 const renderTemplate = (template: string, values: Record<string, string>) => {
-  return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, key) => {
-    return Object.prototype.hasOwnProperty.call(values, key)
-      ? values[key]
-      : match;
+  return template.replace(/{{\s*([^}]+)\s*}}/g, (match, rawKey) => {
+    const key = rawKey.trim();
+    if (Object.prototype.hasOwnProperty.call(values, key)) {
+      return values[key];
+    }
+    const normalizedKey = key.toLowerCase().replace(/[\s\-_–—]+/g, "");
+    for (const [vKey, vVal] of Object.entries(values)) {
+      if (vKey.toLowerCase().replace(/[\s\-_–—]+/g, "") === normalizedKey) {
+        return vVal;
+      }
+    }
+    return match;
   });
 };
+
 
 //  backend user email
 // 2
@@ -6076,6 +6092,722 @@ export const sendLeadRejectedBySalesExecutiveEmail = async (
     identity,
   );
 };
+
+// ============================================================================
+// Return Order Request - Approved by Miscellaneous User -> Notification to Factory User
+// ============================================================================
+export type ReturnOrderRequestApprovedFactoryEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  factoryUserName?: string | null;
+  leadCode: string;
+  leadName: string;
+  miscellaneousUserName: string;
+  returnOrderUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendReturnOrderRequestApprovedFactoryEmail = async (
+  payload: ReturnOrderRequestApprovedFactoryEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const factoryUser = (
+    payload.factoryUserName ||
+    payload.toName ||
+    "Factory User"
+  ).trim();
+  const leadLabel = `${payload.leadCode} - ${payload.leadName}`;
+  const targetUrl =
+    payload.returnOrderUrl || payload.projectUrl || payload.ctaLink || "";
+
+  const defaultSubject = `Return Order Request Approved - ${payload.leadCode} – ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${factoryUser},`,
+    "",
+    `The Return Order request for ${leadLabel} has been approved by ${payload.miscellaneousUserName}.`,
+    "",
+    "Please review the return order details and proceed with the required action.",
+    "",
+    targetUrl ? `View Return Order: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Return Order Request Approved</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${factoryUser},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Return Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by <strong>${payload.miscellaneousUserName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the return order details and proceed with the required action.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.miscellaneousUserName}</div>
+        </div>
+      </div>
+
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:500;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Return Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues: Record<string, string> = {
+    "Factory User": factoryUser,
+    factoryUser,
+    factoryUserName: factoryUser,
+    toName: factoryUser,
+    "miscellaneous user name": payload.miscellaneousUserName,
+    miscellaneousUserName: payload.miscellaneousUserName,
+    "Lead Code": payload.leadCode,
+    "Lead Name": payload.leadName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    "Lead Code – Lead Name": `${payload.leadCode} – ${payload.leadName}`,
+    "Lead Code - Lead Name": leadLabel,
+    leadLabel,
+    returnOrderUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key:
+        RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_REQUEST_APPROVED_FACTORY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key:
+      RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_REQUEST_APPROVED_FACTORY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || factoryUser,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ============================================================================
+// Return Order Approved -> Notification to Factory User
+// ============================================================================
+export type ReturnOrderApprovedToFactoryEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  factoryUserName?: string | null;
+  leadCode: string;
+  leadName: string;
+  miscellaneousUserName?: string | null;
+  returnOrderUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendReturnOrderApprovedToFactoryEmail = async (
+  payload: ReturnOrderApprovedToFactoryEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const factoryUser = (
+    payload.factoryUserName ||
+    payload.toName ||
+    "Factory User"
+  ).trim();
+  const leadLabel = `${payload.leadCode} - ${payload.leadName}`;
+  const targetUrl =
+    payload.returnOrderUrl || payload.projectUrl || payload.ctaLink || "";
+
+  const defaultSubject = `Return Order Approved - ${payload.leadCode} – ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${factoryUser},`,
+    "",
+    `The Return Order for ${leadLabel} has been approved${payload.miscellaneousUserName ? ` by ${payload.miscellaneousUserName}` : ""}.`,
+    "",
+    "Please review the return order details and proceed with the required action.",
+    "",
+    targetUrl ? `View Return Order: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Return Order Approved</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${factoryUser},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Return Order for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved${payload.miscellaneousUserName ? ` by <strong>${payload.miscellaneousUserName}</strong>` : ""}.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the return order details and proceed with the required action.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        ${
+          payload.miscellaneousUserName
+            ? `<div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.miscellaneousUserName}</div>
+        </div>`
+            : ""
+        }
+      </div>
+
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:500;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Return Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues: Record<string, string> = {
+    "Factory User": factoryUser,
+    factoryUser,
+    factoryUserName: factoryUser,
+    toName: factoryUser,
+    "miscellaneous user name": payload.miscellaneousUserName || "",
+    miscellaneousUserName: payload.miscellaneousUserName || "",
+    "Lead Code": payload.leadCode,
+    "Lead Name": payload.leadName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    "Lead Code – Lead Name": `${payload.leadCode} – ${payload.leadName}`,
+    "Lead Code - Lead Name": leadLabel,
+    leadLabel,
+    returnOrderUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key:
+        RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_APPROVED_FACTORY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key:
+      RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_APPROVED_FACTORY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || factoryUser,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ============================================================================
+// Pick Up Confirmed Return Order - Site Supervisor Confirms Pick Up -> Factory User
+// ============================================================================
+export type ReturnOrderPickupConfirmedFactoryEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  factoryUserName?: string | null;
+  leadCode: string;
+  leadName: string;
+  siteSupervisorName?: string | null;
+  returnOrderUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendReturnOrderPickupConfirmedFactoryEmail = async (
+  payload: ReturnOrderPickupConfirmedFactoryEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const factoryUser = (
+    payload.factoryUserName ||
+    payload.toName ||
+    "Factory User"
+  ).trim();
+  const leadLabel = `${payload.leadCode} - ${payload.leadName}`;
+  const targetUrl =
+    payload.returnOrderUrl || payload.projectUrl || payload.ctaLink || "";
+
+  const defaultSubject = `Return Order Pick Up Completed – ${leadLabel}`;
+
+  const defaultText = [
+    `Hello ${factoryUser},`,
+    "",
+    `The Site Supervisor has confirmed that the Return Order items for ${leadLabel} have been picked up from the site.`,
+    "",
+    "Once the returned items reach the factory, please verify them and confirm that they have been received.",
+    "",
+    targetUrl ? `Confirm Return Order Receipt: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Return Order Pick Up Completed</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${factoryUser},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Site Supervisor has confirmed that the Return Order items for <strong>${payload.leadCode} - ${payload.leadName}</strong> have been picked up from the site.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Once the returned items reach the factory, please verify them and confirm that they have been received.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        ${
+          payload.siteSupervisorName
+            ? `<div class="lead-info-row">
+          <div class="lead-info-label">Site Supervisor</div>
+          <div class="lead-info-value">${payload.siteSupervisorName}</div>
+        </div>`
+            : ""
+        }
+      </div>
+
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:500;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Confirm Return Order Receipt
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues: Record<string, string> = {
+    "Factory User": factoryUser,
+    factoryUser,
+    factoryUserName: factoryUser,
+    toName: factoryUser,
+    "Lead Code": payload.leadCode,
+    "Lead Name": payload.leadName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    "Lead Code – Lead Name": `${payload.leadCode} – ${payload.leadName}`,
+    "Lead Code - Lead Name": leadLabel,
+    leadLabel,
+    "Site Supervisor": payload.siteSupervisorName || "Site Supervisor",
+    siteSupervisorName: payload.siteSupervisorName || "Site Supervisor",
+    returnOrderUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key:
+        RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_PICKUP_CONFIRMED_FACTORY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key:
+      RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_PICKUP_CONFIRMED_FACTORY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || factoryUser,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendReturnOrderPickupCompletedToFactoryEmail =
+  sendReturnOrderPickupConfirmedFactoryEmail;
+
+// ============================================================================
+// Return Order Pickup Scheduled - Factory Sets Pickup Date -> Site Supervisor
+// ============================================================================
+export type ReturnOrderPickupScheduledSupervisorEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  siteSupervisorName?: string | null;
+  leadCode: string;
+  leadName: string;
+  pickup_date: string;
+  pickupDate?: string;
+  factoryUserName?: string | null;
+  returnOrderUrl?: string;
+  projectUrl?: string;
+  ctaLink?: string;
+};
+
+export const sendReturnOrderPickupScheduledSupervisorEmail = async (
+  payload: ReturnOrderPickupScheduledSupervisorEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+
+  const siteSupervisor = (
+    payload.siteSupervisorName ||
+    payload.toName ||
+    "Site Supervisor"
+  ).trim();
+  const leadLabel = `${payload.leadCode} - ${payload.leadName}`;
+  const pickupDate = (payload.pickup_date || payload.pickupDate || "").trim();
+  const factoryUser = (payload.factoryUserName || "Factory User").trim();
+  const targetUrl =
+    payload.returnOrderUrl || payload.projectUrl || payload.ctaLink || "";
+
+  const defaultSubject = `Return Order Pickup Scheduled – ${payload.leadCode} – ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${siteSupervisor},`,
+    "",
+    `The pickup for the Return Order of ${payload.leadCode} – ${payload.leadName} has been scheduled for ${pickupDate} by the Factory User.`,
+    "",
+    "Please ensure the return items are kept ready for pickup at the site.",
+    "",
+    targetUrl ? `View Return Order: ${targetUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Return Order Pickup Scheduled</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hello ${siteSupervisor},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The pickup for the Return Order of <strong>${payload.leadCode} – ${payload.leadName}</strong> has been scheduled for <strong>${pickupDate}</strong> by the Factory User.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please ensure the return items are kept ready for pickup at the site.
+      </p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Pickup Date</div>
+          <div class="lead-info-value">${pickupDate}</div>
+        </div>
+        ${
+          factoryUser
+            ? `<div class="lead-info-row">
+          <div class="lead-info-label">Scheduled By</div>
+          <div class="lead-info-value">${factoryUser}</div>
+        </div>`
+            : ""
+        }
+      </div>
+
+      ${
+        targetUrl
+          ? `<div style="margin:20px 0 0;text-align:start;">
+              <a
+                href="${targetUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:500;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Return Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues: Record<string, string> = {
+    "Site Supervisor": siteSupervisor,
+    siteSupervisor,
+    siteSupervisorName: siteSupervisor,
+    toName: siteSupervisor,
+    "Lead Code": payload.leadCode,
+    "Lead Name": payload.leadName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    "Lead Code – Lead Name": `${payload.leadCode} – ${payload.leadName}`,
+    "Lead Code - Lead Name": leadLabel,
+    leadLabel,
+    "Pickup Date": pickupDate,
+    pickup_date: pickupDate,
+    pickupDate,
+    "Factory User": factoryUser,
+    factoryUser,
+    factoryUserName: factoryUser,
+    returnOrderUrl: targetUrl,
+    projectUrl: targetUrl,
+    ctaLink: targetUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key:
+        RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_PICKUP_SCHEDULED_SUPERVISOR,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key:
+      RETURN_ORDER_TEMPLATE_KEYS.RETURN_ORDER_PICKUP_SCHEDULED_SUPERVISOR,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail,
+      toName: payload.toName || siteSupervisor,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export const sendReturnOrderPickupScheduledEmail =
+  sendReturnOrderPickupScheduledSupervisorEmail;
+
+
 
 
 
