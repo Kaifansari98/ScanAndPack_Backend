@@ -14,7 +14,14 @@ export class MetaWebhookController {
    */
   handleGet = async (req: Request, res: Response): Promise<Response> => {
     try {
+
       const verifyToken = "12345";
+
+      await prisma.metaWebhook.create({
+          data: {
+            data: req.query ?? {},
+          },
+        });
 
       const mode = req.query["hub.mode"] as string;
       // res.status(200).send(mode);
