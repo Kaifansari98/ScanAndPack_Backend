@@ -110,6 +110,11 @@ export type ProjectItemsMaster = Prisma.ProjectItemsMasterModel
  */
 export type BoxMaster = Prisma.BoxMasterModel
 /**
+ * Model FactoryOutRevertLog
+ * 
+ */
+export type FactoryOutRevertLog = Prisma.FactoryOutRevertLogModel
+/**
  * Model ScanAndPackItem
  * 
  */

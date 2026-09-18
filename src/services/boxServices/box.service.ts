@@ -991,6 +991,15 @@ export const updateBoxStatus = async (
   ) {
     throw new Error("Project is deleted or deactivated");
   }
+
+  if (newStatus === BoxStatus.unpacked) {
+    if (box.site_in_at !== null || box.site_in_by !== null) {
+      throw new Error(
+        "Cannot unpack box: Box is already at the site (Site In has been recorded)",
+      );
+    }
+  }
+
   const now = new Date();
 
   return await prisma.boxMaster.update({

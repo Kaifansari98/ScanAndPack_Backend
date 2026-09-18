@@ -65,6 +65,7 @@ export const ModelName = {
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
   BoxMaster: 'BoxMaster',
+  FactoryOutRevertLog: 'FactoryOutRevertLog',
   ScanAndPackItem: 'ScanAndPackItem',
   VendorTokens: 'VendorTokens',
   ClientMaster: 'ClientMaster',
@@ -575,6 +576,22 @@ export const BoxMasterScalarFieldEnum = {
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
+
+
+export const FactoryOutRevertLogScalarFieldEnum = {
+  id: 'id',
+  box_id: 'box_id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  factory_out_at: 'factory_out_at',
+  factory_out_by: 'factory_out_by',
+  reverted_by: 'reverted_by',
+  reverted_at: 'reverted_at',
+  description: 'description',
+  created_at: 'created_at'
+} as const
+
+export type FactoryOutRevertLogScalarFieldEnum = (typeof FactoryOutRevertLogScalarFieldEnum)[keyof typeof FactoryOutRevertLogScalarFieldEnum]
 
 
 export const ScanAndPackItemScalarFieldEnum = {

@@ -60,6 +60,7 @@ model VendorMaster {
   b2bRequirementTypes                    B2BRequirementTypeMaster[]
   box_info_values                        BoxInfoFieldValue[]
   boxes                                  BoxMaster[]
+  factory_out_revert_logs                FactoryOutRevertLog[]
   brands                                 BrandMaster[]
   broadcastCategories                    BroadcastCategoryMaster[]              @relation("VendorBroadcastCategories")
   broadcasts                             BroadcastMaster[]                      @relation("VendorBroadcasts")
@@ -286,6 +287,8 @@ model UserMaster {
   boxesFactoryOut                                                                BoxMaster[]                            @relation("BoxFactoryOutBy")
   boxesPackedBy                                                                  BoxMaster[]                            @relation("BoxPackedByUser")
   boxesSiteIn                                                                    BoxMaster[]                            @relation("BoxSiteInBy")
+  factoryOutRevertsMade                                                          FactoryOutRevertLog[]                  @relation("FactoryOutRevertedBy")
+  factoryOutRevertsOriginal                                                      FactoryOutRevertLog[]                  @relation("FactoryOutRevertOriginalUser")
   broadcastAttachmentsCreated                                                    BroadcastAttachment[]                  @relation("BroadcastAttachmentCreatedBy")
   broadcastAttachmentsUpdated                                                    BroadcastAttachment[]                  @relation("BroadcastAttachmentUpdatedBy")
   broadcastAudienceCreated                                                       BroadcastAudienceMapping[]             @relation("BroadcastAudienceCreatedBy")
@@ -547,6 +550,7 @@ model ProjectMaster {
 
   box_info_values       BoxInfoFieldValue[]
   boxes                 BoxMaster[]
+  factory_out_revert_logs FactoryOutRevertLog[]
   CutList               CutList[]
   cutListMachineMapping CutListMachineMapping[]
   defectedItems         DefectedItem[]
@@ -658,9 +662,33 @@ model BoxMaster {
   cutListMachineMapping CutListMachineMapping[]
   items                 ScanAndPackItem[]
   leadMaster            LeadMaster[]            @relation("BoxMasterToLeadMaster")
+  factory_out_revert_logs FactoryOutRevertLog[]
 
   @@unique([project_id, sequence_no])
   @@index([project_id, product_group_name, packing_group_name, box_status], map: "idx_box_auto_packing_lookup")
+}
+
+model FactoryOutRevertLog {
+  id              Int           @id @default(autoincrement())
+  box_id          Int
+  project_id      Int
+  vendor_id       Int
+  factory_out_at  DateTime
+  factory_out_by  Int?
+  reverted_by     Int
+  reverted_at     DateTime      @default(now())
+  description     String
+  created_at      DateTime      @default(now())
+
+  box             BoxMaster     @relation(fields: [box_id], references: [id], onDelete: Cascade)
+  project         ProjectMaster @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  vendor          VendorMaster  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  revertedByUser  UserMaster    @relation("FactoryOutRevertedBy", fields: [reverted_by], references: [id])
+  factoryOutByUser UserMaster?  @relation("FactoryOutRevertOriginalUser", fields: [factory_out_by], references: [id])
+
+  @@index([vendor_id, project_id, box_id])
+  @@index([reverted_by])
+  @@index([reverted_at])
 }
 
 model ScanAndPackItem {
