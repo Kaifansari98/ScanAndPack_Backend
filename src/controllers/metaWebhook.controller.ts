@@ -10,87 +10,45 @@ export class MetaWebhookController {
    */
   handleGet = async (req: Request, res: Response): Promise<Response> => {
     try {
-      const mode = req.query["hub.mode"] as string;
+
+      const verifyToken = "12345";
 
       await prisma.metaWebhook.create({
-            data: {
-              data: req.query ?? {},
-            },
-          });
-
-      // Meta Handshake Verification
-      if (mode === "subscribe") {
-        const token = req.query["hub.verify_token"] as string;
-        const challenge = req.query["hub.challenge"] as string;
-
-        const configuredToken =
-          process.env.META_WEBHOOK_VERIFY_TOKEN ||
-          process.env.META_VERIFY_TOKEN ||
-          "furnix_meta_leads_2026";
-
-        const isValidToken =
-          token === configuredToken ||
-          token === "furnix_meta_leads_2026" ||
-          token === "meta_webhook_verify_token_2026";
-
-        if (isValidToken) {
-          logger.info("[META WEBHOOK] Handshake verification successful.");
-          // Handshake request query parameters ko table me save karein
-          await prisma.metaWebhook.create({
-            data: {
-              data: req.query ?? {},
-            },
-          });
-          return res.status(200).send(challenge);
-        } else {
-          await prisma.metaWebhook.create({
-            data: {
-              data: req.query ?? {},
-            },
-          });
-          logger.warn(
-            `[META WEBHOOK] Handshake verification failed. Received token: ${token}, Expected: ${configuredToken}`
-          );
-          return res.status(403).send("Forbidden: Verification token mismatch");
-        }
-      }
-      // GET request ka incoming data (query params ya body) table me save karein
-      let incomingData: any = {};
-      const hasQuery = req.query && Object.keys(req.query).length > 0;
-      const hasBody =
-        req.body &&
-        (Array.isArray(req.body)
-          ? req.body.length > 0
-          : typeof req.body === "object"
-          ? Object.keys(req.body).length > 0
-          : true);
-
-      if (hasBody) {
-        if (typeof req.body === "object" && !Array.isArray(req.body) && hasQuery) {
-          incomingData = { ...req.query, ...req.body };
-        } else {
-          incomingData = req.body;
-        }
-      } else if (hasQuery) {
-        incomingData = req.query;
-      }
-
-      const savedPayload = await prisma.metaWebhook.create({
         data: {
-          data: incomingData ?? {},
+          data: req.query ?? {},
         },
       });
 
-      logger.info(
-        `[META WEBHOOK] Successfully saved GET webhook data to database. ID: ${savedPayload.id}`
-      );
+      const mode = req.query["hub.mode"] as string;
+      // res.status(200).send(mode);
+      const token = req.query["hub.verify_token"] as string;
+      const challenge = req.query["hub.challenge"] as string;
 
-      // Response me records ka data show nahi karna, sirf confirmation response return karna hai
-      return res.status(200).json({
-        success: true,
-        message: "Webhook data received and stored successfully in database",
-        id: savedPayload.id,
-      });
+
+      // const configuredToken = verifyToken;
+      // process.env.META_WEBHOOK_VERIFY_TOKEN ||
+      // process.env.META_VERIFY_TOKEN ||
+      // verifyToken;
+
+      const isValidToken =
+        token === verifyToken;
+
+      if (mode === "subscribe" && isValidToken) {
+        logger.info("[META WEBHOOK] Handshake verification successful.");
+        // Handshake data ko database table me save karein
+        await prisma.metaWebhook.create({
+          data: {
+            data: req.query ?? {},
+          },
+        });
+        // MUST return HTTP 200 with raw challenge text
+        return res.status(200).send(challenge);
+      } else {
+        logger.warn(
+          `[META WEBHOOK] Handshake verification failed. Mode: ${mode}, Token: ${token}`
+        );
+        return res.sendStatus(403);
+      }
     } catch (error: any) {
       logger.error("[META WEBHOOK] Error in GET /metawebhook:", error);
       return res.status(500).json({
