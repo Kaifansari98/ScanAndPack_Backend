@@ -18,21 +18,21 @@ export class MetaWebhookController {
       const verifyToken = "12345";
 
       await prisma.metaWebhook.create({
-          data: {
-            data: req.query ?? {},
-          },
-        });
+        data: {
+          data: req.query ?? {},
+        },
+      });
 
       const mode = req.query["hub.mode"] as string;
       // res.status(200).send(mode);
       const token = req.query["hub.verify_token"] as string;
       const challenge = req.query["hub.challenge"] as string;
 
-       
+
       // const configuredToken = verifyToken;
-        // process.env.META_WEBHOOK_VERIFY_TOKEN ||
-        // process.env.META_VERIFY_TOKEN ||
-        // verifyToken;
+      // process.env.META_WEBHOOK_VERIFY_TOKEN ||
+      // process.env.META_VERIFY_TOKEN ||
+      // verifyToken;
 
       const isValidToken =
         token === verifyToken;

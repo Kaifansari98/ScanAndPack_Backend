@@ -30,6 +30,25 @@ export const addProcessBrief = async (payload: ProcessBriefInput) => {
 export const getAllProcessBriefs = async (vendor_id: number) => {
   const briefs = await prisma.processBriefMaster.findMany({
     where: { vendor_id },
+    include: {
+      machineMappings: {
+        include: {
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+              machine_code: true
+            }
+          },
+          machineType: {
+            select: {
+              id: true,
+              machine_type: true
+            }
+          }
+        }
+      }
+    },
     orderBy: { id: "desc" },
   });
 
@@ -40,6 +59,7 @@ export interface ProcessBriefMappingItem {
   product_type_id?: number;
   b2b_requirement_type_id?: number;
   process_brief_id: number;
+  machine_id?: number | null;
 }
 
 export interface SaveLeadProcessBriefsInput {
@@ -108,16 +128,22 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
         if (!briefId) return null;
         if (reqTypeId === null) return null;
 
+        const machineId =
+          m.machine_id !== undefined && m.machine_id !== null && !isNaN(Number(m.machine_id)) && Number(m.machine_id) > 0
+            ? Number(m.machine_id)
+            : null;
+
         return {
           lead_id,
           vendor_id,
           b2b_requirement_type_id: reqTypeId,
           process_brief_id: briefId,
+          machine_id: machineId,
           created_by: validCreatedBy,
         };
       })
       .filter(
-        (item): item is { lead_id: number; vendor_id: number; b2b_requirement_type_id: number; process_brief_id: number; created_by: number } =>
+        (item): item is { lead_id: number; vendor_id: number; b2b_requirement_type_id: number; process_brief_id: number; machine_id: number | null; created_by: number } =>
           item !== null
       );
 
@@ -142,6 +168,7 @@ export const saveLeadProcessBriefs = async (payload: SaveLeadProcessBriefsInput)
             vendor_id,
             b2b_requirement_type_id: defaultTypeId,
             process_brief_id: briefId,
+            machine_id: null,
             created_by: validCreatedBy,
           };
         })
@@ -163,6 +190,13 @@ export const getLeadProcessBriefs = async (lead_id: number, vendor_id: number) =
     where: { lead_id, vendor_id },
     include: {
       processBrief: true,
+      machine: {
+        select: {
+          id: true,
+          machine_name: true,
+          machine_code: true,
+        },
+      },
       b2bRequirementType: {
         select: {
           id: true,
@@ -172,3 +206,105 @@ export const getLeadProcessBriefs = async (lead_id: number, vendor_id: number) =
     },
   });
 };
+
+export interface SaveProcessBriefMachineMappingsInput {
+  process_brief_id: number;
+  vendor_id: number;
+  machine_ids?: number[];
+  machine_type_ids?: number[];
+  created_by: number;
+}
+
+export const saveProcessBriefMachineMappings = async (payload: SaveProcessBriefMachineMappingsInput) => {
+  const { process_brief_id, vendor_id, machine_ids = [], machine_type_ids = [], created_by } = payload;
+
+  return prisma.$transaction(async (tx) => {
+    // Delete existing mappings
+    await tx.processBriefMachineMapping.deleteMany({
+      where: { process_brief_id, vendor_id },
+    });
+
+    const dataToCreate: any[] = [];
+
+    // Create mappings for specific machines
+    if (machine_ids.length > 0) {
+      machine_ids.forEach((machineId) => {
+        dataToCreate.push({
+          process_brief_id,
+          machine_id: machineId,
+          machine_type_id: null,
+          vendor_id,
+          created_by,
+        });
+      });
+    }
+
+    // Create mappings for machine types
+    if (machine_type_ids.length > 0) {
+      machine_type_ids.forEach((machineTypeId) => {
+        dataToCreate.push({
+          process_brief_id,
+          machine_id: null,
+          machine_type_id: machineTypeId,
+          vendor_id,
+          created_by,
+        });
+      });
+    }
+
+    if (dataToCreate.length > 0) {
+      await tx.processBriefMachineMapping.createMany({
+        data: dataToCreate,
+      });
+    }
+
+    // Return updated mappings
+    return tx.processBriefMachineMapping.findMany({
+      where: { process_brief_id, vendor_id },
+      include: {
+        machine: true,
+        machineType: true,
+      },
+    });
+  });
+};
+
+export const getProcessBriefMachineMappings = async (process_brief_id: number, vendor_id: number) => {
+  return prisma.processBriefMachineMapping.findMany({
+    where: { process_brief_id, vendor_id },
+    include: {
+      machine: {
+        select: {
+          id: true,
+          machine_name: true,
+          machine_code: true,
+          machine_type_id: true,
+          status: true,
+        },
+      },
+      machineType: {
+        select: {
+          id: true,
+          machine_type: true,
+          active: true,
+        },
+      },
+    },
+  });
+};
+
+export const updateProcessBrief = async (id: number, name: string) => {
+  return prisma.processBriefMaster.update({
+    where: { id },
+    data: { name: name.trim() },
+  });
+};
+
+export const toggleProcessBriefStatus = async (id: number, is_active: boolean) => {
+  return prisma.processBriefMaster.update({
+    where: { id },
+    data: { is_active },
+  });
+};
+
+

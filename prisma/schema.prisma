@@ -8,7 +8,7 @@ datasource db {
 }
 
 model VendorMaster {
-  productsRequiredForProduction ProductsRequiredForProduction[]
+  productsRequiredForProduction          ProductsRequiredForProduction[]
   id                                     Int                                    @id @default(autoincrement())
   vendor_name                            String
   vendor_code                            String
@@ -74,6 +74,8 @@ model VendorMaster {
   coreProducts                           CoreProductMaster[]
   CutList                                CutList[]
   cutListMachineMapping                  CutListMachineMapping[]
+  cutListRules                           CutListRuleMaster[]
+  ruleActions                            RuleActionMaster[]
   debitCreditNotes                       DebitCreditNote[]                      @relation("DCNVendor")
   completionPhotos                       DefectCompletionPhoto[]
   defectMaster                           DefectMaster[]
@@ -140,6 +142,8 @@ model VendorMaster {
   meetingTypes                           MeetingTypeMaster[]
   miscellaneousDocument                  MiscellaneousDocument[]
   miscellaneousMaster                    MiscellaneousMaster[]
+  miscellaneousFollowups                 MiscellaneousFollowup[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
   miscellaneousTeamMaster                MiscellaneousTeamMaster[]
   miscellaneousTypeMaster                MiscellaneousTypeMaster[]
   notifications                          Notification[]
@@ -153,6 +157,7 @@ model VendorMaster {
   paymentTypeMaster                      PaymentTypeMaster[]
   privilegeMasters                       PrivilegeMaster[]
   processBriefs                          ProcessBriefMaster[]
+  processBriefMachineMappings            ProcessBriefMachineMapping[]
   productItemCodes                       ProductItemCode[]
   products                               ProductMaster[]
   stockHistories                         ProductStockHistory[]                  @relation("StockHistoryVendor")
@@ -263,7 +268,7 @@ model PrivilegeMaster {
 }
 
 model UserMaster {
-  productsRequiredForProduction ProductsRequiredForProduction[]
+  productsRequiredForProduction                                                  ProductsRequiredForProduction[]
   id                                                                             Int                                    @id @default(autoincrement())
   vendor_id                                                                      Int
   user_name                                                                      String
@@ -297,6 +302,8 @@ model UserMaster {
   companyVendorsUpdated                                                          CompanyVendorsMaster[]                 @relation("CompanyVendorUpdatedBy")
   operator                                                                       CutListMachineMapping[]
   mappingSiteIns                                                                 CutListMachineMapping[]                @relation("MappingSiteInBy")
+  cutListRulesCreated                                                            CutListRuleMaster[]                    @relation("CutListRulesCreated")
+  cutListRulesUpdated                                                            CutListRuleMaster[]                    @relation("CutListRulesUpdated")
   dcnsCreated                                                                    DebitCreditNote[]                      @relation("DCNCreatedBy")
   dcnsSettled                                                                    DebitCreditNote[]                      @relation("DCNSettledBy")
   completionPhotos                                                               DefectCompletionPhoto[]
@@ -359,6 +366,8 @@ model UserMaster {
   LeadOtherAppliancesRemarkMapping                                               LeadOtherAppliancesRemarkMapping[]
   leadProcessBriefsCreated                                                       LeadProcessBriefMapping[]              @relation("LeadProcessBriefCreatedBy")
   leadProcessBriefsUpdated                                                       LeadProcessBriefMapping[]              @relation("LeadProcessBriefUpdatedBy")
+  pbmCreated                                                                     ProcessBriefMachineMapping[]           @relation("PBM_CreatedBy")
+  pbmUpdated                                                                     ProcessBriefMachineMapping[]           @relation("PBM_UpdatedBy")
   leadProductsCreated                                                            LeadProductMapping[]                   @relation("LeadProductCreatedBy")
   productStructureInstances                                                      LeadProductStructureInstance[]
   leadReqMaterialsCreated                                                        LeadRequirementMaterialMapping[]       @relation("LeadReqMatCreatedBy")
@@ -383,6 +392,9 @@ model UserMaster {
   miscDocumentsCreated                                                           MiscellaneousDocument[]                @relation("MiscDocCreatedBy")
   miscCreated                                                                    MiscellaneousMaster[]                  @relation("MiscCreatedBy")
   miscUpdated                                                                    MiscellaneousMaster[]                  @relation("MiscUpdatedBy")
+  miscReturned                                                                   MiscellaneousMaster[]                  @relation("MiscReturnedBy")
+  miscFollowupsCreated                                                           MiscellaneousFollowup[]                @relation("MiscFollowupCreatedBy")
+  miscReorderInstanceMaterialMappingsCreated                                     MiscellaneousReorderInstancesMaterialMapping[] @relation("MiscReorderInstanceCreatedBy")
   notificationsSent                                                              Notification[]                         @relation("NotificationSender")
   notificationsReceived                                                          Notification[]                         @relation("NotificationUser")
   notificationQueuesCreated                                                      NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
@@ -530,6 +542,7 @@ model ProjectMaster {
   updated_at         DateTime?   @updatedAt
   updated_by         Int?
   packing_type       PackingType @default(DEFAULT)
+  is_multi_location  Boolean     @default(false)
   no_of_boxes        Int         @default(0)
   isDeleted          Boolean     @default(false)
   deleted_by         Int?
@@ -543,16 +556,33 @@ model ProjectMaster {
   box_info_fields       ProjectBoxInfoField[]
   details               ProjectDetails[]
   items                 ProjectItemsMaster[]
-  client                ClientMaster?           @relation(fields: [client_id], references: [id], onDelete: Cascade)
-  createdByUser         UserMaster              @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
-  lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
-  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  client                ClientMaster?                    @relation(fields: [client_id], references: [id], onDelete: Cascade)
+  createdByUser         UserMaster                       @relation("CreatedByUser", fields: [created_by], references: [id], onDelete: Cascade)
+  lead                  LeadMaster?                      @relation(fields: [lead_id], references: [id])
+  vendor                VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   scanItems             ScanAndPackItem[]
-  deletedByUser         UserMaster?             @relation("ProjectDeletedByUser", fields: [deleted_by], references: [id])
-  userMaster            UserMaster?             @relation(fields: [userMasterId], references: [id])
+  locationQuantities    ProjectLocationProductQuantity[]
+  deletedByUser         UserMaster?                      @relation("ProjectDeletedByUser", fields: [deleted_by], references: [id])
+  userMaster            UserMaster?                      @relation(fields: [userMasterId], references: [id])
   userMasterId          Int?
 
   @@index([vendor_id, isDeleted])
+}
+
+model ProjectLocationProductQuantity {
+  id                     Int                     @id @default(autoincrement())
+  project_id             Int
+  vendor_id              Int
+  location_name          String
+  group_name             String
+  qty                    Int
+  created_at             DateTime                @default(now())
+  updated_at             DateTime                @updatedAt
+  project                ProjectMaster           @relation(fields: [project_id], references: [id], onDelete: Cascade)
+  cutListMachineMappings CutListMachineMapping[]
+
+  @@unique([project_id, location_name, group_name])
+  @@index([vendor_id, project_id])
 }
 
 model ProjectDetails {
@@ -614,6 +644,13 @@ model BoxMaster {
   site_in_by            Int?
   packed_at             DateTime?
   packed_by             Int?
+  sequence_no           Int?
+  product_group_name    String?
+  packing_group_name    String?
+  product_set_no        Int?
+  box_position          Int?
+  boxes_per_product     Int?
+  is_auto_created       Boolean                 @default(false)
   box_info_values       BoxInfoFieldValue[]
   factoryOutByUser      UserMaster?             @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
   packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
@@ -624,6 +661,9 @@ model BoxMaster {
   cutListMachineMapping CutListMachineMapping[]
   items                 ScanAndPackItem[]
   leadMaster            LeadMaster[]            @relation("BoxMasterToLeadMaster")
+
+  @@unique([project_id, sequence_no])
+  @@index([project_id, product_group_name, packing_group_name, box_status], map: "idx_box_auto_packing_lookup")
 }
 
 model ScanAndPackItem {
@@ -726,7 +766,7 @@ model ClientTypeMaster {
 }
 
 model LeadMaster {
-  productsRequiredForProduction ProductsRequiredForProduction[]
+  productsRequiredForProduction               ProductsRequiredForProduction[]
   id                                          Int                                   @id @default(autoincrement())
   firstname                                   String
   lastname                                    String
@@ -877,6 +917,8 @@ model LeadMaster {
   userMappings                                LeadUserMapping[]
   ledgers                                     Ledger[]
   miscellaneousMaster                         MiscellaneousMaster[]
+  miscellaneousFollowups                      MiscellaneousFollowup[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
   orderLoginDetails                           OrderLoginDetails[]
   orderLoginPoFiles                           OrderLoginPoFileMapping[]
   payments                                    PaymentInfo[]
@@ -1175,35 +1217,36 @@ model LeadProductMapping {
 
 model ProductTypeMaster {
   productsRequiredForProduction ProductsRequiredForProduction[]
-  id                        Int                            @id @default(autoincrement())
-  type                      String
-  vendor_id                 Int
-  tag                       String
-  status                    String                         @default("active")
-  LeadDetailedLogs          LeadDetailedLogs[]
-  documents                 LeadDocuments[]                @relation("LeadDocumentsToProductType")
-  leads                     LeadProductMapping[]
-  productStructureInstances LeadProductStructureInstance[]
-  Ledger                    Ledger[]
-  PaymentInfo               PaymentInfo[]
-  productStructures         ProductStructure[]
-  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  leadBillingAddresses      LeadBillingAddress[]
+  id                            Int                             @id @default(autoincrement())
+  type                          String
+  vendor_id                     Int
+  tag                           String
+  status                        String                          @default("active")
+  LeadDetailedLogs              LeadDetailedLogs[]
+  documents                     LeadDocuments[]                 @relation("LeadDocumentsToProductType")
+  leads                         LeadProductMapping[]
+  productStructureInstances     LeadProductStructureInstance[]
+  Ledger                        Ledger[]
+  PaymentInfo                   PaymentInfo[]
+  productStructures             ProductStructure[]
+  vendor                        VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadBillingAddresses          LeadBillingAddress[]
 }
 
 model ProcessBriefMaster {
-  id                Int                       @id @default(autoincrement())
-  vendor_id         Int                       @map("vendor_id")
-  name              String                    @map("name")
-  is_active         Boolean                   @default(true) @map("is_active")
-  created_at        DateTime                  @default(now()) @map("created_at")
-  created_by        Int                       @map("created_by")
-  updated_at        DateTime                  @updatedAt @map("updated_at")
-  updated_by        Int?                      @map("updated_by")
+  id                Int                          @id @default(autoincrement())
+  vendor_id         Int                          @map("vendor_id")
+  name              String                       @map("name")
+  is_active         Boolean                      @default(true) @map("is_active")
+  created_at        DateTime                     @default(now()) @map("created_at")
+  created_by        Int                          @map("created_by")
+  updated_at        DateTime                     @updatedAt @map("updated_at")
+  updated_by        Int?                         @map("updated_by")
   leadProcessBriefs LeadProcessBriefMapping[]
-  createdBy         UserMaster                @relation("ProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  updatedBy         UserMaster?               @relation("ProcessBriefUpdatedBy", fields: [updated_by], references: [id])
-  vendor            VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  machineMappings   ProcessBriefMachineMapping[]
+  createdBy         UserMaster                   @relation("ProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy         UserMaster?                  @relation("ProcessBriefUpdatedBy", fields: [updated_by], references: [id])
+  vendor            VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([created_by])
@@ -1220,9 +1263,11 @@ model LeadProcessBriefMapping {
   updated_at              DateTime                  @updatedAt @map("updated_at")
   updated_by              Int?                      @map("updated_by")
   b2b_requirement_type_id Int                       @map("b2b_requirement_type_id")
+  machine_id              Int?                      @map("machine_id")
   b2bRequirementType      B2BRequirementTypeMaster? @relation(fields: [b2b_requirement_type_id], references: [id], onDelete: Cascade)
   createdBy               UserMaster                @relation("LeadProcessBriefCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                    LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  machine                 MachineMaster?            @relation(fields: [machine_id], references: [id], onDelete: SetNull)
   processBrief            ProcessBriefMaster        @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
   updatedBy               UserMaster?               @relation("LeadProcessBriefUpdatedBy", fields: [updated_by], references: [id])
   vendor                  VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1231,7 +1276,34 @@ model LeadProcessBriefMapping {
   @@index([vendor_id])
   @@index([b2b_requirement_type_id])
   @@index([process_brief_id])
+  @@index([machine_id])
   @@map("LeadProcessBriefMapping")
+}
+
+model ProcessBriefMachineMapping {
+  id               Int      @id @default(autoincrement())
+  process_brief_id Int      @map("process_brief_id")
+  machine_id       Int?     @map("machine_id")
+  machine_type_id  Int?     @map("machine_type_id")
+  vendor_id        Int      @map("vendor_id")
+  created_at       DateTime @default(now()) @map("created_at")
+  created_by       Int      @map("created_by")
+  updated_at       DateTime @updatedAt @map("updated_at")
+  updated_by       Int?     @map("updated_by")
+
+  processBrief ProcessBriefMaster @relation(fields: [process_brief_id], references: [id], onDelete: Cascade)
+  machine      MachineMaster?     @relation(fields: [machine_id], references: [id], onDelete: Cascade)
+  machineType  MachineTypeMaster? @relation(fields: [machine_type_id], references: [id], onDelete: Cascade)
+  vendor       VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy    UserMaster         @relation("PBM_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy    UserMaster?        @relation("PBM_UpdatedBy", fields: [updated_by], references: [id])
+
+  @@unique([process_brief_id, machine_id, machine_type_id], name: "process_brief_machine_type_unique")
+  @@index([process_brief_id])
+  @@index([machine_id])
+  @@index([machine_type_id])
+  @@index([vendor_id])
+  @@map("ProcessBriefMachineMapping")
 }
 
 model LeadRequirementMaterialMapping {
@@ -1773,55 +1845,55 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
-  productsRequiredForProduction ProductsRequiredForProduction[]
-  id                                         Int                           @id @default(autoincrement())
+  productsRequiredForProduction              ProductsRequiredForProduction[]
+  id                                         Int                             @id @default(autoincrement())
   vendor_id                                  Int
   lead_id                                    Int
   account_id                                 Int
   product_type_id                            Int
-  is_archived                                Boolean                       @default(false)
+  is_archived                                Boolean                         @default(false)
   product_structure_id                       Int
   quantity_index                             Int
   title                                      String
-  status                                     ProductInstanceStatus         @default(open)
-  description                                String?                       @db.VarChar(2000)
+  status                                     ProductInstanceStatus           @default(open)
+  description                                String?                         @db.VarChar(2000)
   created_by                                 Int
-  created_at                                 DateTime                      @default(now())
+  created_at                                 DateTime                        @default(now())
   updated_by                                 Int?
-  updated_at                                 DateTime                      @updatedAt
+  updated_at                                 DateTime                        @updatedAt
   is_tech_check_completed                    Boolean?
   tech_check_completed_at                    DateTime?
   is_order_login_completed                   Boolean?
   order_login_completed_at                   DateTime?
   is_production_completed                    Boolean?
   production_completed_at                    DateTime?
-  woodwork_packing_details_remark            String?                       @db.VarChar(2000)
-  hardware_packing_details_remark            String?                       @db.VarChar(2000)
+  woodwork_packing_details_remark            String?                         @db.VarChar(2000)
+  hardware_packing_details_remark            String?                         @db.VarChar(2000)
   no_of_boxes                                Int?
   no_of_client_documents_initially_submitted Int?
-  is_order_login_filled                      Boolean?                      @default(false)
+  is_order_login_filled                      Boolean?                        @default(false)
   is_pre_prod_done                           Boolean?
   is_under_production                        Boolean?
   pre_prod_done_at                           DateTime?
   under_production_at                        DateTime?
   production_erd_date                        DateTime?
   is_post_production                         Boolean?
-  pre_prod_remark                            String?                       @db.VarChar(2000)
-  isLargeScaleProjectInstance                Boolean                       @default(false)
+  pre_prod_remark                            String?                         @db.VarChar(2000)
+  isLargeScaleProjectInstance                Boolean                         @default(false)
   product_item_code_id                       Int?
   quantity                                   Int?
   sub_product_structure_id                   Int?
   fastProductionRequests                     FastProductionRequest[]
   designSelections                           LeadDesignSelection[]
   documents                                  LeadDocuments[]
-  account                                    AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead                                       LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  productItemCode                            ProductItemCode?              @relation(fields: [product_item_code_id], references: [id])
-  productStructure                           ProductStructure              @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  productType                                ProductTypeMaster             @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
-  subProductStructure                        ProductSubStructure?          @relation(fields: [sub_product_structure_id], references: [id])
-  updatedBy                                  UserMaster?                   @relation(fields: [updated_by], references: [id])
-  vendor                                     VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  account                                    AccountMaster                   @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead                                       LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productItemCode                            ProductItemCode?                @relation(fields: [product_item_code_id], references: [id])
+  productStructure                           ProductStructure                @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productType                                ProductTypeMaster               @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  subProductStructure                        ProductSubStructure?            @relation(fields: [sub_product_structure_id], references: [id])
+  updatedBy                                  UserMaster?                     @relation(fields: [updated_by], references: [id])
+  vendor                                     VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   activityStatusLogs                         LeadScopedActivityStatusLog[]
   tasks                                      UserLeadTask[]
 
@@ -2548,7 +2620,7 @@ model CompanyVendorsMaster {
   primary_contact_id           Int?
   vendor_name                  String                                 @default("")
   is_active                    Boolean                                @default(true)
-  is_inventory_company_vendor Boolean                                @default(false)
+  is_inventory_company_vendor  Boolean                                @default(false)
   addresses                    CompanyVendorAddress[]
   bankAccounts                 CompanyVendorBankAccount[]
   contactPersons               CompanyVendorContactPerson[]           @relation("CompanyVendorContacts")
@@ -2602,6 +2674,7 @@ model OrderLoginDetails {
   updatedBy                            UserMaster?               @relation("OrderLoginUpdatedBy", fields: [updated_by], references: [id])
   vendor                               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   poFiles                              OrderLoginPoFileMapping[]
+  miscellaneousReorderInstancesMaterialMapping MiscellaneousReorderInstancesMaterialMapping[]
 }
 
 model SiteReadiness {
@@ -2702,14 +2775,24 @@ model MiscellaneousMaster {
   exp_of_rejection         String?
   misc_approved            Boolean?
   required_delivery_date   DateTime?
+  solution                 String?
+  return_order_date        DateTime?
+  return_order_delivery_method ReturnOrderDeliveryMethod?
+  is_returned              Boolean                    @default(false)
+  returned_at              DateTime?
+  returned_by              Int?
+  return_handover_remark   String?
   documents                MiscellaneousDocument[]
   account                  AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                 @relation("MiscCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                     LeadMaster                 @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   type                     MiscellaneousTypeMaster    @relation(fields: [misc_type_id], references: [id])
   updatedBy                UserMaster?                @relation("MiscUpdatedBy", fields: [updated_by], references: [id])
+  returnedBy               UserMaster?                @relation("MiscReturnedBy", fields: [returned_by], references: [id])
   vendor                   VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   teams                    MiscellaneousTeamMapping[]
+  followups                MiscellaneousFollowup[]
+  reorderInstancesMaterialMappings MiscellaneousReorderInstancesMaterialMapping[]
 }
 
 model MiscellaneousTypeMaster {
@@ -2756,6 +2839,53 @@ model MiscellaneousDocument {
   document         LeadDocuments       @relation(fields: [document_id], references: [id])
   miscellaneous    MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id])
   vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model MiscellaneousFollowup {
+  id               Int      @id @default(autoincrement())
+  vendor_id        Int
+  lead_id          Int
+  miscellaneous_id Int
+  followup_date    DateTime
+  solution         String   @db.Text
+  created_by       Int
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  miscellaneous MiscellaneousMaster @relation(fields: [miscellaneous_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor        VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  createdBy     UserMaster          @relation("MiscFollowupCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id, miscellaneous_id])
+  @@index([lead_id])
+  @@index([created_by])
+}
+
+model MiscellaneousReorderInstancesMaterialMapping {
+  id                   Int                 @id @default(autoincrement())
+  vendor_id            Int
+  lead_id              Int
+  misc_id              Int
+  orderlogindetails_id Int
+  created_at           DateTime            @default(now())
+  created_by           Int
+
+  vendor               VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                 LeadMaster          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  miscellaneous        MiscellaneousMaster @relation(fields: [misc_id], references: [id], onDelete: Cascade)
+  orderLoginDetail     OrderLoginDetails   @relation(fields: [orderlogindetails_id], references: [id], onDelete: Cascade)
+  createdBy            UserMaster          @relation("MiscReorderInstanceCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([misc_id])
+  @@index([orderlogindetails_id])
+}
+
+enum ReturnOrderDeliveryMethod {
+  SELF_DELIVERY
+  PICKUP_SCHEDULE
 }
 
 model InstallationIssueLogMaster {
@@ -2908,12 +3038,12 @@ model VendorModulesMapping {
 }
 
 model MachineMaster {
-  id                    Int                     @id @default(autoincrement())
+  id                    Int                          @id @default(autoincrement())
   machine_name          String
   machine_code          String
   machine_type          String?
   machine_type_id       Int?
-  status                MachineStatus           @default(ACTIVE)
+  status                MachineStatus                @default(ACTIVE)
   scan_type             ScanType
   description           String?
   vendor_id             Int
@@ -2922,14 +3052,17 @@ model MachineMaster {
   target_per_hour       Decimal?
   image_path            String?
   created_by            Int
-  created_at            DateTime                @default(now())
-  updated_at            DateTime                @default(now())
+  created_at            DateTime                     @default(now())
+  updated_at            DateTime                     @default(now())
   updated_by            Int
   cutListMachineMapping CutListMachineMapping[]
   defectedItems         DefectedItem[]
-  machineType           MachineTypeMaster?      @relation(fields: [machine_type_id], references: [id])
-  vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
+  machineType           MachineTypeMaster?           @relation(fields: [machine_type_id], references: [id])
+  vendor                VendorMaster                 @relation(fields: [vendor_id], references: [id])
   userMachineMappings   UserMachineMapping[]
+  processBriefMappings  ProcessBriefMachineMapping[]
+  leadProcessBriefs     LeadProcessBriefMapping[]
+  cutListRules          CutListRuleMaster[]          @relation("CutListRules")
 
   @@unique([vendor_id, machine_code, status], name: "machine_code_vendor_status_unique")
   @@index([vendor_id, status])
@@ -2966,6 +3099,8 @@ model CutList {
   use_in_assembled_packing Boolean?
   include_in_packing       Boolean?
   scan_pack_validate       Boolean?
+  custom_packing_group     String?
+  no_of_qty_in_boxes       Int                      @default(1)
   lead                     LeadMaster?              @relation(fields: [lead_id], references: [id])
   project                  ProjectMaster            @relation(fields: [project_id], references: [id])
   vendor                   VendorMaster             @relation(fields: [vendor_id], references: [id])
@@ -2980,41 +3115,47 @@ model CutList {
 }
 
 model CutListMachineMapping {
-  id                 Int                     @id @default(autoincrement())
-  cut_list_id        Int
-  machine_id         Int
-  vendor_id          Int
-  lead_id            Int?
-  project_id         Int
-  sequence_no        Int
-  is_optional        Boolean                 @default(false)
-  expected_in        Boolean                 @default(false)
-  expected_out       Boolean                 @default(false)
-  status             String
-  actual_in_at       DateTime?
-  actual_out_at      DateTime?
-  in_operator        Int?
-  out_operator       Int?
-  created_by         Int
-  created_at         DateTime                @default(now())
-  box_id             Int?
-  site_in_at         DateTime?
-  site_in_by         Int?
-  weight             Float                   @default(0)
-  qty                Int                     @default(1)
-  received_qty       Int?
-  row_created_source String?
-  boxMaster          BoxMaster?              @relation(fields: [box_id], references: [id])
-  cut_list           CutList                 @relation(fields: [cut_list_id], references: [id])
-  operator           UserMaster?             @relation(fields: [in_operator], references: [id])
-  lead               LeadMaster?             @relation(fields: [lead_id], references: [id])
-  machine            MachineMaster           @relation(fields: [machine_id], references: [id])
-  project            ProjectMaster           @relation(fields: [project_id], references: [id])
-  siteInByUser       UserMaster?             @relation("MappingSiteInBy", fields: [site_in_by], references: [id])
-  vendor             VendorMaster            @relation(fields: [vendor_id], references: [id])
-  completionPhotos   DefectCompletionPhoto[]
-  defectedItems      DefectedItem[]
 
+  id                                   Int                             @id @default(autoincrement())
+  cut_list_id                          Int
+  machine_id                           Int
+  vendor_id                            Int
+  lead_id                              Int?
+  project_id                           Int
+  sequence_no                          Int
+  is_optional                          Boolean                         @default(false)
+  expected_in                          Boolean                         @default(false)
+  expected_out                         Boolean                         @default(false)
+  status                               String
+  actual_in_at                         DateTime?
+  actual_out_at                        DateTime?
+  in_operator                          Int?
+  out_operator                         Int?
+  created_by                           Int
+  created_at                           DateTime                        @default(now())
+  box_id                               Int?
+  site_in_at                           DateTime?
+  site_in_by                           Int?
+  weight                               Float                           @default(0)
+  qty                                  Int                             @default(1)
+  received_qty                         Int?
+  row_created_source                   String?
+  project_location_product_quantity_id Int?
+  boxMaster                            BoxMaster?                      @relation(fields: [box_id], references: [id])
+  cut_list                             CutList                         @relation(fields: [cut_list_id], references: [id])
+  operator                             UserMaster?                     @relation(fields: [in_operator], references: [id])
+  lead                                 LeadMaster?                     @relation(fields: [lead_id], references: [id])
+  machine                              MachineMaster                   @relation(fields: [machine_id], references: [id])
+  project                              ProjectMaster                   @relation(fields: [project_id], references: [id])
+  projectLocationProductQuantity       ProjectLocationProductQuantity? @relation(fields: [project_location_product_quantity_id], references: [id], onDelete: Restrict)
+  siteInByUser                         UserMaster?                     @relation("MappingSiteInBy", fields: [site_in_by], references: [id])
+  vendor                               VendorMaster                    @relation(fields: [vendor_id], references: [id])
+  completionPhotos                     DefectCompletionPhoto[]
+  defectedItems                        DefectedItem[]
+  rule_id            Int?
+  rule               CutListRuleMaster?      @relation(fields: [rule_id], references: [id], onDelete: SetNull)
+
+  @@index([rule_id])
   @@index([cut_list_id])
   @@index([machine_id])
   @@index([project_id])
@@ -3025,6 +3166,7 @@ model CutListMachineMapping {
   @@index([vendor_id, project_id, cut_list_id, actual_in_at, sequence_no], map: "idx_clmm_previous_pass")
   @@index([box_id, vendor_id, project_id, actual_in_at, id], map: "idx_clmm_box_items")
   @@index([project_id, machine_id, expected_in, box_id])
+  @@index([project_location_product_quantity_id, cut_list_id, actual_in_at], map: "idx_clmm_location_product_scan")
 }
 
 model UserMachineMapping {
@@ -3066,14 +3208,15 @@ model OrderLoginPoFileMapping {
 }
 
 model MachineTypeMaster {
-  id               Int                     @id @default(autoincrement())
-  machine_type     String
-  is_scanandpack   Boolean                 @default(false)
-  is_trackandtrace Boolean                 @default(false)
-  active           MachineTypeMasterStatus @default(YES)
-  created_at       DateTime                @default(now())
-  updated_at       DateTime                @updatedAt
-  machineMaster    MachineMaster[]
+  id                   Int                          @id @default(autoincrement())
+  machine_type         String
+  is_scanandpack       Boolean                      @default(false)
+  is_trackandtrace     Boolean                      @default(false)
+  active               MachineTypeMasterStatus      @default(YES)
+  created_at           DateTime                     @default(now())
+  updated_at           DateTime                     @updatedAt
+  machineMaster        MachineMaster[]
+  processBriefMappings ProcessBriefMachineMapping[]
 }
 
 model VendorSettingKey {
@@ -3149,7 +3292,7 @@ model DefectedItem {
 }
 
 model FranchiseMaster {
-  productsRequiredForProduction ProductsRequiredForProduction[]
+  productsRequiredForProduction                                              ProductsRequiredForProduction[]
   id                                                                         Int                                  @id @default(autoincrement())
   vendor_id                                                                  Int
   franchise_name                                                             String
@@ -3490,103 +3633,103 @@ model BrandMaster {
 
 model ProductMaster {
   productsRequiredForProduction ProductsRequiredForProduction[]
-  id                       Int                              @id @default(autoincrement())
-  vendor_id                Int
-  item_id                  Int?
-  rotation                 Int                              @default(0)
-  alt_conv_factor          Float                            @default(0)
-  board_length             Float                            @default(0)
-  board_width              Float                            @default(0)
-  dimension_1              Float                            @default(0)
-  dimension_2              Float                            @default(0)
-  dimension_3              Float                            @default(0)
-  installation_charges     Decimal?                         @db.Decimal(12, 2)
-  item1_weight             Decimal?                         @db.Decimal(12, 2)
-  level1_price             Decimal?                         @db.Decimal(12, 2)
-  level2_price             Decimal?                         @db.Decimal(12, 2)
-  level3_price             Decimal?                         @db.Decimal(12, 2)
-  moq                      Int                              @default(0)
-  no_of_drill_holes        Int                              @default(0)
-  pre_mill_width           Float                            @default(0)
-  alt_uom_text             String?
-  brand_id                 Int?
-  category_id              Int
-  article_code             String?
-  p_code                   String?
-  color_name               String?
-  core_material            String?
-  edge_banding_color       String?
-  finish                   String?
-  group                    String?
-  hsn_code                 String?
-  product_name             String
-  procurement              String?
-  unit_of_measure          String?
-  vendor_code              String?
-  custom_field_1           String?
-  custom_field_2           String?
-  custom_field_3           String?
-  created_by               Int?
-  created_at               DateTime                         @default(now())
-  updated_at               DateTime                         @updatedAt
-  updated_by               Int?
-  active                   ProductActiveFlag                @default(Yes)
-  current_stock            Decimal                          @default(0) @db.Decimal(12, 2)
-  hsn_id                   Int?
-  stock_updated_at         DateTime?
-  consumption_unit_id      Int?
-  costing_method           CostingMethod                    @default(FIFO)
-  item_group_id            Int?
-  item_type                ProductItemType                  @default(Goods)
-  max_stock_qty            Decimal?                         @db.Decimal(18, 3)
-  max_stock_unit_id        Int?
-  min_stock_qty            Decimal?                         @db.Decimal(18, 3)
-  min_stock_unit_id        Int?
-  primary_unit_id          Int?
-  reorder_batch_qty        Decimal?                         @db.Decimal(18, 3)
-  reorder_batch_unit_id    Int?
-  reorder_level_qty        Decimal?                         @db.Decimal(18, 3)
-  reorder_level_unit_id    Int?
-  shelf_life_days          Int?
-  stock_unit_id            Int?
-  barcode                  String?
-  core_product_id          Int?
-  finish_id                Int?
-  grade_id                 Int?
-  height                   Decimal?                         @db.Decimal(12, 4)
-  item_code                String?
-  item_type_master_id      Int?
-  length                   Decimal?                         @db.Decimal(12, 4)
-  purchase_unit_id         Int?
-  size                     String?
-  sub_category_id          Int?
-  thickness                Decimal?                         @db.Decimal(12, 4)
-  type_id                  Int?
-  grnItems                 GRNItem[]                        @relation("GRNItemProduct")
-  leadRequirementMaterials LeadRequirementMaterialMapping[]
-  brand                    BrandMaster?                     @relation(fields: [brand_id], references: [id])
-  category                 ProjectCategoriesMaster          @relation("ProductCategory", fields: [category_id], references: [id], onDelete: Cascade)
-  consumptionUnit          UnitMaster?                      @relation("ProductConsumptionUnit", fields: [consumption_unit_id], references: [id])
-  coreProduct              CoreProductMaster?               @relation(fields: [core_product_id], references: [id])
-  finishMaster             FinishMaster?                    @relation(fields: [finish_id], references: [id])
-  grade                    GradeMaster?                     @relation(fields: [grade_id], references: [id])
-  hsn                      HsnProductMapping?               @relation("ProductHsnMapping", fields: [hsn_id], references: [id])
-  itemGroup                ItemGroupMaster?                 @relation(fields: [item_group_id], references: [id])
-  itemTypeMaster           ItemTypeMaster?                  @relation(fields: [item_type_master_id], references: [id])
-  maxStockUnit             UnitMaster?                      @relation("ProductMaxStockUnit", fields: [max_stock_unit_id], references: [id])
-  minStockUnit             UnitMaster?                      @relation("ProductMinStockUnit", fields: [min_stock_unit_id], references: [id])
-  primaryUnit              UnitMaster?                      @relation("ProductPrimaryUnit", fields: [primary_unit_id], references: [id])
-  purchaseUnit             UnitMaster?                      @relation("ProductPurchaseUnit", fields: [purchase_unit_id], references: [id])
-  reorderBatchUnit         UnitMaster?                      @relation("ProductReorderBatchUnit", fields: [reorder_batch_unit_id], references: [id])
-  reorderLevelUnit         UnitMaster?                      @relation("ProductReorderLevelUnit", fields: [reorder_level_unit_id], references: [id])
-  stockUnit                UnitMaster?                      @relation("ProductStockUnit", fields: [stock_unit_id], references: [id])
-  subCategory              ProjectCategoriesMaster?         @relation("ProductSubCategory", fields: [sub_category_id], references: [id])
-  type                     TypeMaster?                      @relation(fields: [type_id], references: [id])
-  vendor                   VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  stockHistories           ProductStockHistory[]            @relation("StockHistoryProduct")
-  supplierMappings         ProductSupplierMapping[]
-  purchaseIntentItems      PurchaseIntentItem[]             @relation("PIItemProduct")
-  purchaseOrderItems       PurchaseOrderItem[]              @relation("POItemProduct")
+  id                            Int                              @id @default(autoincrement())
+  vendor_id                     Int
+  item_id                       Int?
+  rotation                      Int                              @default(0)
+  alt_conv_factor               Float                            @default(0)
+  board_length                  Float                            @default(0)
+  board_width                   Float                            @default(0)
+  dimension_1                   Float                            @default(0)
+  dimension_2                   Float                            @default(0)
+  dimension_3                   Float                            @default(0)
+  installation_charges          Decimal?                         @db.Decimal(12, 2)
+  item1_weight                  Decimal?                         @db.Decimal(12, 2)
+  level1_price                  Decimal?                         @db.Decimal(12, 2)
+  level2_price                  Decimal?                         @db.Decimal(12, 2)
+  level3_price                  Decimal?                         @db.Decimal(12, 2)
+  moq                           Int                              @default(0)
+  no_of_drill_holes             Int                              @default(0)
+  pre_mill_width                Float                            @default(0)
+  alt_uom_text                  String?
+  brand_id                      Int?
+  category_id                   Int
+  article_code                  String?
+  p_code                        String?
+  color_name                    String?
+  core_material                 String?
+  edge_banding_color            String?
+  finish                        String?
+  group                         String?
+  hsn_code                      String?
+  product_name                  String
+  procurement                   String?
+  unit_of_measure               String?
+  vendor_code                   String?
+  custom_field_1                String?
+  custom_field_2                String?
+  custom_field_3                String?
+  created_by                    Int?
+  created_at                    DateTime                         @default(now())
+  updated_at                    DateTime                         @updatedAt
+  updated_by                    Int?
+  active                        ProductActiveFlag                @default(Yes)
+  current_stock                 Decimal                          @default(0) @db.Decimal(12, 2)
+  hsn_id                        Int?
+  stock_updated_at              DateTime?
+  consumption_unit_id           Int?
+  costing_method                CostingMethod                    @default(FIFO)
+  item_group_id                 Int?
+  item_type                     ProductItemType                  @default(Goods)
+  max_stock_qty                 Decimal?                         @db.Decimal(18, 3)
+  max_stock_unit_id             Int?
+  min_stock_qty                 Decimal?                         @db.Decimal(18, 3)
+  min_stock_unit_id             Int?
+  primary_unit_id               Int?
+  reorder_batch_qty             Decimal?                         @db.Decimal(18, 3)
+  reorder_batch_unit_id         Int?
+  reorder_level_qty             Decimal?                         @db.Decimal(18, 3)
+  reorder_level_unit_id         Int?
+  shelf_life_days               Int?
+  stock_unit_id                 Int?
+  barcode                       String?
+  core_product_id               Int?
+  finish_id                     Int?
+  grade_id                      Int?
+  height                        Decimal?                         @db.Decimal(12, 4)
+  item_code                     String?
+  item_type_master_id           Int?
+  length                        Decimal?                         @db.Decimal(12, 4)
+  purchase_unit_id              Int?
+  size                          String?
+  sub_category_id               Int?
+  thickness                     Decimal?                         @db.Decimal(12, 4)
+  type_id                       Int?
+  grnItems                      GRNItem[]                        @relation("GRNItemProduct")
+  leadRequirementMaterials      LeadRequirementMaterialMapping[]
+  brand                         BrandMaster?                     @relation(fields: [brand_id], references: [id])
+  category                      ProjectCategoriesMaster          @relation("ProductCategory", fields: [category_id], references: [id], onDelete: Cascade)
+  consumptionUnit               UnitMaster?                      @relation("ProductConsumptionUnit", fields: [consumption_unit_id], references: [id])
+  coreProduct                   CoreProductMaster?               @relation(fields: [core_product_id], references: [id])
+  finishMaster                  FinishMaster?                    @relation(fields: [finish_id], references: [id])
+  grade                         GradeMaster?                     @relation(fields: [grade_id], references: [id])
+  hsn                           HsnProductMapping?               @relation("ProductHsnMapping", fields: [hsn_id], references: [id])
+  itemGroup                     ItemGroupMaster?                 @relation(fields: [item_group_id], references: [id])
+  itemTypeMaster                ItemTypeMaster?                  @relation(fields: [item_type_master_id], references: [id])
+  maxStockUnit                  UnitMaster?                      @relation("ProductMaxStockUnit", fields: [max_stock_unit_id], references: [id])
+  minStockUnit                  UnitMaster?                      @relation("ProductMinStockUnit", fields: [min_stock_unit_id], references: [id])
+  primaryUnit                   UnitMaster?                      @relation("ProductPrimaryUnit", fields: [primary_unit_id], references: [id])
+  purchaseUnit                  UnitMaster?                      @relation("ProductPurchaseUnit", fields: [purchase_unit_id], references: [id])
+  reorderBatchUnit              UnitMaster?                      @relation("ProductReorderBatchUnit", fields: [reorder_batch_unit_id], references: [id])
+  reorderLevelUnit              UnitMaster?                      @relation("ProductReorderLevelUnit", fields: [reorder_level_unit_id], references: [id])
+  stockUnit                     UnitMaster?                      @relation("ProductStockUnit", fields: [stock_unit_id], references: [id])
+  subCategory                   ProjectCategoriesMaster?         @relation("ProductSubCategory", fields: [sub_category_id], references: [id])
+  type                          TypeMaster?                      @relation(fields: [type_id], references: [id])
+  vendor                        VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  stockHistories                ProductStockHistory[]            @relation("StockHistoryProduct")
+  supplierMappings              ProductSupplierMapping[]
+  purchaseIntentItems           PurchaseIntentItem[]             @relation("PIItemProduct")
+  purchaseOrderItems            PurchaseOrderItem[]              @relation("POItemProduct")
 
   @@index([vendor_id])
   @@index([brand_id])
@@ -4205,6 +4348,7 @@ model ProductSupplierMapping {
   company_vendor_id          Int
   supplier_item_code         String?
   amount                     Decimal?             @db.Decimal(18, 2)
+  final_amount               Decimal?             @db.Decimal(18, 2)
   is_active                  Boolean              @default(true)
   created_by                 Int?
   updated_by                 Int?
@@ -4893,6 +5037,7 @@ enum BoxInfoFieldType {
 enum PackingType {
   DEFAULT
   GROUPWISE
+  CUSTOM_GROUP
 }
 
 enum AdditionalCostCalculationType {
@@ -4933,6 +5078,8 @@ enum StockChangeSource {
   GRNConfirmation
   ExcelUpload
   ManualAdjustment
+  MaterialIssue
+  MaterialFreeze
 }
 
 enum GRNStatus {
@@ -5411,6 +5558,11 @@ model ProductsRequiredForProduction {
   qty             Decimal  @db.Decimal(12, 2)
   unit            String
   name            String
+  // Reserved via "Freeze" — already deducted from ProductMaster.current_stock at freeze time.
+  frozen_item_qty Decimal  @default(0) @db.Decimal(12, 2)
+  // Handed off via "Issue" — the final, consumed state. Issuing an already-frozen unit does
+  // not deduct stock again since freezing already deducted it.
+  issued_item_qty Decimal  @default(0) @db.Decimal(12, 2)
   created_at      DateTime @default(now())
   created_by      Int
 
@@ -5439,4 +5591,142 @@ model MetaWebhook {
   @@index([created_at])
 }
 
+enum RuleStatus {
+  ACTIVE
+  INACTIVE
+}
 
+enum RuleConditionType {
+  COLUMN
+  CATEGORY
+}
+
+enum RuleOperator {
+  EQUALS
+  NOT_EQUALS
+  CONTAINS
+  NOT_CONTAINS
+  STARTS_WITH
+  ENDS_WITH
+  IS_BLANK
+  IS_NOT_BLANK
+  LESS_THAN
+  LESS_THAN_OR_EQUAL
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL
+  IN
+  NOT_IN
+  BETWEEN
+}
+
+enum LogicalOperator {
+  AND
+  OR
+}
+
+enum RuleFieldDataType {
+  STRING
+  NUMBER
+  BOOLEAN
+  ARRAY
+}
+
+model CutListRuleMaster {
+  id         Int        @id @default(autoincrement())
+  vendor_id  Int
+  machine_id Int
+  rule_code  String
+  rule_name  String
+  rule_tag   String?    @default("CUTLIST_MACHINE_ROUTING")
+  priority   Int        @default(10)
+  status     RuleStatus @default(ACTIVE)
+  created_by Int?
+  updated_by Int?
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+
+  vendor    VendorMaster  @relation(fields: [vendor_id], references: [id])
+  machine   MachineMaster @relation("CutListRules", fields: [machine_id], references: [id])
+  createdBy UserMaster?   @relation("CutListRulesCreated", fields: [created_by], references: [id])
+  updatedBy UserMaster?   @relation("CutListRulesUpdated", fields: [updated_by], references: [id])
+
+  conditionGroups        CutListRuleConditionGroup[]
+  actions                CutListRuleAction[]
+  cutListMachineMappings CutListMachineMapping[]
+
+  @@unique([vendor_id, machine_id, rule_code], name: "vendor_machine_rule_code_unique")
+  @@index([vendor_id, machine_id, status])
+}
+
+model CutListRuleConditionGroup {
+  id               Int              @id @default(autoincrement())
+  rule_id          Int
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime         @default(now())
+  updated_at       DateTime         @updatedAt
+
+  rule       CutListRuleMaster      @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  conditions CutListRuleCondition[]
+
+  @@index([rule_id])
+}
+
+model CutListRuleCondition {
+  id               Int               @id @default(autoincrement())
+  group_id         Int
+  condition_type   RuleConditionType
+  field_key        String?
+  operator         RuleOperator
+  value            Json
+  logical_operator LogicalOperator?
+  sequence_no      Int
+  created_at       DateTime          @default(now())
+  updated_at       DateTime          @updatedAt
+
+  group CutListRuleConditionGroup @relation(fields: [group_id], references: [id], onDelete: Cascade)
+
+  @@index([group_id])
+}
+
+model CutListRuleAction {
+  id           Int      @id @default(autoincrement())
+  rule_id      Int
+  action_id    Int
+  action_value Json?
+  sequence_no  Int
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  rule         CutListRuleMaster @relation(fields: [rule_id], references: [id], onDelete: Cascade)
+  actionMaster RuleActionMaster  @relation(fields: [action_id], references: [id])
+
+  @@index([rule_id])
+  @@index([action_id])
+}
+
+model RuleFieldMaster {
+  id         Int               @id @default(autoincrement())
+  field_key  String            @unique
+  field_name String
+  data_type  RuleFieldDataType
+  status     RuleStatus        @default(ACTIVE)
+  created_at DateTime          @default(now())
+  updated_at DateTime          @updatedAt
+}
+
+model RuleActionMaster {
+  id          Int        @id @default(autoincrement())
+  vendor_id   Int
+  action_code String
+  action_name String
+  status      RuleStatus @default(ACTIVE)
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+
+  vendor      VendorMaster        @relation(fields: [vendor_id], references: [id])
+  ruleActions CutListRuleAction[]
+
+  @@unique([vendor_id, action_code], name: "vendor_action_code_unique")
+  @@index([vendor_id])
+}

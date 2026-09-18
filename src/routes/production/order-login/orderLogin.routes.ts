@@ -1,3 +1,4 @@
+import { verifyToken } from "../../../middlewares/auth.middleware";
 import { Router } from "express";
 import { OrderLoginController } from "../../../controllers/leadModuleControllers/production/order-login/orderLogin.controller";
 import multer from "multer";
@@ -10,6 +11,12 @@ import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 const upload = multer();
 const orderLoginRoutes = Router();
 const controller = new OrderLoginController();
+
+orderLoginRoutes.get("/vendorId/:vendorId/leadId/:leadId/required-materials", verifyToken, controller.getRequiredMaterials);
+
+orderLoginRoutes.post("/vendorId/:vendorId/leadId/:leadId/freeze-materials", verifyToken, controller.freezeRequiredMaterials);
+
+orderLoginRoutes.post("/vendorId/:vendorId/leadId/:leadId/issue-materials", verifyToken, controller.issueRequiredMaterials);
 
 // POST → Create Order Login entry
 orderLoginRoutes.post(
@@ -58,6 +65,7 @@ orderLoginRoutes.get(
 
 orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-production-files",
+  verifyToken,
   handleMulterUpload(uploadProductionFiles.array("files")), // ✅ accept multiple files
   controller.uploadProductionFiles,
 );

@@ -88,6 +88,15 @@ underInstallationStageRoutes.post(
   controller.createMiscellaneousEntry,
 );
 
+/**
+ * POST → Create Miscellaneous Return Order with documents
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/leadId/:leadId/create-return-order",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.createMiscellaneousReturnOrder,
+);
+
 underInstallationStageRoutes.post(
   "/miscellaneous/:miscId/documents",
   handleMulterUpload(uploadUnderInstallationFiles.array("files")),
@@ -97,6 +106,16 @@ underInstallationStageRoutes.post(
 underInstallationStageRoutes.get(
   "/vendorId/:vendorId/leadId/:leadId/get-all",
   controller.getAllMiscellaneousEntries,
+);
+
+/**
+ * ✅ PUT → Update Miscellaneous Entry Details
+ * @route PUT /vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update
+ */
+underInstallationStageRoutes.put(
+  "/vendorId/:vendorId/leadId/:leadId/miscId/:miscId/update",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.updateMiscellaneousEntry,
 );
 
 /**
@@ -143,6 +162,43 @@ underInstallationStageRoutes.post(
   "/vendorId/:vendorId/taskId/:taskId/upload-completion-docs",
   handleMulterUpload(uploadUnderInstallationFiles.array("files")),
   controller.uploadMiscCompletionDocumentsByTaskId,
+);
+
+/**
+ * ✅ POST → Mark Miscellaneous Return Order as Returned (Upload return photo proof)
+ * @route POST /vendorId/:vendorId/miscId/:miscId/mark-returned
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/miscId/:miscId/mark-returned",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
+  controller.markMiscellaneousAsReturned,
+);
+
+/**
+ * ✅ GET → Get eligible followup users (site-supervisor, head-site-supervisor, factory, miscellaneous)
+ * @route GET /vendorId/:vendorId/miscellaneous/followup-users
+ */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/miscellaneous/followup-users",
+  controller.getMiscFollowupEligibleUsers,
+);
+
+/**
+ * ✅ POST → Create Miscellaneous Followup Task
+ * @route POST /vendorId/:vendorId/miscId/:miscId/followup
+ */
+underInstallationStageRoutes.post(
+  "/vendorId/:vendorId/miscId/:miscId/followup",
+  controller.createMiscFollowup,
+);
+
+/**
+ * ✅ GET → Get Miscellaneous Followups
+ * @route GET /vendorId/:vendorId/miscId/:miscId/followups
+ */
+underInstallationStageRoutes.get(
+  "/vendorId/:vendorId/miscId/:miscId/followups",
+  controller.getMiscFollowups,
 );
 
 underInstallationStageRoutes.post(
@@ -204,6 +260,16 @@ underInstallationStageRoutes.get(
   controller.checkLeadReadyForFinalHandover,
 );
 
+/** ✅ DELETE → Delete Miscellaneous Entry (Super-Admin only) */
+underInstallationStageRoutes.delete(
+  "/vendorId/:vendorId/leadId/:leadId/misc/:miscId",
+  controller.deleteMiscellaneousEntry,
+);
+underInstallationStageRoutes.delete(
+  "/vendorId/:vendorId/leadId/:leadId/miscId/:miscId",
+  controller.deleteMiscellaneousEntry,
+);
+
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/resolve",
   controller.resolveMiscellaneousEntry,
@@ -211,6 +277,7 @@ underInstallationStageRoutes.put(
 
 underInstallationStageRoutes.put(
   "/vendorId/:vendorId/leadId/:leadId/misc/:miscId/mark-ready",
+  handleMulterUpload(uploadUnderInstallationFiles.array("files")),
   controller.markMiscellaneousTaskReady,
 );
 

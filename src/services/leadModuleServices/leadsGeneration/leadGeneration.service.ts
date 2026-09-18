@@ -1,3 +1,5 @@
+import { UnderInstallationStageService } from "../../installation/under-installation/underInstallationStageService";
+import { resolveMiscTask } from "../../installation/under-installation/resolveMiscTask";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
@@ -947,6 +949,8 @@ export const getLeadsByVendorAndUser = async (
             id: true,
             b2b_requirement_type_id: true,
             process_brief_id: true,
+            machine_id: true,
+            machine: { select: { id: true, machine_name: true, machine_code: true } },
             processBrief: { select: { id: true, name: true } },
             b2bRequirementType: { select: { id: true, type: true } },
           },
@@ -1083,9 +1087,10 @@ export const getLeadById = async (
       userType === "telecaller-team-lead" ||
       userType === "telecaller team lead" ||
       userType === "store caller" ||
+      userType === "miscellaneous" ||
       (userType === "custom" && !!customViewPrivilege)
     ) {
-      console.log("[SERVICE] Sales Executive / Telecaller – vendor scoped access granted");
+      console.log("[SERVICE] Sales Executive / Telecaller / Misc – vendor scoped access granted");
     } else if (["admin", "super-admin", "auditor"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
@@ -1108,7 +1113,7 @@ export const getLeadById = async (
       statusType: true,
       productMappings: { include: { productType: true } },
       leadB2BReqMappings: { include: { b2bRequirementType: true } },
-      leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true } },
+      leadProcessBriefs: { include: { processBrief: true, b2bRequirementType: true, machine: true } },
       leadProductStructureMapping: { include: { productStructure: { include: { productType: true } } } },
       documents: {
         where: { deleted_at: null, documentType: { tag: "Type 1" } },
@@ -4241,7 +4246,7 @@ export const assignLeadToUser = async (
   }
 };
 
-export const editTaskISMService = async (payload: EditTaskISMInput) => {
+export const editTaskISMService = async (payload: EditTaskISMInput, baseUrl = "http://localhost:3000") => {
   const { error, value } = editTaskISMSchema.validate(payload);
   if (error) {
     throw new Error(
@@ -4262,7 +4267,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
     closed_by,
   } = value;
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     // 1️⃣ Validate task existence
     const task = await tx.userLeadTask.findFirst({
       where: { id: task_id, lead_id },
@@ -4280,6 +4285,42 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
     const vendor_id = task.lead.vendor_id;
     const account_id = task.lead.account_id;
+
+    const completedMisc = status === "completed" && task.status !== "completed" &&
+      ["Miscellaneous", "Pending Materials", "Return Order Pickup Schedule", "Return Order Confirmation", "Return Material Handover"].includes(task.task_type)
+      ? await resolveMiscTask(tx, vendor_id, task)
+      : null;
+
+    if (
+      status === "completed" &&
+      task.status !== "completed" &&
+      completedMisc &&
+      (task.task_type === "Return Order Pickup Schedule" ||
+        (completedMisc.return_order_delivery_method === "PICKUP_SCHEDULE" && task.task_type === "Return Order Pickup Schedule"))
+    ) {
+      await UnderInstallationStageService.createReturnMaterialHandoverTaskOnPickupCompleted(
+        tx,
+        vendor_id,
+        task,
+        completedMisc,
+        closed_by ?? updated_by,
+      );
+    }
+
+    if (
+      status === "completed" &&
+      task.status !== "completed" &&
+      completedMisc &&
+      completedMisc.return_order_delivery_method === "PICKUP_SCHEDULE" &&
+      task.task_type === "Return Material Handover"
+    ) {
+      await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
+        tx,
+        vendor_id,
+        completedMisc,
+        closed_by ?? updated_by,
+      );
+    }
 
     const updateData: any = {
       updated_by,
@@ -4416,8 +4457,38 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       updated_by,
     });
 
-    return updatedTask;
+    return { updatedTask, miscId: completedMisc?.id, taskType: task.task_type };
   });
+
+  if (result.miscId) {
+    if (result.taskType === "Return Order Pickup Schedule") {
+      await UnderInstallationStageService.notifyReturnOrderPickupCompleted({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        completed_by: closed_by ?? updated_by,
+        baseUrl,
+      });
+    } else if (result.taskType === "Return Material Handover") {
+      await UnderInstallationStageService.notifyReturnOrderHandoverCompleted({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        returned_by: closed_by ?? updated_by,
+        baseUrl,
+      });
+    } else {
+      await UnderInstallationStageService.notifyMiscTaskReady({
+        vendor_id: result.updatedTask.vendor_id,
+        lead_id,
+        misc_id: result.miscId,
+        ready_by: closed_by ?? updated_by,
+        taskId: result.updatedTask.id,
+        baseUrl,
+      });
+    }
+  }
+  return result.updatedTask;
 };
 
 export const verifyUserTokenService = async (token: string) => {

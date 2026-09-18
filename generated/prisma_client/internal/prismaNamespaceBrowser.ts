@@ -61,6 +61,7 @@ export const ModelName = {
   UserSession: 'UserSession',
   UserPrivilegeMapping: 'UserPrivilegeMapping',
   ProjectMaster: 'ProjectMaster',
+  ProjectLocationProductQuantity: 'ProjectLocationProductQuantity',
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
   BoxMaster: 'BoxMaster',
@@ -84,6 +85,7 @@ export const ModelName = {
   ProductTypeMaster: 'ProductTypeMaster',
   ProcessBriefMaster: 'ProcessBriefMaster',
   LeadProcessBriefMapping: 'LeadProcessBriefMapping',
+  ProcessBriefMachineMapping: 'ProcessBriefMachineMapping',
   LeadRequirementMaterialMapping: 'LeadRequirementMaterialMapping',
   CarcassTypeMaster: 'CarcassTypeMaster',
   CarcasMaterialMaster: 'CarcasMaterialMaster',
@@ -160,6 +162,8 @@ export const ModelName = {
   MiscellaneousTeamMaster: 'MiscellaneousTeamMaster',
   MiscellaneousTeamMapping: 'MiscellaneousTeamMapping',
   MiscellaneousDocument: 'MiscellaneousDocument',
+  MiscellaneousFollowup: 'MiscellaneousFollowup',
+  MiscellaneousReorderInstancesMaterialMapping: 'MiscellaneousReorderInstancesMaterialMapping',
   InstallationIssueLogMaster: 'InstallationIssueLogMaster',
   IssueLogTypeMaster: 'IssueLogTypeMaster',
   IssueLogTypeMapping: 'IssueLogTypeMapping',
@@ -263,7 +267,13 @@ export const ModelName = {
   MetaLead: 'MetaLead',
   BoxItemDeleteLog: 'BoxItemDeleteLog',
   ProductsRequiredForProduction: 'ProductsRequiredForProduction',
-  MetaWebhook: 'MetaWebhook'
+  MetaWebhook: 'MetaWebhook',
+  CutListRuleMaster: 'CutListRuleMaster',
+  CutListRuleConditionGroup: 'CutListRuleConditionGroup',
+  CutListRuleCondition: 'CutListRuleCondition',
+  CutListRuleAction: 'CutListRuleAction',
+  RuleFieldMaster: 'RuleFieldMaster',
+  RuleActionMaster: 'RuleActionMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -475,6 +485,7 @@ export const ProjectMasterScalarFieldEnum = {
   updated_at: 'updated_at',
   updated_by: 'updated_by',
   packing_type: 'packing_type',
+  is_multi_location: 'is_multi_location',
   no_of_boxes: 'no_of_boxes',
   isDeleted: 'isDeleted',
   deleted_by: 'deleted_by',
@@ -483,6 +494,20 @@ export const ProjectMasterScalarFieldEnum = {
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
+
+
+export const ProjectLocationProductQuantityScalarFieldEnum = {
+  id: 'id',
+  project_id: 'project_id',
+  vendor_id: 'vendor_id',
+  location_name: 'location_name',
+  group_name: 'group_name',
+  qty: 'qty',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectLocationProductQuantityScalarFieldEnum = (typeof ProjectLocationProductQuantityScalarFieldEnum)[keyof typeof ProjectLocationProductQuantityScalarFieldEnum]
 
 
 export const ProjectDetailsScalarFieldEnum = {
@@ -540,7 +565,14 @@ export const BoxMasterScalarFieldEnum = {
   site_in_at: 'site_in_at',
   site_in_by: 'site_in_by',
   packed_at: 'packed_at',
-  packed_by: 'packed_by'
+  packed_by: 'packed_by',
+  sequence_no: 'sequence_no',
+  product_group_name: 'product_group_name',
+  packing_group_name: 'packing_group_name',
+  product_set_no: 'product_set_no',
+  box_position: 'box_position',
+  boxes_per_product: 'boxes_per_product',
+  is_auto_created: 'is_auto_created'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -956,10 +988,26 @@ export const LeadProcessBriefMappingScalarFieldEnum = {
   created_by: 'created_by',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  b2b_requirement_type_id: 'b2b_requirement_type_id'
+  b2b_requirement_type_id: 'b2b_requirement_type_id',
+  machine_id: 'machine_id'
 } as const
 
 export type LeadProcessBriefMappingScalarFieldEnum = (typeof LeadProcessBriefMappingScalarFieldEnum)[keyof typeof LeadProcessBriefMappingScalarFieldEnum]
+
+
+export const ProcessBriefMachineMappingScalarFieldEnum = {
+  id: 'id',
+  process_brief_id: 'process_brief_id',
+  machine_id: 'machine_id',
+  machine_type_id: 'machine_type_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type ProcessBriefMachineMappingScalarFieldEnum = (typeof ProcessBriefMachineMappingScalarFieldEnum)[keyof typeof ProcessBriefMachineMappingScalarFieldEnum]
 
 
 export const LeadRequirementMaterialMappingScalarFieldEnum = {
@@ -2102,7 +2150,14 @@ export const MiscellaneousMasterScalarFieldEnum = {
   updated_at: 'updated_at',
   exp_of_rejection: 'exp_of_rejection',
   misc_approved: 'misc_approved',
-  required_delivery_date: 'required_delivery_date'
+  required_delivery_date: 'required_delivery_date',
+  solution: 'solution',
+  return_order_date: 'return_order_date',
+  return_order_delivery_method: 'return_order_delivery_method',
+  is_returned: 'is_returned',
+  returned_at: 'returned_at',
+  returned_by: 'returned_by',
+  return_handover_remark: 'return_handover_remark'
 } as const
 
 export type MiscellaneousMasterScalarFieldEnum = (typeof MiscellaneousMasterScalarFieldEnum)[keyof typeof MiscellaneousMasterScalarFieldEnum]
@@ -2151,6 +2206,34 @@ export const MiscellaneousDocumentScalarFieldEnum = {
 } as const
 
 export type MiscellaneousDocumentScalarFieldEnum = (typeof MiscellaneousDocumentScalarFieldEnum)[keyof typeof MiscellaneousDocumentScalarFieldEnum]
+
+
+export const MiscellaneousFollowupScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  miscellaneous_id: 'miscellaneous_id',
+  followup_date: 'followup_date',
+  solution: 'solution',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type MiscellaneousFollowupScalarFieldEnum = (typeof MiscellaneousFollowupScalarFieldEnum)[keyof typeof MiscellaneousFollowupScalarFieldEnum]
+
+
+export const MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  misc_id: 'misc_id',
+  orderlogindetails_id: 'orderlogindetails_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum = (typeof MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum)[keyof typeof MiscellaneousReorderInstancesMaterialMappingScalarFieldEnum]
 
 
 export const InstallationIssueLogMasterScalarFieldEnum = {
@@ -2351,7 +2434,9 @@ export const CutListScalarFieldEnum = {
   category_id: 'category_id',
   use_in_assembled_packing: 'use_in_assembled_packing',
   include_in_packing: 'include_in_packing',
-  scan_pack_validate: 'scan_pack_validate'
+  scan_pack_validate: 'scan_pack_validate',
+  custom_packing_group: 'custom_packing_group',
+  no_of_qty_in_boxes: 'no_of_qty_in_boxes'
 } as const
 
 export type CutListScalarFieldEnum = (typeof CutListScalarFieldEnum)[keyof typeof CutListScalarFieldEnum]
@@ -2381,7 +2466,9 @@ export const CutListMachineMappingScalarFieldEnum = {
   weight: 'weight',
   qty: 'qty',
   received_qty: 'received_qty',
-  row_created_source: 'row_created_source'
+  row_created_source: 'row_created_source',
+  project_location_product_quantity_id: 'project_location_product_quantity_id',
+  rule_id: 'rule_id'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -3346,6 +3433,7 @@ export const ProductSupplierMappingScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   supplier_item_code: 'supplier_item_code',
   amount: 'amount',
+  final_amount: 'final_amount',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
@@ -3973,6 +4061,8 @@ export const ProductsRequiredForProductionScalarFieldEnum = {
   qty: 'qty',
   unit: 'unit',
   name: 'name',
+  frozen_item_qty: 'frozen_item_qty',
+  issued_item_qty: 'issued_item_qty',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -3987,6 +4077,91 @@ export const MetaWebhookScalarFieldEnum = {
 } as const
 
 export type MetaWebhookScalarFieldEnum = (typeof MetaWebhookScalarFieldEnum)[keyof typeof MetaWebhookScalarFieldEnum]
+
+
+export const CutListRuleMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  machine_id: 'machine_id',
+  rule_code: 'rule_code',
+  rule_name: 'rule_name',
+  rule_tag: 'rule_tag',
+  priority: 'priority',
+  status: 'status',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleMasterScalarFieldEnum = (typeof CutListRuleMasterScalarFieldEnum)[keyof typeof CutListRuleMasterScalarFieldEnum]
+
+
+export const CutListRuleConditionGroupScalarFieldEnum = {
+  id: 'id',
+  rule_id: 'rule_id',
+  logical_operator: 'logical_operator',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleConditionGroupScalarFieldEnum = (typeof CutListRuleConditionGroupScalarFieldEnum)[keyof typeof CutListRuleConditionGroupScalarFieldEnum]
+
+
+export const CutListRuleConditionScalarFieldEnum = {
+  id: 'id',
+  group_id: 'group_id',
+  condition_type: 'condition_type',
+  field_key: 'field_key',
+  operator: 'operator',
+  value: 'value',
+  logical_operator: 'logical_operator',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleConditionScalarFieldEnum = (typeof CutListRuleConditionScalarFieldEnum)[keyof typeof CutListRuleConditionScalarFieldEnum]
+
+
+export const CutListRuleActionScalarFieldEnum = {
+  id: 'id',
+  rule_id: 'rule_id',
+  action_id: 'action_id',
+  action_value: 'action_value',
+  sequence_no: 'sequence_no',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type CutListRuleActionScalarFieldEnum = (typeof CutListRuleActionScalarFieldEnum)[keyof typeof CutListRuleActionScalarFieldEnum]
+
+
+export const RuleFieldMasterScalarFieldEnum = {
+  id: 'id',
+  field_key: 'field_key',
+  field_name: 'field_name',
+  data_type: 'data_type',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RuleFieldMasterScalarFieldEnum = (typeof RuleFieldMasterScalarFieldEnum)[keyof typeof RuleFieldMasterScalarFieldEnum]
+
+
+export const RuleActionMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  action_code: 'action_code',
+  action_name: 'action_name',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RuleActionMasterScalarFieldEnum = (typeof RuleActionMasterScalarFieldEnum)[keyof typeof RuleActionMasterScalarFieldEnum]
 
 
 export const SortOrder = {

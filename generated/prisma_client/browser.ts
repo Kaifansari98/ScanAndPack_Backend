@@ -68,6 +68,11 @@ export type UserPrivilegeMapping = Prisma.UserPrivilegeMappingModel
  */
 export type ProjectMaster = Prisma.ProjectMasterModel
 /**
+ * Model ProjectLocationProductQuantity
+ * 
+ */
+export type ProjectLocationProductQuantity = Prisma.ProjectLocationProductQuantityModel
+/**
  * Model ProjectDetails
  * 
  */
@@ -182,6 +187,11 @@ export type ProcessBriefMaster = Prisma.ProcessBriefMasterModel
  * 
  */
 export type LeadProcessBriefMapping = Prisma.LeadProcessBriefMappingModel
+/**
+ * Model ProcessBriefMachineMapping
+ * 
+ */
+export type ProcessBriefMachineMapping = Prisma.ProcessBriefMachineMappingModel
 /**
  * Model LeadRequirementMaterialMapping
  * 
@@ -562,6 +572,16 @@ export type MiscellaneousTeamMapping = Prisma.MiscellaneousTeamMappingModel
  * 
  */
 export type MiscellaneousDocument = Prisma.MiscellaneousDocumentModel
+/**
+ * Model MiscellaneousFollowup
+ * 
+ */
+export type MiscellaneousFollowup = Prisma.MiscellaneousFollowupModel
+/**
+ * Model MiscellaneousReorderInstancesMaterialMapping
+ * 
+ */
+export type MiscellaneousReorderInstancesMaterialMapping = Prisma.MiscellaneousReorderInstancesMaterialMappingModel
 /**
  * Model InstallationIssueLogMaster
  * 
@@ -1082,3 +1102,33 @@ export type ProductsRequiredForProduction = Prisma.ProductsRequiredForProduction
  * 
  */
 export type MetaWebhook = Prisma.MetaWebhookModel
+/**
+ * Model CutListRuleMaster
+ * 
+ */
+export type CutListRuleMaster = Prisma.CutListRuleMasterModel
+/**
+ * Model CutListRuleConditionGroup
+ * 
+ */
+export type CutListRuleConditionGroup = Prisma.CutListRuleConditionGroupModel
+/**
+ * Model CutListRuleCondition
+ * 
+ */
+export type CutListRuleCondition = Prisma.CutListRuleConditionModel
+/**
+ * Model CutListRuleAction
+ * 
+ */
+export type CutListRuleAction = Prisma.CutListRuleActionModel
+/**
+ * Model RuleFieldMaster
+ * 
+ */
+export type RuleFieldMaster = Prisma.RuleFieldMasterModel
+/**
+ * Model RuleActionMaster
+ * 
+ */
+export type RuleActionMaster = Prisma.RuleActionMasterModel

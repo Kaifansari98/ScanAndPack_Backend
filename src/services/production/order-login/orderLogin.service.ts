@@ -1108,6 +1108,7 @@ export class OrderLoginService {
     userId: number,
     files: { originalName: string; sysName: string }[],
     instanceId?: number | null,
+    materials?: { rows: any[]; replace: boolean },
   ) {
     if (!vendorId || !leadId || !userId) {
       const error = new Error("vendorId, leadId, and userId are required");
@@ -1121,58 +1122,233 @@ export class OrderLoginService {
       throw error;
     }
 
-    const uploadedDocs = [];
+    return prisma.$transaction(async (tx) => {
+      if (materials) {
+        // Serialize replacement and first uploads for this lead, including concurrent requests.
+        await tx.$queryRaw`SELECT id FROM "LeadMaster" WHERE id = ${leadId} AND vendor_id = ${vendorId} FOR UPDATE`;
+        const lead = await tx.leadMaster.findFirst({ where: { id: leadId, vendor_id: vendorId } });
+        if (!lead?.franchise_id) throw Object.assign(new Error("Lead franchise not found"), { statusCode: 400 });
+        const scope = { vendor_id: vendorId, franchise_id: lead.franchise_id, lead_id: leadId, instance_id: instanceId ?? null };
+        const existing = await tx.productsRequiredForProduction.count({ where: scope });
+        if (existing && !materials.replace) throw Object.assign(new Error("Confirm replacement of the previous material list."), { statusCode: 409 });
+        if (!Array.isArray(materials.rows) || !materials.rows.length || materials.rows.length > 10000) {
+          throw Object.assign(new Error("Provide between 1 and 10,000 material rows."), { statusCode: 400 });
+        }
+        const products = await tx.productMaster.findMany({ where: { vendor_id: vendorId }, select: { id: true, article_code: true, active: true } });
+        const rows = materials.rows.flatMap((row) => {
+          if (!row || ["articleCode", "type", "category", "unit", "name"].some((field) => typeof row[field] !== "string" || !row[field].trim()) ||
+            typeof row.qty !== "number" || !Number.isFinite(row.qty) || row.qty <= 0 || row.qty > 9999999999.99 || Math.abs(row.qty * 100 - Math.round(row.qty * 100)) > 0.0001) return [];
+          const matches = products.filter((product) => product.article_code?.trim() === row.articleCode.trim());
+          if (matches.length !== 1 || matches[0].active !== "Yes") return [];
+          return [{ ...scope, product_id: matches[0].id, article_code: row.articleCode.trim(), type: row.type.trim(), category: row.category.trim(), qty: row.qty, unit: row.unit.trim(), name: row.name.trim(), created_by: userId }];
+        });
+        if (!rows.length) throw Object.assign(new Error("No valid active products found. Previous materials have been kept."), { statusCode: 400 });
+        await tx.productsRequiredForProduction.deleteMany({ where: scope });
+        await tx.productsRequiredForProduction.createMany({ data: rows });
+      }
+      const uploadedDocs = [];
 
-    // ✅ Step 1: Upload Client Approval Screenshots
-    const ProductionDocType = await prisma.documentTypeMaster.findFirst({
-      where: { vendor_id: vendorId, tag: "Type 14" },
-    });
-    if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
-
-    for (const file of files) {
-      // ✅ Store record in DB
-      const savedDoc = await prisma.leadDocuments.create({
-        data: {
-          doc_og_name: file.originalName,
-          doc_sys_name: file.sysName,
-          created_by: userId,
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId || null,
-          doc_type_id: ProductionDocType.id, // ✅ Type 14 = Production Files
-          product_structure_instance_id:
-            typeof instanceId !== "undefined" ? instanceId : null,
-        },
+      // ✅ Step 1: Upload Client Approval Screenshots
+      const ProductionDocType = await tx.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 14" },
       });
+      if (!ProductionDocType) throw new Error("Doc Type (Type 14) not found");
 
-      uploadedDocs.push(savedDoc);
-    }
+      for (const file of files) {
+        // ✅ Store record in DB
+        const savedDoc = await tx.leadDocuments.create({
+          data: {
+            doc_og_name: file.originalName,
+            doc_sys_name: file.sysName,
+            created_by: userId,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId || null,
+            doc_type_id: ProductionDocType.id, // ✅ Type 14 = Production Files
+            product_structure_instance_id:
+              typeof instanceId !== "undefined" ? instanceId : null,
+          },
+        });
 
-    if (accountId) {
-      const detailedLog = await createLeadLog(prisma, {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: accountId,
-        action: `Production files uploaded: ${files.length} file(s)`,
-        action_type: "CREATE",
-        created_by: userId,
-        instance_id: instanceId ?? undefined,
-      });
+        uploadedDocs.push(savedDoc);
+      }
 
-      await prisma.leadDocumentLogs.createMany({
-        data: uploadedDocs.map((doc) => ({
+      if (accountId) {
+        const detailedLog = await createLeadLog(tx, {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,
-          doc_id: doc.id,
-          lead_logs_id: detailedLog.id,
+          action: `Production files uploaded: ${files.length} file(s)`,
+          action_type: "CREATE",
           created_by: userId,
-          created_at: new Date(),
-        })),
-      });
-    }
+          instance_id: instanceId ?? undefined,
+        });
 
-    return uploadedDocs;
+        await tx.leadDocumentLogs.createMany({
+          data: uploadedDocs.map((doc) => ({
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: accountId,
+            doc_id: doc.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          })),
+        });
+      }
+
+      return uploadedDocs;
+    }, { timeout: 30000 });
+  }
+
+  async freezeRequiredMaterials(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+    items: { id: number; qty: number }[],
+  ) {
+    if (!vendorId || !leadId || !userId) {
+      throw Object.assign(new Error("vendorId, leadId, and userId are required"), { statusCode: 400 });
+    }
+    const cleanItems = (Array.isArray(items) ? items : [])
+      .map((item) => ({ id: Number(item?.id), qty: Math.round(Number(item?.qty) * 100) / 100 }))
+      .filter((item) => Number.isInteger(item.id) && item.id > 0 && Number.isFinite(item.qty) && item.qty > 0);
+    if (!cleanItems.length) {
+      throw Object.assign(new Error("Provide at least one item with a freeze quantity greater than 0."), { statusCode: 400 });
+    }
+    const qtyById = new Map(cleanItems.map((item) => [item.id, item.qty]));
+
+    return prisma.$transaction(async (tx) => {
+      const rows = await tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] }, vendor_id: vendorId, lead_id: leadId },
+        include: { product: { select: { id: true, current_stock: true, product_name: true } } },
+      });
+      if (rows.length !== qtyById.size) {
+        throw Object.assign(new Error("Some selected items were not found for this lead."), { statusCode: 404 });
+      }
+
+      const now = new Date();
+      for (const row of rows) {
+        const freezeQty = qtyById.get(row.id)!;
+        const required = parseFloat(row.qty.toString());
+        const alreadyFrozen = parseFloat(row.frozen_item_qty.toString());
+        const alreadyIssued = parseFloat(row.issued_item_qty.toString());
+        // Can't freeze past whichever is further along — issuing directly (without freezing
+        // first) also counts against how much of the requirement is left to freeze.
+        const remaining = Math.round((required - Math.max(alreadyFrozen, alreadyIssued)) * 100) / 100;
+        if (freezeQty > remaining + 1e-6) {
+          throw Object.assign(new Error(`Cannot freeze ${freezeQty} of "${row.name}" — only ${remaining} left to freeze.`), { statusCode: 400 });
+        }
+        const currentStock = parseFloat(row.product.current_stock.toString());
+        if (freezeQty > currentStock + 1e-6) {
+          throw Object.assign(new Error(`Cannot freeze ${freezeQty} of "${row.name}" — only ${currentStock} in stock.`), { statusCode: 400 });
+        }
+        const newStock = Math.round((currentStock - freezeQty) * 100) / 100;
+        const newFrozenQty = Math.round((alreadyFrozen + freezeQty) * 100) / 100;
+
+        await tx.productMaster.update({ where: { id: row.product_id }, data: { current_stock: newStock, stock_updated_at: now } });
+        await tx.productsRequiredForProduction.update({ where: { id: row.id }, data: { frozen_item_qty: newFrozenQty } });
+        await tx.productStockHistory.create({
+          data: {
+            vendor_id: vendorId,
+            product_id: row.product_id,
+            old_stock: currentStock,
+            new_stock: newStock,
+            change: newStock - currentStock,
+            source: "MaterialFreeze",
+            changed_by: userId,
+            remarks: `Frozen ${freezeQty} for lead #${leadId}`,
+          },
+        });
+      }
+
+      return tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] } },
+        include: { product: { select: {
+          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
+          unit_of_measure: true, stockUnit: { select: { unit_name: true } },
+          primaryUnit: { select: { unit_name: true, short_name: true } },
+        } } },
+      });
+    }, { timeout: 30000 });
+  }
+
+  async issueRequiredMaterials(
+    vendorId: number,
+    leadId: number,
+    userId: number,
+    items: { id: number; qty: number }[],
+  ) {
+    if (!vendorId || !leadId || !userId) {
+      throw Object.assign(new Error("vendorId, leadId, and userId are required"), { statusCode: 400 });
+    }
+    const cleanItems = (Array.isArray(items) ? items : [])
+      .map((item) => ({ id: Number(item?.id), qty: Math.round(Number(item?.qty) * 100) / 100 }))
+      .filter((item) => Number.isInteger(item.id) && item.id > 0 && Number.isFinite(item.qty) && item.qty > 0);
+    if (!cleanItems.length) {
+      throw Object.assign(new Error("Provide at least one item with an issue quantity greater than 0."), { statusCode: 400 });
+    }
+    const qtyById = new Map(cleanItems.map((item) => [item.id, item.qty]));
+
+    return prisma.$transaction(async (tx) => {
+      const rows = await tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] }, vendor_id: vendorId, lead_id: leadId },
+        include: { product: { select: { id: true, current_stock: true, product_name: true } } },
+      });
+      if (rows.length !== qtyById.size) {
+        throw Object.assign(new Error("Some selected items were not found for this lead."), { statusCode: 404 });
+      }
+
+      const now = new Date();
+      for (const row of rows) {
+        const issueQty = qtyById.get(row.id)!;
+        const required = parseFloat(row.qty.toString());
+        const alreadyFrozen = parseFloat(row.frozen_item_qty.toString());
+        const alreadyIssued = parseFloat(row.issued_item_qty.toString());
+        const remaining = Math.round((required - alreadyIssued) * 100) / 100;
+        if (issueQty > remaining + 1e-6) {
+          throw Object.assign(new Error(`Cannot issue ${issueQty} of "${row.name}" — only ${remaining} left to issue.`), { statusCode: 400 });
+        }
+        const currentStock = parseFloat(row.product.current_stock.toString());
+        // Frozen-but-not-yet-issued stock was already deducted at freeze time — issuing it now
+        // is bookkeeping only. Only the portion beyond that draws down live stock.
+        const frozenNotYetIssued = Math.max(0, Math.round((alreadyFrozen - alreadyIssued) * 100) / 100);
+        const coveredByFreeze = Math.min(issueQty, frozenNotYetIssued);
+        const newDeduction = Math.round((issueQty - coveredByFreeze) * 100) / 100;
+        if (newDeduction > currentStock + 1e-6) {
+          throw Object.assign(new Error(`Cannot issue ${issueQty} of "${row.name}" — only ${coveredByFreeze} is covered by frozen stock and ${currentStock} more is in stock.`), { statusCode: 400 });
+        }
+        const newIssuedQty = Math.round((alreadyIssued + issueQty) * 100) / 100;
+
+        await tx.productsRequiredForProduction.update({ where: { id: row.id }, data: { issued_item_qty: newIssuedQty } });
+
+        if (newDeduction > 0) {
+          const newStock = Math.round((currentStock - newDeduction) * 100) / 100;
+          await tx.productMaster.update({ where: { id: row.product_id }, data: { current_stock: newStock, stock_updated_at: now } });
+          await tx.productStockHistory.create({
+            data: {
+              vendor_id: vendorId,
+              product_id: row.product_id,
+              old_stock: currentStock,
+              new_stock: newStock,
+              change: newStock - currentStock,
+              source: "MaterialIssue",
+              changed_by: userId,
+              remarks: `Issued ${issueQty} for lead #${leadId}${coveredByFreeze > 0 ? ` (${coveredByFreeze} already frozen)` : ""}`,
+            },
+          });
+        }
+      }
+
+      return tx.productsRequiredForProduction.findMany({
+        where: { id: { in: [...qtyById.keys()] } },
+        include: { product: { select: {
+          id: true, vendor_id: true, article_code: true, product_name: true, current_stock: true, min_stock_qty: true, active: true,
+          unit_of_measure: true, stockUnit: { select: { unit_name: true } },
+          primaryUnit: { select: { unit_name: true, short_name: true } },
+        } } },
+      });
+    }, { timeout: 30000 });
   }
 
   async getLeadProductionReadiness(
