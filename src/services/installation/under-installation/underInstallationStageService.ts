@@ -1825,7 +1825,7 @@ export class UnderInstallationStageService {
       // Teams Mapping
       // -----------------------------
 
-      if (teams.length) {
+      if (teams && teams.length) {
         await tx.miscellaneousTeamMapping.createMany({
           data: teams.map((teamId) => ({
             miscellaneous_id: misc.id,
@@ -6230,6 +6230,17 @@ export class UnderInstallationStageService {
           select: { id: true },
         });
         closedTask = createdTask;
+      }
+
+      if (isReturnOrder) {
+        await tx.miscellaneousMaster.update({
+          where: { id: misc_id },
+          data: {
+            is_resolved: true,
+            resolved_at: new Date(),
+            updated_by: ready_by,
+          },
+        });
       }
 
       return {
