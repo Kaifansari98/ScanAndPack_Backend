@@ -17276,6 +17276,7 @@ export const VendorMasterScalarFieldEnum = {
   state_id: 'state_id',
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
+  cutlist_configuration: 'cutlist_configuration',
   is_approval_task_enabled: 'is_approval_task_enabled',
   eligible_booking_days: 'eligible_booking_days',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',

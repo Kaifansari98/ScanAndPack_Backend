@@ -29,6 +29,7 @@ model VendorMaster {
   state_id                               Int?
   is_inventory_enabled                   Boolean                                @default(false)
   is_tracktrace_enabled                  Boolean                                @default(false)
+  cutlist_configuration                  String?                                @default("default")
   is_approval_task_enabled               Boolean                                @default(true)
   eligible_booking_days                  Int?
   is_self_assign_task_type_master_enabed Boolean                                @default(true)
