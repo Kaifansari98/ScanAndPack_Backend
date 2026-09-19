@@ -45,6 +45,7 @@ export type ProjectLocationProductQuantityMinAggregateOutputType = {
   project_id: number | null
   vendor_id: number | null
   location_name: string | null
+  contact_no: string | null
   group_name: string | null
   qty: number | null
   created_at: Date | null
@@ -56,6 +57,7 @@ export type ProjectLocationProductQuantityMaxAggregateOutputType = {
   project_id: number | null
   vendor_id: number | null
   location_name: string | null
+  contact_no: string | null
   group_name: string | null
   qty: number | null
   created_at: Date | null
@@ -67,6 +69,7 @@ export type ProjectLocationProductQuantityCountAggregateOutputType = {
   project_id: number
   vendor_id: number
   location_name: number
+  contact_no: number
   group_name: number
   qty: number
   created_at: number
@@ -94,6 +97,7 @@ export type ProjectLocationProductQuantityMinAggregateInputType = {
   project_id?: true
   vendor_id?: true
   location_name?: true
+  contact_no?: true
   group_name?: true
   qty?: true
   created_at?: true
@@ -105,6 +109,7 @@ export type ProjectLocationProductQuantityMaxAggregateInputType = {
   project_id?: true
   vendor_id?: true
   location_name?: true
+  contact_no?: true
   group_name?: true
   qty?: true
   created_at?: true
@@ -116,6 +121,7 @@ export type ProjectLocationProductQuantityCountAggregateInputType = {
   project_id?: true
   vendor_id?: true
   location_name?: true
+  contact_no?: true
   group_name?: true
   qty?: true
   created_at?: true
@@ -214,6 +220,7 @@ export type ProjectLocationProductQuantityGroupByOutputType = {
   project_id: number
   vendor_id: number
   location_name: string
+  contact_no: string | null
   group_name: string
   qty: number
   created_at: Date
@@ -248,6 +255,7 @@ export type ProjectLocationProductQuantityWhereInput = {
   project_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   vendor_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   location_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
+  contact_no?: Prisma.StringNullableFilter<"ProjectLocationProductQuantity"> | string | null
   group_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
   qty?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   created_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
@@ -261,6 +269,7 @@ export type ProjectLocationProductQuantityOrderByWithRelationInput = {
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   location_name?: Prisma.SortOrder
+  contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   group_name?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -278,6 +287,7 @@ export type ProjectLocationProductQuantityWhereUniqueInput = Prisma.AtLeast<{
   project_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   vendor_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   location_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
+  contact_no?: Prisma.StringNullableFilter<"ProjectLocationProductQuantity"> | string | null
   group_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
   qty?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   created_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
@@ -291,6 +301,7 @@ export type ProjectLocationProductQuantityOrderByWithAggregationInput = {
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   location_name?: Prisma.SortOrder
+  contact_no?: Prisma.SortOrderInput | Prisma.SortOrder
   group_name?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -310,6 +321,7 @@ export type ProjectLocationProductQuantityScalarWhereWithAggregatesInput = {
   project_id?: Prisma.IntWithAggregatesFilter<"ProjectLocationProductQuantity"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProjectLocationProductQuantity"> | number
   location_name?: Prisma.StringWithAggregatesFilter<"ProjectLocationProductQuantity"> | string
+  contact_no?: Prisma.StringNullableWithAggregatesFilter<"ProjectLocationProductQuantity"> | string | null
   group_name?: Prisma.StringWithAggregatesFilter<"ProjectLocationProductQuantity"> | string
   qty?: Prisma.IntWithAggregatesFilter<"ProjectLocationProductQuantity"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"ProjectLocationProductQuantity"> | Date | string
@@ -319,6 +331,7 @@ export type ProjectLocationProductQuantityScalarWhereWithAggregatesInput = {
 export type ProjectLocationProductQuantityCreateInput = {
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -332,6 +345,7 @@ export type ProjectLocationProductQuantityUncheckedCreateInput = {
   project_id: number
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -342,6 +356,7 @@ export type ProjectLocationProductQuantityUncheckedCreateInput = {
 export type ProjectLocationProductQuantityUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -355,6 +370,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -367,6 +383,7 @@ export type ProjectLocationProductQuantityCreateManyInput = {
   project_id: number
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -376,6 +393,7 @@ export type ProjectLocationProductQuantityCreateManyInput = {
 export type ProjectLocationProductQuantityUpdateManyMutationInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,6 +405,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateManyInput = {
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -414,6 +433,7 @@ export type ProjectLocationProductQuantityCountOrderByAggregateInput = {
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   location_name?: Prisma.SortOrder
+  contact_no?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -432,6 +452,7 @@ export type ProjectLocationProductQuantityMaxOrderByAggregateInput = {
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   location_name?: Prisma.SortOrder
+  contact_no?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -443,6 +464,7 @@ export type ProjectLocationProductQuantityMinOrderByAggregateInput = {
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   location_name?: Prisma.SortOrder
+  contact_no?: Prisma.SortOrder
   group_name?: Prisma.SortOrder
   qty?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -522,6 +544,7 @@ export type ProjectLocationProductQuantityUpdateOneWithoutCutListMachineMappings
 export type ProjectLocationProductQuantityCreateWithoutProjectInput = {
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -533,6 +556,7 @@ export type ProjectLocationProductQuantityUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -574,6 +598,7 @@ export type ProjectLocationProductQuantityScalarWhereInput = {
   project_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   vendor_id?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   location_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
+  contact_no?: Prisma.StringNullableFilter<"ProjectLocationProductQuantity"> | string | null
   group_name?: Prisma.StringFilter<"ProjectLocationProductQuantity"> | string
   qty?: Prisma.IntFilter<"ProjectLocationProductQuantity"> | number
   created_at?: Prisma.DateTimeFilter<"ProjectLocationProductQuantity"> | Date | string
@@ -583,6 +608,7 @@ export type ProjectLocationProductQuantityScalarWhereInput = {
 export type ProjectLocationProductQuantityCreateWithoutCutListMachineMappingsInput = {
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -595,6 +621,7 @@ export type ProjectLocationProductQuantityUncheckedCreateWithoutCutListMachineMa
   project_id: number
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -620,6 +647,7 @@ export type ProjectLocationProductQuantityUpdateToOneWithWhereWithoutCutListMach
 export type ProjectLocationProductQuantityUpdateWithoutCutListMachineMappingsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -632,6 +660,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateWithoutCutListMachineMa
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -642,6 +671,7 @@ export type ProjectLocationProductQuantityCreateManyProjectInput = {
   id?: number
   vendor_id: number
   location_name: string
+  contact_no?: string | null
   group_name: string
   qty: number
   created_at?: Date | string
@@ -651,6 +681,7 @@ export type ProjectLocationProductQuantityCreateManyProjectInput = {
 export type ProjectLocationProductQuantityUpdateWithoutProjectInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -662,6 +693,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -673,6 +705,7 @@ export type ProjectLocationProductQuantityUncheckedUpdateManyWithoutProjectInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   location_name?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group_name?: Prisma.StringFieldUpdateOperationsInput | string
   qty?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -715,6 +748,7 @@ export type ProjectLocationProductQuantitySelect<ExtArgs extends runtime.Types.E
   project_id?: boolean
   vendor_id?: boolean
   location_name?: boolean
+  contact_no?: boolean
   group_name?: boolean
   qty?: boolean
   created_at?: boolean
@@ -729,6 +763,7 @@ export type ProjectLocationProductQuantitySelectCreateManyAndReturn<ExtArgs exte
   project_id?: boolean
   vendor_id?: boolean
   location_name?: boolean
+  contact_no?: boolean
   group_name?: boolean
   qty?: boolean
   created_at?: boolean
@@ -741,6 +776,7 @@ export type ProjectLocationProductQuantitySelectUpdateManyAndReturn<ExtArgs exte
   project_id?: boolean
   vendor_id?: boolean
   location_name?: boolean
+  contact_no?: boolean
   group_name?: boolean
   qty?: boolean
   created_at?: boolean
@@ -753,13 +789,14 @@ export type ProjectLocationProductQuantitySelectScalar = {
   project_id?: boolean
   vendor_id?: boolean
   location_name?: boolean
+  contact_no?: boolean
   group_name?: boolean
   qty?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ProjectLocationProductQuantityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "location_name" | "group_name" | "qty" | "created_at" | "updated_at", ExtArgs["result"]["projectLocationProductQuantity"]>
+export type ProjectLocationProductQuantityOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "location_name" | "contact_no" | "group_name" | "qty" | "created_at" | "updated_at", ExtArgs["result"]["projectLocationProductQuantity"]>
 export type ProjectLocationProductQuantityInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   cutListMachineMappings?: boolean | Prisma.ProjectLocationProductQuantity$cutListMachineMappingsArgs<ExtArgs>
@@ -783,6 +820,7 @@ export type $ProjectLocationProductQuantityPayload<ExtArgs extends runtime.Types
     project_id: number
     vendor_id: number
     location_name: string
+    contact_no: string | null
     group_name: string
     qty: number
     created_at: Date
@@ -1216,6 +1254,7 @@ export interface ProjectLocationProductQuantityFieldRefs {
   readonly project_id: Prisma.FieldRef<"ProjectLocationProductQuantity", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"ProjectLocationProductQuantity", 'Int'>
   readonly location_name: Prisma.FieldRef<"ProjectLocationProductQuantity", 'String'>
+  readonly contact_no: Prisma.FieldRef<"ProjectLocationProductQuantity", 'String'>
   readonly group_name: Prisma.FieldRef<"ProjectLocationProductQuantity", 'String'>
   readonly qty: Prisma.FieldRef<"ProjectLocationProductQuantity", 'Int'>
   readonly created_at: Prisma.FieldRef<"ProjectLocationProductQuantity", 'DateTime'>

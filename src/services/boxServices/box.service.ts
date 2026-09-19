@@ -1500,8 +1500,9 @@ export const generateBoxPdfService = async (
       (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
-    const clientContact =
-      project.client_contact_no || lead?.contact_no || "N/A";
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    let clientContact = projectContact || "N/A";
 
     const deliveryAddress =
       project.client_address || lead?.site_address || "N/A";
@@ -1532,6 +1533,7 @@ export const generateBoxPdfService = async (
             select: {
               id: true,
               location_name: true,
+              contact_no: true,
             },
           },
 
@@ -1807,6 +1809,46 @@ export const generateBoxPdfService = async (
         "location name",
       ]) ||
       "";
+
+    const mappedLocationContacts = Array.from(
+      new Set(
+        mappingRows
+          .map((mapping) =>
+            mapping.projectLocationProductQuantity?.contact_no?.trim(),
+          )
+          .filter(Boolean),
+      ),
+    );
+    const locationContacts = [...mappedLocationContacts];
+
+    if (locationContacts.length === 0 && packingLocation) {
+      const locationRecord =
+        await prisma.projectLocationProductQuantity.findFirst({
+          where: {
+            project_id,
+            vendor_id,
+            location_name: {
+              equals: packingLocation,
+              mode: "insensitive",
+            },
+            contact_no: {
+              not: null,
+            },
+          },
+          select: {
+            contact_no: true,
+          },
+        });
+      if (locationRecord?.contact_no?.trim()) {
+        locationContacts.push(locationRecord.contact_no.trim());
+      }
+    }
+
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
+    clientContact =
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "N/A";
 
     const floorValue =
       findBoxInfoValue(boxInfoValues, ["floor", "floor_name", "floor name"]) ||
@@ -3165,7 +3207,7 @@ export const generateProjectBoxPdfService = async (
 
   try {
     // ── 1. Fetch project, vendor ─────────────────────────────────────────────
-    const [project, vendor] = await Promise.all([
+    const [project, vendor, locationRecords] = await Promise.all([
       prisma.projectMaster.findFirst({
         where: { id: project_id, vendor_id },
         select: {
@@ -3173,6 +3215,9 @@ export const generateProjectBoxPdfService = async (
           project_name: true,
           lead_id: true,
           project_status: true,
+          client_name: true,
+          client_contact_no: true,
+          client_address: true,
         },
       }),
       prisma.vendorMaster.findUnique({
@@ -3182,6 +3227,17 @@ export const generateProjectBoxPdfService = async (
           primary_contact_number: true,
           primary_contact_email: true,
           logo: true,
+        },
+      }),
+      prisma.projectLocationProductQuantity.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          contact_no: { not: null },
+        },
+        select: {
+          location_name: true,
+          contact_no: true,
         },
       }),
     ]);
@@ -3210,6 +3266,27 @@ export const generateProjectBoxPdfService = async (
         },
       });
     }
+
+    const clientName =
+      project.client_name ||
+      (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
+      "N/A";
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    const locationContacts = Array.from(
+      new Set(
+        (locationRecords || [])
+          .map((r) => r.contact_no?.trim())
+          .filter(Boolean),
+      ),
+    );
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
+    const clientContact =
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "-";
+    const clientAddress =
+      project.client_address || lead?.site_address || "";
 
     // ── 3. Fetch boxes + item counts from CutListMachineMapping ─────────────
     const packagingMachine = await prisma.machineMaster.findFirst({
@@ -3306,12 +3383,12 @@ export const generateProjectBoxPdfService = async (
   <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:14px;">
     <div>
       ${
-        lead
+        clientName !== "N/A" || clientContact !== "-"
           ? `
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Client Name:</strong> ${escapeHtml(`${lead.firstname} ${lead.lastname}`)}</p>
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(lead.contact_no)}</p>
-        ${lead.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
-        ${lead.site_address ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(lead.site_address)}</p>` : ""}
+        <p style="font-size:13px;margin-bottom:3px;"><strong>Client Name:</strong> ${escapeHtml(clientName)}</p>
+        <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(clientContact)}</p>
+        ${lead?.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
+        ${clientAddress ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(clientAddress)}</p>` : ""}
       `
           : `<p style="font-size:13px;color:#888;">No client information available</p>`
       }
@@ -3439,65 +3516,80 @@ export const generateAllBoxesPdfService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [project, vendor, packagingMachine] = await Promise.all([
-      prisma.projectMaster.findFirst({
-        where: {
-          id: project_id,
+    const [project, vendor, packagingMachine, locationRecords] =
+      await Promise.all([
+        prisma.projectMaster.findFirst({
+          where: {
+            id: project_id,
 
-          vendor_id,
-        },
+            vendor_id,
+          },
 
-        select: {
-          id: true,
+          select: {
+            id: true,
 
-          project_name: true,
+            project_name: true,
 
-          project_status: true,
+            project_status: true,
 
-          lead_id: true,
+            lead_id: true,
 
-          order_no: true,
+            order_no: true,
 
-          client_name: true,
+            client_name: true,
 
-          client_address: true,
+            client_address: true,
 
-          client_contact_no: true,
-        },
-      }),
+            client_contact_no: true,
+          },
+        }),
 
-      prisma.vendorMaster.findUnique({
-        where: {
-          id: vendor_id,
-        },
+        prisma.vendorMaster.findUnique({
+          where: {
+            id: vendor_id,
+          },
 
-        select: {
-          vendor_name: true,
+          select: {
+            vendor_name: true,
 
-          primary_contact_number: true,
+            primary_contact_number: true,
 
-          primary_contact_email: true,
+            primary_contact_email: true,
 
-          logo: true,
-        },
-      }),
+            logo: true,
+          },
+        }),
 
-      prisma.machineMaster.findFirst({
-        where: {
-          vendor_id,
+        prisma.machineMaster.findFirst({
+          where: {
+            vendor_id,
 
-          machine_type_id: 18,
-        },
+            machine_type_id: 18,
+          },
 
-        select: {
-          id: true,
-        },
+          select: {
+            id: true,
+          },
 
-        orderBy: {
-          id: "asc",
-        },
-      }),
-    ]);
+          orderBy: {
+            id: "asc",
+          },
+        }),
+
+        prisma.projectLocationProductQuantity.findMany({
+          where: {
+            project_id,
+            vendor_id,
+            contact_no: {
+              not: null,
+            },
+          },
+          select: {
+            location_name: true,
+            contact_no: true,
+          },
+        }),
+      ]);
 
     if (!project) {
       return validationResponse(0, "Project not found");
@@ -3564,8 +3656,20 @@ export const generateAllBoxesPdfService = async (
       (lead ? `${lead.firstname || ""} ${lead.lastname || ""}`.trim() : "") ||
       "N/A";
 
+    const projectContact =
+      project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+    const locationContacts = Array.from(
+      new Set(
+        (locationRecords || [])
+          .map((r) => r.contact_no?.trim())
+          .filter(Boolean),
+      ),
+    );
+    const resolvedContacts = Array.from(
+      new Set([projectContact, ...locationContacts].filter(Boolean)),
+    );
     const clientContact =
-      project.client_contact_no || lead?.contact_no || "N/A";
+      resolvedContacts.length > 0 ? resolvedContacts.join(" / ") : "N/A";
 
     const deliveryAddress =
       project.client_address || lead?.site_address || "N/A";
@@ -5511,7 +5615,8 @@ export const generateProjectFullReportService = async (
     |--------------------------------------------------------------------------
     */
 
-    const [project, vendor, packagingMachine] = await Promise.all([
+    const [project, vendor, packagingMachine, locationRecords] =
+      await Promise.all([
       prisma.projectMaster.findFirst({
         where: {
           id: project_id,
@@ -5571,7 +5676,33 @@ export const generateProjectFullReportService = async (
           id: "asc",
         },
       }),
+
+      prisma.projectLocationProductQuantity.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          contact_no: {
+            not: null,
+          },
+        },
+        select: {
+          location_name: true,
+          contact_no: true,
+        },
+      }),
     ]);
+
+    const locationContactMap = new Map<string, string>();
+    for (const record of locationRecords) {
+      const locKey = record.location_name?.trim().toLowerCase();
+      if (
+        locKey &&
+        record.contact_no?.trim() &&
+        !locationContactMap.has(locKey)
+      ) {
+        locationContactMap.set(locKey, record.contact_no.trim());
+      }
+    }
 
     if (!project) {
       return validationResponse(0, "Project not found");
@@ -5737,6 +5868,7 @@ export const generateProjectFullReportService = async (
               select: {
                 id: true,
                 location_name: true,
+                contact_no: true,
               },
             },
 
@@ -5908,8 +6040,37 @@ export const generateProjectFullReportService = async (
           ? `${packingLocation} / ${floorValue}`
           : packingLocation || floorValue || "-";
 
+        const mappedLocationContacts = Array.from(
+          new Set(
+            mappings
+              .map((mapping) =>
+                mapping.projectLocationProductQuantity?.contact_no?.trim(),
+              )
+              .filter(Boolean),
+          ),
+        );
+        const locationContacts = [...mappedLocationContacts];
+        if (locationContacts.length === 0 && packingLocation) {
+          const locContact = locationContactMap.get(
+            packingLocation.trim().toLowerCase(),
+          );
+          if (locContact) {
+            locationContacts.push(locContact);
+          }
+        }
+
+        const projectContact =
+          project.client_contact_no?.trim() || lead?.contact_no?.trim() || "";
+        const boxContacts = Array.from(
+          new Set([projectContact, ...locationContacts].filter(Boolean)),
+        );
+        const boxContact =
+          boxContacts.length > 0 ? boxContacts.join(" / ") : "N/A";
+
         return {
           ...box,
+
+          box_contact: boxContact,
 
           items,
 
@@ -6401,7 +6562,7 @@ export const generateProjectFullReportService = async (
                       </div>
 
                       <div class="field-value">
-                        ${escapeHtml(clientContact)}
+                        ${escapeHtml((box as any).box_contact || clientContact)}
                       </div>
                     </div>
                   </div>

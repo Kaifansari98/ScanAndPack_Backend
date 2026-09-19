@@ -503,6 +503,7 @@ export const ProjectLocationProductQuantityScalarFieldEnum = {
   project_id: 'project_id',
   vendor_id: 'vendor_id',
   location_name: 'location_name',
+  contact_no: 'contact_no',
   group_name: 'group_name',
   qty: 'qty',
   created_at: 'created_at',
