@@ -22,6 +22,7 @@ import {
   createOrUpdateOnlineLead,
   generateOnlineLeadCode as generateCodeHelper,
   ensureDefaultStatuses,
+  formatDesignRemarks,
 } from "../../services/leadModuleServices/onlineLead.service";
 
 export { ensureDefaultStatuses };
@@ -3794,36 +3795,18 @@ export class OnlineLeadController {
           }
         }
 
-        // Append Budget, Property Type, and Survey Details to remark
-        const extraRemarks: string[] = [];
-        if (budget) extraRemarks.push(`**ΓÇó Budget:**\n${budget}`);
-        if (propertyType)
-          extraRemarks.push(`**ΓÇó Property Type:**\n${propertyType}`);
-        if (modularSolution)
-          extraRemarks.push(
-            `**ΓÇó What modular solution are you interested in?**\n${modularSolution}`,
-          );
-        if (whenNeedReady)
-          extraRemarks.push(
-            `**ΓÇó When do you need your modular kitchen/wardrobe ready?**\n${whenNeedReady}`,
-          );
-        if (preferredShowroom)
-          extraRemarks.push(
-            `**ΓÇó Which Shambhala showroom would you prefer to visit?**\n${preferredShowroom}`,
-          );
-        if (projectLocation)
-          extraRemarks.push(
-            `**ΓÇó Where is your project located?**\n${projectLocation}`,
-          );
-
-        if (extraRemarks.length > 0) {
-          const suffix = extraRemarks.join("\n\n");
-          if (remark && remark !== "-") {
-            remark = `${remark}\n\n${suffix}`;
-          } else {
-            remark = suffix;
-          }
-        }
+        // Append Budget, Property Type, and Survey Details to remark via shared helper
+        remark = formatDesignRemarks(
+          {
+            budget,
+            propertyType,
+            modularSolution,
+            whenNeedReady,
+            preferredShowroom,
+            projectLocation,
+          },
+          remark,
+        );
 
         // Default remark to "-" if not specified
         remark = remark ? remark.trim() : "-";

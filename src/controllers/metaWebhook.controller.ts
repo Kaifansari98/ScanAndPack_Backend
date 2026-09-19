@@ -4,6 +4,8 @@ import logger from "../utils/logger";
 import {
   createOrUpdateOnlineLead,
   resolveTargetOnlineLeadVendor,
+  extractSurveyDetails,
+  formatDesignRemarks,
 } from "../services/leadModuleServices/onlineLead.service";
 
 export class MetaWebhookController {
@@ -237,14 +239,32 @@ export class MetaWebhookController {
             .filter(Boolean);
         }
 
+        // Extract survey details and format Design Remarks reusing exact Bulk Upload logic
+        const surveyDetails = extractSurveyDetails({
+          ...(body.lead && typeof body.lead === "object" ? body.lead : {}),
+          ...body,
+        });
+        const formattedRemark = formatDesignRemarks(surveyDetails, remark);
+
+        // Fallback city from survey project location if city is missing
+        const resolvedCity =
+          city && String(city).trim() !== ""
+            ? city
+            : (surveyDetails.projectLocation || null);
+
+        // Extract numeric digits only and keep only the last 10 digits
+        const rawDigits = rawContact ? String(rawContact).replace(/\D/g, "") : "";
+        const normalizedContact =
+          rawDigits.length >= 10 ? rawDigits.slice(-10) : String(rawContact || "").trim();
+
         const { lead, isNew } = await createOrUpdateOnlineLead({
           vendor_id: vendorId,
           leads_name: String(leadsName || "Google Sheet Lead").trim(),
-          contact: String(rawContact || "").trim(),
+          contact: normalizedContact,
           email,
-          city,
+          city: resolvedCity,
           source,
-          remark,
+          remark: formattedRemark,
           priority,
           product_types: productTypes,
           product_structures: productStructures,
