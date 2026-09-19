@@ -3,6 +3,7 @@ import { prisma } from "../../prisma/client";
 
 export type ProjectLocationRowInput = {
   location_name?: unknown;
+  contact_no?: unknown;
   quantities?: Record<string, unknown>;
 };
 
@@ -10,6 +11,7 @@ type ProjectLocationEntry = {
   project_id: number;
   vendor_id: number;
   location_name: string;
+  contact_no?: string | null;
   group_name: string;
   qty: number;
 };
@@ -148,6 +150,17 @@ const validateAndFlattenRows = ({
     }
     seenLocations.add(normalizedLocationName);
 
+    const contactNo =
+      row?.contact_no !== undefined && row?.contact_no !== null
+        ? String(row.contact_no).trim()
+        : null;
+
+    if (contactNo && contactNo.length > 50) {
+      throw new Error(
+        `Contact No must not exceed 50 characters in row ${displayRowNumber}`
+      );
+    }
+
     const quantities =
       row?.quantities && typeof row.quantities === "object"
         ? row.quantities
@@ -209,6 +222,7 @@ const validateAndFlattenRows = ({
         project_id: projectId,
         vendor_id: vendorId,
         location_name: locationName,
+        contact_no: contactNo || null,
         group_name: groupName,
         qty: quantity,
       });
@@ -334,6 +348,7 @@ const replaceProjectLocationEntries = async (
         where: { id: existingEntry.id },
         data: {
           location_name: entry.location_name,
+          contact_no: entry.contact_no,
           group_name: entry.group_name,
           qty: entry.qty,
         },
@@ -378,6 +393,7 @@ export const getProjectLocationsService = async (
     },
     select: {
       location_name: true,
+      contact_no: true,
       group_name: true,
       qty: true,
     },
@@ -385,17 +401,26 @@ export const getProjectLocationsService = async (
   });
   const locationsByName = new Map<
     string,
-    { location_name: string; quantities: Record<string, number> }
+    {
+      location_name: string;
+      contact_no: string;
+      quantities: Record<string, number>;
+    }
   >();
 
   for (const record of records) {
     const normalizedLocationName = normalizeName(record.location_name);
     const location = locationsByName.get(normalizedLocationName) ?? {
       location_name: record.location_name,
+      contact_no: record.contact_no ?? "",
       quantities: Object.fromEntries(
         groupNames.map((groupName) => [groupName, 0])
       ),
     };
+
+    if (record.contact_no && !location.contact_no) {
+      location.contact_no = record.contact_no;
+    }
 
     if (groupNames.some((groupName) => groupName === record.group_name)) {
       location.quantities[record.group_name] = record.qty;
@@ -481,6 +506,7 @@ export const importProjectLocationsExcelService = async ({
   const headerColumns = new Map<number, string>();
   const seenHeaders = new Set<string>();
   let locationColumn = 0;
+  let contactColumn = 0;
 
   headerRow.eachCell({ includeEmpty: true }, (cell, columnNumber) => {
     const header = cell.text.trim();
@@ -496,6 +522,18 @@ export const importProjectLocationsExcelService = async ({
 
     if (normalizedHeader === "location name") {
       locationColumn = columnNumber;
+      return;
+    }
+
+    if (
+      normalizedHeader === "contact no" ||
+      normalizedHeader === "contact no." ||
+      normalizedHeader === "contact number" ||
+      normalizedHeader === "contact" ||
+      normalizedHeader === "contact_no" 
+   
+    ) {
+      contactColumn = columnNumber;
       return;
     }
 
@@ -559,8 +597,13 @@ export const importProjectLocationsExcelService = async ({
       }
     }
 
+    const contactNo = contactColumn
+      ? row.getCell(contactColumn).text.trim()
+      : null;
+
     locations.push({
       location_name: row.getCell(locationColumn).text.trim(),
+      contact_no: contactNo || null,
       quantities,
     });
   });

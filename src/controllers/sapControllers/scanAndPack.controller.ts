@@ -44,6 +44,7 @@ export const deleteScanAndPackItem = async (req: Request, res: Response) => {
     const project_id = Number(req.body.project_id);
     const box_id = Number(req.body.box_id);
     const deleted_by = req.body.deleted_by ? Number(req.body.deleted_by) : (req.body.user_id ? Number(req.body.user_id) : null);
+    const reason = req.body.reason ? String(req.body.reason).trim() : "";
 
     if (!id || !vendor_id || !project_id || !box_id) {
       return res.status(400).json({
@@ -52,12 +53,20 @@ export const deleteScanAndPackItem = async (req: Request, res: Response) => {
       });
     }
 
+    if (!reason) {
+      return res.status(400).json({
+        success: false,
+        message: "Reason is required to remove item from box",
+      });
+    }
+
     const result = await deleteScanAndPackItemById(
       id,
       vendor_id,
       project_id,
       box_id,
-      deleted_by
+      deleted_by,
+      reason
     );
 
     return res.status(200).json({

@@ -6473,6 +6473,168 @@ export const markBoxSiteInService = async (
   }
 };
 
+// ── Revert factory_out_at on a box ─────────────────────────────────────────────
+export const revertBoxFactoryOutService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+  user_id: number,
+  description: string,
+) => {
+  try {
+    if (!description || !description.trim()) {
+      return validationResponse(
+        0,
+        "Description is compulsory to revert factory out",
+      );
+    }
+
+    const box = await prisma.boxMaster.findFirst({
+      where: { id: box_id, project_id, vendor_id, is_deleted: false },
+      select: {
+        id: true,
+        box_name: true,
+        box_status: true,
+        factory_out_at: true,
+        factory_out_by: true,
+        site_in_at: true,
+        site_in_by: true,
+        packed_at: true,
+        packed_by: true,
+      },
+    });
+
+    if (!box) return validationResponse(0, "Box not found");
+
+    if (!box.factory_out_at) {
+      return validationResponse(
+        0,
+        "Box has not been marked as factory out yet, cannot revert",
+      );
+    }
+
+    // Packed date and packed user must not be null
+    if (!box.packed_at || !box.packed_by) {
+      return validationResponse(
+        0,
+        "Factory out revert is not possible because box packing information is incomplete (packed_at and packed_by cannot be null)",
+      );
+    }
+
+    // Revert not possible if already at site
+    if (box.site_in_at !== null || box.site_in_by !== null) {
+      return validationResponse(
+        0,
+        "Factory out revert is not possible because the box is already at the site (Site In has been recorded)",
+      );
+    }
+
+    const result = await prisma.$transaction(async (tx) => {
+      // 1. Create revert log entry
+      const log = await tx.factoryOutRevertLog.create({
+        data: {
+          box_id: box.id,
+          project_id,
+          vendor_id,
+          factory_out_at: box.factory_out_at!,
+          factory_out_by: box.factory_out_by,
+          reverted_by: user_id,
+          reverted_at: new Date(),
+          description: description.trim(),
+        },
+        include: {
+          revertedByUser: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+          factoryOutByUser: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      });
+
+      // 2. Clear factory_out_at and factory_out_by on BoxMaster
+      const updatedBox = await tx.boxMaster.update({
+        where: { id: box_id },
+        data: {
+          factory_out_at: null,
+          factory_out_by: null,
+        },
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          factory_out_at: true,
+          factory_out_by: true,
+          site_in_at: true,
+          site_in_by: true,
+          packed_at: true,
+          packed_by: true,
+        },
+      });
+
+      return { updatedBox, log };
+    });
+
+    return validationResponse(
+      1,
+      "Factory out reverted successfully",
+      result,
+    );
+  } catch (error) {
+    console.error("Error in revertBoxFactoryOutService:", error);
+    return validationResponse(0, "Failed to revert factory out");
+  }
+};
+
+// ── Get Factory Out Revert Logs for a box ─────────────────────────────────────
+export const getBoxFactoryOutRevertLogsService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number,
+) => {
+  try {
+    const logs = await prisma.factoryOutRevertLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        revertedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        factoryOutByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        reverted_at: "desc",
+      },
+    });
+
+    return validationResponse(
+      1,
+      "Factory out revert logs fetched successfully",
+      logs,
+    );
+  } catch (error) {
+    console.error("Error in getBoxFactoryOutRevertLogsService:", error);
+    return validationResponse(0, "Failed to fetch factory out revert logs");
+  }
+};
+
 const CADBID_API_URL = process.env.CADBID_URL + "/api/category/get-ct";
 const CADBID_PLATFORM_ID = 1;
 
@@ -9498,7 +9660,22 @@ export const getBoxItemsService = async (
         box_name: true,
         box_status: true,
         factory_out_at: true,
+        factory_out_by: true,
         site_in_at: true,
+        site_in_by: true,
+        packed_at: true,
+        packed_by: true,
+        created_by: true,
+        created_date: true,
+        factoryOutByUser: {
+          select: { id: true, user_name: true },
+        },
+        siteInByUser: {
+          select: { id: true, user_name: true },
+        },
+        packedByUser: {
+          select: { id: true, user_name: true },
+        },
       },
     });
 
@@ -9556,10 +9733,10 @@ export const getBoxItemsService = async (
     const opIds = [
       ...new Set([
         ...mappings.map((mapping) => mapping.in_operator).filter(Boolean),
-
         ...mappings.map((mapping) => mapping.site_in_by).filter(Boolean),
+        box.created_by,
       ]),
-    ] as number[];
+    ].filter(Boolean) as number[];
 
     const ops =
       opIds.length > 0
@@ -9633,13 +9810,78 @@ export const getBoxItemsService = async (
       0,
     );
 
+    const revert_logs = await prisma.factoryOutRevertLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        revertedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        factoryOutByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        reverted_at: "desc",
+      },
+    });
+
+    const unpack_logs = await prisma.boxUnpackLog.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+      include: {
+        unpackedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        packedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+        boxCreatedByUser: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        unpacked_at: "desc",
+      },
+    });
+
+    const createdByUser = box.created_by
+      ? {
+          id: box.created_by,
+          user_name: opMap.get(box.created_by) ?? `User #${box.created_by}`,
+        }
+      : null;
+
     return validationResponse(1, "Box items fetched", {
       box: {
         ...box,
+        createdByUser,
         total_weight: Number(totalBoxWeight.toFixed(2)),
       },
-
       items,
+      revert_logs,
+      unpack_logs,
     });
   } catch (error) {
     console.error("getBoxItemsService error:", error);

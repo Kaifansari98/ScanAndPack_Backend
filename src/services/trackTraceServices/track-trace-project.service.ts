@@ -3163,6 +3163,7 @@ export const getPackagingProjectContextService = async (
           },
           select: {
             location_name: true,
+            contact_no: true,
           },
           distinct: ["location_name"],
           orderBy: {
@@ -3191,8 +3192,9 @@ export const getPackagingProjectContextService = async (
       group_names: Array.from(groupNameMap.values()).sort((a, b) =>
         a.localeCompare(b),
       ),
-      locations: locationRows.map((location) => ({
+      locations: locationRows.map((location: any) => ({
         location_name: location.location_name,
+        contact_no: location.contact_no ?? null,
       })),
     },
   };
@@ -3359,13 +3361,18 @@ export const generateMultiLocationTemplateService = async (
       },
       select: {
         location_name: true,
+        contact_no: true,
         group_name: true,
         qty: true,
       },
     });
   const locations = new Map<
     string,
-    { locationName: string; quantities: Record<string, number> }
+    {
+      locationName: string;
+      contactNo: string;
+      quantities: Record<string, number>;
+    }
   >();
 
   for (const savedQuantity of savedLocationQuantities) {
@@ -3383,16 +3390,21 @@ export const generateMultiLocationTemplateService = async (
 
     const location = locations.get(normalizedLocationName) ?? {
       locationName,
+      contactNo: savedQuantity.contact_no?.trim() ?? "",
       quantities: Object.fromEntries(
         groupNames.map((groupName) => [groupName, 0])
       ),
     };
 
+    if (savedQuantity.contact_no && !location.contactNo) {
+      location.contactNo = savedQuantity.contact_no.trim();
+    }
+
     location.quantities[canonicalGroupName] = savedQuantity.qty;
     locations.set(normalizedLocationName, location);
   }
 
-  const headers = ["Location Name", ...groupNames];
+  const headers = ["Location Name", "Contact No", ...groupNames];
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet("Locations");
   const headerRow = worksheet.addRow(headers);
@@ -3423,16 +3435,19 @@ export const generateMultiLocationTemplateService = async (
     .forEach((location) => {
       const row = worksheet.addRow([
         location.locationName,
+        location.contactNo || "",
         ...groupNames.map((groupName) => location.quantities[groupName] ?? 0),
       ]);
 
       row.eachCell((cell, columnNumber) => {
         cell.alignment = {
-          horizontal: columnNumber === 1 ? "left" : "center",
+          horizontal: columnNumber <= 2 ? "left" : "center",
           vertical: "middle",
         };
 
-        if (columnNumber > 1) {
+        if (columnNumber === 2) {
+          cell.numFmt = "@";
+        } else if (columnNumber > 2) {
           cell.numFmt = "0";
         }
       });

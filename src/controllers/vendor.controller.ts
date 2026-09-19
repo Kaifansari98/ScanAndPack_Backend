@@ -102,6 +102,7 @@ export const createVendor = async (req: Request, res: Response) => {
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      cutlist_configuration: req.body.cutlist_configuration || "default",
       is_available_unique_code: req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true,
       push_lead_to_cadbid: req.body.push_lead_to_cadbid === "true" || req.body.push_lead_to_cadbid === true,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
@@ -194,6 +195,9 @@ export const updateVendorController = async (req: Request, res: Response) => {
         : undefined,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled !== undefined
         ? (req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true)
+        : undefined,
+      cutlist_configuration: req.body.cutlist_configuration !== undefined
+        ? req.body.cutlist_configuration
         : undefined,
       is_available_unique_code: req.body.is_available_unique_code !== undefined
         ? (req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true)
@@ -394,6 +398,7 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
       is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      cutlist_configuration: req.body.cutlist_configuration || "default",
       is_available_unique_code: req.body.is_available_unique_code === "true" || req.body.is_available_unique_code === true,
       is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
       head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,

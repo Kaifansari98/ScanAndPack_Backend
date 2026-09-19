@@ -61,6 +61,7 @@ export type VendorMasterMinAggregateOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
@@ -109,6 +110,7 @@ export type VendorMasterMaxAggregateOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
@@ -157,6 +159,7 @@ export type VendorMasterCountAggregateOutputType = {
   state_id: number
   is_inventory_enabled: number
   is_tracktrace_enabled: number
+  cutlist_configuration: number
   is_approval_task_enabled: number
   eligible_booking_days: number
   is_self_assign_task_type_master_enabed: number
@@ -221,6 +224,7 @@ export type VendorMasterMinAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -269,6 +273,7 @@ export type VendorMasterMaxAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -317,6 +322,7 @@ export type VendorMasterCountAggregateInputType = {
   state_id?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
+  cutlist_configuration?: true
   is_approval_task_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
@@ -452,6 +458,7 @@ export type VendorMasterGroupByOutputType = {
   state_id: number | null
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
+  cutlist_configuration: string | null
   is_approval_task_enabled: boolean
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean
@@ -523,6 +530,7 @@ export type VendorMasterWhereInput = {
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -555,6 +563,8 @@ export type VendorMasterWhereInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterListRelationFilter
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   brands?: Prisma.BrandMasterListRelationFilter
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
@@ -730,6 +740,7 @@ export type VendorMasterOrderByWithRelationInput = {
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrderInput | Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -762,6 +773,8 @@ export type VendorMasterOrderByWithRelationInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterOrderByRelationAggregateInput
   box_info_values?: Prisma.BoxInfoFieldValueOrderByRelationAggregateInput
   boxes?: Prisma.BoxMasterOrderByRelationAggregateInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogOrderByRelationAggregateInput
+  box_unpack_logs?: Prisma.BoxUnpackLogOrderByRelationAggregateInput
   brands?: Prisma.BrandMasterOrderByRelationAggregateInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterOrderByRelationAggregateInput
   broadcasts?: Prisma.BroadcastMasterOrderByRelationAggregateInput
@@ -940,6 +953,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -972,6 +986,8 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterListRelationFilter
   box_info_values?: Prisma.BoxInfoFieldValueListRelationFilter
   boxes?: Prisma.BoxMasterListRelationFilter
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogListRelationFilter
+  box_unpack_logs?: Prisma.BoxUnpackLogListRelationFilter
   brands?: Prisma.BrandMasterListRelationFilter
   broadcastCategories?: Prisma.BroadcastCategoryMasterListRelationFilter
   broadcasts?: Prisma.BroadcastMasterListRelationFilter
@@ -1147,6 +1163,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrderInput | Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -1203,6 +1220,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
@@ -1249,6 +1267,7 @@ export type VendorMasterCreateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -1281,6 +1300,8 @@ export type VendorMasterCreateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -1456,6 +1477,7 @@ export type VendorMasterUncheckedCreateInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -1488,6 +1510,8 @@ export type VendorMasterUncheckedCreateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -1660,6 +1684,7 @@ export type VendorMasterUpdateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1692,6 +1717,8 @@ export type VendorMasterUpdateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -1867,6 +1894,7 @@ export type VendorMasterUncheckedUpdateInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1899,6 +1927,8 @@ export type VendorMasterUncheckedUpdateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -2073,6 +2103,7 @@ export type VendorMasterCreateManyInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -2119,6 +2150,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2167,6 +2199,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2215,6 +2248,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -2270,6 +2304,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -2318,6 +2353,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   state_id?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
+  cutlist_configuration?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
@@ -2546,6 +2582,34 @@ export type VendorMasterUpdateOneRequiredWithoutBoxesNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutBoxesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBoxesInput, Prisma.VendorMasterUpdateWithoutBoxesInput>, Prisma.VendorMasterUncheckedUpdateWithoutBoxesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutFactory_out_revert_logsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutFactory_out_revert_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutFactory_out_revert_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutFactory_out_revert_logsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutFactory_out_revert_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUpdateWithoutFactory_out_revert_logsInput>, Prisma.VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutBox_unpack_logsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_unpack_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutBox_unpack_logsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutBox_unpack_logsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutBox_unpack_logsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput, Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput>, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutScanItemsInput = {
@@ -4685,6 +4749,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -4717,6 +4782,8 @@ export type VendorMasterCreateWithoutAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -4891,6 +4958,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -4923,6 +4991,8 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5110,6 +5180,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5142,6 +5213,8 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -5316,6 +5389,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5348,6 +5422,8 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5519,6 +5595,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -5551,6 +5628,8 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -5725,6 +5804,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -5757,6 +5837,8 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5944,6 +6026,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5976,6 +6059,8 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -6150,6 +6235,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6182,6 +6268,8 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6353,6 +6441,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -6385,6 +6474,8 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -6559,6 +6650,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -6591,6 +6683,8 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6778,6 +6872,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6810,6 +6905,8 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -6984,6 +7081,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7016,6 +7114,8 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7187,6 +7287,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -7219,6 +7320,8 @@ export type VendorMasterCreateWithoutUsersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -7393,6 +7496,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -7425,6 +7529,8 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7612,6 +7718,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7644,6 +7751,8 @@ export type VendorMasterUpdateWithoutUsersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -7818,6 +7927,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7850,6 +7960,8 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8021,6 +8133,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -8053,6 +8166,8 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -8227,6 +8342,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -8259,6 +8375,8 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8446,6 +8564,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8478,6 +8597,8 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -8652,6 +8773,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8684,6 +8806,8 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8855,6 +8979,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -8887,6 +9012,8 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -9061,6 +9188,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -9093,6 +9221,8 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9280,6 +9410,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9312,6 +9443,8 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -9486,6 +9619,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9518,6 +9652,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9689,6 +9825,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -9721,6 +9858,8 @@ export type VendorMasterCreateWithoutProjectsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -9895,6 +10034,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -9927,6 +10067,8 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10114,6 +10256,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10146,6 +10289,8 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -10320,6 +10465,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10352,6 +10498,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10523,6 +10671,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -10555,6 +10704,8 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -10729,6 +10880,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -10761,6 +10913,8 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10948,6 +11102,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10980,6 +11135,8 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -11154,6 +11311,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11186,6 +11344,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11357,6 +11517,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -11389,6 +11550,8 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -11563,6 +11726,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -11595,6 +11759,8 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11782,6 +11948,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11814,6 +11981,8 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -11988,6 +12157,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12020,6 +12190,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12191,6 +12363,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -12222,6 +12395,8 @@ export type VendorMasterCreateWithoutBoxesInput = {
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -12397,6 +12572,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -12428,6 +12604,8 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12616,6 +12794,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12647,6 +12826,8 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -12822,6 +13003,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12853,6 +13035,1700 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutFactory_out_revert_logsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutFactory_out_revert_logsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+}
+
+export type VendorMasterUpsertWithoutFactory_out_revert_logsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedCreateWithoutFactory_out_revert_logsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutFactory_out_revert_logsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutFactory_out_revert_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput>
+}
+
+export type VendorMasterUpdateWithoutFactory_out_revert_logsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutFactory_out_revert_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUncheckedUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutBox_unpack_logsInput = {
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutBox_unpack_logsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  online_leads_lead_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  vendor_report_code?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  state_id?: number | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
+  is_approval_task_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  is_year_wise_lead_code_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  subdomain_url?: string | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  handlesLargeScaleProjects?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
+  icon?: string | null
+  login_image?: string | null
+  address?: string | null
+  city?: string | null
+  gst_no?: string | null
+  pincode?: string | null
+  tag_line?: string | null
+  toll_free_no?: string | null
+  website_link?: string | null
+  is_broadcast_enabled?: boolean
+  is_scanpack_enabled?: boolean
+  is_online_lead_feature_enabled?: boolean
+  push_lead_to_cadbid?: boolean
+  is_available_unique_code?: boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedCreateNestedManyWithoutVendorInput
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedCreateNestedManyWithoutVendorInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
+  broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassLegs?: Prisma.CarcassLegsMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUncheckedCreateNestedManyWithoutVendorInput
+  clientBankAccounts?: Prisma.ClientBankDetailUncheckedCreateNestedManyWithoutVendorInput
+  clients?: Prisma.ClientMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientTypes?: Prisma.ClientTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  coreProducts?: Prisma.CoreProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  cutListRules?: Prisma.CutListRuleMasterUncheckedCreateNestedManyWithoutVendorInput
+  ruleActions?: Prisma.RuleActionMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutVendorInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutVendorInput
+  finishes?: Prisma.FinishMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  grades?: Prisma.GradeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemTypes?: Prisma.ItemTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutVendorInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefs?: Prisma.ProcessBriefMasterUncheckedCreateNestedManyWithoutVendorInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  types?: Prisma.TypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUncheckedCreateNestedManyWithoutVendorMasterInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  online_lead_call_log?: Prisma.online_lead_call_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_history?: Prisma.online_lead_historyUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_lead_store_log?: Prisma.online_lead_store_logUncheckedCreateNestedManyWithoutVendorMasterInput
+  online_leads?: Prisma.online_leadsUncheckedCreateNestedManyWithoutVendorMasterInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutBox_unpack_logsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+}
+
+export type VendorMasterUpsertWithoutBox_unpack_logsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedCreateWithoutBox_unpack_logsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutBox_unpack_logsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutBox_unpack_logsInput, Prisma.VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput>
+}
+
+export type VendorMasterUpdateWithoutBox_unpack_logsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
+  broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
+  carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
+  carcassLegs?: Prisma.CarcassLegsMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  categoryNamingStructures?: Prisma.CategoryNamingStructureUpdateManyWithoutVendorNestedInput
+  clientBankAccounts?: Prisma.ClientBankDetailUpdateManyWithoutVendorNestedInput
+  clients?: Prisma.ClientMasterUpdateManyWithoutVendorNestedInput
+  clientTypes?: Prisma.ClientTypeMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  coreProducts?: Prisma.CoreProductMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  cutListRules?: Prisma.CutListRuleMasterUpdateManyWithoutVendorNestedInput
+  ruleActions?: Prisma.RuleActionMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutVendorNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutVendorNestedInput
+  finishes?: Prisma.FinishMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  grades?: Prisma.GradeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  itemTypes?: Prisma.ItemTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadB2BReqMappings?: Prisma.LeadB2BRequirementTypeMappingUpdateManyWithoutVendorNestedInput
+  leadCarcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  b2bDocuments?: Prisma.LeadB2BDocumentUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  leadHardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutVendorNestedInput
+  leadLightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadOtherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutVendorNestedInput
+  LeadOtherAppliancesRemarkMapping?: Prisma.LeadOtherAppliancesRemarkMappingUpdateManyWithoutVendorMasterNestedInput
+  leadProcessBriefs?: Prisma.LeadProcessBriefMappingUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadRequirementMaterials?: Prisma.LeadRequirementMaterialMappingUpdateManyWithoutVendorNestedInput
+  leadScopedActivityStatusLogs?: Prisma.LeadScopedActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  leadShutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadSpecifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  lightCarcasTypes?: Prisma.LightCarcasTypeMasterUpdateManyWithoutVendorNestedInput
+  lightCarcasUnits?: Prisma.LightCarcasUnitMasterUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousFollowups?: Prisma.MiscellaneousFollowupUpdateManyWithoutVendorNestedInput
+  miscellaneousReorderInstancesMaterialMapping?: Prisma.MiscellaneousReorderInstancesMaterialMappingUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  otherAppliances?: Prisma.OtherAppliancesMasterUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  popaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  processBriefs?: Prisma.ProcessBriefMasterUpdateManyWithoutVendorNestedInput
+  processBriefMachineMappings?: Prisma.ProcessBriefMachineMappingUpdateManyWithoutVendorNestedInput
+  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  box_info_fields?: Prisma.ProjectBoxInfoFieldUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  piSupplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  poSupplierAdditionalCosts?: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterMaterials?: Prisma.ShutterMaterialMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  types?: Prisma.TypeMasterUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  UserTypePrivilegeMapping?: Prisma.UserTypePrivilegeMappingUpdateManyWithoutVendorMasterNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  online_lead_call_log?: Prisma.online_lead_call_logUpdateManyWithoutVendorMasterNestedInput
+  online_lead_followup_status?: Prisma.online_lead_followup_statusUpdateManyWithoutVendorMasterNestedInput
+  online_lead_history?: Prisma.online_lead_historyUpdateManyWithoutVendorMasterNestedInput
+  online_lead_store_log?: Prisma.online_lead_store_logUpdateManyWithoutVendorMasterNestedInput
+  online_leads?: Prisma.online_leadsUpdateManyWithoutVendorMasterNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  specificationDocumentMappings?: Prisma.specificationDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadBillingAddresses?: Prisma.LeadBillingAddressUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutBox_unpack_logsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  online_leads_lead_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  handlesLargeScaleProjects?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gst_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pincode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tag_line?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  toll_free_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  website_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_broadcast_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_scanpack_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_online_lead_feature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  push_lead_to_cadbid?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_available_unique_code?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  productsRequiredForProduction?: Prisma.ProductsRequiredForProductionUncheckedUpdateManyWithoutVendorNestedInput
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  additionalCostMasters?: Prisma.AdditionalCostMasterUncheckedUpdateManyWithoutVendorNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
+  b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13025,6 +14901,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -13057,6 +14934,8 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -13231,6 +15110,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -13263,6 +15143,8 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13450,6 +15332,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13482,6 +15365,8 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -13656,6 +15541,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13688,6 +15574,8 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13859,6 +15747,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -13891,6 +15780,8 @@ export type VendorMasterCreateWithoutTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -14065,6 +15956,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -14097,6 +15989,8 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14284,6 +16178,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14316,6 +16211,8 @@ export type VendorMasterUpdateWithoutTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -14490,6 +16387,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14522,6 +16420,8 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14693,6 +16593,7 @@ export type VendorMasterCreateWithoutClientsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -14725,6 +16626,8 @@ export type VendorMasterCreateWithoutClientsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -14899,6 +16802,7 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -14931,6 +16835,8 @@ export type VendorMasterUncheckedCreateWithoutClientsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15118,6 +17024,7 @@ export type VendorMasterUpdateWithoutClientsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15150,6 +17057,8 @@ export type VendorMasterUpdateWithoutClientsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -15324,6 +17233,7 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15356,6 +17266,8 @@ export type VendorMasterUncheckedUpdateWithoutClientsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15527,6 +17439,7 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -15559,6 +17472,8 @@ export type VendorMasterCreateWithoutClientBankAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -15733,6 +17648,7 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -15765,6 +17681,8 @@ export type VendorMasterUncheckedCreateWithoutClientBankAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15952,6 +17870,7 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15984,6 +17903,8 @@ export type VendorMasterUpdateWithoutClientBankAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -16158,6 +18079,7 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16190,6 +18112,8 @@ export type VendorMasterUncheckedUpdateWithoutClientBankAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16361,6 +18285,7 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -16393,6 +18318,8 @@ export type VendorMasterCreateWithoutClientTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -16567,6 +18494,7 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -16599,6 +18527,8 @@ export type VendorMasterUncheckedCreateWithoutClientTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16786,6 +18716,7 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16818,6 +18749,8 @@ export type VendorMasterUpdateWithoutClientTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -16992,6 +18925,7 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17024,6 +18958,8 @@ export type VendorMasterUncheckedUpdateWithoutClientTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17195,6 +19131,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -17227,6 +19164,8 @@ export type VendorMasterCreateWithoutLeadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -17401,6 +19340,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -17433,6 +19373,8 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17620,6 +19562,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17652,6 +19595,8 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -17826,6 +19771,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17858,6 +19804,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18029,6 +19977,7 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18061,6 +20010,8 @@ export type VendorMasterCreateWithoutLeadSpecificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -18235,6 +20186,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18267,6 +20219,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSpecificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18454,6 +20408,7 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18486,6 +20441,8 @@ export type VendorMasterUpdateWithoutLeadSpecificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -18660,6 +20617,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18692,6 +20650,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSpecificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18863,6 +20823,7 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -18895,6 +20856,8 @@ export type VendorMasterCreateWithoutLeadCarcassMaterialMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -19069,6 +21032,7 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -19101,6 +21065,8 @@ export type VendorMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19288,6 +21254,7 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19320,6 +21287,8 @@ export type VendorMasterUpdateWithoutLeadCarcassMaterialMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -19494,6 +21463,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19526,6 +21496,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19697,6 +21669,7 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -19729,6 +21702,8 @@ export type VendorMasterCreateWithoutLeadShutterMaterialMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -19903,6 +21878,7 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -19935,6 +21911,8 @@ export type VendorMasterUncheckedCreateWithoutLeadShutterMaterialMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20122,6 +22100,7 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20154,6 +22133,8 @@ export type VendorMasterUpdateWithoutLeadShutterMaterialMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -20328,6 +22309,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20360,6 +22342,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20531,6 +22515,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -20563,6 +22548,8 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -20737,6 +22724,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -20769,6 +22757,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20956,6 +22946,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20988,6 +22979,8 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -21162,6 +23155,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21194,6 +23188,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21365,6 +23361,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -21397,6 +23394,8 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -21571,6 +23570,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -21603,6 +23603,8 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21790,6 +23792,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21822,6 +23825,8 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -21996,6 +24001,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22028,6 +24034,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22199,6 +24207,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -22231,6 +24240,8 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -22405,6 +24416,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -22437,6 +24449,8 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22624,6 +24638,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22656,6 +24671,8 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -22830,6 +24847,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22862,6 +24880,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23033,6 +25053,7 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23065,6 +25086,8 @@ export type VendorMasterCreateWithoutLeadScopedActivityStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -23239,6 +25262,7 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23271,6 +25295,8 @@ export type VendorMasterUncheckedCreateWithoutLeadScopedActivityStatusLogsInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23458,6 +25484,7 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23490,6 +25517,8 @@ export type VendorMasterUpdateWithoutLeadScopedActivityStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -23664,6 +25693,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23696,6 +25726,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadScopedActivityStatusLogsInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23867,6 +25899,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -23899,6 +25932,8 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -24073,6 +26108,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24105,6 +26141,8 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24292,6 +26330,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24324,6 +26363,8 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -24498,6 +26539,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24530,6 +26572,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24701,6 +26745,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24733,6 +26778,8 @@ export type VendorMasterCreateWithoutSourcesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -24907,6 +26954,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -24939,6 +26987,8 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25126,6 +27176,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25158,6 +27209,8 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -25332,6 +27385,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25364,6 +27418,8 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25535,6 +27591,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -25566,6 +27623,8 @@ export type VendorMasterCreateWithoutAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -25741,6 +27800,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -25772,6 +27832,8 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25960,6 +28022,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25991,6 +28054,8 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -26166,6 +28231,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26197,6 +28263,8 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26369,6 +28437,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -26401,6 +28470,8 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -26575,6 +28646,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -26607,6 +28679,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26794,6 +28868,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26826,6 +28901,8 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -27000,6 +29077,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27032,6 +29110,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27203,6 +29283,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -27235,6 +29316,8 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -27409,6 +29492,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -27441,6 +29525,8 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27628,6 +29714,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27660,6 +29747,8 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -27834,6 +29923,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27866,6 +29956,8 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28037,6 +30129,7 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -28069,6 +30162,8 @@ export type VendorMasterCreateWithoutProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -28243,6 +30338,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -28275,6 +30371,8 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28462,6 +30560,7 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28494,6 +30593,8 @@ export type VendorMasterUpdateWithoutProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -28668,6 +30769,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28700,6 +30802,8 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28871,6 +30975,7 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -28903,6 +31008,8 @@ export type VendorMasterCreateWithoutLeadProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -29077,6 +31184,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29109,6 +31217,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29296,6 +31406,7 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29328,6 +31439,8 @@ export type VendorMasterUpdateWithoutLeadProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -29502,6 +31615,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29534,6 +31648,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProcessBriefsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29705,6 +31821,7 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29737,6 +31854,8 @@ export type VendorMasterCreateWithoutProcessBriefMachineMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -29911,6 +32030,7 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -29943,6 +32063,8 @@ export type VendorMasterUncheckedCreateWithoutProcessBriefMachineMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30130,6 +32252,7 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30162,6 +32285,8 @@ export type VendorMasterUpdateWithoutProcessBriefMachineMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -30336,6 +32461,7 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30368,6 +32494,8 @@ export type VendorMasterUncheckedUpdateWithoutProcessBriefMachineMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30539,6 +32667,7 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -30571,6 +32700,8 @@ export type VendorMasterCreateWithoutLeadRequirementMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -30745,6 +32876,7 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -30777,6 +32909,8 @@ export type VendorMasterUncheckedCreateWithoutLeadRequirementMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30964,6 +33098,7 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30996,6 +33131,8 @@ export type VendorMasterUpdateWithoutLeadRequirementMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -31170,6 +33307,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31202,6 +33340,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadRequirementMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31373,6 +33513,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -31405,6 +33546,8 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -31579,6 +33722,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -31611,6 +33755,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31798,6 +33944,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31830,6 +33977,8 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -32004,6 +34153,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32036,6 +34186,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32207,6 +34359,7 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -32239,6 +34392,8 @@ export type VendorMasterCreateWithoutCarcasMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -32413,6 +34568,7 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -32445,6 +34601,8 @@ export type VendorMasterUncheckedCreateWithoutCarcasMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32632,6 +34790,7 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32664,6 +34823,8 @@ export type VendorMasterUpdateWithoutCarcasMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -32838,6 +34999,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32870,6 +35032,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcasMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33041,6 +35205,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -33073,6 +35238,8 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -33247,6 +35414,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -33279,6 +35447,8 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33466,6 +35636,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33498,6 +35669,8 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -33672,6 +35845,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33704,6 +35878,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33875,6 +36051,7 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -33907,6 +36084,8 @@ export type VendorMasterCreateWithoutShutterMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -34081,6 +36260,7 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -34113,6 +36293,8 @@ export type VendorMasterUncheckedCreateWithoutShutterMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34300,6 +36482,7 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34332,6 +36515,8 @@ export type VendorMasterUpdateWithoutShutterMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -34506,6 +36691,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34538,6 +36724,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterMaterialsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34709,6 +36897,7 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -34741,6 +36930,8 @@ export type VendorMasterCreateWithoutCarcassLegsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -34915,6 +37106,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -34947,6 +37139,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassLegsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35134,6 +37328,7 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35166,6 +37361,8 @@ export type VendorMasterUpdateWithoutCarcassLegsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -35340,6 +37537,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35372,6 +37570,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassLegsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35543,6 +37743,7 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -35575,6 +37776,8 @@ export type VendorMasterCreateWithoutLeadHardwareMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -35749,6 +37952,7 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -35781,6 +37985,8 @@ export type VendorMasterUncheckedCreateWithoutLeadHardwareMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35968,6 +38174,7 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36000,6 +38207,8 @@ export type VendorMasterUpdateWithoutLeadHardwareMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -36174,6 +38383,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36206,6 +38416,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadHardwareMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36377,6 +38589,7 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -36409,6 +38622,8 @@ export type VendorMasterCreateWithoutLightCarcasTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -36583,6 +38798,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -36615,6 +38831,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36802,6 +39020,7 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36834,6 +39053,8 @@ export type VendorMasterUpdateWithoutLightCarcasTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -37008,6 +39229,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37040,6 +39262,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37211,6 +39435,7 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -37243,6 +39468,8 @@ export type VendorMasterCreateWithoutLightCarcasUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -37417,6 +39644,7 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -37449,6 +39677,8 @@ export type VendorMasterUncheckedCreateWithoutLightCarcasUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37636,6 +39866,7 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37668,6 +39899,8 @@ export type VendorMasterUpdateWithoutLightCarcasUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -37842,6 +40075,7 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37874,6 +40108,8 @@ export type VendorMasterUncheckedUpdateWithoutLightCarcasUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38045,6 +40281,7 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -38077,6 +40314,8 @@ export type VendorMasterCreateWithoutLeadLightCarcasUnitMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -38251,6 +40490,7 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -38283,6 +40523,8 @@ export type VendorMasterUncheckedCreateWithoutLeadLightCarcasUnitMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38470,6 +40712,7 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38502,6 +40745,8 @@ export type VendorMasterUpdateWithoutLeadLightCarcasUnitMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -38676,6 +40921,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38708,6 +40954,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadLightCarcasUnitMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38879,6 +41127,7 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -38911,6 +41160,8 @@ export type VendorMasterCreateWithoutOtherAppliancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -39085,6 +41336,7 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -39117,6 +41369,8 @@ export type VendorMasterUncheckedCreateWithoutOtherAppliancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39304,6 +41558,7 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39336,6 +41591,8 @@ export type VendorMasterUpdateWithoutOtherAppliancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -39510,6 +41767,7 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39542,6 +41800,8 @@ export type VendorMasterUncheckedUpdateWithoutOtherAppliancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39713,6 +41973,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -39745,6 +42006,8 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -39919,6 +42182,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -39951,6 +42215,8 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40138,6 +42404,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40170,6 +42437,8 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -40344,6 +42613,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40376,6 +42646,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40547,6 +42819,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -40579,6 +42852,8 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -40753,6 +43028,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -40785,6 +43061,8 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40972,6 +43250,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41004,6 +43283,8 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -41178,6 +43459,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41210,6 +43492,8 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41381,6 +43665,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -41413,6 +43698,8 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -41587,6 +43874,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -41619,6 +43907,8 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41806,6 +44096,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41838,6 +44129,8 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -42012,6 +44305,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42044,6 +44338,8 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42215,6 +44511,7 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -42247,6 +44544,8 @@ export type VendorMasterCreateWithoutSpecificationDocumentMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -42421,6 +44720,7 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -42453,6 +44753,8 @@ export type VendorMasterUncheckedCreateWithoutSpecificationDocumentMappingsInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42640,6 +44942,7 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42672,6 +44975,8 @@ export type VendorMasterUpdateWithoutSpecificationDocumentMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -42846,6 +45151,7 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42878,6 +45184,8 @@ export type VendorMasterUncheckedUpdateWithoutSpecificationDocumentMappingsInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43049,6 +45357,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43081,6 +45390,8 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -43255,6 +45566,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43287,6 +45599,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43474,6 +45788,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43506,6 +45821,8 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -43680,6 +45997,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43712,6 +46030,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43883,6 +46203,7 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -43915,6 +46236,8 @@ export type VendorMasterCreateWithoutB2bDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -44089,6 +46412,7 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -44121,6 +46445,8 @@ export type VendorMasterUncheckedCreateWithoutB2bDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44308,6 +46634,7 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44340,6 +46667,8 @@ export type VendorMasterUpdateWithoutB2bDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -44514,6 +46843,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44546,6 +46876,8 @@ export type VendorMasterUncheckedUpdateWithoutB2bDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44717,6 +47049,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -44749,6 +47082,8 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -44923,6 +47258,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -44955,6 +47291,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45142,6 +47480,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45174,6 +47513,8 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -45348,6 +47689,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45380,6 +47722,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45551,6 +47895,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -45583,6 +47928,8 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -45757,6 +48104,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -45789,6 +48137,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -45976,6 +48326,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46008,6 +48359,8 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -46182,6 +48535,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46214,6 +48568,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46385,6 +48741,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -46417,6 +48774,8 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -46591,6 +48950,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -46623,6 +48983,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -46810,6 +49172,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46842,6 +49205,8 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -47016,6 +49381,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47048,6 +49414,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -47219,6 +49587,7 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -47251,6 +49620,8 @@ export type VendorMasterCreateWithoutProductSubStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -47425,6 +49796,7 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -47457,6 +49829,8 @@ export type VendorMasterUncheckedCreateWithoutProductSubStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47644,6 +50018,7 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47676,6 +50051,8 @@ export type VendorMasterUpdateWithoutProductSubStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -47850,6 +50227,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47882,6 +50260,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSubStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48053,6 +50433,7 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -48085,6 +50466,8 @@ export type VendorMasterCreateWithoutProductItemCodesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -48259,6 +50642,7 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -48291,6 +50675,8 @@ export type VendorMasterUncheckedCreateWithoutProductItemCodesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -48478,6 +50864,7 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48510,6 +50897,8 @@ export type VendorMasterUpdateWithoutProductItemCodesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -48684,6 +51073,7 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48716,6 +51106,8 @@ export type VendorMasterUncheckedUpdateWithoutProductItemCodesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -48887,6 +51279,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -48919,6 +51312,8 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -49093,6 +51488,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49125,6 +51521,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -49312,6 +51710,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49344,6 +51743,8 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -49518,6 +51919,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49550,6 +51952,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -49721,6 +52125,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49753,6 +52158,8 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -49927,6 +52334,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -49959,6 +52367,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50146,6 +52556,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50178,6 +52589,8 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -50352,6 +52765,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50384,6 +52798,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -50555,6 +52971,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -50587,6 +53004,8 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -50761,6 +53180,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -50793,6 +53213,8 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -50980,6 +53402,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51012,6 +53435,8 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -51186,6 +53611,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51218,6 +53644,8 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -51389,6 +53817,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -51421,6 +53850,8 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -51595,6 +54026,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -51627,6 +54059,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -51814,6 +54248,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51846,6 +54281,8 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -52020,6 +54457,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52052,6 +54490,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -52223,6 +54663,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -52255,6 +54696,8 @@ export type VendorMasterCreateWithoutLedgersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -52429,6 +54872,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -52461,6 +54905,8 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -52648,6 +55094,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52680,6 +55127,8 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -52854,6 +55303,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52886,6 +55336,8 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53057,6 +55509,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53089,6 +55542,8 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -53263,6 +55718,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53295,6 +55751,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -53482,6 +55940,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53514,6 +55973,8 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -53688,6 +56149,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53720,6 +56182,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -53891,6 +56355,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -53923,6 +56388,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -54097,6 +56564,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -54129,6 +56597,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -54316,6 +56786,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54348,6 +56819,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -54522,6 +56995,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -54554,6 +57028,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -54725,6 +57201,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -54757,6 +57234,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -54931,6 +57410,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -54963,6 +57443,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55150,6 +57632,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55182,6 +57665,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -55356,6 +57841,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -55388,6 +57874,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -55559,6 +58047,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -55591,6 +58080,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -55765,6 +58256,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -55797,6 +58289,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -55984,6 +58478,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56016,6 +58511,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -56190,6 +58687,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56222,6 +58720,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -56393,6 +58893,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -56425,6 +58926,8 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -56599,6 +59102,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -56631,6 +59135,8 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -56818,6 +59324,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -56850,6 +59357,8 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -57024,6 +59533,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57056,6 +59566,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57227,6 +59739,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -57259,6 +59772,8 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -57433,6 +59948,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -57465,6 +59981,8 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -57652,6 +60170,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57684,6 +60203,8 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -57858,6 +60379,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -57890,6 +60412,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58061,6 +60585,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -58093,6 +60618,8 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -58267,6 +60794,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -58299,6 +60827,8 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -58486,6 +61016,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58518,6 +61049,8 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -58692,6 +61225,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -58724,6 +61258,8 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -58895,6 +61431,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -58927,6 +61464,8 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -59101,6 +61640,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59133,6 +61673,8 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -59320,6 +61862,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59352,6 +61895,8 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -59526,6 +62071,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -59558,6 +62104,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -59729,6 +62277,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59761,6 +62310,8 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -59935,6 +62486,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -59967,6 +62519,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60154,6 +62708,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60186,6 +62741,8 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -60360,6 +62917,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -60392,6 +62950,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -60563,6 +63123,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -60595,6 +63156,8 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -60769,6 +63332,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -60801,6 +63365,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -60988,6 +63554,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61020,6 +63587,8 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -61194,6 +63763,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61226,6 +63796,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -61397,6 +63969,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -61429,6 +64002,8 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -61603,6 +64178,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -61635,6 +64211,8 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -61822,6 +64400,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -61854,6 +64433,8 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -62028,6 +64609,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62060,6 +64642,8 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -62231,6 +64815,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -62263,6 +64848,8 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -62437,6 +65024,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -62469,6 +65057,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -62656,6 +65246,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62688,6 +65279,8 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -62862,6 +65455,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -62894,6 +65488,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63065,6 +65661,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -63097,6 +65694,8 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -63271,6 +65870,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -63303,6 +65903,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -63490,6 +66092,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63522,6 +66125,8 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -63696,6 +66301,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -63728,6 +66334,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -63899,6 +66507,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -63931,6 +66540,8 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -64105,6 +66716,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -64137,6 +66749,8 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -64324,6 +66938,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64356,6 +66971,8 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -64530,6 +67147,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -64562,6 +67180,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -64733,6 +67353,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -64765,6 +67386,8 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -64939,6 +67562,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -64971,6 +67595,8 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65158,6 +67784,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65190,6 +67817,8 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -65364,6 +67993,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -65396,6 +68026,8 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -65567,6 +68199,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -65599,6 +68232,8 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -65773,6 +68408,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -65805,6 +68441,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -65992,6 +68630,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66024,6 +68663,8 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -66198,6 +68839,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66230,6 +68872,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -66401,6 +69045,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -66433,6 +69078,8 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -66607,6 +69254,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -66639,6 +69287,8 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -66826,6 +69476,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -66858,6 +69509,8 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -67032,6 +69685,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67064,6 +69718,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -67235,6 +69891,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -67267,6 +69924,8 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -67441,6 +70100,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -67473,6 +70133,8 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -67660,6 +70322,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67692,6 +70355,8 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -67866,6 +70531,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -67898,6 +70564,8 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68069,6 +70737,7 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -68101,6 +70770,8 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -68275,6 +70946,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -68307,6 +70979,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -68494,6 +71168,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68526,6 +71201,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -68700,6 +71377,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -68732,6 +71410,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -68903,6 +71583,7 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -68935,6 +71616,8 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -69109,6 +71792,7 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -69141,6 +71825,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -69328,6 +72014,7 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69360,6 +72047,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -69534,6 +72223,7 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -69566,6 +72256,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -69737,6 +72429,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -69769,6 +72462,8 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -69943,6 +72638,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -69975,6 +72671,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70162,6 +72860,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70194,6 +72893,8 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -70368,6 +73069,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -70400,6 +73102,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -70571,6 +73275,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -70603,6 +73308,8 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -70777,6 +73484,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -70809,6 +73517,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -70996,6 +73706,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71028,6 +73739,8 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -71202,6 +73915,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71234,6 +73948,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -71405,6 +74121,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -71437,6 +74154,8 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -71611,6 +74330,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -71643,6 +74363,8 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -71830,6 +74552,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -71862,6 +74585,8 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -72036,6 +74761,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72068,6 +74794,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -72239,6 +74967,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -72271,6 +75000,8 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -72445,6 +75176,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -72477,6 +75209,8 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -72664,6 +75398,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72696,6 +75431,8 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -72870,6 +75607,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -72902,6 +75640,8 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73073,6 +75813,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73105,6 +75846,8 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -73279,6 +76022,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73311,6 +76055,8 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -73498,6 +76244,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73530,6 +76277,8 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -73704,6 +76453,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -73736,6 +76486,8 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -73907,6 +76659,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -73939,6 +76692,8 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -74113,6 +76868,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -74145,6 +76901,8 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -74332,6 +77090,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74364,6 +77123,8 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -74538,6 +77299,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -74570,6 +77332,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -74741,6 +77505,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -74773,6 +77538,8 @@ export type VendorMasterCreateWithoutInstallersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -74947,6 +77714,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -74979,6 +77747,8 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -75166,6 +77936,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75198,6 +77969,8 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -75372,6 +78145,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -75404,6 +78178,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -75575,6 +78351,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -75607,6 +78384,8 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -75781,6 +78560,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -75813,6 +78593,8 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76000,6 +78782,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76032,6 +78815,8 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -76206,6 +78991,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76238,6 +79024,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -76409,6 +79197,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -76441,6 +79230,8 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -76615,6 +79406,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -76647,6 +79439,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -76834,6 +79628,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -76866,6 +79661,8 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -77040,6 +79837,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77072,6 +79870,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -77243,6 +80043,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -77275,6 +80076,8 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -77449,6 +80252,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -77481,6 +80285,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -77668,6 +80474,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77700,6 +80507,8 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -77874,6 +80683,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -77906,6 +80716,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78077,6 +80889,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -78109,6 +80922,8 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -78283,6 +81098,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -78315,6 +81131,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -78502,6 +81320,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78534,6 +81353,8 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -78708,6 +81529,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -78740,6 +81562,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -78911,6 +81735,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -78943,6 +81768,8 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -79117,6 +81944,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79149,6 +81977,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -79336,6 +82166,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79368,6 +82199,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -79542,6 +82375,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -79574,6 +82408,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -79745,6 +82581,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79777,6 +82614,8 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -79951,6 +82790,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -79983,6 +82823,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -80170,6 +83012,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80202,6 +83045,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -80376,6 +83221,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -80408,6 +83254,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -80579,6 +83427,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -80611,6 +83460,8 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -80785,6 +83636,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -80817,6 +83669,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81004,6 +83858,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81036,6 +83891,8 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -81210,6 +84067,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81242,6 +84100,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -81413,6 +84273,7 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -81445,6 +84306,8 @@ export type VendorMasterCreateWithoutMiscellaneousFollowupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -81619,6 +84482,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -81651,6 +84515,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousFollowupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -81838,6 +84704,7 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -81870,6 +84737,8 @@ export type VendorMasterUpdateWithoutMiscellaneousFollowupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -82044,6 +84913,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82076,6 +84946,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousFollowupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -82247,6 +85119,7 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -82279,6 +85152,8 @@ export type VendorMasterCreateWithoutMiscellaneousReorderInstancesMaterialMappin
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -82453,6 +85328,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -82485,6 +85361,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousReorderInstancesMater
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -82672,6 +85550,7 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82704,6 +85583,8 @@ export type VendorMasterUpdateWithoutMiscellaneousReorderInstancesMaterialMappin
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -82878,6 +85759,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -82910,6 +85792,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousReorderInstancesMater
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83081,6 +85965,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83113,6 +85998,8 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -83287,6 +86174,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83319,6 +86207,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -83506,6 +86396,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83538,6 +86429,8 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -83712,6 +86605,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -83744,6 +86638,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -83915,6 +86811,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -83947,6 +86844,8 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -84121,6 +87020,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -84153,6 +87053,8 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -84340,6 +87242,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84372,6 +87275,8 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -84546,6 +87451,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -84578,6 +87484,8 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -84749,6 +87657,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -84781,6 +87690,8 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -84955,6 +87866,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -84987,6 +87899,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -85174,6 +88088,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85206,6 +88121,8 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -85380,6 +88297,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -85412,6 +88330,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -85583,6 +88503,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -85615,6 +88536,8 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -85789,6 +88712,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -85821,6 +88745,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86008,6 +88934,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86040,6 +88967,8 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -86214,6 +89143,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86246,6 +89176,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -86417,6 +89349,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -86449,6 +89382,8 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -86623,6 +89558,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -86655,6 +89591,8 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -86842,6 +89780,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -86874,6 +89813,8 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -87048,6 +89989,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87080,6 +90022,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -87251,6 +90195,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -87283,6 +90228,8 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -87457,6 +90404,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -87489,6 +90437,8 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -87676,6 +90626,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87708,6 +90659,8 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -87882,6 +90835,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -87914,6 +90868,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88085,6 +91041,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -88117,6 +91074,8 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -88291,6 +91250,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -88323,6 +91283,8 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -88510,6 +91472,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88542,6 +91505,8 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -88716,6 +91681,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -88748,6 +91714,8 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -88919,6 +91887,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -88951,6 +91920,8 @@ export type VendorMasterCreateWithoutCutListInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -89125,6 +92096,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89157,6 +92129,8 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -89344,6 +92318,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89376,6 +92351,8 @@ export type VendorMasterUpdateWithoutCutListInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -89550,6 +92527,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -89582,6 +92560,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -89753,6 +92733,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89785,6 +92766,8 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -89959,6 +92942,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -89991,6 +92975,8 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -90178,6 +93164,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90210,6 +93197,8 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -90384,6 +93373,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -90416,6 +93406,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -90587,6 +93579,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -90619,6 +93612,8 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -90793,6 +93788,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -90825,6 +93821,8 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91012,6 +94010,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91044,6 +94043,8 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -91218,6 +94219,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91250,6 +94252,8 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -91421,6 +94425,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -91453,6 +94458,8 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -91627,6 +94634,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -91659,6 +94667,8 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -91846,6 +94856,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -91878,6 +94889,8 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -92052,6 +95065,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92084,6 +95098,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -92255,6 +95271,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -92287,6 +95304,8 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -92461,6 +95480,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -92493,6 +95513,8 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -92680,6 +95702,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92712,6 +95735,8 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -92886,6 +95911,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -92918,6 +95944,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -93089,6 +96117,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -93121,6 +96150,8 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -93295,6 +96326,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -93327,6 +96359,8 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -93514,6 +96548,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93546,6 +96581,8 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -93720,6 +96757,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -93752,6 +96790,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -93923,6 +96963,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -93955,6 +96996,8 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -94129,6 +97172,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -94161,6 +97205,8 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -94348,6 +97394,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94380,6 +97427,8 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -94554,6 +97603,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -94586,6 +97636,8 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -94757,6 +97809,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -94789,6 +97842,8 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -94963,6 +98018,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -94995,6 +98051,8 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -95182,6 +98240,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95214,6 +98273,8 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -95388,6 +98449,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -95420,6 +98482,8 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -95591,6 +98655,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -95623,6 +98688,8 @@ export type VendorMasterCreateWithoutStateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -95796,6 +98863,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -95828,6 +98896,8 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96031,6 +99101,7 @@ export type VendorMasterScalarWhereInput = {
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  cutlist_configuration?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -96077,6 +99148,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -96109,6 +99181,8 @@ export type VendorMasterCreateWithoutThemesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -96283,6 +99357,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -96315,6 +99390,8 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -96502,6 +99579,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96534,6 +99612,8 @@ export type VendorMasterUpdateWithoutThemesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -96708,6 +99788,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -96740,6 +99821,8 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -96911,6 +99994,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -96943,6 +100027,8 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -97117,6 +100203,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97149,6 +100236,8 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -97336,6 +100425,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97368,6 +100458,8 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -97542,6 +100634,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -97574,6 +100667,8 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -97745,6 +100840,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97777,6 +100873,8 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -97951,6 +101049,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -97983,6 +101082,8 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -98170,6 +101271,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98202,6 +101304,8 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -98376,6 +101480,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -98408,6 +101513,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -98579,6 +101686,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -98611,6 +101719,8 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -98785,6 +101895,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -98817,6 +101928,8 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99004,6 +102117,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99036,6 +102150,8 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -99210,6 +102326,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99242,6 +102359,8 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -99413,6 +102532,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -99445,6 +102565,8 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -99619,6 +102741,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -99651,6 +102774,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -99838,6 +102963,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -99870,6 +102996,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -100044,6 +103172,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100076,6 +103205,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -100247,6 +103378,7 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -100279,6 +103411,8 @@ export type VendorMasterCreateWithoutCategoryNamingStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -100453,6 +103587,7 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -100485,6 +103620,8 @@ export type VendorMasterUncheckedCreateWithoutCategoryNamingStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -100672,6 +103809,7 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100704,6 +103842,8 @@ export type VendorMasterUpdateWithoutCategoryNamingStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -100878,6 +104018,7 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -100910,6 +104051,8 @@ export type VendorMasterUncheckedUpdateWithoutCategoryNamingStructuresInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101081,6 +104224,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101113,6 +104257,8 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -101287,6 +104433,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101319,6 +104466,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -101506,6 +104655,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101538,6 +104688,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -101712,6 +104864,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -101744,6 +104897,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -101915,6 +105070,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -101947,6 +105103,8 @@ export type VendorMasterCreateWithoutBrandsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -102121,6 +105279,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -102153,6 +105312,8 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -102340,6 +105501,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102372,6 +105534,8 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -102546,6 +105710,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -102578,6 +105743,8 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -102749,6 +105916,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -102781,6 +105949,8 @@ export type VendorMasterCreateWithoutProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -102955,6 +106125,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -102987,6 +106158,8 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -103174,6 +106347,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103206,6 +106380,8 @@ export type VendorMasterUpdateWithoutProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -103380,6 +106556,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -103412,6 +106589,8 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -103583,6 +106762,7 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -103615,6 +106795,8 @@ export type VendorMasterCreateWithoutCoreProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -103789,6 +106971,7 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -103821,6 +107004,8 @@ export type VendorMasterUncheckedCreateWithoutCoreProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -104008,6 +107193,7 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104040,6 +107226,8 @@ export type VendorMasterUpdateWithoutCoreProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -104214,6 +107402,7 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104246,6 +107435,8 @@ export type VendorMasterUncheckedUpdateWithoutCoreProductsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -104417,6 +107608,7 @@ export type VendorMasterCreateWithoutGradesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -104449,6 +107641,8 @@ export type VendorMasterCreateWithoutGradesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -104623,6 +107817,7 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -104655,6 +107850,8 @@ export type VendorMasterUncheckedCreateWithoutGradesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -104842,6 +108039,7 @@ export type VendorMasterUpdateWithoutGradesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -104874,6 +108072,8 @@ export type VendorMasterUpdateWithoutGradesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -105048,6 +108248,7 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105080,6 +108281,8 @@ export type VendorMasterUncheckedUpdateWithoutGradesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -105251,6 +108454,7 @@ export type VendorMasterCreateWithoutFinishesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -105283,6 +108487,8 @@ export type VendorMasterCreateWithoutFinishesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -105457,6 +108663,7 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -105489,6 +108696,8 @@ export type VendorMasterUncheckedCreateWithoutFinishesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -105676,6 +108885,7 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105708,6 +108918,8 @@ export type VendorMasterUpdateWithoutFinishesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -105882,6 +109094,7 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -105914,6 +109127,8 @@ export type VendorMasterUncheckedUpdateWithoutFinishesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -106085,6 +109300,7 @@ export type VendorMasterCreateWithoutTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106117,6 +109333,8 @@ export type VendorMasterCreateWithoutTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -106291,6 +109509,7 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106323,6 +109542,8 @@ export type VendorMasterUncheckedCreateWithoutTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -106510,6 +109731,7 @@ export type VendorMasterUpdateWithoutTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106542,6 +109764,8 @@ export type VendorMasterUpdateWithoutTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -106716,6 +109940,7 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -106748,6 +109973,8 @@ export type VendorMasterUncheckedUpdateWithoutTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -106919,6 +110146,7 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -106951,6 +110179,8 @@ export type VendorMasterCreateWithoutItemTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -107125,6 +110355,7 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -107157,6 +110388,8 @@ export type VendorMasterUncheckedCreateWithoutItemTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -107344,6 +110577,7 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107376,6 +110610,8 @@ export type VendorMasterUpdateWithoutItemTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -107550,6 +110786,7 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -107582,6 +110819,8 @@ export type VendorMasterUncheckedUpdateWithoutItemTypesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -107753,6 +110992,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -107785,6 +111025,8 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -107959,6 +111201,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -107991,6 +111234,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -108178,6 +111423,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108210,6 +111456,8 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -108384,6 +111632,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -108416,6 +111665,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -108587,6 +111838,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -108619,6 +111871,8 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -108793,6 +112047,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -108825,6 +112080,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -109012,6 +112269,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109044,6 +112302,8 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -109218,6 +112478,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109250,6 +112511,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -109421,6 +112684,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -109453,6 +112717,8 @@ export type VendorMasterCreateWithoutGrnsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -109627,6 +112893,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -109659,6 +112926,8 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -109846,6 +113115,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -109878,6 +113148,8 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -110052,6 +113324,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110084,6 +113357,8 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -110255,6 +113530,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -110287,6 +113563,8 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -110461,6 +113739,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -110493,6 +113772,8 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -110680,6 +113961,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110712,6 +113994,8 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -110886,6 +114170,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -110918,6 +114203,8 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -111089,6 +114376,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111121,6 +114409,8 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -111295,6 +114585,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111327,6 +114618,8 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -111514,6 +114807,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111546,6 +114840,8 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -111720,6 +115016,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -111752,6 +115049,8 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -111923,6 +115222,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -111955,6 +115255,8 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -112129,6 +115431,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -112161,6 +115464,8 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -112348,6 +115653,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112380,6 +115686,8 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -112554,6 +115862,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -112586,6 +115895,8 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -112757,6 +116068,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -112789,6 +116101,8 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -112963,6 +116277,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -112995,6 +116310,8 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -113182,6 +116499,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113214,6 +116532,8 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -113388,6 +116708,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -113420,6 +116741,8 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -113591,6 +116914,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -113623,6 +116947,8 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -113797,6 +117123,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -113829,6 +117156,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -114016,6 +117345,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114048,6 +117378,8 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -114222,6 +117554,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114254,6 +117587,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -114425,6 +117760,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -114457,6 +117793,8 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -114631,6 +117969,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -114663,6 +118002,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -114850,6 +118191,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -114882,6 +118224,8 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -115056,6 +118400,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115088,6 +118433,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -115259,6 +118606,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -115291,6 +118639,8 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -115465,6 +118815,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -115497,6 +118848,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -115684,6 +119037,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115716,6 +119070,8 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -115890,6 +119246,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -115922,6 +119279,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -116093,6 +119452,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -116125,6 +119485,8 @@ export type VendorMasterCreateWithoutUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -116299,6 +119661,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -116331,6 +119694,8 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -116518,6 +119883,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116550,6 +119916,8 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -116724,6 +120092,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -116756,6 +120125,8 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -116927,6 +120298,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -116959,6 +120331,8 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -117133,6 +120507,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117165,6 +120540,8 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -117352,6 +120729,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117384,6 +120762,8 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -117558,6 +120938,7 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -117590,6 +120971,8 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -117761,6 +121144,7 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117793,6 +121177,8 @@ export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -117967,6 +121353,7 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -117999,6 +121386,8 @@ export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -118186,6 +121575,7 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118218,6 +121608,8 @@ export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -118392,6 +121784,7 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -118424,6 +121817,8 @@ export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -118595,6 +121990,7 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -118627,6 +122023,8 @@ export type VendorMasterCreateWithoutPopaymentScheduleHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -118801,6 +122199,7 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -118833,6 +122232,8 @@ export type VendorMasterUncheckedCreateWithoutPopaymentScheduleHistoriesInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -119020,6 +122421,7 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119052,6 +122454,8 @@ export type VendorMasterUpdateWithoutPopaymentScheduleHistoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -119226,6 +122630,7 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119258,6 +122663,8 @@ export type VendorMasterUncheckedUpdateWithoutPopaymentScheduleHistoriesInput = 
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -119429,6 +122836,7 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -119460,6 +122868,8 @@ export type VendorMasterCreateWithoutArchitechuremastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -119635,6 +123045,7 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -119666,6 +123077,8 @@ export type VendorMasterUncheckedCreateWithoutArchitechuremastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -119854,6 +123267,7 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -119885,6 +123299,8 @@ export type VendorMasterUpdateWithoutArchitechuremastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -120060,6 +123476,7 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120091,6 +123508,8 @@ export type VendorMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -120263,6 +123682,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -120294,6 +123714,8 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -120469,6 +123891,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -120500,6 +123923,8 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -120688,6 +124113,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120719,6 +124145,8 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -120894,6 +124322,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -120925,6 +124354,8 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -121097,6 +124528,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -121129,6 +124561,8 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -121303,6 +124737,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -121335,6 +124770,8 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -121522,6 +124959,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121554,6 +124992,8 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -121728,6 +125168,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -121760,6 +125201,8 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -121931,6 +125374,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -121963,6 +125407,8 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -122137,6 +125583,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -122169,6 +125616,8 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -122356,6 +125805,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122388,6 +125838,8 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -122562,6 +126014,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -122594,6 +126047,8 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -122765,6 +126220,7 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -122797,6 +126253,8 @@ export type VendorMasterCreateWithoutBox_info_fieldsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -122971,6 +126429,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123003,6 +126462,8 @@ export type VendorMasterUncheckedCreateWithoutBox_info_fieldsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -123190,6 +126651,7 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123222,6 +126684,8 @@ export type VendorMasterUpdateWithoutBox_info_fieldsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -123396,6 +126860,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -123428,6 +126893,8 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_fieldsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -123599,6 +127066,7 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123630,6 +127098,8 @@ export type VendorMasterCreateWithoutBox_info_valuesInput = {
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -123805,6 +127275,7 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -123836,6 +127307,8 @@ export type VendorMasterUncheckedCreateWithoutBox_info_valuesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -124024,6 +127497,7 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124055,6 +127529,8 @@ export type VendorMasterUpdateWithoutBox_info_valuesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -124230,6 +127706,7 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124261,6 +127738,8 @@ export type VendorMasterUncheckedUpdateWithoutBox_info_valuesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -124433,6 +127912,7 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -124465,6 +127945,8 @@ export type VendorMasterCreateWithoutBroadcastsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -124639,6 +128121,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -124671,6 +128154,8 @@ export type VendorMasterUncheckedCreateWithoutBroadcastsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -124858,6 +128343,7 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -124890,6 +128376,8 @@ export type VendorMasterUpdateWithoutBroadcastsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -125064,6 +128552,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125096,6 +128585,8 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -125267,6 +128758,7 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -125299,6 +128791,8 @@ export type VendorMasterCreateWithoutBroadcastCategoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterCreateNestedManyWithoutVendorInput
@@ -125473,6 +128967,7 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -125505,6 +129000,8 @@ export type VendorMasterUncheckedCreateWithoutBroadcastCategoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -125692,6 +129189,7 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125724,6 +129222,8 @@ export type VendorMasterUpdateWithoutBroadcastCategoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUpdateManyWithoutVendorNestedInput
@@ -125898,6 +129398,7 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -125930,6 +129431,8 @@ export type VendorMasterUncheckedUpdateWithoutBroadcastCategoriesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
   carcasMaterials?: Prisma.CarcasMaterialMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -126101,6 +129604,7 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -126132,6 +129636,8 @@ export type VendorMasterCreateWithoutB2bRequirementTypesInput = {
   architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -126307,6 +129813,7 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -126338,6 +129845,8 @@ export type VendorMasterUncheckedCreateWithoutB2bRequirementTypesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -126526,6 +130035,7 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126557,6 +130067,8 @@ export type VendorMasterUpdateWithoutB2bRequirementTypesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -126732,6 +130244,7 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -126763,6 +130276,8 @@ export type VendorMasterUncheckedUpdateWithoutB2bRequirementTypesInput = {
   architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -126935,6 +130450,7 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -126967,6 +130483,8 @@ export type VendorMasterCreateWithoutLeadB2BReqMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -127141,6 +130659,7 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -127173,6 +130692,8 @@ export type VendorMasterUncheckedCreateWithoutLeadB2BReqMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -127360,6 +130881,7 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127392,6 +130914,8 @@ export type VendorMasterUpdateWithoutLeadB2BReqMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -127566,6 +131090,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -127598,6 +131123,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadB2BReqMappingsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -127769,6 +131296,7 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -127801,6 +131329,8 @@ export type VendorMasterCreateWithoutLeadOtherAppliancesRemarkMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -127975,6 +131505,7 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -128007,6 +131538,8 @@ export type VendorMasterUncheckedCreateWithoutLeadOtherAppliancesRemarkMappingIn
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -128194,6 +131727,7 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128226,6 +131760,8 @@ export type VendorMasterUpdateWithoutLeadOtherAppliancesRemarkMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -128400,6 +131936,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -128432,6 +131969,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadOtherAppliancesRemarkMappingIn
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -128603,6 +132142,7 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -128635,6 +132175,8 @@ export type VendorMasterCreateWithoutUserTypePrivilegeMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -128809,6 +132351,7 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -128841,6 +132384,8 @@ export type VendorMasterUncheckedCreateWithoutUserTypePrivilegeMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -129028,6 +132573,7 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129060,6 +132606,8 @@ export type VendorMasterUpdateWithoutUserTypePrivilegeMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -129234,6 +132782,7 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129266,6 +132815,8 @@ export type VendorMasterUncheckedUpdateWithoutUserTypePrivilegeMappingInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -129437,6 +132988,7 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -129469,6 +133021,8 @@ export type VendorMasterCreateWithoutOnline_lead_call_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -129643,6 +133197,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -129675,6 +133230,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_call_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -129862,6 +133419,7 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -129894,6 +133452,8 @@ export type VendorMasterUpdateWithoutOnline_lead_call_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -130068,6 +133628,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130100,6 +133661,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_call_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -130271,6 +133834,7 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -130303,6 +133867,8 @@ export type VendorMasterCreateWithoutOnline_lead_followup_statusInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -130477,6 +134043,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -130509,6 +134076,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_followup_statusInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -130696,6 +134265,7 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130728,6 +134298,8 @@ export type VendorMasterUpdateWithoutOnline_lead_followup_statusInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -130902,6 +134474,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -130934,6 +134507,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_followup_statusInput =
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -131105,6 +134680,7 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131137,6 +134713,8 @@ export type VendorMasterCreateWithoutOnline_lead_historyInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -131311,6 +134889,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131343,6 +134922,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_historyInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -131530,6 +135111,7 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131562,6 +135144,8 @@ export type VendorMasterUpdateWithoutOnline_lead_historyInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -131736,6 +135320,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -131768,6 +135353,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_historyInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -131939,6 +135526,7 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -131971,6 +135559,8 @@ export type VendorMasterCreateWithoutOnline_lead_store_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -132145,6 +135735,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -132177,6 +135768,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_lead_store_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -132364,6 +135957,7 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132396,6 +135990,8 @@ export type VendorMasterUpdateWithoutOnline_lead_store_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -132570,6 +136166,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -132602,6 +136199,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_lead_store_logInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -132773,6 +136372,7 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -132805,6 +136405,8 @@ export type VendorMasterCreateWithoutOnline_leadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -132979,6 +136581,7 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -133011,6 +136614,8 @@ export type VendorMasterUncheckedCreateWithoutOnline_leadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -133198,6 +136803,7 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133230,6 +136836,8 @@ export type VendorMasterUpdateWithoutOnline_leadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -133404,6 +137012,7 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -133436,6 +137045,8 @@ export type VendorMasterUncheckedUpdateWithoutOnline_leadsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -133607,6 +137218,7 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -133639,6 +137251,8 @@ export type VendorMasterCreateWithoutLeadBillingAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -133813,6 +137427,7 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -133845,6 +137460,8 @@ export type VendorMasterUncheckedCreateWithoutLeadBillingAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -134032,6 +137649,7 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134064,6 +137682,8 @@ export type VendorMasterUpdateWithoutLeadBillingAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -134238,6 +137858,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134270,6 +137891,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadBillingAddressesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -134441,6 +138064,7 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -134472,6 +138096,8 @@ export type VendorMasterCreateWithoutProductsRequiredForProductionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -134647,6 +138273,7 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -134678,6 +138305,8 @@ export type VendorMasterUncheckedCreateWithoutProductsRequiredForProductionInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -134866,6 +138495,7 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -134897,6 +138527,8 @@ export type VendorMasterUpdateWithoutProductsRequiredForProductionInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -135072,6 +138704,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135103,6 +138736,8 @@ export type VendorMasterUncheckedUpdateWithoutProductsRequiredForProductionInput
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -135275,6 +138910,7 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -135307,6 +138943,8 @@ export type VendorMasterCreateWithoutCutListRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -135481,6 +139119,7 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -135513,6 +139152,8 @@ export type VendorMasterUncheckedCreateWithoutCutListRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -135700,6 +139341,7 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135732,6 +139374,8 @@ export type VendorMasterUpdateWithoutCutListRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -135906,6 +139550,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -135938,6 +139583,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListRulesInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -136109,6 +139756,7 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -136141,6 +139789,8 @@ export type VendorMasterCreateWithoutRuleActionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterCreateNestedManyWithoutVendorInput
@@ -136315,6 +139965,7 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   state_id?: number | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -136347,6 +139998,8 @@ export type VendorMasterUncheckedCreateWithoutRuleActionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedCreateNestedManyWithoutVendorInput
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedCreateNestedManyWithoutVendorInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedCreateNestedManyWithoutVendorInput
   brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedCreateNestedManyWithoutVendorInput
   broadcasts?: Prisma.BroadcastMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -136534,6 +140187,7 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136566,6 +140220,8 @@ export type VendorMasterUpdateWithoutRuleActionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -136740,6 +140396,7 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -136772,6 +140429,8 @@ export type VendorMasterUncheckedUpdateWithoutRuleActionsInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -136944,6 +140603,7 @@ export type VendorMasterCreateManyStateInput = {
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: string | null
   is_approval_task_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
@@ -136990,6 +140650,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137022,6 +140683,8 @@ export type VendorMasterUpdateWithoutStateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUpdateManyWithoutVendorNestedInput
@@ -137195,6 +140858,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137227,6 +140891,8 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   b2bRequirementTypes?: Prisma.B2BRequirementTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   box_info_values?: Prisma.BoxInfoFieldValueUncheckedUpdateManyWithoutVendorNestedInput
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  factory_out_revert_logs?: Prisma.FactoryOutRevertLogUncheckedUpdateManyWithoutVendorNestedInput
+  box_unpack_logs?: Prisma.BoxUnpackLogUncheckedUpdateManyWithoutVendorNestedInput
   brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcastCategories?: Prisma.BroadcastCategoryMasterUncheckedUpdateManyWithoutVendorNestedInput
   broadcasts?: Prisma.BroadcastMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -137400,6 +141066,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cutlist_configuration?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -137440,6 +141107,8 @@ export type VendorMasterCountOutputType = {
   b2bRequirementTypes: number
   box_info_values: number
   boxes: number
+  factory_out_revert_logs: number
+  box_unpack_logs: number
   brands: number
   broadcastCategories: number
   broadcasts: number
@@ -137601,6 +141270,8 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   b2bRequirementTypes?: boolean | VendorMasterCountOutputTypeCountB2bRequirementTypesArgs
   box_info_values?: boolean | VendorMasterCountOutputTypeCountBox_info_valuesArgs
   boxes?: boolean | VendorMasterCountOutputTypeCountBoxesArgs
+  factory_out_revert_logs?: boolean | VendorMasterCountOutputTypeCountFactory_out_revert_logsArgs
+  box_unpack_logs?: boolean | VendorMasterCountOutputTypeCountBox_unpack_logsArgs
   brands?: boolean | VendorMasterCountOutputTypeCountBrandsArgs
   broadcastCategories?: boolean | VendorMasterCountOutputTypeCountBroadcastCategoriesArgs
   broadcasts?: boolean | VendorMasterCountOutputTypeCountBroadcastsArgs
@@ -137811,6 +141482,20 @@ export type VendorMasterCountOutputTypeCountBox_info_valuesArgs<ExtArgs extends 
  */
 export type VendorMasterCountOutputTypeCountBoxesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BoxMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountFactory_out_revert_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FactoryOutRevertLogWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountBox_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxUnpackLogWhereInput
 }
 
 /**
@@ -138892,6 +142577,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -138924,6 +142610,8 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   b2bRequirementTypes?: boolean | Prisma.VendorMaster$b2bRequirementTypesArgs<ExtArgs>
   box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
+  factory_out_revert_logs?: boolean | Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>
   brands?: boolean | Prisma.VendorMaster$brandsArgs<ExtArgs>
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
@@ -139100,6 +142788,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -139149,6 +142838,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -139198,6 +142888,7 @@ export type VendorMasterSelectScalar = {
   state_id?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
+  cutlist_configuration?: boolean
   is_approval_task_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
@@ -139225,7 +142916,7 @@ export type VendorMasterSelectScalar = {
   is_available_unique_code?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "online_leads_lead_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt" | "vendor_report_code" | "IsAccountLocInEnabled" | "is_this_vendor_is_custom_usertype_only" | "state_id" | "is_inventory_enabled" | "is_tracktrace_enabled" | "cutlist_configuration" | "is_approval_task_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_year_wise_lead_code_enabled" | "is_client_visit_enabled" | "subdomain_url" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "handlesLargeScaleProjects" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "icon" | "login_image" | "address" | "city" | "gst_no" | "pincode" | "tag_line" | "toll_free_no" | "website_link" | "is_broadcast_enabled" | "is_scanpack_enabled" | "is_online_lead_feature_enabled" | "push_lead_to_cadbid" | "is_available_unique_code", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productsRequiredForProduction?: boolean | Prisma.VendorMaster$productsRequiredForProductionArgs<ExtArgs>
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
@@ -139234,6 +142925,8 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   b2bRequirementTypes?: boolean | Prisma.VendorMaster$b2bRequirementTypesArgs<ExtArgs>
   box_info_values?: boolean | Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
+  factory_out_revert_logs?: boolean | Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>
+  box_unpack_logs?: boolean | Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>
   brands?: boolean | Prisma.VendorMaster$brandsArgs<ExtArgs>
   broadcastCategories?: boolean | Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>
   broadcasts?: boolean | Prisma.VendorMaster$broadcastsArgs<ExtArgs>
@@ -139405,6 +143098,8 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     b2bRequirementTypes: Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>[]
     box_info_values: Prisma.$BoxInfoFieldValuePayload<ExtArgs>[]
     boxes: Prisma.$BoxMasterPayload<ExtArgs>[]
+    factory_out_revert_logs: Prisma.$FactoryOutRevertLogPayload<ExtArgs>[]
+    box_unpack_logs: Prisma.$BoxUnpackLogPayload<ExtArgs>[]
     brands: Prisma.$BrandMasterPayload<ExtArgs>[]
     broadcastCategories: Prisma.$BroadcastCategoryMasterPayload<ExtArgs>[]
     broadcasts: Prisma.$BroadcastMasterPayload<ExtArgs>[]
@@ -139579,6 +143274,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     state_id: number | null
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
+    cutlist_configuration: string | null
     is_approval_task_enabled: boolean
     eligible_booking_days: number | null
     is_self_assign_task_type_master_enabed: boolean
@@ -140005,6 +143701,8 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   b2bRequirementTypes<T extends Prisma.VendorMaster$b2bRequirementTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$b2bRequirementTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$B2BRequirementTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   box_info_values<T extends Prisma.VendorMaster$box_info_valuesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_info_valuesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxInfoFieldValuePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   boxes<T extends Prisma.VendorMaster$boxesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$boxesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  factory_out_revert_logs<T extends Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$factory_out_revert_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FactoryOutRevertLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  box_unpack_logs<T extends Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$box_unpack_logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxUnpackLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   brands<T extends Prisma.VendorMaster$brandsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BrandMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcastCategories<T extends Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastCategoryMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   broadcasts<T extends Prisma.VendorMaster$broadcastsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$broadcastsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BroadcastMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -140206,6 +143904,7 @@ export interface VendorMasterFieldRefs {
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly cutlist_configuration: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>
@@ -140797,6 +144496,54 @@ export type VendorMaster$boxesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.factory_out_revert_logs
+ */
+export type VendorMaster$factory_out_revert_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FactoryOutRevertLog
+   */
+  select?: Prisma.FactoryOutRevertLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FactoryOutRevertLog
+   */
+  omit?: Prisma.FactoryOutRevertLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FactoryOutRevertLogInclude<ExtArgs> | null
+  where?: Prisma.FactoryOutRevertLogWhereInput
+  orderBy?: Prisma.FactoryOutRevertLogOrderByWithRelationInput | Prisma.FactoryOutRevertLogOrderByWithRelationInput[]
+  cursor?: Prisma.FactoryOutRevertLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FactoryOutRevertLogScalarFieldEnum | Prisma.FactoryOutRevertLogScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.box_unpack_logs
+ */
+export type VendorMaster$box_unpack_logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxUnpackLog
+   */
+  select?: Prisma.BoxUnpackLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxUnpackLog
+   */
+  omit?: Prisma.BoxUnpackLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxUnpackLogInclude<ExtArgs> | null
+  where?: Prisma.BoxUnpackLogWhereInput
+  orderBy?: Prisma.BoxUnpackLogOrderByWithRelationInput | Prisma.BoxUnpackLogOrderByWithRelationInput[]
+  cursor?: Prisma.BoxUnpackLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxUnpackLogScalarFieldEnum | Prisma.BoxUnpackLogScalarFieldEnum[]
 }
 
 /**
