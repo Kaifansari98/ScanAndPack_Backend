@@ -27,6 +27,7 @@ import {
   sendSmallOrderDispatchedEmail,
   sendReturnOrderApprovedToFactoryEmail,
   sendReturnOrderPickupScheduledSupervisorEmail,
+  sendReturnOrderPickupConfirmedFactoryEmail,
 } from "../../email/brevoEmail2.service";
 
 interface MiscPayload {
@@ -1507,8 +1508,8 @@ export class UnderInstallationStageService {
             user_id: supervisor.id,
             sender_id: completed_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Return Order Picked Up by Factory",
-            message: `Factory has completed pickup for "${materialDetails}" on ${leadCode} - ${leadName}. Please upload handover photo proof and mark as returned.`,
+            title: "Return Order Pickup Confirmed by Factory",
+            message: `Factory has confirmed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}. Please keep the return items ready for pickup and upload handover photo proof.`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
@@ -1525,8 +1526,8 @@ export class UnderInstallationStageService {
             user_id: miscUser.id,
             sender_id: completed_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Return Order Picked Up by Factory",
-            message: `Factory has completed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}.`,
+            title: "Return Order Pickup Confirmed by Factory",
+            message: `Factory has confirmed the pickup schedule for "${materialDetails}" on ${leadCode} - ${leadName}.`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
@@ -1548,7 +1549,7 @@ export class UnderInstallationStageService {
   }) {
     const { vendor_id, lead_id, misc_id, returned_by, baseUrl = "", confirmTaskId } = payload;
     try {
-      const [factoryUsers, miscUsers, leadMeta, miscRecord, firstInstance] = await Promise.all([
+      const [factoryUsers, miscUsers, leadMeta, miscRecord, firstInstance, supervisorUser] = await Promise.all([
         UnderInstallationStageService.getFactoryRecipients(vendor_id, lead_id),
         UnderInstallationStageService.getMiscellaneousRecipients(vendor_id, lead_id),
         prisma.leadMaster.findUnique({
@@ -1570,11 +1571,16 @@ export class UnderInstallationStageService {
           select: { id: true },
           orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
         }),
+        prisma.userMaster.findUnique({
+          where: { id: returned_by },
+          select: { id: true, user_name: true },
+        }),
       ]);
 
       const leadCode = leadMeta?.lead_code ?? `LEAD-${lead_id}`;
       const leadName = `${leadMeta?.firstname ?? ""} ${leadMeta?.lastname ?? ""}`.trim();
       const materialDetails = miscRecord?.reorder_material_details || "material";
+      const siteSupervisorName = supervisorUser?.user_name || "Site Supervisor";
 
       const stageTag = leadMeta?.statusType?.tag;
       const stagePath = stageTag && STAGE_PATH_BY_TAG[stageTag]
@@ -1589,12 +1595,13 @@ export class UnderInstallationStageService {
       qp.set("miscTab", "actions-scheduling");
       if (confirmTaskId) qp.set("taskId", String(confirmTaskId));
       const redirectPath = `${stagePath}?${qp.toString()}`;
+      const projectUrl = baseUrl ? `${baseUrl}${redirectPath}` : redirectPath;
 
-      // 1. Notify Factory users: verify & confirm receipt
+      // 1. Notify Factory users: verify & confirm receipt (In-app + Email)
       const factoryRecipients = factoryUsers.filter((u) => u.id !== returned_by);
       await Promise.allSettled(
-        factoryRecipients.map((factoryUser) =>
-          NotificationService.createAndSend({
+        factoryRecipients.map(async (factoryUser) => {
+          await NotificationService.createAndSend({
             vendor_id,
             user_id: factoryUser.id,
             sender_id: returned_by,
@@ -1604,8 +1611,23 @@ export class UnderInstallationStageService {
             entity_type: "miscellaneous",
             entity_id: misc_id,
             redirect_url: redirectPath,
-          })
-        )
+          });
+
+          if (factoryUser.user_email) {
+            await sendReturnOrderPickupConfirmedFactoryEmail({
+              vendor_id,
+              toEmail: factoryUser.user_email,
+              toName: factoryUser.user_name ?? undefined,
+              factoryUserName: factoryUser.user_name ?? undefined,
+              leadCode,
+              leadName,
+              siteSupervisorName,
+              returnOrderUrl: projectUrl,
+              projectUrl,
+              ctaLink: projectUrl,
+            });
+          }
+        })
       );
 
       // 2. Notify Miscellaneous users
@@ -3584,20 +3606,18 @@ export class UnderInstallationStageService {
 
                 if (factoryUser.user_email) {
                   if (isReturnOrder) {
-                    if (existing.return_order_delivery_method === "SELF_DELIVERY") {
-                      await sendReturnOrderApprovedToFactoryEmail({
-                        vendor_id,
-                        toEmail: factoryUser.user_email,
-                        toName: factoryUser.user_name ?? undefined,
-                        factoryUserName: factoryUser.user_name ?? undefined,
-                        leadCode,
-                        leadName,
-                        miscellaneousUserName: actionBy,
-                        returnOrderUrl: projectUrl,
-                        projectUrl,
-                        ctaLink: projectUrl,
-                      });
-                    }
+                    await sendReturnOrderApprovedToFactoryEmail({
+                      vendor_id,
+                      toEmail: factoryUser.user_email,
+                      toName: factoryUser.user_name ?? undefined,
+                      factoryUserName: factoryUser.user_name ?? undefined,
+                      leadCode,
+                      leadName,
+                      miscellaneousUserName: actionBy,
+                      returnOrderUrl: projectUrl,
+                      projectUrl,
+                      ctaLink: projectUrl,
+                    });
                   } else {
                     await sendMiscApprovedFactoryEmail({
                       vendor_id,
@@ -6875,8 +6895,9 @@ export class UnderInstallationStageService {
         });
       }
 
+      let confirmationTask: any = null;
       if (existing.return_order_delivery_method === "PICKUP_SCHEDULE") {
-        await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
+        confirmationTask = await UnderInstallationStageService.createReturnOrderConfirmationTaskOnPickupReturned(
           tx,
           vendor_id,
           existing,
@@ -6895,16 +6916,17 @@ export class UnderInstallationStageService {
         created_at: new Date(),
       });
 
-      return updatedMisc;
+      return { updatedMisc, confirmationTaskId: confirmationTask?.id };
     });
 
     try {
       await UnderInstallationStageService.notifyReturnOrderHandoverCompleted({
         vendor_id,
-        lead_id: result.lead_id,
-        misc_id: result.id,
+        lead_id: result.updatedMisc.lead_id,
+        misc_id: result.updatedMisc.id,
         returned_by,
         baseUrl,
+        confirmTaskId: result.confirmationTaskId,
       });
     } catch (notifyErr: any) {
       logger.warn("Return handover notification failed", {
@@ -6913,7 +6935,7 @@ export class UnderInstallationStageService {
       });
     }
 
-    return result;
+    return result.updatedMisc;
   }
 
   /**
