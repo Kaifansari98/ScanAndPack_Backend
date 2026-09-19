@@ -1599,8 +1599,21 @@ export class UnderInstallationStageService {
 
       // 1. Notify Factory users: verify & confirm receipt (In-app + Email)
       const factoryRecipients = factoryUsers.filter((u) => u.id !== returned_by);
+      console.log("[EMAIL DEBUG] notifyReturnOrderHandoverCompleted", {
+        vendor_id,
+        lead_id,
+        misc_id,
+        returned_by,
+        totalFactoryUsers: factoryUsers.length,
+        factoryUsersList: factoryUsers.map((u) => ({ id: u.id, name: u.user_name, email: u.user_email })),
+        factoryRecipientsAfterFilter: factoryRecipients.map((u) => ({ id: u.id, name: u.user_name, email: u.user_email })),
+      });
+
+      // Fallback: If filter removed all users because returned_by is testing with factory account, still notify factory users
+      const effectiveRecipients = factoryRecipients.length > 0 ? factoryRecipients : factoryUsers;
+
       await Promise.allSettled(
-        factoryRecipients.map(async (factoryUser) => {
+        effectiveRecipients.map(async (factoryUser) => {
           await NotificationService.createAndSend({
             vendor_id,
             user_id: factoryUser.id,
@@ -1614,7 +1627,8 @@ export class UnderInstallationStageService {
           });
 
           if (factoryUser.user_email) {
-            await sendReturnOrderPickupConfirmedFactoryEmail({
+            console.log(`[EMAIL DEBUG] Sending Return Order Pickup Confirmed email to: ${factoryUser.user_email}...`);
+            const emailRes = await sendReturnOrderPickupConfirmedFactoryEmail({
               vendor_id,
               toEmail: factoryUser.user_email,
               toName: factoryUser.user_name ?? undefined,
@@ -1625,7 +1639,11 @@ export class UnderInstallationStageService {
               returnOrderUrl: projectUrl,
               projectUrl,
               ctaLink: projectUrl,
+              allowSuperAdmin: true,
             });
+            console.log(`[EMAIL DEBUG] Return Order Pickup Confirmed email result for ${factoryUser.user_email}:`, emailRes);
+          } else {
+            console.warn(`[EMAIL DEBUG] Factory user ${factoryUser.user_name} (ID: ${factoryUser.id}) has no email address!`);
           }
         })
       );
@@ -2407,13 +2425,26 @@ export class UnderInstallationStageService {
         ?.toLowerCase()
         .trim()
         .replace(/_/g, "-");
+      const userRole = ((updatingUser as any)?.user_role || "").toLowerCase().trim().replace(/_/g, "-");
 
-      const isSuperAdmin = normalizedType === "super-admin";
-      const isMiscellaneousUser = normalizedType === "miscellaneous";
+      const isSuperAdmin =
+        normalizedType === "super-admin" ||
+        normalizedType === "superadmin" ||
+        normalizedType === "auditor" ||
+        userRole === "super-admin" ||
+        userRole === "superadmin" ||
+        userRole === "auditor";
+      const isMiscellaneousUser =
+        normalizedType === "miscellaneous" || userRole.includes("miscellaneous");
+      const isSupervisorUser =
+        normalizedType === "site-supervisor" ||
+        normalizedType === "head-site-supervisor" ||
+        normalizedType?.includes("supervisor") ||
+        userRole.includes("supervisor");
 
-      if (!isSuperAdmin && !isMiscellaneousUser) {
+      if (!isSuperAdmin && !isMiscellaneousUser && !isSupervisorUser) {
         throw new Error(
-          "Only Miscellaneous user and Super Admin are permitted to edit miscellaneous details",
+          "Only Miscellaneous user, Site Supervisor, and Super Admin are permitted to edit miscellaneous details",
         );
       }
 
@@ -3606,7 +3637,8 @@ export class UnderInstallationStageService {
 
                 if (factoryUser.user_email) {
                   if (isReturnOrder) {
-                    await sendReturnOrderApprovedToFactoryEmail({
+                    console.log(`[EMAIL DEBUG] Sending Return Order Request Approved email to: ${factoryUser.user_email}...`);
+                    const emailRes = await sendReturnOrderApprovedToFactoryEmail({
                       vendor_id,
                       toEmail: factoryUser.user_email,
                       toName: factoryUser.user_name ?? undefined,
@@ -3617,7 +3649,9 @@ export class UnderInstallationStageService {
                       returnOrderUrl: projectUrl,
                       projectUrl,
                       ctaLink: projectUrl,
+                      allowSuperAdmin: true,
                     });
+                    console.log(`[EMAIL DEBUG] Return Order Request Approved email result for ${factoryUser.user_email}:`, emailRes);
                   } else {
                     await sendMiscApprovedFactoryEmail({
                       vendor_id,
@@ -5664,15 +5698,15 @@ export class UnderInstallationStageService {
       throw Object.assign(new Error("User not found"), { statusCode: 404 });
     }
 
-    const userRole = ((user as any).user_role || "").toLowerCase().trim();
-    const userType = (user.user_type?.user_type || "").toLowerCase().trim();
+    const userRole = ((user as any).user_role || "").toLowerCase().trim().replace(/_/g, "-");
+    const userType = (user.user_type?.user_type || "").toLowerCase().trim().replace(/_/g, "-");
     const isSuperAdmin =
       userRole === "super-admin" ||
       userType === "super-admin" ||
       userRole === "superadmin" ||
       userType === "superadmin" ||
-      userRole === "super_admin" ||
-      userType === "super_admin";
+      userRole === "auditor" ||
+      userType === "auditor";
 
     if (!isSuperAdmin) {
       throw Object.assign(
