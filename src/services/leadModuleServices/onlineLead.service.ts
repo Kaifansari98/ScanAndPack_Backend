@@ -267,6 +267,157 @@ export async function generateOnlineLeadCode(
   return generatedCode;
 }
 
+export interface SurveyDesignRemarkInput {
+  budget?: string | null;
+  propertyType?: string | null;
+  modularSolution?: string | null;
+  whenNeedReady?: string | null;
+  preferredShowroom?: string | null;
+  projectLocation?: string | null;
+}
+
+/**
+ * Extracts survey details flexibly from any object (Google Sheet row, webhook payload, nested lead object).
+ * Normalizes keys by removing underscores, spaces, slashes, question marks, and lowercase comparison.
+ */
+export function extractSurveyDetails(
+  data: Record<string, any>,
+): SurveyDesignRemarkInput {
+  if (!data || typeof data !== "object") return {};
+
+  const clean = (val: any) =>
+    val !== null && val !== undefined ? String(val).trim() : "";
+
+  // Flatten nested structures if present
+  const merged: Record<string, any> = {
+    ...(data.survey_data && typeof data.survey_data === "object"
+      ? data.survey_data
+      : {}),
+    ...(data.lead && typeof data.lead === "object" ? data.lead : {}),
+    ...data,
+  };
+
+  const keys = Object.keys(merged);
+  const norm = (k: string) => k.toLowerCase().replace(/[\s_\/|\-?]+/g, "");
+
+  const modularSolutionKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whatmodularsolution") ||
+      nk.includes("modularsolution") ||
+      (nk.includes("modular") && nk.includes("solution"))
+    );
+  });
+
+  const whenNeedReadyKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whendoyouneed") ||
+      nk.includes("kitchenwardrobe") ||
+      nk.includes("whenneedready") ||
+      (nk.includes("need") && nk.includes("ready"))
+    );
+  });
+
+  const preferredShowroomKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("shambhala") ||
+      nk.includes("showroom") ||
+      nk.includes("prefertovisit") ||
+      nk.includes("preferredshowroom")
+    );
+  });
+
+  const projectLocationKey = keys.find((k) => {
+    const nk = norm(k);
+    return (
+      nk.includes("whereisyourproject") ||
+      nk.includes("projectlocated") ||
+      nk.includes("projectlocation") ||
+      (nk.includes("project") && nk.includes("located"))
+    );
+  });
+
+  const budgetKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "budget" || nk === "leadbudget";
+  });
+
+  const propertyTypeKey = keys.find((k) => {
+    const nk = norm(k);
+    return nk === "propertytype" || nk === "property";
+  });
+
+  return {
+    budget: budgetKey ? clean(merged[budgetKey]) : undefined,
+    propertyType: propertyTypeKey ? clean(merged[propertyTypeKey]) : undefined,
+    modularSolution: modularSolutionKey ? clean(merged[modularSolutionKey]) : undefined,
+    whenNeedReady: whenNeedReadyKey ? clean(merged[whenNeedReadyKey]) : undefined,
+    preferredShowroom: preferredShowroomKey ? clean(merged[preferredShowroomKey]) : undefined,
+    projectLocation: projectLocationKey ? clean(merged[projectLocationKey]) : undefined,
+  };
+}
+
+/**
+ * Formats survey fields into Design Remarks using exact Super Admin Bulk Upload logic:
+ * Heading is bold with bullet marker (**• <Heading>**), value is normal text on the next line.
+ * Preserves existing remark if present.
+ */
+export function formatDesignRemarks(
+  surveyData: SurveyDesignRemarkInput,
+  existingRemark?: string | null,
+): string {
+  const cleanVal = (v: any) =>
+    String(v || "")
+      .replace(/_/g, " ")
+      .trim();
+
+  const extraRemarks: string[] = [];
+
+  const budget = surveyData.budget ? cleanVal(surveyData.budget) : "";
+  const propertyType = surveyData.propertyType ? cleanVal(surveyData.propertyType) : "";
+  const modularSolution = surveyData.modularSolution ? cleanVal(surveyData.modularSolution) : "";
+  const whenNeedReady = surveyData.whenNeedReady ? cleanVal(surveyData.whenNeedReady) : "";
+  const preferredShowroom = surveyData.preferredShowroom ? cleanVal(surveyData.preferredShowroom) : "";
+  const projectLocation = surveyData.projectLocation ? cleanVal(surveyData.projectLocation) : "";
+
+  if (budget) extraRemarks.push(`**• Budget:**\n${budget}`);
+  if (propertyType) extraRemarks.push(`**• Property Type:**\n${propertyType}`);
+  if (modularSolution)
+    extraRemarks.push(
+      `**• What modular solution are you interested in?**\n${modularSolution}`,
+    );
+  if (whenNeedReady)
+    extraRemarks.push(
+      `**• When do you need your modular kitchen/wardrobe ready?**\n${whenNeedReady}`,
+    );
+  if (preferredShowroom)
+    extraRemarks.push(
+      `**• Which Shambhala showroom would you prefer to visit?**\n${preferredShowroom}`,
+    );
+  if (projectLocation)
+    extraRemarks.push(
+      `**• Where is your project located?**\n${projectLocation}`,
+    );
+
+  let remark = existingRemark
+    ? String(existingRemark).replace(/ΓÇó/g, "•").trim()
+    : "";
+  if (extraRemarks.length > 0) {
+    const suffix = extraRemarks.join("\n\n");
+    if (remark && remark !== "-" && remark !== "N/A") {
+      if (!remark.includes(suffix)) {
+        remark = `${remark}\n\n${suffix}`;
+      }
+    } else {
+      remark = suffix;
+    }
+  }
+
+  return remark ? remark.trim() : (existingRemark ? String(existingRemark).trim() : "-");
+}
+
 /**
  * Core reusable function to create or update an online lead.
  * Unassigned leads (assign_to = null) directly appear in Lead Pool.
@@ -328,9 +479,17 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
     throw new Error("contact number is required");
   }
 
-  const cleanContact = String(contact).replace(/\D/g, "");
-  if (cleanContact.length < 10) {
+  // Extract numeric digits only and keep only the last 10 digits
+  const cleanDigits = String(contact).replace(/\D/g, "");
+  if (cleanDigits.length < 10) {
     throw new Error("Contact number must be at least 10 digits");
+  }
+  const normalizedContact = cleanDigits.slice(-10);
+
+  let cleanAltContact: string | null = null;
+  if (alt_contact_no) {
+    const altDigits = String(alt_contact_no).replace(/\D/g, "");
+    cleanAltContact = altDigits.length >= 10 ? altDigits.slice(-10) : altDigits || null;
   }
 
   await ensureDefaultStatuses(Number(vendor_id));
@@ -342,21 +501,20 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
     orderBy: { id: "asc" },
   });
 
-  const contact10 =
-    cleanContact.length > 10 && cleanContact.startsWith("91")
-      ? cleanContact.slice(-10)
-      : cleanContact;
-
   let isNew = false;
   const lead = await prisma.$transaction(async (tx) => {
     const existingOnlineLead = await tx.online_leads.findFirst({
       where: {
         vendor_id: Number(vendor_id),
         OR: [
+          { contact: normalizedContact },
+          { contact: cleanDigits },
           { contact: String(contact).trim() },
-          { contact: cleanContact },
-          { contact: contact10 },
-          { contact: `91${contact10}` },
+          { contact: `+91${normalizedContact}` },
+          { contact: `91${normalizedContact}` },
+          { contact: `0${normalizedContact}` },
+          { contact: `p:+91${normalizedContact}` },
+          { contact: `p:${normalizedContact}` },
         ],
       },
     });
@@ -382,14 +540,34 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         new Set([...existingStructs, ...newStructs].map(String)),
       ).filter(Boolean);
 
+      let combinedRemark = existingOnlineLead.remark;
+      if (remark && remark !== "-" && remark !== "N/A") {
+        const prev =
+          existingOnlineLead.remark &&
+          existingOnlineLead.remark !== "-" &&
+          existingOnlineLead.remark !== "N/A"
+            ? existingOnlineLead.remark.trim()
+            : "";
+        if (!prev) {
+          combinedRemark = remark.trim();
+        } else if (prev === remark.trim()) {
+          combinedRemark = prev;
+        } else if (remark.trim().includes(prev)) {
+          combinedRemark = remark.trim();
+        } else if (prev.includes(remark.trim())) {
+          combinedRemark = prev;
+        } else {
+          combinedRemark = `${prev}\n\n${remark.trim()}`;
+        }
+      }
+
       return await tx.online_leads.update({
         where: { id: existingOnlineLead.id },
         data: {
           leads_name: leads_name || existingOnlineLead.leads_name,
+          contact: normalizedContact,
           email: email || existingOnlineLead.email,
-          remark: remark
-            ? `${existingOnlineLead.remark || ""}\n${remark.trim()}`.trim()
-            : existingOnlineLead.remark,
+          remark: combinedRemark,
           city: city || existingOnlineLead.city,
           product_types: combinedTypes,
           product_structures: combinedStructs,
@@ -433,7 +611,7 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         leads_name: String(leads_name).trim(),
         lead_code: generatedCode,
         email: email || null,
-        contact: String(contact).trim(),
+        contact: normalizedContact,
         source: source || "Google Sheet",
         lead_entry_type: lead_entry_type,
         remark: remark ? String(remark).trim() : "-",
@@ -444,7 +622,7 @@ export async function createOrUpdateOnlineLead(input: CreateOnlineLeadDTO) {
         updated_at: new Date(),
         firstname: fName,
         lastname: lName,
-        alt_contact_no: alt_contact_no || null,
+        alt_contact_no: cleanAltContact,
         site_address: site_address || null,
         site_type_id: site_type_id ? Number(site_type_id) : null,
         source_id: resolvedSourceId,
